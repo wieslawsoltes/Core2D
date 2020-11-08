@@ -20,7 +20,7 @@ using static System.Math;
 
 namespace Core2D.Editor
 {
-    public class ProjectEditor : ViewModelBase
+    public class ProjectEditor : ViewModelBase, IDialogPresenter
     {
         private readonly IServiceProvider _serviceProvider;
         private ShapeEditor _shapeEditor;

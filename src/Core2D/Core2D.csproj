@@ -69,4 +69,11 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\DialogView.axaml.cs">
+      <DependentUpon>DialogView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

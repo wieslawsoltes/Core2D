@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:views="using:Core2D.Views"
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmd="using:Core2D.Designer"
@@ -31,42 +29,15 @@
     </UserControl.KeyBindings>
     <Panel>
         <Grid ColumnDefinitions="*" RowDefinitions="*">
-            <!-- Dashboard -->
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}">
                 <views:DashboardMenuView Grid.Row="0" />
                 <views:DashboardView Grid.Row="1" />
             </Grid>
-            <!-- Editor -->
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
                 <views:EditorMenuView Grid.Row="0" />
                 <views:EditorView Grid.Row="1" />
             </Grid>
         </Grid>
-        <!-- Dialog -->
-        <Panel IsVisible="{Binding Dialog, Converter={x:Static ObjectConverters.IsNotNull}}" x:CompileBindings="False">
-            <Panel Background="{DynamicResource DialogOverlayColor}">
-                <i:Interaction.Behaviors>
-                    <ia:EventTriggerBehavior EventName="PointerPressed">
-                        <ia:CallMethodAction TargetObject="{Binding}" MethodName="OnCloseDialog" />
-                    </ia:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-            </Panel>
-            <Border CornerRadius="4" 
-                    Background="{DynamicResource DialogBackground}" 
-                    BoxShadow="{DynamicResource DialogBoxShadow}" 
-                    VerticalAlignment="Center" HorizontalAlignment="Center">
-                <DockPanel MaxWidth="900" MaxHeight="700">
-                    <Button Content="Close" 
-                            Command="{Binding OnCloseDialog}"
-                            HorizontalAlignment="Right"
-                            Margin="20"
-                            Padding="20,10,20,10"
-                            DockPanel.Dock="Bottom" />
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <ContentControl Content="{Binding Dialog}" Margin="20,20,20,0" />
-                    </ScrollViewer>
-                </DockPanel>
-            </Border>
-        </Panel>
+        <views:DialogView/>
     </Panel>
 </UserControl>

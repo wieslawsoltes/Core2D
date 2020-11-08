@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Core2D.Views.DialogView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:vme="using:Core2D.Editor"
+             xmlns:vmd="using:Core2D.Designer"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
+             d:DesignWidth="1200" d:DesignHeight="580"
+             x:DataType="vme:ProjectEditor" x:CompileBindings="True">
+    <Panel IsVisible="{Binding Dialog, Converter={x:Static ObjectConverters.IsNotNull}}" x:CompileBindings="False">
+        <Panel Background="{DynamicResource DialogOverlayColor}">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="PointerPressed">
+                    <ia:CallMethodAction TargetObject="{Binding}" MethodName="OnCloseDialog" />
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Panel>
+        <Border CornerRadius="4" 
+                Background="{DynamicResource DialogBackground}" 
+                BoxShadow="{DynamicResource DialogBoxShadow}" 
+                VerticalAlignment="Center" HorizontalAlignment="Center">
+            <DockPanel MaxWidth="900" MaxHeight="700">
+                <Button Content="Close" 
+                        Command="{Binding OnCloseDialog}"
+                        HorizontalAlignment="Right"
+                        Margin="20"
+                        Padding="20,10,20,10"
+                        DockPanel.Dock="Bottom" />
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding Dialog}" Margin="20,20,20,0" />
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+    </Panel>
+</UserControl>
