@@ -9,6 +9,8 @@ namespace Core2D.Path.Segments
     [DataContract(IsReference = true)]
     public class ArcSegment : PathSegment
     {
+        public static SweepDirection[] SweepDirectionValues { get; } = (SweepDirection[])Enum.GetValues(typeof(SweepDirection));
+
         private PointShape _point;
         private PathSize _size;
         private double _rotationAngle;

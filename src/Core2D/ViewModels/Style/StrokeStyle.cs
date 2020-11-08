@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Core2D.Style
@@ -6,6 +7,10 @@ namespace Core2D.Style
     [DataContract(IsReference = true)]
     public class StrokeStyle : ViewModelBase
     {
+        public static LineCap[] LineCapValues { get; } = (LineCap[])Enum.GetValues(typeof(LineCap));
+
+        public static ArrowType[] ArrowTypeValues { get; } = (ArrowType[])Enum.GetValues(typeof(ArrowType));
+
         private BaseColor _color;
         private double _thickness;
         private LineCap _lineCap;

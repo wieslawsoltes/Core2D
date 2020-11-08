@@ -9,6 +9,8 @@ namespace Core2D.Path
     [DataContract(IsReference = true)]
     public class PathGeometry : ViewModelBase
     {
+        public static FillRule[] FillRuleValues { get; } = (FillRule[])Enum.GetValues(typeof(FillRule));
+
         private ImmutableArray<PathFigure> _figures;
         private FillRule _fillRule;
 
