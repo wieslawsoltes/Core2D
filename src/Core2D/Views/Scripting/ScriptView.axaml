@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:behaviors="using:Core2D.Behaviors"
-             xmlns:ae="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+             xmlns:ae="using:AvaloniaEdit"
              xmlns:vms="using:Core2D.Scripting"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
