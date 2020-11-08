@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Core2D.Editor
 {
-    public class AboutInfo
+    public class AboutInfo : ViewModelBase
     {
         public string Title { get; set; }
 
@@ -47,5 +48,10 @@ namespace Core2D.Editor
                 $"{nameof(IsUnix)}: {IsUnix}{Environment.NewLine}" +
                 $"{nameof(WindowingSubsystemName)}: {WindowingSubsystemName}{Environment.NewLine}" +
                 $"{nameof(RenderingSubsystemName)}: {RenderingSubsystemName}{Environment.NewLine}";
+
+        public override object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

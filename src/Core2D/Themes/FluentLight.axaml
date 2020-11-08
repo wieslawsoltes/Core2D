@@ -15,6 +15,13 @@
             <GridLength x:Key="SliderPostContentMargin">3</GridLength>
         </Style.Resources>
     </Style>
+    <Style>
+        <Style.Resources>
+            <SolidColorBrush x:Key="DialogOverlayColor">#7F7A7A7A</SolidColorBrush>
+            <SolidColorBrush x:Key="DialogBackground">#FFFFFF</SolidColorBrush>
+            <BoxShadows x:Key="DialogBoxShadow">4 11 30 1 #3F000000</BoxShadows>
+        </Style.Resources>
+    </Style>
     <Style Selector="Expander /template/ ToggleButton#PART_toggle">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>

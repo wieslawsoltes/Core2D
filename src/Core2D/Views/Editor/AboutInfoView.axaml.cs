@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.Views
+namespace Core2D.Views.Editor
 {
-    public class AboutView : UserControl
+    public class AboutInfoView : UserControl
     {
-        public AboutView()
+        public AboutInfoView()
         {
             InitializeComponent();
         }

@@ -34,6 +34,7 @@ namespace Core2D.Editor
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
         private AboutInfo _aboutInfo;
+        private ViewModelBase _dialog;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
         private readonly Lazy<IHitTest> _hitTest;
@@ -116,6 +117,12 @@ namespace Core2D.Editor
         {
             get => _aboutInfo;
             set => RaiseAndSetIfChanged(ref _aboutInfo, value);
+        }
+
+        public ViewModelBase Dialog
+        {
+            get => _dialog;
+            set => RaiseAndSetIfChanged(ref _dialog, value);
         }
 
         public ImmutableArray<IEditorTool> Tools => _tools.Value;
@@ -210,6 +217,11 @@ namespace Core2D.Editor
         public override object Copy(IDictionary<object, object> shared)
         {
             throw new NotImplementedException();
+        }
+
+        public void OnCloseDialog()
+        {
+            Dialog = null;
         }
 
         public (decimal sx, decimal sy) TryToSnap(InputArgs args)

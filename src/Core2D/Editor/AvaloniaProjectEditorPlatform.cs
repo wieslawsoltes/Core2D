@@ -659,11 +659,11 @@ namespace Core2D.Editor
 
         public void OnAboutDialog()
         {
-            new AboutWindow()
+            var editor = _serviceProvider.GetService<ProjectEditor>();
+            if (editor.AboutInfo is { })
             {
-                DataContext = _serviceProvider.GetService<ProjectEditor>()
+                editor.Dialog = editor.AboutInfo;
             }
-            .ShowDialog(GetWindow());
         }
 
         public void OnZoomReset()

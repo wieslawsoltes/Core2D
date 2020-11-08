@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:views="using:Core2D.Views"
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmd="using:Core2D.Designer"
@@ -24,15 +26,44 @@
         <KeyBinding Command="{Binding Platform.OnSaveAs}" Gesture="Ctrl+Shift+S" x:CompileBindings="False" />
         <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E" x:CompileBindings="False" />
         <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4" x:CompileBindings="False" />
+        <!-- Dialog -->
+        <KeyBinding Command="{Binding OnCloseDialog}" Gesture="Escape" x:CompileBindings="False" />
     </UserControl.KeyBindings>
-    <Grid ColumnDefinitions="*" RowDefinitions="*">
-        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}">
-            <views:DashboardMenuView Grid.Row="0" />
-            <views:DashboardView Grid.Row="1" />
+    <Panel>
+        <Grid ColumnDefinitions="*" RowDefinitions="*">
+            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}">
+                <views:DashboardMenuView Grid.Row="0" />
+                <views:DashboardView Grid.Row="1" />
+            </Grid>
+            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
+                <views:EditorMenuView Grid.Row="0" />
+                <views:EditorView Grid.Row="1" />
+            </Grid>
         </Grid>
-        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
-            <views:EditorMenuView Grid.Row="0" />
-            <views:EditorView Grid.Row="1" />
-        </Grid>
-    </Grid>
+        <Panel IsVisible="{Binding Dialog, Converter={x:Static ObjectConverters.IsNotNull}}" x:CompileBindings="False">
+            <Panel Background="{DynamicResource DialogOverlayColor}">
+                <i:Interaction.Behaviors>
+                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                        <ia:CallMethodAction TargetObject="{Binding}" MethodName="OnCloseDialog" />
+                    </ia:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </Panel>
+            <Border CornerRadius="4" 
+                    Background="{DynamicResource DialogBackground}" 
+                    BoxShadow="{DynamicResource DialogBoxShadow}" 
+                    VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    MaxWidth="840" MaxHeight="720">
+                <DockPanel>
+                    <Button Content="Close" 
+                            Command="{Binding OnCloseDialog}"
+                            HorizontalAlignment="Right"
+                            Margin="20"
+                            DockPanel.Dock="Bottom" />
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ContentControl Content="{Binding Dialog}" Margin="20" />
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </Panel>
+    </Panel>
 </UserControl>
