@@ -31,15 +31,18 @@
     </UserControl.KeyBindings>
     <Panel>
         <Grid ColumnDefinitions="*" RowDefinitions="*">
+            <!-- Dashboard -->
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}">
                 <views:DashboardMenuView Grid.Row="0" />
                 <views:DashboardView Grid.Row="1" />
             </Grid>
+            <!-- Editor -->
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
                 <views:EditorMenuView Grid.Row="0" />
                 <views:EditorView Grid.Row="1" />
             </Grid>
         </Grid>
+        <!-- Dialog -->
         <Panel IsVisible="{Binding Dialog, Converter={x:Static ObjectConverters.IsNotNull}}" x:CompileBindings="False">
             <Panel Background="{DynamicResource DialogOverlayColor}">
                 <i:Interaction.Behaviors>
@@ -58,6 +61,7 @@
                             Command="{Binding OnCloseDialog}"
                             HorizontalAlignment="Right"
                             Margin="20"
+                            Padding="20,10,20,10"
                             DockPanel.Dock="Bottom" />
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <ContentControl Content="{Binding Dialog}" Margin="20" />
