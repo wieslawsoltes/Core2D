@@ -23,10 +23,10 @@ namespace Core2D.Views.Data
         {
             InitializeComponent();
 
-            _filterRecordsText = this.FindControl<TextBox>("filterRecordsText");
+            _filterRecordsText = this.FindControl<TextBox>("FilterRecordsTextBox");
             _filterRecordsText.GetObservable(TextBox.TextProperty).Subscribe(_ => OnFilterRecordsTextChanged());
 
-            _rowsDataGrid = this.FindControl<DataGrid>("rowsDataGrid");
+            _rowsDataGrid = this.FindControl<DataGrid>("RowsDataGrid");
             _rowsDataGrid.DataContextChanged += RowsDataGrid_DataContextChanged;
         }
 

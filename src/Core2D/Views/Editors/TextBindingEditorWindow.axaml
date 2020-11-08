@@ -3,10 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:vmdt="clr-namespace:Core2D.Data;assembly=Core2D"
+        xmlns:vmdt="using:Core2D.Data"
         Width="600" Height="250"
-        UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
-        WindowState="Normal" WindowStartupLocation="CenterOwner"
+        UseLayoutRounding="True"
+        RenderOptions.BitmapInterpolationMode="HighQuality"
+        WindowState="Normal"
+        WindowStartupLocation="CenterOwner"
         FontFamily="{DynamicResource UiFontFamily}"
         Background="{DynamicResource SystemChromeMediumColor}"
         Foreground="{DynamicResource SystemBaseHighColor}"
@@ -18,7 +20,7 @@
     <Grid ColumnDefinitions="30*,30*,30*" RowDefinitions="Auto,*,Auto">
         <Label Content="Columns" Margin="6" Grid.Row="0" Grid.Column="0" />
         <DockPanel Margin="6" Grid.Row="1" Grid.Column="0">
-            <ComboBox x:Name="databasesComboBox" Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+            <ComboBox x:Name="DatabasesComboBox" Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
                 <ComboBox.DataTemplates>
                     <DataTemplate DataType="vmdt:Database">
                         <Label Content="{Binding Name}" />
@@ -26,7 +28,7 @@
                 </ComboBox.DataTemplates>
             </ComboBox>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ItemsControl VerticalAlignment="Stretch" Items="{Binding #databasesComboBox.SelectedItem.Columns}">
+                <ItemsControl VerticalAlignment="Stretch" Items="{Binding #DatabasesComboBox.SelectedItem.Columns}">
                     <ItemsControl.DataTemplates>
                         <DataTemplate DataType="vmdt:Column">
                             <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">

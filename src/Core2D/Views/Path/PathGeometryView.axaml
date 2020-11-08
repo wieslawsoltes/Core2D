@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:vmp="clr-namespace:Core2D.Path;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:vmp="using:Core2D.Path"
+             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.PathGeometry}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -19,7 +19,7 @@
             <ComboBox Items="{x:Static vmp:PathGeometry.FillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         </StackPanel>
         <Expander Header="Figures" IsExpanded="False">
-            <TreeView x:Name="figures" Items="{Binding Figures}">
+            <TreeView x:Name="FiguresTreeView" Items="{Binding Figures}">
                 <TreeView.Styles>
                     <Style Selector="TreeViewItem">
                         <Setter Property="IsExpanded" Value="False" />
@@ -36,7 +36,7 @@
             </TreeView>
         </Expander>
         <Expander Header="Selected Figure" IsExpanded="False">
-            <ContentControl Content="{Binding #figures.SelectedItem}" />
+            <ContentControl Content="{Binding #FiguresTreeView.SelectedItem}" />
         </Expander>
     </StackPanel>
 </UserControl>

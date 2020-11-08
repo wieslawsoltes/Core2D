@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:vme="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:vme="using:Core2D.Editor"
+             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="540"
@@ -35,7 +35,7 @@
                     </DataTemplate>
                 </ComboBox.DataTemplates>
             </ComboBox>
-            <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" Margin="12,0,0,0" VerticalAlignment="Center">
+            <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" BorderBrush="{x:Null}" Margin="12,0,0,0" VerticalAlignment="Center">
                 <ComboBox.DataTemplates>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}" />

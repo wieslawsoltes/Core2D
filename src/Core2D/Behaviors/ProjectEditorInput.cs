@@ -50,10 +50,10 @@ namespace Core2D.Behaviors
                 return;
             }
 
-            var presenterViewData = _control.Find<Control>("presenterViewData");
-            var presenterViewTemplate = _control.Find<Control>("presenterViewTemplate");
-            var presenterViewEditor = _control.Find<Control>("presenterViewEditor");
-            var zoomBorder = _control.Find<ZoomBorder>("zoomBorder");
+            var presenterViewData = _control.Find<Control>("PresenterViewData");
+            var presenterViewTemplate = _control.Find<Control>("PresenterViewTemplate");
+            var presenterViewEditor = _control.Find<Control>("PresenterViewEditor");
+            var zoomBorder = _control.Find<ZoomBorder>("PageZoomBorder");
 
             if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
             {
@@ -91,7 +91,7 @@ namespace Core2D.Behaviors
                 return;
             }
 
-            var zoomBorder = _control.Find<ZoomBorder>("zoomBorder");
+            var zoomBorder = _control.Find<ZoomBorder>("PageZoomBorder");
 
             if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
             {

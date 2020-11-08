@@ -3,20 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:behaviors="clr-namespace:Core2D.Behaviors;assembly=Core2D"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:behaviors="using:Core2D.Behaviors"
              xmlns:ae="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
-             xmlns:vms="clr-namespace:Core2D.Scripting;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vms="using:Core2D.Scripting"
+             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Script}"
              d:DesignWidth="1000" d:DesignHeight="600"
              x:DataType="vms:Script" x:CompileBindings="True">
     <UserControl.KeyBindings>
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding #textCode.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding #ScriptTextEditor.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False" />
     </UserControl.KeyBindings>
     <Panel>
-        <ae:TextEditor x:Name="textCode"
+        <ae:TextEditor x:Name="ScriptTextEditor"
                        Margin="0"
                        Background="White"
                        Foreground="Black"

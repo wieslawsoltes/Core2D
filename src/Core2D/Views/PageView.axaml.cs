@@ -11,18 +11,18 @@ namespace Core2D.Views
         private PresenterView _presenterViewData;
         private PresenterView _presenterViewTemplate;
         private PresenterView _presenterViewEditor;
-        //private TextBox _textEditor;
+        private TextBox _textEditor;
 
         public PageView()
         {
             InitializeComponent();
 
-            _scrollViewer = this.FindControl<ScrollViewer>("scrollViewer");
-            _zoomBorder = this.FindControl<ZoomBorder>("zoomBorder");
-            _presenterViewData = this.FindControl<PresenterView>("presenterViewData");
-            _presenterViewTemplate = this.FindControl<PresenterView>("presenterViewTemplate");
-            _presenterViewEditor = this.FindControl<PresenterView>("presenterViewEditor");
-            //_textEditor = this.FindControl<TextBox>("textEditor");
+            _scrollViewer = this.FindControl<ScrollViewer>("PageScrollViewer");
+            _zoomBorder = this.FindControl<ZoomBorder>("PageZoomBorder");
+            _presenterViewData = this.FindControl<PresenterView>("PresenterViewData");
+            _presenterViewTemplate = this.FindControl<PresenterView>("PresenterViewTemplate");
+            _presenterViewEditor = this.FindControl<PresenterView>("PresenterViewEditor");
+            _textEditor = this.FindControl<TextBox>("EditorTextBox");
         }
 
         private void InitializeComponent()

@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:libraries="clr-namespace:Core2D.Views.Libraries;assembly=Core2D"
-             xmlns:vmr="clr-namespace:Core2D.Renderer;assembly=Core2D"
-             xmlns:vms="clr-namespace:Core2D.Shapes;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:libraries="using:Core2D.Views.Libraries"
+             xmlns:vmr="using:Core2D.Renderer"
+             xmlns:vms="using:Core2D.Shapes"
+             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.ShapeRendererState}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -46,14 +46,14 @@
             <ContentControl Content="{Binding DrawShapeState}" />
         </Expander>
         <Expander Header="SelectedShapes" IsExpanded="False">
-            <ListBox x:Name="shapes" Items="{Binding SelectedShapes}" VirtualizationMode="Simple">
+            <ListBox x:Name="ShapesListBox" Items="{Binding SelectedShapes}" VirtualizationMode="Simple">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel Orientation="Vertical" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
                 <ListBox.KeyBindings>
-                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding #shapes.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding #ShapesListBox.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
                 </ListBox.KeyBindings>
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="vms:BaseShape">

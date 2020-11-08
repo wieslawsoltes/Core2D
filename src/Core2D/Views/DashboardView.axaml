@@ -3,18 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
-             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
-             xmlns:handlers="clr-namespace:Core2D.DragAndDrop.Handlers;assembly=Core2D"
-             xmlns:vme="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:vmr="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
+             xmlns:idd="using:Core2D.DragAndDrop"
+             xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
+             xmlns:vme="using:Core2D.Editor"
+             xmlns:vmer="using:Core2D.Editor.Recent"
+             xmlns:vmd="using:Core2D.Designer"
              FontFamily="{DynamicResource UiFontFamily}"
              Background="{DynamicResource SystemChromeMediumColor}"
              Foreground="{DynamicResource SystemBaseHighColor}"
-             UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
+             UseLayoutRounding="True"
+             RenderOptions.BitmapInterpolationMode="HighQuality"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
@@ -43,13 +44,13 @@
             </i:Interaction.Behaviors>
         </Button>
         <Label Content="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" />
-        <ListBox x:Name="recent" Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
+        <ListBox x:Name="RecentListBox" Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
             <ListBox.DataTemplates>
-                <DataTemplate DataType="vmr:RecentFile">
-                    <Panel x:Name="panel" Background="Transparent" Cursor="Hand" ToolTip.Tip="{Binding Path}">
+                <DataTemplate DataType="vmer:RecentFile">
+                    <Panel x:Name="NamePanel" Background="Transparent" Cursor="Hand" ToolTip.Tip="{Binding Path}">
                         <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #panel}" x:CompileBindings="False">
-                                <ia:InvokeCommandAction Command="{Binding #recent.DataContext.OnOpenProject}" CommandParameter="{Binding #panel.DataContext.Path}" x:CompileBindings="False" />
+                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #NamePanel}" x:CompileBindings="False">
+                                <ia:InvokeCommandAction Command="{Binding #RecentListBox.DataContext.OnOpenProject}" CommandParameter="{Binding #NamePanel.DataContext.Path}" x:CompileBindings="False" />
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <TextBlock Text="{Binding Name}" />

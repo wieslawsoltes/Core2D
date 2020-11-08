@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:vm="clr-namespace:Core2D;assembly=Core2D"
-             xmlns:vmdt="clr-namespace:Core2D.Data;assembly=Core2D"
-             xmlns:vme="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:vmc="clr-namespace:Core2D.Containers;assembly=Core2D"
-             xmlns:vms="clr-namespace:Core2D.Shapes;assembly=Core2D"
-             xmlns:vmst="clr-namespace:Core2D.Style;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:idd="using:Core2D.DragAndDrop"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:vm="using:Core2D"
+             xmlns:vmdt="using:Core2D.Data"
+             xmlns:vme="using:Core2D.Editor"
+             xmlns:vmc="using:Core2D.Containers"
+             xmlns:vms="using:Core2D.Shapes"
+             xmlns:vmst="using:Core2D.Style"
+             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1000" d:DesignHeight="600"
@@ -20,9 +20,9 @@
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
     </UserControl.Resources>
-    <TreeView x:Name="project">
+    <TreeView x:Name="ProjectTreeView">
         <TreeView.KeyBindings>
-            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #project.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
+            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #ProjectTreeView.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
         </TreeView.KeyBindings>
         <TreeViewItem Header="{Binding Name}" DataContext="{Binding Project}" IsExpanded="True">
             <TreeViewItem.ContextMenu>

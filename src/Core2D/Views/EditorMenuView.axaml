@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:app="clr-namespace:Core2D;assembly=Core2D"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:vme="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vm="using:Core2D"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:vme="using:Core2D.Editor"
+             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="800" d:DesignHeight="20"
@@ -109,11 +109,11 @@
                 <MenuItem Header="Zoom _Out" Command="{Binding Platform.OnZoomOut}" InputGesture="Ctrl+Subtract" />
             </MenuItem>
             <MenuItem Header="_Theme">
-                <MenuItem Header="Fluent _Light" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentLight" />
-                <MenuItem Header="Fluent _Dark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentDark" />
+                <MenuItem Header="Fluent _Light" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="FluentLight" />
+                <MenuItem Header="Fluent _Dark" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="FluentDark" />
                 <Separator />
-                <MenuItem Header="Default L_ight" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultLight" />
-                <MenuItem Header="Default D_ark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultDark" />
+                <MenuItem Header="Default L_ight" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="DefaultLight" />
+                <MenuItem Header="Default D_ark" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="DefaultDark" />
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Project">

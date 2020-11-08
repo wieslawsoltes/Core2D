@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
-             xmlns:handlers="clr-namespace:Core2D.DragAndDrop.Handlers;assembly=Core2D"
-             xmlns:scripting="clr-namespace:Core2D.Views.Scripting;assembly=Core2D"
-             xmlns:vmc="clr-namespace:Core2D.Containers;assembly=Core2D"
-             xmlns:vms="clr-namespace:Core2D.Scripting;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:idd="using:Core2D.DragAndDrop"
+             xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
+             xmlns:scripting="using:Core2D.Views.Scripting"
+             xmlns:vmc="using:Core2D.Containers"
+             xmlns:vms="using:Core2D.Scripting"
+             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -22,25 +22,25 @@
         <Grid RowDefinitions="Auto,*,Auto" Grid.Row="0">
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
                 <Button Content="reset" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-                <Button Content="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-                <Button Content="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#scripts.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#scripts.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
                 <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
             </StackPanel>
-            <ListBox x:Name="scripts" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1">
+            <ListBox x:Name="ScriptsListBox" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1">
                 <i:Interaction.Behaviors>
                     <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ScriptsListBoxDropHandler}" />
                 </i:Interaction.Behaviors>
                 <ListBox.KeyBindings>
                     <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" Gesture="Ctrl+N" x:CompileBindings="False" />
-                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding #scripts.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
-                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #scripts.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding #ScriptsListBox.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
+                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #ScriptsListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
                 </ListBox.KeyBindings>
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="vms:Script">
-                        <TextBlock x:Name="script" Text="{Binding Name}" Background="Transparent">
+                        <TextBlock x:Name="ScriptTextBlock" Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #script}" x:CompileBindings="False">
+                                <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ScriptTextBlock}" x:CompileBindings="False">
                                     <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnExecuteScript}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False" />
                                 </ia:EventTriggerBehavior>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -64,7 +64,7 @@
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
-            <TextBox Text="{Binding #scripts.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#scripts.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2" x:CompileBindings="False" />
+            <TextBox Text="{Binding #ScriptsListBox.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2" x:CompileBindings="False" />
         </Grid>
         <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1" />
         <scripting:ScriptView DataContext="{Binding CurrentScript}" Grid.Row="2" />

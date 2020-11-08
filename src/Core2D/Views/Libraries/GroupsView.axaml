@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
-             xmlns:handlers="clr-namespace:Core2D.DragAndDrop.Handlers;assembly=Core2D"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:vmc="clr-namespace:Core2D.Containers;assembly=Core2D"
-             xmlns:vms="clr-namespace:Core2D.Shapes;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:idd="using:Core2D.DragAndDrop"
+             xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:vmc="using:Core2D.Containers"
+             xmlns:vms="using:Core2D.Shapes"
+             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -39,20 +39,20 @@
             <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}" CommandParameter="{Binding CurrentGroupLibrary.Selected}" IsVisible="{Binding !!CurrentGroupLibrary.Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
             <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddGroup}" CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding $parent[TopLevel].DataContext.Project.CurrentContainer.CurrentShape, Converter={StaticResource IsGroupConverter}}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
         </StackPanel>
-        <ListBox x:Name="groups" Items="{Binding CurrentGroupLibrary.Items}" SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="3">
+        <ListBox x:Name="GroupsListBox" Items="{Binding CurrentGroupLibrary.Items}" SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay}" Grid.Row="3">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding CurrentGroupLibrary, FallbackValue={x:Null}}" Handler="{StaticResource GroupsListBoxDropHandler}" />
             </i:Interaction.Behaviors>
             <ListBox.KeyBindings>
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddGroup}" CommandParameter="{Binding #groups.DataContext}" Gesture="Ctrl+N" x:CompileBindings="False" />
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #groups.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddGroup}" CommandParameter="{Binding #GroupsListBox.DataContext}" Gesture="Ctrl+N" x:CompileBindings="False" />
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}" CommandParameter="{Binding #GroupsListBox.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #GroupsListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
                 <DataTemplate DataType="vms:GroupShape">
-                    <TextBlock x:Name="group" Text="{Binding Name}" Background="Transparent">
+                    <TextBlock x:Name="GroupTextBlock" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #group}" x:CompileBindings="False">
+                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #GroupTextBlock}" x:CompileBindings="False">
                                 <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnInsertGroup}" CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False" />
                             </ia:EventTriggerBehavior>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -68,6 +68,6 @@
                 </DataTemplate>
             </ListBox.DataTemplates>
         </ListBox>
-        <TextBox Text="{Binding #groups.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#groups.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="4" x:CompileBindings="False" />
+        <TextBox Text="{Binding #GroupsListBox.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#GroupsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="4" x:CompileBindings="False" />
     </Grid>
 </UserControl>

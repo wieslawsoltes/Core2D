@@ -7,14 +7,14 @@ namespace Core2D.Views.Scripting
 {
     public class ScriptView : UserControl
     {
-        private readonly TextEditor _textEditor;
+        private readonly TextEditor _scriptTextEditor;
 
         public ScriptView()
         {
             InitializeComponent();
-            _textEditor = this.FindControl<TextEditor>("textCode");
-            _textEditor.ShowLineNumbers = true;
-            _textEditor.TextArea.IndentationStrategy = new CSharpIndentationStrategy();
+            _scriptTextEditor = this.FindControl<TextEditor>("ScriptTextEditor");
+            _scriptTextEditor.ShowLineNumbers = true;
+            _scriptTextEditor.TextArea.IndentationStrategy = new CSharpIndentationStrategy();
         }
 
         private void InitializeComponent()

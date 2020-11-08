@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
+             xmlns:paz="using:Avalonia.Controls.PanAndZoom"
              mc:Ignorable="d"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="paz:ZoomBorder" x:CompileBindings="True">

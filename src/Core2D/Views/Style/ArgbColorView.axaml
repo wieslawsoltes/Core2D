@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:vms="clr-namespace:Core2D.Style;assembly=Core2D"
-             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:vms="using:Core2D.Style"
+             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.ArgbColor}"
              d:DesignWidth="300" d:DesignHeight="400"
@@ -50,7 +50,7 @@
                 </Border>
             </Panel>
         </ToggleButton>
-        <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" StaysOpen="False" Width="300">
+        <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" Width="300">
             <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="4">
                 <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Margin="10">
                     <Label Content="R" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
