@@ -25,15 +25,12 @@ namespace Core2D.Views.Shapes
                 && topLevel.DataContext is ProjectEditor editor
                 && shape is TextShape text)
             {
-                var window = new TextBindingEditorWindow()
+                var textBindingEditor = new TextBindingEditor()
                 {
-                    DataContext = new TextBindingEditor()
-                    {
-                        Editor = editor,
-                        Text = text
-                    }
+                    Editor = editor,
+                    Text = text
                 };
-                window.ShowDialog(topLevel as Window);
+                editor.Dialog = textBindingEditor;
             }
         }
     }

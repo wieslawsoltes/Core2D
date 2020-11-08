@@ -1,22 +1,13 @@
-﻿<Window x:Class="Core2D.Views.Editors.TextBindingEditorWindow"
-        xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:vmdt="using:Core2D.Data"
-        Width="600" Height="250"
-        UseLayoutRounding="True"
-        RenderOptions.BitmapInterpolationMode="HighQuality"
-        WindowState="Normal"
-        WindowStartupLocation="CenterOwner"
-        FontFamily="{DynamicResource UiFontFamily}"
-        Background="{DynamicResource SystemChromeMediumColor}"
-        Foreground="{DynamicResource SystemBaseHighColor}"
-        Icon="/Assets/Core2D.ico"
-        Title="Text Binding Editor"
-        mc:Ignorable="d"
-        d:DesignWidth="1000" d:DesignHeight="600"
-        x:CompileBindings="False">
+﻿<UserControl x:Class="Core2D.Views.Editors.TextBindingEditorView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vmdt="using:Core2D.Data"
+             Width="600" Height="250"
+             mc:Ignorable="d"
+             d:DesignWidth="1000" d:DesignHeight="600"
+             x:CompileBindings="False">
     <Grid ColumnDefinitions="30*,30*,30*" RowDefinitions="Auto,*,Auto">
         <Label Content="Columns" Margin="6" Grid.Row="0" Grid.Column="0" />
         <DockPanel Margin="6" Grid.Row="1" Grid.Column="0">
@@ -33,7 +24,7 @@
                         <DataTemplate DataType="vmdt:Column">
                             <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
                                 <Label Content="{Binding Name, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}" Grid.Column="0" />
-                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnUseColumnName}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
+                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[UserControl].DataContext.OnUseColumnName}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>
@@ -60,7 +51,7 @@
                         <DataTemplate DataType="vmdt:Property">
                             <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
                                 <Label Content="{Binding Value, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}" Grid.Column="0" />
-                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnUsePageProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
+                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[UserControl].DataContext.OnUsePageProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>
@@ -87,7 +78,7 @@
                         <DataTemplate DataType="vmdt:Property">
                             <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
                                 <Label Content="{Binding Value, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}" Grid.Column="0" />
-                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnUseShapeProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
+                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[UserControl].DataContext.OnUseShapeProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>
@@ -96,7 +87,7 @@
         </ScrollViewer>
         <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Margin="6" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
             <TextBox Text="{Binding Text.Text, Mode=TwoWay}" Margin="0" VerticalAlignment="Stretch" AcceptsReturn="True" Grid.Column="0" />
-            <Button Content="x" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnResetText}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
+            <Button Content="x" Grid.Column="1" Command="{Binding $parent[UserControl].DataContext.OnResetText}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
         </Grid>
     </Grid>
-</Window>
+</UserControl>

@@ -1,15 +1,13 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
 namespace Core2D.Views.Editors
 {
-    public class TextBindingEditorWindow : Window
+    public class TextBindingEditorView : UserControl
     {
-        public TextBindingEditorWindow()
+        public TextBindingEditorView()
         {
             InitializeComponent();
-            this.AttachDevTools();
         }
 
         private void InitializeComponent()
