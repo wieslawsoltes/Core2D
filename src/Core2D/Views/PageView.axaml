@@ -135,8 +135,8 @@
                                              Text="EditorTextBox"
                                              Canvas.Left="300"
                                              Canvas.Top="300"
-                                             Width="90"
-                                             Height="30"
+                                             Width="120"
+                                             Height="60"
                                              FontFamily="Calibri"
                                              FontSize="12"
                                              FontStyle="Normal"
@@ -147,13 +147,31 @@
                                              HorizontalContentAlignment="Center"
                                              VerticalContentAlignment="Center"
                                              TextAlignment="Center"
-                                             Background="{x:Null}"
-                                             BorderBrush="{x:Null}"
-                                             BorderThickness="0"
                                              Margin="0"
                                              Padding="0"
                                              MinHeight="0"
-                                             MinWidth="0" />
+                                             MinWidth="0" >
+                                        <TextBox.Styles>
+                                            <Style Selector="TextBox">
+                                                <Setter Property="BorderBrush" Value="#FF00BFFF"/>
+                                                <Setter Property="Background" Value="{x:Null}" />
+                                                <Setter Property="BorderThickness" Value="2" />
+                                            </Style>
+                                            <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+                                                <Setter Property="BorderBrush" Value="#FF00BFFF"/>
+                                                <Setter Property="Background" Value="{x:Null}" />
+                                                <Setter Property="BorderThickness" Value="2" />
+                                            </Style>
+                                            <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                                                <Setter Property="BorderBrush" Value="#FF00BFFF"/>
+                                                <Setter Property="Background" Value="{x:Null}"/>
+                                                <Setter Property="BorderThickness" Value="2" />
+                                            </Style>
+                                            <Style Selector="TextBox /template/ Border#PART_BorderElement">
+                                                <Setter Property="CornerRadius" Value="0" />
+                                            </Style>
+                                        </TextBox.Styles>
+                                    </TextBox>
                                 </Canvas>
                             </Panel>
                         </Panel>
