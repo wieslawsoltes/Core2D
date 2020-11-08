@@ -70,7 +70,7 @@ namespace Core2D.SvgExporter.Svg
                 var path = converter.ToFillPathShape(shape);
                 if (path != null)
                 {
-                    if (shape.Style.Fill is ArgbColor argbColor)
+                    if (shape.Style.Fill.Color is ArgbColor argbColor)
                     {
                         var geometry = path.Geometry.ToSvgString();
                         var fill = argbColor.ToSvgString();
@@ -85,7 +85,7 @@ namespace Core2D.SvgExporter.Svg
                 var path = converter.ToStrokePathShape(shape);
                 if (path != null)
                 {
-                    if (shape.Style.Stroke is ArgbColor argbColor)
+                    if (shape.Style.Stroke.Color is ArgbColor argbColor)
                     {
                         var geometry = path.Geometry.ToSvgString();
                         var fill = argbColor.ToSvgString();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Core2D.Style
@@ -6,6 +7,10 @@ namespace Core2D.Style
     [DataContract(IsReference = true)]
     public class TextStyle : ViewModelBase
     {
+        public static TextHAlignment[] TextHAlignmentValues { get; } = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
+
+        public static TextVAlignment[] TextVAlignmentValues { get; } = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
+
         private string _fontName;
         private string _fontFile;
         private double _fontSize;

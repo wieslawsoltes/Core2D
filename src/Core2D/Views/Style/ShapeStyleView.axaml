@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.Style}"
@@ -17,53 +15,7 @@
             <TextBox Text="{Binding Name, Mode=TwoWay}" />
         </StackPanel>
         <Expander Header="Stroke" IsExpanded="True">
-            <StackPanel>
-                <ContentControl Content="{Binding Stroke}" />
-                <Label Content="Thickness" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Thickness, Mode=TwoWay}" />
-                <Label Content="Line Cap" Margin="{DynamicResource TextControlThemePadding}" />
-                <ComboBox Items="{x:Static Editor:Enums.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-                <Label Content="Dash Offset" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding DashOffset, Mode=TwoWay}" />
-                <Label Content="Dashes" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Dashes, Mode=TwoWay}" />
-                <StackPanel DataContext="{Binding StartArrowStyle}">
-                    <Grid ColumnDefinitions="40*,6,30*,6,30*">
-                        <StackPanel Grid.Column="0">
-                            <Label Content="Start Arrow" Margin="{DynamicResource TextControlThemePadding}" />
-                            <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" Padding="3" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-                        </StackPanel>
-                        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
-                        <StackPanel Grid.Column="2">
-                            <Label Content="RadiusX" Margin="{DynamicResource TextControlThemePadding}" />
-                            <TextBox Text="{Binding RadiusX, Mode=TwoWay}" />
-                        </StackPanel>
-                        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" />
-                        <StackPanel Grid.Column="4">
-                            <Label Content="RadiusY" Margin="{DynamicResource TextControlThemePadding}" />
-                            <TextBox Text="{Binding RadiusY, Mode=TwoWay}" />
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-                <StackPanel DataContext="{Binding EndArrowStyle}">
-                    <Grid ColumnDefinitions="40*,6,30*,6,30*">
-                        <StackPanel Grid.Column="0">
-                            <Label Content="End Arrow" Margin="{DynamicResource TextControlThemePadding}" />
-                            <ComboBox Items="{x:Static Editor:Enums.ArrowTypeValues}" Padding="3" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-                        </StackPanel>
-                        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
-                        <StackPanel Grid.Column="2">
-                            <Label Content="RadiusX" Margin="{DynamicResource TextControlThemePadding}" />
-                            <TextBox Text="{Binding RadiusX, Mode=TwoWay}" />
-                        </StackPanel>
-                        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" />
-                        <StackPanel Grid.Column="4">
-                            <Label Content="RadiusY" Margin="{DynamicResource TextControlThemePadding}" />
-                            <TextBox Text="{Binding RadiusY, Mode=TwoWay}" />
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </StackPanel>
+            <ContentControl Content="{Binding Stroke}" />
         </Expander>
         <Expander Header="Fill" IsExpanded="True">
             <ContentControl Content="{Binding Fill}" />

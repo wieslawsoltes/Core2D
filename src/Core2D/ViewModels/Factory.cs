@@ -817,6 +817,57 @@ namespace Core2D
             };
         }
 
+        public StrokeStyle CreateStrokeStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00, double thickness = 2.0, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
+        {
+            var style = new StrokeStyle()
+            {
+                Name = name,
+                Color = CreateArgbColor(a, r, g, b),
+                Thickness = thickness,
+                LineCap = lineCap,
+                Dashes = dashes,
+                DashOffset = dashOffset
+            };
+
+            style.StartArrowStyle = startArrowStyle ?? CreateArrowStyle();
+            style.EndArrowStyle = endArrowStyle ?? CreateArrowStyle();
+
+            return style;
+        }
+
+        public StrokeStyle CreateStrokeStyle(string name, BaseColor color, double thickness, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
+        {
+            return new StrokeStyle()
+            {
+                Name = name,
+                Color = color,
+                Thickness = thickness,
+                LineCap = LineCap.Round,
+                Dashes = default,
+                DashOffset = 0.0,
+                StartArrowStyle = startArrowStyle,
+                EndArrowStyle = endArrowStyle
+            };
+        }
+
+        public FillStyle CreateFillStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
+        {
+            return new FillStyle()
+            {
+                Name = name,
+                Color = CreateArgbColor(a, r, g, b)
+            };
+        }
+
+        public FillStyle CreateFillStyle(string name, BaseColor color)
+        {
+            return new FillStyle()
+            {
+                Name = name,
+                Color = color
+            };
+        }
+
         public FontStyle CreateFontStyle(FontStyleFlags flags = FontStyleFlags.Regular)
         {
             return new FontStyle()
@@ -827,22 +878,13 @@ namespace Core2D
 
         public ShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
-            var style = new ShapeStyle()
+            return new ShapeStyle()
             {
                 Name = name,
-                Stroke = CreateArgbColor(sa, sr, sg, sb),
-                Fill = CreateArgbColor(fa, fr, fg, fb),
-                Thickness = thickness,
-                LineCap = lineCap,
-                Dashes = dashes,
-                DashOffset = dashOffset,
+                Stroke = CreateStrokeStyle("", sa, sr, sg, sb, thickness, startArrowStyle, endArrowStyle, lineCap, dashes, dashOffset),
+                Fill = CreateFillStyle("", fa, fr, fg, fb),
                 TextStyle = textStyle ?? CreateTextStyle()
             };
-
-            style.StartArrowStyle = startArrowStyle ?? CreateArrowStyle();
-            style.EndArrowStyle = endArrowStyle ?? CreateArrowStyle();
-
-            return style;
         }
 
         public ShapeStyle CreateShapeStyle(string name, BaseColor stroke, BaseColor fill, double thickness, TextStyle textStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
@@ -850,15 +892,9 @@ namespace Core2D
             return new ShapeStyle()
             {
                 Name = name,
-                Stroke = stroke,
-                Fill = fill,
-                Thickness = thickness,
-                LineCap = LineCap.Round,
-                Dashes = default,
-                DashOffset = 0.0,
-                TextStyle = textStyle,
-                StartArrowStyle = startArrowStyle,
-                EndArrowStyle = endArrowStyle
+                Stroke = CreateStrokeStyle("", stroke, thickness, startArrowStyle, endArrowStyle),
+                Fill = CreateFillStyle("", fill),
+                TextStyle = textStyle
             };
         }
 

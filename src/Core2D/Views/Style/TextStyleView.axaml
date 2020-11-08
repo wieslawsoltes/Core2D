@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
              xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
              xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
              d:DataContext="{x:Static Designer:DesignerContext.TextStyle}"
@@ -25,8 +23,8 @@
             <CheckBox Content="Italic" IsChecked="{Binding Italic, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         </StackPanel>
         <Label Content="HAlignment" Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox Items="{x:Static Editor:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <ComboBox Items="{x:Static Style:TextStyle.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         <Label Content="VAlignment" Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox Items="{x:Static Editor:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <ComboBox Items="{x:Static Style:TextStyle.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
     </StackPanel>
 </UserControl>

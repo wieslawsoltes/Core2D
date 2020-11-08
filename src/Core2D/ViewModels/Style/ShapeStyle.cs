@@ -6,67 +6,19 @@ namespace Core2D.Style
     [DataContract(IsReference = true)]
     public class ShapeStyle : ViewModelBase
     {
-        private BaseColor _stroke;
-        private double _thickness;
-        private LineCap _lineCap;
-        private string _dashes;
-        private double _dashOffset;
-        private ArrowStyle _startArrowStyle;
-        private ArrowStyle _endArrowStyle;
-        private BaseColor _fill;
+        private StrokeStyle _stroke;
+        private FillStyle _fill;
         private TextStyle _textStyle;
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public BaseColor Stroke
+        public StrokeStyle Stroke
         {
             get => _stroke;
             set => RaiseAndSetIfChanged(ref _stroke, value);
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double Thickness
-        {
-            get => _thickness;
-            set => RaiseAndSetIfChanged(ref _thickness, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public LineCap LineCap
-        {
-            get => _lineCap;
-            set => RaiseAndSetIfChanged(ref _lineCap, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public string Dashes
-        {
-            get => _dashes;
-            set => RaiseAndSetIfChanged(ref _dashes, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double DashOffset
-        {
-            get => _dashOffset;
-            set => RaiseAndSetIfChanged(ref _dashOffset, value);
-        }
-        
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ArrowStyle StartArrowStyle
-        {
-            get => _startArrowStyle;
-            set => RaiseAndSetIfChanged(ref _startArrowStyle, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ArrowStyle EndArrowStyle
-        {
-            get => _endArrowStyle;
-            set => RaiseAndSetIfChanged(ref _endArrowStyle, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public BaseColor Fill
+        public FillStyle Fill
         {
             get => _fill;
             set => RaiseAndSetIfChanged(ref _fill, value);
@@ -84,14 +36,8 @@ namespace Core2D.Style
             return new ShapeStyle()
             {
                 Name = this.Name,
-                Stroke = (BaseColor)this.Stroke.Copy(shared),
-                Thickness = this.Thickness,
-                LineCap = this.LineCap,
-                Dashes = this.Dashes,
-                DashOffset = this.DashOffset,
-                StartArrowStyle = (ArrowStyle)this.StartArrowStyle.Copy(shared),
-                EndArrowStyle = (ArrowStyle)this.EndArrowStyle.Copy(shared),
-                Fill = (BaseColor)this.Fill.Copy(shared),
+                Stroke = (StrokeStyle)this.Stroke.Copy(shared),
+                Fill = (FillStyle)this.Fill.Copy(shared),
                 TextStyle = (TextStyle)this.TextStyle.Copy(shared)
             };
         }
@@ -101,8 +47,6 @@ namespace Core2D.Style
             var isDirty = base.IsDirty();
 
             isDirty |= Stroke.IsDirty();
-            isDirty |= StartArrowStyle.IsDirty();
-            isDirty |= EndArrowStyle.IsDirty();
             isDirty |= Fill.IsDirty();
             isDirty |= TextStyle.IsDirty();
 
@@ -113,8 +57,6 @@ namespace Core2D.Style
         {
             base.Invalidate();
             Stroke.Invalidate();
-            StartArrowStyle.Invalidate();
-            EndArrowStyle.Invalidate();
             Fill.Invalidate();
             TextStyle.Invalidate();
         }

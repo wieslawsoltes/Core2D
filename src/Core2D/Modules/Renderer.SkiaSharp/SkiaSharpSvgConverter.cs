@@ -93,8 +93,8 @@ namespace Core2D.Renderer.SkiaSharp
             switch (paint.Shader)
             {
                 case SP.ColorShader colorShader:
-                    style.Stroke = ToArgbColor(colorShader, factory);
-                    style.Fill = ToArgbColor(colorShader, factory);
+                    style.Stroke.Color = ToArgbColor(colorShader, factory);
+                    style.Fill.Color = ToArgbColor(colorShader, factory);
                     break;
 
                 case SP.LinearGradientShader linearGradientShader:
@@ -113,14 +113,14 @@ namespace Core2D.Renderer.SkiaSharp
                     break;
             }
 
-            style.Thickness = paint.StrokeWidth;
+            style.Stroke.Thickness = paint.StrokeWidth;
 
-            style.LineCap = ToLineCap(paint.StrokeCap);
+            style.Stroke.LineCap = ToLineCap(paint.StrokeCap);
 
             if (paint.PathEffect is SP.DashPathEffect dashPathEffect && dashPathEffect.Intervals != null)
             {
-                style.Dashes = StyleHelper.ConvertFloatArrayToDashes(dashPathEffect.Intervals);
-                style.DashOffset = dashPathEffect.Phase;
+                style.Stroke.Dashes = StyleHelper.ConvertFloatArrayToDashes(dashPathEffect.Intervals);
+                style.Stroke.DashOffset = dashPathEffect.Phase;
             }
 
             if (paint.Typeface != null)

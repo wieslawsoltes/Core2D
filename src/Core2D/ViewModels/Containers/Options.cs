@@ -8,6 +8,8 @@ namespace Core2D.Containers
     [DataContract(IsReference = true)]
     public class Options : ViewModelBase
     {
+        public static MoveMode[] MoveModeValues { get; } = (MoveMode[])Enum.GetValues(typeof(MoveMode));
+
         private bool _snapToGrid = true;
         private double _snapX = 15.0;
         private double _snapY = 15.0;

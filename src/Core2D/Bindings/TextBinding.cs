@@ -48,7 +48,7 @@ namespace Core2D.Bindings
             }
 
             var result = properties.FirstOrDefault(p => p.Name == propertyName);
-            if (result != null && result.Value != null)
+            if (result?.Value != null)
             {
                 value = result.Value.ToString();
                 return true;

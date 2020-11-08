@@ -68,7 +68,7 @@ namespace Core2D.XamlExporter.Avalonia
                 if (path != null)
                 {
                     var geometry = path.Geometry.ToXamlString();
-                    var brush = (shape.Style.Fill as ArgbColor).ToXamlString();
+                    var brush = (shape.Style.Fill.Color as ArgbColor).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }
@@ -79,7 +79,7 @@ namespace Core2D.XamlExporter.Avalonia
                 if (path != null)
                 {
                     var geometry = path.Geometry.ToXamlString();
-                    var brush = (shape.Style.Stroke as ArgbColor).ToXamlString();
+                    var brush = (shape.Style.Stroke.Color as ArgbColor).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }

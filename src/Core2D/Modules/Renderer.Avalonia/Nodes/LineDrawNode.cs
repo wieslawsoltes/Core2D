@@ -113,10 +113,10 @@ namespace Core2D.Renderer
             double x2 = Line.End.X;
             double y2 = Line.End.Y;
 
-            if (Style.StartArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
             {
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
-                StartMarker = CreatArrowMarker(x1, y1, a1, Style, Style.StartArrowStyle);
+                StartMarker = CreatArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrowStyle);
                 StartMarker.UpdateStyle();
                 P0 = (StartMarker as Marker).Point;
             }
@@ -126,10 +126,10 @@ namespace Core2D.Renderer
                 P0 = new A.Point(x1, y1);
             }
 
-            if (Style.EndArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
             {
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
-                EndMarker = CreatArrowMarker(x2, y2, a2, Style, Style.EndArrowStyle);
+                EndMarker = CreatArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrowStyle);
                 EndMarker.UpdateStyle();
                 P1 = (EndMarker as Marker).Point;
             }
@@ -154,12 +154,12 @@ namespace Core2D.Renderer
         {
             base.UpdateStyle();
 
-            if (Style.StartArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
             {
                 StartMarker?.UpdateStyle();
             }
 
-            if (Style.EndArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
             {
                 EndMarker?.UpdateStyle();
             }
@@ -173,12 +173,12 @@ namespace Core2D.Renderer
             {
                 context.DrawLine(Stroke, P0, P1);
 
-                if (Style.StartArrowStyle.ArrowType != ArrowType.None)
+                if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
                 {
                     StartMarker?.Draw(dc);
                 }
 
-                if (Style.EndArrowStyle.ArrowType != ArrowType.None)
+                if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
                 {
                     EndMarker?.Draw(dc);
                 }

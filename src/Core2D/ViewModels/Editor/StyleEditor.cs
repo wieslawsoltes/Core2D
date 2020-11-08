@@ -66,7 +66,7 @@ namespace Core2D.Editor
 
             if (editor.PageState?.SelectedShapes != null)
             {
-                var stroke = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Stroke;
+                var stroke = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.Color;
                 _strokeCopy = (BaseColor)stroke?.Copy(null);
             }
         }
@@ -84,10 +84,10 @@ namespace Core2D.Editor
             {
                 var style = shape.Style;
 
-                var previous = style.Stroke;
+                var previous = style.Stroke.Color;
                 var next = (BaseColor)_strokeCopy?.Copy(null);
-                editor.Project?.History?.Snapshot(previous, next, (p) => style.Stroke = p);
-                style.Stroke = next;
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.Stroke.Color = p);
+                style.Stroke.Color = next;
             }
         }
 
@@ -97,7 +97,7 @@ namespace Core2D.Editor
 
             if (editor.PageState?.SelectedShapes != null)
             {
-                var fill = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Fill;
+                var fill = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Fill?.Color;
                 _fillCopy = (BaseColor)fill?.Copy(null);
             }
         }
@@ -115,10 +115,10 @@ namespace Core2D.Editor
             {
                 var style = shape.Style;
 
-                var previous = style.Fill;
+                var previous = style.Fill.Color;
                 var next = (BaseColor)_fillCopy?.Copy(null);
-                editor.Project?.History?.Snapshot(previous, next, (p) => style.Fill = p);
-                style.Fill = next;
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.Fill.Color = p);
+                style.Fill.Color = next;
             }
         }
 
@@ -128,7 +128,7 @@ namespace Core2D.Editor
 
             if (editor.PageState?.SelectedShapes != null)
             {
-                var startArrowStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.StartArrowStyle;
+                var startArrowStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.StartArrowStyle;
                 _startArrowStyleCopy = (ArrowStyle)startArrowStyle?.Copy(null);
             }
         }
@@ -146,10 +146,10 @@ namespace Core2D.Editor
             {
                 var style = shape.Style;
 
-                var previous = style.StartArrowStyle;
+                var previous = style.Stroke.StartArrowStyle;
                 var next = (ArrowStyle)_startArrowStyleCopy?.Copy(null);
-                editor.Project?.History?.Snapshot(previous, next, (p) => style.StartArrowStyle = p);
-                style.StartArrowStyle = next;
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.Stroke.StartArrowStyle = p);
+                style.Stroke.StartArrowStyle = next;
             }
         }
 
@@ -159,7 +159,7 @@ namespace Core2D.Editor
 
             if (editor.PageState?.SelectedShapes != null)
             {
-                var endArrowStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.EndArrowStyle;
+                var endArrowStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.EndArrowStyle;
                 _endArrowStyleCopy = (ArrowStyle)endArrowStyle?.Copy(null);
             }
         }
@@ -177,10 +177,10 @@ namespace Core2D.Editor
             {
                 var style = shape.Style;
 
-                var previous = style.EndArrowStyle;
+                var previous = style.Stroke.EndArrowStyle;
                 var next = (ArrowStyle)_endArrowStyleCopy?.Copy(null);
-                editor.Project?.History?.Snapshot(previous, next, (p) => style.EndArrowStyle = p);
-                style.EndArrowStyle = next;
+                editor.Project?.History?.Snapshot(previous, next, (p) => style.Stroke.EndArrowStyle = p);
+                style.Stroke.EndArrowStyle = next;
             }
         }
 
@@ -220,10 +220,10 @@ namespace Core2D.Editor
             var style = shape.Style;
             if (style != null)
             {
-                var previous = style.Thickness;
+                var previous = style.Stroke.Thickness;
                 var next = value;
-                history?.Snapshot(previous, next, (p) => style.Thickness = p);
-                style.Thickness = next;
+                history?.Snapshot(previous, next, (p) => style.Stroke.Thickness = p);
+                style.Stroke.Thickness = next;
             }
         }
 
@@ -232,10 +232,10 @@ namespace Core2D.Editor
             var style = shape.Style;
             if (style != null)
             {
-                var previous = style.LineCap;
+                var previous = style.Stroke.LineCap;
                 var next = value;
-                history?.Snapshot(previous, next, (p) => style.LineCap = p);
-                style.LineCap = next;
+                history?.Snapshot(previous, next, (p) => style.Stroke.LineCap = p);
+                style.Stroke.LineCap = next;
             }
         }
 
@@ -244,10 +244,10 @@ namespace Core2D.Editor
             var style = shape.Style;
             if (style != null)
             {
-                var previous = style.Dashes;
+                var previous = style.Stroke.Dashes;
                 var next = value;
-                history?.Snapshot(previous, next, (p) => style.Dashes = p);
-                style.Dashes = next;
+                history?.Snapshot(previous, next, (p) => style.Stroke.Dashes = p);
+                style.Stroke.Dashes = next;
             }
         }
 
@@ -256,10 +256,10 @@ namespace Core2D.Editor
             var style = shape.Style;
             if (style != null)
             {
-                var previous = style.DashOffset;
+                var previous = style.Stroke.DashOffset;
                 var next = value;
-                history?.Snapshot(previous, next, (p) => style.DashOffset = p);
-                style.DashOffset = next;
+                history?.Snapshot(previous, next, (p) => style.Stroke.DashOffset = p);
+                style.Stroke.DashOffset = next;
             }
         }
 
@@ -268,17 +268,17 @@ namespace Core2D.Editor
             var style = shape.Style;
             if (style != null)
             {
-                var previous = style.Stroke;
+                var previous = style.Stroke.Color;
                 var next = (BaseColor)value.Copy(null);
-                history?.Snapshot(previous, next, (p) => style.Stroke = p);
-                style.Stroke = next;
+                history?.Snapshot(previous, next, (p) => style.Stroke.Color = p);
+                style.Stroke.Color = next;
             }
         }
 
         private void SetStrokeTransparency(BaseShape shape, byte value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.Stroke is ArgbColor argbColor)
+            if (style?.Stroke?.Color is ArgbColor argbColor)
             {
                 var previous = argbColor.A;
                 var next = value;
@@ -292,17 +292,17 @@ namespace Core2D.Editor
             var style = shape.Style;
             if (style != null)
             {
-                var previous = style.Fill;
+                var previous = style.Fill.Color;
                 var next = (BaseColor)value.Copy(null);
-                history?.Snapshot(previous, next, (p) => style.Fill = p);
-                style.Fill = next;
+                history?.Snapshot(previous, next, (p) => style.Fill.Color = p);
+                style.Fill.Color = next;
             }
         }
 
         private void SetFillTransparency(BaseShape shape, byte value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.Fill is ArgbColor argbColor)
+            if (style?.Fill?.Color is ArgbColor argbColor)
             {
                 var previous = argbColor.A;
                 var next = value;
@@ -314,7 +314,7 @@ namespace Core2D.Editor
         private void SetFontName(BaseShape shape, string value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.TextStyle != null)
+            if (style?.TextStyle != null)
             {
                 var textStyle = style.TextStyle;
 
@@ -328,7 +328,7 @@ namespace Core2D.Editor
         private void SetFontStyle(BaseShape shape, FontStyleFlags value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.TextStyle != null && style.TextStyle.FontStyle != null)
+            if (style?.TextStyle?.FontStyle != null)
             {
                 var fontStyle = style.TextStyle.FontStyle;
 
@@ -342,7 +342,7 @@ namespace Core2D.Editor
         private void SetFontSize(BaseShape shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.TextStyle != null)
+            if (style?.TextStyle != null)
             {
                 var textStyle = style.TextStyle;
 
@@ -356,7 +356,7 @@ namespace Core2D.Editor
         private void SetTextHAlignment(BaseShape shape, TextHAlignment value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.TextStyle != null)
+            if (style?.TextStyle != null)
             {
                 var textStyle = style.TextStyle;
 
@@ -370,7 +370,7 @@ namespace Core2D.Editor
         private void SetTextVAlignment(BaseShape shape, TextVAlignment value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.TextStyle != null)
+            if (style?.TextStyle != null)
             {
                 var textStyle = style.TextStyle;
 
@@ -384,9 +384,9 @@ namespace Core2D.Editor
         private void SetStartArrowType(BaseShape shape, ArrowType value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
+            if (style?.Stroke.StartArrowStyle != null)
             {
-                var startArrowStyle = style.StartArrowStyle;
+                var startArrowStyle = style.Stroke.StartArrowStyle;
 
                 var previous = startArrowStyle.ArrowType;
                 var next = value;
@@ -398,9 +398,9 @@ namespace Core2D.Editor
         private void SetStartArrowRadiusX(BaseShape shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
+            if (style?.Stroke.StartArrowStyle != null)
             {
-                var startArrowStyle = style.StartArrowStyle;
+                var startArrowStyle = style.Stroke.StartArrowStyle;
 
                 var previous = startArrowStyle.RadiusX;
                 var next = value;
@@ -412,9 +412,9 @@ namespace Core2D.Editor
         private void SetStartArrowRadiusY(BaseShape shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.StartArrowStyle != null)
+            if (style?.Stroke.StartArrowStyle != null)
             {
-                var startArrowStyle = style.StartArrowStyle;
+                var startArrowStyle = style.Stroke.StartArrowStyle;
 
                 var previous = startArrowStyle.RadiusY;
                 var next = value;
@@ -426,9 +426,9 @@ namespace Core2D.Editor
         private void SetEndArrowType(BaseShape shape, ArrowType value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
+            if (style?.Stroke.EndArrowStyle != null)
             {
-                var endArrowStyle = style.EndArrowStyle;
+                var endArrowStyle = style.Stroke.EndArrowStyle;
 
                 var previous = endArrowStyle.ArrowType;
                 var next = value;
@@ -440,9 +440,9 @@ namespace Core2D.Editor
         private void SetEndArrowRadiusX(BaseShape shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
+            if (style?.Stroke.EndArrowStyle != null)
             {
-                var endArrowStyle = style.EndArrowStyle;
+                var endArrowStyle = style.Stroke.EndArrowStyle;
 
                 var previous = endArrowStyle.RadiusX;
                 var next = value;
@@ -454,9 +454,9 @@ namespace Core2D.Editor
         private void SetEndArrowRadiusY(BaseShape shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null && style.EndArrowStyle != null)
+            if (style?.Stroke.EndArrowStyle != null)
             {
-                var endArrowStyle = style.EndArrowStyle;
+                var endArrowStyle = style.Stroke.EndArrowStyle;
 
                 var previous = endArrowStyle.RadiusY;
                 var next = value;

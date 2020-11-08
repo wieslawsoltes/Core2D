@@ -50,7 +50,7 @@ namespace Core2D.Renderer.SkiaSharp
 
         public static SKStrokeCap ToStrokeCap(ShapeStyle style)
         {
-            return style.LineCap switch
+            return style.Stroke.LineCap switch
             {
                 LineCap.Square => SKStrokeCap.Square,
                 LineCap.Round => SKStrokeCap.Round,
@@ -63,10 +63,10 @@ namespace Core2D.Renderer.SkiaSharp
             var pen = new SKPaint();
 
             var pathEffect = default(SKPathEffect);
-            if (style.Dashes != null)
+            if (style.Stroke.Dashes != null)
             {
-                var intervals = StyleHelper.ConvertDashesToFloatArray(style.Dashes, strokeWidth);
-                var phase = (float)(style.DashOffset * strokeWidth);
+                var intervals = StyleHelper.ConvertDashesToFloatArray(style.Stroke.Dashes, strokeWidth);
+                var phase = (float)(style.Stroke.DashOffset * strokeWidth);
                 if (intervals != null)
                 {
                     pathEffect = SKPathEffect.CreateDash(intervals, phase);
@@ -77,7 +77,7 @@ namespace Core2D.Renderer.SkiaSharp
             pen.IsAntialias = true;
             pen.IsStroke = true;
             pen.StrokeWidth = (float)strokeWidth;
-            pen.Color = ToSKColor(style.Stroke);
+            pen.Color = ToSKColor(style.Stroke.Color);
             pen.StrokeCap = ToStrokeCap(style);
             pen.PathEffect = pathEffect;
 
@@ -124,7 +124,7 @@ namespace Core2D.Renderer.SkiaSharp
 
         public static SKPaint GetSKPaint(string text, ShapeStyle shapeStyle, PointShape topLeft, PointShape bottomRight, out SKPoint origin)
         {
-            var pen = ToSKPaintBrush(shapeStyle.Stroke);
+            var pen = ToSKPaintBrush(shapeStyle.Stroke.Color);
 
             var weight = SKFontStyleWeight.Normal;
             if (shapeStyle.TextStyle.FontStyle != null)

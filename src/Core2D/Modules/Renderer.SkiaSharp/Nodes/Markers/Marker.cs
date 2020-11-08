@@ -18,8 +18,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public virtual void UpdateStyle()
         {
-            Brush = SkiaSharpDrawUtil.ToSKPaintBrush(ShapeStyle.Fill);
-            Pen = SkiaSharpDrawUtil.ToSKPaintPen(ShapeStyle, ShapeStyle.Thickness);
+            Brush = SkiaSharpDrawUtil.ToSKPaintBrush(ShapeStyle.Fill.Color);
+            Pen = SkiaSharpDrawUtil.ToSKPaintPen(ShapeStyle, ShapeStyle.Stroke.Thickness);
         }
     }
 }
