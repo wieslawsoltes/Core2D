@@ -4,23 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
-             xmlns:locator="clr-namespace:Core2D;assembly=Core2D"
-             xmlns:handlers="clr-namespace:Core2D.DragAndDrop.Handlers;assembly=Core2D"
              xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:Base="clr-namespace:Core2D;assembly=Core2D"
-             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
-             xmlns:Scripting="clr-namespace:Core2D.Scripting;assembly=Core2D"
-             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
-             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vm="clr-namespace:Core2D;assembly=Core2D"
+             xmlns:vmdt="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:vme="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:vmc="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:vms="clr-namespace:Core2D.Shapes;assembly=Core2D"
+             xmlns:vmst="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1000" d:DesignHeight="600"
-             x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
+             x:DataType="vme:ProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
     </UserControl.Resources>
@@ -46,7 +42,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="Containers:Library" ItemsSource="{Binding Items}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:Library" ItemsSource="{Binding Items}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -58,7 +54,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="Style:ShapeStyle">
+                    <DataTemplate DataType="vmst:ShapeStyle">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -84,7 +80,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="Containers:Library" ItemsSource="{Binding Items}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:Library" ItemsSource="{Binding Items}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -96,7 +92,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Shapes:GroupShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vms:GroupShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -108,7 +104,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="Base:ViewModelBase">
+                    <DataTemplate DataType="vm:ViewModelBase">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -134,7 +130,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <DataTemplate DataType="Data:Database">
+                    <DataTemplate DataType="vmdt:Database">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -160,7 +156,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="Containers:PageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:PageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -172,7 +168,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Containers:LayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:LayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -184,7 +180,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Shapes:BaseShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vms:BaseShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -196,7 +192,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="Base:ViewModelBase">
+                    <DataTemplate DataType="vm:ViewModelBase">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -222,7 +218,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <DataTemplate DataType="Base:ViewModelBase">
+                    <DataTemplate DataType="vm:ViewModelBase">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -248,7 +244,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="Containers:DocumentContainer" ItemsSource="{Binding Pages}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:DocumentContainer" ItemsSource="{Binding Pages}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -260,7 +256,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Containers:PageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:PageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -272,7 +268,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Containers:LayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:LayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -284,7 +280,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="Shapes:BaseShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vms:BaseShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -296,7 +292,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="Base:ViewModelBase">
+                    <DataTemplate DataType="vm:ViewModelBase">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

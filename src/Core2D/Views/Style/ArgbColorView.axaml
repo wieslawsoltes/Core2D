@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:Style="clr-namespace:Core2D.Style;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vms="clr-namespace:Core2D.Style;assembly=Core2D"
+             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.ArgbColor}"
+             d:DataContext="{x:Static vmd:DesignerContext.ArgbColor}"
              d:DesignWidth="300" d:DesignHeight="400"
-             x:DataType="Style:ArgbColor" x:CompileBindings="True">
+             x:DataType="vms:ArgbColor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter" />
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">

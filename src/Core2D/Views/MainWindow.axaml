@@ -5,8 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
         xmlns:views="clr-namespace:Core2D.Views;assembly=Core2D"
-        xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-        xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+        xmlns:vme="clr-namespace:Core2D.Editor;assembly=Core2D"
+        xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
         Width="1324" Height="690"
         WindowState="Maximized" WindowStartupLocation="Manual"
         FontFamily="{DynamicResource UiFontFamily}"
@@ -15,9 +15,9 @@
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
         Icon="/Assets/Core2D.ico"
         mc:Ignorable="d"
-        d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+        d:DataContext="{x:Static vmd:DesignerContext.Editor}"
         d:DesignWidth="1200" d:DesignHeight="580"
-        x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
+        x:DataType="vme:ProjectEditor" x:CompileBindings="True">
     <Window.Resources>
         <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter" />
     </Window.Resources>

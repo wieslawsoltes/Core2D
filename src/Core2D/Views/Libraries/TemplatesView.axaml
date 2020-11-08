@@ -7,14 +7,12 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
              xmlns:handlers="clr-namespace:Core2D.DragAndDrop.Handlers;assembly=Core2D"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vmc="clr-namespace:Core2D.Containers;assembly=Core2D"
+             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.Project}"
+             d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="Containers:ProjectContainer" x:CompileBindings="True">
+             x:DataType="vmc:ProjectContainer" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler" />
     </UserControl.Resources>
@@ -36,7 +34,7 @@
                 <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #templates.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="Containers:PageContainer">
+                <DataTemplate DataType="vmc:PageContainer">
                     <TextBlock x:Name="template" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #template}" x:CompileBindings="False">

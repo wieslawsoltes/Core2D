@@ -4,17 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
              xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
              xmlns:views="clr-namespace:Core2D.Views;assembly=Core2D"
-             xmlns:Data="clr-namespace:Core2D.Data;assembly=Core2D"
-             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vmdt="clr-namespace:Core2D.Data;assembly=Core2D"
+             xmlns:vms="clr-namespace:Core2D.Shapes;assembly=Core2D"
+             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.Group}"
+             d:DataContext="{x:Static vmd:DesignerContext.Group}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="Shapes:GroupShape" x:CompileBindings="True">
+             x:DataType="vms:GroupShape" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
     </UserControl.Resources>
@@ -30,7 +29,7 @@
                 <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
                 <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding ShapesProperties}">
                     <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="Data:Property">
+                        <DataTemplate DataType="vmdt:Property">
                             <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
                                 <!--<i:Interaction.Behaviors>
                                         <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -44,7 +43,7 @@
                 <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
                 <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding ShapesProperties}">
                     <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="Data:Property">
+                        <DataTemplate DataType="vmdt:Property">
                             <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
                                 <!--<i:Interaction.Behaviors>
                                         <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -60,7 +59,7 @@
             <Grid RowDefinitions="50*,6,50*">
                 <ListBox x:Name="shapes" Items="{Binding Shapes}" Grid.Row="0">
                     <ListBox.DataTemplates>
-                        <DataTemplate DataType="Shapes:BaseShape">
+                        <DataTemplate DataType="vms:BaseShape">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -79,7 +78,7 @@
             <Grid RowDefinitions="50*,6,50*">
                 <ListBox x:Name="connectors" Items="{Binding Connectors}" Grid.Row="0">
                     <ListBox.DataTemplates>
-                        <DataTemplate DataType="Shapes:PointShape">
+                        <DataTemplate DataType="vms:PointShape">
                             <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <i:Interaction.Behaviors>
                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:Shapes="clr-namespace:Core2D.Shapes;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vms="clr-namespace:Core2D.Shapes;assembly=Core2D"
+             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.Point}"
+             d:DataContext="{x:Static vmd:DesignerContext.Point}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="Shapes:PointShape" x:CompileBindings="True">
+             x:DataType="vms:PointShape" x:CompileBindings="True">
     <StackPanel>
         <Grid ColumnDefinitions="50*,6,50*">
             <StackPanel Grid.Column="0">

@@ -3,48 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              xmlns:app="clr-namespace:Core2D;assembly=Core2D"
              xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:views="clr-namespace:Core2D.Views;assembly=Core2D"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:Recent="clr-namespace:Core2D.Editor.Recent;assembly=Core2D"
-             xmlns:Containers="clr-namespace:Core2D.Containers;assembly=Core2D"
-             xmlns:Themes="clr-namespace:Core2D;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vme="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="800" d:DesignHeight="20"
-             x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
+             x:DataType="vme:ProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ObjectEqualsConverter x:Key="ObjectEqualsConverter" />
         <!-- Menu-Shape -->
-        <DrawingPresenter x:Key="DifferenceIcon" Drawing="{StaticResource Difference}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="IntersectIcon" Drawing="{StaticResource Intersect}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="UnionIcon" Drawing="{StaticResource Union}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="XorIcon" Drawing="{StaticResource Xor}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="ReverseDifferenceIcon" Drawing="{StaticResource ReverseDifference}" Width="16" Height="16" />
+        <Image x:Key="DifferenceIcon" Source="{StaticResource Difference}" Width="16" Height="16" />
+        <Image x:Key="IntersectIcon" Source="{StaticResource Intersect}" Width="16" Height="16" />
+        <Image x:Key="UnionIcon" Source="{StaticResource Union}" Width="16" Height="16" />
+        <Image x:Key="XorIcon" Source="{StaticResource Xor}" Width="16" Height="16" />
+        <Image x:Key="ReverseDifferenceIcon" Source="{StaticResource ReverseDifference}" Width="16" Height="16" />
         <!-- Menu-Tool -->
-        <DrawingPresenter x:Key="NoneIcon" Drawing="{StaticResource None}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="SelectionIcon" Drawing="{StaticResource Selection}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="PointIcon" Drawing="{StaticResource Point}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="LineIcon" Drawing="{StaticResource Line}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="ArcIcon" Drawing="{StaticResource Arc}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="CubicBezierIcon" Drawing="{StaticResource CubicBezier}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="QuadraticBezierIcon" Drawing="{StaticResource QuadraticBezier}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="PathIcon" Drawing="{StaticResource Path}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="PathLineIcon" Drawing="{StaticResource Line}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="PathArcIcon" Drawing="{StaticResource Arc}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="PathCubicBezierIcon" Drawing="{StaticResource CubicBezier}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="PathQuadraticBezierIcon" Drawing="{StaticResource QuadraticBezier}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="PathMoveIcon" Drawing="{StaticResource Move}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="RectangleIcon" Drawing="{StaticResource Rectangle}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="EllipseIcon" Drawing="{StaticResource Ellipse}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="CircleIcon" Drawing="{StaticResource Circle}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="TextIcon" Drawing="{StaticResource Text}" Width="16" Height="16" />
-        <DrawingPresenter x:Key="ImageIcon" Drawing="{StaticResource Image}" Width="16" Height="16" />
+        <Image x:Key="NoneIcon" Source="{StaticResource None}" Width="16" Height="16" />
+        <Image x:Key="SelectionIcon" Source="{StaticResource Selection}" Width="16" Height="16" />
+        <Image x:Key="PointIcon" Source="{StaticResource Point}" Width="16" Height="16" />
+        <Image x:Key="LineIcon" Source="{StaticResource Line}" Width="16" Height="16" />
+        <Image x:Key="ArcIcon" Source="{StaticResource Arc}" Width="16" Height="16" />
+        <Image x:Key="CubicBezierIcon" Source="{StaticResource CubicBezier}" Width="16" Height="16" />
+        <Image x:Key="QuadraticBezierIcon" Source="{StaticResource QuadraticBezier}" Width="16" Height="16" />
+        <Image x:Key="PathIcon" Source="{StaticResource Path}" Width="16" Height="16" />
+        <Image x:Key="PathLineIcon" Source="{StaticResource Line}" Width="16" Height="16" />
+        <Image x:Key="PathArcIcon" Source="{StaticResource Arc}" Width="16" Height="16" />
+        <Image x:Key="PathCubicBezierIcon" Source="{StaticResource CubicBezier}" Width="16" Height="16" />
+        <Image x:Key="PathQuadraticBezierIcon" Source="{StaticResource QuadraticBezier}" Width="16" Height="16" />
+        <Image x:Key="PathMoveIcon" Source="{StaticResource Move}" Width="16" Height="16" />
+        <Image x:Key="RectangleIcon" Source="{StaticResource Rectangle}" Width="16" Height="16" />
+        <Image x:Key="EllipseIcon" Source="{StaticResource Ellipse}" Width="16" Height="16" />
+        <Image x:Key="CircleIcon" Source="{StaticResource Circle}" Width="16" Height="16" />
+        <Image x:Key="TextIcon" Source="{StaticResource Text}" Width="16" Height="16" />
+        <Image x:Key="ImageIcon" Source="{StaticResource Image}" Width="16" Height="16" />
     </UserControl.Resources>
     <Menu x:CompileBindings="False">
         <MenuItem Header="_File">

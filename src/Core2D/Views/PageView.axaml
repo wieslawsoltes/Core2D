@@ -4,20 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="clr-namespace:Core2D.DragAndDrop;assembly=Core2D"
              xmlns:handlers="clr-namespace:Core2D.DragAndDrop.Handlers;assembly=Core2D"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
              xmlns:behaviors="clr-namespace:Core2D.Behaviors;assembly=Core2D"
              xmlns:paz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
              xmlns:views="clr-namespace:Core2D.Views;assembly=Core2D"
-             xmlns:Editor="clr-namespace:Core2D.Editor;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vme="clr-namespace:Core2D.Editor;assembly=Core2D"
+             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.Editor}"
+             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="540"
-             x:DataType="Editor:ProjectEditor" x:CompileBindings="True">
+             x:DataType="vme:ProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:EditorDropHandler x:Key="EditorDropHandler" />
         <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">

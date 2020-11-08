@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Core2D.Converters;assembly=Core2D"
-             xmlns:Path="clr-namespace:Core2D.Path;assembly=Core2D"
-             xmlns:Designer="clr-namespace:Core2D.Designer;assembly=Core2D"
+             xmlns:vmp="clr-namespace:Core2D.Path;assembly=Core2D"
+             xmlns:vmd="clr-namespace:Core2D.Designer;assembly=Core2D"
              mc:Ignorable="d"
-             d:DataContext="{x:Static Designer:DesignerContext.PathSize}"
+             d:DataContext="{x:Static vmd:DesignerContext.PathSize}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="Path:PathSize" x:CompileBindings="True">
+             x:DataType="vmp:PathSize" x:CompileBindings="True">
     <StackPanel>
         <Label Content="Width" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding Width, Mode=TwoWay}" />
