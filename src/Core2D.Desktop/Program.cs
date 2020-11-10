@@ -11,11 +11,9 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
-using Avalonia.Media.Imaging;
 using Avalonia.OpenGL;
 using Avalonia.Threading;
 using Core2D.Editor;
-using Core2D;
 using Core2D.Configuration.Themes;
 using Core2D.Views;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
@@ -23,90 +21,6 @@ using Microsoft.CodeAnalysis.Scripting;
 
 namespace Core2D
 {
-    public class Util
-    {
-        public static void Screenshot(Control target, Size size, string path, double dpi = 96)
-        {
-            var pixelSize = new PixelSize((int)size.Width, (int)size.Height);
-            var dpiVector = new Vector(dpi, dpi);
-            using var bitmap = new RenderTargetBitmap(pixelSize, dpiVector);
-            target.Measure(size);
-            target.Arrange(new Rect(size));
-            bitmap.Render(target);
-            bitmap.Save(path);
-        }
-
-        public static async Task RunUIJob(Action action)
-        {
-            await Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                action.Invoke();
-                Dispatcher.UIThread.RunJobs();
-            });
-        }
-    }
-
-    public class ScriptGlobals
-    {
-        public static Application GetApplication()
-        {
-            return Application.Current;
-        }
-
-        public static Window? GetMainwWindow()
-        {
-            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)GetApplication().ApplicationLifetime;
-            return applicationLifetime?.MainWindow;
-        }
-
-        public static MainView? GetMainView()
-        {
-            var mainWindow = GetMainwWindow();
-            return mainWindow?.Content as MainView;
-        }
-
-        public static ProjectEditor? GetEditor()
-        {
-            var mainWidnow = GetMainwWindow();
-            return mainWidnow?.DataContext as ProjectEditor;
-        }
-
-        public static async Task Screenshot(string path = "screenshot.png", double width = 1366, double height = 690)
-        {
-            await Util.RunUIJob(() =>
-            {
-                var mainConntrol = GetMainView();
-                if (mainConntrol != null)
-                {
-                    var size = new Size(width, height);
-                    Util.Screenshot(mainConntrol, size, path);
-                }
-            });
-        }
-    }
-
-    internal class Settings
-    {
-        public ThemeName? Theme { get; set; } = null;
-        public FileInfo[]? Scripts { get; set; }
-        public FileInfo? Project { get; set; }
-        public bool Repl { get; set; }
-        public bool UseSkia { get; set; }
-        public bool UseDirect2D1 { get; set; }
-        public bool EnableMultiTouch { get; set; } = true;
-        public bool UseGpu { get; set; } = true;
-        public bool AllowEglInitialization { get; set; } = true;
-        public bool UseDeferredRendering { get; set; } = true;
-        public bool UseDirectX11 { get; set; }
-        public bool UseManagedSystemDialogs { get; set; }
-        public bool UseHeadless { get; set; }
-        public bool UseHeadlessDrawing { get; set; }
-        public bool UseHeadlessVnc { get; set; }
-        public bool CreateHeadlessScreenshots { get; set; }
-        public string? VncHost { get; set; } = null;
-        public int VncPort { get; set; } = 5901;
-    }
-
     internal class Program
     {
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
