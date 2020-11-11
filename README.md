@@ -66,6 +66,12 @@ Options:
 * [GitHub source code repository.](https://github.com/wieslawsoltes/Core2D)
 * [Wiki.](https://github.com/wieslawsoltes/Core2D/wiki)
 
+## JetBrains Rider
+
+Core2D is developed using JetBrains Rider.
+
+[![Core2D](images/icon-rider.png)]( https://www.jetbrains.com/?from=Core2D)
+
 ## License
 
 Core2D is licensed under the [MIT license](LICENSE.TXT).
