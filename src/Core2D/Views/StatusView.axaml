@@ -16,7 +16,7 @@
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter" />
     </UserControl.Resources>
     <Grid ColumnDefinitions="Auto,*">
-        <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="12,0,12,0">
+        <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,12,0">
             <TextBlock.Text>
                 <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToStatsMultiConverter}">
                     <Binding Path="Project.Documents" />
@@ -54,7 +54,7 @@
             <CheckBox Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
-            <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" MinWidth="0" Margin="12,0,12,0" VerticalAlignment="Center" />
+            <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" MinWidth="0" Margin="12,0,6,0" VerticalAlignment="Center" />
         </WrapPanel>
     </Grid>
 </UserControl>
