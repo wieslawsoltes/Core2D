@@ -39,11 +39,9 @@
         <Panel>
             <views:DashboardMenuView HorizontalAlignment="Left" 
                                      VerticalAlignment="Top"
-                                     Height="{Binding #MainWindow.WindowDecorationMargin.Top}"
                                      IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
             <views:EditorMenuView HorizontalAlignment="Left"
                                   VerticalAlignment="Top"
-                                  Height="{Binding #MainWindow.WindowDecorationMargin.Top}"
                                   IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
         </Panel>
         <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />
