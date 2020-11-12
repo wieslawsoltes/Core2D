@@ -5,37 +5,52 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
+             xmlns:behaviors="using:Core2D.Behaviors"
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
-             x:DataType="vme:ProjectEditor" x:CompileBindings="True">
+             x:DataType="vme:ProjectEditor" x:CompileBindings="True"
+             IsOverlayVisible="True"
+             IsTitleBarVisible="True"
+             IsCloseButtonVisible="True">
     <Panel IsVisible="{Binding Dialog, Converter={x:Static ObjectConverters.IsNotNull}}" x:CompileBindings="False">
-        <Panel Background="{DynamicResource DialogOverlayColor}">
+        <Panel IsVisible="{Binding $parent[UserControl].IsOverlayVisible}" Background="{DynamicResource DialogOverlayColor}">
             <i:Interaction.Behaviors>
                 <ia:EventTriggerBehavior EventName="PointerPressed">
                     <ia:CallMethodAction TargetObject="{Binding}" MethodName="OnCloseDialog" />
                 </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
         </Panel>
-        <Border CornerRadius="4" 
+        <Border x:Name="DragBorder"
+                CornerRadius="4" 
                 Background="{DynamicResource DialogBackground}" 
                 BoxShadow="{DynamicResource DialogBoxShadow}" 
                 VerticalAlignment="Center" HorizontalAlignment="Center">
-            <i:Interaction.Behaviors>
-                <iac:DragPositionBehavior/>
-            </i:Interaction.Behaviors>
-            <DockPanel MaxWidth="900" MaxHeight="700">
-                <Button Content="Close" 
+            <DockPanel MaxWidth="900" MaxHeight="700" Margin="20">
+                <Border x:Name="TitleBorder"
+                        IsVisible="{Binding $parent[UserControl].IsTitleBarVisible}"
+                        CornerRadius="4"
+                        Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                        VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                        Height="25"
+                        DockPanel.Dock="Top">
+                    <i:Interaction.Behaviors>
+                        <behaviors:DragControlBehavior TargetControl="{Binding #DragBorder}" />
+                    </i:Interaction.Behaviors>
+                    <Label Content="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                </Border>
+                <Button x:Name="CloseButton"
+                        IsVisible="{Binding $parent[UserControl].IsCloseButtonVisible}"
+                        Content="Close" 
                         Command="{Binding OnCloseDialog}"
                         HorizontalAlignment="Right"
-                        Margin="20"
+                        Margin="20,0,0,0"
                         Padding="20,10,20,10"
                         DockPanel.Dock="Bottom" />
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <ContentControl Content="{Binding Dialog}" Margin="20,20,20,0" />
+                    <ContentControl Content="{Binding Dialog}" />
                 </ScrollViewer>
             </DockPanel>
         </Border>

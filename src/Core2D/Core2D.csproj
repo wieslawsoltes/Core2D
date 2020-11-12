@@ -11,7 +11,7 @@
 
   <PropertyGroup>
     <VersionPrefix>0.10.0</VersionPrefix>
-    <VersionSuffix>preview4</VersionSuffix>
+    <VersionSuffix>preview6</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
@@ -67,13 +67,6 @@
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <Reference Include="System.Drawing" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Views\DialogView.axaml.cs">
-      <DependentUpon>DialogView.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
 </Project>
