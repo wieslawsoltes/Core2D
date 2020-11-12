@@ -28,7 +28,7 @@
                 Background="{DynamicResource DialogBackground}" 
                 BoxShadow="{DynamicResource DialogBoxShadow}" 
                 VerticalAlignment="Center" HorizontalAlignment="Center">
-            <DockPanel MaxWidth="900" MaxHeight="700" Margin="20">
+            <DockPanel MaxWidth="900" MaxHeight="700" Margin="0">
                 <Border x:Name="TitleBorder"
                         IsVisible="{Binding $parent[UserControl].IsTitleBarVisible}"
                         CornerRadius="4"
@@ -46,10 +46,10 @@
                         Content="Close" 
                         Command="{Binding OnCloseDialog}"
                         HorizontalAlignment="Right"
-                        Margin="20,0,0,0"
+                        Margin="20,0,20,20"
                         Padding="20,10,20,10"
                         DockPanel.Dock="Bottom" />
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="20">
                     <ContentControl Content="{Binding Dialog}" />
                 </ScrollViewer>
             </DockPanel>
