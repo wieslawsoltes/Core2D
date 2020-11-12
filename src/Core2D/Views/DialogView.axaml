@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
@@ -23,6 +24,9 @@
                 Background="{DynamicResource DialogBackground}" 
                 BoxShadow="{DynamicResource DialogBoxShadow}" 
                 VerticalAlignment="Center" HorizontalAlignment="Center">
+            <i:Interaction.Behaviors>
+                <iac:DragPositionBehavior/>
+            </i:Interaction.Behaviors>
             <DockPanel MaxWidth="900" MaxHeight="700">
                 <Button Content="Close" 
                         Command="{Binding OnCloseDialog}"
