@@ -32,6 +32,6 @@
             <views:DashboardView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
             <views:EditorView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
         </Panel>
-        <views:DialogView/>
+        <views:DialogView />
     </Panel>
 </UserControl>

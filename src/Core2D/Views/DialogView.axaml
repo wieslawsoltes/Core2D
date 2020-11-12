@@ -12,7 +12,7 @@
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="vme:ProjectEditor" x:CompileBindings="True"
-             IsOverlayVisible="True"
+             IsOverlayVisible="False"
              IsTitleBarVisible="True"
              IsCloseButtonVisible="True">
     <Panel IsVisible="{Binding Dialog, Converter={x:Static ObjectConverters.IsNotNull}}" x:CompileBindings="False">
