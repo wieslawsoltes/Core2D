@@ -1,6 +1,12 @@
 ﻿<Style xmlns="https://github.com/avaloniaui"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style.Resources>
+        <DrawingImage x:Key="Menu">
+            <DrawingGroup>
+                <GeometryDrawing Brush="{DynamicResource IconTransparentBrush}" Geometry="F1M0,0L40,0L40,40L0,40z" />
+                <GeometryDrawing Brush="{DynamicResource IconAccentBrush1}" Geometry="M27.9998 17H11.9998V16H27.9998V17ZM27.9998 25H11.9998V24H27.9998V25ZM27.9998 20.9922H11.9998V20H27.9998V20.9922Z" />
+            </DrawingGroup>
+        </DrawingImage>
         <!-- Menu-Shape -->
         <DrawingImage x:Key="Difference">
             <DrawingGroup>
