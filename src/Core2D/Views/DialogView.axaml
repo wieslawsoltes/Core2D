@@ -34,7 +34,7 @@
                         CornerRadius="4"
                         Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
                         VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                        Height="25"
+                        Height="30"
                         DockPanel.Dock="Top">
                     <i:Interaction.Behaviors>
                         <behaviors:DragControlBehavior TargetControl="{Binding #DragBorder}" />
