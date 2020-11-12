@@ -15,6 +15,8 @@
         Foreground="{DynamicResource SystemBaseHighColor}"
         UseLayoutRounding="True"
         RenderOptions.BitmapInterpolationMode="HighQuality"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome, OSXThickTitleBar"
         Icon="/Assets/Core2D.ico"
         mc:Ignorable="d"
         d:DataContext="{x:Static vmd:DesignerContext.Editor}"
