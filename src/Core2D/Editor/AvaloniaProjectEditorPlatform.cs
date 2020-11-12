@@ -662,7 +662,15 @@ namespace Core2D.Editor
             var editor = _serviceProvider.GetService<ProjectEditor>();
             if (editor.AboutInfo is { })
             {
-                editor.Dialog = editor.AboutInfo;
+                var dialog = new Dialog(editor)
+                {
+                    Title = $"About {editor.AboutInfo.Title}",
+                    IsOverlayVisible = true,
+                    IsTitleBarVisible = true,
+                    IsCloseButtonVisible = true,
+                    ViewModel = editor.AboutInfo
+                };
+                editor.ShowDialog(dialog);
             }
         }
 

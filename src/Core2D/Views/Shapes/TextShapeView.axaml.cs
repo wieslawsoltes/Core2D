@@ -3,7 +3,6 @@ using Avalonia.Markup.Xaml;
 using Core2D.Editor;
 using Core2D.Editors;
 using Core2D.Shapes;
-using Core2D.Views.Editors;
 
 namespace Core2D.Views.Shapes
 {
@@ -30,7 +29,15 @@ namespace Core2D.Views.Shapes
                     Editor = editor,
                     Text = text
                 };
-                editor.Dialog = textBindingEditor;
+                var dialog = new Dialog(editor)
+                {
+                    Title = "Text Binding",
+                    IsOverlayVisible = false,
+                    IsTitleBarVisible = true,
+                    IsCloseButtonVisible = true,
+                    ViewModel = textBindingEditor
+                };
+                editor.ShowDialog(dialog);
             }
         }
     }
