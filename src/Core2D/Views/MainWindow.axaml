@@ -7,7 +7,9 @@
         xmlns:views="using:Core2D.Views"
         xmlns:vme="using:Core2D.Editor"
         xmlns:vmd="using:Core2D.Designer"
+        x:Name="MainWindow"
         Width="1324" Height="690"
+        MinWidth="900" MinHeight="420"
         WindowState="Maximized"
         WindowStartupLocation="Manual"
         FontFamily="{DynamicResource UiFontFamily}"
@@ -31,5 +33,13 @@
             <Binding Path="IsProjectDirty" />
         </MultiBinding>
     </Window.Title>
-    <views:MainView x:Name="MainView" />
+    <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
+      <Panel>
+        <Panel>
+            <views:DashboardMenuView HorizontalAlignment="Left" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
+            <views:EditorMenuView HorizontalAlignment="Left" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        </Panel>
+        <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />
+      </Panel>
+    </Panel>
 </Window>
