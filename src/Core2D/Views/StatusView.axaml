@@ -32,7 +32,7 @@
                 <ComboBox.IsVisible>
                     <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
                         <Binding Path="CurrentTool.Title" />
-                        <Binding Source="Path" />
+                        <Binding Path="" Source="Path" />
                     </MultiBinding>
                 </ComboBox.IsVisible>
             </ComboBox>
