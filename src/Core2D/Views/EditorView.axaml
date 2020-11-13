@@ -87,19 +87,19 @@
             <TabItem Header="Libraries">
                 <TabControl>
                     <TabItem Header="Styles">
-                        <libraries:StylesView DataContext="{Binding Project}" Margin="0,0,8,0" />
+                        <libraries:StylesView DataContext="{Binding Project}" />
                     </TabItem>
                     <TabItem Header="Groups">
-                        <libraries:GroupsView DataContext="{Binding Project}" Margin="0,0,8,0" />
+                        <libraries:GroupsView DataContext="{Binding Project}" />
                     </TabItem>
                     <TabItem Header="Databases">
-                        <libraries:DatabasesView DataContext="{Binding Project}" Margin="0,0,8,0" />
+                        <libraries:DatabasesView DataContext="{Binding Project}" />
                     </TabItem>
                     <TabItem Header="Templates">
-                        <libraries:TemplatesView DataContext="{Binding Project}" Margin="0,0,8,0" />
+                        <libraries:TemplatesView DataContext="{Binding Project}" />
                     </TabItem>
                     <TabItem Header="Scripts">
-                        <libraries:ScriptsView DataContext="{Binding Project}" Margin="0,0,8,0" />
+                        <libraries:ScriptsView DataContext="{Binding Project}" />
                     </TabItem>
                 </TabControl>
             </TabItem>
