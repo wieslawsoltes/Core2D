@@ -7,7 +7,6 @@
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:behaviors="using:Core2D.Behaviors"
              xmlns:vme="using:Core2D.Editor"
-             xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="vme:Dialog" x:CompileBindings="True">
