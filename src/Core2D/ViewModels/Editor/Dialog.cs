@@ -5,7 +5,7 @@ namespace Core2D.Editor
 {
     public class Dialog : ViewModelBase
     {
-        private IDialogPresenter _dialogPresenter;
+        private readonly IDialogPresenter _dialogPresenter;
         private string _title;
         private bool _isOverlayVisible;
         private bool _isTitleBarVisible;
