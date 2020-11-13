@@ -11,31 +11,19 @@
              d:DesignWidth="1200" d:DesignHeight="540"
              x:DataType="vme:ProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:EditorToStatsMultiConverter x:Key="EditorToStatsMultiConverter" />
-        <converters:ObjectToObjectConverter x:Key="ObjectToObjectConverter" />
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter" />
     </UserControl.Resources>
     <Grid ColumnDefinitions="Auto,*">
-        <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,12,0">
-            <TextBlock.Text>
-                <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToStatsMultiConverter}">
-                    <Binding Path="Project.Documents" />
-                    <Binding Path="Project.CurrentDocument.Pages" />
-                    <Binding Path="Project.CurrentContainer.Layers" />
-                    <Binding Path="Project.CurrentContainer.CurrentLayer.Shapes" />
-                    <Binding Path="PageState.SelectedShapes" Converter="{StaticResource ObjectToObjectConverter}" />
-                </MultiBinding>
-            </TextBlock.Text>
-        </TextBlock>
+        <TextBlock Text="{Binding PageState.SelectedShapes.Count, FallbackValue='Selected: 0', StringFormat='{}Selected: {0}'}" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,12,0" />
         <WrapPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Margin="12,0,0,0" VerticalAlignment="Center">
+            <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Margin="12,0,0,0" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center">
                 <ComboBox.DataTemplates>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}" />
                     </DataTemplate>
                 </ComboBox.DataTemplates>
             </ComboBox>
-            <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" BorderBrush="{x:Null}" Margin="12,0,0,0" VerticalAlignment="Center">
+            <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" Margin="12,0,0,0" VerticalAlignment="Center">
                 <ComboBox.DataTemplates>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}" />
@@ -50,7 +38,6 @@
             </ComboBox>
             <CheckBox Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
-            <CheckBox Content="Closed" IsChecked="{Binding Project.Options.DefaultIsClosed, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
