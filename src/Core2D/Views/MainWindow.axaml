@@ -35,16 +35,6 @@
         </MultiBinding>
     </Window.Title>
     <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
-      <Panel>
-        <Panel>
-            <views:DashboardMenuView HorizontalAlignment="Left" 
-                                     VerticalAlignment="Top"
-                                     IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
-            <views:EditorMenuView HorizontalAlignment="Left"
-                                  VerticalAlignment="Top"
-                                  IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
-        </Panel>
         <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />
-      </Panel>
     </Panel>
 </Window>
