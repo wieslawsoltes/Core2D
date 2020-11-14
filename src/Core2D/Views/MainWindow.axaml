@@ -40,12 +40,12 @@
         </Style>
     </Window.Styles>
     <Panel>
-        <Panel x:Name="MainViewPanel">
-            <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
+        <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
+            <Panel x:Name="MainViewPanel">
                 <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />
             </Panel>
         </Panel>
-        <Panel x:Name="MainMenuPanel">
+        <Panel x:Name="MainMenuPanel" Margin="{Binding #MainWindow.OffScreenMargin}">
             <views:DashboardMenuView HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
                                      IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
