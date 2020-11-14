@@ -8,7 +8,6 @@
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Core2D.DragAndDrop"
              xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
-             xmlns:views="using:Core2D.Views"
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmer="using:Core2D.Editor.Recent"
              xmlns:vmd="using:Core2D.Designer"
@@ -27,40 +26,37 @@
     <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
     </i:Interaction.Behaviors>
-    <Panel>
-        <views:DashboardMenuView VerticalAlignment="Top" />
-        <Grid RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*" MaxWidth="800" MaxHeight="600">
-            <Label Content="Core2D" FontSize="20" FontWeight="SemiBold" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1" />
-            <Button Content="New Project" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnNewProject}" x:CompileBindings="False">
-                <i:Interaction.Behaviors>
-                    <iac:FocusOnPointerMovedBehavior />
-                </i:Interaction.Behaviors>
-            </Button>
-            <Button Content="Open Project" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding Platform.OnOpen}" x:CompileBindings="False">
-                <i:Interaction.Behaviors>
-                    <iac:FocusOnPointerMovedBehavior />
-                </i:Interaction.Behaviors>
-            </Button>
-            <Button Content="Open Recent" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnOpenProject}" CommandParameter="{Binding CurrentRecentProject.Path}" x:CompileBindings="False">
-                <i:Interaction.Behaviors>
-                    <iac:FocusOnPointerMovedBehavior />
-                </i:Interaction.Behaviors>
-            </Button>
-            <Label Content="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" />
-            <ListBox x:Name="RecentListBox" Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="vmer:RecentFile">
-                        <Panel x:Name="NamePanel" Background="Transparent" Cursor="Hand" ToolTip.Tip="{Binding Path}">
-                            <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #NamePanel}" x:CompileBindings="False">
-                                    <ia:InvokeCommandAction Command="{Binding #RecentListBox.DataContext.OnOpenProject}" CommandParameter="{Binding #NamePanel.DataContext.Path}" x:CompileBindings="False" />
-                                </ia:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>
-                            <TextBlock Text="{Binding Name}" />
-                        </Panel>
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
-        </Grid>
-    </Panel>
+    <Grid RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*" MaxWidth="800" MaxHeight="600">
+        <Label Content="Core2D" FontSize="20" FontWeight="SemiBold" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1" />
+        <Button Content="New Project" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnNewProject}" x:CompileBindings="False">
+            <i:Interaction.Behaviors>
+                <iac:FocusOnPointerMovedBehavior />
+            </i:Interaction.Behaviors>
+        </Button>
+        <Button Content="Open Project" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding Platform.OnOpen}" x:CompileBindings="False">
+            <i:Interaction.Behaviors>
+                <iac:FocusOnPointerMovedBehavior />
+            </i:Interaction.Behaviors>
+        </Button>
+        <Button Content="Open Recent" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding OnOpenProject}" CommandParameter="{Binding CurrentRecentProject.Path}" x:CompileBindings="False">
+            <i:Interaction.Behaviors>
+                <iac:FocusOnPointerMovedBehavior />
+            </i:Interaction.Behaviors>
+        </Button>
+        <Label Content="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" />
+        <ListBox x:Name="RecentListBox" Items="{Binding RecentProjects}" SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
+            <ListBox.DataTemplates>
+                <DataTemplate DataType="vmer:RecentFile">
+                    <Panel x:Name="NamePanel" Background="Transparent" Cursor="Hand" ToolTip.Tip="{Binding Path}">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #NamePanel}" x:CompileBindings="False">
+                                <ia:InvokeCommandAction Command="{Binding #RecentListBox.DataContext.OnOpenProject}" CommandParameter="{Binding #NamePanel.DataContext.Path}" x:CompileBindings="False" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        <TextBlock Text="{Binding Name}" />
+                    </Panel>
+                </DataTemplate>
+            </ListBox.DataTemplates>
+        </ListBox>
+    </Grid>
 </UserControl>

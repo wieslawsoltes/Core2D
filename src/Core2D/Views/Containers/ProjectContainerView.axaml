@@ -8,7 +8,6 @@
              xmlns:idd="using:Core2D.DragAndDrop"
              xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:views="using:Core2D.Views"
              xmlns:vmc="using:Core2D.Containers"
              xmlns:vms="using:Core2D.Shapes"
              xmlns:vmd="using:Core2D.Designer"
@@ -22,10 +21,9 @@
         <handlers:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
-        <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="Auto,*,Auto">
-            <views:EditorMenuView Grid.Column="0" VerticalAlignment="Top" />
-            <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" />
-            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
+        <Grid Grid.Row="0" RowDefinitions="*" ColumnDefinitions="*,Auto">
+            <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
                 <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
                 <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnNew}" CommandParameter="{Binding Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
             </StackPanel>
