@@ -13,7 +13,7 @@
     <UserControl.KeyBindings>
         <KeyBinding Command="{Binding Close}" Gesture="Escape" x:CompileBindings="False" />
     </UserControl.KeyBindings>
-    <Panel IsVisible="{Binding ViewModel, Converter={x:Static ObjectConverters.IsNotNull}}" x:CompileBindings="False">
+    <Panel IsVisible="{Binding ViewModel, Converter={x:Static ObjectConverters.IsNotNull}}">
         <Panel IsVisible="{Binding IsOverlayVisible}" Background="{DynamicResource DialogOverlayColor}">
             <i:Interaction.Behaviors>
                 <ia:EventTriggerBehavior EventName="PointerPressed">
@@ -42,7 +42,7 @@
                 <Button x:Name="CloseButton"
                         IsVisible="{Binding IsCloseButtonVisible}"
                         Content="Close" 
-                        Command="{Binding Close}"
+                        Command="{Binding Close}" x:CompileBindings="False"
                         HorizontalAlignment="Right"
                         Margin="20,0,20,20"
                         Padding="20,10,20,10"
