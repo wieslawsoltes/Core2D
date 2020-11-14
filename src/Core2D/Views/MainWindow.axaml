@@ -34,16 +34,18 @@
             <Binding Path="IsProjectDirty" />
         </MultiBinding>
     </Window.Title>
+    <Window.Styles>
+        <Style Selector="Window[IsExtendedIntoWindowDecorations=False] Panel#MainViewPanel">
+            <Setter Property="Margin" Value="{DynamicResource MainViewMargin}" />
+        </Style>
+    </Window.Styles>
     <Panel>
-        <Panel x:Name="MainViewPanel" Margin="{Binding #MainWindow.OffScreenMargin}">
-            <Panel.Styles>
-                <Style Selector="Window#MainWindow[IsExtendedIntoWindowDecorations=False] Panel#MainViewPanel">
-                    <Setter Property="Margin" Value="{Binding #MainWindow.WindowDecorationMargin}" />
-                </Style>
-            </Panel.Styles>
-            <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />
+        <Panel x:Name="MainViewPanel">
+            <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
+                <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />
+            </Panel>
         </Panel>
-        <Panel x:Name="MainMenuViewPanel">
+        <Panel x:Name="MainMenuPanel">
             <views:DashboardMenuView HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
                                      IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
