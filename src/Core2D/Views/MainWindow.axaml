@@ -35,10 +35,15 @@
         </MultiBinding>
     </Window.Title>
     <Panel>
-        <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
+        <Panel x:Name="MainViewPanel" Margin="{Binding #MainWindow.OffScreenMargin}">
+            <Panel.Styles>
+                <Style Selector="Window#MainWindow[IsExtendedIntoWindowDecorations=False] Panel#MainViewPanel">
+                    <Setter Property="Margin" Value="{Binding #MainWindow.WindowDecorationMargin}" />
+                </Style>
+            </Panel.Styles>
             <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />
         </Panel>
-        <Panel>
+        <Panel x:Name="MainMenuViewPanel">
             <views:DashboardMenuView HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
                                      IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
