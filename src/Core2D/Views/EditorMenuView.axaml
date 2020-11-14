@@ -486,9 +486,9 @@
             </MenuItem>
             <MenuItem Padding="0">
                 <MenuItem.Header>
-                    <DockPanel Width="40" Height="40">
+                    <DockPanel Width="40" Height="40" Margin="2,0,2,0">
                         <Viewbox UseLayoutRounding="False"
-                                 Margin="4,0,8,0"
+                                 Margin="4,0,6,0"
                                  Height="7"
                                  Width="8"
                                  HorizontalAlignment="Center"
@@ -502,7 +502,7 @@
                                       Data="M1939 486L2029 576L1024 1581L19 576L109 486L1024 1401L1939 486Z" />
                             </Panel>
                         </Viewbox>
-                        <Panel Margin="8,0,8,0">
+                        <Panel Margin="0">
                             <Image Source="{Binding CurrentTool, Converter={StaticResource ToolIconConverter}}" Width="16" Height="16" />
                         </Panel>
                     </DockPanel>
