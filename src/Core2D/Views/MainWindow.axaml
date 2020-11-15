@@ -12,6 +12,7 @@
         WindowState="Maximized" WindowStartupLocation="Manual"
         FontFamily="{DynamicResource UiFontFamily}"
         Background="{DynamicResource SystemChromeMediumColor}"
+        TransparencyLevelHint="AcrylicBlur"
         Foreground="{DynamicResource SystemBaseHighColor}"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
         ExtendClientAreaToDecorationsHint="True"
