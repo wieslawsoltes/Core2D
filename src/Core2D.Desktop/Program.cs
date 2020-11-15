@@ -307,7 +307,7 @@ namespace Core2D
 
             var optionUseWindowsUIComposition = new Option(new[] { "--useWindowsUIComposition" }, "Use Windows UI composition")
             {
-                Argument = new Argument<bool>(getDefaultValue: () => false)
+                Argument = new Argument<bool>(getDefaultValue: () => true)
             };
             rootCommand.AddOption(optionUseWindowsUIComposition);
             
