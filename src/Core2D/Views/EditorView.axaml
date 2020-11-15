@@ -32,7 +32,7 @@
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
     </i:Interaction.Behaviors>
     <Grid ColumnDefinitions="250,6,*,6,250" RowDefinitions="*,Auto">
-        <containers:ProjectContainerView DataContext="{Binding Project}" Padding="6,0,0,0" Grid.Column="0" Grid.Row="0" />
+        <containers:ProjectContainerView DataContext="{Binding Project}" Padding="8,0,0,0" Grid.Column="0" Grid.Row="0" />
         <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" />
         <views:PageView Grid.Column="2" Grid.Row="0" />
         <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="3" Grid.Row="0" />
@@ -41,17 +41,19 @@
                 <TabControl>
                     <TabItem Header="Page">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <containers:PageContainerView DataContext="{Binding Project.CurrentContainer}" />
+                            <containers:PageContainerView DataContext="{Binding Project.CurrentContainer}"
+                                                          Margin="0,0,8,0" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Shape">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" />
+                            <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                                            Margin="0,0,8,0"/>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Style">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <style:ShapeStyleView x:DataType="vme:ProjectEditor">
+                            <style:ShapeStyleView x:DataType="vme:ProjectEditor" Margin="0,0,8,0">
                                 <style:ShapeStyleView.DataContext>
                                     <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
                                         <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
@@ -66,6 +68,7 @@
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <views:DataObjectView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                                  Margin="0,0,8,0"
                                                   x:CompileBindings="False" />
                         </ScrollViewer>
                     </TabItem>
@@ -75,6 +78,7 @@
                                       VerticalScrollBarVisibility="Auto">
                             <renderer:ShapeStateView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}" 
                                                      DataContext="{Binding State}"
+                                                     Margin="0,0,8,0"
                                                      x:CompileBindings="False" />
                         </ScrollViewer>
                     </TabItem>
@@ -103,26 +107,26 @@
                 <TabControl>
                     <TabItem Header="Project">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <containers:OptionsView DataContext="{Binding Project.Options}" />
+                            <containers:OptionsView DataContext="{Binding Project.Options}" Margin="0,0,8,0" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Renderer">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <renderer:ShapeRendererStateView DataContext="{Binding PageState}" />
+                            <renderer:ShapeRendererStateView DataContext="{Binding PageState}" Margin="0,0,8,0" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Zoom">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <views:ZoomView DataContext="{Binding CanvasPlatform.Zoom}" />
+                            <views:ZoomView DataContext="{Binding CanvasPlatform.Zoom}" Margin="0,0,8,0" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Images">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <libraries:ImagesView DataContext="{Binding Project}" />
+                            <libraries:ImagesView DataContext="{Binding Project}" Margin="0,0,8,0" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Browser">
-                        <views:BrowserView />
+                        <views:BrowserView Margin="0,0,6,0" />
                     </TabItem>
                 </TabControl>
             </TabItem>

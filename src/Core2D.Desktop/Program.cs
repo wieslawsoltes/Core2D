@@ -180,7 +180,8 @@ namespace Core2D
                 {
                     EnableMultitouch = settings.EnableMultiTouch,
                     AllowEglInitialization = settings.AllowEglInitialization,
-                    UseDeferredRendering = settings.UseDeferredRendering
+                    UseDeferredRendering = settings.UseDeferredRendering,
+                    UseWindowsUIComposition = settings.UseWindowsUIComposition
                 });
 
                 if (settings.UseDirectX11)
@@ -304,6 +305,12 @@ namespace Core2D
             };
             rootCommand.AddOption(optionUseDeferredRendering);
 
+            var optionUseWindowsUIComposition = new Option(new[] { "--useWindowsUIComposition" }, "Use Windows UI composition")
+            {
+                Argument = new Argument<bool>(getDefaultValue: () => false)
+            };
+            rootCommand.AddOption(optionUseWindowsUIComposition);
+            
             var optionUseDirectX11 = new Option(new[] { "--useDirectX11" }, "Use DirectX11 platform api")
             {
                 Argument = new Argument<bool>()

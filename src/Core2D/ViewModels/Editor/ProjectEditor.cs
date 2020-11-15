@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace Core2D.Editor
         private ImmutableArray<RecentFile> _recentProjects;
         private RecentFile _currentRecentProject;
         private AboutInfo _aboutInfo;
-        private ViewModelBase _dialog;
+        private IList<Dialog> _dialogs;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
         private readonly Lazy<IHitTest> _hitTest;
@@ -119,10 +120,10 @@ namespace Core2D.Editor
             set => RaiseAndSetIfChanged(ref _aboutInfo, value);
         }
 
-        public ViewModelBase Dialog
+        public IList<Dialog> Dialogs
         {
-            get => _dialog;
-            set => RaiseAndSetIfChanged(ref _dialog, value);
+            get => _dialogs;
+            set => RaiseAndSetIfChanged(ref _dialogs, value);
         }
 
         public ImmutableArray<IEditorTool> Tools => _tools.Value;
@@ -189,6 +190,7 @@ namespace Core2D.Editor
             _shapeEditor = new ShapeEditor(_serviceProvider);
             _recentProjects = ImmutableArray.Create<RecentFile>();
             _currentRecentProject = default;
+            _dialogs = new ObservableCollection<Dialog>();
             _tools = _serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
             _pathTools = _serviceProvider.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>((tools) => tools.ToImmutableArray());
             _hitTest = _serviceProvider.GetServiceLazily<IHitTest>(hitTests => hitTests.Register(_serviceProvider.GetService<IBounds[]>()));
@@ -219,11 +221,16 @@ namespace Core2D.Editor
             throw new NotImplementedException();
         }
 
-        public void OnCloseDialog()
+        public void ShowDialog(Dialog dialog)
         {
-            Dialog = null;
+            _dialogs.Add(dialog);
         }
 
+        public void CloseDialog(Dialog dialog)
+        {
+            _dialogs.Remove(dialog);
+        }
+        
         public (decimal sx, decimal sy) TryToSnap(InputArgs args)
         {
             if (Project != null && Project.Options.SnapToGrid == true)

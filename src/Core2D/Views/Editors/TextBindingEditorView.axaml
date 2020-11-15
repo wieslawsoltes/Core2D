@@ -9,7 +9,7 @@
              d:DesignWidth="1000" d:DesignHeight="600"
              x:CompileBindings="False">
     <Grid ColumnDefinitions="30*,30*,30*" RowDefinitions="Auto,*,Auto">
-        <Label Content="Columns" Margin="6" Grid.Row="0" Grid.Column="0" />
+        <Label Content="Columns" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="0" />
         <DockPanel Margin="6" Grid.Row="1" Grid.Column="0">
             <ComboBox x:Name="DatabasesComboBox" Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
                 <ComboBox.DataTemplates>
@@ -31,7 +31,7 @@
                 </ItemsControl>
             </ScrollViewer>
         </DockPanel>
-        <Label Content="Page Properties" Margin="6" Grid.Row="0" Grid.Column="1" />
+        <Label Content="Page Properties" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="1" />
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="6" Grid.Row="1" Grid.Column="1">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                 <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
@@ -58,7 +58,7 @@
                 </ItemsControl>
             </Grid>
         </ScrollViewer>
-        <Label Content="Shape Properties" Margin="6" Grid.Row="0" Grid.Column="2" />
+        <Label Content="Shape Properties" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="2" />
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="6" Grid.Row="1" Grid.Column="2">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                 <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />

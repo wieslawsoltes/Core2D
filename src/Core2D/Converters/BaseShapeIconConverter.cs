@@ -14,7 +14,7 @@ namespace Core2D.Converters
             {
                 var key = value.GetType().Name.Replace("Shape", "");
 
-                if (Application.Current.Styles.TryGetResource(key, out object resource))
+                if (Application.Current.Styles.TryGetResource(key, out var resource))
                 {
                     return resource;
                 }

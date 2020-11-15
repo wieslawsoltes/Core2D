@@ -15,6 +15,7 @@ namespace Core2D
         public bool UseGpu { get; set; } = true;
         public bool AllowEglInitialization { get; set; } = true;
         public bool UseDeferredRendering { get; set; } = true;
+        public bool UseWindowsUIComposition { get; set; } = false;
         public bool UseDirectX11 { get; set; }
         public bool UseManagedSystemDialogs { get; set; }
         public bool UseHeadless { get; set; }

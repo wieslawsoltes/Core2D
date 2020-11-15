@@ -7,14 +7,16 @@
         xmlns:views="using:Core2D.Views"
         xmlns:vme="using:Core2D.Editor"
         xmlns:vmd="using:Core2D.Designer"
-        Width="1324" Height="690"
-        WindowState="Maximized"
-        WindowStartupLocation="Manual"
+        x:Name="MainWindow"
+        Width="1324" Height="690" MinWidth="900" MinHeight="420"
+        WindowState="Maximized" WindowStartupLocation="Manual"
         FontFamily="{DynamicResource UiFontFamily}"
         Background="{DynamicResource SystemChromeMediumColor}"
         Foreground="{DynamicResource SystemBaseHighColor}"
-        UseLayoutRounding="True"
-        RenderOptions.BitmapInterpolationMode="HighQuality"
+        UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome, OSXThickTitleBar"
+        ExtendClientAreaTitleBarHeightHint="{DynamicResource MenuBarHeight}"
         Icon="/Assets/Core2D.ico"
         mc:Ignorable="d"
         d:DataContext="{x:Static vmd:DesignerContext.Editor}"
@@ -29,5 +31,24 @@
             <Binding Path="IsProjectDirty" />
         </MultiBinding>
     </Window.Title>
-    <views:MainView x:Name="MainView" />
+    <Window.Styles>
+        <Style Selector="Window[IsExtendedIntoWindowDecorations=False] Panel#MainViewPanel">
+            <Setter Property="Margin" Value="{DynamicResource MainViewMargin}" />
+        </Style>
+    </Window.Styles>
+    <Panel>
+        <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
+            <Panel x:Name="MainViewPanel">
+                <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />
+            </Panel>
+        </Panel>
+        <Panel x:Name="MainMenuPanel" Margin="{Binding #MainWindow.OffScreenMargin}">
+            <views:DashboardMenuView HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
+            <views:EditorMenuView HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        </Panel>
+    </Panel>
 </Window>

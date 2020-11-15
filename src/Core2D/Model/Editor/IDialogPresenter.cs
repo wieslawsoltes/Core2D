@@ -1,8 +1,11 @@
-﻿namespace Core2D.Editor
+﻿using System.Collections.Generic;
+
+namespace Core2D.Editor
 {
     public interface IDialogPresenter
     {
-        ViewModelBase Dialog { get; set; }
-        void OnCloseDialog();
+        IList<Dialog> Dialogs { get; set; }
+        void ShowDialog(Dialog dialog);
+        void CloseDialog(Dialog dialog);
     }
 }

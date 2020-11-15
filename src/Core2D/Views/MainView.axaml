@@ -24,20 +24,23 @@
         <KeyBinding Command="{Binding Platform.OnSaveAs}" Gesture="Ctrl+Shift+S" x:CompileBindings="False" />
         <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E" x:CompileBindings="False" />
         <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4" x:CompileBindings="False" />
-        <!-- Dialog -->
-        <KeyBinding Command="{Binding OnCloseDialog}" Gesture="Escape" x:CompileBindings="False" />
     </UserControl.KeyBindings>
     <Panel>
-        <Grid ColumnDefinitions="*" RowDefinitions="*">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}">
-                <views:DashboardMenuView Grid.Row="0" />
-                <views:DashboardView Grid.Row="1" />
-            </Grid>
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}">
-                <views:EditorMenuView Grid.Row="0" />
-                <views:EditorView Grid.Row="1" />
-            </Grid>
-        </Grid>
-        <views:DialogView/>
+        <Panel>
+            <views:DashboardView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
+            <views:EditorView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
+        </Panel>
+        <ItemsControl Items="{Binding Dialogs}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Panel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <views:DialogView />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Panel>
 </UserControl>
