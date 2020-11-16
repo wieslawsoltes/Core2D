@@ -18,9 +18,9 @@
                 <CheckBox Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
                 <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" MinWidth="0" Margin="12,0,6,0" VerticalAlignment="Center" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <CheckBox Content="Decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
-                <CheckBox Content="Points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+            <StackPanel DataContext="{Binding PageState}" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <CheckBox Content="Decorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+                <CheckBox Content="Points" IsChecked="{Binding DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             </StackPanel>
         </StackPanel>
     </Panel>
