@@ -13,35 +13,15 @@
     <UserControl.Resources>
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter" />
     </UserControl.Resources>
-    <Grid ColumnDefinitions="Auto,*">
-        <TextBlock Text="{Binding PageState.SelectedShapes.Count, FallbackValue='Selected: 0', StringFormat='{}Selected: {0}'}" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,12,0" />
-        <WrapPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ComboBox Items="{Binding Tools}" SelectedItem="{Binding CurrentTool, Mode=TwoWay}" Margin="12,0,0,0" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center">
-                <ComboBox.DataTemplates>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Title}" />
-                    </DataTemplate>
-                </ComboBox.DataTemplates>
-            </ComboBox>
-            <ComboBox Items="{Binding PathTools}" SelectedItem="{Binding CurrentPathTool, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" Margin="12,0,0,0" VerticalAlignment="Center">
-                <ComboBox.DataTemplates>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Title}" />
-                    </DataTemplate>
-                </ComboBox.DataTemplates>
-                <ComboBox.IsVisible>
-                    <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
-                        <Binding Path="CurrentTool.Title" />
-                        <Binding Path="" Source="Path" />
-                    </MultiBinding>
-                </ComboBox.IsVisible>
-            </ComboBox>
+    <Panel>
+        <TextBlock Text="{Binding PageState.SelectedShapes.Count, FallbackValue='Selected: 0', StringFormat='{}Selected: {0}'}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,12,0" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <CheckBox Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" MinWidth="0" Margin="12,0,6,0" VerticalAlignment="Center" />
-        </WrapPanel>
-    </Grid>
+        </StackPanel>
+    </Panel>
 </UserControl>

@@ -13,6 +13,7 @@
              x:DataType="vme:ProjectEditor" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ToolIconConverter x:Key="ToolIconConverter" />
+        <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter" />
         <!-- Menu-Shape -->
         <Image x:Key="DifferenceIcon" Source="{StaticResource Difference}" Width="16" Height="16" />
         <Image x:Key="IntersectIcon" Source="{StaticResource Intersect}" Width="16" Height="16" />
@@ -518,14 +519,6 @@
             <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
             <Separator />
             <MenuItem Header="Pat_h" Icon="{StaticResource PathIcon}" Command="{Binding OnToolPath}" InputGesture="H" />
-            <MenuItem Header="Path T_ool">
-                <MenuItem Header="_Line" Icon="{StaticResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
-                <MenuItem Header="_Arc" Icon="{StaticResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
-                <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
-                <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
-                <Separator />
-                <MenuItem Header="_Move" Icon="{StaticResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M" />
-            </MenuItem>
             <Separator />
             <MenuItem Header="_Rectangle" Icon="{StaticResource RectangleIcon}" Command="{Binding OnToolRectangle}" InputGesture="R" />
             <MenuItem Header="_Ellipse" Icon="{StaticResource EllipseIcon}" Command="{Binding OnToolEllipse}" InputGesture="E" />
@@ -535,6 +528,42 @@
             <MenuItem Header="_Image" Icon="{StaticResource ImageIcon}" Command="{Binding OnToolImage}" InputGesture="I" />
             <Separator />
             <MenuItem Header="Reset" Command="{Binding OnResetTool}" />
+        </MenuItem>
+        <MenuItem Padding="0">
+            <MenuItem.IsVisible>
+                <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
+                    <Binding Path="CurrentTool.Title" />
+                    <Binding Path="" Source="Path" />
+                </MultiBinding>
+            </MenuItem.IsVisible>
+            <MenuItem.Header>
+                <DockPanel Width="40" Height="40" Margin="2,0,2,0">
+                    <Viewbox UseLayoutRounding="False"
+                             Margin="4,0,6,0"
+                             Height="7"
+                             Width="8"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             DockPanel.Dock="Right">
+                        <Panel>
+                            <Panel Height="7" Width="8" />
+                            <Path Stretch="Uniform"
+                                  VerticalAlignment="Center"
+                                  Fill="{DynamicResource IconAccentBrush1}"
+                                  Data="M1939 486L2029 576L1024 1581L19 576L109 486L1024 1401L1939 486Z" />
+                        </Panel>
+                    </Viewbox>
+                    <Panel Margin="0">
+                        <Image Source="{Binding CurrentPathTool, Converter={StaticResource ToolIconConverter}}" Width="16" Height="16" />
+                    </Panel>
+                </DockPanel>
+            </MenuItem.Header>
+            <MenuItem Header="_Line" Icon="{StaticResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
+            <MenuItem Header="_Arc" Icon="{StaticResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
+            <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
+            <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
+            <Separator />
+            <MenuItem Header="_Move" Icon="{StaticResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M" />
         </MenuItem>
     </Menu>
 </UserControl>
