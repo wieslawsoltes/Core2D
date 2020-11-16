@@ -10,7 +10,6 @@ namespace Core2D
         public FileInfo? Project { get; set; }
         public bool Repl { get; set; }
         public bool UseSkia { get; set; }
-        public bool UseDirect2D1 { get; set; }
         public bool EnableMultiTouch { get; set; } = true;
         public bool UseGpu { get; set; } = true;
         public bool AllowEglInitialization { get; set; } = true;

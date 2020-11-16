@@ -164,11 +164,6 @@ namespace Core2D
                     builder.UseSkia();
                 }
 
-                if (settings.UseDirect2D1)
-                {
-                    builder.UseDirect2D1();
-                }
-
                 builder.With(new X11PlatformOptions
                 {
                     EnableMultiTouch = settings.EnableMultiTouch,
@@ -274,12 +269,6 @@ namespace Core2D
                 Argument = new Argument<bool>()
             };
             rootCommand.AddOption(optionUseSkia);
-
-            var optionUseDirect2D1 = new Option(new[] { "--useDirect2D1" }, "Use Direct2D1 renderer")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionUseDirect2D1);
 
             var optionEnableMultiTouch = new Option(new[] { "--enableMultiTouch" }, "Enable multi-touch")
             {
