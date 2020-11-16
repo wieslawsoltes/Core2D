@@ -39,504 +39,502 @@
         <Image x:Key="TextIcon" Source="{StaticResource Text}" Width="16" Height="16" />
         <Image x:Key="ImageIcon" Source="{StaticResource Image}" Width="16" Height="16" />
     </UserControl.Resources>
-    <StackPanel>
-        <Menu x:CompileBindings="False">
-            <MenuItem Padding="0">
-                <MenuItem.Header>
-                    <Image Source="{StaticResource Menu}" Width="40" Height="40" />
-                </MenuItem.Header>
-                <MenuItem Header="_File">
-                    <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}" InputGesture="Ctrl+N" />
-                    <Separator />
-                    <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen}" InputGesture="Ctrl+O" />
-                    <Separator />
-                    <MenuItem Header="_Close" Command="{Binding OnCloseProject}" InputGesture="Ctrl+F4" />
-                    <Separator />
-                    <MenuItem Header="_Save" Command="{Binding Platform.OnSave}" InputGesture="Ctrl+S" />
-                    <MenuItem Header="Save _As..." Command="{Binding Platform.OnSaveAs}" InputGesture="Ctrl+Shift+S" />
-                    <Separator />
-                    <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile}" />
-                    <Separator />
-                    <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson}" />
-                    <Separator />
-                    <MenuItem Header="Import Sv_g..." Command="{Binding Platform.OnImportSvg}" />
-                    <Separator />
-                    <MenuItem Header="_Export..." Command="{Binding Platform.OnExport}" InputGesture="Ctrl+E" />
-                    <Separator />
-                    <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
-                        <MenuItem.Styles>
-                            <Style Selector="MenuItem">
-                                <Setter Property="Header" Value="{Binding Name}" />
-                                <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.Platform.OnOpen}" />
-                                <Setter Property="CommandParameter" Value="{Binding Path}" />
-                            </Style>
-                        </MenuItem.Styles>
-                    </MenuItem>
-                    <Separator />
-                    <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4" />
+    <Menu x:CompileBindings="False">
+        <MenuItem Padding="0">
+            <MenuItem.Header>
+                <Image Source="{StaticResource Menu}" Width="40" Height="40" />
+            </MenuItem.Header>
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}" InputGesture="Ctrl+N" />
+                <Separator />
+                <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen}" InputGesture="Ctrl+O" />
+                <Separator />
+                <MenuItem Header="_Close" Command="{Binding OnCloseProject}" InputGesture="Ctrl+F4" />
+                <Separator />
+                <MenuItem Header="_Save" Command="{Binding Platform.OnSave}" InputGesture="Ctrl+S" />
+                <MenuItem Header="Save _As..." Command="{Binding Platform.OnSaveAs}" InputGesture="Ctrl+Shift+S" />
+                <Separator />
+                <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile}" />
+                <Separator />
+                <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson}" />
+                <Separator />
+                <MenuItem Header="Import Sv_g..." Command="{Binding Platform.OnImportSvg}" />
+                <Separator />
+                <MenuItem Header="_Export..." Command="{Binding Platform.OnExport}" InputGesture="Ctrl+E" />
+                <Separator />
+                <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
+                    <MenuItem.Styles>
+                        <Style Selector="MenuItem">
+                            <Setter Property="Header" Value="{Binding Name}" />
+                            <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.Platform.OnOpen}" />
+                            <Setter Property="CommandParameter" Value="{Binding Path}" />
+                        </Style>
+                    </MenuItem.Styles>
                 </MenuItem>
-                <MenuItem Header="_Edit">
-                    <MenuItem Header="_Undo" Command="{Binding OnUndo}" InputGesture="Ctrl+Z" />
-                    <MenuItem Header="_Redo" Command="{Binding OnRedo}" InputGesture="Ctrl+Y" />
+                <Separator />
+                <MenuItem Header="E_xit" Command="{Binding Platform.OnExit}" InputGesture="Alt+F4" />
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" Command="{Binding OnUndo}" InputGesture="Ctrl+Z" />
+                <MenuItem Header="_Redo" Command="{Binding OnRedo}" InputGesture="Ctrl+Y" />
+                <Separator />
+                <MenuItem Header="Cu_t" Command="{Binding OnCut}" InputGesture="Ctrl+X" />
+                <MenuItem Header="_Copy" Command="{Binding OnCopy}" InputGesture="Ctrl+C" />
+                <MenuItem Header="_Paste" Command="{Binding OnPaste}" InputGesture="Ctrl+V" />
+                <MenuItem Header="_Delete" Command="{Binding OnDelete}" InputGesture="Delete" />
+                <Separator />
+                <MenuItem Header="Copy As _Xaml" Command="{Binding Platform.OnCopyAsXaml}" />
+                <Separator />
+                <MenuItem Header="Copy As _Svg" Command="{Binding Platform.OnCopyAsSvg}" />
+                <MenuItem Header="Paste Sv_g" Command="{Binding Platform.OnPasteSvg}" />
+                <Separator />
+                <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf}" />
+                <Separator />
+                <MenuItem Header="Copy As Svg Path Data" Command="{Binding Platform.OnCopyAsPathData}" />
+                <MenuItem Header="Paste Stroked Svg Path Data" Command="{Binding Platform.OnPastePathDataStroked}" />
+                <MenuItem Header="Paste Filled Svg Path Data" Command="{Binding Platform.OnPastePathDataFilled}" />
+                <Separator />
+                <MenuItem Header="Select _All" Command="{Binding OnSelectAll}" InputGesture="Ctrl+A" />
+                <MenuItem Header="De_select All" Command="{Binding OnDeselectAll}" InputGesture="Ctrl+Shift+A" />
+                <Separator />
+                <MenuItem Header="Cl_ear All" Command="{Binding OnClearAll}" />
+                <Separator />
+                <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape" />
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Zoom">
+                    <MenuItem Header="_Actual Size" Command="{Binding Platform.OnZoomReset}" InputGesture="Ctrl+D0" />
+                    <MenuItem Header="Fit _Page" Command="{Binding Platform.OnZoomUniform}" InputGesture="Ctrl+D1" />
+                    <MenuItem Header="Fit To Fi_ll" Command="{Binding Platform.OnZoomUniformToFill}" InputGesture="Ctrl+D2" />
+                    <MenuItem Header="_Fill Page" Command="{Binding Platform.OnZoomFill}" InputGesture="Ctrl+D3" />
+                    <MenuItem Header="A_uto Fit Page" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="Ctrl+D4" />
                     <Separator />
-                    <MenuItem Header="Cu_t" Command="{Binding OnCut}" InputGesture="Ctrl+X" />
-                    <MenuItem Header="_Copy" Command="{Binding OnCopy}" InputGesture="Ctrl+C" />
-                    <MenuItem Header="_Paste" Command="{Binding OnPaste}" InputGesture="Ctrl+V" />
-                    <MenuItem Header="_Delete" Command="{Binding OnDelete}" InputGesture="Delete" />
-                    <Separator />
-                    <MenuItem Header="Copy As _Xaml" Command="{Binding Platform.OnCopyAsXaml}" />
-                    <Separator />
-                    <MenuItem Header="Copy As _Svg" Command="{Binding Platform.OnCopyAsSvg}" />
-                    <MenuItem Header="Paste Sv_g" Command="{Binding Platform.OnPasteSvg}" />
-                    <Separator />
-                    <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf}" />
-                    <Separator />
-                    <MenuItem Header="Copy As Svg Path Data" Command="{Binding Platform.OnCopyAsPathData}" />
-                    <MenuItem Header="Paste Stroked Svg Path Data" Command="{Binding Platform.OnPastePathDataStroked}" />
-                    <MenuItem Header="Paste Filled Svg Path Data" Command="{Binding Platform.OnPastePathDataFilled}" />
-                    <Separator />
-                    <MenuItem Header="Select _All" Command="{Binding OnSelectAll}" InputGesture="Ctrl+A" />
-                    <MenuItem Header="De_select All" Command="{Binding OnDeselectAll}" InputGesture="Ctrl+Shift+A" />
-                    <Separator />
-                    <MenuItem Header="Cl_ear All" Command="{Binding OnClearAll}" />
-                    <Separator />
-                    <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape" />
+                    <MenuItem Header="Zoom _In" Command="{Binding Platform.OnZoomIn}" InputGesture="Ctrl+Add" />
+                    <MenuItem Header="Zoom _Out" Command="{Binding Platform.OnZoomOut}" InputGesture="Ctrl+Subtract" />
                 </MenuItem>
-                <MenuItem Header="_View">
-                    <MenuItem Header="_Zoom">
-                        <MenuItem Header="_Actual Size" Command="{Binding Platform.OnZoomReset}" InputGesture="Ctrl+D0" />
-                        <MenuItem Header="Fit _Page" Command="{Binding Platform.OnZoomUniform}" InputGesture="Ctrl+D1" />
-                        <MenuItem Header="Fit To Fi_ll" Command="{Binding Platform.OnZoomUniformToFill}" InputGesture="Ctrl+D2" />
-                        <MenuItem Header="_Fill Page" Command="{Binding Platform.OnZoomFill}" InputGesture="Ctrl+D3" />
-                        <MenuItem Header="A_uto Fit Page" Command="{Binding Platform.OnZoomAutoFit}" InputGesture="Ctrl+D4" />
-                        <Separator />
-                        <MenuItem Header="Zoom _In" Command="{Binding Platform.OnZoomIn}" InputGesture="Ctrl+Add" />
-                        <MenuItem Header="Zoom _Out" Command="{Binding Platform.OnZoomOut}" InputGesture="Ctrl+Subtract" />
-                    </MenuItem>
-                    <MenuItem Header="_Theme">
-                        <MenuItem Header="Fluent _Light" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="FluentLight" />
-                        <MenuItem Header="Fluent _Dark" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="FluentDark" />
-                        <Separator />
-                        <MenuItem Header="Default L_ight" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="DefaultLight" />
-                        <MenuItem Header="Default D_ark" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="DefaultDark" />
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="_Project">
-                    <MenuItem Header="D_ata">
-                        <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}" />
-                        <Separator />
-                        <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}" />
-                        <Separator />
-                        <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}" />
-                    </MenuItem>
-                    <MenuItem Header="O_ptions">
-                        <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
-                            <MenuItem.Icon>
-                                <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Header="Default is _Filled" Command="{Binding OnToggleDefaultIsFilled}" InputGesture="F">
-                            <MenuItem.Icon>
-                                <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <Separator />
-                        <MenuItem Header="Default is Close_d" Command="{Binding OnToggleDefaultIsClosed}" InputGesture="D">
-                            <MenuItem.Icon>
-                                <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <Separator />
-                        <MenuItem Header="Snap to _Grid" Command="{Binding OnToggleSnapToGrid}" InputGesture="G">
-                            <MenuItem.Icon>
-                                <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <Separator />
-                        <MenuItem Header="Try To _Connect" Command="{Binding OnToggleTryToConnect}" InputGesture="C">
-                            <MenuItem.Icon>
-                                <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </MenuItem>
+                <MenuItem Header="_Theme">
+                    <MenuItem Header="Fluent _Light" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="FluentLight" />
+                    <MenuItem Header="Fluent _Dark" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="FluentDark" />
                     <Separator />
-                    <MenuItem Header="E_xport Project" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project}" />
-                </MenuItem>
-                <MenuItem Header="_Document">
-                    <MenuItem Header="_Add Document" Command="{Binding OnAddDocument}" CommandParameter="{Binding Mode=OneWay}" />
-                    <Separator />
-                    <MenuItem Header="Insert Document Bef_ore" Command="{Binding OnInsertDocumentBefore}" CommandParameter="{Binding Project.CurrentDocument}" />
-                    <MenuItem Header="Insert Document Aft_er" Command="{Binding OnInsertDocumentAfter}" CommandParameter="{Binding Project.CurrentDocument}" />
-                    <Separator />
-                    <MenuItem Header="Cu_t Document" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentDocument}" />
-                    <MenuItem Header="_Copy Document" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentDocument}" />
-                    <MenuItem Header="_Paste Document" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentDocument}" />
-                    <Separator />
-                    <MenuItem Header="_Delete Document" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentDocument}" />
-                    <Separator />
-                    <MenuItem Header="E_xport Document" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentDocument}" />
-                </MenuItem>
-                <MenuItem Header="P_age">
-                    <MenuItem Header="_Add Page" Command="{Binding OnAddPage}" CommandParameter="{Binding Mode=OneWay}" />
-                    <Separator />
-                    <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Project.CurrentContainer}" />
-                    <MenuItem Header="Insert Page Aft_er" Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Project.CurrentContainer}" />
-                    <Separator />
-                    <MenuItem Header="Cu_t Page" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentContainer}" />
-                    <MenuItem Header="_Copy Page" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentContainer}" />
-                    <MenuItem Header="_Paste Page" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentContainer}" />
-                    <Separator />
-                    <MenuItem Header="_Delete Page" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentContainer}" />
-                    <Separator />
-                    <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainer}" />
-                </MenuItem>
-                <MenuItem Header="_Layer">
-                    <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Project.CurrentContainer}" />
-                    <Separator />
-                    <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Project.CurrentContainer.CurrentLayer}" />
-                </MenuItem>
-                <MenuItem Header="_Shape">
-                    <MenuItem Header="Du_plicate" Command="{Binding OnDuplicateSelected}" InputGesture="Ctrl+D" />
-                    <Separator />
-                    <MenuItem Header="_Group">
-                        <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G" />
-                        <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U" />
-                    </MenuItem>
-                    <MenuItem Header="Rotat_e">
-                        <MenuItem Header="Rotate _Right 90°" Command="{Binding OnRotateSelected}" CommandParameter="90" InputGesture="Ctrl+R" />
-                        <MenuItem Header="Rotate _Left 90°" Command="{Binding OnRotateSelected}" CommandParameter="-90" InputGesture="Ctrl+L" />
-                        <MenuItem Header="Flip _Horizontal" Command="{Binding OnFlipHorizontalSelected}" InputGesture="Ctrl+H" />
-                        <MenuItem Header="Flip _Vertical" Command="{Binding OnFlipVerticalSelected}" InputGesture="Ctrl+J" />
-                    </MenuItem>
-                    <MenuItem Header="_Move">
-                        <MenuItem Header="_Up" Command="{Binding OnMoveUpSelected}" InputGesture="Up" />
-                        <MenuItem Header="_Down" Command="{Binding OnMoveDownSelected}" InputGesture="Down" />
-                        <MenuItem Header="_Left" Command="{Binding OnMoveLeftSelected}" InputGesture="Left" />
-                        <MenuItem Header="_Right" Command="{Binding OnMoveRightSelected}" InputGesture="Right" />
-                    </MenuItem>
-                    <MenuItem Header="Stac_k">
-                        <MenuItem Header="_Horizontally" Command="{Binding OnStackHorizontallySelected}" InputGesture="Shift+H" />
-                        <MenuItem Header="_Vertically" Command="{Binding OnStackVerticallySelected}" InputGesture="Shift+Y" />
-                    </MenuItem>
-                    <MenuItem Header="Dis_tribute">
-                        <MenuItem Header="_Horizontally" Command="{Binding OnDistributeHorizontallySelected}" InputGesture="Ctrl+Shift+H" />
-                        <MenuItem Header="_Vertically" Command="{Binding OnDistributeVerticallySelected}" InputGesture="Ctrl+Shift+Y" />
-                    </MenuItem>
-                    <MenuItem Header="Alig_n">
-                        <MenuItem Header="_Left" Command="{Binding OnAlignLeftSelected}" InputGesture="Ctrl+Shift+Left" />
-                        <MenuItem Header="_Centered" Command="{Binding OnAlignCenteredSelected}" InputGesture="Ctrl+Shift+Subtract" />
-                        <MenuItem Header="_Right" Command="{Binding OnAlignRightSelected}" InputGesture="Ctrl+Shift+Right" />
-                        <Separator />
-                        <MenuItem Header="_Top" Command="{Binding OnAlignTopSelected}" InputGesture="Ctrl+Shift+Up" />
-                        <MenuItem Header="C_enter" Command="{Binding OnAlignCenterSelected}" InputGesture="Ctrl+Shift+OemPipe" />
-                        <MenuItem Header="_Bottom" Command="{Binding OnAlignBottomSelected}" InputGesture="Ctrl+Shift+Down" />
-                    </MenuItem>
-                    <MenuItem Header="_Arange">
-                        <MenuItem Header="_Bring to Front" Command="{Binding OnBringToFrontSelected}" InputGesture="Ctrl+Shift+OemCloseBrackets" />
-                        <MenuItem Header="Bring _Forward" Command="{Binding OnBringForwardSelected}" InputGesture="Ctrl+OemCloseBrackets" />
-                        <Separator />
-                        <MenuItem Header="Send Back_ward" Command="{Binding OnSendBackwardSelected}" InputGesture="Ctrl+OemOpenBrackets" />
-                        <MenuItem Header="_Send to Back" Command="{Binding OnSendToBackSelected}" InputGesture="Ctrl+Shift+OemOpenBrackets" />
-                    </MenuItem>
-                    <Separator />
-                    <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}" />
-                    <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}" />
-                    <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}" />
-                    <MenuItem Header="Create _Winding Path" Command="{Binding OnCreateWindingPath}" />
-                    <MenuItem Header="_Simplify Path" Command="{Binding OnPathSimplify}" />
-                    <MenuItem Header="_Break Path" Command="{Binding OnPathBreak}" InputGesture="Ctrl+B" />
-                    <Separator />
-                    <MenuItem Header="_Difference" Icon="{StaticResource DifferenceIcon}" ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D" />
-                    <MenuItem Header="_Intersect" Icon="{StaticResource IntersectIcon}" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I" />
-                    <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U" />
-                    <MenuItem Header="_Xor" Icon="{StaticResource XorIcon}" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X" />
-                    <MenuItem Header="_Reverse Difference" Icon="{StaticResource ReverseDifferenceIcon}" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
-                </MenuItem>
-                <MenuItem Header="F_ormat">
-                    <MenuItem Header="_Copy">
-                        <MenuItem Header="_Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C" />
-                        <MenuItem Header="St_roke" Command="{Binding StyleEditor.OnCopyStroke}" />
-                        <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnCopyFill}" />
-                        <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnCopyTextStyle}" />
-                        <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnCopyStartArrowStyle}" />
-                        <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnCopyEndArrowStyle}" />
-                    </MenuItem>
-                    <MenuItem Header="_Paste">
-                        <MenuItem Header="_Style" Command="{Binding StyleEditor.OnPasteStyle}" InputGesture="Ctrl+Shift+V" />
-                        <MenuItem Header="St_roke" Command="{Binding StyleEditor.OnPasteStroke}" />
-                        <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnPasteFill}" />
-                        <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnPasteTextStyle}" />
-                        <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnPasteStartArrowStyle}" />
-                        <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnPasteEndArrowStyle}" />
-                    </MenuItem>
-                    <MenuItem Header="_Stroke">
-                        <MenuItem Header="_Thickness">
-                            <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.25" />
-                            <MenuItem Header="0.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.5" />
-                            <MenuItem Header="0.75" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.75" />
-                            <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="1" />
-                            <MenuItem Header="1.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="1.5" />
-                            <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="2" />
-                            <MenuItem Header="2.25" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="2.25" />
-                            <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="3" />
-                            <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="4" />
-                            <MenuItem Header="4.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="4.5" />
-                            <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="5" />
-                            <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="6" />
-                            <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="7" />
-                            <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="8" />
-                            <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="9" />
-                            <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="10" />
-                        </MenuItem>
-                        <MenuItem Header="_Color">
-                            <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Black" />
-                            <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Red" />
-                            <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Green" />
-                            <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Blue" />
-                            <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Cyan" />
-                            <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Magenta" />
-                            <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Yellow" />
-                            <MenuItem Header="_White" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="White" />
-                        </MenuItem>
-                        <MenuItem Header="Trans_parency">
-                            <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="0" />
-                            <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="25" />
-                            <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="51" />
-                            <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="76" />
-                            <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="102" />
-                            <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="127" />
-                            <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="153" />
-                            <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="178" />
-                            <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="204" />
-                            <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="229" />
-                            <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="255" />
-                        </MenuItem>
-                        <MenuItem Header="Line _Cap">
-                            <MenuItem Header="Flat" Command="{Binding StyleEditor.OnStyleSetLineCap}" CommandParameter="Flat" />
-                            <MenuItem Header="Square" Command="{Binding StyleEditor.OnStyleSetLineCap}" CommandParameter="Square" />
-                            <MenuItem Header="Round" Command="{Binding StyleEditor.OnStyleSetLineCap}" CommandParameter="Round" />
-                        </MenuItem>
-                        <MenuItem Header="_Dashes">
-                            <MenuItem Header="_Solid" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="" />
-                            <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2" />
-                            <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="0 2" />
-                            <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2" />
-                            <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2 0 2" />
-                        </MenuItem>
-                        <MenuItem Header="Dash _Offset">
-                            <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-5" />
-                            <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-4" />
-                            <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-3" />
-                            <MenuItem Header="-2" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-2" />
-                            <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-1" />
-                            <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0" />
-                            <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="1" />
-                            <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="2" />
-                            <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="3" />
-                            <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="4" />
-                            <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="5" />
-                        </MenuItem>
-                        <MenuItem Header="_Start Arrow">
-                            <MenuItem Header="_Type">
-                                <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="None" />
-                                <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Rectangle" />
-                                <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Ellipse" />
-                                <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Arrow" />
-                            </MenuItem>
-                            <MenuItem Header="Radius_X">
-                                <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="0" />
-                                <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="1" />
-                                <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="2" />
-                                <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="3" />
-                                <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="4" />
-                                <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="5" />
-                                <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="6" />
-                                <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="7" />
-                                <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="8" />
-                                <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="9" />
-                                <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="10" />
-                            </MenuItem>
-                            <MenuItem Header="Radius_Y">
-                                <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="0" />
-                                <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="1" />
-                                <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="2" />
-                                <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="3" />
-                                <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="4" />
-                                <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="5" />
-                                <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="6" />
-                                <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="7" />
-                                <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="8" />
-                                <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="9" />
-                                <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="10" />
-                            </MenuItem>
-                        </MenuItem>
-                        <MenuItem Header="_End Arrow">
-                            <MenuItem Header="_Type">
-                                <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="None" />
-                                <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Rectangle" />
-                                <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Ellipse" />
-                                <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Arrow" />
-                            </MenuItem>
-                            <MenuItem Header="Radius_X">
-                                <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="0" />
-                                <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="1" />
-                                <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="2" />
-                                <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="3" />
-                                <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="4" />
-                                <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="5" />
-                                <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="6" />
-                                <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="7" />
-                                <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="8" />
-                                <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="9" />
-                                <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="10" />
-                            </MenuItem>
-                            <MenuItem Header="Radius_Y">
-                                <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="0" />
-                                <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="1" />
-                                <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="2" />
-                                <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="3" />
-                                <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="4" />
-                                <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="5" />
-                                <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="6" />
-                                <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="7" />
-                                <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="8" />
-                                <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="9" />
-                                <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="10" />
-                            </MenuItem>
-                        </MenuItem>
-                    </MenuItem>
-                    <MenuItem Header="_Fill">
-                        <MenuItem Header="_Color">
-                            <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Black" />
-                            <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Red" />
-                            <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Green" />
-                            <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Blue" />
-                            <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Cyan" />
-                            <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Magenta" />
-                            <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Yellow" />
-                            <MenuItem Header="_White" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="White" />
-                        </MenuItem>
-                        <MenuItem Header="Trans_parency">
-                            <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="0" />
-                            <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="25" />
-                            <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="51" />
-                            <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="76" />
-                            <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="102" />
-                            <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="127" />
-                            <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="153" />
-                            <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="178" />
-                            <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="204" />
-                            <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="229" />
-                            <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="255" />
-                        </MenuItem>
-                    </MenuItem>
-                    <MenuItem Header="_Text">
-                        <MenuItem Header="Font _Name">
-                            <MenuItem Header="_System" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="System" />
-                            <MenuItem Header="_Arial" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="Arial" />
-                            <MenuItem Header="_Calibri" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="Calibri" />
-                            <MenuItem Header="_Consolas" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="Consolas" />
-                        </MenuItem>
-                        <MenuItem Header="Font _Size">
-                            <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="8" />
-                            <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="9" />
-                            <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="10" />
-                            <MenuItem Header="10.5" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="10.5" />
-                            <MenuItem Header="11" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="11" />
-                            <MenuItem Header="12" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="12" />
-                            <MenuItem Header="14" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="14" />
-                            <MenuItem Header="16" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="16" />
-                            <MenuItem Header="18" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="18" />
-                            <MenuItem Header="20" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="20" />
-                            <MenuItem Header="24" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="24" />
-                            <MenuItem Header="28" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="28" />
-                            <MenuItem Header="32" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="32" />
-                            <MenuItem Header="36" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="36" />
-                            <MenuItem Header="40" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="40" />
-                            <MenuItem Header="44" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="44" />
-                            <MenuItem Header="48" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="48" />
-                            <MenuItem Header="54" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="54" />
-                            <MenuItem Header="60" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="60" />
-                            <MenuItem Header="66" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="66" />
-                            <MenuItem Header="72" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="72" />
-                            <MenuItem Header="80" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="80" />
-                            <MenuItem Header="88" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="88" />
-                            <MenuItem Header="96" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="96" />
-                        </MenuItem>
-                        <MenuItem Header="Font S_tyle">
-                            <MenuItem Header="Toggle _Regular" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Regular" />
-                            <MenuItem Header="Toggle _Bold" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Bold" />
-                            <MenuItem Header="Toggle _Italic" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Italic" />
-                        </MenuItem>
-                        <MenuItem Header="_Horizontal Alignment">
-                            <MenuItem Header="Left" Command="{Binding StyleEditor.OnStyleSetTextHAlignment}" CommandParameter="Left" />
-                            <MenuItem Header="_Center" Command="{Binding StyleEditor.OnStyleSetTextHAlignment}" CommandParameter="Center" />
-                            <MenuItem Header="_Right" Command="{Binding StyleEditor.OnStyleSetTextHAlignment}" CommandParameter="Right" />
-                        </MenuItem>
-                        <MenuItem Header="_Vertical Alignment">
-                            <MenuItem Header="_Top" Command="{Binding StyleEditor.OnStyleSetTextVAlignment}" CommandParameter="Top" />
-                            <MenuItem Header="_Center" Command="{Binding StyleEditor.OnStyleSetTextVAlignment}" CommandParameter="Center" />
-                            <MenuItem Header="_Bottom" Command="{Binding StyleEditor.OnStyleSetTextVAlignment}" CommandParameter="Bottom" />
-                        </MenuItem>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="_Help">
-                    <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}" />
+                    <MenuItem Header="Default L_ight" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="DefaultLight" />
+                    <MenuItem Header="Default D_ark" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="DefaultDark" />
                 </MenuItem>
             </MenuItem>
-            <MenuItem Padding="0">
-                <MenuItem.Header>
-                    <DockPanel Width="40" Height="40" Margin="2,0,2,0">
-                        <Viewbox UseLayoutRounding="False"
-                                 Margin="4,0,6,0"
-                                 Height="7"
-                                 Width="8"
-                                 HorizontalAlignment="Center"
-                                 VerticalAlignment="Center"
-                                 DockPanel.Dock="Right">
-                            <Panel>
-                                <Panel Height="7" Width="8" />
-                                <Path Stretch="Uniform"
-                                      VerticalAlignment="Center"
-                                      Fill="{DynamicResource IconAccentBrush1}"
-                                      Data="M1939 486L2029 576L1024 1581L19 576L109 486L1024 1401L1939 486Z" />
-                            </Panel>
-                        </Viewbox>
-                        <Panel Margin="0">
-                            <Image Source="{Binding CurrentTool, Converter={StaticResource ToolIconConverter}}" Width="16" Height="16" />
+            <MenuItem Header="_Project">
+                <MenuItem Header="D_ata">
+                    <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}" />
+                    <Separator />
+                    <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}" />
+                    <Separator />
+                    <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}" />
+                </MenuItem>
+                <MenuItem Header="O_ptions">
+                    <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
+                        <MenuItem.Icon>
+                            <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Default is _Filled" Command="{Binding OnToggleDefaultIsFilled}" InputGesture="F">
+                        <MenuItem.Icon>
+                            <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Default is Close_d" Command="{Binding OnToggleDefaultIsClosed}" InputGesture="D">
+                        <MenuItem.Icon>
+                            <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Snap to _Grid" Command="{Binding OnToggleSnapToGrid}" InputGesture="G">
+                        <MenuItem.Icon>
+                            <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Try To _Connect" Command="{Binding OnToggleTryToConnect}" InputGesture="C">
+                        <MenuItem.Icon>
+                            <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="E_xport Project" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project}" />
+            </MenuItem>
+            <MenuItem Header="_Document">
+                <MenuItem Header="_Add Document" Command="{Binding OnAddDocument}" CommandParameter="{Binding Mode=OneWay}" />
+                <Separator />
+                <MenuItem Header="Insert Document Bef_ore" Command="{Binding OnInsertDocumentBefore}" CommandParameter="{Binding Project.CurrentDocument}" />
+                <MenuItem Header="Insert Document Aft_er" Command="{Binding OnInsertDocumentAfter}" CommandParameter="{Binding Project.CurrentDocument}" />
+                <Separator />
+                <MenuItem Header="Cu_t Document" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentDocument}" />
+                <MenuItem Header="_Copy Document" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentDocument}" />
+                <MenuItem Header="_Paste Document" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentDocument}" />
+                <Separator />
+                <MenuItem Header="_Delete Document" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentDocument}" />
+                <Separator />
+                <MenuItem Header="E_xport Document" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentDocument}" />
+            </MenuItem>
+            <MenuItem Header="P_age">
+                <MenuItem Header="_Add Page" Command="{Binding OnAddPage}" CommandParameter="{Binding Mode=OneWay}" />
+                <Separator />
+                <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <MenuItem Header="Insert Page Aft_er" Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <Separator />
+                <MenuItem Header="Cu_t Page" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <MenuItem Header="_Copy Page" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <MenuItem Header="_Paste Page" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <Separator />
+                <MenuItem Header="_Delete Page" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <Separator />
+                <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainer}" />
+            </MenuItem>
+            <MenuItem Header="_Layer">
+                <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <Separator />
+                <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Project.CurrentContainer.CurrentLayer}" />
+            </MenuItem>
+            <MenuItem Header="_Shape">
+                <MenuItem Header="Du_plicate" Command="{Binding OnDuplicateSelected}" InputGesture="Ctrl+D" />
+                <Separator />
+                <MenuItem Header="_Group">
+                    <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G" />
+                    <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U" />
+                </MenuItem>
+                <MenuItem Header="Rotat_e">
+                    <MenuItem Header="Rotate _Right 90°" Command="{Binding OnRotateSelected}" CommandParameter="90" InputGesture="Ctrl+R" />
+                    <MenuItem Header="Rotate _Left 90°" Command="{Binding OnRotateSelected}" CommandParameter="-90" InputGesture="Ctrl+L" />
+                    <MenuItem Header="Flip _Horizontal" Command="{Binding OnFlipHorizontalSelected}" InputGesture="Ctrl+H" />
+                    <MenuItem Header="Flip _Vertical" Command="{Binding OnFlipVerticalSelected}" InputGesture="Ctrl+J" />
+                </MenuItem>
+                <MenuItem Header="_Move">
+                    <MenuItem Header="_Up" Command="{Binding OnMoveUpSelected}" InputGesture="Up" />
+                    <MenuItem Header="_Down" Command="{Binding OnMoveDownSelected}" InputGesture="Down" />
+                    <MenuItem Header="_Left" Command="{Binding OnMoveLeftSelected}" InputGesture="Left" />
+                    <MenuItem Header="_Right" Command="{Binding OnMoveRightSelected}" InputGesture="Right" />
+                </MenuItem>
+                <MenuItem Header="Stac_k">
+                    <MenuItem Header="_Horizontally" Command="{Binding OnStackHorizontallySelected}" InputGesture="Shift+H" />
+                    <MenuItem Header="_Vertically" Command="{Binding OnStackVerticallySelected}" InputGesture="Shift+Y" />
+                </MenuItem>
+                <MenuItem Header="Dis_tribute">
+                    <MenuItem Header="_Horizontally" Command="{Binding OnDistributeHorizontallySelected}" InputGesture="Ctrl+Shift+H" />
+                    <MenuItem Header="_Vertically" Command="{Binding OnDistributeVerticallySelected}" InputGesture="Ctrl+Shift+Y" />
+                </MenuItem>
+                <MenuItem Header="Alig_n">
+                    <MenuItem Header="_Left" Command="{Binding OnAlignLeftSelected}" InputGesture="Ctrl+Shift+Left" />
+                    <MenuItem Header="_Centered" Command="{Binding OnAlignCenteredSelected}" InputGesture="Ctrl+Shift+Subtract" />
+                    <MenuItem Header="_Right" Command="{Binding OnAlignRightSelected}" InputGesture="Ctrl+Shift+Right" />
+                    <Separator />
+                    <MenuItem Header="_Top" Command="{Binding OnAlignTopSelected}" InputGesture="Ctrl+Shift+Up" />
+                    <MenuItem Header="C_enter" Command="{Binding OnAlignCenterSelected}" InputGesture="Ctrl+Shift+OemPipe" />
+                    <MenuItem Header="_Bottom" Command="{Binding OnAlignBottomSelected}" InputGesture="Ctrl+Shift+Down" />
+                </MenuItem>
+                <MenuItem Header="_Arange">
+                    <MenuItem Header="_Bring to Front" Command="{Binding OnBringToFrontSelected}" InputGesture="Ctrl+Shift+OemCloseBrackets" />
+                    <MenuItem Header="Bring _Forward" Command="{Binding OnBringForwardSelected}" InputGesture="Ctrl+OemCloseBrackets" />
+                    <Separator />
+                    <MenuItem Header="Send Back_ward" Command="{Binding OnSendBackwardSelected}" InputGesture="Ctrl+OemOpenBrackets" />
+                    <MenuItem Header="_Send to Back" Command="{Binding OnSendToBackSelected}" InputGesture="Ctrl+Shift+OemOpenBrackets" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}" />
+                <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}" />
+                <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}" />
+                <MenuItem Header="Create _Winding Path" Command="{Binding OnCreateWindingPath}" />
+                <MenuItem Header="_Simplify Path" Command="{Binding OnPathSimplify}" />
+                <MenuItem Header="_Break Path" Command="{Binding OnPathBreak}" InputGesture="Ctrl+B" />
+                <Separator />
+                <MenuItem Header="_Difference" Icon="{StaticResource DifferenceIcon}" ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D" />
+                <MenuItem Header="_Intersect" Icon="{StaticResource IntersectIcon}" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I" />
+                <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U" />
+                <MenuItem Header="_Xor" Icon="{StaticResource XorIcon}" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X" />
+                <MenuItem Header="_Reverse Difference" Icon="{StaticResource ReverseDifferenceIcon}" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
+            </MenuItem>
+            <MenuItem Header="F_ormat">
+                <MenuItem Header="_Copy">
+                    <MenuItem Header="_Style" Command="{Binding StyleEditor.OnCopyStyle}" InputGesture="Ctrl+Shift+C" />
+                    <MenuItem Header="St_roke" Command="{Binding StyleEditor.OnCopyStroke}" />
+                    <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnCopyFill}" />
+                    <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnCopyTextStyle}" />
+                    <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnCopyStartArrowStyle}" />
+                    <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnCopyEndArrowStyle}" />
+                </MenuItem>
+                <MenuItem Header="_Paste">
+                    <MenuItem Header="_Style" Command="{Binding StyleEditor.OnPasteStyle}" InputGesture="Ctrl+Shift+V" />
+                    <MenuItem Header="St_roke" Command="{Binding StyleEditor.OnPasteStroke}" />
+                    <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnPasteFill}" />
+                    <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnPasteTextStyle}" />
+                    <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnPasteStartArrowStyle}" />
+                    <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnPasteEndArrowStyle}" />
+                </MenuItem>
+                <MenuItem Header="_Stroke">
+                    <MenuItem Header="_Thickness">
+                        <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.25" />
+                        <MenuItem Header="0.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.5" />
+                        <MenuItem Header="0.75" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="0.75" />
+                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="1" />
+                        <MenuItem Header="1.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="1.5" />
+                        <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="2" />
+                        <MenuItem Header="2.25" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="2.25" />
+                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="3" />
+                        <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="4" />
+                        <MenuItem Header="4.5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="4.5" />
+                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="5" />
+                        <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="6" />
+                        <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="7" />
+                        <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="8" />
+                        <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="9" />
+                        <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetThickness}" CommandParameter="10" />
+                    </MenuItem>
+                    <MenuItem Header="_Color">
+                        <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Black" />
+                        <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Red" />
+                        <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Green" />
+                        <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Blue" />
+                        <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Cyan" />
+                        <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Magenta" />
+                        <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="Yellow" />
+                        <MenuItem Header="_White" Command="{Binding StyleEditor.OnStyleSetStroke}" CommandParameter="White" />
+                    </MenuItem>
+                    <MenuItem Header="Trans_parency">
+                        <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="0" />
+                        <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="25" />
+                        <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="51" />
+                        <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="76" />
+                        <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="102" />
+                        <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="127" />
+                        <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="153" />
+                        <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="178" />
+                        <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="204" />
+                        <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="229" />
+                        <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency}" CommandParameter="255" />
+                    </MenuItem>
+                    <MenuItem Header="Line _Cap">
+                        <MenuItem Header="Flat" Command="{Binding StyleEditor.OnStyleSetLineCap}" CommandParameter="Flat" />
+                        <MenuItem Header="Square" Command="{Binding StyleEditor.OnStyleSetLineCap}" CommandParameter="Square" />
+                        <MenuItem Header="Round" Command="{Binding StyleEditor.OnStyleSetLineCap}" CommandParameter="Round" />
+                    </MenuItem>
+                    <MenuItem Header="_Dashes">
+                        <MenuItem Header="_Solid" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="" />
+                        <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2" />
+                        <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="0 2" />
+                        <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2" />
+                        <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2 0 2" />
+                    </MenuItem>
+                    <MenuItem Header="Dash _Offset">
+                        <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-5" />
+                        <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-4" />
+                        <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-3" />
+                        <MenuItem Header="-2" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-2" />
+                        <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-1" />
+                        <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="0" />
+                        <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="1" />
+                        <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="2" />
+                        <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="3" />
+                        <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="4" />
+                        <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="5" />
+                    </MenuItem>
+                    <MenuItem Header="_Start Arrow">
+                        <MenuItem Header="_Type">
+                            <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="None" />
+                            <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Rectangle" />
+                            <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Ellipse" />
+                            <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Arrow" />
+                        </MenuItem>
+                        <MenuItem Header="Radius_X">
+                            <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="0" />
+                            <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="1" />
+                            <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="2" />
+                            <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="3" />
+                            <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="4" />
+                            <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="5" />
+                            <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="6" />
+                            <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="7" />
+                            <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="8" />
+                            <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="9" />
+                            <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX}" CommandParameter="10" />
+                        </MenuItem>
+                        <MenuItem Header="Radius_Y">
+                            <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="0" />
+                            <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="1" />
+                            <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="2" />
+                            <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="3" />
+                            <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="4" />
+                            <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="5" />
+                            <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="6" />
+                            <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="7" />
+                            <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="8" />
+                            <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="9" />
+                            <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY}" CommandParameter="10" />
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="_End Arrow">
+                        <MenuItem Header="_Type">
+                            <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="None" />
+                            <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Rectangle" />
+                            <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Ellipse" />
+                            <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Arrow" />
+                        </MenuItem>
+                        <MenuItem Header="Radius_X">
+                            <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="0" />
+                            <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="1" />
+                            <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="2" />
+                            <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="3" />
+                            <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="4" />
+                            <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="5" />
+                            <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="6" />
+                            <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="7" />
+                            <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="8" />
+                            <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="9" />
+                            <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX}" CommandParameter="10" />
+                        </MenuItem>
+                        <MenuItem Header="Radius_Y">
+                            <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="0" />
+                            <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="1" />
+                            <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="2" />
+                            <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="3" />
+                            <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="4" />
+                            <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="5" />
+                            <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="6" />
+                            <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="7" />
+                            <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="8" />
+                            <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="9" />
+                            <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY}" CommandParameter="10" />
+                        </MenuItem>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Fill">
+                    <MenuItem Header="_Color">
+                        <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Black" />
+                        <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Red" />
+                        <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Green" />
+                        <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Blue" />
+                        <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Cyan" />
+                        <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Magenta" />
+                        <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="Yellow" />
+                        <MenuItem Header="_White" Command="{Binding StyleEditor.OnStyleSetFill}" CommandParameter="White" />
+                    </MenuItem>
+                    <MenuItem Header="Trans_parency">
+                        <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="0" />
+                        <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="25" />
+                        <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="51" />
+                        <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="76" />
+                        <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="102" />
+                        <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="127" />
+                        <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="153" />
+                        <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="178" />
+                        <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="204" />
+                        <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="229" />
+                        <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetFillTransparency}" CommandParameter="255" />
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Text">
+                    <MenuItem Header="Font _Name">
+                        <MenuItem Header="_System" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="System" />
+                        <MenuItem Header="_Arial" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="Arial" />
+                        <MenuItem Header="_Calibri" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="Calibri" />
+                        <MenuItem Header="_Consolas" Command="{Binding StyleEditor.OnStyleSetFontName}" CommandParameter="Consolas" />
+                    </MenuItem>
+                    <MenuItem Header="Font _Size">
+                        <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="8" />
+                        <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="9" />
+                        <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="10" />
+                        <MenuItem Header="10.5" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="10.5" />
+                        <MenuItem Header="11" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="11" />
+                        <MenuItem Header="12" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="12" />
+                        <MenuItem Header="14" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="14" />
+                        <MenuItem Header="16" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="16" />
+                        <MenuItem Header="18" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="18" />
+                        <MenuItem Header="20" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="20" />
+                        <MenuItem Header="24" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="24" />
+                        <MenuItem Header="28" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="28" />
+                        <MenuItem Header="32" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="32" />
+                        <MenuItem Header="36" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="36" />
+                        <MenuItem Header="40" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="40" />
+                        <MenuItem Header="44" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="44" />
+                        <MenuItem Header="48" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="48" />
+                        <MenuItem Header="54" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="54" />
+                        <MenuItem Header="60" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="60" />
+                        <MenuItem Header="66" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="66" />
+                        <MenuItem Header="72" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="72" />
+                        <MenuItem Header="80" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="80" />
+                        <MenuItem Header="88" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="88" />
+                        <MenuItem Header="96" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="96" />
+                    </MenuItem>
+                    <MenuItem Header="Font S_tyle">
+                        <MenuItem Header="Toggle _Regular" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Regular" />
+                        <MenuItem Header="Toggle _Bold" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Bold" />
+                        <MenuItem Header="Toggle _Italic" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Italic" />
+                    </MenuItem>
+                    <MenuItem Header="_Horizontal Alignment">
+                        <MenuItem Header="Left" Command="{Binding StyleEditor.OnStyleSetTextHAlignment}" CommandParameter="Left" />
+                        <MenuItem Header="_Center" Command="{Binding StyleEditor.OnStyleSetTextHAlignment}" CommandParameter="Center" />
+                        <MenuItem Header="_Right" Command="{Binding StyleEditor.OnStyleSetTextHAlignment}" CommandParameter="Right" />
+                    </MenuItem>
+                    <MenuItem Header="_Vertical Alignment">
+                        <MenuItem Header="_Top" Command="{Binding StyleEditor.OnStyleSetTextVAlignment}" CommandParameter="Top" />
+                        <MenuItem Header="_Center" Command="{Binding StyleEditor.OnStyleSetTextVAlignment}" CommandParameter="Center" />
+                        <MenuItem Header="_Bottom" Command="{Binding StyleEditor.OnStyleSetTextVAlignment}" CommandParameter="Bottom" />
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog}" />
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Padding="0">
+            <MenuItem.Header>
+                <DockPanel Width="40" Height="40" Margin="2,0,2,0">
+                    <Viewbox UseLayoutRounding="False"
+                                Margin="4,0,6,0"
+                                Height="7"
+                                Width="8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                DockPanel.Dock="Right">
+                        <Panel>
+                            <Panel Height="7" Width="8" />
+                            <Path Stretch="Uniform"
+                                    VerticalAlignment="Center"
+                                    Fill="{DynamicResource IconAccentBrush1}"
+                                    Data="M1939 486L2029 576L1024 1581L19 576L109 486L1024 1401L1939 486Z" />
                         </Panel>
-                    </DockPanel>
-                </MenuItem.Header>
-                <MenuItem Header="_None" Icon="{StaticResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N" />
+                    </Viewbox>
+                    <Panel Margin="0">
+                        <Image Source="{Binding CurrentTool, Converter={StaticResource ToolIconConverter}}" Width="16" Height="16" />
+                    </Panel>
+                </DockPanel>
+            </MenuItem.Header>
+            <MenuItem Header="_None" Icon="{StaticResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N" />
+            <Separator />
+            <MenuItem Header="_Selection" Icon="{StaticResource SelectionIcon}" Command="{Binding OnToolSelection}" InputGesture="S" />
+            <Separator />
+            <MenuItem Header="_Point" Icon="{StaticResource PointIcon}" Command="{Binding OnToolPoint}" InputGesture="P" />
+            <Separator />
+            <MenuItem Header="_Line" Icon="{StaticResource LineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
+            <MenuItem Header="_Arc" Icon="{StaticResource ArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
+            <MenuItem Header="Cubic _Bezier" Icon="{StaticResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
+            <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
+            <Separator />
+            <MenuItem Header="Pat_h" Icon="{StaticResource PathIcon}" Command="{Binding OnToolPath}" InputGesture="H" />
+            <MenuItem Header="Path T_ool">
+                <MenuItem Header="_Line" Icon="{StaticResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
+                <MenuItem Header="_Arc" Icon="{StaticResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
+                <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
+                <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
                 <Separator />
-                <MenuItem Header="_Selection" Icon="{StaticResource SelectionIcon}" Command="{Binding OnToolSelection}" InputGesture="S" />
-                <Separator />
-                <MenuItem Header="_Point" Icon="{StaticResource PointIcon}" Command="{Binding OnToolPoint}" InputGesture="P" />
-                <Separator />
-                <MenuItem Header="_Line" Icon="{StaticResource LineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
-                <MenuItem Header="_Arc" Icon="{StaticResource ArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
-                <MenuItem Header="Cubic _Bezier" Icon="{StaticResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
-                <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
-                <Separator />
-                <MenuItem Header="Pat_h" Icon="{StaticResource PathIcon}" Command="{Binding OnToolPath}" InputGesture="H" />
-                <MenuItem Header="Path T_ool">
-                    <MenuItem Header="_Line" Icon="{StaticResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
-                    <MenuItem Header="_Arc" Icon="{StaticResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
-                    <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
-                    <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
-                    <Separator />
-                    <MenuItem Header="_Move" Icon="{StaticResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M" />
-                </MenuItem>
-                <Separator />
-                <MenuItem Header="_Rectangle" Icon="{StaticResource RectangleIcon}" Command="{Binding OnToolRectangle}" InputGesture="R" />
-                <MenuItem Header="_Ellipse" Icon="{StaticResource EllipseIcon}" Command="{Binding OnToolEllipse}" InputGesture="E" />
-                <Separator />
-                <MenuItem Header="_Text" Icon="{StaticResource TextIcon}" Command="{Binding OnToolText}" InputGesture="T" />
-                <Separator />
-                <MenuItem Header="_Image" Icon="{StaticResource ImageIcon}" Command="{Binding OnToolImage}" InputGesture="I" />
-                <Separator />
-                <MenuItem Header="Reset" Command="{Binding OnResetTool}" />
+                <MenuItem Header="_Move" Icon="{StaticResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M" />
             </MenuItem>
-        </Menu>
-    </StackPanel>
+            <Separator />
+            <MenuItem Header="_Rectangle" Icon="{StaticResource RectangleIcon}" Command="{Binding OnToolRectangle}" InputGesture="R" />
+            <MenuItem Header="_Ellipse" Icon="{StaticResource EllipseIcon}" Command="{Binding OnToolEllipse}" InputGesture="E" />
+            <Separator />
+            <MenuItem Header="_Text" Icon="{StaticResource TextIcon}" Command="{Binding OnToolText}" InputGesture="T" />
+            <Separator />
+            <MenuItem Header="_Image" Icon="{StaticResource ImageIcon}" Command="{Binding OnToolImage}" InputGesture="I" />
+            <Separator />
+            <MenuItem Header="Reset" Command="{Binding OnResetTool}" />
+        </MenuItem>
+    </Menu>
 </UserControl>
