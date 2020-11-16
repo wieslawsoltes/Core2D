@@ -14,7 +14,7 @@
         <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter" />
     </UserControl.Resources>
     <Panel>
-        <TextBlock Text="{Binding PageState.SelectedShapes.Count, FallbackValue='Selected: 0', StringFormat='{}Selected: {0}'}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,12,0" />
+        <TextBlock Text="{Binding PageState.SelectedShapes.Count, FallbackValue='Selected: 0', StringFormat='{}Selected: {0}'}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,12,0" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <CheckBox Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             <CheckBox Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
