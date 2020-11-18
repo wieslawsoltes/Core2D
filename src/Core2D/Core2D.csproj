@@ -31,6 +31,7 @@
     <AvaloniaEditVersion>0.10.0-preview6</AvaloniaEditVersion>
     <AvaloniaBehaviorsVersion>0.10.0-preview6</AvaloniaBehaviorsVersion>
     <PanAndZoomVersion>3.0.0-preview6</PanAndZoomVersion>
+    <ColorPickerVersion>0.10.0-preview6</ColorPickerVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -63,6 +64,7 @@
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaEditVersion)" />
+    <PackageReference Include="ThemeEditor.Controls.ColorPicker" Version="$(ColorPickerVersion)" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">

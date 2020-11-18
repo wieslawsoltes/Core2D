@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="using:Core2D.Converters"
+             xmlns:cp="using:ThemeEditor.Controls.ColorPicker"
              xmlns:vms="using:Core2D.Style"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
@@ -11,6 +12,7 @@
              d:DesignWidth="300" d:DesignHeight="400"
              x:DataType="vms:ArgbColor" x:CompileBindings="True">
     <UserControl.Resources>
+        <cp:HexToColorConverter x:Key="HexToColorConverter"/>
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter" />
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
             <VisualBrush.Visual>
@@ -52,22 +54,7 @@
         </ToggleButton>
         <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft" Width="300">
             <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="4">
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" Margin="10">
-                    <Label Content="R" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" />
-                    <Label Content="G" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-                    <Label Content="B" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-                    <Label Content="A" Margin="{DynamicResource TextControlThemePadding}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-                    <Slider Value="{Binding R}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="1" />
-                    <Slider Value="{Binding G}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="1" Grid.Column="1" />
-                    <Slider Value="{Binding B}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="2" Grid.Column="1" />
-                    <Slider Value="{Binding A}" Minimum="0" Maximum="255" TickFrequency="1" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="3" Grid.Column="1" />
-                    <Grid ColumnDefinitions="25*,25*,25*,25*" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-                        <TextBox Text="{Binding R, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="0" />
-                        <TextBox Text="{Binding G, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="1" />
-                        <TextBox Text="{Binding B, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="2" />
-                        <TextBox Text="{Binding A, Mode=TwoWay}" TextAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" MinWidth="40" Grid.Column="3" />
-                    </Grid>
-                </Grid>
+                <cp:ColorPicker x:Name="ArgbColorPicker" Color="{Binding Value, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}" Margin="8" />
             </Border>
         </Popup>
     </Grid>

@@ -19,28 +19,65 @@ namespace Core2D.Style
         public byte A
         {
             get => _a;
-            set => RaiseAndSetIfChanged(ref _a, value);
+            set
+            {
+                RaiseAndSetIfChanged(ref _a, value);
+                RaisePropertyChanged(nameof(Value));
+            }
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte R
         {
             get => _r;
-            set => RaiseAndSetIfChanged(ref _r, value);
+            set
+            {
+                RaiseAndSetIfChanged(ref _r, value);
+                RaisePropertyChanged(nameof(Value));
+            }
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte G
         {
             get => _g;
-            set => RaiseAndSetIfChanged(ref _g, value);
+            set
+            {
+                RaiseAndSetIfChanged(ref _g, value);
+                RaisePropertyChanged(nameof(Value));
+            }
         }
 
         [DataMember(IsRequired = false, EmitDefaultValue = true)]
         public byte B
         {
             get => _b;
-            set => RaiseAndSetIfChanged(ref _b, value);
+            set
+            {
+                RaiseAndSetIfChanged(ref _b, value);
+                RaisePropertyChanged(nameof(Value));
+            }
+        }
+
+        [IgnoreDataMember]
+        public string Value
+        {
+            get { return ToString(this); }
+            set
+            {
+                if (value != null)
+                {
+                    try
+                    {
+                        FromString(value, out _a, out _r, out _g, out _b);
+                        RaisePropertyChanged(nameof(A));
+                        RaisePropertyChanged(nameof(R));
+                        RaisePropertyChanged(nameof(G));
+                        RaisePropertyChanged(nameof(B));
+                    }
+                    catch (Exception) { }
+                }
+            }
         }
 
         public override object Copy(IDictionary<object, object> shared)
@@ -82,7 +119,26 @@ namespace Core2D.Style
             };
         }
 
-        public static ArgbColor Parse(string s)
+        public static uint ToUint32(ArgbColor value)
+        {
+            return ((uint)value.A << 24) | ((uint)value.R << 16) | ((uint)value.G << 8) | (uint)value.B;
+        }
+
+        public static string ToString(ArgbColor value)
+        {
+            return $"#{ToUint32(value):X8}";
+        }
+
+        public static void FromString(string value, out byte a, out byte r, out byte g, out byte b)
+        {
+            Parse(value, out var color);
+            a = (byte)((color >> 24) & 0xff);
+            r = (byte)((color >> 16) & 0xff);
+            g = (byte)((color >> 8) & 0xff);
+            b = (byte)(color & 0xff);
+        }
+
+        public static void Parse(string s, out uint color)
         {
             if (s[0] == '#')
             {
@@ -97,7 +153,7 @@ namespace Core2D.Style
                     throw new FormatException($"Invalid color string: '{s}'.");
                 }
 
-                return FromUInt32(uint.Parse(s.Substring(1), NumberStyles.HexNumber, CultureInfo.InvariantCulture) | or);
+                color = uint.Parse(s.Substring(1), NumberStyles.HexNumber, CultureInfo.InvariantCulture) | or;
             }
             else
             {
@@ -105,13 +161,19 @@ namespace Core2D.Style
                 var member = typeof(Colors).GetTypeInfo().DeclaredProperties.FirstOrDefault(x => x.Name.ToUpperInvariant() == upper);
                 if (member != null)
                 {
-                    return (ArgbColor)member.GetValue(null);
+                    color = (uint)member.GetValue(null);
                 }
                 else
                 {
                     throw new FormatException($"Invalid color string: '{s}'.");
                 }
             }
+        }
+
+        public static ArgbColor Parse(string s)
+        {
+            Parse(s, out var value);
+            return FromUInt32(value);
         }
 
         public static string ToXamlHex(ArgbColor c)
