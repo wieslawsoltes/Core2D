@@ -37,8 +37,8 @@ namespace Core2D.Editor.Factories
             var factory = _serviceProvider.GetService<IFactory>();
             var template = containerFactory.GetTemplate(project, name);
 
-            template.IsGridEnabled = true;
-            template.IsBorderEnabled = true;
+            template.IsGridEnabled = false;
+            template.IsBorderEnabled = false;
             template.GridOffsetLeft = 30.0;
             template.GridOffsetTop = 30.0;
             template.GridOffsetRight = -30.0;

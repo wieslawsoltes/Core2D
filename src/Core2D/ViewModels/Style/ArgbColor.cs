@@ -74,6 +74,7 @@ namespace Core2D.Style
                         RaisePropertyChanged(nameof(R));
                         RaisePropertyChanged(nameof(G));
                         RaisePropertyChanged(nameof(B));
+                        MarkAsDirty();
                     }
                     catch (Exception) { }
                 }

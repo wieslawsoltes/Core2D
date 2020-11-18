@@ -36,6 +36,11 @@ namespace Core2D
             _isDirty = false;
         }
 
+        public virtual void MarkAsDirty()
+        {
+            _isDirty = true;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public abstract object Copy(IDictionary<object, object> shared);

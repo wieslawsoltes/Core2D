@@ -14,6 +14,7 @@
         <!--<StyleInclude Source="avares://Core2D/Themes/FluentDark.xaml" />-->
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
         <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
+        <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.xaml"/>
         <StyleInclude Source="avares://Core2D/Icons.axaml" />
     </Application.Styles>
     <Application.DataTemplates>
