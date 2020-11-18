@@ -12,7 +12,7 @@
              d:DesignWidth="300" d:DesignHeight="400"
              x:DataType="vms:ArgbColor" x:CompileBindings="True">
     <UserControl.Resources>
-        <cp:HexToColorConverter x:Key="HexToColorConverter"/>
+        <converters:HexToColorConverter x:Key="HexToColorConverter"/>
         <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter" />
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
             <VisualBrush.Visual>
