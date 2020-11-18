@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <AvaloniaVersion>0.10.999-cibuild0011949-beta</AvaloniaVersion>
+    <AvaloniaVersion>0.10.999-cibuild0011991-beta</AvaloniaVersion>
   </PropertyGroup>
 
   <ItemGroup>
