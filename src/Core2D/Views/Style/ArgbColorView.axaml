@@ -53,7 +53,7 @@
             </Panel>
         </ToggleButton>
         <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft" Width="450" Height="300">
-            <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="4">
+            <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="0">
                 <cp:ColorPicker x:Name="ArgbColorPicker" Color="{Binding Value, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}" Margin="8" />
             </Border>
         </Popup>
