@@ -2589,40 +2589,29 @@ namespace Core2D.Editor
         {
             try
             {
-                var exception = default(Exception);
-
-                try
+                if (!string.IsNullOrEmpty(text))
                 {
-                    if (!string.IsNullOrEmpty(text))
+                    var pathShape = PathConverter?.FromSvgPathData(text, isStroked: false, isFilled: true);
+                    if (pathShape != null)
                     {
-                        var pathShape = PathConverter?.FromSvgPathData(text, isStroked: false, isFilled: true);
-                        if (pathShape != null)
-                        {
-                            OnPasteShapes(Enumerable.Repeat<BaseShape>(pathShape, 1));
-                            return;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    exception = ex;
-                }
-
-                try
-                {
-                    var shapes = JsonSerializer?.Deserialize<IList<BaseShape>>(text);
-                    if (shapes?.Count() > 0)
-                    {
-                        OnPasteShapes(shapes);
+                        OnPasteShapes(Enumerable.Repeat<BaseShape>(pathShape, 1));
                         return;
                     }
                 }
-                catch (Exception ex)
-                {
-                    exception = ex;
-                }
+            }
+            catch (Exception ex)
+            {
+                Log?.LogException(ex);
+            }
 
-                throw exception;
+            try
+            {
+                var shapes = JsonSerializer?.Deserialize<IList<BaseShape>>(text);
+                if (shapes?.Count() > 0)
+                {
+                    OnPasteShapes(shapes);
+                    return;
+                }
             }
             catch (Exception ex)
             {
