@@ -63,7 +63,7 @@ namespace Core2D.Behaviors
                     presenterViewTemplate?.InvalidateVisual();
                     presenterViewEditor?.InvalidateVisual();
                 };
-                canvasPlatform.ResetZoom = () => zoomBorder?.Reset();
+                canvasPlatform.ResetZoom = () => zoomBorder?.ResetMatrix();
                 canvasPlatform.FillZoom = () => zoomBorder?.Fill();
                 canvasPlatform.UniformZoom = () => zoomBorder?.Uniform();
                 canvasPlatform.UniformToFillZoom = () => zoomBorder?.UniformToFill();
@@ -75,7 +75,7 @@ namespace Core2D.Behaviors
 
             if (zoomBorder != null)
             {
-                zoomBorder.InvalidatedChild = InvalidateChild;
+                zoomBorder.ZoomChanged += ZoomBorder_ZoomChanged;
             }
 
             _inputSource = new AvaloniaInputSource(zoomBorder, presenterViewEditor, p => p);
@@ -108,13 +108,17 @@ namespace Core2D.Behaviors
 
             if (zoomBorder != null)
             {
-                zoomBorder.InvalidatedChild = null;
+                zoomBorder.ZoomChanged -= ZoomBorder_ZoomChanged;
             }
 
             _inputProcessor?.Dispose();
             _inputProcessor = null;
             _inputTarget = null;
             _inputSource = null;
+        }
+        private void ZoomBorder_ZoomChanged(object sender, ZoomChangedEventArgs e)
+        {
+            InvalidateChild(e.ZoomX, e.ZoomY, e.OffsetX, e.OffsetY);
         }
     }
 }

@@ -29,13 +29,12 @@
   <PropertyGroup>
     <AvaloniaVersion>0.10.999-cibuild0011991-beta</AvaloniaVersion>
     <AvaloniaEditVersion>0.10.0-preview6</AvaloniaEditVersion>
-    <AvaloniaBehaviorsVersion>0.10.0-preview6</AvaloniaBehaviorsVersion>
-    <PanAndZoomVersion>3.0.0-preview6</PanAndZoomVersion>
-    <ColorPickerVersion>0.10.0-preview6</ColorPickerVersion>
+    <AvaloniaBehaviorsVersion>0.10.0-build20201123-03</AvaloniaBehaviorsVersion>
+    <PanAndZoomVersion>3.0.0-build20201123-14 </PanAndZoomVersion>
+    <ColorPickerVersion>0.10.0-build20201123-03</ColorPickerVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI" Version="12.1.5" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="System.Diagnostics.TextWriterTraceListener" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" Condition="!$(TargetFramework.StartsWith('net4'))" />
@@ -49,22 +48,21 @@
     <PackageReference Include="PDFsharp" Version="1.50.5147" />
     <PackageReference Include="SkiaSharp" Version="2.80.2" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.2" />
-    <PackageReference Include="Svg.Skia.Picture" Version="0.4.2-preview7" />
     <PackageReference Include="System.Collections.Immutable" Version="1.7.1" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
-    <PackageReference Include="Math.Spatial" Version="1.3.0" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="$(AvaloniaBehaviorsVersion)" />
     <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="$(AvaloniaBehaviorsVersion)" />
-    <PackageReference Include="Avalonia.MatrixExtensions" Version="$(PanAndZoomVersion)" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="$(PanAndZoomVersion)" />
+    <PackageReference Include="ReactiveUI" Version="12.1.5" />
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaEditVersion)" />
     <PackageReference Include="ThemeEditor.Controls.ColorPicker" Version="$(ColorPickerVersion)" />
+    <PackageReference Include="Svg.Skia.Picture" Version="0.4.2-build20201123-03" />
+    <PackageReference Include="Math.Spatial" Version="1.3.0-build20201123-01" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">

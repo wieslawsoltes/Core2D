@@ -3,7 +3,7 @@ using Core2D.Renderer;
 using Core2D.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
-using AME = Avalonia.MatrixExtensions;
+using ACP = Avalonia.Controls.PanAndZoom;
 
 namespace Core2D.Renderer
 {
@@ -52,8 +52,8 @@ namespace Core2D.Renderer
             }
 
             var context = dc as AM.DrawingContext;
-            var translateDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? context.PushPreTransform(AME.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
+            var translateDisposable = scale != 1.0 ? context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
+            var scaleDisposable = scale != 1.0 ? context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
 
             OnDraw(dc, zoom);
 

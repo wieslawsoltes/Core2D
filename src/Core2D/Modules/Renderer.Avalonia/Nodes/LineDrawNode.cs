@@ -5,7 +5,7 @@ using Core2D.Style;
 using Spatial;
 using A = Avalonia;
 using AM = Avalonia.Media;
-using AME = Avalonia.MatrixExtensions;
+using ACP = Avalonia.Controls.PanAndZoom;
 
 namespace Core2D.Renderer
 {
@@ -52,8 +52,8 @@ namespace Core2D.Renderer
                         marker.Shape = Line;
                         marker.ShapeStyle = shapeStyle;
                         marker.Style = style;
-                        marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
-                        marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
+                        marker.Rotation = ACP.MatrixHelper.Rotation(angle, new A.Vector(x, y));
+                        marker.Point = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
 
                         var rect2 = new Rect2(x - sx, y - ry, sx, sy);
                         marker.Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
@@ -72,8 +72,8 @@ namespace Core2D.Renderer
                         marker.Shape = Line;
                         marker.ShapeStyle = shapeStyle;
                         marker.Style = style;
-                        marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
-                        marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
+                        marker.Rotation = ACP.MatrixHelper.Rotation(angle, new A.Vector(x, y));
+                        marker.Point = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
 
                         var rect2 = new Rect2(x - sx, y - ry, sx, sy);
                         var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
@@ -93,13 +93,13 @@ namespace Core2D.Renderer
                         marker.Shape = Line;
                         marker.ShapeStyle = shapeStyle;
                         marker.Style = style;
-                        marker.Rotation = AME.MatrixHelper.Rotation(angle, new A.Vector(x, y));
-                        marker.Point = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
+                        marker.Rotation = ACP.MatrixHelper.Rotation(angle, new A.Vector(x, y));
+                        marker.Point = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
 
-                        marker.P11 = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y + sy));
-                        marker.P21 = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
-                        marker.P12 = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y - sy));
-                        marker.P22 = AME.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
+                        marker.P11 = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y + sy));
+                        marker.P21 = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
+                        marker.P12 = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y - sy));
+                        marker.P22 = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
 
                         return marker;
                     }
