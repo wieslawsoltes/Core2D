@@ -123,7 +123,7 @@
             </i:Interaction.Behaviors>
             <Panel ClipToBounds="True">
                 <ScrollViewer x:Name="PageScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <paz:ZoomBorder x:Name="PageZoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Right" EnablePan="{Binding IsToolIdle}" EnableZoom="True" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <paz:ZoomBorder x:Name="PageZoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Middle" EnablePan="{Binding IsToolIdle}" EnableZoom="True" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Panel HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding #PresenterViewTemplate.Container.Width}" Height="{Binding #PresenterViewTemplate.Container.Height}">
                             <views:PresenterView x:Name="PresenterViewData" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False" />
                             <views:PresenterView x:Name="PresenterViewTemplate" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False" />
