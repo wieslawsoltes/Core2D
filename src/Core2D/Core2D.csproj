@@ -27,7 +27,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AvaloniaVersion>0.10.999-cibuild0011991-beta</AvaloniaVersion>
+    <AvaloniaVersion>0.10.999-cibuild0012062-beta</AvaloniaVersion>
     <AvaloniaEditVersion>0.10.0-preview6</AvaloniaEditVersion>
     <AvaloniaBehaviorsVersion>0.10.0-build20201123-03</AvaloniaBehaviorsVersion>
     <PanAndZoomVersion>3.0.0-build20201123-14 </PanAndZoomVersion>

@@ -12,7 +12,7 @@
 
   <PropertyGroup>
     <VersionPrefix>0.10.0</VersionPrefix>
-    <VersionSuffix>preview4</VersionSuffix>
+    <VersionSuffix>preview6</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <AvaloniaVersion>0.10.999-cibuild0011991-beta</AvaloniaVersion>
+    <AvaloniaVersion>0.10.999-cibuild0012062-beta</AvaloniaVersion>
   </PropertyGroup>
 
   <ItemGroup>
