@@ -115,7 +115,7 @@
         <behaviors:AttachEditorBehavior />
     </i:Interaction.Behaviors>
     <Panel>
-        <Panel Background="#00F5F5F5" />
+        <Panel Background="#FFF5F5F5" />
         <Panel Background="{DynamicResource TemplateCheckerBoard}" />
         <Panel>
             <i:Interaction.Behaviors>
@@ -128,7 +128,10 @@
                                     Background="Transparent" ClipToBounds="False" 
                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <paz:ZoomBorder.ContextMenu>
-                            <ContextMenu IsEnabled="{Binding IsToolIdle}">
+                            <ContextMenu>
+                                <i:Interaction.Behaviors>
+                                    <behaviors:EnableContextMenuBehavior IsEnabled="{Binding IsToolIdle}" />
+                                </i:Interaction.Behaviors>
                                 <MenuItem Header="Test1"/>
                                 <MenuItem Header="Test2"/>
                             </ContextMenu>
