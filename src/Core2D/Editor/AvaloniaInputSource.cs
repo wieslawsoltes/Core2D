@@ -12,7 +12,7 @@ namespace Core2D.Editor
     {
         private const MouseButton BeginButton = MouseButton.Left;
 
-        private const MouseButton EndButton = MouseButton.Right;
+        private const MouseButton EndButton = MouseButton.Middle;
         
         private static ModifierFlags ToModifierFlags(KeyModifiers inputModifiers)
         {
