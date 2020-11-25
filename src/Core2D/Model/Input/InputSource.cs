@@ -2,7 +2,7 @@
 
 namespace Core2D.Input
 {
-    public abstract class InputSource : IInputSource
+    public abstract class InputSource
     {
         public IObservable<InputArgs> BeginDown { get; set; }
 
