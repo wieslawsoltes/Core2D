@@ -4,15 +4,20 @@
     <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
     <Style>
         <Style.Resources>
-            <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
-            <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
-            <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />
+            <Color x:Key="SystemChromeMediumColor">#CF282828</Color>
+            <Color x:Key="SystemBaseHighColor">#FFDEDEDE</Color>
+            <Color x:Key="SystemChromeMediumLowColor">Transparent</Color>
+            <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush" Color="{StaticResource SystemChromeMediumLowColor}" />
+            <Color x:Key="SystemAltMediumLowColor">Transparent</Color>
+            <SolidColorBrush x:Key="SystemControlBackgroundAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}" />
+            <StaticResource x:Key="TextControlBackground" ResourceKey="SystemControlBackgroundAltMediumLowBrush" />
         </Style.Resources>
     </Style>
     <Style>
         <Style.Resources>
-            <Color x:Key="SystemChromeMediumColor">#FF282828</Color>
-            <Color x:Key="SystemBaseHighColor">#FFDEDEDE</Color>
+            <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
+            <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
+            <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />
         </Style.Resources>
     </Style>
     <Style>

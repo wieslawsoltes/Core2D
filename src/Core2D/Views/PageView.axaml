@@ -20,7 +20,7 @@
         <handlers:EditorDropHandler x:Key="EditorDropHandler" />
         <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
             <VisualBrush.Visual>
-                <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="#FFF0F0F0" />
+                <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="#0FFFFFFF" />
             </VisualBrush.Visual>
         </VisualBrush>
     </UserControl.Resources>
@@ -115,7 +115,7 @@
         <behaviors:AttachEditorBehavior />
     </i:Interaction.Behaviors>
     <Panel>
-        <Panel Background="#FFF5F5F5" />
+        <Panel Background="#00F5F5F5" />
         <Panel Background="{DynamicResource TemplateCheckerBoard}" />
         <Panel>
             <i:Interaction.Behaviors>

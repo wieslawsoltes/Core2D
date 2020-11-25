@@ -4,6 +4,16 @@
     <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml" />
     <Style>
         <Style.Resources>
+            <Color x:Key="SystemChromeMediumColor">#CF282828</Color>
+            <Color x:Key="SystemChromeMediumLowColor">Transparent</Color>
+            <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush" Color="{StaticResource SystemChromeMediumLowColor}" />
+            <Color x:Key="SystemAltMediumLowColor">Transparent</Color>
+            <SolidColorBrush x:Key="SystemControlBackgroundAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}" />
+            <StaticResource x:Key="TextControlBackground" ResourceKey="SystemControlBackgroundAltMediumLowBrush" />
+        </Style.Resources>
+    </Style>
+    <Style>
+        <Style.Resources>
             <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
             <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
             <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />
