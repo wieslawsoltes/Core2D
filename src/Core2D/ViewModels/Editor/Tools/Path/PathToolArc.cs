@@ -45,6 +45,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     {
+                        editor.IsToolIdle = false;
                         _arc.Start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         if (!pathTool.IsInitialized)
                         {
@@ -68,7 +69,6 @@ namespace Core2D.Editor.Tools.Path
                         ToStateEnd();
                         Move(null);
                         _currentState = State.End;
-                        editor.IsToolIdle = false;
                     }
                     break;
 
@@ -200,13 +200,14 @@ namespace Core2D.Editor.Tools.Path
             }
 
             _currentState = State.Start;
-            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
                 _selection.Reset();
                 _selection = null;
             }
+            
+            editor.IsToolIdle = true;
         }
     }
 }

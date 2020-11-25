@@ -38,6 +38,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.Start:
                     {
+                        editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
@@ -62,7 +63,6 @@ namespace Core2D.Editor.Tools
                         ToStateEnd();
                         Move(_line);
                         _currentState = State.End;
-                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.End:
@@ -186,13 +186,14 @@ namespace Core2D.Editor.Tools
             }
 
             _currentState = State.Start;
-            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
                 _selection.Reset();
                 _selection = null;
             }
+            
+            editor.IsToolIdle = true;
         }
     }
 }

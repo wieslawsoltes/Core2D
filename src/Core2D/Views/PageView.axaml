@@ -123,9 +123,9 @@
             </i:Interaction.Behaviors>
             <Panel ClipToBounds="True">
                 <ScrollViewer x:Name="PageScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <paz:ZoomBorder x:Name="PageZoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Middle" EnablePan="{Binding IsToolIdle}" EnableZoom="True" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <paz:ZoomBorder x:Name="PageZoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Middle" EnablePan="True" EnableZoom="True" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <paz:ZoomBorder.ContextMenu>
-                            <ContextMenu>
+                            <ContextMenu IsEnabled="{Binding IsToolIdle}">
                                 <MenuItem Header="Test1"/>
                                 <MenuItem Header="Test2"/>
                             </ContextMenu>

@@ -37,14 +37,18 @@ namespace Core2D.Editor.Tools
             {
                 case State.TopLeft:
                     {
+                        editor.IsToolIdle = false;
+ 
                         if (editor.ImageImporter == null)
                         {
+                            editor.IsToolIdle = true;
                             return;
                         }
 
                         var key = await editor.ImageImporter.GetImageKeyAsync();
                         if (key == null || string.IsNullOrEmpty(key))
                         {
+                            editor.IsToolIdle = true;
                             return;
                         }
 
@@ -67,7 +71,6 @@ namespace Core2D.Editor.Tools
                         ToStateBottomRight();
                         Move(_image);
                         _currentState = State.BottomRight;
-                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.BottomRight:
@@ -182,13 +185,14 @@ namespace Core2D.Editor.Tools
             }
 
             _currentState = State.TopLeft;
-            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
                 _selection.Reset();
                 _selection = null;
             }
+            
+            editor.IsToolIdle = true;
         }
     }
 }

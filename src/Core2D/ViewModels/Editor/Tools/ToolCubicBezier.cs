@@ -37,6 +37,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.Point1:
                     {
+                        editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
@@ -57,7 +58,6 @@ namespace Core2D.Editor.Tools
                         ToStatePoint4();
                         Move(_cubicBezier);
                         _currentState = State.Point4;
-                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.Point4:
@@ -264,13 +264,14 @@ namespace Core2D.Editor.Tools
             }
 
             _currentState = State.Point1;
-            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
                 _selection.Reset();
                 _selection = null;
             }
+            
+            editor.IsToolIdle = true;
         }
     }
 }

@@ -51,6 +51,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.TopLeft:
                     {
+                        editor.IsToolIdle = false;
                         if (_currentMode == Mode.Circle)
                         {
                             _centerX = sx;
@@ -77,7 +78,6 @@ namespace Core2D.Editor.Tools
                         ToStateBottomRight();
                         Move(_ellipse);
                         _currentState = State.BottomRight;
-                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.BottomRight:
@@ -209,13 +209,14 @@ namespace Core2D.Editor.Tools
             }
 
             _currentState = State.TopLeft;
-            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
                 _selection.Reset();
                 _selection = null;
             }
+            
+            editor.IsToolIdle = true;
         }
     }
 }

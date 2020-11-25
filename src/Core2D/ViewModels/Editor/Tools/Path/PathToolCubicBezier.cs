@@ -39,6 +39,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Point1:
                     {
+                        editor.IsToolIdle = false;
                         _cubicBezier.Point1 = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         if (!pathTool.IsInitialized)
                         {
@@ -60,7 +61,6 @@ namespace Core2D.Editor.Tools.Path
                         ToStatePoint4();
                         Move(null);
                         _currentState = State.Point4;
-                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.Point4:
@@ -268,13 +268,14 @@ namespace Core2D.Editor.Tools.Path
             }
 
             _currentState = State.Point1;
-            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
                 _selection.Reset();
                 _selection = null;
             }
+            
+            editor.IsToolIdle = true;
         }
     }
 }
