@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools
             throw new NotImplementedException();
         }
 
-        public void LeftDown(InputArgs args)
+        public void BeginDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -52,15 +52,15 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        public void LeftUp(InputArgs args)
+        public void BeginUp(InputArgs args)
         {
         }
 
-        public void RightDown(InputArgs args)
+        public void EndDown(InputArgs args)
         {
         }
 
-        public void RightUp(InputArgs args)
+        public void EndUp(InputArgs args)
         {
         }
 

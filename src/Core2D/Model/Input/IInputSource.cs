@@ -4,13 +4,13 @@ namespace Core2D.Input
 {
     public interface IInputSource
     {
-        IObservable<InputArgs> LeftDown { get; set; }
+        IObservable<InputArgs> BeginDown { get; set; }
 
-        IObservable<InputArgs> LeftUp { get; set; }
+        IObservable<InputArgs> BeginUp { get; set; }
 
-        IObservable<InputArgs> RightDown { get; set; }
+        IObservable<InputArgs> EndDown { get; set; }
 
-        IObservable<InputArgs> RightUp { get; set; }
+        IObservable<InputArgs> EndUp { get; set; }
 
         IObservable<InputArgs> Move { get; set; }
     }

@@ -10,6 +10,10 @@ namespace Core2D.Editor
 {
     public class AvaloniaInputSource : InputSource
     {
+        private const MouseButton BeginButton = MouseButton.Left;
+
+        private const MouseButton EndButton = MouseButton.Right;
+        
         private static ModifierFlags ToModifierFlags(KeyModifiers inputModifiers)
         {
             var modifier = ModifierFlags.None;
@@ -34,10 +38,10 @@ namespace Core2D.Editor
 
         public AvaloniaInputSource(Control source, Control relative, Func<Point, Point> translate)
         {
-            LeftDown = GetPointerPressedObservable(source, relative, translate, MouseButton.Left);
-            LeftUp = GetPointerReleasedObservable(source, relative, translate, MouseButton.Left);
-            RightDown = GetPointerPressedObservable(source, relative, translate, MouseButton.Right);
-            RightUp = GetPointerReleasedObservable(source, relative, translate, MouseButton.Right);
+            BeginDown = GetPointerPressedObservable(source, relative, translate, BeginButton);
+            BeginUp = GetPointerReleasedObservable(source, relative, translate, BeginButton);
+            EndDown = GetPointerPressedObservable(source, relative, translate, EndButton);
+            EndUp = GetPointerReleasedObservable(source, relative, translate, EndButton);
             Move = GetPointerMovedObservable(source, relative, translate);
         }
 

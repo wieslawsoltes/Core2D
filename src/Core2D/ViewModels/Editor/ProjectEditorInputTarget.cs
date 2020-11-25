@@ -11,35 +11,35 @@ namespace Core2D.Editor
             _editor = editor;
         }
 
-        public void LeftDown(InputArgs args) => _editor?.CurrentTool?.LeftDown(args);
+        public void BeginDown(InputArgs args) => _editor?.CurrentTool?.BeginDown(args);
 
-        public void LeftUp(InputArgs args) => _editor?.CurrentTool?.LeftUp(args);
+        public void BeginUp(InputArgs args) => _editor?.CurrentTool?.BeginUp(args);
 
-        public void RightDown(InputArgs args) => _editor?.CurrentTool?.RightDown(args);
+        public void EndDown(InputArgs args) => _editor?.CurrentTool?.EndDown(args);
 
-        public void RightUp(InputArgs args) => _editor?.CurrentTool?.RightUp(args);
+        public void EndUp(InputArgs args) => _editor?.CurrentTool?.EndUp(args);
 
         public void Move(InputArgs args) => _editor?.CurrentTool?.Move(args);
 
-        public bool IsLeftDownAvailable()
+        public bool IsBeginDownAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
-        public bool IsLeftUpAvailable()
+        public bool IsBeginUpAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
-        public bool IsRightDownAvailable()
+        public bool IsEndDownAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
-        public bool IsRightUpAvailable()
+        public bool IsEndUpAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;

@@ -2,23 +2,23 @@
 {
     public interface IInputTarget
     {
-        void LeftDown(InputArgs args);
+        void BeginDown(InputArgs args);
 
-        void LeftUp(InputArgs args);
+        void BeginUp(InputArgs args);
 
-        void RightDown(InputArgs args);
+        void EndDown(InputArgs args);
 
-        void RightUp(InputArgs args);
+        void EndUp(InputArgs args);
 
         void Move(InputArgs args);
 
-        bool IsLeftDownAvailable();
+        bool IsBeginDownAvailable();
 
-        bool IsLeftUpAvailable();
+        bool IsBeginUpAvailable();
 
-        bool IsRightDownAvailable();
+        bool IsEndDownAvailable();
 
-        bool IsRightUpAvailable();
+        bool IsEndUpAvailable();
 
         bool IsMoveAvailable();
     }
