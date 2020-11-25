@@ -24,6 +24,11 @@
     </Style>
     <Style>
         <Style.Resources>
+            <BoxShadows x:Key="PageBoxShadow">4 4 30 1 #3F000000</BoxShadows>
+        </Style.Resources>
+    </Style>
+    <Style>
+        <Style.Resources>
             <Thickness x:Key="MainViewMargin">0,40,0,0</Thickness>
             <x:Double x:Key="MenuBarHeight">40</x:Double>
             <Thickness x:Key="MenuBarItemPadding">12,0,12,0</Thickness>

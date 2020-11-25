@@ -123,64 +123,72 @@
             </i:Interaction.Behaviors>
             <Panel ClipToBounds="True">
                 <ScrollViewer x:Name="PageScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <paz:ZoomBorder x:Name="PageZoomBorder" Stretch="None" ZoomSpeed="1.2" PanButton="Middle" EnablePan="True" EnableZoom="True" Background="Transparent" ClipToBounds="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <paz:ZoomBorder x:Name="PageZoomBorder"
+                                    Stretch="None" ZoomSpeed="1.2" PanButton="Middle" EnablePan="True" EnableZoom="True" 
+                                    Background="Transparent" ClipToBounds="False" 
+                                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <paz:ZoomBorder.ContextMenu>
                             <ContextMenu IsEnabled="{Binding IsToolIdle}">
                                 <MenuItem Header="Test1"/>
                                 <MenuItem Header="Test2"/>
                             </ContextMenu>
                         </paz:ZoomBorder.ContextMenu>
-                        <Panel HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding #PresenterViewTemplate.Container.Width}" Height="{Binding #PresenterViewTemplate.Container.Height}">
-                            <views:PresenterView x:Name="PresenterViewData" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False" />
-                            <views:PresenterView x:Name="PresenterViewTemplate" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False" />
-                            <views:PresenterView x:Name="PresenterViewEditor" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False" />
-                            <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <Canvas Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <TextBox x:Name="EditorTextBox"
-                                             IsVisible="False"
-                                             Text="EditorTextBox"
-                                             Canvas.Left="300"
-                                             Canvas.Top="300"
-                                             Width="120"
-                                             Height="60"
-                                             FontFamily="Calibri"
-                                             FontSize="12"
-                                             FontStyle="Normal"
-                                             FontWeight="Normal"
-                                             Foreground="Black"
-                                             HorizontalAlignment="Stretch"
-                                             VerticalAlignment="Stretch"
-                                             HorizontalContentAlignment="Center"
-                                             VerticalContentAlignment="Center"
-                                             TextAlignment="Center"
-                                             Margin="0"
-                                             Padding="0"
-                                             MinHeight="0"
-                                             MinWidth="0" >
-                                        <TextBox.Styles>
-                                            <Style Selector="TextBox">
-                                                <Setter Property="BorderBrush" Value="#FF00BFFF"/>
-                                                <Setter Property="Background" Value="{x:Null}" />
-                                                <Setter Property="BorderThickness" Value="2" />
-                                            </Style>
-                                            <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
-                                                <Setter Property="BorderBrush" Value="#FF00BFFF"/>
-                                                <Setter Property="Background" Value="{x:Null}" />
-                                                <Setter Property="BorderThickness" Value="2" />
-                                            </Style>
-                                            <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
-                                                <Setter Property="BorderBrush" Value="#FF00BFFF"/>
-                                                <Setter Property="Background" Value="{x:Null}"/>
-                                                <Setter Property="BorderThickness" Value="2" />
-                                            </Style>
-                                            <Style Selector="TextBox /template/ Border#PART_BorderElement">
-                                                <Setter Property="CornerRadius" Value="0" />
-                                            </Style>
-                                        </TextBox.Styles>
-                                    </TextBox>
-                                </Canvas>
+                        <Border HorizontalAlignment="Center" VerticalAlignment="Center"
+                                BoxShadow="{DynamicResource PageBoxShadow}" 
+                                Width="{Binding #PresenterViewTemplate.Container.Width}"
+                                Height="{Binding #PresenterViewTemplate.Container.Height}">
+                            <Panel>
+                                <views:PresenterView x:Name="PresenterViewData" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False" />
+                                <views:PresenterView x:Name="PresenterViewTemplate" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False" />
+                                <views:PresenterView x:Name="PresenterViewEditor" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False" />
+                                <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Canvas Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                        <TextBox x:Name="EditorTextBox"
+                                                IsVisible="False"
+                                                Text="EditorTextBox"
+                                                Canvas.Left="300"
+                                                Canvas.Top="300"
+                                                Width="120"
+                                                Height="60"
+                                                FontFamily="Calibri"
+                                                FontSize="12"
+                                                FontStyle="Normal"
+                                                FontWeight="Normal"
+                                                Foreground="Black"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch"
+                                                HorizontalContentAlignment="Center"
+                                                VerticalContentAlignment="Center"
+                                                TextAlignment="Center"
+                                                Margin="0"
+                                                Padding="0"
+                                                MinHeight="0"
+                                                MinWidth="0" >
+                                            <TextBox.Styles>
+                                                <Style Selector="TextBox">
+                                                    <Setter Property="BorderBrush" Value="#FF00BFFF"/>
+                                                    <Setter Property="Background" Value="{x:Null}" />
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                </Style>
+                                                <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+                                                    <Setter Property="BorderBrush" Value="#FF00BFFF"/>
+                                                    <Setter Property="Background" Value="{x:Null}" />
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                </Style>
+                                                <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                                                    <Setter Property="BorderBrush" Value="#FF00BFFF"/>
+                                                    <Setter Property="Background" Value="{x:Null}"/>
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                </Style>
+                                                <Style Selector="TextBox /template/ Border#PART_BorderElement">
+                                                    <Setter Property="CornerRadius" Value="0" />
+                                                </Style>
+                                            </TextBox.Styles>
+                                        </TextBox>
+                                    </Canvas>
+                                </Panel>
                             </Panel>
-                        </Panel>
+                        </Border>
                     </paz:ZoomBorder>
                 </ScrollViewer>
             </Panel>
