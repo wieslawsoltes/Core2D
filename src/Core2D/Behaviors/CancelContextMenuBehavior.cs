@@ -5,10 +5,13 @@ using Avalonia.Xaml.Interactivity;
 
 namespace Core2D.Behaviors
 {
-    public sealed class EnableContextMenuBehavior : Behavior<ContextMenu>
+    public sealed class EnableContextMenuBehavior : Behavior<Control>
     {
         public static readonly StyledProperty<bool> IsEnabledProperty =
             AvaloniaProperty.Register<EnableContextMenuBehavior, bool>(nameof(IsEnabled), true);
+
+        public static readonly StyledProperty<ContextMenu> ContextMenuProperty =
+            AvaloniaProperty.Register<EnableContextMenuBehavior, ContextMenu>(nameof(ContextMenu));
 
         public bool IsEnabled
         {
@@ -16,11 +19,17 @@ namespace Core2D.Behaviors
             set => SetValue(IsEnabledProperty, value);
         }
 
+        public ContextMenu ContextMenu
+        {
+            get => GetValue(ContextMenuProperty);
+            set => SetValue(ContextMenuProperty, value);
+        }
+
         protected override void OnAttached()
         {
             base.OnAttached();
 
-            if (AssociatedObject is ContextMenu contextMenu)
+            if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
             {
                 contextMenu.ContextMenuOpening += ContextMenu_ContextMenuOpening; 
             }
@@ -30,7 +39,7 @@ namespace Core2D.Behaviors
         {
             base.OnDetaching();
 
-            if (AssociatedObject is ContextMenu contextMenu)
+            if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
             {
                 contextMenu.ContextMenuOpening -= ContextMenu_ContextMenuOpening; 
             }

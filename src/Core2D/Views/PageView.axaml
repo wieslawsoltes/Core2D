@@ -128,14 +128,16 @@
                                     Background="Transparent" ClipToBounds="False" 
                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <paz:ZoomBorder.ContextMenu>
-                            <ContextMenu>
-                                <i:Interaction.Behaviors>
-                                    <behaviors:EnableContextMenuBehavior IsEnabled="{Binding IsToolIdle}" />
-                                </i:Interaction.Behaviors>
+                            <ContextMenu x:Name="PageContextMenu" DataContext="{Binding #PageZoomBorder.DataContext}">
                                 <MenuItem Header="Test1"/>
                                 <MenuItem Header="Test2"/>
                             </ContextMenu>
                         </paz:ZoomBorder.ContextMenu>
+                        <i:Interaction.Behaviors>
+                            <behaviors:EnableContextMenuBehavior IsEnabled="{Binding IsToolIdle}"
+                                                                 ContextMenu="{Binding #PageContextMenu}"
+                                                                 x:CompileBindings="False"/>
+                        </i:Interaction.Behaviors>
                         <Panel HorizontalAlignment="Center" VerticalAlignment="Center"
                                Width="{Binding #PresenterViewTemplate.Container.Width}"
                                Height="{Binding #PresenterViewTemplate.Container.Height}">
