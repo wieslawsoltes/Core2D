@@ -2,7 +2,7 @@
 
 namespace Core2D.Editor
 {
-    public class ProjectEditorInputTarget : IInputTarget
+    public class ProjectEditorInputTarget : InputTarget
     {
         private readonly ProjectEditor _editor;
 
@@ -11,41 +11,41 @@ namespace Core2D.Editor
             _editor = editor;
         }
 
-        public void LeftDown(InputArgs args) => _editor?.CurrentTool?.LeftDown(args);
+        public override void BeginDown(InputArgs args) => _editor?.CurrentTool?.BeginDown(args);
 
-        public void LeftUp(InputArgs args) => _editor?.CurrentTool?.LeftUp(args);
+        public override void BeginUp(InputArgs args) => _editor?.CurrentTool?.BeginUp(args);
 
-        public void RightDown(InputArgs args) => _editor?.CurrentTool?.RightDown(args);
+        public override void EndDown(InputArgs args) => _editor?.CurrentTool?.EndDown(args);
 
-        public void RightUp(InputArgs args) => _editor?.CurrentTool?.RightUp(args);
+        public override void EndUp(InputArgs args) => _editor?.CurrentTool?.EndUp(args);
 
-        public void Move(InputArgs args) => _editor?.CurrentTool?.Move(args);
+        public override void Move(InputArgs args) => _editor?.CurrentTool?.Move(args);
 
-        public bool IsLeftDownAvailable()
+        public override bool IsBeginDownAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
-        public bool IsLeftUpAvailable()
+        public override bool IsBeginUpAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
-        public bool IsRightDownAvailable()
+        public override bool IsEndDownAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
-        public bool IsRightUpAvailable()
+        public override bool IsEndUpAvailable()
         {
             return _editor?.Project?.CurrentContainer?.CurrentLayer != null
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
-        public bool IsMoveAvailable()
+        public override bool IsMoveAvailable()
         {
             return _editor.Project?.CurrentContainer?.CurrentLayer != null
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;

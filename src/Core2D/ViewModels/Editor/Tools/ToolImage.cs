@@ -28,7 +28,7 @@ namespace Core2D.Editor.Tools
             throw new NotImplementedException();
         }
 
-        public async void LeftDown(InputArgs args)
+        public async void BeginDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -37,14 +37,18 @@ namespace Core2D.Editor.Tools
             {
                 case State.TopLeft:
                     {
+                        editor.IsToolIdle = false;
+ 
                         if (editor.ImageImporter == null)
                         {
+                            editor.IsToolIdle = true;
                             return;
                         }
 
                         var key = await editor.ImageImporter.GetImageKeyAsync();
                         if (key == null || string.IsNullOrEmpty(key))
                         {
+                            editor.IsToolIdle = true;
                             return;
                         }
 
@@ -67,7 +71,6 @@ namespace Core2D.Editor.Tools
                         ToStateBottomRight();
                         Move(_image);
                         _currentState = State.BottomRight;
-                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.BottomRight:
@@ -94,11 +97,11 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        public void LeftUp(InputArgs args)
+        public void BeginUp(InputArgs args)
         {
         }
 
-        public void RightDown(InputArgs args)
+        public void EndDown(InputArgs args)
         {
             switch (_currentState)
             {
@@ -110,7 +113,7 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        public void RightUp(InputArgs args)
+        public void EndUp(InputArgs args)
         {
         }
 
@@ -182,13 +185,14 @@ namespace Core2D.Editor.Tools
             }
 
             _currentState = State.TopLeft;
-            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
                 _selection.Reset();
                 _selection = null;
             }
+            
+            editor.IsToolIdle = true;
         }
     }
 }

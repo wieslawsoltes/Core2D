@@ -2,17 +2,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
     <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml" />
+    <!-- <Style>
+        <Style.Resources>
+            <Color x:Key="SystemChromeMediumColor">#DFFFFFFF</Color>
+            <Color x:Key="SystemBaseHighColor">#FF000000</Color>
+            <Color x:Key="SystemChromeMediumLowColor">Transparent</Color>
+            <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush" Color="{StaticResource SystemChromeMediumLowColor}" />
+            <Color x:Key="SystemAltMediumLowColor">Transparent</Color>
+            <SolidColorBrush x:Key="SystemControlBackgroundAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}" />
+            <StaticResource x:Key="TextControlBackground" ResourceKey="SystemControlBackgroundAltMediumLowBrush" />
+        </Style.Resources>
+    </Style> -->
     <Style>
         <Style.Resources>
             <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
             <SolidColorBrush x:Key="IconAccentBrush1" Color="#FF424242" />
             <SolidColorBrush x:Key="IconAccentBrush2" Color="#80424242" />
-        </Style.Resources>
-    </Style>
-    <Style>
-        <Style.Resources>
-            <Color x:Key="SystemChromeMediumColor">#FFFFFFFF</Color>
-            <Color x:Key="SystemBaseHighColor">#FF000000</Color>
         </Style.Resources>
     </Style>
     <Style>

@@ -129,8 +129,8 @@ namespace Core2D.Editor.Tools
                 bool decoratorResult = editor.PageState.Decorator.HitTest(args);
                 if (decoratorResult == true && isHover == false)
                 {
-                    _currentState = State.Selected;
                     editor.IsToolIdle = false;
+                    _currentState = State.Selected;
                     return true;
                 }
             }
@@ -138,7 +138,7 @@ namespace Core2D.Editor.Tools
             return false;
         }
 
-        public void LeftDown(InputArgs args)
+        public void BeginDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -240,6 +240,7 @@ namespace Core2D.Editor.Tools
 
                             if (result != null && editor.PageState.SelectedShapes.Contains(result))
                             {
+                                editor.IsToolIdle = false;
                                 _startX = sx;
                                 _startY = sy;
                                 _historyX = _startX;
@@ -248,7 +249,6 @@ namespace Core2D.Editor.Tools
                                 _currentState = State.Selected;
                                 editor.OnShowOrHideDecorator();
                                 HitTestDecorator(args, isControl, false);
-                                editor.IsToolIdle = false;
                                 break;
                             }
                         }
@@ -257,6 +257,7 @@ namespace Core2D.Editor.Tools
 
                         if (editor.TryToSelectShape(editor.Project.CurrentContainer.CurrentLayer, x, y, deselect))
                         {
+                            editor.IsToolIdle = false;
                             _startX = sx;
                             _startY = sy;
                             _historyX = _startX;
@@ -265,10 +266,10 @@ namespace Core2D.Editor.Tools
                             _currentState = State.Selected;
                             editor.OnShowOrHideDecorator();
                             HitTestDecorator(args, isControl, false);
-                            editor.IsToolIdle = false;
                             break;
                         }
 
+                        editor.IsToolIdle = false;
                         _rectangleShape = factory.CreateRectangleShape(
                             x, y,
                             editor.PageState.SelectionStyle,
@@ -277,7 +278,6 @@ namespace Core2D.Editor.Tools
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         _currentState = State.Selected;
-                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.Selected:
@@ -296,7 +296,7 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        public void LeftUp(InputArgs args)
+        public void BeginUp(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
@@ -373,7 +373,7 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        public void RightDown(InputArgs args)
+        public void EndDown(InputArgs args)
         {
             var editor = _serviceProvider.GetService<ProjectEditor>();
             switch (_currentState)
@@ -393,7 +393,7 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        public void RightUp(InputArgs args)
+        public void EndUp(InputArgs args)
         {
         }
 
@@ -464,8 +464,6 @@ namespace Core2D.Editor.Tools
 
             _currentState = State.None;
 
-            editor.IsToolIdle = true;
-
             editor.Dehover(editor.Project?.CurrentContainer?.CurrentLayer);
 
             DisposeMoveSelectionCache();
@@ -473,6 +471,8 @@ namespace Core2D.Editor.Tools
 
             editor.Project?.CurrentContainer?.CurrentLayer?.InvalidateLayer();
             editor.Project?.CurrentContainer?.WorkingLayer?.InvalidateLayer();
+
+            editor.IsToolIdle = true;
         }
     }
 }

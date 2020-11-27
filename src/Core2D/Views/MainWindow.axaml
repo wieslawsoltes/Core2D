@@ -11,7 +11,7 @@
         Width="1324" Height="690" MinWidth="900" MinHeight="420"
         WindowState="Maximized" WindowStartupLocation="Manual"
         FontFamily="{DynamicResource UiFontFamily}"
-        Background="{DynamicResource SystemChromeMediumColor}"
+        Background="{x:Null}"
         TransparencyLevelHint="AcrylicBlur"
         Foreground="{DynamicResource SystemBaseHighColor}"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
@@ -38,6 +38,15 @@
         </Style>
     </Window.Styles>
     <Panel>
+        <ExperimentalAcrylicBorder DockPanel.Dock="Left" IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial BackgroundSource="Digger"
+                                             TintColor="{DynamicResource SystemAltHighColor}"
+                                             TintOpacity="1"
+                                             FallbackColor="{DynamicResource AcrylicFallbackColor}"
+                                             MaterialOpacity="0.85" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
         <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
             <Panel x:Name="MainViewPanel">
                 <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />

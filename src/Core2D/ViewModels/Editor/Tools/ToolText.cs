@@ -28,7 +28,7 @@ namespace Core2D.Editor.Tools
             throw new NotImplementedException();
         }
 
-        public void LeftDown(InputArgs args)
+        public void BeginDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -37,6 +37,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.TopLeft:
                     {
+                        editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
@@ -57,7 +58,6 @@ namespace Core2D.Editor.Tools
                         ToStateBottomRight();
                         Move(_text);
                         _currentState = State.BottomRight;
-                        editor.IsToolIdle = false;
                     }
                     break;
                 case State.BottomRight:
@@ -84,11 +84,11 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        public void LeftUp(InputArgs args)
+        public void BeginUp(InputArgs args)
         {
         }
 
-        public void RightDown(InputArgs args)
+        public void EndDown(InputArgs args)
         {
             switch (_currentState)
             {
@@ -100,7 +100,7 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        public void RightUp(InputArgs args)
+        public void EndUp(InputArgs args)
         {
         }
 
@@ -172,13 +172,14 @@ namespace Core2D.Editor.Tools
             }
 
             _currentState = State.TopLeft;
-            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
                 _selection.Reset();
                 _selection = null;
             }
+            
+            editor.IsToolIdle = true;
         }
     }
 }

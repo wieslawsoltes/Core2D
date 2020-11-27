@@ -2,101 +2,76 @@
 
 namespace Core2D.Input
 {
-    internal class InputArgsObserver : IObserver<InputArgs>
-    {
-        private readonly IInputTarget _target;
-        private readonly Action<IInputTarget, InputArgs> _onNext;
-
-        public InputArgsObserver(IInputTarget target, Action<IInputTarget, InputArgs> onNext)
-        {
-            _target = target;
-            _onNext = onNext;
-        }
-
-        public void OnCompleted()
-        {
-        }
-
-        public void OnError(Exception error)
-        {
-        }
-
-        public void OnNext(InputArgs value)
-        {
-            _onNext(_target, value);
-        }
-    }
-
     public class InputProcessor : IDisposable
     {
-        private IDisposable _leftDownDisposable = null;
-        private IDisposable _leftUpDisposable = null;
-        private IDisposable _rightDownDisposable = null;
-        private IDisposable _rightUpDisposable = null;
+        private IDisposable _beginDownDisposable = null;
+        private IDisposable _beginUpDisposable = null;
+        private IDisposable _endDownDisposable = null;
+        private IDisposable _endUpDisposable = null;
         private IDisposable _moveDisposable = null;
 
-        private static IDisposable ConnectLeftDown(IInputSource source, IInputTarget target)
+        private static IDisposable ConnectBeginDown(InputSource source, InputTarget target)
         {
-            var observer = new InputArgsObserver(target, OnNextLeftDown);
-            return source.LeftDown.Subscribe(observer);
+            var observer = new InputArgsObserver(target, OnNextBeginDown);
+            return source.BeginDown.Subscribe(observer);
 
-            static void OnNextLeftDown(IInputTarget target, InputArgs args)
+            static void OnNextBeginDown(InputTarget target, InputArgs args)
             {
-                if (target.IsLeftDownAvailable())
+                if (target.IsBeginDownAvailable())
                 {
-                    target.LeftDown(args);
+                    target.BeginDown(args);
                 }
             }
         }
 
-        private static IDisposable ConnectLeftUp(IInputSource source, IInputTarget target)
+        private static IDisposable ConnectBeginUp(InputSource source, InputTarget target)
         {
-            var observer = new InputArgsObserver(target, OnNextLeftUp);
-            return source.LeftUp.Subscribe(observer);
+            var observer = new InputArgsObserver(target, OnNextBeginUp);
+            return source.BeginUp.Subscribe(observer);
 
-            static void OnNextLeftUp(IInputTarget target, InputArgs args)
+            static void OnNextBeginUp(InputTarget target, InputArgs args)
             {
-                if (target.IsLeftUpAvailable())
+                if (target.IsBeginUpAvailable())
                 {
-                    target.LeftUp(args);
+                    target.BeginUp(args);
                 }
             }
         }
 
-        private static IDisposable ConnectRightDown(IInputSource source, IInputTarget target)
+        private static IDisposable ConnectEndDown(InputSource source, InputTarget target)
         {
-            var observer = new InputArgsObserver(target, OnNextRightDown);
-            return source.RightDown.Subscribe(observer);
+            var observer = new InputArgsObserver(target, OnNextEndDown);
+            return source.EndDown.Subscribe(observer);
 
-            static void OnNextRightDown(IInputTarget target, InputArgs args)
+            static void OnNextEndDown(InputTarget target, InputArgs args)
             {
-                if (target.IsRightDownAvailable())
+                if (target.IsEndDownAvailable())
                 {
-                    target.RightDown(args);
+                    target.EndDown(args);
                 }
             }
         }
 
-        private static IDisposable ConnectRightUp(IInputSource source, IInputTarget target)
+        private static IDisposable ConnectEndUp(InputSource source, InputTarget target)
         {
-            var observer = new InputArgsObserver(target, OnNextRightUp);
-            return source.RightUp.Subscribe(observer);
+            var observer = new InputArgsObserver(target, OnNextEndUp);
+            return source.EndUp.Subscribe(observer);
 
-            static void OnNextRightUp(IInputTarget target, InputArgs args)
+            static void OnNextEndUp(InputTarget target, InputArgs args)
             {
-                if (target.IsRightUpAvailable())
+                if (target.IsEndUpAvailable())
                 {
-                    target.RightUp(args);
+                    target.EndUp(args);
                 }
             }
         }
 
-        private static IDisposable ConnectMove(IInputSource source, IInputTarget target)
+        private static IDisposable ConnectMove(InputSource source, InputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextMove);
             return source.Move.Subscribe(observer);
 
-            static void OnNextMove(IInputTarget target, InputArgs args)
+            static void OnNextMove(InputTarget target, InputArgs args)
             {
                 if (target.IsMoveAvailable())
                 {
@@ -105,22 +80,22 @@ namespace Core2D.Input
             }
         }
 
-        private static void DisconnectLeftDown(IDisposable disposable)
+        private static void DisconnectBeginDown(IDisposable disposable)
         {
             disposable?.Dispose();
         }
 
-        private static void DisconnectLeftUp(IDisposable disposable)
+        private static void DisconnectBeginUp(IDisposable disposable)
         {
             disposable?.Dispose();
         }
 
-        private static void DisconnectRightDown(IDisposable disposable)
+        private static void DisconnectEndDown(IDisposable disposable)
         {
             disposable?.Dispose();
         }
 
-        private static void DisconnectRightUp(IDisposable disposable)
+        private static void DisconnectEndUp(IDisposable disposable)
         {
             disposable.Dispose();
         }
@@ -130,21 +105,21 @@ namespace Core2D.Input
             disposable?.Dispose();
         }
 
-        public void Connect(IInputSource source, IInputTarget target)
+        public void Connect(InputSource source, InputTarget target)
         {
-            _leftDownDisposable = ConnectLeftDown(source, target);
-            _leftUpDisposable = ConnectLeftUp(source, target);
-            _rightDownDisposable = ConnectRightDown(source, target);
-            _rightUpDisposable = ConnectRightUp(source, target);
+            _beginDownDisposable = ConnectBeginDown(source, target);
+            _beginUpDisposable = ConnectBeginUp(source, target);
+            _endDownDisposable = ConnectEndDown(source, target);
+            _endUpDisposable = ConnectEndUp(source, target);
             _moveDisposable = ConnectMove(source, target);
         }
 
         public void Disconnect()
         {
-            DisconnectLeftDown(_leftDownDisposable);
-            DisconnectLeftUp(_leftUpDisposable);
-            DisconnectRightDown(_rightDownDisposable);
-            DisconnectRightUp(_rightUpDisposable);
+            DisconnectBeginDown(_beginDownDisposable);
+            DisconnectBeginUp(_beginUpDisposable);
+            DisconnectEndDown(_endDownDisposable);
+            DisconnectEndUp(_endUpDisposable);
             DisconnectMove(_moveDisposable);
         }
 

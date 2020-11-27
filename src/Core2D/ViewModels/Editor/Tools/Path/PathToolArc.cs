@@ -35,7 +35,7 @@ namespace Core2D.Editor.Tools.Path
             throw new NotImplementedException();
         }
 
-        public void LeftDown(InputArgs args)
+        public void BeginDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditor>();
@@ -45,6 +45,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     {
+                        editor.IsToolIdle = false;
                         _arc.Start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         if (!pathTool.IsInitialized)
                         {
@@ -68,7 +69,6 @@ namespace Core2D.Editor.Tools.Path
                         ToStateEnd();
                         Move(null);
                         _currentState = State.End;
-                        editor.IsToolIdle = false;
                     }
                     break;
 
@@ -102,11 +102,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        public void LeftUp(InputArgs args)
+        public void BeginUp(InputArgs args)
         {
         }
 
-        public void RightDown(InputArgs args)
+        public void EndDown(InputArgs args)
         {
             switch (_currentState)
             {
@@ -120,7 +120,7 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        public void RightUp(InputArgs args)
+        public void EndUp(InputArgs args)
         {
         }
 
@@ -200,13 +200,14 @@ namespace Core2D.Editor.Tools.Path
             }
 
             _currentState = State.Start;
-            editor.IsToolIdle = true;
 
             if (_selection != null)
             {
                 _selection.Reset();
                 _selection = null;
             }
+            
+            editor.IsToolIdle = true;
         }
     }
 }

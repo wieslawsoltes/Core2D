@@ -142,25 +142,25 @@ namespace Core2D.Editor.Tools
             Path = null;
         }
 
-        public void LeftDown(InputArgs args)
+        public void BeginDown(InputArgs args)
         {
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.LeftDown(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.BeginDown(args);
         }
 
-        public void LeftUp(InputArgs args)
+        public void BeginUp(InputArgs args)
         {
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.LeftUp(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.BeginUp(args);
         }
 
-        public void RightDown(InputArgs args)
+        public void EndDown(InputArgs args)
         {
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightDown(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.EndDown(args);
             Reset();
         }
 
-        public void RightUp(InputArgs args)
+        public void EndUp(InputArgs args)
         {
-            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.RightUp(args);
+            _serviceProvider.GetService<ProjectEditor>().CurrentPathTool?.EndUp(args);
         }
 
         public void Move(InputArgs args)

@@ -1,6 +1,6 @@
 ﻿namespace Core2D.Editor
 {
-    public interface IEditorTool : ITool
+    public interface IPathTool : ITool
     {
     }
 }
