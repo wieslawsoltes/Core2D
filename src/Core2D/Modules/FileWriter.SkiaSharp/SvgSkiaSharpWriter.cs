@@ -36,7 +36,7 @@ namespace Core2D.FileWriter.SkiaSharpSvg
             }
 
             var renderer = new SkiaSharpRenderer(_serviceProvider);
-            renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 
             var presenter = new ExportPresenter();

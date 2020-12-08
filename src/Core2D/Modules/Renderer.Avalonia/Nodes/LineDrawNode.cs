@@ -142,8 +142,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Line.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Line.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Line.State.HasFlag(ShapeStateFlags.Size);
             P0 = new A.Point(Line.Start.X, Line.Start.Y);
             P1 = new A.Point(Line.End.X, Line.End.Y);
             Center = new A.Point((P0.X + P1.X) / 2.0, (P0.Y + P1.Y) / 2.0);

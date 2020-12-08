@@ -37,7 +37,7 @@ namespace Core2D.Shapes.UnitTests
 
             var shape = new Class1()
             {
-                State = _factory.CreateShapeState(),
+                State = ShapeStateFlags.Default,
                 Properties = ImmutableArray.Create<Property>()
             };
             shape.Properties = shape.Properties.Add(_factory.CreateProperty(null, "", ""));
@@ -59,7 +59,7 @@ namespace Core2D.Shapes.UnitTests
 
             var shape1 = new Class1()
             {
-                State = _factory.CreateShapeState(),
+                State = ShapeStateFlags.Default,
                 Properties = ImmutableArray.Create<Property>()
             };
             shape1.Properties = shape1.Properties.Add(_factory.CreateProperty(null, "", ""));
@@ -70,7 +70,7 @@ namespace Core2D.Shapes.UnitTests
 
             var shape2 = new Class1()
             {
-                State = _factory.CreateShapeState(),
+                State = ShapeStateFlags.Default,
                 Properties = ImmutableArray.Create<Property>()
             };
             shape2.Properties = shape2.Properties.Add(_factory.CreateProperty(null, "", ""));
@@ -108,13 +108,13 @@ namespace Core2D.Shapes.UnitTests
             var target = _factory.CreateGroupShape();
             var shape = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
 
             target.AddShape(shape);
 
             Assert.Equal(shape.Owner, target);
-            Assert.False(shape.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.False(shape.State.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(shape, target.Shapes);
 
             var length = target.Shapes.Length;
@@ -127,11 +127,11 @@ namespace Core2D.Shapes.UnitTests
         {
             var shape1 = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var shape2 = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
@@ -168,11 +168,11 @@ namespace Core2D.Shapes.UnitTests
         {
             var shape1 = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var shape2 = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
@@ -198,7 +198,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var shape = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
@@ -223,14 +223,14 @@ namespace Core2D.Shapes.UnitTests
             var count = source.Count;
             Assert.Equal(4, count);
 
-            Assert.False(point1.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
-            Assert.False(point2.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
-            Assert.False(point3.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
+            Assert.False(point1.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
+            Assert.False(point2.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
+            Assert.False(point3.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
 
-            Assert.True(shape.State.Flags.HasFlag(ShapeStateFlags.Standalone));
-            Assert.True(point1.State.Flags.HasFlag(ShapeStateFlags.Standalone));
-            Assert.True(point2.State.Flags.HasFlag(ShapeStateFlags.Standalone));
-            Assert.True(point3.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(shape.State.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point1.State.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point2.State.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point3.State.HasFlag(ShapeStateFlags.Standalone));
         }
 
         public class Class1 : BaseShape

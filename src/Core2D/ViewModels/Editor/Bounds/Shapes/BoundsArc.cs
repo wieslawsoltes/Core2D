@@ -51,7 +51,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
             var rect = ArcBounds(arc);
 
-            if (arc.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (arc.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).Contains(target);
             }
@@ -70,7 +70,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
             var rect = ArcBounds(arc);
 
-            if (arc.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (arc.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);
             }

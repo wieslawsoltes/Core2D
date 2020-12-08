@@ -11,7 +11,7 @@ namespace Core2D.Renderer
         [AutoNotify] private double _panY;
         [AutoNotify] private double _zoomX;
         [AutoNotify] private double _zoomY;
-        [AutoNotify] private ShapeState _drawShapeState;
+        [AutoNotify] private ShapeStateFlags _drawShapeState;
         [AutoNotify] private ISet<BaseShape> _selectedShapes;
         [AutoNotify] private IImageCache _imageCache;
         [AutoNotify] private bool _drawDecorators;
@@ -31,17 +31,12 @@ namespace Core2D.Renderer
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
-
-            isDirty |= DrawShapeState.IsDirty();
-
             return isDirty;
         }
 
         public override void Invalidate()
         {
             base.Invalidate();
-
-            DrawShapeState.Invalidate();
         }
     }
 }

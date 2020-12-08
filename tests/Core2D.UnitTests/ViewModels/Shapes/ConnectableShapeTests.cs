@@ -19,7 +19,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
+                State = ShapeStateFlags.Default,
                 Connectors = ImmutableArray.Create<PointShape>()
             };
             Assert.True(target is BaseShape);
@@ -31,7 +31,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
+                State = ShapeStateFlags.Default,
                 Connectors = ImmutableArray.Create<PointShape>()
             };
             Assert.False(target.Connectors.IsDefault);
@@ -43,7 +43,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
+                State = ShapeStateFlags.Default,
                 Connectors = ImmutableArray.Create<PointShape>()
             };
 
@@ -63,7 +63,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
+                State = ShapeStateFlags.Default,
                 Connectors = ImmutableArray.Create<PointShape>()
             };
             var point = _factory.CreatePointShape();
@@ -71,8 +71,8 @@ namespace Core2D.Shapes.UnitTests
             target.AddConnectorAsNone(point);
 
             Assert.Equal(point.Owner, target);
-            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
-            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
+            Assert.False(point.State.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
 
             var length = target.Connectors.Length;
@@ -85,7 +85,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
+                State = ShapeStateFlags.Default,
                 Connectors = ImmutableArray.Create<PointShape>()
             };
             var point = _factory.CreatePointShape();
@@ -93,8 +93,8 @@ namespace Core2D.Shapes.UnitTests
             target.AddConnectorAsInput(point);
 
             Assert.Equal(point.Owner, target);
-            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
-            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
+            Assert.False(point.State.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
 
             var length = target.Connectors.Length;
@@ -107,7 +107,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
+                State = ShapeStateFlags.Default,
                 Connectors = ImmutableArray.Create<PointShape>()
             };
             var point = _factory.CreatePointShape();
@@ -115,8 +115,8 @@ namespace Core2D.Shapes.UnitTests
             target.AddConnectorAsOutput(point);
 
             Assert.Equal(point.Owner, target);
-            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
-            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
+            Assert.False(point.State.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
 
             var length = target.Connectors.Length;

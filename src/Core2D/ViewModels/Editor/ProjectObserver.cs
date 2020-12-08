@@ -701,11 +701,6 @@ namespace Core2D.Editor
                 Add(data);
             }
 
-            if (shape.State != null)
-            {
-                shape.State.PropertyChanged += ObserveState;
-            }
-
             if (shape is LineShape line)
             {
                 if (line.Start != null)
@@ -865,11 +860,6 @@ namespace Core2D.Editor
             if (shape is IDataObject data)
             {
                 Remove(data);
-            }
-
-            if (shape.State != null)
-            {
-                shape.State.PropertyChanged -= ObserveState;
             }
 
             if (shape is LineShape line)
@@ -1300,11 +1290,6 @@ namespace Core2D.Editor
             if (style.TextStyle != null)
             {
                 style.TextStyle.PropertyChanged += ObserveStyle;
-
-                if (style.TextStyle.FontStyle != null)
-                {
-                    style.TextStyle.FontStyle.PropertyChanged += ObserveStyle;
-                }
             }
         }
 
@@ -1350,11 +1335,6 @@ namespace Core2D.Editor
             if (style.TextStyle != null)
             {
                 style.TextStyle.PropertyChanged -= ObserveStyle;
-
-                if (style.TextStyle.FontStyle != null)
-                {
-                    style.TextStyle.FontStyle.PropertyChanged -= ObserveStyle;
-                }
             }
         }
 

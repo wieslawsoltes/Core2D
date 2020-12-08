@@ -27,8 +27,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Text.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Text.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Text.State.HasFlag(ShapeStateFlags.Size);
             var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
             Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
             Center = new SKPoint(Rect.MidX, Rect.MidY);

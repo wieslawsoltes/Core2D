@@ -1194,7 +1194,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Stack(items, StackMode.Horizontal, Project?.History);
                 OnUpdateDecorator();
             }
@@ -1205,7 +1205,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Stack(items, StackMode.Vertical, Project?.History);
                 OnUpdateDecorator();
             }
@@ -1216,7 +1216,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Distribute(items, DistributeMode.Horizontal, Project?.History);
                 OnUpdateDecorator();
             }
@@ -1227,7 +1227,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Distribute(items, DistributeMode.Vertical, Project?.History);
                 OnUpdateDecorator();
             }
@@ -1238,7 +1238,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Left, Project?.History);
                 OnUpdateDecorator();
             }
@@ -1249,7 +1249,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Centered, Project?.History);
                 OnUpdateDecorator();
             }
@@ -1260,7 +1260,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Right, Project?.History);
                 OnUpdateDecorator();
             }
@@ -1271,7 +1271,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Top, Project?.History);
                 OnUpdateDecorator();
             }
@@ -1282,7 +1282,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Center, Project?.History);
                 OnUpdateDecorator();
             }
@@ -1293,7 +1293,7 @@ namespace Core2D.Editor
             var shapes = PageState?.SelectedShapes;
             if (shapes != null)
             {
-                var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                 BoxLayout.Align(items, AlignMode.Bottom, Project?.History);
                 OnUpdateDecorator();
             }
@@ -3770,7 +3770,7 @@ namespace Core2D.Editor
         {
             foreach (var shape in shapes)
             {
-                if (!shape.State.Flags.HasFlag(ShapeStateFlags.Locked))
+                if (!shape.State.HasFlag(ShapeStateFlags.Locked))
                 {
                     shape.Move(null, dx, dy);
                 }
@@ -3800,7 +3800,7 @@ namespace Core2D.Editor
 
                             foreach (var shape in shapes)
                             {
-                                if (!shape.State.Flags.HasFlag(ShapeStateFlags.Locked))
+                                if (!shape.State.HasFlag(ShapeStateFlags.Locked))
                                 {
                                     shape.GetPoints(points);
                                 }
@@ -3813,7 +3813,7 @@ namespace Core2D.Editor
 
                     case MoveMode.Shape:
                         {
-                            var items = shapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
+                            var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
                             MoveShapesByWithHistory(items, dx, dy);
                         }
                         break;

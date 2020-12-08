@@ -139,8 +139,8 @@
                                                                  x:CompileBindings="False"/>
                         </i:Interaction.Behaviors>
                         <Panel HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Width="{Binding #PresenterViewTemplate.Container.Width}"
-                               Height="{Binding #PresenterViewTemplate.Container.Height}">
+                               Width="{Binding #PresenterViewTemplate.Container.Template.Width}"
+                               Height="{Binding #PresenterViewTemplate.Container.Template.Height}">
                             <views:PresenterView x:Name="PresenterViewData" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False" />
                             <views:PresenterView x:Name="PresenterViewTemplate" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False" />
                             <views:PresenterView x:Name="PresenterViewEditor" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False" />

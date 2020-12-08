@@ -32,7 +32,7 @@ namespace Core2D.Shapes
 
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
-            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
+            if (State.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.DrawPath(dc, this);
             }

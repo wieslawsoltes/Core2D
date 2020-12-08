@@ -49,7 +49,7 @@ namespace Core2D.Shapes
 
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
-            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
+            if (State.HasFlag(ShapeStateFlags.Visible))
             {
                 foreach (var shape in Shapes)
                 {
@@ -62,7 +62,7 @@ namespace Core2D.Shapes
 
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
-            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
+            if (State.HasFlag(ShapeStateFlags.Visible))
             {
                 foreach (var shape in Shapes)
                 {
@@ -89,7 +89,7 @@ namespace Core2D.Shapes
         {
             foreach (var shape in Shapes)
             {
-                if (!shape.State.Flags.HasFlag(ShapeStateFlags.Connector))
+                if (!shape.State.HasFlag(ShapeStateFlags.Connector))
                 {
                     shape.Move(selection, dx, dy);
                 }

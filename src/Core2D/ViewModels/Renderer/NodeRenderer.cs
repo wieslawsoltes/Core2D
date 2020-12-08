@@ -109,7 +109,7 @@ namespace Core2D.Renderer
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.DrawShape(dc, this);
                 }
@@ -117,7 +117,7 @@ namespace Core2D.Renderer
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.DrawPoints(dc, this);
                 }

@@ -7,10 +7,6 @@ namespace Core2D.Data
 {
     public partial class DataFlow
     {
-        protected DataFlow()
-        {
-        }
-
         public void Bind(ProjectContainer project)
         {
             foreach (var document in project.Documents)

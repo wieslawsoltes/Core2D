@@ -20,7 +20,7 @@ namespace Core2D.FileWriter.SkiaSharpPng
 
         public void Save(Stream stream, PageContainer container)
         {
-            var info = new SKImageInfo((int)container.Width, (int)container.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+            var info = new SKImageInfo((int)container.Template.Width, (int)container.Template.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
             using var bitmap = new SKBitmap(info);
             using (var canvas = new SKCanvas(bitmap))
             {

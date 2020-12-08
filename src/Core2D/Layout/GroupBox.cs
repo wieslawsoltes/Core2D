@@ -30,12 +30,12 @@ namespace Core2D.Layout
 
         public static bool IsPointMovable(PointShape point, BaseShape parent)
         {
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
+            if (point.State.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShape ower && ower.State.HasFlag(ShapeStateFlags.Locked)))
             {
                 return false;
             }
 
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != parent)
+            if (point.State.HasFlag(ShapeStateFlags.Connector) && point.Owner != parent)
             {
                 return false;
             }

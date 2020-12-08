@@ -10,7 +10,6 @@ namespace Core2D.Containers
 {
     public partial class PageContainer : BaseContainer, IDataObject, IGrid
     {
-        // TODO: Template AutoNotify
         [AutoNotify] private double _width;
         [AutoNotify] private double _height;
         [AutoNotify] private BaseColor _background;
@@ -62,7 +61,7 @@ namespace Core2D.Containers
         {
             var isDirty = base.IsDirty();
 
-            if (Background != null)
+            if (_template?.Background != null)
             {
                 isDirty |= Background.IsDirty();
             }

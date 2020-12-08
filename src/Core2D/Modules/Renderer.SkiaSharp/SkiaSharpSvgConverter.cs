@@ -136,12 +136,12 @@ namespace Core2D.Renderer.SkiaSharp
 
                 if (paint.Typeface.Weight == SP.FontStyleWeight.Bold)
                 {
-                    style.TextStyle.FontStyle.Flags = style.TextStyle.FontStyle.Flags | FontStyleFlags.Bold;
+                    style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Bold;
                 }
 
                 if (paint.Typeface.Style == SP.FontStyleSlant.Italic)
                 {
-                    style.TextStyle.FontStyle.Flags = style.TextStyle.FontStyle.Flags | FontStyleFlags.Italic;
+                    style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Italic;
                 }
             }
 

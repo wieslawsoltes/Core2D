@@ -480,7 +480,7 @@ namespace Core2D.Renderer.Dxf
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                if (shape.State.HasFlag(State.DrawShapeState))
                 {
                     shape.DrawShape(dxf, this);
                 }
@@ -488,7 +488,7 @@ namespace Core2D.Renderer.Dxf
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                if (shape.State.HasFlag(State.DrawShapeState))
                 {
                     shape.DrawPoints(dxf, this);
                 }
@@ -785,11 +785,9 @@ namespace Core2D.Renderer.Dxf
 
             var options = new DXFE.MTextFormattingOptions();
             var fs = text.Style.TextStyle.FontStyle;
-            if (fs != null)
-            {
-                options.Bold = fs.Flags.HasFlag(FontStyleFlags.Bold);
-                options.Italic = fs.Flags.HasFlag(FontStyleFlags.Italic);
-            }
+
+            options.Bold = fs.HasFlag(FontStyleFlags.Bold);
+            options.Italic = fs.HasFlag(FontStyleFlags.Italic);
 
             options.Color = null;
             dxfMText.Write(tbind, options);

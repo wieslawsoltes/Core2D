@@ -23,9 +23,7 @@ namespace Core2D.Serializer.Newtonsoft
                 NullValueHandling = NullValueHandling.Ignore,
                 Converters =
                 {
-                    new KeyValuePairConverter(),
-                    new FontStyleConverter(),
-                    new ShapeStateConverter()
+                    new KeyValuePairConverter()
                 }
             };
         }

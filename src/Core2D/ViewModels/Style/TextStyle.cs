@@ -12,7 +12,7 @@ namespace Core2D.Style
         [AutoNotify] private string _fontName;
         [AutoNotify] private string _fontFile;
         [AutoNotify] private double _fontSize;
-        [AutoNotify] private FontStyle _fontStyle;
+        [AutoNotify] private FontStyleFlags _fontStyle;
         [AutoNotify] private TextHAlignment _textHAlignment;
         [AutoNotify] private TextVAlignment _textVAlignment;
 
@@ -24,7 +24,7 @@ namespace Core2D.Style
                 FontName = this.FontName,
                 FontFile = this.FontFile,
                 FontSize = this.FontSize,
-                FontStyle = (FontStyle)this.FontStyle.Copy(shared),
+                FontStyle = this.FontStyle,
                 TextHAlignment = this.TextHAlignment,
                 TextVAlignment = this.TextVAlignment
             };
@@ -33,16 +33,12 @@ namespace Core2D.Style
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
-
-            isDirty |= FontStyle.IsDirty();
-
             return isDirty;
         }
 
         public override void Invalidate()
         {
             base.Invalidate();
-            FontStyle.Invalidate();
         }
     }
 }

@@ -18,8 +18,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Arc.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Arc.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Arc.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Arc.State.HasFlag(ShapeStateFlags.Size);
             Geometry = PathGeometryConverter.ToSKPath(Arc);
             Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
         }

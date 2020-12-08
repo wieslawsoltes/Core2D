@@ -180,14 +180,6 @@ namespace Core2D
             return new Cache<TKey, TValue>(dispose);
         }
 
-        public ShapeState CreateShapeState(ShapeStateFlags flags = ShapeStateFlags.Default)
-        {
-            return new ShapeState()
-            {
-                Flags = flags
-            };
-        }
-
         public ShapeRendererState CreateShapeRendererState()
         {
             var state = new ShapeRendererState()
@@ -196,7 +188,7 @@ namespace Core2D
                 PanY = 0.0,
                 ZoomX = 1.0,
                 ZoomY = 1.0,
-                DrawShapeState = CreateShapeState(ShapeStateFlags.Visible),
+                DrawShapeState = ShapeStateFlags.Visible,
                 SelectedShapes = default
             };
 
@@ -335,7 +327,7 @@ namespace Core2D
             var pointShape = new PointShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = default,
                 X = x,
@@ -349,7 +341,7 @@ namespace Core2D
             var lineShape = new LineShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -367,7 +359,7 @@ namespace Core2D
             var lineShape = new LineShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -393,7 +385,7 @@ namespace Core2D
             var arcShape = new ArcShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -425,7 +417,7 @@ namespace Core2D
             var arcShape = new ArcShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -445,7 +437,7 @@ namespace Core2D
             var quadraticBezierShape = new QuadraticBezierShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -474,7 +466,7 @@ namespace Core2D
             var quadraticBezierShape = new QuadraticBezierShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -493,7 +485,7 @@ namespace Core2D
             var cubicBezierShape = new CubicBezierShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -525,7 +517,7 @@ namespace Core2D
             var cubicBezierShape = new CubicBezierShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -545,7 +537,7 @@ namespace Core2D
             var rectangleShape = new RectangleShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -571,7 +563,7 @@ namespace Core2D
             var rectangleShape = new RectangleShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -589,7 +581,7 @@ namespace Core2D
             var ellipseShape = new EllipseShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -615,7 +607,7 @@ namespace Core2D
             var ellipseShape = new EllipseShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -634,7 +626,7 @@ namespace Core2D
         {
             var pathShape = new PathShape()
             {
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -665,7 +657,7 @@ namespace Core2D
             var pathShape = new PathShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -695,7 +687,7 @@ namespace Core2D
             var textShape = new TextShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -721,7 +713,7 @@ namespace Core2D
             var textShape = new TextShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -741,7 +733,7 @@ namespace Core2D
             var imageShape = new ImageShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -768,7 +760,7 @@ namespace Core2D
             var imageShape = new ImageShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Style = style,
                 IsStroked = isStroked,
@@ -789,7 +781,7 @@ namespace Core2D
             return new GroupShape()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<Property>(),
                 Connectors = ImmutableArray.Create<PointShape>(),
                 Shapes = ImmutableArray.Create<BaseShape>()
@@ -865,14 +857,6 @@ namespace Core2D
             };
         }
 
-        public FontStyle CreateFontStyle(FontStyleFlags flags = FontStyleFlags.Regular)
-        {
-            return new FontStyle()
-            {
-                Flags = flags
-            };
-        }
-
         public ShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
             return new ShapeStyle()
@@ -895,7 +879,7 @@ namespace Core2D
             };
         }
 
-        public TextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
+        public TextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyleFlags fontStyle = FontStyleFlags.Regular, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
         {
             return new TextStyle()
             {
@@ -903,7 +887,7 @@ namespace Core2D
                 FontName = fontName,
                 FontFile = fontFile,
                 FontSize = fontSize,
-                FontStyle = fontStyle ?? CreateFontStyle(FontStyleFlags.Regular),
+                FontStyle = fontStyle,
                 TextHAlignment = textHAlignment,
                 TextVAlignment = textVAlignment
             };

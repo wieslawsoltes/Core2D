@@ -45,7 +45,7 @@ namespace Core2D.Editor.Bounds.Shapes
                 ellipse.BottomRight.X,
                 ellipse.BottomRight.Y);
 
-            if (ellipse.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (ellipse.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).Contains(target);
             }
@@ -68,7 +68,7 @@ namespace Core2D.Editor.Bounds.Shapes
                 ellipse.BottomRight.X,
                 ellipse.BottomRight.Y);
 
-            if (ellipse.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (ellipse.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);
             }

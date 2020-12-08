@@ -41,7 +41,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
             Point2 a;
             Point2 b;
-            if (line.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (line.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 a = new Point2(line.Start.X * scale, line.Start.Y * scale);
                 b = new Point2(line.End.X * scale, line.End.Y * scale);
@@ -66,7 +66,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
             Point2 a;
             Point2 b;
-            if (line.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (line.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 a = new Point2(line.Start.X * scale, line.Start.Y * scale);
                 b = new Point2(line.End.X * scale, line.End.Y * scale);

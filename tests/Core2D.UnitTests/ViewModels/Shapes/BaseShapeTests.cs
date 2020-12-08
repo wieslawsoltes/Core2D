@@ -17,7 +17,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             Assert.True(target is ViewModelBase);
         }

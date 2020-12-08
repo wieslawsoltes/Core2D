@@ -127,21 +127,17 @@ namespace Core2D.Renderer.SkiaSharp
             var pen = ToSKPaintBrush(shapeStyle.Stroke.Color);
 
             var weight = SKFontStyleWeight.Normal;
-            if (shapeStyle.TextStyle.FontStyle != null)
+
+            if (shapeStyle.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
-                if (shapeStyle.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
-                {
-                    weight |= SKFontStyleWeight.Bold;
-                }
+                weight |= SKFontStyleWeight.Bold;
             }
 
             var style = SKFontStyleSlant.Upright;
-            if (shapeStyle.TextStyle.FontStyle != null)
+
+            if (shapeStyle.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
-                if (shapeStyle.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
-                {
-                    style |= SKFontStyleSlant.Italic;
-                }
+                style |= SKFontStyleSlant.Italic;
             }
 
             var tf = SKTypeface.FromFamilyName(shapeStyle.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style);

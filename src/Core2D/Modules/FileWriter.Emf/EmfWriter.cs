@@ -45,7 +45,7 @@ namespace Core2D.FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+                    r.State.DrawShapeState = ShapeStateFlags.Printable;
                     r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
@@ -91,7 +91,7 @@ namespace Core2D.FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+                    r.State.DrawShapeState = ShapeStateFlags.Printable;
                     r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;

@@ -330,12 +330,12 @@ namespace Core2D.Editor
             var style = shape.Style;
             if (style?.TextStyle?.FontStyle != null)
             {
-                var fontStyle = style.TextStyle.FontStyle;
+                var textStyle = style.TextStyle;
 
-                var previous = fontStyle.Flags;
-                var next = fontStyle.Flags ^ value;
-                history?.Snapshot(previous, next, (p) => fontStyle.Flags = p);
-                fontStyle.Flags = next;
+                var previous = textStyle.FontStyle;
+                var next = textStyle.FontStyle ^ value;
+                history?.Snapshot(previous, next, (p) => textStyle.FontStyle = p);
+                textStyle.FontStyle = next;
             }
         }
 

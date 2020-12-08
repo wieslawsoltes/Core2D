@@ -48,7 +48,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
             if (_points.Count() > 0)
             {
-                if (path.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+                if (path.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
                 {
                     return HitTestHelper.Contains(_points, target, scale);
                 }
@@ -73,7 +73,7 @@ namespace Core2D.Editor.Bounds.Shapes
 
             if (_points.Count() > 0)
             {
-                if (path.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+                if (path.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
                 {
                     return HitTestHelper.Overlap(_points, target, scale);
                 }

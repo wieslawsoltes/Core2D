@@ -303,7 +303,7 @@ namespace Core2D.Editor
                     var sources = editor.PageState?.SelectedShapes;
                     if (sources != null)
                     {
-                        var xaml = exporter.Create(sources, container.Width, container.Height);
+                        var xaml = exporter.Create(sources, container.Template.Width, container.Template.Height);
                         if (!string.IsNullOrEmpty(xaml))
                         {
                             editor.TextClipboard?.SetText(xaml);
@@ -314,7 +314,7 @@ namespace Core2D.Editor
                     var shapes = container.Layers.SelectMany(x => x.Shapes);
                     if (shapes != null)
                     {
-                        var xaml = exporter.Create(shapes, container.Width, container.Height);
+                        var xaml = exporter.Create(shapes, container.Template.Width, container.Template.Height);
                         if (!string.IsNullOrEmpty(xaml))
                         {
                             editor.TextClipboard?.SetText(xaml);
@@ -468,7 +468,7 @@ namespace Core2D.Editor
                 editor.DataFlow.Bind(page.Template, db, record);
                 editor.DataFlow.Bind(page, db, record);
 
-                using var bitmap = new System.Drawing.Bitmap((int)page.Width, (int)page.Height);
+                using var bitmap = new System.Drawing.Bitmap((int)page.Template.Width, (int)page.Template.Height);
 
                 if (shapes != null && shapes.Count > 0)
                 {

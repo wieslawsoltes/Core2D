@@ -32,8 +32,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Image.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Image.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Image.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Image.State.HasFlag(ShapeStateFlags.Size);
 
             if (!string.IsNullOrEmpty(Image.Key))
             {

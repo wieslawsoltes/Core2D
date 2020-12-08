@@ -22,8 +22,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Ellipse.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Ellipse.State.HasFlag(ShapeStateFlags.Size);
             Geometry = PathGeometryConverter.ToGeometry(Ellipse);
             Rect = Geometry.Bounds;
             Center = Geometry.Bounds.Center;

@@ -19,8 +19,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Path.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Path.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
             Geometry = PathGeometryConverter.ToGeometry(Path.Geometry);
             Center = Geometry.Bounds.Center;
         }

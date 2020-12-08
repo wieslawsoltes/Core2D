@@ -28,7 +28,7 @@ namespace Core2D.Editor.Tools.Selection
         public void ToStateBottomRight()
         {
             _helperRectangle = _serviceProvider.GetService<IFactory>().CreateRectangleShape(0, 0, _style);
-            _helperRectangle.State.Flags |= ShapeStateFlags.Thickness;
+            _helperRectangle.State |= ShapeStateFlags.Thickness;
 
             _topLeftHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
             _bottomRightHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);

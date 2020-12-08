@@ -138,8 +138,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Line.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Line.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Line.State.HasFlag(ShapeStateFlags.Size);
             P0 = new SKPoint((float)Line.Start.X, (float)Line.Start.Y);
             P1 = new SKPoint((float)Line.End.X, (float)Line.End.Y);
             Center = new SKPoint((float)((P0.X + P1.X) / 2.0), (float)((P0.Y + P1.Y) / 2.0));

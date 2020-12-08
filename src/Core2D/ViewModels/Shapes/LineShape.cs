@@ -16,7 +16,7 @@ namespace Core2D.Shapes
 
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
-            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
+            if (State.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.DrawLine(dc, this);
             }
@@ -58,12 +58,12 @@ namespace Core2D.Shapes
 
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
-            if (!Start.State.Flags.HasFlag(ShapeStateFlags.Connector))
+            if (!Start.State.HasFlag(ShapeStateFlags.Connector))
             {
                 Start.Move(selection, dx, dy);
             }
 
-            if (!End.State.Flags.HasFlag(ShapeStateFlags.Connector))
+            if (!End.State.HasFlag(ShapeStateFlags.Connector))
             {
                 End.Move(selection, dx, dy);
             }

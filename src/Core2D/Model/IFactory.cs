@@ -41,8 +41,6 @@ namespace Core2D
 
         ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue> dispose = null);
 
-        ShapeState CreateShapeState(ShapeStateFlags flags = ShapeStateFlags.Default);
-
         ShapeRendererState CreateShapeRendererState();
 
         LineSegment CreateLineSegment(PointShape point);
@@ -135,13 +133,11 @@ namespace Core2D
 
         FillStyle CreateFillStyle(string name, BaseColor color);
 
-        FontStyle CreateFontStyle(FontStyleFlags flags = FontStyleFlags.Regular);
-
         ShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0);
 
         ShapeStyle CreateShapeStyle(string name, BaseColor stroke, BaseColor fill, double thickness, TextStyle textStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle);
 
-        TextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center);
+        TextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyleFlags fontStyle = FontStyleFlags.Regular, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center);
 
         Options CreateOptions();
 

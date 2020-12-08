@@ -3,23 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="using:Core2D.Converters"
              xmlns:vmr="using:Core2D.Renderer"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.State}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmr:ShapeState" x:CompileBindings="False">
+             x:DataType="vmr:ShapeStateFlags" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:ShapeStateFlagsConverter x:Key="ShapeStateFlagsConverter"/>
+    </UserControl.Resources>
     <StackPanel>
-        <CheckBox Content="Default" IsChecked="{Binding Default, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="Visible" IsChecked="{Binding Visible, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="Printable" IsChecked="{Binding Printable, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="Locked" IsChecked="{Binding Locked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="Size" IsChecked="{Binding Size, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="Thickness" IsChecked="{Binding Thickness, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="Connector" IsChecked="{Binding Connector, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="None" IsChecked="{Binding None, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="Standalone" IsChecked="{Binding Standalone, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="Input" IsChecked="{Binding Input, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="Output" IsChecked="{Binding Output, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="Default" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Default}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="Visible" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Visible}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="Printable" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Printable}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="Locked" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Locked}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="Size" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Size}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="Thickness" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Thickness}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="Connector" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Connector}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="None" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.None}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="Standalone" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Standalone}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="Input" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Input}}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="Output" 
+                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Output}}" 
+                  HorizontalAlignment="Stretch" />
     </StackPanel>
 </UserControl>

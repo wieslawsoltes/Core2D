@@ -37,7 +37,7 @@ namespace Core2D.Designer
 
         public static Library<GroupShape> CurrentGroupLibrary { get; set; }
 
-        public static ShapeState State { get; set; }
+        public static ShapeStateFlags State { get; set; }
 
         public static Database Database { get; set; }
 
@@ -47,7 +47,7 @@ namespace Core2D.Designer
 
         public static ArrowStyle ArrowStyle { get; set; }
 
-        public static FontStyle FontStyle { get; set; }
+        public static FontStyleFlags FontStyle { get; set; }
 
         public static ShapeStyle Style { get; set; }
 
@@ -153,13 +153,13 @@ namespace Core2D.Designer
 
             // State
 
-            State = factory.CreateShapeState();
+            State = ShapeStateFlags.Default;
 
             // Style
 
             ArgbColor = factory.CreateArgbColor(128, 255, 0, 0);
             ArrowStyle = factory.CreateArrowStyle();
-            FontStyle = factory.CreateFontStyle();
+            FontStyle = FontStyleFlags.Regular;
             Style = factory.CreateShapeStyle("Default");
             TextStyle = factory.CreateTextStyle();
 

@@ -48,7 +48,7 @@ namespace Core2D.Editor.Bounds.Shapes
             _points.Clear();
             quadratic.GetPoints(_points);
 
-            if (quadratic.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (quadratic.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Contains(_points, target, scale);
             }
@@ -68,7 +68,7 @@ namespace Core2D.Editor.Bounds.Shapes
             _points.Clear();
             quadratic.GetPoints(_points);
 
-            if (quadratic.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (quadratic.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Overlap(_points, target, scale);
             }

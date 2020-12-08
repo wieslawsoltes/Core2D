@@ -18,7 +18,7 @@ namespace Core2D.Shapes
 
         public override void DrawShape(object dc, IShapeRenderer renderer)
         {
-            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
+            if (State.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.DrawCubicBezier(dc, this);
             }
@@ -74,22 +74,22 @@ namespace Core2D.Shapes
 
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
-            if (!Point1.State.Flags.HasFlag(ShapeStateFlags.Connector))
+            if (!Point1.State.HasFlag(ShapeStateFlags.Connector))
             {
                 Point1.Move(selection, dx, dy);
             }
 
-            if (!Point2.State.Flags.HasFlag(ShapeStateFlags.Connector))
+            if (!Point2.State.HasFlag(ShapeStateFlags.Connector))
             {
                 Point2.Move(selection, dx, dy);
             }
 
-            if (!Point3.State.Flags.HasFlag(ShapeStateFlags.Connector))
+            if (!Point3.State.HasFlag(ShapeStateFlags.Connector))
             {
                 Point3.Move(selection, dx, dy);
             }
 
-            if (!Point4.State.Flags.HasFlag(ShapeStateFlags.Connector))
+            if (!Point4.State.HasFlag(ShapeStateFlags.Connector))
             {
                 Point4.Move(selection, dx, dy);
             }

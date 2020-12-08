@@ -40,7 +40,7 @@ namespace Core2D.Editor.Tools.Selection
         public void ToStatePoint2()
         {
             _line12 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
-            _line12.State.Flags |= ShapeStateFlags.Thickness;
+            _line12.State |= ShapeStateFlags.Thickness;
 
             _helperPoint2 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 
@@ -51,10 +51,10 @@ namespace Core2D.Editor.Tools.Selection
         public void ToStatePoint3()
         {
             _line43 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
-            _line43.State.Flags |= ShapeStateFlags.Thickness;
+            _line43.State |= ShapeStateFlags.Thickness;
 
             _line23 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _style);
-            _line23.State.Flags |= ShapeStateFlags.Thickness;
+            _line23.State |= ShapeStateFlags.Thickness;
 
             _helperPoint3 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
 

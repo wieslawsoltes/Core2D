@@ -137,17 +137,17 @@ namespace Core2D.Editor.Tools.Decorators
                 //_rotateLine
             };
             _currentHandle = null;
-            _rotateHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _topLeftHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _topRightHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _bottomLeftHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _bottomRightHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _topHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _bottomHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _leftHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _rightHandle.State.Flags |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _boundsHandle.State.Flags |= ShapeStateFlags.Thickness;
-            _rotateLine.State.Flags |= ShapeStateFlags.Thickness;
+            _rotateHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _topLeftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _topRightHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _bottomLeftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _bottomRightHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _topHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _bottomHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _leftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _rightHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+            _boundsHandle.State |= ShapeStateFlags.Thickness;
+            _rotateLine.State |= ShapeStateFlags.Thickness;
         }
 
         public override object Copy(IDictionary<object, object> shared)
@@ -270,21 +270,21 @@ namespace Core2D.Editor.Tools.Decorators
 
             if (_groupBox.Bounds.Height <= 0m || _groupBox.Bounds.Width <= 0m)
             {
-                _leftHandle.State.Flags &= ~ShapeStateFlags.Visible;
-                _rightHandle.State.Flags &= ~ShapeStateFlags.Visible;
-                _topHandle.State.Flags &= ~ShapeStateFlags.Visible;
-                _bottomHandle.State.Flags &= ~ShapeStateFlags.Visible;
-                _topRightHandle.State.Flags &= ~ShapeStateFlags.Visible;
-                _bottomLeftHandle.State.Flags &= ~ShapeStateFlags.Visible;
+                _leftHandle.State &= ~ShapeStateFlags.Visible;
+                _rightHandle.State &= ~ShapeStateFlags.Visible;
+                _topHandle.State &= ~ShapeStateFlags.Visible;
+                _bottomHandle.State &= ~ShapeStateFlags.Visible;
+                _topRightHandle.State &= ~ShapeStateFlags.Visible;
+                _bottomLeftHandle.State &= ~ShapeStateFlags.Visible;
             }
             else
             {
-                _leftHandle.State.Flags |= ShapeStateFlags.Visible;
-                _rightHandle.State.Flags |= ShapeStateFlags.Visible;
-                _topHandle.State.Flags |= ShapeStateFlags.Visible;
-                _bottomHandle.State.Flags |= ShapeStateFlags.Visible;
-                _topRightHandle.State.Flags |= ShapeStateFlags.Visible;
-                _bottomLeftHandle.State.Flags |= ShapeStateFlags.Visible;
+                _leftHandle.State |= ShapeStateFlags.Visible;
+                _rightHandle.State |= ShapeStateFlags.Visible;
+                _topHandle.State |= ShapeStateFlags.Visible;
+                _bottomHandle.State |= ShapeStateFlags.Visible;
+                _topRightHandle.State |= ShapeStateFlags.Visible;
+                _bottomLeftHandle.State |= ShapeStateFlags.Visible;
             }
 
             _layer.InvalidateLayer();
@@ -394,7 +394,7 @@ namespace Core2D.Editor.Tools.Decorators
             }
 
             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-            var handles = _handles.Where(x => x.State.Flags.HasFlag(ShapeStateFlags.Visible));
+            var handles = _handles.Where(x => x.State.HasFlag(ShapeStateFlags.Visible));
             var result = editor.HitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState.ZoomX);
             if (result != null)
             {

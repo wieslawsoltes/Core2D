@@ -368,7 +368,7 @@ namespace Core2D.Renderer.WinForms
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                if (shape.State.HasFlag(State.DrawShapeState))
                 {
                     shape.DrawShape(dc, this);
                 }
@@ -376,7 +376,7 @@ namespace Core2D.Renderer.WinForms
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.DrawPoints(dc, this);
                 }
@@ -621,17 +621,15 @@ namespace Core2D.Renderer.WinForms
             var brush = ToBrush(text.Style.Stroke.Color);
 
             var fontStyle = System.Drawing.FontStyle.Regular;
-            if (text.Style.TextStyle.FontStyle != null)
-            {
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Bold))
-                {
-                    fontStyle |= System.Drawing.FontStyle.Bold;
-                }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.Style.FontStyleFlags.Italic))
-                {
-                    fontStyle |= System.Drawing.FontStyle.Italic;
-                }
+            if (text.Style.TextStyle.FontStyle.HasFlag(Core2D.Style.FontStyleFlags.Bold))
+            {
+                fontStyle |= System.Drawing.FontStyle.Bold;
+            }
+
+            if (text.Style.TextStyle.FontStyle.HasFlag(Core2D.Style.FontStyleFlags.Italic))
+            {
+                fontStyle |= System.Drawing.FontStyle.Italic;
             }
 
             Font font = new Font(

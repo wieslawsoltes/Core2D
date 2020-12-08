@@ -320,7 +320,7 @@ namespace Core2D.Renderer.PdfSharp
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(State.DrawShapeState.Flags))
+                if (shape.State.HasFlag(State.DrawShapeState))
                 {
                     shape.DrawShape(dc, this);
                 }
@@ -328,7 +328,7 @@ namespace Core2D.Renderer.PdfSharp
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.DrawPoints(dc, this);
                 }
@@ -612,17 +612,15 @@ namespace Core2D.Renderer.PdfSharp
             var options = new XPdfFontOptions(PdfFontEncoding.Unicode);
 
             var fontStyle = XFontStyle.Regular;
-            if (text.Style.TextStyle.FontStyle != null)
-            {
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
-                {
-                    fontStyle |= XFontStyle.Bold;
-                }
 
-                if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
-                {
-                    fontStyle |= XFontStyle.Italic;
-                }
+            if (text.Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
+            {
+                fontStyle |= XFontStyle.Bold;
+            }
+
+            if (text.Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
+            {
+                fontStyle |= XFontStyle.Italic;
             }
 
             var font = new XFont(

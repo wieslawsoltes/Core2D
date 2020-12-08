@@ -37,7 +37,7 @@ namespace Core2D.FileWriter.PdfSharp
             IProjectExporter exporter = new PdfSharpRenderer(_serviceProvider);
 
             IShapeRenderer renderer = (IShapeRenderer)exporter;
-            renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 
             if (item is PageContainer page)

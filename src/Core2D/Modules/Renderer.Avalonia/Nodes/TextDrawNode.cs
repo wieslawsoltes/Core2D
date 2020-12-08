@@ -29,8 +29,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Text.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Text.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Text.State.HasFlag(ShapeStateFlags.Size);
             var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
             Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
             Center = Rect.Center;
@@ -55,12 +55,12 @@ namespace Core2D.Renderer
             var fontStyle = AM.FontStyle.Normal;
             var fontWeight = AM.FontWeight.Normal;
 
-            if (Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
+            if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
                 fontStyle |= AM.FontStyle.Italic;
             }
 
-            if (Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
+            if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
                 fontWeight |= AM.FontWeight.Bold;
             }

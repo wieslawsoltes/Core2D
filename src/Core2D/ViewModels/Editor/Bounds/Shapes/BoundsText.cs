@@ -45,7 +45,7 @@ namespace Core2D.Editor.Bounds.Shapes
                 text.BottomRight.X,
                 text.BottomRight.Y);
 
-            if (text.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (text.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).Contains(target);
             }
@@ -68,7 +68,7 @@ namespace Core2D.Editor.Bounds.Shapes
                 text.BottomRight.X,
                 text.BottomRight.Y);
 
-            if (text.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (text.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);
             }

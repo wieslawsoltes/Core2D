@@ -50,7 +50,7 @@ namespace Core2D.FileWriter.Svg
                 var shapes = page.Layers.SelectMany(x => x.Shapes);
                 if (shapes != null)
                 {
-                    var xaml = exporter.Create(shapes, page.Width, page.Height);
+                    var xaml = exporter.Create(shapes, page.Template.Width, page.Template.Height);
                     if (!string.IsNullOrEmpty(xaml))
                     {
                         byte[] bytes = Encoding.UTF8.GetBytes(xaml);

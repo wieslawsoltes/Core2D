@@ -8,7 +8,7 @@ namespace Core2D.Shapes
         public static void AddShape(this GroupShape group, BaseShape shape)
         {
             shape.Owner = group;
-            shape.State.Flags &= ~ShapeStateFlags.Standalone;
+            shape.State &= ~ShapeStateFlags.Standalone;
             group.Shapes = group.Shapes.Add(shape);
         }
 
@@ -42,14 +42,14 @@ namespace Core2D.Shapes
                 {
                     if (shape is PointShape point)
                     {
-                        point.State.Flags &=
+                        point.State &=
                             ~(ShapeStateFlags.Connector
                             | ShapeStateFlags.None
                             | ShapeStateFlags.Input
                             | ShapeStateFlags.Output);
                     }
 
-                    shape.State.Flags |= ShapeStateFlags.Standalone;
+                    shape.State |= ShapeStateFlags.Standalone;
 
                     source?.Add(shape);
                 }

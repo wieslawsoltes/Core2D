@@ -36,12 +36,12 @@ namespace Core2D.Editor.Tools
 
         private static bool IsPointMovable(BaseShape shape, PointShape point)
         {
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
+            if (point.State.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShape ower && ower.State.HasFlag(ShapeStateFlags.Locked)))
             {
                 return false;
             }
 
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != shape)
+            if (point.State.HasFlag(ShapeStateFlags.Connector) && point.Owner != shape)
             {
                 return false;
             }
@@ -68,8 +68,8 @@ namespace Core2D.Editor.Tools
             if (editor.PageState.SelectedShapes != null)
             {
                 var shapes = editor.PageState.SelectedShapes
-                    .Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked)
-                             && !s.State.Flags.HasFlag(ShapeStateFlags.Connector));
+                    .Where(s => !s.State.HasFlag(ShapeStateFlags.Locked)
+                             && !s.State.HasFlag(ShapeStateFlags.Connector));
 
                 switch (editor.Project.Options.MoveMode)
                 {
@@ -274,7 +274,7 @@ namespace Core2D.Editor.Tools
                             x, y,
                             editor.PageState.SelectionStyle,
                             true, true);
-                        _rectangleShape.State.Flags |= ShapeStateFlags.Thickness;
+                        _rectangleShape.State |= ShapeStateFlags.Thickness;
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
                         editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         _currentState = State.Selected;

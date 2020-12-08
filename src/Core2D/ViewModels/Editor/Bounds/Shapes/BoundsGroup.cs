@@ -38,7 +38,7 @@ namespace Core2D.Editor.Bounds.Shapes
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var hasSize = group.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var hasSize = group.State.HasFlag(ShapeStateFlags.Size);
 
             foreach (var GroupShape in group.Shapes.Reverse())
             {
@@ -59,7 +59,7 @@ namespace Core2D.Editor.Bounds.Shapes
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var hasSize = group.State.Flags.HasFlag(ShapeStateFlags.Size);
+            var hasSize = group.State.HasFlag(ShapeStateFlags.Size);
 
             foreach (var GroupShape in group.Shapes.Reverse())
             {

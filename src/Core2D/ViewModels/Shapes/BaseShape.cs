@@ -11,7 +11,7 @@ namespace Core2D.Shapes
     {
         private IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
 
-        [AutoNotify] private ShapeState _state;
+        [AutoNotify] private ShapeStateFlags _state;
         [AutoNotify] private ShapeStyle _style;
         [AutoNotify] private bool _isStroked;
         [AutoNotify] private bool _isFilled;
@@ -27,8 +27,6 @@ namespace Core2D.Shapes
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
-
-            isDirty |= State.IsDirty();
 
             foreach (var property in Properties)
             {
@@ -46,8 +44,6 @@ namespace Core2D.Shapes
         public override void Invalidate()
         {
             base.Invalidate();
-
-            State.Invalidate();
 
             foreach (var property in Properties)
             {

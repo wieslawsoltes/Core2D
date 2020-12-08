@@ -6,9 +6,9 @@ namespace Core2D.Renderer.Presenters
     {
         public void Render(object dc, IShapeRenderer renderer, PageContainer container, double dx, double dy)
         {
-            renderer.Fill(dc, dx, dy, container.Width, container.Height, container.Background);
+            renderer.Fill(dc, dx, dy, container.Template.Width, container.Template.Height, container.Template.Background);
 
-            renderer.Grid(dc, container, 0, 0, container.Width, container.Height);
+            renderer.Grid(dc, container.Template, 0, 0, container.Template.Width, container.Template.Height);
 
             if (container.Template != null)
             {

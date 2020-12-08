@@ -54,7 +54,7 @@ namespace Core2D.Editor.Bounds.Shapes
             _points.Clear();
             cubic.GetPoints(_points);
 
-            if (cubic.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (cubic.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Contains(_points, target, scale);
             }
@@ -74,7 +74,7 @@ namespace Core2D.Editor.Bounds.Shapes
             _points.Clear();
             cubic.GetPoints(_points);
 
-            if (cubic.State.Flags.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+            if (cubic.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Overlap(_points, target, scale);
             }

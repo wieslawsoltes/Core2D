@@ -3,12 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="using:Core2D.Converters"
              xmlns:vms="using:Core2D.Style"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.TextStyle}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:TextStyle" x:CompileBindings="False">
+             x:DataType="vms:TextStyle" x:CompileBindings="True">
+    <UserControl.Resources>
+        <converters:FontStyleFlagsConverter x:Key="FontStyleFlagsConverter"/>
+    </UserControl.Resources>
     <StackPanel>
         <Label Content="FontName" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding FontName, Mode=TwoWay}" />
@@ -18,9 +22,15 @@
         <TextBox Text="{Binding FontSize, Mode=TwoWay}" />
         <Label Content="FontStyle" Margin="{DynamicResource TextControlThemePadding}" />
         <StackPanel DataContext="{Binding FontStyle}">
-            <CheckBox Content="Regular" IsChecked="{Binding Regular, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-            <CheckBox Content="Bold" IsChecked="{Binding Bold, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-            <CheckBox Content="Italic" IsChecked="{Binding Italic, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <CheckBox Content="Regular" 
+                      IsChecked="{Binding Mode=TwoWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static vms:FontStyleFlags.Regular}}"
+                      HorizontalAlignment="Stretch" />
+            <CheckBox Content="Bold" 
+                      IsChecked="{Binding Mode=TwoWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static vms:FontStyleFlags.Bold}}"
+                      HorizontalAlignment="Stretch" />
+            <CheckBox Content="Italic" 
+                      IsChecked="{Binding Mode=TwoWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static vms:FontStyleFlags.Italic}}"
+                      HorizontalAlignment="Stretch" />
         </StackPanel>
         <Label Content="HAlignment" Margin="{DynamicResource TextControlThemePadding}" />
         <ComboBox Items="{x:Static vms:TextStyle.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />

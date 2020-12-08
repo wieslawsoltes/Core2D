@@ -6,11 +6,11 @@ namespace Core2D.Renderer.Presenters
     {
         public void Render(object dc, IShapeRenderer renderer, PageContainer container, double dx, double dy)
         {
-            var flags = renderer.State.DrawShapeState.Flags;
+            var flags = renderer.State.DrawShapeState;
 
-            renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
 
-            renderer.Fill(dc, dx, dy, container.Width, container.Height, container.Background);
+            renderer.Fill(dc, dx, dy, container.Template.Width, container.Template.Height, container.Template.Background);
 
             if (container.Template != null)
             {
@@ -19,7 +19,7 @@ namespace Core2D.Renderer.Presenters
 
             renderer.DrawPage(dc, container);
 
-            renderer.State.DrawShapeState.Flags = flags;
+            renderer.State.DrawShapeState = flags;
         }
     }
 }

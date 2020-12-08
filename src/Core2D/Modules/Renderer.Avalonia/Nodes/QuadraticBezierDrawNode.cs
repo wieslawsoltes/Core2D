@@ -19,8 +19,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = QuadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = QuadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = QuadraticBezier.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = QuadraticBezier.State.HasFlag(ShapeStateFlags.Size);
             Geometry = PathGeometryConverter.ToGeometry(QuadraticBezier);
             Center = Geometry.Bounds.Center;
         }
