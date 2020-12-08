@@ -8,19 +8,19 @@ namespace Core2D.Converters
 {
     public class ShapeStateFlagsConverter : IValueConverter
     {
+        private ShapeStateFlags _target;
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ShapeStateFlags flags && parameter is ShapeStateFlags flag && targetType == typeof(bool))
-            {
-                //return flags.HasFlag(flag) ? flags & ~flag : flags | ~flag;
-                return flags.HasFlag(flag);
-            }
-            return AvaloniaProperty.UnsetValue;
+            var mask = (ShapeStateFlags)parameter;
+            this._target = (ShapeStateFlags)value;
+            return ((mask & this._target) != 0);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            this._target ^= (ShapeStateFlags)parameter;
+            return this._target;
         }
     }
 }
