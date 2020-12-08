@@ -93,11 +93,5 @@
                 </ScrollViewer>
             </Grid>
         </Expander>
-        <Expander Header="Data" IsExpanded="False">
-            <views:DataObjectView />
-        </Expander>
-        <Expander Header="State" IsExpanded="False">
-            <ContentControl Content="{Binding State}" />
-        </Expander>
     </StackPanel>
 </UserControl>

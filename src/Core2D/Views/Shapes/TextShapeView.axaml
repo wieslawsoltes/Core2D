@@ -30,14 +30,5 @@
         <Expander Header="BottomRight" IsExpanded="False">
             <ContentControl Content="{Binding BottomRight}" />
         </Expander>
-        <Expander Header="Data" IsExpanded="False">
-            <views:DataObjectView />
-        </Expander>
-        <Expander Header="Style" IsExpanded="False">
-            <ContentControl Content="{Binding Style}" />
-        </Expander>
-        <Expander Header="State" IsExpanded="False">
-            <ContentControl Content="{Binding State}" />
-        </Expander>
     </StackPanel>
 </UserControl>

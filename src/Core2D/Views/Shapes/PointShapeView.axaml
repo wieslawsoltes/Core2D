@@ -9,20 +9,15 @@
              d:DataContext="{x:Static vmd:DesignerContext.Point}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:PointShape" x:CompileBindings="True">
-    <StackPanel>
-        <Grid ColumnDefinitions="50*,6,50*">
-            <StackPanel Grid.Column="0">
-                <Label Content="X" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding X, Mode=TwoWay}" />
-            </StackPanel>
-            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
-            <StackPanel Grid.Column="2">
-                <Label Content="Y" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Y, Mode=TwoWay}" />
-            </StackPanel>
-        </Grid>
-        <Expander Header="State" IsExpanded="False">
-            <ContentControl Content="{Binding State}" />
-        </Expander>
-    </StackPanel>
+    <Grid ColumnDefinitions="50*,6,50*">
+        <StackPanel Grid.Column="0">
+            <Label Content="X" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding X, Mode=TwoWay}" />
+        </StackPanel>
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
+        <StackPanel Grid.Column="2">
+            <Label Content="Y" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding Y, Mode=TwoWay}" />
+        </StackPanel>
+    </Grid>
 </UserControl>
