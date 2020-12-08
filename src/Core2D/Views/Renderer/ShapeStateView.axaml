@@ -15,37 +15,60 @@
     </UserControl.Resources>
     <StackPanel>
         <CheckBox Content="Default" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Default}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleDefaultShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Default}}" 
+                  HorizontalAlignment="Stretch"
+                  IsEnabled="False"
+                  x:CompileBindings="False" />
         <CheckBox Content="Visible" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Visible}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleVisibleShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Visible}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
         <CheckBox Content="Printable" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Printable}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding TogglePrintableShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Printable}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
         <CheckBox Content="Locked" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Locked}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleLockedShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Locked}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
         <CheckBox Content="Size" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Size}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleSizeShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Size}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
         <CheckBox Content="Thickness" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Thickness}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleThicknessShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Thickness}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
         <CheckBox Content="Connector" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Connector}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleConnectorShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Connector}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
         <CheckBox Content="None" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.None}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleNoneShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.None}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
         <CheckBox Content="Standalone" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Standalone}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleStandaloneShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Standalone}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
         <CheckBox Content="Input" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Input}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleInputShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Input}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
         <CheckBox Content="Output" 
-                  IsChecked="{Binding Mode=TwoWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Output}}" 
-                  HorizontalAlignment="Stretch" />
+                  Command="{Binding ToggleOutputShapeState}"
+                  IsChecked="{Binding Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Output}}" 
+                  HorizontalAlignment="Stretch"
+                  x:CompileBindings="False" />
     </StackPanel>
 </UserControl>

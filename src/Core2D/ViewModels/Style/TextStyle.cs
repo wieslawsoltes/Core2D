@@ -16,6 +16,21 @@ namespace Core2D.Style
         [AutoNotify] private TextHAlignment _textHAlignment;
         [AutoNotify] private TextVAlignment _textVAlignment;
 
+        public void ToggleRegularFontStyle()
+        {
+            FontStyle ^= FontStyleFlags.Regular;
+        }
+
+        public void ToggleBoldFontStyle()
+        {
+            FontStyle ^= FontStyleFlags.Bold;
+        }
+
+        public void ToggleItalicFontStyle()
+        {
+            FontStyle ^= FontStyleFlags.Italic;
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
             return new TextStyle()
