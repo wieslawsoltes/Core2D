@@ -1,28 +1,20 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using Core2D.Containers;
 using Core2D.Shapes;
 using Core2D.Style;
 
 namespace Core2D.Renderer
 {
-    [DataContract(IsReference = true)]
-    public abstract class NodeRenderer : ViewModelBase, IShapeRenderer
+    public partial class NodeRenderer : ViewModelBase, IShapeRenderer
     {
         private readonly IServiceProvider _serviceProvider;
-        private ShapeRendererState _state;
         private readonly ICache<string, IDisposable> _biCache;
         private readonly ICache<object, IDrawNode> _drawNodeCache;
         private readonly IDrawNodeFactory _drawNodeFactory;
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ShapeRendererState State
-        {
-            get => _state;
-            set => RaiseAndSetIfChanged(ref _state, value);
-        }
+        [AutoNotify] private ShapeRendererState _state;
 
-        public NodeRenderer(IServiceProvider serviceProvider, IDrawNodeFactory drawNodeFactory)
+        protected NodeRenderer(IServiceProvider serviceProvider, IDrawNodeFactory drawNodeFactory)
         {
             _serviceProvider = serviceProvider;
             _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();

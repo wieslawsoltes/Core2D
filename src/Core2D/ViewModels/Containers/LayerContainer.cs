@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Containers
@@ -10,31 +9,12 @@ namespace Core2D.Containers
 
     public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
 
-    [DataContract(IsReference = true)]
-    public class LayerContainer : BaseContainer
+    public partial class LayerContainer : BaseContainer
     {
         public event InvalidateLayerEventHandler InvalidateLayerHandler;
 
-        private bool _isVisible = true;
-        private ImmutableArray<BaseShape> _shapes;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsVisible
-        {
-            get => _isVisible;
-            set
-            {
-                RaiseAndSetIfChanged(ref _isVisible, value);
-                InvalidateLayer();
-            }
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<BaseShape> Shapes
-        {
-            get => _shapes;
-            set => RaiseAndSetIfChanged(ref _shapes, value);
-        }
+        [AutoNotify] private bool _isVisible = true;
+        [AutoNotify] private ImmutableArray<BaseShape> _shapes;
 
         public void InvalidateLayer() => InvalidateLayerHandler?.Invoke(this, new InvalidateLayerEventArgs());
 

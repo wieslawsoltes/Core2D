@@ -1,35 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
-    [DataContract(IsReference = true)]
-    public class ArrowStyle : ViewModelBase
+    public partial class ArrowStyle : ViewModelBase
     {
-        private ArrowType _arrowType;
-        private double _radiusX;
-        private double _radiusY;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ArrowType ArrowType
-        {
-            get => _arrowType;
-            set => RaiseAndSetIfChanged(ref _arrowType, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double RadiusX
-        {
-            get => _radiusX;
-            set => RaiseAndSetIfChanged(ref _radiusX, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double RadiusY
-        {
-            get => _radiusY;
-            set => RaiseAndSetIfChanged(ref _radiusY, value);
-        }
+        [AutoNotify] private ArrowType _arrowType;
+        [AutoNotify] private double _radiusX;
+        [AutoNotify] private double _radiusY;
 
         public override object Copy(IDictionary<object, object> shared)
         {

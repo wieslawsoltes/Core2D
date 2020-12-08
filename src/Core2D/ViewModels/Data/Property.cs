@@ -1,19 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Core2D.Data
 {
-    [DataContract(IsReference = true)]
-    public class Property : ViewModelBase
+    public partial class Property : ViewModelBase
     {
-        private string _value;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public string Value
-        {
-            get => _value;
-            set => RaiseAndSetIfChanged(ref _value, value);
-        }
+        [AutoNotify] private string _value;
 
         public override object Copy(IDictionary<object, object> shared)
         {

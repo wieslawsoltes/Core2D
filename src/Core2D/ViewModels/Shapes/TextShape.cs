@@ -1,40 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    [DataContract(IsReference = true)]
-    public class TextShape : BaseShape
+    public partial class TextShape : BaseShape
     {
-        private PointShape _topLeft;
-        private PointShape _bottomRight;
-        private string _text;
+        [AutoNotify] private PointShape _topLeft;
+        [AutoNotify] private PointShape _bottomRight;
+        [AutoNotify] private string _text;
 
-        [IgnoreDataMember]
-        public override Type TargetType => typeof(TextShape);
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape TopLeft
+        public TextShape() : base(typeof(TextShape))
         {
-            get => _topLeft;
-            set => RaiseAndSetIfChanged(ref _topLeft, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape BottomRight
-        {
-            get => _bottomRight;
-            set => RaiseAndSetIfChanged(ref _bottomRight, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public string Text
-        {
-            get => _text;
-            set => RaiseAndSetIfChanged(ref _text, value);
         }
 
         public override void DrawShape(object dc, IShapeRenderer renderer)

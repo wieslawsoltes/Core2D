@@ -1,39 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Runtime.Serialization;
 using System.Text;
 using Core2D.Shapes;
 
 namespace Core2D.Path
 {
-    [DataContract(IsReference = true)]
-    public class PathFigure : ViewModelBase
+    public partial class PathFigure : ViewModelBase
     {
-        private PointShape _startPoint;
-        private ImmutableArray<PathSegment> _segments;
-        private bool _isClosed;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape StartPoint
-        {
-            get => _startPoint;
-            set => RaiseAndSetIfChanged(ref _startPoint, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<PathSegment> Segments
-        {
-            get => _segments;
-            set => RaiseAndSetIfChanged(ref _segments, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsClosed
-        {
-            get => _isClosed;
-            set => RaiseAndSetIfChanged(ref _isClosed, value);
-        }
+        [AutoNotify] private PointShape _startPoint;
+        [AutoNotify] private ImmutableArray<PathSegment> _segments;
+        [AutoNotify] private bool _isClosed;
 
         public void GetPoints(IList<PointShape> points)
         {

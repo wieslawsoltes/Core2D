@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.History;
 using Core2D.Scripting;
@@ -11,141 +10,24 @@ using Core2D.Style;
 
 namespace Core2D.Containers
 {
-    [DataContract(IsReference = true)]
     public partial class ProjectContainer : BaseContainer
     {
-        private Options _options;
-        private IHistory _history;
-        private ImmutableArray<Library<ShapeStyle>> _styleLibraries;
-        private ImmutableArray<Library<GroupShape>> _groupLibraries;
-        private ImmutableArray<Database> _databases;
-        private ImmutableArray<PageContainer> _templates;
-        private ImmutableArray<Script> _scripts;
-        private ImmutableArray<DocumentContainer> _documents;
-        private Library<ShapeStyle> _currentStyleLibrary;
-        private Library<GroupShape> _currentGroupLibrary;
-        private Database _currentDatabase;
-        private PageContainer _currentTemplate;
-        private Script _currentScript;
-        private DocumentContainer _currentDocument;
-        private PageContainer _currentContainer;
-        private ViewModelBase _selected;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public Options Options
-        {
-            get => _options;
-            set => RaiseAndSetIfChanged(ref _options, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public IHistory History
-        {
-            get => _history;
-            set => RaiseAndSetIfChanged(ref _history, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<Library<ShapeStyle>> StyleLibraries
-        {
-            get => _styleLibraries;
-            set => RaiseAndSetIfChanged(ref _styleLibraries, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<Library<GroupShape>> GroupLibraries
-        {
-            get => _groupLibraries;
-            set => RaiseAndSetIfChanged(ref _groupLibraries, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<Database> Databases
-        {
-            get => _databases;
-            set => RaiseAndSetIfChanged(ref _databases, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<PageContainer> Templates
-        {
-            get => _templates;
-            set => RaiseAndSetIfChanged(ref _templates, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<Script> Scripts
-        {
-            get => _scripts;
-            set => RaiseAndSetIfChanged(ref _scripts, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<DocumentContainer> Documents
-        {
-            get => _documents;
-            set => RaiseAndSetIfChanged(ref _documents, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public Library<ShapeStyle> CurrentStyleLibrary
-        {
-            get => _currentStyleLibrary;
-            set => RaiseAndSetIfChanged(ref _currentStyleLibrary, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public Library<GroupShape> CurrentGroupLibrary
-        {
-            get => _currentGroupLibrary;
-            set => RaiseAndSetIfChanged(ref _currentGroupLibrary, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public Database CurrentDatabase
-        {
-            get => _currentDatabase;
-            set => RaiseAndSetIfChanged(ref _currentDatabase, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PageContainer CurrentTemplate
-        {
-            get => _currentTemplate;
-            set => RaiseAndSetIfChanged(ref _currentTemplate, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public Script CurrentScript
-        {
-            get => _currentScript;
-            set => RaiseAndSetIfChanged(ref _currentScript, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public DocumentContainer CurrentDocument
-        {
-            get => _currentDocument;
-            set => RaiseAndSetIfChanged(ref _currentDocument, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PageContainer CurrentContainer
-        {
-            get => _currentContainer;
-            set => RaiseAndSetIfChanged(ref _currentContainer, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ViewModelBase Selected
-        {
-            get => _selected;
-            set
-            {
-                SetSelected(value);
-                RaiseAndSetIfChanged(ref _selected, value);
-            }
-        }
+        [AutoNotify] private Options _options;
+        [AutoNotify] private IHistory _history;
+        [AutoNotify] private ImmutableArray<Library<ShapeStyle>> _styleLibraries;
+        [AutoNotify] private ImmutableArray<Library<GroupShape>> _groupLibraries;
+        [AutoNotify] private ImmutableArray<Database> _databases;
+        [AutoNotify] private ImmutableArray<PageContainer> _templates;
+        [AutoNotify] private ImmutableArray<Script> _scripts;
+        [AutoNotify] private ImmutableArray<DocumentContainer> _documents;
+        [AutoNotify] private Library<ShapeStyle> _currentStyleLibrary;
+        [AutoNotify] private Library<GroupShape> _currentGroupLibrary;
+        [AutoNotify] private Database _currentDatabase;
+        [AutoNotify] private PageContainer _currentTemplate;
+        [AutoNotify] private Script _currentScript;
+        [AutoNotify] private DocumentContainer _currentDocument;
+        [AutoNotify] private PageContainer _currentContainer;
+        [AutoNotify] private ViewModelBase _selected;
 
         public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
         {

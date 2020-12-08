@@ -1,35 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    [DataContract(IsReference = true)]
-    public class GroupShape : ConnectableShape
+    public partial class GroupShape : ConnectableShape
     {
-        private ImmutableArray<Property> _shapesProperties;
-        private ImmutableArray<BaseShape> _shapes;
+        // TODO: AutoNotify
+        [AutoNotify] private ImmutableArray<Property> _shapesProperties;
+        [AutoNotify] private ImmutableArray<BaseShape> _shapes;
 
-        [IgnoreDataMember]
-        public override Type TargetType => typeof(GroupShape);
-
-        [IgnoreDataMember]
-        public ImmutableArray<Property> ShapesProperties => GetShapeProperties();
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<BaseShape> Shapes
+        public GroupShape() : base(typeof(GroupShape))
         {
-            get => _shapes;
-            set
-            {
-                if (RaiseAndSetIfChanged(ref _shapes, value))
-                {
-                    _shapesProperties = default;
-                }
-            }
+            _shapesProperties = GetShapeProperties();
         }
 
         private ImmutableArray<Property> GetShapeProperties()

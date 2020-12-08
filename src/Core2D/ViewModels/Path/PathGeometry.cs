@@ -1,32 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Core2D.Path
 {
-    [DataContract(IsReference = true)]
-    public class PathGeometry : ViewModelBase
+    public partial class PathGeometry : ViewModelBase
     {
         public static FillRule[] FillRuleValues { get; } = (FillRule[])Enum.GetValues(typeof(FillRule));
 
-        private ImmutableArray<PathFigure> _figures;
-        private FillRule _fillRule;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<PathFigure> Figures
-        {
-            get => _figures;
-            set => RaiseAndSetIfChanged(ref _figures, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public FillRule FillRule
-        {
-            get => _fillRule;
-            set => RaiseAndSetIfChanged(ref _fillRule, value);
-        }
+        [AutoNotify] private ImmutableArray<PathFigure> _figures;
+        [AutoNotify] private FillRule _fillRule;
 
         public override object Copy(IDictionary<object, object> shared)
         {

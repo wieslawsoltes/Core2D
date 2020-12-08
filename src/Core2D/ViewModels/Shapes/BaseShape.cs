@@ -1,67 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 using Core2D.Style;
 
 namespace Core2D.Shapes
 {
-    [DataContract(IsReference = true)]
-    public abstract class BaseShape : ViewModelBase, IDataObject
+    public partial class BaseShape : ViewModelBase, IDataObject
     {
         private IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
-        private ShapeState _state;
-        private ShapeStyle _style;
-        private bool _isStroked;
-        private bool _isFilled;
-        private ImmutableArray<Property> _properties;
-        private Record _record;
 
-        [IgnoreDataMember]
-        public abstract Type TargetType { get; }
+        [AutoNotify] private ShapeState _state;
+        [AutoNotify] private ShapeStyle _style;
+        [AutoNotify] private bool _isStroked;
+        [AutoNotify] private bool _isFilled;
+        [AutoNotify] private ImmutableArray<Property> _properties;
+        [AutoNotify] private Record _record;
+        [AutoNotify(SetterModifier = AccessModifier.None)] private Type _targetType;
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ShapeState State
+        protected BaseShape(Type targetType)
         {
-            get => _state;
-            set => RaiseAndSetIfChanged(ref _state, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ShapeStyle Style
-        {
-            get => _style;
-            set => RaiseAndSetIfChanged(ref _style, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsStroked
-        {
-            get => _isStroked;
-            set => RaiseAndSetIfChanged(ref _isStroked, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsFilled
-        {
-            get => _isFilled;
-            set => RaiseAndSetIfChanged(ref _isFilled, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<Property> Properties
-        {
-            get => _properties;
-            set => RaiseAndSetIfChanged(ref _properties, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public Record Record
-        {
-            get => _record;
-            set => RaiseAndSetIfChanged(ref _record, value);
+            _targetType = targetType;
         }
 
         public override bool IsDirty()
@@ -97,16 +57,25 @@ namespace Core2D.Shapes
             Record?.Invalidate();
         }
 
-        public abstract void DrawShape(object dc, IShapeRenderer renderer);
+        public virtual void DrawShape(object dc, IShapeRenderer renderer)
+        {
+            throw new NotImplementedException();
+        }
 
-        public abstract void DrawPoints(object dc, IShapeRenderer renderer);
+        public virtual void DrawPoints(object dc, IShapeRenderer renderer)
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual bool Invalidate(IShapeRenderer renderer)
         {
             return false;
         }
 
-        public abstract void Bind(DataFlow dataFlow, object db, object r);
+        public virtual void Bind(DataFlow dataFlow, object db, object r)
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual void SetProperty(string name, object value)
         {
@@ -122,7 +91,10 @@ namespace Core2D.Shapes
             return null;
         }
 
-        public abstract void Move(ISelection selection, decimal dx, decimal dy);
+        public virtual void Move(ISelection selection, decimal dx, decimal dy)
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual void Select(ISelection selection)
         {
@@ -140,6 +112,9 @@ namespace Core2D.Shapes
             }
         }
 
-        public abstract void GetPoints(IList<PointShape> points);
+        public virtual void GetPoints(IList<PointShape> points)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

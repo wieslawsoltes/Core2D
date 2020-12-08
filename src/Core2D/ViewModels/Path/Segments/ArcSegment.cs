@@ -1,56 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Path.Segments
 {
-    [DataContract(IsReference = true)]
-    public class ArcSegment : PathSegment
+    public partial class ArcSegment : PathSegment
     {
         public static SweepDirection[] SweepDirectionValues { get; } = (SweepDirection[])Enum.GetValues(typeof(SweepDirection));
 
-        private PointShape _point;
-        private PathSize _size;
-        private double _rotationAngle;
-        private bool _isLargeArc;
-        private SweepDirection _sweepDirection;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point
-        {
-            get => _point;
-            set => RaiseAndSetIfChanged(ref _point, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PathSize Size
-        {
-            get => _size;
-            set => RaiseAndSetIfChanged(ref _size, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double RotationAngle
-        {
-            get => _rotationAngle;
-            set => RaiseAndSetIfChanged(ref _rotationAngle, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsLargeArc
-        {
-            get => _isLargeArc;
-            set => RaiseAndSetIfChanged(ref _isLargeArc, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public SweepDirection SweepDirection
-        {
-            get => _sweepDirection;
-            set => RaiseAndSetIfChanged(ref _sweepDirection, value);
-        }
+        [AutoNotify] private PointShape _point;
+        [AutoNotify] private PathSize _size;
+        [AutoNotify] private double _rotationAngle;
+        [AutoNotify] private bool _isLargeArc;
+        [AutoNotify] private SweepDirection _sweepDirection;
 
         public override void GetPoints(IList<PointShape> points)
         {

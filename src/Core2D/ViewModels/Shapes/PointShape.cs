@@ -2,33 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    [DataContract(IsReference = true)]
-    public class PointShape : BaseShape
+    public partial class PointShape : BaseShape
     {
-        private double _x;
-        private double _y;
+        [AutoNotify] private double _x;
+        [AutoNotify] private double _y;
 
-        [IgnoreDataMember]
-        public override Type TargetType => typeof(PointShape);
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double X
+        public PointShape() : base(typeof(PointShape))
         {
-            get => _x;
-            set => RaiseAndSetIfChanged(ref _x, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double Y
-        {
-            get => _y;
-            set => RaiseAndSetIfChanged(ref _y, value);
         }
 
         public override bool IsDirty()

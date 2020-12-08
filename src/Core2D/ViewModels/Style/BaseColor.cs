@@ -1,9 +1,9 @@
-﻿using System.Runtime.Serialization;
-
-namespace Core2D.Style
+﻿namespace Core2D.Style
 {
-    [DataContract(IsReference = true)]
-    public abstract class BaseColor : ViewModelBase
+    public class BaseColor : ViewModelBase
     {
+        protected BaseColor()
+        {
+        }
     }
 }

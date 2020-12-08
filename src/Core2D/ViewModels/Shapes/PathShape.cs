@@ -1,26 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Path;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    [DataContract(IsReference = true)]
-    public class PathShape : BaseShape
+    public partial class PathShape : BaseShape
     {
         private List<PointShape> _points;
-        private PathGeometry _geometry;
 
-        [IgnoreDataMember]
-        public override Type TargetType => typeof(PathShape);
+        [AutoNotify] private PathGeometry _geometry;
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PathGeometry Geometry
+        public PathShape() : base(typeof(PathShape))
         {
-            get => _geometry;
-            set => RaiseAndSetIfChanged(ref _geometry, value);
         }
 
         private void UpdatePoints()

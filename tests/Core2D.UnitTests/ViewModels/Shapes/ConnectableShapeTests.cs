@@ -125,7 +125,9 @@ namespace Core2D.Shapes.UnitTests
 
         public class Class1 : BaseShape
         {
-            public override Type TargetType => typeof(Class1);
+            public Class1() : base(typeof(Class1))
+            {
+            }
 
             public override object Copy(IDictionary<object, object> shared)
             {
@@ -160,7 +162,9 @@ namespace Core2D.Shapes.UnitTests
 
         public class Class2 : ConnectableShape
         {
-            public override Type TargetType => typeof(Class2);
+            public Class2() : base(typeof(Class2))
+            {
+            }
         }
     }
 }

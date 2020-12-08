@@ -1,40 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    [DataContract(IsReference = true)]
-    public class QuadraticBezierShape : BaseShape
+    public partial class QuadraticBezierShape : BaseShape
     {
-        private PointShape _point1;
-        private PointShape _point2;
-        private PointShape _point3;
+        [AutoNotify] private PointShape _point1;
+        [AutoNotify] private PointShape _point2;
+        [AutoNotify] private PointShape _point3;
 
-        [IgnoreDataMember]
-        public override Type TargetType => typeof(QuadraticBezierShape);
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point1
+        public QuadraticBezierShape() : base(typeof(QuadraticBezierShape))
         {
-            get => _point1;
-            set => RaiseAndSetIfChanged(ref _point1, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point2
-        {
-            get => _point2;
-            set => RaiseAndSetIfChanged(ref _point2, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point3
-        {
-            get => _point3;
-            set => RaiseAndSetIfChanged(ref _point3, value);
         }
 
         public override void DrawShape(object dc, IShapeRenderer renderer)

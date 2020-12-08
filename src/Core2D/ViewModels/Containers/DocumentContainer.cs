@@ -1,29 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Runtime.Serialization;
 
 namespace Core2D.Containers
 {
-    [DataContract(IsReference = true)]
-    public class DocumentContainer : BaseContainer
+    public partial class DocumentContainer : BaseContainer
     {
-        private bool _isExpanded = true;
-        private ImmutableArray<PageContainer> _pages;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsExpanded
-        {
-            get => _isExpanded;
-            set => RaiseAndSetIfChanged(ref _isExpanded, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<PageContainer> Pages
-        {
-            get => _pages;
-            set => RaiseAndSetIfChanged(ref _pages, value);
-        }
+        [AutoNotify] private bool _isExpanded = true;
+        [AutoNotify] private ImmutableArray<PageContainer> _pages;
 
         public override object Copy(IDictionary<object, object> shared)
         {

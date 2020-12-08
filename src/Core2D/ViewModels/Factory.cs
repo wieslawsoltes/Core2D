@@ -800,10 +800,7 @@ namespace Core2D
         {
             return new ArgbColor()
             {
-                A = a,
-                R = r,
-                G = g,
-                B = b
+                Value = ArgbColor.ToUint32(a, r, g, b)
             };
         }
 

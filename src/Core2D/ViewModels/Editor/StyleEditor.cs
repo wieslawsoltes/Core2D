@@ -280,10 +280,10 @@ namespace Core2D.Editor
             var style = shape.Style;
             if (style?.Stroke?.Color is ArgbColor argbColor)
             {
-                var previous = argbColor.A;
-                var next = value;
-                history?.Snapshot(previous, next, (p) => argbColor.A = p);
-                argbColor.A = next;
+                var previous = argbColor.Value;
+                var next = ArgbColor.ToUint32(value, argbColor.R, argbColor.G, argbColor.B);
+                history?.Snapshot(previous, next, (p) => argbColor.Value = p);
+                argbColor.Value = next;
             }
         }
 
@@ -304,10 +304,10 @@ namespace Core2D.Editor
             var style = shape.Style;
             if (style?.Fill?.Color is ArgbColor argbColor)
             {
-                var previous = argbColor.A;
-                var next = value;
-                history?.Snapshot(previous, next, (p) => argbColor.A = p);
-                argbColor.A = next;
+                var previous = argbColor.Value;
+                var next = ArgbColor.ToUint32(value, argbColor.R, argbColor.G, argbColor.B);
+                history?.Snapshot(previous, next, (p) => argbColor.Value = p);
+                argbColor.Value = next;
             }
         }
 

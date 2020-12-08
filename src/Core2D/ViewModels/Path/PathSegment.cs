@@ -1,26 +1,31 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System;
+using System.Collections.Generic;
 using Core2D.Shapes;
 
 namespace Core2D.Path
 {
-    [DataContract(IsReference = true)]
-    public abstract class PathSegment : ViewModelBase
+    public partial class PathSegment : ViewModelBase
     {
-        private bool _isStroked;
+        [AutoNotify] private bool _isStroked;
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsStroked
+        protected PathSegment()
         {
-            get => _isStroked;
-            set => RaiseAndSetIfChanged(ref _isStroked, value);
         }
 
-        public abstract void GetPoints(IList<PointShape> points);
+        public virtual void GetPoints(IList<PointShape> points)
+        {
+            throw new NotImplementedException();
+        }
 
-        public abstract string ToXamlString();
+        public virtual string ToXamlString()
+        {
+            throw new NotImplementedException();
+        }
 
-        public abstract string ToSvgString();
+        public virtual string ToSvgString()
+        {
+            throw new NotImplementedException();
+        }
 
         public override bool IsDirty()
         {

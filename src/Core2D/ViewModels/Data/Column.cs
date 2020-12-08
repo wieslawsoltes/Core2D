@@ -1,19 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Core2D.Data
 {
-    [DataContract(IsReference = true)]
-    public class Column : ViewModelBase
+    public partial class Column : ViewModelBase
     {
-        private bool _isVisible;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public bool IsVisible
-        {
-            get => _isVisible;
-            set => RaiseAndSetIfChanged(ref _isVisible, value);
-        }
+        [AutoNotify] private bool _isVisible;
 
         public override object Copy(IDictionary<object, object> shared)
         {

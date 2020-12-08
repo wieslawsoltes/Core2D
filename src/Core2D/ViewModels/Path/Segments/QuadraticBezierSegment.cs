@@ -1,29 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Path.Segments
 {
-    [DataContract(IsReference = true)]
-    public class QuadraticBezierSegment : PathSegment
+    public partial class QuadraticBezierSegment : PathSegment
     {
-        private PointShape _point1;
-        private PointShape _point2;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point1
-        {
-            get => _point1;
-            set => RaiseAndSetIfChanged(ref _point1, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point2
-        {
-            get => _point2;
-            set => RaiseAndSetIfChanged(ref _point2, value);
-        }
+        [AutoNotify] private PointShape _point1;
+        [AutoNotify] private PointShape _point2;
 
         public override void GetPoints(IList<PointShape> points)
         {

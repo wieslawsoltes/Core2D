@@ -1,29 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.Serialization;
 
 namespace Core2D.Path
 {
-    [DataContract(IsReference = true)]
-    public class PathSize : ViewModelBase
+    public partial class PathSize : ViewModelBase
     {
-        private double _width;
-        private double _height;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double Width
-        {
-            get => _width;
-            set => RaiseAndSetIfChanged(ref _width, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double Height
-        {
-            get => _height;
-            set => RaiseAndSetIfChanged(ref _height, value);
-        }
+        [AutoNotify] private double _width;
+        [AutoNotify] private double _height;
 
         public override object Copy(IDictionary<object, object> shared)
         {

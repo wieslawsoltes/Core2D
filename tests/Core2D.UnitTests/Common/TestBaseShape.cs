@@ -9,8 +9,10 @@ using Core2D.Style;
 
 namespace Core2D.Common.UnitTests
 {
-    public abstract class TestBaseShape : BaseShape
+    public partial class TestBaseShape : BaseShape
     {
-        public override Type TargetType => typeof(TestBaseShape);
+        protected TestBaseShape() : base(typeof(TestBaseShape))
+        {
+        }
     }
 }

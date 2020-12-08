@@ -6,6 +6,6 @@ namespace Core2D.Common.UnitTests
 {
     public class TestPointShape : PointShape
     {
-        public override Type TargetType => typeof(TestPointShape);
+        public new Type TargetType => typeof(TestPointShape);
     }
 }

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Path
 {
-    [DataContract(IsReference = true)]
-    public class GeometryContext
+    public partial class GeometryContext
     {
         private readonly IFactory _factory;
         private readonly PathGeometry _geometry;

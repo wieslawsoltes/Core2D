@@ -1,29 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 
 namespace Core2D
 {
-    [DataContract(IsReference = true)]
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public partial class ViewModelBase : INotifyPropertyChanged
     {
         private bool _isDirty;
-        private ViewModelBase _owner = null;
-        private string _name = "";
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public virtual ViewModelBase Owner
-        {
-            get => _owner;
-            set => RaiseAndSetIfChanged(ref _owner, value);
-        }
+        [AutoNotify] private ViewModelBase _owner = null;
+        [AutoNotify] private string _name = "";
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public virtual string Name
+        protected ViewModelBase()
         {
-            get => _name;
-            set => RaiseAndSetIfChanged(ref _name, value);
         }
 
         public virtual bool IsDirty()
@@ -43,7 +33,10 @@ namespace Core2D
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public abstract object Copy(IDictionary<object, object> shared);
+        public virtual object Copy(IDictionary<object, object> shared)
+        {
+            throw new NotImplementedException();
+        }
 
         public void RaisePropertyChanged([CallerMemberName] string propertyName = default)
         {

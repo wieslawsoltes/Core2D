@@ -1,48 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    [DataContract(IsReference = true)]
-    public class ArcShape : BaseShape
+    public partial class ArcShape : BaseShape
     {
-        private PointShape _point1;
-        private PointShape _point2;
-        private PointShape _point3;
-        private PointShape _point4;
+        [AutoNotify] private PointShape _point1;
+        [AutoNotify] private PointShape _point2;
+        [AutoNotify] private PointShape _point3;
+        [AutoNotify] private PointShape _point4;
 
-        [IgnoreDataMember]
-        public override Type TargetType => typeof(ArcShape);
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point1
+        public ArcShape() : base(typeof(ArcShape))
         {
-            get => _point1;
-            set => RaiseAndSetIfChanged(ref _point1, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point2
-        {
-            get => _point2;
-            set => RaiseAndSetIfChanged(ref _point2, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point3
-        {
-            get => _point3;
-            set => RaiseAndSetIfChanged(ref _point3, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point4
-        {
-            get => _point4;
-            set => RaiseAndSetIfChanged(ref _point4, value);
         }
 
         public override void DrawShape(object dc, IShapeRenderer renderer)

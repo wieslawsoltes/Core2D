@@ -1,19 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
-    [DataContract(IsReference = true)]
-    public class FillStyle : ViewModelBase
+    public partial class FillStyle : ViewModelBase
     {
-        private BaseColor _color;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public BaseColor Color
-        {
-            get => _color;
-            set => RaiseAndSetIfChanged(ref _color, value);
-        }
+        [AutoNotify] private BaseColor _color;
 
         public override object Copy(IDictionary<object, object> shared)
         {

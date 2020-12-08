@@ -1,40 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    [DataContract(IsReference = true)]
-    public class ImageShape : BaseShape
+    public partial class ImageShape : BaseShape
     {
-        private PointShape _topLeft;
-        private PointShape _bottomRight;
-        private string _key;
+        [AutoNotify] private PointShape _topLeft;
+        [AutoNotify] private PointShape _bottomRight;
+        [AutoNotify] private string _key;
 
-        [IgnoreDataMember]
-        public override Type TargetType => typeof(ImageShape);
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape TopLeft
+        public ImageShape() : base(typeof(ImageShape))
         {
-            get => _topLeft;
-            set => RaiseAndSetIfChanged(ref _topLeft, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape BottomRight
-        {
-            get => _bottomRight;
-            set => RaiseAndSetIfChanged(ref _bottomRight, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public string Key
-        {
-            get => _key;
-            set => RaiseAndSetIfChanged(ref _key, value);
         }
 
         public override void DrawShape(object dc, IShapeRenderer renderer)

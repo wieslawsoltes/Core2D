@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.TextStyle}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:TextStyle" x:CompileBindings="True">
+             x:DataType="vms:TextStyle" x:CompileBindings="False">
     <StackPanel>
         <Label Content="FontName" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding FontName, Mode=TwoWay}" />

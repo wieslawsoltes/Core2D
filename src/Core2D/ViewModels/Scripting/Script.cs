@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Core2D.Scripting
 {
-    [DataContract(IsReference = true)]
-    public class Script : ViewModelBase
+    public partial class Script : ViewModelBase
     {
-        private string _code;
-
-        [IgnoreDataMember]
-        public string Code
-        {
-            get => _code;
-            set => RaiseAndSetIfChanged(ref _code, value);
-        }
+        [AutoNotify] private string _code;
 
         public override object Copy(IDictionary<object, object> shared)
         {

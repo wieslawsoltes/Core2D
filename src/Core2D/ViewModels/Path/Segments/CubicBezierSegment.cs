@@ -1,37 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Core2D.Shapes;
 
 namespace Core2D.Path.Segments
 {
-    [DataContract(IsReference = true)]
-    public class CubicBezierSegment : PathSegment
+    public partial class CubicBezierSegment : PathSegment
     {
-        private PointShape _point1;
-        private PointShape _point2;
-        private PointShape _point3;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point1
-        {
-            get => _point1;
-            set => RaiseAndSetIfChanged(ref _point1, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point2
-        {
-            get => _point2;
-            set => RaiseAndSetIfChanged(ref _point2, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public PointShape Point3
-        {
-            get => _point3;
-            set => RaiseAndSetIfChanged(ref _point3, value);
-        }
+        [AutoNotify] private PointShape _point1;
+        [AutoNotify] private PointShape _point2;
+        [AutoNotify] private PointShape _point3;
 
         public override void GetPoints(IList<PointShape> points)
         {

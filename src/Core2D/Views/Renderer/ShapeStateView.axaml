@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.State}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmr:ShapeState" x:CompileBindings="True">
+             x:DataType="vmr:ShapeState" x:CompileBindings="False">
     <StackPanel>
         <CheckBox Content="Default" IsChecked="{Binding Default, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         <CheckBox Content="Visible" IsChecked="{Binding Visible, Mode=TwoWay}" HorizontalAlignment="Stretch" />

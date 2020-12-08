@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Runtime.Serialization;
 using Core2D.Data;
 using Core2D.Renderer;
 
 namespace Core2D.Shapes
 {
-    [DataContract(IsReference = true)]
-    public abstract class ConnectableShape : BaseShape
+    public partial class ConnectableShape : BaseShape
     {
-        private ImmutableArray<PointShape> _connectors;
+        [AutoNotify] private ImmutableArray<PointShape> _connectors;
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ImmutableArray<PointShape> Connectors
+        protected ConnectableShape(Type targetType) : base(targetType)
         {
-            get => _connectors;
-            set => RaiseAndSetIfChanged(ref _connectors, value);
         }
 
         public override void DrawShape(object dc, IShapeRenderer renderer)

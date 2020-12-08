@@ -3,92 +3,26 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
-    [DataContract(IsReference = true)]
-    public class ArgbColor : BaseColor
+    public partial class ArgbColor : BaseColor
     {
-        private byte _a;
-        private byte _r;
-        private byte _g;
-        private byte _b;
+        [AutoNotify] private uint _value;
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public byte A
-        {
-            get => _a;
-            set
-            {
-                RaiseAndSetIfChanged(ref _a, value);
-                RaisePropertyChanged(nameof(Value));
-            }
-        }
+        public byte A => (byte)((_value >> 24) & 0xff);
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public byte R
-        {
-            get => _r;
-            set
-            {
-                RaiseAndSetIfChanged(ref _r, value);
-                RaisePropertyChanged(nameof(Value));
-            }
-        }
+        public byte R => (byte)((_value >> 16) & 0xff);
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public byte G
-        {
-            get => _g;
-            set
-            {
-                RaiseAndSetIfChanged(ref _g, value);
-                RaisePropertyChanged(nameof(Value));
-            }
-        }
+        public byte G => (byte)((_value >> 8) & 0xff);
 
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public byte B
-        {
-            get => _b;
-            set
-            {
-                RaiseAndSetIfChanged(ref _b, value);
-                RaisePropertyChanged(nameof(Value));
-            }
-        }
-
-        [IgnoreDataMember]
-        public string Value
-        {
-            get { return ToString(this); }
-            set
-            {
-                if (value != null)
-                {
-                    try
-                    {
-                        FromString(value, out _a, out _r, out _g, out _b);
-                        RaisePropertyChanged(nameof(A));
-                        RaisePropertyChanged(nameof(R));
-                        RaisePropertyChanged(nameof(G));
-                        RaisePropertyChanged(nameof(B));
-                        MarkAsDirty();
-                    }
-                    catch (Exception) { }
-                }
-            }
-        }
+        public byte B => (byte)(_value & 0xff);
 
         public override object Copy(IDictionary<object, object> shared)
         {
             return new ArgbColor()
             {
-                A = this.A,
-                R = this.R,
-                G = this.G,
-                B = this.B
+                Value = this.Value
             };
         }
 
@@ -113,21 +47,18 @@ namespace Core2D.Style
         {
             return new ArgbColor
             {
-                A = (byte)((value >> 24) & 0xff),
-                R = (byte)((value >> 16) & 0xff),
-                G = (byte)((value >> 8) & 0xff),
-                B = (byte)(value & 0xff),
+                Value = value
             };
         }
 
-        public static uint ToUint32(ArgbColor value)
+        public static uint ToUint32(byte a, byte r, byte g, byte b)
         {
-            return ((uint)value.A << 24) | ((uint)value.R << 16) | ((uint)value.G << 8) | (uint)value.B;
+            return ((uint)a << 24) | ((uint)r << 16) | ((uint)g << 8) | (uint)b;
         }
 
         public static string ToString(ArgbColor value)
         {
-            return $"#{ToUint32(value):X8}";
+            return $"#{value.Value:X8}";
         }
 
         public static void FromString(string value, out byte a, out byte r, out byte g, out byte b)

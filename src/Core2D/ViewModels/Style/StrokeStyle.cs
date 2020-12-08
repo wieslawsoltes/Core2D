@@ -1,72 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
-    [DataContract(IsReference = true)]
-    public class StrokeStyle : ViewModelBase
+    public partial class StrokeStyle : ViewModelBase
     {
         public static LineCap[] LineCapValues { get; } = (LineCap[])Enum.GetValues(typeof(LineCap));
 
         public static ArrowType[] ArrowTypeValues { get; } = (ArrowType[])Enum.GetValues(typeof(ArrowType));
 
-        private BaseColor _color;
-        private double _thickness;
-        private LineCap _lineCap;
-        private string _dashes;
-        private double _dashOffset;
-        private ArrowStyle _startArrowStyle;
-        private ArrowStyle _endArrowStyle;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public BaseColor Color
-        {
-            get => _color;
-            set => RaiseAndSetIfChanged(ref _color, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double Thickness
-        {
-            get => _thickness;
-            set => RaiseAndSetIfChanged(ref _thickness, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public LineCap LineCap
-        {
-            get => _lineCap;
-            set => RaiseAndSetIfChanged(ref _lineCap, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public string Dashes
-        {
-            get => _dashes;
-            set => RaiseAndSetIfChanged(ref _dashes, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public double DashOffset
-        {
-            get => _dashOffset;
-            set => RaiseAndSetIfChanged(ref _dashOffset, value);
-        }
-        
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ArrowStyle StartArrowStyle
-        {
-            get => _startArrowStyle;
-            set => RaiseAndSetIfChanged(ref _startArrowStyle, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public ArrowStyle EndArrowStyle
-        {
-            get => _endArrowStyle;
-            set => RaiseAndSetIfChanged(ref _endArrowStyle, value);
-        }
+        [AutoNotify] private BaseColor _color;
+        [AutoNotify] private double _thickness;
+        [AutoNotify] private LineCap _lineCap;
+        [AutoNotify] private string _dashes;
+        [AutoNotify] private double _dashOffset;
+        [AutoNotify] private ArrowStyle _startArrowStyle;
+        [AutoNotify] private ArrowStyle _endArrowStyle;
 
         public override object Copy(IDictionary<object, object> shared)
         {

@@ -1,35 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace Core2D.Style
 {
-    [DataContract(IsReference = true)]
-    public class ShapeStyle : ViewModelBase
+    public partial class ShapeStyle : ViewModelBase
     {
-        private StrokeStyle _stroke;
-        private FillStyle _fill;
-        private TextStyle _textStyle;
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public StrokeStyle Stroke
-        {
-            get => _stroke;
-            set => RaiseAndSetIfChanged(ref _stroke, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public FillStyle Fill
-        {
-            get => _fill;
-            set => RaiseAndSetIfChanged(ref _fill, value);
-        }
-
-        [DataMember(IsRequired = false, EmitDefaultValue = true)]
-        public TextStyle TextStyle
-        {
-            get => _textStyle;
-            set => RaiseAndSetIfChanged(ref _textStyle, value);
-        }
+        [AutoNotify] private StrokeStyle _stroke;
+        [AutoNotify] private FillStyle _fill;
+        [AutoNotify] private TextStyle _textStyle;
 
         public override object Copy(IDictionary<object, object> shared)
         {
