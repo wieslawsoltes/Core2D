@@ -26,7 +26,7 @@
                       Command="{Binding ToggleRegularFontStyle}"
                       IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static vms:FontStyleFlags.Regular}}"
                       HorizontalAlignment="Stretch"
-                      IsEnabled="False"
+                      IsVisible="False"
                       x:CompileBindings="False" />
             <CheckBox Content="Bold" 
                       Command="{Binding ToggleBoldFontStyle}"

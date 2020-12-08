@@ -17,7 +17,7 @@
                   Command="{Binding ToggleDefaultShapeState}"
                   IsChecked="{Binding State, Mode=OneWay, Converter={StaticResource ShapeStateFlagsConverter}, ConverterParameter={x:Static vmr:ShapeStateFlags.Default}}" 
                   HorizontalAlignment="Stretch"
-                  IsEnabled="False"
+                  IsVisible="False"
                   x:CompileBindings="False" />
         <CheckBox Content="Visible" 
                   Command="{Binding ToggleVisibleShapeState}"
