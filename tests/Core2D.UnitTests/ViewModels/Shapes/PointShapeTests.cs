@@ -12,7 +12,7 @@ namespace Core2D.Shapes.UnitTests
         public void Inherits_From_BaseShape()
         {
             var target = _factory.CreatePointShape();
-            Assert.True(target is BaseShape);
+            Assert.True(target is BaseShapeViewModel);
         }
     }
 }

@@ -13,7 +13,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:ProjectContainer" x:CompileBindings="True">
+             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:StylesListBoxDropHandler x:Key="StylesListBoxDropHandler" />
     </UserControl.Resources>
@@ -47,7 +47,7 @@
                 <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #StylesListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="vms:ShapeStyle">
+                <DataTemplate DataType="vms:ShapeStyleViewModel">
                     <TextBlock x:Name="StyleTextBlock" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #StyleTextBlock}" x:CompileBindings="False">

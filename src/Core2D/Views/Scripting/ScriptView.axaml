@@ -9,9 +9,9 @@
              xmlns:vms="using:Core2D.Scripting"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Script}"
+             d:DataContext="{x:Static vmd:DesignerContext.ScriptViewModel}"
              d:DesignWidth="1000" d:DesignHeight="600"
-             x:DataType="vms:Script" x:CompileBindings="True">
+             x:DataType="vms:ScriptViewModel" x:CompileBindings="True">
     <UserControl.KeyBindings>
         <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding #ScriptTextEditor.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False" />
     </UserControl.KeyBindings>

@@ -17,7 +17,7 @@ namespace Core2D.UnitTests
         {
             var segment = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 180, true, SweepDirection.Clockwise);
 
-            var target = new List<PointShape>();
+            var target = new List<PointShapeViewModel>();
             segment.GetPoints(target);
             var count = target.Count();
 

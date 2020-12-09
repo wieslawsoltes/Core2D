@@ -7,12 +7,12 @@ namespace Core2D.Renderer
 {
     internal class PathDrawNode : DrawNode, IPathDrawNode
     {
-        public PathShape Path { get; set; }
+        public PathShapeViewModel Path { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public PathDrawNode(PathShape path, ShapeStyle style)
+        public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel styleViewModel)
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Path = path;
             UpdateGeometry();
         }
@@ -21,7 +21,7 @@ namespace Core2D.Renderer
         {
             ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
-            Geometry = PathGeometryConverter.ToGeometry(Path.Geometry);
+            Geometry = PathGeometryConverter.ToGeometry(Path.GeometryViewModel);
             Center = Geometry.Bounds.Center;
         }
 

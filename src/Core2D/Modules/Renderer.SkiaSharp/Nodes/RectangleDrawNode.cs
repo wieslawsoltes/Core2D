@@ -7,13 +7,13 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
     {
-        public RectangleShape Rectangle { get; set; }
+        public RectangleShapeViewModel Rectangle { get; set; }
         public SKRect Rect { get; set; }
 
-        public RectangleDrawNode(RectangleShape rectangle, ShapeStyle style)
+        public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel styleViewModel)
             : base()
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Rectangle = rectangle;
             UpdateGeometry();
         }

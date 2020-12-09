@@ -7,7 +7,7 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class TextDrawNode : DrawNode, ITextDrawNode
     {
-        public TextShape Text { get; set; }
+        public TextShapeViewModel Text { get; set; }
         public SKRect Rect { get; set; }
         public SKPoint Origin { get; set; }
         public SKTypeface Typeface { get; set; }
@@ -18,9 +18,9 @@ namespace Core2D.Renderer.SkiaSharp
         {
         }
 
-        public TextDrawNode(TextShape text, ShapeStyle style)
+        public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel styleViewModel)
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Text = text;
             UpdateGeometry();
         }
@@ -38,19 +38,19 @@ namespace Core2D.Renderer.SkiaSharp
 
         protected void UpdateTextGeometry()
         {
-            BoundText = Text.GetProperty(nameof(TextShape.Text)) is string boundText ? boundText : Text.Text;
+            BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
 
             if (BoundText == null)
             {
                 return;
             }
 
-            if (Style.TextStyle.FontSize < 0.0)
+            if (StyleViewModel.TextStyleViewModel.FontSize < 0.0)
             {
                 return;
             }
 
-            FormattedText = SkiaSharpDrawUtil.GetSKPaint(BoundText, Style, Text.TopLeft, Text.BottomRight, out var origin);
+            FormattedText = SkiaSharpDrawUtil.GetSKPaint(BoundText, StyleViewModel, Text.TopLeft, Text.BottomRight, out var origin);
 
             Origin = origin;
         }

@@ -20,9 +20,9 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = ShapeStateFlags.Default,
-                Connectors = ImmutableArray.Create<PointShape>()
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
-            Assert.True(target is BaseShape);
+            Assert.True(target is BaseShapeViewModel);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = ShapeStateFlags.Default,
-                Connectors = ImmutableArray.Create<PointShape>()
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
             Assert.False(target.Connectors.IsDefault);
         }
@@ -44,14 +44,14 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = ShapeStateFlags.Default,
-                Connectors = ImmutableArray.Create<PointShape>()
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
 
             var point = _factory.CreatePointShape();
             point.Properties = point.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
-            var points = new List<PointShape>();
+            var points = new List<PointShapeViewModel>();
             target.GetPoints(points);
             var count = points.Count();
             Assert.Equal(1, count);
@@ -64,7 +64,7 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = ShapeStateFlags.Default,
-                Connectors = ImmutableArray.Create<PointShape>()
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
             var point = _factory.CreatePointShape();
 
@@ -86,7 +86,7 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = ShapeStateFlags.Default,
-                Connectors = ImmutableArray.Create<PointShape>()
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
             var point = _factory.CreatePointShape();
 
@@ -108,7 +108,7 @@ namespace Core2D.Shapes.UnitTests
             var target = new Class2()
             {
                 State = ShapeStateFlags.Default,
-                Connectors = ImmutableArray.Create<PointShape>()
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
             var point = _factory.CreatePointShape();
 
@@ -123,7 +123,7 @@ namespace Core2D.Shapes.UnitTests
             Assert.Equal(1, length);
         }
 
-        public class Class1 : BaseShape
+        public class Class1 : BaseShapeViewModel
         {
             public Class1() : base(typeof(Class1))
             {
@@ -149,7 +149,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void GetPoints(IList<PointShape> points)
+            public override void GetPoints(IList<PointShapeViewModel> points)
             {
                 throw new NotImplementedException();
             }
@@ -160,7 +160,7 @@ namespace Core2D.Shapes.UnitTests
             }
         }
 
-        public class Class2 : ConnectableShape
+        public class Class2 : ConnectableShapeViewModel
         {
             public Class2() : base(typeof(Class2))
             {

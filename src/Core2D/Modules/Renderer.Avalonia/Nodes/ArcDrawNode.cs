@@ -7,12 +7,12 @@ namespace Core2D.Renderer
 {
     internal class ArcDrawNode : DrawNode, IArcDrawNode
     {
-        public ArcShape Arc { get; set; }
+        public ArcShapeViewModelViewModel Arc { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public ArcDrawNode(ArcShape arc, ShapeStyle style)
+        public ArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel styleViewModel)
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Arc = arc;
             UpdateGeometry();
         }

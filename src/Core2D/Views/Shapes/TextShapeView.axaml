@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Text}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:TextShape" x:CompileBindings="True">
+             x:DataType="vms:TextShapeViewModel" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Text" IsExpanded="True">
             <StackPanel>

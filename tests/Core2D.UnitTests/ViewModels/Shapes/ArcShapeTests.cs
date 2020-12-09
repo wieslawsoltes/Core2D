@@ -13,7 +13,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var style = _factory.CreateShapeStyle();
             var target = _factory.CreateArcShape(0, 0, 0, 0, 0, 0, 0, 0, style);
-            Assert.True(target is BaseShape);
+            Assert.True(target is BaseShapeViewModel);
         }
     }
 }

@@ -6,12 +6,12 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class QuadraticBezierDrawNode : DrawNode, IQuadraticBezierDrawNode
     {
-        public QuadraticBezierShape QuadraticBezier { get; set; }
+        public QuadraticBezierShapeViewModel QuadraticBezier { get; set; }
         public SKPath Geometry { get; set; }
 
-        public QuadraticBezierDrawNode(QuadraticBezierShape quadraticBezier, ShapeStyle style)
+        public QuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel styleViewModel)
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             QuadraticBezier = quadraticBezier;
             UpdateGeometry();
         }

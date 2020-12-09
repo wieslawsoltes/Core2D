@@ -19,20 +19,20 @@ namespace Core2D.FileWriter.SkiaSharpPdf
             _targetDpi = targetDpi;
         }
 
-        private void Add(SKDocument pdf, PageContainer container)
+        private void Add(SKDocument pdf, PageContainerViewModel containerViewModel)
         {
-            using var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height);
-            _presenter.Render(canvas, _renderer, container, 0, 0);
+            using var canvas = pdf.BeginPage((float)containerViewModel.Template.Width, (float)containerViewModel.Template.Height);
+            _presenter.Render(canvas, _renderer, containerViewModel, 0, 0);
         }
 
-        public void Save(Stream stream, PageContainer container)
+        public void Save(Stream stream, PageContainerViewModel containerViewModel)
         {
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
-            Add(pdf, container);
+            Add(pdf, containerViewModel);
             pdf.Close();
         }
 
-        public void Save(Stream stream, DocumentContainer document)
+        public void Save(Stream stream, DocumentContainerViewModel document)
         {
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
             foreach (var container in document.Pages)
@@ -43,7 +43,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
             _renderer.ClearCache();
         }
 
-        public void Save(Stream stream, ProjectContainer project)
+        public void Save(Stream stream, ProjectContainerViewModel project)
         {
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
             foreach (var document in project.Documents)

@@ -9,9 +9,9 @@
              xmlns:vms="using:Core2D.Shapes"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.ShapeRendererState}"
+             d:DataContext="{x:Static vmd:DesignerContext.ShapeRendererStateViewModel}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmr:ShapeRendererState" x:CompileBindings="True">
+             x:DataType="vmr:ShapeRendererStateViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
     </UserControl.Resources>
@@ -25,10 +25,10 @@
             </StackPanel>
         </Expander>
         <Expander Header="Normal Style" IsExpanded="False">
-            <ContentControl Content="{Binding PointStyle}" />
+            <ContentControl Content="{Binding PointStyleViewModel}" />
         </Expander>
         <Expander Header="Selected Style" IsExpanded="False">
-            <ContentControl Content="{Binding SelectedPointStyle}" />
+            <ContentControl Content="{Binding SelectedPointStyleViewModel}" />
         </Expander>
         <Expander Header="Zoom" IsExpanded="False">
             <StackPanel>
@@ -56,7 +56,7 @@
                     <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding #ShapesListBox.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
                 </ListBox.KeyBindings>
                 <ListBox.DataTemplates>
-                    <DataTemplate DataType="vms:BaseShape">
+                    <DataTemplate DataType="vms:BaseShapeViewModel">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}">
                             <TextBlock.ContextMenu>
                                 <ContextMenu x:CompileBindings="False">
@@ -72,10 +72,10 @@
             <libraries:ImagesView DataContext="{Binding ImageCache}" />
         </Expander>
         <Expander Header="SelectionStyle" IsExpanded="False">
-            <ContentControl Content="{Binding SelectionStyle}" />
+            <ContentControl Content="{Binding SelectionStyleViewModel}" />
         </Expander>
         <Expander Header="HelperStyle" IsExpanded="False">
-            <ContentControl Content="{Binding HelperStyle}" />
+            <ContentControl Content="{Binding HelperStyleViewModel}" />
         </Expander>
     </StackPanel>
 </UserControl>

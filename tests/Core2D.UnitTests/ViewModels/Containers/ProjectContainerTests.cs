@@ -22,7 +22,7 @@ namespace Core2D.UnitTests
         public void Options_Not_Null()
         {
             var target = _factory.CreateProjectContainer();
-            Assert.NotNull(target.Options);
+            Assert.NotNull(target.OptionsViewModel);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace Core2D.UnitTests
 
             target.SetCurrentContainer(page);
 
-            Assert.Equal(page, target.CurrentContainer);
+            Assert.Equal(page, target.CurrentContainerViewModel);
             Assert.Equal(page, target.Selected);
         }
 
@@ -130,7 +130,7 @@ namespace Core2D.UnitTests
 
             target.SetCurrentScript(script);
 
-            Assert.Equal(script, target.CurrentScript);
+            Assert.Equal(script, target.CurrentScriptViewModel);
         }
 
         [Fact]
@@ -144,7 +144,7 @@ namespace Core2D.UnitTests
 
             target.SetCurrentDatabase(db);
 
-            Assert.Equal(db, target.CurrentDatabase);
+            Assert.Equal(db, target.CurrentDatabaseViewModel);
         }
 
         [Fact]
@@ -153,7 +153,7 @@ namespace Core2D.UnitTests
         {
             var target = _factory.CreateProjectContainer();
 
-            var library = _factory.CreateLibrary<GroupShape>("Library1");
+            var library = _factory.CreateLibrary<GroupShapeViewModel>("Library1");
             target.GroupLibraries = target.GroupLibraries.Add(library);
 
             target.SetCurrentGroupLibrary(library);
@@ -167,7 +167,7 @@ namespace Core2D.UnitTests
         {
             var target = _factory.CreateProjectContainer();
 
-            var library = _factory.CreateLibrary<ShapeStyle>("Library1");
+            var library = _factory.CreateLibrary<ShapeStyleViewModel>("Library1");
             target.StyleLibraries = target.StyleLibraries.Add(library);
 
             target.SetCurrentStyleLibrary(library);
@@ -214,7 +214,7 @@ namespace Core2D.UnitTests
             target.SetSelected(page);
 
             Assert.Equal(document, target.CurrentDocument);
-            Assert.Equal(page, target.CurrentContainer);
+            Assert.Equal(page, target.CurrentContainerViewModel);
             Assert.True(raised);
         }
 

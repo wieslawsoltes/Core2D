@@ -4,6 +4,6 @@ namespace Core2D.Renderer
 {
     public interface IQuadraticBezierDrawNode : IDrawNode
     {
-        QuadraticBezierShape QuadraticBezier { get; set; }
+        QuadraticBezierShapeViewModel QuadraticBezier { get; set; }
     }
 }

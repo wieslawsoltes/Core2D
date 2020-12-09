@@ -4,6 +4,6 @@ namespace Core2D.Renderer
 {
     public interface IRectangleDrawNode : IDrawNode
     {
-        RectangleShape Rectangle { get; set; }
+        RectangleShapeViewModel Rectangle { get; set; }
     }
 }

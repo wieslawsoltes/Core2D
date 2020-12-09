@@ -47,17 +47,17 @@ namespace Core2D.Layout
             return (box1.Bounds.Height > box2.Bounds.Height) ? 1 : ((box1.Bounds.Height < box2.Bounds.Height) ? -1 : 0);
         }
 
-        public readonly BaseShape Shape;
-        public readonly List<PointShape> Points;
+        public readonly BaseShapeViewModel _shapeViewModel;
+        public readonly List<PointShapeViewModel> Points;
         public Box Bounds;
 
-        public ShapeBox(BaseShape shape)
+        public ShapeBox(BaseShapeViewModel shapeViewModel)
         {
-            Shape = shape;
+            _shapeViewModel = shapeViewModel;
 
-            Points = new List<PointShape>();
+            Points = new List<PointShapeViewModel>();
 
-            Shape.GetPoints(Points);
+            _shapeViewModel.GetPoints(Points);
 
             Bounds = new Box();
 
@@ -93,10 +93,10 @@ namespace Core2D.Layout
 
         public void MoveByWithHistory(decimal dx, decimal dy, IHistory history)
         {
-            var previous = new { DeltaX = -dx, DeltaY = -dy, Shape };
-            var next = new { DeltaX = dx, DeltaY = dy, Shape };
+            var previous = new { DeltaX = -dx, DeltaY = -dy, Shape = _shapeViewModel };
+            var next = new { DeltaX = dx, DeltaY = dy, Shape = _shapeViewModel };
             history.Snapshot(previous, next, (s) => s.Shape.Move(null, s.DeltaX, s.DeltaY));
-            Shape.Move(null, dx, dy);
+            _shapeViewModel.Move(null, dx, dy);
         }
     }
 }

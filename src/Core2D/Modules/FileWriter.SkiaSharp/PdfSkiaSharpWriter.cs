@@ -35,26 +35,26 @@ namespace Core2D.FileWriter.SkiaSharpPdf
                 return;
             }
 
-            IShapeRenderer renderer = new SkiaSharpRenderer(_serviceProvider);
-            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-            renderer.State.ImageCache = ic;
+            IShapeRenderer renderer = new SkiaSharpRendererViewModel(_serviceProvider);
+            renderer.StateViewModel.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.StateViewModel.ImageCache = ic;
 
             var presenter = new ExportPresenter();
 
             IProjectExporter exporter = new PdfSkiaSharpExporter(renderer, presenter, 72.0f);
 
-            if (item is PageContainer page)
+            if (item is PageContainerViewModel page)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
                 var db = (object)page.Properties;
-                var record = (object)page.Record;
+                var record = (object)page.RecordViewModel;
 
                 dataFlow.Bind(page.Template, db, record);
                 dataFlow.Bind(page, db, record);
 
                 exporter.Save(stream, page);
             }
-            else if (item is DocumentContainer document)
+            else if (item is DocumentContainerViewModel document)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
 
@@ -62,7 +62,7 @@ namespace Core2D.FileWriter.SkiaSharpPdf
 
                 exporter.Save(stream, document);
             }
-            else if (item is ProjectContainer project)
+            else if (item is ProjectContainerViewModel project)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
 

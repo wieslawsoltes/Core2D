@@ -41,7 +41,7 @@
         </Expander>
         <Expander Header="Color" IsExpanded="False">
             <StackPanel>
-                <ContentControl Content="{Binding GridStrokeColor}" />
+                <ContentControl Content="{Binding GridStrokeColorViewModel}" />
             </StackPanel>
         </Expander>
         <Expander Header="Thickness" IsExpanded="False">

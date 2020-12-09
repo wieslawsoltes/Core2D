@@ -11,14 +11,14 @@ namespace Core2D.Renderer.PdfSharp
 {
     public partial class PdfSharpRenderer : IProjectExporter
     {
-        public void Save(Stream stream, PageContainer container)
+        public void Save(Stream stream, PageContainerViewModel containerViewModel)
         {
             using var pdf = new PdfDocument();
-            Add(pdf, container);
+            Add(pdf, containerViewModel);
             pdf.Save(stream);
         }
 
-        public void Save(Stream stream, DocumentContainer document)
+        public void Save(Stream stream, DocumentContainerViewModel document)
         {
             using var pdf = new PdfDocument();
             var documentOutline = default(PdfOutline);
@@ -49,7 +49,7 @@ namespace Core2D.Renderer.PdfSharp
             ClearCache();
         }
 
-        public void Save(Stream stream, ProjectContainer project)
+        public void Save(Stream stream, ProjectContainerViewModel project)
         {
             using var pdf = new PdfDocument();
             var projectOutline = default(PdfOutline);
@@ -95,7 +95,7 @@ namespace Core2D.Renderer.PdfSharp
             ClearCache();
         }
 
-        private PdfPage Add(PdfDocument pdf, PageContainer container)
+        private PdfPage Add(PdfDocument pdf, PageContainerViewModel containerViewModel)
         {
             // Create A3 page size with Landscape orientation.
             var pdfPage = pdf.AddPage();
@@ -103,30 +103,30 @@ namespace Core2D.Renderer.PdfSharp
             pdfPage.Orientation = PageOrientation.Landscape;
 
             var dataFlow = _serviceProvider.GetService<DataFlow>();
-            var db = (object)container.Properties;
-            var record = (object)container.Record;
+            var db = (object)containerViewModel.Properties;
+            var record = (object)containerViewModel.RecordViewModel;
 
-            dataFlow.Bind(container.Template, db, record);
-            dataFlow.Bind(container, db, record);
+            dataFlow.Bind(containerViewModel.Template, db, record);
+            dataFlow.Bind(containerViewModel, db, record);
 
             using (XGraphics gfx = XGraphics.FromPdfPage(pdfPage))
             {
                 // Calculate x and y page scale factors.
-                double scaleX = pdfPage.Width.Value / container.Template.Width;
-                double scaleY = pdfPage.Height.Value / container.Template.Height;
+                double scaleX = pdfPage.Width.Value / containerViewModel.Template.Width;
+                double scaleY = pdfPage.Height.Value / containerViewModel.Template.Height;
                 double scale = Math.Min(scaleX, scaleY);
 
                 // Set scaling function.
                 _scaleToPage = (value) => value * scale;
 
                 // Draw container template contents to pdf graphics.
-                Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
+                Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, containerViewModel.Template.Background);
 
                 // Draw template contents to pdf graphics.
-                DrawPage(gfx, container.Template);
+                DrawPage(gfx, containerViewModel.Template);
 
                 // Draw page contents to pdf graphics.
-                DrawPage(gfx, container);
+                DrawPage(gfx, containerViewModel);
             }
 
             return pdfPage;

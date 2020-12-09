@@ -7,13 +7,13 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
     {
-        public EllipseShape Ellipse { get; set; }
+        public EllipseShapeViewModel Ellipse { get; set; }
         public SKRect Rect { get; set; }
 
-        public EllipseDrawNode(EllipseShape ellipse, ShapeStyle style)
+        public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel styleViewModel)
             : base()
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Ellipse = ellipse;
             UpdateGeometry();
         }

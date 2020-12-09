@@ -40,8 +40,8 @@ namespace Core2D.Modules
 
             // Core
 
-            builder.RegisterType<ProjectEditor>().As<ProjectEditor>().InstancePerLifetimeScope();
-            builder.RegisterType<StyleEditor>().As<StyleEditor>().InstancePerLifetimeScope();
+            builder.RegisterType<ProjectEditorViewModel>().As<ProjectEditorViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<StyleEditorViewModel>().As<StyleEditorViewModel>().InstancePerLifetimeScope();
             builder.RegisterType<Factory>().As<IFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ContainerFactory>().As<IContainerFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
@@ -56,7 +56,7 @@ namespace Core2D.Modules
 #if USE_SKIA
             builder.RegisterType<SkiaSharpRenderer>().As<IShapeRenderer>().InstancePerDependency();
 #else
-            builder.RegisterType<AvaloniaRenderer>().As<IShapeRenderer>().InstancePerDependency();
+            builder.RegisterType<AvaloniaRendererViewModel>().As<IShapeRenderer>().InstancePerDependency();
 #endif
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
@@ -73,10 +73,10 @@ namespace Core2D.Modules
             builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<JpegSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-            builder.RegisterType<OpenXmlReader>().As<ITextFieldReader<Database>>().InstancePerLifetimeScope();
-            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<Database>>().InstancePerLifetimeScope();
-            builder.RegisterType<OpenXmlWriter>().As<ITextFieldWriter<Database>>().InstancePerLifetimeScope();
-            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<Database>>().InstancePerLifetimeScope();
+            builder.RegisterType<OpenXmlReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
+            builder.RegisterType<OpenXmlWriter>().As<ITextFieldWriter<DatabaseViewModel>>().InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<DatabaseViewModel>>().InstancePerLifetimeScope();
             builder.RegisterType<SkiaSharpPathConverter>().As<IPathConverter>().InstancePerLifetimeScope();
             builder.RegisterType<SkiaSharpSvgConverter>().As<ISvgConverter>().InstancePerLifetimeScope();
 

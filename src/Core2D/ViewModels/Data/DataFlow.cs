@@ -7,7 +7,7 @@ namespace Core2D.Data
 {
     public partial class DataFlow
     {
-        public void Bind(ProjectContainer project)
+        public void Bind(ProjectContainerViewModel project)
         {
             foreach (var document in project.Documents)
             {
@@ -15,27 +15,27 @@ namespace Core2D.Data
             }
         }
 
-        public void Bind(DocumentContainer document)
+        public void Bind(DocumentContainerViewModel document)
         {
             foreach (var container in document.Pages)
             {
                 var db = container.Properties;
-                var r = container.Record;
+                var r = container.RecordViewModel;
 
                 Bind(container.Template, db, r);
                 Bind(container, db, r);
             }
         }
 
-        public void Bind(PageContainer container, object db, object r)
+        public void Bind(PageContainerViewModel containerViewModel, object db, object r)
         {
-            foreach (var layer in container.Layers)
+            foreach (var layer in containerViewModel.Layers)
             {
                 Bind(layer, db, r);
             }
         }
 
-        public void Bind(LayerContainer layer, object db, object r)
+        public void Bind(LayerContainerViewModel layer, object db, object r)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -43,43 +43,43 @@ namespace Core2D.Data
             }
         }
 
-        public void Bind(LineShape line, object db, object r)
+        public void Bind(LineShapeViewModel line, object db, object r)
         {
         }
 
-        public void Bind(RectangleShape rectangle, object db, object r)
+        public void Bind(RectangleShapeViewModel rectangle, object db, object r)
         {
         }
 
-        public void Bind(EllipseShape ellipse, object db, object r)
+        public void Bind(EllipseShapeViewModel ellipse, object db, object r)
         {
         }
 
-        public void Bind(ArcShape arc, object db, object r)
+        public void Bind(ArcShapeViewModelViewModel arc, object db, object r)
         {
         }
 
-        public void Bind(CubicBezierShape cubicBezier, object db, object r)
+        public void Bind(CubicBezierShapeViewModel cubicBezier, object db, object r)
         {
         }
 
-        public void Bind(QuadraticBezierShape quadraticBezier, object db, object r)
+        public void Bind(QuadraticBezierShapeViewModel quadraticBezier, object db, object r)
         {
         }
 
-        public void Bind(TextShape text, object db, object r)
+        public void Bind(TextShapeViewModel text, object db, object r)
         {
-            var properties = (ImmutableArray<Property>)db;
-            var record = (Record)r;
+            var properties = (ImmutableArray<PropertyViewModel>)db;
+            var record = (RecordViewModel)r;
             var tbind = TextBinding.Bind(text, properties, record);
-            text.SetProperty(nameof(TextShape.Text), tbind);
+            text.SetProperty(nameof(TextShapeViewModel.Text), tbind);
         }
 
-        public void Bind(ImageShape image, object db, object r)
+        public void Bind(ImageShapeViewModel image, object db, object r)
         {
         }
 
-        public void Bind(PathShape path, object db, object r)
+        public void Bind(PathShapeViewModel path, object db, object r)
         {
         }
     }

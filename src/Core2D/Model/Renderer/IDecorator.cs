@@ -7,9 +7,9 @@ namespace Core2D.Renderer
 {
     public interface IDecorator : IDrawable
     {
-        LayerContainer Layer { get; set; }
+        LayerContainerViewModel Layer { get; set; }
 
-        IList<BaseShape> Shapes { get; set; }
+        IList<BaseShapeViewModel> Shapes { get; set; }
 
         bool IsVisible { get; }
 

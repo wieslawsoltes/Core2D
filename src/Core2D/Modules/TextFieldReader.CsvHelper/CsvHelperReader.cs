@@ -9,7 +9,7 @@ using CSV = CsvHelper;
 
 namespace Core2D.TextFieldReader.CsvHelper
 {
-    public sealed class CsvHelperReader : ITextFieldReader<Database>
+    public sealed class CsvHelperReader : ITextFieldReader<DatabaseViewModel>
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -46,7 +46,7 @@ namespace Core2D.TextFieldReader.CsvHelper
             }
         }
 
-        public Database Read(Stream stream)
+        public DatabaseViewModel Read(Stream stream)
         {
             var fields = ReadFields(stream).ToList();
 

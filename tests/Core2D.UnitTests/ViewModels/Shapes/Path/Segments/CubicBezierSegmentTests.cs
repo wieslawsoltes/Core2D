@@ -16,7 +16,7 @@ namespace Core2D.UnitTests
         {
             var segment = _factory.CreateCubicBezierSegment(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape());
 
-            var target = new List<PointShape>();
+            var target = new List<PointShapeViewModel>();
             segment.GetPoints(target);
 
             Assert.Equal(3, target.Count());

@@ -4,7 +4,7 @@ using Core2D.Renderer;
 
 namespace Core2D.Containers
 {
-    public partial class ProjectContainer : BaseContainer, IImageCache
+    public partial class ProjectContainerViewModel : BaseContainerViewModel, IImageCache
     {
         private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 

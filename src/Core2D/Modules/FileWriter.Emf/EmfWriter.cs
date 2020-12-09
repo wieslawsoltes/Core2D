@@ -27,7 +27,7 @@ namespace Core2D.FileWriter.Emf
 
         public string Extension { get; } = "emf";
 
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShapeViewModel> shapes, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -45,8 +45,8 @@ namespace Core2D.FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.State.DrawShapeState = ShapeStateFlags.Printable;
-                    r.State.ImageCache = ic;
+                    r.StateViewModel.DrawShapeState = ShapeStateFlags.Printable;
+                    r.StateViewModel.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -73,7 +73,7 @@ namespace Core2D.FileWriter.Emf
             return ms;
         }
 
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainer container, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainerViewModel containerViewModel, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -91,8 +91,8 @@ namespace Core2D.FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.State.DrawShapeState = ShapeStateFlags.Printable;
-                    r.State.ImageCache = ic;
+                    r.StateViewModel.DrawShapeState = ShapeStateFlags.Printable;
+                    r.StateViewModel.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -102,8 +102,8 @@ namespace Core2D.FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.DrawPage(g, container.Template);
-                    r.DrawPage(g, container);
+                    r.DrawPage(g, containerViewModel.Template);
+                    r.DrawPage(g, containerViewModel);
 
                     r.ClearCache();
                 }
@@ -117,12 +117,12 @@ namespace Core2D.FileWriter.Emf
             return ms;
         }
 
-        public void Save(Stream stream, PageContainer container, IImageCache ic)
+        public void Save(Stream stream, PageContainerViewModel containerViewModel, IImageCache ic)
         {
-            if (container?.Template != null)
+            if (containerViewModel?.Template != null)
             {
-                using var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height);
-                using var ms = MakeMetafileStream(bitmap, container, ic);
+                using var bitmap = new Bitmap((int)containerViewModel.Template.Width, (int)containerViewModel.Template.Height);
+                using var ms = MakeMetafileStream(bitmap, containerViewModel, ic);
                 ms.WriteTo(stream);
             }
         }
@@ -140,22 +140,22 @@ namespace Core2D.FileWriter.Emf
                 return;
             }
 
-            if (item is PageContainer page)
+            if (item is PageContainerViewModel page)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
                 var db = (object)page.Properties;
-                var record = (object)page.Record;
+                var record = (object)page.RecordViewModel;
 
                 dataFlow.Bind(page.Template, db, record);
                 dataFlow.Bind(page, db, record);
 
                 Save(stream, page, ic);
             }
-            else if (item is DocumentContainer document)
+            else if (item is DocumentContainerViewModel document)
             {
                 throw new NotSupportedException("Saving documents as emf drawing is not supported.");
             }
-            else if (item is ProjectContainer project)
+            else if (item is ProjectContainerViewModel project)
             {
                 throw new NotSupportedException("Saving projects as emf drawing is not supported.");
             }

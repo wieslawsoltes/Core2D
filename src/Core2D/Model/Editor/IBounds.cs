@@ -9,10 +9,10 @@ namespace Core2D.Editor
     {
         Type TargetType { get; }
 
-        PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
+        PointShapeViewModel TryToGetPoint(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
 
-        bool Contains(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
+        bool Contains(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
 
-        bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
+        bool Overlaps(BaseShapeViewModel shapeViewModel, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
     }
 }

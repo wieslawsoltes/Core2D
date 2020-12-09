@@ -8,7 +8,7 @@ namespace Core2D.Renderer.WinForms
 {
     public static class PathGeometryConverter
     {
-        public static D2D.GraphicsPath ToGraphicsPath(this PathGeometry pg, Func<double, float> scale)
+        public static D2D.GraphicsPath ToGraphicsPath(this PathGeometryViewModel pg, Func<double, float> scale)
         {
             var gp = new D2D.GraphicsPath
             {
@@ -21,12 +21,12 @@ namespace Core2D.Renderer.WinForms
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is ArcSegment arcSegment)
+                    if (segment is ArcSegmentViewModel arcSegment)
                     {
                         // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
                         startPoint = arcSegment.Point;
                     }
-                    else if (segment is CubicBezierSegment cubicBezierSegment)
+                    else if (segment is CubicBezierSegmentViewModel cubicBezierSegment)
                     {
                         gp.AddBezier(
                             scale(startPoint.X),
@@ -39,7 +39,7 @@ namespace Core2D.Renderer.WinForms
                             scale(cubicBezierSegment.Point3.Y));
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is LineSegment lineSegment)
+                    else if (segment is LineSegmentViewModel lineSegment)
                     {
                         gp.AddLine(
                             scale(startPoint.X),
@@ -48,7 +48,7 @@ namespace Core2D.Renderer.WinForms
                             scale(lineSegment.Point.Y));
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                    else if (segment is QuadraticBezierSegmentViewModel quadraticBezierSegment)
                     {
                         var p1 = startPoint;
                         var p2 = quadraticBezierSegment.Point1;

@@ -31,7 +31,7 @@ namespace Core2D.Editor
                 var path = result?.FirstOrDefault();
                 if (path != null)
                 {
-                    return _serviceProvider.GetService<ProjectEditor>().OnGetImageKey(path);
+                    return _serviceProvider.GetService<ProjectEditorViewModel>().OnGetImageKey(path);
                 }
             }
             catch (Exception ex)

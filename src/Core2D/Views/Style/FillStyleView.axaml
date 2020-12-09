@@ -6,8 +6,8 @@
              xmlns:vms="using:Core2D.Style"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Style}"
+             d:DataContext="{x:Static vmd:DesignerContext.StyleViewModel}"
              d:DesignWidth="250" d:DesignHeight="500"
-             x:DataType="vms:FillStyle" x:CompileBindings="True">
-    <ContentControl Content="{Binding Color}" />
+             x:DataType="vms:FillStyleViewModel" x:CompileBindings="True">
+    <ContentControl Content="{Binding ColorViewModel}" />
 </UserControl>

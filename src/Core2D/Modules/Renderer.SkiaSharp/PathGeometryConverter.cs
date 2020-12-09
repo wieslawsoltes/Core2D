@@ -13,21 +13,21 @@ namespace Core2D.Renderer.SkiaSharp
 {
     public static class PathGeometryConverter
     {
-        public static void CreateFigure(this PathFigure pathFigure, SKPath path)
+        public static void CreateFigure(this PathFigureViewModel pathFigureViewModel, SKPath path)
         {
             path.MoveTo(
-                (float)(pathFigure.StartPoint.X),
-                (float)(pathFigure.StartPoint.Y));
+                (float)(pathFigureViewModel.StartPoint.X),
+                (float)(pathFigureViewModel.StartPoint.Y));
 
-            foreach (var segment in pathFigure.Segments)
+            foreach (var segment in pathFigureViewModel.Segments)
             {
-                if (segment is LineSegment lineSegment)
+                if (segment is LineSegmentViewModel lineSegment)
                 {
                     path.LineTo(
                         (float)(lineSegment.Point.X),
                         (float)(lineSegment.Point.Y));
                 }
-                else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                else if (segment is QuadraticBezierSegmentViewModel quadraticBezierSegment)
                 {
                     path.QuadTo(
                         (float)(quadraticBezierSegment.Point1.X),
@@ -35,7 +35,7 @@ namespace Core2D.Renderer.SkiaSharp
                         (float)(quadraticBezierSegment.Point2.X),
                         (float)(quadraticBezierSegment.Point2.Y));
                 }
-                else if (segment is CubicBezierSegment cubicBezierSegment)
+                else if (segment is CubicBezierSegmentViewModel cubicBezierSegment)
                 {
                     path.CubicTo(
                         (float)(cubicBezierSegment.Point1.X),
@@ -45,7 +45,7 @@ namespace Core2D.Renderer.SkiaSharp
                         (float)(cubicBezierSegment.Point3.X),
                         (float)(cubicBezierSegment.Point3.Y));
                 }
-                else if (segment is ArcSegment arcSegment)
+                else if (segment is ArcSegmentViewModel arcSegment)
                 {
                     path.ArcTo(
                         (float)(arcSegment.Size.Width),
@@ -62,16 +62,16 @@ namespace Core2D.Renderer.SkiaSharp
                 }
             }
 
-            if (pathFigure.IsClosed)
+            if (pathFigureViewModel.IsClosed)
             {
                 path.Close();
             }
         }
 
-        public static PathGeometry ToPathGeometry(SKPath path, IFactory factory)
+        public static PathGeometryViewModel ToPathGeometry(SKPath path, IFactory factory)
         {
             var geometry = factory.CreatePathGeometry(
-                ImmutableArray.Create<PathFigure>(),
+                ImmutableArray.Create<PathFigureViewModel>(),
                 path.FillType == SKPathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
             var context = factory.CreateGeometryContext(geometry);
@@ -141,18 +141,18 @@ namespace Core2D.Renderer.SkiaSharp
             return geometry;
         }
 
-        public static SKPath ToSKPath(this IEnumerable<BaseShape> shapes)
+        public static SKPath ToSKPath(this IEnumerable<BaseShapeViewModel> shapes)
         {
             var path = new SKPath
             {
                 FillType = SKPathFillType.Winding
             };
-            var previous = default(PointShape);
+            var previous = default(PointShapeViewModel);
             foreach (var shape in shapes)
             {
                 switch (shape)
                 {
-                    case LineShape lineShape:
+                    case LineShapeViewModel lineShape:
                         {
                             if (previous == null || previous != lineShape.Start)
                             {
@@ -167,7 +167,7 @@ namespace Core2D.Renderer.SkiaSharp
                         }
                         break;
 
-                    case RectangleShape rectangleShape:
+                    case RectangleShapeViewModel rectangleShape:
                         {
                             path.AddRect(
                                 SkiaSharpDrawUtil.CreateRect(rectangleShape.TopLeft, rectangleShape.BottomRight),
@@ -175,7 +175,7 @@ namespace Core2D.Renderer.SkiaSharp
                         }
                         break;
 
-                    case EllipseShape ellipseShape:
+                    case EllipseShapeViewModel ellipseShape:
                         {
                             path.AddOval(
                                 SkiaSharpDrawUtil.CreateRect(ellipseShape.TopLeft, ellipseShape.BottomRight),
@@ -183,7 +183,7 @@ namespace Core2D.Renderer.SkiaSharp
                         }
                         break;
 
-                    case ArcShape arcShape:
+                    case ArcShapeViewModelViewModel arcShape:
                         {
                             var a = new GdiArc(
                                 Point2.FromXY(arcShape.Point1.X, arcShape.Point1.Y),
@@ -199,7 +199,7 @@ namespace Core2D.Renderer.SkiaSharp
                         }
                         break;
 
-                    case CubicBezierShape cubicBezierShape:
+                    case CubicBezierShapeViewModel cubicBezierShape:
                         {
                             if (previous == null || previous != cubicBezierShape.Point1)
                             {
@@ -218,7 +218,7 @@ namespace Core2D.Renderer.SkiaSharp
                         }
                         break;
 
-                    case QuadraticBezierShape quadraticBezierShape:
+                    case QuadraticBezierShapeViewModel quadraticBezierShape:
                         {
                             if (previous == null || previous != quadraticBezierShape.Point1)
                             {
@@ -235,7 +235,7 @@ namespace Core2D.Renderer.SkiaSharp
                         }
                         break;
 
-                    case TextShape textShape:
+                    case TextShapeViewModel textShape:
                         {
                             var resultPath = ToSKPath(textShape);
                             if (resultPath != null && !resultPath.IsEmpty)
@@ -245,7 +245,7 @@ namespace Core2D.Renderer.SkiaSharp
                         }
                         break;
 
-                    case PathShape pathShape:
+                    case PathShapeViewModel pathShape:
                         {
                             var resultPath = ToSKPath(pathShape);
                             if (resultPath != null && !resultPath.IsEmpty)
@@ -255,7 +255,7 @@ namespace Core2D.Renderer.SkiaSharp
                         }
                         break;
 
-                    case GroupShape groupShape:
+                    case GroupShapeViewModel groupShape:
                         {
                             var resultPath = ToSKPath(groupShape.Shapes);
                             if (resultPath != null && !resultPath.IsEmpty)
@@ -269,25 +269,25 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this BaseShape shape)
+        public static SKPath ToSKPath(this BaseShapeViewModel shapeViewModel)
         {
-            return shape switch
+            return shapeViewModel switch
             {
-                LineShape lineShape => ToSKPath(lineShape),
-                RectangleShape rectangleShape => ToSKPath(rectangleShape),
-                EllipseShape ellipseShape => ToSKPath(ellipseShape),
-                ImageShape imageShape => ToSKPath(imageShape),
-                ArcShape arcShape => ToSKPath(arcShape),
-                CubicBezierShape cubicBezierShape => ToSKPath(cubicBezierShape),
-                QuadraticBezierShape quadraticBezierShape => ToSKPath(quadraticBezierShape),
-                TextShape textShape => ToSKPath(textShape),
-                PathShape pathShape => ToSKPath(pathShape),
-                GroupShape groupShape => ToSKPath(groupShape.Shapes),
+                LineShapeViewModel lineShape => ToSKPath(lineShape),
+                RectangleShapeViewModel rectangleShape => ToSKPath(rectangleShape),
+                EllipseShapeViewModel ellipseShape => ToSKPath(ellipseShape),
+                ImageShapeViewModel imageShape => ToSKPath(imageShape),
+                ArcShapeViewModelViewModel arcShape => ToSKPath(arcShape),
+                CubicBezierShapeViewModel cubicBezierShape => ToSKPath(cubicBezierShape),
+                QuadraticBezierShapeViewModel quadraticBezierShape => ToSKPath(quadraticBezierShape),
+                TextShapeViewModel textShape => ToSKPath(textShape),
+                PathShapeViewModel pathShape => ToSKPath(pathShape),
+                GroupShapeViewModel groupShape => ToSKPath(groupShape.Shapes),
                 _ => null,
             };
         }
 
-        public static SKPath ToSKPath(this LineShape line)
+        public static SKPath ToSKPath(this LineShapeViewModel line)
         {
             var path = new SKPath
             {
@@ -302,7 +302,7 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this RectangleShape rectangle)
+        public static SKPath ToSKPath(this RectangleShapeViewModel rectangle)
         {
             var path = new SKPath
             {
@@ -314,7 +314,7 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this EllipseShape ellipse)
+        public static SKPath ToSKPath(this EllipseShapeViewModel ellipse)
         {
             var path = new SKPath
             {
@@ -326,7 +326,7 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this ImageShape image)
+        public static SKPath ToSKPath(this ImageShapeViewModel image)
         {
             var path = new SKPath
             {
@@ -338,7 +338,7 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this ArcShape arc)
+        public static SKPath ToSKPath(this ArcShapeViewModelViewModel arc)
         {
             var path = new SKPath
             {
@@ -358,7 +358,7 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this CubicBezierShape cubicBezier)
+        public static SKPath ToSKPath(this CubicBezierShapeViewModel cubicBezier)
         {
             var path = new SKPath
             {
@@ -377,7 +377,7 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this QuadraticBezierShape quadraticBezier)
+        public static SKPath ToSKPath(this QuadraticBezierShapeViewModel quadraticBezier)
         {
             var path = new SKPath
             {
@@ -394,14 +394,14 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this TextShape text)
+        public static SKPath ToSKPath(this TextShapeViewModel text)
         {
             var path = new SKPath
             {
                 FillType = SKPathFillType.Winding
             };
 
-            if (!(text.GetProperty(nameof(TextShape.Text)) is string tbind))
+            if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string tbind))
             {
                 tbind = text.Text;
             }
@@ -411,7 +411,7 @@ namespace Core2D.Renderer.SkiaSharp
                 return path;
             }
 
-            using var pen = SkiaSharpDrawUtil.GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, out var origin);
+            using var pen = SkiaSharpDrawUtil.GetSKPaint(tbind, text.StyleViewModel, text.TopLeft, text.BottomRight, out var origin);
             using var outlinePath = pen.GetTextPath(tbind, origin.X, origin.Y);
             using var fillPath = pen.GetFillPath(outlinePath);
 
@@ -420,15 +420,15 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this PathGeometry pathGeometry)
+        public static SKPath ToSKPath(this PathGeometryViewModel pathGeometryViewModel)
         {
-            var fillType = pathGeometry.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
+            var fillType = pathGeometryViewModel.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
             var path = new SKPath
             {
                 FillType = fillType
             };
 
-            foreach (var pathFigure in pathGeometry.Figures)
+            foreach (var pathFigure in pathGeometryViewModel.Figures)
             {
                 CreateFigure(pathFigure, path);
             }
@@ -436,9 +436,9 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this PathShape path)
+        public static SKPath ToSKPath(this PathShapeViewModel path)
         {
-            return ToSKPath(path.Geometry);
+            return ToSKPath(path.GeometryViewModel);
         }
 
         public static SKPathOp ToSKPathOp(PathOp op)

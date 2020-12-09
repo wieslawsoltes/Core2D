@@ -21,15 +21,15 @@ namespace Core2D.Views.Shapes
         public void OnEditTextBinding(object shape)
         {
             if (this.VisualRoot is TopLevel topLevel 
-                && topLevel.DataContext is ProjectEditor editor
-                && shape is TextShape text)
+                && topLevel.DataContext is ProjectEditorViewModel editor
+                && shape is TextShapeViewModel text)
             {
-                var textBindingEditor = new TextBindingEditor()
+                var textBindingEditor = new TextBindingEditorViewModel()
                 {
-                    Editor = editor,
+                    EditorViewModel = editor,
                     Text = text
                 };
-                var dialog = new Dialog(editor)
+                var dialog = new DialogViewModel(editor)
                 {
                     Title = "Text Binding",
                     IsOverlayVisible = false,

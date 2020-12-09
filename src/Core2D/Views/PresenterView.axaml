@@ -9,7 +9,7 @@
              Height="{Binding $self.Container.Height}"
              Focusable="True"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
+             d:DataContext="{x:Static vmd:DesignerContext.EditorViewModel}"
              d:DesignWidth="1200" d:DesignHeight="540"
-             x:DataType="vme:ProjectEditor" x:CompileBindings="False">
+             x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="False">
 </UserControl>

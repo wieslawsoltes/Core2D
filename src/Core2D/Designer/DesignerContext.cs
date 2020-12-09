@@ -17,79 +17,79 @@ namespace Core2D.Designer
 {
     public class DesignerContext
     {
-        public static ProjectEditor Editor { get; set; }
+        public static ProjectEditorViewModel EditorViewModel { get; set; }
 
-        public static PageContainer Template { get; set; }
+        public static PageContainerViewModel Template { get; set; }
 
-        public static PageContainer Page { get; set; }
+        public static PageContainerViewModel Page { get; set; }
 
-        public static DocumentContainer Document { get; set; }
+        public static DocumentContainerViewModel Document { get; set; }
 
-        public static LayerContainer Layer { get; set; }
+        public static LayerContainerViewModel Layer { get; set; }
 
-        public static Options Options { get; set; }
+        public static OptionsViewModel OptionsViewModel { get; set; }
 
-        public static Script Script { get; set; }
+        public static ScriptViewModel ScriptViewModel { get; set; }
 
-        public static ProjectContainer Project { get; set; }
+        public static ProjectContainerViewModel Project { get; set; }
 
-        public static Library<ShapeStyle> CurrentStyleLibrary { get; set; }
+        public static LibraryViewModel<ShapeStyleViewModel> CurrentStyleLibraryViewModel { get; set; }
 
-        public static Library<GroupShape> CurrentGroupLibrary { get; set; }
+        public static LibraryViewModel<GroupShapeViewModel> CurrentGroupLibraryViewModel { get; set; }
 
         public static ShapeStateFlags State { get; set; }
 
-        public static Database Database { get; set; }
+        public static DatabaseViewModel DatabaseViewModel { get; set; }
 
-        public static Record Record { get; set; }
+        public static RecordViewModel RecordViewModel { get; set; }
 
-        public static ArgbColor ArgbColor { get; set; }
+        public static ArgbColorViewModelViewModel ArgbColorViewModelViewModel { get; set; }
 
-        public static ArrowStyle ArrowStyle { get; set; }
+        public static ArrowStyleViewModel ArrowStyleViewModel { get; set; }
 
         public static FontStyleFlags FontStyle { get; set; }
 
-        public static ShapeStyle Style { get; set; }
+        public static ShapeStyleViewModel StyleViewModel { get; set; }
 
-        public static TextStyle TextStyle { get; set; }
+        public static TextStyleViewModel TextStyleViewModel { get; set; }
 
-        public static ArcShape Arc { get; set; }
+        public static ArcShapeViewModelViewModel Arc { get; set; }
 
-        public static CubicBezierShape CubicBezier { get; set; }
+        public static CubicBezierShapeViewModel CubicBezier { get; set; }
 
-        public static EllipseShape Ellipse { get; set; }
+        public static EllipseShapeViewModel Ellipse { get; set; }
 
-        public static GroupShape Group { get; set; }
+        public static GroupShapeViewModel Group { get; set; }
 
-        public static ImageShape Image { get; set; }
+        public static ImageShapeViewModel Image { get; set; }
 
-        public static LineShape Line { get; set; }
+        public static LineShapeViewModel Line { get; set; }
 
-        public static PathShape Path { get; set; }
+        public static PathShapeViewModel Path { get; set; }
 
-        public static PointShape Point { get; set; }
+        public static PointShapeViewModel Point { get; set; }
 
-        public static QuadraticBezierShape QuadraticBezier { get; set; }
+        public static QuadraticBezierShapeViewModel QuadraticBezier { get; set; }
 
-        public static RectangleShape Rectangle { get; set; }
+        public static RectangleShapeViewModel Rectangle { get; set; }
 
-        public static TextShape Text { get; set; }
+        public static TextShapeViewModel Text { get; set; }
 
-        public static ArcSegment ArcSegment { get; set; }
+        public static ArcSegmentViewModel ArcSegmentViewModel { get; set; }
 
-        public static CubicBezierSegment CubicBezierSegment { get; set; }
+        public static CubicBezierSegmentViewModel CubicBezierSegmentViewModel { get; set; }
 
-        public static LineSegment LineSegment { get; set; }
+        public static LineSegmentViewModel LineSegmentViewModel { get; set; }
 
-        public static PathFigure PathFigure { get; set; }
+        public static PathFigureViewModel PathFigureViewModel { get; set; }
 
-        public static PathGeometry PathGeometry { get; set; }
+        public static PathGeometryViewModel PathGeometryViewModel { get; set; }
 
         public static PathSize PathSize { get; set; }
 
-        public static QuadraticBezierSegment QuadraticBezierSegment { get; set; }
+        public static QuadraticBezierSegmentViewModel QuadraticBezierSegmentViewModel { get; set; }
 
-        public static ShapeRendererState ShapeRendererState { get; set; }
+        public static ShapeRendererStateViewModel ShapeRendererStateViewModel { get; set; }
 
         public static void InitializeContext(IServiceProvider serviceProvider)
         {
@@ -97,16 +97,16 @@ namespace Core2D.Designer
 
             // Editor
 
-            Editor = serviceProvider.GetService<ProjectEditor>();
+            EditorViewModel = serviceProvider.GetService<ProjectEditorViewModel>();
 
             // Recent Projects
 
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFile.Create("Test1", "Test1.project"));
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFile.Create("Test2", "Test2.project"));
+            EditorViewModel.RecentProjects = EditorViewModel.RecentProjects.Add(RecentFileViewModel.Create("Test1", "Test1.project"));
+            EditorViewModel.RecentProjects = EditorViewModel.RecentProjects.Add(RecentFileViewModel.Create("Test2", "Test2.project"));
 
             // New Project
 
-            Editor.OnNewProject();
+            EditorViewModel.OnNewProject();
 
             // Data
 
@@ -119,10 +119,10 @@ namespace Core2D.Designer
                 db,
                 ImmutableArray.CreateRange(values));
             db.Records = db.Records.Add(record);
-            db.CurrentRecord = record;
+            db.CurrentRecordViewModel = record;
 
-            Database = db;
-            Record = record;
+            DatabaseViewModel = db;
+            RecordViewModel = record;
 
             // Project
 
@@ -137,19 +137,19 @@ namespace Core2D.Designer
             var layer = Page.Layers.FirstOrDefault();
             layer.Shapes = layer.Shapes.Add(factory.CreateLineShape(0, 0, null));
             Page.CurrentLayer = layer;
-            Page.CurrentShape = layer.Shapes.FirstOrDefault();
+            Page.CurrentShapeViewModel = layer.Shapes.FirstOrDefault();
             Page.Template = Template;
 
             Document = factory.CreateDocumentContainer();
             Layer = factory.CreateLayerContainer();
-            Options = factory.CreateOptions();
+            OptionsViewModel = factory.CreateOptions();
 
-            CurrentStyleLibrary = Project.CurrentStyleLibrary;
-            CurrentGroupLibrary = Project.CurrentGroupLibrary;
+            CurrentStyleLibraryViewModel = Project.CurrentStyleLibrary;
+            CurrentGroupLibraryViewModel = Project.CurrentGroupLibrary;
 
             // Scripting
 
-            Script = factory.CreateScript();
+            ScriptViewModel = factory.CreateScript();
 
             // State
 
@@ -157,39 +157,39 @@ namespace Core2D.Designer
 
             // Style
 
-            ArgbColor = factory.CreateArgbColor(128, 255, 0, 0);
-            ArrowStyle = factory.CreateArrowStyle();
+            ArgbColorViewModelViewModel = factory.CreateArgbColor(128, 255, 0, 0);
+            ArrowStyleViewModel = factory.CreateArrowStyle();
             FontStyle = FontStyleFlags.Regular;
-            Style = factory.CreateShapeStyle("Default");
-            TextStyle = factory.CreateTextStyle();
+            StyleViewModel = factory.CreateShapeStyle("Default");
+            TextStyleViewModel = factory.CreateTextStyle();
 
             // Shapes
 
-            Arc = factory.CreateArcShape(0, 0, Style);
-            CubicBezier = factory.CreateCubicBezierShape(0, 0, Style);
-            Ellipse = factory.CreateEllipseShape(0, 0, Style);
+            Arc = factory.CreateArcShape(0, 0, StyleViewModel);
+            CubicBezier = factory.CreateCubicBezierShape(0, 0, StyleViewModel);
+            Ellipse = factory.CreateEllipseShape(0, 0, StyleViewModel);
             Group = factory.CreateGroupShape("Group");
-            Image = factory.CreateImageShape(0, 0, Style, "key");
-            Line = factory.CreateLineShape(0, 0, Style);
-            Path = factory.CreatePathShape(Style, null);
+            Image = factory.CreateImageShape(0, 0, StyleViewModel, "key");
+            Line = factory.CreateLineShape(0, 0, StyleViewModel);
+            Path = factory.CreatePathShape(StyleViewModel, null);
             Point = factory.CreatePointShape();
-            QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, Style);
-            Rectangle = factory.CreateRectangleShape(0, 0, Style);
-            Text = factory.CreateTextShape(0, 0, Style, "Text");
+            QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, StyleViewModel);
+            Rectangle = factory.CreateRectangleShape(0, 0, StyleViewModel);
+            Text = factory.CreateTextShape(0, 0, StyleViewModel, "Text");
 
             // Path
 
-            ArcSegment = factory.CreateArcSegment(factory.CreatePointShape(), factory.CreatePathSize(), 180, true, SweepDirection.Clockwise);
-            CubicBezierSegment = factory.CreateCubicBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), factory.CreatePointShape());
-            LineSegment = factory.CreateLineSegment(factory.CreatePointShape());
-            PathFigure = factory.CreatePathFigure(factory.CreatePointShape(), false);
-            PathGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigure>(), FillRule.EvenOdd);
+            ArcSegmentViewModel = factory.CreateArcSegment(factory.CreatePointShape(), factory.CreatePathSize(), 180, true, SweepDirection.Clockwise);
+            CubicBezierSegmentViewModel = factory.CreateCubicBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), factory.CreatePointShape());
+            LineSegmentViewModel = factory.CreateLineSegment(factory.CreatePointShape());
+            PathFigureViewModel = factory.CreatePathFigure(factory.CreatePointShape(), false);
+            PathGeometryViewModel = factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), FillRule.EvenOdd);
             PathSize = factory.CreatePathSize();
-            QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape());
+            QuadraticBezierSegmentViewModel = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape());
 
             // Renderer
 
-            ShapeRendererState = factory.CreateShapeRendererState();
+            ShapeRendererStateViewModel = factory.CreateShapeRendererState();
         }
     }
 }

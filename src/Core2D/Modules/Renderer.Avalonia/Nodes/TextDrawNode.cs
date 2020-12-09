@@ -9,7 +9,7 @@ namespace Core2D.Renderer
 {
     internal class TextDrawNode : DrawNode, ITextDrawNode
     {
-        public TextShape Text { get; set; }
+        public TextShapeViewModel Text { get; set; }
         public A.Rect Rect { get; set; }
         public A.Point Origin { get; set; }
         public AM.Typeface Typeface { get; set; }
@@ -20,9 +20,9 @@ namespace Core2D.Renderer
         {
         }
 
-        public TextDrawNode(TextShape text, ShapeStyle style)
+        public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel styleViewModel)
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Text = text;
             UpdateGeometry();
         }
@@ -40,14 +40,14 @@ namespace Core2D.Renderer
 
         protected void UpdateTextGeometry()
         {
-            BoundText = Text.GetProperty(nameof(TextShape.Text)) is string boundText ? boundText : Text.Text;
+            BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
 
             if (BoundText == null)
             {
                 return;
             }
 
-            if (Style.TextStyle.FontSize < 0.0)
+            if (StyleViewModel.TextStyleViewModel.FontSize < 0.0)
             {
                 return;
             }
@@ -55,12 +55,12 @@ namespace Core2D.Renderer
             var fontStyle = AM.FontStyle.Normal;
             var fontWeight = AM.FontWeight.Normal;
 
-            if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
+            if (StyleViewModel.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
                 fontStyle |= AM.FontStyle.Italic;
             }
 
-            if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
+            if (StyleViewModel.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
                 fontWeight |= AM.FontWeight.Bold;
             }
@@ -68,9 +68,9 @@ namespace Core2D.Renderer
             // TODO: Cache Typeface
             // TODO: Cache FormattedText
 
-            Typeface = new AM.Typeface(Style.TextStyle.FontName, fontStyle, fontWeight);
+            Typeface = new AM.Typeface(StyleViewModel.TextStyleViewModel.FontName, fontStyle, fontWeight);
 
-            var textAlignment = Style.TextStyle.TextHAlignment switch
+            var textAlignment = StyleViewModel.TextStyleViewModel.TextHAlignment switch
             {
                 TextHAlignment.Right => AM.TextAlignment.Right,
                 TextHAlignment.Center => AM.TextAlignment.Center,
@@ -83,7 +83,7 @@ namespace Core2D.Renderer
                 Text = BoundText,
                 TextAlignment = textAlignment,
                 TextWrapping = AM.TextWrapping.NoWrap,
-                FontSize = Style.TextStyle.FontSize,
+                FontSize = StyleViewModel.TextStyleViewModel.FontSize,
                 Constraint = Rect.Size
             };
 
@@ -98,7 +98,7 @@ namespace Core2D.Renderer
             //    _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0)
             //};
 
-            var originY = Style.TextStyle.TextVAlignment switch
+            var originY = StyleViewModel.TextStyleViewModel.TextVAlignment switch
             {
                 TextVAlignment.Top => rect.Y,
                 TextVAlignment.Bottom => rect.Bottom - size.Height,

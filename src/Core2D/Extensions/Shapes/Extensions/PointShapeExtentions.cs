@@ -4,7 +4,7 @@ namespace Core2D.Shapes
 {
     public static class PointShapeExtentions
     {
-        public static double DistanceTo(this PointShape point, PointShape other)
+        public static double DistanceTo(this PointShapeViewModel point, PointShapeViewModel other)
         {
             double dx = point.X - other.X;
             double dy = point.Y - other.Y;

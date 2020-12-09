@@ -13,10 +13,10 @@ namespace Core2D.DragAndDrop.Handlers
         internal bool ValidateLibrary<T>(ListBox listBox, DragEventArgs e, object sourceContext, object targetContext, bool bExecute) where T : ViewModelBase
         {
             if (!(sourceContext is T sourceItem) 
-                || !(targetContext is Library<T> library) 
+                || !(targetContext is LibraryViewModel<T> library) 
                 || !(listBox.GetVisualAt(e.GetPosition(listBox)) is IControl targetControl)
                 || !(listBox.GetVisualRoot() is IControl rootControl)
-                || !(rootControl.DataContext is ProjectEditor editor)
+                || !(rootControl.DataContext is ProjectEditorViewModel editor)
                 || !(targetControl.DataContext is T targetItem))
             {
                 return false;
@@ -67,7 +67,7 @@ namespace Core2D.DragAndDrop.Handlers
         {
             if (e.Source is IControl && sender is ListBox listBox)
             {
-                return ValidateLibrary<ShapeStyle>(listBox, e, sourceContext, targetContext, false);
+                return ValidateLibrary<ShapeStyleViewModel>(listBox, e, sourceContext, targetContext, false);
             }
             return false;
         }
@@ -76,7 +76,7 @@ namespace Core2D.DragAndDrop.Handlers
         {
             if (e.Source is IControl && sender is ListBox listBox)
             {
-                return ValidateLibrary<ShapeStyle>(listBox, e, sourceContext, targetContext, true);
+                return ValidateLibrary<ShapeStyleViewModel>(listBox, e, sourceContext, targetContext, true);
             }
             return false;
         }
@@ -88,7 +88,7 @@ namespace Core2D.DragAndDrop.Handlers
         {
             if (e.Source is IControl && sender is ListBox listBox)
             {
-                return ValidateLibrary<GroupShape>(listBox, e, sourceContext, targetContext, false);
+                return ValidateLibrary<GroupShapeViewModel>(listBox, e, sourceContext, targetContext, false);
             }
             return false;
         }
@@ -97,7 +97,7 @@ namespace Core2D.DragAndDrop.Handlers
         {
             if (e.Source is IControl && sender is ListBox listBox)
             {
-                return ValidateLibrary<GroupShape>(listBox, e, sourceContext, targetContext, true);
+                return ValidateLibrary<GroupShapeViewModel>(listBox, e, sourceContext, targetContext, true);
             }
             return false;
         }

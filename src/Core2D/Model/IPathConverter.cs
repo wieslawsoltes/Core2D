@@ -6,22 +6,22 @@ namespace Core2D
 {
     public interface IPathConverter
     {
-        PathShape ToPathShape(IEnumerable<BaseShape> shapes);
+        PathShapeViewModel ToPathShape(IEnumerable<BaseShapeViewModel> shapes);
 
-        PathShape ToPathShape(BaseShape shape);
+        PathShapeViewModel ToPathShape(BaseShapeViewModel shapeViewModel);
 
-        PathShape ToStrokePathShape(BaseShape shape);
+        PathShapeViewModel ToStrokePathShape(BaseShapeViewModel shapeViewModel);
 
-        PathShape ToFillPathShape(BaseShape shape);
+        PathShapeViewModel ToFillPathShape(BaseShapeViewModel shapeViewModel);
 
-        PathShape ToWindingPathShape(BaseShape shape);
+        PathShapeViewModel ToWindingPathShape(BaseShapeViewModel shapeViewModel);
 
-        PathShape Simplify(BaseShape shape);
+        PathShapeViewModel Simplify(BaseShapeViewModel shapeViewModel);
 
-        PathShape Op(IEnumerable<BaseShape> shapes, PathOp op);
+        PathShapeViewModel Op(IEnumerable<BaseShapeViewModel> shapes, PathOp op);
 
-        public PathShape FromSvgPathData(string svgPath, bool isStroked, bool isFilled);
+        public PathShapeViewModel FromSvgPathData(string svgPath, bool isStroked, bool isFilled);
 
-        public string ToSvgPathData(BaseShape shape);
+        public string ToSvgPathData(BaseShapeViewModel shapeViewModel);
     }
 }

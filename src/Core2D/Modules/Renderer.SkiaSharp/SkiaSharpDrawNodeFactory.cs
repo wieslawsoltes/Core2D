@@ -6,9 +6,9 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class SkiaSharpDrawNodeFactory : IDrawNodeFactory
     {
-        public IFillDrawNode CreateFillDrawNode(double x, double y, double width, double height, BaseColor color)
+        public IFillDrawNode CreateFillDrawNode(double x, double y, double width, double height, BaseColorViewModel colorViewModel)
         {
-            return new FillDrawNode(x, y, width, height, color);
+            return new FillDrawNode(x, y, width, height, colorViewModel);
         }
 
         public IGridDrawNode CreateGridDrawNode(IGrid grid, double x, double y, double width, double height)
@@ -16,54 +16,54 @@ namespace Core2D.Renderer.SkiaSharp
             return new GridDrawNode(grid, x, y, width, height);
         }
 
-        public IPointDrawNode CreatePointDrawNode(PointShape point, ShapeStyle pointStyle, double pointSize)
+        public IPointDrawNode CreatePointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize)
         {
-            return new PointDrawNode(point, pointStyle, pointSize);
+            return new PointDrawNode(point, pointStyleViewModel, pointSize);
         }
 
-        public ILineDrawNode CreateLineDrawNode(LineShape line, ShapeStyle style)
+        public ILineDrawNode CreateLineDrawNode(LineShapeViewModel line, ShapeStyleViewModel styleViewModel)
         {
-            return new LineDrawNode(line, style);
+            return new LineDrawNode(line, styleViewModel);
         }
 
-        public IRectangleDrawNode CreateRectangleDrawNode(RectangleShape rectangle, ShapeStyle style)
+        public IRectangleDrawNode CreateRectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel styleViewModel)
         {
-            return new RectangleDrawNode(rectangle, style);
+            return new RectangleDrawNode(rectangle, styleViewModel);
         }
 
-        public IEllipseDrawNode CreateEllipseDrawNode(EllipseShape ellipse, ShapeStyle style)
+        public IEllipseDrawNode CreateEllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel styleViewModel)
         {
-            return new EllipseDrawNode(ellipse, style);
+            return new EllipseDrawNode(ellipse, styleViewModel);
         }
 
-        public IArcDrawNode CreateArcDrawNode(ArcShape arc, ShapeStyle style)
+        public IArcDrawNode CreateArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel styleViewModel)
         {
-            return new ArcDrawNode(arc, style);
+            return new ArcDrawNode(arc, styleViewModel);
         }
 
-        public ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShape cubicBezier, ShapeStyle style)
+        public ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel styleViewModel)
         {
-            return new CubicBezierDrawNode(cubicBezier, style);
+            return new CubicBezierDrawNode(cubicBezier, styleViewModel);
         }
 
-        public IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShape quadraticBezier, ShapeStyle style)
+        public IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel styleViewModel)
         {
-            return new QuadraticBezierDrawNode(quadraticBezier, style);
+            return new QuadraticBezierDrawNode(quadraticBezier, styleViewModel);
         }
 
-        public ITextDrawNode CreateTextDrawNode(TextShape text, ShapeStyle style)
+        public ITextDrawNode CreateTextDrawNode(TextShapeViewModel text, ShapeStyleViewModel styleViewModel)
         {
-            return new TextDrawNode(text, style);
+            return new TextDrawNode(text, styleViewModel);
         }
 
-        public IImageDrawNode CreateImageDrawNode(ImageShape image, ShapeStyle style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
+        public IImageDrawNode CreateImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel styleViewModel, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
         {
-            return new ImageDrawNode(image, style, imageCache, bitmapCache);
+            return new ImageDrawNode(image, styleViewModel, imageCache, bitmapCache);
         }
 
-        public IPathDrawNode CreatePathDrawNode(PathShape path, ShapeStyle style)
+        public IPathDrawNode CreatePathDrawNode(PathShapeViewModel path, ShapeStyleViewModel styleViewModel)
         {
-            return new PathDrawNode(path, style);
+            return new PathDrawNode(path, styleViewModel);
         }
     }
 }

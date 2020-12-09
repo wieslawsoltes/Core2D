@@ -6,36 +6,36 @@ namespace Core2D.Renderer
 {
     public interface IShapeRenderer
     {
-        ShapeRendererState State { get; set; }
+        ShapeRendererStateViewModel StateViewModel { get; set; }
 
         void ClearCache();
 
-        void Fill(object dc, double x, double y, double width, double height, BaseColor color);
+        void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel colorViewModel);
 
         void Grid(object dc, IGrid grid, double x, double y, double width, double height);
 
-        void DrawPage(object dc, PageContainer container);
+        void DrawPage(object dc, PageContainerViewModel containerViewModel);
 
-        void DrawLayer(object dc, LayerContainer layer);
+        void DrawLayer(object dc, LayerContainerViewModel layer);
 
-        void DrawPoint(object dc, PointShape point);
+        void DrawPoint(object dc, PointShapeViewModel point);
 
-        void DrawLine(object dc, LineShape line);
+        void DrawLine(object dc, LineShapeViewModel line);
 
-        void DrawRectangle(object dc, RectangleShape rectangle);
+        void DrawRectangle(object dc, RectangleShapeViewModel rectangle);
 
-        void DrawEllipse(object dc, EllipseShape ellipse);
+        void DrawEllipse(object dc, EllipseShapeViewModel ellipse);
 
-        void DrawArc(object dc, ArcShape arc);
+        void DrawArc(object dc, ArcShapeViewModelViewModel arc);
 
-        void DrawCubicBezier(object dc, CubicBezierShape cubicBezier);
+        void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier);
 
-        void DrawQuadraticBezier(object dc, QuadraticBezierShape quadraticBezier);
+        void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier);
 
-        void DrawText(object dc, TextShape text);
+        void DrawText(object dc, TextShapeViewModel text);
 
-        void DrawImage(object dc, ImageShape image);
+        void DrawImage(object dc, ImageShapeViewModel image);
 
-        void DrawPath(object dc, PathShape path);
+        void DrawPath(object dc, PathShapeViewModel path);
     }
 }

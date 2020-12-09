@@ -12,7 +12,7 @@ namespace Core2D.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ISet<BaseShape> items && items.Count == 1)
+            if (value is ISet<BaseShapeViewModel> items && items.Count == 1)
             {
                 return items.First();
             }

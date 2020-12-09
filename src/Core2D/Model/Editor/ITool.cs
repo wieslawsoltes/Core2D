@@ -17,9 +17,9 @@ namespace Core2D.Editor
 
         void Move(InputArgs args);
 
-        void Move(BaseShape shape);
+        void Move(BaseShapeViewModel shapeViewModel);
 
-        void Finalize(BaseShape shape);
+        void Finalize(BaseShapeViewModel shapeViewModel);
 
         void Reset();
     }

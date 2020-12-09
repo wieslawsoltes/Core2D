@@ -5,7 +5,7 @@ namespace Core2D.Renderer
 {
     public interface IDrawNode : IDisposable
     {
-        ShapeStyle Style { get; set; }
+        ShapeStyleViewModel StyleViewModel { get; set; }
         bool ScaleThickness { get; set; }
         bool ScaleSize { get; set; }
         void UpdateGeometry();

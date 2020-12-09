@@ -4,6 +4,6 @@ namespace Core2D.Renderer
 {
     public interface IArcDrawNode : IDrawNode
     {
-        ArcShape Arc { get; set; }
+        ArcShapeViewModelViewModel Arc { get; set; }
     }
 }

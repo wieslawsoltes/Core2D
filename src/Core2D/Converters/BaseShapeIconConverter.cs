@@ -10,7 +10,7 @@ namespace Core2D.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is BaseShape shape)
+            if (value is BaseShapeViewModel shape)
             {
                 var key = value.GetType().Name.Replace("Shape", "");
 

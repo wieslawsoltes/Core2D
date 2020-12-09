@@ -8,14 +8,14 @@ namespace Core2D.Renderer
 {
     internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
     {
-        public EllipseShape Ellipse { get; set; }
+        public EllipseShapeViewModel Ellipse { get; set; }
         public A.Rect Rect { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public EllipseDrawNode(EllipseShape ellipse, ShapeStyle style)
+        public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel styleViewModel)
             : base()
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Ellipse = ellipse;
             UpdateGeometry();
         }

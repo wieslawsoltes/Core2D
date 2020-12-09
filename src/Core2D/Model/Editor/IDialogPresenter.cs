@@ -4,8 +4,8 @@ namespace Core2D.Editor
 {
     public interface IDialogPresenter
     {
-        IList<Dialog> Dialogs { get; set; }
-        void ShowDialog(Dialog dialog);
-        void CloseDialog(Dialog dialog);
+        IList<DialogViewModel> Dialogs { get; set; }
+        void ShowDialog(DialogViewModel dialogViewModel);
+        void CloseDialog(DialogViewModel dialogViewModel);
     }
 }

@@ -12,7 +12,7 @@ namespace Core2D.Renderer
 {
     internal class ImageDrawNode : DrawNode, IImageDrawNode
     {
-        public ImageShape Image { get; set; }
+        public ImageShapeViewModel Image { get; set; }
         public A.Rect Rect { get; set; }
         public IImageCache ImageCache { get; set; }
         public ICache<string, IDisposable> BitmapCache { get; set; }
@@ -20,10 +20,10 @@ namespace Core2D.Renderer
         public A.Rect SourceRect { get; set; }
         public A.Rect DestRect { get; set; }
 
-        public ImageDrawNode(ImageShape image, ShapeStyle style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
+        public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel styleViewModel, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
             : base()
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Image = image;
             ImageCache = imageCache;
             BitmapCache = bitmapCache;

@@ -12,7 +12,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_ViewModelBase()
         {
-            var target = _factory.CreateLibrary<PageContainer>("Test");
+            var target = _factory.CreateLibrary<PageContainerViewModel>("Test");
             Assert.True(target is ViewModelBase);
         }
 
@@ -20,7 +20,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Items_Not_Null()
         {
-            var target = _factory.CreateLibrary<PageContainer>("Test");
+            var target = _factory.CreateLibrary<PageContainerViewModel>("Test");
             Assert.False(target.Items.IsDefault);
         }
 
@@ -28,7 +28,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Selected_Is_Null()
         {
-            var target = _factory.CreateLibrary<PageContainer>("Test");
+            var target = _factory.CreateLibrary<PageContainerViewModel>("Test");
             Assert.Null(target.Selected);
         }
 
@@ -36,7 +36,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetSelected_Sets_Selected()
         {
-            var target = _factory.CreateLibrary<PageContainer>("Test");
+            var target = _factory.CreateLibrary<PageContainerViewModel>("Test");
 
             var item = _factory.CreateTemplateContainer();
             target.Items = target.Items.Add(item);

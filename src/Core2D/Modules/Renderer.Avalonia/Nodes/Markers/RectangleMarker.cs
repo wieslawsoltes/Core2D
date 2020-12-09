@@ -10,12 +10,12 @@
 
             using var rotationDisposable = context.PushPreTransform(Rotation);
 
-            if (Shape.IsFilled)
+            if (ShapeViewModel.IsFilled)
             {
                 context.FillRectangle(Brush, Rect);
             }
 
-            if (Shape.IsStroked)
+            if (ShapeViewModel.IsStroked)
             {
                 context.DrawRectangle(Pen, Rect);
             }

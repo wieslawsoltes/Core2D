@@ -15,150 +15,150 @@ namespace Core2D
 {
     public interface IFactory
     {
-        Library<T> CreateLibrary<T>(string name);
+        LibraryViewModel<T> CreateLibrary<T>(string name);
 
-        Library<T> CreateLibrary<T>(string name, IEnumerable<T> items);
+        LibraryViewModel<T> CreateLibrary<T>(string name, IEnumerable<T> items);
 
-        Value CreateValue(string content);
+        ValueViewModel CreateValue(string content);
 
-        Property CreateProperty(ViewModelBase owner, string name, string value);
+        PropertyViewModel CreateProperty(ViewModelBase owner, string name, string value);
 
-        Column CreateColumn(Database owner, string name, bool isVisible = true);
+        ColumnViewModel CreateColumn(DatabaseViewModel owner, string name, bool isVisible = true);
 
-        Record CreateRecord(Database owner, ImmutableArray<Value> values);
+        RecordViewModel CreateRecord(DatabaseViewModel owner, ImmutableArray<ValueViewModel> values);
 
-        Record CreateRecord(Database owner, string id, ImmutableArray<Value> values);
+        RecordViewModel CreateRecord(DatabaseViewModel owner, string id, ImmutableArray<ValueViewModel> values);
 
-        Record CreateRecord(Database owner, string value);
+        RecordViewModel CreateRecord(DatabaseViewModel owner, string value);
 
-        Database CreateDatabase(string name, string idColumnName = "Id");
+        DatabaseViewModel CreateDatabase(string name, string idColumnName = "Id");
 
-        Database CreateDatabase(string name, ImmutableArray<Column> columns, string idColumnName = "Id");
+        DatabaseViewModel CreateDatabase(string name, ImmutableArray<ColumnViewModel> columns, string idColumnName = "Id");
 
-        Database CreateDatabase(string name, ImmutableArray<Column> columns, ImmutableArray<Record> records, string idColumnName = "Id");
+        DatabaseViewModel CreateDatabase(string name, ImmutableArray<ColumnViewModel> columns, ImmutableArray<RecordViewModel> records, string idColumnName = "Id");
 
-        Database FromFields(string name, IEnumerable<string[]> fields, string idColumnName = "Id");
+        DatabaseViewModel FromFields(string name, IEnumerable<string[]> fields, string idColumnName = "Id");
 
         ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue> dispose = null);
 
-        ShapeRendererState CreateShapeRendererState();
+        ShapeRendererStateViewModel CreateShapeRendererState();
 
-        LineSegment CreateLineSegment(PointShape point);
+        LineSegmentViewModel CreateLineSegment(PointShapeViewModel point);
 
-        ArcSegment CreateArcSegment(PointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection);
+        ArcSegmentViewModel CreateArcSegment(PointShapeViewModel point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection);
 
-        QuadraticBezierSegment CreateQuadraticBezierSegment(PointShape point1, PointShape point2);
+        QuadraticBezierSegmentViewModel CreateQuadraticBezierSegment(PointShapeViewModel point1, PointShapeViewModel point2);
 
-        CubicBezierSegment CreateCubicBezierSegment(PointShape point1, PointShape point2, PointShape point3);
+        CubicBezierSegmentViewModel CreateCubicBezierSegment(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3);
 
         PathSize CreatePathSize(double width = 0.0, double height = 0.0);
 
-        PathGeometry CreatePathGeometry();
+        PathGeometryViewModel CreatePathGeometry();
 
-        PathGeometry CreatePathGeometry(ImmutableArray<PathFigure> figures, FillRule fillRule = FillRule.Nonzero);
+        PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero);
 
         GeometryContext CreateGeometryContext();
 
-        GeometryContext CreateGeometryContext(PathGeometry geometry);
+        GeometryContext CreateGeometryContext(PathGeometryViewModel geometryViewModel);
 
-        PathFigure CreatePathFigure(bool isClosed = false);
+        PathFigureViewModel CreatePathFigure(bool isClosed = false);
 
-        PathFigure CreatePathFigure(PointShape startPoint, bool isClosed = false);
+        PathFigureViewModel CreatePathFigure(PointShapeViewModel startPoint, bool isClosed = false);
 
-        PointShape CreatePointShape(double x = 0.0, double y = 0.0, string name = "");
+        PointShapeViewModel CreatePointShape(double x = 0.0, double y = 0.0, string name = "");
 
-        LineShape CreateLineShape(PointShape start, PointShape end, ShapeStyle style, bool isStroked = true, string name = "");
+        LineShapeViewModel CreateLineShape(PointShapeViewModel start, PointShapeViewModel end, ShapeStyleViewModel styleViewModel, bool isStroked = true, string name = "");
 
-        LineShape CreateLineShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, string name = "");
+        LineShapeViewModel CreateLineShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, bool isStroked = true, string name = "");
 
-        LineShape CreateLineShape(double x, double y, ShapeStyle style, bool isStroked = true, string name = "");
+        LineShapeViewModel CreateLineShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, string name = "");
 
-        ArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        ArcShapeViewModelViewModel CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        ArcShape CreateArcShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        ArcShapeViewModelViewModel CreateArcShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        ArcShape CreateArcShape(PointShape point1, PointShape point2, PointShape point3, PointShape point4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        ArcShapeViewModelViewModel CreateArcShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        QuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        QuadraticBezierShape CreateQuadraticBezierShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        QuadraticBezierShape CreateQuadraticBezierShape(PointShape point1, PointShape point2, PointShape point3, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        QuadraticBezierShapeViewModel CreateQuadraticBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        CubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        CubicBezierShapeViewModel CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        CubicBezierShape CreateCubicBezierShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        CubicBezierShapeViewModel CreateCubicBezierShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        CubicBezierShape CreateCubicBezierShape(PointShape point1, PointShape point2, PointShape point3, PointShape point4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        CubicBezierShapeViewModel CreateCubicBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        RectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        RectangleShapeViewModel CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        RectangleShape CreateRectangleShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        RectangleShapeViewModel CreateRectangleShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        RectangleShape CreateRectangleShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        RectangleShapeViewModel CreateRectangleShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        EllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        EllipseShapeViewModel CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        EllipseShape CreateEllipseShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        EllipseShapeViewModel CreateEllipseShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        EllipseShape CreateEllipseShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "");
+        EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "");
 
-        PathShape CreatePathShape(ShapeStyle style, PathGeometry geometry, bool isStroked = true, bool isFilled = true);
+        PathShapeViewModel CreatePathShape(ShapeStyleViewModel styleViewModel, PathGeometryViewModel geometryViewModel, bool isStroked = true, bool isFilled = true);
 
-        PathShape CreatePathShape(string name, ShapeStyle style, PathGeometry geometry, bool isStroked = true, bool isFilled = true);
+        PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel styleViewModel, PathGeometryViewModel geometryViewModel, bool isStroked = true, bool isFilled = true);
 
-        TextShape CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyle style, string text, bool isStroked = true, string name = "");
+        TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, string text, bool isStroked = true, string name = "");
 
-        TextShape CreateTextShape(double x, double y, ShapeStyle style, string text, bool isStroked = true, string name = "");
+        TextShapeViewModel CreateTextShape(double x, double y, ShapeStyleViewModel styleViewModel, string text, bool isStroked = true, string name = "");
 
-        TextShape CreateTextShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string text, bool isStroked = true, string name = "");
+        TextShapeViewModel CreateTextShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel styleViewModel, string text, bool isStroked = true, string name = "");
 
-        ImageShape CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "");
+        ImageShapeViewModel CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
-        ImageShape CreateImageShape(double x, double y, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "");
+        ImageShapeViewModel CreateImageShape(double x, double y, ShapeStyleViewModel styleViewModel, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
-        ImageShape CreateImageShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "");
+        ImageShapeViewModel CreateImageShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel styleViewModel, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
-        GroupShape CreateGroupShape(string name = "g");
+        GroupShapeViewModel CreateGroupShape(string name = "g");
 
-        ArgbColor CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
+        ArgbColorViewModelViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
 
-        ArrowStyle CreateArrowStyle(ArrowType arrowType = ArrowType.None, double radiusX = 5.0, double radiusY = 3.0);
+        ArrowStyleViewModel CreateArrowStyle(ArrowType arrowType = ArrowType.None, double radiusX = 5.0, double radiusY = 3.0);
 
-        StrokeStyle CreateStrokeStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00, double thickness = 2.0, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0);
+        StrokeStyleViewModel CreateStrokeStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00, double thickness = 2.0, ArrowStyleViewModel startArrowStyleViewModel = null, ArrowStyleViewModel endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0);
 
-        StrokeStyle CreateStrokeStyle(string name, BaseColor color, double thickness, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle);
+        StrokeStyleViewModel CreateStrokeStyle(string name, BaseColorViewModel colorViewModel, double thickness, ArrowStyleViewModel startArrowStyleViewModel, ArrowStyleViewModel endArrowStyleViewModel);
 
-        FillStyle CreateFillStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
+        FillStyleViewModel CreateFillStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
 
-        FillStyle CreateFillStyle(string name, BaseColor color);
+        FillStyleViewModel CreateFillStyle(string name, BaseColorViewModel colorViewModel);
 
-        ShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0);
+        ShapeStyleViewModel CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyleViewModel textStyleViewModel = null, ArrowStyleViewModel startArrowStyleViewModel = null, ArrowStyleViewModel endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0);
 
-        ShapeStyle CreateShapeStyle(string name, BaseColor stroke, BaseColor fill, double thickness, TextStyle textStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle);
+        ShapeStyleViewModel CreateShapeStyle(string name, BaseColorViewModel stroke, BaseColorViewModel fill, double thickness, TextStyleViewModel textStyleViewModel, ArrowStyleViewModel startArrowStyleViewModel, ArrowStyleViewModel endArrowStyleViewModel);
 
-        TextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyleFlags fontStyle = FontStyleFlags.Regular, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center);
+        TextStyleViewModel CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyleFlags fontStyle = FontStyleFlags.Regular, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center);
 
-        Options CreateOptions();
+        OptionsViewModel CreateOptions();
 
-        Script CreateScript(string name = "Script", string code = "");
+        ScriptViewModel CreateScript(string name = "Script", string code = "");
 
-        LayerContainer CreateLayerContainer(string name = "Layer", PageContainer owner = null, bool isVisible = true);
+        LayerContainerViewModel CreateLayerContainer(string name = "Layer", PageContainerViewModel owner = null, bool isVisible = true);
 
-        PageContainer CreatePageContainer(string name = "Page");
+        PageContainerViewModel CreatePageContainer(string name = "Page");
 
-        PageContainer CreateTemplateContainer(string name = "Template", double width = 840, double height = 600);
+        PageContainerViewModel CreateTemplateContainer(string name = "Template", double width = 840, double height = 600);
 
-        DocumentContainer CreateDocumentContainer(string name = "Document");
+        DocumentContainerViewModel CreateDocumentContainer(string name = "Document");
 
-        ProjectContainer CreateProjectContainer(string name = "Project");
+        ProjectContainerViewModel CreateProjectContainer(string name = "Project");
 
-        ProjectContainer OpenProjectContainer(string path, IFileSystem fileSystem, IJsonSerializer serializer);
+        ProjectContainerViewModel OpenProjectContainer(string path, IFileSystem fileSystem, IJsonSerializer serializer);
 
-        void SaveProjectContainer(ProjectContainer project, string path, IFileSystem fileSystem, IJsonSerializer serializer);
+        void SaveProjectContainer(ProjectContainerViewModel project, string path, IFileSystem fileSystem, IJsonSerializer serializer);
 
-        ProjectContainer OpenProjectContainer(Stream stream, IFileSystem fileSystem, IJsonSerializer serializer);
+        ProjectContainerViewModel OpenProjectContainer(Stream stream, IFileSystem fileSystem, IJsonSerializer serializer);
 
-        void SaveProjectContainer(ProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileSystem, IJsonSerializer serializer);
+        void SaveProjectContainer(ProjectContainerViewModel project, IImageCache imageCache, Stream stream, IFileSystem fileSystem, IJsonSerializer serializer);
     }
 }

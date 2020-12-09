@@ -41,11 +41,11 @@ namespace Core2D.Editor
 
         void OnPastePathDataFilled();
 
-        void OnImportData(ProjectContainer project);
+        void OnImportData(ProjectContainerViewModel project);
 
-        void OnExportData(Database db);
+        void OnExportData(DatabaseViewModel db);
 
-        void OnUpdateData(Database db);
+        void OnUpdateData(DatabaseViewModel db);
 
         void OnAboutDialog();
 

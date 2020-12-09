@@ -5,7 +5,7 @@ namespace Core2D.Data
 {
     public static class DatabaseExtensions
     {
-        public static bool Update(this Database destination, Database source, out ImmutableArray<Record>.Builder records)
+        public static bool Update(this DatabaseViewModel destination, DatabaseViewModel source, out ImmutableArray<RecordViewModel>.Builder records)
         {
             bool isDirty = false;
             records = null;

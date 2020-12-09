@@ -8,7 +8,7 @@ namespace Core2D.Layout
 {
     public static class BoxLayout
     {
-        public static void Stack(IEnumerable<BaseShape> shapes, StackMode mode, IHistory history)
+        public static void Stack(IEnumerable<BaseShapeViewModel> shapes, StackMode mode, IHistory history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length < 2)
@@ -51,7 +51,7 @@ namespace Core2D.Layout
             }
         }
 
-        public static void Distribute(IEnumerable<BaseShape> shapes, DistributeMode mode, IHistory history)
+        public static void Distribute(IEnumerable<BaseShapeViewModel> shapes, DistributeMode mode, IHistory history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length <= 2)
@@ -106,7 +106,7 @@ namespace Core2D.Layout
             }
         }
 
-        public static void Align(IEnumerable<BaseShape> shapes, AlignMode mode, IHistory history)
+        public static void Align(IEnumerable<BaseShapeViewModel> shapes, AlignMode mode, IHistory history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length <= 1)
@@ -148,7 +148,7 @@ namespace Core2D.Layout
             }
         }
 
-        public static void Flip(IEnumerable<BaseShape> shapes, FlipMode mode, IHistory history)
+        public static void Flip(IEnumerable<BaseShapeViewModel> shapes, FlipMode mode, IHistory history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length <= 0)
@@ -162,8 +162,8 @@ namespace Core2D.Layout
             {
                 case FlipMode.Horizontal:
                     {
-                        var previous = new List<(PointShape point, decimal x)>();
-                        var next = new List<(PointShape point, decimal x)>();
+                        var previous = new List<(PointShapeViewModel point, decimal x)>();
+                        var next = new List<(PointShapeViewModel point, decimal x)>();
 
                         foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
                         {
@@ -178,8 +178,8 @@ namespace Core2D.Layout
                     break;
                 case FlipMode.Vertical:
                     {
-                        var previous = new List<(PointShape point, decimal y)>();
-                        var next = new List<(PointShape point, decimal y)>();
+                        var previous = new List<(PointShapeViewModel point, decimal y)>();
+                        var next = new List<(PointShapeViewModel point, decimal y)>();
 
                         foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
                         {
@@ -195,7 +195,7 @@ namespace Core2D.Layout
             }
         }
 
-        public static void Rotate(IEnumerable<BaseShape> shapes, decimal angle, IHistory history)
+        public static void Rotate(IEnumerable<BaseShapeViewModel> shapes, decimal angle, IHistory history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length <= 0)
@@ -205,8 +205,8 @@ namespace Core2D.Layout
 
             var boxes = groupBox.Boxes.ToList();
 
-            var previous = new List<(PointShape point, decimal x, decimal y)>();
-            var next = new List<(PointShape point, decimal x, decimal y)>();
+            var previous = new List<(PointShapeViewModel point, decimal x, decimal y)>();
+            var next = new List<(PointShapeViewModel point, decimal x, decimal y)>();
 
             var radians = angle * (decimal)Math.PI / 180m;
             var centerX = groupBox.Bounds.CenterX;

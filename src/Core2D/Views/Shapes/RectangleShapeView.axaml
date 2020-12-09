@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Rectangle}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:RectangleShape" x:CompileBindings="True">
+             x:DataType="vms:RectangleShapeViewModel" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Rectangle" IsExpanded="True">
             <StackPanel>

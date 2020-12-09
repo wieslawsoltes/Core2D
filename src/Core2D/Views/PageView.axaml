@@ -13,9 +13,9 @@
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
+             d:DataContext="{x:Static vmd:DesignerContext.EditorViewModel}"
              d:DesignWidth="1200" d:DesignHeight="540"
-             x:DataType="vme:ProjectEditor" x:CompileBindings="True">
+             x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:EditorDropHandler x:Key="EditorDropHandler" />
         <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
@@ -91,8 +91,8 @@
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Xor" Gesture="Ctrl+Shift+X" x:CompileBindings="False" />
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" Gesture="Ctrl+Shift+R" x:CompileBindings="False" />
         <!-- Format -->
-        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding StyleEditorViewModel.OnCopyStyle}" Gesture="Ctrl+Shift+C" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding StyleEditorViewModel.OnPasteStyle}" Gesture="Ctrl+Shift+V" x:CompileBindings="False" />
         <!-- Tool -->
         <KeyBinding Command="{Binding OnToolNone}" Gesture="N" x:CompileBindings="False" />
         <KeyBinding Command="{Binding OnToolSelection}" Gesture="S" x:CompileBindings="False" />
@@ -139,11 +139,11 @@
                                                                  x:CompileBindings="False"/>
                         </i:Interaction.Behaviors>
                         <Panel HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Width="{Binding #PresenterViewTemplate.Container.Template.Width}"
-                               Height="{Binding #PresenterViewTemplate.Container.Template.Height}">
-                            <views:PresenterView x:Name="PresenterViewData" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False" />
-                            <views:PresenterView x:Name="PresenterViewTemplate" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False" />
-                            <views:PresenterView x:Name="PresenterViewEditor" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False" />
+                               Width="{Binding #PresenterViewTemplate.ContainerViewModel.Template.Width}"
+                               Height="{Binding #PresenterViewTemplate.ContainerViewModel.Template.Height}">
+                            <views:PresenterView x:Name="PresenterViewData" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" ContainerViewModel="{Binding Project.CurrentContainerViewModel}" PresenterType="Data" ClipToBounds="False" />
+                            <views:PresenterView x:Name="PresenterViewTemplate" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" ContainerViewModel="{Binding Project.CurrentContainerViewModel}" PresenterType="Template" ClipToBounds="False" />
+                            <views:PresenterView x:Name="PresenterViewEditor" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" ContainerViewModel="{Binding Project.CurrentContainerViewModel}" PresenterType="Editor" ClipToBounds="False" />
                             <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <Canvas Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <TextBox x:Name="EditorTextBox"

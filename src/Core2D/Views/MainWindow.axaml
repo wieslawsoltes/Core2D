@@ -20,9 +20,9 @@
         ExtendClientAreaTitleBarHeightHint="{DynamicResource MenuBarHeight}"
         Icon="/Assets/Core2D.ico"
         mc:Ignorable="d"
-        d:DataContext="{x:Static vmd:DesignerContext.Editor}"
+        d:DataContext="{x:Static vmd:DesignerContext.EditorViewModel}"
         d:DesignWidth="1200" d:DesignHeight="580"
-        x:DataType="vme:ProjectEditor" x:CompileBindings="True">
+        x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <Window.Resources>
         <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter" />
     </Window.Resources>

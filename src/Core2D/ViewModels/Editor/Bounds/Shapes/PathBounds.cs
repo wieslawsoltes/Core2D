@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Core2D.Renderer;
+using Core2D.Shapes;
+using Spatial;
+
+namespace Core2D.Editor.Bounds.Shapes
+{
+    public class PathBounds : IBounds
+    {
+        private List<PointShapeViewModel> _points = new List<PointShapeViewModel>();
+
+        public Type TargetType => typeof(PathShapeViewModel);
+
+        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        {
+            if (!(shapeViewModel is PathShapeViewModel path))
+            {
+                throw new ArgumentNullException(nameof(shapeViewModel));
+            }
+
+            var pointHitTest = registered[typeof(PointShapeViewModel)];
+
+            _points.Clear();
+            path.GetPoints(_points);
+
+            foreach (var pathPoint in _points)
+            {
+                if (pointHitTest.TryToGetPoint(pathPoint, target, radius, scale, registered) != null)
+                {
+                    return pathPoint;
+                }
+            }
+
+            return null;
+        }
+
+        public bool Contains(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        {
+            if (!(shapeViewModel is PathShapeViewModel path))
+            {
+                throw new ArgumentNullException(nameof(shapeViewModel));
+            }
+
+            _points.Clear();
+            path.GetPoints(_points);
+
+            if (_points.Count() > 0)
+            {
+                if (path.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+                {
+                    return HitTestHelper.Contains(_points, target, scale);
+                }
+                else
+                {
+                    return HitTestHelper.Contains(_points, target, 1.0);
+                }
+            }
+
+            return false;
+        }
+
+        public bool Overlaps(BaseShapeViewModel shapeViewModel, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        {
+            if (!(shapeViewModel is PathShapeViewModel path))
+            {
+                throw new ArgumentNullException(nameof(shapeViewModel));
+            }
+
+            _points.Clear();
+            path.GetPoints(_points);
+
+            if (_points.Count() > 0)
+            {
+                if (path.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
+                {
+                    return HitTestHelper.Overlap(_points, target, scale);
+                }
+                else
+                {
+                    return HitTestHelper.Overlap(_points, target, 1.0);
+                }
+            }
+
+            return false;
+        }
+    }
+}

@@ -12,7 +12,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Layer}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:LayerContainer" x:CompileBindings="True">
+             x:DataType="vmc:LayerContainerViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
     </UserControl.Resources>
@@ -25,7 +25,7 @@
         <Expander Header="Shapes" IsExpanded="False">
             <ListBox x:Name="ShapesListBox" Items="{Binding Shapes}">
                 <ListBox.DataTemplates>
-                    <DataTemplate DataType="vms:BaseShape">
+                    <DataTemplate DataType="vms:BaseShapeViewModel">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

@@ -16,7 +16,7 @@ namespace Core2D.UnitTests
         {
             var segment = _factory.CreateLineSegment(_factory.CreatePointShape());
 
-            var target = new List<PointShape>();
+            var target = new List<PointShapeViewModel>();
             segment.GetPoints(target);
             var count = target.Count();
 

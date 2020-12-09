@@ -11,7 +11,7 @@ namespace Core2D.Renderer.Dxf
 {
     public partial class DxfRenderer : IProjectExporter
     {
-        public void Save(Stream stream, PageContainer container)
+        public void Save(Stream stream, PageContainerViewModel containerViewModel)
         {
             if (stream is FileStream fileStream)
             {
@@ -24,13 +24,13 @@ namespace Core2D.Renderer.Dxf
 
             var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
 
-            Add(dxf, container);
+            Add(dxf, containerViewModel);
 
             dxf.Save(stream);
             ClearCache();
         }
 
-        public void Save(Stream stream, DocumentContainer document)
+        public void Save(Stream stream, DocumentContainerViewModel document)
         {
             if (stream is FileStream fileStream)
             {
@@ -49,7 +49,7 @@ namespace Core2D.Renderer.Dxf
             ClearCache();
         }
 
-        public void Save(Stream stream, ProjectContainer project)
+        public void Save(Stream stream, ProjectContainerViewModel project)
         {
             if (stream is FileStream fileStream)
             {
@@ -68,30 +68,30 @@ namespace Core2D.Renderer.Dxf
             ClearCache();
         }
 
-        private void Add(DXF.DxfDocument dxf, PageContainer container)
+        private void Add(DXF.DxfDocument dxf, PageContainerViewModel containerViewModel)
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
-            var db = (object)container.Properties;
-            var record = (object)container.Record;
+            var db = (object)containerViewModel.Properties;
+            var record = (object)containerViewModel.RecordViewModel;
 
-            dataFlow.Bind(container.Template, db, record);
-            dataFlow.Bind(container, db, record);
+            dataFlow.Bind(containerViewModel.Template, db, record);
+            dataFlow.Bind(containerViewModel, db, record);
 
-            if (container.Template != null)
+            if (containerViewModel.Template != null)
             {
-                _pageWidth = container.Template.Width;
-                _pageHeight = container.Template.Height;
-                DrawPage(dxf, container.Template);
+                _pageWidth = containerViewModel.Template.Width;
+                _pageHeight = containerViewModel.Template.Height;
+                DrawPage(dxf, containerViewModel.Template);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            DrawPage(dxf, container);
+            DrawPage(dxf, containerViewModel);
         }
 
-        private void Add(DXF.DxfDocument dxf, DocumentContainer document)
+        private void Add(DXF.DxfDocument dxf, DocumentContainerViewModel document)
         {
             foreach (var page in document.Pages)
             {
@@ -114,7 +114,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void Add(DXF.DxfDocument dxf, ProjectContainer project)
+        private void Add(DXF.DxfDocument dxf, ProjectContainerViewModel project)
         {
             foreach (var document in project.Documents)
             {

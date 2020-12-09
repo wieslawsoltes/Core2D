@@ -36,18 +36,18 @@ namespace Core2D.FileWriter.Dxf
             IProjectExporter exporter = new DxfRenderer(_serviceProvider);
 
             IShapeRenderer renderer = (IShapeRenderer)exporter;
-            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-            renderer.State.ImageCache = ic;
+            renderer.StateViewModel.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.StateViewModel.ImageCache = ic;
 
-            if (item is PageContainer page)
+            if (item is PageContainerViewModel page)
             {
                 exporter.Save(stream, page);
             }
-            else if (item is DocumentContainer document)
+            else if (item is DocumentContainerViewModel document)
             {
                 exporter.Save(stream, document);
             }
-            else if (item is ProjectContainer project)
+            else if (item is ProjectContainerViewModel project)
             {
                 exporter.Save(stream, project);
             }

@@ -6,7 +6,7 @@ namespace Core2D.Renderer
 {
     public interface IImageDrawNode : IDrawNode
     {
-        ImageShape Image { get; set; }
+        ImageShapeViewModel Image { get; set; }
         IImageCache ImageCache { get; set; }
         ICache<string, IDisposable> BitmapCache { get; set; }
     }

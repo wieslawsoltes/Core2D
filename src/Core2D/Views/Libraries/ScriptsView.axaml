@@ -14,7 +14,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:ProjectContainer" x:CompileBindings="True">
+             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <handlers:ScriptsListBoxDropHandler x:Key="ScriptsListBoxDropHandler" />
     </UserControl.Resources>
@@ -22,12 +22,12 @@
         <Grid RowDefinitions="Auto,*,Auto" Grid.Row="0">
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
                 <Button Content="reset" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-                <Button Content="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-                <Button Content="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding CurrentScriptViewModel.Code}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}" CommandParameter="{Binding CurrentScriptViewModel.Code}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}" CommandParameter="{Binding CurrentScriptViewModel}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
                 <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
             </StackPanel>
-            <ListBox x:Name="ScriptsListBox" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}" Grid.Row="1">
+            <ListBox x:Name="ScriptsListBox" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScriptViewModel, Mode=TwoWay}" Grid.Row="1">
                 <i:Interaction.Behaviors>
                     <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ScriptsListBoxDropHandler}" />
                 </i:Interaction.Behaviors>
@@ -37,7 +37,7 @@
                     <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #ScriptsListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
                 </ListBox.KeyBindings>
                 <ListBox.DataTemplates>
-                    <DataTemplate DataType="vms:Script">
+                    <DataTemplate DataType="vms:ScriptViewModel">
                         <TextBlock x:Name="ScriptTextBlock" Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ScriptTextBlock}" x:CompileBindings="False">
@@ -67,6 +67,6 @@
             <TextBox Text="{Binding #ScriptsListBox.SelectedItem.Name, Mode=TwoWay}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent" Margin="0,12,0,0" Grid.Row="2" x:CompileBindings="False" />
         </Grid>
         <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1" />
-        <scripting:ScriptView DataContext="{Binding CurrentScript}" Grid.Row="2" />
+        <scripting:ScriptView DataContext="{Binding CurrentScriptViewModel}" Grid.Row="2" />
     </Grid>
 </UserControl>

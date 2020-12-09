@@ -4,7 +4,7 @@ namespace Core2D.Renderer
 {
     public interface ITextDrawNode : IDrawNode
     {
-        TextShape Text { get; set; }
+        TextShapeViewModel Text { get; set; }
         string BoundText { get; set; }
     }
 }

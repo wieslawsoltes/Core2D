@@ -9,13 +9,13 @@ namespace Core2D.Renderer
 {
     internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
     {
-        public RectangleShape Rectangle { get; set; }
+        public RectangleShapeViewModel Rectangle { get; set; }
         public A.Rect Rect { get; set; }
 
-        public RectangleDrawNode(RectangleShape rectangle, ShapeStyle style)
+        public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel styleViewModel)
             : base()
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Rectangle = rectangle;
             UpdateGeometry();
         }

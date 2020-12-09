@@ -10,11 +10,11 @@
              x:DataType="vm:IDataObject" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Record" IsExpanded="True">
-            <DockPanel IsVisible="{Binding !!Record}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!Record}" DockPanel.Dock="Top">
+            <DockPanel IsVisible="{Binding !!RecordViewModel}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!RecordViewModel}" DockPanel.Dock="Top">
                     <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
                 </StackPanel>
-                <ContentControl Content="{Binding Record}" />
+                <ContentControl Content="{Binding RecordViewModel}" />
             </DockPanel>
         </Expander>
         <Expander Header="Properties" IsExpanded="True">
@@ -26,7 +26,7 @@
                     <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
                     <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Properties}">
                         <ItemsControl.DataTemplates>
-                            <DataTemplate DataType="vmdt:Property">
+                            <DataTemplate DataType="vmdt:PropertyViewModel">
                                 <Panel VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
                                     <!--<i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -40,7 +40,7 @@
                     <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
                     <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Properties}">
                         <ItemsControl.DataTemplates>
-                            <DataTemplate DataType="vmdt:Property">
+                            <DataTemplate DataType="vmdt:PropertyViewModel">
                                 <DockPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="Transparent" Margin="0,2,0,2">
                                     <!--<i:Interaction.Behaviors>
                                         <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

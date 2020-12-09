@@ -14,9 +14,9 @@
              xmlns:vmst="using:Core2D.Style"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
+             d:DataContext="{x:Static vmd:DesignerContext.EditorViewModel}"
              d:DesignWidth="1000" d:DesignHeight="600"
-             x:DataType="vme:ProjectEditor" x:CompileBindings="True">
+             x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
     </UserControl.Resources>
@@ -42,7 +42,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="vmc:Library" ItemsSource="{Binding Items}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:LibraryViewModel" ItemsSource="{Binding Items}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -54,7 +54,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <DataTemplate DataType="vmst:ShapeStyle">
+                    <DataTemplate DataType="vmst:ShapeStyleViewModel">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -80,7 +80,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="vmc:Library" ItemsSource="{Binding Items}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:LibraryViewModel" ItemsSource="{Binding Items}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -92,7 +92,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="vms:GroupShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vms:GroupShapeViewModel" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -130,7 +130,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <DataTemplate DataType="vmdt:Database">
+                    <DataTemplate DataType="vmdt:DatabaseViewModel">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -156,7 +156,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="vmc:PageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:PageContainerViewModel" ItemsSource="{Binding Layers}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -168,7 +168,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="vmc:LayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -180,7 +180,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="vms:BaseShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vms:BaseShapeViewModel" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -244,7 +244,7 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <TreeDataTemplate DataType="vmc:DocumentContainer" ItemsSource="{Binding Pages}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" ItemsSource="{Binding Pages}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -256,7 +256,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="vmc:PageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:PageContainerViewModel" ItemsSource="{Binding Layers}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -268,7 +268,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="vmc:LayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -280,7 +280,7 @@
                             </TextBlock.ContextMenu>
                         </TextBlock>
                     </TreeDataTemplate>
-                    <TreeDataTemplate DataType="vms:BaseShape" ItemsSource="{Binding Resources}" x:CompileBindings="False">
+                    <TreeDataTemplate DataType="vms:BaseShapeViewModel" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

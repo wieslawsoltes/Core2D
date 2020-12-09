@@ -8,47 +8,47 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class LineDrawNode : DrawNode, ILineDrawNode
     {
-        public LineShape Line { get; set; }
+        public LineShapeViewModel Line { get; set; }
         public SKPoint P0 { get; set; }
         public SKPoint P1 { get; set; }
         public IMarker StartMarker { get; set; }
         public IMarker EndMarker { get; set; }
 
-        public LineDrawNode(LineShape line, ShapeStyle style)
+        public LineDrawNode(LineShapeViewModel line, ShapeStyleViewModel styleViewModel)
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             Line = line;
             UpdateGeometry();
         }
 
-        private Marker CreateArrowMarker(double x, double y, double angle, ShapeStyle shapeStyle, ArrowStyle style)
+        private Marker CreateArrowMarker(double x, double y, double angle, ShapeStyleViewModel shapeStyleViewModel, ArrowStyleViewModel styleViewModel)
         {
-            switch (style.ArrowType)
+            switch (styleViewModel.ArrowType)
             {
                 default:
                 case ArrowType.None:
                     {
                         var marker = new NoneMarker();
 
-                        marker.Shape = Line;
-                        marker.ShapeStyle = shapeStyle;
-                        marker.Style = style;
+                        marker.ShapeViewModel = Line;
+                        marker.ShapeStyleViewModel = shapeStyleViewModel;
+                        marker.StyleViewModel = styleViewModel;
                         marker.Point = new SKPoint((float)x, (float)y);
 
                         return marker;
                     }
                 case ArrowType.Rectangle:
                     {
-                        double rx = style.RadiusX;
-                        double ry = style.RadiusY;
+                        double rx = styleViewModel.RadiusX;
+                        double ry = styleViewModel.RadiusY;
                         double sx = 2.0 * rx;
                         double sy = 2.0 * ry;
 
                         var marker = new RectangleMarker();
 
-                        marker.Shape = Line;
-                        marker.ShapeStyle = shapeStyle;
-                        marker.Style = style;
+                        marker.ShapeViewModel = Line;
+                        marker.ShapeStyleViewModel = shapeStyleViewModel;
+                        marker.StyleViewModel = styleViewModel;
                         marker.Rotation = MatrixHelper.Rotation(angle, new SKPoint((float)x, (float)y));
                         marker.Point = MatrixHelper.TransformPoint(marker.Rotation, new SKPoint((float)(x - sx), (float)y));
 
@@ -59,16 +59,16 @@ namespace Core2D.Renderer.SkiaSharp
                     }
                 case ArrowType.Ellipse:
                     {
-                        double rx = style.RadiusX;
-                        double ry = style.RadiusY;
+                        double rx = styleViewModel.RadiusX;
+                        double ry = styleViewModel.RadiusY;
                         double sx = 2.0 * rx;
                         double sy = 2.0 * ry;
 
                         var marker = new EllipseMarker();
 
-                        marker.Shape = Line;
-                        marker.ShapeStyle = shapeStyle;
-                        marker.Style = style;
+                        marker.ShapeViewModel = Line;
+                        marker.ShapeStyleViewModel = shapeStyleViewModel;
+                        marker.StyleViewModel = styleViewModel;
                         marker.Rotation = MatrixHelper.Rotation(angle, new SKPoint((float)x, (float)y));
                         marker.Point = MatrixHelper.TransformPoint(marker.Rotation, new SKPoint((float)(x - sx), (float)y));
 
@@ -79,16 +79,16 @@ namespace Core2D.Renderer.SkiaSharp
                     }
                 case ArrowType.Arrow:
                     {
-                        double rx = style.RadiusX;
-                        double ry = style.RadiusY;
+                        double rx = styleViewModel.RadiusX;
+                        double ry = styleViewModel.RadiusY;
                         double sx = 2.0 * rx;
                         double sy = 2.0 * ry;
 
                         var marker = new ArrowMarker();
 
-                        marker.Shape = Line;
-                        marker.ShapeStyle = shapeStyle;
-                        marker.Style = style;
+                        marker.ShapeViewModel = Line;
+                        marker.ShapeStyleViewModel = shapeStyleViewModel;
+                        marker.StyleViewModel = styleViewModel;
                         marker.Rotation = MatrixHelper.Rotation(angle, new SKPoint((float)x, (float)y));
                         marker.Point = MatrixHelper.TransformPoint(marker.Rotation, new SKPoint((float)x, (float)y));
 
@@ -109,10 +109,10 @@ namespace Core2D.Renderer.SkiaSharp
             double x2 = Line.End.X;
             double y2 = Line.End.Y;
 
-            if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
+            if (StyleViewModel.Stroke.StartArrowStyleViewModel.ArrowType != ArrowType.None)
             {
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
-                StartMarker = CreateArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrowStyle);
+                StartMarker = CreateArrowMarker(x1, y1, a1, StyleViewModel, StyleViewModel.Stroke.StartArrowStyleViewModel);
                 StartMarker.UpdateStyle();
                 P0 = (StartMarker as Marker).Point;
             }
@@ -122,10 +122,10 @@ namespace Core2D.Renderer.SkiaSharp
                 P0 = new SKPoint((float)x1, (float)y1);
             }
 
-            if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
+            if (StyleViewModel.Stroke.EndArrowStyleViewModel.ArrowType != ArrowType.None)
             {
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
-                EndMarker = CreateArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrowStyle);
+                EndMarker = CreateArrowMarker(x2, y2, a2, StyleViewModel, StyleViewModel.Stroke.EndArrowStyleViewModel);
                 EndMarker.UpdateStyle();
                 P1 = (EndMarker as Marker).Point;
             }
@@ -150,12 +150,12 @@ namespace Core2D.Renderer.SkiaSharp
         {
             base.UpdateStyle();
 
-            if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
+            if (StyleViewModel.Stroke.StartArrowStyleViewModel.ArrowType != ArrowType.None)
             {
                 StartMarker?.UpdateStyle();
             }
 
-            if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
+            if (StyleViewModel.Stroke.EndArrowStyleViewModel.ArrowType != ArrowType.None)
             {
                 EndMarker?.UpdateStyle();
             }
@@ -169,12 +169,12 @@ namespace Core2D.Renderer.SkiaSharp
             {
                 canvas.DrawLine(P0, P1, Stroke);
 
-                if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
+                if (StyleViewModel.Stroke.StartArrowStyleViewModel.ArrowType != ArrowType.None)
                 {
                     StartMarker?.Draw(dc);
                 }
 
-                if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
+                if (StyleViewModel.Stroke.EndArrowStyleViewModel.ArrowType != ArrowType.None)
                 {
                     EndMarker?.Draw(dc);
                 }

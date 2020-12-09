@@ -9,7 +9,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Core2D.TextFieldReader.OpenXml
 {
-    public sealed class OpenXmlReader : ITextFieldReader<Database>
+    public sealed class OpenXmlReader : ITextFieldReader<DatabaseViewModel>
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -85,7 +85,7 @@ namespace Core2D.TextFieldReader.OpenXml
             spreadsheetDocument.Close();
         }
 
-        public Database Read(Stream stream)
+        public DatabaseViewModel Read(Stream stream)
         {
             var fields = ReadFields(stream).ToList();
 

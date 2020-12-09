@@ -34,12 +34,12 @@ namespace Core2D.SvgExporter.Svg
 
             switch (item)
             {
-                case BaseShape shape:
+                case BaseShapeViewModel shape:
                     {
                         ToGeometryDrawing(shape, sb, converter);
                     }
                     break;
-                case IEnumerable<BaseShape> shapes:
+                case IEnumerable<BaseShapeViewModel> shapes:
                     {
                         foreach (var shape in shapes)
                         {
@@ -54,9 +54,9 @@ namespace Core2D.SvgExporter.Svg
             return sb.ToString();
         }
 
-        private void ToGeometryDrawing(BaseShape shape, StringBuilder sb, IPathConverter converter)
+        private void ToGeometryDrawing(BaseShapeViewModel shapeViewModel, StringBuilder sb, IPathConverter converter)
         {
-            if (shape is GroupShape group)
+            if (shapeViewModel is GroupShapeViewModel group)
             {
                 foreach (var child in group.Shapes)
                 {
@@ -65,32 +65,32 @@ namespace Core2D.SvgExporter.Svg
                 return;
             }
 
-            if (shape.IsFilled)
+            if (shapeViewModel.IsFilled)
             {
-                var path = converter.ToFillPathShape(shape);
+                var path = converter.ToFillPathShape(shapeViewModel);
                 if (path != null)
                 {
-                    if (shape.Style.Fill.Color is ArgbColor argbColor)
+                    if (shapeViewModel.StyleViewModel.Fill.ColorViewModel is ArgbColorViewModelViewModel argbColor)
                     {
-                        var geometry = path.Geometry.ToSvgString();
+                        var geometry = path.GeometryViewModel.ToSvgString();
                         var fill = argbColor.ToSvgString();
                         var fillOpacity = (argbColor.A / 255.0).ToString(CultureInfo.InvariantCulture);
-                        var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
+                        var fillRule = path.GeometryViewModel.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
                         sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>"); 
                     }
                 }
             }
-            if (shape.IsStroked)
+            if (shapeViewModel.IsStroked)
             {
-                var path = converter.ToStrokePathShape(shape);
+                var path = converter.ToStrokePathShape(shapeViewModel);
                 if (path != null)
                 {
-                    if (shape.Style.Stroke.Color is ArgbColor argbColor)
+                    if (shapeViewModel.StyleViewModel.Stroke.ColorViewModel is ArgbColorViewModelViewModel argbColor)
                     {
-                        var geometry = path.Geometry.ToSvgString();
+                        var geometry = path.GeometryViewModel.ToSvgString();
                         var fill = argbColor.ToSvgString();
                         var fillOpacity = (argbColor.A / 255.0).ToString(CultureInfo.InvariantCulture);
-                        var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
+                        var fillRule = path.GeometryViewModel.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
                         sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>");
                     }
                 }

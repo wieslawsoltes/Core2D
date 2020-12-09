@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Document}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:DocumentContainer" x:CompileBindings="True">
+             x:DataType="vmc:DocumentContainerViewModel" x:CompileBindings="True">
     <StackPanel>
         <StackPanel>
             <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
@@ -19,7 +19,7 @@
         <Expander Header="Pages" IsExpanded="False">
             <ListBox x:Name="PagesListBox" Items="{Binding Pages}">
                 <ListBox.DataTemplates>
-                    <DataTemplate DataType="vmc:PageContainer">
+                    <DataTemplate DataType="vmc:PageContainerViewModel">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Image}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:ImageShape" x:CompileBindings="True">
+             x:DataType="vms:ImageShapeViewModel" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Image" IsExpanded="True">
             <StackPanel>

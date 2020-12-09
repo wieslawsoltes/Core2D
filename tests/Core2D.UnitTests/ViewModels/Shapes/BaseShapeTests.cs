@@ -22,7 +22,7 @@ namespace Core2D.Shapes.UnitTests
             Assert.True(target is ViewModelBase);
         }
 
-        private class Class1 : BaseShape
+        private class Class1 : BaseShapeViewModel
         {
             public Class1() : base(typeof(Class1))
             {
@@ -48,7 +48,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void GetPoints(IList<PointShape> points)
+            public override void GetPoints(IList<PointShapeViewModel> points)
             {
                 throw new NotImplementedException();
             }

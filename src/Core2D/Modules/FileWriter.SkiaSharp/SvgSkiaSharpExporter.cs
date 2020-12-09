@@ -18,19 +18,19 @@ namespace Core2D.FileWriter.SkiaSharpSvg
             _presenter = presenter;
         }
 
-        public void Save(Stream stream, PageContainer container)
+        public void Save(Stream stream, PageContainerViewModel containerViewModel)
         {
             using var wstream = new SKManagedWStream(stream);
-            using var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, (int)container.Template.Width, (int)container.Template.Height), stream);
-            _presenter.Render(canvas, _renderer, container, 0, 0);
+            using var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, (int)containerViewModel.Template.Width, (int)containerViewModel.Template.Height), stream);
+            _presenter.Render(canvas, _renderer, containerViewModel, 0, 0);
         }
 
-        public void Save(Stream stream, DocumentContainer document)
+        public void Save(Stream stream, DocumentContainerViewModel document)
         {
             throw new NotSupportedException("Saving documents as svg drawing is not supported.");
         }
 
-        public void Save(Stream stream, ProjectContainer project)
+        public void Save(Stream stream, ProjectContainerViewModel project)
         {
             throw new NotSupportedException("Saving projects as svg drawing is not supported.");
         }

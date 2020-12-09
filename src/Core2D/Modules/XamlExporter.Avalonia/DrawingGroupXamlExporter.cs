@@ -31,12 +31,12 @@ namespace Core2D.XamlExporter.Avalonia
 
             switch (item)
             {
-                case BaseShape shape:
+                case BaseShapeViewModel shape:
                     {
                         ToGeometryDrawing(shape, sb, converter);
                     }
                     break;
-                case IEnumerable<BaseShape> shapes:
+                case IEnumerable<BaseShapeViewModel> shapes:
                     {
                         foreach (var shape in shapes)
                         {
@@ -51,9 +51,9 @@ namespace Core2D.XamlExporter.Avalonia
             return sb.ToString();
         }
 
-        private void ToGeometryDrawing(BaseShape shape, StringBuilder sb, IPathConverter converter)
+        private void ToGeometryDrawing(BaseShapeViewModel shapeViewModel, StringBuilder sb, IPathConverter converter)
         {
-            if (shape is GroupShape group)
+            if (shapeViewModel is GroupShapeViewModel group)
             {
                 foreach (var child in group.Shapes)
                 {
@@ -62,24 +62,24 @@ namespace Core2D.XamlExporter.Avalonia
                 return;
             }
 
-            if (shape.IsFilled)
+            if (shapeViewModel.IsFilled)
             {
-                var path = converter.ToFillPathShape(shape);
+                var path = converter.ToFillPathShape(shapeViewModel);
                 if (path != null)
                 {
-                    var geometry = path.Geometry.ToXamlString();
-                    var brush = (shape.Style.Fill.Color as ArgbColor).ToXamlString();
+                    var geometry = path.GeometryViewModel.ToXamlString();
+                    var brush = (shapeViewModel.StyleViewModel.Fill.ColorViewModel as ArgbColorViewModelViewModel).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }
 
-            if (shape.IsStroked)
+            if (shapeViewModel.IsStroked)
             {
-                var path = converter.ToStrokePathShape(shape);
+                var path = converter.ToStrokePathShape(shapeViewModel);
                 if (path != null)
                 {
-                    var geometry = path.Geometry.ToXamlString();
-                    var brush = (shape.Style.Stroke.Color as ArgbColor).ToXamlString();
+                    var geometry = path.GeometryViewModel.ToXamlString();
+                    var brush = (shapeViewModel.StyleViewModel.Stroke.ColorViewModel as ArgbColorViewModelViewModel).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }

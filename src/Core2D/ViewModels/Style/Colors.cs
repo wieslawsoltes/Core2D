@@ -1,6 +1,6 @@
 ﻿namespace Core2D.Style
 {
-    public class Colors
+    public static class Colors
     {
         public static uint AliceBlue => 0xfff0f8ff;
 

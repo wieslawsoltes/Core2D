@@ -13,7 +13,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             var canvas = dc as SKCanvas;
 
-            if (Shape.IsStroked)
+            if (ShapeViewModel.IsStroked)
             {
                 canvas.DrawLine(P11, P21, Pen);
                 canvas.DrawLine(P12, P22, Pen);

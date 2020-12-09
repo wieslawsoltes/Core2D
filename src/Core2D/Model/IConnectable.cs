@@ -4,9 +4,9 @@ namespace Core2D
 {
     public interface IConnectable
     {
-        bool Connect(PointShape point, PointShape target);
+        bool Connect(PointShapeViewModel point, PointShapeViewModel target);
 
-        bool Disconnect(PointShape point, out PointShape result);
+        bool Disconnect(PointShapeViewModel point, out PointShapeViewModel result);
 
         bool Disconnect();
     }

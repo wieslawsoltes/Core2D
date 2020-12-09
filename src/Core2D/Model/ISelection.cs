@@ -5,6 +5,6 @@ namespace Core2D
 {
     public interface ISelection
     {
-        ISet<BaseShape> SelectedShapes { get; set; }
+        ISet<BaseShapeViewModel> SelectedShapes { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Core2D.Style.UnitTests
         [Trait("Core2D.Style", "Style")]
         public void FromUInt32_Should_Convert_From_UInit32()
         {
-            var target = ArgbColor.FromUInt32(0x07ABCDEF);
+            var target = ArgbColorViewModelViewModel.FromUInt32(0x07ABCDEF);
 
             Assert.Equal(0x07, target.A);
             Assert.Equal(0xAB, target.R);
@@ -31,7 +31,7 @@ namespace Core2D.Style.UnitTests
         [Trait("Core2D.Style", "Style")]
         public void Parse_String_Statring_With_Hash_And_Alpha_Channel()
         {
-            var target = ArgbColor.Parse("#07ABCDEF");
+            var target = ArgbColorViewModelViewModel.Parse("#07ABCDEF");
 
             Assert.Equal(0x07, target.A);
             Assert.Equal(0xAB, target.R);
@@ -43,7 +43,7 @@ namespace Core2D.Style.UnitTests
         [Trait("Core2D.Style", "Style")]
         public void Parse_String_Statring_With_Hash_And_No_Alpha_Channel()
         {
-            var target = ArgbColor.Parse("#ABCDEF");
+            var target = ArgbColorViewModelViewModel.Parse("#ABCDEF");
 
             Assert.Equal(0xFF, target.A);
             Assert.Equal(0xAB, target.R);
@@ -55,7 +55,7 @@ namespace Core2D.Style.UnitTests
         [Trait("Core2D.Style", "Style")]
         public void Parse_String_Using_Predefined_Color_Names()
         {
-            var target = ArgbColor.Parse("Magenta");
+            var target = ArgbColorViewModelViewModel.Parse("Magenta");
 
             Assert.Equal(0xFF, target.A);
             Assert.Equal(0xFF, target.R);
@@ -69,7 +69,7 @@ namespace Core2D.Style.UnitTests
         {
             var target = _factory.CreateArgbColor(0xFF, 0x7F, 0x5A, 0x45);
 
-            Assert.Equal("#FF7F5A45", ArgbColor.ToXamlHex(target));
+            Assert.Equal("#FF7F5A45", ArgbColorViewModelViewModel.ToXamlHex(target));
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace Core2D.Style.UnitTests
         {
             var target = _factory.CreateArgbColor(0xFF, 0x7F, 0x5A, 0x45);
 
-            Assert.Equal("#7F5A45", ArgbColor.ToSvgHex(target)); // NOTE: 0xFF Alpha value is not used in Svg
+            Assert.Equal("#7F5A45", ArgbColorViewModelViewModel.ToSvgHex(target)); // NOTE: 0xFF Alpha value is not used in Svg
         }
     }
 }

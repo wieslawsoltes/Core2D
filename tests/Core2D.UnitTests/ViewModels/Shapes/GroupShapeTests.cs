@@ -18,7 +18,7 @@ namespace Core2D.Shapes.UnitTests
         public void Inherits_From_ConnectableShape()
         {
             var target = _factory.CreateGroupShape();
-            Assert.True(target is ConnectableShape);
+            Assert.True(target is ConnectableShapeViewModel);
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace Core2D.Shapes.UnitTests
             var shape = new Class1()
             {
                 State = ShapeStateFlags.Default,
-                Properties = ImmutableArray.Create<Property>()
+                Properties = ImmutableArray.Create<PropertyViewModel>()
             };
             shape.Properties = shape.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape);
@@ -60,7 +60,7 @@ namespace Core2D.Shapes.UnitTests
             var shape1 = new Class1()
             {
                 State = ShapeStateFlags.Default,
-                Properties = ImmutableArray.Create<Property>()
+                Properties = ImmutableArray.Create<PropertyViewModel>()
             };
             shape1.Properties = shape1.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape1);
@@ -71,7 +71,7 @@ namespace Core2D.Shapes.UnitTests
             var shape2 = new Class1()
             {
                 State = ShapeStateFlags.Default,
-                Properties = ImmutableArray.Create<Property>()
+                Properties = ImmutableArray.Create<PropertyViewModel>()
             };
             shape2.Properties = shape2.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Shapes = target.Shapes.Add(shape2);
@@ -95,7 +95,7 @@ namespace Core2D.Shapes.UnitTests
             point.Properties = point.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
-            var points = new List<PointShape>();
+            var points = new List<PointShapeViewModel>();
             target.GetPoints(points);
             var count = points.Count();
             Assert.Equal(3, count);
@@ -136,7 +136,7 @@ namespace Core2D.Shapes.UnitTests
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
-            var shapes = new List<BaseShape> { shape1, shape2, point1, point2 };
+            var shapes = new List<BaseShapeViewModel> { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
             var target = _factory.CreateGroupShape("g");
@@ -177,7 +177,7 @@ namespace Core2D.Shapes.UnitTests
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
-            var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
+            var shapes = new BaseShapeViewModel[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
             var target = _factory.CreateGroupShape("g");
@@ -211,7 +211,7 @@ namespace Core2D.Shapes.UnitTests
             target.AddConnectorAsInput(point2);
             target.AddConnectorAsOutput(point3);
 
-            var source = new List<BaseShape> { target };
+            var source = new List<BaseShapeViewModel> { target };
 
             target.Ungroup(source);
 
@@ -233,7 +233,7 @@ namespace Core2D.Shapes.UnitTests
             Assert.True(point3.State.HasFlag(ShapeStateFlags.Standalone));
         }
 
-        public class Class1 : BaseShape
+        public class Class1 : BaseShapeViewModel
         {
             public Class1() : base(typeof(Class1))
             {
@@ -259,7 +259,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void GetPoints(IList<PointShape> points)
+            public override void GetPoints(IList<PointShapeViewModel> points)
             {
                 throw new NotImplementedException();
             }

@@ -15,12 +15,12 @@ namespace Core2D.Converters
         {
             if (values != null && values.Count == 2)
             {
-                if (values[0] is ISet<BaseShape> shapes && shapes.Count > 0)
+                if (values[0] is ISet<BaseShapeViewModel> shapes && shapes.Count > 0)
                 {
-                    return shapes.FirstOrDefault().Style;
+                    return shapes.FirstOrDefault().StyleViewModel;
                 }
 
-                if (values[1] is ShapeStyle style)
+                if (values[1] is ShapeStyleViewModel style)
                 {
                     return style;
                 }

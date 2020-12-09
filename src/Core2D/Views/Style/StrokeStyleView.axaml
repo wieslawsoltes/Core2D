@@ -6,24 +6,24 @@
              xmlns:vms="using:Core2D.Style"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Style}"
+             d:DataContext="{x:Static vmd:DesignerContext.StyleViewModel}"
              d:DesignWidth="250" d:DesignHeight="500"
-             x:DataType="vms:StrokeStyle" x:CompileBindings="True">
+             x:DataType="vms:StrokeStyleViewModel" x:CompileBindings="True">
     <StackPanel>
-        <ContentControl Content="{Binding Color}" />
+        <ContentControl Content="{Binding ColorViewModel}" />
         <Label Content="Thickness" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding Thickness, Mode=TwoWay}" />
         <Label Content="Line Cap" Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox Items="{x:Static vms:StrokeStyle.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <ComboBox Items="{x:Static vms:StrokeStyleViewModel.LineCapValues}" SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         <Label Content="Dash Offset" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding DashOffset, Mode=TwoWay}" />
         <Label Content="Dashes" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding Dashes, Mode=TwoWay}" />
-        <StackPanel DataContext="{Binding StartArrowStyle}">
+        <StackPanel DataContext="{Binding StartArrowStyleViewModel}">
             <Grid ColumnDefinitions="40*,6,30*,6,30*">
                 <StackPanel Grid.Column="0">
                     <Label Content="Start Arrow" Margin="{DynamicResource TextControlThemePadding}" />
-                    <ComboBox Items="{x:Static vms:StrokeStyle.ArrowTypeValues}" Padding="3" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                    <ComboBox Items="{x:Static vms:StrokeStyleViewModel.ArrowTypeValues}" Padding="3" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
                 </StackPanel>
                 <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
                 <StackPanel Grid.Column="2">
@@ -37,11 +37,11 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <StackPanel DataContext="{Binding EndArrowStyle}">
+        <StackPanel DataContext="{Binding EndArrowStyleViewModel}">
             <Grid ColumnDefinitions="40*,6,30*,6,30*">
                 <StackPanel Grid.Column="0">
                     <Label Content="End Arrow" Margin="{DynamicResource TextControlThemePadding}" />
-                    <ComboBox Items="{x:Static vms:StrokeStyle.ArrowTypeValues}" Padding="3" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                    <ComboBox Items="{x:Static vms:StrokeStyleViewModel.ArrowTypeValues}" Padding="3" SelectedItem="{Binding ArrowType, Mode=TwoWay}" HorizontalAlignment="Stretch" />
                 </StackPanel>
                 <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
                 <StackPanel Grid.Column="2">

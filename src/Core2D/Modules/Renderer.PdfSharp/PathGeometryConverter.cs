@@ -8,7 +8,7 @@ namespace Core2D.Renderer.PdfSharp
 {
     public static class PathGeometryConverter
     {
-        public static PDF.XGraphicsPath ToXGraphicsPath(this PathGeometry pg, Func<double, double> scale)
+        public static PDF.XGraphicsPath ToXGraphicsPath(this PathGeometryViewModel pg, Func<double, double> scale)
         {
             var gp = new PDF.XGraphicsPath()
             {
@@ -21,7 +21,7 @@ namespace Core2D.Renderer.PdfSharp
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is ArcSegment arcSegment)
+                    if (segment is ArcSegmentViewModel arcSegment)
                     {
 #if WPF
                         var point1 = new PDF.XPoint(
@@ -44,7 +44,7 @@ namespace Core2D.Renderer.PdfSharp
                         startPoint = arcSegment.Point;
 #endif
                     }
-                    else if (segment is CubicBezierSegment cubicBezierSegment)
+                    else if (segment is CubicBezierSegmentViewModel cubicBezierSegment)
                     {
                         gp.AddBezier(
                             scale(startPoint.X),
@@ -57,9 +57,9 @@ namespace Core2D.Renderer.PdfSharp
                             scale(cubicBezierSegment.Point3.Y));
                         startPoint = cubicBezierSegment.Point3;
                     }
-                    else if (segment is LineSegment)
+                    else if (segment is LineSegmentViewModel)
                     {
-                        var lineSegment = segment as LineSegment;
+                        var lineSegment = segment as LineSegmentViewModel;
                         gp.AddLine(
                             scale(startPoint.X),
                             scale(startPoint.Y),
@@ -67,7 +67,7 @@ namespace Core2D.Renderer.PdfSharp
                             scale(lineSegment.Point.Y));
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                    else if (segment is QuadraticBezierSegmentViewModel quadraticBezierSegment)
                     {
                         var p1 = startPoint;
                         var p2 = quadraticBezierSegment.Point1;

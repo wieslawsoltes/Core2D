@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Path}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:PathShape" x:CompileBindings="True">
+             x:DataType="vms:PathShapeViewModel" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Path" IsExpanded="True">
             <StackPanel>
@@ -20,7 +20,7 @@
             </StackPanel>
         </Expander>
         <Expander Header="Geometry" IsExpanded="False">
-            <ContentControl Content="{Binding Geometry}" />
+            <ContentControl Content="{Binding GeometryViewModel}" />
         </Expander>
     </StackPanel>
 </UserControl>

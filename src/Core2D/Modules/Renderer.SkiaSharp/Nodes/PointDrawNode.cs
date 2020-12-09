@@ -7,13 +7,13 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class PointDrawNode : DrawNode, IPointDrawNode
     {
-        public PointShape Point { get; set; }
+        public PointShapeViewModel Point { get; set; }
         public double PointSize { get; set; }
         public SKRect Rect { get; set; }
 
-        public PointDrawNode(PointShape point, ShapeStyle pointStyle, double pointSize)
+        public PointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize)
         {
-            Style = pointStyle;
+            StyleViewModel = pointStyleViewModel;
             Point = point;
             PointSize = pointSize;
             UpdateGeometry();

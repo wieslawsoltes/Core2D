@@ -5,7 +5,7 @@ namespace Core2D
 {
     public interface IDataObject
     {
-        ImmutableArray<Property> Properties { get; set; }
-        Record Record { get; set; }
+        ImmutableArray<PropertyViewModel> Properties { get; set; }
+        RecordViewModel RecordViewModel { get; set; }
     }
 }

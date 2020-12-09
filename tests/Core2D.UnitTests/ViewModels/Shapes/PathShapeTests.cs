@@ -14,7 +14,7 @@ namespace Core2D.Shapes.UnitTests
             var style = _factory.CreateShapeStyle();
             var geometry = _factory.CreatePathGeometry();
             var target = _factory.CreatePathShape(style, geometry);
-            Assert.True(target is BaseShape);
+            Assert.True(target is BaseShapeViewModel);
         }
     }
 }

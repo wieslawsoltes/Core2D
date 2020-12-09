@@ -9,22 +9,22 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:ProjectContainer" x:CompileBindings="True">
+             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,Auto,*">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
-            <TextBox Text="{Binding CurrentDatabase.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentDatabase}" Grid.Column="0" x:CompileBindings="False" />
+            <TextBox Text="{Binding CurrentDatabaseViewModel.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentDatabase}" Grid.Column="0" x:CompileBindings="False" />
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
-                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabase}" IsVisible="{Binding !!CurrentDatabase}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
+                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveDatabase}" CommandParameter="{Binding CurrentDatabaseViewModel}" IsVisible="{Binding !!CurrentDatabaseViewModel}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
                 <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddDatabase}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
             </StackPanel>
         </Grid>
-        <ComboBox Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!CurrentDatabase}" HorizontalAlignment="Stretch">
+        <ComboBox Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabaseViewModel, Mode=TwoWay}" Grid.Row="1" IsVisible="{Binding !!CurrentDatabaseViewModel}" HorizontalAlignment="Stretch">
             <ComboBox.DataTemplates>
-                <DataTemplate DataType="vmdt:Database">
+                <DataTemplate DataType="vmdt:DatabaseViewModel">
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ComboBox.DataTemplates>
         </ComboBox>
-        <ContentControl Content="{Binding CurrentDatabase}" Grid.Row="2" />
+        <ContentControl Content="{Binding CurrentDatabaseViewModel}" Grid.Row="2" />
     </Grid>
 </UserControl>

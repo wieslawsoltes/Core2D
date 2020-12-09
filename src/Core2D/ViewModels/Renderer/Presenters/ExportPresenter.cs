@@ -4,22 +4,22 @@ namespace Core2D.Renderer.Presenters
 {
     public class ExportPresenter : IContainerPresenter
     {
-        public void Render(object dc, IShapeRenderer renderer, PageContainer container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, PageContainerViewModel containerViewModel, double dx, double dy)
         {
-            var flags = renderer.State.DrawShapeState;
+            var flags = renderer.StateViewModel.DrawShapeState;
 
-            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.StateViewModel.DrawShapeState = ShapeStateFlags.Printable;
 
-            renderer.Fill(dc, dx, dy, container.Template.Width, container.Template.Height, container.Template.Background);
+            renderer.Fill(dc, dx, dy, containerViewModel.Template.Width, containerViewModel.Template.Height, containerViewModel.Template.Background);
 
-            if (container.Template != null)
+            if (containerViewModel.Template != null)
             {
-                renderer.DrawPage(dc, container.Template);
+                renderer.DrawPage(dc, containerViewModel.Template);
             }
 
-            renderer.DrawPage(dc, container);
+            renderer.DrawPage(dc, containerViewModel);
 
-            renderer.State.DrawShapeState = flags;
+            renderer.StateViewModel.DrawShapeState = flags;
         }
     }
 }

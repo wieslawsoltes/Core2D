@@ -22,12 +22,12 @@ namespace Core2D.Behaviors
 
         public void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
         {
-            if (!(_control.DataContext is ProjectEditor projectEditor))
+            if (!(_control.DataContext is ProjectEditorViewModel projectEditor))
             {
                 return;
             }
 
-            var state = projectEditor.PageState;
+            var state = projectEditor.PageStateViewModel;
             if (state != null)
             {
                 state.ZoomX = zoomX;
@@ -45,7 +45,7 @@ namespace Core2D.Behaviors
 
         public void Attach()
         {
-            if (!(_control.DataContext is ProjectEditor projectEditor))
+            if (!(_control.DataContext is ProjectEditorViewModel projectEditor))
             {
                 return;
             }
@@ -86,7 +86,7 @@ namespace Core2D.Behaviors
 
         public void Detach()
         {
-            if (!(_control.DataContext is ProjectEditor projectEditor))
+            if (!(_control.DataContext is ProjectEditorViewModel projectEditor))
             {
                 return;
             }

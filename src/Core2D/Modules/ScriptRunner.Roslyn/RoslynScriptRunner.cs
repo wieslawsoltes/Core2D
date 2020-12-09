@@ -25,7 +25,7 @@ namespace Core2D.ScriptRunner.Roslyn
                     return await previousState.ContinueWithAsync(code);
                 }
                 var options = ScriptOptions.Default.WithImports("System");
-                var editor = _serviceProvider.GetService<ProjectEditor>();
+                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                 return await CSharpScript.RunAsync(code, options, editor);
             }
             catch (CompilationErrorException ex)

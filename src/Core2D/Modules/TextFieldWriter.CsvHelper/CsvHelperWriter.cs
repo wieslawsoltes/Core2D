@@ -7,7 +7,7 @@ using CSV = CsvHelper;
 
 namespace Core2D.TextFieldWriter.CsvHelper
 {
-    public sealed class CsvHelperWriter : ITextFieldWriter<Database>
+    public sealed class CsvHelperWriter : ITextFieldWriter<DatabaseViewModel>
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -20,7 +20,7 @@ namespace Core2D.TextFieldWriter.CsvHelper
 
         public string Extension { get; } = "csv";
 
-        public void Write(Stream stream, Database database)
+        public void Write(Stream stream, DatabaseViewModel databaseViewModel)
         {
             using var writer = new StringWriter();
 
@@ -34,8 +34,8 @@ namespace Core2D.TextFieldWriter.CsvHelper
             {
                 // Columns
 
-                csvWriter.WriteField(database.IdColumnName);
-                foreach (var column in database.Columns)
+                csvWriter.WriteField(databaseViewModel.IdColumnName);
+                foreach (var column in databaseViewModel.Columns)
                 {
                     csvWriter.WriteField(column.Name);
                 }
@@ -43,7 +43,7 @@ namespace Core2D.TextFieldWriter.CsvHelper
 
                 // Records
 
-                foreach (var record in database.Records)
+                foreach (var record in databaseViewModel.Records)
                 {
                     csvWriter.WriteField(record.Id.ToString());
                     foreach (var value in record.Values)

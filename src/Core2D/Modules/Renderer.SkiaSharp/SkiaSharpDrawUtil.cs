@@ -16,7 +16,7 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKRect(left, top, right, bottom);
         }
 
-        public static SKRect CreateRect(PointShape tl, PointShape br)
+        public static SKRect CreateRect(PointShapeViewModel tl, PointShapeViewModel br)
         {
             float left = (float)Math.Min(tl.X, br.X);
             float top = (float)Math.Min(tl.Y, br.Y);
@@ -25,16 +25,16 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKRect(left, top, right, bottom);
         }
 
-        public static SKColor ToSKColor(BaseColor color)
+        public static SKColor ToSKColor(BaseColorViewModel colorViewModel)
         {
-            return color switch
+            return colorViewModel switch
             {
-                ArgbColor argbColor => new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A),
-                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+                ArgbColorViewModelViewModel argbColor => new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A),
+                _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
             };
         }
 
-        public static SKPaint ToSKPaintBrush(BaseColor color)
+        public static SKPaint ToSKPaintBrush(BaseColorViewModel colorViewModel)
         {
             var brush = new SKPaint();
 
@@ -43,14 +43,14 @@ namespace Core2D.Renderer.SkiaSharp
             brush.IsStroke = false;
             brush.LcdRenderText = true;
             brush.SubpixelText = true;
-            brush.Color = ToSKColor(color);
+            brush.Color = ToSKColor(colorViewModel);
 
             return brush;
         }
 
-        public static SKStrokeCap ToStrokeCap(ShapeStyle style)
+        public static SKStrokeCap ToStrokeCap(ShapeStyleViewModel styleViewModel)
         {
-            return style.Stroke.LineCap switch
+            return styleViewModel.Stroke.LineCap switch
             {
                 LineCap.Square => SKStrokeCap.Square,
                 LineCap.Round => SKStrokeCap.Round,
@@ -58,15 +58,15 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
-        public static SKPaint ToSKPaintPen(ShapeStyle style, double strokeWidth)
+        public static SKPaint ToSKPaintPen(ShapeStyleViewModel styleViewModel, double strokeWidth)
         {
             var pen = new SKPaint();
 
             var pathEffect = default(SKPathEffect);
-            if (style.Stroke.Dashes != null)
+            if (styleViewModel.Stroke.Dashes != null)
             {
-                var intervals = StyleHelper.ConvertDashesToFloatArray(style.Stroke.Dashes, strokeWidth);
-                var phase = (float)(style.Stroke.DashOffset * strokeWidth);
+                var intervals = StyleHelper.ConvertDashesToFloatArray(styleViewModel.Stroke.Dashes, strokeWidth);
+                var phase = (float)(styleViewModel.Stroke.DashOffset * strokeWidth);
                 if (intervals != null)
                 {
                     pathEffect = SKPathEffect.CreateDash(intervals, phase);
@@ -77,14 +77,14 @@ namespace Core2D.Renderer.SkiaSharp
             pen.IsAntialias = true;
             pen.IsStroke = true;
             pen.StrokeWidth = (float)strokeWidth;
-            pen.Color = ToSKColor(style.Stroke.Color);
-            pen.StrokeCap = ToStrokeCap(style);
+            pen.Color = ToSKColor(styleViewModel.Stroke.ColorViewModel);
+            pen.StrokeCap = ToStrokeCap(styleViewModel);
             pen.PathEffect = pathEffect;
 
             return pen;
         }
 
-        public static SKPaint ToSKPaintPen(BaseColor color, double strokeWidth)
+        public static SKPaint ToSKPaintPen(BaseColorViewModel colorViewModel, double strokeWidth)
         {
             var pen = new SKPaint();
 
@@ -94,26 +94,26 @@ namespace Core2D.Renderer.SkiaSharp
             pen.IsAntialias = true;
             pen.IsStroke = true;
             pen.StrokeWidth = (float)strokeWidth;
-            pen.Color = ToSKColor(color);
+            pen.Color = ToSKColor(colorViewModel);
             pen.StrokeCap = SKStrokeCap.Butt;
             pen.PathEffect = pathEffect;
 
             return pen;
         }
 
-        public static SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
+        public static SKPoint GetTextOrigin(ShapeStyleViewModel styleViewModel, ref SKRect rect, ref SKRect size)
         {
             double rwidth = Math.Abs(rect.Right - rect.Left);
             double rheight = Math.Abs(rect.Bottom - rect.Top);
             double swidth = Math.Abs(size.Right - size.Left);
             double sheight = Math.Abs(size.Bottom - size.Top);
-            var ox = style.TextStyle.TextHAlignment switch
+            var ox = styleViewModel.TextStyleViewModel.TextHAlignment switch
             {
                 TextHAlignment.Left => rect.Left,
                 TextHAlignment.Right => rect.Right - swidth,
                 _ => (rect.Left + rwidth / 2f) - (swidth / 2f),
             };
-            var oy = style.TextStyle.TextVAlignment switch
+            var oy = styleViewModel.TextStyleViewModel.TextVAlignment switch
             {
                 TextVAlignment.Top => rect.Top,
                 TextVAlignment.Bottom => rect.Bottom - sheight,
@@ -122,30 +122,30 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKPoint((float)ox, (float)oy);
         }
 
-        public static SKPaint GetSKPaint(string text, ShapeStyle shapeStyle, PointShape topLeft, PointShape bottomRight, out SKPoint origin)
+        public static SKPaint GetSKPaint(string text, ShapeStyleViewModel shapeStyleViewModel, PointShapeViewModel topLeft, PointShapeViewModel bottomRight, out SKPoint origin)
         {
-            var pen = ToSKPaintBrush(shapeStyle.Stroke.Color);
+            var pen = ToSKPaintBrush(shapeStyleViewModel.Stroke.ColorViewModel);
 
             var weight = SKFontStyleWeight.Normal;
 
-            if (shapeStyle.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
+            if (shapeStyleViewModel.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
                 weight |= SKFontStyleWeight.Bold;
             }
 
             var style = SKFontStyleSlant.Upright;
 
-            if (shapeStyle.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
+            if (shapeStyleViewModel.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
                 style |= SKFontStyleSlant.Italic;
             }
 
-            var tf = SKTypeface.FromFamilyName(shapeStyle.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style);
+            var tf = SKTypeface.FromFamilyName(shapeStyleViewModel.TextStyleViewModel.FontName, weight, SKFontStyleWidth.Normal, style);
             pen.Typeface = tf;
             pen.TextEncoding = SKTextEncoding.Utf16;
-            pen.TextSize = (float)(shapeStyle.TextStyle.FontSize);
+            pen.TextSize = (float)(shapeStyleViewModel.TextStyleViewModel.FontSize);
 
-            pen.TextAlign = shapeStyle.TextStyle.TextHAlignment switch
+            pen.TextAlign = shapeStyleViewModel.TextStyleViewModel.TextHAlignment switch
             {
                 TextHAlignment.Center => SKTextAlign.Center,
                 TextHAlignment.Right => SKTextAlign.Right,
@@ -161,7 +161,7 @@ namespace Core2D.Renderer.SkiaSharp
             float width = rect.Width;
             float height = rect.Height;
 
-            switch (shapeStyle.TextStyle.TextVAlignment)
+            switch (shapeStyleViewModel.TextStyleViewModel.TextVAlignment)
             {
                 default:
                 case TextVAlignment.Top:
@@ -177,7 +177,7 @@ namespace Core2D.Renderer.SkiaSharp
                     break;
             }
 
-            switch (shapeStyle.TextStyle.TextHAlignment)
+            switch (shapeStyleViewModel.TextStyleViewModel.TextHAlignment)
             {
                 default:
                 case TextHAlignment.Left:

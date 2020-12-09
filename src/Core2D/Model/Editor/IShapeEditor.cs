@@ -7,8 +7,8 @@ namespace Core2D.Editor
 {
     internal interface IShapeEditor
     {
-        void BreakPathFigure(PathFigure pathFigure, ShapeStyle style, bool isStroked, bool isFilled, List<BaseShape> result);
-        bool BreakPathShape(PathShape pathShape, List<BaseShape> result);
-        void BreakShape(BaseShape shape, List<BaseShape> result, List<BaseShape> remove);
+        void BreakPathFigure(PathFigureViewModel pathFigureViewModel, ShapeStyleViewModel styleViewModel, bool isStroked, bool isFilled, List<BaseShapeViewModel> result);
+        bool BreakPathShape(PathShapeViewModel pathShapeViewModel, List<BaseShapeViewModel> result);
+        void BreakShape(BaseShapeViewModel shapeViewModel, List<BaseShapeViewModel> result, List<BaseShapeViewModel> remove);
     }
 }

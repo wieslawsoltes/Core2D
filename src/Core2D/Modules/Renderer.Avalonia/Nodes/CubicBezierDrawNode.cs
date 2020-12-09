@@ -7,12 +7,12 @@ namespace Core2D.Renderer
 {
     internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
     {
-        public CubicBezierShape CubicBezier { get; set; }
+        public CubicBezierShapeViewModel CubicBezier { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public CubicBezierDrawNode(CubicBezierShape cubicBezier, ShapeStyle style)
+        public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel styleViewModel)
         {
-            Style = style;
+            StyleViewModel = styleViewModel;
             CubicBezier = cubicBezier;
             UpdateGeometry();
         }

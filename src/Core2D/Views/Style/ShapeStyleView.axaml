@@ -6,9 +6,9 @@
              xmlns:vms="using:Core2D.Style"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Style}"
+             d:DataContext="{x:Static vmd:DesignerContext.StyleViewModel}"
              d:DesignWidth="250" d:DesignHeight="500"
-             x:DataType="vms:ShapeStyle" x:CompileBindings="True">
+             x:DataType="vms:ShapeStyleViewModel" x:CompileBindings="True">
     <StackPanel>
         <StackPanel>
             <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
@@ -21,7 +21,7 @@
             <ContentControl Content="{Binding Fill}" />
         </Expander>
         <Expander Header="Text" IsExpanded="False">
-            <ContentControl Content="{Binding TextStyle}" />
+            <ContentControl Content="{Binding TextStyleViewModel}" />
         </Expander>
     </StackPanel>
 </UserControl>

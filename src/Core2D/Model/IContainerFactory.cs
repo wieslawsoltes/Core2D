@@ -4,12 +4,12 @@ namespace Core2D
 {
     public interface IContainerFactory
     {
-        PageContainer GetTemplate(ProjectContainer project, string name);
+        PageContainerViewModel GetTemplate(ProjectContainerViewModel project, string name);
 
-        PageContainer GetPage(ProjectContainer project, string name);
+        PageContainerViewModel GetPage(ProjectContainerViewModel project, string name);
 
-        DocumentContainer GetDocument(ProjectContainer project, string name);
+        DocumentContainerViewModel GetDocument(ProjectContainerViewModel project, string name);
 
-        ProjectContainer GetProject();
+        ProjectContainerViewModel GetProject();
     }
 }
