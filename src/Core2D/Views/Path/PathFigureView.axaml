@@ -13,7 +13,7 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmp:PathFigureViewModel" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+        <converters:ViewModelToTypeStringConverter x:Key="ViewModelToTypeStringConverter" />
     </UserControl.Resources>
     <StackPanel>
         <StackPanel>
@@ -26,7 +26,7 @@
             <ListBox Items="{Binding Segments}">
                 <ListBox.DataTemplates>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                             </i:Interaction.Behaviors>

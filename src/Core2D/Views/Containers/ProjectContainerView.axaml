@@ -18,7 +18,7 @@
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:BaseShapeIconConverter x:Key="BaseShapeIconConverter" />
-        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+        <converters:ShapeToTypeStringConverter x:Key="ShapeToTypeStringConverter" />
         <handlers:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
@@ -154,7 +154,7 @@
                             </ContextMenu>
                         </StackPanel.ContextMenu>
                         <Image Source="{Binding Mode=OneWay, Converter={StaticResource BaseShapeIconConverter}}" Width="16" Height="16" Margin="8" />
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ShapeToTypeStringConverter}}" VerticalAlignment="Center" />
                     </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>

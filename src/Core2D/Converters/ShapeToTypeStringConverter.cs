@@ -2,16 +2,21 @@
 using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Converters
 {
-    public class ObjectToTypeStringConverter : IValueConverter
+    public class ShapeToTypeStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null && value != AvaloniaProperty.UnsetValue)
+            if (value is BaseShapeViewModel shape)
             {
-                return value.GetType().Name;
+                if (string.IsNullOrEmpty(shape.Name))
+                {
+                    return shape.GetType().Name.Replace("ShapeViewModel", "");
+                }
+                return shape.Name;
             }
             return AvaloniaProperty.UnsetValue;
         }
