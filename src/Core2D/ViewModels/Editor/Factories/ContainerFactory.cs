@@ -119,7 +119,7 @@ namespace Core2D.ViewModels.Editor.Factories
             documentBuilder.Add(document);
             project.Documents = documentBuilder.ToImmutable();
 
-            project.Selected = document.Pages.FirstOrDefault();
+            project.SetCurrentContainer(page);
 
             // Databases
             var db = factory.CreateDatabase("Default");
