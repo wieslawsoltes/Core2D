@@ -8,7 +8,7 @@
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.EditorViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="800" d:DesignHeight="20"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.Resources>
@@ -125,37 +125,37 @@
                 <MenuItem Header="D_ata">
                     <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}" />
                     <Separator />
-                    <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabaseViewModel}" />
+                    <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}" />
                     <Separator />
-                    <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabaseViewModel}" />
+                    <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}" />
                 </MenuItem>
                 <MenuItem Header="O_ptions">
                     <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
                         <MenuItem.Icon>
-                            <CheckBox IsChecked="{Binding Project.OptionsViewModel.DefaultIsStroked}" />
+                            <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Default is _Filled" Command="{Binding OnToggleDefaultIsFilled}" InputGesture="F">
                         <MenuItem.Icon>
-                            <CheckBox IsChecked="{Binding Project.OptionsViewModel.DefaultIsFilled}" />
+                            <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="Default is Close_d" Command="{Binding OnToggleDefaultIsClosed}" InputGesture="D">
                         <MenuItem.Icon>
-                            <CheckBox IsChecked="{Binding Project.OptionsViewModel.DefaultIsClosed}" />
+                            <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="Snap to _Grid" Command="{Binding OnToggleSnapToGrid}" InputGesture="G">
                         <MenuItem.Icon>
-                            <CheckBox IsChecked="{Binding Project.OptionsViewModel.SnapToGrid}" />
+                            <CheckBox IsChecked="{Binding Project.Options.SnapToGrid}" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="Try To _Connect" Command="{Binding OnToggleTryToConnect}" InputGesture="C">
                         <MenuItem.Icon>
-                            <CheckBox IsChecked="{Binding Project.OptionsViewModel.TryToConnect}" />
+                            <CheckBox IsChecked="{Binding Project.Options.TryToConnect}" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
@@ -179,21 +179,21 @@
             <MenuItem Header="P_age">
                 <MenuItem Header="_Add Page" Command="{Binding OnAddPage}" CommandParameter="{Binding Mode=OneWay}" />
                 <Separator />
-                <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Project.CurrentContainerViewModel}" />
-                <MenuItem Header="Insert Page Aft_er" Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Project.CurrentContainerViewModel}" />
+                <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <MenuItem Header="Insert Page Aft_er" Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Project.CurrentContainer}" />
                 <Separator />
-                <MenuItem Header="Cu_t Page" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentContainerViewModel}" />
-                <MenuItem Header="_Copy Page" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentContainerViewModel}" />
-                <MenuItem Header="_Paste Page" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentContainerViewModel}" />
+                <MenuItem Header="Cu_t Page" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <MenuItem Header="_Copy Page" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentContainer}" />
+                <MenuItem Header="_Paste Page" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentContainer}" />
                 <Separator />
-                <MenuItem Header="_Delete Page" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentContainerViewModel}" />
+                <MenuItem Header="_Delete Page" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentContainer}" />
                 <Separator />
-                <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainerViewModel}" />
+                <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainer}" />
             </MenuItem>
             <MenuItem Header="_Layer">
-                <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Project.CurrentContainerViewModel}" />
+                <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Project.CurrentContainer}" />
                 <Separator />
-                <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Project.CurrentContainerViewModel.CurrentLayer}" />
+                <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Project.CurrentContainer.CurrentLayer}" />
             </MenuItem>
             <MenuItem Header="_Shape">
                 <MenuItem Header="Du_plicate" Command="{Binding OnDuplicateSelected}" InputGesture="Ctrl+D" />

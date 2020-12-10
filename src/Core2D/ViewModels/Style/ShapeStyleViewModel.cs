@@ -6,16 +6,16 @@ namespace Core2D.Style
     {
         [AutoNotify] private StrokeStyleViewModel _stroke;
         [AutoNotify] private FillStyleViewModel _fill;
-        [AutoNotify] private TextStyleViewModel _textStyleViewModel;
+        [AutoNotify] private TextStyleViewModel _textStyle;
 
         public override object Copy(IDictionary<object, object> shared)
         {
             return new ShapeStyleViewModel()
             {
                 Name = this.Name,
-                Stroke = (StrokeStyleViewModel)this.Stroke.Copy(shared),
-                Fill = (FillStyleViewModel)this.Fill.Copy(shared),
-                TextStyleViewModel = (TextStyleViewModel)this.TextStyleViewModel.Copy(shared)
+                Stroke = (StrokeStyleViewModel)this._stroke.Copy(shared),
+                Fill = (FillStyleViewModel)this._fill.Copy(shared),
+                TextStyle = (TextStyleViewModel)this._textStyle.Copy(shared)
             };
         }
 
@@ -23,9 +23,9 @@ namespace Core2D.Style
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= Stroke.IsDirty();
-            isDirty |= Fill.IsDirty();
-            isDirty |= TextStyleViewModel.IsDirty();
+            isDirty |= _stroke.IsDirty();
+            isDirty |= _fill.IsDirty();
+            isDirty |= _textStyle.IsDirty();
 
             return isDirty;
         }
@@ -33,9 +33,9 @@ namespace Core2D.Style
         public override void Invalidate()
         {
             base.Invalidate();
-            Stroke.Invalidate();
-            Fill.Invalidate();
-            TextStyleViewModel.Invalidate();
+            _stroke.Invalidate();
+            _fill.Invalidate();
+            _textStyle.Invalidate();
         }
     }
 }

@@ -192,14 +192,14 @@ namespace Core2D
                 SelectedShapes = default
             };
 
-            state.SelectionStyleViewModel =
+            state.SelectionStyle =
                 CreateShapeStyle(
                     "Selection",
                     0x7F, 0x33, 0x33, 0xFF,
                     0x4F, 0x33, 0x33, 0xFF,
                     1.0);
 
-            state.HelperStyleViewModel =
+            state.HelperStyle =
                 CreateShapeStyle(
                     "Helper",
                     0xFF, 0x00, 0xBF, 0xFF,
@@ -209,13 +209,13 @@ namespace Core2D
             state.DrawDecorators = true;
             state.DrawPoints = true;
 
-            state.PointStyleViewModel =
+            state.PointStyle =
                 CreateShapeStyle(
                     "Point",
                     0xFF, 0x00, 0xBF, 0xFF,
                     0xFF, 0xFF, 0xFF, 0xFF,
                     2.0);
-            state.SelectedPointStyleViewModel =
+            state.SelectedPointStyle =
                 CreateShapeStyle(
                     "SelectionPoint",
                     0xFF, 0x00, 0xBF, 0xFF,
@@ -288,9 +288,9 @@ namespace Core2D
             return new GeometryContext(this, CreatePathGeometry());
         }
 
-        public GeometryContext CreateGeometryContext(PathGeometryViewModel geometryViewModel)
+        public GeometryContext CreateGeometryContext(PathGeometryViewModel geometry)
         {
-            return new GeometryContext(this, geometryViewModel);
+            return new GeometryContext(this, geometry);
         }
 
         public PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero)
@@ -329,21 +329,21 @@ namespace Core2D
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = default,
+                Style = default,
                 X = x,
                 Y = y
             };
             return pointShape;
         }
 
-        public LineShapeViewModel CreateLineShape(PointShapeViewModel start, PointShapeViewModel end, ShapeStyleViewModel styleViewModel, bool isStroked = true, string name = "")
+        public LineShapeViewModel CreateLineShape(PointShapeViewModel start, PointShapeViewModel end, ShapeStyleViewModel style, bool isStroked = true, string name = "")
         {
             var lineShape = new LineShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = false
             };
@@ -354,14 +354,14 @@ namespace Core2D
             return lineShape;
         }
 
-        public LineShapeViewModel CreateLineShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, bool isStroked = true, string name = "")
+        public LineShapeViewModel CreateLineShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, bool isStroked = true, string name = "")
         {
             var lineShape = new LineShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = false
             };
@@ -375,19 +375,19 @@ namespace Core2D
             return lineShape;
         }
 
-        public LineShapeViewModel CreateLineShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, string name = "")
+        public LineShapeViewModel CreateLineShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, string name = "")
         {
-            return CreateLineShape(x, y, x, y, styleViewModel, isStroked, name);
+            return CreateLineShape(x, y, x, y, style, isStroked, name);
         }
 
-        public ArcShapeViewModelViewModel CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModelViewModel CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var arcShape = new ArcShapeViewModelViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
             };
@@ -407,19 +407,19 @@ namespace Core2D
             return arcShape;
         }
 
-        public ArcShapeViewModelViewModel CreateArcShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModelViewModel CreateArcShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateArcShape(x, y, x, y, x, y, x, y, styleViewModel, isStroked, isFilled, name);
+            return CreateArcShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public ArcShapeViewModelViewModel CreateArcShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModelViewModel CreateArcShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var arcShape = new ArcShapeViewModelViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
             };
@@ -432,14 +432,14 @@ namespace Core2D
             return arcShape;
         }
 
-        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var quadraticBezierShape = new QuadraticBezierShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
             };
@@ -456,19 +456,19 @@ namespace Core2D
             return quadraticBezierShape;
         }
 
-        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateQuadraticBezierShape(x, y, x, y, x, y, styleViewModel, isStroked, isFilled, name);
+            return CreateQuadraticBezierShape(x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var quadraticBezierShape = new QuadraticBezierShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
             };
@@ -480,14 +480,14 @@ namespace Core2D
             return quadraticBezierShape;
         }
 
-        public CubicBezierShapeViewModel CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public CubicBezierShapeViewModel CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var cubicBezierShape = new CubicBezierShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
             };
@@ -507,19 +507,19 @@ namespace Core2D
             return cubicBezierShape;
         }
 
-        public CubicBezierShapeViewModel CreateCubicBezierShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public CubicBezierShapeViewModel CreateCubicBezierShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateCubicBezierShape(x, y, x, y, x, y, x, y, styleViewModel, isStroked, isFilled, name);
+            return CreateCubicBezierShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public CubicBezierShapeViewModel CreateCubicBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public CubicBezierShapeViewModel CreateCubicBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var cubicBezierShape = new CubicBezierShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
             };
@@ -532,14 +532,14 @@ namespace Core2D
             return cubicBezierShape;
         }
 
-        public RectangleShapeViewModel CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public RectangleShapeViewModel CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var rectangleShape = new RectangleShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
             };
@@ -553,19 +553,19 @@ namespace Core2D
             return rectangleShape;
         }
 
-        public RectangleShapeViewModel CreateRectangleShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public RectangleShapeViewModel CreateRectangleShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateRectangleShape(x, y, x, y, styleViewModel, isStroked, isFilled, name);
+            return CreateRectangleShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public RectangleShapeViewModel CreateRectangleShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public RectangleShapeViewModel CreateRectangleShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var rectangleShape = new RectangleShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
             };
@@ -576,14 +576,14 @@ namespace Core2D
             return rectangleShape;
         }
 
-        public EllipseShapeViewModel CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public EllipseShapeViewModel CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var ellipseShape = new EllipseShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
             };
@@ -597,19 +597,19 @@ namespace Core2D
             return ellipseShape;
         }
 
-        public EllipseShapeViewModel CreateEllipseShape(double x, double y, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public EllipseShapeViewModel CreateEllipseShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            return CreateEllipseShape(x, y, x, y, styleViewModel, isStroked, isFilled, name);
+            return CreateEllipseShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel styleViewModel, bool isStroked = true, bool isFilled = false, string name = "")
+        public EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var ellipseShape = new EllipseShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
                 TopLeft = topLeft,
@@ -622,23 +622,23 @@ namespace Core2D
             return ellipseShape;
         }
 
-        public PathShapeViewModel CreatePathShape(ShapeStyleViewModel styleViewModel, PathGeometryViewModel geometryViewModel, bool isStroked = true, bool isFilled = true)
+        public PathShapeViewModel CreatePathShape(ShapeStyleViewModel style, PathGeometryViewModel geometry, bool isStroked = true, bool isFilled = true)
         {
             var pathShape = new PathShapeViewModel()
             {
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                GeometryViewModel = geometryViewModel
+                Geometry = geometry
             };
 
-            if (geometryViewModel != null)
+            if (geometry != null)
             {
-                geometryViewModel.Owner = pathShape;
+                geometry.Owner = pathShape;
 
-                foreach (var figure in geometryViewModel.Figures)
+                foreach (var figure in geometry.Figures)
                 {
                     figure.Owner = pathShape;
 
@@ -652,44 +652,29 @@ namespace Core2D
             return pathShape;
         }
 
-        public PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel styleViewModel, PathGeometryViewModel geometryViewModel, bool isStroked = true, bool isFilled = true)
+        public PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel style, PathGeometryViewModel geometry, bool isStroked = true, bool isFilled = true)
         {
             var pathShape = new PathShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                GeometryViewModel = geometryViewModel
+                Geometry = geometry
             };
-
-            //if (geometry != null)
-            //{
-            //    geometry.Owner = pathShape;
-            //
-            //    foreach (var figure in geometry.Figures)
-            //    {
-            //        figure.Owner = geometry;
-            //
-            //        foreach (var segment in figure.Segments)
-            //        {
-            //            segment.Owner = figure;
-            //        }
-            //    }
-            //}
             return pathShape;
         }
 
-        public TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, string text, bool isStroked = true, string name = "")
+        public TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, string text, bool isStroked = true, string name = "")
         {
             var textShape = new TextShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 Text = text
             };
@@ -703,19 +688,19 @@ namespace Core2D
             return textShape;
         }
 
-        public TextShapeViewModel CreateTextShape(double x, double y, ShapeStyleViewModel styleViewModel, string text, bool isStroked = true, string name = "")
+        public TextShapeViewModel CreateTextShape(double x, double y, ShapeStyleViewModel style, string text, bool isStroked = true, string name = "")
         {
-            return CreateTextShape(x, y, x, y, styleViewModel, text, isStroked, name);
+            return CreateTextShape(x, y, x, y, style, text, isStroked, name);
         }
 
-        public TextShapeViewModel CreateTextShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel styleViewModel, string text, bool isStroked = true, string name = "")
+        public TextShapeViewModel CreateTextShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, string text, bool isStroked = true, string name = "")
         {
             var textShape = new TextShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
@@ -728,14 +713,14 @@ namespace Core2D
             return textShape;
         }
 
-        public ImageShapeViewModel CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel styleViewModel, string key, bool isStroked = false, bool isFilled = false, string name = "")
+        public ImageShapeViewModel CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
             var imageShape = new ImageShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
                 Key = key
@@ -750,19 +735,19 @@ namespace Core2D
             return imageShape;
         }
 
-        public ImageShapeViewModel CreateImageShape(double x, double y, ShapeStyleViewModel styleViewModel, string key, bool isStroked = false, bool isFilled = false, string name = "")
+        public ImageShapeViewModel CreateImageShape(double x, double y, ShapeStyleViewModel style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
-            return CreateImageShape(x, y, x, y, styleViewModel, key, isStroked, isFilled, name);
+            return CreateImageShape(x, y, x, y, style, key, isStroked, isFilled, name);
         }
 
-        public ImageShapeViewModel CreateImageShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel styleViewModel, string key, bool isStroked = false, bool isFilled = false, string name = "")
+        public ImageShapeViewModel CreateImageShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
             var imageShape = new ImageShapeViewModel()
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
-                StyleViewModel = styleViewModel,
+                Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
                 TopLeft = topLeft,
@@ -811,31 +796,31 @@ namespace Core2D
             var style = new StrokeStyleViewModel()
             {
                 Name = name,
-                ColorViewModel = CreateArgbColor(a, r, g, b),
+                Color = CreateArgbColor(a, r, g, b),
                 Thickness = thickness,
                 LineCap = lineCap,
                 Dashes = dashes,
                 DashOffset = dashOffset
             };
 
-            style.StartArrowStyleViewModel = startArrowStyleViewModel ?? CreateArrowStyle();
-            style.EndArrowStyleViewModel = endArrowStyleViewModel ?? CreateArrowStyle();
+            style.StartArrow = startArrowStyleViewModel ?? CreateArrowStyle();
+            style.EndArrow = endArrowStyleViewModel ?? CreateArrowStyle();
 
             return style;
         }
 
-        public StrokeStyleViewModel CreateStrokeStyle(string name, BaseColorViewModel colorViewModel, double thickness, ArrowStyleViewModel startArrowStyleViewModel, ArrowStyleViewModel endArrowStyleViewModel)
+        public StrokeStyleViewModel CreateStrokeStyle(string name, BaseColorViewModel colorViewModel, double thickness, ArrowStyleViewModel startArrow, ArrowStyleViewModel endArrow)
         {
             return new StrokeStyleViewModel()
             {
                 Name = name,
-                ColorViewModel = colorViewModel,
+                Color = colorViewModel,
                 Thickness = thickness,
                 LineCap = LineCap.Round,
                 Dashes = default,
                 DashOffset = 0.0,
-                StartArrowStyleViewModel = startArrowStyleViewModel,
-                EndArrowStyleViewModel = endArrowStyleViewModel
+                StartArrow = startArrow,
+                EndArrow = endArrow
             };
         }
 
@@ -844,7 +829,7 @@ namespace Core2D
             return new FillStyleViewModel()
             {
                 Name = name,
-                ColorViewModel = CreateArgbColor(a, r, g, b)
+                Color = CreateArgbColor(a, r, g, b)
             };
         }
 
@@ -853,7 +838,7 @@ namespace Core2D
             return new FillStyleViewModel()
             {
                 Name = name,
-                ColorViewModel = colorViewModel
+                Color = colorViewModel
             };
         }
 
@@ -864,7 +849,7 @@ namespace Core2D
                 Name = name,
                 Stroke = CreateStrokeStyle("", sa, sr, sg, sb, thickness, startArrowStyleViewModel, endArrowStyleViewModel, lineCap, dashes, dashOffset),
                 Fill = CreateFillStyle("", fa, fr, fg, fb),
-                TextStyleViewModel = textStyleViewModel ?? CreateTextStyle()
+                TextStyle = textStyleViewModel ?? CreateTextStyle()
             };
         }
 
@@ -875,7 +860,7 @@ namespace Core2D
                 Name = name,
                 Stroke = CreateStrokeStyle("", stroke, thickness, startArrowStyleViewModel, endArrowStyleViewModel),
                 Fill = CreateFillStyle("", fill),
-                TextStyleViewModel = textStyleViewModel
+                TextStyle = textStyleViewModel
             };
         }
 
@@ -971,7 +956,7 @@ namespace Core2D
             template.GridOffsetBottom = 0.0;
             template.GridCellWidth = 10.0;
             template.GridCellHeight = 10.0;
-            template.GridStrokeColorViewModel = CreateArgbColor(0xFF, 0xDE, 0xDE, 0xDE);
+            template.GridStrokeColor = CreateArgbColor(0xFF, 0xDE, 0xDE, 0xDE);
             template.GridStrokeThickness = 1.0;
 
             var builder = template.Layers.ToBuilder();
@@ -999,7 +984,7 @@ namespace Core2D
             return new ProjectContainerViewModel()
             {
                 Name = name,
-                OptionsViewModel = CreateOptions(),
+                Options = CreateOptions(),
                 StyleLibraries = ImmutableArray.Create<LibraryViewModel<ShapeStyleViewModel>>(),
                 GroupLibraries = ImmutableArray.Create<LibraryViewModel<GroupShapeViewModel>>(),
                 Databases = ImmutableArray.Create<DatabaseViewModel>(),

@@ -17,10 +17,10 @@ namespace Core2D.Containers
         [AutoNotify] private LayerContainerViewModel _currentLayer;
         [AutoNotify] private LayerContainerViewModel _workingLayer;
         [AutoNotify] private LayerContainerViewModel _helperLayer;
-        [AutoNotify] private BaseShapeViewModel _currentShapeViewModel;
+        [AutoNotify] private BaseShapeViewModel _currentShape;
         [AutoNotify] private PageContainerViewModel _template;
         [AutoNotify] private ImmutableArray<PropertyViewModel> _properties;
-        [AutoNotify] private RecordViewModel _recordViewModel;
+        [AutoNotify] private RecordViewModel _record;
         [AutoNotify] private bool _isExpanded = false;
         [AutoNotify] private bool _isGridEnabled;
         [AutoNotify] private bool _isBorderEnabled;
@@ -30,7 +30,7 @@ namespace Core2D.Containers
         [AutoNotify] private double _gridOffsetBottom;
         [AutoNotify] private double _gridCellWidth;
         [AutoNotify] private double _gridCellHeight;
-        [AutoNotify] private BaseColorViewModel _gridStrokeColorViewModel;
+        [AutoNotify] private BaseColorViewModel _gridStrokeColor;
         [AutoNotify] private double _gridStrokeThickness;
 
         public void SetCurrentLayer(LayerContainerViewModel layer) => CurrentLayer = layer;
@@ -93,12 +93,12 @@ namespace Core2D.Containers
 
             if (RecordViewModel != null)
             {
-                isDirty |= RecordViewModel.IsDirty();
+                isDirty |= Record.IsDirty();
             }
 
-            if (GridStrokeColorViewModel != null)
+            if (GridStrokeColor != null)
             {
-                isDirty |= GridStrokeColorViewModel.IsDirty();
+                isDirty |= GridStrokeColor.IsDirty();
             }
 
             return isDirty;
@@ -124,7 +124,7 @@ namespace Core2D.Containers
                 property.Invalidate();
             }
 
-            RecordViewModel?.Invalidate();
+            Record?.Invalidate();
         }
     }
 }

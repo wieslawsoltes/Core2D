@@ -10,7 +10,7 @@ namespace Core2D.Shapes
     {
         private List<PointShapeViewModel> _points;
 
-        [AutoNotify] private PathGeometryViewModel _geometryViewModel;
+        [AutoNotify] private PathGeometryViewModel _geometry;
 
         public PathShapeViewModel() : base(typeof(PathShapeViewModel))
         {
@@ -40,9 +40,9 @@ namespace Core2D.Shapes
 
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
-            if (renderer.StateViewModel.SelectedShapes != null)
+            if (renderer.State.SelectedShapes != null)
             {
-                if (renderer.StateViewModel.SelectedShapes.Contains(this))
+                if (renderer.State.SelectedShapes.Contains(this))
                 {
                     UpdatePoints();
 
@@ -57,7 +57,7 @@ namespace Core2D.Shapes
 
                     foreach (var point in _points)
                     {
-                        if (renderer.StateViewModel.SelectedShapes.Contains(point))
+                        if (renderer.State.SelectedShapes.Contains(point))
                         {
                             point.DrawShape(dc, renderer);
                         }
@@ -68,7 +68,7 @@ namespace Core2D.Shapes
 
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = RecordViewModel ?? r;
+            var record = Record ?? r;
 
             dataFlow.Bind(this, db, record);
 
@@ -116,7 +116,7 @@ namespace Core2D.Shapes
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
-            foreach (var figure in GeometryViewModel.Figures)
+            foreach (var figure in _geometry.Figures)
             {
                 figure.GetPoints(points);
             }
@@ -131,9 +131,9 @@ namespace Core2D.Shapes
         {
             var isDirty = base.IsDirty();
 
-            if (GeometryViewModel != null)
+            if (_geometry != null)
             {
-                isDirty |= GeometryViewModel.IsDirty();
+                isDirty |= _geometry.IsDirty();
             }
 
             return isDirty;
@@ -143,13 +143,13 @@ namespace Core2D.Shapes
         {
             base.Invalidate();
 
-            GeometryViewModel?.Invalidate();
+            _geometry?.Invalidate();
         }
 
         public string ToXamlString()
-            => GeometryViewModel?.ToXamlString();
+            => _geometry?.ToXamlString();
 
         public string ToSvgString()
-            => GeometryViewModel?.ToSvgString();
+            => _geometry?.ToSvgString();
     }
 }

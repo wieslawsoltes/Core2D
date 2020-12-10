@@ -12,11 +12,11 @@ namespace Core2D.Shapes
         private IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
 
         [AutoNotify] private ShapeStateFlags _state;
-        [AutoNotify] private ShapeStyleViewModel _styleViewModel;
+        [AutoNotify] private ShapeStyleViewModel _style;
         [AutoNotify] private bool _isStroked;
         [AutoNotify] private bool _isFilled;
         [AutoNotify] private ImmutableArray<PropertyViewModel> _properties;
-        [AutoNotify] private RecordViewModel _recordViewModel;
+        [AutoNotify] private RecordViewModel _record;
         [AutoNotify(SetterModifier = AccessModifier.None)] private Type _targetType;
 
         protected BaseShapeViewModel(Type targetType)
@@ -88,9 +88,9 @@ namespace Core2D.Shapes
                 isDirty |= property.IsDirty();
             }
 
-            if (RecordViewModel != null)
+            if (Record != null)
             {
-                isDirty |= RecordViewModel.IsDirty();
+                isDirty |= Record.IsDirty();
             }
 
             return isDirty;
@@ -105,7 +105,7 @@ namespace Core2D.Shapes
                 property.Invalidate();
             }
 
-            RecordViewModel?.Invalidate();
+            Record?.Invalidate();
         }
 
         public virtual void DrawShape(object dc, IShapeRenderer renderer)

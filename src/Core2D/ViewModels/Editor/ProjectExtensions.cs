@@ -158,12 +158,12 @@ namespace Core2D.Editor
             }
         }
 
-        public static void AddScript(this ProjectContainerViewModel project, ScriptViewModel scriptViewModel)
+        public static void AddScript(this ProjectContainerViewModel project, ScriptViewModel script)
         {
-            if (project?.Scripts != null && scriptViewModel != null)
+            if (project?.Scripts != null && script != null)
             {
                 var previous = project.Scripts;
-                var next = project.Scripts.Add(scriptViewModel);
+                var next = project.Scripts.Add(script);
                 project?.History?.Snapshot(previous, next, (p) => project.Scripts = p);
                 project.Scripts = next;
             }
@@ -183,25 +183,25 @@ namespace Core2D.Editor
             }
         }
 
-        public static void RemoveScript(this ProjectContainerViewModel project, ScriptViewModel scriptViewModel)
+        public static void RemoveScript(this ProjectContainerViewModel project, ScriptViewModel script)
         {
-            if (project?.Scripts != null && scriptViewModel != null)
+            if (project?.Scripts != null && script != null)
             {
                 var previous = project.Scripts;
-                var next = project.Scripts.Remove(scriptViewModel);
+                var next = project.Scripts.Remove(script);
                 project?.History?.Snapshot(previous, next, (p) => project.Scripts = p);
                 project.Scripts = next;
             }
         }
 
-        public static void AddLayer(this ProjectContainerViewModel project, PageContainerViewModel containerViewModel, LayerContainerViewModel layer)
+        public static void AddLayer(this ProjectContainerViewModel project, PageContainerViewModel container, LayerContainerViewModel layer)
         {
-            if (containerViewModel != null && containerViewModel.Layers != null && layer != null)
+            if (container != null && container.Layers != null && layer != null)
             {
-                var previous = containerViewModel.Layers;
-                var next = containerViewModel.Layers.Add(layer);
-                project?.History?.Snapshot(previous, next, (p) => containerViewModel.Layers = p);
-                containerViewModel.Layers = next;
+                var previous = container.Layers;
+                var next = container.Layers.Add(layer);
+                project?.History?.Snapshot(previous, next, (p) => container.Layers = p);
+                container.Layers = next;
             }
         }
 
@@ -227,23 +227,23 @@ namespace Core2D.Editor
             }
         }
 
-        public static void AddShape(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shapeViewModel)
+        public static void AddShape(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shape)
         {
-            if (layer != null && layer.Shapes != null && shapeViewModel != null)
+            if (layer != null && layer.Shapes != null && shape != null)
             {
                 var previous = layer.Shapes;
-                var next = layer.Shapes.Add(shapeViewModel);
+                var next = layer.Shapes.Add(shape);
                 project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
 
-        public static void AddShapeAt(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shapeViewModel, int index)
+        public static void AddShapeAt(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shape, int index)
         {
-            if (layer?.Shapes != null && shapeViewModel != null)
+            if (layer?.Shapes != null && shape != null)
             {
                 var previous = layer.Shapes;
-                var next = layer.Shapes.Insert(index, shapeViewModel);
+                var next = layer.Shapes.Insert(index, shape);
                 project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
@@ -263,37 +263,37 @@ namespace Core2D.Editor
             }
         }
 
-        public static void RemoveShape(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shapeViewModel)
+        public static void RemoveShape(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shape)
         {
-            if (layer?.Shapes != null && shapeViewModel != null)
+            if (layer?.Shapes != null && shape != null)
             {
                 var previous = layer.Shapes;
-                var next = layer.Shapes.Remove(shapeViewModel);
+                var next = layer.Shapes.Remove(shape);
                 project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
             }
         }
 
-        public static LayerContainerViewModel RemoveShape(this ProjectContainerViewModel project, BaseShapeViewModel shapeViewModel)
+        public static LayerContainerViewModel RemoveShape(this ProjectContainerViewModel project, BaseShapeViewModel shape)
         {
-            if (project?.Documents != null && shapeViewModel != null)
+            if (project?.Documents != null && shape != null)
             {
-                var layer = project.Documents.SelectMany(d => d.Pages).SelectMany(p => p.Layers).FirstOrDefault(l => l.Shapes.Contains(shapeViewModel));
+                var layer = project.Documents.SelectMany(d => d.Pages).SelectMany(p => p.Layers).FirstOrDefault(l => l.Shapes.Contains(shape));
                 if (layer != null)
                 {
-                    project.RemoveShape(layer, shapeViewModel);
+                    project.RemoveShape(layer, shape);
                 }
                 return layer;
             }
             return null;
         }
 
-        public static void ReplaceShape(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shapeViewModel, int index)
+        public static void ReplaceShape(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shape, int index)
         {
-            if (layer != null && shapeViewModel != null && index >= 0)
+            if (layer != null && shape != null && index >= 0)
             {
                 var builder = layer.Shapes.ToBuilder();
-                builder[index] = shapeViewModel;
+                builder[index] = shape;
 
                 var previous = layer.Shapes;
                 var next = builder.ToImmutable();
@@ -302,12 +302,12 @@ namespace Core2D.Editor
             }
         }
 
-        public static void SwapShape(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shapeViewModel, int insertIndex, int removeIndex)
+        public static void SwapShape(this ProjectContainerViewModel project, LayerContainerViewModel layer, BaseShapeViewModel shape, int insertIndex, int removeIndex)
         {
-            if (layer != null && shapeViewModel != null && insertIndex >= 0 && removeIndex >= 0)
+            if (layer != null && shape != null && insertIndex >= 0 && removeIndex >= 0)
             {
                 var builder = layer.Shapes.ToBuilder();
-                builder.Insert(insertIndex, shapeViewModel);
+                builder.Insert(insertIndex, shape);
                 builder.RemoveAt(removeIndex);
 
                 var previous = layer.Shapes;
@@ -317,23 +317,23 @@ namespace Core2D.Editor
             }
         }
 
-        public static void AddProperty(this ProjectContainerViewModel project, IDataObject data, PropertyViewModel propertyViewModel)
+        public static void AddProperty(this ProjectContainerViewModel project, IDataObject data, PropertyViewModel property)
         {
-            if (data?.Properties != null && propertyViewModel != null)
+            if (data?.Properties != null && property != null)
             {
                 var previous = data.Properties;
-                var next = data.Properties.Add(propertyViewModel);
+                var next = data.Properties.Add(property);
                 project?.History?.Snapshot(previous, next, (p) => data.Properties = p);
                 data.Properties = next;
             }
         }
 
-        public static void RemoveProperty(this ProjectContainerViewModel project, PropertyViewModel propertyViewModel)
+        public static void RemoveProperty(this ProjectContainerViewModel project, PropertyViewModel property)
         {
-            if (propertyViewModel.Owner is IDataObject data && data.Properties != null)
+            if (property.Owner is IDataObject data && data.Properties != null)
             {
                 var previous = data.Properties;
-                var next = data.Properties.Remove(propertyViewModel);
+                var next = data.Properties.Remove(property);
                 project?.History?.Snapshot(previous, next, (p) => data.Properties = p);
                 data.Properties = next;
             }
@@ -382,45 +382,45 @@ namespace Core2D.Editor
             }
         }
 
-        public static void AddColumn(this ProjectContainerViewModel project, DatabaseViewModel db, ColumnViewModel columnViewModel)
+        public static void AddColumn(this ProjectContainerViewModel project, DatabaseViewModel db, ColumnViewModel column)
         {
-            if (db?.Columns != null && columnViewModel != null)
+            if (db?.Columns != null && column != null)
             {
                 var previous = db.Columns;
-                var next = db.Columns.Add(columnViewModel);
+                var next = db.Columns.Add(column);
                 project?.History?.Snapshot(previous, next, (p) => db.Columns = p);
                 db.Columns = next;
             }
         }
 
-        public static void RemoveColumn(this ProjectContainerViewModel project, ColumnViewModel columnViewModel)
+        public static void RemoveColumn(this ProjectContainerViewModel project, ColumnViewModel column)
         {
-            if (columnViewModel?.Owner is DatabaseViewModel db && db.Columns != null)
+            if (column?.Owner is DatabaseViewModel db && db.Columns != null)
             {
                 var previous = db.Columns;
-                var next = db.Columns.Remove(columnViewModel);
+                var next = db.Columns.Remove(column);
                 project?.History?.Snapshot(previous, next, (p) => db.Columns = p);
                 db.Columns = next;
             }
         }
 
-        public static void AddRecord(this ProjectContainerViewModel project, DatabaseViewModel db, RecordViewModel recordViewModel)
+        public static void AddRecord(this ProjectContainerViewModel project, DatabaseViewModel db, RecordViewModel record)
         {
             if (db?.Records != null)
             {
                 var previous = db.Records;
-                var next = db.Records.Add(recordViewModel);
+                var next = db.Records.Add(record);
                 project?.History?.Snapshot(previous, next, (p) => db.Records = p);
                 db.Records = next;
             }
         }
 
-        public static void RemoveRecord(this ProjectContainerViewModel project, RecordViewModel recordViewModel)
+        public static void RemoveRecord(this ProjectContainerViewModel project, RecordViewModel record)
         {
-            if (recordViewModel?.Owner is DatabaseViewModel db && db.Records != null)
+            if (record?.Owner is DatabaseViewModel db && db.Records != null)
             {
                 var previous = db.Records;
-                var next = db.Records.Remove(recordViewModel);
+                var next = db.Records.Remove(record);
                 project?.History?.Snapshot(previous, next, (p) => db.Records = p);
                 db.Records = next;
             }
@@ -438,23 +438,23 @@ namespace Core2D.Editor
             }
         }
 
-        public static void ApplyRecord(this ProjectContainerViewModel project, IDataObject data, RecordViewModel recordViewModel)
+        public static void ApplyRecord(this ProjectContainerViewModel project, IDataObject data, RecordViewModel record)
         {
-            if (data != null && recordViewModel != null)
+            if (data != null && record != null)
             {
                 var previous = data.RecordViewModel;
-                var next = recordViewModel;
+                var next = record;
                 project?.History?.Snapshot(previous, next, (p) => data.RecordViewModel = p);
                 data.RecordViewModel = next;
             }
         }
 
-        public static void AddGroupLibrary(this ProjectContainerViewModel project, LibraryViewModel<GroupShapeViewModel> libraryViewModel)
+        public static void AddGroupLibrary(this ProjectContainerViewModel project, LibraryViewModel<GroupShapeViewModel> library)
         {
-            if (project?.GroupLibraries != null && libraryViewModel != null)
+            if (project?.GroupLibraries != null && library != null)
             {
                 var previous = project.GroupLibraries;
-                var next = project.GroupLibraries.Add(libraryViewModel);
+                var next = project.GroupLibraries.Add(library);
                 project?.History?.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                 project.GroupLibraries = next;
             }
@@ -474,23 +474,23 @@ namespace Core2D.Editor
             }
         }
 
-        public static void RemoveGroupLibrary(this ProjectContainerViewModel project, LibraryViewModel<GroupShapeViewModel> libraryViewModel)
+        public static void RemoveGroupLibrary(this ProjectContainerViewModel project, LibraryViewModel<GroupShapeViewModel> library)
         {
-            if (project?.GroupLibraries != null && libraryViewModel != null)
+            if (project?.GroupLibraries != null && library != null)
             {
                 var previous = project.GroupLibraries;
-                var next = project.GroupLibraries.Remove(libraryViewModel);
+                var next = project.GroupLibraries.Remove(library);
                 project?.History?.Snapshot(previous, next, (p) => project.GroupLibraries = p);
                 project.GroupLibraries = next;
             }
         }
 
-        public static void AddStyleLibrary(this ProjectContainerViewModel project, LibraryViewModel<ShapeStyleViewModel> libraryViewModel)
+        public static void AddStyleLibrary(this ProjectContainerViewModel project, LibraryViewModel<ShapeStyleViewModel> library)
         {
-            if (project?.StyleLibraries != null && libraryViewModel != null)
+            if (project?.StyleLibraries != null && library != null)
             {
                 var previous = project.StyleLibraries;
-                var next = project.StyleLibraries.Add(libraryViewModel);
+                var next = project.StyleLibraries.Add(library);
                 project?.History?.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                 project.StyleLibraries = next;
             }
@@ -510,31 +510,31 @@ namespace Core2D.Editor
             }
         }
 
-        public static void RemoveStyleLibrary(this ProjectContainerViewModel project, LibraryViewModel<ShapeStyleViewModel> libraryViewModel)
+        public static void RemoveStyleLibrary(this ProjectContainerViewModel project, LibraryViewModel<ShapeStyleViewModel> library)
         {
-            if (project?.CurrentStyleLibrary != null && libraryViewModel != null)
+            if (project?.CurrentStyleLibrary != null && library != null)
             {
                 var previous = project.StyleLibraries;
-                var next = project.StyleLibraries.Remove(libraryViewModel);
+                var next = project.StyleLibraries.Remove(library);
                 project?.History?.Snapshot(previous, next, (p) => project.StyleLibraries = p);
                 project.StyleLibraries = next;
             }
         }
 
-        public static void AddStyle(this ProjectContainerViewModel project, LibraryViewModel<ShapeStyleViewModel> libraryViewModel, ShapeStyleViewModel styleViewModel)
+        public static void AddStyle(this ProjectContainerViewModel project, LibraryViewModel<ShapeStyleViewModel> library, ShapeStyleViewModel style)
         {
-            AddItem(project, libraryViewModel, styleViewModel);
+            AddItem(project, library, style);
         }
 
-        public static LibraryViewModel<ShapeStyleViewModel> RemoveStyle(this ProjectContainerViewModel project, ShapeStyleViewModel styleViewModel)
+        public static LibraryViewModel<ShapeStyleViewModel> RemoveStyle(this ProjectContainerViewModel project, ShapeStyleViewModel style)
         {
-            if (project?.StyleLibraries != null && styleViewModel != null)
+            if (project?.StyleLibraries != null && style != null)
             {
-                var library = project.StyleLibraries.FirstOrDefault(l => l.Items.Contains(styleViewModel));
+                var library = project.StyleLibraries.FirstOrDefault(l => l.Items.Contains(style));
                 if (library?.Items != null)
                 {
                     var previous = library.Items;
-                    var next = library.Items.Remove(styleViewModel);
+                    var next = library.Items.Remove(style);
                     project?.History?.Snapshot(previous, next, (p) => library.Items = p);
                     library.Items = next;
                 }
@@ -543,34 +543,34 @@ namespace Core2D.Editor
             return null;
         }
 
-        public static void ApplyStyle(this ProjectContainerViewModel project, BaseShapeViewModel shapeViewModel, ShapeStyleViewModel styleViewModel)
+        public static void ApplyStyle(this ProjectContainerViewModel project, BaseShapeViewModel shape, ShapeStyleViewModel style)
         {
-            if (shapeViewModel != null && styleViewModel != null)
+            if (shape != null && style != null)
             {
-                if (shapeViewModel is GroupShapeViewModel group)
+                if (shape is GroupShapeViewModel group)
                 {
                     var shapes = ProjectContainerViewModel.GetAllShapes(group.Shapes);
                     foreach (var child in shapes)
                     {
-                        var previous = child.StyleViewModel;
-                        var next = (ShapeStyleViewModel)styleViewModel.Copy(null);
-                        project?.History?.Snapshot(previous, next, (p) => child.StyleViewModel = p);
-                        child.StyleViewModel = next;
+                        var previous = child.Style;
+                        var next = (ShapeStyleViewModel)style.Copy(null);
+                        project?.History?.Snapshot(previous, next, (p) => child.Style = p);
+                        child.Style = next;
                     }
                 }
                 else
                 {
-                    var previous = shapeViewModel.StyleViewModel;
-                    var next = (ShapeStyleViewModel)styleViewModel.Copy(null);
-                    project?.History?.Snapshot(previous, next, (p) => shapeViewModel.StyleViewModel = p);
-                    shapeViewModel.StyleViewModel = next;
+                    var previous = shape.Style;
+                    var next = (ShapeStyleViewModel)style.Copy(null);
+                    project?.History?.Snapshot(previous, next, (p) => shape.Style = p);
+                    shape.Style = next;
                 }
             }
         }
 
-        public static void AddGroup(this ProjectContainerViewModel project, LibraryViewModel<GroupShapeViewModel> libraryViewModel, GroupShapeViewModel group)
+        public static void AddGroup(this ProjectContainerViewModel project, LibraryViewModel<GroupShapeViewModel> library, GroupShapeViewModel group)
         {
-            AddItem(project, libraryViewModel, group);
+            AddItem(project, library, group);
         }
 
         public static LibraryViewModel<GroupShapeViewModel> RemoveGroup(this ProjectContainerViewModel project, GroupShapeViewModel group)
@@ -601,17 +601,17 @@ namespace Core2D.Editor
             }
         }
 
-        public static void AddItems<T>(this ProjectContainerViewModel project, LibraryViewModel<T> libraryViewModel, IEnumerable<T> items)
+        public static void AddItems<T>(this ProjectContainerViewModel project, LibraryViewModel<T> library, IEnumerable<T> items)
         {
-            if (libraryViewModel?.Items != null && items != null)
+            if (library?.Items != null && items != null)
             {
-                var builder = libraryViewModel.Items.ToBuilder();
+                var builder = library.Items.ToBuilder();
                 builder.AddRange(items);
 
-                var previous = libraryViewModel.Items;
+                var previous = library.Items;
                 var next = builder.ToImmutable();
-                project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
-                libraryViewModel.Items = next;
+                project?.History?.Snapshot(previous, next, (p) => library.Items = p);
+                library.Items = next;
             }
         }
     }

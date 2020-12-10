@@ -20,7 +20,7 @@ namespace Core2D.Renderer
 
         double GridCellHeight { get; set; }
 
-        BaseColorViewModel GridStrokeColorViewModel { get; set; }
+        BaseColorViewModel GridStrokeColor { get; set; }
 
         double GridStrokeThickness { get; set; }
 

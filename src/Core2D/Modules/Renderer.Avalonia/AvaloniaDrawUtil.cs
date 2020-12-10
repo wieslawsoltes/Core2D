@@ -17,20 +17,20 @@ namespace Core2D.Renderer
             _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported.")
         };
 
-        public static AM.IPen ToPen(ShapeStyleViewModel styleViewModel, double thickness)
+        public static AM.IPen ToPen(ShapeStyleViewModel style, double thickness)
         {
             var dashStyle = default(AM.Immutable.ImmutableDashStyle);
-            if (styleViewModel.Stroke.Dashes != null)
+            if (style.Stroke.Dashes != null)
             {
-                var dashes = StyleHelper.ConvertDashesToDoubleArray(styleViewModel.Stroke.Dashes, 1.0);
-                var dashOffset = styleViewModel.Stroke.DashOffset;
+                var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Stroke.Dashes, 1.0);
+                var dashOffset = style.Stroke.DashOffset;
                 if (dashes != null)
                 {
                     dashStyle = new AM.Immutable.ImmutableDashStyle(dashes, dashOffset);
                 }
             }
 
-            var lineCap = styleViewModel.Stroke.LineCap switch
+            var lineCap = style.Stroke.LineCap switch
             {
                 LineCap.Flat => AM.PenLineCap.Flat,
                 LineCap.Square => AM.PenLineCap.Square,
@@ -38,7 +38,7 @@ namespace Core2D.Renderer
                 _ => throw new NotImplementedException()
             };
 
-            var brush = ToBrush(styleViewModel.Stroke.ColorViewModel);
+            var brush = ToBrush(style.Stroke.ColorViewModel);
             var pen = new AM.Immutable.ImmutablePen(brush, thickness, dashStyle, lineCap);
 
             return pen;

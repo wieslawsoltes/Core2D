@@ -51,7 +51,7 @@ namespace Core2D.Shapes
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                foreach (var shape in Shapes)
+                foreach (var shape in _shapes)
                 {
                     shape.DrawShape(dc, renderer);
                 }
@@ -64,7 +64,7 @@ namespace Core2D.Shapes
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                foreach (var shape in Shapes)
+                foreach (var shape in _shapes)
                 {
                     shape.DrawPoints(dc, renderer);
                 }
@@ -75,9 +75,9 @@ namespace Core2D.Shapes
 
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = RecordViewModel ?? r;
+            var record = Record ?? r;
 
-            foreach (var shape in Shapes)
+            foreach (var shape in _shapes)
             {
                 shape.Bind(dataFlow, db, record);
             }
@@ -87,7 +87,7 @@ namespace Core2D.Shapes
 
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
-            foreach (var shape in Shapes)
+            foreach (var shape in _shapes)
             {
                 if (!shape.State.HasFlag(ShapeStateFlags.Connector))
                 {
@@ -110,7 +110,7 @@ namespace Core2D.Shapes
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
-            foreach (var shape in Shapes)
+            foreach (var shape in _shapes)
             {
                 shape.GetPoints(points);
             }
@@ -127,7 +127,7 @@ namespace Core2D.Shapes
         {
             var isDirty = base.IsDirty();
 
-            foreach (var shape in Shapes)
+            foreach (var shape in _shapes)
             {
                 isDirty |= shape.IsDirty();
             }
@@ -139,7 +139,7 @@ namespace Core2D.Shapes
         {
             base.Invalidate();
 
-            foreach (var shape in Shapes)
+            foreach (var shape in _shapes)
             {
                 shape.Invalidate();
             }

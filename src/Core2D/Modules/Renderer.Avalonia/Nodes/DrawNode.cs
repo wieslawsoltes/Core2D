@@ -9,7 +9,7 @@ namespace Core2D.Renderer
 {
     internal abstract class DrawNode : IDrawNode
     {
-        public ShapeStyleViewModel StyleViewModel { get; set; }
+        public ShapeStyleViewModel Style { get; set; }
         public bool ScaleThickness { get; set; }
         public bool ScaleSize { get; set; }
         public AM.IBrush Fill { get; set; }

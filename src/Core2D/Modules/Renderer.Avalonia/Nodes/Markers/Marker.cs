@@ -7,7 +7,7 @@ namespace Core2D.Renderer
     {
         public BaseShapeViewModel ShapeViewModel { get; set; }
         public ShapeStyleViewModel ShapeStyleViewModel { get; set; }
-        public ArrowStyleViewModel StyleViewModel { get; set; }
+        public ArrowStyleViewModel Style { get; set; }
         public Avalonia.Media.IBrush Brush { get; set; }
         public Avalonia.Media.IPen Pen { get; set; }
         public Avalonia.Matrix Rotation { get; set; }

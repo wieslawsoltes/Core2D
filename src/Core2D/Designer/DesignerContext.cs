@@ -17,7 +17,7 @@ namespace Core2D.Designer
 {
     public class DesignerContext
     {
-        public static ProjectEditorViewModel EditorViewModel { get; set; }
+        public static ProjectEditorViewModel Editor { get; set; }
 
         public static PageContainerViewModel Template { get; set; }
 
@@ -49,7 +49,7 @@ namespace Core2D.Designer
 
         public static FontStyleFlags FontStyle { get; set; }
 
-        public static ShapeStyleViewModel StyleViewModel { get; set; }
+        public static ShapeStyleViewModel Style { get; set; }
 
         public static TextStyleViewModel TextStyleViewModel { get; set; }
 
@@ -97,16 +97,16 @@ namespace Core2D.Designer
 
             // Editor
 
-            EditorViewModel = serviceProvider.GetService<ProjectEditorViewModel>();
+            Editor = serviceProvider.GetService<ProjectEditorViewModel>();
 
             // Recent Projects
 
-            EditorViewModel.RecentProjects = EditorViewModel.RecentProjects.Add(RecentFileViewModel.Create("Test1", "Test1.project"));
-            EditorViewModel.RecentProjects = EditorViewModel.RecentProjects.Add(RecentFileViewModel.Create("Test2", "Test2.project"));
+            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create("Test1", "Test1.project"));
+            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create("Test2", "Test2.project"));
 
             // New Project
 
-            EditorViewModel.OnNewProject();
+            Editor.OnNewProject();
 
             // Data
 
@@ -119,7 +119,7 @@ namespace Core2D.Designer
                 db,
                 ImmutableArray.CreateRange(values));
             db.Records = db.Records.Add(record);
-            db.CurrentRecordViewModel = record;
+            db.CurrentRecord = record;
 
             DatabaseViewModel = db;
             RecordViewModel = record;
@@ -142,7 +142,7 @@ namespace Core2D.Designer
 
             Document = factory.CreateDocumentContainer();
             Layer = factory.CreateLayerContainer();
-            OptionsViewModel = factory.CreateOptions();
+            Options = factory.CreateOptions();
 
             CurrentStyleLibraryViewModel = Project.CurrentStyleLibrary;
             CurrentGroupLibraryViewModel = Project.CurrentGroupLibrary;
@@ -160,8 +160,8 @@ namespace Core2D.Designer
             ArgbColorViewModelViewModel = factory.CreateArgbColor(128, 255, 0, 0);
             ArrowStyleViewModel = factory.CreateArrowStyle();
             FontStyle = FontStyleFlags.Regular;
-            StyleViewModel = factory.CreateShapeStyle("Default");
-            TextStyleViewModel = factory.CreateTextStyle();
+            Style = factory.CreateShapeStyle("Default");
+            TextStyle = factory.CreateTextStyle();
 
             // Shapes
 

@@ -17,16 +17,16 @@ namespace Core2D.Renderer
         public IMarker StartMarker { get; set; }
         public IMarker EndMarker { get; set; }
 
-        public LineDrawNode(LineShapeViewModel line, ShapeStyleViewModel styleViewModel)
+        public LineDrawNode(LineShapeViewModel line, ShapeStyleViewModel style)
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Line = line;
             UpdateGeometry();
         }
 
-        private Marker CreatArrowMarker(double x, double y, double angle, ShapeStyleViewModel shapeStyleViewModel, ArrowStyleViewModel styleViewModel)
+        private Marker CreatArrowMarker(double x, double y, double angle, ShapeStyleViewModel shapeStyleViewModel, ArrowStyleViewModel style)
         {
-            switch (styleViewModel.ArrowType)
+            switch (style.ArrowType)
             {
                 default:
                 case ArrowType.None:
@@ -35,15 +35,15 @@ namespace Core2D.Renderer
 
                         marker.ShapeViewModel = Line;
                         marker.ShapeStyleViewModel = shapeStyleViewModel;
-                        marker.StyleViewModel = styleViewModel;
+                        marker.Style = style;
                         marker.Point = new A.Point(x, y);
 
                         return marker;
                     }
                 case ArrowType.Rectangle:
                     {
-                        double rx = styleViewModel.RadiusX;
-                        double ry = styleViewModel.RadiusY;
+                        double rx = style.RadiusX;
+                        double ry = style.RadiusY;
                         double sx = 2.0 * rx;
                         double sy = 2.0 * ry;
 
@@ -51,7 +51,7 @@ namespace Core2D.Renderer
 
                         marker.ShapeViewModel = Line;
                         marker.ShapeStyleViewModel = shapeStyleViewModel;
-                        marker.StyleViewModel = styleViewModel;
+                        marker.Style = style;
                         marker.Rotation = ACP.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
 
@@ -62,8 +62,8 @@ namespace Core2D.Renderer
                     }
                 case ArrowType.Ellipse:
                     {
-                        double rx = styleViewModel.RadiusX;
-                        double ry = styleViewModel.RadiusY;
+                        double rx = style.RadiusX;
+                        double ry = style.RadiusY;
                         double sx = 2.0 * rx;
                         double sy = 2.0 * ry;
 
@@ -71,7 +71,7 @@ namespace Core2D.Renderer
 
                         marker.ShapeViewModel = Line;
                         marker.ShapeStyleViewModel = shapeStyleViewModel;
-                        marker.StyleViewModel = styleViewModel;
+                        marker.Style = style;
                         marker.Rotation = ACP.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
 
@@ -83,8 +83,8 @@ namespace Core2D.Renderer
                     }
                 case ArrowType.Arrow:
                     {
-                        double rx = styleViewModel.RadiusX;
-                        double ry = styleViewModel.RadiusY;
+                        double rx = style.RadiusX;
+                        double ry = style.RadiusY;
                         double sx = 2.0 * rx;
                         double sy = 2.0 * ry;
 
@@ -92,7 +92,7 @@ namespace Core2D.Renderer
 
                         marker.ShapeViewModel = Line;
                         marker.ShapeStyleViewModel = shapeStyleViewModel;
-                        marker.StyleViewModel = styleViewModel;
+                        marker.Style = style;
                         marker.Rotation = ACP.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
 

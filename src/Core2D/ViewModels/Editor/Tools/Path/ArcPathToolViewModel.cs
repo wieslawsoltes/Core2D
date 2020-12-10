@@ -65,7 +65,7 @@ namespace Core2D.Editor.Tools.Path
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
                             _defaultSweepDirection);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateEnd();
                         Move(null);
                         _currentState = State.End;
@@ -76,7 +76,7 @@ namespace Core2D.Editor.Tools.Path
                     {
                         _arc.End.X = (double)sx;
                         _arc.End.Y = (double)sy;
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             var end = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (end != null)
@@ -94,7 +94,7 @@ namespace Core2D.Editor.Tools.Path
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
                             _defaultSweepDirection);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                         _currentState = State.End;
                     }
@@ -133,7 +133,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Start:
                     {
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             editor.TryToHoverShape((double)sx, (double)sy);
                         }
@@ -142,7 +142,7 @@ namespace Core2D.Editor.Tools.Path
 
                 case State.End:
                     {
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             editor.TryToHoverShape((double)sx, (double)sy);
                         }
@@ -153,7 +153,7 @@ namespace Core2D.Editor.Tools.Path
                         arc.Point = _arc.End;
                         arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
                         arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         Move(null);
                     }
                     break;
@@ -166,19 +166,19 @@ namespace Core2D.Editor.Tools.Path
             _selection?.Reset();
             _selection = new LineSelection(
                 _serviceProvider,
-                editor.Project.CurrentContainerViewModel.HelperLayer,
+                editor.Project.CurrentContainer.HelperLayer,
                 _arc,
-                editor.PageStateViewModel.HelperStyleViewModel);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateEnd();
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
             _selection?.Move();
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
         }
 

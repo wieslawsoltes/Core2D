@@ -5,7 +5,7 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal abstract class DrawNode : IDrawNode
     {
-        public ShapeStyleViewModel StyleViewModel { get; set; }
+        public ShapeStyleViewModel Style { get; set; }
         public bool ScaleThickness { get; set; }
         public bool ScaleSize { get; set; }
         public SKPaint Fill { get; set; }

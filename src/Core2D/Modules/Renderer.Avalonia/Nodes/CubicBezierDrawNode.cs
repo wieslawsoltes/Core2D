@@ -10,9 +10,9 @@ namespace Core2D.Renderer
         public CubicBezierShapeViewModel CubicBezier { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel styleViewModel)
+        public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             CubicBezier = cubicBezier;
             UpdateGeometry();
         }

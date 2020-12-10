@@ -45,7 +45,7 @@ namespace Core2D.Editor.Factories
             template.GridOffsetBottom = -30.0;
             template.GridCellWidth = 30.0;
             template.GridCellHeight = 30.0;
-            template.GridStrokeColorViewModel = factory.CreateArgbColor(0xFF, 0xDE, 0xDE, 0xDE);
+            template.GridStrokeColor = factory.CreateArgbColor(0xFF, 0xDE, 0xDE, 0xDE);
             template.GridStrokeThickness = 1.0;
 
             return template;

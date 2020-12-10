@@ -101,7 +101,7 @@ namespace Core2D.UnitTests
 
             target.SetCurrentContainer(page);
 
-            Assert.Equal(page, target.CurrentContainerViewModel);
+            Assert.Equal(page, target.CurrentContainer);
             Assert.Equal(page, target.Selected);
         }
 
@@ -130,7 +130,7 @@ namespace Core2D.UnitTests
 
             target.SetCurrentScript(script);
 
-            Assert.Equal(script, target.CurrentScriptViewModel);
+            Assert.Equal(script, target.CurrentScript);
         }
 
         [Fact]
@@ -144,7 +144,7 @@ namespace Core2D.UnitTests
 
             target.SetCurrentDatabase(db);
 
-            Assert.Equal(db, target.CurrentDatabaseViewModel);
+            Assert.Equal(db, target.CurrentDatabase);
         }
 
         [Fact]
@@ -214,7 +214,7 @@ namespace Core2D.UnitTests
             target.SetSelected(page);
 
             Assert.Equal(document, target.CurrentDocument);
-            Assert.Equal(page, target.CurrentContainerViewModel);
+            Assert.Equal(page, target.CurrentContainer);
             Assert.True(raised);
         }
 

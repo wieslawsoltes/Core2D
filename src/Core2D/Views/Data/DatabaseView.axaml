@@ -14,7 +14,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom">
             <Expander Header="Current Record" IsExpanded="False">
-                <ContentControl Content="{Binding CurrentRecordViewModel}" />
+                <ContentControl Content="{Binding CurrentRecord}" />
             </Expander>
             <Expander Header="Columns" IsExpanded="False">
                 <DockPanel>
@@ -43,12 +43,12 @@
             <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" DockPanel.Dock="Top">
                 <TextBox x:Name="FilterRecordsTextBox" Text="" Watermark="Filter records" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0" x:CompileBindings="False" />
                 <StackPanel Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Button Content="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecordViewModel}" IsVisible="{Binding !!CurrentRecordViewModel}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
-                    <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecordViewModel}" IsVisible="{Binding !!CurrentRecordViewModel}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
+                    <Button Content="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
+                    <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveRecord}" CommandParameter="{Binding CurrentRecord}" IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
                     <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}" CommandParameter="{Binding}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
                 </StackPanel>
             </Grid>
-            <DataGrid x:Name="RowsDataGrid" SelectedItem="{Binding CurrentRecordViewModel, Mode=TwoWay}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" BorderThickness="0" RowBackground="Transparent">
+            <DataGrid x:Name="RowsDataGrid" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" BorderThickness="0" RowBackground="Transparent">
                 <i:Interaction.Behaviors>
                     <idd:TypedDragBehavior DataType="{x:Type vmdt:RecordViewModel}" />
                 </i:Interaction.Behaviors>

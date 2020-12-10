@@ -20,9 +20,9 @@ namespace Core2D.Renderer
         {
         }
 
-        public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel styleViewModel)
+        public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style)
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Text = text;
             UpdateGeometry();
         }

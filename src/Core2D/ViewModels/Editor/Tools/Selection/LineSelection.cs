@@ -15,12 +15,12 @@ namespace Core2D.Editor.Tools.Selection
         private PointShapeViewModel _startHelperPoint;
         private PointShapeViewModel _endHelperPoint;
 
-        public LineSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, LineShapeViewModel shapeViewModel, ShapeStyleViewModel styleViewModel)
+        public LineSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, LineShapeViewModel shape, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
-            _line = shapeViewModel;
-            _styleViewModel = styleViewModel;
+            _line = shape;
+            _styleViewModel = style;
         }
 
         public void ToStateEnd()

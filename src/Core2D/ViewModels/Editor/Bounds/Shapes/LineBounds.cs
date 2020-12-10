@@ -10,11 +10,11 @@ namespace Core2D.Editor.Bounds.Shapes
     {
         public Type TargetType => typeof(LineShapeViewModel);
 
-        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shapeViewModel is LineShapeViewModel line))
+            if (!(shape is LineShapeViewModel line))
             {
-                throw new ArgumentNullException(nameof(shapeViewModel));
+                throw new ArgumentNullException(nameof(shape));
             }
 
             var pointHitTest = registered[typeof(PointShapeViewModel)];
@@ -32,11 +32,11 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shapeViewModel is LineShapeViewModel line))
+            if (!(shape is LineShapeViewModel line))
             {
-                throw new ArgumentNullException(nameof(shapeViewModel));
+                throw new ArgumentNullException(nameof(shape));
             }
 
             Point2 a;
@@ -57,11 +57,11 @@ namespace Core2D.Editor.Bounds.Shapes
             return distance < radius;
         }
 
-        public bool Overlaps(BaseShapeViewModel shapeViewModel, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shapeViewModel is LineShapeViewModel line))
+            if (!(shape is LineShapeViewModel line))
             {
-                throw new ArgumentNullException(nameof(shapeViewModel));
+                throw new ArgumentNullException(nameof(shape));
             }
 
             Point2 a;

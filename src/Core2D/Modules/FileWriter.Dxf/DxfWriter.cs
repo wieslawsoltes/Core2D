@@ -36,8 +36,8 @@ namespace Core2D.FileWriter.Dxf
             IProjectExporter exporter = new DxfRenderer(_serviceProvider);
 
             IShapeRenderer renderer = (IShapeRenderer)exporter;
-            renderer.StateViewModel.DrawShapeState = ShapeStateFlags.Printable;
-            renderer.StateViewModel.ImageCache = ic;
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.State.ImageCache = ic;
 
             if (item is PageContainerViewModel page)
             {

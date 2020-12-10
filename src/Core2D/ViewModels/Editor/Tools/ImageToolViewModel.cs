@@ -66,8 +66,8 @@ namespace Core2D.Editor.Tools
                             _image.TopLeft = result;
                         }
 
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Add(_image);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_image);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateBottomRight();
                         Move(_image);
                         _currentState = State.BottomRight;
@@ -86,9 +86,9 @@ namespace Core2D.Editor.Tools
                                 _image.BottomRight = result;
                             }
 
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_image);
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_image);
                             Finalize(_image);
-                            editor.Project.AddShape(editor.Project.CurrentContainerViewModel.CurrentLayer, _image);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _image);
 
                             Reset();
                         }
@@ -124,7 +124,7 @@ namespace Core2D.Editor.Tools
             switch (_currentState)
             {
                 case State.TopLeft:
-                    if (editor.Project.OptionsViewModel.TryToConnect)
+                    if (editor.Project.Options.TryToConnect)
                     {
                         editor.TryToHoverShape((double)sx, (double)sy);
                     }
@@ -133,13 +133,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_image != null)
                         {
-                            if (editor.Project.OptionsViewModel.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
                                 editor.TryToHoverShape((double)sx, (double)sy);
                             }
                             _image.BottomRight.X = (double)sx;
                             _image.BottomRight.Y = (double)sy;
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_image);
                         }
                     }
@@ -152,19 +152,19 @@ namespace Core2D.Editor.Tools
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             _selection = new ImageSelection(
                 _serviceProvider,
-                editor.Project.CurrentContainerViewModel.HelperLayer,
+                editor.Project.CurrentContainer.HelperLayer,
                 _image,
-                editor.PageStateViewModel.HelperStyleViewModel);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateBottomRight();
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
             _selection.Move();
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
         }
 
@@ -178,8 +178,8 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_image);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_image);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

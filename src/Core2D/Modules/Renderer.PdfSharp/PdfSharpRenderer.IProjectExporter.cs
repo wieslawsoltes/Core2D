@@ -11,10 +11,10 @@ namespace Core2D.Renderer.PdfSharp
 {
     public partial class PdfSharpRenderer : IProjectExporter
     {
-        public void Save(Stream stream, PageContainerViewModel containerViewModel)
+        public void Save(Stream stream, PageContainerViewModel container)
         {
             using var pdf = new PdfDocument();
-            Add(pdf, containerViewModel);
+            Add(pdf, container);
             pdf.Save(stream);
         }
 
@@ -95,7 +95,7 @@ namespace Core2D.Renderer.PdfSharp
             ClearCache();
         }
 
-        private PdfPage Add(PdfDocument pdf, PageContainerViewModel containerViewModel)
+        private PdfPage Add(PdfDocument pdf, PageContainerViewModel container)
         {
             // Create A3 page size with Landscape orientation.
             var pdfPage = pdf.AddPage();
@@ -103,30 +103,30 @@ namespace Core2D.Renderer.PdfSharp
             pdfPage.Orientation = PageOrientation.Landscape;
 
             var dataFlow = _serviceProvider.GetService<DataFlow>();
-            var db = (object)containerViewModel.Properties;
-            var record = (object)containerViewModel.RecordViewModel;
+            var db = (object)container.Properties;
+            var record = (object)container.RecordViewModel;
 
-            dataFlow.Bind(containerViewModel.Template, db, record);
-            dataFlow.Bind(containerViewModel, db, record);
+            dataFlow.Bind(container.Template, db, record);
+            dataFlow.Bind(container, db, record);
 
             using (XGraphics gfx = XGraphics.FromPdfPage(pdfPage))
             {
                 // Calculate x and y page scale factors.
-                double scaleX = pdfPage.Width.Value / containerViewModel.Template.Width;
-                double scaleY = pdfPage.Height.Value / containerViewModel.Template.Height;
+                double scaleX = pdfPage.Width.Value / container.Template.Width;
+                double scaleY = pdfPage.Height.Value / container.Template.Height;
                 double scale = Math.Min(scaleX, scaleY);
 
                 // Set scaling function.
                 _scaleToPage = (value) => value * scale;
 
                 // Draw container template contents to pdf graphics.
-                Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, containerViewModel.Template.Background);
+                Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
 
                 // Draw template contents to pdf graphics.
-                DrawPage(gfx, containerViewModel.Template);
+                DrawPage(gfx, container.Template);
 
                 // Draw page contents to pdf graphics.
-                DrawPage(gfx, containerViewModel);
+                DrawPage(gfx, container);
             }
 
             return pdfPage;

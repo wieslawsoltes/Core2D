@@ -27,9 +27,9 @@ namespace Core2D.Editor.Bounds
             }
         }
 
-        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale)
+        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale)
         {
-            return Registered[shapeViewModel.TargetType].TryToGetPoint(shapeViewModel, target, radius, scale, Registered);
+            return Registered[shape.TargetType].TryToGetPoint(shape, target, radius, scale, Registered);
         }
 
         public PointShapeViewModel TryToGetPoint(IEnumerable<BaseShapeViewModel> shapes, Point2 target, double radius, double scale)
@@ -45,14 +45,14 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public bool Contains(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale)
+        public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale)
         {
-            return Registered[shapeViewModel.TargetType].Contains(shapeViewModel, target, radius, scale, Registered);
+            return Registered[shape.TargetType].Contains(shape, target, radius, scale, Registered);
         }
 
-        public bool Overlaps(BaseShapeViewModel shapeViewModel, Rect2 target, double radius, double scale)
+        public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale)
         {
-            return Registered[shapeViewModel.TargetType].Overlaps(shapeViewModel, target, radius, scale, Registered);
+            return Registered[shape.TargetType].Overlaps(shape, target, radius, scale, Registered);
         }
 
         public BaseShapeViewModel TryToGetShape(IEnumerable<BaseShapeViewModel> shapes, Point2 target, double radius, double scale)

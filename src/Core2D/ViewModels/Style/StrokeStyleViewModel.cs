@@ -9,26 +9,26 @@ namespace Core2D.Style
 
         public static ArrowType[] ArrowTypeValues { get; } = (ArrowType[])Enum.GetValues(typeof(ArrowType));
 
-        [AutoNotify] private BaseColorViewModel _colorViewModel;
+        [AutoNotify] private BaseColorViewModel _color;
         [AutoNotify] private double _thickness;
         [AutoNotify] private LineCap _lineCap;
         [AutoNotify] private string _dashes;
         [AutoNotify] private double _dashOffset;
-        [AutoNotify] private ArrowStyleViewModel _startArrowStyleViewModel;
-        [AutoNotify] private ArrowStyleViewModel _endArrowStyleViewModel;
+        [AutoNotify] private ArrowStyleViewModel _startArrow;
+        [AutoNotify] private ArrowStyleViewModel _endArrow;
 
         public override object Copy(IDictionary<object, object> shared)
         {
             return new StrokeStyleViewModel()
             {
                 Name = this.Name,
-                ColorViewModel = (BaseColorViewModel)this.ColorViewModel.Copy(shared),
-                Thickness = this.Thickness,
-                LineCap = this.LineCap,
-                Dashes = this.Dashes,
-                DashOffset = this.DashOffset,
-                StartArrowStyleViewModel = (ArrowStyleViewModel)this.StartArrowStyleViewModel.Copy(shared),
-                EndArrowStyleViewModel = (ArrowStyleViewModel)this.EndArrowStyleViewModel.Copy(shared)
+                Color = (BaseColorViewModel)this._color.Copy(shared),
+                Thickness = this._thickness,
+                LineCap = this._lineCap,
+                Dashes = this._dashes,
+                DashOffset = this._dashOffset,
+                StartArrow = (ArrowStyleViewModel)this._startArrow.Copy(shared),
+                EndArrow = (ArrowStyleViewModel)this._endArrow.Copy(shared)
             };
         }
 
@@ -36,9 +36,9 @@ namespace Core2D.Style
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= ColorViewModel.IsDirty();
-            isDirty |= StartArrowStyleViewModel.IsDirty();
-            isDirty |= EndArrowStyleViewModel.IsDirty();
+            isDirty |= _color.IsDirty();
+            isDirty |= _startArrow.IsDirty();
+            isDirty |= _endArrow.IsDirty();
 
             return isDirty;
         }
@@ -46,9 +46,9 @@ namespace Core2D.Style
         public override void Invalidate()
         {
             base.Invalidate();
-            ColorViewModel.Invalidate();
-            StartArrowStyleViewModel.Invalidate();
-            EndArrowStyleViewModel.Invalidate();
+            _color.Invalidate();
+            _startArrow.Invalidate();
+            _endArrow.Invalidate();
         }
     }
 }

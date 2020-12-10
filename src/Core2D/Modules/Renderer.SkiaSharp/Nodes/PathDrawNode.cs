@@ -9,9 +9,9 @@ namespace Core2D.Renderer.SkiaSharp
         public PathShapeViewModel Path { get; set; }
         public SKPath Geometry { get; set; }
 
-        public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel styleViewModel)
+        public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style)
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Path = path;
             UpdateGeometry();
         }

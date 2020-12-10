@@ -10,10 +10,10 @@ namespace Core2D.Renderer.SkiaSharp
         public EllipseShapeViewModel Ellipse { get; set; }
         public SKRect Rect { get; set; }
 
-        public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel styleViewModel)
+        public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
             : base()
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Ellipse = ellipse;
             UpdateGeometry();
         }

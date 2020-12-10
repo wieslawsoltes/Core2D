@@ -13,22 +13,22 @@ namespace Core2D.Renderer
 
         IPointDrawNode CreatePointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize);
 
-        ILineDrawNode CreateLineDrawNode(LineShapeViewModel line, ShapeStyleViewModel styleViewModel);
+        ILineDrawNode CreateLineDrawNode(LineShapeViewModel line, ShapeStyleViewModel style);
 
-        IRectangleDrawNode CreateRectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel styleViewModel);
+        IRectangleDrawNode CreateRectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel style);
 
-        IEllipseDrawNode CreateEllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel styleViewModel);
+        IEllipseDrawNode CreateEllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style);
 
-        IArcDrawNode CreateArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel styleViewModel);
+        IArcDrawNode CreateArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel style);
 
-        ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel styleViewModel);
+        ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style);
 
-        IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel styleViewModel);
+        IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style);
 
-        ITextDrawNode CreateTextDrawNode(TextShapeViewModel text, ShapeStyleViewModel styleViewModel);
+        ITextDrawNode CreateTextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style);
 
-        IImageDrawNode CreateImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel styleViewModel, IImageCache imageCache, ICache<string, IDisposable> bitmapCache);
+        IImageDrawNode CreateImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache);
 
-        IPathDrawNode CreatePathDrawNode(PathShapeViewModel path, ShapeStyleViewModel styleViewModel);
+        IPathDrawNode CreatePathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style);
     }
 }

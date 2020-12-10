@@ -39,7 +39,7 @@ namespace Core2D.Editor.Tools.Path
                         var start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.BeginFigure(
                                 start,
-                                editor.Project.OptionsViewModel.DefaultIsClosed);
+                                editor.Project.Options.DefaultIsClosed);
 
                         editor.CurrentPathTool.BeginDown(args);
                     }
@@ -67,7 +67,7 @@ namespace Core2D.Editor.Tools.Path
             {
                 case State.Move:
                     {
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             editor.TryToHoverShape((double)sx, (double)sy);
                         }
@@ -76,11 +76,11 @@ namespace Core2D.Editor.Tools.Path
             }
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
         }
 

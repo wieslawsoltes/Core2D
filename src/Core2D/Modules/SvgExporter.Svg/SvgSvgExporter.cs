@@ -54,9 +54,9 @@ namespace Core2D.SvgExporter.Svg
             return sb.ToString();
         }
 
-        private void ToGeometryDrawing(BaseShapeViewModel shapeViewModel, StringBuilder sb, IPathConverter converter)
+        private void ToGeometryDrawing(BaseShapeViewModel shape, StringBuilder sb, IPathConverter converter)
         {
-            if (shapeViewModel is GroupShapeViewModel group)
+            if (shape is GroupShapeViewModel group)
             {
                 foreach (var child in group.Shapes)
                 {
@@ -65,12 +65,12 @@ namespace Core2D.SvgExporter.Svg
                 return;
             }
 
-            if (shapeViewModel.IsFilled)
+            if (shape.IsFilled)
             {
-                var path = converter.ToFillPathShape(shapeViewModel);
+                var path = converter.ToFillPathShape(shape);
                 if (path != null)
                 {
-                    if (shapeViewModel.StyleViewModel.Fill.ColorViewModel is ArgbColorViewModelViewModel argbColor)
+                    if (shape.Style.Fill.ColorViewModel is ArgbColorViewModelViewModel argbColor)
                     {
                         var geometry = path.GeometryViewModel.ToSvgString();
                         var fill = argbColor.ToSvgString();
@@ -80,12 +80,12 @@ namespace Core2D.SvgExporter.Svg
                     }
                 }
             }
-            if (shapeViewModel.IsStroked)
+            if (shape.IsStroked)
             {
-                var path = converter.ToStrokePathShape(shapeViewModel);
+                var path = converter.ToStrokePathShape(shape);
                 if (path != null)
                 {
-                    if (shapeViewModel.StyleViewModel.Stroke.ColorViewModel is ArgbColorViewModelViewModel argbColor)
+                    if (shape.Style.Stroke.ColorViewModel is ArgbColorViewModelViewModel argbColor)
                     {
                         var geometry = path.GeometryViewModel.ToSvgString();
                         var fill = argbColor.ToSvgString();

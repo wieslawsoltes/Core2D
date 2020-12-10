@@ -8,13 +8,13 @@ namespace Core2D.Editors
 {
     public class TextBindingEditorViewModel : ViewModelBase
     {
-        private ProjectEditorViewModel _editorViewModel;
+        private ProjectEditorViewModel _editor;
         private TextShapeViewModel _text;
 
-        public ProjectEditorViewModel EditorViewModel
+        public ProjectEditorViewModel Editor
         {
-            get => _editorViewModel;
-            set => RaiseAndSetIfChanged(ref _editorViewModel, value);
+            get => _editor;
+            set => RaiseAndSetIfChanged(ref _editor, value);
         }
 
         public TextShapeViewModel Text
@@ -28,50 +28,50 @@ namespace Core2D.Editors
             throw new NotImplementedException();
         }
 
-        public void OnUseColumnName(ColumnViewModel columnViewModel)
+        public void OnUseColumnName(ColumnViewModel column)
         {
-            if (_text != null && columnViewModel != null)
+            if (_text != null && column != null)
             {
                 if (string.IsNullOrEmpty(_text.Text))
                 {
-                    _text.Text = $"{{{columnViewModel.Name}}}";
+                    _text.Text = $"{{{column.Name}}}";
                 }
                 else
                 {
                     var startIndex = _text.Text.Length;
-                    _text.Text = _text.Text.Insert(startIndex, $"{{{columnViewModel.Name}}}");
+                    _text.Text = _text.Text.Insert(startIndex, $"{{{column.Name}}}");
                 }
             }
         }
 
-        public void OnUsePageProperty(PropertyViewModel propertyViewModel)
+        public void OnUsePageProperty(PropertyViewModel property)
         {
-            if (_text != null && propertyViewModel != null)
+            if (_text != null && property != null)
             {
                 if (string.IsNullOrEmpty(_text.Text))
                 {
-                    _text.Text = $"{{{propertyViewModel.Name}}}";
+                    _text.Text = $"{{{property.Name}}}";
                 }
                 else
                 {
                     var startIndex = _text.Text.Length;
-                    _text.Text = _text.Text.Insert(startIndex, $"{{{propertyViewModel.Name}}}");
+                    _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
                 }
             }
         }
 
-        public void OnUseShapeProperty(PropertyViewModel propertyViewModel)
+        public void OnUseShapeProperty(PropertyViewModel property)
         {
-            if (_text != null && propertyViewModel != null)
+            if (_text != null && property != null)
             {
                 if (string.IsNullOrEmpty(_text.Text))
                 {
-                    _text.Text = $"{{{propertyViewModel.Name}}}";
+                    _text.Text = $"{{{property.Name}}}";
                 }
                 else
                 {
                     var startIndex = _text.Text.Length;
-                    _text.Text = _text.Text.Insert(startIndex, $"{{{propertyViewModel.Name}}}");
+                    _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
                 }
             }
         }

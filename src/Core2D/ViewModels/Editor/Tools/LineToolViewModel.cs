@@ -45,8 +45,8 @@ namespace Core2D.Editor.Tools
                         _line = factory.CreateLineShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
-                            editor.Project.OptionsViewModel.DefaultIsStroked);
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                            editor.Project.Options.DefaultIsStroked);
+                        if (editor.Project.Options.TryToConnect)
                         {
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result != null)
@@ -58,8 +58,8 @@ namespace Core2D.Editor.Tools
                                 editor.TryToSplitLine(x, y, _line.Start);
                             }
                         }
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Add(_line);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateEnd();
                         Move(_line);
                         _currentState = State.End;
@@ -72,7 +72,7 @@ namespace Core2D.Editor.Tools
                             _line.End.X = (double)sx;
                             _line.End.Y = (double)sy;
 
-                            if (editor.Project.OptionsViewModel.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
                                 var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                                 if (result != null)
@@ -85,9 +85,9 @@ namespace Core2D.Editor.Tools
                                 }
                             }
 
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_line);
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
                             Finalize(_line);
-                            editor.Project.AddShape(editor.Project.CurrentContainerViewModel.CurrentLayer, _line);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _line);
 
                             Reset();
                         }
@@ -124,7 +124,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.Start:
                     {
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             editor.TryToHoverShape((double)sx, (double)sy);
                         }
@@ -134,13 +134,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_line != null)
                         {
-                            if (editor.Project.OptionsViewModel.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
                                 editor.TryToHoverShape((double)sx, (double)sy);
                             }
                             _line.End.X = (double)sx;
                             _line.End.Y = (double)sy;
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_line);
                         }
                     }
@@ -153,19 +153,19 @@ namespace Core2D.Editor.Tools
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             _selection = new LineSelection(
                 _serviceProvider,
-                editor.Project.CurrentContainerViewModel.HelperLayer,
+                editor.Project.CurrentContainer.HelperLayer,
                 _line,
-                editor.PageStateViewModel.HelperStyleViewModel);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateEnd();
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
             _selection.Move();
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
         }
 
@@ -179,8 +179,8 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.End:
                     {
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_line);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

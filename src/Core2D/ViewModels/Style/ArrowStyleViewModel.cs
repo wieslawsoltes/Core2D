@@ -13,9 +13,9 @@ namespace Core2D.Style
             return new ArrowStyleViewModel()
             {
                 Name = this.Name,
-                ArrowType = this.ArrowType,
-                RadiusX = this.RadiusX,
-                RadiusY = this.RadiusY
+                ArrowType = this._arrowType,
+                RadiusX = this._radiusX,
+                RadiusY = this._radiusY
             };
         }
 

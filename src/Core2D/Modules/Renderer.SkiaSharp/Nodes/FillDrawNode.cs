@@ -18,7 +18,7 @@ namespace Core2D.Renderer.SkiaSharp
             Y = y;
             Width = width;
             Height = height;
-            ColorViewModel = colorViewModel;
+            Color = colorViewModel;
             UpdateGeometry();
         }
 

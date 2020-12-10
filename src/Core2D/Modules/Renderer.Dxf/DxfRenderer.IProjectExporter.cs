@@ -11,7 +11,7 @@ namespace Core2D.Renderer.Dxf
 {
     public partial class DxfRenderer : IProjectExporter
     {
-        public void Save(Stream stream, PageContainerViewModel containerViewModel)
+        public void Save(Stream stream, PageContainerViewModel container)
         {
             if (stream is FileStream fileStream)
             {
@@ -24,7 +24,7 @@ namespace Core2D.Renderer.Dxf
 
             var dxf = new DXF.DxfDocument(DXFH.DxfVersion.AutoCad2010);
 
-            Add(dxf, containerViewModel);
+            Add(dxf, container);
 
             dxf.Save(stream);
             ClearCache();
@@ -68,27 +68,27 @@ namespace Core2D.Renderer.Dxf
             ClearCache();
         }
 
-        private void Add(DXF.DxfDocument dxf, PageContainerViewModel containerViewModel)
+        private void Add(DXF.DxfDocument dxf, PageContainerViewModel container)
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
-            var db = (object)containerViewModel.Properties;
-            var record = (object)containerViewModel.RecordViewModel;
+            var db = (object)container.Properties;
+            var record = (object)container.RecordViewModel;
 
-            dataFlow.Bind(containerViewModel.Template, db, record);
-            dataFlow.Bind(containerViewModel, db, record);
+            dataFlow.Bind(container.Template, db, record);
+            dataFlow.Bind(container, db, record);
 
-            if (containerViewModel.Template != null)
+            if (container.Template != null)
             {
-                _pageWidth = containerViewModel.Template.Width;
-                _pageHeight = containerViewModel.Template.Height;
-                DrawPage(dxf, containerViewModel.Template);
+                _pageWidth = container.Template.Width;
+                _pageHeight = container.Template.Height;
+                DrawPage(dxf, container.Template);
             }
             else
             {
                 throw new NullReferenceException("Container template must be set.");
             }
 
-            DrawPage(dxf, containerViewModel);
+            DrawPage(dxf, container);
         }
 
         private void Add(DXF.DxfDocument dxf, DocumentContainerViewModel document)

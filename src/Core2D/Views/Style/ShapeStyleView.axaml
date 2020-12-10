@@ -6,7 +6,7 @@
              xmlns:vms="using:Core2D.Style"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.StyleViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.Style}"
              d:DesignWidth="250" d:DesignHeight="500"
              x:DataType="vms:ShapeStyleViewModel" x:CompileBindings="True">
     <StackPanel>

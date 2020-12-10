@@ -25,9 +25,9 @@ namespace Core2D.Shapes
 
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
-            if (renderer.StateViewModel.SelectedShapes != null)
+            if (renderer.State.SelectedShapes != null)
             {
-                if (renderer.StateViewModel.SelectedShapes.Contains(this))
+                if (renderer.State.SelectedShapes.Contains(this))
                 {
                     _point1.DrawShape(dc, renderer);
                     _point2.DrawShape(dc, renderer);
@@ -35,17 +35,17 @@ namespace Core2D.Shapes
                 }
                 else
                 {
-                    if (renderer.StateViewModel.SelectedShapes.Contains(_point1))
+                    if (renderer.State.SelectedShapes.Contains(_point1))
                     {
                         _point1.DrawShape(dc, renderer);
                     }
 
-                    if (renderer.StateViewModel.SelectedShapes.Contains(_point2))
+                    if (renderer.State.SelectedShapes.Contains(_point2))
                     {
                         _point2.DrawShape(dc, renderer);
                     }
 
-                    if (renderer.StateViewModel.SelectedShapes.Contains(_point3))
+                    if (renderer.State.SelectedShapes.Contains(_point3))
                     {
                         _point3.DrawShape(dc, renderer);
                     }
@@ -55,7 +55,7 @@ namespace Core2D.Shapes
 
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = RecordViewModel ?? r;
+            var record = Record ?? r;
 
             dataFlow.Bind(this, db, record);
 
@@ -66,43 +66,43 @@ namespace Core2D.Shapes
 
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
-            if (!Point1.State.HasFlag(ShapeStateFlags.Connector))
+            if (!_point1.State.HasFlag(ShapeStateFlags.Connector))
             {
-                Point1.Move(selection, dx, dy);
+                _point1.Move(selection, dx, dy);
             }
 
-            if (!Point2.State.HasFlag(ShapeStateFlags.Connector))
+            if (!_point2.State.HasFlag(ShapeStateFlags.Connector))
             {
-                Point2.Move(selection, dx, dy);
+                _point2.Move(selection, dx, dy);
             }
 
-            if (!Point3.State.HasFlag(ShapeStateFlags.Connector))
+            if (!_point3.State.HasFlag(ShapeStateFlags.Connector))
             {
-                Point3.Move(selection, dx, dy);
+                _point3.Move(selection, dx, dy);
             }
         }
 
         public override void Select(ISelection selection)
         {
             base.Select(selection);
-            Point1.Select(selection);
-            Point2.Select(selection);
-            Point3.Select(selection);
+            _point1.Select(selection);
+            _point2.Select(selection);
+            _point3.Select(selection);
         }
 
         public override void Deselect(ISelection selection)
         {
             base.Deselect(selection);
-            Point1.Deselect(selection);
-            Point2.Deselect(selection);
-            Point3.Deselect(selection);
+            _point1.Deselect(selection);
+            _point2.Deselect(selection);
+            _point3.Deselect(selection);
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
-            points.Add(Point1);
-            points.Add(Point2);
-            points.Add(Point3);
+            points.Add(_point1);
+            points.Add(_point2);
+            points.Add(_point3);
         }
 
         public override object Copy(IDictionary<object, object> shared)
@@ -114,9 +114,9 @@ namespace Core2D.Shapes
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= Point1.IsDirty();
-            isDirty |= Point2.IsDirty();
-            isDirty |= Point3.IsDirty();
+            isDirty |= _point1.IsDirty();
+            isDirty |= _point2.IsDirty();
+            isDirty |= _point3.IsDirty();
 
             return isDirty;
         }
@@ -124,9 +124,9 @@ namespace Core2D.Shapes
         public override void Invalidate()
         {
             base.Invalidate();
-            Point1.Invalidate();
-            Point2.Invalidate();
-            Point3.Invalidate();
+            _point1.Invalidate();
+            _point2.Invalidate();
+            _point3.Invalidate();
         }
     }
 }

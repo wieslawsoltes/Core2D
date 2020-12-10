@@ -12,10 +12,10 @@ namespace Core2D.Renderer
         public RectangleShapeViewModel Rectangle { get; set; }
         public A.Rect Rect { get; set; }
 
-        public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel styleViewModel)
+        public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
             : base()
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Rectangle = rectangle;
             UpdateGeometry();
         }

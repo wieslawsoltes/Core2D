@@ -93,8 +93,8 @@ namespace Core2D.Renderer.SkiaSharp
             switch (paint.Shader)
             {
                 case SP.ColorShader colorShader:
-                    style.Stroke.ColorViewModel = ToArgbColor(colorShader, factory);
-                    style.Fill.ColorViewModel = ToArgbColor(colorShader, factory);
+                    style.Stroke.Color = ToArgbColor(colorShader, factory);
+                    style.Fill.Color = ToArgbColor(colorShader, factory);
                     break;
 
                 case SP.LinearGradientShader linearGradientShader:

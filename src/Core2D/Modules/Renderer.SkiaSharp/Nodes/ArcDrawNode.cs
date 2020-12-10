@@ -9,9 +9,9 @@ namespace Core2D.Renderer.SkiaSharp
         public ArcShapeViewModelViewModel Arc { get; set; }
         public SKPath Geometry { get; set; }
 
-        public ArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel styleViewModel)
+        public ArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Arc = arc;
             UpdateGeometry();
         }

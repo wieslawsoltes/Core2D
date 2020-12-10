@@ -15,12 +15,12 @@ namespace Core2D.Editor.Tools.Selection
         private PointShapeViewModel _topLeftHelperPoint;
         private PointShapeViewModel _bottomRightHelperPoint;
 
-        public EllipseSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, EllipseShapeViewModel shapeViewModel, ShapeStyleViewModel styleViewModel)
+        public EllipseSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, EllipseShapeViewModel shape, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
-            _ellipse = shapeViewModel;
-            _styleViewModel = styleViewModel;
+            _ellipse = shape;
+            _styleViewModel = style;
         }
 
         public void ToStateBottomRight()

@@ -10,11 +10,11 @@ namespace Core2D.Editor.Tools.Selection
         private readonly PointShapeViewModel _shapeViewModel;
         private readonly ShapeStyleViewModel _styleViewModel;
 
-        public PointSelection(LayerContainerViewModel layer, PointShapeViewModel shapeViewModel, ShapeStyleViewModel styleViewModel)
+        public PointSelection(LayerContainerViewModel layer, PointShapeViewModel shape, ShapeStyleViewModel style)
         {
             _layer = layer;
-            _shapeViewModel = shapeViewModel;
-            _styleViewModel = styleViewModel;
+            _shapeViewModel = shape;
+            _styleViewModel = style;
         }
     }
 }

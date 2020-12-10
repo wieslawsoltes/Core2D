@@ -26,7 +26,7 @@ namespace Core2D.Views.Shapes
             {
                 var textBindingEditor = new TextBindingEditorViewModel()
                 {
-                    EditorViewModel = editor,
+                    Editor = editor,
                     Text = text
                 };
                 var dialog = new DialogViewModel(editor)

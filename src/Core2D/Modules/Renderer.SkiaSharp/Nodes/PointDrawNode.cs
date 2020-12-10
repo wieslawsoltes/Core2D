@@ -13,7 +13,7 @@ namespace Core2D.Renderer.SkiaSharp
 
         public PointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize)
         {
-            StyleViewModel = pointStyleViewModel;
+            Style = pointStyleViewModel;
             Point = point;
             PointSize = pointSize;
             UpdateGeometry();

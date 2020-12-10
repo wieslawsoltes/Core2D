@@ -10,11 +10,11 @@ namespace Core2D.Editor.Tools.Selection
         private readonly PathShapeViewModel _path;
         private readonly ShapeStyleViewModel _styleViewModel;
 
-        public PathSelection(LayerContainerViewModel layer, PathShapeViewModel shapeViewModel, ShapeStyleViewModel styleViewModel)
+        public PathSelection(LayerContainerViewModel layer, PathShapeViewModel shape, ShapeStyleViewModel style)
         {
             _layer = layer;
-            _path = shapeViewModel;
-            _styleViewModel = styleViewModel;
+            _path = shape;
+            _styleViewModel = style;
         }
     }
 }

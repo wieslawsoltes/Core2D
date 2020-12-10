@@ -12,12 +12,12 @@ namespace Core2D.Renderer
         private readonly ICache<object, IDrawNode> _drawNodeCache;
         private readonly IDrawNodeFactory _drawNodeFactory;
 
-        [AutoNotify] private ShapeRendererStateViewModel _stateViewModel;
+        [AutoNotify] private ShapeRendererStateViewModel _state;
 
         protected NodeRendererViewModel(IServiceProvider serviceProvider, IDrawNodeFactory drawNodeFactory)
         {
             _serviceProvider = serviceProvider;
-            _stateViewModel = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
+            _state = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, IDisposable>(x => x.Dispose());
             _drawNodeCache = _serviceProvider.GetService<IFactory>().CreateCache<object, IDrawNode>(x => x.Dispose());
             _drawNodeFactory = drawNodeFactory;
@@ -29,9 +29,9 @@ namespace Core2D.Renderer
             _drawNodeCache.Reset();
         }
 
-        public void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel colorViewModel)
+        public void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel color)
         {
-            var drawNodeCached = _drawNodeCache.Get(colorViewModel);
+            var drawNodeCached = _drawNodeCache.Get(color);
             if (drawNodeCached != null)
             {
                 if (drawNodeCached is IFillDrawNode drawNode)
@@ -41,24 +41,24 @@ namespace Core2D.Renderer
                     drawNode.Width = width;
                     drawNode.Height = height;
                     drawNode.UpdateGeometry();
-                    if (colorViewModel.IsDirty())
+                    if (color.IsDirty())
                     {
-                        drawNode.ColorViewModel = colorViewModel;
+                        drawNode.Color = color;
                         drawNode.UpdateStyle();
-                        colorViewModel.Invalidate();
+                        color.Invalidate();
                     }
-                    drawNode.Draw(dc, _stateViewModel.ZoomX);
+                    drawNode.Draw(dc, _state.ZoomX);
                 }
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateFillDrawNode(x, y, width, height, colorViewModel);
+                var drawNode = _drawNodeFactory.CreateFillDrawNode(x, y, width, height, color);
 
                 drawNode.UpdateStyle();
 
-                _drawNodeCache.Set(colorViewModel, drawNode);
+                _drawNodeCache.Set(color, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
@@ -74,12 +74,12 @@ namespace Core2D.Renderer
                     drawNode.Width = width;
                     drawNode.Height = height;
                     drawNode.UpdateGeometry();
-                    if (grid.IsDirty() || (grid.GridStrokeColorViewModel != null && grid.GridStrokeColorViewModel.IsDirty()))
+                    if (grid.IsDirty() || (grid.GridStrokeColor != null && grid.GridStrokeColor.IsDirty()))
                     {
                         drawNode.UpdateStyle();
-                        grid.GridStrokeColorViewModel?.Invalidate();
+                        grid.GridStrokeColor?.Invalidate();
                     }
-                    drawNode.Draw(dc, _stateViewModel.ZoomX);
+                    drawNode.Draw(dc, _state.ZoomX);
                 }
             }
             else
@@ -90,13 +90,13 @@ namespace Core2D.Renderer
 
                 _drawNodeCache.Set(grid, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
-        public void DrawPage(object dc, PageContainerViewModel containerViewModel)
+        public void DrawPage(object dc, PageContainerViewModel container)
         {
-            foreach (var layer in containerViewModel.Layers)
+            foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
@@ -109,7 +109,7 @@ namespace Core2D.Renderer
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(_stateViewModel.DrawShapeState))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.DrawShape(dc, this);
                 }
@@ -117,7 +117,7 @@ namespace Core2D.Renderer
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(_stateViewModel.DrawShapeState))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.DrawPoints(dc, this);
                 }
@@ -126,9 +126,9 @@ namespace Core2D.Renderer
 
         public void DrawPoint(object dc, PointShapeViewModel point)
         {
-            var isSelected = _stateViewModel.SelectedShapes?.Count > 0 && _stateViewModel.SelectedShapes.Contains(point);
-            var pointStyle = isSelected ? _stateViewModel.SelectedPointStyleViewModel : _stateViewModel.PointStyleViewModel;
-            var pointSize = _stateViewModel.PointSize;
+            var isSelected = _state.SelectedShapes?.Count > 0 && _state.SelectedShapes.Contains(point);
+            var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
+            var pointSize = _state.PointSize;
             if (pointStyle == null || pointSize <= 0.0)
             {
                 return;
@@ -137,9 +137,9 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(point);
             if (drawNodeCached != null)
             {
-                if (pointStyle.IsDirty() || drawNodeCached.StyleViewModel != pointStyle)
+                if (pointStyle.IsDirty() || drawNodeCached.Style != pointStyle)
                 {
-                    drawNodeCached.StyleViewModel = pointStyle;
+                    drawNodeCached.Style = pointStyle;
                     drawNodeCached.UpdateStyle();
                 }
 
@@ -148,9 +148,9 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                if (_stateViewModel.DrawPoints == true)
+                if (_state.DrawPoints == true)
                 {
-                    drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                    drawNodeCached.Draw(dc, _state.ZoomX);
                 }
             }
             else
@@ -161,9 +161,9 @@ namespace Core2D.Renderer
 
                 _drawNodeCache.Set(point, drawNode);
 
-                if (_stateViewModel.DrawPoints == true)
+                if (_state.DrawPoints == true)
                 {
-                    drawNode.Draw(dc, _stateViewModel.ZoomX);
+                    drawNode.Draw(dc, _state.ZoomX);
                 }
             }
         }
@@ -173,12 +173,12 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(line);
             if (drawNodeCached != null)
             {
-                if (line.StyleViewModel.IsDirty() || drawNodeCached.StyleViewModel != line.StyleViewModel)
+                if (line.Style.IsDirty() || drawNodeCached.Style != line.Style)
                 {
-                    drawNodeCached.StyleViewModel = line.StyleViewModel;
+                    drawNodeCached.Style = line.Style;
                     drawNodeCached.UpdateStyle();
                     drawNodeCached.UpdateGeometry();
-                    line.StyleViewModel.Invalidate();
+                    line.Style.Invalidate();
                 }
 
                 if (line.IsDirty())
@@ -186,17 +186,17 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                drawNodeCached.Draw(dc, _state.ZoomX);
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateLineDrawNode(line, line.StyleViewModel);
+                var drawNode = _drawNodeFactory.CreateLineDrawNode(line, line.Style);
 
                 drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(line, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
@@ -205,11 +205,11 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(rectangle);
             if (drawNodeCached != null)
             {
-                if (rectangle.StyleViewModel.IsDirty() || drawNodeCached.StyleViewModel != rectangle.StyleViewModel)
+                if (rectangle.Style.IsDirty() || drawNodeCached.Style != rectangle.Style)
                 {
-                    drawNodeCached.StyleViewModel = rectangle.StyleViewModel;
+                    drawNodeCached.Style = rectangle.Style;
                     drawNodeCached.UpdateStyle();
-                    rectangle.StyleViewModel.Invalidate();
+                    rectangle.Style.Invalidate();
                 }
 
                 if (rectangle.IsDirty())
@@ -217,17 +217,17 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                drawNodeCached.Draw(dc, _state.ZoomX);
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateRectangleDrawNode(rectangle, rectangle.StyleViewModel);
+                var drawNode = _drawNodeFactory.CreateRectangleDrawNode(rectangle, rectangle.Style);
 
                 drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(rectangle, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
@@ -236,11 +236,11 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(ellipse);
             if (drawNodeCached != null)
             {
-                if (ellipse.StyleViewModel.IsDirty() || drawNodeCached.StyleViewModel != ellipse.StyleViewModel)
+                if (ellipse.Style.IsDirty() || drawNodeCached.Style != ellipse.Style)
                 {
-                    drawNodeCached.StyleViewModel = ellipse.StyleViewModel;
+                    drawNodeCached.Style = ellipse.Style;
                     drawNodeCached.UpdateStyle();
-                    ellipse.StyleViewModel.Invalidate();
+                    ellipse.Style.Invalidate();
                 }
 
                 if (ellipse.IsDirty())
@@ -248,17 +248,17 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                drawNodeCached.Draw(dc, _state.ZoomX);
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateEllipseDrawNode(ellipse, ellipse.StyleViewModel);
+                var drawNode = _drawNodeFactory.CreateEllipseDrawNode(ellipse, ellipse.Style);
 
                 drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(ellipse, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
@@ -267,11 +267,11 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(arc);
             if (drawNodeCached != null)
             {
-                if (arc.StyleViewModel.IsDirty() || drawNodeCached.StyleViewModel != arc.StyleViewModel)
+                if (arc.Style.IsDirty() || drawNodeCached.Style != arc.Style)
                 {
-                    drawNodeCached.StyleViewModel = arc.StyleViewModel;
+                    drawNodeCached.Style = arc.Style;
                     drawNodeCached.UpdateStyle();
-                    arc.StyleViewModel.Invalidate();
+                    arc.Style.Invalidate();
                 }
 
                 if (arc.IsDirty())
@@ -279,17 +279,17 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                drawNodeCached.Draw(dc, _state.ZoomX);
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateArcDrawNode(arc, arc.StyleViewModel);
+                var drawNode = _drawNodeFactory.CreateArcDrawNode(arc, arc.Style);
 
                 drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(arc, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
@@ -298,11 +298,11 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(cubicBezier);
             if (drawNodeCached != null)
             {
-                if (cubicBezier.StyleViewModel.IsDirty() || drawNodeCached.StyleViewModel != cubicBezier.StyleViewModel)
+                if (cubicBezier.Style.IsDirty() || drawNodeCached.Style != cubicBezier.Style)
                 {
-                    drawNodeCached.StyleViewModel = cubicBezier.StyleViewModel;
+                    drawNodeCached.Style = cubicBezier.Style;
                     drawNodeCached.UpdateStyle();
-                    cubicBezier.StyleViewModel.Invalidate();
+                    cubicBezier.Style.Invalidate();
                 }
 
                 if (cubicBezier.IsDirty())
@@ -310,17 +310,17 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                drawNodeCached.Draw(dc, _state.ZoomX);
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateCubicBezierDrawNode(cubicBezier, cubicBezier.StyleViewModel);
+                var drawNode = _drawNodeFactory.CreateCubicBezierDrawNode(cubicBezier, cubicBezier.Style);
 
                 drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(cubicBezier, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
@@ -329,11 +329,11 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(quadraticBezier);
             if (drawNodeCached != null)
             {
-                if (quadraticBezier.StyleViewModel.IsDirty() || drawNodeCached.StyleViewModel != quadraticBezier.StyleViewModel)
+                if (quadraticBezier.Style.IsDirty() || drawNodeCached.Style != quadraticBezier.Style)
                 {
-                    drawNodeCached.StyleViewModel = quadraticBezier.StyleViewModel;
+                    drawNodeCached.Style = quadraticBezier.Style;
                     drawNodeCached.UpdateStyle();
-                    quadraticBezier.StyleViewModel.Invalidate();
+                    quadraticBezier.Style.Invalidate();
                 }
 
                 if (quadraticBezier.IsDirty())
@@ -341,17 +341,17 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                drawNodeCached.Draw(dc, _state.ZoomX);
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateQuadraticBezierDrawNode(quadraticBezier, quadraticBezier.StyleViewModel);
+                var drawNode = _drawNodeFactory.CreateQuadraticBezierDrawNode(quadraticBezier, quadraticBezier.Style);
 
                 drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(quadraticBezier, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
@@ -360,12 +360,12 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(text);
             if (drawNodeCached != null)
             {
-                if (text.StyleViewModel.IsDirty() || drawNodeCached.StyleViewModel != text.StyleViewModel)
+                if (text.Style.IsDirty() || drawNodeCached.Style != text.Style)
                 {
-                    drawNodeCached.StyleViewModel = text.StyleViewModel;
+                    drawNodeCached.Style = text.Style;
                     drawNodeCached.UpdateStyle();
                     drawNodeCached.UpdateGeometry();
-                    text.StyleViewModel.Invalidate();
+                    text.Style.Invalidate();
                 }
 
                 if (text.IsDirty() || IsBoundTextDirty(drawNodeCached, text))
@@ -373,7 +373,7 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                drawNodeCached.Draw(dc, _state.ZoomX);
 
                 static bool IsBoundTextDirty(IDrawNode drawNodeCached, TextShapeViewModel text)
                 {
@@ -384,13 +384,13 @@ namespace Core2D.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateTextDrawNode(text, text.StyleViewModel);
+                var drawNode = _drawNodeFactory.CreateTextDrawNode(text, text.Style);
 
                 drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(text, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
@@ -399,11 +399,11 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(image);
             if (drawNodeCached != null)
             {
-                if (image.StyleViewModel.IsDirty() || drawNodeCached.StyleViewModel != image.StyleViewModel)
+                if (image.Style.IsDirty() || drawNodeCached.Style != image.Style)
                 {
-                    drawNodeCached.StyleViewModel = image.StyleViewModel;
+                    drawNodeCached.Style = image.Style;
                     drawNodeCached.UpdateStyle();
-                    image.StyleViewModel.Invalidate();
+                    image.Style.Invalidate();
                 }
 
                 if (image.IsDirty())
@@ -411,17 +411,17 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                drawNodeCached.Draw(dc, _state.ZoomX);
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateImageDrawNode(image, image.StyleViewModel, _stateViewModel.ImageCache, _biCache);
+                var drawNode = _drawNodeFactory.CreateImageDrawNode(image, image.Style, _state.ImageCache, _biCache);
 
                 drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(image, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
 
@@ -430,11 +430,11 @@ namespace Core2D.Renderer
             var drawNodeCached = _drawNodeCache.Get(path);
             if (drawNodeCached != null)
             {
-                if (path.StyleViewModel.IsDirty() || drawNodeCached.StyleViewModel != path.StyleViewModel)
+                if (path.Style.IsDirty() || drawNodeCached.Style != path.Style)
                 {
-                    drawNodeCached.StyleViewModel = path.StyleViewModel;
+                    drawNodeCached.Style = path.Style;
                     drawNodeCached.UpdateStyle();
-                    path.StyleViewModel.Invalidate();
+                    path.Style.Invalidate();
                 }
 
                 if (path.IsDirty())
@@ -442,17 +442,17 @@ namespace Core2D.Renderer
                     drawNodeCached.UpdateGeometry();
                 }
 
-                drawNodeCached.Draw(dc, _stateViewModel.ZoomX);
+                drawNodeCached.Draw(dc, _state.ZoomX);
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreatePathDrawNode(path, path.StyleViewModel);
+                var drawNode = _drawNodeFactory.CreatePathDrawNode(path, path.Style);
 
                 drawNode.UpdateStyle();
 
                 _drawNodeCache.Set(path, drawNode);
 
-                drawNode.Draw(dc, _stateViewModel.ZoomX);
+                drawNode.Draw(dc, _state.ZoomX);
             }
         }
     }

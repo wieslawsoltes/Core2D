@@ -35,9 +35,9 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateStyle()
         {
-            if (Grid.GridStrokeColorViewModel != null)
+            if (Grid.GridStrokeColor != null)
             {
-                Stroke = SkiaSharpDrawUtil.ToSKPaintPen(Grid.GridStrokeColorViewModel, Grid.GridStrokeThickness);
+                Stroke = SkiaSharpDrawUtil.ToSKPaintPen(Grid.GridStrokeColor, Grid.GridStrokeThickness);
             }
             else
             {
@@ -73,7 +73,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             var canvas = dc as SKCanvas;
 
-            if (Grid.GridStrokeColorViewModel != null)
+            if (Grid.GridStrokeColor != null)
             {
                 if (Grid.IsGridEnabled)
                 {

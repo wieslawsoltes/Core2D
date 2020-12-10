@@ -26,7 +26,7 @@ namespace Core2D.Renderer.Dxf
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
 
-        public ShapeRendererStateViewModel StateViewModel
+        public ShapeRendererStateViewModel State
         {
             get => _stateViewModel;
             set => RaiseAndSetIfChanged(ref _stateViewModel, value);
@@ -179,13 +179,13 @@ namespace Core2D.Renderer.Dxf
                 }, 3);
         }
 
-        private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, ShapeStyleViewModel styleViewModel, bool isStroked, double x1, double y1, double x2, double y2)
+        private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, ShapeStyleViewModel style, bool isStroked, double x1, double y1, double x2, double y2)
         {
             if (isStroked)
             {
-                var stroke = ToColor(styleViewModel.Stroke.ColorViewModel);
-                var strokeTansparency = ToTransparency(styleViewModel.Stroke.ColorViewModel);
-                var lineweight = ToLineweight(styleViewModel.Stroke.Thickness);
+                var stroke = ToColor(style.Stroke.ColorViewModel);
+                var strokeTansparency = ToTransparency(style.Stroke.ColorViewModel);
+                var lineweight = ToLineweight(style.Stroke.Thickness);
 
                 var dxfLine = CreateLine(x1, y1, x2, y2);
 
@@ -214,16 +214,16 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(dxfLine);
         }
 
-        private void DrawRectangleInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, ShapeStyleViewModel styleViewModel, ref Spatial.Rect2 rect)
+        private void DrawRectangleInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, ShapeStyleViewModel style, ref Spatial.Rect2 rect)
         {
             if (isFilled)
             {
-                FillRectangle(dxf, layer, rect.X, rect.Y, rect.Width, rect.Height, styleViewModel.Fill.ColorViewModel);
+                FillRectangle(dxf, layer, rect.X, rect.Y, rect.Width, rect.Height, style.Fill.ColorViewModel);
             }
 
             if (isStroked)
             {
-                StrokeRectangle(dxf, layer, styleViewModel, rect.X, rect.Y, rect.Width, rect.Height);
+                StrokeRectangle(dxf, layer, style, rect.X, rect.Y, rect.Width, rect.Height);
             }
         }
 
@@ -255,12 +255,12 @@ namespace Core2D.Renderer.Dxf
             dxf.AddEntity(hatch);
         }
 
-        private void StrokeRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, ShapeStyleViewModel styleViewModel, double x, double y, double width, double height)
+        private void StrokeRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, ShapeStyleViewModel style, double x, double y, double width, double height)
         {
-            DrawLineInternal(dxf, layer, styleViewModel, true, x, y, x + width, y);
-            DrawLineInternal(dxf, layer, styleViewModel, true, x + width, y, x + width, y + height);
-            DrawLineInternal(dxf, layer, styleViewModel, true, x + width, y + height, x, y + height);
-            DrawLineInternal(dxf, layer, styleViewModel, true, x, y + height, x, y);
+            DrawLineInternal(dxf, layer, style, true, x, y, x + width, y);
+            DrawLineInternal(dxf, layer, style, true, x + width, y, x + width, y + height);
+            DrawLineInternal(dxf, layer, style, true, x + width, y + height, x, y + height);
+            DrawLineInternal(dxf, layer, style, true, x, y + height, x, y);
         }
 
         private void StrokeRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, BaseColorViewModel colorViewModel, double thickness, double x, double y, double width, double height)
@@ -271,18 +271,18 @@ namespace Core2D.Renderer.Dxf
             DrawLineInternal(dxf, layer, colorViewModel, thickness, x, y + height, x, y);
         }
 
-        private void DrawEllipseInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, ShapeStyleViewModel styleViewModel, ref Spatial.Rect2 rect)
+        private void DrawEllipseInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, ShapeStyleViewModel style, ref Spatial.Rect2 rect)
         {
             var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
 
             if (isFilled)
             {
-                FillEllipse(dxf, layer, dxfEllipse, styleViewModel.Fill.ColorViewModel);
+                FillEllipse(dxf, layer, dxfEllipse, style.Fill.ColorViewModel);
             }
 
             if (isStroked)
             {
-                StrokeEllipse(dxf, layer, dxfEllipse, styleViewModel.Stroke.ColorViewModel, styleViewModel.Stroke.Thickness);
+                StrokeEllipse(dxf, layer, dxfEllipse, style.Stroke.ColorViewModel, style.Stroke.Thickness);
             }
         }
 
@@ -337,12 +337,12 @@ namespace Core2D.Renderer.Dxf
 
             for (double gx = ox + cw; gx < ex; gx += cw)
             {
-                DrawLineInternal(dxf, layer, grid.GridStrokeColorViewModel, grid.GridStrokeThickness, gx, oy, gx, ey);
+                DrawLineInternal(dxf, layer, grid.GridStrokeColor, grid.GridStrokeThickness, gx, oy, gx, ey);
             }
 
             for (double gy = oy + ch; gy < ey; gy += ch)
             {
-                DrawLineInternal(dxf, layer, grid.GridStrokeColorViewModel, grid.GridStrokeThickness, ox, gy, ex, gy);
+                DrawLineInternal(dxf, layer, grid.GridStrokeColor, grid.GridStrokeThickness, ox, gy, ex, gy);
             }
         }
 
@@ -451,15 +451,15 @@ namespace Core2D.Renderer.Dxf
 
             if (grid.IsBorderEnabled)
             {
-                StrokeRectangle(dxf, _currentLayer, grid.GridStrokeColorViewModel, grid.GridStrokeThickness, rect.X, rect.Y, rect.Width, rect.Height);
+                StrokeRectangle(dxf, _currentLayer, grid.GridStrokeColor, grid.GridStrokeThickness, rect.X, rect.Y, rect.Width, rect.Height);
             }
         }
 
-        public void DrawPage(object dc, PageContainerViewModel containerViewModel)
+        public void DrawPage(object dc, PageContainerViewModel container)
         {
             var dxf = dc as DXF.DxfDocument;
 
-            foreach (var layer in containerViewModel.Layers)
+            foreach (var layer in container.Layers)
             {
                 var dxfLayer = new DXFT.Layer(layer.Name)
                 {
@@ -480,7 +480,7 @@ namespace Core2D.Renderer.Dxf
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(StateViewModel.DrawShapeState))
+                if (shape.State.HasFlag(State.DrawShapeState))
                 {
                     shape.DrawShape(dxf, this);
                 }
@@ -488,7 +488,7 @@ namespace Core2D.Renderer.Dxf
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(StateViewModel.DrawShapeState))
+                if (shape.State.HasFlag(State.DrawShapeState))
                 {
                     shape.DrawPoints(dxf, this);
                 }
@@ -515,7 +515,7 @@ namespace Core2D.Renderer.Dxf
 
                 // TODO: Draw line end arrow.
 
-                DrawLineInternal(dxf, _currentLayer, line.StyleViewModel, line.IsStroked, _x1, _y1, _x2, _y2);
+                DrawLineInternal(dxf, _currentLayer, line.Style, line.IsStroked, _x1, _y1, _x2, _y2);
             }
         }
 
@@ -524,7 +524,7 @@ namespace Core2D.Renderer.Dxf
             if (rectangle.IsStroked || rectangle.IsFilled)
             {
                 var dxf = dc as DXF.DxfDocument;
-                var style = rectangle.StyleViewModel;
+                var style = rectangle.Style;
                 var rect = Spatial.Rect2.FromPoints(
                     rectangle.TopLeft.X,
                     rectangle.TopLeft.Y,
@@ -541,7 +541,7 @@ namespace Core2D.Renderer.Dxf
             if (ellipse.IsStroked || ellipse.IsFilled)
             {
                 var dxf = dc as DXF.DxfDocument;
-                var style = ellipse.StyleViewModel;
+                var style = ellipse.Style;
                 var rect = Spatial.Rect2.FromPoints(
                     ellipse.TopLeft.X,
                     ellipse.TopLeft.Y,
@@ -556,7 +556,7 @@ namespace Core2D.Renderer.Dxf
         public void DrawArc(object dc, ArcShapeViewModelViewModel arc)
         {
             var dxf = dc as DXF.DxfDocument;
-            var style = arc.StyleViewModel;
+            var style = arc.Style;
 
             var dxfEllipse = CreateEllipticalArc(arc);
 
@@ -606,7 +606,7 @@ namespace Core2D.Renderer.Dxf
             if (cubicBezier.IsStroked || cubicBezier.IsFilled)
             {
                 var dxf = dc as DXF.DxfDocument;
-                var style = cubicBezier.StyleViewModel;
+                var style = cubicBezier.Style;
 
                 var dxfSpline = CreateCubicSpline(
                     cubicBezier.Point1.X,
@@ -664,7 +664,7 @@ namespace Core2D.Renderer.Dxf
             if (quadraticBezier.IsStroked || quadraticBezier.IsFilled)
             {
                 var dxf = dc as DXF.DxfDocument;
-                var style = quadraticBezier.StyleViewModel;
+                var style = quadraticBezier.Style;
 
                 var dxfSpline = CreateQuadraticSpline(
                     quadraticBezier.Point1.X,
@@ -729,7 +729,7 @@ namespace Core2D.Renderer.Dxf
                 return;
             }
 
-            var style = text.StyleViewModel;
+            var style = text.Style;
             var stroke = ToColor(style.Stroke.ColorViewModel);
             var strokeTansparency = ToTransparency(style.Stroke.ColorViewModel);
 
@@ -740,33 +740,33 @@ namespace Core2D.Renderer.Dxf
                 text.BottomRight.X,
                 text.BottomRight.Y,
                 0, 0);
-            var x = text.StyleViewModel.TextStyleViewModel.TextHAlignment switch
+            var x = text.Style.TextStyleViewModel.TextHAlignment switch
             {
                 TextHAlignment.Center => rect.X + rect.Width / 2.0,
                 TextHAlignment.Right => rect.X + rect.Width,
                 _ => rect.X,
             };
-            var y = text.StyleViewModel.TextStyleViewModel.TextVAlignment switch
+            var y = text.Style.TextStyleViewModel.TextVAlignment switch
             {
                 TextVAlignment.Center => rect.Y + rect.Height / 2.0,
                 TextVAlignment.Bottom => rect.Y + rect.Height,
                 _ => rect.Y,
             };
-            attachmentPoint = text.StyleViewModel.TextStyleViewModel.TextVAlignment switch
+            attachmentPoint = text.Style.TextStyleViewModel.TextVAlignment switch
             {
-                TextVAlignment.Center => text.StyleViewModel.TextStyleViewModel.TextHAlignment switch
+                TextVAlignment.Center => text.Style.TextStyleViewModel.TextHAlignment switch
                 {
                     TextHAlignment.Center => DXFE.MTextAttachmentPoint.MiddleCenter,
                     TextHAlignment.Right => DXFE.MTextAttachmentPoint.MiddleRight,
                     _ => DXFE.MTextAttachmentPoint.MiddleLeft,
                 },
-                TextVAlignment.Bottom => text.StyleViewModel.TextStyleViewModel.TextHAlignment switch
+                TextVAlignment.Bottom => text.Style.TextStyleViewModel.TextHAlignment switch
                 {
                     TextHAlignment.Center => DXFE.MTextAttachmentPoint.BottomCenter,
                     TextHAlignment.Right => DXFE.MTextAttachmentPoint.BottomRight,
                     _ => DXFE.MTextAttachmentPoint.BottomLeft,
                 },
-                _ => text.StyleViewModel.TextStyleViewModel.TextHAlignment switch
+                _ => text.Style.TextStyleViewModel.TextHAlignment switch
                 {
                     TextHAlignment.Center => DXFE.MTextAttachmentPoint.TopCenter,
                     TextHAlignment.Right => DXFE.MTextAttachmentPoint.TopRight,
@@ -776,7 +776,7 @@ namespace Core2D.Renderer.Dxf
             var ts = new netDxf.Tables.TextStyle(style.TextStyleViewModel.FontName, style.TextStyleViewModel.FontFile);
             var dxfMText = new DXFE.MText(
                 new DXF.Vector3(ToDxfX(x), ToDxfY(y), 0),
-                text.StyleViewModel.TextStyleViewModel.FontSize * _targetDpi / _sourceDpi,
+                text.Style.TextStyleViewModel.FontSize * _targetDpi / _sourceDpi,
                 rect.Width,
                 ts)
             {
@@ -784,7 +784,7 @@ namespace Core2D.Renderer.Dxf
             };
 
             var options = new DXFE.MTextFormattingOptions();
-            var fs = text.StyleViewModel.TextStyleViewModel.FontStyle;
+            var fs = text.Style.TextStyleViewModel.FontStyle;
 
             options.Bold = fs.HasFlag(FontStyleFlags.Bold);
             options.Italic = fs.HasFlag(FontStyleFlags.Italic);
@@ -803,7 +803,7 @@ namespace Core2D.Renderer.Dxf
         {
             var dxf = dc as DXF.DxfDocument;
 
-            var bytes = StateViewModel.ImageCache.GetImage(image.Key);
+            var bytes = State.ImageCache.GetImage(image.Key);
             if (bytes != null)
             {
                 var rect = Spatial.Rect2.FromPoints(
@@ -825,7 +825,7 @@ namespace Core2D.Renderer.Dxf
                 }
                 else
                 {
-                    if (StateViewModel.ImageCache != null && !string.IsNullOrEmpty(image.Key) && !string.IsNullOrEmpty(_outputPath))
+                    if (State.ImageCache != null && !string.IsNullOrEmpty(image.Key) && !string.IsNullOrEmpty(_outputPath))
                     {
                         var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
                         System.IO.File.WriteAllBytes(path, bytes);
@@ -849,7 +849,7 @@ namespace Core2D.Renderer.Dxf
             if (path.IsStroked || path.IsFilled)
             {
                 var dxf = dc as DXF.DxfDocument;
-                var style = path.StyleViewModel;
+                var style = path.Style;
 
                 CreateHatchBoundsAndEntities(path.GeometryViewModel, out var bounds, out var entities);
                 if (entities == null || bounds == null)

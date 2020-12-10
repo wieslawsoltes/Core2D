@@ -16,11 +16,11 @@ namespace Core2D.Renderer
         [AutoNotify] private IImageCache _imageCache;
         [AutoNotify] private bool _drawDecorators;
         [AutoNotify] private bool _drawPoints;
-        [AutoNotify] private ShapeStyleViewModel _pointStyleViewModel;
-        [AutoNotify] private ShapeStyleViewModel _selectedPointStyleViewModel;
+        [AutoNotify] private ShapeStyleViewModel _pointStyle;
+        [AutoNotify] private ShapeStyleViewModel _selectedPointStyle;
         [AutoNotify] private double _pointSize;
-        [AutoNotify] private ShapeStyleViewModel _selectionStyleViewModel;
-        [AutoNotify] private ShapeStyleViewModel _helperStyleViewModel;
+        [AutoNotify] private ShapeStyleViewModel _selectionStyle;
+        [AutoNotify] private ShapeStyleViewModel _helperStyle;
         [AutoNotify] private IDecorator _decorator;
 
         public override object Copy(IDictionary<object, object> shared)

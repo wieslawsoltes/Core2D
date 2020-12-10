@@ -6,6 +6,6 @@ namespace Core2D
     public interface IDataObject
     {
         ImmutableArray<PropertyViewModel> Properties { get; set; }
-        RecordViewModel RecordViewModel { get; set; }
+        RecordViewModel Record { get; set; }
     }
 }

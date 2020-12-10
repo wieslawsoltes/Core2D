@@ -44,8 +44,8 @@ namespace Core2D.Editor.Tools
                         _cubicBezier = factory.CreateCubicBezierShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
-                            editor.Project.OptionsViewModel.DefaultIsStroked,
-                            editor.Project.OptionsViewModel.DefaultIsFilled);
+                            editor.Project.Options.DefaultIsStroked,
+                            editor.Project.Options.DefaultIsFilled);
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)
@@ -53,8 +53,8 @@ namespace Core2D.Editor.Tools
                             _cubicBezier.Point1 = result;
                         }
 
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Add(_cubicBezier);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_cubicBezier);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStatePoint4();
                         Move(_cubicBezier);
                         _currentState = State.Point4;
@@ -75,7 +75,7 @@ namespace Core2D.Editor.Tools
                                 _cubicBezier.Point4 = result;
                             }
 
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             ToStatePoint2();
                             Move(_cubicBezier);
                             _currentState = State.Point2;
@@ -95,7 +95,7 @@ namespace Core2D.Editor.Tools
                                 _cubicBezier.Point2 = result;
                             }
 
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             ToStatePoint3();
                             Move(_cubicBezier);
                             _currentState = State.Point3;
@@ -115,9 +115,9 @@ namespace Core2D.Editor.Tools
                                 _cubicBezier.Point3 = result;
                             }
 
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_cubicBezier);
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_cubicBezier);
                             Finalize(_cubicBezier);
-                            editor.Project.AddShape(editor.Project.CurrentContainerViewModel.CurrentLayer, _cubicBezier);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _cubicBezier);
 
                             Reset();
                         }
@@ -156,7 +156,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.Point1:
                     {
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             editor.TryToHoverShape((double)sx, (double)sy);
                         }
@@ -166,7 +166,7 @@ namespace Core2D.Editor.Tools
                     {
                         if (_cubicBezier != null)
                         {
-                            if (editor.Project.OptionsViewModel.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
                                 editor.TryToHoverShape((double)sx, (double)sy);
                             }
@@ -176,7 +176,7 @@ namespace Core2D.Editor.Tools
                             _cubicBezier.Point3.Y = (double)sy;
                             _cubicBezier.Point4.X = (double)sx;
                             _cubicBezier.Point4.Y = (double)sy;
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_cubicBezier);
                         }
                     }
@@ -185,13 +185,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_cubicBezier != null)
                         {
-                            if (editor.Project.OptionsViewModel.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
                                 editor.TryToHoverShape((double)sx, (double)sy);
                             }
                             _cubicBezier.Point2.X = (double)sx;
                             _cubicBezier.Point2.Y = (double)sy;
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_cubicBezier);
                         }
                     }
@@ -200,13 +200,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_cubicBezier != null)
                         {
-                            if (editor.Project.OptionsViewModel.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
                                 editor.TryToHoverShape((double)sx, (double)sy);
                             }
                             _cubicBezier.Point3.X = (double)sx;
                             _cubicBezier.Point3.Y = (double)sy;
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_cubicBezier);
                         }
                     }
@@ -219,9 +219,9 @@ namespace Core2D.Editor.Tools
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             _selectionSelection = new BezierSelectionSelection(
                 _serviceProvider,
-                editor.Project.CurrentContainerViewModel.HelperLayer,
+                editor.Project.CurrentContainer.HelperLayer,
                 _cubicBezier,
-                editor.PageStateViewModel.HelperStyleViewModel);
+                editor.PageState.HelperStyle);
 
             _selectionSelection.ToStatePoint4();
         }
@@ -236,12 +236,12 @@ namespace Core2D.Editor.Tools
             _selectionSelection.ToStatePoint3();
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
             _selectionSelection.Move();
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
         }
 
@@ -257,8 +257,8 @@ namespace Core2D.Editor.Tools
                 case State.Point2:
                 case State.Point3:
                     {
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_cubicBezier);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_cubicBezier);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

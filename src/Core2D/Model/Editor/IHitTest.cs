@@ -13,13 +13,13 @@ namespace Core2D.Editor
 
         void Register(IEnumerable<IBounds> hitTests);
 
-        PointShapeViewModel TryToGetPoint(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale);
+        PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale);
 
         PointShapeViewModel TryToGetPoint(IEnumerable<BaseShapeViewModel> shapes, Point2 target, double radius, double scale);
 
-        bool Contains(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale);
+        bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale);
 
-        bool Overlaps(BaseShapeViewModel shapeViewModel, Rect2 target, double radius, double scale);
+        bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale);
 
         BaseShapeViewModel TryToGetShape(IEnumerable<BaseShapeViewModel> shapes, Point2 target, double radius, double scale);
 

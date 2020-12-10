@@ -197,8 +197,8 @@ namespace Core2D.Views
                             s_editorPresenter.Render(context, customState.Renderer, customState._containerViewModel, 0.0, 0.0);
 
                             customState._containerViewModel?.Invalidate();
-                            customState.Renderer.StateViewModel.PointStyleViewModel.Invalidate();
-                            customState.Renderer.StateViewModel.SelectedPointStyleViewModel.Invalidate();
+                            customState.Renderer.State.PointStyle.Invalidate();
+                            customState.Renderer.State.SelectedPointStyle.Invalidate();
                         }
                     }
                     break;

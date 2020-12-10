@@ -15,11 +15,11 @@ namespace Core2D.Editor.Tools
     public class PathToolViewModel : ViewModelBase, IEditorTool
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly LinePathToolViewModel _linePathToolViewModel;
-        private readonly ArcPathToolViewModel _arcPathToolViewModel;
-        private readonly CubicBezierPathToolViewModel _cubicBezierPathToolViewModel;
-        private readonly QuadraticBezierPathToolViewModel _quadraticBezierPathToolViewModel;
-        private readonly MovePathToolViewModel _movePathToolViewModel;
+        private readonly LinePathToolViewModel _linePathTool;
+        private readonly ArcPathToolViewModel _arcPathTool;
+        private readonly CubicBezierPathToolViewModel _cubicBezierPathTool;
+        private readonly QuadraticBezierPathToolViewModel _quadraticBezierPathTool;
+        private readonly MovePathToolViewModel _movePathTool;
 
         internal bool IsInitialized { get; set; }
 
@@ -36,11 +36,11 @@ namespace Core2D.Editor.Tools
         public PathToolViewModel(IServiceProvider serviceProvider) : base()
         {
             _serviceProvider = serviceProvider;
-            _linePathToolViewModel = serviceProvider.GetService<LinePathToolViewModel>();
-            _arcPathToolViewModel = serviceProvider.GetService<ArcPathToolViewModel>();
-            _cubicBezierPathToolViewModel = serviceProvider.GetService<CubicBezierPathToolViewModel>();
-            _quadraticBezierPathToolViewModel = serviceProvider.GetService<QuadraticBezierPathToolViewModel>();
-            _movePathToolViewModel = serviceProvider.GetService<MovePathToolViewModel>();
+            _linePathTool = serviceProvider.GetService<LinePathToolViewModel>();
+            _arcPathTool = serviceProvider.GetService<ArcPathToolViewModel>();
+            _cubicBezierPathTool = serviceProvider.GetService<CubicBezierPathToolViewModel>();
+            _quadraticBezierPathTool = serviceProvider.GetService<QuadraticBezierPathToolViewModel>();
+            _movePathTool = serviceProvider.GetService<MovePathToolViewModel>();
             IsInitialized = false;
         }
 
@@ -60,30 +60,30 @@ namespace Core2D.Editor.Tools
 
         public void RemoveLastSegment()
         {
-            if (PreviousPathTool == _linePathToolViewModel)
+            if (PreviousPathTool == _linePathTool)
             {
                 RemoveLastSegment<LineSegmentViewModel>();
-                _linePathToolViewModel.Reset();
+                _linePathTool.Reset();
             }
-            else if (PreviousPathTool == _arcPathToolViewModel)
+            else if (PreviousPathTool == _arcPathTool)
             {
                 RemoveLastSegment<ArcSegmentViewModel>();
-                _arcPathToolViewModel.Reset();
+                _arcPathTool.Reset();
             }
-            else if (PreviousPathTool == _cubicBezierPathToolViewModel)
+            else if (PreviousPathTool == _cubicBezierPathTool)
             {
                 RemoveLastSegment<CubicBezierSegmentViewModel>();
-                _cubicBezierPathToolViewModel.Reset();
+                _cubicBezierPathTool.Reset();
             }
-            else if (PreviousPathTool == _quadraticBezierPathToolViewModel)
+            else if (PreviousPathTool == _quadraticBezierPathTool)
             {
                 RemoveLastSegment<QuadraticBezierSegmentViewModel>();
-                _quadraticBezierPathToolViewModel.Reset();
+                _quadraticBezierPathTool.Reset();
             }
 
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
-            editor.Project.CurrentContainerViewModel.HelperLayer.InvalidateLayer();
+            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+            editor.Project.CurrentContainer.HelperLayer.InvalidateLayer();
         }
 
         public PointShapeViewModel GetLastPathPoint()
@@ -110,13 +110,13 @@ namespace Core2D.Editor.Tools
 
             GeometryViewModel = factory.CreatePathGeometry(
                 ImmutableArray.Create<PathFigureViewModel>(),
-                editor.Project.OptionsViewModel.DefaultFillRule);
+                editor.Project.Options.DefaultFillRule);
 
             GeometryContext = factory.CreateGeometryContext(GeometryViewModel);
 
             GeometryContext.BeginFigure(
                 start,
-                editor.Project.OptionsViewModel.DefaultIsClosed);
+                editor.Project.Options.DefaultIsClosed);
 
             var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                 editor.Project.CurrentStyleLibrary.Selected :
@@ -125,10 +125,10 @@ namespace Core2D.Editor.Tools
                 "Path",
                 (ShapeStyleViewModel)style.Copy(null),
                 GeometryViewModel,
-                editor.Project.OptionsViewModel.DefaultIsStroked,
-                editor.Project.OptionsViewModel.DefaultIsFilled);
+                editor.Project.Options.DefaultIsStroked,
+                editor.Project.Options.DefaultIsFilled);
 
-            editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Add(Path);
+            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(Path);
 
             PreviousPathTool = editor.CurrentPathTool;
             IsInitialized = true;
@@ -168,14 +168,14 @@ namespace Core2D.Editor.Tools
             _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Move(args);
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Move(shapeViewModel);
+            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Move(shape);
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Finalize(shapeViewModel);
+            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Finalize(shape);
         }
 
         public void Reset()
@@ -186,12 +186,12 @@ namespace Core2D.Editor.Tools
 
             if (Path?.GeometryViewModel != null)
             {
-                editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(Path);
-                editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
+                editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
 
                 if (!(Path.GeometryViewModel.Figures.Length == 1) || !(Path.GeometryViewModel.Figures[0].Segments.Length <= 1))
                 {
-                    editor.Project.AddShape(editor.Project.CurrentContainerViewModel.CurrentLayer, Path);
+                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, Path);
                 }
             }
 

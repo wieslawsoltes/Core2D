@@ -20,7 +20,7 @@ namespace Core2D.Renderer
             Y = y;
             Width = width;
             Height = height;
-            ColorViewModel = colorViewModel;
+            Color = colorViewModel;
             UpdateGeometry();
         }
 

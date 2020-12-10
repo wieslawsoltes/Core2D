@@ -13,7 +13,7 @@ using Spatial;
 
 namespace Core2D.Editor.Tools.Decorators
 {
-    public class BoxDecoratorViewModel : ViewModelBase, IDrawable, IDecorator
+    public partial class BoxDecoratorViewModel : ViewModelBase, IDrawable, IDecorator
     {
         private enum Mode
         {
@@ -32,20 +32,20 @@ namespace Core2D.Editor.Tools.Decorators
 
         private bool _isVisible;
         private readonly IServiceProvider _serviceProvider;
-        private ShapeStyleViewModel _styleViewModel;
-        private bool _isStroked;
-        private bool _isFilled;
-        private LayerContainerViewModel _layer;
-        private IList<BaseShapeViewModel> _shapes;
+        [AutoNotify] private ShapeStyleViewModel _style;
+        [AutoNotify] private bool _isStroked;
+        [AutoNotify] private bool _isFilled;
+        [AutoNotify] private LayerContainerViewModel _layer;
+        [AutoNotify] private IList<BaseShapeViewModel> _shapes;
         private readonly IFactory _factory;
         private readonly decimal _sizeLarge;
         private readonly decimal _sizeSmall;
         private readonly decimal _rotateDistance;
         private GroupBox _groupBox;
-        private readonly ShapeStyleViewModel _handleStyleViewModel;
-        private readonly ShapeStyleViewModel _boundsStyleViewModel;
-        private readonly ShapeStyleViewModel _selectedHandleStyleViewModel;
-        private readonly ShapeStyleViewModel _selectedBoundsStyleViewModel;
+        private readonly ShapeStyleViewModel _handleStyle;
+        private readonly ShapeStyleViewModel _boundsStyle;
+        private readonly ShapeStyleViewModel _selectedHandleStyle;
+        private readonly ShapeStyleViewModel _selectedBoundsStyle;
         private readonly RectangleShapeViewModel _boundsHandle;
         private readonly LineShapeViewModel _rotateLine;
         private readonly EllipseShapeViewModel _rotateHandle;
@@ -68,37 +68,7 @@ namespace Core2D.Editor.Tools.Decorators
         private decimal _rotateAngle = 270m;
         private bool _previousDrawPoints = true;
 
-        public LayerContainerViewModel Layer
-        {
-            get => _layer;
-            set => RaiseAndSetIfChanged(ref _layer, value);
-        }
-
-        public IList<BaseShapeViewModel> Shapes
-        {
-            get => _shapes;
-            set => RaiseAndSetIfChanged(ref _shapes, value);
-        }
-
         public bool IsVisible => _isVisible;
-
-        public ShapeStyleViewModel StyleViewModel
-        {
-            get => _styleViewModel;
-            set => RaiseAndSetIfChanged(ref _styleViewModel, value);
-        }
-
-        public bool IsStroked
-        {
-            get => _isStroked;
-            set => RaiseAndSetIfChanged(ref _isStroked, value);
-        }
-
-        public bool IsFilled
-        {
-            get => _isFilled;
-            set => RaiseAndSetIfChanged(ref _isFilled, value);
-        }
 
         public BoxDecoratorViewModel(IServiceProvider serviceProvider)
         {
@@ -107,21 +77,21 @@ namespace Core2D.Editor.Tools.Decorators
             _sizeLarge = 4m;
             _sizeSmall = 4m;
             _rotateDistance = -16.875m;
-            _handleStyleViewModel = _factory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
-            _boundsStyleViewModel = _factory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-            _selectedHandleStyleViewModel = _factory.CreateShapeStyle("SelectedHandle", 255, 0, 191, 255, 255, 0, 191, 255, 2.0);
-            _selectedBoundsStyleViewModel = _factory.CreateShapeStyle("SelectedBounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-            _rotateHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyleViewModel, true, true, name: "_rotateHandle");
-            _topLeftHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyleViewModel, true, true, name: "_topLeftHandle");
-            _topRightHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyleViewModel, true, true, name: "_topRightHandle");
-            _bottomLeftHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyleViewModel, true, true, name: "_bottomLeftHandle");
-            _bottomRightHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyleViewModel, true, true, name: "_bottomRightHandle");
-            _topHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyleViewModel, true, true, name: "_topHandle");
-            _bottomHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyleViewModel, true, true, name: "_bottomHandle");
-            _leftHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyleViewModel, true, true, name: "_leftHandle");
-            _rightHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyleViewModel, true, true, name: "_rightHandle");
-            _boundsHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _boundsStyleViewModel, true, false, name: "_boundsHandle");
-            _rotateLine = _factory.CreateLineShape(0, 0, 0, 0, _boundsStyleViewModel, true, name: "_rotateLine");
+            _handleStyle = _factory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
+            _boundsStyle = _factory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
+            _selectedHandleStyle = _factory.CreateShapeStyle("SelectedHandle", 255, 0, 191, 255, 255, 0, 191, 255, 2.0);
+            _selectedBoundsStyle = _factory.CreateShapeStyle("SelectedBounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
+            _rotateHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rotateHandle");
+            _topLeftHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topLeftHandle");
+            _topRightHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topRightHandle");
+            _bottomLeftHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomLeftHandle");
+            _bottomRightHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomRightHandle");
+            _topHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topHandle");
+            _bottomHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomHandle");
+            _leftHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_leftHandle");
+            _rightHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
+            _boundsHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_boundsHandle");
+            _rotateLine = _factory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
             _handles = new List<BaseShapeViewModel>
             {
                 //_rotateHandle,
@@ -303,13 +273,13 @@ namespace Core2D.Editor.Tools.Decorators
             }
 
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-            _previousDrawPoints = editor.PageStateViewModel.DrawPoints;
-            editor.PageStateViewModel.DrawPoints = false;
+            _previousDrawPoints = editor.PageState.DrawPoints;
+            editor.PageState.DrawPoints = false;
 
             _mode = Mode.None;
             if (_currentHandle != null)
             {
-                _currentHandle.StyleViewModel = _currentHandle == _boundsHandle ? _boundsStyleViewModel : _handleStyleViewModel;
+                _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
                 _points = null;
                 _rotateAngle = 0m;
@@ -343,13 +313,13 @@ namespace Core2D.Editor.Tools.Decorators
             if (_isVisible == true)
             {
                 var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-                editor.PageStateViewModel.DrawPoints = _previousDrawPoints;
+                editor.PageState.DrawPoints = _previousDrawPoints;
             }
 
             _mode = Mode.None;
             if (_currentHandle != null)
             {
-                _currentHandle.StyleViewModel = _currentHandle == _boundsHandle ? _boundsStyleViewModel : _handleStyleViewModel;
+                _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
                 _points = null;
                 _rotateAngle = 0m;
@@ -386,16 +356,16 @@ namespace Core2D.Editor.Tools.Decorators
             _mode = Mode.None;
             if (_currentHandle != null)
             {
-                _currentHandle.StyleViewModel = _currentHandle == _boundsHandle ? _boundsStyleViewModel : _handleStyleViewModel;
+                _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
                 _points = null;
                 _rotateAngle = 0m;
                 _layer.InvalidateLayer();
             }
 
-            double radius = editor.Project.OptionsViewModel.HitThreshold / editor.PageStateViewModel.ZoomX;
+            double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
             var handles = _handles.Where(x => x.State.HasFlag(ShapeStateFlags.Visible));
-            var result = editor.HitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageStateViewModel.ZoomX);
+            var result = editor.HitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState.ZoomX);
             if (result != null)
             {
                 if (result == _boundsHandle)
@@ -442,7 +412,7 @@ namespace Core2D.Editor.Tools.Decorators
                 if (_mode != Mode.None)
                 {
                     _currentHandle = result;
-                    _currentHandle.StyleViewModel = _currentHandle == _boundsHandle ? _selectedBoundsStyleViewModel : _selectedHandleStyleViewModel;
+                    _currentHandle.Style = _currentHandle == _boundsHandle ? _selectedBoundsStyle : _selectedHandleStyle;
                     _startX = sx;
                     _startY = sy;
                     _historyX = _startX;

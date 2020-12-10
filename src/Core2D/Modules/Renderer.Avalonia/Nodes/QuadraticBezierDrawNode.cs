@@ -10,9 +10,9 @@ namespace Core2D.Renderer
         public QuadraticBezierShapeViewModel QuadraticBezier { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public QuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel styleViewModel)
+        public QuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             QuadraticBezier = quadraticBezier;
             UpdateGeometry();
         }

@@ -4,15 +4,15 @@ namespace Core2D.Renderer.Presenters
 {
     public class TemplatePresenter : IContainerPresenter
     {
-        public void Render(object dc, IShapeRenderer renderer, PageContainerViewModel containerViewModel, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, PageContainerViewModel container, double dx, double dy)
         {
-            renderer.Fill(dc, dx, dy, containerViewModel.Template.Width, containerViewModel.Template.Height, containerViewModel.Template.Background);
+            renderer.Fill(dc, dx, dy, container.Template.Width, container.Template.Height, container.Template.Background);
 
-            renderer.Grid(dc, containerViewModel.Template, 0, 0, containerViewModel.Template.Width, containerViewModel.Template.Height);
+            renderer.Grid(dc, container.Template, 0, 0, container.Template.Width, container.Template.Height);
 
-            if (containerViewModel.Template != null)
+            if (container.Template != null)
             {
-                renderer.DrawPage(dc, containerViewModel.Template);
+                renderer.DrawPage(dc, container.Template);
             }
         }
     }

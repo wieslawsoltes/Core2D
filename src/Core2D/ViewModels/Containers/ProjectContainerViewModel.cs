@@ -12,7 +12,7 @@ namespace Core2D.Containers
 {
     public partial class ProjectContainerViewModel : BaseContainerViewModel
     {
-        [AutoNotify] private OptionsViewModel _optionsViewModel;
+        [AutoNotify] private OptionsViewModel _options;
         [AutoNotify] private IHistory _history;
         [AutoNotify] private ImmutableArray<LibraryViewModel<ShapeStyleViewModel>> _styleLibraries;
         [AutoNotify] private ImmutableArray<LibraryViewModel<GroupShapeViewModel>> _groupLibraries;
@@ -20,13 +20,13 @@ namespace Core2D.Containers
         [AutoNotify] private ImmutableArray<PageContainerViewModel> _templates;
         [AutoNotify] private ImmutableArray<ScriptViewModel> _scripts;
         [AutoNotify] private ImmutableArray<DocumentContainerViewModel> _documents;
-        [AutoNotify] private LibraryViewModel<ShapeStyleViewModel> _currentStyleLibraryViewModel;
-        [AutoNotify] private LibraryViewModel<GroupShapeViewModel> _currentGroupLibraryViewModel;
-        [AutoNotify] private DatabaseViewModel _currentDatabaseViewModel;
+        [AutoNotify] private LibraryViewModel<ShapeStyleViewModel> _currentStyleLibrary;
+        [AutoNotify] private LibraryViewModel<GroupShapeViewModel> _currentGroupLibrary;
+        [AutoNotify] private DatabaseViewModel _currentDatabase;
         [AutoNotify] private PageContainerViewModel _currentTemplate;
-        [AutoNotify] private ScriptViewModel _currentScriptViewModel;
+        [AutoNotify] private ScriptViewModel _currentScript;
         [AutoNotify] private DocumentContainerViewModel _currentDocument;
-        [AutoNotify] private PageContainerViewModel _currentContainerViewModel;
+        [AutoNotify] private PageContainerViewModel _currentContainer;
         [AutoNotify] private ViewModelBase _selected;
 
         public static IEnumerable<BaseShapeViewModel> GetAllShapes(IEnumerable<BaseShapeViewModel> shapes)
@@ -75,17 +75,17 @@ namespace Core2D.Containers
             Selected = document;
         }
 
-        public void SetCurrentContainer(PageContainerViewModel containerViewModel)
+        public void SetCurrentContainer(PageContainerViewModel container)
         {
-            CurrentContainerViewModel = containerViewModel;
-            Selected = containerViewModel;
+            CurrentContainer = container;
+            Selected = container;
         }
 
         public void SetCurrentTemplate(PageContainerViewModel template) => CurrentTemplate = template;
 
-        public void SetCurrentScript(ScriptViewModel scriptViewModel) => CurrentScriptViewModel = scriptViewModel;
+        public void SetCurrentScript(ScriptViewModel script) => CurrentScript = script;
 
-        public void SetCurrentDatabase(DatabaseViewModel db) => CurrentDatabaseViewModel = db;
+        public void SetCurrentDatabase(DatabaseViewModel db) => CurrentDatabase = db;
 
         public void SetCurrentGroupLibrary(LibraryViewModel<GroupShapeViewModel> libraryViewModel) => CurrentGroupLibrary = libraryViewModel;
 
@@ -113,10 +113,10 @@ namespace Core2D.Containers
                         CurrentDocument = document;
                     }
 
-                    if (CurrentContainerViewModel != container)
+                    if (CurrentContainer != container)
                     {
-                        CurrentContainerViewModel = container;
-                        CurrentContainerViewModel.InvalidateLayer();
+                        CurrentContainer = container;
+                        CurrentContainer.InvalidateLayer();
                     }
                 }
             }
@@ -125,12 +125,12 @@ namespace Core2D.Containers
                 if (CurrentDocument != document)
                 {
                     CurrentDocument = document;
-                    if (!CurrentDocument?.Pages.Contains(CurrentContainerViewModel) ?? false)
+                    if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
                     {
                         var current = CurrentDocument.Pages.FirstOrDefault();
-                        if (CurrentContainerViewModel != current)
+                        if (CurrentContainer != current)
                         {
-                            CurrentContainerViewModel = current;
+                            CurrentContainer = current;
                         }
                     }
                 }
@@ -146,7 +146,7 @@ namespace Core2D.Containers
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= OptionsViewModel.IsDirty();
+            isDirty |= Options.IsDirty();
 
             foreach (var styleLibrary in StyleLibraries)
             {
@@ -185,7 +185,7 @@ namespace Core2D.Containers
         {
             base.Invalidate();
 
-            OptionsViewModel.Invalidate();
+            Options.Invalidate();
 
             foreach (var styleLibrary in StyleLibraries)
             {

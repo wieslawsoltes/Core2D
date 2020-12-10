@@ -20,9 +20,9 @@ namespace Core2D.Shapes
 
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
-            if (renderer.StateViewModel.SelectedShapes != null)
+            if (renderer.State.SelectedShapes != null)
             {
-                if (renderer.StateViewModel.SelectedShapes.Contains(this))
+                if (renderer.State.SelectedShapes.Contains(this))
                 {
                     foreach (var connector in _connectors)
                     {
@@ -33,7 +33,7 @@ namespace Core2D.Shapes
                 {
                     foreach (var connector in _connectors)
                     {
-                        if (renderer.StateViewModel.SelectedShapes.Contains(connector))
+                        if (renderer.State.SelectedShapes.Contains(connector))
                         {
                             connector.DrawShape(dc, renderer);
                         }
@@ -44,7 +44,7 @@ namespace Core2D.Shapes
 
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = RecordViewModel ?? r;
+            var record = Record ?? r;
 
             foreach (var connector in _connectors)
             {
@@ -97,7 +97,7 @@ namespace Core2D.Shapes
         {
             var isDirty = base.IsDirty();
 
-            foreach (var connector in Connectors)
+            foreach (var connector in _connectors)
             {
                 isDirty |= connector.IsDirty();
             }
@@ -109,7 +109,7 @@ namespace Core2D.Shapes
         {
             base.Invalidate();
 
-            foreach (var connector in Connectors)
+            foreach (var connector in _connectors)
             {
                 connector.Invalidate();
             }

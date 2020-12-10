@@ -20,10 +20,10 @@ namespace Core2D.Renderer
         public A.Rect SourceRect { get; set; }
         public A.Rect DestRect { get; set; }
 
-        public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel styleViewModel, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
+        public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
             : base()
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Image = image;
             ImageCache = imageCache;
             BitmapCache = bitmapCache;

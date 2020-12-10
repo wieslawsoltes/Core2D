@@ -14,7 +14,7 @@
              xmlns:vmst="using:Core2D.Style"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.EditorViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1000" d:DesignHeight="600"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.Resources>

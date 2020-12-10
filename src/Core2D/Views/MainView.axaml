@@ -7,7 +7,7 @@
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.EditorViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.KeyBindings>

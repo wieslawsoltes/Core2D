@@ -13,13 +13,13 @@ namespace Core2D.Renderer.SkiaSharp
 {
     public static class PathGeometryConverter
     {
-        public static void CreateFigure(this PathFigureViewModel pathFigureViewModel, SKPath path)
+        public static void CreateFigure(this PathFigureViewModel pathFigure, SKPath path)
         {
             path.MoveTo(
-                (float)(pathFigureViewModel.StartPoint.X),
-                (float)(pathFigureViewModel.StartPoint.Y));
+                (float)(pathFigure.StartPoint.X),
+                (float)(pathFigure.StartPoint.Y));
 
-            foreach (var segment in pathFigureViewModel.Segments)
+            foreach (var segment in pathFigure.Segments)
             {
                 if (segment is LineSegmentViewModel lineSegment)
                 {
@@ -62,7 +62,7 @@ namespace Core2D.Renderer.SkiaSharp
                 }
             }
 
-            if (pathFigureViewModel.IsClosed)
+            if (pathFigure.IsClosed)
             {
                 path.Close();
             }
@@ -269,9 +269,9 @@ namespace Core2D.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this BaseShapeViewModel shapeViewModel)
+        public static SKPath ToSKPath(this BaseShapeViewModel shape)
         {
-            return shapeViewModel switch
+            return shape switch
             {
                 LineShapeViewModel lineShape => ToSKPath(lineShape),
                 RectangleShapeViewModel rectangleShape => ToSKPath(rectangleShape),
@@ -411,7 +411,7 @@ namespace Core2D.Renderer.SkiaSharp
                 return path;
             }
 
-            using var pen = SkiaSharpDrawUtil.GetSKPaint(tbind, text.StyleViewModel, text.TopLeft, text.BottomRight, out var origin);
+            using var pen = SkiaSharpDrawUtil.GetSKPaint(tbind, text.Style, text.TopLeft, text.BottomRight, out var origin);
             using var outlinePath = pen.GetTextPath(tbind, origin.X, origin.Y);
             using var fillPath = pen.GetFillPath(outlinePath);
 

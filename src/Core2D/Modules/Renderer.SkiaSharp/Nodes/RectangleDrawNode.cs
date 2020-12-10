@@ -10,10 +10,10 @@ namespace Core2D.Renderer.SkiaSharp
         public RectangleShapeViewModel Rectangle { get; set; }
         public SKRect Rect { get; set; }
 
-        public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel styleViewModel)
+        public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
             : base()
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Rectangle = rectangle;
             UpdateGeometry();
         }

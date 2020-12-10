@@ -8,20 +8,20 @@ namespace Core2D
     {
         PathShapeViewModel ToPathShape(IEnumerable<BaseShapeViewModel> shapes);
 
-        PathShapeViewModel ToPathShape(BaseShapeViewModel shapeViewModel);
+        PathShapeViewModel ToPathShape(BaseShapeViewModel shape);
 
-        PathShapeViewModel ToStrokePathShape(BaseShapeViewModel shapeViewModel);
+        PathShapeViewModel ToStrokePathShape(BaseShapeViewModel shape);
 
-        PathShapeViewModel ToFillPathShape(BaseShapeViewModel shapeViewModel);
+        PathShapeViewModel ToFillPathShape(BaseShapeViewModel shape);
 
-        PathShapeViewModel ToWindingPathShape(BaseShapeViewModel shapeViewModel);
+        PathShapeViewModel ToWindingPathShape(BaseShapeViewModel shape);
 
-        PathShapeViewModel Simplify(BaseShapeViewModel shapeViewModel);
+        PathShapeViewModel Simplify(BaseShapeViewModel shape);
 
         PathShapeViewModel Op(IEnumerable<BaseShapeViewModel> shapes, PathOp op);
 
         public PathShapeViewModel FromSvgPathData(string svgPath, bool isStroked, bool isFilled);
 
-        public string ToSvgPathData(BaseShapeViewModel shapeViewModel);
+        public string ToSvgPathData(BaseShapeViewModel shape);
     }
 }

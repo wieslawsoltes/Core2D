@@ -15,7 +15,7 @@
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.EditorViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.Resources>
@@ -36,13 +36,13 @@
                 <TabControl>
                     <TabItem Header="Page">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <containers:PageContainerView DataContext="{Binding Project.CurrentContainerViewModel}"
+                            <containers:PageContainerView DataContext="{Binding Project.CurrentContainer}"
                                                           Margin="0,0,8,0" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Shape">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <ContentControl Content="{Binding PageStateViewModel.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                            <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
                                             Margin="0,0,8,0"/>
                         </ScrollViewer>
                     </TabItem>
@@ -51,7 +51,7 @@
                             <style:ShapeStyleView x:DataType="vme:ProjectEditorViewModel" Margin="0,0,8,0">
                                 <style:ShapeStyleView.DataContext>
                                     <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
-                                        <Binding Path="PageStateViewModel.SelectedShapes" FallbackValue="{x:Null}" />
+                                        <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
                                         <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
                                     </MultiBinding>
                                 </style:ShapeStyleView.DataContext>
@@ -59,7 +59,7 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Data">
-                        <ScrollViewer DataContext="{Binding PageStateViewModel.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <views:DataObjectView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
@@ -68,7 +68,7 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="State">
-                        <ScrollViewer DataContext="{Binding PageStateViewModel.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <renderer:ShapeStateView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}" 
@@ -102,12 +102,12 @@
                 <TabControl>
                     <TabItem Header="Project">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <containers:OptionsView DataContext="{Binding Project.OptionsViewModel}" Margin="0,0,8,0" />
+                            <containers:OptionsView DataContext="{Binding Project.Options}" Margin="0,0,8,0" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Renderer">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <renderer:ShapeRendererStateView DataContext="{Binding PageStateViewModel}" Margin="0,0,8,0" />
+                            <renderer:ShapeRendererStateView DataContext="{Binding PageState}" Margin="0,0,8,0" />
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Zoom">

@@ -25,21 +25,21 @@ namespace Core2D.Shapes
 
         public override void DrawPoints(object dc, IShapeRenderer renderer)
         {
-            if (renderer.StateViewModel.SelectedShapes != null)
+            if (renderer.State.SelectedShapes != null)
             {
-                if (renderer.StateViewModel.SelectedShapes.Contains(this))
+                if (renderer.State.SelectedShapes.Contains(this))
                 {
                     _topLeft.DrawShape(dc, renderer);
                     _bottomRight.DrawShape(dc, renderer);
                 }
                 else
                 {
-                    if (renderer.StateViewModel.SelectedShapes.Contains(_topLeft))
+                    if (renderer.State.SelectedShapes.Contains(_topLeft))
                     {
                         _topLeft.DrawShape(dc, renderer);
                     }
 
-                    if (renderer.StateViewModel.SelectedShapes.Contains(_bottomRight))
+                    if (renderer.State.SelectedShapes.Contains(_bottomRight))
                     {
                         _bottomRight.DrawShape(dc, renderer);
                     }
@@ -49,7 +49,7 @@ namespace Core2D.Shapes
 
         public override void Bind(DataFlow dataFlow, object db, object r)
         {
-            var record = RecordViewModel ?? r;
+            var record = Record ?? r;
 
             dataFlow.Bind(this, db, record);
 
@@ -59,35 +59,35 @@ namespace Core2D.Shapes
 
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
-            if (!TopLeft.State.HasFlag(ShapeStateFlags.Connector))
+            if (!_topLeft.State.HasFlag(ShapeStateFlags.Connector))
             {
-                TopLeft.Move(selection, dx, dy);
+                _topLeft.Move(selection, dx, dy);
             }
 
-            if (!BottomRight.State.HasFlag(ShapeStateFlags.Connector))
+            if (!_bottomRight.State.HasFlag(ShapeStateFlags.Connector))
             {
-                BottomRight.Move(selection, dx, dy);
+                _bottomRight.Move(selection, dx, dy);
             }
         }
 
         public override void Select(ISelection selection)
         {
             base.Select(selection);
-            TopLeft.Select(selection);
-            BottomRight.Select(selection);
+            _topLeft.Select(selection);
+            _bottomRight.Select(selection);
         }
 
         public override void Deselect(ISelection selection)
         {
             base.Deselect(selection);
-            TopLeft.Deselect(selection);
-            BottomRight.Deselect(selection);
+            _topLeft.Deselect(selection);
+            _bottomRight.Deselect(selection);
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
-            points.Add(TopLeft);
-            points.Add(BottomRight);
+            points.Add(_topLeft);
+            points.Add(_bottomRight);
         }
 
         public override object Copy(IDictionary<object, object> shared)
@@ -99,8 +99,8 @@ namespace Core2D.Shapes
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= TopLeft.IsDirty();
-            isDirty |= BottomRight.IsDirty();
+            isDirty |= _topLeft.IsDirty();
+            isDirty |= _bottomRight.IsDirty();
 
             return isDirty;
         }
@@ -108,8 +108,8 @@ namespace Core2D.Shapes
         public override void Invalidate()
         {
             base.Invalidate();
-            TopLeft.Invalidate();
-            BottomRight.Invalidate();
+            _topLeft.Invalidate();
+            _bottomRight.Invalidate();
         }
     }
 }

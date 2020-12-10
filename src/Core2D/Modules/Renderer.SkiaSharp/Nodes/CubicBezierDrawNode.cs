@@ -9,9 +9,9 @@ namespace Core2D.Renderer.SkiaSharp
         public CubicBezierShapeViewModel CubicBezier { get; set; }
         public SKPath Geometry { get; set; }
 
-        public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel styleViewModel)
+        public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             CubicBezier = cubicBezier;
             UpdateGeometry();
         }

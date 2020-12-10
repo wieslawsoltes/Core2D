@@ -6,15 +6,15 @@ namespace Core2D.Renderer
 {
     public interface IShapeRenderer
     {
-        ShapeRendererStateViewModel StateViewModel { get; set; }
+        ShapeRendererStateViewModel State { get; set; }
 
         void ClearCache();
 
-        void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel colorViewModel);
+        void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel color);
 
         void Grid(object dc, IGrid grid, double x, double y, double width, double height);
 
-        void DrawPage(object dc, PageContainerViewModel containerViewModel);
+        void DrawPage(object dc, PageContainerViewModel container);
 
         void DrawLayer(object dc, LayerContainerViewModel layer);
 

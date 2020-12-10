@@ -25,10 +25,10 @@
             </StackPanel>
         </Expander>
         <Expander Header="Normal Style" IsExpanded="False">
-            <ContentControl Content="{Binding PointStyleViewModel}" />
+            <ContentControl Content="{Binding PointStyle}" />
         </Expander>
         <Expander Header="Selected Style" IsExpanded="False">
-            <ContentControl Content="{Binding SelectedPointStyleViewModel}" />
+            <ContentControl Content="{Binding SelectedPointStyle}" />
         </Expander>
         <Expander Header="Zoom" IsExpanded="False">
             <StackPanel>
@@ -72,10 +72,10 @@
             <libraries:ImagesView DataContext="{Binding ImageCache}" />
         </Expander>
         <Expander Header="SelectionStyle" IsExpanded="False">
-            <ContentControl Content="{Binding SelectionStyleViewModel}" />
+            <ContentControl Content="{Binding SelectionStyle}" />
         </Expander>
         <Expander Header="HelperStyle" IsExpanded="False">
-            <ContentControl Content="{Binding HelperStyleViewModel}" />
+            <ContentControl Content="{Binding HelperStyle}" />
         </Expander>
     </StackPanel>
 </UserControl>

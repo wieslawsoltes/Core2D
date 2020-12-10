@@ -64,8 +64,8 @@ namespace Core2D.Editor.Tools
                         _ellipse = factory.CreateEllipseShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
-                            editor.Project.OptionsViewModel.DefaultIsStroked,
-                            editor.Project.OptionsViewModel.DefaultIsFilled);
+                            editor.Project.Options.DefaultIsStroked,
+                            editor.Project.Options.DefaultIsFilled);
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)
@@ -73,8 +73,8 @@ namespace Core2D.Editor.Tools
                             _ellipse.TopLeft = result;
                         }
 
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Add(_ellipse);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_ellipse);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateBottomRight();
                         Move(_ellipse);
                         _currentState = State.BottomRight;
@@ -100,9 +100,9 @@ namespace Core2D.Editor.Tools
                                 _ellipse.BottomRight = result;
                             }
 
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_ellipse);
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
                             Finalize(_ellipse);
-                            editor.Project.AddShape(editor.Project.CurrentContainerViewModel.CurrentLayer, _ellipse);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _ellipse);
 
                             Reset();
                         }
@@ -139,7 +139,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.TopLeft:
                     {
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             editor.TryToHoverShape((double)sx, (double)sy);
                         }
@@ -149,7 +149,7 @@ namespace Core2D.Editor.Tools
                     {
                         if (_ellipse != null)
                         {
-                            if (editor.Project.OptionsViewModel.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
                                 editor.TryToHoverShape((double)sx, (double)sy);
                             }
@@ -163,7 +163,7 @@ namespace Core2D.Editor.Tools
                                 _ellipse.BottomRight.X = (double)sx;
                                 _ellipse.BottomRight.Y = (double)sy;
                             }
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_ellipse);
                         }
                     }
@@ -176,19 +176,19 @@ namespace Core2D.Editor.Tools
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             _selection = new EllipseSelection(
                 _serviceProvider,
-                editor.Project.CurrentContainerViewModel.HelperLayer,
+                editor.Project.CurrentContainer.HelperLayer,
                 _ellipse,
-                editor.PageStateViewModel.HelperStyleViewModel);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateBottomRight();
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
             _selection.Move();
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
         }
 
@@ -202,8 +202,8 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_ellipse);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

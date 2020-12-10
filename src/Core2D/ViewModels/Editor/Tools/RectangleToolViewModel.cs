@@ -44,8 +44,8 @@ namespace Core2D.Editor.Tools
                         _rectangle = factory.CreateRectangleShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
-                            editor.Project.OptionsViewModel.DefaultIsStroked,
-                            editor.Project.OptionsViewModel.DefaultIsFilled);
+                            editor.Project.Options.DefaultIsStroked,
+                            editor.Project.Options.DefaultIsFilled);
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)
@@ -53,8 +53,8 @@ namespace Core2D.Editor.Tools
                             _rectangle.TopLeft = result;
                         }
 
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Add(_rectangle);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateBottomRight();
                         Move(_rectangle);
                         _currentState = State.BottomRight;
@@ -73,9 +73,9 @@ namespace Core2D.Editor.Tools
                                 _rectangle.BottomRight = result;
                             }
 
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_rectangle);
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
                             Finalize(_rectangle);
-                            editor.Project.AddShape(editor.Project.CurrentContainerViewModel.CurrentLayer, _rectangle);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _rectangle);
 
                             Reset();
                         }
@@ -112,7 +112,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.TopLeft:
                     {
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             editor.TryToHoverShape((double)sx, (double)sy);
                         }
@@ -122,13 +122,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_rectangle != null)
                         {
-                            if (editor.Project.OptionsViewModel.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
                                 editor.TryToHoverShape((double)sx, (double)sy);
                             }
                             _rectangle.BottomRight.X = (double)sx;
                             _rectangle.BottomRight.Y = (double)sy;
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_rectangle);
                         }
                     }
@@ -141,19 +141,19 @@ namespace Core2D.Editor.Tools
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             _selection = new RectangleSelection(
                 _serviceProvider,
-                editor.Project.CurrentContainerViewModel.HelperLayer,
+                editor.Project.CurrentContainer.HelperLayer,
                 _rectangle,
-                editor.PageStateViewModel.HelperStyleViewModel);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateBottomRight();
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
             _selection.Move();
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
         }
 
@@ -167,8 +167,8 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_rectangle);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

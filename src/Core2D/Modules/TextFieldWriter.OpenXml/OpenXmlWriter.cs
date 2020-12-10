@@ -21,26 +21,26 @@ namespace Core2D.TextFieldWriter.OpenXml
 
         public string Extension { get; } = "xlsx";
 
-        private void ToValues(DatabaseViewModel databaseViewModel, out object[,] values)
+        private void ToValues(DatabaseViewModel database, out object[,] values)
         {
-            int nRows = databaseViewModel.Records.Length + 1;
-            int nColumns = databaseViewModel.Columns.Length + 1;
+            int nRows = database.Records.Length + 1;
+            int nColumns = database.Columns.Length + 1;
             values = new object[nRows, nColumns];
-            values[0, 0] = databaseViewModel.IdColumnName;
+            values[0, 0] = database.IdColumnName;
 
             // Columns
 
-            for (int i = 0; i < databaseViewModel.Columns.Length; i++)
+            for (int i = 0; i < database.Columns.Length; i++)
             {
-                var column = databaseViewModel.Columns[i];
+                var column = database.Columns[i];
                 values[0, i + 1] = column.Name;
             }
 
             // Rows
 
-            for (int i = 0; i < databaseViewModel.Records.Length; i++)
+            for (int i = 0; i < database.Records.Length; i++)
             {
-                var record = databaseViewModel.Records[i];
+                var record = database.Records[i];
 
                 values[i + 1, 0] = record.Id.ToString();
 
@@ -167,13 +167,13 @@ namespace Core2D.TextFieldWriter.OpenXml
             spreadsheetDocument.Close();
         }
 
-        public void Write(Stream stream, DatabaseViewModel databaseViewModel)
+        public void Write(Stream stream, DatabaseViewModel database)
         {
             object[,] values;
-            ToValues(databaseViewModel, out values);
+            ToValues(database, out values);
 
-            uint nRows = (uint)databaseViewModel.Records.Length + 1U;
-            uint nColumns = (uint)databaseViewModel.Columns.Length + 1U;
+            uint nRows = (uint)database.Records.Length + 1U;
+            uint nColumns = (uint)database.Columns.Length + 1U;
             Write(stream, values, nRows, nColumns, "Database");
         }
     }

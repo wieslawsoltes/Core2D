@@ -17,7 +17,7 @@ namespace Core2D.Converters
             {
                 if (values[0] is ISet<BaseShapeViewModel> shapes && shapes.Count > 0)
                 {
-                    return shapes.FirstOrDefault().StyleViewModel;
+                    return shapes.FirstOrDefault().Style;
                 }
 
                 if (values[1] is ShapeStyleViewModel style)

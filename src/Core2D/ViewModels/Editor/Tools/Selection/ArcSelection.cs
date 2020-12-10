@@ -24,12 +24,12 @@ namespace Core2D.Editor.Tools.Selection
         private PointShapeViewModel _startHelperPoint;
         private PointShapeViewModel _endHelperPoint;
 
-        public ArcSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, ArcShapeViewModelViewModel shapeViewModelViewModel, ShapeStyleViewModel styleViewModel)
+        public ArcSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, ArcShapeViewModelViewModel shapeViewModelViewModel, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
             _arc = shapeViewModelViewModel;
-            _styleViewModel = styleViewModel;
+            _styleViewModel = style;
         }
 
         public void ToStatePoint2()

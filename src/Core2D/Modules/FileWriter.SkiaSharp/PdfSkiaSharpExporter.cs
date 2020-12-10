@@ -19,16 +19,16 @@ namespace Core2D.FileWriter.SkiaSharpPdf
             _targetDpi = targetDpi;
         }
 
-        private void Add(SKDocument pdf, PageContainerViewModel containerViewModel)
+        private void Add(SKDocument pdf, PageContainerViewModel container)
         {
-            using var canvas = pdf.BeginPage((float)containerViewModel.Template.Width, (float)containerViewModel.Template.Height);
-            _presenter.Render(canvas, _renderer, containerViewModel, 0, 0);
+            using var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height);
+            _presenter.Render(canvas, _renderer, container, 0, 0);
         }
 
-        public void Save(Stream stream, PageContainerViewModel containerViewModel)
+        public void Save(Stream stream, PageContainerViewModel container)
         {
             using var pdf = SKDocument.CreatePdf(stream, _targetDpi);
-            Add(pdf, containerViewModel);
+            Add(pdf, container);
             pdf.Close();
         }
 

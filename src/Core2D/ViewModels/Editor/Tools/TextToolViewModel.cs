@@ -45,7 +45,7 @@ namespace Core2D.Editor.Tools
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
                             "Text",
-                            editor.Project.OptionsViewModel.DefaultIsStroked);
+                            editor.Project.Options.DefaultIsStroked);
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)
@@ -53,8 +53,8 @@ namespace Core2D.Editor.Tools
                             _text.TopLeft = result;
                         }
 
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Add(_text);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_text);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                         ToStateBottomRight();
                         Move(_text);
                         _currentState = State.BottomRight;
@@ -73,9 +73,9 @@ namespace Core2D.Editor.Tools
                                 _text.BottomRight = result;
                             }
 
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_text);
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
                             Finalize(_text);
-                            editor.Project.AddShape(editor.Project.CurrentContainerViewModel.CurrentLayer, _text);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _text);
 
                             Reset();
                         }
@@ -111,7 +111,7 @@ namespace Core2D.Editor.Tools
             switch (_currentState)
             {
                 case State.TopLeft:
-                    if (editor.Project.OptionsViewModel.TryToConnect)
+                    if (editor.Project.Options.TryToConnect)
                     {
                         editor.TryToHoverShape((double)sx, (double)sy);
                     }
@@ -120,13 +120,13 @@ namespace Core2D.Editor.Tools
                     {
                         if (_text != null)
                         {
-                            if (editor.Project.OptionsViewModel.TryToConnect)
+                            if (editor.Project.Options.TryToConnect)
                             {
                                 editor.TryToHoverShape((double)sx, (double)sy);
                             }
                             _text.BottomRight.X = (double)sx;
                             _text.BottomRight.Y = (double)sy;
-                            editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                             Move(_text);
                         }
                     }
@@ -139,19 +139,19 @@ namespace Core2D.Editor.Tools
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             _selection = new TextSelection(
                 _serviceProvider,
-                editor.Project.CurrentContainerViewModel.HelperLayer,
+                editor.Project.CurrentContainer.HelperLayer,
                 _text,
-                editor.PageStateViewModel.HelperStyleViewModel);
+                editor.PageState.HelperStyle);
 
             _selection.ToStateBottomRight();
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
             _selection.Move();
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
         }
 
@@ -165,8 +165,8 @@ namespace Core2D.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes = editor.Project.CurrentContainerViewModel.WorkingLayer.Shapes.Remove(_text);
-                        editor.Project.CurrentContainerViewModel.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
+                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
                     }
                     break;
             }

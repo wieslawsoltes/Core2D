@@ -48,9 +48,9 @@ namespace Core2D.Renderer.SkiaSharp
             return brush;
         }
 
-        public static SKStrokeCap ToStrokeCap(ShapeStyleViewModel styleViewModel)
+        public static SKStrokeCap ToStrokeCap(ShapeStyleViewModel style)
         {
-            return styleViewModel.Stroke.LineCap switch
+            return style.Stroke.LineCap switch
             {
                 LineCap.Square => SKStrokeCap.Square,
                 LineCap.Round => SKStrokeCap.Round,
@@ -58,15 +58,15 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
-        public static SKPaint ToSKPaintPen(ShapeStyleViewModel styleViewModel, double strokeWidth)
+        public static SKPaint ToSKPaintPen(ShapeStyleViewModel style, double strokeWidth)
         {
             var pen = new SKPaint();
 
             var pathEffect = default(SKPathEffect);
-            if (styleViewModel.Stroke.Dashes != null)
+            if (style.Stroke.Dashes != null)
             {
-                var intervals = StyleHelper.ConvertDashesToFloatArray(styleViewModel.Stroke.Dashes, strokeWidth);
-                var phase = (float)(styleViewModel.Stroke.DashOffset * strokeWidth);
+                var intervals = StyleHelper.ConvertDashesToFloatArray(style.Stroke.Dashes, strokeWidth);
+                var phase = (float)(style.Stroke.DashOffset * strokeWidth);
                 if (intervals != null)
                 {
                     pathEffect = SKPathEffect.CreateDash(intervals, phase);
@@ -77,8 +77,8 @@ namespace Core2D.Renderer.SkiaSharp
             pen.IsAntialias = true;
             pen.IsStroke = true;
             pen.StrokeWidth = (float)strokeWidth;
-            pen.Color = ToSKColor(styleViewModel.Stroke.ColorViewModel);
-            pen.StrokeCap = ToStrokeCap(styleViewModel);
+            pen.Color = ToSKColor(style.Stroke.ColorViewModel);
+            pen.StrokeCap = ToStrokeCap(style);
             pen.PathEffect = pathEffect;
 
             return pen;
@@ -101,19 +101,19 @@ namespace Core2D.Renderer.SkiaSharp
             return pen;
         }
 
-        public static SKPoint GetTextOrigin(ShapeStyleViewModel styleViewModel, ref SKRect rect, ref SKRect size)
+        public static SKPoint GetTextOrigin(ShapeStyleViewModel style, ref SKRect rect, ref SKRect size)
         {
             double rwidth = Math.Abs(rect.Right - rect.Left);
             double rheight = Math.Abs(rect.Bottom - rect.Top);
             double swidth = Math.Abs(size.Right - size.Left);
             double sheight = Math.Abs(size.Bottom - size.Top);
-            var ox = styleViewModel.TextStyleViewModel.TextHAlignment switch
+            var ox = style.TextStyleViewModel.TextHAlignment switch
             {
                 TextHAlignment.Left => rect.Left,
                 TextHAlignment.Right => rect.Right - swidth,
                 _ => (rect.Left + rwidth / 2f) - (swidth / 2f),
             };
-            var oy = styleViewModel.TextStyleViewModel.TextVAlignment switch
+            var oy = style.TextStyleViewModel.TextVAlignment switch
             {
                 TextVAlignment.Top => rect.Top,
                 TextVAlignment.Bottom => rect.Bottom - sheight,

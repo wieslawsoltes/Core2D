@@ -36,12 +36,12 @@ namespace Core2D.Style
             return new TextStyleViewModel()
             {
                 Name = this.Name,
-                FontName = this.FontName,
-                FontFile = this.FontFile,
-                FontSize = this.FontSize,
-                FontStyle = this.FontStyle,
-                TextHAlignment = this.TextHAlignment,
-                TextVAlignment = this.TextVAlignment
+                FontName = this._fontName,
+                FontFile = this._fontFile,
+                FontSize = this._fontSize,
+                FontStyle = this._fontStyle,
+                TextHAlignment = this._textHAlignment,
+                TextVAlignment = this._textVAlignment
             };
         }
 

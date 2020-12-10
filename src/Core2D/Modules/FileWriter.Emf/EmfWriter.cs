@@ -45,8 +45,8 @@ namespace Core2D.FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.StateViewModel.DrawShapeState = ShapeStateFlags.Printable;
-                    r.StateViewModel.ImageCache = ic;
+                    r.State.DrawShapeState = ShapeStateFlags.Printable;
+                    r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -73,7 +73,7 @@ namespace Core2D.FileWriter.Emf
             return ms;
         }
 
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainerViewModel containerViewModel, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainerViewModel container, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -91,8 +91,8 @@ namespace Core2D.FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.StateViewModel.DrawShapeState = ShapeStateFlags.Printable;
-                    r.StateViewModel.ImageCache = ic;
+                    r.State.DrawShapeState = ShapeStateFlags.Printable;
+                    r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -102,8 +102,8 @@ namespace Core2D.FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.DrawPage(g, containerViewModel.Template);
-                    r.DrawPage(g, containerViewModel);
+                    r.DrawPage(g, container.Template);
+                    r.DrawPage(g, container);
 
                     r.ClearCache();
                 }
@@ -117,12 +117,12 @@ namespace Core2D.FileWriter.Emf
             return ms;
         }
 
-        public void Save(Stream stream, PageContainerViewModel containerViewModel, IImageCache ic)
+        public void Save(Stream stream, PageContainerViewModel container, IImageCache ic)
         {
-            if (containerViewModel?.Template != null)
+            if (container?.Template != null)
             {
-                using var bitmap = new Bitmap((int)containerViewModel.Template.Width, (int)containerViewModel.Template.Height);
-                using var ms = MakeMetafileStream(bitmap, containerViewModel, ic);
+                using var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height);
+                using var ms = MakeMetafileStream(bitmap, container, ic);
                 ms.WriteTo(stream);
             }
         }

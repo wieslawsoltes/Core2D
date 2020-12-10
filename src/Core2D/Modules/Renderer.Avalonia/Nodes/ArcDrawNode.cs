@@ -10,9 +10,9 @@ namespace Core2D.Renderer
         public ArcShapeViewModelViewModel Arc { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public ArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel styleViewModel)
+        public ArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Arc = arc;
             UpdateGeometry();
         }

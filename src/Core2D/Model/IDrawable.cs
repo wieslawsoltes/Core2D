@@ -5,7 +5,7 @@ namespace Core2D
 {
     public interface IDrawable
     {
-        ShapeStyleViewModel StyleViewModel { get; set; }
+        ShapeStyleViewModel Style { get; set; }
 
         bool IsStroked { get; set; }
 

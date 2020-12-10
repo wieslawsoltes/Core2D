@@ -51,9 +51,9 @@ namespace Core2D.XamlExporter.Avalonia
             return sb.ToString();
         }
 
-        private void ToGeometryDrawing(BaseShapeViewModel shapeViewModel, StringBuilder sb, IPathConverter converter)
+        private void ToGeometryDrawing(BaseShapeViewModel shape, StringBuilder sb, IPathConverter converter)
         {
-            if (shapeViewModel is GroupShapeViewModel group)
+            if (shape is GroupShapeViewModel group)
             {
                 foreach (var child in group.Shapes)
                 {
@@ -62,24 +62,24 @@ namespace Core2D.XamlExporter.Avalonia
                 return;
             }
 
-            if (shapeViewModel.IsFilled)
+            if (shape.IsFilled)
             {
-                var path = converter.ToFillPathShape(shapeViewModel);
+                var path = converter.ToFillPathShape(shape);
                 if (path != null)
                 {
                     var geometry = path.GeometryViewModel.ToXamlString();
-                    var brush = (shapeViewModel.StyleViewModel.Fill.ColorViewModel as ArgbColorViewModelViewModel).ToXamlString();
+                    var brush = (shape.Style.Fill.ColorViewModel as ArgbColorViewModelViewModel).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }
 
-            if (shapeViewModel.IsStroked)
+            if (shape.IsStroked)
             {
-                var path = converter.ToStrokePathShape(shapeViewModel);
+                var path = converter.ToStrokePathShape(shape);
                 if (path != null)
                 {
                     var geometry = path.GeometryViewModel.ToXamlString();
-                    var brush = (shapeViewModel.StyleViewModel.Stroke.ColorViewModel as ArgbColorViewModelViewModel).ToXamlString();
+                    var brush = (shape.Style.Stroke.ColorViewModel as ArgbColorViewModelViewModel).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }

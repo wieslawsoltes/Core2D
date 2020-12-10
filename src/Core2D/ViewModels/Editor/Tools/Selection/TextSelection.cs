@@ -17,12 +17,12 @@ namespace Core2D.Editor.Tools.Selection
         private PointShapeViewModel _bottomRightHelperPoint;
         private RectangleShapeViewModel _helperRectangle;
 
-        public TextSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, TextShapeViewModel shapeViewModel, ShapeStyleViewModel styleViewModel)
+        public TextSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, TextShapeViewModel shape, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
-            _text = shapeViewModel;
-            _styleViewModel = styleViewModel;
+            _text = shape;
+            _styleViewModel = style;
         }
 
         public void ToStateBottomRight()

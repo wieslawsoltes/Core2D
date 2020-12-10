@@ -8,7 +8,7 @@ namespace Core2D.Renderer.SkiaSharp
     {
         public BaseShapeViewModel ShapeViewModel { get; set; }
         public ShapeStyleViewModel ShapeStyleViewModel { get; set; }
-        public ArrowStyleViewModel StyleViewModel { get; set; }
+        public ArrowStyleViewModel Style { get; set; }
         public SKPaint Brush { get; set; }
         public SKPaint Pen { get; set; }
         public SKMatrix Rotation { get; set; }

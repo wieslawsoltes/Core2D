@@ -51,9 +51,9 @@ namespace Core2D.Layout
         public readonly List<PointShapeViewModel> Points;
         public Box Bounds;
 
-        public ShapeBox(BaseShapeViewModel shapeViewModel)
+        public ShapeBox(BaseShapeViewModel shape)
         {
-            _shapeViewModel = shapeViewModel;
+            _shapeViewModel = shape;
 
             Points = new List<PointShapeViewModel>();
 

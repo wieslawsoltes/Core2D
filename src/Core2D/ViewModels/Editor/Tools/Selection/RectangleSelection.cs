@@ -15,12 +15,12 @@ namespace Core2D.Editor.Tools.Selection
         private PointShapeViewModel _topLeftHelperPoint;
         private PointShapeViewModel _bottomRightHelperPoint;
 
-        public RectangleSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, RectangleShapeViewModel shapeViewModel, ShapeStyleViewModel styleViewModel)
+        public RectangleSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, RectangleShapeViewModel shape, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
-            _rectangle = shapeViewModel;
-            _styleViewModel = styleViewModel;
+            _rectangle = shape;
+            _styleViewModel = style;
         }
 
         public void ToStateBottomRight()

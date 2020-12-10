@@ -45,8 +45,8 @@ namespace Core2D.Shapes
 
         public override void Move(ISelection selection, decimal dx, decimal dy)
         {
-            X = (double)((decimal)X + dx);
-            Y = (double)((decimal)Y + dy);
+            X = (double)((decimal)_x + dx);
+            Y = (double)((decimal)_y + dy);
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)
@@ -83,7 +83,7 @@ namespace Core2D.Shapes
             return new PointShapeViewModel()
             {
                 Name = Name,
-                StyleViewModel = StyleViewModel,
+                Style = Style,
                 Properties = properties,
                 X = X,
                 Y = Y

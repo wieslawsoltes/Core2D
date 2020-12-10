@@ -27,7 +27,7 @@ namespace Core2D.Behaviors
                 return;
             }
 
-            var state = projectEditor.PageStateViewModel;
+            var state = projectEditor.PageState;
             if (state != null)
             {
                 state.ZoomX = zoomX;

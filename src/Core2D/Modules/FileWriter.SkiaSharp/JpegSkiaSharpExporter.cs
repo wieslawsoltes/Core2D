@@ -18,14 +18,14 @@ namespace Core2D.FileWriter.SkiaSharpJpeg
             _presenter = presenter;
         }
 
-        public void Save(Stream stream, PageContainerViewModel containerViewModel)
+        public void Save(Stream stream, PageContainerViewModel container)
         {
-            var info = new SKImageInfo((int)containerViewModel.Template.Width, (int)containerViewModel.Template.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+            var info = new SKImageInfo((int)container.Template.Width, (int)container.Template.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
             using var bitmap = new SKBitmap(info);
             using (var canvas = new SKCanvas(bitmap))
             {
                 canvas.Clear();
-                _presenter.Render(canvas, _renderer, containerViewModel, 0, 0);
+                _presenter.Render(canvas, _renderer, container, 0, 0);
             }
             using var image = SKImage.FromBitmap(bitmap);
             using var data = image.Encode(SKEncodedImageFormat.Jpeg, 100);

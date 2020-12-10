@@ -6,31 +6,31 @@ namespace Core2D.Path
     public partial class GeometryContext
     {
         private readonly IFactory _factory;
-        private readonly PathGeometryViewModel _geometryViewModel;
-        private PathFigureViewModel _currentFigureViewModel;
+        private readonly PathGeometryViewModel _geometry;
+        private PathFigureViewModel _currentFigure;
 
-        public GeometryContext(IFactory factory, PathGeometryViewModel geometryViewModel)
+        public GeometryContext(IFactory factory, PathGeometryViewModel geometry)
         {
             _factory = factory;
-            _geometryViewModel = geometryViewModel ?? throw new ArgumentNullException(nameof(geometryViewModel));
+            _geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
         }
 
         public void BeginFigure(PointShapeViewModel startPoint, bool isClosed = true)
         {
-            _currentFigureViewModel = _factory.CreatePathFigure(startPoint, isClosed);
-            _geometryViewModel.Figures = _geometryViewModel.Figures.Add(_currentFigureViewModel);
+            _currentFigure = _factory.CreatePathFigure(startPoint, isClosed);
+            _geometry.Figures = _geometry.Figures.Add(_currentFigure);
         }
 
         public void SetClosedState(bool isClosed)
         {
-            _currentFigureViewModel.IsClosed = isClosed;
+            _currentFigure.IsClosed = isClosed;
         }
 
         public void LineTo(PointShapeViewModel point)
         {
             var segment = _factory.CreateLineSegment(
                 point);
-            _currentFigureViewModel.Segments = _currentFigureViewModel.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         public void ArcTo(PointShapeViewModel point, PathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise)
@@ -41,7 +41,7 @@ namespace Core2D.Path
                 rotationAngle,
                 isLargeArc,
                 sweepDirection);
-            _currentFigureViewModel.Segments = _currentFigureViewModel.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         public void CubicBezierTo(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3)
@@ -50,7 +50,7 @@ namespace Core2D.Path
                 point1,
                 point2,
                 point3);
-            _currentFigureViewModel.Segments = _currentFigureViewModel.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
         public void QuadraticBezierTo(PointShapeViewModel point1, PointShapeViewModel point2)
@@ -58,7 +58,7 @@ namespace Core2D.Path
             var segment = _factory.CreateQuadraticBezierSegment(
                 point1,
                 point2);
-            _currentFigureViewModel.Segments = _currentFigureViewModel.Segments.Add(segment);
+            _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
     }
 }

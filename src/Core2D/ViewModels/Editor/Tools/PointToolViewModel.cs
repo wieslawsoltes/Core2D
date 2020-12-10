@@ -36,16 +36,16 @@ namespace Core2D.Editor.Tools
                     {
                         _point = factory.CreatePointShape((double)sx, (double)sy);
 
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             if (!editor.TryToSplitLine(args.X, args.Y, _point, true))
                             {
-                                editor.Project.AddShape(editor.Project.CurrentContainerViewModel.CurrentLayer, _point);
+                                editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
                             }
                         }
                         else
                         {
-                            editor.Project.AddShape(editor.Project.CurrentContainerViewModel.CurrentLayer, _point);
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
                         }
                     }
                     break;
@@ -72,7 +72,7 @@ namespace Core2D.Editor.Tools
             {
                 case State.Point:
                     {
-                        if (editor.Project.OptionsViewModel.TryToConnect)
+                        if (editor.Project.Options.TryToConnect)
                         {
                             editor.TryToHoverShape((double)sx, (double)sy);
                         }
@@ -81,11 +81,11 @@ namespace Core2D.Editor.Tools
             }
         }
 
-        public void Move(BaseShapeViewModel shapeViewModel)
+        public void Move(BaseShapeViewModel shape)
         {
         }
 
-        public void Finalize(BaseShapeViewModel shapeViewModel)
+        public void Finalize(BaseShapeViewModel shape)
         {
         }
 

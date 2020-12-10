@@ -25,7 +25,7 @@ namespace Core2D.Editor.Factories
             var point = factory.CreatePointShape(x, y);
             if (isStandalone)
             {
-                project.AddShape(project.CurrentContainerViewModel.CurrentLayer, point);
+                project.AddShape(project.CurrentContainer.CurrentLayer, point);
             }
             return point;
         }
@@ -43,7 +43,7 @@ namespace Core2D.Editor.Factories
                 x2, y2,
                 (ShapeStyleViewModel)style.Copy(null),
                 isStroked);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, line);
+            project.AddShape(project.CurrentContainer.CurrentLayer, line);
             return line;
         }
 
@@ -60,7 +60,7 @@ namespace Core2D.Editor.Factories
                 end,
                 (ShapeStyleViewModel)style.Copy(null),
                 isStroked);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, line);
+            project.AddShape(project.CurrentContainer.CurrentLayer, line);
             return line;
         }
 
@@ -80,7 +80,7 @@ namespace Core2D.Editor.Factories
                 (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, arc);
+            project.AddShape(project.CurrentContainer.CurrentLayer, arc);
             return arc;
         }
 
@@ -100,7 +100,7 @@ namespace Core2D.Editor.Factories
                 (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, arc);
+            project.AddShape(project.CurrentContainer.CurrentLayer, arc);
             return arc;
         }
 
@@ -120,7 +120,7 @@ namespace Core2D.Editor.Factories
                 (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, cubicBezier);
+            project.AddShape(project.CurrentContainer.CurrentLayer, cubicBezier);
             return cubicBezier;
         }
 
@@ -140,7 +140,7 @@ namespace Core2D.Editor.Factories
                 (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, cubicBezier);
+            project.AddShape(project.CurrentContainer.CurrentLayer, cubicBezier);
             return cubicBezier;
         }
 
@@ -159,7 +159,7 @@ namespace Core2D.Editor.Factories
                 (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, quadraticBezier);
+            project.AddShape(project.CurrentContainer.CurrentLayer, quadraticBezier);
             return quadraticBezier;
         }
 
@@ -178,7 +178,7 @@ namespace Core2D.Editor.Factories
                 (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, quadraticBezier);
+            project.AddShape(project.CurrentContainer.CurrentLayer, quadraticBezier);
             return quadraticBezier;
         }
 
@@ -188,7 +188,7 @@ namespace Core2D.Editor.Factories
             return factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), fillRule);
         }
 
-        PathShapeViewModel IShapeFactory.Path(PathGeometryViewModel geometryViewModel, bool isStroked, bool isFilled)
+        PathShapeViewModel IShapeFactory.Path(PathGeometryViewModel geometry, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
@@ -199,10 +199,10 @@ namespace Core2D.Editor.Factories
             var path = factory.CreatePathShape(
                 "",
                 (ShapeStyleViewModel)style.Copy(null),
-                geometryViewModel,
+                geometry,
                 isStroked,
                 isFilled);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, path);
+            project.AddShape(project.CurrentContainer.CurrentLayer, path);
             return path;
         }
 
@@ -221,7 +221,7 @@ namespace Core2D.Editor.Factories
                 isStroked,
                 isFilled,
                 text);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, rectangle);
+            project.AddShape(project.CurrentContainer.CurrentLayer, rectangle);
             return rectangle;
         }
 
@@ -240,7 +240,7 @@ namespace Core2D.Editor.Factories
                 isStroked,
                 isFilled,
                 text);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, rectangle);
+            project.AddShape(project.CurrentContainer.CurrentLayer, rectangle);
             return rectangle;
         }
 
@@ -259,7 +259,7 @@ namespace Core2D.Editor.Factories
                 isStroked,
                 isFilled,
                 text);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, ellipse);
+            project.AddShape(project.CurrentContainer.CurrentLayer, ellipse);
             return ellipse;
         }
 
@@ -278,7 +278,7 @@ namespace Core2D.Editor.Factories
                 isStroked,
                 isFilled,
                 text);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, ellipse);
+            project.AddShape(project.CurrentContainer.CurrentLayer, ellipse);
             return ellipse;
         }
 
@@ -296,7 +296,7 @@ namespace Core2D.Editor.Factories
                 (ShapeStyleViewModel)style.Copy(null),
                 text,
                 isStroked);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, txt);
+            project.AddShape(project.CurrentContainer.CurrentLayer, txt);
             return txt;
         }
 
@@ -314,7 +314,7 @@ namespace Core2D.Editor.Factories
                 (ShapeStyleViewModel)style.Copy(null),
                 text,
                 isStroked);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, txt);
+            project.AddShape(project.CurrentContainer.CurrentLayer, txt);
             return txt;
         }
 
@@ -334,7 +334,7 @@ namespace Core2D.Editor.Factories
                 isStroked,
                 isFilled,
                 text);
-            project.AddShape(project.CurrentContainerViewModel.CurrentLayer, image);
+            project.AddShape(project.CurrentContainer.CurrentLayer, image);
             return image;
         }
 
@@ -363,7 +363,7 @@ namespace Core2D.Editor.Factories
                     isStroked,
                     isFilled,
                     text);
-                project.AddShape(project.CurrentContainerViewModel.CurrentLayer, image);
+                project.AddShape(project.CurrentContainer.CurrentLayer, image);
                 return image;
             }
             return null;

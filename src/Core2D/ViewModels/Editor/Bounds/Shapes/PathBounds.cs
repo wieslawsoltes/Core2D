@@ -13,11 +13,11 @@ namespace Core2D.Editor.Bounds.Shapes
 
         public Type TargetType => typeof(PathShapeViewModel);
 
-        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shapeViewModel is PathShapeViewModel path))
+            if (!(shape is PathShapeViewModel path))
             {
-                throw new ArgumentNullException(nameof(shapeViewModel));
+                throw new ArgumentNullException(nameof(shape));
             }
 
             var pointHitTest = registered[typeof(PointShapeViewModel)];
@@ -36,11 +36,11 @@ namespace Core2D.Editor.Bounds.Shapes
             return null;
         }
 
-        public bool Contains(BaseShapeViewModel shapeViewModel, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shapeViewModel is PathShapeViewModel path))
+            if (!(shape is PathShapeViewModel path))
             {
-                throw new ArgumentNullException(nameof(shapeViewModel));
+                throw new ArgumentNullException(nameof(shape));
             }
 
             _points.Clear();
@@ -61,11 +61,11 @@ namespace Core2D.Editor.Bounds.Shapes
             return false;
         }
 
-        public bool Overlaps(BaseShapeViewModel shapeViewModel, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shapeViewModel is PathShapeViewModel path))
+            if (!(shape is PathShapeViewModel path))
             {
-                throw new ArgumentNullException(nameof(shapeViewModel));
+                throw new ArgumentNullException(nameof(shape));
             }
 
             _points.Clear();

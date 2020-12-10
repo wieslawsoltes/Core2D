@@ -6,19 +6,19 @@
              xmlns:vme="using:Core2D.Editor"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.EditorViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="540"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <Panel>
-        <TextBlock DataContext="{Binding PageStateViewModel}" Text="{Binding SelectedShapes.Count, FallbackValue='Selected: 0', StringFormat='{}Selected: {0}'}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,12,0" />
+        <TextBlock DataContext="{Binding PageState}" Text="{Binding SelectedShapes.Count, FallbackValue='Selected: 0', StringFormat='{}Selected: {0}'}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,12,0" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <CheckBox Content="Stroked" IsChecked="{Binding Project.OptionsViewModel.DefaultIsStroked, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
-                <CheckBox Content="Filled" IsChecked="{Binding Project.OptionsViewModel.DefaultIsFilled, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
-                <CheckBox Content="Snap" IsChecked="{Binding Project.OptionsViewModel.SnapToGrid, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
-                <CheckBox Content="Connect" IsChecked="{Binding Project.OptionsViewModel.TryToConnect, Mode=TwoWay}" MinWidth="0" Margin="12,0,6,0" VerticalAlignment="Center" />
+                <CheckBox Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+                <CheckBox Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+                <CheckBox Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
+                <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" MinWidth="0" Margin="12,0,6,0" VerticalAlignment="Center" />
             </StackPanel>
-            <StackPanel DataContext="{Binding PageStateViewModel}" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel DataContext="{Binding PageState}" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <CheckBox Content="Decorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
                 <CheckBox Content="Points" IsChecked="{Binding DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0" VerticalAlignment="Center" />
             </StackPanel>

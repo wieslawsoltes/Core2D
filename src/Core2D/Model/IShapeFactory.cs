@@ -25,7 +25,7 @@ namespace Core2D
 
         PathGeometryViewModel Geometry(FillRule fillRule);
 
-        PathShapeViewModel Path(PathGeometryViewModel geometryViewModel, bool isStroked, bool isFilled);
+        PathShapeViewModel Path(PathGeometryViewModel geometry, bool isStroked, bool isFilled);
 
         RectangleShapeViewModel Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text);
 

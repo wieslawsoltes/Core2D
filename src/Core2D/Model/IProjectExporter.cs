@@ -5,7 +5,7 @@ namespace Core2D
 {
     public interface IProjectExporter
     {
-        void Save(Stream stream, PageContainerViewModel containerViewModel);
+        void Save(Stream stream, PageContainerViewModel container);
 
         void Save(Stream stream, DocumentContainerViewModel document);
 

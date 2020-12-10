@@ -5,11 +5,11 @@ namespace Core2D.Shapes
 {
     public static class GroupShapeExtensions
     {
-        public static void AddShape(this GroupShapeViewModel group, BaseShapeViewModel shapeViewModel)
+        public static void AddShape(this GroupShapeViewModel group, BaseShapeViewModel shape)
         {
-            shapeViewModel.Owner = group;
-            shapeViewModel.State &= ~ShapeStateFlags.Standalone;
-            group.Shapes = group.Shapes.Add(shapeViewModel);
+            shape.Owner = group;
+            shape.State &= ~ShapeStateFlags.Standalone;
+            group.Shapes = group.Shapes.Add(shape);
         }
 
         public static void Group(this GroupShapeViewModel group, IEnumerable<BaseShapeViewModel> shapes, IList<BaseShapeViewModel> source = null)

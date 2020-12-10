@@ -4,14 +4,14 @@ namespace Core2D.Style
 {
     public partial class FillStyleViewModel : ViewModelBase
     {
-        [AutoNotify] private BaseColorViewModel _colorViewModel;
+        [AutoNotify] private BaseColorViewModel _color;
 
         public override object Copy(IDictionary<object, object> shared)
         {
             return new FillStyleViewModel()
             {
                 Name = this.Name,
-                ColorViewModel = (BaseColorViewModel)this.ColorViewModel.Copy(shared)
+                Color = (BaseColorViewModel)this._color.Copy(shared)
             };
         }
 
@@ -19,7 +19,7 @@ namespace Core2D.Style
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= ColorViewModel.IsDirty();
+            isDirty |= _color.IsDirty();
 
             return isDirty;
         }
@@ -27,7 +27,7 @@ namespace Core2D.Style
         public override void Invalidate()
         {
             base.Invalidate();
-            ColorViewModel.Invalidate();
+            _color.Invalidate();
         }
     }
 }

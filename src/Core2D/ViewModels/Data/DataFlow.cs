@@ -27,9 +27,9 @@ namespace Core2D.Data
             }
         }
 
-        public void Bind(PageContainerViewModel containerViewModel, object db, object r)
+        public void Bind(PageContainerViewModel container, object db, object r)
         {
-            foreach (var layer in containerViewModel.Layers)
+            foreach (var layer in container.Layers)
             {
                 Bind(layer, db, r);
             }

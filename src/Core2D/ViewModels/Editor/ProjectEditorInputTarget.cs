@@ -4,56 +4,56 @@ namespace Core2D.Editor
 {
     public class ProjectEditorInputTarget : InputTarget
     {
-        private readonly ProjectEditorViewModel _editorViewModel;
+        private readonly ProjectEditorViewModel _editor;
 
-        public ProjectEditorInputTarget(ProjectEditorViewModel editorViewModel)
+        public ProjectEditorInputTarget(ProjectEditorViewModel editor)
         {
-            _editorViewModel = editorViewModel;
+            _editor = editor;
         }
 
-        public override void BeginDown(InputArgs args) => _editorViewModel?.CurrentTool?.BeginDown(args);
+        public override void BeginDown(InputArgs args) => _editor?.CurrentTool?.BeginDown(args);
 
-        public override void BeginUp(InputArgs args) => _editorViewModel?.CurrentTool?.BeginUp(args);
+        public override void BeginUp(InputArgs args) => _editor?.CurrentTool?.BeginUp(args);
 
-        public override void EndDown(InputArgs args) => _editorViewModel?.CurrentTool?.EndDown(args);
+        public override void EndDown(InputArgs args) => _editor?.CurrentTool?.EndDown(args);
 
-        public override void EndUp(InputArgs args) => _editorViewModel?.CurrentTool?.EndUp(args);
+        public override void EndUp(InputArgs args) => _editor?.CurrentTool?.EndUp(args);
 
-        public override void Move(InputArgs args) => _editorViewModel?.CurrentTool?.Move(args);
+        public override void Move(InputArgs args) => _editor?.CurrentTool?.Move(args);
 
         public override bool IsBeginDownAvailable()
         {
-            return _editorViewModel?.Project?.CurrentContainerViewModel?.CurrentLayer != null
-                && _editorViewModel.Project.CurrentContainerViewModel.CurrentLayer.IsVisible;
+            return _editor?.Project?.CurrentContainer?.CurrentLayer != null
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public override bool IsBeginUpAvailable()
         {
-            return _editorViewModel?.Project?.CurrentContainerViewModel?.CurrentLayer != null
-                && _editorViewModel.Project.CurrentContainerViewModel.CurrentLayer.IsVisible;
+            return _editor?.Project?.CurrentContainer?.CurrentLayer != null
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public override bool IsEndDownAvailable()
         {
-            return _editorViewModel?.Project?.CurrentContainerViewModel?.CurrentLayer != null
-                && _editorViewModel.Project.CurrentContainerViewModel.CurrentLayer.IsVisible;
+            return _editor?.Project?.CurrentContainer?.CurrentLayer != null
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public override bool IsEndUpAvailable()
         {
-            return _editorViewModel?.Project?.CurrentContainerViewModel?.CurrentLayer != null
-                && _editorViewModel.Project.CurrentContainerViewModel.CurrentLayer.IsVisible;
+            return _editor?.Project?.CurrentContainer?.CurrentLayer != null
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public override bool IsMoveAvailable()
         {
-            return _editorViewModel.Project?.CurrentContainerViewModel?.CurrentLayer != null
-                && _editorViewModel.Project.CurrentContainerViewModel.CurrentLayer.IsVisible;
+            return _editor.Project?.CurrentContainer?.CurrentLayer != null
+                && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public bool IsSelectionAvailable()
         {
-            return _editorViewModel?.PageStateViewModel?.SelectedShapes != null;
+            return _editor?.PageState?.SelectedShapes != null;
         }
     }
 }

@@ -10,9 +10,9 @@ namespace Core2D.Renderer
         public PathShapeViewModel Path { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel styleViewModel)
+        public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style)
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Path = path;
             UpdateGeometry();
         }

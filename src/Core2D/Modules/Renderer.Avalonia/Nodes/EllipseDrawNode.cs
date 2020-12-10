@@ -12,10 +12,10 @@ namespace Core2D.Renderer
         public A.Rect Rect { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel styleViewModel)
+        public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
             : base()
         {
-            StyleViewModel = styleViewModel;
+            Style = style;
             Ellipse = ellipse;
             UpdateGeometry();
         }

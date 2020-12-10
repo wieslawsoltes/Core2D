@@ -4,18 +4,18 @@ namespace Core2D.Renderer.Presenters
 {
     public class EditorPresenter : IContainerPresenter
     {
-        public void Render(object dc, IShapeRenderer renderer, PageContainerViewModel containerViewModel, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, PageContainerViewModel container, double dx, double dy)
         {
-            renderer.DrawPage(dc, containerViewModel);
+            renderer.DrawPage(dc, container);
 
-            if (containerViewModel.WorkingLayer != null)
+            if (container.WorkingLayer != null)
             {
-                renderer.DrawLayer(dc, containerViewModel.WorkingLayer);
+                renderer.DrawLayer(dc, container.WorkingLayer);
             }
 
-            if (containerViewModel.HelperLayer != null)
+            if (container.HelperLayer != null)
             {
-                renderer.DrawLayer(dc, containerViewModel.HelperLayer);
+                renderer.DrawLayer(dc, container.HelperLayer);
             }
         }
     }

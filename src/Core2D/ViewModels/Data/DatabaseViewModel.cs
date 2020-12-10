@@ -8,13 +8,13 @@ namespace Core2D.Data
         [AutoNotify] private string _idColumnName;
         [AutoNotify] private ImmutableArray<ColumnViewModel> _columns;
         [AutoNotify] private ImmutableArray<RecordViewModel> _records;
-        [AutoNotify] private RecordViewModel _currentRecordViewModel;
+        [AutoNotify] private RecordViewModel _currentRecord;
 
         public override object Copy(IDictionary<object, object> shared)
         {
             var columns = this._columns.Copy(shared).ToImmutable();
             var records = this._records.Copy(shared).ToImmutable();
-            var currentRecordIndex = _records.IndexOf(_currentRecordViewModel);
+            var currentRecordIndex = _records.IndexOf(_currentRecord);
 
             return new DatabaseViewModel()
             {
@@ -22,7 +22,7 @@ namespace Core2D.Data
                 IdColumnName = this.IdColumnName,
                 Columns = columns,
                 Records = records,
-                CurrentRecordViewModel = records[currentRecordIndex]
+                CurrentRecord = records[currentRecordIndex]
             };
         }
 

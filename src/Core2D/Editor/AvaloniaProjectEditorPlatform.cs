@@ -298,9 +298,9 @@ namespace Core2D.Editor
                 {
                     var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                     var exporter = new SvgSvgExporter(_serviceProvider);
-                    var container = editor.Project.CurrentContainerViewModel;
+                    var container = editor.Project.CurrentContainer;
 
-                    var sources = editor.PageStateViewModel?.SelectedShapes;
+                    var sources = editor.PageState?.SelectedShapes;
                     if (sources != null)
                     {
                         var xaml = exporter.Create(sources, container.Template.Width, container.Template.Height);
@@ -360,9 +360,9 @@ namespace Core2D.Editor
                 {
                     var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                     var exporter = new DrawingGroupXamlExporter(_serviceProvider);
-                    var container = editor.Project.CurrentContainerViewModel;
+                    var container = editor.Project.CurrentContainer;
 
-                    var sources = editor.PageStateViewModel?.SelectedShapes;
+                    var sources = editor.PageState?.SelectedShapes;
                     if (sources != null)
                     {
                         var xaml = exporter.Create(sources, null);
@@ -459,8 +459,8 @@ namespace Core2D.Editor
             {
                 var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                 var imageChache = editor.Project as IImageCache;
-                var page = editor.Project.CurrentContainerViewModel;
-                var shapes = editor.PageStateViewModel.SelectedShapes;
+                var page = editor.Project.CurrentContainer;
+                var shapes = editor.PageState.SelectedShapes;
                 var writer = editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter)) as EmfWriter;
 
                 var db = (object)page.Properties;
@@ -497,9 +497,9 @@ namespace Core2D.Editor
                 {
                     var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                     var converter = editor.PathConverter;
-                    var container = editor.Project.CurrentContainerViewModel;
+                    var container = editor.Project.CurrentContainer;
 
-                    var shapes = editor.PageStateViewModel?.SelectedShapes ?? container?.Layers.SelectMany(x => x.Shapes);
+                    var shapes = editor.PageState?.SelectedShapes ?? container?.Layers.SelectMany(x => x.Shapes);
                     if (shapes == null)
                     {
                         return;
