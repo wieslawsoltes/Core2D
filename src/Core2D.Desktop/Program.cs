@@ -13,7 +13,6 @@ using Avalonia.Dialogs;
 using Avalonia.Headless;
 using Avalonia.OpenGL;
 using Avalonia.Threading;
-using Core2D.Editor;
 using Core2D.Configuration.Themes;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;

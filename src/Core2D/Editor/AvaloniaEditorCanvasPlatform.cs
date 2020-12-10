@@ -77,10 +77,5 @@ namespace Core2D.Editor
         {
             _serviceProvider = serviceProvider;
         }
-
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

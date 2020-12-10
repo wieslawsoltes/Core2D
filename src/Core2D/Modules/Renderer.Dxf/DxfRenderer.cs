@@ -43,11 +43,6 @@ namespace Core2D.Renderer.Dxf
             _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         private static double s_lineweightFactor = 96.0 / 2540.0;
 
         private static short[] s_lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };

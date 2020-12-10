@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core2D.Model.Editor;
 using Core2D.Model.Path;
 
@@ -19,21 +18,5 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private bool _defaultIsClosed = true;
         [AutoNotify] private FillRule _defaultFillRule = FillRule.EvenOdd;
         [AutoNotify] private bool _tryToConnect = false;
-
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool IsDirty()
-        {
-            var isDirty = base.IsDirty();
-            return isDirty;
-        }
-
-        public override void Invalidate()
-        {
-            base.Invalidate();
-        }
     }
 }

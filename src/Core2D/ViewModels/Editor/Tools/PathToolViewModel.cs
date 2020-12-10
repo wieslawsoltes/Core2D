@@ -45,11 +45,6 @@ namespace Core2D.ViewModels.Editor.Tools
             IsInitialized = false;
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public void RemoveLastSegment<T>() where T : PathSegmentViewModel
         {
             var figure = Geometry?.Figures.LastOrDefault();

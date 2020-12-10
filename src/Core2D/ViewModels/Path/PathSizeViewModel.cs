@@ -9,11 +9,6 @@ namespace Core2D.ViewModels.Path
         [AutoNotify] private double _width;
         [AutoNotify] private double _height;
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();

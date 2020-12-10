@@ -9,11 +9,6 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private bool _isExpanded = true;
         [AutoNotify] private ImmutableArray<PageContainerViewModel> _pages;
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();

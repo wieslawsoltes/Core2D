@@ -18,11 +18,6 @@ namespace Core2D.ViewModels.Containers
 
         public void InvalidateLayer() => InvalidateLayerHandler?.Invoke(this, new InvalidateLayerEventArgs());
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();

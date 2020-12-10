@@ -17,11 +17,6 @@ namespace Core2D.ViewModels.Editor.Tools
             _serviceProvider = serviceProvider;
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public void BeginDown(InputArgs args)
         {
         }

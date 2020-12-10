@@ -90,11 +90,6 @@ namespace Core2D.ViewModels.Shapes
             points.Add(_bottomRight);
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();

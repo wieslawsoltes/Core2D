@@ -48,10 +48,5 @@ namespace Core2D.ViewModels.Editor
                 $"{nameof(IsUnix)}: {IsUnix}{Environment.NewLine}" +
                 $"{nameof(WindowingSubsystemName)}: {WindowingSubsystemName}{Environment.NewLine}" +
                 $"{nameof(RenderingSubsystemName)}: {RenderingSubsystemName}{Environment.NewLine}";
-
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

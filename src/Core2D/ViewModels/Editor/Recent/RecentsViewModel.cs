@@ -9,11 +9,6 @@ namespace Core2D.ViewModels.Editor.Recent
         [AutoNotify] private ImmutableArray<RecentFileViewModel> _files = ImmutableArray.Create<RecentFileViewModel>();
         [AutoNotify] private RecentFileViewModel _current = default;
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public static RecentsViewModel Create(ImmutableArray<RecentFileViewModel> files, RecentFileViewModel current)
         {
             return new RecentsViewModel()

@@ -25,11 +25,6 @@ namespace Core2D.ViewModels.Editor.Tools.Path
             _serviceProvider = serviceProvider;
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public void BeginDown(InputArgs args)
         {
             var factory = _serviceProvider.GetService<IFactory>();

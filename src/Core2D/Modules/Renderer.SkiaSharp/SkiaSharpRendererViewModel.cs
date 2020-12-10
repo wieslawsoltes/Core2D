@@ -10,10 +10,5 @@ namespace Core2D.Renderer.SkiaSharp
             : base(serviceProvider, new SkiaSharpDrawNodeFactory())
         {
         }
-
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

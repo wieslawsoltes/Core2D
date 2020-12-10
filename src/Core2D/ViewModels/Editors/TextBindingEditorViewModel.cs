@@ -23,11 +23,6 @@ namespace Core2D.ViewModels.Editors
             set => RaiseAndSetIfChanged(ref _text, value);
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public void OnUseColumnName(ColumnViewModel column)
         {
             if (_text != null && column != null)

@@ -30,11 +30,6 @@ namespace Core2D.ViewModels.Editor.Tools
             _serviceProvider = serviceProvider;
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         private static bool IsPointMovable(BaseShapeViewModel shape, PointShapeViewModel point)
         {
             if (point.State.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShapeViewModel ower && ower.State.HasFlag(ShapeStateFlags.Locked)))

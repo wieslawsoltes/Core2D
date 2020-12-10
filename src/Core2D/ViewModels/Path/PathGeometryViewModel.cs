@@ -13,11 +13,6 @@ namespace Core2D.ViewModels.Path
         [AutoNotify] private ImmutableArray<PathFigureViewModel> _figures;
         [AutoNotify] private FillRule _fillRule;
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();

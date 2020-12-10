@@ -220,11 +220,6 @@ namespace Core2D.ViewModels.Editor
             _svgConverter = _serviceProvider.GetServiceLazily<ISvgConverter>();
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public void ShowDialog(DialogViewModel dialog)
         {
             _dialogs.Add(dialog);

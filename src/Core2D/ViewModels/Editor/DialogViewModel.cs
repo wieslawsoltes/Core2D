@@ -48,11 +48,6 @@ namespace Core2D.ViewModels.Editor
             _dialogPresenter = dialogPresenter;
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Show()
         {
             _dialogPresenter.ShowDialog(this);

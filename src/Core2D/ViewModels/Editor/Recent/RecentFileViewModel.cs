@@ -7,11 +7,6 @@ namespace Core2D.ViewModels.Editor.Recent
     {
         [AutoNotify] private string _path;
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public static RecentFileViewModel Create(string name, string path)
         {
             return new RecentFileViewModel()

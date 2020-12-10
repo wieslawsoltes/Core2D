@@ -24,11 +24,6 @@ namespace Core2D.ViewModels.Renderer
         [AutoNotify] private ShapeStyleViewModel _helperStyle;
         [AutoNotify] private IDecorator _decorator;
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();

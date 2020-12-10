@@ -2,7 +2,6 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Core2D.Editor;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
 

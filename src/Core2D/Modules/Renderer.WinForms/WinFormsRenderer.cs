@@ -39,11 +39,6 @@ namespace Core2D.Renderer.WinForms
             _scaleToPage = (value) => (float)(value);
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         private static Color ToColor(BaseColorViewModel colorViewModel)
         {
             return colorViewModel switch

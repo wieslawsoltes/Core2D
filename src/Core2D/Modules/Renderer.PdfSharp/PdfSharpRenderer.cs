@@ -37,11 +37,6 @@ namespace Core2D.Renderer.PdfSharp
             _scaleToPage = (value) => (float)(value * 1.0);
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         private static XColor ToXColor(BaseColorViewModel colorViewModel)
         {
             return colorViewModel switch

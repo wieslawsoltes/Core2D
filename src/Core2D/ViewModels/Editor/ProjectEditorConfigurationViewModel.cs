@@ -5,11 +5,6 @@ namespace Core2D.ViewModels.Editor
 {
     public class ProjectEditorConfigurationViewModel : ViewModelBase
     {
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         public static string DefaultLayerName = "Layer";
 
         public static string DefaultTemplateName = "Template";

@@ -29,11 +29,6 @@ namespace Core2D.ViewModels.Editor.Tools
             _serviceProvider = serviceProvider;
         }
 
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
-
         private static void CircleConstrain(PointShapeViewModel tl, PointShapeViewModel br, decimal cx, decimal cy, decimal px, decimal py)
         {
             decimal r = Max(Abs(cx - px), Abs(cy - py));
