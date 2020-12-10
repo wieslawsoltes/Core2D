@@ -2284,14 +2284,6 @@ namespace Core2D.Editor
             }
         }
 
-        public void OnSelectedItemChanged(ViewModelBase item)
-        {
-            if (Project != null)
-            {
-                Project.Selected = item;
-            }
-        }
-
         public void OnAddPage(object item)
         {
             if (Project?.CurrentDocument != null)

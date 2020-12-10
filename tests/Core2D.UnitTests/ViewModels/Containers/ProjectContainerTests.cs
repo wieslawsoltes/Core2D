@@ -234,7 +234,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
-        public void Setting_Selected_Should_Call_SetSelected()
+        public void Setting_Selected_Should_Call_SetSelected_After()
         {
             var target = _factory.CreateProjectContainer();
 
@@ -242,6 +242,7 @@ namespace Core2D.UnitTests
             target.Documents = target.Documents.Add(document);
 
             target.Selected = document;
+            target.SetSelected(document);
 
             Assert.Equal(document, target.CurrentDocument);
         }

@@ -73,12 +73,14 @@ namespace Core2D.Containers
         {
             CurrentDocument = document;
             Selected = document;
+            SetSelected(document);
         }
 
         public void SetCurrentContainer(PageContainerViewModel container)
         {
             CurrentContainer = container;
             Selected = container;
+            SetSelected(container);
         }
 
         public void SetCurrentTemplate(PageContainerViewModel template) => CurrentTemplate = template;
@@ -90,6 +92,8 @@ namespace Core2D.Containers
         public void SetCurrentGroupLibrary(LibraryViewModel<GroupShapeViewModel> libraryViewModel) => CurrentGroupLibrary = libraryViewModel;
 
         public void SetCurrentStyleLibrary(LibraryViewModel<ShapeStyleViewModel> libraryViewModel) => CurrentStyleLibrary = libraryViewModel;
+
+        public void SelectedChanged() =>  SetSelected(Selected);
 
         public void SetSelected(ViewModelBase value)
         {
