@@ -1,6 +1,5 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;
-using Core2D.Editor;
 
 namespace Core2D.Behaviors
 {

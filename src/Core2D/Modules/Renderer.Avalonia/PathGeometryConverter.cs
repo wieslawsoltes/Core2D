@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Immutable;
-using Core2D;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Shapes;
 using Spatial;
 using Spatial.Arc;
 using A = Avalonia;

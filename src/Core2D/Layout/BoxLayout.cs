@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.History;
-using Core2D.Shapes;
 using System.Linq;
+using Core2D.Model.History;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Layout
 {

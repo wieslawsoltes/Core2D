@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core2D.Model.Renderer;
 
-namespace Core2D.Renderer
+namespace Core2D.ViewModels.Renderer
 {
     public class Cache<TKey, TValue> : ICache<TKey, TValue>
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace Core2D.Editor.Recent
+namespace Core2D.ViewModels.Editor.Recent
 {
     public partial class RecentsViewModel : ViewModelBase
     {

@@ -1,4 +1,5 @@
-﻿using Core2D.Style;
+﻿using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Style;
 using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp

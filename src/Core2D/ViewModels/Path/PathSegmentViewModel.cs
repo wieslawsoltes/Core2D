@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Path
+namespace Core2D.ViewModels.Path
 {
     public partial class PathSegmentViewModel : ViewModelBase
     {

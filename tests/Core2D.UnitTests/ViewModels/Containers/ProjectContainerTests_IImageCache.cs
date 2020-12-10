@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using Core2D;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels;
 using Xunit;
 
 namespace Core2D.UnitTests

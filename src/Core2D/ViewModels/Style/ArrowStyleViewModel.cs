@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Core2D.Model.Style;
 
-namespace Core2D.Style
+namespace Core2D.ViewModels.Style
 {
     public partial class ArrowStyleViewModel : ViewModelBase
     {

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Immutable;
-using Core2D;
-using Core2D.Path;
-using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Editor.Factories
+namespace Core2D.ViewModels.Editor.Factories
 {
     public sealed class ShapeFactory : IShapeFactory
     {

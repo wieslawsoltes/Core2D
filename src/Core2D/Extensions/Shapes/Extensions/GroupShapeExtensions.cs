@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Core2D.Renderer;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Shapes
 {

@@ -1,4 +1,4 @@
-﻿namespace Core2D.Renderer
+﻿namespace Core2D.Model.Renderer
 {
     public interface ICache<TKey, TValue>
     {

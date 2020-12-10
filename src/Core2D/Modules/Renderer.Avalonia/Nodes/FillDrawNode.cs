@@ -1,5 +1,5 @@
-﻿using Core2D.Renderer;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
 

@@ -1,4 +1,4 @@
-﻿namespace Core2D.Containers
+﻿namespace Core2D.Model.Editor
 {
     public enum MoveMode
     {

@@ -1,6 +1,8 @@
 ﻿using System;
-using Core2D.Shapes;
+using Core2D.Model.Style;
 using Core2D.Style;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp

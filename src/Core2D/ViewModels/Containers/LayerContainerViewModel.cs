@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Containers
+namespace Core2D.ViewModels.Containers
 {
     public class InvalidateLayerEventArgs : EventArgs { }
 

@@ -2,7 +2,7 @@
 using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
-using Core2D.Renderer;
+using Core2D.Model.Renderer;
 
 namespace Core2D.Converters
 {

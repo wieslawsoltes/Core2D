@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.Model.Editor;
+using Core2D.ViewModels.Shapes;
 using Spatial;
 
-namespace Core2D.Editor.Bounds
+namespace Core2D.ViewModels.Editor.Bounds
 {
     public class HitTest : IHitTest
     {

@@ -1,15 +1,17 @@
 ﻿using System;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Path
+namespace Core2D.ViewModels.Path
 {
-    public partial class GeometryContext
+    public partial class GeometryContextViewModel
     {
         private readonly IFactory _factory;
         private readonly PathGeometryViewModel _geometry;
         private PathFigureViewModel _currentFigure;
 
-        public GeometryContext(IFactory factory, PathGeometryViewModel geometry)
+        public GeometryContextViewModel(IFactory factory, PathGeometryViewModel geometry)
         {
             _factory = factory;
             _geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
@@ -33,7 +35,7 @@ namespace Core2D.Path
             _currentFigure.Segments = _currentFigure.Segments.Add(segment);
         }
 
-        public void ArcTo(PointShapeViewModel point, PathSize size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise)
+        public void ArcTo(PointShapeViewModel point, PathSizeViewModel size, double rotationAngle = 0.0, bool isLargeArc = false, SweepDirection sweepDirection = SweepDirection.Clockwise)
         {
             var segment = _factory.CreateArcSegment(
                 point,

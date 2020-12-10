@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="using:Core2D"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:vme="using:Core2D.Editor"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:app="using:Core2D"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="800" d:DesignHeight="20"
@@ -114,11 +114,11 @@
                     <MenuItem Header="Zoom _Out" Command="{Binding Platform.OnZoomOut}" InputGesture="Ctrl+Subtract" />
                 </MenuItem>
                 <MenuItem Header="_Theme">
-                    <MenuItem Header="Fluent _Light" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="FluentLight" />
-                    <MenuItem Header="Fluent _Dark" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="FluentDark" />
+                    <MenuItem Header="Fluent _Light" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentLight" />
+                    <MenuItem Header="Fluent _Dark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentDark" />
                     <Separator />
-                    <MenuItem Header="Default L_ight" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="DefaultLight" />
-                    <MenuItem Header="Default D_ark" Command="{x:Static vm:App.ChangeTheme}" CommandParameter="DefaultDark" />
+                    <MenuItem Header="Default L_ight" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultLight" />
+                    <MenuItem Header="Default D_ark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultDark" />
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Project">

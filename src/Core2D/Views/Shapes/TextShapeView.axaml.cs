@@ -1,8 +1,8 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Core2D.Editor;
-using Core2D.Editors;
-using Core2D.Shapes;
+using Core2D.ViewModels.Editor;
+using Core2D.ViewModels.Editors;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Views.Shapes
 {

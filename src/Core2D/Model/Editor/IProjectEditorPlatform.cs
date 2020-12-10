@@ -1,7 +1,7 @@
-﻿using Core2D.Containers;
-using Core2D.Data;
+﻿using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
 
-namespace Core2D.Editor
+namespace Core2D.Model.Editor
 {
     public interface IProjectEditorPlatform
     {

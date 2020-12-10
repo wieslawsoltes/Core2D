@@ -3,7 +3,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Core2D.Editor;
-using Core2D.Input;
+using Core2D.Model.Editor;
+using Core2D.Model.Input;
+using Core2D.ViewModels.Editor;
 
 namespace Core2D.Behaviors
 {

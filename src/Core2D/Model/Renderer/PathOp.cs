@@ -1,4 +1,4 @@
-﻿namespace Core2D.Renderer
+﻿namespace Core2D.Model.Renderer
 {
     public enum PathOp
     {

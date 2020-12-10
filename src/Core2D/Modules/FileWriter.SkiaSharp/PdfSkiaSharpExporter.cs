@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Containers;
 using SkiaSharp;
 
 namespace Core2D.FileWriter.SkiaSharpPdf

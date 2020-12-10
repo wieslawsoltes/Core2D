@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Data;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Data;
 
 namespace Core2D.Renderer
 {

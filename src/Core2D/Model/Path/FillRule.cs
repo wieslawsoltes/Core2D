@@ -1,4 +1,4 @@
-﻿namespace Core2D.Path
+﻿namespace Core2D.Model.Path
 {
     public enum FillRule
     {

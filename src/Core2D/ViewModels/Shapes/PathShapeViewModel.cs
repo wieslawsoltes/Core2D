@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Data;
-using Core2D.Path;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Path;
 
-namespace Core2D.Shapes
+namespace Core2D.ViewModels.Shapes
 {
     public partial class PathShapeViewModel : BaseShapeViewModel
     {

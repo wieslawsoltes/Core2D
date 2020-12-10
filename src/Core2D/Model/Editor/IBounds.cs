@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 using Spatial;
 
-namespace Core2D.Editor
+namespace Core2D.Model.Editor
 {
     public interface IBounds
     {

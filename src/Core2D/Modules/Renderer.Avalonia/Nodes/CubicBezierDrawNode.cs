@@ -1,6 +1,7 @@
-﻿using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using AM = Avalonia.Media;
 
 namespace Core2D.Renderer

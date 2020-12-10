@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer
 {
     [Flags]
     public enum ShapeStateFlags

@@ -1,8 +1,9 @@
-﻿using Core2D.Containers;
-using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Renderer;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer
 {
     public interface IShapeRenderer
     {

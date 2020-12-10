@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Core2D.Model.Model.Style;
 
-namespace Core2D.Style
+namespace Core2D.ViewModels.Style
 {
     public partial class ArgbColorViewModel : BaseColorViewModel
     {

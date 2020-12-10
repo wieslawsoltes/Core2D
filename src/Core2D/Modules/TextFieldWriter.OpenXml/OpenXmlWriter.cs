@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using Core2D;
-using Core2D.Data;
+using Core2D.Model;
+using Core2D.ViewModels.Data;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;

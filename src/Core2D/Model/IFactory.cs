@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Renderer;
-using Core2D.Scripting;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model.Path;
+using Core2D.Model.Renderer;
+using Core2D.Model.Style;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Renderer;
+using Core2D.ViewModels.Scripting;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface IFactory
     {
@@ -45,21 +49,21 @@ namespace Core2D
 
         LineSegmentViewModel CreateLineSegment(PointShapeViewModel point);
 
-        ArcSegmentViewModel CreateArcSegment(PointShapeViewModel point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection);
+        ArcSegmentViewModel CreateArcSegment(PointShapeViewModel point, PathSizeViewModel size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection);
 
         QuadraticBezierSegmentViewModel CreateQuadraticBezierSegment(PointShapeViewModel point1, PointShapeViewModel point2);
 
         CubicBezierSegmentViewModel CreateCubicBezierSegment(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3);
 
-        PathSize CreatePathSize(double width = 0.0, double height = 0.0);
+        PathSizeViewModel CreatePathSize(double width = 0.0, double height = 0.0);
 
         PathGeometryViewModel CreatePathGeometry();
 
         PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero);
 
-        GeometryContext CreateGeometryContext();
+        GeometryContextViewModel CreateGeometryContext();
 
-        GeometryContext CreateGeometryContext(PathGeometryViewModel geometry);
+        GeometryContextViewModel CreateGeometryContext(PathGeometryViewModel geometry);
 
         PathFigureViewModel CreatePathFigure(bool isClosed = false);
 

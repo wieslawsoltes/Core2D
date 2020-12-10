@@ -5,12 +5,12 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
 using Core2D.Renderer.WinForms;
-using Core2D.Shapes;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.FileWriter.Emf
 {

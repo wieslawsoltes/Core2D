@@ -2,10 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Text;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
 using Core2D.XamlExporter.Avalonia;
 
 namespace Core2D.FileWriter.Xaml

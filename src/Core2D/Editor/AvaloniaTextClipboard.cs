@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Avalonia;
+using Core2D.Model;
 
 namespace Core2D.Editor
 {

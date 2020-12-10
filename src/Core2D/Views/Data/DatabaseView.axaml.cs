@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
-using Core2D.Data;
+using Core2D.ViewModels.Data;
 
 namespace Core2D.Views.Data
 {

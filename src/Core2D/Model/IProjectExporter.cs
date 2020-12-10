@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using Core2D.Containers;
+using Core2D.ViewModels.Containers;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface IProjectExporter
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Editor;
+using Core2D.Model.Editor;
+using Core2D.ViewModels;
 
 namespace Core2D.Editor
 {

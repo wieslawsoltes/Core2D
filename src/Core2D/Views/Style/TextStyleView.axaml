@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:vms="using:Core2D.Style"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:ms="using:Core2D.Model.Style"
+             xmlns:vms="using:Core2D.ViewModels.Style"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.TextStyle}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -24,18 +25,18 @@
         <StackPanel>
             <CheckBox Content="Regular" 
                       Command="{Binding ToggleRegularFontStyle}"
-                      IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static vms:FontStyleFlags.Regular}}"
+                      IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static ms:FontStyleFlags.Regular}}"
                       HorizontalAlignment="Stretch"
                       IsVisible="False"
                       x:CompileBindings="False" />
             <CheckBox Content="Bold" 
                       Command="{Binding ToggleBoldFontStyle}"
-                      IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static vms:FontStyleFlags.Bold}}"
+                      IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static ms:FontStyleFlags.Bold}}"
                       HorizontalAlignment="Stretch"
                       x:CompileBindings="False" />
             <CheckBox Content="Italic" 
                       Command="{Binding ToggleItalicFontStyle}"
-                      IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static vms:FontStyleFlags.Italic}}"
+                      IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static ms:FontStyleFlags.Italic}}"
                       HorizontalAlignment="Stretch"
                       x:CompileBindings="False" />
         </StackPanel>

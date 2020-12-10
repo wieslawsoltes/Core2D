@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Core2D.Containers;
-using Core2D.Input;
-using Core2D.Shapes;
+using Core2D.Model.Input;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer
 {
     public interface IDecorator : IDrawable
     {

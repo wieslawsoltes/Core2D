@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vmc="using:Core2D.Containers"
-             xmlns:vmp="using:Core2D.Path"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmc="using:Core2D.ViewModels.Containers"
+             xmlns:vmp="using:Core2D.ViewModels.Path"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.OptionsViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.Options}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:OptionsViewModel" x:CompileBindings="True">
     <StackPanel>

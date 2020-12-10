@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.Model.Style;
 using Core2D.Style;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Renderer;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 

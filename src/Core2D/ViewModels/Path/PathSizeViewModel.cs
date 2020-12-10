@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Core2D.Path
+namespace Core2D.ViewModels.Path
 {
-    public partial class PathSize : ViewModelBase
+    public partial class PathSizeViewModel : ViewModelBase
     {
         [AutoNotify] private double _width;
         [AutoNotify] private double _height;

@@ -3,17 +3,16 @@ using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-
+using Core2D.Model.Renderer;
 #if USE_SKIA
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 #endif
-
-using Core2D.Containers;
-using Core2D.Data;
 using Core2D.Renderer;
-using Core2D.Renderer.Presenters;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Renderer.Presenters;
 
 namespace Core2D.Views
 {

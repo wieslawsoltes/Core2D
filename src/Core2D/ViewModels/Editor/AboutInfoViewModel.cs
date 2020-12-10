@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Core2D.Editor
+namespace Core2D.ViewModels.Editor
 {
     public class AboutInfoViewModel : ViewModelBase
     {

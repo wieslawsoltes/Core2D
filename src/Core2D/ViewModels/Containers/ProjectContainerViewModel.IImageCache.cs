@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core2D.Renderer;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Renderer;
 
-namespace Core2D.Containers
+namespace Core2D.ViewModels.Containers
 {
     public partial class ProjectContainerViewModel : BaseContainerViewModel, IImageCache
     {
         private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
-        private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
+        private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKeyViewModel() { Key = i.Key }).ToList();
 
         public IEnumerable<IImageKey> Keys => GetKeys();
 

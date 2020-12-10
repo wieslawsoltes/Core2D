@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
+using Core2D.Model.Path;
 
-namespace Core2D.Path
+namespace Core2D.ViewModels.Path
 {
     public partial class PathGeometryViewModel : ViewModelBase
     {

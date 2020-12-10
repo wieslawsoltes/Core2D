@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Core2D.Editor.Recent
+namespace Core2D.ViewModels.Editor.Recent
 {
     public partial class RecentFileViewModel : ViewModelBase
     {

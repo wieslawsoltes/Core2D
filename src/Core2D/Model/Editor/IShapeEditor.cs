@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Core2D.Path;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Editor
+namespace Core2D.Model.Editor
 {
     internal interface IShapeEditor
     {

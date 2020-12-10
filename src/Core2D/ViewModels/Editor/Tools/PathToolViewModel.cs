@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D;
-using Core2D.Editor.Tools.Path;
-using Core2D.Input;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model;
+using Core2D.Model.Editor;
+using Core2D.Model.Input;
+using Core2D.ViewModels.Editor.Tools.Path;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Editor.Tools
+namespace Core2D.ViewModels.Editor.Tools
 {
     public class PathToolViewModel : ViewModelBase, IEditorTool
     {
@@ -27,7 +28,7 @@ namespace Core2D.Editor.Tools
 
         internal PathGeometryViewModel Geometry { get; set; }
 
-        internal GeometryContext GeometryContext { get; set; }
+        internal GeometryContextViewModel GeometryContext { get; set; }
 
         internal IPathTool PreviousPathTool { get; set; }
 

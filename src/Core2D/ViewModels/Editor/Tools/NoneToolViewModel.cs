@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Input;
-using Core2D.Shapes;
+using Core2D.Model.Editor;
+using Core2D.Model.Input;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Editor.Tools
+namespace Core2D.ViewModels.Editor.Tools
 {
     public class NoneToolViewModel : ViewModelBase, IEditorTool
     {

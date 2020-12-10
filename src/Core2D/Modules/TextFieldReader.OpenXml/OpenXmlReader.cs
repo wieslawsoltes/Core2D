@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Core2D;
-using Core2D.Data;
+using Core2D.Model;
+using Core2D.ViewModels.Data;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 

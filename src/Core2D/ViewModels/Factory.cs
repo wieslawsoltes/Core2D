@@ -4,17 +4,21 @@ using System.Collections.Immutable;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Renderer;
-using Core2D.Scripting;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model;
+using Core2D.Model.Editor;
+using Core2D.Model.Path;
+using Core2D.Model.Renderer;
+using Core2D.Model.Style;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Renderer;
+using Core2D.ViewModels.Scripting;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D
+namespace Core2D.ViewModels
 {
     public class Factory : IFactory
     {
@@ -234,7 +238,7 @@ namespace Core2D
             };
         }
 
-        public ArcSegmentViewModel CreateArcSegment(PointShapeViewModel point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection)
+        public ArcSegmentViewModel CreateArcSegment(PointShapeViewModel point, PathSizeViewModel size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection)
         {
             return new ArcSegmentViewModel()
             {
@@ -265,9 +269,9 @@ namespace Core2D
             };
         }
 
-        public PathSize CreatePathSize(double width = 0.0, double height = 0.0)
+        public PathSizeViewModel CreatePathSize(double width = 0.0, double height = 0.0)
         {
-            return new PathSize()
+            return new PathSizeViewModel()
             {
                 Width = width,
                 Height = height
@@ -283,14 +287,14 @@ namespace Core2D
             };
         }
 
-        public GeometryContext CreateGeometryContext()
+        public GeometryContextViewModel CreateGeometryContext()
         {
-            return new GeometryContext(this, CreatePathGeometry());
+            return new GeometryContextViewModel(this, CreatePathGeometry());
         }
 
-        public GeometryContext CreateGeometryContext(PathGeometryViewModel geometry)
+        public GeometryContextViewModel CreateGeometryContext(PathGeometryViewModel geometry)
         {
-            return new GeometryContext(this, geometry);
+            return new GeometryContextViewModel(this, geometry);
         }
 
         public PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero)

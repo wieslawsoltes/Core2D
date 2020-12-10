@@ -1,10 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.VisualTree;
-using Core2D.Containers;
-using Core2D.Editor;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Editor;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.DragAndDrop.Handlers
 {

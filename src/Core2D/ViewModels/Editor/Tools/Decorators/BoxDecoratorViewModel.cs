@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Input;
 using Core2D.Layout;
-using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model;
+using Core2D.Model.Input;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Spatial;
 
-namespace Core2D.Editor.Tools.Decorators
+namespace Core2D.ViewModels.Editor.Tools.Decorators
 {
     public partial class BoxDecoratorViewModel : ViewModelBase, IDrawable, IDecorator
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using Core2D;
-using Core2D.Data;
+using Core2D.Model;
+using Core2D.ViewModels.Data;
 using CSV = CsvHelper;
 
 namespace Core2D.TextFieldWriter.CsvHelper

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Core2D
+namespace Core2D.ViewModels
 {
     public partial class ViewModelBase : INotifyPropertyChanged
     {

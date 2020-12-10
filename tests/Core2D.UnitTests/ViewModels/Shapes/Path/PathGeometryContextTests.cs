@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Immutable;
-using Core2D;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -17,7 +17,7 @@ namespace Core2D.UnitTests
         public void Inherits_From_XGeometryContext()
         {
             var target = _factory.CreateGeometryContext(_factory.CreatePathGeometry());
-            Assert.True(target is GeometryContext);
+            Assert.True(target is GeometryContextViewModel);
         }
 
         [Fact]

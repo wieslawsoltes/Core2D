@@ -2,8 +2,8 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
-using Core2D.Data;
-using Core2D.Shapes;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Bindings
 {

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Autofac;
-using Core2D.Data;
 using Core2D.Editor;
-using Core2D.Editor.Bounds;
-using Core2D.Editor.Factories;
 using Core2D.FileSystem.DotNet;
 using Core2D.FileWriter.Dxf;
 using Core2D.FileWriter.Emf;
@@ -17,6 +14,9 @@ using Core2D.FileWriter.SkiaSharpWebp;
 using Core2D.FileWriter.Svg;
 using Core2D.FileWriter.Xaml;
 using Core2D.Log.Trace;
+using Core2D.Model;
+using Core2D.Model.Editor;
+using Core2D.Model.Renderer;
 using Core2D.Renderer;
 using Core2D.Renderer.SkiaSharp;
 using Core2D.ScriptRunner.Roslyn;
@@ -26,6 +26,11 @@ using Core2D.TextFieldReader.CsvHelper;
 using Core2D.TextFieldReader.OpenXml;
 using Core2D.TextFieldWriter.CsvHelper;
 using Core2D.TextFieldWriter.OpenXml;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
+using Core2D.ViewModels.Editor.Bounds;
+using Core2D.ViewModels.Editor.Factories;
 using Core2D.Views;
 
 namespace Core2D.Modules

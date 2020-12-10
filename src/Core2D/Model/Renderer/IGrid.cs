@@ -1,6 +1,6 @@
-﻿using Core2D.Style;
+﻿using Core2D.ViewModels.Style;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer
 {
     public interface IGrid
     {

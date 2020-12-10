@@ -1,9 +1,9 @@
 ﻿using System.Collections.Immutable;
 using Core2D.Bindings;
-using Core2D.Containers;
-using Core2D.Shapes;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Data
+namespace Core2D.ViewModels.Data
 {
     public partial class DataFlow
     {

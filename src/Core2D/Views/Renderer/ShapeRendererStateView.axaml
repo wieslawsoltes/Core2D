@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="using:Core2D.Converters"
              xmlns:libraries="using:Core2D.Views.Libraries"
-             xmlns:vmr="using:Core2D.Renderer"
-             xmlns:vms="using:Core2D.Shapes"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmr="using:Core2D.ViewModels.Renderer"
+             xmlns:vms="using:Core2D.ViewModels.Shapes"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.ShapeRendererStateViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.ShapeRendererState}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmr:ShapeRendererStateViewModel" x:CompileBindings="True">
     <UserControl.Resources>

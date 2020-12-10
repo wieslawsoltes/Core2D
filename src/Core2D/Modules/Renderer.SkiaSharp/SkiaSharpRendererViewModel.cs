@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core2D.ViewModels.Renderer;
 
 namespace Core2D.Renderer.SkiaSharp
 {

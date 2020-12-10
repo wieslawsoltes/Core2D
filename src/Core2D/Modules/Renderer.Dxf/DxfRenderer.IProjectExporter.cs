@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
+using Core2D.Model;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
 using DXF = netDxf;
 using DXFH = netDxf.Header;
 using DXFO = netDxf.Objects;

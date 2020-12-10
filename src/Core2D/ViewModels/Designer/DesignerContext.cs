@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Editor;
-using Core2D.Editor.Recent;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Renderer;
-using Core2D.Scripting;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.Model.Renderer;
+using Core2D.Model.Style;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
+using Core2D.ViewModels.Editor.Recent;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Renderer;
+using Core2D.ViewModels.Scripting;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Designer
+namespace Core2D.ViewModels.Designer
 {
     public class DesignerContext
     {
@@ -84,7 +88,7 @@ namespace Core2D.Designer
 
         public static PathGeometryViewModel PathGeometry { get; set; }
 
-        public static PathSize PathSize { get; set; }
+        public static PathSizeViewModel PathSize { get; set; }
 
         public static QuadraticBezierSegmentViewModel QuadraticBezierSegment { get; set; }
 

@@ -1,6 +1,7 @@
-﻿using Core2D;
-using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Xunit;
 
 namespace Core2D.UnitTests

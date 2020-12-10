@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core2D.Renderer;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 using Spatial;
 using Spatial.ConvexHull;
 using Spatial.Sat;
 
-namespace Core2D.Editor.Bounds
+namespace Core2D.ViewModels.Editor.Bounds
 {
     public static class HitTestHelper
     {

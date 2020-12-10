@@ -1,4 +1,4 @@
-﻿namespace Core2D.Style
+﻿namespace Core2D.Model.Model.Style
 {
     public static class Colors
     {

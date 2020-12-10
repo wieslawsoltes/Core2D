@@ -1,7 +1,7 @@
-﻿using Core2D.Renderer;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.ViewModels.Style;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface IDrawable
     {

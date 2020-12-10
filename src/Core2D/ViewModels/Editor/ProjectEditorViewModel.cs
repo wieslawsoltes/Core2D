@@ -5,21 +5,25 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Editor.History;
-using Core2D.Editor.Recent;
-using Core2D.Editor.Tools.Decorators;
-using Core2D.Input;
 using Core2D.Layout;
-using Core2D.Renderer;
-using Core2D.Scripting;
+using Core2D.Model;
+using Core2D.Model.Editor;
+using Core2D.Model.Input;
+using Core2D.Model.Renderer;
 using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor.History;
+using Core2D.ViewModels.Editor.Recent;
+using Core2D.ViewModels.Editor.Tools.Decorators;
+using Core2D.ViewModels.Renderer;
+using Core2D.ViewModels.Scripting;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Spatial;
 using static System.Math;
 
-namespace Core2D.Editor
+namespace Core2D.ViewModels.Editor
 {
     public class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {

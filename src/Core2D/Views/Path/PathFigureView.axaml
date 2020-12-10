@@ -6,10 +6,10 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Core2D.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:vmp="using:Core2D.Path"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmp="using:Core2D.ViewModels.Path"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.PathFigureViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.PathFigure}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmp:PathFigureViewModel" x:CompileBindings="True">
     <UserControl.Resources>

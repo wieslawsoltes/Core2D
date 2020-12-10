@@ -12,12 +12,12 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Platform;
 using Avalonia.Styling;
-using Core2D;
-using Core2D.Editor;
 using Core2D.Configuration.Themes;
 using Core2D.Configuration.Windows;
-using Core2D.Designer;
+using Core2D.ViewModels.Designer;
+using Core2D.Model;
 using Core2D.Modules;
+using Core2D.ViewModels.Editor;
 using Core2D.Views;
 
 namespace Core2D

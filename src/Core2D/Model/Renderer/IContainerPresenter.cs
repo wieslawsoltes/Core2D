@@ -1,6 +1,6 @@
-﻿using Core2D.Containers;
+﻿using Core2D.ViewModels.Containers;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer
 {
     public interface IContainerPresenter
     {

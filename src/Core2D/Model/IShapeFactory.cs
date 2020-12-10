@@ -1,7 +1,8 @@
-﻿using Core2D.Path;
-using Core2D.Shapes;
+﻿using Core2D.Model.Path;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface IShapeFactory
     {

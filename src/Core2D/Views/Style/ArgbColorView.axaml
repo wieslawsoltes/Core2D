@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="using:Core2D.Converters"
              xmlns:cp="using:ThemeEditor.Controls.ColorPicker"
-             xmlns:vms="using:Core2D.Style"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vms="using:Core2D.ViewModels.Style"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.ArgbColorViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.ArgbColor}"
              d:DesignWidth="300" d:DesignHeight="400"
              x:DataType="vms:ArgbColorViewModel" x:CompileBindings="True">
     <UserControl.Resources>

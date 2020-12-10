@@ -1,5 +1,5 @@
 ﻿using System;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Layout
 {

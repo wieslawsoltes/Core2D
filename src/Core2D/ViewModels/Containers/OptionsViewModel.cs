@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Path;
+using Core2D.Model.Editor;
+using Core2D.Model.Path;
 
-namespace Core2D.Containers
+namespace Core2D.ViewModels.Containers
 {
     public partial class OptionsViewModel : ViewModelBase
     {

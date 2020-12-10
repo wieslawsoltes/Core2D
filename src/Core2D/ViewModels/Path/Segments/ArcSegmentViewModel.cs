@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Core2D.Shapes;
+using Core2D.Model.Path;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Path.Segments
+namespace Core2D.ViewModels.Path.Segments
 {
     public partial class ArcSegmentViewModel : PathSegmentViewModel
     {
         public static SweepDirection[] SweepDirectionValues { get; } = (SweepDirection[])Enum.GetValues(typeof(SweepDirection));
 
         [AutoNotify] private PointShapeViewModel _point;
-        [AutoNotify] private PathSize _size;
+        [AutoNotify] private PathSizeViewModel _size;
         [AutoNotify] private double _rotationAngle;
         [AutoNotify] private bool _isLargeArc;
         [AutoNotify] private SweepDirection _sweepDirection;

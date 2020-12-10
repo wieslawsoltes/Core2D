@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Core2D.Style
+namespace Core2D.ViewModels.Style
 {
     public partial class FillStyleViewModel : ViewModelBase
     {

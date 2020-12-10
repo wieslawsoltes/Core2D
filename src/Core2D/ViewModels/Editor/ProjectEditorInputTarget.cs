@@ -1,6 +1,6 @@
-﻿using Core2D.Input;
+﻿using Core2D.Model.Input;
 
-namespace Core2D.Editor
+namespace Core2D.ViewModels.Editor
 {
     public class ProjectEditorInputTarget : InputTarget
     {

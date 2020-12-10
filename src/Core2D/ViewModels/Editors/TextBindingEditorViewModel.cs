@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Data;
-using Core2D.Editor;
-using Core2D.Shapes;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Editors
+namespace Core2D.ViewModels.Editors
 {
     public class TextBindingEditorViewModel : ViewModelBase
     {

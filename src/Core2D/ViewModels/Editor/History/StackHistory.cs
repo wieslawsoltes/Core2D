@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.History;
+using Core2D.Model.History;
 
-namespace Core2D.Editor.History
+namespace Core2D.ViewModels.Editor.History
 {
     internal sealed class StackHistory : IHistory
     {

@@ -1,4 +1,5 @@
-﻿using Core2D;
+﻿using Core2D.Model;
+using Core2D.ViewModels;
 using Xunit;
 
 namespace Core2D.Data.UnitTests

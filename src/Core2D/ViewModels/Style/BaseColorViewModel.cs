@@ -1,4 +1,4 @@
-﻿namespace Core2D.Style
+﻿namespace Core2D.ViewModels.Style
 {
     public class BaseColorViewModel : ViewModelBase
     {

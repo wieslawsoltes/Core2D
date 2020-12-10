@@ -1,4 +1,5 @@
-﻿using static System.Math;
+﻿using Core2D.ViewModels.Shapes;
+using static System.Math;
 
 namespace Core2D.Shapes
 {

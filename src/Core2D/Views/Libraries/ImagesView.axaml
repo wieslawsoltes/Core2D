@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Core2D.DragAndDrop"
-             xmlns:vmr="using:Core2D.Renderer"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:mr="using:Core2D.Model.Renderer"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmr:IImageCache" x:CompileBindings="True">
+             x:DataType="mr:IImageCache" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*">
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
             <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddImageKey}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
@@ -18,7 +18,7 @@
         <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key" />
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Keys}">
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="vmr:IImageKey">
+                <DataTemplate DataType="mr:IImageKey">
                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

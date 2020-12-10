@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D;
-using Core2D.Editor.Tools.Selection;
-using Core2D.Input;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Editor;
+using Core2D.Model.Input;
+using Core2D.Model.Path;
+using Core2D.ViewModels.Editor.Tools.Selection;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Shapes;
 using static System.Math;
 
-namespace Core2D.Editor.Tools.Path
+namespace Core2D.ViewModels.Editor.Tools.Path
 {
     public class ArcPathToolViewModel : ViewModelBase, IPathTool
     {

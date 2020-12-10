@@ -1,7 +1,7 @@
-﻿using Core2D.Input;
-using Core2D.Shapes;
+﻿using Core2D.Model.Input;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Editor
+namespace Core2D.Model.Editor
 {
     public interface ITool
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Core2D.Data
+namespace Core2D.ViewModels.Data
 {
     public partial class ValueViewModel : ViewModelBase
     {

@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.Model.Style;
 using Core2D.Style;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Renderer;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Spatial;
 using Spatial.Arc;
 
@@ -62,19 +67,19 @@ namespace Core2D.Renderer.WinForms
             var pen = new Pen(ToColor(style.Stroke.Color), (float)(style.Stroke.Thickness / State.ZoomX));
             switch (style.Stroke.LineCap)
             {
-                case Core2D.Style.LineCap.Flat:
+                case Core2D.Model.Style.LineCap.Flat:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
                     break;
 
-                case Core2D.Style.LineCap.Square:
+                case Core2D.Model.Style.LineCap.Square:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Square;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Square;
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
                     break;
 
-                case Core2D.Style.LineCap.Round:
+                case Core2D.Model.Style.LineCap.Round:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Round;
@@ -622,12 +627,12 @@ namespace Core2D.Renderer.WinForms
 
             var fontStyle = System.Drawing.FontStyle.Regular;
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Core2D.Style.FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle.HasFlag(Core2D.Model.Style.FontStyleFlags.Bold))
             {
                 fontStyle |= System.Drawing.FontStyle.Bold;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Core2D.Style.FontStyleFlags.Italic))
+            if (text.Style.TextStyle.FontStyle.HasFlag(Core2D.Model.Style.FontStyleFlags.Italic))
             {
                 fontStyle |= System.Drawing.FontStyle.Italic;
             }

@@ -4,16 +4,17 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using Avalonia.Controls;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Editor;
 using Core2D.FileWriter.Emf;
-using Core2D.Renderer;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Editor;
+using Core2D.Model.Renderer;
 using Core2D.SvgExporter.Svg;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
+using Core2D.ViewModels.Shapes;
 using Core2D.Views;
 using Core2D.XamlExporter.Avalonia;
-using Microsoft.CodeAnalysis;
 
 namespace Core2D.Editor
 {

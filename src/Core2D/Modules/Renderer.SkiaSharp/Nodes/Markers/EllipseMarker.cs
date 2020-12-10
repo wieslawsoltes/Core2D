@@ -1,5 +1,4 @@
-﻿using Core2D.Renderer.SkiaSharp;
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
 {

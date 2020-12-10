@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.Editor.History
+namespace Core2D.ViewModels.Editor.History
 {
     internal struct UndoRedo
     {

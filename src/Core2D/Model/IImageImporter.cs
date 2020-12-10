@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface IImageImporter
     {

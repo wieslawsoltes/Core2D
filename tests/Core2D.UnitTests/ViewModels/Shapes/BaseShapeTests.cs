@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Shapes;
 using Xunit;
 
 namespace Core2D.Shapes.UnitTests

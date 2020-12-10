@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Data;
-using Core2D.Renderer;
-using Core2D.Style;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Shapes
+namespace Core2D.ViewModels.Shapes
 {
     public partial class BaseShapeViewModel : ViewModelBase, IDataObject
     {

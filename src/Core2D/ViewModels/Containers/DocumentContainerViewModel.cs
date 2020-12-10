@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace Core2D.Containers
+namespace Core2D.ViewModels.Containers
 {
     public partial class DocumentContainerViewModel : BaseContainerViewModel
     {

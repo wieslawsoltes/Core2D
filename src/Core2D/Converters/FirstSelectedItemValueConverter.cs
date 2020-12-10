@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Avalonia;
 using Avalonia.Data.Converters;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Converters
 {
