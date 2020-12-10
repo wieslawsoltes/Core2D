@@ -9,7 +9,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class TextToolViewModel : ViewModelBase, IEditorTool
+    public partial class TextToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { TopLeft, BottomRight }
         private readonly IServiceProvider _serviceProvider;

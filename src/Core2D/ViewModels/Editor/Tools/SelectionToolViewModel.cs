@@ -10,7 +10,7 @@ using Spatial;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class SelectionToolViewModel : ViewModelBase, IEditorTool
+    public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { None, Selected }
         private readonly IServiceProvider _serviceProvider;

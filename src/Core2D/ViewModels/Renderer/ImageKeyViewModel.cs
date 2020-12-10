@@ -1,5 +1,4 @@
-﻿
-using Core2D.Model.Renderer;
+﻿using Core2D.Model.Renderer;
 
 namespace Core2D.ViewModels.Renderer
 {

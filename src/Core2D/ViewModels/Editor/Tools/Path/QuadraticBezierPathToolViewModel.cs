@@ -10,7 +10,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Editor.Tools.Path
 {
-    public class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
+    public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
     {
         public enum State { Point1, Point3, Point2 }
         private readonly IServiceProvider _serviceProvider;

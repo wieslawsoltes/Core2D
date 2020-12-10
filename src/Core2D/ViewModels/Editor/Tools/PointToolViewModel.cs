@@ -7,7 +7,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class PointToolViewModel : ViewModelBase, IEditorTool
+    public partial class PointToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { Point }
         private readonly IServiceProvider _serviceProvider;

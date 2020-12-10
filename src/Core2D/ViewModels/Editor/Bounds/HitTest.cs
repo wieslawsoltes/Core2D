@@ -6,7 +6,7 @@ using Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds
 {
-    public class HitTest : IHitTest
+    public partial class HitTest : IHitTest
     {
         public IDictionary<Type, IBounds> Registered { get; set; }
 

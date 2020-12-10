@@ -13,7 +13,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class PathToolViewModel : ViewModelBase, IEditorTool
+    public partial class PathToolViewModel : ViewModelBase, IEditorTool
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly LinePathToolViewModel _linePathTool;

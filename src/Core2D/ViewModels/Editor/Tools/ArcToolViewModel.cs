@@ -11,7 +11,7 @@ using Spatial.Arc;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class ArcToolViewModel : ViewModelBase, IEditorTool
+    public partial class ArcToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { Point1, Point2, Point3, Point4 }
         private readonly IServiceProvider _serviceProvider;

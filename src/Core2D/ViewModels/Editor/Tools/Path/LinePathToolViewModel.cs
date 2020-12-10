@@ -10,7 +10,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Editor.Tools.Path
 {
-    public class LinePathToolViewModel : ViewModelBase, IPathTool
+    public partial class LinePathToolViewModel : ViewModelBase, IPathTool
     {
         public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;

@@ -6,7 +6,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class NoneToolViewModel : ViewModelBase, IEditorTool
+    public partial class NoneToolViewModel : ViewModelBase, IEditorTool
     {
         private readonly IServiceProvider _serviceProvider;
 

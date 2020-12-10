@@ -8,7 +8,7 @@ using Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public class PathBounds : IBounds
+    public partial class PathBounds : IBounds
     {
         private List<PointShapeViewModel> _points = new List<PointShapeViewModel>();
 

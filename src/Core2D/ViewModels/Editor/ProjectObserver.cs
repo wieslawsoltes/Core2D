@@ -13,7 +13,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor
 {
-    public class ProjectObserver : IDisposable
+    public partial class ProjectObserver : IDisposable
     {
         private readonly ProjectEditorViewModel _editor;
         private readonly Action _invalidateContainer;

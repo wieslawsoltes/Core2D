@@ -9,7 +9,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Factories
 {
-    public sealed class ShapeFactory : IShapeFactory
+    public partial class ShapeFactory : IShapeFactory
     {
         private readonly IServiceProvider _serviceProvider;
 

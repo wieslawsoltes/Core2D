@@ -7,7 +7,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public class TextSelection
+    public partial class TextSelection
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly LayerContainerViewModel _layer;

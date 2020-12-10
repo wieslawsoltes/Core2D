@@ -9,7 +9,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
+    public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { Point1, Point3, Point2 }
         private readonly IServiceProvider _serviceProvider;

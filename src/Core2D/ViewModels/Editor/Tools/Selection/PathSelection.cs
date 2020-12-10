@@ -4,7 +4,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public class PathSelection
+    public partial class PathSelection
     {
         private readonly LayerContainerViewModel _layer;
         private readonly PathShapeViewModel _path;

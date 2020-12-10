@@ -7,7 +7,7 @@ using Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public class ArcBounds : IBounds
+    public partial class ArcBounds : IBounds
     {
         public Type TargetType => typeof(ArcShapeViewModelViewModel);
 

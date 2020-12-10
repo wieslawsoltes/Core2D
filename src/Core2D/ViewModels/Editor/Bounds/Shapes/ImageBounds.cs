@@ -7,7 +7,7 @@ using Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public class ImageBounds : IBounds
+    public partial class ImageBounds : IBounds
     {
         public Type TargetType => typeof(ImageShapeViewModel);
 

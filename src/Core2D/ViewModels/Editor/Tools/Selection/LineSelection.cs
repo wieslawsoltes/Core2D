@@ -6,7 +6,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public class LineSelection
+    public partial class LineSelection
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly LayerContainerViewModel _layer;

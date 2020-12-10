@@ -25,7 +25,7 @@ using static System.Math;
 
 namespace Core2D.ViewModels.Editor
 {
-    public class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
+    public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {
         private readonly IServiceProvider _serviceProvider;
         private ShapeEditor _shapeEditor;

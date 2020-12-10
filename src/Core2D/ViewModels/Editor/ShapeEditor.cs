@@ -10,7 +10,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor
 {
-    internal class ShapeEditor
+    public partial class ShapeEditor
     {
         private readonly IServiceProvider _serviceProvider;
 

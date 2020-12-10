@@ -20,7 +20,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels
 {
-    public class Factory : IFactory
+    public partial class Factory : IFactory
     {
         public LibraryViewModel<T> CreateLibrary<T>(string name)
         {

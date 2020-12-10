@@ -1,6 +1,6 @@
 ﻿namespace Core2D.ViewModels.Style
 {
-    public class BaseColorViewModel : ViewModelBase
+    public partial class BaseColorViewModel : ViewModelBase
     {
         protected BaseColorViewModel()
         {

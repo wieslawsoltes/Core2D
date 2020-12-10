@@ -12,7 +12,7 @@ using static System.Math;
 
 namespace Core2D.ViewModels.Editor.Tools.Path
 {
-    public class ArcPathToolViewModel : ViewModelBase, IPathTool
+    public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
     {
         public enum State { Start, End }
 

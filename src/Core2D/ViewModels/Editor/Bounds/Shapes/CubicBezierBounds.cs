@@ -7,7 +7,7 @@ using Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public class CubicBezierBounds : IBounds
+    public partial class CubicBezierBounds : IBounds
     {
         private List<PointShapeViewModel> _points = new List<PointShapeViewModel>();
 

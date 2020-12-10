@@ -10,7 +10,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor
 {
-    public class StyleEditorViewModel : ViewModelBase
+    public partial class StyleEditorViewModel : ViewModelBase
     {
         private const NumberStyles _numberStyles = NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
         private readonly IServiceProvider _serviceProvider;

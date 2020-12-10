@@ -3,7 +3,7 @@ using Core2D.ViewModels.Containers;
 
 namespace Core2D.ViewModels.Renderer.Presenters
 {
-    public class TemplatePresenter : IContainerPresenter
+    public partial class TemplatePresenter : IContainerPresenter
     {
         public void Render(object dc, IShapeRenderer renderer, PageContainerViewModel container, double dx, double dy)
         {

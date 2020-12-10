@@ -9,7 +9,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class LineToolViewModel : ViewModelBase, IEditorTool
+    public partial class LineToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { Start, End }
         private readonly IServiceProvider _serviceProvider;

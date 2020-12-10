@@ -4,7 +4,7 @@ using Core2D.Model.Editor;
 
 namespace Core2D.ViewModels.Editor
 {
-    public class DialogViewModel : ViewModelBase
+    public partial class DialogViewModel : ViewModelBase
     {
         private readonly IDialogPresenter _dialogPresenter;
         private string _title;

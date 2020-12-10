@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Editor
 {
-    public class AboutInfoViewModel : ViewModelBase
+    public partial class AboutInfoViewModel : ViewModelBase
     {
         public string Title { get; set; }
 

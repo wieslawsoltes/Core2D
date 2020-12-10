@@ -10,7 +10,7 @@ using static System.Math;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class EllipseToolViewModel : ViewModelBase, IEditorTool
+    public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { TopLeft, BottomRight }
         public enum Mode { Rectangle, Circle }

@@ -2,7 +2,7 @@
 
 namespace Core2D.ViewModels.Editor
 {
-    public class ProjectEditorInputTarget : InputTarget
+    public partial class ProjectEditorInputTarget : InputTarget
     {
         private readonly ProjectEditorViewModel _editor;
 

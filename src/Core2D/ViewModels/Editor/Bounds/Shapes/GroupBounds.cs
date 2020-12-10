@@ -8,7 +8,7 @@ using Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public class GroupBounds : IBounds
+    public partial class GroupBounds : IBounds
     {
         public Type TargetType => typeof(GroupShapeViewModel);
 

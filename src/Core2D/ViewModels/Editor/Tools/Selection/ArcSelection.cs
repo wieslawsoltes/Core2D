@@ -9,7 +9,7 @@ using Spatial.Arc;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public class ArcSelection
+    public partial class ArcSelection
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly LayerContainerViewModel _layer;

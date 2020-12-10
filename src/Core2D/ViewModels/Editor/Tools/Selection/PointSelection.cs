@@ -4,7 +4,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public class PointSelection
+    public partial class PointSelection
     {
         private readonly LayerContainerViewModel _layer;
         private readonly PointShapeViewModel _shapeViewModel;

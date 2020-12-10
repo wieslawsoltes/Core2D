@@ -7,7 +7,7 @@ using Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public class QuadraticBezierBounds : IBounds
+    public partial class QuadraticBezierBounds : IBounds
     {
         private List<PointShapeViewModel> _points = new List<PointShapeViewModel>();
         public Type TargetType => typeof(QuadraticBezierShapeViewModel);

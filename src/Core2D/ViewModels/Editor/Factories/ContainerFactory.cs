@@ -7,7 +7,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Factories
 {
-    public sealed class ContainerFactory : IContainerFactory
+    public partial class ContainerFactory : IContainerFactory
     {
         private readonly IServiceProvider _serviceProvider;
 

@@ -9,7 +9,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools
 {
-    public class CubicBezierToolViewModel : ViewModelBase, IEditorTool
+    public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { Point1, Point4, Point2, Point3 }
         private readonly IServiceProvider _serviceProvider;

@@ -4,7 +4,7 @@ using Core2D.Model.Renderer;
 
 namespace Core2D.ViewModels.Renderer
 {
-    public class Cache<TKey, TValue> : ICache<TKey, TValue>
+    public partial class Cache<TKey, TValue> : ICache<TKey, TValue>
     {
         private IDictionary<TKey, TValue> _storage;
         private readonly Action<TValue> _dispose;

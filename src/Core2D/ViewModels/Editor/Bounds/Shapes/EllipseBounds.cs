@@ -7,7 +7,7 @@ using Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public class EllipseBounds : IBounds
+    public partial class EllipseBounds : IBounds
     {
         public Type TargetType => typeof(EllipseShapeViewModel);
 

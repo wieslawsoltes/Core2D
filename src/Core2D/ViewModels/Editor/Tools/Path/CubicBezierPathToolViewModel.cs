@@ -10,7 +10,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Editor.Tools.Path
 {
-    public class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
+    public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
     {
         public enum State { Point1, Point4, Point2, Point3 }
         private readonly IServiceProvider _serviceProvider;
