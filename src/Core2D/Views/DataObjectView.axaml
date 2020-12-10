@@ -10,11 +10,11 @@
              x:DataType="vm:IDataObject" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Record" IsExpanded="True">
-            <DockPanel IsVisible="{Binding !!RecordViewModel}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!RecordViewModel}" DockPanel.Dock="Top">
+            <DockPanel IsVisible="{Binding !!Record}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding !!Record}" DockPanel.Dock="Top">
                     <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}" CommandParameter="{Binding}" IsVisible="{Binding !!Record}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
                 </StackPanel>
-                <ContentControl Content="{Binding RecordViewModel}" />
+                <ContentControl Content="{Binding Record}" />
             </DockPanel>
         </Expander>
         <Expander Header="Properties" IsExpanded="True">

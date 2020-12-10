@@ -24,8 +24,8 @@ namespace Core2D.Renderer
 
         public virtual void UpdateStyle()
         {
-            Fill = AvaloniaDrawUtil.ToBrush(StyleViewModel.Fill.ColorViewModel);
-            Stroke = AvaloniaDrawUtil.ToPen(StyleViewModel, StyleViewModel.Stroke.Thickness);
+            Fill = AvaloniaDrawUtil.ToBrush(Style.Fill.Color);
+            Stroke = AvaloniaDrawUtil.ToPen(Style, Style.Stroke.Thickness);
         }
 
         public virtual void Draw(object dc, double zoom)
@@ -34,7 +34,7 @@ namespace Core2D.Renderer
             var translateX = 0.0 - (Center.X * scale) + Center.X;
             var translateY = 0.0 - (Center.Y * scale) + Center.Y;
 
-            double thickness = StyleViewModel.Stroke.Thickness;
+            double thickness = Style.Stroke.Thickness;
 
             if (ScaleThickness)
             {
@@ -48,7 +48,7 @@ namespace Core2D.Renderer
 
             if (Stroke.Thickness != thickness)
             {
-                Stroke = AvaloniaDrawUtil.ToPen(StyleViewModel, thickness);
+                Stroke = AvaloniaDrawUtil.ToPen(Style, thickness);
             }
 
             var context = dc as AM.DrawingContext;

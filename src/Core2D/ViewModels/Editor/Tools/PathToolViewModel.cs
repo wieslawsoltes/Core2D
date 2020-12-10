@@ -25,7 +25,7 @@ namespace Core2D.Editor.Tools
 
         internal PathShapeViewModel Path { get; set; }
 
-        internal PathGeometryViewModel GeometryViewModel { get; set; }
+        internal PathGeometryViewModel Geometry { get; set; }
 
         internal GeometryContext GeometryContext { get; set; }
 
@@ -51,7 +51,7 @@ namespace Core2D.Editor.Tools
 
         public void RemoveLastSegment<T>() where T : PathSegmentViewModel
         {
-            var figure = GeometryViewModel?.Figures.LastOrDefault();
+            var figure = Geometry?.Figures.LastOrDefault();
             if (figure?.Segments.LastOrDefault() is T segment)
             {
                 figure.Segments = figure.Segments.Remove(segment);
@@ -88,7 +88,7 @@ namespace Core2D.Editor.Tools
 
         public PointShapeViewModel GetLastPathPoint()
         {
-            var figure = GeometryViewModel.Figures.LastOrDefault();
+            var figure = Geometry.Figures.LastOrDefault();
             if (figure != null)
             {
                 return (figure.Segments.LastOrDefault()) switch
@@ -108,11 +108,11 @@ namespace Core2D.Editor.Tools
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            GeometryViewModel = factory.CreatePathGeometry(
+            Geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<PathFigureViewModel>(),
                 editor.Project.Options.DefaultFillRule);
 
-            GeometryContext = factory.CreateGeometryContext(GeometryViewModel);
+            GeometryContext = factory.CreateGeometryContext(Geometry);
 
             GeometryContext.BeginFigure(
                 start,
@@ -124,7 +124,7 @@ namespace Core2D.Editor.Tools
             Path = factory.CreatePathShape(
                 "Path",
                 (ShapeStyleViewModel)style.Copy(null),
-                GeometryViewModel,
+                Geometry,
                 editor.Project.Options.DefaultIsStroked,
                 editor.Project.Options.DefaultIsFilled);
 
@@ -137,7 +137,7 @@ namespace Core2D.Editor.Tools
         public void DeInitializeWorkingPath()
         {
             IsInitialized = false;
-            GeometryViewModel = null;
+            Geometry = null;
             GeometryContext = null;
             Path = null;
         }
@@ -184,12 +184,12 @@ namespace Core2D.Editor.Tools
 
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (Path?.GeometryViewModel != null)
+            if (Path?.Geometry != null)
             {
                 editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
                 editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
 
-                if (!(Path.GeometryViewModel.Figures.Length == 1) || !(Path.GeometryViewModel.Figures[0].Segments.Length <= 1))
+                if (!(Path.Geometry.Figures.Length == 1) || !(Path.Geometry.Figures[0].Segments.Length <= 1))
                 {
                     editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, Path);
                 }

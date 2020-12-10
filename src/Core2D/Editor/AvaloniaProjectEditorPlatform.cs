@@ -464,7 +464,7 @@ namespace Core2D.Editor
                 var writer = editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter)) as EmfWriter;
 
                 var db = (object)page.Properties;
-                var record = (object)page.RecordViewModel;
+                var record = (object)page.Record;
                 editor.DataFlow.Bind(page.Template, db, record);
                 editor.DataFlow.Bind(page, db, record);
 

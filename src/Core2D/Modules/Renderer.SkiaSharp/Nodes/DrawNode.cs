@@ -20,8 +20,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public virtual void UpdateStyle()
         {
-            Fill = SkiaSharpDrawUtil.ToSKPaintBrush(StyleViewModel.Fill.ColorViewModel);
-            Stroke = SkiaSharpDrawUtil.ToSKPaintPen(StyleViewModel, StyleViewModel.Stroke.Thickness);
+            Fill = SkiaSharpDrawUtil.ToSKPaintBrush(Style.Fill.Color);
+            Stroke = SkiaSharpDrawUtil.ToSKPaintPen(Style, Style.Stroke.Thickness);
         }
 
         public virtual void Draw(object dc, double zoom)
@@ -30,7 +30,7 @@ namespace Core2D.Renderer.SkiaSharp
             var translateX = 0.0 - (Center.X * scale) + Center.X;
             var translateY = 0.0 - (Center.Y * scale) + Center.Y;
 
-            double thickness = StyleViewModel.Stroke.Thickness;
+            double thickness = Style.Stroke.Thickness;
 
             if (ScaleThickness)
             {

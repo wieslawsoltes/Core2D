@@ -6,14 +6,14 @@ namespace Core2D.Renderer
 {
     internal static class AvaloniaDrawUtil
     {
-        public static AM.Color ToColor(ArgbColorViewModelViewModel argbColorViewModelViewModel)
+        public static AM.Color ToColor(ArgbColorViewModel argbColorViewModelViewModel)
         {
             return AM.Color.FromArgb(argbColorViewModelViewModel.A, argbColorViewModelViewModel.R, argbColorViewModelViewModel.G, argbColorViewModelViewModel.B);
         }
 
         public static AM.IBrush ToBrush(BaseColorViewModel colorViewModel) => colorViewModel switch
         {
-            ArgbColorViewModelViewModel argbColor => new AM.Immutable.ImmutableSolidColorBrush(ToColor(argbColor)),
+            ArgbColorViewModel argbColor => new AM.Immutable.ImmutableSolidColorBrush(ToColor(argbColor)),
             _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported.")
         };
 
@@ -38,7 +38,7 @@ namespace Core2D.Renderer
                 _ => throw new NotImplementedException()
             };
 
-            var brush = ToBrush(style.Stroke.ColorViewModel);
+            var brush = ToBrush(style.Stroke.Color);
             var pen = new AM.Immutable.ImmutablePen(brush, thickness, dashStyle, lineCap);
 
             return pen;

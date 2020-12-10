@@ -428,13 +428,13 @@ namespace Core2D.Editor
 
         public static void ResetRecord(this ProjectContainerViewModel project, IDataObject data)
         {
-            var record = data?.RecordViewModel;
+            var record = data?.Record;
             if (record != null)
             {
                 var previous = record;
                 var next = default(RecordViewModel);
-                project?.History?.Snapshot(previous, next, (p) => data.RecordViewModel = p);
-                data.RecordViewModel = next;
+                project?.History?.Snapshot(previous, next, (p) => data.Record = p);
+                data.Record = next;
             }
         }
 
@@ -442,10 +442,10 @@ namespace Core2D.Editor
         {
             if (data != null && record != null)
             {
-                var previous = data.RecordViewModel;
+                var previous = data.Record;
                 var next = record;
-                project?.History?.Snapshot(previous, next, (p) => data.RecordViewModel = p);
-                data.RecordViewModel = next;
+                project?.History?.Snapshot(previous, next, (p) => data.Record = p);
+                data.Record = next;
             }
         }
 

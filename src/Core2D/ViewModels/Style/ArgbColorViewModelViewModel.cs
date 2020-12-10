@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Core2D.Style
 {
-    public partial class ArgbColorViewModelViewModel : BaseColorViewModel
+    public partial class ArgbColorViewModel : BaseColorViewModel
     {
         [AutoNotify] private uint _value;
 
@@ -20,7 +20,7 @@ namespace Core2D.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ArgbColorViewModelViewModel()
+            return new ArgbColorViewModel()
             {
                 Value = this.Value
             };
@@ -43,9 +43,9 @@ namespace Core2D.Style
         public string ToSvgString()
             => ToSvgHex(this);
 
-        public static ArgbColorViewModelViewModel FromUInt32(uint value)
+        public static ArgbColorViewModel FromUInt32(uint value)
         {
-            return new ArgbColorViewModelViewModel
+            return new ArgbColorViewModel
             {
                 Value = value
             };
@@ -56,7 +56,7 @@ namespace Core2D.Style
             return ((uint)a << 24) | ((uint)r << 16) | ((uint)g << 8) | (uint)b;
         }
 
-        public static string ToString(ArgbColorViewModelViewModel value)
+        public static string ToString(ArgbColorViewModel value)
         {
             return $"#{value.Value:X8}";
         }
@@ -102,18 +102,18 @@ namespace Core2D.Style
             }
         }
 
-        public static ArgbColorViewModelViewModel Parse(string s)
+        public static ArgbColorViewModel Parse(string s)
         {
             Parse(s, out var value);
             return FromUInt32(value);
         }
 
-        public static string ToXamlHex(ArgbColorViewModelViewModel c)
+        public static string ToXamlHex(ArgbColorViewModel c)
         {
             return string.Concat('#', c.A.ToString("X2"), c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"));
         }
 
-        public static string ToSvgHex(ArgbColorViewModelViewModel c)
+        public static string ToSvgHex(ArgbColorViewModel c)
         {
             return string.Concat('#', c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2")); // NOTE: Not using c.A.ToString("X2")
         }

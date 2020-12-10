@@ -40,7 +40,7 @@ namespace Core2D.Renderer.SkiaSharp
             return paint.Style == SP.PaintStyle.Fill || paint.Style == SP.PaintStyle.StrokeAndFill;
         }
 
-        private static ArgbColorViewModelViewModel ToArgbColor(SP.ColorShader colorShader, IFactory factory)
+        private static ArgbColorViewModel ToArgbColor(SP.ColorShader colorShader, IFactory factory)
         {
             return factory.CreateArgbColor(
                 colorShader.Color.Alpha,
@@ -127,21 +127,21 @@ namespace Core2D.Renderer.SkiaSharp
             {
                 if (paint.Typeface.FamilyName != null)
                 {
-                    style.TextStyleViewModel.FontName = paint.Typeface.FamilyName;
+                    style.TextStyle.FontName = paint.Typeface.FamilyName;
                 }
 
-                style.TextStyleViewModel.FontSize = paint.TextSize;
+                style.TextStyle.FontSize = paint.TextSize;
 
-                style.TextStyleViewModel.TextHAlignment = ToTextHAlignment(paint.TextAlign);
+                style.TextStyle.TextHAlignment = ToTextHAlignment(paint.TextAlign);
 
                 if (paint.Typeface.Weight == SP.FontStyleWeight.Bold)
                 {
-                    style.TextStyleViewModel.FontStyle = style.TextStyleViewModel.FontStyle | FontStyleFlags.Bold;
+                    style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Bold;
                 }
 
                 if (paint.Typeface.Style == SP.FontStyleSlant.Italic)
                 {
-                    style.TextStyleViewModel.FontStyle = style.TextStyleViewModel.FontStyle | FontStyleFlags.Italic;
+                    style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Italic;
                 }
             }
 

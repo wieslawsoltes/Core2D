@@ -121,7 +121,7 @@ namespace Core2D
 
         GroupShapeViewModel CreateGroupShape(string name = "g");
 
-        ArgbColorViewModelViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
+        ArgbColorViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
 
         ArrowStyleViewModel CreateArrowStyle(ArrowType arrowType = ArrowType.None, double radiusX = 5.0, double radiusY = 3.0);
 

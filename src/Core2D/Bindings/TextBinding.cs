@@ -61,7 +61,7 @@ namespace Core2D.Bindings
         public static string Bind(TextShapeViewModel shape, ImmutableArray<PropertyViewModel> properties, RecordViewModel externalRecordViewModel)
         {
             var text = shape.Text;
-            var record = shape.RecordViewModel ?? externalRecordViewModel;
+            var record = shape.Record ?? externalRecordViewModel;
 
             if (string.IsNullOrEmpty(text))
             {

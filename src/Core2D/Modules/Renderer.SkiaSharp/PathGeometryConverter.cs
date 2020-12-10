@@ -438,7 +438,7 @@ namespace Core2D.Renderer.SkiaSharp
 
         public static SKPath ToSKPath(this PathShapeViewModel path)
         {
-            return ToSKPath(path.GeometryViewModel);
+            return ToSKPath(path.Geometry);
         }
 
         public static SKPathOp ToSKPathOp(PathOp op)

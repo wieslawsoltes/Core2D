@@ -45,12 +45,12 @@ namespace Core2D.Renderer.SkiaSharp
                 return;
             }
 
-            if (StyleViewModel.TextStyleViewModel.FontSize < 0.0)
+            if (Style.TextStyle.FontSize < 0.0)
             {
                 return;
             }
 
-            FormattedText = SkiaSharpDrawUtil.GetSKPaint(BoundText, StyleViewModel, Text.TopLeft, Text.BottomRight, out var origin);
+            FormattedText = SkiaSharpDrawUtil.GetSKPaint(BoundText, Style, Text.TopLeft, Text.BottomRight, out var origin);
 
             Origin = origin;
         }

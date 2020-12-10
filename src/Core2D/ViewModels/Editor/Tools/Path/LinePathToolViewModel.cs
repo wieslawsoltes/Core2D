@@ -67,7 +67,7 @@ namespace Core2D.Editor.Tools.Path
                             var end = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (end != null)
                             {
-                                var figure = pathTool.GeometryViewModel.Figures.LastOrDefault();
+                                var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var line = figure.Segments.LastOrDefault() as LineSegmentViewModel;
                                 line.Point = end;
                             }

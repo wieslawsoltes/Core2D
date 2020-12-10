@@ -104,7 +104,7 @@ namespace Core2D.Renderer.PdfSharp
 
             var dataFlow = _serviceProvider.GetService<DataFlow>();
             var db = (object)container.Properties;
-            var record = (object)container.RecordViewModel;
+            var record = (object)container.Record;
 
             dataFlow.Bind(container.Template, db, record);
             dataFlow.Bind(container, db, record);

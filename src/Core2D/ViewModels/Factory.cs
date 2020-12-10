@@ -773,11 +773,11 @@ namespace Core2D
             };
         }
 
-        public ArgbColorViewModelViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
+        public ArgbColorViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
         {
-            return new ArgbColorViewModelViewModel()
+            return new ArgbColorViewModel()
             {
-                Value = ArgbColorViewModelViewModel.ToUint32(a, r, g, b)
+                Value = ArgbColorViewModel.ToUint32(a, r, g, b)
             };
         }
 

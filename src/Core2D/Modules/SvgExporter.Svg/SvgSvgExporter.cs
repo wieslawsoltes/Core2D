@@ -70,12 +70,12 @@ namespace Core2D.SvgExporter.Svg
                 var path = converter.ToFillPathShape(shape);
                 if (path != null)
                 {
-                    if (shape.Style.Fill.ColorViewModel is ArgbColorViewModelViewModel argbColor)
+                    if (shape.Style.Fill.Color is ArgbColorViewModel argbColor)
                     {
-                        var geometry = path.GeometryViewModel.ToSvgString();
+                        var geometry = path.Geometry.ToSvgString();
                         var fill = argbColor.ToSvgString();
                         var fillOpacity = (argbColor.A / 255.0).ToString(CultureInfo.InvariantCulture);
-                        var fillRule = path.GeometryViewModel.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
+                        var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
                         sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>"); 
                     }
                 }
@@ -85,12 +85,12 @@ namespace Core2D.SvgExporter.Svg
                 var path = converter.ToStrokePathShape(shape);
                 if (path != null)
                 {
-                    if (shape.Style.Stroke.ColorViewModel is ArgbColorViewModelViewModel argbColor)
+                    if (shape.Style.Stroke.Color is ArgbColorViewModel argbColor)
                     {
-                        var geometry = path.GeometryViewModel.ToSvgString();
+                        var geometry = path.Geometry.ToSvgString();
                         var fill = argbColor.ToSvgString();
                         var fillOpacity = (argbColor.A / 255.0).ToString(CultureInfo.InvariantCulture);
-                        var fillRule = path.GeometryViewModel.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
+                        var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
                         sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>");
                     }
                 }

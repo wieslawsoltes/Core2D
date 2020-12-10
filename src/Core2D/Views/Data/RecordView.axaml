@@ -6,7 +6,7 @@
              xmlns:vmdt="using:Core2D.Data"
              xmlns:vmd="using:Core2D.Designer"
              mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.RecordViewModel}"
+             d:DataContext="{x:Static vmd:DesignerContext.Record}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmdt:RecordViewModel" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">

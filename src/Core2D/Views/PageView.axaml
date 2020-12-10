@@ -139,11 +139,11 @@
                                                                  x:CompileBindings="False"/>
                         </i:Interaction.Behaviors>
                         <Panel HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Width="{Binding #PresenterViewTemplate.ContainerViewModel.Template.Width}"
-                               Height="{Binding #PresenterViewTemplate.ContainerViewModel.Template.Height}">
-                            <views:PresenterView x:Name="PresenterViewData" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" ContainerViewModel="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False" />
-                            <views:PresenterView x:Name="PresenterViewTemplate" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" ContainerViewModel="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False" />
-                            <views:PresenterView x:Name="PresenterViewEditor" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" ContainerViewModel="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False" />
+                               Width="{Binding #PresenterViewTemplate.Container.Template.Width}"
+                               Height="{Binding #PresenterViewTemplate.Container.Template.Height}">
+                            <views:PresenterView x:Name="PresenterViewData" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Data" ClipToBounds="False" />
+                            <views:PresenterView x:Name="PresenterViewTemplate" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Template" ClipToBounds="False" />
+                            <views:PresenterView x:Name="PresenterViewEditor" ZoomBorder="{Binding #PageZoomBorder}" Renderer="{Binding PageRenderer}" DataFlow="{Binding DataFlow}" Container="{Binding Project.CurrentContainer}" PresenterType="Editor" ClipToBounds="False" />
                             <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <Canvas Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <TextBox x:Name="EditorTextBox"

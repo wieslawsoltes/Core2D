@@ -37,19 +37,19 @@ namespace Core2D.Containers
 
         public virtual void InvalidateLayer()
         {
-            Template?.InvalidateLayer();
+            _template?.InvalidateLayer();
 
-            if (Layers != null)
+            if (_layers != null)
             {
-                foreach (var layer in Layers)
+                foreach (var layer in _layers)
                 {
                     layer.InvalidateLayer();
                 }
             }
 
-            WorkingLayer?.InvalidateLayer();
+            _workingLayer?.InvalidateLayer();
 
-            HelperLayer?.InvalidateLayer();
+            _helperLayer?.InvalidateLayer();
         }
 
         public override object Copy(IDictionary<object, object> shared)
@@ -61,44 +61,44 @@ namespace Core2D.Containers
         {
             var isDirty = base.IsDirty();
 
-            if (_template?.Background != null)
+            if (_template?._background != null)
             {
-                isDirty |= Background.IsDirty();
+                isDirty |= _background.IsDirty();
             }
 
-            foreach (var layer in Layers)
+            foreach (var layer in _layers)
             {
                 isDirty |= layer.IsDirty();
             }
 
-            if (WorkingLayer != null)
+            if (_workingLayer != null)
             {
-                isDirty |= WorkingLayer.IsDirty();
+                isDirty |= _workingLayer.IsDirty();
             }
 
-            if (HelperLayer != null)
+            if (_helperLayer != null)
             {
-                isDirty |= HelperLayer.IsDirty();
+                isDirty |= _helperLayer.IsDirty();
             }
 
-            if (Template != null)
+            if (_template != null)
             {
-                isDirty |= Template.IsDirty();
+                isDirty |= _template.IsDirty();
             }
 
-            foreach (var property in Properties)
+            foreach (var property in _properties)
             {
                 isDirty |= property.IsDirty();
             }
 
-            if (RecordViewModel != null)
+            if (_record != null)
             {
-                isDirty |= Record.IsDirty();
+                isDirty |= _record.IsDirty();
             }
 
-            if (GridStrokeColor != null)
+            if (_gridStrokeColor != null)
             {
-                isDirty |= GridStrokeColor.IsDirty();
+                isDirty |= _gridStrokeColor.IsDirty();
             }
 
             return isDirty;
@@ -108,23 +108,23 @@ namespace Core2D.Containers
         {
             base.Invalidate();
 
-            Background?.Invalidate();
+            _background?.Invalidate();
 
-            foreach (var layer in Layers)
+            foreach (var layer in _layers)
             {
                 layer.Invalidate();
             }
 
-            WorkingLayer?.Invalidate();
-            HelperLayer?.Invalidate();
-            Template?.Invalidate();
+            _workingLayer?.Invalidate();
+            _helperLayer?.Invalidate();
+            _template?.Invalidate();
  
-            foreach (var property in Properties)
+            foreach (var property in _properties)
             {
                 property.Invalidate();
             }
 
-            Record?.Invalidate();
+            _record?.Invalidate();
         }
     }
 }

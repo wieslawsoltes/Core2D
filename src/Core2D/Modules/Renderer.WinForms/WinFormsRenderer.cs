@@ -43,7 +43,7 @@ namespace Core2D.Renderer.WinForms
         {
             return colorViewModel switch
             {
-                ArgbColorViewModelViewModel argbColor => Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
+                ArgbColorViewModel argbColor => Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
                 _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
             };
         }
@@ -52,14 +52,14 @@ namespace Core2D.Renderer.WinForms
         {
             return colorViewModel switch
             {
-                ArgbColorViewModelViewModel argbColor => new SolidBrush(ToColor(argbColor)),
+                ArgbColorViewModel argbColor => new SolidBrush(ToColor(argbColor)),
                 _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
             };
         }
 
         private Pen ToPen(ShapeStyleViewModel style, Func<double, float> scale)
         {
-            var pen = new Pen(ToColor(style.Stroke.ColorViewModel), (float)(style.Stroke.Thickness / State.ZoomX));
+            var pen = new Pen(ToColor(style.Stroke.Color), (float)(style.Stroke.Thickness / State.ZoomX));
             switch (style.Stroke.LineCap)
             {
                 case Core2D.Style.LineCap.Flat:
@@ -118,10 +118,10 @@ namespace Core2D.Renderer.WinForms
 
         private void DrawLineArrowsInternal(LineShapeViewModel line, Graphics gfx, out PointF pt1, out PointF pt2)
         {
-            var fillStartArrow = ToBrush(line.Style.Fill.ColorViewModel);
+            var fillStartArrow = ToBrush(line.Style.Fill.Color);
             var strokeStartArrow = ToPen(line.Style, _scaleToPage);
 
-            var fillEndArrow = ToBrush(line.Style.Fill.ColorViewModel);
+            var fillEndArrow = ToBrush(line.Style.Fill.Color);
             var strokeEndArrow = ToPen(line.Style, _scaleToPage);
 
             double _x1 = line.Start.X;
@@ -134,8 +134,8 @@ namespace Core2D.Renderer.WinForms
             float x2 = _scaleToPage(_x2);
             float y2 = _scaleToPage(_y2);
 
-            var sas = line.Style.Stroke.StartArrowStyleViewModel;
-            var eas = line.Style.Stroke.EndArrowStyleViewModel;
+            var sas = line.Style.Stroke.StartArrow;
+            var eas = line.Style.Stroke.EndArrow;
             float a1 = (float)(Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI);
             float a2 = (float)(Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI);
 
@@ -402,7 +402,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            var brush = ToBrush(rectangle.Style.Fill.ColorViewModel);
+            var brush = ToBrush(rectangle.Style.Fill.Color);
             var pen = ToPen(rectangle.Style, _scaleToPage);
 
             var rect = CreateRect(
@@ -438,7 +438,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            var brush = ToBrush(ellipse.Style.Fill.ColorViewModel);
+            var brush = ToBrush(ellipse.Style.Fill.Color);
             var pen = ToPen(ellipse.Style, _scaleToPage);
 
             var rect = CreateRect(
@@ -482,7 +482,7 @@ namespace Core2D.Renderer.WinForms
             {
                 var _gfx = dc as Graphics;
 
-                var brush = ToBrush(arc.Style.Fill.ColorViewModel);
+                var brush = ToBrush(arc.Style.Fill.Color);
                 var pen = ToPen(arc.Style, _scaleToPage);
 
                 if (arc.IsFilled)
@@ -519,7 +519,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            var brush = ToBrush(cubicBezier.Style.Fill.ColorViewModel);
+            var brush = ToBrush(cubicBezier.Style.Fill.Color);
             var pen = ToPen(cubicBezier.Style, _scaleToPage);
 
             if (cubicBezier.IsFilled)
@@ -559,7 +559,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            var brush = ToBrush(quadraticBezier.Style.Fill.ColorViewModel);
+            var brush = ToBrush(quadraticBezier.Style.Fill.Color);
             var pen = ToPen(quadraticBezier.Style, _scaleToPage);
 
             double x1 = quadraticBezier.Point1.X;
@@ -618,23 +618,23 @@ namespace Core2D.Renderer.WinForms
                 return;
             }
 
-            var brush = ToBrush(text.Style.Stroke.ColorViewModel);
+            var brush = ToBrush(text.Style.Stroke.Color);
 
             var fontStyle = System.Drawing.FontStyle.Regular;
 
-            if (text.Style.TextStyleViewModel.FontStyle.HasFlag(Core2D.Style.FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle.HasFlag(Core2D.Style.FontStyleFlags.Bold))
             {
                 fontStyle |= System.Drawing.FontStyle.Bold;
             }
 
-            if (text.Style.TextStyleViewModel.FontStyle.HasFlag(Core2D.Style.FontStyleFlags.Italic))
+            if (text.Style.TextStyle.FontStyle.HasFlag(Core2D.Style.FontStyleFlags.Italic))
             {
                 fontStyle |= System.Drawing.FontStyle.Italic;
             }
 
             Font font = new Font(
-                text.Style.TextStyleViewModel.FontName,
-                (float)(text.Style.TextStyleViewModel.FontSize * _textScaleFactor),
+                text.Style.TextStyle.FontName,
+                (float)(text.Style.TextStyle.FontSize * _textScaleFactor),
                 fontStyle);
 
             var rect = CreateRect(
@@ -649,7 +649,7 @@ namespace Core2D.Renderer.WinForms
                 _scaleToPage(rect.Height));
 
             var format = new StringFormat();
-            switch (text.Style.TextStyleViewModel.TextHAlignment)
+            switch (text.Style.TextStyle.TextHAlignment)
             {
                 case TextHAlignment.Left:
                     format.Alignment = StringAlignment.Near;
@@ -664,7 +664,7 @@ namespace Core2D.Renderer.WinForms
                     break;
             }
 
-            switch (text.Style.TextStyleViewModel.TextVAlignment)
+            switch (text.Style.TextStyle.TextVAlignment)
             {
                 case TextVAlignment.Top:
                     format.LineAlignment = StringAlignment.Near;
@@ -685,7 +685,7 @@ namespace Core2D.Renderer.WinForms
             _gfx.DrawString(
                 tbind,
                 font,
-                ToBrush(text.Style.Stroke.ColorViewModel),
+                ToBrush(text.Style.Stroke.Color),
                 srect,
                 format);
 
@@ -697,7 +697,7 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            var brush = ToBrush(image.Style.Stroke.ColorViewModel);
+            var brush = ToBrush(image.Style.Stroke.Color);
 
             var rect = CreateRect(
                 image.TopLeft,
@@ -713,7 +713,7 @@ namespace Core2D.Renderer.WinForms
             if (image.IsFilled)
             {
                 _gfx.FillRectangle(
-                    ToBrush(image.Style.Fill.ColorViewModel),
+                    ToBrush(image.Style.Fill.Color),
                     srect);
             }
 
@@ -757,11 +757,11 @@ namespace Core2D.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            var gp = path.GeometryViewModel.ToGraphicsPath(_scaleToPage);
+            var gp = path.Geometry.ToGraphicsPath(_scaleToPage);
 
             if (path.IsFilled && path.IsStroked)
             {
-                var brush = ToBrush(path.Style.Fill.ColorViewModel);
+                var brush = ToBrush(path.Style.Fill.Color);
                 var pen = ToPen(path.Style, _scaleToPage);
                 _gfx.FillPath(
                     brush,
@@ -774,7 +774,7 @@ namespace Core2D.Renderer.WinForms
             }
             else if (path.IsFilled && !path.IsStroked)
             {
-                var brush = ToBrush(path.Style.Fill.ColorViewModel);
+                var brush = ToBrush(path.Style.Fill.Color);
                 _gfx.FillPath(
                     brush,
                     gp);

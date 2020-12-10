@@ -47,7 +47,7 @@ namespace Core2D.FileWriter.SkiaSharpWebp
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
                 var db = (object)page.Properties;
-                var record = (object)page.RecordViewModel;
+                var record = (object)page.Record;
 
                 dataFlow.Bind(page.Template, db, record);
                 dataFlow.Bind(page, db, record);

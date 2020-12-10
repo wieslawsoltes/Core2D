@@ -76,7 +76,7 @@ namespace Core2D.Editor
 
         private void ObserveRecord(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Record.Values))
+            if (e.PropertyName == nameof(RecordViewModel.Values))
             {
                 var record = sender as RecordViewModel;
                 Remove(record.Values);
@@ -824,9 +824,9 @@ namespace Core2D.Editor
             }
             else if (shape is PathShapeViewModel path)
             {
-                if (path.GeometryViewModel != null)
+                if (path.Geometry != null)
                 {
-                    Add(path.GeometryViewModel);
+                    Add(path.Geometry);
                 }
             }
             else if (shape is GroupShapeViewModel group)
@@ -985,9 +985,9 @@ namespace Core2D.Editor
             }
             else if (shape is PathShapeViewModel path)
             {
-                if (path.GeometryViewModel != null)
+                if (path.Geometry != null)
                 {
-                    Remove(path.GeometryViewModel);
+                    Remove(path.Geometry);
                 }
             }
             else if (shape is GroupShapeViewModel group)
@@ -1261,19 +1261,19 @@ namespace Core2D.Editor
             {
                 style.Stroke.PropertyChanged += ObserveStyle;
                 
-                if (style.Stroke.ColorViewModel != null)
+                if (style.Stroke.Color != null)
                 {
-                    style.Stroke.ColorViewModel.PropertyChanged += ObserveStyle;
+                    style.Stroke.Color.PropertyChanged += ObserveStyle;
                 }
 
-                if (style.Stroke.StartArrowStyleViewModel != null)
+                if (style.Stroke.StartArrow != null)
                 {
-                    style.Stroke.StartArrowStyleViewModel.PropertyChanged += ObserveStyle;
+                    style.Stroke.StartArrow.PropertyChanged += ObserveStyle;
                 }
 
-                if (style.Stroke.EndArrowStyleViewModel != null)
+                if (style.Stroke.EndArrow != null)
                 {
-                    style.Stroke.EndArrowStyleViewModel.PropertyChanged += ObserveStyle;
+                    style.Stroke.EndArrow.PropertyChanged += ObserveStyle;
                 }
             }
 
@@ -1281,15 +1281,15 @@ namespace Core2D.Editor
             {
                 style.Fill.PropertyChanged += ObserveStyle;
 
-                if (style.Fill.ColorViewModel != null)
+                if (style.Fill.Color != null)
                 {
-                    style.Fill.ColorViewModel.PropertyChanged += ObserveStyle;
+                    style.Fill.Color.PropertyChanged += ObserveStyle;
                 }
             }
 
-            if (style.TextStyleViewModel != null)
+            if (style.TextStyle != null)
             {
-                style.TextStyleViewModel.PropertyChanged += ObserveStyle;
+                style.TextStyle.PropertyChanged += ObserveStyle;
             }
         }
 
@@ -1306,19 +1306,19 @@ namespace Core2D.Editor
             {
                 style.Stroke.PropertyChanged -= ObserveStyle;
                 
-                if (style.Stroke.ColorViewModel != null)
+                if (style.Stroke.Color != null)
                 {
-                    style.Stroke.ColorViewModel.PropertyChanged -= ObserveStyle;
+                    style.Stroke.Color.PropertyChanged -= ObserveStyle;
                 }
 
-                if (style.Stroke.StartArrowStyleViewModel != null)
+                if (style.Stroke.StartArrow != null)
                 {
-                    style.Stroke.StartArrowStyleViewModel.PropertyChanged -= ObserveStyle;
+                    style.Stroke.StartArrow.PropertyChanged -= ObserveStyle;
                 }
 
-                if (style.Stroke.EndArrowStyleViewModel != null)
+                if (style.Stroke.EndArrow != null)
                 {
-                    style.Stroke.EndArrowStyleViewModel.PropertyChanged -= ObserveStyle;
+                    style.Stroke.EndArrow.PropertyChanged -= ObserveStyle;
                 }
             }
 
@@ -1326,15 +1326,15 @@ namespace Core2D.Editor
             {
                 style.Fill.PropertyChanged -= ObserveStyle;
                 
-                if (style.Fill.ColorViewModel != null)
+                if (style.Fill.Color != null)
                 {
-                    style.Fill.ColorViewModel.PropertyChanged -= ObserveStyle;
+                    style.Fill.Color.PropertyChanged -= ObserveStyle;
                 }
             }
 
-            if (style.TextStyleViewModel != null)
+            if (style.TextStyle != null)
             {
-                style.TextStyleViewModel.PropertyChanged -= ObserveStyle;
+                style.TextStyle.PropertyChanged -= ObserveStyle;
             }
         }
 

@@ -8,19 +8,19 @@ namespace Core2D.Renderer
     internal class FillDrawNode : DrawNode, IFillDrawNode
     {
         public A.Rect Rect { get; set; }
-        public BaseColorViewModel ColorViewModel { get; set; }
+        public BaseColorViewModel Color { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
 
-        public FillDrawNode(double x, double y, double width, double height, BaseColorViewModel colorViewModel)
+        public FillDrawNode(double x, double y, double width, double height, BaseColorViewModel color)
         {
             X = x;
             Y = y;
             Width = width;
             Height = height;
-            Color = colorViewModel;
+            Color = color;
             UpdateGeometry();
         }
 
@@ -34,7 +34,7 @@ namespace Core2D.Renderer
 
         public override void UpdateStyle()
         {
-            Fill = AvaloniaDrawUtil.ToBrush(ColorViewModel);
+            Fill = AvaloniaDrawUtil.ToBrush(Color);
         }
 
         public override void Draw(object dc, double zoom)

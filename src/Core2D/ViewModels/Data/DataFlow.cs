@@ -20,7 +20,7 @@ namespace Core2D.Data
             foreach (var container in document.Pages)
             {
                 var db = container.Properties;
-                var r = container.RecordViewModel;
+                var r = container.Record;
 
                 Bind(container.Template, db, r);
                 Bind(container, db, r);

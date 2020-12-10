@@ -82,7 +82,7 @@ namespace Core2D.Views
             AvaloniaProperty.Register<PresenterView, ZoomBorder>(nameof(ZoomBorder), null);
 
         public static readonly StyledProperty<PageContainerViewModel> ContainerProperty =
-            AvaloniaProperty.Register<PresenterView, PageContainerViewModel>(nameof(ContainerViewModel), null);
+            AvaloniaProperty.Register<PresenterView, PageContainerViewModel>(nameof(Container), null);
 
         public static readonly StyledProperty<IShapeRenderer> RendererProperty =
             AvaloniaProperty.Register<PresenterView, IShapeRenderer>(nameof(Renderer), null);
@@ -99,7 +99,7 @@ namespace Core2D.Views
             set => SetValue(ZoomBorderProperty, value);
         }
 
-        public PageContainerViewModel ContainerViewModel
+        public PageContainerViewModel Container
         {
             get => GetValue(ContainerProperty);
             set => SetValue(ContainerProperty, value);
@@ -139,7 +139,7 @@ namespace Core2D.Views
 
             var customState = new CustomState()
             {
-                _containerViewModel = ContainerViewModel,
+                _containerViewModel = Container,
                 Renderer = Renderer ?? GetValue(RendererOptions.RendererProperty),
                 DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
                 PresenterType = PresenterType,
@@ -169,7 +169,7 @@ namespace Core2D.Views
                         if (customState._containerViewModel != null && customState.DataFlow != null)
                         {
                             var db = (object)customState._containerViewModel.Properties;
-                            var record = (object)customState._containerViewModel.RecordViewModel;
+                            var record = (object)customState._containerViewModel.Record;
 
                             if (customState._containerViewModel.Template != null)
                             {

@@ -72,7 +72,7 @@ namespace Core2D.Editor.Tools.Path
                             var point3 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point3 != null)
                             {
-                                var figure = pathTool.GeometryViewModel.Figures.LastOrDefault();
+                                var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
                                 cubicBezier.Point3 = point3;
                                 _cubicBezier.Point4 = point3;
@@ -93,7 +93,7 @@ namespace Core2D.Editor.Tools.Path
                             var point1 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point1 != null)
                             {
-                                var figure = pathTool.GeometryViewModel.Figures.LastOrDefault();
+                                var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
                                 cubicBezier.Point1 = point1;
                                 _cubicBezier.Point2 = point1;
@@ -114,7 +114,7 @@ namespace Core2D.Editor.Tools.Path
                             var point2 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point2 != null)
                             {
-                                var figure = pathTool.GeometryViewModel.Figures.LastOrDefault();
+                                var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
                                 cubicBezier.Point2 = point2;
                                 _cubicBezier.Point3 = point2;

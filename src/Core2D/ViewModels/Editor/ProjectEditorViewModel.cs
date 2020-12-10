@@ -2641,7 +2641,7 @@ namespace Core2D.Editor
                 // Try to restore shape record.
                 foreach (var shape in ProjectContainerViewModel.GetAllShapes(shapes))
                 {
-                    if (shape?.RecordViewModel == null)
+                    if (shape?.Record == null)
                     {
                         continue;
                     }
@@ -2649,7 +2649,7 @@ namespace Core2D.Editor
                     if (records.TryGetValue(shape.Record.Id, out var record))
                     {
                         // Use existing record.
-                        shape.RecordViewModel = record;
+                        shape.Record = record;
                     }
                     else
                     {
@@ -2665,7 +2665,7 @@ namespace Core2D.Editor
 
                         // Add missing data record.
                         shape.Record.Owner = Project.CurrentDatabase;
-                        Project?.AddRecord(Project?.CurrentDatabase, shape.RecordViewModel);
+                        Project?.AddRecord(Project?.CurrentDatabase, shape.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();
@@ -3025,7 +3025,7 @@ namespace Core2D.Editor
 
             var g = Factory.CreateGroupShape(ProjectEditorConfigurationViewModel.DefaulGroupName);
 
-            g.RecordViewModel = record;
+            g.Record = record;
 
             var length = record.Values.Length;
             double px = (double)sx;

@@ -29,7 +29,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
             return colorViewModel switch
             {
-                ArgbColorViewModelViewModel argbColor => new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A),
+                ArgbColorViewModel argbColor => new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A),
                 _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
             };
         }
@@ -77,7 +77,7 @@ namespace Core2D.Renderer.SkiaSharp
             pen.IsAntialias = true;
             pen.IsStroke = true;
             pen.StrokeWidth = (float)strokeWidth;
-            pen.Color = ToSKColor(style.Stroke.ColorViewModel);
+            pen.Color = ToSKColor(style.Stroke.Color);
             pen.StrokeCap = ToStrokeCap(style);
             pen.PathEffect = pathEffect;
 
@@ -107,13 +107,13 @@ namespace Core2D.Renderer.SkiaSharp
             double rheight = Math.Abs(rect.Bottom - rect.Top);
             double swidth = Math.Abs(size.Right - size.Left);
             double sheight = Math.Abs(size.Bottom - size.Top);
-            var ox = style.TextStyleViewModel.TextHAlignment switch
+            var ox = style.TextStyle.TextHAlignment switch
             {
                 TextHAlignment.Left => rect.Left,
                 TextHAlignment.Right => rect.Right - swidth,
                 _ => (rect.Left + rwidth / 2f) - (swidth / 2f),
             };
-            var oy = style.TextStyleViewModel.TextVAlignment switch
+            var oy = style.TextStyle.TextVAlignment switch
             {
                 TextVAlignment.Top => rect.Top,
                 TextVAlignment.Bottom => rect.Bottom - sheight,
@@ -124,28 +124,28 @@ namespace Core2D.Renderer.SkiaSharp
 
         public static SKPaint GetSKPaint(string text, ShapeStyleViewModel shapeStyleViewModel, PointShapeViewModel topLeft, PointShapeViewModel bottomRight, out SKPoint origin)
         {
-            var pen = ToSKPaintBrush(shapeStyleViewModel.Stroke.ColorViewModel);
+            var pen = ToSKPaintBrush(shapeStyleViewModel.Stroke.Color);
 
             var weight = SKFontStyleWeight.Normal;
 
-            if (shapeStyleViewModel.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Bold))
+            if (shapeStyleViewModel.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
                 weight |= SKFontStyleWeight.Bold;
             }
 
             var style = SKFontStyleSlant.Upright;
 
-            if (shapeStyleViewModel.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Italic))
+            if (shapeStyleViewModel.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
                 style |= SKFontStyleSlant.Italic;
             }
 
-            var tf = SKTypeface.FromFamilyName(shapeStyleViewModel.TextStyleViewModel.FontName, weight, SKFontStyleWidth.Normal, style);
+            var tf = SKTypeface.FromFamilyName(shapeStyleViewModel.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style);
             pen.Typeface = tf;
             pen.TextEncoding = SKTextEncoding.Utf16;
-            pen.TextSize = (float)(shapeStyleViewModel.TextStyleViewModel.FontSize);
+            pen.TextSize = (float)(shapeStyleViewModel.TextStyle.FontSize);
 
-            pen.TextAlign = shapeStyleViewModel.TextStyleViewModel.TextHAlignment switch
+            pen.TextAlign = shapeStyleViewModel.TextStyle.TextHAlignment switch
             {
                 TextHAlignment.Center => SKTextAlign.Center,
                 TextHAlignment.Right => SKTextAlign.Right,
@@ -161,7 +161,7 @@ namespace Core2D.Renderer.SkiaSharp
             float width = rect.Width;
             float height = rect.Height;
 
-            switch (shapeStyleViewModel.TextStyleViewModel.TextVAlignment)
+            switch (shapeStyleViewModel.TextStyle.TextVAlignment)
             {
                 default:
                 case TextVAlignment.Top:
@@ -177,7 +177,7 @@ namespace Core2D.Renderer.SkiaSharp
                     break;
             }
 
-            switch (shapeStyleViewModel.TextStyleViewModel.TextHAlignment)
+            switch (shapeStyleViewModel.TextStyle.TextHAlignment)
             {
                 default:
                 case TextHAlignment.Left:

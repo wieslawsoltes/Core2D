@@ -41,7 +41,7 @@ namespace Core2D.Renderer.PdfSharp
         {
             return colorViewModel switch
             {
-                ArgbColorViewModelViewModel argbColor => XColor.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
+                ArgbColorViewModel argbColor => XColor.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
                 _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
             };
         }
@@ -49,7 +49,7 @@ namespace Core2D.Renderer.PdfSharp
         private static XPen ToXPen(ShapeStyleViewModel style, Func<double, double> scale, double sourceDpi, double targetDpi)
         {
             var strokeWidth = scale(style.Stroke.Thickness * targetDpi / sourceDpi);
-            var pen = new XPen(ToXColor(style.Stroke.ColorViewModel), strokeWidth);
+            var pen = new XPen(ToXColor(style.Stroke.Color), strokeWidth);
             switch (style.Stroke.LineCap)
             {
                 case LineCap.Flat:
@@ -91,7 +91,7 @@ namespace Core2D.Renderer.PdfSharp
         {
             return colorViewModel switch
             {
-                ArgbColorViewModelViewModel argbColor => new XSolidBrush(ToXColor(argbColor)),
+                ArgbColorViewModel argbColor => new XSolidBrush(ToXColor(argbColor)),
                 _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
             };
         }
@@ -106,10 +106,10 @@ namespace Core2D.Renderer.PdfSharp
 
         private void DrawLineArrowsInternal(XGraphics gfx, LineShapeViewModel line, out XPoint pt1, out XPoint pt2)
         {
-            var fillStartArrow = ToXBrush(line.Style.Fill.ColorViewModel);
+            var fillStartArrow = ToXBrush(line.Style.Fill.Color);
             var strokeStartArrow = ToXPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi);
 
-            var fillEndArrow = ToXBrush(line.Style.Fill.ColorViewModel);
+            var fillEndArrow = ToXBrush(line.Style.Fill.Color);
             var strokeEndArrow = ToXPen(line.Style, _scaleToPage, _sourceDpi, _targetDpi);
 
             double _x1 = line.Start.X;
@@ -122,8 +122,8 @@ namespace Core2D.Renderer.PdfSharp
             double x2 = _scaleToPage(_x2);
             double y2 = _scaleToPage(_y2);
 
-            var sas = line.Style.Stroke.StartArrowStyleViewModel;
-            var eas = line.Style.Stroke.EndArrowStyleViewModel;
+            var sas = line.Style.Stroke.StartArrow;
+            var eas = line.Style.Stroke.EndArrow;
             double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
             double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
 
@@ -369,7 +369,7 @@ namespace Core2D.Renderer.PdfSharp
             {
                 _gfx.DrawRectangle(
                     ToXPen(rectangle.Style, _scaleToPage, _sourceDpi, _targetDpi),
-                    ToXBrush(rectangle.Style.Fill.ColorViewModel),
+                    ToXBrush(rectangle.Style.Fill.Color),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
@@ -387,7 +387,7 @@ namespace Core2D.Renderer.PdfSharp
             else if (!rectangle.IsStroked && rectangle.IsFilled)
             {
                 _gfx.DrawRectangle(
-                    ToXBrush(rectangle.Style.Fill.ColorViewModel),
+                    ToXBrush(rectangle.Style.Fill.Color),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
@@ -410,7 +410,7 @@ namespace Core2D.Renderer.PdfSharp
             {
                 _gfx.DrawEllipse(
                     ToXPen(ellipse.Style, _scaleToPage, _sourceDpi, _targetDpi),
-                    ToXBrush(ellipse.Style.Fill.ColorViewModel),
+                    ToXBrush(ellipse.Style.Fill.Color),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
@@ -428,7 +428,7 @@ namespace Core2D.Renderer.PdfSharp
             else if (!ellipse.IsStroked && ellipse.IsFilled)
             {
                 _gfx.DrawEllipse(
-                    ToXBrush(ellipse.Style.Fill.ColorViewModel),
+                    ToXBrush(ellipse.Style.Fill.Color),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
@@ -462,13 +462,13 @@ namespace Core2D.Renderer.PdfSharp
                 {
                     _gfx.DrawPath(
                         ToXPen(arc.Style, _scaleToPage, _sourceDpi, _targetDpi),
-                        ToXBrush(arc.Style.Fill.ColorViewModel),
+                        ToXBrush(arc.Style.Fill.Color),
                         path);
                 }
                 else
                 {
                     _gfx.DrawPath(
-                        ToXBrush(arc.Style.Fill.ColorViewModel),
+                        ToXBrush(arc.Style.Fill.Color),
                         path);
                 }
             }
@@ -509,13 +509,13 @@ namespace Core2D.Renderer.PdfSharp
                 {
                     _gfx.DrawPath(
                         ToXPen(cubicBezier.Style, _scaleToPage, _sourceDpi, _targetDpi),
-                        ToXBrush(cubicBezier.Style.Fill.ColorViewModel),
+                        ToXBrush(cubicBezier.Style.Fill.Color),
                         path);
                 }
                 else
                 {
                     _gfx.DrawPath(
-                        ToXBrush(cubicBezier.Style.Fill.ColorViewModel),
+                        ToXBrush(cubicBezier.Style.Fill.Color),
                         path);
                 }
             }
@@ -567,13 +567,13 @@ namespace Core2D.Renderer.PdfSharp
                 {
                     _gfx.DrawPath(
                         ToXPen(quadraticBezier.Style, _scaleToPage, _sourceDpi, _targetDpi),
-                        ToXBrush(quadraticBezier.Style.Fill.ColorViewModel),
+                        ToXBrush(quadraticBezier.Style.Fill.Color),
                         path);
                 }
                 else
                 {
                     _gfx.DrawPath(
-                        ToXBrush(quadraticBezier.Style.Fill.ColorViewModel),
+                        ToXBrush(quadraticBezier.Style.Fill.Color),
                         path);
                 }
             }
@@ -613,19 +613,19 @@ namespace Core2D.Renderer.PdfSharp
 
             var fontStyle = XFontStyle.Regular;
 
-            if (text.Style.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
                 fontStyle |= XFontStyle.Bold;
             }
 
-            if (text.Style.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Italic))
+            if (text.Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
                 fontStyle |= XFontStyle.Italic;
             }
 
             var font = new XFont(
-                text.Style.TextStyleViewModel.FontName,
-                _scaleToPage(text.Style.TextStyleViewModel.FontSize),
+                text.Style.TextStyle.FontName,
+                _scaleToPage(text.Style.TextStyle.FontSize),
                 fontStyle,
                 options);
 
@@ -643,7 +643,7 @@ namespace Core2D.Renderer.PdfSharp
                 _scaleToPage(rect.Height));
 
             var format = new XStringFormat();
-            switch (text.Style.TextStyleViewModel.TextHAlignment)
+            switch (text.Style.TextStyle.TextHAlignment)
             {
                 case TextHAlignment.Left:
                     format.Alignment = XStringAlignment.Near;
@@ -658,7 +658,7 @@ namespace Core2D.Renderer.PdfSharp
                     break;
             }
 
-            switch (text.Style.TextStyleViewModel.TextVAlignment)
+            switch (text.Style.TextStyle.TextVAlignment)
             {
                 case TextVAlignment.Top:
                     format.LineAlignment = XLineAlignment.Near;
@@ -676,7 +676,7 @@ namespace Core2D.Renderer.PdfSharp
             _gfx.DrawString(
                 tbind,
                 font,
-                ToXBrush(text.Style.Stroke.ColorViewModel),
+                ToXBrush(text.Style.Stroke.Color),
                 srect,
                 format);
         }
@@ -702,7 +702,7 @@ namespace Core2D.Renderer.PdfSharp
             {
                 DrawRectangleInternal(
                     _gfx,
-                    ToXBrush(image.Style.Fill.ColorViewModel),
+                    ToXBrush(image.Style.Fill.Color),
                     ToXPen(image.Style, _scaleToPage, _sourceDpi, _targetDpi),
                     image.IsStroked,
                     image.IsFilled,
@@ -737,19 +737,19 @@ namespace Core2D.Renderer.PdfSharp
         {
             var _gfx = dc as XGraphics;
 
-            var gp = path.GeometryViewModel.ToXGraphicsPath(_scaleToPage);
+            var gp = path.Geometry.ToXGraphicsPath(_scaleToPage);
 
             if (path.IsFilled && path.IsStroked)
             {
                 _gfx.DrawPath(
                     ToXPen(path.Style, _scaleToPage, _sourceDpi, _targetDpi),
-                    ToXBrush(path.Style.Fill.ColorViewModel),
+                    ToXBrush(path.Style.Fill.Color),
                     gp);
             }
             else if (path.IsFilled && !path.IsStroked)
             {
                 _gfx.DrawPath(
-                    ToXBrush(path.Style.Fill.ColorViewModel),
+                    ToXBrush(path.Style.Fill.Color),
                     gp);
             }
             else if (!path.IsFilled && path.IsStroked)

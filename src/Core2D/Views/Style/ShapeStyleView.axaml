@@ -21,7 +21,7 @@
             <ContentControl Content="{Binding Fill}" />
         </Expander>
         <Expander Header="Text" IsExpanded="False">
-            <ContentControl Content="{Binding TextStyleViewModel}" />
+            <ContentControl Content="{Binding TextStyle}" />
         </Expander>
     </StackPanel>
 </UserControl>

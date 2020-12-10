@@ -20,7 +20,7 @@
             </StackPanel>
         </Expander>
         <Expander Header="Geometry" IsExpanded="False">
-            <ContentControl Content="{Binding GeometryViewModel}" />
+            <ContentControl Content="{Binding Geometry}" />
         </Expander>
     </StackPanel>
 </UserControl>

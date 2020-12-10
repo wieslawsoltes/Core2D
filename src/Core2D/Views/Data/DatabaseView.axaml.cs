@@ -143,7 +143,7 @@ namespace Core2D.Views.Data
                     Header = $"{column.Name}",
                     Width = DataGridLength.Auto,
                     IsVisible = column.IsVisible,
-                    Binding = new Binding($"{nameof(Record.Values)}[{i}].{nameof(ValueViewModel.Content)}"),
+                    Binding = new Binding($"{nameof(RecordViewModel.Values)}[{i}].{nameof(ValueViewModel.Content)}"),
                     IsReadOnly = false
                 };
                 column.PropertyChanged += Column_PropertyChanged;

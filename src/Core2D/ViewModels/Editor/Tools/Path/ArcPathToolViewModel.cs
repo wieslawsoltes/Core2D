@@ -148,7 +148,7 @@ namespace Core2D.Editor.Tools.Path
                         }
                         _arc.End.X = (double)sx;
                         _arc.End.Y = (double)sy;
-                        var figure = pathTool.GeometryViewModel.Figures.LastOrDefault();
+                        var figure = pathTool.Geometry.Figures.LastOrDefault();
                         var arc = figure.Segments.LastOrDefault() as ArcSegmentViewModel;
                         arc.Point = _arc.End;
                         arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);

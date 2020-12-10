@@ -58,7 +58,7 @@ namespace Core2D.Renderer.Dxf
         {
             return colorViewModel switch
             {
-                ArgbColorViewModelViewModel argbColor => new DXF.AciColor(argbColor.R, argbColor.G, argbColor.B),
+                ArgbColorViewModel argbColor => new DXF.AciColor(argbColor.R, argbColor.G, argbColor.B),
                 _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
             };
         }
@@ -67,7 +67,7 @@ namespace Core2D.Renderer.Dxf
         {
             switch (colorViewModel)
             {
-                case ArgbColorViewModelViewModel argbColor:
+                case ArgbColorViewModel argbColor:
                     return (short)(90.0 - argbColor.A * 90.0 / 255.0);
                     ;
                 default:
@@ -183,8 +183,8 @@ namespace Core2D.Renderer.Dxf
         {
             if (isStroked)
             {
-                var stroke = ToColor(style.Stroke.ColorViewModel);
-                var strokeTansparency = ToTransparency(style.Stroke.ColorViewModel);
+                var stroke = ToColor(style.Stroke.Color);
+                var strokeTansparency = ToTransparency(style.Stroke.Color);
                 var lineweight = ToLineweight(style.Stroke.Thickness);
 
                 var dxfLine = CreateLine(x1, y1, x2, y2);
@@ -218,7 +218,7 @@ namespace Core2D.Renderer.Dxf
         {
             if (isFilled)
             {
-                FillRectangle(dxf, layer, rect.X, rect.Y, rect.Width, rect.Height, style.Fill.ColorViewModel);
+                FillRectangle(dxf, layer, rect.X, rect.Y, rect.Width, rect.Height, style.Fill.Color);
             }
 
             if (isStroked)
@@ -277,12 +277,12 @@ namespace Core2D.Renderer.Dxf
 
             if (isFilled)
             {
-                FillEllipse(dxf, layer, dxfEllipse, style.Fill.ColorViewModel);
+                FillEllipse(dxf, layer, dxfEllipse, style.Fill.Color);
             }
 
             if (isStroked)
             {
-                StrokeEllipse(dxf, layer, dxfEllipse, style.Stroke.ColorViewModel, style.Stroke.Thickness);
+                StrokeEllipse(dxf, layer, dxfEllipse, style.Stroke.Color, style.Stroke.Thickness);
             }
         }
 
@@ -562,8 +562,8 @@ namespace Core2D.Renderer.Dxf
 
             if (arc.IsFilled)
             {
-                var fill = ToColor(style.Fill.ColorViewModel);
-                var fillTransparency = ToTransparency(style.Fill.ColorViewModel);
+                var fill = ToColor(style.Fill.Color);
+                var fillTransparency = ToTransparency(style.Fill.Color);
 
                 // TODO: The netDxf does not create hatch for Ellipse with end angle equal to 360.
                 var bounds =
@@ -588,8 +588,8 @@ namespace Core2D.Renderer.Dxf
 
             if (arc.IsStroked)
             {
-                var stroke = ToColor(style.Stroke.ColorViewModel);
-                var strokeTansparency = ToTransparency(style.Stroke.ColorViewModel);
+                var stroke = ToColor(style.Stroke.Color);
+                var strokeTansparency = ToTransparency(style.Stroke.Color);
                 var lineweight = ToLineweight(style.Stroke.Thickness);
 
                 dxfEllipse.Layer = _currentLayer;
@@ -620,8 +620,8 @@ namespace Core2D.Renderer.Dxf
 
                 if (cubicBezier.IsFilled)
                 {
-                    var fill = ToColor(style.Fill.ColorViewModel);
-                    var fillTransparency = ToTransparency(style.Fill.ColorViewModel);
+                    var fill = ToColor(style.Fill.Color);
+                    var fillTransparency = ToTransparency(style.Fill.Color);
 
                     var bounds =
                         new List<DXFE.HatchBoundaryPath>
@@ -645,8 +645,8 @@ namespace Core2D.Renderer.Dxf
 
                 if (cubicBezier.IsStroked)
                 {
-                    var stroke = ToColor(style.Stroke.ColorViewModel);
-                    var strokeTansparency = ToTransparency(style.Stroke.ColorViewModel);
+                    var stroke = ToColor(style.Stroke.Color);
+                    var strokeTansparency = ToTransparency(style.Stroke.Color);
                     var lineweight = ToLineweight(style.Stroke.Thickness);
 
                     dxfSpline.Layer = _currentLayer;
@@ -676,8 +676,8 @@ namespace Core2D.Renderer.Dxf
 
                 if (quadraticBezier.IsFilled)
                 {
-                    var fill = ToColor(style.Fill.ColorViewModel);
-                    var fillTransparency = ToTransparency(style.Fill.ColorViewModel);
+                    var fill = ToColor(style.Fill.Color);
+                    var fillTransparency = ToTransparency(style.Fill.Color);
 
                     var bounds =
                         new List<DXFE.HatchBoundaryPath>
@@ -701,8 +701,8 @@ namespace Core2D.Renderer.Dxf
 
                 if (quadraticBezier.IsStroked)
                 {
-                    var stroke = ToColor(style.Stroke.ColorViewModel);
-                    var strokeTansparency = ToTransparency(style.Stroke.ColorViewModel);
+                    var stroke = ToColor(style.Stroke.Color);
+                    var strokeTansparency = ToTransparency(style.Stroke.Color);
                     var lineweight = ToLineweight(style.Stroke.Thickness);
 
                     dxfSpline.Layer = _currentLayer;
@@ -730,8 +730,8 @@ namespace Core2D.Renderer.Dxf
             }
 
             var style = text.Style;
-            var stroke = ToColor(style.Stroke.ColorViewModel);
-            var strokeTansparency = ToTransparency(style.Stroke.ColorViewModel);
+            var stroke = ToColor(style.Stroke.Color);
+            var strokeTansparency = ToTransparency(style.Stroke.Color);
 
             var attachmentPoint = default(DXFE.MTextAttachmentPoint);
             var rect = Spatial.Rect2.FromPoints(
@@ -740,43 +740,43 @@ namespace Core2D.Renderer.Dxf
                 text.BottomRight.X,
                 text.BottomRight.Y,
                 0, 0);
-            var x = text.Style.TextStyleViewModel.TextHAlignment switch
+            var x = text.Style.TextStyle.TextHAlignment switch
             {
                 TextHAlignment.Center => rect.X + rect.Width / 2.0,
                 TextHAlignment.Right => rect.X + rect.Width,
                 _ => rect.X,
             };
-            var y = text.Style.TextStyleViewModel.TextVAlignment switch
+            var y = text.Style.TextStyle.TextVAlignment switch
             {
                 TextVAlignment.Center => rect.Y + rect.Height / 2.0,
                 TextVAlignment.Bottom => rect.Y + rect.Height,
                 _ => rect.Y,
             };
-            attachmentPoint = text.Style.TextStyleViewModel.TextVAlignment switch
+            attachmentPoint = text.Style.TextStyle.TextVAlignment switch
             {
-                TextVAlignment.Center => text.Style.TextStyleViewModel.TextHAlignment switch
+                TextVAlignment.Center => text.Style.TextStyle.TextHAlignment switch
                 {
                     TextHAlignment.Center => DXFE.MTextAttachmentPoint.MiddleCenter,
                     TextHAlignment.Right => DXFE.MTextAttachmentPoint.MiddleRight,
                     _ => DXFE.MTextAttachmentPoint.MiddleLeft,
                 },
-                TextVAlignment.Bottom => text.Style.TextStyleViewModel.TextHAlignment switch
+                TextVAlignment.Bottom => text.Style.TextStyle.TextHAlignment switch
                 {
                     TextHAlignment.Center => DXFE.MTextAttachmentPoint.BottomCenter,
                     TextHAlignment.Right => DXFE.MTextAttachmentPoint.BottomRight,
                     _ => DXFE.MTextAttachmentPoint.BottomLeft,
                 },
-                _ => text.Style.TextStyleViewModel.TextHAlignment switch
+                _ => text.Style.TextStyle.TextHAlignment switch
                 {
                     TextHAlignment.Center => DXFE.MTextAttachmentPoint.TopCenter,
                     TextHAlignment.Right => DXFE.MTextAttachmentPoint.TopRight,
                     _ => DXFE.MTextAttachmentPoint.TopLeft,
                 },
             };
-            var ts = new netDxf.Tables.TextStyle(style.TextStyleViewModel.FontName, style.TextStyleViewModel.FontFile);
+            var ts = new netDxf.Tables.TextStyle(style.TextStyle.FontName, style.TextStyle.FontFile);
             var dxfMText = new DXFE.MText(
                 new DXF.Vector3(ToDxfX(x), ToDxfY(y), 0),
-                text.Style.TextStyleViewModel.FontSize * _targetDpi / _sourceDpi,
+                text.Style.TextStyle.FontSize * _targetDpi / _sourceDpi,
                 rect.Width,
                 ts)
             {
@@ -784,7 +784,7 @@ namespace Core2D.Renderer.Dxf
             };
 
             var options = new DXFE.MTextFormattingOptions();
-            var fs = text.Style.TextStyleViewModel.FontStyle;
+            var fs = text.Style.TextStyle.FontStyle;
 
             options.Bold = fs.HasFlag(FontStyleFlags.Bold);
             options.Italic = fs.HasFlag(FontStyleFlags.Italic);
@@ -851,7 +851,7 @@ namespace Core2D.Renderer.Dxf
                 var dxf = dc as DXF.DxfDocument;
                 var style = path.Style;
 
-                CreateHatchBoundsAndEntities(path.GeometryViewModel, out var bounds, out var entities);
+                CreateHatchBoundsAndEntities(path.Geometry, out var bounds, out var entities);
                 if (entities == null || bounds == null)
                 {
                     return;
@@ -859,8 +859,8 @@ namespace Core2D.Renderer.Dxf
 
                 if (path.IsFilled)
                 {
-                    var fill = ToColor(style.Fill.ColorViewModel);
-                    var fillTransparency = ToTransparency(style.Fill.ColorViewModel);
+                    var fill = ToColor(style.Fill.Color);
+                    var fillTransparency = ToTransparency(style.Fill.Color);
 
                     var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
                     {
@@ -876,8 +876,8 @@ namespace Core2D.Renderer.Dxf
                 {
                     // TODO: Add support for Closed paths.
 
-                    var stroke = ToColor(style.Stroke.ColorViewModel);
-                    var strokeTansparency = ToTransparency(style.Stroke.ColorViewModel);
+                    var stroke = ToColor(style.Stroke.Color);
+                    var strokeTansparency = ToTransparency(style.Stroke.Color);
                     var lineweight = ToLineweight(style.Stroke.Thickness);
 
                     foreach (var entity in entities)

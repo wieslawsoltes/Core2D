@@ -134,20 +134,20 @@ namespace Core2D.Editor
         {
             var factory = _serviceProvider.GetService<IFactory>();
 
-            if (pathShape.GeometryViewModel.Figures.Length == 1)
+            if (pathShape.Geometry.Figures.Length == 1)
             {
-                BreakPathFigure(pathShape.GeometryViewModel.Figures[0], pathShape.Style, pathShape.IsStroked, pathShape.IsFilled, result);
+                BreakPathFigure(pathShape.Geometry.Figures[0], pathShape.Style, pathShape.IsStroked, pathShape.IsFilled, result);
                 return true;
             }
-            else if (pathShape.GeometryViewModel.Figures.Length > 1)
+            else if (pathShape.Geometry.Figures.Length > 1)
             {
-                foreach (var pathFigure in pathShape.GeometryViewModel.Figures)
+                foreach (var pathFigure in pathShape.Geometry.Figures)
                 {
                     var style = pathShape.Style != null ?
                         (ShapeStyleViewModel)pathShape.Style?.Copy(null) :
                         factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
 
-                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), pathShape.GeometryViewModel.FillRule);
+                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), pathShape.Geometry.FillRule);
                     convertedGeometry.Figures = convertedGeometry.Figures.Add(pathFigure);
 
                     var convertedPathShape = factory.CreatePathShape(

@@ -47,7 +47,7 @@ namespace Core2D.Renderer
                 return;
             }
 
-            if (StyleViewModel.TextStyleViewModel.FontSize < 0.0)
+            if (Style.TextStyle.FontSize < 0.0)
             {
                 return;
             }
@@ -55,12 +55,12 @@ namespace Core2D.Renderer
             var fontStyle = AM.FontStyle.Normal;
             var fontWeight = AM.FontWeight.Normal;
 
-            if (StyleViewModel.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Italic))
+            if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
                 fontStyle |= AM.FontStyle.Italic;
             }
 
-            if (StyleViewModel.TextStyleViewModel.FontStyle.HasFlag(FontStyleFlags.Bold))
+            if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
                 fontWeight |= AM.FontWeight.Bold;
             }
@@ -68,9 +68,9 @@ namespace Core2D.Renderer
             // TODO: Cache Typeface
             // TODO: Cache FormattedText
 
-            Typeface = new AM.Typeface(StyleViewModel.TextStyleViewModel.FontName, fontStyle, fontWeight);
+            Typeface = new AM.Typeface(Style.TextStyle.FontName, fontStyle, fontWeight);
 
-            var textAlignment = StyleViewModel.TextStyleViewModel.TextHAlignment switch
+            var textAlignment = Style.TextStyle.TextHAlignment switch
             {
                 TextHAlignment.Right => AM.TextAlignment.Right,
                 TextHAlignment.Center => AM.TextAlignment.Center,
@@ -83,7 +83,7 @@ namespace Core2D.Renderer
                 Text = BoundText,
                 TextAlignment = textAlignment,
                 TextWrapping = AM.TextWrapping.NoWrap,
-                FontSize = StyleViewModel.TextStyleViewModel.FontSize,
+                FontSize = Style.TextStyle.FontSize,
                 Constraint = Rect.Size
             };
 
@@ -98,7 +98,7 @@ namespace Core2D.Renderer
             //    _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0)
             //};
 
-            var originY = StyleViewModel.TextStyleViewModel.TextVAlignment switch
+            var originY = Style.TextStyle.TextVAlignment switch
             {
                 TextVAlignment.Top => rect.Y,
                 TextVAlignment.Bottom => rect.Bottom - size.Height,
