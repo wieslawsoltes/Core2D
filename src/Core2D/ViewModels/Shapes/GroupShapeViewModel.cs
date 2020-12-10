@@ -8,43 +8,10 @@ namespace Core2D.Shapes
 {
     public partial class GroupShapeViewModel : ConnectableShapeViewModel
     {
-        // TODO: AutoNotify
-        [AutoNotify] private ImmutableArray<PropertyViewModel> _shapesProperties;
         [AutoNotify] private ImmutableArray<BaseShapeViewModel> _shapes;
 
         public GroupShapeViewModel() : base(typeof(GroupShapeViewModel))
         {
-            _shapesProperties = GetShapeProperties();
-        }
-
-        private ImmutableArray<PropertyViewModel> GetShapeProperties()
-        {
-            if (_shapesProperties == null)
-            {
-                if (_shapes != null)
-                {
-                    var builder = ImmutableArray.CreateBuilder<PropertyViewModel>();
-
-                    foreach (var shape in _shapes)
-                    {
-                        foreach (var property in shape.Properties)
-                        {
-                            builder.Add(property);
-                        }
-                    }
-
-                    foreach (var connector in base.Connectors)
-                    {
-                        foreach (var property in connector.Properties)
-                        {
-                            builder.Add(property);
-                        }
-                    }
-
-                    _shapesProperties = builder.ToImmutable();
-                }
-            }
-            return _shapesProperties;
         }
 
         public override void DrawShape(object dc, IShapeRenderer renderer)

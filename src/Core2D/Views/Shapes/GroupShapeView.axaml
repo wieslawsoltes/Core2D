@@ -25,35 +25,41 @@
             </StackPanel>
         </Expander>
         <Expander Header="Properties" IsExpanded="True">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!ShapesProperties.Length}">
-                <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding ShapesProperties}">
-                    <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="vmdt:PropertyViewModel">
-                            <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                                <!--<i:Interaction.Behaviors>
-                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                                    </i:Interaction.Behaviors>-->
-                                <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.DataTemplates>
-                </ItemsControl>
-                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
-                <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding ShapesProperties}">
-                    <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="vmdt:PropertyViewModel">
-                            <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                                <!--<i:Interaction.Behaviors>
-                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                                    </i:Interaction.Behaviors>-->
-                                <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.DataTemplates>
-                </ItemsControl>
-            </Grid>
+            <ItemsControl Items="{Binding Shapes}">
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="vms:BaseShapeViewModel">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+                            <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
+                            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Properties}">
+                                <ItemsControl.DataTemplates>
+                                    <DataTemplate DataType="vmdt:PropertyViewModel">
+                                        <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                                            <!--<i:Interaction.Behaviors>
+                                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                                                </i:Interaction.Behaviors>-->
+                                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.DataTemplates>
+                            </ItemsControl>
+                            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+                            <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
+                            <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Properties}">
+                                <ItemsControl.DataTemplates>
+                                    <DataTemplate DataType="vmdt:PropertyViewModel">
+                                        <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                                            <!--<i:Interaction.Behaviors>
+                                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                                                </i:Interaction.Behaviors>-->
+                                            <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.DataTemplates>
+                            </ItemsControl>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
         </Expander>
         <Expander Header="Shapes" IsExpanded="False">
             <Grid RowDefinitions="50*,6,50*">

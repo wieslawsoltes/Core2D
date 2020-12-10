@@ -31,57 +31,6 @@ namespace Core2D.Shapes.UnitTests
 
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
-        public void ShapesProperties_Gets_Shapes_And_Connectors_Properties()
-        {
-            var target = _factory.CreateGroupShape();
-
-            var shape = new Class1()
-            {
-                State = ShapeStateFlags.Default,
-                Properties = ImmutableArray.Create<PropertyViewModel>()
-            };
-            shape.Properties = shape.Properties.Add(_factory.CreateProperty(null, "", ""));
-            target.Shapes = target.Shapes.Add(shape);
-
-            var point = _factory.CreatePointShape();
-            point.Properties = point.Properties.Add(_factory.CreateProperty(null, "", ""));
-            target.Connectors = target.Connectors.Add(point);
-
-            var length = target.ShapesProperties.Length;
-            Assert.Equal(2, length);
-        }
-
-        [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
-        public void ShapesProperties_Cache_Should_Reset_After_Shapes_Updated()
-        {
-            var target = _factory.CreateGroupShape();
-
-            var shape1 = new Class1()
-            {
-                State = ShapeStateFlags.Default,
-                Properties = ImmutableArray.Create<PropertyViewModel>()
-            };
-            shape1.Properties = shape1.Properties.Add(_factory.CreateProperty(null, "", ""));
-            target.Shapes = target.Shapes.Add(shape1);
-
-            var length1 = target.ShapesProperties.Length;
-            Assert.Equal(1, length1);
-
-            var shape2 = new Class1()
-            {
-                State = ShapeStateFlags.Default,
-                Properties = ImmutableArray.Create<PropertyViewModel>()
-            };
-            shape2.Properties = shape2.Properties.Add(_factory.CreateProperty(null, "", ""));
-            target.Shapes = target.Shapes.Add(shape2);
-
-            var length2 = target.ShapesProperties.Length;
-            Assert.Equal(2, length2);
-        }
-
-        [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
         public void GetPoints_Returns_Shapes_And_Connector_Points()
         {
             var style = _factory.CreateShapeStyle();
