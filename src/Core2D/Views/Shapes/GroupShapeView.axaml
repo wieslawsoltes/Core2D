@@ -28,7 +28,7 @@
             <ItemsControl Items="{Binding Shapes}">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="vms:BaseShapeViewModel">
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!Properties.Length}">
                             <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
                             <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Properties}">
                                 <ItemsControl.DataTemplates>
