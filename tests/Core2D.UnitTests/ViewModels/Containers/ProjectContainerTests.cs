@@ -22,7 +22,7 @@ namespace Core2D.UnitTests
         public void Options_Not_Null()
         {
             var target = _factory.CreateProjectContainer();
-            Assert.NotNull(target.OptionsViewModel);
+            Assert.NotNull(target.Options);
         }
 
         [Fact]
