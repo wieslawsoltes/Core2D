@@ -36,7 +36,7 @@ namespace Core2D.ViewModels.Containers
 
         public void SetCurrentLayer(LayerContainerViewModel layer) => CurrentLayer = layer;
 
-        public virtual void InvalidateLayer()
+        public void InvalidateLayer()
         {
             _template?.InvalidateLayer();
 
