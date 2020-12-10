@@ -1,11 +1,12 @@
-﻿using Core2D.Style;
+﻿using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Style;
 using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
 {
     internal abstract class DrawNode : IDrawNode
     {
-        public ShapeStyle Style { get; set; }
+        public ShapeStyleViewModel Style { get; set; }
         public bool ScaleThickness { get; set; }
         public bool ScaleSize { get; set; }
         public SKPaint Fill { get; set; }

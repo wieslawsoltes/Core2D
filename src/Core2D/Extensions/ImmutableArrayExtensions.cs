@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using Core2D.ViewModels;
 
 namespace Core2D.Data
 {

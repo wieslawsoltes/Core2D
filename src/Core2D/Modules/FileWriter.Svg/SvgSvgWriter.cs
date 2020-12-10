@@ -2,11 +2,11 @@
 using System.IO;
 using System.Linq;
 using System.Text;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
 using Core2D.SvgExporter.Svg;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
 
 namespace Core2D.FileWriter.Svg
 {
@@ -38,7 +38,7 @@ namespace Core2D.FileWriter.Svg
 
             var exporter = new SvgSvgExporter(_serviceProvider);
 
-            if (item is PageContainer page)
+            if (item is PageContainerViewModel page)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
                 var db = (object)page.Properties;
@@ -50,7 +50,7 @@ namespace Core2D.FileWriter.Svg
                 var shapes = page.Layers.SelectMany(x => x.Shapes);
                 if (shapes != null)
                 {
-                    var xaml = exporter.Create(shapes, page.Width, page.Height);
+                    var xaml = exporter.Create(shapes, page.Template.Width, page.Template.Height);
                     if (!string.IsNullOrEmpty(xaml))
                     {
                         byte[] bytes = Encoding.UTF8.GetBytes(xaml);
@@ -58,11 +58,11 @@ namespace Core2D.FileWriter.Svg
                     }
                 }
             }
-            else if (item is DocumentContainer document)
+            else if (item is DocumentContainerViewModel document)
             {
                 throw new NotSupportedException("Saving documents as svg drawing is not supported.");
             }
-            else if (item is ProjectContainer project)
+            else if (item is ProjectContainerViewModel project)
             {
                 throw new NotSupportedException("Saving projects as svg drawing is not supported.");
             }

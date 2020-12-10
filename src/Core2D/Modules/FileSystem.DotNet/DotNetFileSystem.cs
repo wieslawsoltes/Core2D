@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-using Core2D;
+using Core2D.Model;
 
 namespace Core2D.FileSystem.DotNet
 {

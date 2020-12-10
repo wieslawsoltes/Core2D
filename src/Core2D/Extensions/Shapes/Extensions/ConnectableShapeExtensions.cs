@@ -1,30 +1,31 @@
-﻿using Core2D.Renderer;
+﻿using Core2D.Model.Renderer;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Shapes
 {
     public static class ConnectableShapeExtensions
     {
-        public static void AddConnectorAsNone(this ConnectableShape shape, PointShape point)
+        public static void AddConnectorAsNone(this ConnectableShapeViewModel shape, PointShapeViewModel point)
         {
             point.Owner = shape;
-            point.State.Flags |= ShapeStateFlags.Connector | ShapeStateFlags.None;
-            point.State.Flags &= ~ShapeStateFlags.Standalone;
+            point.State |= ShapeStateFlags.Connector | ShapeStateFlags.None;
+            point.State &= ~ShapeStateFlags.Standalone;
             shape.Connectors = shape.Connectors.Add(point);
         }
 
-        public static void AddConnectorAsInput(this ConnectableShape shape, PointShape point)
+        public static void AddConnectorAsInput(this ConnectableShapeViewModel shape, PointShapeViewModel point)
         {
             point.Owner = shape;
-            point.State.Flags |= ShapeStateFlags.Connector | ShapeStateFlags.Input;
-            point.State.Flags &= ~ShapeStateFlags.Standalone;
+            point.State |= ShapeStateFlags.Connector | ShapeStateFlags.Input;
+            point.State &= ~ShapeStateFlags.Standalone;
             shape.Connectors = shape.Connectors.Add(point);
         }
 
-        public static void AddConnectorAsOutput(this ConnectableShape shape, PointShape point)
+        public static void AddConnectorAsOutput(this ConnectableShapeViewModel shape, PointShapeViewModel point)
         {
             point.Owner = shape;
-            point.State.Flags |= ShapeStateFlags.Connector | ShapeStateFlags.Output;
-            point.State.Flags &= ~ShapeStateFlags.Standalone;
+            point.State |= ShapeStateFlags.Connector | ShapeStateFlags.Output;
+            point.State &= ~ShapeStateFlags.Standalone;
             shape.Connectors = shape.Connectors.Add(point);
         }
     }

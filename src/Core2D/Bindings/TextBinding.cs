@@ -2,14 +2,14 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
-using Core2D.Data;
-using Core2D.Shapes;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Bindings
 {
     internal static class TextBinding
     {
-        public static bool GetBindingValue(Record record, string columnName, out string value)
+        public static bool GetBindingValue(RecordViewModel record, string columnName, out string value)
         {
             if (string.IsNullOrEmpty(columnName) || record == null)
             {
@@ -17,7 +17,7 @@ namespace Core2D.Bindings
                 return false;
             }
 
-            var db = record.Owner as Database;
+            var db = record.Owner as DatabaseViewModel;
             var columns = db.Columns;
             var values = record.Values;
             if (columns == null || values == null || columns.Length != values.Length)
@@ -39,7 +39,7 @@ namespace Core2D.Bindings
             return false;
         }
 
-        public static bool GetBindingValue(ImmutableArray<Property> properties, string propertyName, out string value)
+        public static bool GetBindingValue(ImmutableArray<PropertyViewModel> properties, string propertyName, out string value)
         {
             if (string.IsNullOrEmpty(propertyName) || properties == null)
             {
@@ -58,10 +58,10 @@ namespace Core2D.Bindings
             return false;
         }
 
-        public static string Bind(TextShape shape, ImmutableArray<Property> properties, Record externalRecord)
+        public static string Bind(TextShapeViewModel shape, ImmutableArray<PropertyViewModel> properties, RecordViewModel externalRecordViewModel)
         {
             var text = shape.Text;
-            var record = shape.Record ?? externalRecord;
+            var record = shape.Record ?? externalRecordViewModel;
 
             if (string.IsNullOrEmpty(text))
             {

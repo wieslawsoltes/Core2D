@@ -1,4 +1,6 @@
-﻿using Core2D;
+﻿using Core2D.Model;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Shapes;
 using Xunit;
 
 namespace Core2D.Shapes.UnitTests
@@ -14,7 +16,7 @@ namespace Core2D.Shapes.UnitTests
             var style = _factory.CreateShapeStyle();
             var geometry = _factory.CreatePathGeometry();
             var target = _factory.CreatePathShape(style, geometry);
-            Assert.True(target is BaseShape);
+            Assert.True(target is BaseShapeViewModel);
         }
     }
 }

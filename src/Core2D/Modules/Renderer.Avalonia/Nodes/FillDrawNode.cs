@@ -1,5 +1,5 @@
-﻿using Core2D.Renderer;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
@@ -8,13 +8,13 @@ namespace Core2D.Renderer
     internal class FillDrawNode : DrawNode, IFillDrawNode
     {
         public A.Rect Rect { get; set; }
-        public BaseColor Color { get; set; }
+        public BaseColorViewModel Color { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
 
-        public FillDrawNode(double x, double y, double width, double height, BaseColor color)
+        public FillDrawNode(double x, double y, double width, double height, BaseColorViewModel color)
         {
             X = x;
             Y = y;

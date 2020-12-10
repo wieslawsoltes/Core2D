@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Core2D.Path;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Editor
+namespace Core2D.Model.Editor
 {
     internal interface IShapeEditor
     {
-        void BreakPathFigure(PathFigure pathFigure, ShapeStyle style, bool isStroked, bool isFilled, List<BaseShape> result);
-        bool BreakPathShape(PathShape pathShape, List<BaseShape> result);
-        void BreakShape(BaseShape shape, List<BaseShape> result, List<BaseShape> remove);
+        void BreakPathFigure(PathFigureViewModel pathFigure, ShapeStyleViewModel style, bool isStroked, bool isFilled, List<BaseShapeViewModel> result);
+        bool BreakPathShape(PathShapeViewModel pathShape, List<BaseShapeViewModel> result);
+        void BreakShape(BaseShapeViewModel shape, List<BaseShapeViewModel> result, List<BaseShapeViewModel> remove);
     }
 }

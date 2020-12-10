@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Core2D;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.XamlExporter.Avalonia
 {
@@ -31,12 +31,12 @@ namespace Core2D.XamlExporter.Avalonia
 
             switch (item)
             {
-                case BaseShape shape:
+                case BaseShapeViewModel shape:
                     {
                         ToGeometryDrawing(shape, sb, converter);
                     }
                     break;
-                case IEnumerable<BaseShape> shapes:
+                case IEnumerable<BaseShapeViewModel> shapes:
                     {
                         foreach (var shape in shapes)
                         {
@@ -51,9 +51,9 @@ namespace Core2D.XamlExporter.Avalonia
             return sb.ToString();
         }
 
-        private void ToGeometryDrawing(BaseShape shape, StringBuilder sb, IPathConverter converter)
+        private void ToGeometryDrawing(BaseShapeViewModel shape, StringBuilder sb, IPathConverter converter)
         {
-            if (shape is GroupShape group)
+            if (shape is GroupShapeViewModel group)
             {
                 foreach (var child in group.Shapes)
                 {
@@ -68,7 +68,7 @@ namespace Core2D.XamlExporter.Avalonia
                 if (path != null)
                 {
                     var geometry = path.Geometry.ToXamlString();
-                    var brush = (shape.Style.Fill.Color as ArgbColor).ToXamlString();
+                    var brush = (shape.Style.Fill.Color as ArgbColorViewModel).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }
@@ -79,7 +79,7 @@ namespace Core2D.XamlExporter.Avalonia
                 if (path != null)
                 {
                     var geometry = path.Geometry.ToXamlString();
-                    var brush = (shape.Style.Stroke.Color as ArgbColor).ToXamlString();
+                    var brush = (shape.Style.Stroke.Color as ArgbColorViewModel).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }

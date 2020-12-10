@@ -3,17 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vmdt="using:Core2D.Data"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmdt="using:Core2D.ViewModels.Data"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Record}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmdt:Record" x:CompileBindings="True">
+             x:DataType="vmdt:RecordViewModel" x:CompileBindings="True">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
         <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" />
-        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" DataContext="{Binding Owner}" Items="{Binding Columns}" x:DataType="vmdt:Database">
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" DataContext="{Binding Owner}" Items="{Binding Columns}" x:DataType="vmdt:DatabaseViewModel">
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="vmdt:Column">
+                <DataTemplate DataType="vmdt:ColumnViewModel">
                     <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
                         <!--<i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -27,7 +27,7 @@
         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" />
         <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="vmdt:Value">
+                <DataTemplate DataType="vmdt:ValueViewModel">
                     <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
                         <!--<i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

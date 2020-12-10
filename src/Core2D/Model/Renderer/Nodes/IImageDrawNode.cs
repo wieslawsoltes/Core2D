@@ -1,12 +1,11 @@
 ﻿using System;
-using Core2D.Renderer;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer.Nodes
 {
     public interface IImageDrawNode : IDrawNode
     {
-        ImageShape Image { get; set; }
+        ImageShapeViewModel Image { get; set; }
         IImageCache ImageCache { get; set; }
         ICache<string, IDisposable> BitmapCache { get; set; }
     }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
-using Core2D;
-using Core2D.Path;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Path;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -31,8 +33,8 @@ namespace Core2D.UnitTests
         {
             var geometry = _factory.CreatePathGeometry();
 
-            var target = ImmutableArray.Create<PathFigure>();
-            var actual = (geometry as PathGeometry).ToXamlString(target);
+            var target = ImmutableArray.Create<PathFigureViewModel>();
+            var actual = (geometry as PathGeometryViewModel).ToXamlString(target);
 
             Assert.Equal(string.Empty, actual);
         }
@@ -43,8 +45,8 @@ namespace Core2D.UnitTests
         {
             var geometry = _factory.CreatePathGeometry();
 
-            var target = ImmutableArray.Create<PathFigure>();
-            var actual = (geometry as PathGeometry).ToSvgString(target);
+            var target = ImmutableArray.Create<PathFigureViewModel>();
+            var actual = (geometry as PathGeometryViewModel).ToSvgString(target);
 
             Assert.Equal(string.Empty, actual);
         }

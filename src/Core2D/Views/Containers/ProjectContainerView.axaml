@@ -4,20 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Core2D.DragAndDrop"
              xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:vmc="using:Core2D.Containers"
-             xmlns:vms="using:Core2D.Shapes"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmc="using:Core2D.ViewModels.Containers"
+             xmlns:vms="using:Core2D.ViewModels.Shapes"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:ProjectContainer" x:CompileBindings="True">
+             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:BaseShapeIconConverter x:Key="BaseShapeIconConverter" />
-        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+        <converters:ShapeToTypeStringConverter x:Key="ShapeToTypeStringConverter" />
         <handlers:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
@@ -31,6 +32,9 @@
         <TreeView x:Name="DocumentsTreeView" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" Grid.Row="1" x:CompileBindings="False">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ProjectTreeViewDropHandler}" />
+                <ia:EventTriggerBehavior EventName="SelectionChanged">
+                    <ia:CallMethodAction TargetObject="{Binding}" MethodName="SelectedChanged" />
+                </ia:EventTriggerBehavior>
             </i:Interaction.Behaviors>
             <TreeView.KeyBindings>
                 <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnNew}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+N" x:CompileBindings="False" />
@@ -53,7 +57,7 @@
                 </Style>
             </TreeView.Styles>
             <TreeView.DataTemplates>
-                <TreeDataTemplate DataType="vmc:DocumentContainer" ItemsSource="{Binding Pages}" x:CompileBindings="False">
+                <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" ItemsSource="{Binding Pages}" x:CompileBindings="False">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -77,7 +81,7 @@
                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TreeDataTemplate>
-                <TreeDataTemplate DataType="vmc:PageContainer" ItemsSource="{Binding Layers}" x:CompileBindings="False">
+                <TreeDataTemplate DataType="vmc:PageContainerViewModel" ItemsSource="{Binding Layers}" x:CompileBindings="False">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior />
@@ -110,7 +114,7 @@
                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TreeDataTemplate>
-                <TreeDataTemplate DataType="vmc:LayerContainer" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
+                <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -132,7 +136,7 @@
                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TreeDataTemplate>
-                <DataTemplate DataType="vms:BaseShape">
+                <DataTemplate DataType="vms:BaseShapeViewModel">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <iac:BindTagToVisualRootDataContextBehavior />
@@ -150,7 +154,7 @@
                             </ContextMenu>
                         </StackPanel.ContextMenu>
                         <Image Source="{Binding Mode=OneWay, Converter={StaticResource BaseShapeIconConverter}}" Width="16" Height="16" Margin="8" />
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ShapeToTypeStringConverter}}" VerticalAlignment="Center" />
                     </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>

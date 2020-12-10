@@ -1,5 +1,5 @@
 ﻿using System;
-using Core2D;
+using Core2D.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -23,9 +23,7 @@ namespace Core2D.Serializer.Newtonsoft
                 NullValueHandling = NullValueHandling.Ignore,
                 Converters =
                 {
-                    new KeyValuePairConverter(),
-                    new FontStyleConverter(),
-                    new ShapeStateConverter()
+                    new KeyValuePairConverter()
                 }
             };
         }

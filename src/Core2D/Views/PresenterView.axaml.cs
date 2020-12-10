@@ -3,17 +3,16 @@ using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-
+using Core2D.Model.Renderer;
 #if USE_SKIA
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 #endif
-
-using Core2D.Containers;
-using Core2D.Data;
 using Core2D.Renderer;
-using Core2D.Renderer.Presenters;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Renderer.Presenters;
 
 namespace Core2D.Views
 {
@@ -32,7 +31,7 @@ namespace Core2D.Views
 
     internal struct CustomState
     {
-        public PageContainer Container;
+        public PageContainerViewModel _containerViewModel;
         public IShapeRenderer Renderer;
         public DataFlow DataFlow;
         public PresenterType PresenterType;
@@ -81,8 +80,8 @@ namespace Core2D.Views
         public static readonly StyledProperty<ZoomBorder> ZoomBorderProperty =
             AvaloniaProperty.Register<PresenterView, ZoomBorder>(nameof(ZoomBorder), null);
 
-        public static readonly StyledProperty<PageContainer> ContainerProperty =
-            AvaloniaProperty.Register<PresenterView, PageContainer>(nameof(Container), null);
+        public static readonly StyledProperty<PageContainerViewModel> ContainerProperty =
+            AvaloniaProperty.Register<PresenterView, PageContainerViewModel>(nameof(Container), null);
 
         public static readonly StyledProperty<IShapeRenderer> RendererProperty =
             AvaloniaProperty.Register<PresenterView, IShapeRenderer>(nameof(Renderer), null);
@@ -99,7 +98,7 @@ namespace Core2D.Views
             set => SetValue(ZoomBorderProperty, value);
         }
 
-        public PageContainer Container
+        public PageContainerViewModel Container
         {
             get => GetValue(ContainerProperty);
             set => SetValue(ContainerProperty, value);
@@ -139,7 +138,7 @@ namespace Core2D.Views
 
             var customState = new CustomState()
             {
-                Container = Container,
+                _containerViewModel = Container,
                 Renderer = Renderer ?? GetValue(RendererOptions.RendererProperty),
                 DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
                 PresenterType = PresenterType,
@@ -166,37 +165,37 @@ namespace Core2D.Views
 
                 case PresenterType.Data:
                     {
-                        if (customState.Container != null && customState.DataFlow != null)
+                        if (customState._containerViewModel != null && customState.DataFlow != null)
                         {
-                            var db = (object)customState.Container.Properties;
-                            var record = (object)customState.Container.Record;
+                            var db = (object)customState._containerViewModel.Properties;
+                            var record = (object)customState._containerViewModel.Record;
 
-                            if (customState.Container.Template != null)
+                            if (customState._containerViewModel.Template != null)
                             {
-                                customState.DataFlow.Bind(customState.Container.Template, db, record);
+                                customState.DataFlow.Bind(customState._containerViewModel.Template, db, record);
                             }
-                            customState.DataFlow.Bind(customState.Container, db, record);
+                            customState.DataFlow.Bind(customState._containerViewModel, db, record);
                         }
                     }
                     break;
 
                 case PresenterType.Template:
                     {
-                        if (customState.Container != null && customState.Renderer != null)
+                        if (customState._containerViewModel != null && customState.Renderer != null)
                         {
-                            s_templatePresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
-                            customState.Container?.Template?.Invalidate();
+                            s_templatePresenter.Render(context, customState.Renderer, customState._containerViewModel, 0.0, 0.0);
+                            customState._containerViewModel?.Template?.Invalidate();
                         }
                     }
                     break;
 
                 case PresenterType.Editor:
                     {
-                        if (customState.Container != null && customState.Renderer != null)
+                        if (customState._containerViewModel != null && customState.Renderer != null)
                         {
-                            s_editorPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
+                            s_editorPresenter.Render(context, customState.Renderer, customState._containerViewModel, 0.0, 0.0);
 
-                            customState.Container?.Invalidate();
+                            customState._containerViewModel?.Invalidate();
                             customState.Renderer.State.PointStyle.Invalidate();
                             customState.Renderer.State.SelectedPointStyle.Invalidate();
                         }
@@ -205,9 +204,9 @@ namespace Core2D.Views
 
                 case PresenterType.Export:
                     {
-                        if (customState.Container != null && customState.Renderer != null)
+                        if (customState._containerViewModel != null && customState.Renderer != null)
                         {
-                            s_exportPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
+                            s_exportPresenter.Render(context, customState.Renderer, customState._containerViewModel, 0.0, 0.0);
                         }
                     }
                     break;

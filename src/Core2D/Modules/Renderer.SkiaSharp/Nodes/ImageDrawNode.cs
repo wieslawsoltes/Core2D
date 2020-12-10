@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Spatial;
 using SkiaSharp;
 
@@ -9,7 +11,7 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class ImageDrawNode : DrawNode, IImageDrawNode
     {
-        public ImageShape Image { get; set; }
+        public ImageShapeViewModel Image { get; set; }
         public SKRect Rect { get; set; }
         public IImageCache ImageCache { get; set; }
         public ICache<string, IDisposable> BitmapCache { get; set; }
@@ -17,7 +19,7 @@ namespace Core2D.Renderer.SkiaSharp
         public SKRect SourceRect { get; set; }
         public SKRect DestRect { get; set; }
 
-        public ImageDrawNode(ImageShape image, ShapeStyle style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
+        public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
             : base()
         {
             Style = style;
@@ -29,8 +31,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Image.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Image.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Image.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Image.State.HasFlag(ShapeStateFlags.Size);
 
             if (!string.IsNullOrEmpty(Image.Key))
             {

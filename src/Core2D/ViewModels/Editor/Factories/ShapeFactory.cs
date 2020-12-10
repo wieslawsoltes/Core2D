@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Immutable;
-using Core2D;
-using Core2D.Path;
-using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Editor.Factories
+namespace Core2D.ViewModels.Editor.Factories
 {
-    public sealed class ShapeFactory : IShapeFactory
+    public partial class ShapeFactory : IShapeFactory
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -17,10 +18,10 @@ namespace Core2D.Editor.Factories
             _serviceProvider = serviceProvider;
         }
 
-        PointShape IShapeFactory.Point(double x, double y, bool isStandalone)
+        PointShapeViewModel IShapeFactory.Point(double x, double y, bool isStandalone)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var point = factory.CreatePointShape(x, y);
             if (isStandalone)
@@ -30,175 +31,175 @@ namespace Core2D.Editor.Factories
             return point;
         }
 
-        LineShape IShapeFactory.Line(double x1, double y1, double x2, double y2, bool isStroked)
+        LineShapeViewModel IShapeFactory.Line(double x1, double y1, double x2, double y2, bool isStroked)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var line = factory.CreateLineShape(
                 x1, y1,
                 x2, y2,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, line);
             return line;
         }
 
-        LineShape IShapeFactory.Line(PointShape start, PointShape end, bool isStroked)
+        LineShapeViewModel IShapeFactory.Line(PointShapeViewModel start, PointShapeViewModel end, bool isStroked)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var line = factory.CreateLineShape(
                 start,
                 end,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, line);
             return line;
         }
 
-        ArcShape IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
+        ArcShapeViewModelViewModel IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var arc = factory.CreateArcShape(
                 x1, y1,
                 x2, y2,
                 x3, y3,
                 x4, y4,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, arc);
             return arc;
         }
 
-        ArcShape IShapeFactory.Arc(PointShape point1, PointShape point2, PointShape point3, PointShape point4, bool isStroked, bool isFilled)
+        ArcShapeViewModelViewModel IShapeFactory.Arc(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var arc = factory.CreateArcShape(
                 point1,
                 point2,
                 point3,
                 point4,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, arc);
             return arc;
         }
 
-        CubicBezierShape IShapeFactory.CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
+        CubicBezierShapeViewModel IShapeFactory.CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var cubicBezier = factory.CreateCubicBezierShape(
                 x1, y1,
                 x2, y2,
                 x3, y3,
                 x4, y4,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, cubicBezier);
             return cubicBezier;
         }
 
-        CubicBezierShape IShapeFactory.CubicBezier(PointShape point1, PointShape point2, PointShape point3, PointShape point4, bool isStroked, bool isFilled)
+        CubicBezierShapeViewModel IShapeFactory.CubicBezier(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var cubicBezier = factory.CreateCubicBezierShape(
                 point1,
                 point2,
                 point3,
                 point4,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, cubicBezier);
             return cubicBezier;
         }
 
-        QuadraticBezierShape IShapeFactory.QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled)
+        QuadraticBezierShapeViewModel IShapeFactory.QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var quadraticBezier = factory.CreateQuadraticBezierShape(
                 x1, y1,
                 x2, y2,
                 x3, y3,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, quadraticBezier);
             return quadraticBezier;
         }
 
-        QuadraticBezierShape IShapeFactory.QuadraticBezier(PointShape point1, PointShape point2, PointShape point3, bool isStroked, bool isFilled)
+        QuadraticBezierShapeViewModel IShapeFactory.QuadraticBezier(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var quadraticBezier = factory.CreateQuadraticBezierShape(
                 point1,
                 point2,
                 point3,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, quadraticBezier);
             return quadraticBezier;
         }
 
-        PathGeometry IShapeFactory.Geometry(FillRule fillRule)
+        PathGeometryViewModel IShapeFactory.Geometry(FillRule fillRule)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            return factory.CreatePathGeometry(ImmutableArray.Create<PathFigure>(), fillRule);
+            return factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), fillRule);
         }
 
-        PathShape IShapeFactory.Path(PathGeometry geometry, bool isStroked, bool isFilled)
+        PathShapeViewModel IShapeFactory.Path(PathGeometryViewModel geometry, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var path = factory.CreatePathShape(
                 "",
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 geometry,
                 isStroked,
                 isFilled);
@@ -206,18 +207,18 @@ namespace Core2D.Editor.Factories
             return path;
         }
 
-        RectangleShape IShapeFactory.Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
+        RectangleShapeViewModel IShapeFactory.Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var rectangle = factory.CreateRectangleShape(
                 x1, y1,
                 x2, y2,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled,
                 text);
@@ -225,18 +226,18 @@ namespace Core2D.Editor.Factories
             return rectangle;
         }
 
-        RectangleShape IShapeFactory.Rectangle(PointShape topLeft, PointShape bottomRight, bool isStroked, bool isFilled, string text)
+        RectangleShapeViewModel IShapeFactory.Rectangle(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var rectangle = factory.CreateRectangleShape(
                 topLeft,
                 bottomRight,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled,
                 text);
@@ -244,18 +245,18 @@ namespace Core2D.Editor.Factories
             return rectangle;
         }
 
-        EllipseShape IShapeFactory.Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
+        EllipseShapeViewModel IShapeFactory.Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var ellipse = factory.CreateEllipseShape(
                 x1, y1,
                 x2, y2,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled,
                 text);
@@ -263,18 +264,18 @@ namespace Core2D.Editor.Factories
             return ellipse;
         }
 
-        EllipseShape IShapeFactory.Ellipse(PointShape topLeft, PointShape bottomRight, bool isStroked, bool isFilled, string text)
+        EllipseShapeViewModel IShapeFactory.Ellipse(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var ellipse = factory.CreateEllipseShape(
                 topLeft,
                 bottomRight,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 isStroked,
                 isFilled,
                 text);
@@ -282,54 +283,54 @@ namespace Core2D.Editor.Factories
             return ellipse;
         }
 
-        TextShape IShapeFactory.Text(double x1, double y1, double x2, double y2, string text, bool isStroked)
+        TextShapeViewModel IShapeFactory.Text(double x1, double y1, double x2, double y2, string text, bool isStroked)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var txt = factory.CreateTextShape(
                 x1, y1,
                 x2, y2,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 text,
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, txt);
             return txt;
         }
 
-        TextShape IShapeFactory.Text(PointShape topLeft, PointShape bottomRight, string text, bool isStroked)
+        TextShapeViewModel IShapeFactory.Text(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, string text, bool isStroked)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var txt = factory.CreateTextShape(
                 topLeft,
                 bottomRight,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 text,
                 isStroked);
             project.AddShape(project.CurrentContainer.CurrentLayer, txt);
             return txt;
         }
 
-        ImageShape IShapeFactory.Image(string path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
+        ImageShapeViewModel IShapeFactory.Image(string path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
             var image = factory.CreateImageShape(
                 x1, y1,
                 x2, y2,
-                (ShapeStyle)style.Copy(null),
+                (ShapeStyleViewModel)style.Copy(null),
                 path,
                 isStroked,
                 isFilled,
@@ -338,10 +339,10 @@ namespace Core2D.Editor.Factories
             return image;
         }
 
-        ImageShape IShapeFactory.Image(string path, PointShape topLeft, PointShape bottomRight, bool isStroked, bool isFilled, string text)
+        ImageShapeViewModel IShapeFactory.Image(string path, PointShapeViewModel topLeft, PointShapeViewModel bottomRight, bool isStroked, bool isFilled, string text)
         {
             var factory = _serviceProvider.GetService<IFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditor>();
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var fileSystem = editor.FileSystem;
             byte[] bytes;
@@ -354,11 +355,11 @@ namespace Core2D.Editor.Factories
                 var key = imageCache.AddImageFromFile(path, bytes);
                 var style = project.CurrentStyleLibrary?.Selected != null ?
                     project.CurrentStyleLibrary.Selected :
-                    factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                    factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
                 var image = factory.CreateImageShape(
                     topLeft,
                     bottomRight,
-                    (ShapeStyle)style.Copy(null),
+                    (ShapeStyleViewModel)style.Copy(null),
                     key,
                     isStroked,
                     isFilled,

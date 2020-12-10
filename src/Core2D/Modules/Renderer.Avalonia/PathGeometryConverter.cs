@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Immutable;
-using Core2D;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Shapes;
 using Spatial;
 using Spatial.Arc;
 using A = Avalonia;
@@ -13,10 +14,10 @@ namespace Core2D.Renderer
 {
     public static class PathGeometryConverter
     {
-        public static PathGeometry ToPathGeometry(AM.PathGeometry pg, IFactory factory)
+        public static PathGeometryViewModel ToPathGeometry(AM.PathGeometry pg, IFactory factory)
         {
             var geometry = factory.CreatePathGeometry(
-                ImmutableArray.Create<PathFigure>(),
+                ImmutableArray.Create<PathFigureViewModel>(),
                 pg.FillRule == AM.FillRule.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
             var context = factory.CreateGeometryContext(geometry);
@@ -66,13 +67,13 @@ namespace Core2D.Renderer
             return geometry;
         }
 
-        public static AM.StreamGeometry ToStreamGeometry(PathGeometry xpg)
+        public static AM.StreamGeometry ToStreamGeometry(PathGeometryViewModel xpg)
         {
             var sg = new AM.StreamGeometry();
 
             using (var sgc = sg.Open())
             {
-                PointShape previous = default;
+                PointShapeViewModel previous = default;
 
                 sgc.SetFillRule(xpg.FillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd);
 
@@ -84,7 +85,7 @@ namespace Core2D.Renderer
 
                     foreach (var segment in xpf.Segments)
                     {
-                        if (segment is ArcSegment arcSegment)
+                        if (segment is ArcSegmentViewModel arcSegment)
                         {
                             sgc.ArcTo(
                                 new A.Point(arcSegment.Point.X, arcSegment.Point.Y),
@@ -95,7 +96,7 @@ namespace Core2D.Renderer
 
                             previous = arcSegment.Point;
                         }
-                        else if (segment is CubicBezierSegment cubicBezierSegment)
+                        else if (segment is CubicBezierSegmentViewModel cubicBezierSegment)
                         {
                             sgc.CubicBezierTo(
                                 new A.Point(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
@@ -104,14 +105,14 @@ namespace Core2D.Renderer
 
                             previous = cubicBezierSegment.Point3;
                         }
-                        else if (segment is LineSegment lineSegment)
+                        else if (segment is LineSegmentViewModel lineSegment)
                         {
                             sgc.LineTo(
                                 new A.Point(lineSegment.Point.X, lineSegment.Point.Y));
 
                             previous = lineSegment.Point;
                         }
-                        else if (segment is QuadraticBezierSegment quadraticBezierSegment)
+                        else if (segment is QuadraticBezierSegmentViewModel quadraticBezierSegment)
                         {
                             sgc.QuadraticBezierTo(
                                 new A.Point(
@@ -136,18 +137,18 @@ namespace Core2D.Renderer
             return sg;
         }
 
-        public static PathGeometry ToPathGeometry(string source, IFactory factory)
+        public static PathGeometryViewModel ToPathGeometry(string source, IFactory factory)
         {
             var pg = AM.PathGeometry.Parse(source);
             return ToPathGeometry(pg, factory);
         }
 
-        public static AM.Geometry ToGeometry(PathGeometry xpg)
+        public static AM.Geometry ToGeometry(PathGeometryViewModel xpg)
         {
             return ToStreamGeometry(xpg);
         }
 
-        public static AM.Geometry ToGeometry(EllipseShape ellipse)
+        public static AM.Geometry ToGeometry(EllipseShapeViewModel ellipse)
         {
             var rect2 = Rect2.FromPoints(ellipse.TopLeft.X, ellipse.TopLeft.Y, ellipse.BottomRight.X, ellipse.BottomRight.Y);
             var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
@@ -155,7 +156,7 @@ namespace Core2D.Renderer
             return g;
         }
 
-        public static AM.Geometry ToGeometry(ArcShape arc)
+        public static AM.Geometry ToGeometry(ArcShapeViewModelViewModel arc)
         {
             var sg = new AM.StreamGeometry();
             using var sgc = sg.Open();
@@ -177,7 +178,7 @@ namespace Core2D.Renderer
             return sg;
         }
 
-        public static AM.Geometry ToGeometry(CubicBezierShape cubicBezier)
+        public static AM.Geometry ToGeometry(CubicBezierShapeViewModel cubicBezier)
         {
             var sg = new AM.StreamGeometry();
             using var sgc = sg.Open();
@@ -192,7 +193,7 @@ namespace Core2D.Renderer
             return sg;
         }
 
-        public static AM.Geometry ToGeometry(QuadraticBezierShape quadraticBezier)
+        public static AM.Geometry ToGeometry(QuadraticBezierShapeViewModel quadraticBezier)
         {
             var sg = new AM.StreamGeometry();
             using var sgc = sg.Open();
@@ -206,7 +207,7 @@ namespace Core2D.Renderer
             return sg;
         }
 
-        public static string ToSource(PathGeometry xpg)
+        public static string ToSource(PathGeometryViewModel xpg)
         {
             return ToStreamGeometry(xpg).ToString();
         }

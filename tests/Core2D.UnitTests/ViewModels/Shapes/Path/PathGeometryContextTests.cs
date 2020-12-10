@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Immutable;
-using Core2D;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -17,7 +17,7 @@ namespace Core2D.UnitTests
         public void Inherits_From_XGeometryContext()
         {
             var target = _factory.CreateGeometryContext(_factory.CreatePathGeometry());
-            Assert.True(target is GeometryContext);
+            Assert.True(target is GeometryContextViewModel);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace Core2D.UnitTests
             target.LineTo(_factory.CreatePointShape());
 
             var segment = geometry.Figures[0].Segments[0];
-            Assert.IsType<LineSegment>(segment);
+            Assert.IsType<LineSegmentViewModel>(segment);
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace Core2D.UnitTests
             target.ArcTo(_factory.CreatePointShape(), _factory.CreatePathSize(), 0.0, false, SweepDirection.Clockwise);
 
             var segment = geometry.Figures[0].Segments[0];
-            Assert.IsType<ArcSegment>(segment);
+            Assert.IsType<ArcSegmentViewModel>(segment);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace Core2D.UnitTests
             target.CubicBezierTo(_factory.CreatePointShape(), _factory.CreatePointShape(), _factory.CreatePointShape());
 
             var segment = geometry.Figures[0].Segments[0];
-            Assert.IsType<CubicBezierSegment>(segment);
+            Assert.IsType<CubicBezierSegmentViewModel>(segment);
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace Core2D.UnitTests
             target.QuadraticBezierTo(_factory.CreatePointShape(), _factory.CreatePointShape());
 
             var segment = geometry.Figures[0].Segments[0];
-            Assert.IsType<QuadraticBezierSegment>(segment);
+            Assert.IsType<QuadraticBezierSegmentViewModel>(segment);
         }
     }
 }

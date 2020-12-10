@@ -1,34 +1,33 @@
 ﻿using System;
-using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer.Nodes
 {
     public interface IDrawNodeFactory
     {
-        IFillDrawNode CreateFillDrawNode(double x, double y, double width, double height, BaseColor color);
+        IFillDrawNode CreateFillDrawNode(double x, double y, double width, double height, BaseColorViewModel colorViewModel);
 
         IGridDrawNode CreateGridDrawNode(IGrid grid, double x, double y, double width, double height);
 
-        IPointDrawNode CreatePointDrawNode(PointShape point, ShapeStyle pointStyle, double pointSize);
+        IPointDrawNode CreatePointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize);
 
-        ILineDrawNode CreateLineDrawNode(LineShape line, ShapeStyle style);
+        ILineDrawNode CreateLineDrawNode(LineShapeViewModel line, ShapeStyleViewModel style);
 
-        IRectangleDrawNode CreateRectangleDrawNode(RectangleShape rectangle, ShapeStyle style);
+        IRectangleDrawNode CreateRectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel style);
 
-        IEllipseDrawNode CreateEllipseDrawNode(EllipseShape ellipse, ShapeStyle style);
+        IEllipseDrawNode CreateEllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style);
 
-        IArcDrawNode CreateArcDrawNode(ArcShape arc, ShapeStyle style);
+        IArcDrawNode CreateArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel style);
 
-        ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShape cubicBezier, ShapeStyle style);
+        ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style);
 
-        IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShape quadraticBezier, ShapeStyle style);
+        IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style);
 
-        ITextDrawNode CreateTextDrawNode(TextShape text, ShapeStyle style);
+        ITextDrawNode CreateTextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style);
 
-        IImageDrawNode CreateImageDrawNode(ImageShape image, ShapeStyle style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache);
+        IImageDrawNode CreateImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache);
 
-        IPathDrawNode CreatePathDrawNode(PathShape path, ShapeStyle style);
+        IPathDrawNode CreatePathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style);
     }
 }

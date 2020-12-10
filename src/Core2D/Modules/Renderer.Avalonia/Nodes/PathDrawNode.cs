@@ -1,16 +1,17 @@
-﻿using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using AM = Avalonia.Media;
 
 namespace Core2D.Renderer
 {
     internal class PathDrawNode : DrawNode, IPathDrawNode
     {
-        public PathShape Path { get; set; }
+        public PathShapeViewModel Path { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public PathDrawNode(PathShape path, ShapeStyle style)
+        public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style)
         {
             Style = style;
             Path = path;
@@ -19,8 +20,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Path.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Path.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
             Geometry = PathGeometryConverter.ToGeometry(Path.Geometry);
             Center = Geometry.Bounds.Center;
         }

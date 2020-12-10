@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface ISvgConverter
     {
-        IList<BaseShape> Convert(string path, out double width, out double height);
+        IList<BaseShapeViewModel> Convert(string path, out double width, out double height);
 
-        IList<BaseShape> FromString(string text, out double width, out double height);
+        IList<BaseShapeViewModel> FromString(string text, out double width, out double height);
     }
 }

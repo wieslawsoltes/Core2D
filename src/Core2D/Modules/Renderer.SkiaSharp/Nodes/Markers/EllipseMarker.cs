@@ -1,5 +1,4 @@
-﻿using Core2D.Renderer.SkiaSharp;
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
 {
@@ -14,12 +13,12 @@ namespace Core2D.Renderer.SkiaSharp
             var count = canvas.Save();
             canvas.SetMatrix(MatrixHelper.Multiply(Rotation, canvas.TotalMatrix));
 
-            if (Shape.IsFilled)
+            if (ShapeViewModel.IsFilled)
             {
                 canvas.DrawOval(Rect, Brush);
             }
 
-            if (Shape.IsStroked)
+            if (ShapeViewModel.IsStroked)
             {
                 canvas.DrawOval(Rect, Pen);
             }

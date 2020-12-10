@@ -1,6 +1,6 @@
 ﻿using System;
-using Core2D.Renderer;
-using Core2D.Style;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
 using ACP = Avalonia.Controls.PanAndZoom;
@@ -9,7 +9,7 @@ namespace Core2D.Renderer
 {
     internal abstract class DrawNode : IDrawNode
     {
-        public ShapeStyle Style { get; set; }
+        public ShapeStyleViewModel Style { get; set; }
         public bool ScaleThickness { get; set; }
         public bool ScaleSize { get; set; }
         public AM.IBrush Fill { get; set; }

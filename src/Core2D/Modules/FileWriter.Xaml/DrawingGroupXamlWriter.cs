@@ -2,10 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Text;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
 using Core2D.XamlExporter.Avalonia;
 
 namespace Core2D.FileWriter.Xaml
@@ -38,7 +38,7 @@ namespace Core2D.FileWriter.Xaml
 
             var exporter = new DrawingGroupXamlExporter(_serviceProvider);
 
-            if (item is PageContainer page)
+            if (item is PageContainerViewModel page)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
                 var db = (object)page.Properties;
@@ -59,11 +59,11 @@ namespace Core2D.FileWriter.Xaml
                     }
                 }
             }
-            else if (item is DocumentContainer document)
+            else if (item is DocumentContainerViewModel document)
             {
                 throw new NotSupportedException("Saving documents as xaml drawing is not supported.");
             }
-            else if (item is ProjectContainer project)
+            else if (item is ProjectContainerViewModel project)
             {
                 throw new NotSupportedException("Saving projects as xaml drawing is not supported.");
             }

@@ -1,13 +1,14 @@
-﻿using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.Renderer
 {
     internal abstract class Marker : IMarker
     {
-        public BaseShape Shape { get; set; }
-        public ShapeStyle ShapeStyle { get; set; }
-        public ArrowStyle Style { get; set; }
+        public BaseShapeViewModel ShapeViewModel { get; set; }
+        public ShapeStyleViewModel ShapeStyleViewModel { get; set; }
+        public ArrowStyleViewModel Style { get; set; }
         public Avalonia.Media.IBrush Brush { get; set; }
         public Avalonia.Media.IPen Pen { get; set; }
         public Avalonia.Matrix Rotation { get; set; }
@@ -17,8 +18,8 @@ namespace Core2D.Renderer
 
         public virtual void UpdateStyle()
         {
-            Brush = AvaloniaDrawUtil.ToBrush(ShapeStyle.Fill.Color);
-            Pen = AvaloniaDrawUtil.ToPen(ShapeStyle, ShapeStyle.Stroke.Thickness);
+            Brush = AvaloniaDrawUtil.ToBrush(ShapeStyleViewModel.Fill.Color);
+            Pen = AvaloniaDrawUtil.ToPen(ShapeStyleViewModel, ShapeStyleViewModel.Stroke.Thickness);
         }
     }
 }

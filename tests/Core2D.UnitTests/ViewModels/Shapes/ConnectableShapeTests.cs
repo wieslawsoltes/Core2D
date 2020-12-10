@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Shapes;
 using Xunit;
 
 namespace Core2D.Shapes.UnitTests
@@ -19,10 +21,10 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<PointShape>()
+                State = ShapeStateFlags.Default,
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
-            Assert.True(target is BaseShape);
+            Assert.True(target is BaseShapeViewModel);
         }
 
         [Fact]
@@ -31,8 +33,8 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<PointShape>()
+                State = ShapeStateFlags.Default,
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
             Assert.False(target.Connectors.IsDefault);
         }
@@ -43,15 +45,15 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<PointShape>()
+                State = ShapeStateFlags.Default,
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
 
             var point = _factory.CreatePointShape();
             point.Properties = point.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
-            var points = new List<PointShape>();
+            var points = new List<PointShapeViewModel>();
             target.GetPoints(points);
             var count = points.Count();
             Assert.Equal(1, count);
@@ -63,16 +65,16 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<PointShape>()
+                State = ShapeStateFlags.Default,
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
             var point = _factory.CreatePointShape();
 
             target.AddConnectorAsNone(point);
 
             Assert.Equal(point.Owner, target);
-            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
-            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
+            Assert.False(point.State.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
 
             var length = target.Connectors.Length;
@@ -85,16 +87,16 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<PointShape>()
+                State = ShapeStateFlags.Default,
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
             var point = _factory.CreatePointShape();
 
             target.AddConnectorAsInput(point);
 
             Assert.Equal(point.Owner, target);
-            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
-            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
+            Assert.False(point.State.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
 
             var length = target.Connectors.Length;
@@ -107,25 +109,27 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = new Class2()
             {
-                State = _factory.CreateShapeState(),
-                Connectors = ImmutableArray.Create<PointShape>()
+                State = ShapeStateFlags.Default,
+                Connectors = ImmutableArray.Create<PointShapeViewModel>()
             };
             var point = _factory.CreatePointShape();
 
             target.AddConnectorAsOutput(point);
 
             Assert.Equal(point.Owner, target);
-            Assert.True(point.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
-            Assert.False(point.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
+            Assert.False(point.State.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(point, target.Connectors);
 
             var length = target.Connectors.Length;
             Assert.Equal(1, length);
         }
 
-        public class Class1 : BaseShape
+        public class Class1 : BaseShapeViewModel
         {
-            public override Type TargetType => typeof(Class1);
+            public Class1() : base(typeof(Class1))
+            {
+            }
 
             public override object Copy(IDictionary<object, object> shared)
             {
@@ -147,7 +151,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void GetPoints(IList<PointShape> points)
+            public override void GetPoints(IList<PointShapeViewModel> points)
             {
                 throw new NotImplementedException();
             }
@@ -158,9 +162,11 @@ namespace Core2D.Shapes.UnitTests
             }
         }
 
-        public class Class2 : ConnectableShape
+        public class Class2 : ConnectableShapeViewModel
         {
-            public override Type TargetType => typeof(Class2);
+            public Class2() : base(typeof(Class2))
+            {
+            }
         }
     }
 }

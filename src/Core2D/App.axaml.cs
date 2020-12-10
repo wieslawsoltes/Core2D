@@ -12,12 +12,12 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Platform;
 using Avalonia.Styling;
-using Core2D;
-using Core2D.Editor;
 using Core2D.Configuration.Themes;
 using Core2D.Configuration.Windows;
-using Core2D.Designer;
+using Core2D.ViewModels.Designer;
+using Core2D.Model;
 using Core2D.Modules;
+using Core2D.ViewModels.Editor;
 using Core2D.Views;
 
 namespace Core2D
@@ -86,9 +86,9 @@ namespace Core2D
             }
         }
 
-        public AboutInfo CreateAboutInfo(RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
+        public AboutInfoViewModel CreateAboutInfo(RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
         {
-            return new AboutInfo()
+            return new AboutInfoViewModel()
             {
                 Title = "Core2D",
                 Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}",
@@ -133,7 +133,7 @@ namespace Core2D
                 }
             }
 
-            var editor = serviceProvider.GetService<ProjectEditor>();
+            var editor = serviceProvider.GetService<ProjectEditorViewModel>();
 
             var recentPath = System.IO.Path.Combine(fileSystem.GetBaseDirectory(), "Core2D.recent");
             if (fileSystem.Exists(recentPath))
@@ -151,7 +151,7 @@ namespace Core2D
             var windowingSubsystemName = windowingPlatform.GetType().Assembly.GetName().Name;
             var renderingSubsystemName = platformRenderInterface.GetType().Assembly.GetName().Name;
             var aboutInfo = CreateAboutInfo(runtimeInfo, windowingSubsystemName, renderingSubsystemName);
-            editor.AboutInfo = aboutInfo;
+            editor.AboutInfoViewModel = aboutInfo;
 
             var mainWindow = serviceProvider.GetService<MainWindow>();
 
@@ -197,7 +197,7 @@ namespace Core2D
 
             log?.Initialize(System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.log"));
 
-            var editor = serviceProvider.GetService<ProjectEditor>();
+            var editor = serviceProvider.GetService<ProjectEditorViewModel>();
 
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
             editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");

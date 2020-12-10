@@ -1,6 +1,7 @@
-﻿using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
@@ -8,11 +9,11 @@ namespace Core2D.Renderer
 {
     internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
     {
-        public EllipseShape Ellipse { get; set; }
+        public EllipseShapeViewModel Ellipse { get; set; }
         public A.Rect Rect { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public EllipseDrawNode(EllipseShape ellipse, ShapeStyle style)
+        public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
             : base()
         {
             Style = style;
@@ -22,8 +23,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Ellipse.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Ellipse.State.HasFlag(ShapeStateFlags.Size);
             Geometry = PathGeometryConverter.ToGeometry(Ellipse);
             Rect = Geometry.Bounds;
             Center = Geometry.Bounds.Center;

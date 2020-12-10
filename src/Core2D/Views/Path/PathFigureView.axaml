@@ -6,14 +6,14 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Core2D.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:vmp="using:Core2D.Path"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmp="using:Core2D.ViewModels.Path"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.PathFigure}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmp:PathFigure" x:CompileBindings="True">
+             x:DataType="vmp:PathFigureViewModel" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+        <converters:ViewModelToTypeStringConverter x:Key="ViewModelToTypeStringConverter" />
     </UserControl.Resources>
     <StackPanel>
         <StackPanel>
@@ -26,7 +26,7 @@
             <ListBox Items="{Binding Segments}">
                 <ListBox.DataTemplates>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                             </i:Interaction.Behaviors>

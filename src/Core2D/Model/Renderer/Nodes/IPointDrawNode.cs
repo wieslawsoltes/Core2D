@@ -1,10 +1,10 @@
-﻿using Core2D.Shapes;
+﻿using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer.Nodes
 {
     public interface IPointDrawNode : IDrawNode
     {
-        PointShape Point { get; set; }
+        PointShapeViewModel Point { get; set; }
         double PointSize { get; set; }
     }
 }

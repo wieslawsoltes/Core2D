@@ -1,5 +1,7 @@
-﻿using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Spatial;
 using SkiaSharp;
 
@@ -7,7 +9,7 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class TextDrawNode : DrawNode, ITextDrawNode
     {
-        public TextShape Text { get; set; }
+        public TextShapeViewModel Text { get; set; }
         public SKRect Rect { get; set; }
         public SKPoint Origin { get; set; }
         public SKTypeface Typeface { get; set; }
@@ -18,7 +20,7 @@ namespace Core2D.Renderer.SkiaSharp
         {
         }
 
-        public TextDrawNode(TextShape text, ShapeStyle style)
+        public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style)
         {
             Style = style;
             Text = text;
@@ -27,8 +29,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Text.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Text.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Text.State.HasFlag(ShapeStateFlags.Size);
             var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
             Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
             Center = new SKPoint(Rect.MidX, Rect.MidY);
@@ -38,7 +40,7 @@ namespace Core2D.Renderer.SkiaSharp
 
         protected void UpdateTextGeometry()
         {
-            BoundText = Text.GetProperty(nameof(TextShape.Text)) is string boundText ? boundText : Text.Text;
+            BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
 
             if (BoundText == null)
             {

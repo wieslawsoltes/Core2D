@@ -1,23 +1,25 @@
 ﻿using System;
+using Core2D.Model.Style;
 using Core2D.Style;
+using Core2D.ViewModels.Style;
 using AM = Avalonia.Media;
 
 namespace Core2D.Renderer
 {
     internal static class AvaloniaDrawUtil
     {
-        public static AM.Color ToColor(ArgbColor argbColor)
+        public static AM.Color ToColor(ArgbColorViewModel argbColorViewModelViewModel)
         {
-            return AM.Color.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B);
+            return AM.Color.FromArgb(argbColorViewModelViewModel.A, argbColorViewModelViewModel.R, argbColorViewModelViewModel.G, argbColorViewModelViewModel.B);
         }
 
-        public static AM.IBrush ToBrush(BaseColor color) => color switch
+        public static AM.IBrush ToBrush(BaseColorViewModel colorViewModel) => colorViewModel switch
         {
-            ArgbColor argbColor => new AM.Immutable.ImmutableSolidColorBrush(ToColor(argbColor)),
-            _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported.")
+            ArgbColorViewModel argbColor => new AM.Immutable.ImmutableSolidColorBrush(ToColor(argbColor)),
+            _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported.")
         };
 
-        public static AM.IPen ToPen(ShapeStyle style, double thickness)
+        public static AM.IPen ToPen(ShapeStyleViewModel style, double thickness)
         {
             var dashStyle = default(AM.Immutable.ImmutableDashStyle);
             if (style.Stroke.Dashes != null)
@@ -44,11 +46,11 @@ namespace Core2D.Renderer
             return pen;
         }
 
-        public static AM.IPen ToPen(BaseColor color, double thickness)
+        public static AM.IPen ToPen(BaseColorViewModel colorViewModel, double thickness)
         {
             var dashStyle = default(AM.Immutable.ImmutableDashStyle);
             var lineCap = AM.PenLineCap.Flat;
-            var brush = ToBrush(color);
+            var brush = ToBrush(colorViewModel);
             var pen = new AM.Immutable.ImmutablePen(brush, thickness, dashStyle, lineCap);
             return pen;
         }

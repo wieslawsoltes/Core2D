@@ -2,7 +2,7 @@
 using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Converters
 {
@@ -10,9 +10,9 @@ namespace Core2D.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is BaseShape shape)
+            if (value is BaseShapeViewModel shape)
             {
-                var key = value.GetType().Name.Replace("Shape", "");
+                var key = value.GetType().Name.Replace("ShapeViewModel", "");
 
                 if (Application.Current.Styles.TryGetResource(key, out var resource))
                 {

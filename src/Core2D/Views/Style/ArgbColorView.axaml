@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="using:Core2D.Converters"
              xmlns:cp="using:ThemeEditor.Controls.ColorPicker"
-             xmlns:vms="using:Core2D.Style"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vms="using:Core2D.ViewModels.Style"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.ArgbColor}"
              d:DesignWidth="300" d:DesignHeight="400"
-             x:DataType="vms:ArgbColor" x:CompileBindings="True">
+             x:DataType="vms:ArgbColorViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:HexToColorConverter x:Key="HexToColorConverter"/>
-        <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter" />
+        <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter" />
         <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
             <VisualBrush.Visual>
                 <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="LightGray" />
@@ -40,16 +40,7 @@
             <Panel Height="30" DockPanel.Dock="Top">
                 <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
                 <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
-                <Border BorderThickness="0" CornerRadius="0">
-                    <Border.Background>
-                        <MultiBinding Mode="OneWay" Converter="{StaticResource ArgbColorToBrushMultiConverter}">
-                            <Binding Path="A" />
-                            <Binding Path="R" />
-                            <Binding Path="G" />
-                            <Binding Path="B" />
-                        </MultiBinding>
-                    </Border.Background>
-                </Border>
+                <Border BorderThickness="0" CornerRadius="0" Background="{Binding Value, Converter={StaticResource ArgbColorToBrushConverter}}" />
             </Panel>
         </ToggleButton>
         <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft" Width="450" Height="300">

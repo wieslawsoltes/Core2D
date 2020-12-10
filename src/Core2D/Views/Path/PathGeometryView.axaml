@@ -4,19 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:vmp="using:Core2D.Path"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmp="using:Core2D.ViewModels.Path"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.PathGeometry}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmp:PathGeometry" x:CompileBindings="True">
+             x:DataType="vmp:PathGeometryViewModel" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+        <converters:ViewModelToTypeStringConverter x:Key="ViewModelToTypeStringConverter" />
     </UserControl.Resources>
     <StackPanel>
         <StackPanel>
             <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
-            <ComboBox Items="{x:Static vmp:PathGeometry.FillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <ComboBox Items="{x:Static vmp:PathGeometryViewModel.FillRuleValues}" SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         </StackPanel>
         <Expander Header="Figures" IsExpanded="False">
             <TreeView x:Name="FiguresTreeView" Items="{Binding Figures}">
@@ -26,11 +26,11 @@
                     </Style>
                 </TreeView.Styles>
                 <TreeView.DataTemplates>
-                    <TreeDataTemplate DataType="vmp:PathFigure" ItemsSource="{Binding Segments}" x:CompileBindings="False">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" />
+                    <TreeDataTemplate DataType="vmp:PathFigureViewModel" ItemsSource="{Binding Segments}" x:CompileBindings="False">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}" Background="Transparent" />
                     </TreeDataTemplate>
-                    <DataTemplate DataType="vmp:PathSegment">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent" />
+                    <DataTemplate DataType="vmp:PathSegmentViewModel">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}" Background="Transparent" />
                     </DataTemplate>
                 </TreeView.DataTemplates>
             </TreeView>

@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Core2D.DragAndDrop"
-             xmlns:vmdt="using:Core2D.Data"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmdt="using:Core2D.ViewModels.Data"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Database}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmdt:Database" x:CompileBindings="True">
+             x:DataType="vmdt:DatabaseViewModel" x:CompileBindings="True">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom">
             <Expander Header="Current Record" IsExpanded="False">
@@ -24,7 +24,7 @@
                     </StackPanel>
                     <DataGrid x:Name="ColumnsDataGrid" Items="{Binding Columns}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" BorderThickness="0" RowBackground="Transparent">
                         <i:Interaction.Behaviors>
-                            <idd:TypedDragBehavior DataType="{x:Type vmdt:Column}" />
+                            <idd:TypedDragBehavior DataType="{x:Type vmdt:ColumnViewModel}" />
                         </i:Interaction.Behaviors>
                         <DataGrid.KeyBindings>
                             <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddColumn}" CommandParameter="{Binding}" Gesture="Ctrl+N" x:CompileBindings="False" />
@@ -32,7 +32,7 @@
                         </DataGrid.KeyBindings>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" IsReadOnly="False" Binding="{Binding Name}" />
-                            <DataGridCheckBoxColumn Header="IsVisible" Binding="{Binding IsVisible}" x:DataType="vmdt:Column" />
+                            <DataGridCheckBoxColumn Header="IsVisible" Binding="{Binding IsVisible}" x:DataType="vmdt:ColumnViewModel" />
                             <DataGridTextColumn Header="Owner" Binding="{Binding Owner.Name}" IsReadOnly="True" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -50,7 +50,7 @@
             </Grid>
             <DataGrid x:Name="RowsDataGrid" SelectedItem="{Binding CurrentRecord, Mode=TwoWay}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="False" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" BorderThickness="0" RowBackground="Transparent">
                 <i:Interaction.Behaviors>
-                    <idd:TypedDragBehavior DataType="{x:Type vmdt:Record}" />
+                    <idd:TypedDragBehavior DataType="{x:Type vmdt:RecordViewModel}" />
                 </i:Interaction.Behaviors>
                 <DataGrid.KeyBindings>
                     <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}" CommandParameter="{Binding #RowsDataGrid.DataContext, Mode=OneWay}" Gesture="Ctrl+N" x:CompileBindings="False" />

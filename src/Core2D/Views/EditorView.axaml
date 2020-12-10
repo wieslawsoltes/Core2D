@@ -12,12 +12,12 @@
              xmlns:renderer="using:Core2D.Views.Renderer"
              xmlns:style="using:Core2D.Views.Style"
              xmlns:libraries="using:Core2D.Views.Libraries"
-             xmlns:vme="using:Core2D.Editor"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
-             x:DataType="vme:ProjectEditor" x:CompileBindings="True">
+             x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:FirstSelectedItemValueConverter x:Key="FirstSelectedItemValueConverter" />
         <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter" />
@@ -48,7 +48,7 @@
                     </TabItem>
                     <TabItem Header="Style">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <style:ShapeStyleView x:DataType="vme:ProjectEditor" Margin="0,0,8,0">
+                            <style:ShapeStyleView x:DataType="vme:ProjectEditorViewModel" Margin="0,0,8,0">
                                 <style:ShapeStyleView.DataContext>
                                     <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
                                         <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
@@ -72,7 +72,7 @@
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <renderer:ShapeStateView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}" 
-                                                     DataContext="{Binding State}"
+                                                     DataContext="{Binding}"
                                                      Margin="0,0,8,0"
                                                      x:CompileBindings="False" />
                         </ScrollViewer>

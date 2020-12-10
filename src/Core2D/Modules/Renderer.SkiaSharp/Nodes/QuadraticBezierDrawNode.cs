@@ -1,15 +1,17 @@
-﻿using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
 {
     internal class QuadraticBezierDrawNode : DrawNode, IQuadraticBezierDrawNode
     {
-        public QuadraticBezierShape QuadraticBezier { get; set; }
+        public QuadraticBezierShapeViewModel QuadraticBezier { get; set; }
         public SKPath Geometry { get; set; }
 
-        public QuadraticBezierDrawNode(QuadraticBezierShape quadraticBezier, ShapeStyle style)
+        public QuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
         {
             Style = style;
             QuadraticBezier = quadraticBezier;
@@ -18,8 +20,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = QuadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = QuadraticBezier.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = QuadraticBezier.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = QuadraticBezier.State.HasFlag(ShapeStateFlags.Size);
             Geometry = PathGeometryConverter.ToSKPath(QuadraticBezier);
             Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
         }

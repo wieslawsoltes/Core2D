@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Core2D.Editor.History
+namespace Core2D.ViewModels.Editor.History
 {
-    internal struct UndoRedo
+    public readonly partial struct UndoRedo
     {
         public readonly Action Undo;
 

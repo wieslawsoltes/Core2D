@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D;
-using Core2D.Path;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Shapes;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -43,13 +44,13 @@ namespace Core2D.UnitTests
         {
             var figure = _factory.CreatePathFigure();
 
-            var segment1 = new TestSegment() { Point = _factory.CreatePointShape() };
+            var segment1 = new TestSegmentViewModel() { Point = _factory.CreatePointShape() };
             figure.Segments = figure.Segments.Add(segment1);
 
-            var segment2 = new TestSegment() { Point = _factory.CreatePointShape() };
+            var segment2 = new TestSegmentViewModel() { Point = _factory.CreatePointShape() };
             figure.Segments = figure.Segments.Add(segment2);
 
-            var target = new List<PointShape>();
+            var target = new List<PointShapeViewModel>();
             figure.GetPoints(target);
 
             Assert.Equal(3, target.Count());
@@ -65,8 +66,8 @@ namespace Core2D.UnitTests
         {
             var figure = _factory.CreatePathFigure();
 
-            var target = ImmutableArray.Create<PathSegment>();
-            var actual = (figure as PathFigure).ToXamlString(target);
+            var target = ImmutableArray.Create<PathSegmentViewModel>();
+            var actual = (figure as PathFigureViewModel).ToXamlString(target);
 
             Assert.Equal(string.Empty, actual);
         }
@@ -77,8 +78,8 @@ namespace Core2D.UnitTests
         {
             var figure = _factory.CreatePathFigure();
 
-            var target = ImmutableArray.Create<PathSegment>();
-            var actual = (figure as PathFigure).ToSvgString(target);
+            var target = ImmutableArray.Create<PathSegmentViewModel>();
+            var actual = (figure as PathFigureViewModel).ToSvgString(target);
 
             Assert.Equal(string.Empty, actual);
         }
@@ -131,11 +132,11 @@ namespace Core2D.UnitTests
             Assert.Equal("M0,0z", actual);
         }
 
-        public class TestSegment : PathSegment
+        public class TestSegmentViewModel : PathSegmentViewModel
         {
-            public PointShape Point { get; set; }
+            public PointShapeViewModel Point { get; set; }
 
-            public override void GetPoints(IList<PointShape> points)
+            public override void GetPoints(IList<PointShapeViewModel> points)
             {
                 points.Add(Point);
             }

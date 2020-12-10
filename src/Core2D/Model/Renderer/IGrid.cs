@@ -1,6 +1,6 @@
-﻿using Core2D.Style;
+﻿using Core2D.ViewModels.Style;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer
 {
     public interface IGrid
     {
@@ -20,7 +20,7 @@ namespace Core2D.Renderer
 
         double GridCellHeight { get; set; }
 
-        BaseColor GridStrokeColor { get; set; }
+        BaseColorViewModel GridStrokeColor { get; set; }
 
         double GridStrokeThickness { get; set; }
 

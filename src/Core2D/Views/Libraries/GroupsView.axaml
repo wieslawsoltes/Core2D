@@ -8,13 +8,13 @@
              xmlns:idd="using:Core2D.DragAndDrop"
              xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:vmc="using:Core2D.Containers"
-             xmlns:vms="using:Core2D.Shapes"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmc="using:Core2D.ViewModels.Containers"
+             xmlns:vms="using:Core2D.ViewModels.Shapes"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:ProjectContainer" x:CompileBindings="True">
+             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:IsGroupConverter x:Key="IsGroupConverter" />
         <handlers:GroupsListBoxDropHandler x:Key="GroupsListBoxDropHandler" />
@@ -49,7 +49,7 @@
                 <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #GroupsListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="vms:GroupShape">
+                <DataTemplate DataType="vms:GroupShapeViewModel">
                     <TextBlock x:Name="GroupTextBlock" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #GroupTextBlock}" x:CompileBindings="False">

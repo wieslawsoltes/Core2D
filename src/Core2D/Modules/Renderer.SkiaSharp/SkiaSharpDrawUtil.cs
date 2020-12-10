@@ -1,6 +1,8 @@
 ﻿using System;
-using Core2D.Shapes;
+using Core2D.Model.Style;
 using Core2D.Style;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
@@ -16,7 +18,7 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKRect(left, top, right, bottom);
         }
 
-        public static SKRect CreateRect(PointShape tl, PointShape br)
+        public static SKRect CreateRect(PointShapeViewModel tl, PointShapeViewModel br)
         {
             float left = (float)Math.Min(tl.X, br.X);
             float top = (float)Math.Min(tl.Y, br.Y);
@@ -25,16 +27,16 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKRect(left, top, right, bottom);
         }
 
-        public static SKColor ToSKColor(BaseColor color)
+        public static SKColor ToSKColor(BaseColorViewModel colorViewModel)
         {
-            return color switch
+            return colorViewModel switch
             {
-                ArgbColor argbColor => new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A),
-                _ => throw new NotSupportedException($"The {color.GetType()} color type is not supported."),
+                ArgbColorViewModel argbColor => new SKColor(argbColor.R, argbColor.G, argbColor.B, argbColor.A),
+                _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
             };
         }
 
-        public static SKPaint ToSKPaintBrush(BaseColor color)
+        public static SKPaint ToSKPaintBrush(BaseColorViewModel colorViewModel)
         {
             var brush = new SKPaint();
 
@@ -43,12 +45,12 @@ namespace Core2D.Renderer.SkiaSharp
             brush.IsStroke = false;
             brush.LcdRenderText = true;
             brush.SubpixelText = true;
-            brush.Color = ToSKColor(color);
+            brush.Color = ToSKColor(colorViewModel);
 
             return brush;
         }
 
-        public static SKStrokeCap ToStrokeCap(ShapeStyle style)
+        public static SKStrokeCap ToStrokeCap(ShapeStyleViewModel style)
         {
             return style.Stroke.LineCap switch
             {
@@ -58,7 +60,7 @@ namespace Core2D.Renderer.SkiaSharp
             };
         }
 
-        public static SKPaint ToSKPaintPen(ShapeStyle style, double strokeWidth)
+        public static SKPaint ToSKPaintPen(ShapeStyleViewModel style, double strokeWidth)
         {
             var pen = new SKPaint();
 
@@ -84,7 +86,7 @@ namespace Core2D.Renderer.SkiaSharp
             return pen;
         }
 
-        public static SKPaint ToSKPaintPen(BaseColor color, double strokeWidth)
+        public static SKPaint ToSKPaintPen(BaseColorViewModel colorViewModel, double strokeWidth)
         {
             var pen = new SKPaint();
 
@@ -94,14 +96,14 @@ namespace Core2D.Renderer.SkiaSharp
             pen.IsAntialias = true;
             pen.IsStroke = true;
             pen.StrokeWidth = (float)strokeWidth;
-            pen.Color = ToSKColor(color);
+            pen.Color = ToSKColor(colorViewModel);
             pen.StrokeCap = SKStrokeCap.Butt;
             pen.PathEffect = pathEffect;
 
             return pen;
         }
 
-        public static SKPoint GetTextOrigin(ShapeStyle style, ref SKRect rect, ref SKRect size)
+        public static SKPoint GetTextOrigin(ShapeStyleViewModel style, ref SKRect rect, ref SKRect size)
         {
             double rwidth = Math.Abs(rect.Right - rect.Left);
             double rheight = Math.Abs(rect.Bottom - rect.Top);
@@ -122,34 +124,30 @@ namespace Core2D.Renderer.SkiaSharp
             return new SKPoint((float)ox, (float)oy);
         }
 
-        public static SKPaint GetSKPaint(string text, ShapeStyle shapeStyle, PointShape topLeft, PointShape bottomRight, out SKPoint origin)
+        public static SKPaint GetSKPaint(string text, ShapeStyleViewModel shapeStyleViewModel, PointShapeViewModel topLeft, PointShapeViewModel bottomRight, out SKPoint origin)
         {
-            var pen = ToSKPaintBrush(shapeStyle.Stroke.Color);
+            var pen = ToSKPaintBrush(shapeStyleViewModel.Stroke.Color);
 
             var weight = SKFontStyleWeight.Normal;
-            if (shapeStyle.TextStyle.FontStyle != null)
+
+            if (shapeStyleViewModel.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
-                if (shapeStyle.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
-                {
-                    weight |= SKFontStyleWeight.Bold;
-                }
+                weight |= SKFontStyleWeight.Bold;
             }
 
             var style = SKFontStyleSlant.Upright;
-            if (shapeStyle.TextStyle.FontStyle != null)
+
+            if (shapeStyleViewModel.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
-                if (shapeStyle.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
-                {
-                    style |= SKFontStyleSlant.Italic;
-                }
+                style |= SKFontStyleSlant.Italic;
             }
 
-            var tf = SKTypeface.FromFamilyName(shapeStyle.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style);
+            var tf = SKTypeface.FromFamilyName(shapeStyleViewModel.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style);
             pen.Typeface = tf;
             pen.TextEncoding = SKTextEncoding.Utf16;
-            pen.TextSize = (float)(shapeStyle.TextStyle.FontSize);
+            pen.TextSize = (float)(shapeStyleViewModel.TextStyle.FontSize);
 
-            pen.TextAlign = shapeStyle.TextStyle.TextHAlignment switch
+            pen.TextAlign = shapeStyleViewModel.TextStyle.TextHAlignment switch
             {
                 TextHAlignment.Center => SKTextAlign.Center,
                 TextHAlignment.Right => SKTextAlign.Right,
@@ -165,7 +163,7 @@ namespace Core2D.Renderer.SkiaSharp
             float width = rect.Width;
             float height = rect.Height;
 
-            switch (shapeStyle.TextStyle.TextVAlignment)
+            switch (shapeStyleViewModel.TextStyle.TextVAlignment)
             {
                 default:
                 case TextVAlignment.Top:
@@ -181,7 +179,7 @@ namespace Core2D.Renderer.SkiaSharp
                     break;
             }
 
-            switch (shapeStyle.TextStyle.TextHAlignment)
+            switch (shapeStyleViewModel.TextStyle.TextHAlignment)
             {
                 default:
                 case TextHAlignment.Left:

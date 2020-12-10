@@ -1,11 +1,11 @@
 ﻿using System;
-using Core2D.Style;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer.Nodes
 {
     public interface IDrawNode : IDisposable
     {
-        ShapeStyle Style { get; set; }
+        ShapeStyleViewModel Style { get; set; }
         bool ScaleThickness { get; set; }
         bool ScaleSize { get; set; }
         void UpdateGeometry();

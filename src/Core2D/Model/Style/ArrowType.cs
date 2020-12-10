@@ -1,4 +1,4 @@
-﻿namespace Core2D.Style
+﻿namespace Core2D.Model.Style
 {
     public enum ArrowType
     {

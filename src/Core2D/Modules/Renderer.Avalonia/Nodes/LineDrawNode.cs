@@ -1,7 +1,9 @@
 ﻿using System;
-using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.Model.Style;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Spatial;
 using A = Avalonia;
 using AM = Avalonia.Media;
@@ -11,20 +13,20 @@ namespace Core2D.Renderer
 {
     internal class LineDrawNode : DrawNode, ILineDrawNode
     {
-        public LineShape Line { get; set; }
+        public LineShapeViewModel Line { get; set; }
         public A.Point P0 { get; set; }
         public A.Point P1 { get; set; }
         public IMarker StartMarker { get; set; }
         public IMarker EndMarker { get; set; }
 
-        public LineDrawNode(LineShape line, ShapeStyle style)
+        public LineDrawNode(LineShapeViewModel line, ShapeStyleViewModel style)
         {
             Style = style;
             Line = line;
             UpdateGeometry();
         }
 
-        private Marker CreatArrowMarker(double x, double y, double angle, ShapeStyle shapeStyle, ArrowStyle style)
+        private Marker CreatArrowMarker(double x, double y, double angle, ShapeStyleViewModel shapeStyleViewModel, ArrowStyleViewModel style)
         {
             switch (style.ArrowType)
             {
@@ -33,8 +35,8 @@ namespace Core2D.Renderer
                     {
                         var marker = new NoneMarker();
 
-                        marker.Shape = Line;
-                        marker.ShapeStyle = shapeStyle;
+                        marker.ShapeViewModel = Line;
+                        marker.ShapeStyleViewModel = shapeStyleViewModel;
                         marker.Style = style;
                         marker.Point = new A.Point(x, y);
 
@@ -49,8 +51,8 @@ namespace Core2D.Renderer
 
                         var marker = new RectangleMarker();
 
-                        marker.Shape = Line;
-                        marker.ShapeStyle = shapeStyle;
+                        marker.ShapeViewModel = Line;
+                        marker.ShapeStyleViewModel = shapeStyleViewModel;
                         marker.Style = style;
                         marker.Rotation = ACP.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
@@ -69,8 +71,8 @@ namespace Core2D.Renderer
 
                         var marker = new EllipseMarker();
 
-                        marker.Shape = Line;
-                        marker.ShapeStyle = shapeStyle;
+                        marker.ShapeViewModel = Line;
+                        marker.ShapeStyleViewModel = shapeStyleViewModel;
                         marker.Style = style;
                         marker.Rotation = ACP.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x - sx, y));
@@ -90,8 +92,8 @@ namespace Core2D.Renderer
 
                         var marker = new ArrowMarker();
 
-                        marker.Shape = Line;
-                        marker.ShapeStyle = shapeStyle;
+                        marker.ShapeViewModel = Line;
+                        marker.ShapeStyleViewModel = shapeStyleViewModel;
                         marker.Style = style;
                         marker.Rotation = ACP.MatrixHelper.Rotation(angle, new A.Vector(x, y));
                         marker.Point = ACP.MatrixHelper.TransformPoint(marker.Rotation, new A.Point(x, y));
@@ -113,10 +115,10 @@ namespace Core2D.Renderer
             double x2 = Line.End.X;
             double y2 = Line.End.Y;
 
-            if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
             {
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
-                StartMarker = CreatArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrowStyle);
+                StartMarker = CreatArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrow);
                 StartMarker.UpdateStyle();
                 P0 = (StartMarker as Marker).Point;
             }
@@ -126,10 +128,10 @@ namespace Core2D.Renderer
                 P0 = new A.Point(x1, y1);
             }
 
-            if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.EndArrow.ArrowType != ArrowType.None)
             {
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
-                EndMarker = CreatArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrowStyle);
+                EndMarker = CreatArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrow);
                 EndMarker.UpdateStyle();
                 P1 = (EndMarker as Marker).Point;
             }
@@ -142,8 +144,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Line.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Line.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Line.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Line.State.HasFlag(ShapeStateFlags.Size);
             P0 = new A.Point(Line.Start.X, Line.Start.Y);
             P1 = new A.Point(Line.End.X, Line.End.Y);
             Center = new A.Point((P0.X + P1.X) / 2.0, (P0.Y + P1.Y) / 2.0);
@@ -154,12 +156,12 @@ namespace Core2D.Renderer
         {
             base.UpdateStyle();
 
-            if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
             {
                 StartMarker?.UpdateStyle();
             }
 
-            if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
+            if (Style.Stroke.EndArrow.ArrowType != ArrowType.None)
             {
                 EndMarker?.UpdateStyle();
             }
@@ -173,12 +175,12 @@ namespace Core2D.Renderer
             {
                 context.DrawLine(Stroke, P0, P1);
 
-                if (Style.Stroke.StartArrowStyle.ArrowType != ArrowType.None)
+                if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
                 {
                     StartMarker?.Draw(dc);
                 }
 
-                if (Style.Stroke.EndArrowStyle.ArrowType != ArrowType.None)
+                if (Style.Stroke.EndArrow.ArrowType != ArrowType.None)
                 {
                     EndMarker?.Draw(dc);
                 }

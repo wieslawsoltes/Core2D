@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Editor;
+using Core2D.Model.Editor;
+using Core2D.ViewModels;
 
 namespace Core2D.Editor
 {
@@ -75,11 +76,6 @@ namespace Core2D.Editor
         public AvaloniaEditorCanvasPlatform(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-        }
-
-        public override object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
         }
     }
 }

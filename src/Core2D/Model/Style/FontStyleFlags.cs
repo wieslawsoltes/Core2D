@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.Style
+namespace Core2D.Model.Style
 {
     [Flags]
     public enum FontStyleFlags

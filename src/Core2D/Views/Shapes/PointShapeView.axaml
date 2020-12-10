@@ -3,26 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vms="using:Core2D.Shapes"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vms="using:Core2D.ViewModels.Shapes"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Point}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:PointShape" x:CompileBindings="True">
-    <StackPanel>
-        <Grid ColumnDefinitions="50*,6,50*">
-            <StackPanel Grid.Column="0">
-                <Label Content="X" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding X, Mode=TwoWay}" />
-            </StackPanel>
-            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
-            <StackPanel Grid.Column="2">
-                <Label Content="Y" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Y, Mode=TwoWay}" />
-            </StackPanel>
-        </Grid>
-        <Expander Header="State" IsExpanded="False">
-            <ContentControl Content="{Binding State}" />
-        </Expander>
-    </StackPanel>
+             x:DataType="vms:PointShapeViewModel" x:CompileBindings="True">
+    <Grid ColumnDefinitions="50*,6,50*">
+        <StackPanel Grid.Column="0">
+            <Label Content="X" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding X, Mode=TwoWay}" />
+        </StackPanel>
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
+        <StackPanel Grid.Column="2">
+            <Label Content="Y" Margin="{DynamicResource TextControlThemePadding}" />
+            <TextBox Text="{Binding Y, Mode=TwoWay}" />
+        </StackPanel>
+    </Grid>
 </UserControl>

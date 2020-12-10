@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 using Spatial;
 
-namespace Core2D.Editor
+namespace Core2D.Model.Editor
 {
     public interface IBounds
     {
         Type TargetType { get; }
 
-        PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
+        PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
 
-        bool Contains(BaseShape shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
+        bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
 
-        bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
+        bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered);
     }
 }

@@ -46,7 +46,7 @@ namespace Core2D
 				return;
 			}
 
-			var viewModelBaseSymbol = compilation.GetTypeByMetadataName("Core2D.ViewModelBase");
+			var viewModelBaseSymbol = compilation.GetTypeByMetadataName("Core2D.ViewModels.ViewModelBase");
 			if (viewModelBaseSymbol is null)
 			{
 				return;
@@ -143,7 +143,7 @@ namespace {namespaceNameLocator}
 			{
 				string namespaceNameViewModel = namedTypeSymbolViewModel.ContainingNamespace.ToDisplayString();
 				string classNameViewModel = $"{namespaceNameViewModel}.{namedTypeSymbolViewModel.ToDisplayString(format)}";
-				string classNameView = classNameViewModel.Replace("Core2D", "Core2D.Views") + "View";
+				string classNameView = classNameViewModel.Replace("ViewModel", "View");
 
 				var classNameViewSymbol = compilation.GetTypeByMetadataName(classNameView);
 				if (classNameViewSymbol is null || classNameViewSymbol.BaseType?.Equals(userControlViewSymbol, SymbolEqualityComparer.Default) != true)

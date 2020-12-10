@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.Model.Editor;
+using Core2D.ViewModels.Shapes;
 using Spatial;
 
-namespace Core2D.Editor.Bounds
+namespace Core2D.ViewModels.Editor.Bounds
 {
-    public class HitTest : IHitTest
+    public partial class HitTest : IHitTest
     {
         public IDictionary<Type, IBounds> Registered { get; set; }
 
@@ -27,12 +28,12 @@ namespace Core2D.Editor.Bounds
             }
         }
 
-        public PointShape TryToGetPoint(BaseShape shape, Point2 target, double radius, double scale)
+        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale)
         {
             return Registered[shape.TargetType].TryToGetPoint(shape, target, radius, scale, Registered);
         }
 
-        public PointShape TryToGetPoint(IEnumerable<BaseShape> shapes, Point2 target, double radius, double scale)
+        public PointShapeViewModel TryToGetPoint(IEnumerable<BaseShapeViewModel> shapes, Point2 target, double radius, double scale)
         {
             foreach (var shape in shapes)
             {
@@ -45,17 +46,17 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public bool Contains(BaseShape shape, Point2 target, double radius, double scale)
+        public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale)
         {
             return Registered[shape.TargetType].Contains(shape, target, radius, scale, Registered);
         }
 
-        public bool Overlaps(BaseShape shape, Rect2 target, double radius, double scale)
+        public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale)
         {
             return Registered[shape.TargetType].Overlaps(shape, target, radius, scale, Registered);
         }
 
-        public BaseShape TryToGetShape(IEnumerable<BaseShape> shapes, Point2 target, double radius, double scale)
+        public BaseShapeViewModel TryToGetShape(IEnumerable<BaseShapeViewModel> shapes, Point2 target, double radius, double scale)
         {
             foreach (var shape in shapes)
             {
@@ -68,9 +69,9 @@ namespace Core2D.Editor.Bounds
             return null;
         }
 
-        public ISet<BaseShape> TryToGetShapes(IEnumerable<BaseShape> shapes, Rect2 target, double radius, double scale)
+        public ISet<BaseShapeViewModel> TryToGetShapes(IEnumerable<BaseShapeViewModel> shapes, Rect2 target, double radius, double scale)
         {
-            var selected = new HashSet<BaseShape>();
+            var selected = new HashSet<BaseShapeViewModel>();
             foreach (var shape in shapes)
             {
                 var result = Registered[shape.TargetType].Overlaps(shape, target, radius, scale, Registered);

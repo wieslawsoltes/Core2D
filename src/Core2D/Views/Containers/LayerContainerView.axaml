@@ -6,15 +6,15 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Core2D.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:vms="using:Core2D.Shapes"
-             xmlns:vmc="using:Core2D.Containers"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vms="using:Core2D.ViewModels.Shapes"
+             xmlns:vmc="using:Core2D.ViewModels.Containers"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Layer}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:LayerContainer" x:CompileBindings="True">
+             x:DataType="vmc:LayerContainerViewModel" x:CompileBindings="True">
     <UserControl.Resources>
-        <converters:ObjectToTypeStringConverter x:Key="ObjectToTypeStringConverter" />
+        <converters:ViewModelToTypeStringConverter x:Key="ViewModelToTypeStringConverter" />
     </UserControl.Resources>
     <StackPanel>
         <StackPanel>
@@ -25,8 +25,8 @@
         <Expander Header="Shapes" IsExpanded="False">
             <ListBox x:Name="ShapesListBox" Items="{Binding Shapes}">
                 <ListBox.DataTemplates>
-                    <DataTemplate DataType="vms:BaseShape">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ObjectToTypeStringConverter}}" Background="Transparent">
+                    <DataTemplate DataType="vms:BaseShapeViewModel">
+                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}" Background="Transparent">
                             <i:Interaction.Behaviors>
                                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                             </i:Interaction.Behaviors>

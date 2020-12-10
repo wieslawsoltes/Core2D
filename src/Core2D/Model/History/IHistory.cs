@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.History
+namespace Core2D.Model.History
 {
     public interface IHistory
     {

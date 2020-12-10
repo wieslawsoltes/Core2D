@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer
 {
     public interface IImageCache : INotifyPropertyChanged
     {

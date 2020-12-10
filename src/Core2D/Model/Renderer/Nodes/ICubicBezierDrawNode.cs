@@ -1,9 +1,9 @@
-﻿using Core2D.Shapes;
+﻿using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer.Nodes
 {
     public interface ICubicBezierDrawNode : IDrawNode
     {
-        CubicBezierShape CubicBezier { get; set; }
+        CubicBezierShapeViewModel CubicBezier { get; set; }
     }
 }

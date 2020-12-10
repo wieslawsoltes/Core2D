@@ -1,10 +1,10 @@
-﻿using Core2D.Shapes;
+﻿using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Renderer
+namespace Core2D.Model.Renderer.Nodes
 {
     public interface ILineDrawNode : IDrawNode
     {
-        LineShape Line { get; set; }
+        LineShapeViewModel Line { get; set; }
         public IMarker StartMarker { get; set; }
         public IMarker EndMarker { get; set; }
     }

@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using Core2D.Model;
+using Core2D.ViewModels;
+using Xunit;
 
 namespace Core2D.Style.UnitTests
 {

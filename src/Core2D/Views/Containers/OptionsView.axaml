@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vmc="using:Core2D.Containers"
-             xmlns:vmp="using:Core2D.Path"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vmc="using:Core2D.ViewModels.Containers"
+             xmlns:vmp="using:Core2D.ViewModels.Path"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Options}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:Options" x:CompileBindings="True">
+             x:DataType="vmc:OptionsViewModel" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="General" IsExpanded="True">
             <StackPanel>
@@ -21,7 +21,7 @@
                 <Label Content="HitThreshold" Margin="{DynamicResource TextControlThemePadding}" />
                 <TextBox Text="{Binding HitThreshold, Mode=TwoWay}" />
                 <Label Content="MoveMode" Margin="{DynamicResource TextControlThemePadding}" />
-                <ComboBox Items="{x:Static vmc:Options.MoveModeValues}" SelectedItem="{Binding MoveMode, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <ComboBox Items="{x:Static vmc:OptionsViewModel.MoveModeValues}" SelectedItem="{Binding MoveMode, Mode=TwoWay}" HorizontalAlignment="Stretch" />
                 <CheckBox Content="TryToConnect" IsChecked="{Binding TryToConnect, Mode=TwoWay}" HorizontalAlignment="Stretch" />
             </StackPanel>
         </Expander>
@@ -31,7 +31,7 @@
                 <CheckBox Content="IsFilled" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
                 <CheckBox Content="IsClosed" IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch" />
                 <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
-                <ComboBox Items="{x:Static vmp:PathGeometry.FillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                <ComboBox Items="{x:Static vmp:PathGeometryViewModel.FillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
             </StackPanel>
         </Expander>
     </StackPanel>

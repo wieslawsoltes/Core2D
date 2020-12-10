@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Core2D.Editor;
+using Core2D.Model;
+using Core2D.ViewModels.Editor;
 using Core2D.Views;
 
 namespace Core2D.Editor
@@ -31,7 +32,7 @@ namespace Core2D.Editor
                 var path = result?.FirstOrDefault();
                 if (path != null)
                 {
-                    return _serviceProvider.GetService<ProjectEditor>().OnGetImageKey(path);
+                    return _serviceProvider.GetService<ProjectEditorViewModel>().OnGetImageKey(path);
                 }
             }
             catch (Exception ex)

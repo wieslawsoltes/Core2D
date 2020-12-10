@@ -1,6 +1,7 @@
-﻿using Core2D;
-using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -153,7 +154,7 @@ namespace Core2D.UnitTests
         {
             var target = _factory.CreateProjectContainer();
 
-            var library = _factory.CreateLibrary<GroupShape>("Library1");
+            var library = _factory.CreateLibrary<GroupShapeViewModel>("Library1");
             target.GroupLibraries = target.GroupLibraries.Add(library);
 
             target.SetCurrentGroupLibrary(library);
@@ -167,7 +168,7 @@ namespace Core2D.UnitTests
         {
             var target = _factory.CreateProjectContainer();
 
-            var library = _factory.CreateLibrary<ShapeStyle>("Library1");
+            var library = _factory.CreateLibrary<ShapeStyleViewModel>("Library1");
             target.StyleLibraries = target.StyleLibraries.Add(library);
 
             target.SetCurrentStyleLibrary(library);
@@ -234,7 +235,7 @@ namespace Core2D.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
-        public void Setting_Selected_Should_Call_SetSelected()
+        public void Setting_Selected_Should_Call_SetSelected_After()
         {
             var target = _factory.CreateProjectContainer();
 
@@ -242,6 +243,7 @@ namespace Core2D.UnitTests
             target.Documents = target.Documents.Add(document);
 
             target.Selected = document;
+            target.SetSelected(document);
 
             Assert.Equal(document, target.CurrentDocument);
         }

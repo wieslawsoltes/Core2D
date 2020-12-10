@@ -1,14 +1,16 @@
 ﻿using System;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.Renderer.SkiaSharp
 {
     internal class SkiaSharpDrawNodeFactory : IDrawNodeFactory
     {
-        public IFillDrawNode CreateFillDrawNode(double x, double y, double width, double height, BaseColor color)
+        public IFillDrawNode CreateFillDrawNode(double x, double y, double width, double height, BaseColorViewModel colorViewModel)
         {
-            return new FillDrawNode(x, y, width, height, color);
+            return new FillDrawNode(x, y, width, height, colorViewModel);
         }
 
         public IGridDrawNode CreateGridDrawNode(IGrid grid, double x, double y, double width, double height)
@@ -16,52 +18,52 @@ namespace Core2D.Renderer.SkiaSharp
             return new GridDrawNode(grid, x, y, width, height);
         }
 
-        public IPointDrawNode CreatePointDrawNode(PointShape point, ShapeStyle pointStyle, double pointSize)
+        public IPointDrawNode CreatePointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize)
         {
-            return new PointDrawNode(point, pointStyle, pointSize);
+            return new PointDrawNode(point, pointStyleViewModel, pointSize);
         }
 
-        public ILineDrawNode CreateLineDrawNode(LineShape line, ShapeStyle style)
+        public ILineDrawNode CreateLineDrawNode(LineShapeViewModel line, ShapeStyleViewModel style)
         {
             return new LineDrawNode(line, style);
         }
 
-        public IRectangleDrawNode CreateRectangleDrawNode(RectangleShape rectangle, ShapeStyle style)
+        public IRectangleDrawNode CreateRectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
         {
             return new RectangleDrawNode(rectangle, style);
         }
 
-        public IEllipseDrawNode CreateEllipseDrawNode(EllipseShape ellipse, ShapeStyle style)
+        public IEllipseDrawNode CreateEllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
         {
             return new EllipseDrawNode(ellipse, style);
         }
 
-        public IArcDrawNode CreateArcDrawNode(ArcShape arc, ShapeStyle style)
+        public IArcDrawNode CreateArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
         {
             return new ArcDrawNode(arc, style);
         }
 
-        public ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShape cubicBezier, ShapeStyle style)
+        public ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
         {
             return new CubicBezierDrawNode(cubicBezier, style);
         }
 
-        public IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShape quadraticBezier, ShapeStyle style)
+        public IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
         {
             return new QuadraticBezierDrawNode(quadraticBezier, style);
         }
 
-        public ITextDrawNode CreateTextDrawNode(TextShape text, ShapeStyle style)
+        public ITextDrawNode CreateTextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style)
         {
             return new TextDrawNode(text, style);
         }
 
-        public IImageDrawNode CreateImageDrawNode(ImageShape image, ShapeStyle style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
+        public IImageDrawNode CreateImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
         {
             return new ImageDrawNode(image, style, imageCache, bitmapCache);
         }
 
-        public IPathDrawNode CreatePathDrawNode(PathShape path, ShapeStyle style)
+        public IPathDrawNode CreatePathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style)
         {
             return new PathDrawNode(path, style);
         }

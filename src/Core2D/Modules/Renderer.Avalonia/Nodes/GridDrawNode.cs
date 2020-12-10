@@ -1,4 +1,5 @@
-﻿using Core2D.Renderer;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
 using A = Avalonia;
 using AM = Avalonia.Media;
 

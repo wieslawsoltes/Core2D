@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Core2D.Shapes;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface ISelection
     {
-        ISet<BaseShape> SelectedShapes { get; set; }
+        ISet<BaseShapeViewModel> SelectedShapes { get; set; }
     }
 }

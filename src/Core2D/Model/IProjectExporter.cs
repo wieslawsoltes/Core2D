@@ -1,14 +1,14 @@
 ﻿using System.IO;
-using Core2D.Containers;
+using Core2D.ViewModels.Containers;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface IProjectExporter
     {
-        void Save(Stream stream, PageContainer container);
+        void Save(Stream stream, PageContainerViewModel container);
 
-        void Save(Stream stream, DocumentContainer document);
+        void Save(Stream stream, DocumentContainerViewModel document);
 
-        void Save(Stream stream, ProjectContainer project);
+        void Save(Stream stream, ProjectContainerViewModel project);
     }
 }

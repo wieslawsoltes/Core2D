@@ -4,23 +4,27 @@ using System.Collections.Immutable;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Path;
-using Core2D.Path.Segments;
-using Core2D.Renderer;
-using Core2D.Scripting;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.Model;
+using Core2D.Model.Editor;
+using Core2D.Model.Path;
+using Core2D.Model.Renderer;
+using Core2D.Model.Style;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Renderer;
+using Core2D.ViewModels.Scripting;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D
+namespace Core2D.ViewModels
 {
-    public class Factory : IFactory
+    public partial class Factory : IFactory
     {
-        public Library<T> CreateLibrary<T>(string name)
+        public LibraryViewModel<T> CreateLibrary<T>(string name)
         {
-            return new Library<T>()
+            return new LibraryViewModel<T>()
             {
                 Name = name,
                 Items = ImmutableArray.Create<T>(),
@@ -28,9 +32,9 @@ namespace Core2D
             };
         }
 
-        public Library<T> CreateLibrary<T>(string name, IEnumerable<T> items)
+        public LibraryViewModel<T> CreateLibrary<T>(string name, IEnumerable<T> items)
         {
-            return new Library<T>()
+            return new LibraryViewModel<T>()
             {
                 Name = name,
                 Items = ImmutableArray.CreateRange<T>(items),
@@ -38,17 +42,17 @@ namespace Core2D
             };
         }
 
-        public Value CreateValue(string content)
+        public ValueViewModel CreateValue(string content)
         {
-            return new Value()
+            return new ValueViewModel()
             {
                 Content = content
             };
         }
 
-        public Property CreateProperty(ViewModelBase owner, string name, string value)
+        public PropertyViewModel CreateProperty(ViewModelBase owner, string name, string value)
         {
-            return new Property()
+            return new PropertyViewModel()
             {
                 Name = name,
                 Value = value,
@@ -56,9 +60,9 @@ namespace Core2D
             };
         }
 
-        public Column CreateColumn(Database owner, string name, bool isVisible = true)
+        public ColumnViewModel CreateColumn(DatabaseViewModel owner, string name, bool isVisible = true)
         {
-            return new Column()
+            return new ColumnViewModel()
             {
                 Name = name,
                 IsVisible = isVisible,
@@ -66,18 +70,18 @@ namespace Core2D
             };
         }
 
-        public Record CreateRecord(Database owner, ImmutableArray<Value> values)
+        public RecordViewModel CreateRecord(DatabaseViewModel owner, ImmutableArray<ValueViewModel> values)
         {
-            return new Record()
+            return new RecordViewModel()
             {
                 Values = values,
                 Owner = owner
             };
         }
 
-        public Record CreateRecord(Database owner, string id, ImmutableArray<Value> values)
+        public RecordViewModel CreateRecord(DatabaseViewModel owner, string id, ImmutableArray<ValueViewModel> values)
         {
-            var record = new Record()
+            var record = new RecordViewModel()
             {
                 Values = values,
                 Owner = owner
@@ -91,9 +95,9 @@ namespace Core2D
             return record;
         }
 
-        public Record CreateRecord(Database owner, string value)
+        public RecordViewModel CreateRecord(DatabaseViewModel owner, string value)
         {
-            return new Record()
+            return new RecordViewModel()
             {
                 Values = ImmutableArray.CreateRange(
                     Enumerable.Repeat(
@@ -103,31 +107,31 @@ namespace Core2D
             };
         }
 
-        public Database CreateDatabase(string name, string idColumnName = "Id")
+        public DatabaseViewModel CreateDatabase(string name, string idColumnName = "Id")
         {
-            return new Database()
+            return new DatabaseViewModel()
             {
                 Name = name,
                 IdColumnName = idColumnName,
-                Columns = ImmutableArray.Create<Column>(),
-                Records = ImmutableArray.Create<Record>()
+                Columns = ImmutableArray.Create<ColumnViewModel>(),
+                Records = ImmutableArray.Create<RecordViewModel>()
             };
         }
 
-        public Database CreateDatabase(string name, ImmutableArray<Column> columns, string idColumnName = "Id")
+        public DatabaseViewModel CreateDatabase(string name, ImmutableArray<ColumnViewModel> columns, string idColumnName = "Id")
         {
-            return new Database()
+            return new DatabaseViewModel()
             {
                 Name = name,
                 IdColumnName = idColumnName,
                 Columns = columns,
-                Records = ImmutableArray.Create<Record>()
+                Records = ImmutableArray.Create<RecordViewModel>()
             };
         }
 
-        public Database CreateDatabase(string name, ImmutableArray<Column> columns, ImmutableArray<Record> records, string idColumnName = "Id")
+        public DatabaseViewModel CreateDatabase(string name, ImmutableArray<ColumnViewModel> columns, ImmutableArray<RecordViewModel> records, string idColumnName = "Id")
         {
-            return new Database()
+            return new DatabaseViewModel()
             {
                 Name = name,
                 IdColumnName = idColumnName,
@@ -136,11 +140,11 @@ namespace Core2D
             };
         }
 
-        public Database FromFields(string name, IEnumerable<string[]> fields, string idColumnName = "Id")
+        public DatabaseViewModel FromFields(string name, IEnumerable<string[]> fields, string idColumnName = "Id")
         {
             var db = CreateDatabase(name, idColumnName);
             var tempColumns = fields.FirstOrDefault().Select(c => CreateColumn(db, c));
-            var columns = ImmutableArray.CreateRange<Column>(tempColumns);
+            var columns = ImmutableArray.CreateRange<ColumnViewModel>(tempColumns);
 
             if (columns.Length >= 1 && columns[0].Name == idColumnName)
             {
@@ -153,9 +157,9 @@ namespace Core2D
                             CreateRecord(
                                 db,
                                 v.FirstOrDefault(),
-                                ImmutableArray.CreateRange<Value>(v.Select(c => CreateValue(c)))));
+                                ImmutableArray.CreateRange<ValueViewModel>(v.Select(c => CreateValue(c)))));
 
-                db.Records = ImmutableArray.CreateRange<Record>(tempRecords);
+                db.Records = ImmutableArray.CreateRange<RecordViewModel>(tempRecords);
             }
             else
             {
@@ -167,9 +171,9 @@ namespace Core2D
                     .Select(v =>
                             CreateRecord(
                                 db,
-                                ImmutableArray.CreateRange<Value>(v.Select(c => CreateValue(c)))));
+                                ImmutableArray.CreateRange<ValueViewModel>(v.Select(c => CreateValue(c)))));
 
-                db.Records = ImmutableArray.CreateRange<Record>(tempRecords);
+                db.Records = ImmutableArray.CreateRange<RecordViewModel>(tempRecords);
             }
 
             return db;
@@ -180,23 +184,15 @@ namespace Core2D
             return new Cache<TKey, TValue>(dispose);
         }
 
-        public ShapeState CreateShapeState(ShapeStateFlags flags = ShapeStateFlags.Default)
+        public ShapeRendererStateViewModel CreateShapeRendererState()
         {
-            return new ShapeState()
-            {
-                Flags = flags
-            };
-        }
-
-        public ShapeRendererState CreateShapeRendererState()
-        {
-            var state = new ShapeRendererState()
+            var state = new ShapeRendererStateViewModel()
             {
                 PanX = 0.0,
                 PanY = 0.0,
                 ZoomX = 1.0,
                 ZoomY = 1.0,
-                DrawShapeState = CreateShapeState(ShapeStateFlags.Visible),
+                DrawShapeState = ShapeStateFlags.Visible,
                 SelectedShapes = default
             };
 
@@ -234,17 +230,17 @@ namespace Core2D
             return state;
         }
 
-        public LineSegment CreateLineSegment(PointShape point)
+        public LineSegmentViewModel CreateLineSegment(PointShapeViewModel point)
         {
-            return new LineSegment()
+            return new LineSegmentViewModel()
             {
                 Point = point
             };
         }
 
-        public ArcSegment CreateArcSegment(PointShape point, PathSize size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection)
+        public ArcSegmentViewModel CreateArcSegment(PointShapeViewModel point, PathSizeViewModel size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection)
         {
-            return new ArcSegment()
+            return new ArcSegmentViewModel()
             {
                 Point = point,
                 Size = size,
@@ -254,18 +250,18 @@ namespace Core2D
             };
         }
 
-        public QuadraticBezierSegment CreateQuadraticBezierSegment(PointShape point1, PointShape point2)
+        public QuadraticBezierSegmentViewModel CreateQuadraticBezierSegment(PointShapeViewModel point1, PointShapeViewModel point2)
         {
-            return new QuadraticBezierSegment()
+            return new QuadraticBezierSegmentViewModel()
             {
                 Point1 = point1,
                 Point2 = point2
             };
         }
 
-        public CubicBezierSegment CreateCubicBezierSegment(PointShape point1, PointShape point2, PointShape point3)
+        public CubicBezierSegmentViewModel CreateCubicBezierSegment(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3)
         {
-            return new CubicBezierSegment()
+            return new CubicBezierSegmentViewModel()
             {
                 Point1 = point1,
                 Point2 = point2,
@@ -273,70 +269,70 @@ namespace Core2D
             };
         }
 
-        public PathSize CreatePathSize(double width = 0.0, double height = 0.0)
+        public PathSizeViewModel CreatePathSize(double width = 0.0, double height = 0.0)
         {
-            return new PathSize()
+            return new PathSizeViewModel()
             {
                 Width = width,
                 Height = height
             };
         }
 
-        public PathGeometry CreatePathGeometry()
+        public PathGeometryViewModel CreatePathGeometry()
         {
-            return new PathGeometry()
+            return new PathGeometryViewModel()
             {
-                Figures = ImmutableArray.Create<PathFigure>(),
+                Figures = ImmutableArray.Create<PathFigureViewModel>(),
                 FillRule = FillRule.Nonzero
             };
         }
 
-        public GeometryContext CreateGeometryContext()
+        public GeometryContextViewModel CreateGeometryContext()
         {
-            return new GeometryContext(this, CreatePathGeometry());
+            return new GeometryContextViewModel(this, CreatePathGeometry());
         }
 
-        public GeometryContext CreateGeometryContext(PathGeometry geometry)
+        public GeometryContextViewModel CreateGeometryContext(PathGeometryViewModel geometry)
         {
-            return new GeometryContext(this, geometry);
+            return new GeometryContextViewModel(this, geometry);
         }
 
-        public PathGeometry CreatePathGeometry(ImmutableArray<PathFigure> figures, FillRule fillRule = FillRule.Nonzero)
+        public PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero)
         {
-            return new PathGeometry()
+            return new PathGeometryViewModel()
             {
                 Figures = figures,
                 FillRule = fillRule
             };
         }
 
-        public PathFigure CreatePathFigure(bool isClosed = false)
+        public PathFigureViewModel CreatePathFigure(bool isClosed = false)
         {
-            return new PathFigure()
+            return new PathFigureViewModel()
             {
                 StartPoint = CreatePointShape(),
-                Segments = ImmutableArray.Create<PathSegment>(),
+                Segments = ImmutableArray.Create<PathSegmentViewModel>(),
                 IsClosed = isClosed
             };
         }
 
-        public PathFigure CreatePathFigure(PointShape startPoint, bool isClosed = false)
+        public PathFigureViewModel CreatePathFigure(PointShapeViewModel startPoint, bool isClosed = false)
         {
-            return new PathFigure()
+            return new PathFigureViewModel()
             {
                 StartPoint = startPoint,
-                Segments = ImmutableArray.Create<PathSegment>(),
+                Segments = ImmutableArray.Create<PathSegmentViewModel>(),
                 IsClosed = isClosed
             };
         }
 
-        public PointShape CreatePointShape(double x = 0.0, double y = 0.0, string name = "")
+        public PointShapeViewModel CreatePointShape(double x = 0.0, double y = 0.0, string name = "")
         {
-            var pointShape = new PointShape()
+            var pointShape = new PointShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = default,
                 X = x,
                 Y = y
@@ -344,13 +340,13 @@ namespace Core2D
             return pointShape;
         }
 
-        public LineShape CreateLineShape(PointShape start, PointShape end, ShapeStyle style, bool isStroked = true, string name = "")
+        public LineShapeViewModel CreateLineShape(PointShapeViewModel start, PointShapeViewModel end, ShapeStyleViewModel style, bool isStroked = true, string name = "")
         {
-            var lineShape = new LineShape()
+            var lineShape = new LineShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false
@@ -362,13 +358,13 @@ namespace Core2D
             return lineShape;
         }
 
-        public LineShape CreateLineShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, string name = "")
+        public LineShapeViewModel CreateLineShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, bool isStroked = true, string name = "")
         {
-            var lineShape = new LineShape()
+            var lineShape = new LineShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false
@@ -383,18 +379,18 @@ namespace Core2D
             return lineShape;
         }
 
-        public LineShape CreateLineShape(double x, double y, ShapeStyle style, bool isStroked = true, string name = "")
+        public LineShapeViewModel CreateLineShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, string name = "")
         {
             return CreateLineShape(x, y, x, y, style, isStroked, name);
         }
 
-        public ArcShape CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModelViewModel CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var arcShape = new ArcShape()
+            var arcShape = new ArcShapeViewModelViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -415,18 +411,18 @@ namespace Core2D
             return arcShape;
         }
 
-        public ArcShape CreateArcShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModelViewModel CreateArcShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateArcShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public ArcShape CreateArcShape(PointShape point1, PointShape point2, PointShape point3, PointShape point4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModelViewModel CreateArcShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var arcShape = new ArcShape()
+            var arcShape = new ArcShapeViewModelViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -440,13 +436,13 @@ namespace Core2D
             return arcShape;
         }
 
-        public QuadraticBezierShape CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var quadraticBezierShape = new QuadraticBezierShape()
+            var quadraticBezierShape = new QuadraticBezierShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -464,18 +460,18 @@ namespace Core2D
             return quadraticBezierShape;
         }
 
-        public QuadraticBezierShape CreateQuadraticBezierShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateQuadraticBezierShape(x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public QuadraticBezierShape CreateQuadraticBezierShape(PointShape point1, PointShape point2, PointShape point3, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var quadraticBezierShape = new QuadraticBezierShape()
+            var quadraticBezierShape = new QuadraticBezierShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -488,13 +484,13 @@ namespace Core2D
             return quadraticBezierShape;
         }
 
-        public CubicBezierShape CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public CubicBezierShapeViewModel CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var cubicBezierShape = new CubicBezierShape()
+            var cubicBezierShape = new CubicBezierShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -515,18 +511,18 @@ namespace Core2D
             return cubicBezierShape;
         }
 
-        public CubicBezierShape CreateCubicBezierShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public CubicBezierShapeViewModel CreateCubicBezierShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateCubicBezierShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public CubicBezierShape CreateCubicBezierShape(PointShape point1, PointShape point2, PointShape point3, PointShape point4, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public CubicBezierShapeViewModel CreateCubicBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var cubicBezierShape = new CubicBezierShape()
+            var cubicBezierShape = new CubicBezierShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -540,13 +536,13 @@ namespace Core2D
             return cubicBezierShape;
         }
 
-        public RectangleShape CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public RectangleShapeViewModel CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var rectangleShape = new RectangleShape()
+            var rectangleShape = new RectangleShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -561,18 +557,18 @@ namespace Core2D
             return rectangleShape;
         }
 
-        public RectangleShape CreateRectangleShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public RectangleShapeViewModel CreateRectangleShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateRectangleShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public RectangleShape CreateRectangleShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public RectangleShapeViewModel CreateRectangleShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var rectangleShape = new RectangleShape()
+            var rectangleShape = new RectangleShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -584,13 +580,13 @@ namespace Core2D
             return rectangleShape;
         }
 
-        public EllipseShape CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public EllipseShapeViewModel CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var ellipseShape = new EllipseShape()
+            var ellipseShape = new EllipseShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled
@@ -605,18 +601,18 @@ namespace Core2D
             return ellipseShape;
         }
 
-        public EllipseShape CreateEllipseShape(double x, double y, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public EllipseShapeViewModel CreateEllipseShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateEllipseShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public EllipseShape CreateEllipseShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, bool isStroked = true, bool isFilled = false, string name = "")
+        public EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var ellipseShape = new EllipseShape()
+            var ellipseShape = new EllipseShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -630,12 +626,12 @@ namespace Core2D
             return ellipseShape;
         }
 
-        public PathShape CreatePathShape(ShapeStyle style, PathGeometry geometry, bool isStroked = true, bool isFilled = true)
+        public PathShapeViewModel CreatePathShape(ShapeStyleViewModel style, PathGeometryViewModel geometry, bool isStroked = true, bool isFilled = true)
         {
-            var pathShape = new PathShape()
+            var pathShape = new PathShapeViewModel()
             {
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -660,43 +656,28 @@ namespace Core2D
             return pathShape;
         }
 
-        public PathShape CreatePathShape(string name, ShapeStyle style, PathGeometry geometry, bool isStroked = true, bool isFilled = true)
+        public PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel style, PathGeometryViewModel geometry, bool isStroked = true, bool isFilled = true)
         {
-            var pathShape = new PathShape()
+            var pathShape = new PathShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
                 Geometry = geometry
             };
-
-            //if (geometry != null)
-            //{
-            //    geometry.Owner = pathShape;
-            //
-            //    foreach (var figure in geometry.Figures)
-            //    {
-            //        figure.Owner = geometry;
-            //
-            //        foreach (var segment in figure.Segments)
-            //        {
-            //            segment.Owner = figure;
-            //        }
-            //    }
-            //}
             return pathShape;
         }
 
-        public TextShape CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyle style, string text, bool isStroked = true, string name = "")
+        public TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, string text, bool isStroked = true, string name = "")
         {
-            var textShape = new TextShape()
+            var textShape = new TextShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 Text = text
@@ -711,18 +692,18 @@ namespace Core2D
             return textShape;
         }
 
-        public TextShape CreateTextShape(double x, double y, ShapeStyle style, string text, bool isStroked = true, string name = "")
+        public TextShapeViewModel CreateTextShape(double x, double y, ShapeStyleViewModel style, string text, bool isStroked = true, string name = "")
         {
             return CreateTextShape(x, y, x, y, style, text, isStroked, name);
         }
 
-        public TextShape CreateTextShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string text, bool isStroked = true, string name = "")
+        public TextShapeViewModel CreateTextShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, string text, bool isStroked = true, string name = "")
         {
-            var textShape = new TextShape()
+            var textShape = new TextShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 TopLeft = topLeft,
@@ -736,13 +717,13 @@ namespace Core2D
             return textShape;
         }
 
-        public ImageShape CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "")
+        public ImageShapeViewModel CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
-            var imageShape = new ImageShape()
+            var imageShape = new ImageShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -758,18 +739,18 @@ namespace Core2D
             return imageShape;
         }
 
-        public ImageShape CreateImageShape(double x, double y, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "")
+        public ImageShapeViewModel CreateImageShape(double x, double y, ShapeStyleViewModel style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
             return CreateImageShape(x, y, x, y, style, key, isStroked, isFilled, name);
         }
 
-        public ImageShape CreateImageShape(PointShape topLeft, PointShape bottomRight, ShapeStyle style, string key, bool isStroked = false, bool isFilled = false, string name = "")
+        public ImageShapeViewModel CreateImageShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
-            var imageShape = new ImageShape()
+            var imageShape = new ImageShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
@@ -784,32 +765,29 @@ namespace Core2D
             return imageShape;
         }
 
-        public GroupShape CreateGroupShape(string name = "g")
+        public GroupShapeViewModel CreateGroupShape(string name = "g")
         {
-            return new GroupShape()
+            return new GroupShapeViewModel()
             {
                 Name = name,
-                State = CreateShapeState(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone),
-                Properties = ImmutableArray.Create<Property>(),
-                Connectors = ImmutableArray.Create<PointShape>(),
-                Shapes = ImmutableArray.Create<BaseShape>()
+                State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+                Properties = ImmutableArray.Create<PropertyViewModel>(),
+                Connectors = ImmutableArray.Create<PointShapeViewModel>(),
+                Shapes = ImmutableArray.Create<BaseShapeViewModel>()
             };
         }
 
-        public ArgbColor CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
+        public ArgbColorViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
         {
-            return new ArgbColor()
+            return new ArgbColorViewModel()
             {
-                A = a,
-                R = r,
-                G = g,
-                B = b
+                Value = ArgbColorViewModel.ToUint32(a, r, g, b)
             };
         }
 
-        public ArrowStyle CreateArrowStyle(ArrowType arrowType = ArrowType.None, double radiusX = 5.0, double radiusY = 3.0)
+        public ArrowStyleViewModel CreateArrowStyle(ArrowType arrowType = ArrowType.None, double radiusX = 5.0, double radiusY = 3.0)
         {
-            return new ArrowStyle()
+            return new ArrowStyleViewModel()
             {
                 ArrowType = arrowType,
                 RadiusX = radiusX,
@@ -817,9 +795,9 @@ namespace Core2D
             };
         }
 
-        public StrokeStyle CreateStrokeStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00, double thickness = 2.0, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
+        public StrokeStyleViewModel CreateStrokeStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00, double thickness = 2.0, ArrowStyleViewModel startArrowStyleViewModel = null, ArrowStyleViewModel endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
-            var style = new StrokeStyle()
+            var style = new StrokeStyleViewModel()
             {
                 Name = name,
                 Color = CreateArgbColor(a, r, g, b),
@@ -829,92 +807,84 @@ namespace Core2D
                 DashOffset = dashOffset
             };
 
-            style.StartArrowStyle = startArrowStyle ?? CreateArrowStyle();
-            style.EndArrowStyle = endArrowStyle ?? CreateArrowStyle();
+            style.StartArrow = startArrowStyleViewModel ?? CreateArrowStyle();
+            style.EndArrow = endArrowStyleViewModel ?? CreateArrowStyle();
 
             return style;
         }
 
-        public StrokeStyle CreateStrokeStyle(string name, BaseColor color, double thickness, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
+        public StrokeStyleViewModel CreateStrokeStyle(string name, BaseColorViewModel colorViewModel, double thickness, ArrowStyleViewModel startArrow, ArrowStyleViewModel endArrow)
         {
-            return new StrokeStyle()
+            return new StrokeStyleViewModel()
             {
                 Name = name,
-                Color = color,
+                Color = colorViewModel,
                 Thickness = thickness,
                 LineCap = LineCap.Round,
                 Dashes = default,
                 DashOffset = 0.0,
-                StartArrowStyle = startArrowStyle,
-                EndArrowStyle = endArrowStyle
+                StartArrow = startArrow,
+                EndArrow = endArrow
             };
         }
 
-        public FillStyle CreateFillStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
+        public FillStyleViewModel CreateFillStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
         {
-            return new FillStyle()
+            return new FillStyleViewModel()
             {
                 Name = name,
                 Color = CreateArgbColor(a, r, g, b)
             };
         }
 
-        public FillStyle CreateFillStyle(string name, BaseColor color)
+        public FillStyleViewModel CreateFillStyle(string name, BaseColorViewModel colorViewModel)
         {
-            return new FillStyle()
+            return new FillStyleViewModel()
             {
                 Name = name,
-                Color = color
+                Color = colorViewModel
             };
         }
 
-        public FontStyle CreateFontStyle(FontStyleFlags flags = FontStyleFlags.Regular)
+        public ShapeStyleViewModel CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyleViewModel textStyleViewModel = null, ArrowStyleViewModel startArrowStyleViewModel = null, ArrowStyleViewModel endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
-            return new FontStyle()
-            {
-                Flags = flags
-            };
-        }
-
-        public ShapeStyle CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyle textStyle = null, ArrowStyle startArrowStyle = null, ArrowStyle endArrowStyle = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
-        {
-            return new ShapeStyle()
+            return new ShapeStyleViewModel()
             {
                 Name = name,
-                Stroke = CreateStrokeStyle("", sa, sr, sg, sb, thickness, startArrowStyle, endArrowStyle, lineCap, dashes, dashOffset),
+                Stroke = CreateStrokeStyle("", sa, sr, sg, sb, thickness, startArrowStyleViewModel, endArrowStyleViewModel, lineCap, dashes, dashOffset),
                 Fill = CreateFillStyle("", fa, fr, fg, fb),
-                TextStyle = textStyle ?? CreateTextStyle()
+                TextStyle = textStyleViewModel ?? CreateTextStyle()
             };
         }
 
-        public ShapeStyle CreateShapeStyle(string name, BaseColor stroke, BaseColor fill, double thickness, TextStyle textStyle, ArrowStyle startArrowStyle, ArrowStyle endArrowStyle)
+        public ShapeStyleViewModel CreateShapeStyle(string name, BaseColorViewModel stroke, BaseColorViewModel fill, double thickness, TextStyleViewModel textStyleViewModel, ArrowStyleViewModel startArrowStyleViewModel, ArrowStyleViewModel endArrowStyleViewModel)
         {
-            return new ShapeStyle()
+            return new ShapeStyleViewModel()
             {
                 Name = name,
-                Stroke = CreateStrokeStyle("", stroke, thickness, startArrowStyle, endArrowStyle),
+                Stroke = CreateStrokeStyle("", stroke, thickness, startArrowStyleViewModel, endArrowStyleViewModel),
                 Fill = CreateFillStyle("", fill),
-                TextStyle = textStyle
+                TextStyle = textStyleViewModel
             };
         }
 
-        public TextStyle CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyle fontStyle = null, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
+        public TextStyleViewModel CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyleFlags fontStyle = FontStyleFlags.Regular, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
         {
-            return new TextStyle()
+            return new TextStyleViewModel()
             {
                 Name = name,
                 FontName = fontName,
                 FontFile = fontFile,
                 FontSize = fontSize,
-                FontStyle = fontStyle ?? CreateFontStyle(FontStyleFlags.Regular),
+                FontStyle = fontStyle,
                 TextHAlignment = textHAlignment,
                 TextVAlignment = textVAlignment
             };
         }
 
-        public Options CreateOptions()
+        public OptionsViewModel CreateOptions()
         {
-            return new Options()
+            return new OptionsViewModel()
             {
                 SnapToGrid = true,
                 SnapX = 15.0,
@@ -929,33 +899,33 @@ namespace Core2D
             };
         }
 
-        public Script CreateScript(string name = "Script", string code = "")
+        public ScriptViewModel CreateScript(string name = "Script", string code = "")
         {
-            return new Script()
+            return new ScriptViewModel()
             {
                 Name = name,
                 Code = code
             };
         }
 
-        public LayerContainer CreateLayerContainer(string name = "Layer", PageContainer owner = null, bool isVisible = true)
+        public LayerContainerViewModel CreateLayerContainer(string name = "Layer", PageContainerViewModel owner = null, bool isVisible = true)
         {
-            return new LayerContainer()
+            return new LayerContainerViewModel()
             {
                 Name = name,
                 Owner = owner,
-                Shapes = ImmutableArray.Create<BaseShape>(),
+                Shapes = ImmutableArray.Create<BaseShapeViewModel>(),
                 IsVisible = isVisible
             };
         }
 
-        public PageContainer CreatePageContainer(string name = "Page")
+        public PageContainerViewModel CreatePageContainer(string name = "Page")
         {
-            var page = new PageContainer()
+            var page = new PageContainerViewModel()
             {
                 Name = name,
-                Layers = ImmutableArray.Create<LayerContainer>(),
-                Properties = ImmutableArray.Create<Property>()
+                Layers = ImmutableArray.Create<LayerContainerViewModel>(),
+                Properties = ImmutableArray.Create<PropertyViewModel>()
             };
 
             var builder = page.Layers.ToBuilder();
@@ -969,13 +939,13 @@ namespace Core2D
             return page;
         }
 
-        public PageContainer CreateTemplateContainer(string name = "Template", double width = 840, double height = 600)
+        public PageContainerViewModel CreateTemplateContainer(string name = "Template", double width = 840, double height = 600)
         {
-            var template = new PageContainer()
+            var template = new PageContainerViewModel()
             {
                 Name = name,
-                Layers = ImmutableArray.Create<LayerContainer>(),
-                Properties = ImmutableArray.Create<Property>()
+                Layers = ImmutableArray.Create<LayerContainerViewModel>(),
+                Properties = ImmutableArray.Create<PropertyViewModel>()
             };
 
             template.Background = CreateArgbColor(0x00, 0xFF, 0xFF, 0xFF);
@@ -1004,42 +974,42 @@ namespace Core2D
             return template;
         }
 
-        public DocumentContainer CreateDocumentContainer(string name = "Document")
+        public DocumentContainerViewModel CreateDocumentContainer(string name = "Document")
         {
-            return new DocumentContainer()
+            return new DocumentContainerViewModel()
             {
                 Name = name,
-                Pages = ImmutableArray.Create<PageContainer>()
+                Pages = ImmutableArray.Create<PageContainerViewModel>()
             };
         }
 
-        public ProjectContainer CreateProjectContainer(string name = "Project")
+        public ProjectContainerViewModel CreateProjectContainer(string name = "Project")
         {
-            return new ProjectContainer()
+            return new ProjectContainerViewModel()
             {
                 Name = name,
                 Options = CreateOptions(),
-                StyleLibraries = ImmutableArray.Create<Library<ShapeStyle>>(),
-                GroupLibraries = ImmutableArray.Create<Library<GroupShape>>(),
-                Databases = ImmutableArray.Create<Database>(),
-                Templates = ImmutableArray.Create<PageContainer>(),
-                Scripts = ImmutableArray.Create<Script>(),
-                Documents = ImmutableArray.Create<DocumentContainer>()
+                StyleLibraries = ImmutableArray.Create<LibraryViewModel<ShapeStyleViewModel>>(),
+                GroupLibraries = ImmutableArray.Create<LibraryViewModel<GroupShapeViewModel>>(),
+                Databases = ImmutableArray.Create<DatabaseViewModel>(),
+                Templates = ImmutableArray.Create<PageContainerViewModel>(),
+                Scripts = ImmutableArray.Create<ScriptViewModel>(),
+                Documents = ImmutableArray.Create<DocumentContainerViewModel>()
             };
         }
 
-        private IEnumerable<string> GetUsedKeys(ProjectContainer project)
+        private IEnumerable<string> GetUsedKeys(ProjectContainerViewModel project)
         {
-            return ProjectContainer.GetAllShapes<ImageShape>(project).Select(i => i.Key).Distinct();
+            return ProjectContainerViewModel.GetAllShapes<ImageShapeViewModel>(project).Select(i => i.Key).Distinct();
         }
 
-        private ProjectContainer ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileSystem, IJsonSerializer serializer)
+        private ProjectContainerViewModel ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             using var entryStream = projectEntry.Open();
-            return serializer.Deserialize<ProjectContainer>(fileSystem.ReadUtf8Text(entryStream));
+            return serializer.Deserialize<ProjectContainerViewModel>(fileSystem.ReadUtf8Text(entryStream));
         }
 
-        private void WriteProjectContainer(ProjectContainer project, ZipArchiveEntry projectEntry, IFileSystem fileSystem, IJsonSerializer serializer)
+        private void WriteProjectContainer(ProjectContainerViewModel project, ZipArchiveEntry projectEntry, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             using var jsonStream = projectEntry.Open();
             fileSystem.WriteUtf8Text(jsonStream, serializer.Serialize(project));
@@ -1068,13 +1038,13 @@ namespace Core2D
             }
         }
 
-        public ProjectContainer OpenProjectContainer(string path, IFileSystem fileSystem, IJsonSerializer serializer)
+        public ProjectContainerViewModel OpenProjectContainer(string path, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             using var stream = fileSystem.Open(path);
             return OpenProjectContainer(stream, fileSystem, serializer);
         }
 
-        public void SaveProjectContainer(ProjectContainer project, string path, IFileSystem fileSystem, IJsonSerializer serializer)
+        public void SaveProjectContainer(ProjectContainerViewModel project, string path, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             if (project is IImageCache imageCache)
             {
@@ -1083,7 +1053,7 @@ namespace Core2D
             }
         }
 
-        public ProjectContainer OpenProjectContainer(Stream stream, IFileSystem fileSystem, IJsonSerializer serializer)
+        public ProjectContainerViewModel OpenProjectContainer(Stream stream, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Read);
             var projectEntry = archive.Entries.FirstOrDefault(e => e.FullName == "Project.json");
@@ -1095,7 +1065,7 @@ namespace Core2D
             return project;
         }
 
-        public void SaveProjectContainer(ProjectContainer project, IImageCache imageCache, Stream stream, IFileSystem fileSystem, IJsonSerializer serializer)
+        public void SaveProjectContainer(ProjectContainerViewModel project, IImageCache imageCache, Stream stream, IFileSystem fileSystem, IJsonSerializer serializer)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Create);
             var projectEntry = archive.CreateEntry("Project.json");

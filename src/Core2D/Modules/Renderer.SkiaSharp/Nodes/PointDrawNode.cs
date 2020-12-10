@@ -1,5 +1,6 @@
-﻿using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Spatial;
 using SkiaSharp;
 
@@ -7,13 +8,13 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class PointDrawNode : DrawNode, IPointDrawNode
     {
-        public PointShape Point { get; set; }
+        public PointShapeViewModel Point { get; set; }
         public double PointSize { get; set; }
         public SKRect Rect { get; set; }
 
-        public PointDrawNode(PointShape point, ShapeStyle pointStyle, double pointSize)
+        public PointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize)
         {
-            Style = pointStyle;
+            Style = pointStyleViewModel;
             Point = point;
             PointSize = pointSize;
             UpdateGeometry();
@@ -21,8 +22,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = true; // Point.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = true; // Point.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = true; // Point.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = true; // Point.State.HasFlag(ShapeStateFlags.Size);
             var rect2 = Rect2.FromPoints(Point.X - PointSize, Point.Y - PointSize, Point.X + PointSize, Point.Y + PointSize, 0, 0);
             Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
             Center = new SKPoint(Rect.MidX, Rect.MidY);

@@ -1,6 +1,8 @@
-﻿using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.Model.Style;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Spatial;
 using A = Avalonia;
 using AM = Avalonia.Media;
@@ -9,7 +11,7 @@ namespace Core2D.Renderer
 {
     internal class TextDrawNode : DrawNode, ITextDrawNode
     {
-        public TextShape Text { get; set; }
+        public TextShapeViewModel Text { get; set; }
         public A.Rect Rect { get; set; }
         public A.Point Origin { get; set; }
         public AM.Typeface Typeface { get; set; }
@@ -20,7 +22,7 @@ namespace Core2D.Renderer
         {
         }
 
-        public TextDrawNode(TextShape text, ShapeStyle style)
+        public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style)
         {
             Style = style;
             Text = text;
@@ -29,8 +31,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Text.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Text.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Text.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Text.State.HasFlag(ShapeStateFlags.Size);
             var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
             Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
             Center = Rect.Center;
@@ -40,7 +42,7 @@ namespace Core2D.Renderer
 
         protected void UpdateTextGeometry()
         {
-            BoundText = Text.GetProperty(nameof(TextShape.Text)) is string boundText ? boundText : Text.Text;
+            BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
 
             if (BoundText == null)
             {
@@ -55,12 +57,12 @@ namespace Core2D.Renderer
             var fontStyle = AM.FontStyle.Normal;
             var fontWeight = AM.FontWeight.Normal;
 
-            if (Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
+            if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
                 fontStyle |= AM.FontStyle.Italic;
             }
 
-            if (Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
+            if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
                 fontWeight |= AM.FontWeight.Bold;
             }

@@ -10,7 +10,7 @@
 
             using var rotationDisposable = context.PushPreTransform(Rotation);
 
-            context.DrawGeometry(Shape.IsFilled ? Brush : null, Shape.IsStroked ? Pen : null, EllipseGeometry);
+            context.DrawGeometry(ShapeViewModel.IsFilled ? Brush : null, ShapeViewModel.IsStroked ? Pen : null, EllipseGeometry);
         }
     }
 }

@@ -1,15 +1,15 @@
-﻿using Core2D.Containers;
+﻿using Core2D.ViewModels.Containers;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface IContainerFactory
     {
-        PageContainer GetTemplate(ProjectContainer project, string name);
+        PageContainerViewModel GetTemplate(ProjectContainerViewModel project, string name);
 
-        PageContainer GetPage(ProjectContainer project, string name);
+        PageContainerViewModel GetPage(ProjectContainerViewModel project, string name);
 
-        DocumentContainer GetDocument(ProjectContainer project, string name);
+        DocumentContainerViewModel GetDocument(ProjectContainerViewModel project, string name);
 
-        ProjectContainer GetProject();
+        ProjectContainerViewModel GetProject();
     }
 }

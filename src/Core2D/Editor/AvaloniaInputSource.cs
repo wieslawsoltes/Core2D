@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Core2D.Input;
+using Core2D.Model.Input;
 
 namespace Core2D.Editor
 {

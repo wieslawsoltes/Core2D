@@ -1,26 +1,27 @@
 ﻿using System.Collections.Generic;
-using Core2D.Renderer;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Shapes
 {
     public static class GroupShapeExtensions
     {
-        public static void AddShape(this GroupShape group, BaseShape shape)
+        public static void AddShape(this GroupShapeViewModel group, BaseShapeViewModel shape)
         {
             shape.Owner = group;
-            shape.State.Flags &= ~ShapeStateFlags.Standalone;
+            shape.State &= ~ShapeStateFlags.Standalone;
             group.Shapes = group.Shapes.Add(shape);
         }
 
-        public static void Group(this GroupShape group, IEnumerable<BaseShape> shapes, IList<BaseShape> source = null)
+        public static void Group(this GroupShapeViewModel group, IEnumerable<BaseShapeViewModel> shapes, IList<BaseShapeViewModel> source = null)
         {
             if (shapes != null)
             {
                 foreach (var shape in shapes)
                 {
-                    if (shape is PointShape)
+                    if (shape is PointShapeViewModel)
                     {
-                        group.AddConnectorAsNone(shape as PointShape);
+                        group.AddConnectorAsNone(shape as PointShapeViewModel);
                     }
                     else
                     {
@@ -34,29 +35,29 @@ namespace Core2D.Shapes
             source?.Add(@group);
         }
 
-        public static void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> source)
+        public static void Ungroup(IEnumerable<BaseShapeViewModel> shapes, IList<BaseShapeViewModel> source)
         {
             if (shapes != null && source != null)
             {
                 foreach (var shape in shapes)
                 {
-                    if (shape is PointShape point)
+                    if (shape is PointShapeViewModel point)
                     {
-                        point.State.Flags &=
+                        point.State &=
                             ~(ShapeStateFlags.Connector
                             | ShapeStateFlags.None
                             | ShapeStateFlags.Input
                             | ShapeStateFlags.Output);
                     }
 
-                    shape.State.Flags |= ShapeStateFlags.Standalone;
+                    shape.State |= ShapeStateFlags.Standalone;
 
                     source?.Add(shape);
                 }
             }
         }
 
-        public static void Ungroup(this GroupShape group, IList<BaseShape> source)
+        public static void Ungroup(this GroupShapeViewModel group, IList<BaseShapeViewModel> source)
         {
             Ungroup(group.Shapes, source);
             Ungroup(group.Connectors, source);

@@ -13,8 +13,8 @@ using Avalonia.Dialogs;
 using Avalonia.Headless;
 using Avalonia.OpenGL;
 using Avalonia.Threading;
-using Core2D.Editor;
 using Core2D.Configuration.Themes;
+using Core2D.ViewModels.Editor;
 using Core2D.Views;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
@@ -84,7 +84,7 @@ namespace Core2D
                 var mainWindow = applicationLifetime?.MainWindow;
                 var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
                 var mainView = mainWindow?.Content as MainView;
-                var editor = mainView?.DataContext as ProjectEditor;
+                var editor = mainView?.DataContext as ProjectEditorViewModel;
 
                 var pt = new Point(-1, -1);
                 headlessWindow?.MouseMove(pt);
@@ -121,7 +121,7 @@ namespace Core2D
                 var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
                 var mainWindow = applicationLifetime?.MainWindow;
                 var mainView = mainWindow?.Content as MainView;
-                var editor = mainView?.DataContext as ProjectEditor;
+                var editor = mainView?.DataContext as ProjectEditorViewModel;
 
                 if (mainView != null)
                 {

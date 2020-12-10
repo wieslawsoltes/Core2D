@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Core2D.ViewModels;
 using Xunit;
 
 namespace Core2D.UnitTests

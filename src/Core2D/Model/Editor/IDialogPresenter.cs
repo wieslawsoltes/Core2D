@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Core2D.ViewModels.Editor;
 
-namespace Core2D.Editor
+namespace Core2D.Model.Editor
 {
     public interface IDialogPresenter
     {
-        IList<Dialog> Dialogs { get; set; }
-        void ShowDialog(Dialog dialog);
-        void CloseDialog(Dialog dialog);
+        IList<DialogViewModel> Dialogs { get; set; }
+        void ShowDialog(DialogViewModel dialogViewModel);
+        void CloseDialog(DialogViewModel dialogViewModel);
     }
 }

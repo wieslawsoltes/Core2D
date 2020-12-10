@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core2D;
-using Core2D.Path;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Shapes;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -17,7 +18,7 @@ namespace Core2D.UnitTests
         {
             var segment = _factory.CreateArcSegment(_factory.CreatePointShape(), _factory.CreatePathSize(), 180, true, SweepDirection.Clockwise);
 
-            var target = new List<PointShape>();
+            var target = new List<PointShapeViewModel>();
             segment.GetPoints(target);
             var count = target.Count();
 

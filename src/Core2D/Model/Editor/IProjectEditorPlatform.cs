@@ -1,7 +1,7 @@
-﻿using Core2D.Containers;
-using Core2D.Data;
+﻿using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
 
-namespace Core2D.Editor
+namespace Core2D.Model.Editor
 {
     public interface IProjectEditorPlatform
     {
@@ -41,11 +41,11 @@ namespace Core2D.Editor
 
         void OnPastePathDataFilled();
 
-        void OnImportData(ProjectContainer project);
+        void OnImportData(ProjectContainerViewModel project);
 
-        void OnExportData(Database db);
+        void OnExportData(DatabaseViewModel db);
 
-        void OnUpdateData(Database db);
+        void OnUpdateData(DatabaseViewModel db);
 
         void OnAboutDialog();
 

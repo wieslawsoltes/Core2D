@@ -1,12 +1,12 @@
-﻿using Core2D.Shapes;
+﻿using Core2D.ViewModels.Shapes;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface IConnectable
     {
-        bool Connect(PointShape point, PointShape target);
+        bool Connect(PointShapeViewModel point, PointShapeViewModel target);
 
-        bool Disconnect(PointShape point, out PointShape result);
+        bool Disconnect(PointShapeViewModel point, out PointShapeViewModel result);
 
         bool Disconnect();
     }

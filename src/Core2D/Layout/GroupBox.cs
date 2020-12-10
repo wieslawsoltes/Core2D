@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.Renderer;
-using Core2D.Shapes;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Shapes;
 using Spatial;
 
 namespace Core2D.Layout
 {
     public struct GroupBox
     {
-        public static void TransformPoint(ref MatrixD matrix, PointShape point)
+        public static void TransformPoint(ref MatrixD matrix, PointShapeViewModel point)
         {
             var transformed = MatrixD.TransformPoint(matrix, new PointD((decimal)point.X, (decimal)point.Y));
             point.X = (double)transformed.X;
             point.Y = (double)transformed.Y;
         }
 
-        public static void TransformPoints(ref MatrixD matrix, IList<PointShape> points)
+        public static void TransformPoints(ref MatrixD matrix, IList<PointShapeViewModel> points)
         {
             if (points == null || points.Count == 0)
             {
@@ -28,14 +28,14 @@ namespace Core2D.Layout
             }
         }
 
-        public static bool IsPointMovable(PointShape point, BaseShape parent)
+        public static bool IsPointMovable(PointShapeViewModel point, BaseShapeViewModel parent)
         {
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShape ower && ower.State.Flags.HasFlag(ShapeStateFlags.Locked)))
+            if (point.State.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShapeViewModel ower && ower.State.HasFlag(ShapeStateFlags.Locked)))
             {
                 return false;
             }
 
-            if (point.State.Flags.HasFlag(ShapeStateFlags.Connector) && point.Owner != parent)
+            if (point.State.HasFlag(ShapeStateFlags.Connector) && point.Owner != parent)
             {
                 return false;
             }
@@ -46,7 +46,7 @@ namespace Core2D.Layout
         public readonly ShapeBox[] Boxes;
         public Box Bounds;
 
-        public GroupBox(IList<BaseShape> shapes)
+        public GroupBox(IList<BaseShapeViewModel> shapes)
         {
             Boxes = new ShapeBox[shapes.Count];
 
@@ -92,25 +92,25 @@ namespace Core2D.Layout
             Bounds.Height = Math.Abs(Bounds.Bottom - Bounds.Top);
         }
 
-        public List<PointShape> GetMovablePoints()
+        public List<PointShapeViewModel> GetMovablePoints()
         {
-            var points = new HashSet<PointShape>();
+            var points = new HashSet<PointShapeViewModel>();
 
             for (int i = 0; i < Boxes.Length; i++)
             {
                 foreach (var point in Boxes[i].Points)
                 {
-                    if (IsPointMovable(point, Boxes[i].Shape))
+                    if (IsPointMovable(point, Boxes[i]._shapeViewModel))
                     {
                         points.Add(point);
                     }
                 }
             }
 
-            return new List<PointShape>(points);
+            return new List<PointShapeViewModel>(points);
         }
 
-        public void Rotate(decimal sx, decimal sy, List<PointShape> points, ref decimal rotateAngle)
+        public void Rotate(decimal sx, decimal sy, List<PointShapeViewModel> points, ref decimal rotateAngle)
         {
             var centerX = Bounds.CenterX;
             var centerY = Bounds.CenterY;
@@ -125,7 +125,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void Translate(decimal dx, decimal dy, List<PointShape> points)
+        public void Translate(decimal dx, decimal dy, List<PointShapeViewModel> points)
         {
             decimal offsetX = dx;
             decimal offsetY = dy;
@@ -134,7 +134,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void ScaleTop(decimal dy, List<PointShape> points)
+        public void ScaleTop(decimal dy, List<PointShapeViewModel> points)
         {
             var oldSize = Bounds.Height;
             var newSize = oldSize - dy;
@@ -152,7 +152,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void ScaleBottom(decimal dy, List<PointShape> points)
+        public void ScaleBottom(decimal dy, List<PointShapeViewModel> points)
         {
             var oldSize = Bounds.Height;
             var newSize = oldSize + dy;
@@ -170,7 +170,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void ScaleLeft(decimal dx, List<PointShape> points)
+        public void ScaleLeft(decimal dx, List<PointShapeViewModel> points)
         {
             var oldSize = Bounds.Width;
             var newSize = oldSize - dx;
@@ -188,7 +188,7 @@ namespace Core2D.Layout
             Update();
         }
 
-        public void ScaleRight(decimal dx, List<PointShape> points)
+        public void ScaleRight(decimal dx, List<PointShapeViewModel> points)
         {
             var oldSize = Bounds.Width;
             var newSize = oldSize + dx;

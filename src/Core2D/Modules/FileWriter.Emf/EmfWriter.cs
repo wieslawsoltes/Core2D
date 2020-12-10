@@ -5,12 +5,12 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
 using Core2D.Renderer.WinForms;
-using Core2D.Shapes;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.FileWriter.Emf
 {
@@ -27,7 +27,7 @@ namespace Core2D.FileWriter.Emf
 
         public string Extension { get; } = "emf";
 
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShapeViewModel> shapes, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -45,7 +45,7 @@ namespace Core2D.FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+                    r.State.DrawShapeState = ShapeStateFlags.Printable;
                     r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
@@ -73,7 +73,7 @@ namespace Core2D.FileWriter.Emf
             return ms;
         }
 
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainer container, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainerViewModel container, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -91,7 +91,7 @@ namespace Core2D.FileWriter.Emf
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+                    r.State.DrawShapeState = ShapeStateFlags.Printable;
                     r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
@@ -117,7 +117,7 @@ namespace Core2D.FileWriter.Emf
             return ms;
         }
 
-        public void Save(Stream stream, PageContainer container, IImageCache ic)
+        public void Save(Stream stream, PageContainerViewModel container, IImageCache ic)
         {
             if (container?.Template != null)
             {
@@ -140,7 +140,7 @@ namespace Core2D.FileWriter.Emf
                 return;
             }
 
-            if (item is PageContainer page)
+            if (item is PageContainerViewModel page)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
                 var db = (object)page.Properties;
@@ -151,11 +151,11 @@ namespace Core2D.FileWriter.Emf
 
                 Save(stream, page, ic);
             }
-            else if (item is DocumentContainer document)
+            else if (item is DocumentContainerViewModel document)
             {
                 throw new NotSupportedException("Saving documents as emf drawing is not supported.");
             }
-            else if (item is ProjectContainer project)
+            else if (item is ProjectContainerViewModel project)
             {
                 throw new NotSupportedException("Saving projects as emf drawing is not supported.");
             }

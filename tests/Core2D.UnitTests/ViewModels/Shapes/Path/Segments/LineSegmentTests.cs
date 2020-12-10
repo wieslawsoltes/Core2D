@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core2D;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Shapes;
 using Xunit;
 
 namespace Core2D.UnitTests
@@ -16,7 +17,7 @@ namespace Core2D.UnitTests
         {
             var segment = _factory.CreateLineSegment(_factory.CreatePointShape());
 
-            var target = new List<PointShape>();
+            var target = new List<PointShapeViewModel>();
             segment.GetPoints(target);
             var count = target.Count();
 

@@ -5,8 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converters="using:Core2D.Converters"
         xmlns:views="using:Core2D.Views"
-        xmlns:vme="using:Core2D.Editor"
-        xmlns:vmd="using:Core2D.Designer"
+        xmlns:vme="using:Core2D.ViewModels.Editor"
+        xmlns:vmd="using:Core2D.ViewModels.Designer"
         x:Name="MainWindow"
         Width="1324" Height="690" MinWidth="900" MinHeight="420"
         WindowState="Maximized" WindowStartupLocation="Manual"
@@ -22,7 +22,7 @@
         mc:Ignorable="d"
         d:DataContext="{x:Static vmd:DesignerContext.Editor}"
         d:DesignWidth="1200" d:DesignHeight="580"
-        x:DataType="vme:ProjectEditor" x:CompileBindings="True">
+        x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <Window.Resources>
         <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter" />
     </Window.Resources>

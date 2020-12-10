@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core2D.Input
+namespace Core2D.Model.Input
 {
     internal class InputArgsObserver : IObserver<InputArgs>
     {

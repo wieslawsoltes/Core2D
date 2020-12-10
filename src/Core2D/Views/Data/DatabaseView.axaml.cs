@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
-using Core2D.Data;
+using Core2D.ViewModels.Data;
 
 namespace Core2D.Views.Data
 {
@@ -15,7 +14,7 @@ namespace Core2D.Views.Data
     {
         private TextBox _filterRecordsText;
         private DataGrid _rowsDataGrid;
-        private Database _database;
+        private DatabaseViewModel _databaseViewModel;
         private string _recordsFilter;
         private DataGridCollectionView _recordsView;
 
@@ -46,7 +45,7 @@ namespace Core2D.Views.Data
 
         private bool FilterRecords(object arg)
         {
-            if (!string.IsNullOrWhiteSpace(_recordsFilter) && arg is Record record)
+            if (!string.IsNullOrWhiteSpace(_recordsFilter) && arg is RecordViewModel record)
             {
                 foreach (var value in record.Values)
                 {
@@ -66,38 +65,38 @@ namespace Core2D.Views.Data
 
         private void RowsDataGrid_DataContextChanged(object sender, EventArgs e)
         {
-            if (_database != null)
+            if (_databaseViewModel != null)
             {
-                _database.PropertyChanged -= Database_PropertyChanged;
-                _database = null;
+                _databaseViewModel.PropertyChanged -= DatabaseViewModelPropertyChanged;
+                _databaseViewModel = null;
             }
 
             ResetRecordsView();
             ResetColumns();
 
-            if (DataContext is Database database)
+            if (DataContext is DatabaseViewModel database)
             {
-                _database = database;
-                _database.PropertyChanged += Database_PropertyChanged;
+                _databaseViewModel = database;
+                _databaseViewModel.PropertyChanged += DatabaseViewModelPropertyChanged;
                 CreateColumns();
                 CreateRecordsView();
             }
         }
 
-        private void Database_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void DatabaseViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Database.Columns))
+            if (e.PropertyName == nameof(DatabaseViewModel.Columns))
             {
-                if (_database != null)
+                if (_databaseViewModel != null)
                 {
                     ResetColumns();
                     CreateColumns();
                 }
             }
 
-            if (e.PropertyName == nameof(Database.Records))
+            if (e.PropertyName == nameof(DatabaseViewModel.Records))
             {
-                if (_database != null)
+                if (_databaseViewModel != null)
                 {
                     ResetRecordsView();
                     CreateRecordsView();
@@ -107,10 +106,10 @@ namespace Core2D.Views.Data
 
         private void Column_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Column.Name)
-                || e.PropertyName == nameof(Column.IsVisible))
+            if (e.PropertyName == nameof(ColumnViewModel.Name)
+                || e.PropertyName == nameof(ColumnViewModel.IsVisible))
             {
-                if (_database != null)
+                if (_databaseViewModel != null)
                 {
                     UpdateHeaders();
                 }
@@ -119,7 +118,7 @@ namespace Core2D.Views.Data
 
         private void CreateRecordsView()
         {
-            _recordsView = new DataGridCollectionView(_database.Records);
+            _recordsView = new DataGridCollectionView(_databaseViewModel.Records);
             _recordsView.Filter = FilterRecords;
             _rowsDataGrid.Items = _recordsView;
 
@@ -135,15 +134,15 @@ namespace Core2D.Views.Data
 
         private void CreateColumns()
         {
-            for (int i = 0; i < _database.Columns.Length; i++)
+            for (int i = 0; i < _databaseViewModel.Columns.Length; i++)
             {
-                var column = _database.Columns[i];
+                var column = _databaseViewModel.Columns[i];
                 var dataGridTextColumn = new DataGridTextColumn()
                 {
                     Header = $"{column.Name}",
                     Width = DataGridLength.Auto,
                     IsVisible = column.IsVisible,
-                    Binding = new Binding($"{nameof(Record.Values)}[{i}].{nameof(Value.Content)}"),
+                    Binding = new Binding($"{nameof(RecordViewModel.Values)}[{i}].{nameof(ValueViewModel.Content)}"),
                     IsReadOnly = false
                 };
                 column.PropertyChanged += Column_PropertyChanged;
@@ -158,9 +157,9 @@ namespace Core2D.Views.Data
 
         private void UpdateHeaders()
         {
-            for (int i = 0; i < _database.Columns.Length; i++)
+            for (int i = 0; i < _databaseViewModel.Columns.Length; i++)
             {
-                var column = _database.Columns[i];
+                var column = _databaseViewModel.Columns[i];
                 _rowsDataGrid.Columns[i].Header = column.Name;
                 _rowsDataGrid.Columns[i].IsVisible = column.IsVisible;
             }

@@ -4,8 +4,8 @@ using System.Globalization;
 using System.Linq;
 using Avalonia;
 using Avalonia.Data.Converters;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.Converters
 {
@@ -15,12 +15,12 @@ namespace Core2D.Converters
         {
             if (values != null && values.Count == 2)
             {
-                if (values[0] is ISet<BaseShape> shapes && shapes.Count > 0)
+                if (values[0] is ISet<BaseShapeViewModel> shapes && shapes.Count > 0)
                 {
                     return shapes.FirstOrDefault().Style;
                 }
 
-                if (values[1] is ShapeStyle style)
+                if (values[1] is ShapeStyleViewModel style)
                 {
                     return style;
                 }

@@ -1,6 +1,7 @@
-﻿using Core2D.Renderer;
-using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Spatial;
 using A = Avalonia;
 using AM = Avalonia.Media;
@@ -9,10 +10,10 @@ namespace Core2D.Renderer
 {
     internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
     {
-        public RectangleShape Rectangle { get; set; }
+        public RectangleShapeViewModel Rectangle { get; set; }
         public A.Rect Rect { get; set; }
 
-        public RectangleDrawNode(RectangleShape rectangle, ShapeStyle style)
+        public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
             : base()
         {
             Style = style;
@@ -22,8 +23,8 @@ namespace Core2D.Renderer
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Rectangle.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Rectangle.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Rectangle.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Rectangle.State.HasFlag(ShapeStateFlags.Size);
             var rect2 = Rect2.FromPoints(Rectangle.TopLeft.X, Rectangle.TopLeft.Y, Rectangle.BottomRight.X, Rectangle.BottomRight.Y, 0, 0);
             Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
             Center = Rect.Center;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
+using Core2D.Model;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -11,14 +11,14 @@ namespace Core2D.Renderer.PdfSharp
 {
     public partial class PdfSharpRenderer : IProjectExporter
     {
-        public void Save(Stream stream, PageContainer container)
+        public void Save(Stream stream, PageContainerViewModel container)
         {
             using var pdf = new PdfDocument();
             Add(pdf, container);
             pdf.Save(stream);
         }
 
-        public void Save(Stream stream, DocumentContainer document)
+        public void Save(Stream stream, DocumentContainerViewModel document)
         {
             using var pdf = new PdfDocument();
             var documentOutline = default(PdfOutline);
@@ -49,7 +49,7 @@ namespace Core2D.Renderer.PdfSharp
             ClearCache();
         }
 
-        public void Save(Stream stream, ProjectContainer project)
+        public void Save(Stream stream, ProjectContainerViewModel project)
         {
             using var pdf = new PdfDocument();
             var projectOutline = default(PdfOutline);
@@ -95,7 +95,7 @@ namespace Core2D.Renderer.PdfSharp
             ClearCache();
         }
 
-        private PdfPage Add(PdfDocument pdf, PageContainer container)
+        private PdfPage Add(PdfDocument pdf, PageContainerViewModel container)
         {
             // Create A3 page size with Landscape orientation.
             var pdfPage = pdf.AddPage();

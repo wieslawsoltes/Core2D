@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
 using Core2D.Renderer.PdfSharp;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
 
 namespace Core2D.FileWriter.PdfSharp
 {
@@ -37,10 +37,10 @@ namespace Core2D.FileWriter.PdfSharp
             IProjectExporter exporter = new PdfSharpRenderer(_serviceProvider);
 
             IShapeRenderer renderer = (IShapeRenderer)exporter;
-            renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
             renderer.State.ImageCache = ic;
 
-            if (item is PageContainer page)
+            if (item is PageContainerViewModel page)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
                 var db = (object)page.Properties;
@@ -51,7 +51,7 @@ namespace Core2D.FileWriter.PdfSharp
 
                 exporter.Save(stream, page);
             }
-            else if (item is DocumentContainer document)
+            else if (item is DocumentContainerViewModel document)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
 
@@ -59,7 +59,7 @@ namespace Core2D.FileWriter.PdfSharp
 
                 exporter.Save(stream, document);
             }
-            else if (item is ProjectContainer project)
+            else if (item is ProjectContainerViewModel project)
             {
                 var dataFlow = _serviceProvider.GetService<DataFlow>();
 

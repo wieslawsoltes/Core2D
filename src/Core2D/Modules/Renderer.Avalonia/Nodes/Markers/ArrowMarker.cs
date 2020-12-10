@@ -11,7 +11,7 @@
         {
             var context = dc as Avalonia.Media.DrawingContext;
 
-            if (Shape.IsStroked)
+            if (ShapeViewModel.IsStroked)
             {
                 context.DrawLine(Pen, P11, P21);
                 context.DrawLine(Pen, P12, P22);

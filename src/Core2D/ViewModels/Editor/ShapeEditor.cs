@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Core2D.Path;
-using Core2D.Path.Segments;
+using Core2D.Model;
 using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
-namespace Core2D.Editor
+namespace Core2D.ViewModels.Editor
 {
-    internal class ShapeEditor
+    public partial class ShapeEditor
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -17,7 +19,7 @@ namespace Core2D.Editor
             _serviceProvider = serviceProvider;
         }
 
-        public void BreakPathFigure(PathFigure pathFigure, ShapeStyle style, bool isStroked, bool isFilled, List<BaseShape> result)
+        public void BreakPathFigure(PathFigureViewModel pathFigure, ShapeStyleViewModel style, bool isStroked, bool isFilled, List<BaseShapeViewModel> result)
         {
             var factory = _serviceProvider.GetService<IFactory>();
 
@@ -28,11 +30,11 @@ namespace Core2D.Editor
             {
                 switch (segment)
                 {
-                    case LineSegment lineSegment:
+                    case LineSegmentViewModel lineSegment:
                         {
                             var convertedStyle = style != null ?
-                                (ShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                                (ShapeStyleViewModel)style?.Copy(null) :
+                                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
 
                             var convertedPathShape = factory.CreateLineShape(
                                 lastPoint,
@@ -46,11 +48,11 @@ namespace Core2D.Editor
                         }
                         break;
 
-                    case QuadraticBezierSegment quadraticBezierSegment:
+                    case QuadraticBezierSegmentViewModel quadraticBezierSegment:
                         {
                             var convertedStyle = style != null ?
-                                (ShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                                (ShapeStyleViewModel)style?.Copy(null) :
+                                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
 
                             var convertedPathShape = factory.CreateQuadraticBezierShape(
                                 lastPoint,
@@ -66,11 +68,11 @@ namespace Core2D.Editor
                         }
                         break;
 
-                    case CubicBezierSegment cubicBezierSegment:
+                    case CubicBezierSegmentViewModel cubicBezierSegment:
                         {
                             var convertedStyle = style != null ?
-                                (ShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                                (ShapeStyleViewModel)style?.Copy(null) :
+                                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
 
                             var convertedPathShape = factory.CreateCubicBezierShape(
                                 lastPoint,
@@ -87,11 +89,11 @@ namespace Core2D.Editor
                         }
                         break;
 
-                    case ArcSegment arcSegment:
+                    case ArcSegmentViewModel arcSegment:
                         {
                             var convertedStyle = style != null ?
-                                (ShapeStyle)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                                (ShapeStyleViewModel)style?.Copy(null) :
+                                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
 
                             var point2 = factory.CreatePointShape(0, 0); // TODO:
 
@@ -117,8 +119,8 @@ namespace Core2D.Editor
             if (pathFigure.Segments.Length > 0 && pathFigure.IsClosed)
             {
                 var convertedStyle = style != null ?
-                    (ShapeStyle)style?.Copy(null) :
-                    factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                    (ShapeStyleViewModel)style?.Copy(null) :
+                    factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
 
                 var convertedPathShape = factory.CreateLineShape(
                     lastPoint,
@@ -130,7 +132,7 @@ namespace Core2D.Editor
             }
         }
 
-        public bool BreakPathShape(PathShape pathShape, List<BaseShape> result)
+        public bool BreakPathShape(PathShapeViewModel pathShape, List<BaseShapeViewModel> result)
         {
             var factory = _serviceProvider.GetService<IFactory>();
 
@@ -144,10 +146,10 @@ namespace Core2D.Editor
                 foreach (var pathFigure in pathShape.Geometry.Figures)
                 {
                     var style = pathShape.Style != null ?
-                        (ShapeStyle)pathShape.Style?.Copy(null) :
-                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                        (ShapeStyleViewModel)pathShape.Style?.Copy(null) :
+                        factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
 
-                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigure>(), pathShape.Geometry.FillRule);
+                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), pathShape.Geometry.FillRule);
                     convertedGeometry.Figures = convertedGeometry.Figures.Add(pathFigure);
 
                     var convertedPathShape = factory.CreatePathShape(
@@ -166,11 +168,11 @@ namespace Core2D.Editor
             return false;
         }
 
-        public void BreakShape(BaseShape shape, List<BaseShape> result, List<BaseShape> remove)
+        public void BreakShape(BaseShapeViewModel shape, List<BaseShapeViewModel> result, List<BaseShapeViewModel> remove)
         {
             switch (shape)
             {
-                case PathShape pathShape:
+                case PathShapeViewModel pathShape:
                     {
                         if (BreakPathShape(pathShape, result) == true)
                         {
@@ -179,11 +181,11 @@ namespace Core2D.Editor
                     }
                     break;
 
-                case GroupShape groupShape:
+                case GroupShapeViewModel groupShape:
                     {
                         if (groupShape.Shapes.Length > 0)
                         {
-                            var groupShapes = new List<BaseShape>();
+                            var groupShapes = new List<BaseShapeViewModel>();
 
                             GroupShapeExtensions.Ungroup(groupShape.Shapes, groupShapes);
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Containers;
 using SkiaSharp;
 
 namespace Core2D.FileWriter.SkiaSharpJpeg
@@ -18,9 +18,9 @@ namespace Core2D.FileWriter.SkiaSharpJpeg
             _presenter = presenter;
         }
 
-        public void Save(Stream stream, PageContainer container)
+        public void Save(Stream stream, PageContainerViewModel container)
         {
-            var info = new SKImageInfo((int)container.Width, (int)container.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+            var info = new SKImageInfo((int)container.Template.Width, (int)container.Template.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
             using var bitmap = new SKBitmap(info);
             using (var canvas = new SKCanvas(bitmap))
             {
@@ -32,12 +32,12 @@ namespace Core2D.FileWriter.SkiaSharpJpeg
             data.SaveTo(stream);
         }
 
-        public void Save(Stream stream, DocumentContainer document)
+        public void Save(Stream stream, DocumentContainerViewModel document)
         {
             throw new NotSupportedException("Saving documents as jpeg drawing is not supported.");
         }
 
-        public void Save(Stream stream, ProjectContainer project)
+        public void Save(Stream stream, ProjectContainerViewModel project)
         {
             throw new NotSupportedException("Saving projects as jpeg drawing is not supported.");
         }

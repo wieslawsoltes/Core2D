@@ -2,8 +2,8 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.VisualTree;
-using Core2D.Containers;
-using Core2D.Editor;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Editor;
 
 namespace Core2D.DragAndDrop.Handlers
 {
@@ -11,12 +11,12 @@ namespace Core2D.DragAndDrop.Handlers
     {
         private bool ValidateContainer(TreeView treeView, DragEventArgs e, object sourceContext, object targetContext, bool bExecute)
         {
-            if (!(sourceContext is BaseContainer sourceItem)
-                || !(targetContext is ProjectContainer)
+            if (!(sourceContext is BaseContainerViewModel sourceItem)
+                || !(targetContext is ProjectContainerViewModel)
                 || !(treeView.GetVisualAt(e.GetPosition(treeView)) is IControl targetControl)
                 || !(treeView.GetVisualRoot() is IControl rootControl)
-                || !(rootControl.DataContext is ProjectEditor editor)
-                || !(targetControl.DataContext is BaseContainer targetItem))
+                || !(rootControl.DataContext is ProjectEditorViewModel editor)
+                || !(targetControl.DataContext is BaseContainerViewModel targetItem))
             {
                 return false;
             }
@@ -25,11 +25,11 @@ namespace Core2D.DragAndDrop.Handlers
 
             switch (sourceItem)
             {
-                case LayerContainer sourceLayer:
+                case LayerContainerViewModel sourceLayer:
                     {
                         switch (targetItem)
                         {
-                            case LayerContainer targetLayer:
+                            case LayerContainerViewModel targetLayer:
                                 {
                                     if (bExecute)
                                     {
@@ -37,7 +37,7 @@ namespace Core2D.DragAndDrop.Handlers
                                     }
                                     return true;
                                 }
-                            case PageContainer targetPage:
+                            case PageContainerViewModel targetPage:
                                 {
                                     if (e.DragEffects == DragDropEffects.Copy)
                                     {
@@ -68,7 +68,7 @@ namespace Core2D.DragAndDrop.Handlers
                                     }
                                     return false;
                                 }
-                            case DocumentContainer targetDocument:
+                            case DocumentContainerViewModel targetDocument:
                                 {
                                     return false;
                                 }
@@ -76,15 +76,15 @@ namespace Core2D.DragAndDrop.Handlers
 
                         return false;
                     }
-                case PageContainer sourcePage:
+                case PageContainerViewModel sourcePage:
                     {
                         switch (targetItem)
                         {
-                            case LayerContainer targetLayer:
+                            case LayerContainerViewModel targetLayer:
                                 {
                                     return false;
                                 }
-                            case PageContainer targetPage:
+                            case PageContainerViewModel targetPage:
                                 {
                                     if (bExecute)
                                     {
@@ -92,7 +92,7 @@ namespace Core2D.DragAndDrop.Handlers
                                     }
                                     return true;
                                 }
-                            case DocumentContainer targetDocument:
+                            case DocumentContainerViewModel targetDocument:
                                 {
                                     if (e.DragEffects == DragDropEffects.Copy)
                                     {
@@ -129,19 +129,19 @@ namespace Core2D.DragAndDrop.Handlers
 
                         return false;
                     }
-                case DocumentContainer sourceDocument:
+                case DocumentContainerViewModel sourceDocument:
                     {
                         switch (targetItem)
                         {
-                            case LayerContainer targetLayer:
+                            case LayerContainerViewModel targetLayer:
                                 {
                                     return false;
                                 }
-                            case PageContainer targetPage:
+                            case PageContainerViewModel targetPage:
                                 {
                                     return false;
                                 }
-                            case DocumentContainer targetDocument:
+                            case DocumentContainerViewModel targetDocument:
                                 {
                                     if (bExecute)
                                     {

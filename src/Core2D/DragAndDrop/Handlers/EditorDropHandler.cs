@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using Avalonia.Input;
-using Core2D.Containers;
-using Core2D.Data;
-using Core2D.Editor;
-using Core2D.Shapes;
-using Core2D.Style;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.DragAndDrop.Handlers
 {
     public class EditorDropHandler : DefaultDropHandler
     {
-        private bool Validate(ProjectEditor editor, object sender, DragEventArgs e, bool bExecute)
+        private bool Validate(ProjectEditorViewModel editorViewModel, object sender, DragEventArgs e, bool bExecute)
         {
             var point = GetPosition(sender, e);
 
@@ -20,7 +20,7 @@ namespace Core2D.DragAndDrop.Handlers
 
                 if (bExecute)
                 {
-                    editor?.OnTryPaste(text);
+                    editorViewModel?.OnTryPaste(text);
                 }
 
                 return true;
@@ -32,14 +32,14 @@ namespace Core2D.DragAndDrop.Handlers
 
                 switch (data)
                 {
-                    case BaseShape shape:
-                        return editor?.OnDropShape(shape, point.X, point.Y, bExecute) == true;
-                    case Record record:
-                        return editor?.OnDropRecord(record, point.X, point.Y, bExecute) == true;
-                    case ShapeStyle style:
-                        return editor?.OnDropStyle(style, point.X, point.Y, bExecute) == true;
-                    case PageContainer page:
-                        return editor?.OnDropTemplate(page, point.X, point.Y, bExecute) == true;
+                    case BaseShapeViewModel shape:
+                        return editorViewModel?.OnDropShape(shape, point.X, point.Y, bExecute) == true;
+                    case RecordViewModel record:
+                        return editorViewModel?.OnDropRecord(record, point.X, point.Y, bExecute) == true;
+                    case ShapeStyleViewModel style:
+                        return editorViewModel?.OnDropStyle(style, point.X, point.Y, bExecute) == true;
+                    case PageContainerViewModel page:
+                        return editorViewModel?.OnDropTemplate(page, point.X, point.Y, bExecute) == true;
                     default:
                         break;
                 }
@@ -50,7 +50,7 @@ namespace Core2D.DragAndDrop.Handlers
                 var files = e.Data.GetFileNames().ToArray();
                 if (bExecute)
                 {
-                    editor?.OnDropFiles(files, point.X, point.Y);
+                    editorViewModel?.OnDropFiles(files, point.X, point.Y);
                 }
                 return true;
             }
@@ -60,7 +60,7 @@ namespace Core2D.DragAndDrop.Handlers
 
         public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            if (targetContext is ProjectEditor editor)
+            if (targetContext is ProjectEditorViewModel editor)
             {
                 return Validate(editor, sender, e, false);
             }
@@ -69,7 +69,7 @@ namespace Core2D.DragAndDrop.Handlers
 
         public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
         {
-            if (targetContext is ProjectEditor editor)
+            if (targetContext is ProjectEditorViewModel editor)
             {
                 return Validate(editor, sender, e, true);
             }

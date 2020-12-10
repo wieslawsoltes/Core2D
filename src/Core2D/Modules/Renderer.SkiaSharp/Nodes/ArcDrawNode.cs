@@ -1,15 +1,17 @@
-﻿using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using SkiaSharp;
 
 namespace Core2D.Renderer.SkiaSharp
 {
     internal class ArcDrawNode : DrawNode, IArcDrawNode
     {
-        public ArcShape Arc { get; set; }
+        public ArcShapeViewModelViewModel Arc { get; set; }
         public SKPath Geometry { get; set; }
 
-        public ArcDrawNode(ArcShape arc, ShapeStyle style)
+        public ArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
         {
             Style = style;
             Arc = arc;
@@ -18,8 +20,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Arc.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Arc.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Arc.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Arc.State.HasFlag(ShapeStateFlags.Size);
             Geometry = PathGeometryConverter.ToSKPath(Arc);
             Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
         }

@@ -1,5 +1,7 @@
-﻿using Core2D.Shapes;
-using Core2D.Style;
+﻿using Core2D.Model.Renderer;
+using Core2D.Model.Renderer.Nodes;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using SkiaSharp;
 using Spatial;
 
@@ -7,10 +9,10 @@ namespace Core2D.Renderer.SkiaSharp
 {
     internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
     {
-        public EllipseShape Ellipse { get; set; }
+        public EllipseShapeViewModel Ellipse { get; set; }
         public SKRect Rect { get; set; }
 
-        public EllipseDrawNode(EllipseShape ellipse, ShapeStyle style)
+        public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
             : base()
         {
             Style = style;
@@ -20,8 +22,8 @@ namespace Core2D.Renderer.SkiaSharp
 
         public override void UpdateGeometry()
         {
-            ScaleThickness = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Ellipse.State.Flags.HasFlag(ShapeStateFlags.Size);
+            ScaleThickness = Ellipse.State.HasFlag(ShapeStateFlags.Thickness);
+            ScaleSize = Ellipse.State.HasFlag(ShapeStateFlags.Size);
             var rect2 = Rect2.FromPoints(Ellipse.TopLeft.X, Ellipse.TopLeft.Y, Ellipse.BottomRight.X, Ellipse.BottomRight.Y, 0, 0);
             Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
             Center = new SKPoint(Rect.MidX, Rect.MidY);

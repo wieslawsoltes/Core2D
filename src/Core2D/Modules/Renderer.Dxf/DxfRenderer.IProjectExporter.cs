@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using Core2D;
-using Core2D.Containers;
-using Core2D.Data;
+using Core2D.Model;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Data;
 using DXF = netDxf;
 using DXFH = netDxf.Header;
 using DXFO = netDxf.Objects;
@@ -11,7 +11,7 @@ namespace Core2D.Renderer.Dxf
 {
     public partial class DxfRenderer : IProjectExporter
     {
-        public void Save(Stream stream, PageContainer container)
+        public void Save(Stream stream, PageContainerViewModel container)
         {
             if (stream is FileStream fileStream)
             {
@@ -30,7 +30,7 @@ namespace Core2D.Renderer.Dxf
             ClearCache();
         }
 
-        public void Save(Stream stream, DocumentContainer document)
+        public void Save(Stream stream, DocumentContainerViewModel document)
         {
             if (stream is FileStream fileStream)
             {
@@ -49,7 +49,7 @@ namespace Core2D.Renderer.Dxf
             ClearCache();
         }
 
-        public void Save(Stream stream, ProjectContainer project)
+        public void Save(Stream stream, ProjectContainerViewModel project)
         {
             if (stream is FileStream fileStream)
             {
@@ -68,7 +68,7 @@ namespace Core2D.Renderer.Dxf
             ClearCache();
         }
 
-        private void Add(DXF.DxfDocument dxf, PageContainer container)
+        private void Add(DXF.DxfDocument dxf, PageContainerViewModel container)
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
             var db = (object)container.Properties;
@@ -91,7 +91,7 @@ namespace Core2D.Renderer.Dxf
             DrawPage(dxf, container);
         }
 
-        private void Add(DXF.DxfDocument dxf, DocumentContainer document)
+        private void Add(DXF.DxfDocument dxf, DocumentContainerViewModel document)
         {
             foreach (var page in document.Pages)
             {
@@ -114,7 +114,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        private void Add(DXF.DxfDocument dxf, ProjectContainer project)
+        private void Add(DXF.DxfDocument dxf, ProjectContainerViewModel project)
         {
             foreach (var document in project.Documents)
             {

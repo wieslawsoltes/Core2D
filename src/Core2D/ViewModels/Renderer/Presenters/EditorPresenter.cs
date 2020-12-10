@@ -1,10 +1,11 @@
-﻿using Core2D.Containers;
+﻿using Core2D.Model.Renderer;
+using Core2D.ViewModels.Containers;
 
-namespace Core2D.Renderer.Presenters
+namespace Core2D.ViewModels.Renderer.Presenters
 {
-    public class EditorPresenter : IContainerPresenter
+    public partial class EditorPresenter : IContainerPresenter
     {
-        public void Render(object dc, IShapeRenderer renderer, PageContainer container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, PageContainerViewModel container, double dx, double dy)
         {
             renderer.DrawPage(dc, container);
 

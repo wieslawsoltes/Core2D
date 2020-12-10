@@ -1,14 +1,14 @@
 ﻿using System;
 using System.IO;
-using Core2D;
-using Core2D.Data;
+using Core2D.Model;
+using Core2D.ViewModels.Data;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Core2D.TextFieldWriter.OpenXml
 {
-    public sealed class OpenXmlWriter : ITextFieldWriter<Database>
+    public sealed class OpenXmlWriter : ITextFieldWriter<DatabaseViewModel>
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -21,7 +21,7 @@ namespace Core2D.TextFieldWriter.OpenXml
 
         public string Extension { get; } = "xlsx";
 
-        private void ToValues(Database database, out object[,] values)
+        private void ToValues(DatabaseViewModel database, out object[,] values)
         {
             int nRows = database.Records.Length + 1;
             int nColumns = database.Columns.Length + 1;
@@ -167,7 +167,7 @@ namespace Core2D.TextFieldWriter.OpenXml
             spreadsheetDocument.Close();
         }
 
-        public void Write(Stream stream, Database database)
+        public void Write(Stream stream, DatabaseViewModel database)
         {
             object[,] values;
             ToValues(database, out values);

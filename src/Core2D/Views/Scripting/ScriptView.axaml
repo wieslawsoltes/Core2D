@@ -6,12 +6,12 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:behaviors="using:Core2D.Behaviors"
              xmlns:ae="using:AvaloniaEdit"
-             xmlns:vms="using:Core2D.Scripting"
-             xmlns:vmd="using:Core2D.Designer"
+             xmlns:vms="using:Core2D.ViewModels.Scripting"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Script}"
              d:DesignWidth="1000" d:DesignHeight="600"
-             x:DataType="vms:Script" x:CompileBindings="True">
+             x:DataType="vms:ScriptViewModel" x:CompileBindings="True">
     <UserControl.KeyBindings>
         <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding #ScriptTextEditor.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False" />
     </UserControl.KeyBindings>

@@ -1,27 +1,27 @@
 ﻿using System.Collections.Generic;
-using Core2D.Renderer;
-using Core2D.Shapes;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels.Shapes;
 
-namespace Core2D
+namespace Core2D.Model
 {
     public interface IPathConverter
     {
-        PathShape ToPathShape(IEnumerable<BaseShape> shapes);
+        PathShapeViewModel ToPathShape(IEnumerable<BaseShapeViewModel> shapes);
 
-        PathShape ToPathShape(BaseShape shape);
+        PathShapeViewModel ToPathShape(BaseShapeViewModel shape);
 
-        PathShape ToStrokePathShape(BaseShape shape);
+        PathShapeViewModel ToStrokePathShape(BaseShapeViewModel shape);
 
-        PathShape ToFillPathShape(BaseShape shape);
+        PathShapeViewModel ToFillPathShape(BaseShapeViewModel shape);
 
-        PathShape ToWindingPathShape(BaseShape shape);
+        PathShapeViewModel ToWindingPathShape(BaseShapeViewModel shape);
 
-        PathShape Simplify(BaseShape shape);
+        PathShapeViewModel Simplify(BaseShapeViewModel shape);
 
-        PathShape Op(IEnumerable<BaseShape> shapes, PathOp op);
+        PathShapeViewModel Op(IEnumerable<BaseShapeViewModel> shapes, PathOp op);
 
-        public PathShape FromSvgPathData(string svgPath, bool isStroked, bool isFilled);
+        public PathShapeViewModel FromSvgPathData(string svgPath, bool isStroked, bool isFilled);
 
-        public string ToSvgPathData(BaseShape shape);
+        public string ToSvgPathData(BaseShapeViewModel shape);
     }
 }

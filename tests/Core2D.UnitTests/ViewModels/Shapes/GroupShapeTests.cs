@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using Core2D;
-using Core2D.Data;
-using Core2D.Renderer;
+using Core2D.Model;
+using Core2D.Model.Renderer;
+using Core2D.ViewModels;
+using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Shapes;
 using Xunit;
 
 namespace Core2D.Shapes.UnitTests
@@ -18,7 +19,7 @@ namespace Core2D.Shapes.UnitTests
         public void Inherits_From_ConnectableShape()
         {
             var target = _factory.CreateGroupShape();
-            Assert.True(target is ConnectableShape);
+            Assert.True(target is ConnectableShapeViewModel);
         }
 
         [Fact]
@@ -27,57 +28,6 @@ namespace Core2D.Shapes.UnitTests
         {
             var target = _factory.CreateGroupShape();
             Assert.False(target.Shapes.IsDefault);
-        }
-
-        [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
-        public void ShapesProperties_Gets_Shapes_And_Connectors_Properties()
-        {
-            var target = _factory.CreateGroupShape();
-
-            var shape = new Class1()
-            {
-                State = _factory.CreateShapeState(),
-                Properties = ImmutableArray.Create<Property>()
-            };
-            shape.Properties = shape.Properties.Add(_factory.CreateProperty(null, "", ""));
-            target.Shapes = target.Shapes.Add(shape);
-
-            var point = _factory.CreatePointShape();
-            point.Properties = point.Properties.Add(_factory.CreateProperty(null, "", ""));
-            target.Connectors = target.Connectors.Add(point);
-
-            var length = target.ShapesProperties.Length;
-            Assert.Equal(2, length);
-        }
-
-        [Fact]
-        [Trait("Core2D.Shapes", "Shapes")]
-        public void ShapesProperties_Cache_Should_Reset_After_Shapes_Updated()
-        {
-            var target = _factory.CreateGroupShape();
-
-            var shape1 = new Class1()
-            {
-                State = _factory.CreateShapeState(),
-                Properties = ImmutableArray.Create<Property>()
-            };
-            shape1.Properties = shape1.Properties.Add(_factory.CreateProperty(null, "", ""));
-            target.Shapes = target.Shapes.Add(shape1);
-
-            var length1 = target.ShapesProperties.Length;
-            Assert.Equal(1, length1);
-
-            var shape2 = new Class1()
-            {
-                State = _factory.CreateShapeState(),
-                Properties = ImmutableArray.Create<Property>()
-            };
-            shape2.Properties = shape2.Properties.Add(_factory.CreateProperty(null, "", ""));
-            target.Shapes = target.Shapes.Add(shape2);
-
-            var length2 = target.ShapesProperties.Length;
-            Assert.Equal(2, length2);
         }
 
         [Fact]
@@ -95,7 +45,7 @@ namespace Core2D.Shapes.UnitTests
             point.Properties = point.Properties.Add(_factory.CreateProperty(null, "", ""));
             target.Connectors = target.Connectors.Add(point);
 
-            var points = new List<PointShape>();
+            var points = new List<PointShapeViewModel>();
             target.GetPoints(points);
             var count = points.Count();
             Assert.Equal(3, count);
@@ -108,13 +58,13 @@ namespace Core2D.Shapes.UnitTests
             var target = _factory.CreateGroupShape();
             var shape = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
 
             target.AddShape(shape);
 
             Assert.Equal(shape.Owner, target);
-            Assert.False(shape.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.False(shape.State.HasFlag(ShapeStateFlags.Standalone));
             Assert.Contains(shape, target.Shapes);
 
             var length = target.Shapes.Length;
@@ -127,16 +77,16 @@ namespace Core2D.Shapes.UnitTests
         {
             var shape1 = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var shape2 = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
-            var shapes = new List<BaseShape> { shape1, shape2, point1, point2 };
+            var shapes = new List<BaseShapeViewModel> { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
             var target = _factory.CreateGroupShape("g");
@@ -168,16 +118,16 @@ namespace Core2D.Shapes.UnitTests
         {
             var shape1 = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var shape2 = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
 
-            var shapes = new BaseShape[] { shape1, shape2, point1, point2 };
+            var shapes = new BaseShapeViewModel[] { shape1, shape2, point1, point2 };
             var source = shapes.ToList();
 
             var target = _factory.CreateGroupShape("g");
@@ -198,7 +148,7 @@ namespace Core2D.Shapes.UnitTests
         {
             var shape = new Class1()
             {
-                State = _factory.CreateShapeState()
+                State = ShapeStateFlags.Default
             };
             var point1 = _factory.CreatePointShape();
             var point2 = _factory.CreatePointShape();
@@ -211,7 +161,7 @@ namespace Core2D.Shapes.UnitTests
             target.AddConnectorAsInput(point2);
             target.AddConnectorAsOutput(point3);
 
-            var source = new List<BaseShape> { target };
+            var source = new List<BaseShapeViewModel> { target };
 
             target.Ungroup(source);
 
@@ -223,19 +173,21 @@ namespace Core2D.Shapes.UnitTests
             var count = source.Count;
             Assert.Equal(4, count);
 
-            Assert.False(point1.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
-            Assert.False(point2.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
-            Assert.False(point3.State.Flags.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
+            Assert.False(point1.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.None));
+            Assert.False(point2.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Input));
+            Assert.False(point3.State.HasFlag(ShapeStateFlags.Connector | ShapeStateFlags.Output));
 
-            Assert.True(shape.State.Flags.HasFlag(ShapeStateFlags.Standalone));
-            Assert.True(point1.State.Flags.HasFlag(ShapeStateFlags.Standalone));
-            Assert.True(point2.State.Flags.HasFlag(ShapeStateFlags.Standalone));
-            Assert.True(point3.State.Flags.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(shape.State.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point1.State.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point2.State.HasFlag(ShapeStateFlags.Standalone));
+            Assert.True(point3.State.HasFlag(ShapeStateFlags.Standalone));
         }
 
-        public class Class1 : BaseShape
+        public class Class1 : BaseShapeViewModel
         {
-            public override Type TargetType => typeof(Class1);
+            public Class1() : base(typeof(Class1))
+            {
+            }
 
             public override object Copy(IDictionary<object, object> shared)
             {
@@ -257,7 +209,7 @@ namespace Core2D.Shapes.UnitTests
                 throw new NotImplementedException();
             }
 
-            public override void GetPoints(IList<PointShape> points)
+            public override void GetPoints(IList<PointShapeViewModel> points)
             {
                 throw new NotImplementedException();
             }

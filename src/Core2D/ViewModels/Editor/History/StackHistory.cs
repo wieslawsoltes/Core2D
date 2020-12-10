@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core2D.History;
+using Core2D.Model.History;
 
-namespace Core2D.Editor.History
+namespace Core2D.ViewModels.Editor.History
 {
-    internal sealed class StackHistory : IHistory
+    public partial class StackHistory : IHistory
     {
         private readonly Stack<UndoRedo> _undos = new Stack<UndoRedo>();
         private readonly Stack<UndoRedo> _redos = new Stack<UndoRedo>();

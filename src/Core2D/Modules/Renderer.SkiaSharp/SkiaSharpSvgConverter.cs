@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Data;
 using System.IO;
 using System.Linq;
-using Core2D.Editor;
-using Core2D.Path;
-using Core2D.Shapes;
+using Core2D.Model;
+using Core2D.Model.Path;
+using Core2D.Model.Style;
 using Core2D.Style;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Svg.Skia;
 using SP = Svg.Picture;
 
@@ -40,7 +42,7 @@ namespace Core2D.Renderer.SkiaSharp
             return paint.Style == SP.PaintStyle.Fill || paint.Style == SP.PaintStyle.StrokeAndFill;
         }
 
-        private static ArgbColor ToArgbColor(SP.ColorShader colorShader, IFactory factory)
+        private static ArgbColorViewModel ToArgbColor(SP.ColorShader colorShader, IFactory factory)
         {
             return factory.CreateArgbColor(
                 colorShader.Color.Alpha,
@@ -81,7 +83,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
         }
 
-        private static ShapeStyle ToStyle(SP.Paint paint, IFactory factory)
+        private static ShapeStyleViewModel ToStyle(SP.Paint paint, IFactory factory)
         {
             var style = factory.CreateShapeStyle("Style");
 
@@ -136,19 +138,19 @@ namespace Core2D.Renderer.SkiaSharp
 
                 if (paint.Typeface.Weight == SP.FontStyleWeight.Bold)
                 {
-                    style.TextStyle.FontStyle.Bold = true;
+                    style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Bold;
                 }
 
                 if (paint.Typeface.Style == SP.FontStyleSlant.Italic)
                 {
-                    style.TextStyle.FontStyle.Italic = true;
+                    style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Italic;
                 }
             }
 
             return style;
         }
 
-        public static PathGeometry ToPathGeometry(SP.Path path, bool isFilled, IFactory factory)
+        public static PathGeometryViewModel ToPathGeometry(SP.Path path, bool isFilled, IFactory factory)
         {
             if (path.Commands == null)
             {
@@ -156,7 +158,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
 
             var geometry = factory.CreatePathGeometry(
-                ImmutableArray.Create<PathFigure>(),
+                ImmutableArray.Create<PathFigureViewModel>(),
                 path.FillType == SP.PathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
             var context = factory.CreateGeometryContext(geometry);
@@ -310,7 +312,7 @@ namespace Core2D.Renderer.SkiaSharp
             return geometry;
         }
 
-        public static PathGeometry ToPathGeometry(SP.AddPolyPathCommand addPolyPathCommand, SP.PathFillType fillType, bool isFilled, bool isClosed, IFactory factory)
+        public static PathGeometryViewModel ToPathGeometry(SP.AddPolyPathCommand addPolyPathCommand, SP.PathFillType fillType, bool isFilled, bool isClosed, IFactory factory)
         {
             if (addPolyPathCommand.Points == null || addPolyPathCommand.Points.Count < 2)
             {
@@ -318,7 +320,7 @@ namespace Core2D.Renderer.SkiaSharp
             }
 
             var geometry = factory.CreatePathGeometry(
-                ImmutableArray.Create<PathFigure>(),
+                ImmutableArray.Create<PathFigureViewModel>(),
                 fillType == SP.PathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
             var context = factory.CreateGeometryContext(geometry);
@@ -341,7 +343,7 @@ namespace Core2D.Renderer.SkiaSharp
             return geometry;
         }
 
-        private static void ToShape(SP.Picture picture, List<BaseShape> shapes, IFactory factory)
+        private static void ToShape(SP.Picture picture, List<BaseShapeViewModel> shapes, IFactory factory)
         {
             foreach (var canvasCommand in picture.Commands)
             {
@@ -567,7 +569,7 @@ namespace Core2D.Renderer.SkiaSharp
             return stream;
         }
 
-        private IList<BaseShape> Convert(Svg.SvgDocument document, out double width, out double height)
+        private IList<BaseShapeViewModel> Convert(Svg.SvgDocument document, out double width, out double height)
         {
             var picture = SKSvg.ToModel(document);
             if (picture == null)
@@ -577,7 +579,7 @@ namespace Core2D.Renderer.SkiaSharp
                 return null;
             }
 
-            var shapes = new List<BaseShape>();
+            var shapes = new List<BaseShapeViewModel>();
             var factory = _serviceProvider.GetService<IFactory>();
 
             ToShape(picture, shapes, factory);
@@ -588,10 +590,10 @@ namespace Core2D.Renderer.SkiaSharp
 
             width = picture.CullRect.Width;
             height = picture.CullRect.Height;
-            return Enumerable.Repeat<BaseShape>(group, 1).ToList();
+            return Enumerable.Repeat<BaseShapeViewModel>(group, 1).ToList();
         }
 
-        public IList<BaseShape> Convert(string path, out double width, out double height)
+        public IList<BaseShapeViewModel> Convert(string path, out double width, out double height)
         {
             var document = SKSvg.Open(path);
             if (document == null)
@@ -604,7 +606,7 @@ namespace Core2D.Renderer.SkiaSharp
             return Convert(document, out width, out height);
         }
 
-        public IList<BaseShape> FromString(string text, out double width, out double height)
+        public IList<BaseShapeViewModel> FromString(string text, out double width, out double height)
         {
             using var stream = ToStream(text);
             var document = SKSvg.Open(stream);

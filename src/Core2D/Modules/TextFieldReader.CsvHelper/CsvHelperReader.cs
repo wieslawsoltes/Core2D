@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using Core2D;
-using Core2D.Data;
+using Core2D.Model;
+using Core2D.ViewModels.Data;
 using CSV = CsvHelper;
 
 namespace Core2D.TextFieldReader.CsvHelper
 {
-    public sealed class CsvHelperReader : ITextFieldReader<Database>
+    public sealed class CsvHelperReader : ITextFieldReader<DatabaseViewModel>
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -46,7 +46,7 @@ namespace Core2D.TextFieldReader.CsvHelper
             }
         }
 
-        public Database Read(Stream stream)
+        public DatabaseViewModel Read(Stream stream)
         {
             var fields = ReadFields(stream).ToList();
 
