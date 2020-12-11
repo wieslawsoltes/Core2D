@@ -13,7 +13,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private PointShapeViewModel _point3;
         [AutoNotify] private PointShapeViewModel _point4;
 
-        public ArcShapeViewModelViewModel() : base(typeof(ArcShapeViewModelViewModel))
+        public ArcShapeViewModelViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(ArcShapeViewModelViewModel))
         {
         }
 

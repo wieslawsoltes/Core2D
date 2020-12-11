@@ -10,14 +10,13 @@ namespace Core2D.ViewModels.Editor.Tools.Path
     public partial class MovePathToolViewModel : ViewModelBase, IPathTool
     {
         public enum State { Move }
-        private readonly IServiceProvider _serviceProvider;
-        private readonly State _currentState = State.Move;
+        private readonly State _currentState;
 
         public string Title => "Move";
 
-        public MovePathToolViewModel(IServiceProvider serviceProvider) : base()
+        public MovePathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
+            _currentState = State.Move;
         }
 
         public void BeginDown(InputArgs args)

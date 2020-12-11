@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Style
 {
@@ -6,9 +7,13 @@ namespace Core2D.ViewModels.Style
     {
         [AutoNotify] private BaseColorViewModel _color;
 
+        public FillStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new FillStyleViewModel()
+            return new FillStyleViewModel(_serviceProvider)
             {
                 Name = this.Name,
                 Color = (BaseColorViewModel)this._color.Copy(shared)

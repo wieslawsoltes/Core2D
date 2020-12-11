@@ -22,9 +22,16 @@ namespace Core2D.ViewModels
 {
     public partial class Factory : IFactory
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        public Factory(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         public LibraryViewModel<T> CreateLibrary<T>(string name)
         {
-            return new LibraryViewModel<T>()
+            return new LibraryViewModel<T>(_serviceProvider)
             {
                 Name = name,
                 Items = ImmutableArray.Create<T>(),
@@ -34,7 +41,7 @@ namespace Core2D.ViewModels
 
         public LibraryViewModel<T> CreateLibrary<T>(string name, IEnumerable<T> items)
         {
-            return new LibraryViewModel<T>()
+            return new LibraryViewModel<T>(_serviceProvider)
             {
                 Name = name,
                 Items = ImmutableArray.CreateRange<T>(items),
@@ -44,7 +51,7 @@ namespace Core2D.ViewModels
 
         public ValueViewModel CreateValue(string content)
         {
-            return new ValueViewModel()
+            return new ValueViewModel(_serviceProvider)
             {
                 Content = content
             };
@@ -52,7 +59,7 @@ namespace Core2D.ViewModels
 
         public PropertyViewModel CreateProperty(ViewModelBase owner, string name, string value)
         {
-            return new PropertyViewModel()
+            return new PropertyViewModel(_serviceProvider)
             {
                 Name = name,
                 Value = value,
@@ -62,7 +69,7 @@ namespace Core2D.ViewModels
 
         public ColumnViewModel CreateColumn(DatabaseViewModel owner, string name, bool isVisible = true)
         {
-            return new ColumnViewModel()
+            return new ColumnViewModel(_serviceProvider)
             {
                 Name = name,
                 IsVisible = isVisible,
@@ -72,7 +79,7 @@ namespace Core2D.ViewModels
 
         public RecordViewModel CreateRecord(DatabaseViewModel owner, ImmutableArray<ValueViewModel> values)
         {
-            return new RecordViewModel()
+            return new RecordViewModel(_serviceProvider)
             {
                 Values = values,
                 Owner = owner
@@ -81,7 +88,7 @@ namespace Core2D.ViewModels
 
         public RecordViewModel CreateRecord(DatabaseViewModel owner, string id, ImmutableArray<ValueViewModel> values)
         {
-            var record = new RecordViewModel()
+            var record = new RecordViewModel(_serviceProvider)
             {
                 Values = values,
                 Owner = owner
@@ -97,7 +104,7 @@ namespace Core2D.ViewModels
 
         public RecordViewModel CreateRecord(DatabaseViewModel owner, string value)
         {
-            return new RecordViewModel()
+            return new RecordViewModel(_serviceProvider)
             {
                 Values = ImmutableArray.CreateRange(
                     Enumerable.Repeat(
@@ -109,7 +116,7 @@ namespace Core2D.ViewModels
 
         public DatabaseViewModel CreateDatabase(string name, string idColumnName = "Id")
         {
-            return new DatabaseViewModel()
+            return new DatabaseViewModel(_serviceProvider)
             {
                 Name = name,
                 IdColumnName = idColumnName,
@@ -120,7 +127,7 @@ namespace Core2D.ViewModels
 
         public DatabaseViewModel CreateDatabase(string name, ImmutableArray<ColumnViewModel> columns, string idColumnName = "Id")
         {
-            return new DatabaseViewModel()
+            return new DatabaseViewModel(_serviceProvider)
             {
                 Name = name,
                 IdColumnName = idColumnName,
@@ -131,7 +138,7 @@ namespace Core2D.ViewModels
 
         public DatabaseViewModel CreateDatabase(string name, ImmutableArray<ColumnViewModel> columns, ImmutableArray<RecordViewModel> records, string idColumnName = "Id")
         {
-            return new DatabaseViewModel()
+            return new DatabaseViewModel(_serviceProvider)
             {
                 Name = name,
                 IdColumnName = idColumnName,
@@ -186,7 +193,7 @@ namespace Core2D.ViewModels
 
         public ShapeRendererStateViewModel CreateShapeRendererState()
         {
-            var state = new ShapeRendererStateViewModel()
+            var state = new ShapeRendererStateViewModel(_serviceProvider)
             {
                 PanX = 0.0,
                 PanY = 0.0,
@@ -232,7 +239,7 @@ namespace Core2D.ViewModels
 
         public LineSegmentViewModel CreateLineSegment(PointShapeViewModel point)
         {
-            return new LineSegmentViewModel()
+            return new LineSegmentViewModel(_serviceProvider)
             {
                 Point = point
             };
@@ -240,7 +247,7 @@ namespace Core2D.ViewModels
 
         public ArcSegmentViewModel CreateArcSegment(PointShapeViewModel point, PathSizeViewModel size, double rotationAngle, bool isLargeArc, SweepDirection sweepDirection)
         {
-            return new ArcSegmentViewModel()
+            return new ArcSegmentViewModel(_serviceProvider)
             {
                 Point = point,
                 Size = size,
@@ -252,7 +259,7 @@ namespace Core2D.ViewModels
 
         public QuadraticBezierSegmentViewModel CreateQuadraticBezierSegment(PointShapeViewModel point1, PointShapeViewModel point2)
         {
-            return new QuadraticBezierSegmentViewModel()
+            return new QuadraticBezierSegmentViewModel(_serviceProvider)
             {
                 Point1 = point1,
                 Point2 = point2
@@ -261,7 +268,7 @@ namespace Core2D.ViewModels
 
         public CubicBezierSegmentViewModel CreateCubicBezierSegment(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3)
         {
-            return new CubicBezierSegmentViewModel()
+            return new CubicBezierSegmentViewModel(_serviceProvider)
             {
                 Point1 = point1,
                 Point2 = point2,
@@ -271,7 +278,7 @@ namespace Core2D.ViewModels
 
         public PathSizeViewModel CreatePathSize(double width = 0.0, double height = 0.0)
         {
-            return new PathSizeViewModel()
+            return new PathSizeViewModel(_serviceProvider)
             {
                 Width = width,
                 Height = height
@@ -280,7 +287,7 @@ namespace Core2D.ViewModels
 
         public PathGeometryViewModel CreatePathGeometry()
         {
-            return new PathGeometryViewModel()
+            return new PathGeometryViewModel(_serviceProvider)
             {
                 Figures = ImmutableArray.Create<PathFigureViewModel>(),
                 FillRule = FillRule.Nonzero
@@ -289,17 +296,17 @@ namespace Core2D.ViewModels
 
         public GeometryContextViewModel CreateGeometryContext()
         {
-            return new GeometryContextViewModel(this, CreatePathGeometry());
+            return new GeometryContextViewModel(_serviceProvider, CreatePathGeometry());
         }
 
         public GeometryContextViewModel CreateGeometryContext(PathGeometryViewModel geometry)
         {
-            return new GeometryContextViewModel(this, geometry);
+            return new GeometryContextViewModel(_serviceProvider, geometry);
         }
 
         public PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero)
         {
-            return new PathGeometryViewModel()
+            return new PathGeometryViewModel(_serviceProvider)
             {
                 Figures = figures,
                 FillRule = fillRule
@@ -308,7 +315,7 @@ namespace Core2D.ViewModels
 
         public PathFigureViewModel CreatePathFigure(bool isClosed = false)
         {
-            return new PathFigureViewModel()
+            return new PathFigureViewModel(_serviceProvider)
             {
                 StartPoint = CreatePointShape(),
                 Segments = ImmutableArray.Create<PathSegmentViewModel>(),
@@ -318,7 +325,7 @@ namespace Core2D.ViewModels
 
         public PathFigureViewModel CreatePathFigure(PointShapeViewModel startPoint, bool isClosed = false)
         {
-            return new PathFigureViewModel()
+            return new PathFigureViewModel(_serviceProvider)
             {
                 StartPoint = startPoint,
                 Segments = ImmutableArray.Create<PathSegmentViewModel>(),
@@ -328,7 +335,7 @@ namespace Core2D.ViewModels
 
         public PointShapeViewModel CreatePointShape(double x = 0.0, double y = 0.0, string name = "")
         {
-            var pointShape = new PointShapeViewModel()
+            var pointShape = new PointShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -342,7 +349,7 @@ namespace Core2D.ViewModels
 
         public LineShapeViewModel CreateLineShape(PointShapeViewModel start, PointShapeViewModel end, ShapeStyleViewModel style, bool isStroked = true, string name = "")
         {
-            var lineShape = new LineShapeViewModel()
+            var lineShape = new LineShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -360,7 +367,7 @@ namespace Core2D.ViewModels
 
         public LineShapeViewModel CreateLineShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, bool isStroked = true, string name = "")
         {
-            var lineShape = new LineShapeViewModel()
+            var lineShape = new LineShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -386,7 +393,7 @@ namespace Core2D.ViewModels
 
         public ArcShapeViewModelViewModel CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var arcShape = new ArcShapeViewModelViewModel()
+            var arcShape = new ArcShapeViewModelViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -418,7 +425,7 @@ namespace Core2D.ViewModels
 
         public ArcShapeViewModelViewModel CreateArcShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var arcShape = new ArcShapeViewModelViewModel()
+            var arcShape = new ArcShapeViewModelViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -438,7 +445,7 @@ namespace Core2D.ViewModels
 
         public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var quadraticBezierShape = new QuadraticBezierShapeViewModel()
+            var quadraticBezierShape = new QuadraticBezierShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -467,7 +474,7 @@ namespace Core2D.ViewModels
 
         public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var quadraticBezierShape = new QuadraticBezierShapeViewModel()
+            var quadraticBezierShape = new QuadraticBezierShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -486,7 +493,7 @@ namespace Core2D.ViewModels
 
         public CubicBezierShapeViewModel CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var cubicBezierShape = new CubicBezierShapeViewModel()
+            var cubicBezierShape = new CubicBezierShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -518,7 +525,7 @@ namespace Core2D.ViewModels
 
         public CubicBezierShapeViewModel CreateCubicBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var cubicBezierShape = new CubicBezierShapeViewModel()
+            var cubicBezierShape = new CubicBezierShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -538,7 +545,7 @@ namespace Core2D.ViewModels
 
         public RectangleShapeViewModel CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var rectangleShape = new RectangleShapeViewModel()
+            var rectangleShape = new RectangleShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -564,7 +571,7 @@ namespace Core2D.ViewModels
 
         public RectangleShapeViewModel CreateRectangleShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var rectangleShape = new RectangleShapeViewModel()
+            var rectangleShape = new RectangleShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -582,7 +589,7 @@ namespace Core2D.ViewModels
 
         public EllipseShapeViewModel CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var ellipseShape = new EllipseShapeViewModel()
+            var ellipseShape = new EllipseShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -608,7 +615,7 @@ namespace Core2D.ViewModels
 
         public EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var ellipseShape = new EllipseShapeViewModel()
+            var ellipseShape = new EllipseShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -628,7 +635,7 @@ namespace Core2D.ViewModels
 
         public PathShapeViewModel CreatePathShape(ShapeStyleViewModel style, PathGeometryViewModel geometry, bool isStroked = true, bool isFilled = true)
         {
-            var pathShape = new PathShapeViewModel()
+            var pathShape = new PathShapeViewModel(_serviceProvider)
             {
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
                 Properties = ImmutableArray.Create<PropertyViewModel>(),
@@ -658,7 +665,7 @@ namespace Core2D.ViewModels
 
         public PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel style, PathGeometryViewModel geometry, bool isStroked = true, bool isFilled = true)
         {
-            var pathShape = new PathShapeViewModel()
+            var pathShape = new PathShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -673,7 +680,7 @@ namespace Core2D.ViewModels
 
         public TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, string text, bool isStroked = true, string name = "")
         {
-            var textShape = new TextShapeViewModel()
+            var textShape = new TextShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -699,7 +706,7 @@ namespace Core2D.ViewModels
 
         public TextShapeViewModel CreateTextShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, string text, bool isStroked = true, string name = "")
         {
-            var textShape = new TextShapeViewModel()
+            var textShape = new TextShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -719,7 +726,7 @@ namespace Core2D.ViewModels
 
         public ImageShapeViewModel CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
-            var imageShape = new ImageShapeViewModel()
+            var imageShape = new ImageShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -746,7 +753,7 @@ namespace Core2D.ViewModels
 
         public ImageShapeViewModel CreateImageShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
-            var imageShape = new ImageShapeViewModel()
+            var imageShape = new ImageShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -767,7 +774,7 @@ namespace Core2D.ViewModels
 
         public GroupShapeViewModel CreateGroupShape(string name = "g")
         {
-            return new GroupShapeViewModel()
+            return new GroupShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -779,7 +786,7 @@ namespace Core2D.ViewModels
 
         public ArgbColorViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
         {
-            return new ArgbColorViewModel()
+            return new ArgbColorViewModel(_serviceProvider)
             {
                 Value = ArgbColorViewModel.ToUint32(a, r, g, b)
             };
@@ -787,7 +794,7 @@ namespace Core2D.ViewModels
 
         public ArrowStyleViewModel CreateArrowStyle(ArrowType arrowType = ArrowType.None, double radiusX = 5.0, double radiusY = 3.0)
         {
-            return new ArrowStyleViewModel()
+            return new ArrowStyleViewModel(_serviceProvider)
             {
                 ArrowType = arrowType,
                 RadiusX = radiusX,
@@ -797,7 +804,7 @@ namespace Core2D.ViewModels
 
         public StrokeStyleViewModel CreateStrokeStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00, double thickness = 2.0, ArrowStyleViewModel startArrowStyleViewModel = null, ArrowStyleViewModel endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
-            var style = new StrokeStyleViewModel()
+            var style = new StrokeStyleViewModel(_serviceProvider)
             {
                 Name = name,
                 Color = CreateArgbColor(a, r, g, b),
@@ -815,7 +822,7 @@ namespace Core2D.ViewModels
 
         public StrokeStyleViewModel CreateStrokeStyle(string name, BaseColorViewModel colorViewModel, double thickness, ArrowStyleViewModel startArrow, ArrowStyleViewModel endArrow)
         {
-            return new StrokeStyleViewModel()
+            return new StrokeStyleViewModel(_serviceProvider)
             {
                 Name = name,
                 Color = colorViewModel,
@@ -830,7 +837,7 @@ namespace Core2D.ViewModels
 
         public FillStyleViewModel CreateFillStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
         {
-            return new FillStyleViewModel()
+            return new FillStyleViewModel(_serviceProvider)
             {
                 Name = name,
                 Color = CreateArgbColor(a, r, g, b)
@@ -839,7 +846,7 @@ namespace Core2D.ViewModels
 
         public FillStyleViewModel CreateFillStyle(string name, BaseColorViewModel colorViewModel)
         {
-            return new FillStyleViewModel()
+            return new FillStyleViewModel(_serviceProvider)
             {
                 Name = name,
                 Color = colorViewModel
@@ -848,7 +855,7 @@ namespace Core2D.ViewModels
 
         public ShapeStyleViewModel CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyleViewModel textStyleViewModel = null, ArrowStyleViewModel startArrowStyleViewModel = null, ArrowStyleViewModel endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0)
         {
-            return new ShapeStyleViewModel()
+            return new ShapeStyleViewModel(_serviceProvider)
             {
                 Name = name,
                 Stroke = CreateStrokeStyle("", sa, sr, sg, sb, thickness, startArrowStyleViewModel, endArrowStyleViewModel, lineCap, dashes, dashOffset),
@@ -859,7 +866,7 @@ namespace Core2D.ViewModels
 
         public ShapeStyleViewModel CreateShapeStyle(string name, BaseColorViewModel stroke, BaseColorViewModel fill, double thickness, TextStyleViewModel textStyleViewModel, ArrowStyleViewModel startArrowStyleViewModel, ArrowStyleViewModel endArrowStyleViewModel)
         {
-            return new ShapeStyleViewModel()
+            return new ShapeStyleViewModel(_serviceProvider)
             {
                 Name = name,
                 Stroke = CreateStrokeStyle("", stroke, thickness, startArrowStyleViewModel, endArrowStyleViewModel),
@@ -870,7 +877,7 @@ namespace Core2D.ViewModels
 
         public TextStyleViewModel CreateTextStyle(string name = "", string fontName = "Calibri", string fontFile = @"C:\Windows\Fonts\calibri.ttf", double fontSize = 12.0, FontStyleFlags fontStyle = FontStyleFlags.Regular, TextHAlignment textHAlignment = TextHAlignment.Center, TextVAlignment textVAlignment = TextVAlignment.Center)
         {
-            return new TextStyleViewModel()
+            return new TextStyleViewModel(_serviceProvider)
             {
                 Name = name,
                 FontName = fontName,
@@ -884,7 +891,7 @@ namespace Core2D.ViewModels
 
         public OptionsViewModel CreateOptions()
         {
-            return new OptionsViewModel()
+            return new OptionsViewModel(_serviceProvider)
             {
                 SnapToGrid = true,
                 SnapX = 15.0,
@@ -901,7 +908,7 @@ namespace Core2D.ViewModels
 
         public ScriptViewModel CreateScript(string name = "Script", string code = "")
         {
-            return new ScriptViewModel()
+            return new ScriptViewModel(_serviceProvider)
             {
                 Name = name,
                 Code = code
@@ -910,7 +917,7 @@ namespace Core2D.ViewModels
 
         public LayerContainerViewModel CreateLayerContainer(string name = "Layer", PageContainerViewModel owner = null, bool isVisible = true)
         {
-            return new LayerContainerViewModel()
+            return new LayerContainerViewModel(_serviceProvider)
             {
                 Name = name,
                 Owner = owner,
@@ -921,7 +928,7 @@ namespace Core2D.ViewModels
 
         public PageContainerViewModel CreatePageContainer(string name = "Page")
         {
-            var page = new PageContainerViewModel()
+            var page = new PageContainerViewModel(_serviceProvider)
             {
                 Name = name,
                 Layers = ImmutableArray.Create<LayerContainerViewModel>(),
@@ -941,7 +948,7 @@ namespace Core2D.ViewModels
 
         public PageContainerViewModel CreateTemplateContainer(string name = "Template", double width = 840, double height = 600)
         {
-            var template = new PageContainerViewModel()
+            var template = new PageContainerViewModel(_serviceProvider)
             {
                 Name = name,
                 Layers = ImmutableArray.Create<LayerContainerViewModel>(),
@@ -976,7 +983,7 @@ namespace Core2D.ViewModels
 
         public DocumentContainerViewModel CreateDocumentContainer(string name = "Document")
         {
-            return new DocumentContainerViewModel()
+            return new DocumentContainerViewModel(_serviceProvider)
             {
                 Name = name,
                 Pages = ImmutableArray.Create<PageContainerViewModel>()
@@ -985,7 +992,7 @@ namespace Core2D.ViewModels
 
         public ProjectContainerViewModel CreateProjectContainer(string name = "Project")
         {
-            return new ProjectContainerViewModel()
+            return new ProjectContainerViewModel(_serviceProvider)
             {
                 Name = name,
                 Options = CreateOptions(),

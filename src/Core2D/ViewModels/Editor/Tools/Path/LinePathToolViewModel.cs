@@ -13,16 +13,16 @@ namespace Core2D.ViewModels.Editor.Tools.Path
     public partial class LinePathToolViewModel : ViewModelBase, IPathTool
     {
         public enum State { Start, End }
-        private readonly IServiceProvider _serviceProvider;
-        private State _currentState = State.Start;
-        private LineShapeViewModel _line = new LineShapeViewModel();
+        private State _currentState;
+        private LineShapeViewModel _line;
         private LineSelection _selection;
 
         public string Title => "Line";
 
-        public LinePathToolViewModel(IServiceProvider serviceProvider) : base()
+        public LinePathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
+            _currentState = State.Start;
+            _line = new LineShapeViewModel(serviceProvider);
         }
 
         public void BeginDown(InputArgs args)

@@ -20,7 +20,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private RecordViewModel _record;
         [AutoNotify(SetterModifier = AccessModifier.None)] private Type _targetType;
 
-        protected BaseShapeViewModel(Type targetType)
+        protected BaseShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider)
         {
             _targetType = targetType;
         }

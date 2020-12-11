@@ -10,15 +10,13 @@ namespace Core2D.ViewModels.Editor.Tools
     public partial class PointToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { Point }
-        private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.Point;
         private PointShapeViewModel _point;
 
         public string Title => "Point";
 
-        public PointToolViewModel(IServiceProvider serviceProvider) : base()
+        public PointToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         public void BeginDown(InputArgs args)

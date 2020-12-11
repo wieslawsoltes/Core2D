@@ -1,8 +1,10 @@
-﻿namespace Core2D.ViewModels.Containers
+﻿using System;
+
+namespace Core2D.ViewModels.Containers
 {
     public partial class LibraryViewModel : ViewModelBase
     {
-        protected LibraryViewModel()
+        protected LibraryViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
     }

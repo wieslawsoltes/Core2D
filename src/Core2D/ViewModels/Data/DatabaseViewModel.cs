@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Data;
 
@@ -11,13 +12,17 @@ namespace Core2D.ViewModels.Data
         [AutoNotify] private ImmutableArray<RecordViewModel> _records;
         [AutoNotify] private RecordViewModel _currentRecord;
 
+        public DatabaseViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
             var columns = this._columns.Copy(shared).ToImmutable();
             var records = this._records.Copy(shared).ToImmutable();
             var currentRecordIndex = _records.IndexOf(_currentRecord);
 
-            return new DatabaseViewModel()
+            return new DatabaseViewModel(_serviceProvider)
             {
                 Name = this.Name,
                 IdColumnName = this.IdColumnName,

@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private PointShapeViewModel _topLeft;
         [AutoNotify] private PointShapeViewModel _bottomRight;
 
-        public EllipseShapeViewModel() : base(typeof(EllipseShapeViewModel))
+        public EllipseShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(EllipseShapeViewModel))
         {
         }
 

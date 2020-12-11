@@ -16,6 +16,10 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private bool _isVisible = true;
         [AutoNotify] private ImmutableArray<BaseShapeViewModel> _shapes;
 
+        public LayerContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public void InvalidateLayer() => InvalidateLayerHandler?.Invoke(this, new InvalidateLayerEventArgs());
 
         public override bool IsDirty()

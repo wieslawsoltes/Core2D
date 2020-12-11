@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
@@ -8,19 +7,11 @@ namespace Core2D.ViewModels.Editors
 {
     public partial class TextBindingEditorViewModel : ViewModelBase
     {
-        private ProjectEditorViewModel _editor;
-        private TextShapeViewModel _text;
+        [AutoNotify] private ProjectEditorViewModel _editor;
+        [AutoNotify] private TextShapeViewModel _text;
 
-        public ProjectEditorViewModel Editor
+        public TextBindingEditorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            get => _editor;
-            set => RaiseAndSetIfChanged(ref _editor, value);
-        }
-
-        public TextShapeViewModel Text
-        {
-            get => _text;
-            set => RaiseAndSetIfChanged(ref _text, value);
         }
 
         public void OnUseColumnName(ColumnViewModel column)

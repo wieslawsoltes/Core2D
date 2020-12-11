@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Editor
 {
-    public partial class ProjectEditorConfigurationViewModel : ViewModelBase
+    public class ProjectEditorConfiguration
     {
         public static string DefaultLayerName = "Layer";
 

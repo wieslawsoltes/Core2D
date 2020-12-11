@@ -43,6 +43,13 @@ namespace Core2D.Modules
 
             builder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
 
+            // ViewModels
+
+            builder.RegisterAssemblyTypes(typeof(ViewModelBase).GetTypeInfo().Assembly)
+                .PublicOnly()
+                .Where(t => t.Namespace.StartsWith("Core2D.ViewModels") && t.Name.EndsWith("ViewModel"))
+                .AsSelf();
+
             // Core
 
             builder.RegisterType<ProjectEditorViewModel>().As<ProjectEditorViewModel>().InstancePerLifetimeScope();

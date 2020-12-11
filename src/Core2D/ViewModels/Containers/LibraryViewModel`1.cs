@@ -9,6 +9,10 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private ImmutableArray<T> _items;
         [AutoNotify] private T _selected;
 
+        public LibraryViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public void SetSelected(T item) => Selected = item;
 
         public override bool IsDirty()

@@ -14,7 +14,6 @@ namespace Core2D.ViewModels.Editor.Tools
     {
         public enum State { TopLeft, BottomRight }
         public enum Mode { Rectangle, Circle }
-        private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.TopLeft;
         private Mode _currentMode = Mode.Rectangle;
         private EllipseShapeViewModel _ellipse;
@@ -24,9 +23,8 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Ellipse";
 
-        public EllipseToolViewModel(IServiceProvider serviceProvider) : base()
+        public EllipseToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         private static void CircleConstrain(PointShapeViewModel tl, PointShapeViewModel br, decimal cx, decimal cy, decimal px, decimal py)
@@ -56,7 +54,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.Factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _ellipse = factory.CreateEllipseShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

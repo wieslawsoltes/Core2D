@@ -12,16 +12,14 @@ namespace Core2D.ViewModels.Editor.Tools
     public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { TopLeft, BottomRight }
-        private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.TopLeft;
         private RectangleShapeViewModel _rectangle;
         private RectangleSelection _selection;
 
         public string Title => "Rectangle";
 
-        public RectangleToolViewModel(IServiceProvider serviceProvider) : base()
+        public RectangleToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         public void BeginDown(InputArgs args)
@@ -36,7 +34,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.Factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _rectangle = factory.CreateRectangleShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

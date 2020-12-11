@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Style
 {
@@ -8,9 +9,13 @@ namespace Core2D.ViewModels.Style
         [AutoNotify] private FillStyleViewModel _fill;
         [AutoNotify] private TextStyleViewModel _textStyle;
 
+        public ShapeStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ShapeStyleViewModel()
+            return new ShapeStyleViewModel(_serviceProvider)
             {
                 Name = this.Name,
                 Stroke = (StrokeStyleViewModel)this._stroke.Copy(shared),

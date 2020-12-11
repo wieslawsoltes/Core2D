@@ -19,9 +19,13 @@ namespace Core2D.ViewModels.Style
 
         public byte B => (byte)(_value & 0xff);
 
+        public ArgbColorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ArgbColorViewModel()
+            return new ArgbColorViewModel(_serviceProvider)
             {
                 Value = this.Value
             };
@@ -46,7 +50,8 @@ namespace Core2D.ViewModels.Style
 
         public static ArgbColorViewModel FromUInt32(uint value)
         {
-            return new ArgbColorViewModel
+            // TODO: IServiceProvider
+            return new ArgbColorViewModel(null)
             {
                 Value = value
             };

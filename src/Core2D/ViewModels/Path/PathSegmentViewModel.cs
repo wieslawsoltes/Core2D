@@ -8,7 +8,7 @@ namespace Core2D.ViewModels.Path
     {
         [AutoNotify] private bool _isStroked;
 
-        protected PathSegmentViewModel()
+        protected PathSegmentViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
 

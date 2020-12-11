@@ -16,9 +16,8 @@ namespace Core2D.ViewModels.Editor.Tools.Path
     {
         public enum State { Start, End }
 
-        private readonly IServiceProvider _serviceProvider;
-        private State _currentState = State.Start;
-        private LineShapeViewModel _arc = new LineShapeViewModel();
+        private State _currentState;
+        private LineShapeViewModel _arc;
         private LineSelection _selection;
         private const double _defaultRotationAngle = 0.0;
         private const bool _defaultIsLargeArc = false;
@@ -26,9 +25,10 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public string Title => "Arc";
 
-        public ArcPathToolViewModel(IServiceProvider serviceProvider) : base()
+        public ArcPathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
+            _currentState = State.Start;
+            _arc = new LineShapeViewModel(serviceProvider);
         }
 
         public void BeginDown(InputArgs args)

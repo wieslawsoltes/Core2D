@@ -69,6 +69,10 @@ namespace Core2D.ViewModels.Containers
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
         }
 
+        public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public void SetCurrentDocument(DocumentContainerViewModel document)
         {
             CurrentDocument = document;

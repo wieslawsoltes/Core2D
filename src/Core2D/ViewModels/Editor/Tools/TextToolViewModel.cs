@@ -12,16 +12,14 @@ namespace Core2D.ViewModels.Editor.Tools
     public partial class TextToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { TopLeft, BottomRight }
-        private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.TopLeft;
         private TextShapeViewModel _text;
         private TextSelection _selection;
 
         public string Title => "Text";
 
-        public TextToolViewModel(IServiceProvider serviceProvider) : base()
+        public TextToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         public void BeginDown(InputArgs args)
@@ -36,7 +34,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.Factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _text = factory.CreateTextShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

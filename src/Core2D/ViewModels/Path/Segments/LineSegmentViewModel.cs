@@ -8,6 +8,10 @@ namespace Core2D.ViewModels.Path.Segments
     {
         [AutoNotify] private PointShapeViewModel _point;
 
+        public LineSegmentViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
             points.Add(Point);

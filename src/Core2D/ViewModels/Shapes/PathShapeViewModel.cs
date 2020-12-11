@@ -13,7 +13,7 @@ namespace Core2D.ViewModels.Shapes
 
         [AutoNotify] private PathGeometryViewModel _geometry;
 
-        public PathShapeViewModel() : base(typeof(PathShapeViewModel))
+        public PathShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(PathShapeViewModel))
         {
         }
 

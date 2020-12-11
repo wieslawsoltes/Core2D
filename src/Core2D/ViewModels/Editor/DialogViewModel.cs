@@ -7,43 +7,14 @@ namespace Core2D.ViewModels.Editor
     public partial class DialogViewModel : ViewModelBase
     {
         private readonly IDialogPresenter _dialogPresenter;
-        private string _title;
-        private bool _isOverlayVisible;
-        private bool _isTitleBarVisible;
-        private bool _isCloseButtonVisible;
-        private ViewModelBase _viewModel;
 
-        public string Title
-        {
-            get => _title;
-            set => RaiseAndSetIfChanged(ref _title, value);
-        }
+        [AutoNotify] private string _title;
+        [AutoNotify] private bool _isOverlayVisible;
+        [AutoNotify] private bool _isTitleBarVisible;
+        [AutoNotify] private bool _isCloseButtonVisible;
+        [AutoNotify] private ViewModelBase _viewModel;
 
-        public bool IsOverlayVisible
-        {
-            get => _isOverlayVisible;
-            set => RaiseAndSetIfChanged(ref _isOverlayVisible, value);
-        }
-
-        public bool IsTitleBarVisible
-        {
-            get => _isTitleBarVisible;
-            set => RaiseAndSetIfChanged(ref _isTitleBarVisible, value);
-        }
-
-        public bool IsCloseButtonVisible
-        {
-            get => _isCloseButtonVisible;
-            set => RaiseAndSetIfChanged(ref _isCloseButtonVisible, value);
-        }
-
-        public ViewModelBase ViewModel
-        {
-            get => _viewModel;
-            set => RaiseAndSetIfChanged(ref _viewModel, value);
-        }
-
-        public DialogViewModel(IDialogPresenter dialogPresenter)
+        public DialogViewModel(IServiceProvider serviceProvider, IDialogPresenter dialogPresenter) : base(serviceProvider)
         {
             _dialogPresenter = dialogPresenter;
         }

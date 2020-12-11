@@ -34,6 +34,10 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private BaseColorViewModel _gridStrokeColor;
         [AutoNotify] private double _gridStrokeThickness;
 
+        public PageContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public void SetCurrentLayer(LayerContainerViewModel layer) => CurrentLayer = layer;
 
         public void InvalidateLayer()

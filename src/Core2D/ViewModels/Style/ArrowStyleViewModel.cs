@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core2D.Model.Style;
 
 namespace Core2D.ViewModels.Style
@@ -9,9 +10,13 @@ namespace Core2D.ViewModels.Style
         [AutoNotify] private double _radiusX;
         [AutoNotify] private double _radiusY;
 
+        public ArrowStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ArrowStyleViewModel()
+            return new ArrowStyleViewModel(_serviceProvider)
             {
                 Name = this.Name,
                 ArrowType = this._arrowType,

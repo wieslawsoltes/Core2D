@@ -20,8 +20,6 @@ namespace Core2D.Renderer.Dxf
 {
     public partial class DxfRenderer : ViewModelBase, IShapeRenderer
     {
-        private readonly IServiceProvider _serviceProvider;
-        private ShapeRendererStateViewModel _stateViewModel;
         private ICache<string, DXFO.ImageDefinition> _biCache;
         private double _pageWidth;
         private double _pageHeight;
@@ -30,17 +28,12 @@ namespace Core2D.Renderer.Dxf
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
 
-        public ShapeRendererStateViewModel State
-        {
-            get => _stateViewModel;
-            set => RaiseAndSetIfChanged(ref _stateViewModel, value);
-        }
+        [AutoNotify] private ShapeRendererStateViewModel _state;
 
-        public DxfRenderer(IServiceProvider serviceProvider)
+        public DxfRenderer(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
-            _stateViewModel = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
+            _state = serviceProvider.GetService<IFactory>().CreateShapeRendererState();
+            _biCache = serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
         }
 
         private static double s_lineweightFactor = 96.0 / 2540.0;

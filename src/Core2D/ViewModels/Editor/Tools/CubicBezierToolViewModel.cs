@@ -12,16 +12,14 @@ namespace Core2D.ViewModels.Editor.Tools
     public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { Point1, Point4, Point2, Point3 }
-        private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.Point1;
         private CubicBezierShapeViewModel _cubicBezier;
         private BezierSelectionSelection _selectionSelection;
 
         public string Title => "CubicBezier";
 
-        public CubicBezierToolViewModel(IServiceProvider serviceProvider) : base()
+        public CubicBezierToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         public void BeginDown(InputArgs args)
@@ -36,7 +34,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.Factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _cubicBezier = factory.CreateCubicBezierShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

@@ -86,9 +86,9 @@ namespace Core2D
             }
         }
 
-        public AboutInfoViewModel CreateAboutInfo(RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
+        public AboutInfoViewModel CreateAboutInfo(IServiceProvider serviceProvider, RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
         {
-            return new AboutInfoViewModel()
+            return new AboutInfoViewModel(serviceProvider)
             {
                 Title = "Core2D",
                 Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}",
@@ -150,8 +150,8 @@ namespace Core2D
             var platformRenderInterface = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>();
             var windowingSubsystemName = windowingPlatform.GetType().Assembly.GetName().Name;
             var renderingSubsystemName = platformRenderInterface.GetType().Assembly.GetName().Name;
-            var aboutInfo = CreateAboutInfo(runtimeInfo, windowingSubsystemName, renderingSubsystemName);
-            editor.AboutInfoViewModel = aboutInfo;
+            var aboutInfo = CreateAboutInfo(serviceProvider, runtimeInfo, windowingSubsystemName, renderingSubsystemName);
+            editor.AboutInfo = aboutInfo;
 
             var mainWindow = serviceProvider.GetService<MainWindow>();
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Data
 {
@@ -6,9 +7,13 @@ namespace Core2D.ViewModels.Data
     {
         [AutoNotify] private bool _isVisible;
 
+        public ColumnViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ColumnViewModel()
+            return new ColumnViewModel(_serviceProvider)
             {
                 Name = this.Name,
                 IsVisible = this.IsVisible

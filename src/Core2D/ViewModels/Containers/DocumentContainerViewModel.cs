@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace Core2D.ViewModels.Containers
@@ -8,6 +7,10 @@ namespace Core2D.ViewModels.Containers
     {
         [AutoNotify] private bool _isExpanded = true;
         [AutoNotify] private ImmutableArray<PageContainerViewModel> _pages;
+
+        public DocumentContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
 
         public override bool IsDirty()
         {
