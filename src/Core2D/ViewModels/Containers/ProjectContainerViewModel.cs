@@ -10,7 +10,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class ProjectContainerViewModel : BaseContainerViewModel
+    public partial class ProjectContainerViewModel : ViewModelBase
     {
         [AutoNotify] private OptionsViewModel _options;
         [AutoNotify] private IHistory _history;

@@ -16,7 +16,6 @@ using Core2D.Configuration.Themes;
 using Core2D.Configuration.Windows;
 using Core2D.ViewModels.Designer;
 using Core2D.Model;
-using Core2D.Modules;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
 
@@ -78,7 +77,7 @@ namespace Core2D
             {
                 var builder = new ContainerBuilder();
 
-                builder.RegisterModule<AvaloniaModule>();
+                builder.RegisterModule<AppModule>();
 
                 var container = builder.Build();
 
@@ -111,7 +110,7 @@ namespace Core2D
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterModule<AvaloniaModule>();
+            builder.RegisterModule<AppModule>();
 
             var container = builder.Build();
 
@@ -187,7 +186,7 @@ namespace Core2D
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterModule<AvaloniaModule>();
+            builder.RegisterModule<AppModule>();
 
             var container = builder.Build(); // TODO: Dispose()
             var serviceProvider = container.Resolve<IServiceProvider>();

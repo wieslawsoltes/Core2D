@@ -16,7 +16,7 @@ namespace Core2D.ViewModels.Renderer
 
         [AutoNotify] private ShapeRendererStateViewModel _state;
 
-        protected NodeRendererViewModel(IServiceProvider serviceProvider, IDrawNodeFactory drawNodeFactory) : base(serviceProvider)
+        public NodeRendererViewModel(IServiceProvider serviceProvider, IDrawNodeFactory drawNodeFactory) : base(serviceProvider)
         {
             _state = serviceProvider.GetService<IFactory>().CreateShapeRendererState();
             _biCache = serviceProvider.GetService<IFactory>().CreateCache<string, IDisposable>(x => x.Dispose());

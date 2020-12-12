@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class LibraryViewModel<T> : LibraryViewModel
+    public partial class LibraryViewModel<T> : ViewModelBase
     {
         [AutoNotify] private ImmutableArray<T> _items;
         [AutoNotify] private T _selected;

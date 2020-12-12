@@ -1,5 +1,4 @@
-﻿using System;
-using Core2D.Model;
+﻿using Core2D.Model;
 using Autofac;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -8,21 +7,17 @@ namespace Core2D.Serializer.Newtonsoft
 {
     public sealed class NewtonsoftJsonSerializer : IJsonSerializer
     {
-        private readonly IServiceProvider _serviceProvider;
-
         private readonly JsonSerializerSettings _settings;
 
-        public NewtonsoftJsonSerializer(IServiceProvider serviceProvider, IContainer container)
+        public NewtonsoftJsonSerializer(ILifetimeScope lifetimeScope)
         {
-            _serviceProvider = serviceProvider;
-
             _settings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
                 TypeNameHandling = TypeNameHandling.Objects,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ProjectContractResolver(container),
+                ContractResolver = new ProjectContractResolver(lifetimeScope),
                 NullValueHandling = NullValueHandling.Ignore,
                 Converters =
                 {

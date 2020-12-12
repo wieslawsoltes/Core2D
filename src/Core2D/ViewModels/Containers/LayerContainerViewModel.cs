@@ -9,7 +9,7 @@ namespace Core2D.ViewModels.Containers
 
     public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
 
-    public partial class LayerContainerViewModel : BaseContainerViewModel
+    public partial class LayerContainerViewModel : ViewModelBase
     {
         public event InvalidateLayerEventHandler InvalidateLayerHandler;
 

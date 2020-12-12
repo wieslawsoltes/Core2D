@@ -18,7 +18,7 @@ namespace Core2D.Renderer
         public AM.FormattedText FormattedText { get; set; }
         public string BoundText { get; set; }
 
-        protected TextDrawNode()
+        public TextDrawNode()
         {
         }
 
