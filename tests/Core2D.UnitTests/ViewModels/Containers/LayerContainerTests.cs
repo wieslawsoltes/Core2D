@@ -25,24 +25,6 @@ namespace Core2D.UnitTests
             Assert.False(target.Shapes.IsDefault);
         }
 
-        [Fact(Skip = "TODO")]
-        [Trait("Core2D.Containers", "Project")]
-        public void Setting_IsVisible_Should_Invalidate_Layer()
-        {
-            var target = _factory.CreateLayerContainer("Layer1");
-
-            bool raised = false;
-
-            target.InvalidateLayerHandler += (sender, e) =>
-            {
-                raised = true;
-            };
-
-            target.IsVisible = false;
-
-            Assert.True(raised);
-        }
-
         [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Raises_InvalidateLayer_Event()
