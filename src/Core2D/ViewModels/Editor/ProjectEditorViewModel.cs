@@ -114,13 +114,13 @@ namespace Core2D.ViewModels.Editor
 
         public ISvgConverter SvgConverter => _svgConverter.Value;
 
-        private object ScriptState { get; set; } = default;
+        private object ScriptState { get; set; }
 
-        private PageContainerViewModel PageToCopy { get; set; } = default;
+        private PageContainerViewModel PageToCopy { get; set; }
 
-        private DocumentContainerViewModel DocumentToCopy { get; set; } = default;
+        private DocumentContainerViewModel DocumentToCopy { get; set; }
 
-        private BaseShapeViewModel HoveredShapeViewModel { get; set; } = default;
+        private BaseShapeViewModel HoveredShapeViewModel { get; set; }
 
         public ProjectEditorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {

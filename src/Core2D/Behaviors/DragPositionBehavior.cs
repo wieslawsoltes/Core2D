@@ -11,7 +11,7 @@ namespace Core2D.Behaviors
         public static readonly StyledProperty<Control> TargetControlProperty =
             AvaloniaProperty.Register<DragControlBehavior, Control>(nameof(TargetControl), null);
 
-        private IControl _parent = null;
+        private IControl _parent;
         private Point _previous;
 
         public Control TargetControl

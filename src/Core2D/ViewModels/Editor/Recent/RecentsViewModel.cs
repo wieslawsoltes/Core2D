@@ -6,7 +6,7 @@ namespace Core2D.ViewModels.Editor.Recent
     public partial class RecentsViewModel : ViewModelBase
     {
         [AutoNotify] private ImmutableArray<RecentFileViewModel> _files = ImmutableArray.Create<RecentFileViewModel>();
-        [AutoNotify] private RecentFileViewModel _current = default;
+        [AutoNotify] private RecentFileViewModel _current;
 
         public RecentsViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {

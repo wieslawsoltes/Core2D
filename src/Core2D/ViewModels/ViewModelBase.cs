@@ -10,7 +10,7 @@ namespace Core2D.ViewModels
         private bool _isDirty;
         protected readonly IServiceProvider _serviceProvider;
 
-        [AutoNotify] private ViewModelBase _owner = null;
+        [AutoNotify] private ViewModelBase _owner;
         [AutoNotify] private string _name = "";
 
         public ViewModelBase(IServiceProvider serviceProvider)

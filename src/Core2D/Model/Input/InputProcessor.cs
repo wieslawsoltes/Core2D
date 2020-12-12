@@ -4,11 +4,11 @@ namespace Core2D.Model.Input
 {
     public class InputProcessor : IDisposable
     {
-        private IDisposable _beginDownDisposable = null;
-        private IDisposable _beginUpDisposable = null;
-        private IDisposable _endDownDisposable = null;
-        private IDisposable _endUpDisposable = null;
-        private IDisposable _moveDisposable = null;
+        private IDisposable _beginDownDisposable;
+        private IDisposable _beginUpDisposable;
+        private IDisposable _endDownDisposable;
+        private IDisposable _endUpDisposable;
+        private IDisposable _moveDisposable;
 
         private static IDisposable ConnectBeginDown(InputSource source, InputTarget target)
         {

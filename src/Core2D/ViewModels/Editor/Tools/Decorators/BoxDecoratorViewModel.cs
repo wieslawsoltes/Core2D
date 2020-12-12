@@ -56,7 +56,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
         private readonly RectangleShapeViewModel _leftHandle;
         private readonly RectangleShapeViewModel _rightHandle;
         private List<BaseShapeViewModel> _handles;
-        private BaseShapeViewModel _currentHandle = null;
+        private BaseShapeViewModel _currentHandle;
         private List<PointShapeViewModel> _points;
         private Mode _mode = Mode.None;
         private decimal _startX;

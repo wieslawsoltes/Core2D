@@ -13,7 +13,7 @@ namespace Core2D.DragAndDrop
         private Point _dragStartPoint;
         private PointerEventArgs _triggerEvent;
         private object _value;
-        private bool _lock = false;
+        private bool _lock;
 
         public static readonly StyledProperty<Type> DataTypeProperty =
             AvaloniaProperty.Register<TypedDragBehavior, Type>(nameof(DataType));

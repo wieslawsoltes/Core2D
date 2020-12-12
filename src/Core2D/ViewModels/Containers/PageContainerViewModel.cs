@@ -22,7 +22,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private PageContainerViewModel _template;
         [AutoNotify] private ImmutableArray<PropertyViewModel> _properties;
         [AutoNotify] private RecordViewModel _record;
-        [AutoNotify] private bool _isExpanded = false;
+        [AutoNotify] private bool _isExpanded;
         [AutoNotify] private bool _isGridEnabled;
         [AutoNotify] private bool _isBorderEnabled;
         [AutoNotify] private double _gridOffsetLeft;

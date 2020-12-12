@@ -7,7 +7,7 @@ namespace Core2D.Behaviors
 {
     public class DocumentTextBindingBehavior : Behavior<TextEditor>
     {
-        private TextEditor _textEditor = null;
+        private TextEditor _textEditor;
 
         public static readonly StyledProperty<string> TextProperty =
             AvaloniaProperty.Register<DocumentTextBindingBehavior, string>(nameof(Text));

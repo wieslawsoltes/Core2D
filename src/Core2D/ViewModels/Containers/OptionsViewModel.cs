@@ -14,10 +14,10 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private double _hitThreshold = 7.0;
         [AutoNotify] private MoveMode _moveMode = MoveMode.Point;
         [AutoNotify] private bool _defaultIsStroked = true;
-        [AutoNotify] private bool _defaultIsFilled = false;
+        [AutoNotify] private bool _defaultIsFilled;
         [AutoNotify] private bool _defaultIsClosed = true;
         [AutoNotify] private FillRule _defaultFillRule = FillRule.EvenOdd;
-        [AutoNotify] private bool _tryToConnect = false;
+        [AutoNotify] private bool _tryToConnect;
 
         public OptionsViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {

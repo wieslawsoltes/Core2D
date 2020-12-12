@@ -11,10 +11,10 @@ namespace Core2D.Behaviors
 {
     public class ProjectEditorInput
     {
-        private readonly Control _control = null;
-        private AvaloniaInputSource _inputSource = null;
-        private ProjectEditorInputTarget _inputTarget = null;
-        private InputProcessor _inputProcessor = null;
+        private readonly Control _control;
+        private AvaloniaInputSource _inputSource;
+        private ProjectEditorInputTarget _inputTarget;
+        private InputProcessor _inputProcessor;
 
         public ProjectEditorInput(Control control)
         {
