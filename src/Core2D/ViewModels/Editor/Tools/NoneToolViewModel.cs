@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.ViewModels.Shapes;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.Model.Style;

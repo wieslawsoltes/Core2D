@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core2D.Model.Editor;
 
 namespace Core2D.ViewModels.Editor

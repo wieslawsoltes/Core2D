@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Core2D.ViewModels.Editor
+﻿namespace Core2D.ViewModels.Editor
 {
     public class ProjectEditorConfiguration
     {
