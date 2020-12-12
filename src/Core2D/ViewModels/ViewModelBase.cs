@@ -8,12 +8,14 @@ namespace Core2D.ViewModels
     public partial class ViewModelBase : INotifyPropertyChanged
     {
         private bool _isDirty;
+        protected readonly IServiceProvider _serviceProvider;
 
         [AutoNotify] private ViewModelBase _owner = null;
         [AutoNotify] private string _name = "";
 
-        protected ViewModelBase()
+        public ViewModelBase(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
         }
 
         public virtual bool IsDirty()

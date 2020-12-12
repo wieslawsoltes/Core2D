@@ -5,13 +5,13 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Path
 {
-    public partial class GeometryContextViewModel
+    public class GeometryContext
     {
         private readonly IFactory _factory;
         private readonly PathGeometryViewModel _geometry;
         private PathFigureViewModel _currentFigure;
 
-        public GeometryContextViewModel(IFactory factory, PathGeometryViewModel geometry)
+        public GeometryContext(IFactory factory, PathGeometryViewModel geometry)
         {
             _factory = factory;
             _geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));

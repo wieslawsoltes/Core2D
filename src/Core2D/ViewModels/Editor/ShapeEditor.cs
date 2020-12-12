@@ -34,7 +34,7 @@ namespace Core2D.ViewModels.Editor
                         {
                             var convertedStyle = style != null ?
                                 (ShapeStyleViewModel)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                             var convertedPathShape = factory.CreateLineShape(
                                 lastPoint,
@@ -52,7 +52,7 @@ namespace Core2D.ViewModels.Editor
                         {
                             var convertedStyle = style != null ?
                                 (ShapeStyleViewModel)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                             var convertedPathShape = factory.CreateQuadraticBezierShape(
                                 lastPoint,
@@ -72,7 +72,7 @@ namespace Core2D.ViewModels.Editor
                         {
                             var convertedStyle = style != null ?
                                 (ShapeStyleViewModel)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                             var convertedPathShape = factory.CreateCubicBezierShape(
                                 lastPoint,
@@ -93,7 +93,7 @@ namespace Core2D.ViewModels.Editor
                         {
                             var convertedStyle = style != null ?
                                 (ShapeStyleViewModel)style?.Copy(null) :
-                                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                             var point2 = factory.CreatePointShape(0, 0); // TODO:
 
@@ -120,7 +120,7 @@ namespace Core2D.ViewModels.Editor
             {
                 var convertedStyle = style != null ?
                     (ShapeStyleViewModel)style?.Copy(null) :
-                    factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                    factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                 var convertedPathShape = factory.CreateLineShape(
                     lastPoint,
@@ -147,7 +147,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     var style = pathShape.Style != null ?
                         (ShapeStyleViewModel)pathShape.Style?.Copy(null) :
-                        factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                        factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
                     var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), pathShape.Geometry.FillRule);
                     convertedGeometry.Figures = convertedGeometry.Figures.Add(pathFigure);

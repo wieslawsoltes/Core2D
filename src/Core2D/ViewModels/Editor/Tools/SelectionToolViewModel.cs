@@ -13,7 +13,6 @@ namespace Core2D.ViewModels.Editor.Tools
     public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { None, Selected }
-        private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.None;
         private RectangleShapeViewModel _rectangleShape;
         private decimal _startX;
@@ -25,9 +24,8 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Selection";
 
-        public SelectionToolViewModel(IServiceProvider serviceProvider) : base()
+        public SelectionToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         private static bool IsPointMovable(BaseShapeViewModel shape, PointShapeViewModel point)

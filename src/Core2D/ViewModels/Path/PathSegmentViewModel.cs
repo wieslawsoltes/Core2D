@@ -8,7 +8,7 @@ namespace Core2D.ViewModels.Path
     {
         [AutoNotify] private bool _isStroked;
 
-        protected PathSegmentViewModel()
+        public PathSegmentViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
 
@@ -25,17 +25,6 @@ namespace Core2D.ViewModels.Path
         public virtual string ToSvgString()
         {
             throw new NotImplementedException();
-        }
-
-        public override bool IsDirty()
-        {
-            var isDirty = base.IsDirty();
-            return isDirty;
-        }
-
-        public override void Invalidate()
-        {
-            base.Invalidate();
         }
     }
 }

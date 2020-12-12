@@ -12,16 +12,14 @@ namespace Core2D.ViewModels.Editor.Tools
     public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { Point1, Point3, Point2 }
-        private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.Point1;
         private QuadraticBezierShapeViewModel _quadraticBezier;
         private QuadraticBezierSelection _selection;
 
         public string Title => "QuadraticBezier";
 
-        public QuadraticBezierToolViewModel(IServiceProvider serviceProvider) : base()
+        public QuadraticBezierToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         public void BeginDown(InputArgs args)
@@ -36,7 +34,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.Factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _quadraticBezier = factory.CreateQuadraticBezierShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

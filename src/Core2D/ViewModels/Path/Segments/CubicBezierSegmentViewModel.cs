@@ -10,6 +10,10 @@ namespace Core2D.ViewModels.Path.Segments
         [AutoNotify] private PointShapeViewModel _point2;
         [AutoNotify] private PointShapeViewModel _point3;
 
+        public CubicBezierSegmentViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
             points.Add(Point1);

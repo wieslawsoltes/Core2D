@@ -38,7 +38,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var line = factory.CreateLineShape(
                 x1, y1,
                 x2, y2,
@@ -55,7 +55,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var line = factory.CreateLineShape(
                 start,
                 end,
@@ -72,7 +72,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var arc = factory.CreateArcShape(
                 x1, y1,
                 x2, y2,
@@ -92,7 +92,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var arc = factory.CreateArcShape(
                 point1,
                 point2,
@@ -112,7 +112,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var cubicBezier = factory.CreateCubicBezierShape(
                 x1, y1,
                 x2, y2,
@@ -132,7 +132,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var cubicBezier = factory.CreateCubicBezierShape(
                 point1,
                 point2,
@@ -152,7 +152,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var quadraticBezier = factory.CreateQuadraticBezierShape(
                 x1, y1,
                 x2, y2,
@@ -171,7 +171,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var quadraticBezier = factory.CreateQuadraticBezierShape(
                 point1,
                 point2,
@@ -196,7 +196,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var path = factory.CreatePathShape(
                 "",
                 (ShapeStyleViewModel)style.Copy(null),
@@ -214,7 +214,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var rectangle = factory.CreateRectangleShape(
                 x1, y1,
                 x2, y2,
@@ -233,7 +233,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var rectangle = factory.CreateRectangleShape(
                 topLeft,
                 bottomRight,
@@ -252,7 +252,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var ellipse = factory.CreateEllipseShape(
                 x1, y1,
                 x2, y2,
@@ -271,7 +271,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var ellipse = factory.CreateEllipseShape(
                 topLeft,
                 bottomRight,
@@ -290,7 +290,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var txt = factory.CreateTextShape(
                 x1, y1,
                 x2, y2,
@@ -308,7 +308,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var txt = factory.CreateTextShape(
                 topLeft,
                 bottomRight,
@@ -326,7 +326,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected != null ?
                 project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var image = factory.CreateImageShape(
                 x1, y1,
                 x2, y2,
@@ -355,7 +355,7 @@ namespace Core2D.ViewModels.Editor.Factories
                 var key = imageCache.AddImageFromFile(path, bytes);
                 var style = project.CurrentStyleLibrary?.Selected != null ?
                     project.CurrentStyleLibrary.Selected :
-                    factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                    factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                 var image = factory.CreateImageShape(
                     topLeft,
                     bottomRight,

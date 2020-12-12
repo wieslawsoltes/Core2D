@@ -104,8 +104,8 @@ namespace Core2D.ViewModels.Designer
 
             // Recent Projects
 
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create("Test1", "Test1.project"));
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create("Test2", "Test2.project"));
+            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create(serviceProvider, "Test1", "Test1.project"));
+            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create(serviceProvider, "Test2", "Test2.project"));
 
             // New Project
 

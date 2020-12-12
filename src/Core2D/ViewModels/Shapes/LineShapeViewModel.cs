@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private PointShapeViewModel _start;
         [AutoNotify] private PointShapeViewModel _end;
 
-        public LineShapeViewModel() : base(typeof(LineShapeViewModel))
+        public LineShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(LineShapeViewModel))
         {
         }
 

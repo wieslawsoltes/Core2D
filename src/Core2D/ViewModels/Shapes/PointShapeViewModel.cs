@@ -13,7 +13,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private double _x;
         [AutoNotify] private double _y;
 
-        public PointShapeViewModel() : base(typeof(PointShapeViewModel))
+        public PointShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(PointShapeViewModel))
         {
         }
 
@@ -66,7 +66,7 @@ namespace Core2D.ViewModels.Shapes
                 foreach (var property in Properties)
                 {
                     builder.Add(
-                        new PropertyViewModel()
+                        new PropertyViewModel(_serviceProvider)
                         {
                             Name = property.Name,
                             Value = property.Value,
@@ -76,7 +76,7 @@ namespace Core2D.ViewModels.Shapes
                 properties = builder.ToImmutable();
             }
 
-            return new PointShapeViewModel()
+            return new PointShapeViewModel(_serviceProvider)
             {
                 Name = Name,
                 Style = Style,

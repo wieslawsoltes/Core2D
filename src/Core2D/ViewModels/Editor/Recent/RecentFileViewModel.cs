@@ -7,9 +7,13 @@ namespace Core2D.ViewModels.Editor.Recent
     {
         [AutoNotify] private string _path;
 
-        public static RecentFileViewModel Create(string name, string path)
+        public RecentFileViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            return new RecentFileViewModel()
+        }
+
+        public static RecentFileViewModel Create(IServiceProvider serviceProvider, string name, string path)
+        {
+            return new RecentFileViewModel(serviceProvider)
             {
                 Name = name,
                 Path = path

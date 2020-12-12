@@ -95,6 +95,11 @@ namespace Core2D.UnitTests
                 }
             }
 
+            public Class1() : base(null)
+            {
+                
+            }
+            
             public override object Copy(IDictionary<object, object> shared)
             {
                 throw new NotImplementedException();

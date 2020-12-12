@@ -6,7 +6,7 @@ namespace Core2D.Data.UnitTests
 {
     public class PropertyTests
     {
-        private readonly IFactory _factory = new Factory();
+        private readonly IFactory _factory = new Factory(null);
 
         [Fact]
         [Trait("Core2D.Data", "Data")]

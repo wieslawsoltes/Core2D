@@ -33,15 +33,26 @@ using Core2D.ViewModels.Editor.Bounds;
 using Core2D.ViewModels.Editor.Factories;
 using Core2D.Views;
 
-namespace Core2D.Modules
+namespace Core2D
 {
-    public class AvaloniaModule : Autofac.Module
+    public class AppModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
+            ILifetimeScope lifetimeScope = null;
+            builder.Register(x => lifetimeScope).AsSelf().SingleInstance();
+            builder.RegisterBuildCallback(x => lifetimeScope = x);
+
             // Locator
 
             builder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
+
+            // ViewModels
+
+            builder.RegisterAssemblyTypes(typeof(ViewModelBase).GetTypeInfo().Assembly)
+                .PublicOnly()
+                .Where(t => t.Namespace.StartsWith("Core2D.ViewModels") && t.Name.EndsWith("ViewModel"))
+                .AsSelf();
 
             // Core
 

@@ -1,5 +1,5 @@
-﻿using System;
-using Core2D.Model;
+﻿using Core2D.Model;
+using Autofac;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -7,19 +7,17 @@ namespace Core2D.Serializer.Newtonsoft
 {
     public sealed class NewtonsoftJsonSerializer : IJsonSerializer
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly JsonSerializerSettings _settings;
 
-        private static readonly JsonSerializerSettings Settings;
-
-        static NewtonsoftJsonSerializer()
+        public NewtonsoftJsonSerializer(ILifetimeScope lifetimeScope)
         {
-            Settings = new JsonSerializerSettings()
+            _settings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
                 TypeNameHandling = TypeNameHandling.Objects,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ProjectContractResolver(),
+                ContractResolver = new ProjectContractResolver(lifetimeScope),
                 NullValueHandling = NullValueHandling.Ignore,
                 Converters =
                 {
@@ -28,19 +26,14 @@ namespace Core2D.Serializer.Newtonsoft
             };
         }
 
-        public NewtonsoftJsonSerializer(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
-
         string IJsonSerializer.Serialize<T>(T value)
         {
-            return JsonConvert.SerializeObject(value, Settings);
+            return JsonConvert.SerializeObject(value, _settings);
         }
 
         T IJsonSerializer.Deserialize<T>(string json)
         {
-            return JsonConvert.DeserializeObject<T>(json, Settings);
+            return JsonConvert.DeserializeObject<T>(json, _settings);
         }
     }
 }

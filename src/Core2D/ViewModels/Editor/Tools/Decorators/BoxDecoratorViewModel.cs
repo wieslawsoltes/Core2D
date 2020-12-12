@@ -30,7 +30,6 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
         }
 
         private bool _isVisible;
-        private readonly IServiceProvider _serviceProvider;
         [AutoNotify] private ShapeStyleViewModel _style;
         [AutoNotify] private bool _isStroked;
         [AutoNotify] private bool _isFilled;
@@ -69,10 +68,9 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
         public bool IsVisible => _isVisible;
 
-        public BoxDecoratorViewModel(IServiceProvider serviceProvider)
+        public BoxDecoratorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
-            _factory = _serviceProvider.GetService<IFactory>();
+            _factory = serviceProvider.GetService<IFactory>();
             _sizeLarge = 4m;
             _sizeSmall = 4m;
             _rotateDistance = -16.875m;

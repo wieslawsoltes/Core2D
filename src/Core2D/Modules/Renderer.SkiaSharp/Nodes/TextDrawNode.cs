@@ -16,7 +16,7 @@ namespace Core2D.Renderer.SkiaSharp
         public SKPaint FormattedText { get; set; }
         public string BoundText { get; set; }
 
-        protected TextDrawNode()
+        public TextDrawNode()
         {
         }
 

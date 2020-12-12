@@ -13,7 +13,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private PointShapeViewModel _point3;
         [AutoNotify] private PointShapeViewModel _point4;
 
-        public CubicBezierShapeViewModel() : base(typeof(CubicBezierShapeViewModel))
+        public CubicBezierShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(CubicBezierShapeViewModel))
         {
         }
 

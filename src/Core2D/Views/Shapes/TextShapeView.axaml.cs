@@ -24,20 +24,11 @@ namespace Core2D.Views.Shapes
                 && topLevel.DataContext is ProjectEditorViewModel editor
                 && shape is TextShapeViewModel text)
             {
-                var textBindingEditor = new TextBindingEditorViewModel()
+                var dialog = editor.CreateTextBindingDialog(text);
+                if (dialog is {})
                 {
-                    Editor = editor,
-                    Text = text
-                };
-                var dialog = new DialogViewModel(editor)
-                {
-                    Title = "Text Binding",
-                    IsOverlayVisible = false,
-                    IsTitleBarVisible = true,
-                    IsCloseButtonVisible = true,
-                    ViewModel = textBindingEditor
-                };
-                editor.ShowDialog(dialog);
+                    editor.ShowDialog(dialog);
+                }
             }
         }
     }

@@ -9,7 +9,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class PageContainerViewModel : BaseContainerViewModel, IDataObject, IGrid
+    public partial class PageContainerViewModel : ViewModelBase, IDataObject, IGrid
     {
         [AutoNotify] private double _width;
         [AutoNotify] private double _height;
@@ -33,6 +33,10 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private double _gridCellHeight;
         [AutoNotify] private BaseColorViewModel _gridStrokeColor;
         [AutoNotify] private double _gridStrokeThickness;
+
+        public PageContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
 
         public void SetCurrentLayer(LayerContainerViewModel layer) => CurrentLayer = layer;
 

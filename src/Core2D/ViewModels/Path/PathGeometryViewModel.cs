@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
 using Core2D.Model.Path;
@@ -12,6 +11,10 @@ namespace Core2D.ViewModels.Path
 
         [AutoNotify] private ImmutableArray<PathFigureViewModel> _figures;
         [AutoNotify] private FillRule _fillRule;
+
+        public PathGeometryViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
 
         public override bool IsDirty()
         {

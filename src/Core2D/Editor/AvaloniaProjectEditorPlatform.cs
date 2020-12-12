@@ -9,6 +9,7 @@ using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
 using Core2D.SvgExporter.Svg;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
@@ -18,13 +19,10 @@ using Core2D.XamlExporter.Avalonia;
 
 namespace Core2D.Editor
 {
-    public class AvaloniaProjectEditorPlatform : IProjectEditorPlatform
+    public partial class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatform
     {
-        private readonly IServiceProvider _serviceProvider;
-
-        public AvaloniaProjectEditorPlatform(IServiceProvider serviceProvider)
+        public AvaloniaProjectEditorPlatform(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         private MainWindow GetWindow()
@@ -661,15 +659,15 @@ namespace Core2D.Editor
         public void OnAboutDialog()
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-            if (editor.AboutInfoViewModel is { })
+            if (editor.AboutInfo is { })
             {
-                var dialog = new DialogViewModel(editor)
+                var dialog = new DialogViewModel(_serviceProvider, editor)
                 {
-                    Title = $"About {editor.AboutInfoViewModel.Title}",
+                    Title = $"About {editor.AboutInfo.Title}",
                     IsOverlayVisible = true,
                     IsTitleBarVisible = true,
                     IsCloseButtonVisible = true,
-                    ViewModel = editor.AboutInfoViewModel
+                    ViewModel = editor.AboutInfo
                 };
                 editor.ShowDialog(dialog);
             }

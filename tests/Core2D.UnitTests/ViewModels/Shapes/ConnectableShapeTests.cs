@@ -13,7 +13,7 @@ namespace Core2D.Shapes.UnitTests
 {
     public class ConnectableShapeTests
     {
-        private readonly IFactory _factory = new Factory();
+        private readonly IFactory _factory = new Factory(null);
 
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
@@ -127,7 +127,7 @@ namespace Core2D.Shapes.UnitTests
 
         public class Class1 : BaseShapeViewModel
         {
-            public Class1() : base(typeof(Class1))
+            public Class1() : base(null, typeof(Class1))
             {
             }
 
@@ -164,7 +164,7 @@ namespace Core2D.Shapes.UnitTests
 
         public class Class2 : ConnectableShapeViewModel
         {
-            public Class2() : base(typeof(Class2))
+            public Class2() : base(null, typeof(Class2))
             {
             }
         }

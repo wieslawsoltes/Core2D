@@ -18,5 +18,9 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private bool _defaultIsClosed = true;
         [AutoNotify] private FillRule _defaultFillRule = FillRule.EvenOdd;
         [AutoNotify] private bool _tryToConnect = false;
+
+        public OptionsViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
     }
 }

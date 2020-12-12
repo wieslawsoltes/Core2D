@@ -13,16 +13,16 @@ namespace Core2D.ViewModels.Editor.Tools.Path
     public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
     {
         public enum State { Point1, Point4, Point2, Point3 }
-        private readonly IServiceProvider _serviceProvider;
-        private State _currentState = State.Point1;
-        private CubicBezierShapeViewModel _cubicBezier = new CubicBezierShapeViewModel();
+        private State _currentState;
+        private CubicBezierShapeViewModel _cubicBezier;
         private BezierSelectionSelection _selectionSelection;
 
         public string Title => "CubicBezier";
 
-        public CubicBezierPathToolViewModel(IServiceProvider serviceProvider) : base()
+        public CubicBezierPathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
+            _currentState = State.Point1;
+            _cubicBezier = new CubicBezierShapeViewModel(serviceProvider);
         }
 
         public void BeginDown(InputArgs args)

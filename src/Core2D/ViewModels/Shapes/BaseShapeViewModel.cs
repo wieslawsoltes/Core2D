@@ -10,7 +10,7 @@ namespace Core2D.ViewModels.Shapes
 {
     public partial class BaseShapeViewModel : ViewModelBase, IDataObject
     {
-        private IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
+        private readonly IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
 
         [AutoNotify] private ShapeStateFlags _state;
         [AutoNotify] private ShapeStyleViewModel _style;
@@ -20,7 +20,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private RecordViewModel _record;
         [AutoNotify(SetterModifier = AccessModifier.None)] private Type _targetType;
 
-        protected BaseShapeViewModel(Type targetType)
+        public BaseShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider)
         {
             _targetType = targetType;
         }

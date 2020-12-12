@@ -15,7 +15,6 @@ namespace Core2D.ViewModels.Editor.Tools
 {
     public partial class PathToolViewModel : ViewModelBase, IEditorTool
     {
-        private readonly IServiceProvider _serviceProvider;
         private readonly LinePathToolViewModel _linePathTool;
         private readonly ArcPathToolViewModel _arcPathTool;
         private readonly CubicBezierPathToolViewModel _cubicBezierPathTool;
@@ -28,15 +27,14 @@ namespace Core2D.ViewModels.Editor.Tools
 
         internal PathGeometryViewModel Geometry { get; set; }
 
-        internal GeometryContextViewModel GeometryContext { get; set; }
+        internal GeometryContext GeometryContext { get; set; }
 
         internal IPathTool PreviousPathTool { get; set; }
 
         public string Title => "Path";
 
-        public PathToolViewModel(IServiceProvider serviceProvider) : base()
+        public PathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
             _linePathTool = serviceProvider.GetService<LinePathToolViewModel>();
             _arcPathTool = serviceProvider.GetService<ArcPathToolViewModel>();
             _cubicBezierPathTool = serviceProvider.GetService<CubicBezierPathToolViewModel>();
@@ -116,7 +114,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                 editor.Project.CurrentStyleLibrary.Selected :
-                editor.Factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             Path = factory.CreatePathShape(
                 "Path",
                 (ShapeStyleViewModel)style.Copy(null),

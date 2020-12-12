@@ -10,14 +10,14 @@ namespace Core2D.UnitTests
 {
     public class PathGeometryContextTests
     {
-        private readonly IFactory _factory = new Factory();
+        private readonly IFactory _factory = new Factory(null);
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
         public void Inherits_From_XGeometryContext()
         {
             var target = _factory.CreateGeometryContext(_factory.CreatePathGeometry());
-            Assert.True(target is GeometryContextViewModel);
+            Assert.True(target is GeometryContext);
         }
 
         [Fact]

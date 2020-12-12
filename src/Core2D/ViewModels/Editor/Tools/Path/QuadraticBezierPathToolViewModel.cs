@@ -13,16 +13,16 @@ namespace Core2D.ViewModels.Editor.Tools.Path
     public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
     {
         public enum State { Point1, Point3, Point2 }
-        private readonly IServiceProvider _serviceProvider;
-        private State _currentState = State.Point1;
-        private QuadraticBezierShapeViewModel _quadraticBezier = new QuadraticBezierShapeViewModel();
+        private State _currentState;
+        private QuadraticBezierShapeViewModel _quadraticBezier;
         private QuadraticBezierSelection _selection;
 
         public string Title => "QuadraticBezier";
 
-        public QuadraticBezierPathToolViewModel(IServiceProvider serviceProvider) : base()
+        public QuadraticBezierPathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
+            _currentState = State.Point1;
+            _quadraticBezier = new QuadraticBezierShapeViewModel(serviceProvider);
         }
 
         public void BeginDown(InputArgs args)

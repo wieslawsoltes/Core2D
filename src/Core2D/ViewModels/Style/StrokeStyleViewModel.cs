@@ -18,9 +18,13 @@ namespace Core2D.ViewModels.Style
         [AutoNotify] private ArrowStyleViewModel _startArrow;
         [AutoNotify] private ArrowStyleViewModel _endArrow;
 
+        public StrokeStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new StrokeStyleViewModel()
+            return new StrokeStyleViewModel(_serviceProvider)
             {
                 Name = this.Name,
                 Color = (BaseColorViewModel)this._color.Copy(shared),

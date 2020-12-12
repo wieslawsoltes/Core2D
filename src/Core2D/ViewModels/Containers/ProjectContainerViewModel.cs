@@ -10,7 +10,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class ProjectContainerViewModel : BaseContainerViewModel
+    public partial class ProjectContainerViewModel : ViewModelBase
     {
         [AutoNotify] private OptionsViewModel _options;
         [AutoNotify] private IHistory _history;
@@ -67,6 +67,10 @@ namespace Core2D.ViewModels.Containers
                 .SelectMany(l => l.Shapes);
 
             return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
+        }
+
+        public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
         }
 
         public void SetCurrentDocument(DocumentContainerViewModel document)

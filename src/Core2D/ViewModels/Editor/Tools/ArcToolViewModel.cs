@@ -14,7 +14,6 @@ namespace Core2D.ViewModels.Editor.Tools
     public partial class ArcToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { Point1, Point2, Point3, Point4 }
-        private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.Point1;
         private ArcShapeViewModelViewModel _arc;
         private bool _connectedPoint3;
@@ -23,9 +22,8 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Arc";
 
-        public ArcToolViewModel(IServiceProvider serviceProvider) : base()
+        public ArcToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         public void BeginDown(InputArgs args)
@@ -40,7 +38,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.Factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _connectedPoint3 = false;
                         _connectedPoint4 = false;
                         _arc = factory.CreateArcShape(

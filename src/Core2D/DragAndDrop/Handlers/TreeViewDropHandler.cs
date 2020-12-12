@@ -9,25 +9,36 @@ namespace Core2D.DragAndDrop.Handlers
 {
     public class ProjectTreeViewDropHandler : DefaultDropHandler
     {
+        private bool IsContainer(object source)
+        {
+            return source switch
+            {
+                LayerContainerViewModel targetLayer => true,
+                PageContainerViewModel targetPage => true,
+                DocumentContainerViewModel targetDocument => true,
+                _ => false
+            };
+        }
+
         private bool ValidateContainer(TreeView treeView, DragEventArgs e, object sourceContext, object targetContext, bool bExecute)
         {
-            if (!(sourceContext is BaseContainerViewModel sourceItem)
+            if (!(IsContainer(sourceContext))
                 || !(targetContext is ProjectContainerViewModel)
                 || !(treeView.GetVisualAt(e.GetPosition(treeView)) is IControl targetControl)
                 || !(treeView.GetVisualRoot() is IControl rootControl)
                 || !(rootControl.DataContext is ProjectEditorViewModel editor)
-                || !(targetControl.DataContext is BaseContainerViewModel targetItem))
+                || !(IsContainer(targetControl.DataContext)))
             {
                 return false;
             }
 
-            Debug.WriteLine($"{sourceItem} -> {targetItem}");
+            Debug.WriteLine($"{sourceContext} -> {targetControl.DataContext}");
 
-            switch (sourceItem)
+            switch (sourceContext)
             {
                 case LayerContainerViewModel sourceLayer:
                     {
-                        switch (targetItem)
+                        switch (targetControl.DataContext)
                         {
                             case LayerContainerViewModel targetLayer:
                                 {
@@ -78,7 +89,7 @@ namespace Core2D.DragAndDrop.Handlers
                     }
                 case PageContainerViewModel sourcePage:
                     {
-                        switch (targetItem)
+                        switch (targetControl.DataContext)
                         {
                             case LayerContainerViewModel targetLayer:
                                 {
@@ -131,7 +142,7 @@ namespace Core2D.DragAndDrop.Handlers
                     }
                 case DocumentContainerViewModel sourceDocument:
                     {
-                        switch (targetItem)
+                        switch (targetControl.DataContext)
                         {
                             case LayerContainerViewModel targetLayer:
                                 {

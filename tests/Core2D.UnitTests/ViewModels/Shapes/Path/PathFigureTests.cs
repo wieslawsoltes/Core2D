@@ -12,7 +12,7 @@ namespace Core2D.UnitTests
 {
     public class PathFigureTests
     {
-        private readonly IFactory _factory = new Factory();
+        private readonly IFactory _factory = new Factory(null);
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]
@@ -136,6 +136,11 @@ namespace Core2D.UnitTests
         {
             public PointShapeViewModel Point { get; set; }
 
+            public TestSegmentViewModel() : base(null)
+            {
+                
+            }
+            
             public override void GetPoints(IList<PointShapeViewModel> points)
             {
                 points.Add(Point);

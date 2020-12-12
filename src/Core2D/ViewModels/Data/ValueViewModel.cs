@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Data
 {
@@ -6,9 +7,13 @@ namespace Core2D.ViewModels.Data
     {
         [AutoNotify] private string _content;
 
+        public ValueViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ValueViewModel()
+            return new ValueViewModel(_serviceProvider)
             {
                 Name = Name,
                 Content = Content

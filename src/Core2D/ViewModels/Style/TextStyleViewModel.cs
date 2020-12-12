@@ -17,6 +17,10 @@ namespace Core2D.ViewModels.Style
         [AutoNotify] private TextHAlignment _textHAlignment;
         [AutoNotify] private TextVAlignment _textVAlignment;
 
+        public TextStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public void ToggleRegularFontStyle()
         {
             FontStyle ^= FontStyleFlags.Regular;
@@ -34,7 +38,7 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new TextStyleViewModel()
+            return new TextStyleViewModel(_serviceProvider)
             {
                 Name = this.Name,
                 FontName = this._fontName,

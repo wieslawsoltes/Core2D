@@ -9,7 +9,7 @@ namespace Core2D.ViewModels.Containers
     {
         private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
-        private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKeyViewModel() { Key = i.Key }).ToList();
+        private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKeyViewModel(_serviceProvider) { Key = i.Key }).ToList();
 
         public IEnumerable<IImageKey> Keys => GetKeys();
 

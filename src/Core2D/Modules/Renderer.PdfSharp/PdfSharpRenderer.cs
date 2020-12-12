@@ -16,24 +16,17 @@ namespace Core2D.Renderer.PdfSharp
 {
     public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
     {
-        private readonly IServiceProvider _serviceProvider;
-        private ShapeRendererStateViewModel _stateViewModel;
         private ICache<string, XImage> _biCache;
         private Func<double, double> _scaleToPage;
         private double _sourceDpi = 96.0;
         private double _targetDpi = 72.0;
 
-        public ShapeRendererStateViewModel State
-        {
-            get => _stateViewModel;
-            set => RaiseAndSetIfChanged(ref _stateViewModel, value);
-        }
+        [AutoNotify] private ShapeRendererStateViewModel _state;
 
-        public PdfSharpRenderer(IServiceProvider serviceProvider)
+        public PdfSharpRenderer(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
-            _stateViewModel = _serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = _serviceProvider.GetService<IFactory>().CreateCache<string, XImage>(bi => bi.Dispose());
+            _state = serviceProvider.GetService<IFactory>().CreateShapeRendererState();
+            _biCache = serviceProvider.GetService<IFactory>().CreateCache<string, XImage>(bi => bi.Dispose());
             _scaleToPage = (value) => (float)(value * 1.0);
         }
 
@@ -328,7 +321,7 @@ namespace Core2D.Renderer.PdfSharp
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(_stateViewModel.DrawShapeState))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.DrawPoints(dc, this);
                 }

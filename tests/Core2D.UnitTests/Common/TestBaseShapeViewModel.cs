@@ -4,7 +4,7 @@ namespace Core2D.Common.UnitTests
 {
     public partial class TestBaseShapeViewModel : BaseShapeViewModel
     {
-        protected TestBaseShapeViewModel() : base(typeof(TestBaseShapeViewModel))
+        protected TestBaseShapeViewModel() : base(null, typeof(TestBaseShapeViewModel))
         {
         }
     }

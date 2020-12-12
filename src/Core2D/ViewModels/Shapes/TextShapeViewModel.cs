@@ -12,7 +12,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private PointShapeViewModel _bottomRight;
         [AutoNotify] private string _text;
 
-        public TextShapeViewModel() : base(typeof(TextShapeViewModel))
+        public TextShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(TextShapeViewModel))
         {
         }
 

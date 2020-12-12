@@ -13,7 +13,6 @@ namespace Core2D.ViewModels.Editor
     public partial class StyleEditorViewModel : ViewModelBase
     {
         private const NumberStyles _numberStyles = NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
-        private readonly IServiceProvider _serviceProvider;
         private ShapeStyleViewModel _shapeStyleCopy;
         private BaseColorViewModel _strokeCopy;
         private BaseColorViewModel _fillCopy;
@@ -21,9 +20,8 @@ namespace Core2D.ViewModels.Editor
         private ArrowStyleViewModel _endArrowStyleCopy;
         private ArrowStyleViewModel _startArrowStyleCopy;
 
-        public StyleEditorViewModel(IServiceProvider serviceProvider)
+        public StyleEditorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         public void OnCopyStyle()

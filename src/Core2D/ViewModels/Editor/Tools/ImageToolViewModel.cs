@@ -12,16 +12,14 @@ namespace Core2D.ViewModels.Editor.Tools
     public partial class ImageToolViewModel : ViewModelBase, IEditorTool
     {
         public enum State { TopLeft, BottomRight }
-        private readonly IServiceProvider _serviceProvider;
         private State _currentState = State.TopLeft;
         private ImageShapeViewModel _image;
         private ImageSelection _selection;
 
         public string Title => "Image";
 
-        public ImageToolViewModel(IServiceProvider serviceProvider) : base()
+        public ImageToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _serviceProvider = serviceProvider;
         }
 
         public async void BeginDown(InputArgs args)
@@ -50,7 +48,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.Factory.CreateShapeStyle(ProjectEditorConfigurationViewModel.DefaulStyleName);
+                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _image = factory.CreateImageShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

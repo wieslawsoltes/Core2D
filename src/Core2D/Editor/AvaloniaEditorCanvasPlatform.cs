@@ -5,77 +5,20 @@ using Core2D.ViewModels;
 
 namespace Core2D.Editor
 {
-    public class AvaloniaEditorCanvasPlatform : ViewModelBase, IEditorCanvasPlatform
+    public partial class AvaloniaEditorCanvasPlatform : ViewModelBase, IEditorCanvasPlatform
     {
-        private readonly IServiceProvider _serviceProvider;
+        [AutoNotify] private Action _invalidateControl;
+        [AutoNotify] private Action _resetZoom;
+        [AutoNotify] private Action _fillZoom;
+        [AutoNotify] private Action _uniformZoom;
+        [AutoNotify] private Action _uniformToFillZoom;
+        [AutoNotify] private Action _autoFitZoom;
+        [AutoNotify] private Action _inZoom;
+        [AutoNotify] private Action _outZoom;
+        [AutoNotify] private object _zoom;
 
-        private Action _invalidateControl;
-        private Action _resetZoom;
-        private Action _fillZoom;
-        private Action _uniformZoom;
-        private Action _uniformToFillZoom;
-        private Action _autoFitZoom;
-        private Action _inZoom;
-        private Action _outZoom;
-        private object _zoom;
-
-        public Action InvalidateControl
+        public AvaloniaEditorCanvasPlatform(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            get => _invalidateControl;
-            set => RaiseAndSetIfChanged(ref _invalidateControl, value);
-        }
-
-        public Action ResetZoom
-        {
-            get => _resetZoom;
-            set => RaiseAndSetIfChanged(ref _resetZoom, value);
-        }
-
-        public Action FillZoom
-        {
-            get => _fillZoom;
-            set => RaiseAndSetIfChanged(ref _fillZoom, value);
-        }
-
-        public Action UniformZoom
-        {
-            get => _uniformZoom;
-            set => RaiseAndSetIfChanged(ref _uniformZoom, value);
-        }
-
-        public Action UniformToFillZoom
-        {
-            get => _uniformToFillZoom;
-            set => RaiseAndSetIfChanged(ref _uniformToFillZoom, value);
-        }
-
-        public Action AutoFitZoom
-        {
-            get => _autoFitZoom;
-            set => RaiseAndSetIfChanged(ref _autoFitZoom, value);
-        }
-
-        public Action InZoom
-        {
-            get => _inZoom;
-            set => RaiseAndSetIfChanged(ref _inZoom, value);
-        }
-
-        public Action OutZoom
-        {
-            get => _outZoom;
-            set => RaiseAndSetIfChanged(ref _outZoom, value);
-        }
-
-        public object Zoom
-        {
-            get => _zoom;
-            set => RaiseAndSetIfChanged(ref _zoom, value);
-        }
-
-        public AvaloniaEditorCanvasPlatform(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
         }
     }
 }
