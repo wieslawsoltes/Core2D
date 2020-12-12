@@ -42,18 +42,6 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <!-- <TreeDataTemplate DataType="vmc:LibraryViewModel" ItemsSource="{Binding Items}" x:CompileBindings="False"> -->
-                    <!--     <TextBlock Text="{Binding Name}" Background="Transparent"> -->
-                    <!--         <i:Interaction.Behaviors> -->
-                    <!--             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" /> -->
-                    <!--         </i:Interaction.Behaviors> -->
-                    <!--         <TextBlock.ContextMenu> -->
-                    <!--             <ContextMenu x:CompileBindings="False"> -->
-                    <!--                 <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}" /> -->
-                    <!--             </ContextMenu> -->
-                    <!--         </TextBlock.ContextMenu> -->
-                    <!--     </TextBlock> -->
-                    <!-- </TreeDataTemplate> -->
                     <DataTemplate DataType="vmst:ShapeStyleViewModel">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
@@ -80,18 +68,6 @@
                     </Style>
                 </TreeViewItem.Styles>
                 <TreeViewItem.DataTemplates>
-                    <!-- <TreeDataTemplate DataType="vmc:LibraryViewModel" ItemsSource="{Binding Items}" x:CompileBindings="False"> -->
-                    <!--     <TextBlock Text="{Binding Name}" Background="Transparent"> -->
-                    <!--         <i:Interaction.Behaviors> -->
-                    <!--             <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" /> -->
-                    <!--         </i:Interaction.Behaviors> -->
-                    <!--         <TextBlock.ContextMenu> -->
-                    <!--             <ContextMenu x:CompileBindings="False"> -->
-                    <!--                 <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding}" /> -->
-                    <!--             </ContextMenu> -->
-                    <!--         </TextBlock.ContextMenu> -->
-                    <!--     </TextBlock> -->
-                    <!-- </TreeDataTemplate> -->
                     <TreeDataTemplate DataType="vms:GroupShapeViewModel" ItemsSource="{Binding Resources}" x:CompileBindings="False">
                         <TextBlock Text="{Binding Name}" Background="Transparent">
                             <i:Interaction.Behaviors>
