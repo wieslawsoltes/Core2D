@@ -294,14 +294,14 @@ namespace Core2D.ViewModels
             };
         }
 
-        public GeometryContextViewModel CreateGeometryContext()
+        public GeometryContext CreateGeometryContext()
         {
-            return new GeometryContextViewModel(_serviceProvider, CreatePathGeometry());
+            return new GeometryContext(this, CreatePathGeometry());
         }
 
-        public GeometryContextViewModel CreateGeometryContext(PathGeometryViewModel geometry)
+        public GeometryContext CreateGeometryContext(PathGeometryViewModel geometry)
         {
-            return new GeometryContextViewModel(_serviceProvider, geometry);
+            return new GeometryContext(this, geometry);
         }
 
         public PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero)

@@ -5,15 +5,15 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Path
 {
-    public partial class GeometryContextViewModel : ViewModelBase
+    public class GeometryContext
     {
         private readonly IFactory _factory;
         private readonly PathGeometryViewModel _geometry;
         private PathFigureViewModel _currentFigure;
 
-        public GeometryContextViewModel(IServiceProvider serviceProvider, PathGeometryViewModel geometry) : base(serviceProvider)
+        public GeometryContext(IFactory factory, PathGeometryViewModel geometry)
         {
-            _factory = serviceProvider.GetService<IFactory>();
+            _factory = factory;
             _geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
         }
 

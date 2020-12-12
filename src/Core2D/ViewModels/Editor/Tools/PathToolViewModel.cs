@@ -27,7 +27,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         internal PathGeometryViewModel Geometry { get; set; }
 
-        internal GeometryContextViewModel GeometryContext { get; set; }
+        internal GeometryContext GeometryContext { get; set; }
 
         internal IPathTool PreviousPathTool { get; set; }
 

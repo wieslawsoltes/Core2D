@@ -61,9 +61,9 @@ namespace Core2D.Model
 
         PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero);
 
-        GeometryContextViewModel CreateGeometryContext();
+        GeometryContext CreateGeometryContext();
 
-        GeometryContextViewModel CreateGeometryContext(PathGeometryViewModel geometry);
+        GeometryContext CreateGeometryContext(PathGeometryViewModel geometry);
 
         PathFigureViewModel CreatePathFigure(bool isClosed = false);
 
