@@ -10,7 +10,7 @@ namespace Core2D.UnitTests
 {
     public class PathGeometryContextTests
     {
-        private readonly IFactory _factory = new Factory();
+        private readonly IFactory _factory = new Factory(null);
 
         [Fact]
         [Trait("Core2D.Path", "Geometry")]

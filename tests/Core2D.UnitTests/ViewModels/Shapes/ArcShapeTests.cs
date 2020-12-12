@@ -7,7 +7,7 @@ namespace Core2D.Shapes.UnitTests
 {
     public class ArcShapeTests
     {
-        private readonly IFactory _factory = new Factory();
+        private readonly IFactory _factory = new Factory(null);
 
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]

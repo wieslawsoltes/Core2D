@@ -6,7 +6,7 @@ namespace Core2D.Style.UnitTests
 {
     public class FillStyleTests
     {
-        private readonly IFactory _factory = new Factory();
+        private readonly IFactory _factory = new Factory(null);
 
         [Fact]
         [Trait("Core2D.Style", "Style")]

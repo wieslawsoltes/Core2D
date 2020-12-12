@@ -11,7 +11,7 @@ namespace Core2D.Shapes.UnitTests
 {
     public class BaseShapeTests
     {
-        private readonly IFactory _factory = new Factory();
+        private readonly IFactory _factory = new Factory(null);
 
         [Fact]
         [Trait("Core2D.Shapes", "Shapes")]
@@ -26,7 +26,7 @@ namespace Core2D.Shapes.UnitTests
 
         private class Class1 : BaseShapeViewModel
         {
-            public Class1() : base(typeof(Class1))
+            public Class1() : base(null, typeof(Class1))
             {
             }
 
