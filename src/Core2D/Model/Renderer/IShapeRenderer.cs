@@ -15,7 +15,7 @@ namespace Core2D.Model.Renderer
 
         void Grid(object dc, IGrid grid, double x, double y, double width, double height);
 
-        void DrawPage(object dc, PageContainerViewModel container);
+        void DrawContainer(object dc, BaseContainerViewModel container);
 
         void DrawLayer(object dc, LayerContainerViewModel layer);
 

@@ -31,7 +31,7 @@ namespace Core2D.ViewModels.Editor.Factories
             return sgd;
         }
 
-        private PageContainerViewModel CreateDefaultTemplate(IContainerFactory containerFactory, ProjectContainerViewModel project, string name)
+        private TemplateContainerViewModel CreateDefaultTemplate(IContainerFactory containerFactory, ProjectContainerViewModel project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var template = containerFactory.GetTemplate(project, name);
@@ -50,7 +50,7 @@ namespace Core2D.ViewModels.Editor.Factories
             return template;
         }
 
-        PageContainerViewModel IContainerFactory.GetTemplate(ProjectContainerViewModel project, string name)
+        TemplateContainerViewModel IContainerFactory.GetTemplate(ProjectContainerViewModel project, string name)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var template = factory.CreateTemplateContainer(name);

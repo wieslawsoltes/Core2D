@@ -17,16 +17,16 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private ImmutableArray<LibraryViewModel<ShapeStyleViewModel>> _styleLibraries;
         [AutoNotify] private ImmutableArray<LibraryViewModel<GroupShapeViewModel>> _groupLibraries;
         [AutoNotify] private ImmutableArray<DatabaseViewModel> _databases;
-        [AutoNotify] private ImmutableArray<PageContainerViewModel> _templates;
+        [AutoNotify] private ImmutableArray<TemplateContainerViewModel> _templates;
         [AutoNotify] private ImmutableArray<ScriptViewModel> _scripts;
         [AutoNotify] private ImmutableArray<DocumentContainerViewModel> _documents;
         [AutoNotify] private LibraryViewModel<ShapeStyleViewModel> _currentStyleLibrary;
         [AutoNotify] private LibraryViewModel<GroupShapeViewModel> _currentGroupLibrary;
         [AutoNotify] private DatabaseViewModel _currentDatabase;
-        [AutoNotify] private PageContainerViewModel _currentTemplate;
+        [AutoNotify] private TemplateContainerViewModel _currentTemplate;
         [AutoNotify] private ScriptViewModel _currentScript;
         [AutoNotify] private DocumentContainerViewModel _currentDocument;
-        [AutoNotify] private PageContainerViewModel _currentContainer;
+        [AutoNotify] private BaseContainerViewModel _currentContainer;
         [AutoNotify] private ViewModelBase _selected;
 
         public static IEnumerable<BaseShapeViewModel> GetAllShapes(IEnumerable<BaseShapeViewModel> shapes)
@@ -80,14 +80,14 @@ namespace Core2D.ViewModels.Containers
             SetSelected(document);
         }
 
-        public void SetCurrentContainer(PageContainerViewModel container)
+        public void SetCurrentContainer(BaseContainerViewModel container)
         {
             CurrentContainer = container;
             Selected = container;
             SetSelected(container);
         }
 
-        public void SetCurrentTemplate(PageContainerViewModel template) => CurrentTemplate = template;
+        public void SetCurrentTemplate(TemplateContainerViewModel template) => CurrentTemplate = template;
 
         public void SetCurrentScript(ScriptViewModel script) => CurrentScript = script;
 

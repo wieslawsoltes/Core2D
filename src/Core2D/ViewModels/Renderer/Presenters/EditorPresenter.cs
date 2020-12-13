@@ -5,9 +5,9 @@ namespace Core2D.ViewModels.Renderer.Presenters
 {
     public partial class EditorPresenter : IContainerPresenter
     {
-        public void Render(object dc, IShapeRenderer renderer, PageContainerViewModel container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, BaseContainerViewModel container, double dx, double dy)
         {
-            renderer.DrawPage(dc, container);
+            renderer.DrawContainer(dc, container);
 
             if (container.WorkingLayer != null)
             {

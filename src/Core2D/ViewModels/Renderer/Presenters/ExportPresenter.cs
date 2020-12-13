@@ -5,21 +5,19 @@ namespace Core2D.ViewModels.Renderer.Presenters
 {
     public partial class ExportPresenter : IContainerPresenter
     {
-        public void Render(object dc, IShapeRenderer renderer, PageContainerViewModel container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, BaseContainerViewModel container, double dx, double dy)
         {
             var flags = renderer.State.DrawShapeState;
 
             renderer.State.DrawShapeState = ShapeStateFlags.Printable;
 
-            renderer.Fill(dc, dx, dy, container.Template.Width, container.Template.Height, container.Template.Background);
-
-            if (container.Template != null)
+            if (container is PageContainerViewModel page && page.Template != null)
             {
-                renderer.DrawPage(dc, container.Template);
+                renderer.Fill(dc, dx, dy, page.Template.Width, page.Template.Height, page.Template.Background);
+                renderer.DrawContainer(dc, page.Template);
             }
 
-            renderer.DrawPage(dc, container);
-
+            renderer.DrawContainer(dc, container);
             renderer.State.DrawShapeState = flags;
         }
     }

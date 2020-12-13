@@ -915,7 +915,7 @@ namespace Core2D.ViewModels
             };
         }
 
-        public LayerContainerViewModel CreateLayerContainer(string name = "Layer", PageContainerViewModel owner = null, bool isVisible = true)
+        public LayerContainerViewModel CreateLayerContainer(string name = "Layer", BaseContainerViewModel owner = null, bool isVisible = true)
         {
             return new LayerContainerViewModel(_serviceProvider)
             {
@@ -946,9 +946,9 @@ namespace Core2D.ViewModels
             return page;
         }
 
-        public PageContainerViewModel CreateTemplateContainer(string name = "Template", double width = 840, double height = 600)
+        public TemplateContainerViewModel CreateTemplateContainer(string name = "Template", double width = 840, double height = 600)
         {
-            var template = new PageContainerViewModel(_serviceProvider)
+            var template = new TemplateContainerViewModel(_serviceProvider)
             {
                 Name = name,
                 Layers = ImmutableArray.Create<LayerContainerViewModel>(),
@@ -999,7 +999,7 @@ namespace Core2D.ViewModels
                 StyleLibraries = ImmutableArray.Create<LibraryViewModel<ShapeStyleViewModel>>(),
                 GroupLibraries = ImmutableArray.Create<LibraryViewModel<GroupShapeViewModel>>(),
                 Databases = ImmutableArray.Create<DatabaseViewModel>(),
-                Templates = ImmutableArray.Create<PageContainerViewModel>(),
+                Templates = ImmutableArray.Create<TemplateContainerViewModel>(),
                 Scripts = ImmutableArray.Create<ScriptViewModel>(),
                 Documents = ImmutableArray.Create<DocumentContainerViewModel>()
             };

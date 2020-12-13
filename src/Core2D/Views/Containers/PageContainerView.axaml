@@ -12,27 +12,10 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:PageContainerViewModel" x:CompileBindings="True">
     <StackPanel>
-        <Grid ColumnDefinitions="50*,6,50*">
-            <StackPanel Grid.Column="0">
-                <Label Content="Width" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Template.Width, Mode=TwoWay}" />
-            </StackPanel>
-            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" />
-            <StackPanel Grid.Column="2">
-                <Label Content="Height" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Template.Height, Mode=TwoWay}" />
-            </StackPanel>
-        </Grid>
-        <Expander Header="Background" IsExpanded="True">
-            <ContentControl Content="{Binding Template.Background}" />
-        </Expander>
-        <Expander Header="Grid" IsExpanded="False">
-            <renderer:GridView />
-        </Expander>
         <Expander Header="Data" IsExpanded="False">
             <views:DataObjectView />
         </Expander>
-        <Expander Header="Template" IsExpanded="False">
+        <Expander Header="Template" IsExpanded="True">
             <ContentControl Content="{Binding Template}" />
         </Expander>
     </StackPanel>

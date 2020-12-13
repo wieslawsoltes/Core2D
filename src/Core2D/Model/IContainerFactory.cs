@@ -4,7 +4,7 @@ namespace Core2D.Model
 {
     public interface IContainerFactory
     {
-        PageContainerViewModel GetTemplate(ProjectContainerViewModel project, string name);
+        TemplateContainerViewModel GetTemplate(ProjectContainerViewModel project, string name);
 
         PageContainerViewModel GetPage(ProjectContainerViewModel project, string name);
 

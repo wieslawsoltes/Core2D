@@ -4,6 +4,6 @@ namespace Core2D.Model.Renderer
 {
     public interface IContainerPresenter
     {
-        void Render(object dc, IShapeRenderer renderer, PageContainerViewModel container, double dx, double dy);
+        void Render(object dc, IShapeRenderer renderer, BaseContainerViewModel container, double dx, double dy);
     }
 }

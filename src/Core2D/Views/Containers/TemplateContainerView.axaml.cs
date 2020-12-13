@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.Views
+namespace Core2D.Views.Containers
 {
-    public class PageView : UserControl
+    public class TemplateContainerView : UserControl
     {
-        public PageView()
+        public TemplateContainerView()
         {
             InitializeComponent();
         }
