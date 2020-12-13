@@ -75,4 +75,15 @@
 		<ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Views\Containers\TemplateContainerView.axaml.cs">
+	    <DependentUpon>TemplateContainerView.axaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Views\TemplateView.axaml.cs">
+	    <DependentUpon>TemplateView.axaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+
 </Project>

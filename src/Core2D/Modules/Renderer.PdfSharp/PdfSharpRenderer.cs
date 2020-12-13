@@ -297,7 +297,7 @@ namespace Core2D.Renderer.PdfSharp
             }
         }
 
-        public void DrawPage(object dc, PageContainerViewModel container)
+        public void DrawContainer(object dc, BaseContainerViewModel container)
         {
             foreach (var layer in container.Layers)
             {

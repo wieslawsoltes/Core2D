@@ -37,7 +37,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetSelected_Sets_Selected()
         {
-            var target = _factory.CreateLibrary<PageContainerViewModel>("Test");
+            var target = _factory.CreateLibrary<TemplateContainerViewModel>("Test");
 
             var item = _factory.CreateTemplateContainer();
             target.Items = target.Items.Add(item);

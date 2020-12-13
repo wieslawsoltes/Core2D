@@ -113,7 +113,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddTemplate(this ProjectContainerViewModel project, PageContainerViewModel template)
+        public static void AddTemplate(this ProjectContainerViewModel project, TemplateContainerViewModel template)
         {
             if (project?.Templates != null && template != null)
             {
@@ -124,7 +124,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddTemplates(this ProjectContainerViewModel project, IEnumerable<PageContainerViewModel> templates)
+        public static void AddTemplates(this ProjectContainerViewModel project, IEnumerable<TemplateContainerViewModel> templates)
         {
             if (project?.Templates != null && templates != null)
             {
@@ -138,7 +138,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void RemoveTemplate(this ProjectContainerViewModel project, PageContainerViewModel template)
+        public static void RemoveTemplate(this ProjectContainerViewModel project, TemplateContainerViewModel template)
         {
             if (project?.Templates != null && template != null)
             {
@@ -149,7 +149,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void ApplyTemplate(this ProjectContainerViewModel project, PageContainerViewModel page, PageContainerViewModel template)
+        public static void ApplyTemplate(this ProjectContainerViewModel project, PageContainerViewModel page, TemplateContainerViewModel template)
         {
             if (page != null && template != null)
             {
@@ -196,7 +196,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddLayer(this ProjectContainerViewModel project, PageContainerViewModel container, LayerContainerViewModel layer)
+        public static void AddLayer(this ProjectContainerViewModel project, BaseContainerViewModel container, LayerContainerViewModel layer)
         {
             if (container != null && container.Layers != null && layer != null)
             {
@@ -209,7 +209,7 @@ namespace Core2D.ViewModels.Editor
 
         public static void RemoveLayer(this ProjectContainerViewModel project, LayerContainerViewModel layer)
         {
-            if (layer.Owner is PageContainerViewModel container && container.Layers != null)
+            if (layer.Owner is BaseContainerViewModel container && container.Layers != null)
             {
                 var previous = container.Layers;
                 var next = container.Layers.Remove(layer);

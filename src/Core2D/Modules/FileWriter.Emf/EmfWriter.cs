@@ -73,7 +73,7 @@ namespace Core2D.FileWriter.Emf
             return ms;
         }
 
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, PageContainerViewModel container, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, BaseContainerViewModel container, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -102,8 +102,11 @@ namespace Core2D.FileWriter.Emf
 
                     g.PageUnit = GraphicsUnit.Display;
 
-                    r.DrawPage(g, container.Template);
-                    r.DrawPage(g, container);
+                    if (container is PageContainerViewModel page)
+                    {
+                        r.DrawContainer(g, page.Template);
+                    }
+                    r.DrawContainer(g, container);
 
                     r.ClearCache();
                 }

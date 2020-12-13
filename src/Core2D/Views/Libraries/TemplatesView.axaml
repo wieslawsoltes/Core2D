@@ -34,7 +34,7 @@
                 <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" CommandParameter="{Binding #TemplatesListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
             </ListBox.KeyBindings>
             <ListBox.DataTemplates>
-                <DataTemplate DataType="vmc:PageContainerViewModel">
+                <DataTemplate DataType="vmc:TemplateContainerViewModel">
                     <TextBlock x:Name="TemplateTextBlock" Text="{Binding Name}" Background="Transparent">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #TemplateTextBlock}" x:CompileBindings="False">

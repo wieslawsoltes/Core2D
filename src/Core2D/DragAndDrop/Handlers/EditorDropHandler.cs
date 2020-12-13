@@ -38,8 +38,8 @@ namespace Core2D.DragAndDrop.Handlers
                         return editorViewModel?.OnDropRecord(record, point.X, point.Y, bExecute) == true;
                     case ShapeStyleViewModel style:
                         return editorViewModel?.OnDropStyle(style, point.X, point.Y, bExecute) == true;
-                    case PageContainerViewModel page:
-                        return editorViewModel?.OnDropTemplate(page, point.X, point.Y, bExecute) == true;
+                    case TemplateContainerViewModel template:
+                        return editorViewModel?.OnDropTemplate(template, point.X, point.Y, bExecute) == true;
                     default:
                         break;
                 }

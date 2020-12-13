@@ -22,7 +22,7 @@ namespace Core2D.ViewModels.Designer
     {
         public static ProjectEditorViewModel Editor { get; set; }
 
-        public static PageContainerViewModel Template { get; set; }
+        public static TemplateContainerViewModel Template { get; set; }
 
         public static PageContainerViewModel Page { get; set; }
 

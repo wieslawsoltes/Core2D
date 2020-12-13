@@ -299,10 +299,24 @@ namespace Core2D.Editor
                     var exporter = new SvgSvgExporter(_serviceProvider);
                     var container = editor.Project.CurrentContainer;
 
+                    var width = 0.0;
+                    var height = 0.0;
+                    switch (container)
+                    {
+                        case TemplateContainerViewModel template:
+                            width = template.Width;
+                            height = template.Height;
+                            break;
+                        case PageContainerViewModel page:
+                            width = page.Template.Width;
+                            height = page.Template.Height;
+                            break;
+                    }
+
                     var sources = editor.PageState?.SelectedShapes;
                     if (sources != null)
                     {
-                        var xaml = exporter.Create(sources, container.Template.Width, container.Template.Height);
+                        var xaml = exporter.Create(sources, width, height);
                         if (!string.IsNullOrEmpty(xaml))
                         {
                             editor.TextClipboard?.SetText(xaml);
@@ -313,7 +327,7 @@ namespace Core2D.Editor
                     var shapes = container.Layers.SelectMany(x => x.Shapes);
                     if (shapes != null)
                     {
-                        var xaml = exporter.Create(shapes, container.Template.Width, container.Template.Height);
+                        var xaml = exporter.Create(shapes, width, height);
                         if (!string.IsNullOrEmpty(xaml))
                         {
                             editor.TextClipboard?.SetText(xaml);
@@ -458,16 +472,31 @@ namespace Core2D.Editor
             {
                 var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                 var imageChache = editor.Project as IImageCache;
-                var page = editor.Project.CurrentContainer;
+                var container = editor.Project.CurrentContainer;
                 var shapes = editor.PageState.SelectedShapes;
                 var writer = editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter)) as EmfWriter;
 
-                var db = (object)page.Properties;
-                var record = (object)page.Record;
-                editor.DataFlow.Bind(page.Template, db, record);
-                editor.DataFlow.Bind(page, db, record);
+                var db = (object)container.Properties;
+                var record = (object)container.Record;
 
-                using var bitmap = new System.Drawing.Bitmap((int)page.Template.Width, (int)page.Template.Height);
+                var width = 0.0;
+                var height = .0;
+
+                if (container is PageContainerViewModel page)
+                {
+                    editor.DataFlow.Bind(page.Template, db, record);
+                    width = page.Template.Width;
+                    height = page.Template.Height;
+                }
+                else if (container is TemplateContainerViewModel template)
+                {
+                    width = template.Width;
+                    height = template.Height;
+                }
+ 
+                editor.DataFlow.Bind(container, db, record);
+
+                using var bitmap = new System.Drawing.Bitmap((int)width, (int)height);
 
                 if (shapes != null && shapes.Count > 0)
                 {
@@ -477,7 +506,7 @@ namespace Core2D.Editor
                 }
                 else
                 {
-                    using var ms = writer.MakeMetafileStream(bitmap, page, imageChache);
+                    using var ms = writer.MakeMetafileStream(bitmap, container, imageChache);
                     ms.Position = 0;
                     SetClipboardMetafile(ms);
                 }

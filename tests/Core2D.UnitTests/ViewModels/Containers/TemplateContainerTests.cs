@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Core2D.UnitTests
 {
-    public class PageContainerTests
+    public class TemplateContainerTests
     {
         private readonly IFactory _factory = new Factory(null);
 
@@ -13,7 +13,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Inherits_From_BaseContainerViewModel()
         {
-            var target = _factory.CreatePageContainer();
+            var target = _factory.CreateTemplateContainer();
             Assert.True(target is ViewModelBase);
             Assert.True(target is BaseContainerViewModel);
         }
@@ -22,7 +22,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Layers_Not_Null()
         {
-            var target = _factory.CreatePageContainer();
+            var target = _factory.CreateTemplateContainer();
             Assert.False(target.Layers.IsDefault);
         }
 
@@ -30,7 +30,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void SetCurrentLayer_Sets_CurrentLayer()
         {
-            var target = _factory.CreatePageContainer();
+            var target = _factory.CreateTemplateContainer();
 
             var layer = _factory.CreateLayerContainer("Layer1", target);
             target.Layers = target.Layers.Add(layer);
@@ -44,7 +44,7 @@ namespace Core2D.UnitTests
         [Trait("Core2D.Containers", "Project")]
         public void Invalidate_Should_Invalidate_All_Layers()
         {
-            var target = _factory.CreatePageContainer();
+            var target = _factory.CreateTemplateContainer();
 
             var layer1 = _factory.CreateLayerContainer("Layer1", target);
             var layer2 = _factory.CreateLayerContainer("Layer2", target);
@@ -70,62 +70,36 @@ namespace Core2D.UnitTests
 
         [Fact(Skip = "TODO")]
         [Trait("Core2D.Containers", "Project")]
-        public void Template_Not_Null_Width_Returns_Template_Width()
+        public void Template_Width_Returns_Template_Width()
         {
-            var target = _factory.CreatePageContainer();
+            var target = _factory.CreateTemplateContainer();
 
-            target.Template = _factory.CreateTemplateContainer();
-            target.Template.Width = 400;
+            target.Width = 300;
 
-            Assert.Equal(400, target.Template.Width);
+            Assert.Equal(400, target.Width);
         }
 
         [Fact(Skip = "TODO")]
         [Trait("Core2D.Containers", "Project")]
-        public void Template_Not_Null_Width_Returns_Template_Height()
+        public void Template_Width_Returns_Template_Height()
         {
-            var target = _factory.CreatePageContainer();
+            var target = _factory.CreateTemplateContainer();
 
-            target.Template = _factory.CreateTemplateContainer();
-            target.Template.Height = 400;
+            target.Height = 300;
 
-            Assert.Equal(400, target.Template.Height);
+            Assert.Equal(300, target.Height);
         }
 
         [Fact(Skip = "TODO")]
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Background_Returns_Template_Background()
         {
-            var target = _factory.CreatePageContainer();
+            var target = _factory.CreateTemplateContainer();
             var argbColor = _factory.CreateArgbColor();
+            
+            target.Background = argbColor;
 
-            target.Template = _factory.CreateTemplateContainer();
-            target.Template.Background = argbColor;
-
-            Assert.Equal(argbColor, target.Template.Background);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void Invalidate_Should_Invalidate_Template()
-        {
-            var target = _factory.CreatePageContainer();
-
-            target.Template = _factory.CreateTemplateContainer();
-
-            var layer = _factory.CreateLayerContainer("Layer1", target);
-            target.Template.Layers = target.Template.Layers.Add(layer);
-
-            bool raised = false;
-
-            layer.InvalidateLayerHandler += (sender, e) =>
-            {
-                raised = true;
-            };
-
-            target.InvalidateLayer();
-
-            Assert.True(raised);
+            Assert.Equal(argbColor, target.Background);
         }
     }
 }

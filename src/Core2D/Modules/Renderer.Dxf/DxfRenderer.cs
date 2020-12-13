@@ -447,7 +447,7 @@ namespace Core2D.Renderer.Dxf
             }
         }
 
-        public void DrawPage(object dc, PageContainerViewModel container)
+        public void DrawContainer(object dc, BaseContainerViewModel container)
         {
             var dxf = dc as DXF.DxfDocument;
 

@@ -177,9 +177,16 @@ namespace Core2D.ViewModels.Editor
 
         private void ObserveTemplateBackgroud(object sender, PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(PageContainerViewModel.Background));
-            var page = _editor.Project.CurrentContainer;
-            page?.Template.RaisePropertyChanged(nameof(PageContainerViewModel.Background));
+            _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(TemplateContainerViewModel.Background));
+            var container = _editor.Project.CurrentContainer;
+            if (container is PageContainerViewModel page)
+            {
+                page.Template.RaisePropertyChanged(nameof(TemplateContainerViewModel.Background));
+            }
+            if (container is TemplateContainerViewModel template)
+            {
+                template.RaisePropertyChanged(nameof(TemplateContainerViewModel.Background));
+            }
             _invalidateLayers();
             MarkAsDirty();
         }
@@ -187,8 +194,15 @@ namespace Core2D.ViewModels.Editor
         private void ObserveGridStrokeColor(object sender, PropertyChangedEventArgs e)
         {
             _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
-            var page = _editor.Project.CurrentContainer;
-            page?.Template.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
+            var container = _editor.Project.CurrentContainer;
+            if (container is PageContainerViewModel page)
+            {
+                page.Template.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
+            }
+            if (container is TemplateContainerViewModel template)
+            {
+                template.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
+            }
             _invalidateLayers();
             MarkAsDirty();
         }
@@ -565,87 +579,152 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        private void Add(PageContainerViewModel container)
+        private void Add(PageContainerViewModel page)
         {
-            if (container == null)
+            if (page == null)
             {
                 return;
             }
 
-            container.PropertyChanged += ObservePage;
+            page.PropertyChanged += ObservePage;
 
-            if (container.Background != null)
+            page.PropertyChanged += ObserveGrid;
+
+            if (page.Layers != null)
             {
-                container.Background.PropertyChanged += ObserveTemplateBackgroud;
+                Add(page.Layers);
             }
 
-            if (container.GridStrokeColor != null)
-            {
-                container.GridStrokeColor.PropertyChanged += ObserveGridStrokeColor;
-            }
-
-            container.PropertyChanged += ObserveGrid;
-
-            if (container.Layers != null)
-            {
-                Add(container.Layers);
-            }
-
-            if (container is IDataObject data)
+            if (page is IDataObject data)
             {
                 Add(data);
             }
 
-            if (container.WorkingLayer != null)
+            if (page.WorkingLayer != null)
             {
-                container.WorkingLayer.InvalidateLayerHandler += ObserveInvalidateLayer;
+                page.WorkingLayer.InvalidateLayerHandler += ObserveInvalidateLayer;
             }
 
-            if (container.HelperLayer != null)
+            if (page.HelperLayer != null)
             {
-                container.HelperLayer.InvalidateLayerHandler += ObserveInvalidateLayer;
+                page.HelperLayer.InvalidateLayerHandler += ObserveInvalidateLayer;
             }
         }
 
-        private void Remove(PageContainerViewModel container)
+        private void Remove(PageContainerViewModel page)
         {
-            if (container == null)
+            if (page == null)
             {
                 return;
             }
 
-            container.PropertyChanged -= ObservePage;
+            page.PropertyChanged -= ObservePage;
 
-            if (container.Background != null)
+            page.PropertyChanged -= ObserveGrid;
+
+            if (page.Layers != null)
             {
-                container.Background.PropertyChanged -= ObserveTemplateBackgroud;
+                Remove(page.Layers);
             }
 
-            if (container.GridStrokeColor != null)
-            {
-                container.GridStrokeColor.PropertyChanged -= ObserveGridStrokeColor;
-            }
-
-            container.PropertyChanged -= ObserveGrid;
-
-            if (container.Layers != null)
-            {
-                Remove(container.Layers);
-            }
-
-            if (container is IDataObject data)
+            if (page is IDataObject data)
             {
                 Remove(data);
             }
 
-            if (container.WorkingLayer != null)
+            if (page.WorkingLayer != null)
             {
-                container.WorkingLayer.InvalidateLayerHandler -= ObserveInvalidateLayer;
+                page.WorkingLayer.InvalidateLayerHandler -= ObserveInvalidateLayer;
             }
 
-            if (container.HelperLayer != null)
+            if (page.HelperLayer != null)
             {
-                container.HelperLayer.InvalidateLayerHandler -= ObserveInvalidateLayer;
+                page.HelperLayer.InvalidateLayerHandler -= ObserveInvalidateLayer;
+            }
+        }
+
+
+        private void Add(TemplateContainerViewModel template)
+        {
+            if (template == null)
+            {
+                return;
+            }
+
+            template.PropertyChanged += ObservePage;
+
+            if (template.Background != null)
+            {
+                template.Background.PropertyChanged += ObserveTemplateBackgroud;
+            }
+
+            if (template.GridStrokeColor != null)
+            {
+                template.GridStrokeColor.PropertyChanged += ObserveGridStrokeColor;
+            }
+
+            template.PropertyChanged += ObserveGrid;
+
+            if (template.Layers != null)
+            {
+                Add(template.Layers);
+            }
+
+            if (template is IDataObject data)
+            {
+                Add(data);
+            }
+
+            if (template.WorkingLayer != null)
+            {
+                template.WorkingLayer.InvalidateLayerHandler += ObserveInvalidateLayer;
+            }
+
+            if (template.HelperLayer != null)
+            {
+                template.HelperLayer.InvalidateLayerHandler += ObserveInvalidateLayer;
+            }
+        }
+
+        private void Remove(TemplateContainerViewModel template)
+        {
+            if (template == null)
+            {
+                return;
+            }
+
+            template.PropertyChanged -= ObservePage;
+
+            if (template.Background != null)
+            {
+                template.Background.PropertyChanged -= ObserveTemplateBackgroud;
+            }
+
+            if (template.GridStrokeColor != null)
+            {
+                template.GridStrokeColor.PropertyChanged -= ObserveGridStrokeColor;
+            }
+
+            template.PropertyChanged -= ObserveGrid;
+
+            if (template.Layers != null)
+            {
+                Remove(template.Layers);
+            }
+
+            if (template is IDataObject data)
+            {
+                Remove(data);
+            }
+
+            if (template.WorkingLayer != null)
+            {
+                template.WorkingLayer.InvalidateLayerHandler -= ObserveInvalidateLayer;
+            }
+
+            if (template.HelperLayer != null)
+            {
+                template.HelperLayer.InvalidateLayerHandler -= ObserveInvalidateLayer;
             }
         }
 
@@ -1549,6 +1628,32 @@ namespace Core2D.ViewModels.Editor
         }
 
         private void Remove(IEnumerable<PageContainerViewModel> containers)
+        {
+            if (containers == null)
+            {
+                return;
+            }
+
+            foreach (var page in containers)
+            {
+                Remove(page);
+            }
+        }
+
+        private void Add(IEnumerable<TemplateContainerViewModel> containers)
+        {
+            if (containers == null)
+            {
+                return;
+            }
+
+            foreach (var page in containers)
+            {
+                Add(page);
+            }
+        }
+
+        private void Remove(IEnumerable<TemplateContainerViewModel> containers)
         {
             if (containers == null)
             {

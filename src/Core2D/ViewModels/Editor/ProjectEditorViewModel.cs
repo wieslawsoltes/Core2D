@@ -490,32 +490,27 @@ namespace Core2D.ViewModels.Editor
                 }
                 Project?.AddLayer(Project?.CurrentContainer, layer);
             }
+            else if (item is TemplateContainerViewModel template)
+            {
+                if (restore)
+                {
+                    var shapes = template.Layers.SelectMany(x => x.Shapes);
+                    TryToRestoreRecords(shapes);
+                }
+                Project?.AddTemplate(template);
+            }
             else if (item is PageContainerViewModel page)
             {
-                if (page.Template == null)
+                if (restore)
                 {
-                    // Import as template.
-                    if (restore)
-                    {
-                        var shapes = page.Layers.SelectMany(x => x.Shapes);
-                        TryToRestoreRecords(shapes);
-                    }
-                    Project?.AddTemplate(page);
+                    var shapes = Enumerable.Concat(
+                        page.Layers.SelectMany(x => x.Shapes),
+                        page.Template?.Layers.SelectMany(x => x.Shapes));
+                    TryToRestoreRecords(shapes);
                 }
-                else
-                {
-                    // Import as page.
-                    if (restore)
-                    {
-                        var shapes = Enumerable.Concat(
-                            page.Layers.SelectMany(x => x.Shapes),
-                            page.Template?.Layers.SelectMany(x => x.Shapes));
-                        TryToRestoreRecords(shapes);
-                    }
-                    Project?.AddPage(Project?.CurrentDocument, page);
-                }
+                Project?.AddPage(Project?.CurrentDocument, page);
             }
-            else if (item is IList<PageContainerViewModel> templates)
+            else if (item is IList<TemplateContainerViewModel> templates)
             {
                 if (restore)
                 {
@@ -2132,7 +2127,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnRemoveTemplate(PageContainerViewModel template)
+        public void OnRemoveTemplate(TemplateContainerViewModel template)
         {
             if (template != null)
             {
@@ -2141,7 +2136,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnEditTemplate(PageContainerViewModel template)
+        public void OnEditTemplate(BaseContainerViewModel template)
         {
             if (Project != null && template != null)
             {
@@ -2168,10 +2163,10 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnApplyTemplate(PageContainerViewModel template)
+        public void OnApplyTemplate(TemplateContainerViewModel template)
         {
-            var page = Project?.CurrentContainer;
-            if (page != null && template != null && page != template)
+            var container = Project?.CurrentContainer;
+            if (container is PageContainerViewModel page)
             {
                 Project.ApplyTemplate(page, template);
                 Project.CurrentContainer.InvalidateLayer();
@@ -3043,12 +3038,12 @@ namespace Core2D.ViewModels.Editor
             return false;
         }
 
-        public bool OnDropTemplate(PageContainerViewModel template, double x, double y, bool bExecute = true)
+        public bool OnDropTemplate(TemplateContainerViewModel template, double x, double y, bool bExecute = true)
         {
             try
             {
-                var page = Project?.CurrentContainer;
-                if (page != null && template != null && page != template)
+                var container = Project?.CurrentContainer;
+                if (container is PageContainerViewModel page && template != null)
                 {
                     if (bExecute)
                     {
