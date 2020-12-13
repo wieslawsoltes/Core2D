@@ -159,14 +159,14 @@ namespace Core2D.ViewModels.Editor
         {
             if (e.PropertyName == nameof(IDataObject.Properties))
             {
-                var container = sender as PageContainerViewModel;
+                var container = sender as BaseContainerViewModel;
                 Remove(container.Properties);
                 Add(container.Properties);
             }
 
-            if (e.PropertyName == nameof(PageContainerViewModel.Layers))
+            if (e.PropertyName == nameof(BaseContainerViewModel.Layers))
             {
-                var container = sender as PageContainerViewModel;
+                var container = sender as BaseContainerViewModel;
                 Remove(container.Layers);
                 Add(container.Layers);
             }
@@ -175,7 +175,7 @@ namespace Core2D.ViewModels.Editor
             MarkAsDirty();
         }
 
-        private void ObserveTemplateBackgroud(object sender, PropertyChangedEventArgs e)
+        private void ObserveTemplateBackground(object sender, PropertyChangedEventArgs e)
         {
             _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(TemplateContainerViewModel.Background));
             var container = _editor.Project.CurrentContainer;
@@ -588,8 +588,6 @@ namespace Core2D.ViewModels.Editor
 
             page.PropertyChanged += ObservePage;
 
-            page.PropertyChanged += ObserveGrid;
-
             if (page.Layers != null)
             {
                 Add(page.Layers);
@@ -620,8 +618,6 @@ namespace Core2D.ViewModels.Editor
 
             page.PropertyChanged -= ObservePage;
 
-            page.PropertyChanged -= ObserveGrid;
-
             if (page.Layers != null)
             {
                 Remove(page.Layers);
@@ -643,7 +639,6 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-
         private void Add(TemplateContainerViewModel template)
         {
             if (template == null)
@@ -655,7 +650,7 @@ namespace Core2D.ViewModels.Editor
 
             if (template.Background != null)
             {
-                template.Background.PropertyChanged += ObserveTemplateBackgroud;
+                template.Background.PropertyChanged += ObserveTemplateBackground;
             }
 
             if (template.GridStrokeColor != null)
@@ -697,7 +692,7 @@ namespace Core2D.ViewModels.Editor
 
             if (template.Background != null)
             {
-                template.Background.PropertyChanged -= ObserveTemplateBackgroud;
+                template.Background.PropertyChanged -= ObserveTemplateBackground;
             }
 
             if (template.GridStrokeColor != null)
@@ -1640,29 +1635,29 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        private void Add(IEnumerable<TemplateContainerViewModel> containers)
+        private void Add(IEnumerable<TemplateContainerViewModel> templates)
         {
-            if (containers == null)
+            if (templates == null)
             {
                 return;
             }
 
-            foreach (var page in containers)
+            foreach (var template in templates)
             {
-                Add(page);
+                Add(template);
             }
         }
 
-        private void Remove(IEnumerable<TemplateContainerViewModel> containers)
+        private void Remove(IEnumerable<TemplateContainerViewModel> templates)
         {
-            if (containers == null)
+            if (templates == null)
             {
                 return;
             }
 
-            foreach (var page in containers)
+            foreach (var template in templates)
             {
-                Remove(page);
+                Remove(template);
             }
         }
 

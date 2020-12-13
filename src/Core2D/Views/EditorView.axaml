@@ -15,7 +15,6 @@
              xmlns:renderer="using:Core2D.Views.Renderer"
              xmlns:style="using:Core2D.Views.Style"
              xmlns:libraries="using:Core2D.Views.Libraries"
-             xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
@@ -135,7 +134,6 @@
                                         Stretch="None" ZoomSpeed="1.2" PanButton="Middle" EnablePan="True" EnableZoom="True" 
                                         Background="Transparent" ClipToBounds="False" 
                                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
                             <paz:ZoomBorder.ContextMenu>
                                 <ContextMenu x:Name="TemplateContextMenu" DataContext="{Binding #PageZoomBorder.DataContext}">
                                     <MenuItem Header="Test1"/>
@@ -147,17 +145,34 @@
                                                                      ContextMenu="{Binding #TemplateContextMenu}"
                                                                      x:CompileBindings="False"/>
                             </i:Interaction.Behaviors>
-                            <Panel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <ContentControl x:Name="ContainerContentControl" Content="{Binding Project.CurrentContainer}">
-                                    <ContentControl.DataTemplates>
-                                        <DataTemplate DataType="vmc:PageContainerViewModel">
-                                            <views:PageView />
-                                        </DataTemplate>
-                                        <DataTemplate DataType="vmc:TemplateContainerViewModel">
-                                            <views:TemplateView />
-                                        </DataTemplate>
-                                    </ContentControl.DataTemplates>
-                                </ContentControl>
+                            <Panel DataContext="{Binding Project.CurrentContainer}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Panel x:Name="ContainerPanel"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Width="{Binding Template.Width, TargetNullValue={Binding Width}}"
+                                       Height="{Binding Template.Height, TargetNullValue={Binding Height}}"
+                                       x:CompileBindings="False">
+                                    <views:PresenterView x:Name="PresenterViewData" 
+                                                         ZoomBorder="{Binding #PageZoomBorder}"
+                                                         Renderer="{Binding $parent[TopLevel].DataContext.PageRenderer}"
+                                                         DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
+                                                         Container="{Binding}"
+                                                         PresenterType="Data"
+                                                         ClipToBounds="False"/>
+                                    <views:PresenterView x:Name="PresenterViewTemplate"
+                                                         ZoomBorder="{Binding #PageZoomBorder}"
+                                                         Renderer="{Binding $parent[TopLevel].DataContext.PageRenderer}"
+                                                         DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
+                                                         Container="{Binding}"
+                                                         PresenterType="Template"
+                                                         ClipToBounds="False"/>
+                                    <views:PresenterView x:Name="PresenterViewEditor"
+                                                         ZoomBorder="{Binding #PageZoomBorder}"
+                                                         Renderer="{Binding $parent[TopLevel].DataContext.PageRenderer}"
+                                                         DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
+                                                         Container="{Binding}"
+                                                         PresenterType="Editor"
+                                                         ClipToBounds="False"/>
+                                </Panel>
                                 <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <Canvas Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                         <TextBox x:Name="EditorTextBox"
