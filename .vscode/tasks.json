@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/Core2D/Core2D.csproj"
+                "${workspaceFolder}/src/Core2D.Desktop/Core2D.Desktop.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
