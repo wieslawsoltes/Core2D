@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <LangVersion>preview</LangVersion>
     <IsPackable>False</IsPackable>
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);NU1701</NoWarn>
@@ -16,31 +15,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
-    <PackageReference Include="Autofac" Version="6.1.0" />
-    <PackageReference Include="CsvHelper" Version="18.0.0" />
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.8.0" />
-    <PackageReference Include="netDXF.netstandard" Version="2.4.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="PDFsharp" Version="1.50.5147" />
-    <PackageReference Include="SkiaSharp" Version="2.80.2" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.2" />
-    <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
-    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
-    <PackageReference Include="Svg.Skia.Picture" Version="0.4.2-rc1" />
-    <PackageReference Include="Math.Spatial" Version="1.4.0" />
-    <PackageReference Include="ThemeEditor.Controls.ColorPicker" Version="$(ColorPickerVersion)" />
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="$(AvaloniaBehaviorsVersion)" />
-    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="$(AvaloniaBehaviorsVersion)" />
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="$(PanAndZoomVersion)" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)" PrivateAssets="All" />
+    <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
+    <PackageReference Include="Autofac" Version="$(AutofacVersion)" />
+    <PackageReference Include="CsvHelper" Version="$(CsvHelperVersion)" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="$(DocumentFormatOpenXmlVersion)" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="$(MicrosoftCodeAnalysisCSharpScriptingVersion)" />
+    <PackageReference Include="netDXF.netstandard" Version="$(netDXFnetstandardVersion)" />
+    <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
+    <PackageReference Include="PDFsharp" Version="$(PDFsharpVersion)" />
+    <PackageReference Include="SkiaSharp" Version="$(SkiaSharpVersion)" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="$(SkiaSharpVersion)" />
+    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
+    <PackageReference Include="System.IO.Compression" Version="$(SystemIOCompressionVersion)" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="$(SystemTextEncodingCodePagesVersion)" />
+    <PackageReference Include="Svg.Skia.Picture" Version="$(SvgSkiaPictureVersion)" />
+    <PackageReference Include="Math.Spatial" Version="$(MathSpatialVersion)" />
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaEditVersion)" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaAvaloniaEditVersion)" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="$(AvaloniaXamlBehaviorsVersion)" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="$(AvaloniaXamlBehaviorsVersion)" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="$(AvaloniaControlsPanAndZoomVersion)" />
+    <PackageReference Include="ThemeEditor.Controls.ColorPicker" Version="$(ThemeEditorControlsColorPickerVersion)" />
   </ItemGroup>
 
 	<ItemGroup>

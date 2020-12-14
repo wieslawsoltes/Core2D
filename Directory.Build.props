@@ -1,6 +1,7 @@
 <Project>
  <PropertyGroup>
    <Deterministic>true</Deterministic>
+    <LangVersion>preview</LangVersion>
  </PropertyGroup>
   <PropertyGroup>
     <VersionPrefix>0.10.0</VersionPrefix>
@@ -11,11 +12,27 @@
     <Copyright>Copyright © Wiesław Šoltés 2020</Copyright>
   </PropertyGroup>
   <PropertyGroup>
+    <MicrosoftNETFrameworkReferenceAssembliesVersion>1.0.0</MicrosoftNETFrameworkReferenceAssembliesVersion>
+    <SystemDrawingCommonVersion>5.0.0</SystemDrawingCommonVersion>
+    <AutofacVersion>6.1.0</AutofacVersion>
+    <CsvHelperVersion>18.0.0</CsvHelperVersion>
+    <DocumentFormatOpenXmlVersion>2.11.3</DocumentFormatOpenXmlVersion>
+    <MicrosoftCodeAnalysisCSharpScriptingVersion>3.8.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
+    <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
+    <NewtonsoftJsonVersion>12.0.3</NewtonsoftJsonVersion>
+    <PDFsharpVersion>1.50.5147</PDFsharpVersion>
+    <SkiaSharpVersion>2.80.2</SkiaSharpVersion>
+    <SystemCollectionsImmutableVersion>5.0.0</SystemCollectionsImmutableVersion>
+    <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
+    <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
+    <SvgSkiaPictureVersion>0.4.2-rc1</SvgSkiaPictureVersion>
+    <MathSpatialVersion>1.4.0</MathSpatialVersion>
     <AvaloniaVersion>0.10.0-rc1</AvaloniaVersion>
-    <AvaloniaEditVersion>0.10.0-rc1</AvaloniaEditVersion>
-    <AvaloniaBehaviorsVersion>0.10.0-rc1</AvaloniaBehaviorsVersion>
-    <PanAndZoomVersion>3.0.0-rc1</PanAndZoomVersion>
-    <ColorPickerVersion>0.10.0-rc1</ColorPickerVersion>
+    <AvaloniaAvaloniaEditVersion>0.10.0-rc1</AvaloniaEditVersion>
+    <AvaloniaXamlBehaviorsVersion>0.10.0-rc1</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>3.0.0-rc1</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>0.10.0-rc1</ThemeEditorControlsColorPickerVersion>
+    <SystemCommandLineVersion>2.0.0-beta1.20574.7</SystemCommandLineVersion>
   </PropertyGroup>
   <PropertyGroup>
     <!--<DefineConstants>$(DefineConstants);USE_SKIA</DefineConstants>-->
