@@ -28,7 +28,7 @@
     <SvgSkiaPictureVersion>0.4.2-rc1</SvgSkiaPictureVersion>
     <MathSpatialVersion>1.4.0</MathSpatialVersion>
     <AvaloniaVersion>0.10.0-rc1</AvaloniaVersion>
-    <AvaloniaAvaloniaEditVersion>0.10.0-rc1</AvaloniaEditVersion>
+    <AvaloniaAvaloniaEditVersion>0.10.0-rc1</AvaloniaAvaloniaEditVersion>
     <AvaloniaXamlBehaviorsVersion>0.10.0-rc1</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>3.0.0-rc1</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>0.10.0-rc1</ThemeEditorControlsColorPickerVersion>
