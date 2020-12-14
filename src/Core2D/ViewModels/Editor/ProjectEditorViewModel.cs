@@ -127,7 +127,7 @@ namespace Core2D.ViewModels.Editor
             _recentProjects = ImmutableArray.Create<RecentFileViewModel>();
             _currentRecentProject = default;
             _dialogs = new ObservableCollection<DialogViewModel>();
-            _tools = serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>((tools) => tools.Where(tool => !tool.GetType().Name.StartsWith("PathTool")).ToImmutableArray());
+            _tools = serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>((tools) => tools.ToImmutableArray());
             _pathTools = serviceProvider.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>((tools) => tools.ToImmutableArray());
             _hitTest = serviceProvider.GetServiceLazily<IHitTest>(hitTests => hitTests.Register(serviceProvider.GetService<IBounds[]>()));
             _log = serviceProvider.GetServiceLazily<ILog>();
