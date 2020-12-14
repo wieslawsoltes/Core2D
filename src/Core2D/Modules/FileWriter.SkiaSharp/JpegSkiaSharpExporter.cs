@@ -5,7 +5,7 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using SkiaSharp;
 
-namespace Core2D.FileWriter.SkiaSharpJpeg
+namespace Core2D.Modules.FileWriter.SkiaSharpJpeg
 {
     public sealed class JpegSkiaSharpExporter : IProjectExporter
     {

@@ -1,10 +1,11 @@
 ﻿using System;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
+using Core2D.Modules.Renderer.SkiaSharp.Nodes;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp
 {
     internal class SkiaSharpDrawNodeFactory : IDrawNodeFactory
     {

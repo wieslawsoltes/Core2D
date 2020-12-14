@@ -68,7 +68,7 @@ namespace Core2D.UnitTests
             Assert.Equal(4, count);
         }
 
-        [Fact(Skip = "TODO")]
+        [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Width_Returns_Template_Width()
         {
@@ -80,7 +80,7 @@ namespace Core2D.UnitTests
             Assert.Equal(400, target.Template.Width);
         }
 
-        [Fact(Skip = "TODO")]
+        [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Width_Returns_Template_Height()
         {
@@ -92,7 +92,7 @@ namespace Core2D.UnitTests
             Assert.Equal(400, target.Template.Height);
         }
 
-        [Fact(Skip = "TODO")]
+        [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Background_Returns_Template_Background()
         {

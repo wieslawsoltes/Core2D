@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Renderer;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using SkiaSharp;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp
 {
     public class SkiaSharpPathConverter : IPathConverter
     {

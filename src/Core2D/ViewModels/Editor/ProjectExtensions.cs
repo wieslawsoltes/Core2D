@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D.Data;
 using Core2D.Model;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;

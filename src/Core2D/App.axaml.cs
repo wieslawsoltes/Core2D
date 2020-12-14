@@ -16,6 +16,7 @@ using Core2D.Configuration.Themes;
 using Core2D.Configuration.Windows;
 using Core2D.ViewModels.Designer;
 using Core2D.Model;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
 

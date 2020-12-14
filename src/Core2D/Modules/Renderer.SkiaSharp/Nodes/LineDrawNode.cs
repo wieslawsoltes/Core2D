@@ -2,12 +2,13 @@
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using Core2D.Model.Style;
+using Core2D.Modules.Renderer.SkiaSharp.Nodes.Marker;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Spatial;
 using SkiaSharp;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 {
     internal class LineDrawNode : DrawNode, ILineDrawNode
     {
@@ -24,7 +25,7 @@ namespace Core2D.Renderer.SkiaSharp
             UpdateGeometry();
         }
 
-        private Marker CreateArrowMarker(double x, double y, double angle, ShapeStyleViewModel shapeStyleViewModel, ArrowStyleViewModel style)
+        private MarkerBase CreateArrowMarker(double x, double y, double angle, ShapeStyleViewModel shapeStyleViewModel, ArrowStyleViewModel style)
         {
             switch (style.ArrowType)
             {
@@ -117,7 +118,7 @@ namespace Core2D.Renderer.SkiaSharp
                 double a1 = Math.Atan2(y1 - y2, x1 - x2);
                 StartMarker = CreateArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrow);
                 StartMarker.UpdateStyle();
-                P0 = (StartMarker as Marker).Point;
+                P0 = (StartMarker as MarkerBase).Point;
             }
             else
             {
@@ -130,7 +131,7 @@ namespace Core2D.Renderer.SkiaSharp
                 double a2 = Math.Atan2(y2 - y1, x2 - x1);
                 EndMarker = CreateArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrow);
                 EndMarker.UpdateStyle();
-                P1 = (EndMarker as Marker).Point;
+                P1 = (EndMarker as MarkerBase).Point;
             }
             else
             {

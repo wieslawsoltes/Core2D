@@ -4,7 +4,7 @@ using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.UnitTests.ViewModels.Containers
 {
     public class ProjectContainerTests
     {

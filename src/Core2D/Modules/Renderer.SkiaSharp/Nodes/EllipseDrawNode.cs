@@ -5,7 +5,7 @@ using Core2D.ViewModels.Style;
 using SkiaSharp;
 using Spatial;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 {
     internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
     {

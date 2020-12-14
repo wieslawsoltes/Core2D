@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using Core2D.Model;
 using Core2D.Model.Renderer;
-using Core2D.SvgExporter.Svg;
+using Core2D.Modules.SvgExporter.Svg;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 
-namespace Core2D.FileWriter.Svg
+namespace Core2D.Modules.FileWriter.Svg
 {
     public sealed class SvgSvgWriter : IFileWriter
     {

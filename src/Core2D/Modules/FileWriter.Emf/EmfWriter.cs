@@ -7,12 +7,13 @@ using System.Drawing.Text;
 using System.IO;
 using Core2D.Model;
 using Core2D.Model.Renderer;
-using Core2D.Renderer.WinForms;
+using Core2D.Modules.Renderer.WinForms;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.FileWriter.Emf
+namespace Core2D.Modules.FileWriter.Emf
 {
     public sealed class EmfWriter : IFileWriter
     {

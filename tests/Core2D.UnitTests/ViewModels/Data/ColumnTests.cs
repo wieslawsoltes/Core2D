@@ -2,7 +2,7 @@
 using Core2D.ViewModels;
 using Xunit;
 
-namespace Core2D.Data.UnitTests
+namespace Core2D.UnitTests.ViewModels.Data
 {
     public class ColumnTests
     {

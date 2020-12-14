@@ -4,7 +4,7 @@ using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using SkiaSharp;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 {
     internal class PathDrawNode : DrawNode, IPathDrawNode
     {

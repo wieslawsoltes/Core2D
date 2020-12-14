@@ -1,8 +1,9 @@
 ﻿using Core2D.Model;
 using Core2D.ViewModels;
+using Core2D.ViewModels.Data;
 using Xunit;
 
-namespace Core2D.Data.UnitTests
+namespace Core2D.UnitTests.ViewModels.Data
 {
     public class DatabaseTests
     {

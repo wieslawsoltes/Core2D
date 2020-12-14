@@ -10,7 +10,6 @@ using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.Model.Renderer;
-using Core2D.Shapes;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor.History;

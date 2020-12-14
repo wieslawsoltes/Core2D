@@ -5,7 +5,7 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Shapes;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.UnitTests.ViewModels.Path.Segments
 {
     public class QuadraticBezierSegmentTests
     {

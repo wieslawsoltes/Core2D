@@ -1,11 +1,12 @@
 using System;
 using System.Threading.Tasks;
 using Core2D.Model;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Editor;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
-namespace Core2D.ScriptRunner.Roslyn
+namespace Core2D.Modules.ScriptRunner.Roslyn
 {
     public class RoslynScriptRunner : IScriptRunner
     {

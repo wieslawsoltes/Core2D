@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 using Core2D.Model;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace Core2D.Renderer.PdfSharp
+namespace Core2D.Modules.Renderer.PdfSharp
 {
     public partial class PdfSharpRenderer : IProjectExporter
     {

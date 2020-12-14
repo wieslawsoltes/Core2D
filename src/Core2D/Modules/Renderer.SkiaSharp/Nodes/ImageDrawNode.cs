@@ -7,7 +7,7 @@ using Core2D.ViewModels.Style;
 using Spatial;
 using SkiaSharp;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 {
     internal class ImageDrawNode : DrawNode, IImageDrawNode
     {

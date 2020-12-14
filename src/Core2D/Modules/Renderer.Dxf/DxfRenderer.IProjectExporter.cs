@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 using Core2D.Model;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using DXF = netDxf;
 using DXFH = netDxf.Header;
 using DXFO = netDxf.Objects;
 
-namespace Core2D.Renderer.Dxf
+namespace Core2D.Modules.Renderer.Dxf
 {
     public partial class DxfRenderer : IProjectExporter
     {

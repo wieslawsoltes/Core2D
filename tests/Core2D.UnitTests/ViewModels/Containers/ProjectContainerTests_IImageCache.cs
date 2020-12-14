@@ -5,7 +5,7 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.UnitTests.ViewModels.Containers
 {
     public class ProjectContainerTests_IImageCache
     {

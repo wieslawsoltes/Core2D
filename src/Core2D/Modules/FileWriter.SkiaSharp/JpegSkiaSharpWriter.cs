@@ -2,12 +2,13 @@
 using System.IO;
 using Core2D.Model;
 using Core2D.Model.Renderer;
-using Core2D.Renderer.SkiaSharp;
+using Core2D.Modules.Renderer.SkiaSharp;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Renderer.Presenters;
 
-namespace Core2D.FileWriter.SkiaSharpJpeg
+namespace Core2D.Modules.FileWriter.SkiaSharpJpeg
 {
     public sealed class JpegSkiaSharpWriter : IFileWriter
     {

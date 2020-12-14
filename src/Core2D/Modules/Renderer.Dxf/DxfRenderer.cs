@@ -16,7 +16,7 @@ using DXFE = netDxf.Entities;
 using DXFO = netDxf.Objects;
 using DXFT = netDxf.Tables;
 
-namespace Core2D.Renderer.Dxf
+namespace Core2D.Modules.Renderer.Dxf
 {
     public partial class DxfRenderer : ViewModelBase, IShapeRenderer
     {

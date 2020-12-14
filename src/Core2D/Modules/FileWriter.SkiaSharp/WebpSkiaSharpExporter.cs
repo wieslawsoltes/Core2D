@@ -5,7 +5,7 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using SkiaSharp;
 
-namespace Core2D.FileWriter.SkiaSharpWebp
+namespace Core2D.Modules.FileWriter.SkiaSharpWebp
 {
     public sealed class WebpSkiaSharpExporter : IProjectExporter
     {

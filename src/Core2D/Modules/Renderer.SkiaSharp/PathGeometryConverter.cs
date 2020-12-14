@@ -11,7 +11,7 @@ using SkiaSharp;
 using Spatial;
 using Spatial.Arc;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp
 {
     public static class PathGeometryConverter
     {

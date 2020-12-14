@@ -9,7 +9,7 @@ using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 #endif
-using Core2D.Renderer;
+using Core2D.Modules.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Renderer.Presenters;

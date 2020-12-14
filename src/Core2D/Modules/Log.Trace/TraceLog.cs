@@ -4,7 +4,7 @@ using System;
 using Core2D.Model;
 using SD = System.Diagnostics;
 
-namespace Core2D.Log.Trace
+namespace Core2D.Modules.Log.Trace
 {
     public sealed class TraceLog : ILog
     {

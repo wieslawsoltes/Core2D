@@ -2,10 +2,10 @@
 using System.IO;
 using Core2D.Model;
 using Core2D.Model.Renderer;
-using Core2D.Renderer.Dxf;
+using Core2D.Modules.Renderer.Dxf;
 using Core2D.ViewModels.Containers;
 
-namespace Core2D.FileWriter.Dxf
+namespace Core2D.Modules.FileWriter.Dxf
 {
     public sealed class DxfWriter : IFileWriter
     {

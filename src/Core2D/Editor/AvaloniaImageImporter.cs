@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Core2D.Model;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
 

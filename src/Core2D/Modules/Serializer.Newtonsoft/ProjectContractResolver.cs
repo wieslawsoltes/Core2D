@@ -9,7 +9,7 @@ using Autofac.Core.Activators.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Core2D.Serializer.Newtonsoft
+namespace Core2D.Modules.Serializer.Newtonsoft
 {
     internal class ProjectContractResolver : DefaultContractResolver
     {

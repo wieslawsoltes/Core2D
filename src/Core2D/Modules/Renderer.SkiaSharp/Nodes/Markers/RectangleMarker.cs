@@ -1,8 +1,8 @@
 ﻿using SkiaSharp;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Marker
 {
-    internal class RectangleMarker : Marker
+    internal class RectangleMarker : MarkerBase
     {
         public SKRect Rect { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using Autofac;
 
-namespace Core2D.ServiceProvider.Autofac
+namespace Core2D.Modules.ServiceProvider.Autofac
 {
     public class AutofacServiceProvider : IServiceProvider
     {

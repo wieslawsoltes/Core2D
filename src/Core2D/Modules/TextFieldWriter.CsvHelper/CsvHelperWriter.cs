@@ -2,10 +2,11 @@
 using System.Globalization;
 using System.IO;
 using Core2D.Model;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Data;
 using CSV = CsvHelper;
 
-namespace Core2D.TextFieldWriter.CsvHelper
+namespace Core2D.Modules.TextFieldWriter.CsvHelper
 {
     public sealed class CsvHelperWriter : ITextFieldWriter<DatabaseViewModel>
     {

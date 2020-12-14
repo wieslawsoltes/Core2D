@@ -4,7 +4,6 @@ using System.Drawing.Drawing2D;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.Model.Style;
-using Core2D.Style;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Renderer;
@@ -13,7 +12,7 @@ using Core2D.ViewModels.Style;
 using Spatial;
 using Spatial.Arc;
 
-namespace Core2D.Renderer.WinForms
+namespace Core2D.Modules.Renderer.WinForms
 {
     public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
     {

@@ -3,7 +3,7 @@ using Autofac;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Core2D.Serializer.Newtonsoft
+namespace Core2D.Modules.Serializer.Newtonsoft
 {
     public sealed class NewtonsoftJsonSerializer : IJsonSerializer
     {

@@ -2,7 +2,7 @@
 using Core2D.ViewModels.Style;
 using SkiaSharp;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 {
     internal abstract class DrawNode : IDrawNode
     {

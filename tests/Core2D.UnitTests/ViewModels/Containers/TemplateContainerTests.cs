@@ -3,7 +3,7 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.UnitTests.ViewModels.Containers
 {
     public class TemplateContainerTests
     {
@@ -68,7 +68,7 @@ namespace Core2D.UnitTests
             Assert.Equal(4, count);
         }
 
-        [Fact(Skip = "TODO")]
+        [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Template_Width_Returns_Template_Width()
         {
@@ -76,10 +76,10 @@ namespace Core2D.UnitTests
 
             target.Width = 300;
 
-            Assert.Equal(400, target.Width);
+            Assert.Equal(300, target.Width);
         }
 
-        [Fact(Skip = "TODO")]
+        [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Template_Width_Returns_Template_Height()
         {
@@ -90,7 +90,7 @@ namespace Core2D.UnitTests
             Assert.Equal(300, target.Height);
         }
 
-        [Fact(Skip = "TODO")]
+        [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void Template_Not_Null_Background_Returns_Template_Background()
         {

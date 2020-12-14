@@ -4,10 +4,11 @@ using System.Globalization;
 using System.Text;
 using Core2D.Model;
 using Core2D.Model.Path;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
-namespace Core2D.SvgExporter.Svg
+namespace Core2D.Modules.SvgExporter.Svg
 {
     public class SvgSvgExporter : ISvgExporter
     {

@@ -2,7 +2,7 @@
 using Core2D.ViewModels;
 using Xunit;
 
-namespace Core2D.Style.UnitTests
+namespace Core2D.UnitTests.ViewModels.Style
 {
     public class StrokeStyleTests
     {

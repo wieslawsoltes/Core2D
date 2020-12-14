@@ -3,7 +3,7 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Shapes;
 using Xunit;
 
-namespace Core2D.Shapes.UnitTests
+namespace Core2D.UnitTests.ViewModels.Shapes
 {
     public class ImageShapeTests
     {

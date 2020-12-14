@@ -8,7 +8,7 @@ using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Shapes;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.UnitTests.ViewModels.Path
 {
     public class PathFigureTests
     {

@@ -5,7 +5,7 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Path;
 using Xunit;
 
-namespace Core2D.UnitTests
+namespace Core2D.UnitTests.ViewModels.Path
 {
     public class PathGeometryTests
     {

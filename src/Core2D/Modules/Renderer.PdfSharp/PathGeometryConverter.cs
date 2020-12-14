@@ -4,7 +4,7 @@ using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
 using PDF = PdfSharp.Drawing;
 
-namespace Core2D.Renderer.PdfSharp
+namespace Core2D.Modules.Renderer.PdfSharp
 {
     public static class PathGeometryConverter
     {

@@ -6,7 +6,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace Core2D.TextFieldWriter.OpenXml
+namespace Core2D.Modules.TextFieldWriter.OpenXml
 {
     public sealed class OpenXmlWriter : ITextFieldWriter<DatabaseViewModel>
     {

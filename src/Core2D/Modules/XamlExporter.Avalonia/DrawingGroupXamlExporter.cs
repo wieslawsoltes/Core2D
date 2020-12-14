@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Core2D.Model;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
-namespace Core2D.XamlExporter.Avalonia
+namespace Core2D.Modules.XamlExporter.Avalonia
 {
     public class DrawingGroupXamlExporter : IXamlExporter
     {

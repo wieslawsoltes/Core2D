@@ -1,8 +1,8 @@
 ﻿using SkiaSharp;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Marker
 {
-    internal class EllipseMarker : Marker
+    internal class EllipseMarker : MarkerBase
     {
         public SKRect Rect { get; set; }
 

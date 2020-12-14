@@ -1,8 +1,8 @@
 ﻿using SkiaSharp;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Marker
 {
-    internal class ArrowMarker : Marker
+    internal class ArrowMarker : MarkerBase
     {
         public SKPoint P11;
         public SKPoint P21;

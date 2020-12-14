@@ -2,11 +2,12 @@
 using System.IO;
 using Core2D.Model;
 using Core2D.Model.Renderer;
-using Core2D.Renderer.PdfSharp;
+using Core2D.Modules.Renderer.PdfSharp;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 
-namespace Core2D.FileWriter.PdfSharp
+namespace Core2D.Modules.FileWriter.PdfSharp
 {
     public sealed class PdfSharpWriter : IFileWriter
     {

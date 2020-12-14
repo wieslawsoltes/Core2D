@@ -4,10 +4,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using Core2D.Model;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Data;
 using CSV = CsvHelper;
 
-namespace Core2D.TextFieldReader.CsvHelper
+namespace Core2D.Modules.TextFieldReader.CsvHelper
 {
     public sealed class CsvHelperReader : ITextFieldReader<DatabaseViewModel>
     {

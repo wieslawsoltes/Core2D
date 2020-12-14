@@ -2,7 +2,7 @@
 using Core2D.Model.Renderer.Nodes;
 using SkiaSharp;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 {
     internal class GridDrawNode : DrawNode, IGridDrawNode
     {

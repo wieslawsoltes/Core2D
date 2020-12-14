@@ -3,7 +3,7 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Style;
 using Xunit;
 
-namespace Core2D.Style.UnitTests
+namespace Core2D.UnitTests.ViewModels.Style
 {
     public class ArgbColorTests
     {

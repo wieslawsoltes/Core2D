@@ -4,7 +4,7 @@ using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
 using D2D = System.Drawing.Drawing2D;
 
-namespace Core2D.Renderer.WinForms
+namespace Core2D.Modules.Renderer.WinForms
 {
     public static class PathGeometryConverter
     {

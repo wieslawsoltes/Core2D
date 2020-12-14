@@ -2,7 +2,7 @@
 using System.Text;
 using Core2D.Model;
 
-namespace Core2D.FileSystem.DotNet
+namespace Core2D.Modules.FileSystem.DotNet
 {
     public sealed class DotNetFileSystem : IFileSystem
     {

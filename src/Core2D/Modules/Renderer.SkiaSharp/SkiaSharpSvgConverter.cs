@@ -6,14 +6,14 @@ using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Path;
 using Core2D.Model.Style;
-using Core2D.Style;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Svg.Skia;
 using SP = Svg.Picture;
 
-namespace Core2D.Renderer.SkiaSharp
+namespace Core2D.Modules.Renderer.SkiaSharp
 {
     public class SkiaSharpSvgConverter : ISvgConverter
     {
