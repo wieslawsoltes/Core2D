@@ -5,7 +5,7 @@ using System.Text;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Bindings
+namespace Core2D.ViewModels.Data.Bindings
 {
     internal static class TextBinding
     {
@@ -76,8 +76,10 @@ namespace Core2D.Bindings
 
                 bindings.Reverse();
 
-                foreach (var binding in bindings)
+                for (int i = 0; i < bindings.Count; i++)
                 {
+                    var binding = bindings[i];
+
                     // Try to bind to internal Record or external (r) data record using Text property as Column.Name name.
                     if (record != null)
                     {
