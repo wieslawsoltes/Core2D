@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core2D.Layout;
 using Core2D.Model;
 using Core2D.Model.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Layout;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Spatial;
