@@ -40,7 +40,7 @@ namespace Core2D.Views
 #if USE_SKIA
     internal class CustomDrawOperation : ICustomDrawOperation
     {
-        public PresenterControl PresenterControl { get; set; }
+        public PresenterView PresenterView { get; set; }
 
         public CustomState CustomState { get; set; }
 
@@ -64,7 +64,7 @@ namespace Core2D.Views
 
             canvas.Save();
 
-            PresenterControl.Draw(CustomState, canvas);
+            PresenterView.Draw(CustomState, canvas);
 
             canvas.Restore();
         }
@@ -146,7 +146,7 @@ namespace Core2D.Views
 #if USE_SKIA
             var customDrawOperation = new CustomDrawOperation
             {
-                PresenterControl = this,
+                PresenterView = this,
                 CustomState = customState,
                 Bounds = ZoomBorder != null ? ZoomBorder.Bounds : this.Bounds
             };

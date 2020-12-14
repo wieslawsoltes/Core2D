@@ -11,30 +11,9 @@
 		<CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <VersionPrefix>0.10.0</VersionPrefix>
-    <VersionSuffix>rc1</VersionSuffix>
-    <Authors>Wiesław Šoltés</Authors>
-    <Company>Wiesław Šoltés</Company>
-    <Description>A multi-platform data driven 2D diagram editor.</Description>
-    <Copyright>Copyright © Wiesław Šoltés 2020</Copyright>
-  </PropertyGroup>
-
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <!--<DefineConstants>$(DefineConstants);USE_SKIA</DefineConstants>-->
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <AvaloniaVersion>0.10.0-rc1</AvaloniaVersion>
-    <AvaloniaEditVersion>0.10.0-rc1</AvaloniaEditVersion>
-    <AvaloniaBehaviorsVersion>0.10.0-rc1</AvaloniaBehaviorsVersion>
-    <PanAndZoomVersion>3.0.0-rc1</PanAndZoomVersion>
-    <ColorPickerVersion>0.10.0-rc1</ColorPickerVersion>
-  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
