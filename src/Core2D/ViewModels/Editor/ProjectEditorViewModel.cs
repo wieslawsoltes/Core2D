@@ -840,7 +840,7 @@ namespace Core2D.ViewModels.Editor
                 Project?.RemoveLayer(layer);
 
                 var selected = Project?.CurrentContainer?.Layers.FirstOrDefault();
-                if (layer.Owner is PageContainerViewModel owner)
+                if (layer.Owner is BaseContainerViewModel owner)
                 {
                     owner.SetCurrentLayer(selected);
                 }
@@ -2020,7 +2020,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnAddLayer(PageContainerViewModel container)
+        public void OnAddLayer(BaseContainerViewModel container)
         {
             if (container != null)
             {
@@ -2033,7 +2033,7 @@ namespace Core2D.ViewModels.Editor
             if (layer != null)
             {
                 Project.RemoveLayer(layer);
-                if (layer.Owner is PageContainerViewModel owner)
+                if (layer.Owner is BaseContainerViewModel owner)
                 {
                     owner.SetCurrentLayer(owner.Layers.FirstOrDefault());
                 }
@@ -3120,7 +3120,7 @@ namespace Core2D.ViewModels.Editor
                 }
             }
 
-            if (layer.Owner is PageContainerViewModel owner)
+            if (layer.Owner is BaseContainerViewModel owner)
             {
                 owner.CurrentShape = shape;
             }
@@ -3144,7 +3144,7 @@ namespace Core2D.ViewModels.Editor
                 OnShowDecorator();
             }
 
-            if (layer.Owner is PageContainerViewModel owner && owner.CurrentShape != null)
+            if (layer.Owner is BaseContainerViewModel owner && owner.CurrentShape != null)
             {
                 owner.CurrentShape = default;
             }
@@ -3163,7 +3163,7 @@ namespace Core2D.ViewModels.Editor
         {
             Deselect();
 
-            if (layer.Owner is PageContainerViewModel owner && owner.CurrentShape != null)
+            if (layer.Owner is BaseContainerViewModel owner && owner.CurrentShape != null)
             {
                 owner.CurrentShape = default;
             }

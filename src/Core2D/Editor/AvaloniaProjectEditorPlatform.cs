@@ -239,9 +239,9 @@ namespace Core2D.Editor
             {
                 name = document.Name;
             }
-            else if (item is PageContainerViewModel page)
+            else if (item is BaseContainerViewModel container)
             {
-                name = page.Name;
+                name = container.Name;
             }
 
             var dlg = new SaveFileDialog() { Title = "Save" };

@@ -14,7 +14,7 @@ namespace Core2D.DragAndDrop.Handlers
             return source switch
             {
                 LayerContainerViewModel targetLayer => true,
-                PageContainerViewModel targetPage => true,
+                BaseContainerViewModel targetPage => true,
                 DocumentContainerViewModel targetDocument => true,
                 _ => false
             };
@@ -48,14 +48,14 @@ namespace Core2D.DragAndDrop.Handlers
                                     }
                                     return true;
                                 }
-                            case PageContainerViewModel targetPage:
+                            case BaseContainerViewModel targetContainer:
                                 {
                                     if (e.DragEffects == DragDropEffects.Copy)
                                     {
                                         if (bExecute)
                                         {
                                             var layer = editor?.Clone(sourceLayer);
-                                            editor?.Project.AddLayer(targetPage, layer);
+                                            editor?.Project.AddLayer(targetContainer, layer);
                                         }
                                         return true;
                                     }
@@ -64,7 +64,7 @@ namespace Core2D.DragAndDrop.Handlers
                                         if (bExecute)
                                         {
                                             editor?.Project?.RemoveLayer(sourceLayer);
-                                            editor?.Project.AddLayer(targetPage, sourceLayer);
+                                            editor?.Project.AddLayer(targetContainer, sourceLayer);
                                         }
                                         return true;
                                     }
@@ -72,7 +72,7 @@ namespace Core2D.DragAndDrop.Handlers
                                     {
                                         if (bExecute)
                                         {
-                                            editor?.Project.AddLayer(targetPage, sourceLayer);
+                                            editor?.Project.AddLayer(targetContainer, sourceLayer);
                                             e.DragEffects = DragDropEffects.None;
                                         }
                                         return true;
@@ -87,7 +87,7 @@ namespace Core2D.DragAndDrop.Handlers
 
                         return false;
                     }
-                case PageContainerViewModel sourcePage:
+                case PageContainerViewModel sourceContainer:
                     {
                         switch (targetControl.DataContext)
                         {
@@ -109,7 +109,7 @@ namespace Core2D.DragAndDrop.Handlers
                                     {
                                         if (bExecute)
                                         {
-                                            var page = editor?.Clone(sourcePage);
+                                            var page = editor?.Clone(sourceContainer);
                                             editor?.Project.AddPage(targetDocument, page);
                                             editor?.Project?.SetCurrentContainer(page);
                                         }
@@ -119,9 +119,9 @@ namespace Core2D.DragAndDrop.Handlers
                                     {
                                         if (bExecute)
                                         {
-                                            editor?.Project?.RemovePage(sourcePage);
-                                            editor?.Project.AddPage(targetDocument, sourcePage);
-                                            editor?.Project?.SetCurrentContainer(sourcePage);
+                                            editor?.Project?.RemovePage(sourceContainer);
+                                            editor?.Project.AddPage(targetDocument, sourceContainer);
+                                            editor?.Project?.SetCurrentContainer(sourceContainer);
                                         }
                                         return true;
                                     }
@@ -129,8 +129,8 @@ namespace Core2D.DragAndDrop.Handlers
                                     {
                                         if (bExecute)
                                         {
-                                            editor?.Project.AddPage(targetDocument, sourcePage);
-                                            editor?.Project?.SetCurrentContainer(sourcePage);
+                                            editor?.Project.AddPage(targetDocument, sourceContainer);
+                                            editor?.Project?.SetCurrentContainer(sourceContainer);
                                         }
                                         return true;
                                     }
@@ -148,7 +148,7 @@ namespace Core2D.DragAndDrop.Handlers
                                 {
                                     return false;
                                 }
-                            case PageContainerViewModel targetPage:
+                            case BaseContainerViewModel targetContainer:
                                 {
                                     return false;
                                 }

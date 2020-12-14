@@ -103,7 +103,7 @@ namespace Core2D.ViewModels.Containers
         {
             if (value is LayerContainerViewModel layer)
             {
-                if (layer.Owner is PageContainerViewModel owner)
+                if (layer.Owner is BaseContainerViewModel owner)
                 {
                     if (owner.CurrentLayer != layer)
                     {
@@ -111,7 +111,7 @@ namespace Core2D.ViewModels.Containers
                     }
                 }
             }
-            else if (value is PageContainerViewModel container && _documents != null)
+            else if (value is BaseContainerViewModel container && _documents != null)
             {
                 var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
                 if (document != null)
