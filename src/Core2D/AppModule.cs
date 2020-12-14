@@ -39,6 +39,8 @@ namespace Core2D
     {
         protected override void Load(ContainerBuilder builder)
         {
+            // Container
+
             ILifetimeScope lifetimeScope = null;
             builder.Register(x => lifetimeScope).AsSelf().SingleInstance();
             builder.RegisterBuildCallback(x => lifetimeScope = x);
@@ -65,17 +67,23 @@ namespace Core2D
                 })
                 .AsSelf();
 
-            // Core
+            // Editor
 
-            builder.RegisterType<ProjectEditorViewModel>().As<ProjectEditorViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<AboutInfoViewModel>().As<AboutInfoViewModel>().InstancePerLifetimeScope();
             builder.RegisterType<StyleEditorViewModel>().As<StyleEditorViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<DialogViewModel>().As<DialogViewModel>().InstancePerDependency();
+            builder.RegisterType<ProjectEditorViewModel>().As<ProjectEditorViewModel>().InstancePerLifetimeScope();
+
             builder.RegisterType<Factory>().As<IFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ContainerFactory>().As<IContainerFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
+
             builder.RegisterAssemblyTypes(typeof(IEditorTool).GetTypeInfo().Assembly).As<IEditorTool>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IPathTool).GetTypeInfo().Assembly).As<IPathTool>().AsSelf().InstancePerLifetimeScope();
+
             builder.RegisterType<HitTest>().As<IHitTest>().InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly).As<IBounds>().AsSelf().InstancePerLifetimeScope();
+
             builder.RegisterType<DataFlow>().As<DataFlow>().InstancePerLifetimeScope();
 
             // Dependencies
@@ -107,13 +115,13 @@ namespace Core2D
             builder.RegisterType<SkiaSharpPathConverter>().As<IPathConverter>().InstancePerLifetimeScope();
             builder.RegisterType<SkiaSharpSvgConverter>().As<ISvgConverter>().InstancePerLifetimeScope();
 
-            // Editor
+            // Avalonia
 
             builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
             builder.RegisterType<AvaloniaProjectEditorPlatform>().As<IProjectEditorPlatform>().InstancePerLifetimeScope();
             builder.RegisterType<AvaloniaEditorCanvasPlatform>().As<IEditorCanvasPlatform>().InstancePerLifetimeScope();
 
-            // View
+            // Views
 
             builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();
         }
