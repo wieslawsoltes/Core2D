@@ -107,7 +107,7 @@ namespace Core2D.ViewModels.Editor
 
         public IEditorCanvasPlatform CanvasPlatform => _canvasPlatform.Value;
 
-        public StyleEditorViewModel StyleEditorViewModel => _styleEditor.Value;
+        public StyleEditorViewModel StyleEditor => _styleEditor.Value;
 
         public IPathConverter PathConverter => _pathConverter.Value;
 

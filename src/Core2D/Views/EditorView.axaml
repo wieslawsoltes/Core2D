@@ -98,8 +98,8 @@
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="Xor" Gesture="Ctrl+Shift+X" x:CompileBindings="False" />
         <KeyBinding Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" Gesture="Ctrl+Shift+R" x:CompileBindings="False" />
         <!-- Format -->
-        <KeyBinding Command="{Binding StyleEditorViewModel.OnCopyStyle}" Gesture="Ctrl+Shift+C" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding StyleEditorViewModel.OnPasteStyle}" Gesture="Ctrl+Shift+V" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V" x:CompileBindings="False" />
         <!-- Tool -->
         <KeyBinding Command="{Binding OnToolNone}" Gesture="N" x:CompileBindings="False" />
         <KeyBinding Command="{Binding OnToolSelection}" Gesture="S" x:CompileBindings="False" />
