@@ -74,6 +74,13 @@ namespace Core2D.ViewModels.Containers
 
         public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+            PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(Selected))
+                {
+                    SetSelected(Selected);
+                }
+            };
         }
 
         public void SetCurrentDocument(DocumentContainerViewModel document)
@@ -123,6 +130,13 @@ namespace Core2D.ViewModels.Containers
                         Debug.WriteLine($"  [CurrentLayer] {layer.Name}");
                         container.CurrentLayer = layer;
                     }
+
+                    if (CurrentContainer != container)
+                    {
+                        Debug.WriteLine($"  [CurrentContainer] {container.Name}");
+                        CurrentContainer = container;
+                        CurrentContainer.InvalidateLayer();
+                    }
                 }
             }
             else if (value is LayerContainerViewModel layer && _documents != null)
@@ -137,6 +151,13 @@ namespace Core2D.ViewModels.Containers
                     {
                         Debug.WriteLine($"  [CurrentLayer] {layer.Name}");
                         container.CurrentLayer = layer;
+                    }
+
+                    if (CurrentContainer != container)
+                    {
+                        Debug.WriteLine($"  [CurrentContainer] {container.Name}");
+                        CurrentContainer = container;
+                        CurrentContainer.InvalidateLayer();
                     }
                 }
             }
@@ -172,6 +193,7 @@ namespace Core2D.ViewModels.Containers
                         {
                             Debug.WriteLine($"  [CurrentContainer] {current?.Name}");
                             CurrentContainer = current;
+                            CurrentContainer.InvalidateLayer();
                         }
                     }
                 }
