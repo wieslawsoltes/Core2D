@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using Core2D.Model;
 using Core2D.Model.History;
@@ -103,13 +104,39 @@ namespace Core2D.ViewModels.Containers
 
         public void SetSelected(ViewModelBase value)
         {
-            if (value is LayerContainerViewModel layer)
+            Debug.WriteLine($"[SetSelected] {value.Name} ({value.GetType()})");
+            if (value is BaseShapeViewModel shape)
             {
-                if (layer.Owner is BaseContainerViewModel owner)
+                var layer = _documents
+                    .SelectMany(x => x.Pages)
+                    .SelectMany(x => x.Layers)
+                    .FirstOrDefault(l => l.Shapes.Contains(shape));
+
+                var container = _documents
+                    .SelectMany(x => x.Pages)
+                    .FirstOrDefault(c => c.Layers.Contains(layer));
+
+                if (container != null && layer != null)
                 {
-                    if (owner.CurrentLayer != layer)
+                    if (container.CurrentLayer != layer)
                     {
-                        owner.CurrentLayer = layer;
+                        Debug.WriteLine($"  [CurrentLayer] {layer.Name}");
+                        container.CurrentLayer = layer;
+                    }
+                }
+            }
+            else if (value is LayerContainerViewModel layer && _documents != null)
+            {
+                var container = _documents
+                    .SelectMany(x => x.Pages)
+                    .FirstOrDefault(c => c.Layers.Contains(layer));
+
+                if (container != null)
+                {
+                    if (container.CurrentLayer != layer)
+                    {
+                        Debug.WriteLine($"  [CurrentLayer] {layer.Name}");
+                        container.CurrentLayer = layer;
                     }
                 }
             }
@@ -120,11 +147,13 @@ namespace Core2D.ViewModels.Containers
                 {
                     if (CurrentDocument != document)
                     {
+                        Debug.WriteLine($"  [CurrentDocument] {document.Name}");
                         CurrentDocument = document;
                     }
 
                     if (CurrentContainer != container)
                     {
+                        Debug.WriteLine($"  [CurrentContainer] {container.Name}");
                         CurrentContainer = container;
                         CurrentContainer.InvalidateLayer();
                     }
@@ -134,12 +163,14 @@ namespace Core2D.ViewModels.Containers
             {
                 if (CurrentDocument != document)
                 {
+                    Debug.WriteLine($"  [CurrentDocument] {document.Name}");
                     CurrentDocument = document;
                     if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
                     {
                         var current = CurrentDocument.Pages.FirstOrDefault();
                         if (CurrentContainer != current)
                         {
+                            Debug.WriteLine($"  [CurrentContainer] {current?.Name}");
                             CurrentContainer = current;
                         }
                     }
