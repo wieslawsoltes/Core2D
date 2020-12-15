@@ -53,7 +53,7 @@ namespace Core2D.ViewModels.Editor
 
         public bool IsSelectionAvailable()
         {
-            return _editor?.PageState?.SelectedShapes != null;
+            return _editor?.Project?.SelectedShapes != null;
         }
     }
 }

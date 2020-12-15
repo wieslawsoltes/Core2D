@@ -22,7 +22,7 @@ namespace Core2D.Modules.FileWriter.SkiaSharpPdf
         private void Add(SKDocument pdf, PageContainerViewModel container)
         {
             using var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height);
-            _presenter.Render(canvas, _renderer, container, 0, 0);
+            _presenter.Render(canvas, _renderer, null, container, 0, 0);
         }
 
         public void Save(Stream stream, PageContainerViewModel container)

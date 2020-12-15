@@ -10,6 +10,7 @@ using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 #endif
 using Core2D.Modules.Renderer;
+using Core2D.Model;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Renderer.Presenters;
@@ -33,6 +34,7 @@ namespace Core2D.Views
     {
         public BaseContainerViewModel Container;
         public IShapeRenderer Renderer;
+        public ISelection Selection;
         public DataFlow DataFlow;
         public PresenterType PresenterType;
     }
@@ -86,6 +88,9 @@ namespace Core2D.Views
         public static readonly StyledProperty<IShapeRenderer> RendererProperty =
             AvaloniaProperty.Register<PresenterView, IShapeRenderer>(nameof(Renderer), null);
 
+        public static readonly StyledProperty<ISelection> SelectionProperty =
+            AvaloniaProperty.Register<PresenterView, ISelection>(nameof(Selection), null);
+
         public static readonly StyledProperty<DataFlow> DataFlowProperty =
             AvaloniaProperty.Register<PresenterView, DataFlow>(nameof(DataFlow), null);
 
@@ -108,6 +113,12 @@ namespace Core2D.Views
         {
             get => GetValue(RendererProperty);
             set => SetValue(RendererProperty, value);
+        }
+
+        public ISelection Selection
+        {
+            get => GetValue(SelectionProperty);
+            set => SetValue(SelectionProperty, value);
         }
 
         public DataFlow DataFlow
@@ -140,6 +151,7 @@ namespace Core2D.Views
             {
                 Container = Container,
                 Renderer = Renderer ?? GetValue(RendererOptions.RendererProperty),
+                Selection = Selection ?? GetValue(RendererOptions.SelectionProperty),
                 DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
                 PresenterType = PresenterType,
             };
@@ -183,7 +195,7 @@ namespace Core2D.Views
                     {
                         if (customState.Container != null && customState.Renderer != null)
                         {
-                            s_templatePresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
+                            s_templatePresenter.Render(context, customState.Renderer, customState.Selection, customState.Container, 0.0, 0.0);
                             if (customState.Container is PageContainerViewModel page)
                             {
                                 page.Template?.Invalidate();  
@@ -196,7 +208,7 @@ namespace Core2D.Views
                     {
                         if (customState.Container != null && customState.Renderer != null)
                         {
-                            s_editorPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
+                            s_editorPresenter.Render(context, customState.Renderer, customState.Selection, customState.Container, 0.0, 0.0);
 
                             customState.Container?.Invalidate();
                             customState.Renderer.State.PointStyle.Invalidate();
@@ -209,7 +221,7 @@ namespace Core2D.Views
                     {
                         if (customState.Container != null && customState.Renderer != null)
                         {
-                            s_exportPresenter.Render(context, customState.Renderer, customState.Container, 0.0, 0.0);
+                            s_exportPresenter.Render(context, customState.Renderer, customState.Selection, customState.Container, 0.0, 0.0);
                         }
                     }
                     break;

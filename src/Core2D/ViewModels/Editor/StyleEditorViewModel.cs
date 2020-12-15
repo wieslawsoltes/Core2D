@@ -28,9 +28,9 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.PageState?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes != null)
             {
-                var style = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style;
+                var style = editor.Project?.SelectedShapes.FirstOrDefault()?.Style;
                 _shapeStyleCopy = (ShapeStyleViewModel)style?.Copy(null);
             }
         }
@@ -57,9 +57,9 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.PageState?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes != null)
             {
-                var stroke = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.Color;
+                var stroke = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.Color;
                 _strokeCopy = (BaseColorViewModel)stroke?.Copy(null);
             }
         }
@@ -88,9 +88,9 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.PageState?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes != null)
             {
-                var fill = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Fill?.Color;
+                var fill = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.Fill?.Color;
                 _fillCopy = (BaseColorViewModel)fill?.Copy(null);
             }
         }
@@ -119,9 +119,9 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.PageState?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes != null)
             {
-                var startArrowStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.StartArrow;
+                var startArrowStyle = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.StartArrow;
                 _startArrowStyleCopy = (ArrowStyleViewModel)startArrowStyle?.Copy(null);
             }
         }
@@ -150,9 +150,9 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.PageState?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes != null)
             {
-                var endArrowStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.EndArrow;
+                var endArrowStyle = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.EndArrow;
                 _endArrowStyleCopy = (ArrowStyleViewModel)endArrowStyle?.Copy(null);
             }
         }
@@ -181,9 +181,9 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.PageState?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes != null)
             {
-                var textStyle = editor.PageState?.SelectedShapes.FirstOrDefault()?.Style?.TextStyle;
+                var textStyle = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.TextStyle;
                 _textStyleCopy = (TextStyleViewModel)textStyle?.Copy(null);
             }
         }
@@ -460,9 +460,9 @@ namespace Core2D.ViewModels.Editor
 
         private IEnumerable<BaseShapeViewModel> GetShapes(ProjectEditorViewModel editorViewModel)
         {
-            if (editorViewModel.PageState?.SelectedShapes?.Count > 0)
+            if (editorViewModel.Project?.SelectedShapes?.Count > 0)
             {
-                foreach (var shape in editorViewModel.PageState.SelectedShapes)
+                foreach (var shape in editorViewModel.Project.SelectedShapes)
                 {
                     if (shape is GroupShapeViewModel group)
                     {

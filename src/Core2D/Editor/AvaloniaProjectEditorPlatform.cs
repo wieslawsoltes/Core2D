@@ -313,7 +313,7 @@ namespace Core2D.Editor
                             break;
                     }
 
-                    var sources = editor.PageState?.SelectedShapes;
+                    var sources = editor.Project?.SelectedShapes;
                     if (sources != null)
                     {
                         var xaml = exporter.Create(sources, width, height);
@@ -375,7 +375,7 @@ namespace Core2D.Editor
                     var exporter = new DrawingGroupXamlExporter(_serviceProvider);
                     var container = editor.Project.CurrentContainer;
 
-                    var sources = editor.PageState?.SelectedShapes;
+                    var sources = editor.Project?.SelectedShapes;
                     if (sources != null)
                     {
                         var xaml = exporter.Create(sources, null);
@@ -473,7 +473,7 @@ namespace Core2D.Editor
                 var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                 var imageChache = editor.Project as IImageCache;
                 var container = editor.Project.CurrentContainer;
-                var shapes = editor.PageState.SelectedShapes;
+                var shapes = editor.Project.SelectedShapes;
                 var writer = editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter)) as EmfWriter;
 
                 var db = (object)container.Properties;
@@ -527,7 +527,7 @@ namespace Core2D.Editor
                     var converter = editor.PathConverter;
                     var container = editor.Project.CurrentContainer;
 
-                    var shapes = editor.PageState?.SelectedShapes ?? container?.Layers.SelectMany(x => x.Shapes);
+                    var shapes = editor.Project?.SelectedShapes ?? container?.Layers.SelectMany(x => x.Shapes);
                     if (shapes == null)
                     {
                         return;

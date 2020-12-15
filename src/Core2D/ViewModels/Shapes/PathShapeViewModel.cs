@@ -31,25 +31,25 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer)
+        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawPath(dc, this);
+                renderer.DrawPath(dc, this, Style);
             }
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer)
+        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
-            if (renderer.State.SelectedShapes != null)
+            if (selection.SelectedShapes != null)
             {
-                if (renderer.State.SelectedShapes.Contains(this))
+                if (selection.SelectedShapes.Contains(this))
                 {
                     UpdatePoints();
 
                     foreach (var point in _points)
                     {
-                        point.DrawShape(dc, renderer);
+                        point.DrawShape(dc, renderer, selection);
                     }
                 }
                 else
@@ -58,9 +58,9 @@ namespace Core2D.ViewModels.Shapes
 
                     foreach (var point in _points)
                     {
-                        if (renderer.State.SelectedShapes.Contains(point))
+                        if (selection.SelectedShapes.Contains(point))
                         {
-                            point.DrawShape(dc, renderer);
+                            point.DrawShape(dc, renderer, selection);
                         }
                     }
                 }

@@ -11,9 +11,9 @@ namespace Core2D.Model
 
         bool IsFilled { get; set; }
 
-        void DrawShape(object dc, IShapeRenderer renderer);
+        void DrawShape(object dc, IShapeRenderer renderer, ISelection selection);
 
-        void DrawPoints(object dc, IShapeRenderer renderer);
+        void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection);
 
         bool Invalidate(IShapeRenderer renderer);
     }

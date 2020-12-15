@@ -15,28 +15,28 @@ namespace Core2D.ViewModels.Shapes
         {
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer)
+        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
         {
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer)
+        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
-            if (renderer.State.SelectedShapes != null)
+            if (selection.SelectedShapes != null)
             {
-                if (renderer.State.SelectedShapes.Contains(this))
+                if (selection.SelectedShapes.Contains(this))
                 {
                     foreach (var connector in _connectors)
                     {
-                        connector.DrawShape(dc, renderer);
+                        connector.DrawShape(dc, renderer, selection);
                     }
                 }
                 else
                 {
                     foreach (var connector in _connectors)
                     {
-                        if (renderer.State.SelectedShapes.Contains(connector))
+                        if (selection.SelectedShapes.Contains(connector))
                         {
-                            connector.DrawShape(dc, renderer);
+                            connector.DrawShape(dc, renderer, selection);
                         }
                     }
                 }

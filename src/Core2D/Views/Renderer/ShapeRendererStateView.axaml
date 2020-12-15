@@ -45,29 +45,6 @@
         <Expander Header="DrawShapeState" IsExpanded="False">
             <ContentControl Content="{Binding DrawShapeState}" />
         </Expander>
-        <Expander Header="SelectedShapes" IsExpanded="False">
-            <ListBox x:Name="ShapesListBox" Items="{Binding SelectedShapes}" VirtualizationMode="Simple">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Orientation="Vertical" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.KeyBindings>
-                    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding #ShapesListBox.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
-                </ListBox.KeyBindings>
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="vms:BaseShapeViewModel">
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}">
-                            <TextBlock.ContextMenu>
-                                <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveShape}" CommandParameter="{Binding}" />
-                                </ContextMenu>
-                            </TextBlock.ContextMenu>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
-        </Expander>
         <Expander Header="ImageCache" IsExpanded="False">
             <libraries:ImagesView DataContext="{Binding ImageCache}" />
         </Expander>

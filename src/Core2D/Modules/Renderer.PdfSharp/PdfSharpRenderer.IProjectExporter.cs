@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
 using Core2D.Model;
+using Core2D.Model.Renderer;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Renderer.Presenters;
 using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -14,19 +16,21 @@ namespace Core2D.Modules.Renderer.PdfSharp
     {
         public void Save(Stream stream, PageContainerViewModel container)
         {
+            var presenter = new ExportPresenter();
             using var pdf = new PdfDocument();
-            Add(pdf, container);
+            Add(pdf, container, presenter);
             pdf.Save(stream);
         }
 
         public void Save(Stream stream, DocumentContainerViewModel document)
         {
+            var presenter = new ExportPresenter();
             using var pdf = new PdfDocument();
             var documentOutline = default(PdfOutline);
 
             foreach (var container in document.Pages)
             {
-                var page = Add(pdf, container);
+                var page = Add(pdf, container, presenter);
 
                 if (documentOutline == null)
                 {
@@ -52,6 +56,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
 
         public void Save(Stream stream, ProjectContainerViewModel project)
         {
+            var presenter = new ExportPresenter();
             using var pdf = new PdfDocument();
             var projectOutline = default(PdfOutline);
 
@@ -61,7 +66,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
 
                 foreach (var container in document.Pages)
                 {
-                    var page = Add(pdf, container);
+                    var page = Add(pdf, container, presenter);
 
                     if (projectOutline == null)
                     {
@@ -96,7 +101,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
             ClearCache();
         }
 
-        private PdfPage Add(PdfDocument pdf, PageContainerViewModel container)
+        private PdfPage Add(PdfDocument pdf, PageContainerViewModel container, IContainerPresenter presenter)
         {
             // Create A3 page size with Landscape orientation.
             var pdfPage = pdf.AddPage();
@@ -123,11 +128,12 @@ namespace Core2D.Modules.Renderer.PdfSharp
                 // Draw container template contents to pdf graphics.
                 Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
 
+
                 // Draw template contents to pdf graphics.
-                DrawContainer(gfx, container.Template);
+                presenter.Render(gfx, this, null, container.Template, 0, 0);
 
                 // Draw page contents to pdf graphics.
-                DrawContainer(gfx, container);
+                presenter.Render(gfx, this, null, container, 0, 0);
             }
 
             return pdfPage;

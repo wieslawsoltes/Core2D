@@ -1,11 +1,6 @@
-if (PageState.SelectedShape != null)
+if (Project.SelectedShapes != null)
 {
-    PageState.SelectedShape.IsStroked = false;
-}
-
-if (PageState.SelectedShapes != null)
-{
-    foreach (var shape in PageState.SelectedShapes)
+    foreach (var shape in Project.SelectedShapes)
     {
         shape.IsStroked = false;
     }

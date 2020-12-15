@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Data;
+using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
 
@@ -18,6 +19,19 @@ namespace Core2D.Modules.Renderer
         public static void SetRenderer(AvaloniaObject obj, IShapeRenderer value)
         {
             obj.SetValue(RendererProperty, value);
+        }
+
+        public static readonly AttachedProperty<ISelection> SelectionProperty =
+            AvaloniaProperty.RegisterAttached<RendererOptions, AvaloniaObject, ISelection>("Selection", null, true, BindingMode.TwoWay);
+
+        public static ISelection GetSelection(AvaloniaObject obj)
+        {
+            return obj.GetValue(SelectionProperty);
+        }
+
+        public static void SetSelection(AvaloniaObject obj, ISelection value)
+        {
+            obj.SetValue(SelectionProperty, value);
         }
 
         public static readonly AttachedProperty<DataFlow> DataFlowProperty =

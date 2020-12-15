@@ -95,52 +95,14 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawContainer(object dc, BaseContainerViewModel container)
+        public void DrawPoint(object dc, PointShapeViewModel point, ShapeStyleViewModel style)
         {
-            foreach (var layer in container.Layers)
-            {
-                if (layer.IsVisible)
-                {
-                    DrawLayer(dc, layer);
-                }
-            }
-        }
-
-        public void DrawLayer(object dc, LayerContainerViewModel layer)
-        {
-            foreach (var shape in layer.Shapes)
-            {
-                if (shape.State.HasFlag(_state.DrawShapeState))
-                {
-                    shape.DrawShape(dc, this);
-                }
-            }
-
-            foreach (var shape in layer.Shapes)
-            {
-                if (shape.State.HasFlag(_state.DrawShapeState))
-                {
-                    shape.DrawPoints(dc, this);
-                }
-            }
-        }
-
-        public void DrawPoint(object dc, PointShapeViewModel point)
-        {
-            var isSelected = _state.SelectedShapes?.Count > 0 && _state.SelectedShapes.Contains(point);
-            var pointStyle = isSelected ? _state.SelectedPointStyle : _state.PointStyle;
-            var pointSize = _state.PointSize;
-            if (pointStyle == null || pointSize <= 0.0)
-            {
-                return;
-            }
-
             var drawNodeCached = _drawNodeCache.Get(point);
             if (drawNodeCached != null)
             {
-                if (pointStyle.IsDirty() || drawNodeCached.Style != pointStyle)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
-                    drawNodeCached.Style = pointStyle;
+                    drawNodeCached.Style = style;
                     drawNodeCached.UpdateStyle();
                 }
 
@@ -156,7 +118,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreatePointDrawNode(point, pointStyle, pointSize);
+                var drawNode = _drawNodeFactory.CreatePointDrawNode(point, style, _state.PointSize);
 
                 drawNode.UpdateStyle();
 
@@ -169,17 +131,17 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawLine(object dc, LineShapeViewModel line)
+        public void DrawLine(object dc, LineShapeViewModel line, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(line);
             if (drawNodeCached != null)
             {
-                if (line.Style.IsDirty() || drawNodeCached.Style != line.Style)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
                     drawNodeCached.Style = line.Style;
                     drawNodeCached.UpdateStyle();
                     drawNodeCached.UpdateGeometry();
-                    line.Style.Invalidate();
+                    style.Invalidate();
                 }
 
                 if (line.IsDirty())
@@ -191,7 +153,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateLineDrawNode(line, line.Style);
+                var drawNode = _drawNodeFactory.CreateLineDrawNode(line, style);
 
                 drawNode.UpdateStyle();
 
@@ -201,16 +163,16 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawRectangle(object dc, RectangleShapeViewModel rectangle)
+        public void DrawRectangle(object dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(rectangle);
             if (drawNodeCached != null)
             {
-                if (rectangle.Style.IsDirty() || drawNodeCached.Style != rectangle.Style)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
-                    drawNodeCached.Style = rectangle.Style;
+                    drawNodeCached.Style = style;
                     drawNodeCached.UpdateStyle();
-                    rectangle.Style.Invalidate();
+                    style.Invalidate();
                 }
 
                 if (rectangle.IsDirty())
@@ -222,7 +184,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateRectangleDrawNode(rectangle, rectangle.Style);
+                var drawNode = _drawNodeFactory.CreateRectangleDrawNode(rectangle, style);
 
                 drawNode.UpdateStyle();
 
@@ -232,16 +194,16 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawEllipse(object dc, EllipseShapeViewModel ellipse)
+        public void DrawEllipse(object dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(ellipse);
             if (drawNodeCached != null)
             {
-                if (ellipse.Style.IsDirty() || drawNodeCached.Style != ellipse.Style)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
-                    drawNodeCached.Style = ellipse.Style;
+                    drawNodeCached.Style = style;
                     drawNodeCached.UpdateStyle();
-                    ellipse.Style.Invalidate();
+                    style.Invalidate();
                 }
 
                 if (ellipse.IsDirty())
@@ -253,7 +215,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateEllipseDrawNode(ellipse, ellipse.Style);
+                var drawNode = _drawNodeFactory.CreateEllipseDrawNode(ellipse, style);
 
                 drawNode.UpdateStyle();
 
@@ -263,16 +225,16 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawArc(object dc, ArcShapeViewModelViewModel arc)
+        public void DrawArc(object dc, ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(arc);
             if (drawNodeCached != null)
             {
-                if (arc.Style.IsDirty() || drawNodeCached.Style != arc.Style)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
-                    drawNodeCached.Style = arc.Style;
+                    drawNodeCached.Style = style;
                     drawNodeCached.UpdateStyle();
-                    arc.Style.Invalidate();
+                    style.Invalidate();
                 }
 
                 if (arc.IsDirty())
@@ -284,7 +246,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateArcDrawNode(arc, arc.Style);
+                var drawNode = _drawNodeFactory.CreateArcDrawNode(arc, style);
 
                 drawNode.UpdateStyle();
 
@@ -294,16 +256,16 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier)
+        public void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(cubicBezier);
             if (drawNodeCached != null)
             {
-                if (cubicBezier.Style.IsDirty() || drawNodeCached.Style != cubicBezier.Style)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
-                    drawNodeCached.Style = cubicBezier.Style;
+                    drawNodeCached.Style = style;
                     drawNodeCached.UpdateStyle();
-                    cubicBezier.Style.Invalidate();
+                    style.Invalidate();
                 }
 
                 if (cubicBezier.IsDirty())
@@ -315,7 +277,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateCubicBezierDrawNode(cubicBezier, cubicBezier.Style);
+                var drawNode = _drawNodeFactory.CreateCubicBezierDrawNode(cubicBezier, style);
 
                 drawNode.UpdateStyle();
 
@@ -325,16 +287,16 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier)
+        public void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(quadraticBezier);
             if (drawNodeCached != null)
             {
-                if (quadraticBezier.Style.IsDirty() || drawNodeCached.Style != quadraticBezier.Style)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
-                    drawNodeCached.Style = quadraticBezier.Style;
+                    drawNodeCached.Style = style;
                     drawNodeCached.UpdateStyle();
-                    quadraticBezier.Style.Invalidate();
+                    style.Invalidate();
                 }
 
                 if (quadraticBezier.IsDirty())
@@ -346,7 +308,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateQuadraticBezierDrawNode(quadraticBezier, quadraticBezier.Style);
+                var drawNode = _drawNodeFactory.CreateQuadraticBezierDrawNode(quadraticBezier, style);
 
                 drawNode.UpdateStyle();
 
@@ -356,17 +318,17 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawText(object dc, TextShapeViewModel text)
+        public void DrawText(object dc, TextShapeViewModel text, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(text);
             if (drawNodeCached != null)
             {
-                if (text.Style.IsDirty() || drawNodeCached.Style != text.Style)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
-                    drawNodeCached.Style = text.Style;
+                    drawNodeCached.Style = style;
                     drawNodeCached.UpdateStyle();
                     drawNodeCached.UpdateGeometry();
-                    text.Style.Invalidate();
+                    style.Invalidate();
                 }
 
                 if (text.IsDirty() || IsBoundTextDirty(drawNodeCached, text))
@@ -385,7 +347,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateTextDrawNode(text, text.Style);
+                var drawNode = _drawNodeFactory.CreateTextDrawNode(text, style);
 
                 drawNode.UpdateStyle();
 
@@ -395,16 +357,16 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawImage(object dc, ImageShapeViewModel image)
+        public void DrawImage(object dc, ImageShapeViewModel image, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(image);
             if (drawNodeCached != null)
             {
-                if (image.Style.IsDirty() || drawNodeCached.Style != image.Style)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
-                    drawNodeCached.Style = image.Style;
+                    drawNodeCached.Style = style;
                     drawNodeCached.UpdateStyle();
-                    image.Style.Invalidate();
+                    style.Invalidate();
                 }
 
                 if (image.IsDirty())
@@ -416,7 +378,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreateImageDrawNode(image, image.Style, _state.ImageCache, _biCache);
+                var drawNode = _drawNodeFactory.CreateImageDrawNode(image, style, _state.ImageCache, _biCache);
 
                 drawNode.UpdateStyle();
 
@@ -426,16 +388,16 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawPath(object dc, PathShapeViewModel path)
+        public void DrawPath(object dc, PathShapeViewModel path, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(path);
             if (drawNodeCached != null)
             {
-                if (path.Style.IsDirty() || drawNodeCached.Style != path.Style)
+                if (style.IsDirty() || drawNodeCached.Style != style)
                 {
-                    drawNodeCached.Style = path.Style;
+                    drawNodeCached.Style = style;
                     drawNodeCached.UpdateStyle();
-                    path.Style.Invalidate();
+                    style.Invalidate();
                 }
 
                 if (path.IsDirty())
@@ -447,7 +409,7 @@ namespace Core2D.ViewModels.Renderer
             }
             else
             {
-                var drawNode = _drawNodeFactory.CreatePathDrawNode(path, path.Style);
+                var drawNode = _drawNodeFactory.CreatePathDrawNode(path, style);
 
                 drawNode.UpdateStyle();
 

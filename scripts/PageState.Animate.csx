@@ -8,7 +8,7 @@ int delay = 250;
 
 Task.Factory.StartNew(async () => 
 {
-    var shapes = PageState.SelectedShapes.ToList();
+    var shapes = Project.SelectedShapes.ToList();
     if (shapes.Count <= 0) return;
     for (int i = 0; i < frames; i++)
     {

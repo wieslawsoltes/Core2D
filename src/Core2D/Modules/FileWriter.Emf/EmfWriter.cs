@@ -11,6 +11,7 @@ using Core2D.Modules.Renderer.WinForms;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Renderer.Presenters;
 using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Modules.FileWriter.Emf
@@ -59,7 +60,7 @@ namespace Core2D.Modules.FileWriter.Emf
 
                     foreach (var shape in shapes)
                     {
-                        shape.DrawShape(g, r);
+                        shape.DrawShape(g, r, null);
                     }
 
                     r.ClearCache();
@@ -91,6 +92,7 @@ namespace Core2D.Modules.FileWriter.Emf
 
                 using (g = Graphics.FromImage(mf))
                 {
+                    var p = new ExportPresenter();
                     var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
                     r.State.DrawShapeState = ShapeStateFlags.Printable;
                     r.State.ImageCache = ic;
@@ -105,9 +107,9 @@ namespace Core2D.Modules.FileWriter.Emf
 
                     if (container is PageContainerViewModel page)
                     {
-                        r.DrawContainer(g, page.Template);
+                        p.Render(g, r, null, page.Template, 0, 0);
                     }
-                    r.DrawContainer(g, container);
+                    p.Render(g, r, null, container, 0, 0);
 
                     r.ClearCache();
                 }

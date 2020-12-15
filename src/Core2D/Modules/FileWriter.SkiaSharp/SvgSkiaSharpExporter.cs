@@ -22,7 +22,7 @@ namespace Core2D.Modules.FileWriter.SkiaSharpSvg
         {
             using var wstream = new SKManagedWStream(stream);
             using var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, (int)container.Template.Width, (int)container.Template.Height), stream);
-            _presenter.Render(canvas, _renderer, container, 0, 0);
+            _presenter.Render(canvas, _renderer, null, container, 0, 0);
         }
 
         public void Save(Stream stream, DocumentContainerViewModel document)

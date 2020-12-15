@@ -1,4 +1,4 @@
-foreach (var shape in PageState.SelectedShapes)
+foreach (var shape in Project.SelectedShapes)
 {
     shape.Move(null, 30, 0);
 }

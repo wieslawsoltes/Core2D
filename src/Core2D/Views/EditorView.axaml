@@ -155,21 +155,24 @@
                                        x:CompileBindings="False">
                                     <views:PresenterView x:Name="PresenterViewData" 
                                                          ZoomBorder="{Binding #PageZoomBorder}"
-                                                         Renderer="{Binding $parent[TopLevel].DataContext.PageRenderer}"
+                                                         Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
+                                                         Selection="{Binding $parent[TopLevel].DataContext.Selection}"
                                                          DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
                                                          Container="{Binding}"
                                                          PresenterType="Data"
                                                          ClipToBounds="False"/>
                                     <views:PresenterView x:Name="PresenterViewTemplate"
                                                          ZoomBorder="{Binding #PageZoomBorder}"
-                                                         Renderer="{Binding $parent[TopLevel].DataContext.PageRenderer}"
+                                                         Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
+                                                         Selection="{Binding $parent[TopLevel].DataContext.Selection}"
                                                          DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
                                                          Container="{Binding}"
                                                          PresenterType="Template"
                                                          ClipToBounds="False"/>
                                     <views:PresenterView x:Name="PresenterViewEditor"
                                                          ZoomBorder="{Binding #PageZoomBorder}"
-                                                         Renderer="{Binding $parent[TopLevel].DataContext.PageRenderer}"
+                                                         Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
+                                                         Selection="{Binding $parent[TopLevel].DataContext.Selection}"
                                                          DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
                                                          Container="{Binding}"
                                                          PresenterType="Editor"
@@ -239,7 +242,7 @@
                     </TabItem>
                     <TabItem Header="Shape">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <ContentControl Content="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                            <ContentControl Content="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
                                             Margin="0,0,8,0"/>
                         </ScrollViewer>
                     </TabItem>
@@ -248,7 +251,7 @@
                             <style:ShapeStyleView x:DataType="vme:ProjectEditorViewModel" Margin="0,0,8,0">
                                 <style:ShapeStyleView.DataContext>
                                     <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
-                                        <Binding Path="PageState.SelectedShapes" FallbackValue="{x:Null}" />
+                                        <Binding Path="Project.SelectedShapes" FallbackValue="{x:Null}" />
                                         <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
                                     </MultiBinding>
                                 </style:ShapeStyleView.DataContext>
@@ -256,7 +259,7 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="Data">
-                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                        <ScrollViewer DataContext="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <views:DataObjectView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
@@ -265,7 +268,7 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem Header="State">
-                        <ScrollViewer DataContext="{Binding PageState.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                        <ScrollViewer DataContext="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <renderer:ShapeStateView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}" 

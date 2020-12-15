@@ -15,30 +15,30 @@ namespace Core2D.ViewModels.Shapes
         {
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer)
+        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
                 foreach (var shape in _shapes)
                 {
-                    shape.DrawShape(dc, renderer);
+                    shape.DrawShape(dc, renderer, selection);
                 }
             }
 
-            base.DrawShape(dc, renderer);
+            base.DrawShape(dc, renderer, selection);
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer)
+        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
                 foreach (var shape in _shapes)
                 {
-                    shape.DrawPoints(dc, renderer);
+                    shape.DrawPoints(dc, renderer, selection);
                 }
             }
 
-            base.DrawPoints(dc, renderer);
+            base.DrawPoints(dc, renderer, selection);
         }
 
         public override void Bind(DataFlow dataFlow, object db, object r)

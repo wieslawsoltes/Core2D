@@ -139,18 +139,18 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             }
         }
 
-        public virtual void DrawShape(object dc, IShapeRenderer renderer)
+        public virtual void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
         {
             if (_isVisible)
             {
                 foreach (var handle in _handles)
                 {
-                    handle.DrawShape(dc, renderer);
+                    handle.DrawShape(dc, renderer, selection);
                 }
             }
         }
 
-        public virtual void DrawPoints(object dc, IShapeRenderer renderer)
+        public virtual void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
         }
 

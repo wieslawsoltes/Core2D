@@ -17,7 +17,7 @@ void OnCopyAsEmf()
 {
     var imageChache = Project as IImageCache;
     var page = Project.CurrentContainer;
-    var shapes = PageState.SelectedShapes;
+    var shapes = Project.SelectedShapes;
     var writer = FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter)) as EmfWriter;
 
     var db = (object)page.Data.Properties;

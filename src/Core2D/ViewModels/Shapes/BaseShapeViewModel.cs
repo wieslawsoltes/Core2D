@@ -109,12 +109,12 @@ namespace Core2D.ViewModels.Shapes
             Record?.Invalidate();
         }
 
-        public virtual void DrawShape(object dc, IShapeRenderer renderer)
+        public virtual void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void DrawPoints(object dc, IShapeRenderer renderer)
+        public virtual void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
             throw new NotImplementedException();
         }

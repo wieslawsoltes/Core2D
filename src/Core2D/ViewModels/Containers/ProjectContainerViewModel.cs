@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Core2D.Model;
 using Core2D.Model.History;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Scripting;
@@ -10,7 +11,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class ProjectContainerViewModel : ViewModelBase
+    public partial class ProjectContainerViewModel : ViewModelBase, ISelection
     {
         [AutoNotify] private OptionsViewModel _options;
         [AutoNotify] private IHistory _history;
@@ -28,6 +29,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private DocumentContainerViewModel _currentDocument;
         [AutoNotify] private BaseContainerViewModel _currentContainer;
         [AutoNotify] private ViewModelBase _selected;
+        [AutoNotify] private ISet<BaseShapeViewModel> _selectedShapes;
 
         public static IEnumerable<BaseShapeViewModel> GetAllShapes(IEnumerable<BaseShapeViewModel> shapes)
         {

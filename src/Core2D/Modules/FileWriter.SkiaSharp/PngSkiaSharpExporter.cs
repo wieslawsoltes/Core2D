@@ -25,7 +25,7 @@ namespace Core2D.Modules.FileWriter.SkiaSharpPng
             using (var canvas = new SKCanvas(bitmap))
             {
                 canvas.Clear();
-                _presenter.Render(canvas, _renderer, container, 0, 0);
+                _presenter.Render(canvas, _renderer, null, container, 0, 0);
             }
             using var image = SKImage.FromBitmap(bitmap);
             using var data = image.Encode(SKEncodedImageFormat.Png, 100);

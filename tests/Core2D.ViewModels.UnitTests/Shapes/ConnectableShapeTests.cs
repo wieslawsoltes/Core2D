@@ -136,12 +136,12 @@ namespace Core2D.ViewModels.UnitTests.ViewModels.Shapes
                 throw new NotImplementedException();
             }
 
-            public override void DrawShape(object dc, IShapeRenderer renderer)
+            public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
             {
                 throw new NotImplementedException();
             }
 
-            public override void DrawPoints(object dc, IShapeRenderer renderer)
+            public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
             {
                 throw new NotImplementedException();
             }

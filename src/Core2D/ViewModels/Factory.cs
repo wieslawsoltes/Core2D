@@ -199,8 +199,7 @@ namespace Core2D.ViewModels
                 PanY = 0.0,
                 ZoomX = 1.0,
                 ZoomY = 1.0,
-                DrawShapeState = ShapeStateFlags.Visible,
-                SelectedShapes = default
+                DrawShapeState = ShapeStateFlags.Visible
             };
 
             state.SelectionStyle =
@@ -1001,7 +1000,8 @@ namespace Core2D.ViewModels
                 Databases = ImmutableArray.Create<DatabaseViewModel>(),
                 Templates = ImmutableArray.Create<TemplateContainerViewModel>(),
                 Scripts = ImmutableArray.Create<ScriptViewModel>(),
-                Documents = ImmutableArray.Create<DocumentContainerViewModel>()
+                Documents = ImmutableArray.Create<DocumentContainerViewModel>(),
+                SelectedShapes = default
             };
         }
 

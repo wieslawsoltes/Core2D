@@ -16,39 +16,39 @@ namespace Core2D.ViewModels.Shapes
         {
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer)
+        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawQuadraticBezier(dc, this);
+                renderer.DrawQuadraticBezier(dc, this, Style);
             }
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer)
+        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
-            if (renderer.State.SelectedShapes != null)
+            if (selection.SelectedShapes != null)
             {
-                if (renderer.State.SelectedShapes.Contains(this))
+                if (selection.SelectedShapes.Contains(this))
                 {
-                    _point1.DrawShape(dc, renderer);
-                    _point2.DrawShape(dc, renderer);
-                    _point3.DrawShape(dc, renderer);
+                    _point1.DrawShape(dc, renderer, selection);
+                    _point2.DrawShape(dc, renderer, selection);
+                    _point3.DrawShape(dc, renderer, selection);
                 }
                 else
                 {
-                    if (renderer.State.SelectedShapes.Contains(_point1))
+                    if (selection.SelectedShapes.Contains(_point1))
                     {
-                        _point1.DrawShape(dc, renderer);
+                        _point1.DrawShape(dc, renderer, selection);
                     }
 
-                    if (renderer.State.SelectedShapes.Contains(_point2))
+                    if (selection.SelectedShapes.Contains(_point2))
                     {
-                        _point2.DrawShape(dc, renderer);
+                        _point2.DrawShape(dc, renderer, selection);
                     }
 
-                    if (renderer.State.SelectedShapes.Contains(_point3))
+                    if (selection.SelectedShapes.Contains(_point3))
                     {
-                        _point3.DrawShape(dc, renderer);
+                        _point3.DrawShape(dc, renderer, selection);
                     }
                 }
             }

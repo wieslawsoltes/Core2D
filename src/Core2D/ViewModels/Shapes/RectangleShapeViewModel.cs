@@ -15,33 +15,33 @@ namespace Core2D.ViewModels.Shapes
         {
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer)
+        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawRectangle(dc, this);
+                renderer.DrawRectangle(dc, this, Style);
             }
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer)
+        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
-            if (renderer.State.SelectedShapes != null)
+            if (selection.SelectedShapes != null)
             {
-                if (renderer.State.SelectedShapes.Contains(this))
+                if (selection.SelectedShapes.Contains(this))
                 {
-                    _topLeft.DrawShape(dc, renderer);
-                    _bottomRight.DrawShape(dc, renderer);
+                    _topLeft.DrawShape(dc, renderer, selection);
+                    _bottomRight.DrawShape(dc, renderer, selection);
                 }
                 else
                 {
-                    if (renderer.State.SelectedShapes.Contains(_topLeft))
+                    if (selection.SelectedShapes.Contains(_topLeft))
                     {
-                        _topLeft.DrawShape(dc, renderer);
+                        _topLeft.DrawShape(dc, renderer, selection);
                     }
 
-                    if (renderer.State.SelectedShapes.Contains(_bottomRight))
+                    if (selection.SelectedShapes.Contains(_bottomRight))
                     {
-                        _bottomRight.DrawShape(dc, renderer);
+                        _bottomRight.DrawShape(dc, renderer, selection);
                     }
                 }
             }

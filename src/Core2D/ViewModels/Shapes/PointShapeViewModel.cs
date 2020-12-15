@@ -28,15 +28,22 @@ namespace Core2D.ViewModels.Shapes
             base.Invalidate();
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer)
+        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawPoint(dc, this);
+                var isSelected = selection.SelectedShapes?.Count > 0 && selection.SelectedShapes.Contains(this);
+                var style = isSelected ? renderer.State.SelectedPointStyle : renderer.State.PointStyle;
+                var size = renderer.State.PointSize;
+                if (style == null || size <= 0.0)
+                {
+                    return;
+                }
+                renderer.DrawPoint(dc, this, style);
             }
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer)
+        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
         }
 

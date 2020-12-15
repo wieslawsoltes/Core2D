@@ -15,28 +15,24 @@ namespace Core2D.Model.Renderer
 
         void Grid(object dc, IGrid grid, double x, double y, double width, double height);
 
-        void DrawContainer(object dc, BaseContainerViewModel container);
+        void DrawPoint(object dc, PointShapeViewModel point, ShapeStyleViewModel style);
 
-        void DrawLayer(object dc, LayerContainerViewModel layer);
+        void DrawLine(object dc, LineShapeViewModel line, ShapeStyleViewModel style);
 
-        void DrawPoint(object dc, PointShapeViewModel point);
+        void DrawRectangle(object dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel style);
 
-        void DrawLine(object dc, LineShapeViewModel line);
+        void DrawEllipse(object dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel style);
 
-        void DrawRectangle(object dc, RectangleShapeViewModel rectangle);
+        void DrawArc(object dc, ArcShapeViewModelViewModel arc, ShapeStyleViewModel style);
 
-        void DrawEllipse(object dc, EllipseShapeViewModel ellipse);
+        void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style);
 
-        void DrawArc(object dc, ArcShapeViewModelViewModel arc);
+        void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style);
 
-        void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier);
+        void DrawText(object dc, TextShapeViewModel text, ShapeStyleViewModel style);
 
-        void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier);
+        void DrawImage(object dc, ImageShapeViewModel image, ShapeStyleViewModel style);
 
-        void DrawText(object dc, TextShapeViewModel text);
-
-        void DrawImage(object dc, ImageShapeViewModel image);
-
-        void DrawPath(object dc, PathShapeViewModel path);
+        void DrawPath(object dc, PathShapeViewModel path, ShapeStyleViewModel style);
     }
 }

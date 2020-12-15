@@ -13,7 +13,6 @@ namespace Core2D.ViewModels.Renderer
         [AutoNotify] private double _zoomX;
         [AutoNotify] private double _zoomY;
         [AutoNotify] private ShapeStateFlags _drawShapeState;
-        [AutoNotify] private ISet<BaseShapeViewModel> _selectedShapes;
         [AutoNotify] private IImageCache _imageCache;
         [AutoNotify] private bool _drawDecorators;
         [AutoNotify] private bool _drawPoints;
