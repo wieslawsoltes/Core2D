@@ -182,9 +182,15 @@ namespace Core2D.ViewModels.UnitTests.ViewModels.Containers
         {
             var target = _factory.CreateProjectContainer();
 
-            var page = _factory.CreatePageContainer();
-            var layer = _factory.CreateLayerContainer("Layer1", page);
+            var document = _factory.CreateDocumentContainer();
+            target.Documents = target.Documents.Add(document);
 
+            var page = _factory.CreatePageContainer();
+            document.Pages = document.Pages.Add(page);
+
+            var layer = _factory.CreateLayerContainer("Layer1", page);
+            page.Layers = page.Layers.Add(layer);
+ 
             target.SetSelected(layer);
 
             Assert.Equal(layer, page.CurrentLayer);
@@ -222,20 +228,6 @@ namespace Core2D.ViewModels.UnitTests.ViewModels.Containers
         [Fact]
         [Trait("Core2D.Containers", "Project")]
         public void SetSelected_Document()
-        {
-            var target = _factory.CreateProjectContainer();
-
-            var document = _factory.CreateDocumentContainer();
-            target.Documents = target.Documents.Add(document);
-
-            target.SetSelected(document);
-
-            Assert.Equal(document, target.CurrentDocument);
-        }
-
-        [Fact]
-        [Trait("Core2D.Containers", "Project")]
-        public void Setting_Selected_Should_Call_SetSelected_After()
         {
             var target = _factory.CreateProjectContainer();
 
