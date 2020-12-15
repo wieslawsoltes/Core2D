@@ -99,7 +99,7 @@ namespace Core2D.ViewModels.Containers
 
         public void SetCurrentStyleLibrary(LibraryViewModel<ShapeStyleViewModel> libraryViewModel) => CurrentStyleLibrary = libraryViewModel;
 
-        public void SelectedChanged() =>  SetSelected(Selected);
+        public void SelectedChanged() => SetSelected(Selected);
 
         public void SetSelected(ViewModelBase value)
         {
