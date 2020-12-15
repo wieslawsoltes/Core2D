@@ -32,7 +32,7 @@ namespace Core2D.ViewModels.Shapes
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                var isSelected = selection.SelectedShapes?.Count > 0 && selection.SelectedShapes.Contains(this);
+                var isSelected = selection?.SelectedShapes?.Count > 0 && selection?.SelectedShapes.Contains(this);
                 var style = isSelected ? renderer.State.SelectedPointStyle : renderer.State.PointStyle;
                 var size = renderer.State.PointSize;
                 if (style == null || size <= 0.0)

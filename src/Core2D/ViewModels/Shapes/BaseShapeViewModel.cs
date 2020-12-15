@@ -150,17 +150,23 @@ namespace Core2D.ViewModels.Shapes
 
         public virtual void Select(ISelection selection)
         {
-            if (!selection.SelectedShapes.Contains(this))
+            if (selection?.SelectedShapes != null)
             {
-                selection.SelectedShapes.Add(this);
+                if (!selection.SelectedShapes.Contains(this))
+                {
+                    selection.SelectedShapes.Add(this);
+                }
             }
         }
 
         public virtual void Deselect(ISelection selection)
         {
-            if (selection.SelectedShapes.Contains(this))
+            if (selection?.SelectedShapes != null)
             {
-                selection.SelectedShapes.Remove(this);
+                if (selection.SelectedShapes.Contains(this))
+                {
+                    selection.SelectedShapes.Remove(this);
+                }
             }
         }
 
