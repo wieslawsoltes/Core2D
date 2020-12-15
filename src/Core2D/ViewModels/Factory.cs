@@ -390,9 +390,9 @@ namespace Core2D.ViewModels
             return CreateLineShape(x, y, x, y, style, isStroked, name);
         }
 
-        public ArcShapeViewModelViewModel CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModel CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var arcShape = new ArcShapeViewModelViewModel(_serviceProvider)
+            var arcShape = new ArcShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
@@ -417,14 +417,14 @@ namespace Core2D.ViewModels
             return arcShape;
         }
 
-        public ArcShapeViewModelViewModel CreateArcShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModel CreateArcShape(double x, double y, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             return CreateArcShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public ArcShapeViewModelViewModel CreateArcShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModel CreateArcShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel style, bool isStroked = true, bool isFilled = false, string name = "")
         {
-            var arcShape = new ArcShapeViewModelViewModel(_serviceProvider)
+            var arcShape = new ArcShapeViewModel(_serviceProvider)
             {
                 Name = name,
                 State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,

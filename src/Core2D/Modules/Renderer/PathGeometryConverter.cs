@@ -156,7 +156,7 @@ namespace Core2D.Modules.Renderer
             return g;
         }
 
-        public static AM.Geometry ToGeometry(ArcShapeViewModelViewModel arc)
+        public static AM.Geometry ToGeometry(ArcShapeViewModel arc)
         {
             var sg = new AM.StreamGeometry();
             using var sgc = sg.Open();

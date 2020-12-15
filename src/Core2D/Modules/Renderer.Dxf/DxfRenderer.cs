@@ -98,7 +98,7 @@ namespace Core2D.Modules.Renderer.Dxf
             };
         }
 
-        private DXFE.Ellipse CreateEllipticalArc(ArcShapeViewModelViewModel arc)
+        private DXFE.Ellipse CreateEllipticalArc(ArcShapeViewModel arc)
         {
             var a = new Spatial.Arc.GdiArc(
                 Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -503,7 +503,7 @@ namespace Core2D.Modules.Renderer.Dxf
             }
         }
 
-        public void DrawArc(object dc, ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
+        public void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style)
         {
             var dxf = dc as DXF.DxfDocument;
 

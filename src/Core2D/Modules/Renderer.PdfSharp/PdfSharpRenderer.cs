@@ -397,7 +397,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
             }
         }
 
-        public void DrawArc(object dc, ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
+        public void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style)
         {
             var _gfx = dc as XGraphics;
 

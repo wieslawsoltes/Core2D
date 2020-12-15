@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Editor.Tools
     {
         public enum State { Point1, Point2, Point3, Point4 }
         private State _currentState = State.Point1;
-        private ArcShapeViewModelViewModel _arc;
+        private ArcShapeViewModel _arc;
         private bool _connectedPoint3;
         private bool _connectedPoint4;
         private ArcSelection _selection;
@@ -250,7 +250,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void Finalize(BaseShapeViewModel shape)
         {
-            var arc = shape as ArcShapeViewModelViewModel;
+            var arc = shape as ArcShapeViewModel;
             var a = new WpfArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),
                 Point2.FromXY(arc.Point2.X, arc.Point2.Y),

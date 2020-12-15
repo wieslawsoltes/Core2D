@@ -185,7 +185,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                         }
                         break;
 
-                    case ArcShapeViewModelViewModel arcShape:
+                    case ArcShapeViewModel arcShape:
                         {
                             var a = new GdiArc(
                                 Point2.FromXY(arcShape.Point1.X, arcShape.Point1.Y),
@@ -279,7 +279,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 RectangleShapeViewModel rectangleShape => ToSKPath(rectangleShape),
                 EllipseShapeViewModel ellipseShape => ToSKPath(ellipseShape),
                 ImageShapeViewModel imageShape => ToSKPath(imageShape),
-                ArcShapeViewModelViewModel arcShape => ToSKPath(arcShape),
+                ArcShapeViewModel arcShape => ToSKPath(arcShape),
                 CubicBezierShapeViewModel cubicBezierShape => ToSKPath(cubicBezierShape),
                 QuadraticBezierShapeViewModel quadraticBezierShape => ToSKPath(quadraticBezierShape),
                 TextShapeViewModel textShape => ToSKPath(textShape),
@@ -340,7 +340,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this ArcShapeViewModelViewModel arc)
+        public static SKPath ToSKPath(this ArcShapeViewModel arc)
         {
             var path = new SKPath
             {

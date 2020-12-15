@@ -56,7 +56,7 @@ namespace Core2D.ViewModels.Designer
 
         public static TextStyleViewModel TextStyle { get; private set; }
 
-        public static ArcShapeViewModelViewModel Arc { get; private set; }
+        public static ArcShapeViewModel Arc { get; private set; }
 
         public static CubicBezierShapeViewModel CubicBezier { get; private set; }
 

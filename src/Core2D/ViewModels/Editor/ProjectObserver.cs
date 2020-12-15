@@ -812,7 +812,7 @@ namespace Core2D.ViewModels.Editor
                     ellipse.BottomRight.PropertyChanged += ObserveShape;
                 }
             }
-            else if (shape is ArcShapeViewModelViewModel arc)
+            else if (shape is ArcShapeViewModel arc)
             {
                 if (arc.Point1 != null)
                 {
@@ -973,7 +973,7 @@ namespace Core2D.ViewModels.Editor
                     ellipse.BottomRight.PropertyChanged -= ObserveShape;
                 }
             }
-            else if (shape is ArcShapeViewModelViewModel arc)
+            else if (shape is ArcShapeViewModel arc)
             {
                 if (arc.Point1 != null)
                 {

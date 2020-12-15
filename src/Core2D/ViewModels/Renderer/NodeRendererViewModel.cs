@@ -225,7 +225,7 @@ namespace Core2D.ViewModels.Renderer
             }
         }
 
-        public void DrawArc(object dc, ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
+        public void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(arc);
             if (drawNodeCached != null)

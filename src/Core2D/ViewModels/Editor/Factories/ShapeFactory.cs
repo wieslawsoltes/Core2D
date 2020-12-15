@@ -65,7 +65,7 @@ namespace Core2D.ViewModels.Editor.Factories
             return line;
         }
 
-        ArcShapeViewModelViewModel IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
+        ArcShapeViewModel IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
@@ -85,7 +85,7 @@ namespace Core2D.ViewModels.Editor.Factories
             return arc;
         }
 
-        ArcShapeViewModelViewModel IShapeFactory.Arc(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, bool isStroked, bool isFilled)
+        ArcShapeViewModel IShapeFactory.Arc(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();

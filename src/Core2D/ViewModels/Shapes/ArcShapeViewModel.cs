@@ -6,14 +6,14 @@ using Core2D.ViewModels.Data;
 
 namespace Core2D.ViewModels.Shapes
 {
-    public partial class ArcShapeViewModelViewModel : BaseShapeViewModel
+    public partial class ArcShapeViewModel : BaseShapeViewModel
     {
         [AutoNotify] private PointShapeViewModel _point1;
         [AutoNotify] private PointShapeViewModel _point2;
         [AutoNotify] private PointShapeViewModel _point3;
         [AutoNotify] private PointShapeViewModel _point4;
 
-        public ArcShapeViewModelViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(ArcShapeViewModelViewModel))
+        public ArcShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(ArcShapeViewModel))
         {
         }
 

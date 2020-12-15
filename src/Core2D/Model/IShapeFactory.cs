@@ -12,9 +12,9 @@ namespace Core2D.Model
 
         LineShapeViewModel Line(PointShapeViewModel start, PointShapeViewModel end, bool isStroked);
 
-        ArcShapeViewModelViewModel Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
+        ArcShapeViewModel Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
 
-        ArcShapeViewModelViewModel Arc(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, bool isStroked, bool isFilled);
+        ArcShapeViewModel Arc(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, bool isStroked, bool isFilled);
 
         CubicBezierShapeViewModel CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
 

@@ -431,7 +431,7 @@ namespace Core2D.Modules.Renderer.WinForms
             pen.Dispose();
         }
 
-        public void DrawArc(object dc, ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
+        public void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style)
         {
             var a = new GdiArc(
                 Point2.FromXY(arc.Point1.X, arc.Point1.Y),

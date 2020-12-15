@@ -39,7 +39,7 @@ namespace Core2D.Modules.Renderer
             return new EllipseDrawNode(ellipse, style);
         }
 
-        public IArcDrawNode CreateArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
+        public IArcDrawNode CreateArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel style)
         {
             return new ArcDrawNode(arc, style);
         }

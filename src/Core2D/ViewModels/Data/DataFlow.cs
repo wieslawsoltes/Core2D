@@ -55,7 +55,7 @@ namespace Core2D.ViewModels.Data
         {
         }
 
-        public void Bind(ArcShapeViewModelViewModel arc, object db, object r)
+        public void Bind(ArcShapeViewModel arc, object db, object r)
         {
         }
 

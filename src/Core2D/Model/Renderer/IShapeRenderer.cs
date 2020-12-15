@@ -23,7 +23,7 @@ namespace Core2D.Model.Renderer
 
         void DrawEllipse(object dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel style);
 
-        void DrawArc(object dc, ArcShapeViewModelViewModel arc, ShapeStyleViewModel style);
+        void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style);
 
         void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style);
 

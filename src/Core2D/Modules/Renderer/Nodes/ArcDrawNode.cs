@@ -8,10 +8,10 @@ namespace Core2D.Modules.Renderer.Nodes
 {
     internal class ArcDrawNode : DrawNode, IArcDrawNode
     {
-        public ArcShapeViewModelViewModel Arc { get; set; }
+        public ArcShapeViewModel Arc { get; set; }
         public AM.Geometry Geometry { get; set; }
 
-        public ArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel style)
+        public ArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel style)
         {
             Style = style;
             Arc = arc;

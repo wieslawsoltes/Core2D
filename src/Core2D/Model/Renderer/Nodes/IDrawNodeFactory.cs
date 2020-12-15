@@ -18,7 +18,7 @@ namespace Core2D.Model.Renderer.Nodes
 
         IEllipseDrawNode CreateEllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style);
 
-        IArcDrawNode CreateArcDrawNode(ArcShapeViewModelViewModel arc, ShapeStyleViewModel style);
+        IArcDrawNode CreateArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel style);
 
         ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style);
 

@@ -13,7 +13,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly LayerContainerViewModel _layer;
-        private readonly ArcShapeViewModelViewModel _arc;
+        private readonly ArcShapeViewModel _arc;
         private readonly ShapeStyleViewModel _styleViewModel;
         private LineShapeViewModel _startLine;
         private LineShapeViewModel _endLine;
@@ -24,11 +24,11 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
         private PointShapeViewModel _startHelperPoint;
         private PointShapeViewModel _endHelperPoint;
 
-        public ArcSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, ArcShapeViewModelViewModel shapeViewModelViewModel, ShapeStyleViewModel style)
+        public ArcSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, ArcShapeViewModel shapeViewModel, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;
-            _arc = shapeViewModelViewModel;
+            _arc = shapeViewModel;
             _styleViewModel = style;
         }
 
