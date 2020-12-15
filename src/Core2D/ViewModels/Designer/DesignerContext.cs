@@ -20,79 +20,79 @@ namespace Core2D.ViewModels.Designer
 {
     public class DesignerContext
     {
-        public static ProjectEditorViewModel Editor { get; set; }
+        public static ProjectEditorViewModel Editor { get; private set; }
 
-        public static TemplateContainerViewModel Template { get; set; }
+        public static TemplateContainerViewModel Template { get; private set; }
 
-        public static PageContainerViewModel Page { get; set; }
+        public static PageContainerViewModel Page { get; private set; }
 
-        public static DocumentContainerViewModel Document { get; set; }
+        public static DocumentContainerViewModel Document { get; private set; }
 
-        public static LayerContainerViewModel Layer { get; set; }
+        public static LayerContainerViewModel Layer { get; private set; }
 
-        public static OptionsViewModel Options { get; set; }
+        public static OptionsViewModel Options { get; private set; }
 
-        public static ScriptViewModel Script { get; set; }
+        public static ScriptViewModel Script { get; private set; }
 
-        public static ProjectContainerViewModel Project { get; set; }
+        public static ProjectContainerViewModel Project { get; private set; }
 
-        public static LibraryViewModel<ShapeStyleViewModel> CurrentStyleLibrary { get; set; }
+        public static LibraryViewModel<ShapeStyleViewModel> CurrentStyleLibrary { get; private set; }
 
-        public static LibraryViewModel<GroupShapeViewModel> CurrentGroupLibrary { get; set; }
+        public static LibraryViewModel<GroupShapeViewModel> CurrentGroupLibrary { get; private set; }
 
-        public static ShapeStateFlags State { get; set; }
+        public static ShapeStateFlags State { get; private set; }
 
-        public static DatabaseViewModel Database { get; set; }
+        public static DatabaseViewModel Database { get; private set; }
 
-        public static RecordViewModel Record { get; set; }
+        public static RecordViewModel Record { get; private set; }
 
-        public static ArgbColorViewModel ArgbColor { get; set; }
+        public static ArgbColorViewModel ArgbColor { get; private set; }
 
-        public static ArrowStyleViewModel ArrowStyle { get; set; }
+        public static ArrowStyleViewModel ArrowStyle { get; private set; }
 
-        public static FontStyleFlags FontStyle { get; set; }
+        public static FontStyleFlags FontStyle { get; private set; }
 
-        public static ShapeStyleViewModel Style { get; set; }
+        public static ShapeStyleViewModel Style { get; private set; }
 
-        public static TextStyleViewModel TextStyle { get; set; }
+        public static TextStyleViewModel TextStyle { get; private set; }
 
-        public static ArcShapeViewModelViewModel Arc { get; set; }
+        public static ArcShapeViewModelViewModel Arc { get; private set; }
 
-        public static CubicBezierShapeViewModel CubicBezier { get; set; }
+        public static CubicBezierShapeViewModel CubicBezier { get; private set; }
 
-        public static EllipseShapeViewModel Ellipse { get; set; }
+        public static EllipseShapeViewModel Ellipse { get; private set; }
 
-        public static GroupShapeViewModel Group { get; set; }
+        public static GroupShapeViewModel Group { get; private set; }
 
-        public static ImageShapeViewModel Image { get; set; }
+        public static ImageShapeViewModel Image { get; private set; }
 
-        public static LineShapeViewModel Line { get; set; }
+        public static LineShapeViewModel Line { get; private set; }
 
-        public static PathShapeViewModel Path { get; set; }
+        public static PathShapeViewModel Path { get; private set; }
 
-        public static PointShapeViewModel Point { get; set; }
+        public static PointShapeViewModel Point { get; private set; }
 
-        public static QuadraticBezierShapeViewModel QuadraticBezier { get; set; }
+        public static QuadraticBezierShapeViewModel QuadraticBezier { get; private set; }
 
-        public static RectangleShapeViewModel Rectangle { get; set; }
+        public static RectangleShapeViewModel Rectangle { get; private set; }
 
-        public static TextShapeViewModel Text { get; set; }
+        public static TextShapeViewModel Text { get; private set; }
 
-        public static ArcSegmentViewModel ArcSegment { get; set; }
+        public static ArcSegmentViewModel ArcSegment { get; private set; }
 
-        public static CubicBezierSegmentViewModel CubicBezierSegment { get; set; }
+        public static CubicBezierSegmentViewModel CubicBezierSegment { get; private set; }
 
-        public static LineSegmentViewModel LineSegment { get; set; }
+        public static LineSegmentViewModel LineSegment { get; private set; }
 
-        public static PathFigureViewModel PathFigure { get; set; }
+        public static PathFigureViewModel PathFigure { get; private set; }
 
-        public static PathGeometryViewModel PathGeometry { get; set; }
+        public static PathGeometryViewModel PathGeometry { get; private set; }
 
-        public static PathSizeViewModel PathSize { get; set; }
+        public static PathSizeViewModel PathSize { get; private set; }
 
-        public static QuadraticBezierSegmentViewModel QuadraticBezierSegment { get; set; }
+        public static QuadraticBezierSegmentViewModel QuadraticBezierSegment { get; private set; }
 
-        public static ShapeRendererStateViewModel ShapeRendererState { get; set; }
+        public static ShapeRendererStateViewModel ShapeRendererState { get; private set; }
 
         public static void InitializeContext(IServiceProvider serviceProvider)
         {

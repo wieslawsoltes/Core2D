@@ -45,7 +45,6 @@ namespace Core2D.ViewModels.Editor
         private readonly Lazy<ILog> _log;
         private readonly Lazy<DataFlow> _dataFlow;
         private readonly Lazy<IShapeRenderer> _pageRenderer;
-        private readonly Lazy<IShapeRenderer> _documentRenderer;
         private readonly Lazy<IFileSystem> _fileSystem;
         private readonly Lazy<IFactory> _factory;
         private readonly Lazy<IContainerFactory> _containerFactory;
@@ -76,10 +75,6 @@ namespace Core2D.ViewModels.Editor
         public IShapeRenderer PageRenderer => _pageRenderer.Value;
 
         public ShapeRendererStateViewModel PageState => _pageRenderer.Value?.State;
-
-        public IShapeRenderer DocumentRenderer => _documentRenderer.Value;
-
-        public ShapeRendererStateViewModel DocumentState => _documentRenderer.Value?.State;
 
         public IFileSystem FileSystem => _fileSystem.Value;
 
@@ -133,7 +128,6 @@ namespace Core2D.ViewModels.Editor
             _log = serviceProvider.GetServiceLazily<ILog>();
             _dataFlow = serviceProvider.GetServiceLazily<DataFlow>();
             _pageRenderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
-            _documentRenderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
             _fileSystem = serviceProvider.GetServiceLazily<IFileSystem>();
             _factory = serviceProvider.GetServiceLazily<IFactory>();
             _containerFactory = serviceProvider.GetServiceLazily<IContainerFactory>();
@@ -2332,12 +2326,6 @@ namespace Core2D.ViewModels.Editor
                 PageRenderer.ClearCache();
                 PageRenderer.State.ImageCache = cache;
             }
-
-            if (DocumentRenderer != null)
-            {
-                DocumentRenderer.ClearCache();
-                DocumentRenderer.State.ImageCache = cache;
-            }
         }
 
         public void OnLoad(ProjectContainerViewModel project, string path = null)
@@ -2391,8 +2379,6 @@ namespace Core2D.ViewModels.Editor
             try
             {
                 PageRenderer?.ClearCache();
-
-                DocumentRenderer?.ClearCache();
             }
             catch (Exception ex)
             {
