@@ -10,37 +10,25 @@
             <SolidColorBrush x:Key="SystemControlBackgroundAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}" />
             <StaticResource x:Key="TextControlBackground" ResourceKey="SystemControlBackgroundAltMediumLowBrush" />
             <SolidColorBrush x:Key="AcrylicFallbackColor">#1F1F1F</SolidColorBrush>
-        </Style.Resources>
-    </Style>
-    <Style>
-        <Style.Resources>
             <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
             <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
             <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />
-        </Style.Resources>
-    </Style>
-    <Style>
-        <Style.Resources>
             <GridLength x:Key="SliderPreContentMargin">3</GridLength>
             <GridLength x:Key="SliderPostContentMargin">3</GridLength>
-        </Style.Resources>
-    </Style>
-    <Style>
-        <Style.Resources>
             <SolidColorBrush x:Key="DialogOverlayColor">#7F2E2E2E</SolidColorBrush>
             <SolidColorBrush x:Key="DialogBackground">#323232</SolidColorBrush>
             <BoxShadows x:Key="DialogBoxShadow">4 11 30 1 #3F000000</BoxShadows>
-        </Style.Resources>
-    </Style>
-    <Style>
-        <Style.Resources>
             <Thickness x:Key="MainViewMargin">0,40,0,0</Thickness>
             <x:Double x:Key="MenuBarHeight">40</x:Double>
             <Thickness x:Key="MenuBarItemPadding">12,0,12,0</Thickness>
+            <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
         </Style.Resources>
     </Style>
     <Style Selector="Expander /template/ ToggleButton#PART_toggle">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="Expander /template/ ToggleButton#PART_toggle:pointerover /template/ Border">
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightBaseMediumBrush}" />
     </Style>
     <Style Selector="ListBoxItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
