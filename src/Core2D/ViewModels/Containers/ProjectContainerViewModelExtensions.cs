@@ -15,5 +15,13 @@ namespace Core2D.ViewModels.Containers
 
             return shapes.GetAllShapes()?.Where(s => s is T).Cast<T>();
         }
+        
+        public static IEnumerable<BaseShapeViewModel> GetAllShapes(this ProjectContainerViewModel project)
+        {
+            return project?.Documents
+                .SelectMany(d => d.Pages)
+                .SelectMany(c => c.Layers)
+                .SelectMany(l => l.Shapes);
+        }
     }
 }
