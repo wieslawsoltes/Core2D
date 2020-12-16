@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
-             Focusable="True"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="540"
