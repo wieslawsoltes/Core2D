@@ -45,7 +45,7 @@ namespace Core2D.ViewModels.Containers
 
         public void SetSelected(ViewModelBase value)
         {
-            Debug.WriteLine($"[SetSelected] {value.Name} ({value.GetType()})");
+            Debug.WriteLine($"[SetSelected] {value?.Name} ({value?.GetType()})");
             if (value is BaseShapeViewModel shape)
             {
                 var layer = _documents
