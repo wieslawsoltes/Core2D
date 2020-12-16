@@ -9,14 +9,14 @@ using Core2D.ViewModels.Editor;
 
 namespace Core2D.Behaviors
 {
-    public class ProjectEditorInput
+    public class AttachEditor
     {
         private readonly Control _control;
         private AvaloniaInputSource _inputSource;
         private ProjectEditorInputTarget _inputTarget;
         private InputProcessor _inputProcessor;
 
-        public ProjectEditorInput(Control control)
+        public AttachEditor(Control control)
         {
             _control = control;
             _control.GetObservable(Control.DataContextProperty).Subscribe(Changed);

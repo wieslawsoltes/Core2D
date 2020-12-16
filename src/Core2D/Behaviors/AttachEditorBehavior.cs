@@ -5,7 +5,7 @@ namespace Core2D.Behaviors
 {
     public class AttachEditorBehavior : Behavior<Control>
     {
-        private ProjectEditorInput _input;
+        private AttachEditor _input;
 
         protected override void OnAttached()
         {
@@ -13,7 +13,7 @@ namespace Core2D.Behaviors
 
             if (AssociatedObject is { })
             {
-                _input = new ProjectEditorInput(AssociatedObject);
+                _input = new AttachEditor(AssociatedObject);
             }
         }
 
