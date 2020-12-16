@@ -30,7 +30,7 @@
                 <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnNew}" CommandParameter="{Binding Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
             </StackPanel>
         </Grid>
-        <TreeView x:Name="DocumentsTreeView" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" x:CompileBindings="False">
+        <TreeView x:Name="DocumentsTreeView" SelectionMode="Multiple" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" x:CompileBindings="False">
             <i:Interaction.Behaviors>
                 <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ProjectTreeViewDropHandler}" />
             </i:Interaction.Behaviors>
