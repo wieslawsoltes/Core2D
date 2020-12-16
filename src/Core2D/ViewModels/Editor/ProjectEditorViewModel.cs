@@ -2634,10 +2634,13 @@ namespace Core2D.ViewModels.Editor
 
         private void UpdateShapeNames(IEnumerable<BaseShapeViewModel> shapes)
         {
-            var source = _project.GetAllShapes().Concat(shapes.GetAllShapes()).Distinct();
+            var all = _project.GetAllShapes().ToList();
+            var source = new List<BaseShapeViewModel>();
+
             foreach (var shape in shapes)
             {
-                SetShapeName(shape, source);
+                SetShapeName(shape, all.Concat(source));
+                source.Add(shape);
             }
         }
 
