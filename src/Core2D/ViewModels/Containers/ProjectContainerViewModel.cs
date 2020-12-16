@@ -83,32 +83,6 @@ namespace Core2D.ViewModels.Containers
             };
         }
 
-        public void SetCurrentDocument(DocumentContainerViewModel document)
-        {
-            CurrentDocument = document;
-            Selected = document;
-            SetSelected(document);
-        }
-
-        public void SetCurrentContainer(BaseContainerViewModel container)
-        {
-            CurrentContainer = container;
-            Selected = container;
-            SetSelected(container);
-        }
-
-        public void SetCurrentTemplate(TemplateContainerViewModel template) => CurrentTemplate = template;
-
-        public void SetCurrentScript(ScriptViewModel script) => CurrentScript = script;
-
-        public void SetCurrentDatabase(DatabaseViewModel db) => CurrentDatabase = db;
-
-        public void SetCurrentGroupLibrary(LibraryViewModel<GroupShapeViewModel> libraryViewModel) => CurrentGroupLibrary = libraryViewModel;
-
-        public void SetCurrentStyleLibrary(LibraryViewModel<ShapeStyleViewModel> libraryViewModel) => CurrentStyleLibrary = libraryViewModel;
-
-        public void SelectedChanged() => SetSelected(Selected);
-
         public void SetSelected(ViewModelBase value)
         {
             Debug.WriteLine($"[SetSelected] {value.Name} ({value.GetType()})");
@@ -199,6 +173,30 @@ namespace Core2D.ViewModels.Containers
                 }
             }
         }
+
+        public void SetCurrentDocument(DocumentContainerViewModel document)
+        {
+            CurrentDocument = document;
+            Selected = document;
+            SetSelected(document);
+        }
+
+        public void SetCurrentContainer(BaseContainerViewModel container)
+        {
+            CurrentContainer = container;
+            Selected = container;
+            SetSelected(container);
+        }
+
+        public void SetCurrentTemplate(TemplateContainerViewModel template) => CurrentTemplate = template;
+
+        public void SetCurrentScript(ScriptViewModel script) => CurrentScript = script;
+
+        public void SetCurrentDatabase(DatabaseViewModel db) => CurrentDatabase = db;
+
+        public void SetCurrentGroupLibrary(LibraryViewModel<GroupShapeViewModel> libraryViewModel) => CurrentGroupLibrary = libraryViewModel;
+
+        public void SetCurrentStyleLibrary(LibraryViewModel<ShapeStyleViewModel> libraryViewModel) => CurrentStyleLibrary = libraryViewModel;
 
         public override bool IsDirty()
         {
