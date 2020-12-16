@@ -130,8 +130,7 @@ namespace Core2D.ViewModels.Designer
             // Project
 
             var containerFactory = serviceProvider.GetService<IContainerFactory>();
-            var shapeFactory = serviceProvider.GetService<IShapeFactory>();
-
+ 
             Project = containerFactory.GetProject();
 
             Template = factory.CreateTemplateContainer();
