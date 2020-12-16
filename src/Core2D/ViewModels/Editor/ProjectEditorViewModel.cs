@@ -725,7 +725,11 @@ namespace Core2D.ViewModels.Editor
 
         public void OnCut(object item)
         {
-            if (item is PageContainerViewModel page)
+            if (item is BaseShapeViewModel shape)
+            {
+                // TODO:
+            }
+            else if (item is PageContainerViewModel page)
             {
                 PageToCopy = page;
                 DocumentToCopy = default;
@@ -754,7 +758,11 @@ namespace Core2D.ViewModels.Editor
 
         public void OnCopy(object item)
         {
-            if (item is PageContainerViewModel page)
+            if (item is BaseShapeViewModel shape)
+            {
+                // TODO:
+            }
+            else if (item is PageContainerViewModel page)
             {
                 PageToCopy = page;
                 DocumentToCopy = default;
@@ -778,7 +786,11 @@ namespace Core2D.ViewModels.Editor
 
         public async void OnPaste(object item)
         {
-            if (Project != null && item is PageContainerViewModel page)
+            if (Project != null && item is BaseShapeViewModel shape)
+            {
+                // TODO:
+            }
+            else if (Project != null && item is PageContainerViewModel page)
             {
                 if (PageToCopy != null)
                 {
