@@ -29,8 +29,9 @@ namespace Core2D.ViewModels.Editor.Tools
                     {
                         _point = factory.CreatePointShape(
                             (double)sx, 
-                            (double)sy,
-                            editor.GetShapeName<PointShapeViewModel>());
+                            (double)sy);
+
+                        editor.SetShapeName(_point);
 
                         if (editor.Project.Options.TryToConnect)
                         {

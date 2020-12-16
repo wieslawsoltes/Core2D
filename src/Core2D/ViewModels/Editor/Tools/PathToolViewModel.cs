@@ -115,11 +115,13 @@ namespace Core2D.ViewModels.Editor.Tools
                 editor.Project.CurrentStyleLibrary.Selected :
                 editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             Path = factory.CreatePathShape(
-                editor.GetShapeName<PathShapeViewModel>(),
+                "",
                 (ShapeStyleViewModel)style.Copy(null),
                 Geometry,
                 editor.Project.Options.DefaultIsStroked,
                 editor.Project.Options.DefaultIsFilled);
+
+            editor.SetShapeName(Path);
 
             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(Path);
 

@@ -38,8 +38,10 @@ namespace Core2D.ViewModels.Editor.Tools
                         _line = factory.CreateLineShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
-                            editor.Project.Options.DefaultIsStroked,
-                            editor.GetShapeName<LineShapeViewModel>());
+                            editor.Project.Options.DefaultIsStroked);
+
+                        editor.SetShapeName(_line);
+
                         if (editor.Project.Options.TryToConnect)
                         {
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);

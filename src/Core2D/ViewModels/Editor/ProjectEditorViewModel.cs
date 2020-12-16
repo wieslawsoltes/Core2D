@@ -199,11 +199,16 @@ namespace Core2D.ViewModels.Editor
             return string.Empty;
         }
 
-        public string GetShapeName<T>()
+        public void SetShapeName(BaseShapeViewModel shape, IEnumerable<BaseShapeViewModel> source = null)
         {
-            var count = _project.GetAllShapes<T>().Count() + 1;
-            var name = typeof(T).Name.Replace("ShapeViewModel", " ") + count;
-            return name;
+            var input = source ?? _project.GetAllShapes();
+            var shapes = input.Where(s => s.GetType() == shape.GetType() && s != shape).ToList();
+            var count = shapes.Count + 1;
+            var update = string.IsNullOrEmpty(shape.Name) || input.Any(x => x != shape && x.Name == shape.Name);
+            if (update)
+            {
+                shape.Name = shape.GetType().Name.Replace("ShapeViewModel", " ") + count; 
+            }
         }
 
         public void OnNew(object item)
@@ -2627,12 +2632,22 @@ namespace Core2D.ViewModels.Editor
             TryToRestoreRecords(shapes);
         }
 
+        private void UpdateShapeNames(IEnumerable<BaseShapeViewModel> shapes)
+        {
+            var source = _project.GetAllShapes().Concat(shapes.GetAllShapes()).Distinct();
+            foreach (var shape in shapes)
+            {
+                SetShapeName(shape, source);
+            }
+        }
+
         public void OnPasteShapes(IEnumerable<BaseShapeViewModel> shapes)
         {
             try
             {
                 Deselect(Project?.CurrentContainer?.CurrentLayer);
                 TryToRestoreRecords(shapes);
+                UpdateShapeNames(shapes);
                 Project.AddShapes(Project?.CurrentContainer?.CurrentLayer, shapes);
                 OnSelect(shapes);
             }

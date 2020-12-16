@@ -44,8 +44,9 @@ namespace Core2D.ViewModels.Editor.Tools
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsFilled,
-                            editor.GetShapeName<ArcShapeViewModel>());
+                            editor.Project.Options.DefaultIsFilled);
+
+                        editor.SetShapeName(_arc);
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result is { })

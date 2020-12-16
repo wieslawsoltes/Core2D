@@ -42,8 +42,9 @@ namespace Core2D.ViewModels.Editor.Tools
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsFilled,
-                            editor.GetShapeName<RectangleShapeViewModel>());
+                            editor.Project.Options.DefaultIsFilled);
+
+                        editor.SetShapeName(_rectangle);
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result is { })
