@@ -138,14 +138,12 @@ namespace Core2D.ViewModels.Containers
         {
             CurrentDocument = document;
             Selected = document;
-            SetSelected(document);
         }
 
         public void SetCurrentContainer(FrameContainerViewModel container)
         {
             CurrentContainer = container;
             Selected = container;
-            SetSelected(container);
         }
 
         public void SetCurrentTemplate(TemplateContainerViewModel template) => CurrentTemplate = template;

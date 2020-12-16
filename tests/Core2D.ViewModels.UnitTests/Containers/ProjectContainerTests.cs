@@ -235,7 +235,6 @@ namespace Core2D.ViewModels.UnitTests.ViewModels.Containers
             target.Documents = target.Documents.Add(document);
 
             target.Selected = document;
-            target.SetSelected(document);
 
             Assert.Equal(document, target.CurrentDocument);
         }
