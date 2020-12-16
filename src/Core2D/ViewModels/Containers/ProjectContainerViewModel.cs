@@ -32,46 +32,6 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private ViewModelBase _selected;
         [AutoNotify] private ISet<BaseShapeViewModel> _selectedShapes;
 
-        public static IEnumerable<BaseShapeViewModel> GetAllShapes(IEnumerable<BaseShapeViewModel> shapes)
-        {
-            if (shapes == null)
-            {
-                yield break;
-            }
-
-            foreach (var shape in shapes)
-            {
-                if (shape is GroupShapeViewModel groupShape)
-                {
-                    foreach (var s in GetAllShapes(groupShape.Shapes))
-                    {
-                        yield return s;
-                    }
-
-                    yield return shape;
-                }
-                else
-                {
-                    yield return shape;
-                }
-            }
-        }
-
-        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<BaseShapeViewModel> shapes)
-        {
-            return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
-        }
-
-        public static IEnumerable<T> GetAllShapes<T>(ProjectContainerViewModel project)
-        {
-            var shapes = project?.Documents
-                .SelectMany(d => d.Pages)
-                .SelectMany(c => c.Layers)
-                .SelectMany(l => l.Shapes);
-
-            return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
-        }
-
         public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             PropertyChanged += (sender, e) =>

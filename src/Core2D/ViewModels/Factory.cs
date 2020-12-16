@@ -1007,7 +1007,7 @@ namespace Core2D.ViewModels
 
         private IEnumerable<string> GetUsedKeys(ProjectContainerViewModel project)
         {
-            return ProjectContainerViewModel.GetAllShapes<ImageShapeViewModel>(project).Select(i => i.Key).Distinct();
+            return project.GetAllShapes<ImageShapeViewModel>().Select(i => i.Key).Distinct();
         }
 
         private ProjectContainerViewModel ReadProjectContainer(ZipArchiveEntry projectEntry, IFileSystem fileSystem, IJsonSerializer serializer)

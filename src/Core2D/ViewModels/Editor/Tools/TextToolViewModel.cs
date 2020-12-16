@@ -38,7 +38,8 @@ namespace Core2D.ViewModels.Editor.Tools
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
                             "Text",
-                            editor.Project.Options.DefaultIsStroked);
+                            editor.Project.Options.DefaultIsStroked,
+                            editor.GetShapeName<TextShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)

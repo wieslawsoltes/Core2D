@@ -466,7 +466,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     if (shape is GroupShapeViewModel group)
                     {
-                        var groupShapes = ProjectContainerViewModel.GetAllShapes(group.Shapes);
+                        var groupShapes = group.Shapes.GetAllShapes();
                         foreach (var child in groupShapes)
                         {
                             yield return child;

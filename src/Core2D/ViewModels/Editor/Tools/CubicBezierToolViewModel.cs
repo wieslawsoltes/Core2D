@@ -38,7 +38,8 @@ namespace Core2D.ViewModels.Editor.Tools
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsFilled);
+                            editor.Project.Options.DefaultIsFilled,
+                            editor.GetShapeName<CubicBezierShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)

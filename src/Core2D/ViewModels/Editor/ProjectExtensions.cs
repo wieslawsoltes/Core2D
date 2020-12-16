@@ -550,7 +550,7 @@ namespace Core2D.ViewModels.Editor
             {
                 if (shape is GroupShapeViewModel group)
                 {
-                    var shapes = ProjectContainerViewModel.GetAllShapes(group.Shapes);
+                    var shapes = group.Shapes.GetAllShapes();
                     foreach (var child in shapes)
                     {
                         var previous = child.Style;

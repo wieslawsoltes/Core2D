@@ -199,6 +199,13 @@ namespace Core2D.ViewModels.Editor
             return string.Empty;
         }
 
+        public string GetShapeName<T>()
+        {
+            var count = _project.GetAllShapes<T>().Count() + 1;
+            var name = typeof(T).Name.Replace("ShapeViewModel", " ") + count;
+            return name;
+        }
+
         public void OnNew(object item)
         {
             if (item is LayerContainerViewModel layer)
@@ -2575,7 +2582,7 @@ namespace Core2D.ViewModels.Editor
                 var records = GenerateRecordDictionaryById();
 
                 // Try to restore shape record.
-                foreach (var shape in ProjectContainerViewModel.GetAllShapes(shapes))
+                foreach (var shape in shapes.GetAllShapes())
                 {
                     if (shape?.Record == null)
                     {
@@ -2891,7 +2898,7 @@ namespace Core2D.ViewModels.Editor
                     {
                         if (clone is GroupShapeViewModel group)
                         {
-                            var shapes = ProjectContainerViewModel.GetAllShapes<LineShapeViewModel>(Project?.CurrentContainer?.CurrentLayer?.Shapes);
+                            var shapes = Project?.CurrentContainer?.CurrentLayer?.Shapes.GetAllShapes<LineShapeViewModel>();
                             TryToConnectLines(shapes, group.Connectors);
                         }
                     }

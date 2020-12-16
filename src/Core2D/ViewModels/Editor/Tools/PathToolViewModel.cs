@@ -115,7 +115,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 editor.Project.CurrentStyleLibrary.Selected :
                 editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             Path = factory.CreatePathShape(
-                "Path",
+                editor.GetShapeName<PathShapeViewModel>(),
                 (ShapeStyleViewModel)style.Copy(null),
                 Geometry,
                 editor.Project.Options.DefaultIsStroked,

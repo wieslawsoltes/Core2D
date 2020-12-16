@@ -151,7 +151,14 @@
                             </ContextMenu>
                         </StackPanel.ContextMenu>
                         <Image Source="{Binding Mode=OneWay, Converter={StaticResource BaseShapeIconConverter}}" Width="16" Height="16" Margin="8" />
-                        <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ShapeToTypeStringConverter}}" VerticalAlignment="Center" />
+                        <TextBlock VerticalAlignment="Center" >
+                            <TextBlock.Text>
+                                <MultiBinding Mode="OneWay" Converter="{StaticResource ShapeToTypeStringConverter}">
+                                    <Binding Path="Name" />
+                                    <Binding Path="" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </TreeView.DataTemplates>

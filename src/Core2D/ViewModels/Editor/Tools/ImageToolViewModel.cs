@@ -51,7 +51,10 @@ namespace Core2D.ViewModels.Editor.Tools
                         _image = factory.CreateImageShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
-                            key);
+                            key,
+                            false,
+                            false,
+                            editor.GetShapeName<ArcShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)

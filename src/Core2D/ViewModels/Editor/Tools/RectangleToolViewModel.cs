@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
+using Avalonia;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
+using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor.Tools.Selection;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
@@ -34,11 +37,13 @@ namespace Core2D.ViewModels.Editor.Tools
                         var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+
                         _rectangle = factory.CreateRectangleShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),
                             editor.Project.Options.DefaultIsStroked,
-                            editor.Project.Options.DefaultIsFilled);
+                            editor.Project.Options.DefaultIsFilled,
+                            editor.GetShapeName<RectangleShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result != null)
