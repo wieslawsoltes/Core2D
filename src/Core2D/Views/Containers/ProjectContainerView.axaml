@@ -151,7 +151,7 @@
                             </ContextMenu>
                         </StackPanel.ContextMenu>
                         <Image Source="{Binding Mode=OneWay, Converter={StaticResource BaseShapeIconConverter}}" Width="16" Height="16" Margin="8" />
-                        <TextBlock VerticalAlignment="Center" >
+                        <TextBlock VerticalAlignment="Center">
                             <TextBlock.Text>
                                 <MultiBinding Mode="OneWay" Converter="{StaticResource ShapeToTypeStringConverter}">
                                     <Binding Path="Name" />
