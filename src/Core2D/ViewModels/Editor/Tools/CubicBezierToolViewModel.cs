@@ -31,7 +31,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.Point1:
                     {
                         editor.IsToolIdle = false;
-                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                        var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _cubicBezier = factory.CreateCubicBezierShape(
@@ -42,7 +42,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             editor.GetShapeName<CubicBezierShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                        if (result != null)
+                        if (result is { })
                         {
                             _cubicBezier.Point1 = result;
                         }
@@ -56,7 +56,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point4:
                     {
-                        if (_cubicBezier != null)
+                        if (_cubicBezier is { })
                         {
                             _cubicBezier.Point3.X = (double)sx;
                             _cubicBezier.Point3.Y = (double)sy;
@@ -64,7 +64,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _cubicBezier.Point4.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _cubicBezier.Point4 = result;
                             }
@@ -78,13 +78,13 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point2:
                     {
-                        if (_cubicBezier != null)
+                        if (_cubicBezier is { })
                         {
                             _cubicBezier.Point2.X = (double)sx;
                             _cubicBezier.Point2.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _cubicBezier.Point2 = result;
                             }
@@ -98,13 +98,13 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point3:
                     {
-                        if (_cubicBezier != null)
+                        if (_cubicBezier is { })
                         {
                             _cubicBezier.Point3.X = (double)sx;
                             _cubicBezier.Point3.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _cubicBezier.Point3 = result;
                             }
@@ -158,7 +158,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point4:
                     {
-                        if (_cubicBezier != null)
+                        if (_cubicBezier is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -177,7 +177,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point2:
                     {
-                        if (_cubicBezier != null)
+                        if (_cubicBezier is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -192,7 +192,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point3:
                     {
-                        if (_cubicBezier != null)
+                        if (_cubicBezier is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -259,7 +259,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             _currentState = State.Point1;
 
-            if (_selectionSelection != null)
+            if (_selectionSelection is { })
             {
                 _selectionSelection.Reset();
                 _selectionSelection = null;

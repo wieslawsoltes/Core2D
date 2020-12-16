@@ -64,11 +64,11 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var pen = new SKPaint();
 
             var pathEffect = default(SKPathEffect);
-            if (style.Stroke.Dashes != null)
+            if (style.Stroke.Dashes is { })
             {
                 var intervals = StyleHelper.ConvertDashesToFloatArray(style.Stroke.Dashes, strokeWidth);
                 var phase = (float)(style.Stroke.DashOffset * strokeWidth);
-                if (intervals != null)
+                if (intervals is { })
                 {
                     pathEffect = SKPathEffect.CreateDash(intervals, phase);
                 }

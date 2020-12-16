@@ -37,12 +37,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
             if (!string.IsNullOrEmpty(Image.Key))
             {
                 ImageCached = BitmapCache.Get(Image.Key) as SKBitmap;
-                if (ImageCached == null && ImageCache != null)
+                if (ImageCached is null && ImageCache is { })
                 {
                     try
                     {
                         var bytes = ImageCache.GetImage(Image.Key);
-                        if (bytes != null)
+                        if (bytes is { })
                         {
                             ImageCached = SKBitmap.Decode(bytes);
                             BitmapCache.Set(Image.Key, ImageCached);
@@ -55,7 +55,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
                     }
                 }
 
-                if (ImageCached != null)
+                if (ImageCached is { })
                 {
                     SourceRect = new SKRect(0, 0, ImageCached.Width, ImageCached.Height);
                 }
@@ -84,7 +84,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
                 canvas.DrawRect(DestRect, Stroke);
             }
 
-            if (ImageCached != null)
+            if (ImageCached is { })
             {
                 try
                 {

@@ -38,7 +38,7 @@ namespace Core2D.Modules.Renderer.Nodes
 
         public override void UpdateStyle()
         {
-            if (Grid.GridStrokeColor != null)
+            if (Grid.GridStrokeColor is { })
             {
                 Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, Grid.GridStrokeThickness);
             }
@@ -64,7 +64,7 @@ namespace Core2D.Modules.Renderer.Nodes
                 thickness /= scale;
             }
 
-            if (Stroke != null && Stroke.Thickness != thickness)
+            if (Stroke is { } && Stroke.Thickness != thickness)
             {
                 Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, thickness);
             }
@@ -76,7 +76,7 @@ namespace Core2D.Modules.Renderer.Nodes
         {
             var context = dc as AM.DrawingContext;
 
-            if (Grid.GridStrokeColor != null)
+            if (Grid.GridStrokeColor is { })
             {
                 if (Grid.IsGridEnabled)
                 {

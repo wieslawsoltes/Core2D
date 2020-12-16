@@ -38,10 +38,10 @@ namespace Core2D.ViewModels.Editor.History
             }
 
             var undo = _undos.Pop();
-            if (undo.Undo != null)
+            if (undo.Undo is { })
             {
                 undo.Undo();
-                if (undo.Redo != null)
+                if (undo.Redo is { })
                 {
                     var redo = UndoRedo.Create(undo.Undo, undo.Redo);
                     _redos.Push(redo);
@@ -59,10 +59,10 @@ namespace Core2D.ViewModels.Editor.History
             }
 
             var redo = _redos.Pop();
-            if (redo.Redo != null)
+            if (redo.Redo is { })
             {
                 redo.Redo();
-                if (redo.Undo != null)
+                if (redo.Undo is { })
                 {
                     var undo = UndoRedo.Create(redo.Undo, redo.Redo);
                     _undos.Push(undo);
@@ -74,12 +74,12 @@ namespace Core2D.ViewModels.Editor.History
 
         void IHistory.Reset()
         {
-            if (_undos != null && _undos.Count > 0)
+            if (_undos is { } && _undos.Count > 0)
             {
                 _undos.Clear();
             }
 
-            if (_redos != null && _redos.Count > 0)
+            if (_redos is { } && _redos.Count > 0)
             {
                 _redos.Clear();
             }

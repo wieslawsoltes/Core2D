@@ -15,7 +15,7 @@ namespace Core2D.ViewModels.Shapes
 
         public static void Group(this GroupShapeViewModel group, IEnumerable<BaseShapeViewModel> shapes, IList<BaseShapeViewModel> source = null)
         {
-            if (shapes != null)
+            if (shapes is { })
             {
                 foreach (var shape in shapes)
                 {
@@ -37,7 +37,7 @@ namespace Core2D.ViewModels.Shapes
 
         public static void Ungroup(IEnumerable<BaseShapeViewModel> shapes, IList<BaseShapeViewModel> source)
         {
-            if (shapes != null && source != null)
+            if (shapes is { } && source is { })
             {
                 foreach (var shape in shapes)
                 {

@@ -155,7 +155,7 @@ namespace Core2D
 
             var mainWindow = serviceProvider.GetService<MainWindow>();
 
-            if (windowSettings != null)
+            if (windowSettings is { })
             {
                 WindowConfigurationFactory.Load(mainWindow, windowSettings);
             }

@@ -44,7 +44,7 @@ namespace Core2D.Modules.Renderer.Nodes
         {
             BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
 
-            if (BoundText == null)
+            if (BoundText is null)
             {
                 return;
             }
@@ -114,7 +114,7 @@ namespace Core2D.Modules.Renderer.Nodes
         {
             var context = dc as AM.DrawingContext;
 
-            if (FormattedText != null)
+            if (FormattedText is { })
             {
                 context.DrawText(Stroke.Brush, Origin, FormattedText); 
             }

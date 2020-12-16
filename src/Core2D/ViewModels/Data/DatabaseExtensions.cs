@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Data
             bool isDirty = false;
             records = null;
 
-            if (source == null || destination == null)
+            if (source is null || destination is null)
             {
                 return isDirty;
             }
@@ -51,7 +51,7 @@ namespace Core2D.ViewModels.Data
             {
                 var record = destination.Records[i];
                 var result = source.Records.FirstOrDefault(r => r.Id == record.Id);
-                if (result != null)
+                if (result is { })
                 {
                     // Update existing record.
                     for (int j = 1; j < result.Values.Length; j++)
@@ -75,7 +75,7 @@ namespace Core2D.ViewModels.Data
             {
                 var record = source.Records[i];
                 var result = destination.Records.FirstOrDefault(r => r.Id == record.Id);
-                if (result == null)
+                if (result is null)
                 {
                     var r = source.Records[i];
 

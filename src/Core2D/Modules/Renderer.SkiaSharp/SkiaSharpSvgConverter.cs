@@ -26,7 +26,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
         private static bool IsStroked(SP.Paint paint)
         {
-            if (paint == null)
+            if (paint is null)
             {
                 return false;
             }
@@ -35,7 +35,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
         private static bool IsFilled(SP.Paint paint)
         {
-            if (paint == null)
+            if (paint is null)
             {
                 return false;
             }
@@ -87,7 +87,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
         {
             var style = factory.CreateShapeStyle("Style");
 
-            if (paint == null)
+            if (paint is null)
             {
                 return style;
             }
@@ -119,15 +119,15 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
             style.Stroke.LineCap = ToLineCap(paint.StrokeCap);
 
-            if (paint.PathEffect is SP.DashPathEffect dashPathEffect && dashPathEffect.Intervals != null)
+            if (paint.PathEffect is SP.DashPathEffect dashPathEffect && dashPathEffect.Intervals is { })
             {
                 style.Stroke.Dashes = StyleHelper.ConvertFloatArrayToDashes(dashPathEffect.Intervals);
                 style.Stroke.DashOffset = dashPathEffect.Phase;
             }
 
-            if (paint.Typeface != null)
+            if (paint.Typeface is { })
             {
-                if (paint.Typeface.FamilyName != null)
+                if (paint.Typeface.FamilyName is { })
                 {
                     style.TextStyle.FontName = paint.Typeface.FamilyName;
                 }
@@ -152,7 +152,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
         public static PathGeometryViewModel ToPathGeometry(SP.Path path, bool isFilled, IFactory factory)
         {
-            if (path.Commands == null)
+            if (path.Commands is null)
             {
                 return null;
             }
@@ -314,7 +314,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
         public static PathGeometryViewModel ToPathGeometry(SP.AddPolyPathCommand addPolyPathCommand, SP.PathFillType fillType, bool isFilled, bool isClosed, IFactory factory)
         {
-            if (addPolyPathCommand.Points == null || addPolyPathCommand.Points.Count < 2)
+            if (addPolyPathCommand.Points is null || addPolyPathCommand.Points.Count < 2)
             {
                 return null;
             }
@@ -393,7 +393,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
                     case SP.DrawPathCanvasCommand drawPathCanvasCommand:
                         {
-                            if (drawPathCanvasCommand.Path != null && drawPathCanvasCommand.Paint != null)
+                            if (drawPathCanvasCommand.Path is { } && drawPathCanvasCommand.Paint is { })
                             {
                                 if (drawPathCanvasCommand.Path.Commands?.Count == 1)
                                 {
@@ -461,14 +461,14 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
                                         case SP.AddPolyPathCommand addPolyPathCommand:
                                             {
-                                                if (addPolyPathCommand.Points != null)
+                                                if (addPolyPathCommand.Points is { })
                                                 {
                                                     var polyGeometry = ToPathGeometry(
                                                         addPolyPathCommand,
                                                         drawPathCanvasCommand.Path.FillType,
                                                         IsFilled(drawPathCanvasCommand.Paint),
                                                         addPolyPathCommand.Close, factory);
-                                                    if (polyGeometry != null)
+                                                    if (polyGeometry is { })
                                                     {
                                                         var style = ToStyle(drawPathCanvasCommand.Paint, factory);
                                                         var pathShape = factory.CreatePathShape(
@@ -510,7 +510,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                                 }
 
                                 var geometry = ToPathGeometry(drawPathCanvasCommand.Path, IsFilled(drawPathCanvasCommand.Paint), factory);
-                                if (geometry != null)
+                                if (geometry is { })
                                 {
                                     var style = ToStyle(drawPathCanvasCommand.Paint, factory);
                                     var pathShape = factory.CreatePathShape(
@@ -533,7 +533,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
                     case SP.DrawTextCanvasCommand drawTextCanvasCommand:
                         {
-                            if (drawTextCanvasCommand.Paint != null)
+                            if (drawTextCanvasCommand.Paint is { })
                             {
                                 var style = ToStyle(drawTextCanvasCommand.Paint, factory);
                                 var pathShape = factory.CreateTextShape(
@@ -572,7 +572,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
         private IList<BaseShapeViewModel> Convert(Svg.SvgDocument document, out double width, out double height)
         {
             var picture = SKSvg.ToModel(document);
-            if (picture == null)
+            if (picture is null)
             {
                 width = double.NaN;
                 height = double.NaN;
@@ -596,7 +596,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
         public IList<BaseShapeViewModel> Convert(string path, out double width, out double height)
         {
             var document = SKSvg.Open(path);
-            if (document == null)
+            if (document is null)
             {
                 width = double.NaN;
                 height = double.NaN;
@@ -610,7 +610,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
         {
             using var stream = ToStream(text);
             var document = SKSvg.Open(stream);
-            if (document == null)
+            if (document is null)
             {
                 width = double.NaN;
                 height = double.NaN;

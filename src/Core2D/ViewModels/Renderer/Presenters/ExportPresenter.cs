@@ -12,7 +12,7 @@ namespace Core2D.ViewModels.Renderer.Presenters
 
             renderer.State.DrawShapeState = ShapeStateFlags.Printable;
 
-            if (container is PageContainerViewModel page && page.Template != null)
+            if (container is PageContainerViewModel page && page.Template is { })
             {
                 renderer.Fill(dc, dx, dy, page.Template.Width, page.Template.Height, page.Template.Background);
                 DrawContainer(dc, renderer, selection, page.Template);

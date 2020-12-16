@@ -21,7 +21,7 @@ namespace Core2D.ViewModels.Containers
         {
             var isDirty = base.IsDirty();
 
-            if (_template != null)
+            if (_template is { })
             {
                 isDirty |= _template.IsDirty();
             }

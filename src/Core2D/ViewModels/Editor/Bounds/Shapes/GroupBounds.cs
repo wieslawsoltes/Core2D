@@ -23,7 +23,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
             foreach (var groupPoint in group.Connectors.Reverse())
             {
-                if (pointHitTest.TryToGetPoint(groupPoint, target, radius, scale, registered) != null)
+                if (pointHitTest.TryToGetPoint(groupPoint, target, radius, scale, registered) is { })
                 {
                     return groupPoint;
                 }

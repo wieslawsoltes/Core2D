@@ -51,13 +51,13 @@ namespace Core2D.Modules.Log.Trace
             {
                 SD.Trace.Flush();
 
-                if (_listener != null)
+                if (_listener is { })
                 {
                     _listener.Dispose();
                     _listener = null;
                 }
 
-                if (_stream != null)
+                if (_stream is { })
                 {
                     _stream.Dispose();
                     _stream = null;
@@ -115,7 +115,7 @@ namespace Core2D.Modules.Log.Trace
         public void LogException(Exception ex)
         {
             LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
-            if (ex.InnerException != null)
+            if (ex.InnerException is { })
             {
                 LogException(ex.InnerException);
             }

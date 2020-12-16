@@ -11,7 +11,7 @@ namespace Core2D.Behaviors
         {
             base.OnAttached();
 
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 _input = new ProjectEditorInput(AssociatedObject);
             }
@@ -21,7 +21,7 @@ namespace Core2D.Behaviors
         {
             base.OnDetaching();
 
-            if (AssociatedObject != null)
+            if (AssociatedObject is { })
             {
                 _input?.Detach();
             }

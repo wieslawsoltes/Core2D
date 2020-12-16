@@ -9,7 +9,7 @@ namespace Core2D.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null && value.GetType() == typeof(GroupShapeViewModel);
+            return value is { } && value.GetType() == typeof(GroupShapeViewModel);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

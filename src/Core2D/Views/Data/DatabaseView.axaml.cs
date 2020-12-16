@@ -65,7 +65,7 @@ namespace Core2D.Views.Data
 
         private void RowsDataGrid_DataContextChanged(object sender, EventArgs e)
         {
-            if (_databaseViewModel != null)
+            if (_databaseViewModel is { })
             {
                 _databaseViewModel.PropertyChanged -= DatabaseViewModelPropertyChanged;
                 _databaseViewModel = null;
@@ -87,7 +87,7 @@ namespace Core2D.Views.Data
         {
             if (e.PropertyName == nameof(DatabaseViewModel.Columns))
             {
-                if (_databaseViewModel != null)
+                if (_databaseViewModel is { })
                 {
                     ResetColumns();
                     CreateColumns();
@@ -96,7 +96,7 @@ namespace Core2D.Views.Data
 
             if (e.PropertyName == nameof(DatabaseViewModel.Records))
             {
-                if (_databaseViewModel != null)
+                if (_databaseViewModel is { })
                 {
                     ResetRecordsView();
                     CreateRecordsView();
@@ -109,7 +109,7 @@ namespace Core2D.Views.Data
             if (e.PropertyName == nameof(ColumnViewModel.Name)
                 || e.PropertyName == nameof(ColumnViewModel.IsVisible))
             {
-                if (_databaseViewModel != null)
+                if (_databaseViewModel is { })
                 {
                     UpdateHeaders();
                 }

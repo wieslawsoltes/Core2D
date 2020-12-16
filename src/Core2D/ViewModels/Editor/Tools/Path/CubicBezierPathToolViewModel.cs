@@ -65,7 +65,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         if (editor.Project.Options.TryToConnect)
                         {
                             var point3 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (point3 != null)
+                            if (point3 is { })
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
@@ -86,7 +86,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         if (editor.Project.Options.TryToConnect)
                         {
                             var point1 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (point1 != null)
+                            if (point1 is { })
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
@@ -107,7 +107,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         if (editor.Project.Options.TryToConnect)
                         {
                             var point2 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (point2 != null)
+                            if (point2 is { })
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
                                 var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
@@ -264,7 +264,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
             _currentState = State.Point1;
 
-            if (_selectionSelection != null)
+            if (_selectionSelection is { })
             {
                 _selectionSelection.Reset();
                 _selectionSelection = null;

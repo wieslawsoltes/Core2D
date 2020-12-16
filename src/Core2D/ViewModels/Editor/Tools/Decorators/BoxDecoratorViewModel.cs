@@ -161,7 +161,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
         public void Update(bool rebuild = true)
         {
-            if (_layer == null || _shapes == null)
+            if (_layer is null || _shapes is null)
             {
                 return;
             }
@@ -254,7 +254,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
         public void Show()
         {
-            if (_layer == null || _shapes == null)
+            if (_layer is null || _shapes is null)
             {
                 return;
             }
@@ -269,7 +269,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             editor.PageState.DrawPoints = false;
 
             _mode = Mode.None;
-            if (_currentHandle != null)
+            if (_currentHandle is { })
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
@@ -297,7 +297,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
         public void Hide()
         {
-            if (_layer == null || _shapes == null)
+            if (_layer is null || _shapes is null)
             {
                 return;
             }
@@ -309,7 +309,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             }
 
             _mode = Mode.None;
-            if (_currentHandle != null)
+            if (_currentHandle is { })
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
@@ -346,7 +346,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             (decimal sx, decimal sy) = editor.TryToSnap(args);
 
             _mode = Mode.None;
-            if (_currentHandle != null)
+            if (_currentHandle is { })
             {
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
                 _currentHandle = null;
@@ -358,7 +358,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
             var handles = _handles.Where(x => x.State.HasFlag(ShapeStateFlags.Visible));
             var result = editor.HitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState.ZoomX);
-            if (result != null)
+            if (result is { })
             {
                 if (result == _boundsHandle)
                 {
@@ -420,7 +420,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
         public void Move(InputArgs args)
         {
-            if (_layer == null || _shapes == null)
+            if (_layer is null || _shapes is null)
             {
                 return;
             }
@@ -440,10 +440,10 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             _startX = sx;
             _startY = sy;
 
-            if (_points == null)
+            if (_points is null)
             {
                 _points = _groupBox.GetMovablePoints();
-                if (_points == null)
+                if (_points is null)
                 {
                     return;
                 }

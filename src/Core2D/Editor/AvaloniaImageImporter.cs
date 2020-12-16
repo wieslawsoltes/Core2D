@@ -31,7 +31,7 @@ namespace Core2D.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 var result = await dlg.ShowAsync(GetWindow());
                 var path = result?.FirstOrDefault();
-                if (path != null)
+                if (path is { })
                 {
                     return _serviceProvider.GetService<ProjectEditorViewModel>().OnGetImageKey(path);
                 }

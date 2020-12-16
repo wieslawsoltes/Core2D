@@ -31,7 +31,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.Point1:
                     {
                         editor.IsToolIdle = false;
-                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                        var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _quadraticBezier = factory.CreateQuadraticBezierShape(
@@ -42,7 +42,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             editor.GetShapeName<QuadraticBezierShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                        if (result != null)
+                        if (result is { })
                         {
                             _quadraticBezier.Point1 = result;
                         }
@@ -56,7 +56,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point3:
                     {
-                        if (_quadraticBezier != null)
+                        if (_quadraticBezier is { })
                         {
                             _quadraticBezier.Point2.X = (double)sx;
                             _quadraticBezier.Point2.Y = (double)sy;
@@ -64,7 +64,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _quadraticBezier.Point3.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _quadraticBezier.Point3 = result;
                             }
@@ -78,13 +78,13 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point2:
                     {
-                        if (_quadraticBezier != null)
+                        if (_quadraticBezier is { })
                         {
                             _quadraticBezier.Point2.X = (double)sx;
                             _quadraticBezier.Point2.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _quadraticBezier.Point2 = result;
                             }
@@ -137,7 +137,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point3:
                     {
-                        if (_quadraticBezier != null)
+                        if (_quadraticBezier is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -154,7 +154,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point2:
                     {
-                        if (_quadraticBezier != null)
+                        if (_quadraticBezier is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -215,7 +215,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             _currentState = State.Point1;
 
-            if (_selection != null)
+            if (_selection is { })
             {
                 _selection.Reset();
                 _selection = null;

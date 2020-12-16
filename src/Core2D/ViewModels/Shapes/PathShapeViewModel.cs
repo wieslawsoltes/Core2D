@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Shapes
 
         private void UpdatePoints()
         {
-            if (_points == null)
+            if (_points is null)
             {
                 _points = new List<PointShapeViewModel>();
                 GetPoints(_points);
@@ -41,7 +41,7 @@ namespace Core2D.ViewModels.Shapes
 
         public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
-            if (selection?.SelectedShapes != null)
+            if (selection?.SelectedShapes is { })
             {
                 if (selection.SelectedShapes.Contains(this))
                 {
@@ -127,7 +127,7 @@ namespace Core2D.ViewModels.Shapes
         {
             var isDirty = base.IsDirty();
 
-            if (_geometry != null)
+            if (_geometry is { })
             {
                 isDirty |= _geometry.IsDirty();
             }

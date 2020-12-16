@@ -38,7 +38,7 @@ namespace Core2D.Modules.Serializer.Newtonsoft
             if (_lifetimeScope.ComponentRegistry.TryGetRegistration(new TypedService(type), out var registration))
             {
                 var viewType = (registration.Activator as ReflectionActivator)?.LimitType;
-                if (viewType != null)
+                if (viewType is { })
                 {
                     return base.CreateObjectContract(viewType);
                 }

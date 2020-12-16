@@ -28,7 +28,7 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.Project?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes is { })
             {
                 var style = editor.Project?.SelectedShapes.FirstOrDefault()?.Style;
                 _shapeStyleCopy = (ShapeStyleViewModel)style?.Copy(null);
@@ -37,7 +37,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnPasteStyle()
         {
-            if (_shapeStyleCopy == null)
+            if (_shapeStyleCopy is null)
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.Project?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes is { })
             {
                 var stroke = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.Color;
                 _strokeCopy = (BaseColorViewModel)stroke?.Copy(null);
@@ -66,7 +66,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnPasteStroke()
         {
-            if (_strokeCopy == null)
+            if (_strokeCopy is null)
             {
                 return;
             }
@@ -88,7 +88,7 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.Project?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes is { })
             {
                 var fill = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.Fill?.Color;
                 _fillCopy = (BaseColorViewModel)fill?.Copy(null);
@@ -97,7 +97,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnPasteFill()
         {
-            if (_fillCopy == null)
+            if (_fillCopy is null)
             {
                 return;
             }
@@ -119,7 +119,7 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.Project?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes is { })
             {
                 var startArrowStyle = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.StartArrow;
                 _startArrowStyleCopy = (ArrowStyleViewModel)startArrowStyle?.Copy(null);
@@ -128,7 +128,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnPasteStartArrowStyle()
         {
-            if (_startArrowStyleCopy == null)
+            if (_startArrowStyleCopy is null)
             {
                 return;
             }
@@ -150,7 +150,7 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.Project?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes is { })
             {
                 var endArrowStyle = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.Stroke?.EndArrow;
                 _endArrowStyleCopy = (ArrowStyleViewModel)endArrowStyle?.Copy(null);
@@ -159,7 +159,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnPasteEndArrowStyle()
         {
-            if (_endArrowStyleCopy == null)
+            if (_endArrowStyleCopy is null)
             {
                 return;
             }
@@ -181,7 +181,7 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.Project?.SelectedShapes != null)
+            if (editor.Project?.SelectedShapes is { })
             {
                 var textStyle = editor.Project?.SelectedShapes.FirstOrDefault()?.Style?.TextStyle;
                 _textStyleCopy = (TextStyleViewModel)textStyle?.Copy(null);
@@ -190,7 +190,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnPasteTextStyle()
         {
-            if (_textStyleCopy == null)
+            if (_textStyleCopy is null)
             {
                 return;
             }
@@ -211,7 +211,7 @@ namespace Core2D.ViewModels.Editor
         private void SetThickness(BaseShapeViewModel shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null)
+            if (style is { })
             {
                 var previous = style.Stroke.Thickness;
                 var next = value;
@@ -223,7 +223,7 @@ namespace Core2D.ViewModels.Editor
         private void SetLineCap(BaseShapeViewModel shape, LineCap value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null)
+            if (style is { })
             {
                 var previous = style.Stroke.LineCap;
                 var next = value;
@@ -235,7 +235,7 @@ namespace Core2D.ViewModels.Editor
         private void SetDashes(BaseShapeViewModel shape, string value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null)
+            if (style is { })
             {
                 var previous = style.Stroke.Dashes;
                 var next = value;
@@ -247,7 +247,7 @@ namespace Core2D.ViewModels.Editor
         private void SetDashOffset(BaseShapeViewModel shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null)
+            if (style is { })
             {
                 var previous = style.Stroke.DashOffset;
                 var next = value;
@@ -259,7 +259,7 @@ namespace Core2D.ViewModels.Editor
         private void SetStroke(BaseShapeViewModel shape, BaseColorViewModel value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null)
+            if (style is { })
             {
                 var previous = style.Stroke.Color;
                 var next = (BaseColorViewModel)value.Copy(null);
@@ -283,7 +283,7 @@ namespace Core2D.ViewModels.Editor
         private void SetFill(BaseShapeViewModel shape, BaseColorViewModel value, IHistory history)
         {
             var style = shape.Style;
-            if (style != null)
+            if (style is { })
             {
                 var previous = style.Fill.Color;
                 var next = (BaseColorViewModel)value.Copy(null);
@@ -307,7 +307,7 @@ namespace Core2D.ViewModels.Editor
         private void SetFontName(BaseShapeViewModel shape, string value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.TextStyle != null)
+            if (style?.TextStyle is { })
             {
                 var textStyle = style.TextStyle;
 
@@ -321,7 +321,7 @@ namespace Core2D.ViewModels.Editor
         private void SetFontStyle(BaseShapeViewModel shape, FontStyleFlags value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.TextStyle?.FontStyle != null)
+            if (style?.TextStyle?.FontStyle is { })
             {
                 var textStyle = style.TextStyle;
 
@@ -335,7 +335,7 @@ namespace Core2D.ViewModels.Editor
         private void SetFontSize(BaseShapeViewModel shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.TextStyle != null)
+            if (style?.TextStyle is { })
             {
                 var textStyle = style.TextStyle;
 
@@ -349,7 +349,7 @@ namespace Core2D.ViewModels.Editor
         private void SetTextHAlignment(BaseShapeViewModel shape, TextHAlignment value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.TextStyle != null)
+            if (style?.TextStyle is { })
             {
                 var textStyle = style.TextStyle;
 
@@ -363,7 +363,7 @@ namespace Core2D.ViewModels.Editor
         private void SetTextVAlignment(BaseShapeViewModel shape, TextVAlignment value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.TextStyle != null)
+            if (style?.TextStyle is { })
             {
                 var textStyle = style.TextStyle;
 
@@ -377,7 +377,7 @@ namespace Core2D.ViewModels.Editor
         private void SetStartArrowType(BaseShapeViewModel shape, ArrowType value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.Stroke.StartArrow != null)
+            if (style?.Stroke.StartArrow is { })
             {
                 var startArrowStyle = style.Stroke.StartArrow;
 
@@ -391,7 +391,7 @@ namespace Core2D.ViewModels.Editor
         private void SetStartArrowRadiusX(BaseShapeViewModel shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.Stroke.StartArrow != null)
+            if (style?.Stroke.StartArrow is { })
             {
                 var startArrowStyle = style.Stroke.StartArrow;
 
@@ -405,7 +405,7 @@ namespace Core2D.ViewModels.Editor
         private void SetStartArrowRadiusY(BaseShapeViewModel shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.Stroke.StartArrow != null)
+            if (style?.Stroke.StartArrow is { })
             {
                 var startArrowStyle = style.Stroke.StartArrow;
 
@@ -419,7 +419,7 @@ namespace Core2D.ViewModels.Editor
         private void SetEndArrowType(BaseShapeViewModel shape, ArrowType value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.Stroke.EndArrow != null)
+            if (style?.Stroke.EndArrow is { })
             {
                 var endArrowStyle = style.Stroke.EndArrow;
 
@@ -433,7 +433,7 @@ namespace Core2D.ViewModels.Editor
         private void SetEndArrowRadiusX(BaseShapeViewModel shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.Stroke.EndArrow != null)
+            if (style?.Stroke.EndArrow is { })
             {
                 var endArrowStyle = style.Stroke.EndArrow;
 
@@ -447,7 +447,7 @@ namespace Core2D.ViewModels.Editor
         private void SetEndArrowRadiusY(BaseShapeViewModel shape, double value, IHistory history)
         {
             var style = shape.Style;
-            if (style?.Stroke.EndArrow != null)
+            if (style?.Stroke.EndArrow is { })
             {
                 var endArrowStyle = style.Stroke.EndArrow;
 

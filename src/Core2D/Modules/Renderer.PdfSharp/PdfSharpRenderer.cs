@@ -55,12 +55,12 @@ namespace Core2D.Modules.Renderer.PdfSharp
                     pen.LineCap = XLineCap.Round;
                     break;
             }
-            if (style.Stroke.Dashes != null)
+            if (style.Stroke.Dashes is { })
             {
                 // TODO: Convert to correct dash values.
                 var dashPattern = StyleHelper.ConvertDashesToDoubleArray(style.Stroke.Dashes, strokeWidth);
                 var dashOffset = style.Stroke.DashOffset * strokeWidth;
-                if (dashPattern != null)
+                if (dashPattern is { })
                 {
                     pen.DashPattern = dashPattern;
                     pen.DashStyle = XDashStyle.Custom;
@@ -565,7 +565,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
                 tbind = text.Text;
             }
 
-            if (tbind == null)
+            if (tbind is null)
             {
                 return;
             }
@@ -671,16 +671,16 @@ namespace Core2D.Modules.Renderer.PdfSharp
             }
 
             var imageCached = _biCache.Get(image.Key);
-            if (imageCached != null)
+            if (imageCached is { })
             {
                 _gfx.DrawImage(imageCached, srect);
             }
             else
             {
-                if (State.ImageCache != null && !string.IsNullOrEmpty(image.Key))
+                if (State.ImageCache is { } && !string.IsNullOrEmpty(image.Key))
                 {
                     var bytes = State.ImageCache.GetImage(image.Key);
-                    if (bytes != null)
+                    if (bytes is { })
                     {
                         var ms = new System.IO.MemoryStream(bytes);
 

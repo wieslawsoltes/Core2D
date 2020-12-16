@@ -65,7 +65,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void Move()
         {
-            if (_line12 != null)
+            if (_line12 is { })
             {
                 _line12.Start.X = _cubicBezier.Point1.X;
                 _line12.Start.Y = _cubicBezier.Point1.Y;
@@ -73,7 +73,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _line12.End.Y = _cubicBezier.Point2.Y;
             }
 
-            if (_line43 != null)
+            if (_line43 is { })
             {
                 _line43.Start.X = _cubicBezier.Point4.X;
                 _line43.Start.Y = _cubicBezier.Point4.Y;
@@ -81,7 +81,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _line43.End.Y = _cubicBezier.Point3.Y;
             }
 
-            if (_line23 != null)
+            if (_line23 is { })
             {
                 _line23.Start.X = _cubicBezier.Point2.X;
                 _line23.Start.Y = _cubicBezier.Point2.Y;
@@ -89,25 +89,25 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _line23.End.Y = _cubicBezier.Point3.Y;
             }
 
-            if (_helperPoint1 != null)
+            if (_helperPoint1 is { })
             {
                 _helperPoint1.X = _cubicBezier.Point1.X;
                 _helperPoint1.Y = _cubicBezier.Point1.Y;
             }
 
-            if (_helperPoint2 != null)
+            if (_helperPoint2 is { })
             {
                 _helperPoint2.X = _cubicBezier.Point2.X;
                 _helperPoint2.Y = _cubicBezier.Point2.Y;
             }
 
-            if (_helperPoint3 != null)
+            if (_helperPoint3 is { })
             {
                 _helperPoint3.X = _cubicBezier.Point3.X;
                 _helperPoint3.Y = _cubicBezier.Point3.Y;
             }
 
-            if (_helperPoint4 != null)
+            if (_helperPoint4 is { })
             {
                 _helperPoint4.X = _cubicBezier.Point4.X;
                 _helperPoint4.Y = _cubicBezier.Point4.Y;
@@ -118,43 +118,43 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void Reset()
         {
-            if (_line12 != null)
+            if (_line12 is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_line12);
                 _line12 = null;
             }
 
-            if (_line43 != null)
+            if (_line43 is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_line43);
                 _line43 = null;
             }
 
-            if (_line23 != null)
+            if (_line23 is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_line23);
                 _line23 = null;
             }
 
-            if (_helperPoint1 != null)
+            if (_helperPoint1 is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_helperPoint1);
                 _helperPoint1 = null;
             }
 
-            if (_helperPoint2 != null)
+            if (_helperPoint2 is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_helperPoint2);
                 _helperPoint2 = null;
             }
 
-            if (_helperPoint3 != null)
+            if (_helperPoint3 is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_helperPoint3);
                 _helperPoint3 = null;
             }
 
-            if (_helperPoint4 != null)
+            if (_helperPoint4 is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_helperPoint4);
                 _helperPoint4 = null;

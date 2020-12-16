@@ -28,7 +28,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
             foreach (var pathPoint in _points)
             {
-                if (pointHitTest.TryToGetPoint(pathPoint, target, radius, scale, registered) != null)
+                if (pointHitTest.TryToGetPoint(pathPoint, target, radius, scale, registered) is { })
                 {
                     return pathPoint;
                 }

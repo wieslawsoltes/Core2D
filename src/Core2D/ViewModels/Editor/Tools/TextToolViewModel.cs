@@ -31,7 +31,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.TopLeft:
                     {
                         editor.IsToolIdle = false;
-                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                        var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _text = factory.CreateTextShape(
@@ -42,7 +42,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             editor.GetShapeName<TextShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                        if (result != null)
+                        if (result is { })
                         {
                             _text.TopLeft = result;
                         }
@@ -56,13 +56,13 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        if (_text != null)
+                        if (_text is { })
                         {
                             _text.BottomRight.X = (double)sx;
                             _text.BottomRight.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _text.BottomRight = result;
                             }
@@ -112,7 +112,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        if (_text != null)
+                        if (_text is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -167,7 +167,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             _currentState = State.TopLeft;
 
-            if (_selection != null)
+            if (_selection is { })
             {
                 _selection.Reset();
                 _selection = null;

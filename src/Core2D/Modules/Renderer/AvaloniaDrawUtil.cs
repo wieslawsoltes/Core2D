@@ -21,11 +21,11 @@ namespace Core2D.Modules.Renderer
         public static AM.IPen ToPen(ShapeStyleViewModel style, double thickness)
         {
             var dashStyle = default(AM.Immutable.ImmutableDashStyle);
-            if (style.Stroke.Dashes != null)
+            if (style.Stroke.Dashes is { })
             {
                 var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Stroke.Dashes, 1.0);
                 var dashOffset = style.Stroke.DashOffset;
-                if (dashes != null)
+                if (dashes is { })
                 {
                     dashStyle = new AM.Immutable.ImmutableDashStyle(dashes, dashOffset);
                 }

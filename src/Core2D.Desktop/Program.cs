@@ -32,7 +32,7 @@ namespace Core2D
         {
             Console.WriteLine(ex.Message);
             Console.WriteLine(ex.StackTrace);
-            if (ex.InnerException != null)
+            if (ex.InnerException is { })
             {
                 Log(ex.InnerException);
             }
@@ -92,19 +92,19 @@ namespace Core2D
 
                 var size = new Size(1366, 690);
 
-                if (mainView != null)
+                if (mainView is { })
                 {
                     Util.Screenshot(mainView, size, $"Core2D-Dashboard-{App.DefaultTheme}.png");
                     Dispatcher.UIThread.RunJobs();
                 }
 
-                if (mainView != null)
+                if (mainView is { })
                 {
                     editor?.OnNew(null);
                     Dispatcher.UIThread.RunJobs();
                 }
 
-                if (mainView != null)
+                if (mainView is { })
                 {
                     Util.Screenshot(mainView, size, $"Core2D-Editor-{App.DefaultTheme}.png");
                     Dispatcher.UIThread.RunJobs();
@@ -123,9 +123,9 @@ namespace Core2D
                 var mainView = mainWindow?.Content as MainView;
                 var editor = mainView?.DataContext as ProjectEditorViewModel;
 
-                if (mainView != null)
+                if (mainView is { })
                 {
-                    if (settings.Scripts != null)
+                    if (settings.Scripts is { })
                     {
                         foreach (var script in settings.Scripts)
                         {
@@ -134,7 +134,7 @@ namespace Core2D
                         }
                     }
 
-                    if (settings.Project != null)
+                    if (settings.Project is { })
                     {
                         editor?.OnOpenProject(settings.Project.FullName);
                         Dispatcher.UIThread.RunJobs();
@@ -149,7 +149,7 @@ namespace Core2D
 
             try
             {
-                if (settings.Theme != null)
+                if (settings.Theme is { })
                 {
                     App.DefaultTheme = settings.Theme.Value;
                 }
@@ -363,7 +363,7 @@ namespace Core2D
 
             rootCommand.Invoke(args);
 
-            if (rootSettings != null)
+            if (rootSettings is { })
             {
                 StartAvaloniaApp(rootSettings, args);
             }

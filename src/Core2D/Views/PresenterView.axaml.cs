@@ -59,7 +59,7 @@ namespace Core2D.Views
         public void Render(IDrawingContextImpl context)
         {
             var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
-            if (canvas == null)
+            if (canvas is null)
             {
                 return;
             }
@@ -160,7 +160,7 @@ namespace Core2D.Views
             {
                 PresenterView = this,
                 CustomState = customState,
-                Bounds = ZoomBorder != null ? ZoomBorder.Bounds : this.Bounds
+                Bounds = ZoomBorder is { } ? ZoomBorder.Bounds : this.Bounds
             };
             context.Custom(customDrawOperation);
 #else
@@ -177,7 +177,7 @@ namespace Core2D.Views
 
                 case PresenterType.Data:
                     {
-                        if (customState.Container != null && customState.DataFlow != null)
+                        if (customState.Container is { } && customState.DataFlow is { })
                         {
                             var db = (object)customState.Container.Properties;
                             var record = (object)customState.Container.Record;
@@ -193,7 +193,7 @@ namespace Core2D.Views
 
                 case PresenterType.Template:
                     {
-                        if (customState.Container != null && customState.Renderer != null)
+                        if (customState.Container is { } && customState.Renderer is { })
                         {
                             s_templatePresenter.Render(context, customState.Renderer, customState.Selection, customState.Container, 0.0, 0.0);
                             if (customState.Container is PageContainerViewModel page)
@@ -206,7 +206,7 @@ namespace Core2D.Views
 
                 case PresenterType.Editor:
                     {
-                        if (customState.Container != null && customState.Renderer != null)
+                        if (customState.Container is { } && customState.Renderer is { })
                         {
                             s_editorPresenter.Render(context, customState.Renderer, customState.Selection, customState.Container, 0.0, 0.0);
 
@@ -219,7 +219,7 @@ namespace Core2D.Views
 
                 case PresenterType.Export:
                     {
-                        if (customState.Container != null && customState.Renderer != null)
+                        if (customState.Container is { } && customState.Renderer is { })
                         {
                             s_exportPresenter.Render(context, customState.Renderer, customState.Selection, customState.Container, 0.0, 0.0);
                         }

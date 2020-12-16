@@ -23,7 +23,7 @@ namespace Core2D.Modules.SvgExporter.Svg
         {
             var converter = _serviceProvider.GetService<IPathConverter>();
 
-            if (converter == null)
+            if (converter is null)
             {
                 return null;
             }
@@ -69,7 +69,7 @@ namespace Core2D.Modules.SvgExporter.Svg
             if (shape.IsFilled)
             {
                 var path = converter.ToFillPathShape(shape);
-                if (path != null)
+                if (path is { })
                 {
                     if (shape.Style.Fill.Color is ArgbColorViewModel argbColor)
                     {
@@ -84,7 +84,7 @@ namespace Core2D.Modules.SvgExporter.Svg
             if (shape.IsStroked)
             {
                 var path = converter.ToStrokePathShape(shape);
-                if (path != null)
+                if (path is { })
                 {
                     if (shape.Style.Stroke.Color is ArgbColorViewModel argbColor)
                     {

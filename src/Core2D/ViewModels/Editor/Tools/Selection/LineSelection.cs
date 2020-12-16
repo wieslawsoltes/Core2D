@@ -34,13 +34,13 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void Move()
         {
-            if (_startHelperPoint != null)
+            if (_startHelperPoint is { })
             {
                 _startHelperPoint.X = _line.Start.X;
                 _startHelperPoint.Y = _line.Start.Y;
             }
 
-            if (_endHelperPoint != null)
+            if (_endHelperPoint is { })
             {
                 _endHelperPoint.X = _line.End.X;
                 _endHelperPoint.Y = _line.End.Y;
@@ -51,13 +51,13 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void Reset()
         {
-            if (_startHelperPoint != null)
+            if (_startHelperPoint is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_startHelperPoint);
                 _startHelperPoint = null;
             }
 
-            if (_endHelperPoint != null)
+            if (_endHelperPoint is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_endHelperPoint);
                 _endHelperPoint = null;

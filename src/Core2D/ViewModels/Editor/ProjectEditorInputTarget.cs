@@ -23,37 +23,37 @@ namespace Core2D.ViewModels.Editor
 
         public override bool IsBeginDownAvailable()
         {
-            return _editor?.Project?.CurrentContainer?.CurrentLayer != null
+            return _editor?.Project?.CurrentContainer?.CurrentLayer is { }
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public override bool IsBeginUpAvailable()
         {
-            return _editor?.Project?.CurrentContainer?.CurrentLayer != null
+            return _editor?.Project?.CurrentContainer?.CurrentLayer is { }
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public override bool IsEndDownAvailable()
         {
-            return _editor?.Project?.CurrentContainer?.CurrentLayer != null
+            return _editor?.Project?.CurrentContainer?.CurrentLayer is { }
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public override bool IsEndUpAvailable()
         {
-            return _editor?.Project?.CurrentContainer?.CurrentLayer != null
+            return _editor?.Project?.CurrentContainer?.CurrentLayer is { }
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public override bool IsMoveAvailable()
         {
-            return _editor.Project?.CurrentContainer?.CurrentLayer != null
+            return _editor.Project?.CurrentContainer?.CurrentLayer is { }
                 && _editor.Project.CurrentContainer.CurrentLayer.IsVisible;
         }
 
         public bool IsSelectionAvailable()
         {
-            return _editor?.Project?.SelectedShapes != null;
+            return _editor?.Project?.SelectedShapes is { };
         }
     }
 }

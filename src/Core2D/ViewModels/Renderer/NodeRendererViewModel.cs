@@ -33,7 +33,7 @@ namespace Core2D.ViewModels.Renderer
         public void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel color)
         {
             var drawNodeCached = _drawNodeCache.Get(color);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (drawNodeCached is IFillDrawNode drawNode)
                 {
@@ -66,7 +66,7 @@ namespace Core2D.ViewModels.Renderer
         public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
         {
             var drawNodeCached = _drawNodeCache.Get(grid);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (drawNodeCached is IGridDrawNode drawNode)
                 {
@@ -75,7 +75,7 @@ namespace Core2D.ViewModels.Renderer
                     drawNode.Width = width;
                     drawNode.Height = height;
                     drawNode.UpdateGeometry();
-                    if (grid.IsDirty() || (grid.GridStrokeColor != null && grid.GridStrokeColor.IsDirty()))
+                    if (grid.IsDirty() || (grid.GridStrokeColor is { } && grid.GridStrokeColor.IsDirty()))
                     {
                         drawNode.UpdateStyle();
                         grid.GridStrokeColor?.Invalidate();
@@ -98,7 +98,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawPoint(object dc, PointShapeViewModel point, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(point);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {
@@ -134,7 +134,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawLine(object dc, LineShapeViewModel line, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(line);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {
@@ -166,7 +166,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawRectangle(object dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(rectangle);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {
@@ -197,7 +197,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawEllipse(object dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(ellipse);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {
@@ -228,7 +228,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(arc);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {
@@ -259,7 +259,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(cubicBezier);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {
@@ -290,7 +290,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(quadraticBezier);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {
@@ -321,7 +321,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawText(object dc, TextShapeViewModel text, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(text);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {
@@ -360,7 +360,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawImage(object dc, ImageShapeViewModel image, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(image);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {
@@ -391,7 +391,7 @@ namespace Core2D.ViewModels.Renderer
         public void DrawPath(object dc, PathShapeViewModel path, ShapeStyleViewModel style)
         {
             var drawNodeCached = _drawNodeCache.Get(path);
-            if (drawNodeCached != null)
+            if (drawNodeCached is { })
             {
                 if (style.IsDirty() || drawNodeCached.Style != style)
                 {

@@ -38,7 +38,7 @@ namespace Core2D.ViewModels.Editor.Bounds
             foreach (var shape in shapes)
             {
                 var result = TryToGetPoint(shape, target, radius, scale);
-                if (result != null)
+                if (result is { })
                 {
                     return result;
                 }

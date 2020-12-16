@@ -35,7 +35,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.Point1:
                     {
                         editor.IsToolIdle = false;
-                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                        var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _connectedPoint3 = false;
@@ -48,7 +48,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             editor.GetShapeName<ArcShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                        if (result != null)
+                        if (result is { })
                         {
                             _arc.Point1 = result;
                         }
@@ -61,7 +61,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point2:
                     {
-                        if (_arc != null)
+                        if (_arc is { })
                         {
                             _arc.Point2.X = (double)sx;
                             _arc.Point2.Y = (double)sy;
@@ -69,7 +69,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _arc.Point3.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _arc.Point2 = result;
                             }
@@ -83,7 +83,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point3:
                     {
-                        if (_arc != null)
+                        if (_arc is { })
                         {
                             _arc.Point3.X = (double)sx;
                             _arc.Point3.Y = (double)sy;
@@ -91,7 +91,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _arc.Point4.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _arc.Point3 = result;
                                 _connectedPoint3 = true;
@@ -111,13 +111,13 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point4:
                     {
-                        if (_arc != null)
+                        if (_arc is { })
                         {
                             _arc.Point4.X = (double)sx;
                             _arc.Point4.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _arc.Point4 = result;
                                 _connectedPoint4 = true;
@@ -176,7 +176,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point2:
                     {
-                        if (_arc != null)
+                        if (_arc is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -191,7 +191,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point3:
                     {
-                        if (_arc != null)
+                        if (_arc is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -206,7 +206,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Point4:
                     {
-                        if (_arc != null)
+                        if (_arc is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -291,7 +291,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             _currentState = State.Point1;
 
-            if (_selection != null)
+            if (_selection is { })
             {
                 _selection.Reset();
                 _selection = null;

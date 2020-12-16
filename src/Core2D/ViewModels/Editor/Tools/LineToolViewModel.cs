@@ -32,7 +32,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.Start:
                     {
                         editor.IsToolIdle = false;
-                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                        var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _line = factory.CreateLineShape(
@@ -43,7 +43,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         if (editor.Project.Options.TryToConnect)
                         {
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _line.Start = result;
                             }
@@ -61,7 +61,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.End:
                     {
-                        if (_line != null)
+                        if (_line is { })
                         {
                             _line.End.X = (double)sx;
                             _line.End.Y = (double)sy;
@@ -69,7 +69,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             if (editor.Project.Options.TryToConnect)
                             {
                                 var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                                if (result != null)
+                                if (result is { })
                                 {
                                     _line.End = result;
                                 }
@@ -126,7 +126,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.End:
                     {
-                        if (_line != null)
+                        if (_line is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -181,7 +181,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             _currentState = State.Start;
 
-            if (_selection != null)
+            if (_selection is { })
             {
                 _selection.Reset();
                 _selection = null;

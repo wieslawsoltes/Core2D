@@ -34,7 +34,7 @@ namespace Core2D.Behaviors
         {
             base.OnDetaching();
 
-            if (_textEditor != null)
+            if (_textEditor is { })
             {
                 _textEditor.TextChanged -= TextChanged;
             }
@@ -42,7 +42,7 @@ namespace Core2D.Behaviors
 
         private void TextChanged(object sender, EventArgs eventArgs)
         {
-            if (_textEditor?.Document != null)
+            if (_textEditor?.Document is { })
             {
                 Text = _textEditor.Document.Text;
             }
@@ -50,7 +50,7 @@ namespace Core2D.Behaviors
 
         private void TextPropertyChanged(string text)
         {
-            if (_textEditor?.Document != null && text != null)
+            if (_textEditor?.Document is { } && text is { })
             {
                 var caretOffset = _textEditor.CaretOffset;
                 _textEditor.Document.Text = text;

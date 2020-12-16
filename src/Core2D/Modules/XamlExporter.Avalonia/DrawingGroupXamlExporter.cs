@@ -21,7 +21,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
         {
             var converter = _serviceProvider.GetService<IPathConverter>();
 
-            if (converter == null)
+            if (converter is null)
             {
                 return null;
             }
@@ -66,7 +66,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
             if (shape.IsFilled)
             {
                 var path = converter.ToFillPathShape(shape);
-                if (path != null)
+                if (path is { })
                 {
                     var geometry = path.Geometry.ToXamlString();
                     var brush = (shape.Style.Fill.Color as ArgbColorViewModel).ToXamlString();
@@ -77,7 +77,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
             if (shape.IsStroked)
             {
                 var path = converter.ToStrokePathShape(shape);
-                if (path != null)
+                if (path is { })
                 {
                     var geometry = path.Geometry.ToXamlString();
                     var brush = (shape.Style.Stroke.Color as ArgbColorViewModel).ToXamlString();

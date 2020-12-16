@@ -13,7 +13,7 @@ namespace Core2D.Converters
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values != null && values.Count == 2)
+            if (values is { } && values.Count == 2)
             {
                 if (values[0] is ISet<BaseShapeViewModel> shapes && shapes.Count > 0)
                 {

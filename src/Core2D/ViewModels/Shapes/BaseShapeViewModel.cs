@@ -89,7 +89,7 @@ namespace Core2D.ViewModels.Shapes
                 isDirty |= property.IsDirty();
             }
 
-            if (Record != null)
+            if (Record is { })
             {
                 isDirty |= Record.IsDirty();
             }
@@ -150,7 +150,7 @@ namespace Core2D.ViewModels.Shapes
 
         public virtual void Select(ISelection selection)
         {
-            if (selection?.SelectedShapes != null)
+            if (selection?.SelectedShapes is { })
             {
                 if (!selection.SelectedShapes.Contains(this))
                 {
@@ -161,7 +161,7 @@ namespace Core2D.ViewModels.Shapes
 
         public virtual void Deselect(ISelection selection)
         {
-            if (selection?.SelectedShapes != null)
+            if (selection?.SelectedShapes is { })
             {
                 if (selection.SelectedShapes.Contains(this))
                 {

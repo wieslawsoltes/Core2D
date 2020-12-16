@@ -37,7 +37,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 
         public override void UpdateStyle()
         {
-            if (Grid.GridStrokeColor != null)
+            if (Grid.GridStrokeColor is { })
             {
                 Stroke = SkiaSharpDrawUtil.ToSKPaintPen(Grid.GridStrokeColor, Grid.GridStrokeThickness);
             }
@@ -63,7 +63,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
                 thickness /= scale;
             }
 
-            if (Stroke != null && Stroke.StrokeWidth != thickness)
+            if (Stroke is { } && Stroke.StrokeWidth != thickness)
             {
                 Stroke.StrokeWidth = (float)thickness;
             }
@@ -75,7 +75,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
         {
             var canvas = dc as SKCanvas;
 
-            if (Grid.GridStrokeColor != null)
+            if (Grid.GridStrokeColor is { })
             {
                 if (Grid.IsGridEnabled)
                 {

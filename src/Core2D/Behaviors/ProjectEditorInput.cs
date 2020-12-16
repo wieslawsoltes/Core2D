@@ -30,7 +30,7 @@ namespace Core2D.Behaviors
             }
 
             var state = projectEditor.PageState;
-            if (state != null)
+            if (state is { })
             {
                 state.ZoomX = zoomX;
                 state.ZoomY = zoomY;
@@ -75,7 +75,7 @@ namespace Core2D.Behaviors
                 canvasPlatform.Zoom = zoomBorder;
             }
 
-            if (zoomBorder != null)
+            if (zoomBorder is { })
             {
                 zoomBorder.ZoomChanged += ZoomBorder_ZoomChanged;
             }
@@ -108,7 +108,7 @@ namespace Core2D.Behaviors
                 canvasPlatform.Zoom = null;
             }
 
-            if (zoomBorder != null)
+            if (zoomBorder is { })
             {
                 zoomBorder.ZoomChanged -= ZoomBorder_ZoomChanged;
             }

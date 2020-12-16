@@ -31,7 +31,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     case LineSegmentViewModel lineSegment:
                         {
-                            var convertedStyle = style != null ?
+                            var convertedStyle = style is { } ?
                                 (ShapeStyleViewModel)style?.Copy(null) :
                                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
@@ -49,7 +49,7 @@ namespace Core2D.ViewModels.Editor
 
                     case QuadraticBezierSegmentViewModel quadraticBezierSegment:
                         {
-                            var convertedStyle = style != null ?
+                            var convertedStyle = style is { } ?
                                 (ShapeStyleViewModel)style?.Copy(null) :
                                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
@@ -69,7 +69,7 @@ namespace Core2D.ViewModels.Editor
 
                     case CubicBezierSegmentViewModel cubicBezierSegment:
                         {
-                            var convertedStyle = style != null ?
+                            var convertedStyle = style is { } ?
                                 (ShapeStyleViewModel)style?.Copy(null) :
                                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
@@ -90,7 +90,7 @@ namespace Core2D.ViewModels.Editor
 
                     case ArcSegmentViewModel arcSegment:
                         {
-                            var convertedStyle = style != null ?
+                            var convertedStyle = style is { } ?
                                 (ShapeStyleViewModel)style?.Copy(null) :
                                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
@@ -117,7 +117,7 @@ namespace Core2D.ViewModels.Editor
 
             if (pathFigure.Segments.Length > 0 && pathFigure.IsClosed)
             {
-                var convertedStyle = style != null ?
+                var convertedStyle = style is { } ?
                     (ShapeStyleViewModel)style?.Copy(null) :
                     factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
@@ -144,7 +144,7 @@ namespace Core2D.ViewModels.Editor
             {
                 foreach (var pathFigure in pathShape.Geometry.Figures)
                 {
-                    var style = pathShape.Style != null ?
+                    var style = pathShape.Style is { } ?
                         (ShapeStyleViewModel)pathShape.Style?.Copy(null) :
                         factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
@@ -202,7 +202,7 @@ namespace Core2D.ViewModels.Editor
                     {
                         var pathConverter = _serviceProvider.GetService<IPathConverter>();
                         var path = pathConverter?.ToPathShape(shape);
-                        if (path != null)
+                        if (path is { })
                         {
                             BreakShape(path, result, remove);
                             remove.Add(shape);

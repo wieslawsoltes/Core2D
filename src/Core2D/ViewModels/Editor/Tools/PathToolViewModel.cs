@@ -82,7 +82,7 @@ namespace Core2D.ViewModels.Editor.Tools
         public PointShapeViewModel GetLastPathPoint()
         {
             var figure = Geometry.Figures.LastOrDefault();
-            if (figure != null)
+            if (figure is { })
             {
                 return (figure.Segments.LastOrDefault()) switch
                 {
@@ -111,7 +111,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 start,
                 editor.Project.Options.DefaultIsClosed);
 
-            var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+            var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                 editor.Project.CurrentStyleLibrary.Selected :
                 editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             Path = factory.CreatePathShape(
@@ -177,7 +177,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (Path?.Geometry != null)
+            if (Path?.Geometry is { })
             {
                 editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
                 editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();

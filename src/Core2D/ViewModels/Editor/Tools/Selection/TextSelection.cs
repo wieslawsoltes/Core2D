@@ -40,7 +40,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void Move()
         {
-            if (_helperRectangle != null)
+            if (_helperRectangle is { })
             {
                 _helperRectangle.TopLeft.X = _text.TopLeft.X;
                 _helperRectangle.TopLeft.Y = _text.TopLeft.Y;
@@ -48,13 +48,13 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _helperRectangle.BottomRight.Y = _text.BottomRight.Y;
             }
 
-            if (_topLeftHelperPoint != null)
+            if (_topLeftHelperPoint is { })
             {
                 _topLeftHelperPoint.X = _text.TopLeft.X;
                 _topLeftHelperPoint.Y = _text.TopLeft.Y;
             }
 
-            if (_bottomRightHelperPoint != null)
+            if (_bottomRightHelperPoint is { })
             {
                 _bottomRightHelperPoint.X = _text.BottomRight.X;
                 _bottomRightHelperPoint.Y = _text.BottomRight.Y;
@@ -65,19 +65,19 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void Reset()
         {
-            if (_helperRectangle != null)
+            if (_helperRectangle is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_helperRectangle);
                 _helperRectangle = null;
             }
 
-            if (_topLeftHelperPoint != null)
+            if (_topLeftHelperPoint is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_topLeftHelperPoint);
                 _topLeftHelperPoint = null;
             }
 
-            if (_bottomRightHelperPoint != null)
+            if (_bottomRightHelperPoint is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_bottomRightHelperPoint);
                 _bottomRightHelperPoint = null;

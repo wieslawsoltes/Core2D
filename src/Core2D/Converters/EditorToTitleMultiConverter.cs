@@ -13,14 +13,14 @@ namespace Core2D.Converters
 
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values != null && values.Count() == 2 && values.All(x => x != AvaloniaProperty.UnsetValue))
+            if (values is { } && values.Count() == 2 && values.All(x => x != AvaloniaProperty.UnsetValue))
             {
-                if (values[0] == null || values[0].GetType() != typeof(string))
+                if (values[0] is null || values[0].GetType() != typeof(string))
                 {
                     return s_defaultTitle;
                 }
 
-                if (values[1] == null || values[1].GetType() != typeof(bool))
+                if (values[1] is null || values[1].GetType() != typeof(bool))
                 {
                     return s_defaultTitle;
                 }

@@ -32,20 +32,20 @@ namespace Core2D.ViewModels.Editor.Tools
                     {
                         editor.IsToolIdle = false;
  
-                        if (editor.ImageImporter == null)
+                        if (editor.ImageImporter is null)
                         {
                             editor.IsToolIdle = true;
                             return;
                         }
 
                         var key = await editor.ImageImporter.GetImageKeyAsync();
-                        if (key == null || string.IsNullOrEmpty(key))
+                        if (key is null || string.IsNullOrEmpty(key))
                         {
                             editor.IsToolIdle = true;
                             return;
                         }
 
-                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                        var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _image = factory.CreateImageShape(
@@ -57,7 +57,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             editor.GetShapeName<ArcShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                        if (result != null)
+                        if (result is { })
                         {
                             _image.TopLeft = result;
                         }
@@ -71,13 +71,13 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        if (_image != null)
+                        if (_image is { })
                         {
                             _image.BottomRight.X = (double)sx;
                             _image.BottomRight.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _image.BottomRight = result;
                             }
@@ -127,7 +127,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        if (_image != null)
+                        if (_image is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -182,7 +182,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             _currentState = State.TopLeft;
 
-            if (_selection != null)
+            if (_selection is { })
             {
                 _selection.Reset();
                 _selection = null;

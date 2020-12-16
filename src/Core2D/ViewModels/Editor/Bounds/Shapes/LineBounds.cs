@@ -20,12 +20,12 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
             var pointHitTest = registered[typeof(PointShapeViewModel)];
 
-            if (pointHitTest.TryToGetPoint(line.Start, target, radius, scale, registered) != null)
+            if (pointHitTest.TryToGetPoint(line.Start, target, radius, scale, registered) is { })
             {
                 return line.Start;
             }
 
-            if (pointHitTest.TryToGetPoint(line.End, target, radius, scale, registered) != null)
+            if (pointHitTest.TryToGetPoint(line.End, target, radius, scale, registered) is { })
             {
                 return line.End;
             }

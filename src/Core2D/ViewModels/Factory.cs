@@ -644,7 +644,7 @@ namespace Core2D.ViewModels
                 Geometry = geometry
             };
 
-            if (geometry != null)
+            if (geometry is { })
             {
                 geometry.Owner = pathShape;
 

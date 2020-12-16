@@ -42,7 +42,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
         {
             BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
 
-            if (BoundText == null)
+            if (BoundText is null)
             {
                 return;
             }
@@ -61,7 +61,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
         {
             var canvas = dc as SKCanvas;
 
-            if (FormattedText != null)
+            if (FormattedText is { })
             {
                 canvas.DrawText(BoundText, Origin.X, Origin.Y, FormattedText);
             }

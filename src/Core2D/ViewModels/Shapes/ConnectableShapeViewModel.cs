@@ -21,7 +21,7 @@ namespace Core2D.ViewModels.Shapes
 
         public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
         {
-            if (selection?.SelectedShapes != null)
+            if (selection?.SelectedShapes is { })
             {
                 if (selection.SelectedShapes.Contains(this))
                 {

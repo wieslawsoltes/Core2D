@@ -71,12 +71,12 @@ namespace Core2D.Modules.Renderer.WinForms
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Round;
                     break;
             }
-            if (style.Stroke.Dashes != null)
+            if (style.Stroke.Dashes is { })
             {
                 // TODO: Convert to correct dash values.
                 var dashPattern = StyleHelper.ConvertDashesToFloatArray(style.Stroke.Dashes, 1);
                 var dashOffset = (float)style.Stroke.DashOffset;
-                if (dashPattern != null)
+                if (dashPattern is { })
                 {
                     pen.DashPattern = dashPattern;
                     pen.DashStyle = DashStyle.Custom;
@@ -574,7 +574,7 @@ namespace Core2D.Modules.Renderer.WinForms
                 tbind = text.Text;
             }
 
-            if (tbind == null)
+            if (tbind is null)
             {
                 return;
             }
@@ -689,16 +689,16 @@ namespace Core2D.Modules.Renderer.WinForms
             }
 
             var imageCached = _biCache.Get(image.Key);
-            if (imageCached != null)
+            if (imageCached is { })
             {
                 _gfx.DrawImage(imageCached, srect);
             }
             else
             {
-                if (State.ImageCache != null && !string.IsNullOrEmpty(image.Key))
+                if (State.ImageCache is { } && !string.IsNullOrEmpty(image.Key))
                 {
                     var bytes = State.ImageCache.GetImage(image.Key);
-                    if (bytes != null)
+                    if (bytes is { })
                     {
                         var ms = new System.IO.MemoryStream(bytes);
                         var bi = Image.FromStream(ms);

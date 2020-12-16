@@ -83,16 +83,16 @@ namespace Core2D.ViewModels.Path
         public string ToXamlString()
         {
             return
-                (StartPoint != null ? "M" + StartPoint.ToXamlString() : "")
-                + (Segments != null ? ToXamlString(Segments) : "")
+                (StartPoint is { } ? "M" + StartPoint.ToXamlString() : "")
+                + (Segments is { } ? ToXamlString(Segments) : "")
                 + (IsClosed ? "z" : "");
         }
 
         public string ToSvgString()
         {
             return
-                (StartPoint != null ? "M" + StartPoint.ToSvgString() : "")
-                + (Segments != null ? ToSvgString(Segments) : "")
+                (StartPoint is { } ? "M" + StartPoint.ToSvgString() : "")
+                + (Segments is { } ? ToSvgString(Segments) : "")
                 + (IsClosed ? "z" : "");
         }
     }

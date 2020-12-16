@@ -25,13 +25,13 @@ namespace Core2D.Modules.FileWriter.SkiaSharpSvg
 
         public void Save(Stream stream, object item, object options)
         {
-            if (item == null)
+            if (item is null)
             {
                 return;
             }
 
             var ic = options as IImageCache;
-            if (options == null)
+            if (options is null)
             {
                 return;
             }

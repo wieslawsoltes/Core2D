@@ -34,13 +34,13 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void Move()
         {
-            if (_topLeftHelperPoint != null)
+            if (_topLeftHelperPoint is { })
             {
                 _topLeftHelperPoint.X = _ellipse.TopLeft.X;
                 _topLeftHelperPoint.Y = _ellipse.TopLeft.Y;
             }
 
-            if (_bottomRightHelperPoint != null)
+            if (_bottomRightHelperPoint is { })
             {
                 _bottomRightHelperPoint.X = _ellipse.BottomRight.X;
                 _bottomRightHelperPoint.Y = _ellipse.BottomRight.Y;
@@ -51,13 +51,13 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void Reset()
         {
-            if (_topLeftHelperPoint != null)
+            if (_topLeftHelperPoint is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_topLeftHelperPoint);
                 _topLeftHelperPoint = null;
             }
 
-            if (_bottomRightHelperPoint != null)
+            if (_bottomRightHelperPoint is { })
             {
                 _layer.Shapes = _layer.Shapes.Remove(_bottomRightHelperPoint);
                 _bottomRightHelperPoint = null;

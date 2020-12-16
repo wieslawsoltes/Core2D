@@ -39,7 +39,7 @@ namespace Core2D.Modules.TextFieldReader.CsvHelper
             while (true)
             {
                 var fields = csvParser.Read();
-                if (fields == null)
+                if (fields is null)
                 {
                     break;
                 }

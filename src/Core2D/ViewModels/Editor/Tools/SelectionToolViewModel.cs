@@ -59,7 +59,7 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor.Project.SelectedShapes != null)
+            if (editor.Project.SelectedShapes is { })
             {
                 var shapes = editor.Project.SelectedShapes
                     .Where(s => !s.State.HasFlag(ShapeStateFlags.Locked)
@@ -97,12 +97,12 @@ namespace Core2D.ViewModels.Editor.Tools
             _startX = sx;
             _startY = sy;
 
-            if (_pointsCache != null)
+            if (_pointsCache is { })
             {
                 editor.MoveShapesBy(_pointsCache, dx, dy);
             }
 
-            if (_shapesCache != null)
+            if (_shapesCache is { })
             {
                 editor.MoveShapesBy(_shapesCache, dx, dy);
             }
@@ -111,14 +111,14 @@ namespace Core2D.ViewModels.Editor.Tools
         private bool IsSelectionAvailable()
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-            return editor?.Project?.SelectedShapes != null;
+            return editor?.Project?.SelectedShapes is { };
         }
 
         private bool HitTestDecorator(InputArgs args, bool isControl, bool isHover)
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
-            if (isControl == false && editor.PageState.Decorator != null && editor.PageState.Decorator.IsVisible)
+            if (isControl == false && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible)
             {
                 bool decoratorResult = editor.PageState.Decorator.HitTest(args);
                 if (decoratorResult == true && isHover == false)
@@ -142,7 +142,7 @@ namespace Core2D.ViewModels.Editor.Tools
             {
                 case State.None:
                     {
-                        if (editor.PageState == null)
+                        if (editor.PageState is null)
                         {
                             return;
                         }
@@ -151,7 +151,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         editor.Dehover(editor.Project.CurrentContainer.CurrentLayer);
 
-                        if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator != null && editor.PageState.Decorator.IsVisible == true)
+                        if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible == true)
                         {
                             if (HitTestDecorator(args, isControl, false) == true)
                             {
@@ -164,14 +164,14 @@ namespace Core2D.ViewModels.Editor.Tools
                             var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
                             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
                             BaseShapeViewModel result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
-                            if (result == null)
+                            if (result is null)
                             {
                                 result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                             }
 
-                            if (result != null)
+                            if (result is { })
                             {
-                                if (editor.Project.SelectedShapes == null)
+                                if (editor.Project.SelectedShapes is null)
                                 {
                                     editor.Project.SelectedShapes = new HashSet<BaseShapeViewModel>() { result };
                                     editor.Project.CurrentContainer.CurrentLayer.InvalidateLayer();
@@ -179,7 +179,7 @@ namespace Core2D.ViewModels.Editor.Tools
                                     HitTestDecorator(args, isControl, false);
                                     break;
                                 }
-                                else if (editor.Project.SelectedShapes != null)
+                                else if (editor.Project.SelectedShapes is { })
                                 {
                                     if (editor.Project.SelectedShapes.Contains(result))
                                     {
@@ -216,23 +216,23 @@ namespace Core2D.ViewModels.Editor.Tools
                             }
                         }
 
-                        if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator != null && editor.PageState.Decorator.IsVisible == true)
+                        if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible == true)
                         {
                             editor.OnHideDecorator();
                         }
 
-                        if (editor.Project.SelectedShapes != null)
+                        if (editor.Project.SelectedShapes is { })
                         {
                             var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
 
                             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
                             BaseShapeViewModel result = editor.HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
-                            if (result == null)
+                            if (result is null)
                             {
                                 result = editor.HitTest.TryToGetShape(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                             }
 
-                            if (result != null && editor.Project.SelectedShapes.Contains(result))
+                            if (result is { } && editor.Project.SelectedShapes.Contains(result))
                             {
                                 editor.IsToolIdle = false;
                                 _startX = sx;
@@ -276,7 +276,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.Selected:
                     {
-                        if (_rectangleShape != null)
+                        if (_rectangleShape is { })
                         {
                             _rectangleShape.BottomRight.X = x;
                             _rectangleShape.BottomRight.Y = y;
@@ -301,7 +301,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     {
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
-                        if (_rectangleShape != null)
+                        if (_rectangleShape is { })
                         {
                             _rectangleShape.BottomRight.X = args.X;
                             _rectangleShape.BottomRight.Y = args.Y;
@@ -334,12 +334,12 @@ namespace Core2D.ViewModels.Editor.Tools
                                 editor.Project?.History?.Snapshot(previous, next,
                                     (state) =>
                                     {
-                                        if (state.Points != null)
+                                        if (state.Points is { })
                                         {
                                             editor.MoveShapesBy(state.Points, state.DeltaX, state.DeltaY);
                                         }
 
-                                        if (state.Shapes != null)
+                                        if (state.Shapes is { })
                                         {
                                             editor.MoveShapesBy(state.Shapes, state.DeltaX, state.DeltaY);
                                         }
@@ -355,7 +355,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         var deselect = !isControl;
                         var includeSelected = isControl;
 
-                        if (_rectangleShape != null)
+                        if (_rectangleShape is { })
                         {
                             _currentState = State.None;
                             editor.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangleShape, deselect, includeSelected);
@@ -398,7 +398,7 @@ namespace Core2D.ViewModels.Editor.Tools
             {
                 case State.None:
                     {
-                        if (editor.PageState == null)
+                        if (editor.PageState is null)
                         {
                             return;
                         }
@@ -416,7 +416,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     {
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
-                        if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator != null && editor.PageState.Decorator.IsVisible == true)
+                        if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible == true)
                         {
                             editor.PageState.Decorator.Move(args);
                             editor.PageState.Decorator.Update(false);
@@ -433,7 +433,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             break;
                         }
 
-                        if (_rectangleShape != null)
+                        if (_rectangleShape is { })
                         {
                             _rectangleShape.BottomRight.X = args.X;
                             _rectangleShape.BottomRight.Y = args.Y;

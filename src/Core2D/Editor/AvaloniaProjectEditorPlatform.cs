@@ -32,14 +32,14 @@ namespace Core2D.Editor
 
         public async void OnOpen(string path)
         {
-            if (path == null)
+            if (path is null)
             {
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 var result = await dlg.ShowAsync(GetWindow());
                 var item = result?.FirstOrDefault();
-                if (item != null)
+                if (item is { })
                 {
                     var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                     editor.OnOpenProject(item);
@@ -77,7 +77,7 @@ namespace Core2D.Editor
             dlg.InitialFileName = editor.Project?.Name;
             dlg.DefaultExtension = "project";
             var result = await dlg.ShowAsync(GetWindow());
-            if (result != null)
+            if (result is { })
             {
                 editor.OnSaveProject(result);
             }
@@ -85,7 +85,7 @@ namespace Core2D.Editor
 
         public async void OnImportJson(string path)
         {
-            if (path == null)
+            if (path is null)
             {
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.AllowMultiple = true;
@@ -93,11 +93,11 @@ namespace Core2D.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
 
                 var result = await dlg.ShowAsync(GetWindow());
-                if (result != null)
+                if (result is { })
                 {
                     foreach (var item in result)
                     {
-                        if (item != null)
+                        if (item is { })
                         {
                             _serviceProvider.GetService<ProjectEditorViewModel>().OnImportJson(item);
                         }
@@ -115,7 +115,7 @@ namespace Core2D.Editor
 
         public async void OnImportSvg(string path)
         {
-            if (path == null)
+            if (path is null)
             {
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.AllowMultiple = true;
@@ -123,11 +123,11 @@ namespace Core2D.Editor
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
 
                 var result = await dlg.ShowAsync(GetWindow());
-                if (result != null)
+                if (result is { })
                 {
                     foreach (var item in result)
                     {
-                        if (item != null)
+                        if (item is { })
                         {
                             _serviceProvider.GetService<ProjectEditorViewModel>().OnImportSvg(item);
                         }
@@ -145,17 +145,17 @@ namespace Core2D.Editor
 
         public async void OnImportObject(string path)
         {
-            if (path == null)
+            if (path is null)
             {
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.AllowMultiple = true;
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                 var result = await dlg.ShowAsync(GetWindow());
-                if (result != null)
+                if (result is { })
                 {
                     foreach (var item in result)
                     {
-                        if (item != null)
+                        if (item is { })
                         {
                             string resultExtension = System.IO.Path.GetExtension(item);
                             if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
@@ -188,7 +188,7 @@ namespace Core2D.Editor
             dlg.InitialFileName = editor?.GetName(item);
             dlg.DefaultExtension = "json";
             var result = await dlg.ShowAsync(GetWindow());
-            if (result != null)
+            if (result is { })
             {
                 editor.OnExportJson(result, item);
             }
@@ -197,14 +197,14 @@ namespace Core2D.Editor
         public async void OnExportObject(object item)
         {
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-            if (item != null)
+            if (item is { })
             {
                 var dlg = new SaveFileDialog() { Title = "Save" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
                 dlg.InitialFileName = editor?.GetName(item);
                 dlg.DefaultExtension = "json";
                 var result = await dlg.ShowAsync(GetWindow());
-                if (result != null)
+                if (result is { })
                 {
                     string resultExtension = System.IO.Path.GetExtension(result);
                     if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
@@ -221,9 +221,9 @@ namespace Core2D.Editor
 
             string name = string.Empty;
 
-            if (item == null || item is ProjectEditorViewModel)
+            if (item is null || item is ProjectEditorViewModel)
             {
-                if (editor.Project == null)
+                if (editor.Project is null)
                 {
                     return;
                 }
@@ -254,11 +254,11 @@ namespace Core2D.Editor
             dlg.DefaultExtension = editor?.FileWriters.FirstOrDefault()?.Extension;
 
             var result = await dlg.ShowAsync(GetWindow());
-            if (result != null)
+            if (result is { })
             {
                 string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
                 var writer = editor.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
-                if (writer != null)
+                if (writer is { })
                 {
                     editor.OnExport(result, item, writer);
                 }
@@ -267,16 +267,16 @@ namespace Core2D.Editor
 
         public async void OnExecuteScriptFile(string path)
         {
-            if (path == null)
+            if (path is null)
             {
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Script", Extensions = { "csx", "cs" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 dlg.AllowMultiple = true;
                 var result = await dlg.ShowAsync(GetWindow());
-                if (result != null)
+                if (result is { })
                 {
-                    if (result.All(r => r != null))
+                    if (result.All(r => r is { }))
                     {
                         await _serviceProvider.GetService<ProjectEditorViewModel>().OnExecuteScriptFile(result);
                     }
@@ -293,7 +293,7 @@ namespace Core2D.Editor
         {
             try
             {
-                if (item == null)
+                if (item is null)
                 {
                     var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                     var exporter = new SvgSvgExporter(_serviceProvider);
@@ -314,7 +314,7 @@ namespace Core2D.Editor
                     }
 
                     var sources = editor.Project?.SelectedShapes;
-                    if (sources != null)
+                    if (sources is { })
                     {
                         var xaml = exporter.Create(sources, width, height);
                         if (!string.IsNullOrEmpty(xaml))
@@ -325,7 +325,7 @@ namespace Core2D.Editor
                     }
 
                     var shapes = container.Layers.SelectMany(x => x.Shapes);
-                    if (shapes != null)
+                    if (shapes is { })
                     {
                         var xaml = exporter.Create(shapes, width, height);
                         if (!string.IsNullOrEmpty(xaml))
@@ -353,7 +353,7 @@ namespace Core2D.Editor
                 if (!string.IsNullOrEmpty(svgText))
                 {
                     var shapes = converter.FromString(svgText, out _, out _);
-                    if (shapes != null)
+                    if (shapes is { })
                     {
                         editor.OnPasteShapes(shapes);
                     }
@@ -369,14 +369,14 @@ namespace Core2D.Editor
         {
             try
             {
-                if (item == null)
+                if (item is null)
                 {
                     var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                     var exporter = new DrawingGroupXamlExporter(_serviceProvider);
                     var container = editor.Project.CurrentContainer;
 
                     var sources = editor.Project?.SelectedShapes;
-                    if (sources != null)
+                    if (sources is { })
                     {
                         var xaml = exporter.Create(sources, null);
                         if (!string.IsNullOrEmpty(xaml))
@@ -387,7 +387,7 @@ namespace Core2D.Editor
                     }
 
                     var shapes = container.Layers.SelectMany(x => x.Shapes);
-                    if (shapes != null)
+                    if (shapes is { })
                     {
                         var key = container?.Name;
                         var xaml = exporter.Create(shapes, key);
@@ -498,7 +498,7 @@ namespace Core2D.Editor
 
                 using var bitmap = new System.Drawing.Bitmap((int)width, (int)height);
 
-                if (shapes != null && shapes.Count > 0)
+                if (shapes is { } && shapes.Count > 0)
                 {
                     using var ms = writer.MakeMetafileStream(bitmap, shapes, imageChache);
                     ms.Position = 0;
@@ -521,14 +521,14 @@ namespace Core2D.Editor
         {
             try
             {
-                if (item == null)
+                if (item is null)
                 {
                     var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                     var converter = editor.PathConverter;
                     var container = editor.Project.CurrentContainer;
 
                     var shapes = editor.Project?.SelectedShapes ?? container?.Layers.SelectMany(x => x.Shapes);
-                    if (shapes == null)
+                    if (shapes is null)
                     {
                         return;
                     }
@@ -568,7 +568,7 @@ namespace Core2D.Editor
                 if (!string.IsNullOrEmpty(svgPath))
                 {
                     var pathShape = converter.FromSvgPathData(svgPath, isStroked: true, isFilled: false);
-                    if (pathShape != null)
+                    if (pathShape is { })
                     {
                         editor.OnPasteShapes(Enumerable.Repeat<BaseShapeViewModel>(pathShape, 1));
                     }
@@ -591,7 +591,7 @@ namespace Core2D.Editor
                 if (!string.IsNullOrEmpty(svgPath))
                 {
                     var pathShape = converter.FromSvgPathData(svgPath, isStroked: false, isFilled: true);
-                    if (pathShape != null)
+                    if (pathShape is { })
                     {
                         editor.OnPasteShapes(Enumerable.Repeat<BaseShapeViewModel>(pathShape, 1));
                     }
@@ -614,16 +614,16 @@ namespace Core2D.Editor
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             var result = await dlg.ShowAsync(GetWindow());
 
-            if (result != null)
+            if (result is { })
             {
                 var path = result.FirstOrDefault();
-                if (path == null)
+                if (path is null)
                 {
                     return;
                 }
                 string ext = System.IO.Path.GetExtension(path).ToLower().TrimStart('.');
                 var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
-                if (reader != null)
+                if (reader is { })
                 {
                     editor.OnImportData(project, path, reader);
                 }
@@ -632,7 +632,7 @@ namespace Core2D.Editor
 
         public async void OnExportData(DatabaseViewModel db)
         {
-            if (db != null)
+            if (db is { })
             {
                 var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                 var dlg = new SaveFileDialog() { Title = "Save" };
@@ -644,11 +644,11 @@ namespace Core2D.Editor
                 dlg.InitialFileName = db.Name;
                 dlg.DefaultExtension = editor?.TextFieldWriters.FirstOrDefault()?.Extension;
                 var result = await dlg.ShowAsync(GetWindow());
-                if (result != null)
+                if (result is { })
                 {
                     string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
                     var writer = editor.TextFieldWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
-                    if (writer != null)
+                    if (writer is { })
                     {
                         editor.OnExportData(result, db, writer);
                     }
@@ -658,7 +658,7 @@ namespace Core2D.Editor
 
         public async void OnUpdateData(DatabaseViewModel db)
         {
-            if (db != null)
+            if (db is { })
             {
                 var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
                 var dlg = new OpenFileDialog() { Title = "Open" };
@@ -668,16 +668,16 @@ namespace Core2D.Editor
                 }
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
                 var result = await dlg.ShowAsync(GetWindow());
-                if (result != null)
+                if (result is { })
                 {
                     var path = result.FirstOrDefault();
-                    if (path == null)
+                    if (path is null)
                     {
                         return;
                     }
                     string ext = System.IO.Path.GetExtension(path).ToLower().TrimStart('.');
                     var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
-                    if (reader != null)
+                    if (reader is { })
                     {
                         editor.OnUpdateData(path, db, reader);
                     }

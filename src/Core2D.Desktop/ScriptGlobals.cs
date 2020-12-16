@@ -37,7 +37,7 @@ namespace Core2D
             await Util.RunUIJob(() =>
             {
                 var mainControl = GetMainView();
-                if (mainControl != null)
+                if (mainControl is { })
                 {
                     var size = new Size(width, height);
                     Util.Screenshot(mainControl, size, path);

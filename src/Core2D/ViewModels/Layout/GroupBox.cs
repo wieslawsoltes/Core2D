@@ -17,7 +17,7 @@ namespace Core2D.ViewModels.Layout
 
         public static void TransformPoints(ref MatrixD matrix, IList<PointShapeViewModel> points)
         {
-            if (points == null || points.Count == 0)
+            if (points is null || points.Count == 0)
             {
                 return;
             }

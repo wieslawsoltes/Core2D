@@ -156,7 +156,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 {
                     case LineShapeViewModel lineShape:
                         {
-                            if (previous == null || previous != lineShape.Start)
+                            if (previous is null || previous != lineShape.Start)
                             {
                                 path.MoveTo(
                                     (float)(lineShape.Start.X),
@@ -203,7 +203,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
                     case CubicBezierShapeViewModel cubicBezierShape:
                         {
-                            if (previous == null || previous != cubicBezierShape.Point1)
+                            if (previous is null || previous != cubicBezierShape.Point1)
                             {
                                 path.MoveTo(
                                     (float)(cubicBezierShape.Point1.X),
@@ -222,7 +222,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
                     case QuadraticBezierShapeViewModel quadraticBezierShape:
                         {
-                            if (previous == null || previous != quadraticBezierShape.Point1)
+                            if (previous is null || previous != quadraticBezierShape.Point1)
                             {
                                 path.MoveTo(
                                     (float)(quadraticBezierShape.Point1.X),
@@ -240,7 +240,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                     case TextShapeViewModel textShape:
                         {
                             var resultPath = ToSKPath(textShape);
-                            if (resultPath != null && !resultPath.IsEmpty)
+                            if (resultPath is { } && !resultPath.IsEmpty)
                             {
                                 path.AddPath(resultPath, SKPathAddMode.Append);
                             }
@@ -250,7 +250,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                     case PathShapeViewModel pathShape:
                         {
                             var resultPath = ToSKPath(pathShape);
-                            if (resultPath != null && !resultPath.IsEmpty)
+                            if (resultPath is { } && !resultPath.IsEmpty)
                             {
                                 path.AddPath(resultPath, SKPathAddMode.Append);
                             }
@@ -260,7 +260,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                     case GroupShapeViewModel groupShape:
                         {
                             var resultPath = ToSKPath(groupShape.Shapes);
-                            if (resultPath != null && !resultPath.IsEmpty)
+                            if (resultPath is { } && !resultPath.IsEmpty)
                             {
                                 path.AddPath(resultPath, SKPathAddMode.Append);
                             }
@@ -408,7 +408,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 tbind = text.Text;
             }
 
-            if (tbind == null)
+            if (tbind is null)
             {
                 return path;
             }
@@ -461,7 +461,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             result = new SKPath(first) { FillType = first.FillType };
 
             var next = result.Op(second, op);
-            if (next != null)
+            if (next is { })
             {
                 result.Dispose();
                 result = next;
@@ -498,7 +498,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 for (int i = 1; i < paths.Count; i++)
                 {
                     var next = result.Op(paths[i], op);
-                    if (next != null)
+                    if (next is { })
                     {
                         result.Dispose();
                         result = next;

@@ -25,7 +25,7 @@ namespace Core2D.ViewModels.Containers
 
         public virtual void InvalidateLayer()
         {
-            if (_layers != null)
+            if (_layers is { })
             {
                 foreach (var layer in _layers)
                 {
@@ -47,12 +47,12 @@ namespace Core2D.ViewModels.Containers
                 isDirty |= layer.IsDirty();
             }
 
-            if (_workingLayer != null)
+            if (_workingLayer is { })
             {
                 isDirty |= _workingLayer.IsDirty();
             }
 
-            if (_helperLayer != null)
+            if (_helperLayer is { })
             {
                 isDirty |= _helperLayer.IsDirty();
             }
@@ -62,7 +62,7 @@ namespace Core2D.ViewModels.Containers
                 isDirty |= property.IsDirty();
             }
 
-            if (_record != null)
+            if (_record is { })
             {
                 isDirty |= _record.IsDirty();
             }

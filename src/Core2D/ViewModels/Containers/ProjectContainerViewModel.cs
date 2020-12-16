@@ -57,7 +57,7 @@ namespace Core2D.ViewModels.Containers
                     .SelectMany(x => x.Pages)
                     .FirstOrDefault(c => c.Layers.Contains(layer));
 
-                if (container != null && layer != null)
+                if (container is { } && layer is { })
                 {
                     if (container.CurrentLayer != layer)
                     {
@@ -73,13 +73,13 @@ namespace Core2D.ViewModels.Containers
                     }
                 }
             }
-            else if (value is LayerContainerViewModel layer && _documents != null)
+            else if (value is LayerContainerViewModel layer && _documents is { })
             {
                 var container = _documents
                     .SelectMany(x => x.Pages)
                     .FirstOrDefault(c => c.Layers.Contains(layer));
 
-                if (container != null)
+                if (container is { })
                 {
                     if (container.CurrentLayer != layer)
                     {
@@ -95,10 +95,10 @@ namespace Core2D.ViewModels.Containers
                     }
                 }
             }
-            else if (value is BaseContainerViewModel container && _documents != null)
+            else if (value is BaseContainerViewModel container && _documents is { })
             {
                 var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
-                if (document != null)
+                if (document is { })
                 {
                     if (CurrentDocument != document)
                     {

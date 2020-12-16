@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Data.Bindings
     {
         public static bool GetBindingValue(RecordViewModel record, string columnName, out string value)
         {
-            if (string.IsNullOrEmpty(columnName) || record == null)
+            if (string.IsNullOrEmpty(columnName) || record is null)
             {
                 value = null;
                 return false;
@@ -48,7 +48,7 @@ namespace Core2D.ViewModels.Data.Bindings
             }
 
             var result = properties.FirstOrDefault(p => p.Name == propertyName);
-            if (result?.Value != null)
+            if (result?.Value is { })
             {
                 value = result.Value.ToString();
                 return true;
@@ -81,7 +81,7 @@ namespace Core2D.ViewModels.Data.Bindings
                     var binding = bindings[i];
 
                     // Try to bind to internal Record or external (r) data record using Text property as Column.Name name.
-                    if (record != null)
+                    if (record is { })
                     {
                         bool success = GetBindingValue(record, binding.Path, out string value);
                         if (success)
@@ -93,7 +93,7 @@ namespace Core2D.ViewModels.Data.Bindings
                     }
 
                     // Try to bind to external Properties database (e.g. Container.Properties) using Text property as Property.Name name.
-                    if (properties != null && properties.Length > 0)
+                    if (properties is { } && properties.Length > 0)
                     {
                         bool success = GetBindingValue(properties, binding.Path, out string value);
                         if (success)
@@ -105,7 +105,7 @@ namespace Core2D.ViewModels.Data.Bindings
                     }
 
                     // Try to bind to internal Properties database (e.g. Properties) using Text property as Property.Name name.
-                    if (shape.Properties != null && shape.Properties.Length > 0)
+                    if (shape.Properties is { } && shape.Properties.Length > 0)
                     {
                         bool success = GetBindingValue(shape.Properties, binding.Path, out string value);
                         if (success)
@@ -124,12 +124,12 @@ namespace Core2D.ViewModels.Data.Bindings
             }
 
             // Try to bind to Properties using Text as formatting args.
-            if (shape.Properties != null && shape.Properties.Length > 0)
+            if (shape.Properties is { } && shape.Properties.Length > 0)
             {
                 try
                 {
-                    var args = shape.Properties.Where(x => x != null).Select(x => x.Value).ToArray();
-                    if (args != null && args.Length > 0)
+                    var args = shape.Properties.Where(x => x is { }).Select(x => x.Value).ToArray();
+                    if (args is { } && args.Length > 0)
                     {
                         return string.Format(text, args);
                     }

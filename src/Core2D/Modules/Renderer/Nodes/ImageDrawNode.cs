@@ -39,12 +39,12 @@ namespace Core2D.Modules.Renderer.Nodes
             if (!string.IsNullOrEmpty(Image.Key))
             {
                 ImageCached = BitmapCache.Get(Image.Key) as AMI.Bitmap;
-                if (ImageCached == null && ImageCache != null)
+                if (ImageCached is null && ImageCache is { })
                 {
                     try
                     {
                         var bytes = ImageCache.GetImage(Image.Key);
-                        if (bytes != null)
+                        if (bytes is { })
                         {
                             using var ms = new System.IO.MemoryStream(bytes);
                             ImageCached = new AMI.Bitmap(ms);
@@ -58,7 +58,7 @@ namespace Core2D.Modules.Renderer.Nodes
                     }
                 }
 
-                if (ImageCached != null)
+                if (ImageCached is { })
                 {
                     SourceRect = new A.Rect(0, 0, ImageCached.PixelSize.Width, ImageCached.PixelSize.Height);
                 }
@@ -87,7 +87,7 @@ namespace Core2D.Modules.Renderer.Nodes
                 context.DrawRectangle(Stroke, DestRect);
             }
 
-            if (ImageCached != null)
+            if (ImageCached is { })
             {
                 try
                 {

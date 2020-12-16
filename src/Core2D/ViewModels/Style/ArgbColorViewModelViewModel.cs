@@ -97,7 +97,7 @@ namespace Core2D.ViewModels.Style
             {
                 var upper = s.ToUpperInvariant();
                 var member = typeof(Colors).GetTypeInfo().DeclaredProperties.FirstOrDefault(x => x.Name.ToUpperInvariant() == upper);
-                if (member != null)
+                if (member is { })
                 {
                     color = (uint)member.GetValue(null);
                 }

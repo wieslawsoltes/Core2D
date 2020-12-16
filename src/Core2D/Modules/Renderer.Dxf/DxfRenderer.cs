@@ -671,7 +671,7 @@ namespace Core2D.Modules.Renderer.Dxf
                 tbind = text.Text;
             }
 
-            if (tbind == null)
+            if (tbind is null)
             {
                 return;
             }
@@ -750,7 +750,7 @@ namespace Core2D.Modules.Renderer.Dxf
             var dxf = dc as DXF.DxfDocument;
 
             var bytes = State.ImageCache.GetImage(image.Key);
-            if (bytes != null)
+            if (bytes is { })
             {
                 var rect = Spatial.Rect2.FromPoints(
                     image.TopLeft.X,
@@ -760,7 +760,7 @@ namespace Core2D.Modules.Renderer.Dxf
                     0, 0);
 
                 var dxfImageDefinitionCached = _biCache.Get(image.Key);
-                if (dxfImageDefinitionCached != null)
+                if (dxfImageDefinitionCached is { })
                 {
                     var dxfImage = new DXFE.Image(
                         dxfImageDefinitionCached,
@@ -771,7 +771,7 @@ namespace Core2D.Modules.Renderer.Dxf
                 }
                 else
                 {
-                    if (State.ImageCache != null && !string.IsNullOrEmpty(image.Key) && !string.IsNullOrEmpty(_outputPath))
+                    if (State.ImageCache is { } && !string.IsNullOrEmpty(image.Key) && !string.IsNullOrEmpty(_outputPath))
                     {
                         var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
                         System.IO.File.WriteAllBytes(path, bytes);
@@ -797,7 +797,7 @@ namespace Core2D.Modules.Renderer.Dxf
                 var dxf = dc as DXF.DxfDocument;
  
                 CreateHatchBoundsAndEntities(path.Geometry, out var bounds, out var entities);
-                if (entities == null || bounds == null)
+                if (entities is null || bounds is null)
                 {
                     return;
                 }

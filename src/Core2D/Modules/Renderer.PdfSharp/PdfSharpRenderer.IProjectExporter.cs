@@ -32,7 +32,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
             {
                 var page = Add(pdf, container, presenter);
 
-                if (documentOutline == null)
+                if (documentOutline is null)
                 {
                     documentOutline = pdf.Outlines.Add(
                         document.Name,
@@ -68,7 +68,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
                 {
                     var page = Add(pdf, container, presenter);
 
-                    if (projectOutline == null)
+                    if (projectOutline is null)
                     {
                         projectOutline = pdf.Outlines.Add(
                             project.Name,
@@ -78,7 +78,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
                             XColors.Black);
                     }
 
-                    if (documentOutline == null)
+                    if (documentOutline is null)
                     {
                         documentOutline = projectOutline.Outlines.Add(
                             document.Name,

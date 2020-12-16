@@ -74,7 +74,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         if (editor.Project.Options.TryToConnect)
                         {
                             var end = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (end != null)
+                            if (end is { })
                             {
                                 _arc.End = end;
                             }
@@ -196,7 +196,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
             _currentState = State.Start;
 
-            if (_selection != null)
+            if (_selection is { })
             {
                 _selection.Reset();
                 _selection = null;

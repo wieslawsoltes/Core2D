@@ -28,12 +28,12 @@ namespace Core2D.ViewModels.Containers
         {
             var isDirty = base.IsDirty();
 
-            if (_background != null)
+            if (_background is { })
             {
                 isDirty |= _background.IsDirty();
             }
 
-            if (_gridStrokeColor != null)
+            if (_gridStrokeColor is { })
             {
                 isDirty |= _gridStrokeColor.IsDirty();
             }

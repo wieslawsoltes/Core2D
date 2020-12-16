@@ -34,7 +34,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.TopLeft:
                     {
                         editor.IsToolIdle = false;
-                        var style = editor.Project.CurrentStyleLibrary?.Selected != null ?
+                        var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
                             editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
@@ -46,7 +46,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             editor.GetShapeName<RectangleShapeViewModel>());
 
                         var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                        if (result != null)
+                        if (result is { })
                         {
                             _rectangle.TopLeft = result;
                         }
@@ -60,13 +60,13 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        if (_rectangle != null)
+                        if (_rectangle is { })
                         {
                             _rectangle.BottomRight.X = (double)sx;
                             _rectangle.BottomRight.Y = (double)sy;
 
                             var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (result != null)
+                            if (result is { })
                             {
                                 _rectangle.BottomRight = result;
                             }
@@ -118,7 +118,7 @@ namespace Core2D.ViewModels.Editor.Tools
                     break;
                 case State.BottomRight:
                     {
-                        if (_rectangle != null)
+                        if (_rectangle is { })
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
@@ -173,7 +173,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             _currentState = State.TopLeft;
 
-            if (_selection != null)
+            if (_selection is { })
             {
                 _selection.Reset();
                 _selection = null;

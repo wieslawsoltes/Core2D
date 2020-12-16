@@ -125,7 +125,7 @@ namespace Core2D.Modules.FileWriter.Emf
 
         public void Save(Stream stream, PageContainerViewModel container, IImageCache ic)
         {
-            if (container?.Template != null)
+            if (container?.Template is { })
             {
                 using var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height);
                 using var ms = MakeMetafileStream(bitmap, container, ic);
@@ -135,13 +135,13 @@ namespace Core2D.Modules.FileWriter.Emf
 
         public void Save(Stream stream, object item, object options)
         {
-            if (item == null)
+            if (item is null)
             {
                 return;
             }
 
             var ic = options as IImageCache;
-            if (options == null)
+            if (options is null)
             {
                 return;
             }

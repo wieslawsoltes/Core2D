@@ -92,7 +92,7 @@ namespace Core2D.DragAndDrop
         private void AssociatedObject_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-            if (properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased && _triggerEvent != null)
+            if (properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased && _triggerEvent is { })
             {
                 _triggerEvent = null;
                 _lock = false;
@@ -102,7 +102,7 @@ namespace Core2D.DragAndDrop
         private async void AssociatedObject_PointerMoved(object sender, PointerEventArgs e)
         {
             var properties = e.GetCurrentPoint(AssociatedObject).Properties;
-            if (properties.IsLeftButtonPressed && _triggerEvent != null)
+            if (properties.IsLeftButtonPressed && _triggerEvent is { })
             {
                 var point = e.GetPosition(null);
                 var diff = _dragStartPoint - point;

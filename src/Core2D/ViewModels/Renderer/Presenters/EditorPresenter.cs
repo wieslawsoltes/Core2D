@@ -10,12 +10,12 @@ namespace Core2D.ViewModels.Renderer.Presenters
         {
             DrawContainer(dc, renderer, selection, container);
 
-            if (container.WorkingLayer != null)
+            if (container.WorkingLayer is { })
             {
                 DrawLayer(dc, renderer, selection, container.WorkingLayer);
             }
 
-            if (container.HelperLayer != null)
+            if (container.HelperLayer is { })
             {
                 DrawLayer(dc, renderer, selection, container.HelperLayer);
             }

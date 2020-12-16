@@ -16,7 +16,7 @@ namespace Core2D.ViewModels.Editors
 
         public void OnUseColumnName(ColumnViewModel column)
         {
-            if (_text != null && column != null)
+            if (_text is { } && column is { })
             {
                 if (string.IsNullOrEmpty(_text.Text))
                 {
@@ -32,7 +32,7 @@ namespace Core2D.ViewModels.Editors
 
         public void OnUsePageProperty(PropertyViewModel property)
         {
-            if (_text != null && property != null)
+            if (_text is { } && property is { })
             {
                 if (string.IsNullOrEmpty(_text.Text))
                 {
@@ -48,7 +48,7 @@ namespace Core2D.ViewModels.Editors
 
         public void OnUseShapeProperty(PropertyViewModel property)
         {
-            if (_text != null && property != null)
+            if (_text is { } && property is { })
             {
                 if (string.IsNullOrEmpty(_text.Text))
                 {
@@ -64,7 +64,7 @@ namespace Core2D.ViewModels.Editors
 
         public void OnResetText()
         {
-            if (_text != null)
+            if (_text is { })
             {
                 _text.Text = "";
             }

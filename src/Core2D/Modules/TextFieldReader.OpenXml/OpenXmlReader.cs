@@ -25,7 +25,7 @@ namespace Core2D.Modules.TextFieldReader.OpenXml
 
         private static string ToString(Cell c, SharedStringTablePart stringTable)
         {
-            if (c.DataType == null)
+            if (c.DataType is null)
             {
                 return c.CellValue?.Text;
             }
@@ -34,7 +34,7 @@ namespace Core2D.Modules.TextFieldReader.OpenXml
             {
                 case CellValues.SharedString:
                     {
-                        if (stringTable != null)
+                        if (stringTable is { })
                         {
                             int index = int.Parse(c.InnerText);
                             var value = stringTable.SharedStringTable.ElementAt(index).InnerText;

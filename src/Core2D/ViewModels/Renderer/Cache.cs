@@ -38,9 +38,9 @@ namespace Core2D.ViewModels.Renderer
 
         public void Reset()
         {
-            if (_storage != null)
+            if (_storage is { })
             {
-                if (_dispose != null)
+                if (_dispose is { })
                 {
                     foreach (var data in _storage)
                     {

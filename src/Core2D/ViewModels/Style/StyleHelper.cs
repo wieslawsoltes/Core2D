@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Style
         {
             try
             {
-                if (value != null)
+                if (value is { })
                 {
                     return string.Join(" ", value.Select(x => x.ToString(CultureInfo.InvariantCulture)));
                 }
@@ -28,7 +28,7 @@ namespace Core2D.ViewModels.Style
         {
             try
             {
-                if (value != null)
+                if (value is { })
                 {
                     return string.Join(" ", value.Select(x => x.ToString(CultureInfo.InvariantCulture)));
                 }
@@ -46,7 +46,7 @@ namespace Core2D.ViewModels.Style
         {
             try
             {
-                if (value != null)
+                if (value is { })
                 {
                     string[] values = value.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
                     double[] array = new double[values.Length];
@@ -73,7 +73,7 @@ namespace Core2D.ViewModels.Style
         {
             try
             {
-                if (value != null)
+                if (value is { })
                 {
                     string[] values = value.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
                     float[] array = new float[values.Length];

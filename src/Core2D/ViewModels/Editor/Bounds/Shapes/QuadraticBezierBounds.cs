@@ -21,17 +21,17 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
             var pointHitTest = registered[typeof(PointShapeViewModel)];
 
-            if (pointHitTest.TryToGetPoint(quadratic.Point1, target, radius, scale, registered) != null)
+            if (pointHitTest.TryToGetPoint(quadratic.Point1, target, radius, scale, registered) is { })
             {
                 return quadratic.Point1;
             }
 
-            if (pointHitTest.TryToGetPoint(quadratic.Point2, target, radius, scale, registered) != null)
+            if (pointHitTest.TryToGetPoint(quadratic.Point2, target, radius, scale, registered) is { })
             {
                 return quadratic.Point2;
             }
 
-            if (pointHitTest.TryToGetPoint(quadratic.Point3, target, radius, scale, registered) != null)
+            if (pointHitTest.TryToGetPoint(quadratic.Point3, target, radius, scale, registered) is { })
             {
                 return quadratic.Point3;
             }

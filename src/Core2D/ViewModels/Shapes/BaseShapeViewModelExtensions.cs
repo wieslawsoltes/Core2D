@@ -7,7 +7,7 @@ namespace Core2D.ViewModels.Shapes
     {
         public static IEnumerable<BaseShapeViewModel> GetAllShapes(this IEnumerable<BaseShapeViewModel> shapes)
         {
-            if (shapes == null)
+            if (shapes is null)
             {
                 yield break;
             }

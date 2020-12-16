@@ -20,7 +20,7 @@ namespace Core2D.Modules.Renderer.Dxf
 
             renderer.State.DrawShapeState = ShapeStateFlags.Printable;
 
-            if (container is PageContainerViewModel page && page.Template != null)
+            if (container is PageContainerViewModel page && page.Template is { })
             {
                 renderer.Fill(dc, dx, dy, page.Template.Width, page.Template.Height, page.Template.Background);
                 DrawContainer(dc, renderer, selection, page.Template);
@@ -143,7 +143,7 @@ namespace Core2D.Modules.Renderer.Dxf
             dataFlow.Bind(container.Template, db, record);
             dataFlow.Bind(container, db, record);
 
-            if (container.Template != null)
+            if (container.Template is { })
             {
                 _pageWidth = container.Template.Width;
                 _pageHeight = container.Template.Height;
