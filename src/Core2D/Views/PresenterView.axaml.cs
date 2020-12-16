@@ -32,7 +32,7 @@ namespace Core2D.Views
 
     internal struct CustomState
     {
-        public BaseContainerViewModel Container;
+        public FrameContainerViewModel Container;
         public IShapeRenderer Renderer;
         public ISelection Selection;
         public DataFlow DataFlow;
@@ -82,8 +82,8 @@ namespace Core2D.Views
         public static readonly StyledProperty<ZoomBorder> ZoomBorderProperty =
             AvaloniaProperty.Register<PresenterView, ZoomBorder>(nameof(ZoomBorder), null);
 
-        public static readonly StyledProperty<BaseContainerViewModel> ContainerProperty =
-            AvaloniaProperty.Register<PresenterView, BaseContainerViewModel>(nameof(Container), null);
+        public static readonly StyledProperty<FrameContainerViewModel> ContainerProperty =
+            AvaloniaProperty.Register<PresenterView, FrameContainerViewModel>(nameof(Container), null);
 
         public static readonly StyledProperty<IShapeRenderer> RendererProperty =
             AvaloniaProperty.Register<PresenterView, IShapeRenderer>(nameof(Renderer), null);
@@ -103,7 +103,7 @@ namespace Core2D.Views
             set => SetValue(ZoomBorderProperty, value);
         }
 
-        public BaseContainerViewModel Container
+        public FrameContainerViewModel Container
         {
             get => GetValue(ContainerProperty);
             set => SetValue(ContainerProperty, value);

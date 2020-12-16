@@ -6,7 +6,7 @@ namespace Core2D.ViewModels.Renderer.Presenters
 {
     public partial class TemplatePresenter : IContainerPresenter
     {
-        public void Render(object dc, IShapeRenderer renderer, ISelection selection, BaseContainerViewModel container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container, double dx, double dy)
         {
             if (container is PageContainerViewModel page && page.Template is { })
             {
@@ -16,7 +16,7 @@ namespace Core2D.ViewModels.Renderer.Presenters
             }
         }
 
-        private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, BaseContainerViewModel container)
+        private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container)
         {
             foreach (var layer in container.Layers)
             {

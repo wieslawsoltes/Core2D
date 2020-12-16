@@ -159,14 +159,14 @@ namespace Core2D.ViewModels.Editor
         {
             if (e.PropertyName == nameof(IDataObject.Properties))
             {
-                var container = sender as BaseContainerViewModel;
+                var container = sender as FrameContainerViewModel;
                 Remove(container.Properties);
                 Add(container.Properties);
             }
 
-            if (e.PropertyName == nameof(BaseContainerViewModel.Layers))
+            if (e.PropertyName == nameof(FrameContainerViewModel.Layers))
             {
-                var container = sender as BaseContainerViewModel;
+                var container = sender as FrameContainerViewModel;
                 Remove(container.Layers);
                 Add(container.Layers);
             }

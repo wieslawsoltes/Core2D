@@ -11,11 +11,11 @@ namespace Core2D.ViewModels.UnitTests
 
         [Fact]
         [Trait("Core2D.Containers", "Project")]
-        public void Inherits_From_BaseContainerViewModel()
+        public void Inherits_From_FrameContainerViewModel()
         {
             var target = _factory.CreatePageContainer();
             Assert.True(target is ViewModelBase);
-            Assert.True(target is BaseContainerViewModel);
+            Assert.True(target is FrameContainerViewModel);
         }
 
         [Fact]

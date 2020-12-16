@@ -6,7 +6,7 @@ namespace Core2D.ViewModels.Renderer.Presenters
 {
     public partial class EditorPresenter : IContainerPresenter
     {
-        public void Render(object dc, IShapeRenderer renderer, ISelection selection, BaseContainerViewModel container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container, double dx, double dy)
         {
             DrawContainer(dc, renderer, selection, container);
 
@@ -21,7 +21,7 @@ namespace Core2D.ViewModels.Renderer.Presenters
             }
         }
 
-        private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, BaseContainerViewModel container)
+        private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container)
         {
             foreach (var layer in container.Layers)
             {

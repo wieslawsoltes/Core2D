@@ -195,7 +195,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddLayer(this ProjectContainerViewModel project, BaseContainerViewModel container, LayerContainerViewModel layer)
+        public static void AddLayer(this ProjectContainerViewModel project, FrameContainerViewModel container, LayerContainerViewModel layer)
         {
             if (container is { } && container.Layers is { } && layer is { })
             {
@@ -208,7 +208,7 @@ namespace Core2D.ViewModels.Editor
 
         public static void RemoveLayer(this ProjectContainerViewModel project, LayerContainerViewModel layer)
         {
-            if (layer.Owner is BaseContainerViewModel container && container.Layers is { })
+            if (layer.Owner is FrameContainerViewModel container && container.Layers is { })
             {
                 var previous = container.Layers;
                 var next = container.Layers.Remove(layer);

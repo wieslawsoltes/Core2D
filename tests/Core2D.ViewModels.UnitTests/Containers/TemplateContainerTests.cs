@@ -15,7 +15,7 @@ namespace Core2D.ViewModels.UnitTests.ViewModels.Containers
         {
             var target = _factory.CreateTemplateContainer();
             Assert.True(target is ViewModelBase);
-            Assert.True(target is BaseContainerViewModel);
+            Assert.True(target is FrameContainerViewModel);
         }
 
         [Fact]

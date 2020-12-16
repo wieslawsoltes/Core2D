@@ -2,7 +2,7 @@
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class PageContainerViewModel : BaseContainerViewModel
+    public partial class PageContainerViewModel : FrameContainerViewModel
     {
         [AutoNotify] private TemplateContainerViewModel _template;
 

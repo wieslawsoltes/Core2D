@@ -6,7 +6,7 @@ namespace Core2D.ViewModels.Renderer.Presenters
 {
     public partial class ExportPresenter : IContainerPresenter
     {
-        public void Render(object dc, IShapeRenderer renderer, ISelection selection, BaseContainerViewModel container, double dx, double dy)
+        public void Render(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container, double dx, double dy)
         {
             var flags = renderer.State.DrawShapeState;
 
@@ -22,7 +22,7 @@ namespace Core2D.ViewModels.Renderer.Presenters
             renderer.State.DrawShapeState = flags;
         }
 
-        private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, BaseContainerViewModel container)
+        private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container)
         {
             foreach (var layer in container.Layers)
             {

@@ -914,7 +914,7 @@ namespace Core2D.ViewModels
             };
         }
 
-        public LayerContainerViewModel CreateLayerContainer(string name = "Layer", BaseContainerViewModel owner = null, bool isVisible = true)
+        public LayerContainerViewModel CreateLayerContainer(string name = "Layer", FrameContainerViewModel owner = null, bool isVisible = true)
         {
             return new LayerContainerViewModel(_serviceProvider)
             {

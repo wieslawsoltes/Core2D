@@ -27,7 +27,7 @@ namespace Core2D.ViewModels.Data
             }
         }
 
-        public void Bind(BaseContainerViewModel container, object db, object r)
+        public void Bind(FrameContainerViewModel container, object db, object r)
         {
             foreach (var layer in container.Layers)
             {

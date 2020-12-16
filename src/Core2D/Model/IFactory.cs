@@ -147,7 +147,7 @@ namespace Core2D.Model
 
         ScriptViewModel CreateScript(string name = "Script", string code = "");
 
-        LayerContainerViewModel CreateLayerContainer(string name = "Layer", BaseContainerViewModel owner = null, bool isVisible = true);
+        LayerContainerViewModel CreateLayerContainer(string name = "Layer", FrameContainerViewModel owner = null, bool isVisible = true);
 
         PageContainerViewModel CreatePageContainer(string name = "Page");
 

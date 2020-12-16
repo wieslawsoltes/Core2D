@@ -75,7 +75,7 @@ namespace Core2D.Modules.FileWriter.Emf
             return ms;
         }
 
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, BaseContainerViewModel container, IImageCache ic)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, FrameContainerViewModel container, IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);

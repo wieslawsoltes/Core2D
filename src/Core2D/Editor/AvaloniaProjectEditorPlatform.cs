@@ -239,7 +239,7 @@ namespace Core2D.Editor
             {
                 name = document.Name;
             }
-            else if (item is BaseContainerViewModel container)
+            else if (item is FrameContainerViewModel container)
             {
                 name = container.Name;
             }

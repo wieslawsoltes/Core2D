@@ -12,7 +12,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class ProjectContainerViewModel : ViewModelBase, ISelection
+    public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelection
     {
         [AutoNotify] private OptionsViewModel _options;
         [AutoNotify] private IHistory _history;
@@ -28,7 +28,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private TemplateContainerViewModel _currentTemplate;
         [AutoNotify] private ScriptViewModel _currentScript;
         [AutoNotify] private DocumentContainerViewModel _currentDocument;
-        [AutoNotify] private BaseContainerViewModel _currentContainer;
+        [AutoNotify] private FrameContainerViewModel _currentContainer;
         [AutoNotify] private ViewModelBase _selected;
         [AutoNotify] private ISet<BaseShapeViewModel> _selectedShapes;
 
@@ -95,7 +95,7 @@ namespace Core2D.ViewModels.Containers
                     }
                 }
             }
-            else if (value is BaseContainerViewModel container && _documents is { })
+            else if (value is FrameContainerViewModel container && _documents is { })
             {
                 var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
                 if (document is { })
@@ -141,7 +141,7 @@ namespace Core2D.ViewModels.Containers
             SetSelected(document);
         }
 
-        public void SetCurrentContainer(BaseContainerViewModel container)
+        public void SetCurrentContainer(FrameContainerViewModel container)
         {
             CurrentContainer = container;
             Selected = container;

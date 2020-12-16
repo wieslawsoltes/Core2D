@@ -14,7 +14,7 @@ namespace Core2D.DragAndDrop.Handlers
             return source switch
             {
                 LayerContainerViewModel targetLayer => true,
-                BaseContainerViewModel targetPage => true,
+                FrameContainerViewModel targetPage => true,
                 DocumentContainerViewModel targetDocument => true,
                 _ => false
             };
@@ -48,7 +48,7 @@ namespace Core2D.DragAndDrop.Handlers
                                     }
                                     return true;
                                 }
-                            case BaseContainerViewModel targetContainer:
+                            case FrameContainerViewModel targetContainer:
                                 {
                                     if (e.DragEffects == DragDropEffects.Copy)
                                     {
@@ -148,7 +148,7 @@ namespace Core2D.DragAndDrop.Handlers
                                 {
                                     return false;
                                 }
-                            case BaseContainerViewModel targetContainer:
+                            case FrameContainerViewModel targetContainer:
                                 {
                                     return false;
                                 }

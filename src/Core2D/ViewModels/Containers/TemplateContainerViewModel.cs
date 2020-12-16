@@ -4,7 +4,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class TemplateContainerViewModel : BaseContainerViewModel, IGrid
+    public partial class TemplateContainerViewModel : FrameContainerViewModel, IGrid
     {
         [AutoNotify] private double _width;
         [AutoNotify] private double _height;

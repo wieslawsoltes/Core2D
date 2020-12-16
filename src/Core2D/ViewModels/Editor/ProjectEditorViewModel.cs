@@ -855,7 +855,7 @@ namespace Core2D.ViewModels.Editor
                 Project?.RemoveLayer(layer);
 
                 var selected = Project?.CurrentContainer?.Layers.FirstOrDefault();
-                if (layer.Owner is BaseContainerViewModel owner)
+                if (layer.Owner is FrameContainerViewModel owner)
                 {
                     owner.SetCurrentLayer(selected);
                 }
@@ -2035,7 +2035,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnAddLayer(BaseContainerViewModel container)
+        public void OnAddLayer(FrameContainerViewModel container)
         {
             if (container is { })
             {
@@ -2048,7 +2048,7 @@ namespace Core2D.ViewModels.Editor
             if (layer is { })
             {
                 Project.RemoveLayer(layer);
-                if (layer.Owner is BaseContainerViewModel owner)
+                if (layer.Owner is FrameContainerViewModel owner)
                 {
                     owner.SetCurrentLayer(owner.Layers.FirstOrDefault());
                 }
@@ -2150,7 +2150,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnEditTemplate(BaseContainerViewModel template)
+        public void OnEditTemplate(FrameContainerViewModel template)
         {
             if (Project is { } && template is { })
             {
@@ -3127,7 +3127,7 @@ namespace Core2D.ViewModels.Editor
                 }
             }
 
-            if (layer.Owner is BaseContainerViewModel owner)
+            if (layer.Owner is FrameContainerViewModel owner)
             {
                 owner.CurrentShape = shape;
             }
@@ -3151,7 +3151,7 @@ namespace Core2D.ViewModels.Editor
                 OnShowDecorator();
             }
 
-            if (layer.Owner is BaseContainerViewModel owner && owner.CurrentShape is { })
+            if (layer.Owner is FrameContainerViewModel owner && owner.CurrentShape is { })
             {
                 owner.CurrentShape = default;
             }
@@ -3170,7 +3170,7 @@ namespace Core2D.ViewModels.Editor
         {
             Deselect();
 
-            if (layer.Owner is BaseContainerViewModel owner && owner.CurrentShape is { })
+            if (layer.Owner is FrameContainerViewModel owner && owner.CurrentShape is { })
             {
                 owner.CurrentShape = default;
             }

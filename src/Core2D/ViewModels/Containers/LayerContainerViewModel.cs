@@ -8,11 +8,10 @@ namespace Core2D.ViewModels.Containers
 
     public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
 
-    public partial class LayerContainerViewModel : ViewModelBase
+    public partial class LayerContainerViewModel : BaseContainerViewModel
     {
         public event InvalidateLayerEventHandler InvalidateLayerHandler;
 
-        [AutoNotify] private bool _isVisible = true;
         [AutoNotify] private ImmutableArray<BaseShapeViewModel> _shapes;
 
         public LayerContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)

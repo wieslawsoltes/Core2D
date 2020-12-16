@@ -3,9 +3,8 @@ using System.Collections.Immutable;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class DocumentContainerViewModel : ViewModelBase
+    public partial class DocumentContainerViewModel : BaseContainerViewModel
     {
-        [AutoNotify] private bool _isExpanded = true;
         [AutoNotify] private ImmutableArray<PageContainerViewModel> _pages;
 
         public DocumentContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
