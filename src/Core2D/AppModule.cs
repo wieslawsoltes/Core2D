@@ -12,6 +12,7 @@ using Core2D.Modules.FileWriter.PdfSharp;
 using Core2D.Modules.FileWriter.SkiaSharpJpeg;
 using Core2D.Modules.FileWriter.SkiaSharpPdf;
 using Core2D.Modules.FileWriter.SkiaSharpPng;
+using Core2D.Modules.FileWriter.SkiaSharpSkp;
 using Core2D.Modules.FileWriter.SkiaSharpSvg;
 using Core2D.Modules.FileWriter.SkiaSharpWebp;
 using Core2D.Modules.FileWriter.Svg;
@@ -105,6 +106,7 @@ namespace Core2D
             builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<PngSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<SkpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<JpegSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
