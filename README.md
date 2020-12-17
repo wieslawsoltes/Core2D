@@ -48,6 +48,7 @@ Options:
   --enableMultiTouch                                               Enable multi-touch [default: True]
   --useGpu                                                         Use Gpu [default: True]
   --allowEglInitialization                                         Allow EGL initialization [default: True]
+  --useWgl                                                         Use Windows GL
   --useDeferredRendering                                           Use deferred rendering [default: True]
   --useWindowsUIComposition                                        Use Windows UI composition [default: True]
   --useDirectX11                                                   Use DirectX11 platform api
@@ -55,8 +56,8 @@ Options:
   --useHeadlessDrawing                                             Use headless drawing
   --useHeadlessVnc                                                 Use headless vnc
   --createHeadlessScreenshots                                      Create headless screenshots
-  --vncHost <vnchost>                                              Vnc host
-  --vncPort <vncport>                                              Vnc port [default: 5901]
+  --vncHost <vncHost>                                              Vnc host
+  --vncPort <vncPort>                                              Vnc port [default: 5901]
   --version                                                        Show version information
   -?, -h, --help                                                   Show help and usage information
 ```
