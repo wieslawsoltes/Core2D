@@ -16,6 +16,7 @@ using Avalonia.Threading;
 using Core2D.Configuration.Themes;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
@@ -77,37 +78,47 @@ namespace Core2D.Desktop
             }
         }
 
-        private static async Task CreateScreenshots()
+        private static async Task CreateScreenshots(string extension, double with, double height)
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
                 var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
                 var mainWindow = applicationLifetime?.MainWindow;
                 var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
-                var mainView = mainWindow?.Content as MainView;
-                var editor = mainView?.DataContext as ProjectEditorViewModel;
 
-                var pt = new Point(-1, -1);
-                headlessWindow?.MouseMove(pt);
-                Dispatcher.UIThread.RunJobs();
-
-                var size = new Size(1366, 690);
-
-                if (mainView is { })
+                if (mainWindow?.FindControl<Panel>("ContentPanel") is Panel contentPanel)
                 {
-                    Util.Screenshot(mainView, size, $"Core2D-Dashboard-{App.DefaultTheme}.png");
+                    var editor = contentPanel?.DataContext as ProjectEditorViewModel;
+
+                    var pt = new Point(-1, -1);
+                    headlessWindow?.MouseMove(pt);
                     Dispatcher.UIThread.RunJobs();
-                }
 
-                if (mainView is { })
-                {
+                    var size = new Size(with, height);
+                    var pathDashboard = $"Core2D-Dashboard-{App.DefaultTheme}.{extension}";
+                    var pathEditor = $"Core2D-Editor-{App.DefaultTheme}.{extension}";
+
+                    if (string.Equals(extension, "png", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Util.RenderAsPng(contentPanel, size, pathDashboard);
+                    }
+                    if (string.Equals(extension, "svg", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Util.RenderAsSvg(contentPanel, size, pathDashboard);
+                    }
+                    Dispatcher.UIThread.RunJobs();
+
                     editor?.OnNew(null);
                     Dispatcher.UIThread.RunJobs();
-                }
 
-                if (mainView is { })
-                {
-                    Util.Screenshot(mainView, size, $"Core2D-Editor-{App.DefaultTheme}.png");
+                    if (string.Equals(extension, "png", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Util.RenderAsPng(contentPanel, size, pathEditor);
+                    }
+                    if (string.Equals(extension, "svg", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Util.RenderAsSvg(contentPanel, size, pathEditor);
+                    }
                     Dispatcher.UIThread.RunJobs();
                 }
 
@@ -200,7 +211,7 @@ namespace Core2D.Desktop
                 if (settings.CreateHeadlessScreenshots)
                 {
                     builder.UseHeadless(false)
-                           .AfterSetup(async _ => await CreateScreenshots())
+                           .AfterSetup(async _ => await CreateScreenshots(settings.ScreenshotExtension, settings.ScreenshotWidth, settings.ScreenshotHeight))
                            .StartWithClassicDesktopLifetime(args);
                     return;
                 }
@@ -334,6 +345,24 @@ namespace Core2D.Desktop
                 Argument = new Argument<bool>()
             };
             rootCommand.AddOption(optionCreateHeadlessScreenshots);
+
+            var optionScreenshotExtension = new Option(new[] { "--screenshotExtension" }, "Screenshots file extension")
+            {
+                Argument = new Argument<string?>(getDefaultValue: () => "png")
+            };
+            rootCommand.AddOption(optionScreenshotExtension);
+            
+            var optionScreenshotWidth = new Option(new[] { "--screenshotWidth" }, "Screenshots width")
+            {
+                Argument = new Argument<double>(getDefaultValue: () => 1366)
+            };
+            rootCommand.AddOption(optionScreenshotWidth);
+            
+            var optionScreenshotHeight = new Option(new[] { "--screenshotHeight" }, "Screenshots height")
+            {
+                Argument = new Argument<double>(getDefaultValue: () => 690)
+            };
+            rootCommand.AddOption(optionScreenshotHeight);
 
             var optionVncHost = new Option(new[] { "--vncHost" }, "Vnc host")
             {

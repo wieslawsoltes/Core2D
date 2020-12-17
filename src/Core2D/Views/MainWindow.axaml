@@ -37,7 +37,7 @@
             <Setter Property="Margin" Value="{DynamicResource MainViewMargin}" />
         </Style>
     </Window.Styles>
-    <Panel>
+    <Panel x:Name="ContentPanel">
         <ExperimentalAcrylicBorder DockPanel.Dock="Left" IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial BackgroundSource="Digger"

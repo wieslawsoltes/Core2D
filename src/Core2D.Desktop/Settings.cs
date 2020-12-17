@@ -22,6 +22,9 @@ namespace Core2D.Desktop
         public bool UseHeadlessDrawing { get; set; }
         public bool UseHeadlessVnc { get; set; }
         public bool CreateHeadlessScreenshots { get; set; }
+        public string ScreenshotExtension { get; set; } = "png";
+        public double ScreenshotWidth { get; set; } = 1366;
+        public double ScreenshotHeight { get; set; } = 690;
         public string? VncHost { get; set; } = null;
         public int VncPort { get; set; } = 5901;
     }

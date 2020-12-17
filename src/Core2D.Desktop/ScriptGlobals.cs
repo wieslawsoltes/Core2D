@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -40,7 +41,15 @@ namespace Core2D.Desktop
                 if (mainControl is { })
                 {
                     var size = new Size(width, height);
-                    Util.Screenshot(mainControl, size, path);
+                    if (path.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Util.RenderAsPng(mainControl, size, path);
+                    }
+
+                    if (path.EndsWith(".svg", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Util.RenderAsSvg(mainControl, size, path);
+                    }
                 }
             });
         }
