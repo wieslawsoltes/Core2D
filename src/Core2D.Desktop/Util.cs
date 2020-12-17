@@ -36,18 +36,18 @@ namespace Core2D.Desktop
                 _canvas = canvas;
                 _dpi = dpi;
             }
-            
+
             public IDrawingContextImpl CreateDrawingContext(IVisualBrushRenderer visualBrushRenderer)
             {
                 return DrawingContextHelper.WrapSkiaCanvas(_canvas, new Vector(_dpi, _dpi), visualBrushRenderer);
             }
-            
+
             public void Dispose()
             {
                 _canvas.Flush();
             }
         }
-        
+
         public static void RenderAsSvg(Control target, Size size, string path, double dpi = 96)
         {
             using var stream = File.Create(path);
@@ -60,7 +60,7 @@ namespace Core2D.Desktop
             using var renderTarget = new CustomRenderTarget(canvas, dpi);
             ImmediateRenderer.Render(target, renderTarget);
         }
-        
+
         public static void RenderAsPdf(Control target, Size size, string path, double dpi = 72)
         {
             using var stream = File.Create(path);
@@ -73,7 +73,7 @@ namespace Core2D.Desktop
             using var renderTarget = new CustomRenderTarget(canvas, dpi);
             ImmediateRenderer.Render(target, renderTarget);
         }
-        
+
         public static void Render(Control? control, Size size, string path)
         {
             if (control is null)
