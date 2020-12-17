@@ -47,6 +47,21 @@ namespace Core2D
             }
         }
 
+        public static void RenderAsSkp(Control target, Size size, string path, double dpi = 96)
+        {
+            var bounds = SKRect.Create(new SKSize((float)size.Width, (float)size.Height));
+            using var pictureRecorder = new SKPictureRecorder();
+            using var canvas = pictureRecorder.BeginRecording(bounds);
+            using var renderer = new ImmediateRenderer(target);
+            target.Measure(size);
+            target.Arrange(new Rect(size));
+            using var renderTarget = new CustomRenderTarget(canvas, dpi);
+            ImmediateRenderer.Render(target, renderTarget);
+            using var picture = pictureRecorder.EndRecording();
+            using var stream = File.Create(path);
+            picture.Serialize(stream);
+        }
+
         public static void RenderAsSvg(Control target, Size size, string path, double dpi = 96)
         {
             using var stream = File.Create(path);
@@ -84,15 +99,20 @@ namespace Core2D
             {
                 RenderAsPng(control, size, path);
             }
-
-            if (path.EndsWith("pdf", StringComparison.OrdinalIgnoreCase))
+            
+            if (path.EndsWith("skp", StringComparison.OrdinalIgnoreCase))
             {
-                RenderAsPdf(control, size, path);
+                RenderAsSkp(control, size, path);
             }
 
             if (path.EndsWith("svg", StringComparison.OrdinalIgnoreCase))
             {
                 RenderAsSvg(control, size, path);
+            }
+            
+            if (path.EndsWith("pdf", StringComparison.OrdinalIgnoreCase))
+            {
+                RenderAsPdf(control, size, path);
             }
         }
 
