@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -35,23 +34,7 @@ namespace Core2D.Desktop
 
         public static async Task Screenshot(string path = "screenshot.png", double width = 1366, double height = 690)
         {
-            await Util.RunUiJob(() =>
-            {
-                var mainControl = GetMainView();
-                if (mainControl is { })
-                {
-                    var size = new Size(width, height);
-                    if (path.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
-                    {
-                        Util.RenderAsPng(mainControl, size, path);
-                    }
-
-                    if (path.EndsWith(".svg", StringComparison.OrdinalIgnoreCase))
-                    {
-                        Util.RenderAsSvg(mainControl, size, path);
-                    }
-                }
-            });
+            await Util.RunUiJob(() => Util.Render(GetMainView(), new Size(width, height), path));
         }
     }
 }

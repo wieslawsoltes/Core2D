@@ -16,7 +16,6 @@ using Avalonia.Threading;
 using Core2D.Configuration.Themes;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
-using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
@@ -98,27 +97,13 @@ namespace Core2D.Desktop
                     var pathDashboard = $"Core2D-Dashboard-{App.DefaultTheme}.{extension}";
                     var pathEditor = $"Core2D-Editor-{App.DefaultTheme}.{extension}";
 
-                    if (string.Equals(extension, "png", StringComparison.OrdinalIgnoreCase))
-                    {
-                        Util.RenderAsPng(contentPanel, size, pathDashboard);
-                    }
-                    if (string.Equals(extension, "svg", StringComparison.OrdinalIgnoreCase))
-                    {
-                        Util.RenderAsSvg(contentPanel, size, pathDashboard);
-                    }
+                    Util.Render(contentPanel, size, pathDashboard);
                     Dispatcher.UIThread.RunJobs();
 
                     editor?.OnNew(null);
                     Dispatcher.UIThread.RunJobs();
 
-                    if (string.Equals(extension, "png", StringComparison.OrdinalIgnoreCase))
-                    {
-                        Util.RenderAsPng(contentPanel, size, pathEditor);
-                    }
-                    if (string.Equals(extension, "svg", StringComparison.OrdinalIgnoreCase))
-                    {
-                        Util.RenderAsSvg(contentPanel, size, pathEditor);
-                    }
+                    Util.Render(contentPanel, size, pathEditor);
                     Dispatcher.UIThread.RunJobs();
                 }
 
