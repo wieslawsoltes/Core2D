@@ -86,7 +86,7 @@ namespace Core2D.Desktop
                 var mainWindow = applicationLifetime?.MainWindow;
                 var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
 
-                if (mainWindow?.FindControl<Panel>("ContentPanel") is Panel contentPanel)
+                if (mainWindow?.FindControl<Panel>("ContentPanel") is { } contentPanel)
                 {
                     var editor = contentPanel?.DataContext as ProjectEditorViewModel;
 
