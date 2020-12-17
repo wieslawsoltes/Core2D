@@ -13,6 +13,7 @@ namespace Core2D.Desktop
         public bool EnableMultiTouch { get; set; } = true;
         public bool UseGpu { get; set; } = true;
         public bool AllowEglInitialization { get; set; } = true;
+        public bool UseWgl { get; set; } 
         public bool UseDeferredRendering { get; set; } = true;
         public bool UseWindowsUIComposition { get; set; } = true;
         public bool UseDirectX11 { get; set; }

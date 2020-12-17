@@ -175,6 +175,7 @@ namespace Core2D.Desktop
                 {
                     EnableMultitouch = settings.EnableMultiTouch,
                     AllowEglInitialization = settings.AllowEglInitialization,
+                    UseWgl = settings.UseWgl,
                     UseDeferredRendering = settings.UseDeferredRendering,
                     UseWindowsUIComposition = settings.UseWindowsUIComposition
                 });
@@ -284,6 +285,12 @@ namespace Core2D.Desktop
                 Argument = new Argument<bool>(getDefaultValue: () => true)
             };
             rootCommand.AddOption(optionAllowEglInitialization);
+
+            var optionUseWgl = new Option(new[] { "--useWgl" }, "Use Windows GL")
+            {
+                Argument = new Argument<bool>()
+            };
+            rootCommand.AddOption(optionUseWgl);
 
             var optionUseDeferredRendering = new Option(new[] { "--useDeferredRendering" }, "Use deferred rendering")
             {
