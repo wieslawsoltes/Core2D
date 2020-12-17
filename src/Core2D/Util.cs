@@ -10,7 +10,7 @@ using Avalonia.Skia.Helpers;
 using Avalonia.Threading;
 using SkiaSharp;
 
-namespace Core2D.Desktop
+namespace Core2D
 {
     public static class Util
     {
@@ -73,7 +73,7 @@ namespace Core2D.Desktop
             ImmediateRenderer.Render(target, renderTarget);
         }
 
-        public static void Render(Control? control, Size size, string path)
+        public static void Render(Control control, Size size, string path)
         {
             if (control is null)
             {
