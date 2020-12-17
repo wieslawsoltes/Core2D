@@ -21,7 +21,7 @@ using Microsoft.CodeAnalysis.Scripting;
 
 namespace Core2D.Desktop
 {
-    internal class Program
+    internal static class Program
     {
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
         private static extern bool AttachConsole(int processId);
@@ -40,40 +40,41 @@ namespace Core2D.Desktop
 
         private static void Repl()
         {
-            s_replThread = new Thread(async () =>
+            s_replThread = new Thread(ReplThread)
             {
-                ScriptState<object>? state = null;
+                IsBackground = true
+            };
+            s_replThread?.Start();
+        }
 
-                while (true)
+        private static async void ReplThread()
+        {
+            ScriptState<object>? state = null;
+
+            while (true)
+            {
+                try
                 {
-                    try
-                    {
-                        var code = Console.ReadLine();
+                    var code = Console.ReadLine();
 
-                        if (state is { } previous)
-                        {
-                            await Util.RunUiJob(async () =>
-                            {
-                                state = await previous.ContinueWithAsync(code);
-                            });
-                        }
-                        else
-                        {
-                            await Util.RunUiJob(async () =>
-                            {
-                                var options = ScriptOptions.Default.WithImports("System");
-                                state = await CSharpScript.RunAsync(code, options, new ScriptGlobals());
-                            });
-                        }
-                    }
-                    catch (Exception ex)
+                    if (state is { } previous)
                     {
-                        Log(ex);
+                        await Util.RunUiJob(async () => { state = await previous.ContinueWithAsync(code); });
+                    }
+                    else
+                    {
+                        await Util.RunUiJob(async () =>
+                        {
+                            var options = ScriptOptions.Default.WithImports("System");
+                            state = await CSharpScript.RunAsync(code, options, new ScriptGlobals());
+                        });
                     }
                 }
-            })
-            { IsBackground = true };
-            s_replThread?.Start();
+                catch (Exception ex)
+                {
+                    Log(ex);
+                }
+            }
         }
 
         private static async Task CreateScreenshots()
