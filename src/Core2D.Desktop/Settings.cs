@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Core2D.Configuration.Themes;
 
-namespace Core2D
+namespace Core2D.Desktop
 {
     public class Settings
     {

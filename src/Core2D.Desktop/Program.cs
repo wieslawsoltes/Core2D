@@ -19,16 +19,16 @@ using Core2D.Views;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
-namespace Core2D
+namespace Core2D.Desktop
 {
     internal class Program
     {
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
-        internal static extern bool AttachConsole(int processId);
+        private static extern bool AttachConsole(int processId);
 
-        internal static Thread? s_replThread;
+        private static Thread? s_replThread;
 
-        internal static void Log(Exception ex)
+        private static void Log(Exception ex)
         {
             Console.WriteLine(ex.Message);
             Console.WriteLine(ex.StackTrace);
@@ -38,7 +38,7 @@ namespace Core2D
             }
         }
 
-        internal static void Repl()
+        private static void Repl()
         {
             s_replThread = new Thread(async () =>
             {
@@ -50,16 +50,16 @@ namespace Core2D
                     {
                         var code = Console.ReadLine();
 
-                        if (state is ScriptState<object> previous)
+                        if (state is { } previous)
                         {
-                            await Util.RunUIJob(async () =>
+                            await Util.RunUiJob(async () =>
                             {
                                 state = await previous.ContinueWithAsync(code);
                             });
                         }
                         else
                         {
-                            await Util.RunUIJob(async () =>
+                            await Util.RunUiJob(async () =>
                             {
                                 var options = ScriptOptions.Default.WithImports("System");
                                 state = await CSharpScript.RunAsync(code, options, new ScriptGlobals());
@@ -76,7 +76,7 @@ namespace Core2D
             s_replThread?.Start();
         }
 
-        internal static async Task CreateScreenshots()
+        private static async Task CreateScreenshots()
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
@@ -114,7 +114,7 @@ namespace Core2D
             });
         }
 
-        internal static async Task ProcessSettings(Settings settings)
+        private static async Task ProcessSettings(Settings settings)
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
@@ -143,7 +143,7 @@ namespace Core2D
             });
         }
 
-        internal static void StartAvaloniaApp(Settings settings, string[] args)
+        private static void StartAvaloniaApp(Settings settings, string[] args)
         {
             var builder = BuildAvaloniaApp();
 
@@ -214,12 +214,9 @@ namespace Core2D
                            .StartWithHeadlessVncPlatform(settings.VncHost, settings.VncPort, args, ShutdownMode.OnMainWindowClose);
                     return;
                 }
-                else
-                {
-                    builder.AfterSetup(async _ => await ProcessSettings(settings))
-                           .StartWithClassicDesktopLifetime(args);
-                    return;
-                }
+
+                builder.AfterSetup(async _ => await ProcessSettings(settings))
+                    .StartWithClassicDesktopLifetime(args);
             }
             catch (Exception ex)
             {
@@ -227,7 +224,7 @@ namespace Core2D
             }
         }
 
-        internal static RootCommand CreateRootCommand()
+        private static RootCommand CreateRootCommand()
         {
             var rootCommand = new RootCommand()
             {

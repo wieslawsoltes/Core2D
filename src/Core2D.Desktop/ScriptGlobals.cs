@@ -5,7 +5,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
 
-namespace Core2D
+namespace Core2D.Desktop
 {
     public class ScriptGlobals
     {
@@ -34,7 +34,7 @@ namespace Core2D
 
         public static async Task Screenshot(string path = "screenshot.png", double width = 1366, double height = 690)
         {
-            await Util.RunUIJob(() =>
+            await Util.RunUiJob(() =>
             {
                 var mainControl = GetMainView();
                 if (mainControl is { })

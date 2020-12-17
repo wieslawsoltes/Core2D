@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 
-namespace Core2D
+namespace Core2D.Desktop
 {
     public static class Util
     {
@@ -20,7 +20,7 @@ namespace Core2D
             bitmap.Save(path);
         }
 
-        public static async Task RunUIJob(Action action)
+        public static async Task RunUiJob(Action action)
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
