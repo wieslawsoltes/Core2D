@@ -21,7 +21,7 @@
     <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
     <NewtonsoftJsonVersion>12.0.3</NewtonsoftJsonVersion>
     <PDFsharpVersion>1.50.5147</PDFsharpVersion>
-    <SkiaSharpVersion>2.80.2</SkiaSharpVersion>
+    <SkiaSharpVersion>2.84.0-preview.4</SkiaSharpVersion>
     <SystemCollectionsImmutableVersion>5.0.0</SystemCollectionsImmutableVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
