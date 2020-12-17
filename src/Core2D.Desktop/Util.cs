@@ -33,7 +33,10 @@ namespace Core2D.Desktop
             using var canvas = SKSvgCanvas.Create(bounds, wstream);
             using var impl = DrawingContextHelper.WrapSkiaCanvas(canvas, new Vector(dpi, dpi));
             using var context = new DrawingContext(impl);
+            target?.Measure(size);
+            target?.Arrange(new Rect(size));
             target?.Render(context);
+            canvas.Flush();
         }
         
         public static void RenderAsPdf(Control? target, Size size, string path, double dpi = 96)
@@ -44,7 +47,10 @@ namespace Core2D.Desktop
             using var canvas = document.BeginPage((float)size.Width, (float)size.Height);
             using var impl = DrawingContextHelper.WrapSkiaCanvas(canvas, new Vector(dpi, dpi));
             using var context = new DrawingContext(impl);
+            target?.Measure(size);
+            target?.Arrange(new Rect(size));
             target?.Render(context);
+            canvas.Flush();
         }
         
         public static void Render(Control? control, Size size, string path)
