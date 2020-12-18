@@ -12,7 +12,7 @@ namespace Core2D.Util
 {
     internal class RequestHandler
     {
-        private  HttpListenerContext _context;
+        private readonly HttpListenerContext _context;
 
         public RequestHandler(HttpListenerContext context)
         {
