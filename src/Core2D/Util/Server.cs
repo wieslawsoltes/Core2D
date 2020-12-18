@@ -34,7 +34,11 @@ namespace Core2D.Util
 
             var sb = new StringBuilder();
 
-            sb.AppendLine("<html><body>");
+            sb.AppendLine("<html>");
+            sb.AppendLine("<head>");
+            sb.AppendLine("  <link rel=\"icon\" href=\"data:;base64,iVBORw0KGgo=\">");
+            sb.AppendLine("</head>");
+            sb.AppendLine("<body>");
 
             await Renderer.RunUiJob(() => 
             {
