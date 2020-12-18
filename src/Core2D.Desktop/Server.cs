@@ -53,9 +53,11 @@ namespace Core2D.Desktop
                         editor?.OnCloseProject();
                         Dispatcher.UIThread.RunJobs();
                     }
+ 
                     Console.WriteLine($"Rendering...");
                     var sw = new Stopwatch();
                     sw.Start();
+
                     var size = new Size(1366, 690);
                     using var stream = new MemoryStream();
                     Util.RenderAsSvg(control, size, stream);
@@ -63,6 +65,7 @@ namespace Core2D.Desktop
                     using var reader = new StreamReader(stream);
                     var svg = reader.ReadToEnd();
                     sb.AppendLine(svg);
+
                     sw.Stop();
                     Console.WriteLine($"Done in {sw.ElapsedMilliseconds}ms");
                 }
