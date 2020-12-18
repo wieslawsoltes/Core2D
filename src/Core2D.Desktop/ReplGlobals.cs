@@ -7,7 +7,7 @@ using Core2D.Views;
 
 namespace Core2D.Desktop
 {
-    public class ScriptGlobals
+    public class ReplGlobals
     {
         public static Application GetApplication()
         {

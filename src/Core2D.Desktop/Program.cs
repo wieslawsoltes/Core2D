@@ -66,7 +66,7 @@ namespace Core2D.Desktop
                         await Util.RunUiJob(async () =>
                         {
                             var options = ScriptOptions.Default.WithImports("System");
-                            state = await CSharpScript.RunAsync(code, options, new ScriptGlobals());
+                            state = await CSharpScript.RunAsync(code, options, new ReplGlobals());
                         });
                     }
                 }
@@ -229,137 +229,138 @@ namespace Core2D.Desktop
                 Description = "A multi-platform data driven 2D diagram editor."
             };
 
-            var optionTheme = new Option(new[] { "--theme", "-t" }, "Set application theme")
-            {
-                Argument = new Argument<ThemeName?>()
-            };
-            rootCommand.AddOption(optionTheme);
+            rootCommand.AddOption(
+                new Option(new[] { "--theme", "-t" }, "Set application theme")
+                {
+                    Argument = new Argument<ThemeName?>()
+                });
 
-            var optionScripts = new Option(new[] { "--scripts", "-s" }, "The relative or absolute path to the script files")
-            {
-                Argument = new Argument<FileInfo[]?>()
-            };
-            rootCommand.AddOption(optionScripts);
+            rootCommand.AddOption(
+                new Option(new[] { "--scripts", "-s" }, "The relative or absolute path to the script files")
+                {
+                    Argument = new Argument<FileInfo[]?>()
+                });
 
-            var optionProject = new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file")
-            {
-                Argument = new Argument<FileInfo?>()
-            };
-            rootCommand.AddOption(optionProject);
+            rootCommand.AddOption(
+                new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file")
+                {
+                    Argument = new Argument<FileInfo?>()
+                });
 
-            var optionRepl = new Option(new[] { "--repl" }, "Run scripting repl")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionRepl);
+            rootCommand.AddOption(
+                new Option(new[] { "--repl" }, "Run scripting repl")
+                {
+                    Argument = new Argument<bool>()
+                });
 
-            var optionUseManagedSystemDialogs = new Option(new[] { "--useManagedSystemDialogs" }, "Use managed system dialogs")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionUseManagedSystemDialogs);
+            rootCommand.AddOption(
+                new Option(new[] { "--useManagedSystemDialogs" }, "Use managed system dialogs")
+                {
+                    Argument = new Argument<bool>()
+                });
 
-            var optionUseSkia = new Option(new[] { "--useSkia" }, "Use Skia renderer")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionUseSkia);
+            rootCommand.AddOption(
+                new Option(new[] { "--useSkia" }, "Use Skia renderer")
+                {
+                    Argument = new Argument<bool>()
+                });
 
-            var optionEnableMultiTouch = new Option(new[] { "--enableMultiTouch" }, "Enable multi-touch")
-            {
-                Argument = new Argument<bool>(getDefaultValue: () => true)
-            };
-            rootCommand.AddOption(optionEnableMultiTouch);
+            rootCommand.AddOption(
+                new Option(new[] { "--enableMultiTouch" }, "Enable multi-touch")
+                {
+                    Argument = new Argument<bool>(getDefaultValue: () => true)
+                });
 
-            var optionUseGpu = new Option(new[] { "--useGpu" }, "Use Gpu")
-            {
-                Argument = new Argument<bool>(getDefaultValue: () => true)
-            };
-            rootCommand.AddOption(optionUseGpu);
+            rootCommand.AddOption(
+                new Option(new[] { "--useGpu" }, "Use Gpu")
+                {
+                    Argument = new Argument<bool>(getDefaultValue: () => true)
+                });
 
-            var optionAllowEglInitialization = new Option(new[] { "--allowEglInitialization" }, "Allow EGL initialization")
-            {
-                Argument = new Argument<bool>(getDefaultValue: () => true)
-            };
-            rootCommand.AddOption(optionAllowEglInitialization);
+            rootCommand.AddOption(
+                new Option(new[] { "--allowEglInitialization" }, "Allow EGL initialization")
+                {
+                    Argument = new Argument<bool>(getDefaultValue: () => true)
+                });
 
-            var optionUseWgl = new Option(new[] { "--useWgl" }, "Use Windows GL")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionUseWgl);
+            rootCommand.AddOption(
+                new Option(new[] { "--useWgl" }, "Use Windows GL")
+                {
+                    Argument = new Argument<bool>()
+                });
 
-            var optionUseDeferredRendering = new Option(new[] { "--useDeferredRendering" }, "Use deferred rendering")
-            {
-                Argument = new Argument<bool>(getDefaultValue: () => true)
-            };
-            rootCommand.AddOption(optionUseDeferredRendering);
+            rootCommand.AddOption(
+                new Option(new[] { "--useDeferredRendering" }, "Use deferred rendering")
+                {
+                    Argument = new Argument<bool>(getDefaultValue: () => true)
+                });
 
-            var optionUseWindowsUIComposition = new Option(new[] { "--useWindowsUIComposition" }, "Use Windows UI composition")
-            {
-                Argument = new Argument<bool>(getDefaultValue: () => true)
-            };
-            rootCommand.AddOption(optionUseWindowsUIComposition);
+            rootCommand.AddOption(
+                new Option(new[] { "--useWindowsUIComposition" }, "Use Windows UI composition")
+                {
+                    Argument = new Argument<bool>(getDefaultValue: () => true)
+                });
+
+            rootCommand.AddOption(
+                new Option(new[] { "--useDirectX11" }, "Use DirectX11 platform api")
+                {
+                    Argument = new Argument<bool>()
+                });
+
+            rootCommand.AddOption(
+                new Option(new[] { "--useHeadless" }, "Use headless")
+                {
+                    Argument = new Argument<bool>()
+                });
+
+            rootCommand.AddOption(
+                new Option(new[] { "--useHeadlessDrawing" }, "Use headless drawing")
+                {
+                    Argument = new Argument<bool>()
+                });
+
+            rootCommand.AddOption(
+                new Option(new[] { "--useHeadlessVnc" }, "Use headless vnc")
+                {
+                    Argument = new Argument<bool>()
+                });
+
+            rootCommand.AddOption(
+                new Option(new[] { "--createHeadlessScreenshots" }, "Create headless screenshots")
+                {
+                    Argument = new Argument<bool>()
+                });
+
+            rootCommand.AddOption(
+                new Option(new[] { "--screenshotExtension" }, "Screenshots file extension")
+                {
+                    Argument = new Argument<string?>(getDefaultValue: () => "png")
+                });
+
+            rootCommand.AddOption(
+                new Option(new[] { "--screenshotWidth" }, "Screenshots width")
+                {
+                    Argument = new Argument<double>(getDefaultValue: () => 1366)
+                });
             
-            var optionUseDirectX11 = new Option(new[] { "--useDirectX11" }, "Use DirectX11 platform api")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionUseDirectX11);
+            rootCommand.AddOption(
+                new Option(new[] { "--screenshotHeight" }, "Screenshots height")
+                {
+                    Argument = new Argument<double>(getDefaultValue: () => 690)
+                });
 
-            var optionUseHeadless = new Option(new[] { "--useHeadless" }, "Use headless")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionUseHeadless);
+            rootCommand.AddOption(
+                new Option(new[] { "--vncHost" }, "Vnc host")
+                {
+                    Argument = new Argument<string?>()
+                }
+            );
 
-            var optionUseHeadlessDrawing = new Option(new[] { "--useHeadlessDrawing" }, "Use headless drawing")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionUseHeadlessDrawing);
-
-            var optionUseHeadlessVnc = new Option(new[] { "--useHeadlessVnc" }, "Use headless vnc")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionUseHeadlessVnc);
-
-            var optionCreateHeadlessScreenshots = new Option(new[] { "--createHeadlessScreenshots" }, "Create headless screenshots")
-            {
-                Argument = new Argument<bool>()
-            };
-            rootCommand.AddOption(optionCreateHeadlessScreenshots);
-
-            var optionScreenshotExtension = new Option(new[] { "--screenshotExtension" }, "Screenshots file extension")
-            {
-                Argument = new Argument<string?>(getDefaultValue: () => "png")
-            };
-            rootCommand.AddOption(optionScreenshotExtension);
-            
-            var optionScreenshotWidth = new Option(new[] { "--screenshotWidth" }, "Screenshots width")
-            {
-                Argument = new Argument<double>(getDefaultValue: () => 1366)
-            };
-            rootCommand.AddOption(optionScreenshotWidth);
-            
-            var optionScreenshotHeight = new Option(new[] { "--screenshotHeight" }, "Screenshots height")
-            {
-                Argument = new Argument<double>(getDefaultValue: () => 690)
-            };
-            rootCommand.AddOption(optionScreenshotHeight);
-
-            var optionVncHost = new Option(new[] { "--vncHost" }, "Vnc host")
-            {
-                Argument = new Argument<string?>()
-            };
-            rootCommand.AddOption(optionVncHost);
-
-            var optionVncPort = new Option(new[] { "--vncPort" }, "Vnc port")
-            {
-                Argument = new Argument<int>(getDefaultValue: () => 5901)
-            };
-            rootCommand.AddOption(optionVncPort);
+            rootCommand.AddOption(
+                new Option(new[] { "--vncPort" }, "Vnc port")
+                {
+                    Argument = new Argument<int>(getDefaultValue: () => 5901)
+                });
 
             return rootCommand;
         }
