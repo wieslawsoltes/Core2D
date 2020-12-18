@@ -140,7 +140,6 @@ namespace Core2D.Desktop
             });
         }
 
-
         private static void StartAvaloniaApp(Settings settings, string[] args)
         {
             var builder = BuildAvaloniaApp();
