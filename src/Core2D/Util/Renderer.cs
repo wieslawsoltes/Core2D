@@ -10,9 +10,9 @@ using Avalonia.Skia.Helpers;
 using Avalonia.Threading;
 using SkiaSharp;
 
-namespace Core2D
+namespace Core2D.Util
 {
-    public static class Util
+    public static class Renderer
     {
         public static void RenderAsPng(Control target, Size size, string path, double dpi = 96)
         {

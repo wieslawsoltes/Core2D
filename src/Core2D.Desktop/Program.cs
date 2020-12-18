@@ -14,6 +14,7 @@ using Avalonia.Headless;
 using Avalonia.OpenGL;
 using Avalonia.Threading;
 using Core2D.Configuration.Themes;
+using Core2D.Util;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
@@ -59,11 +60,11 @@ namespace Core2D.Desktop
 
                     if (state is { } previous)
                     {
-                        await Util.RunUiJob(async () => { state = await previous.ContinueWithAsync(code); });
+                        await Renderer.RunUiJob(async () => { state = await previous.ContinueWithAsync(code); });
                     }
                     else
                     {
-                        await Util.RunUiJob(async () =>
+                        await Renderer.RunUiJob(async () =>
                         {
                             var options = ScriptOptions.Default.WithImports("System");
                             state = await CSharpScript.RunAsync(code, options, new Repl());
@@ -97,13 +98,13 @@ namespace Core2D.Desktop
                     var pathDashboard = $"Core2D-Dashboard-{App.DefaultTheme}.{extension}";
                     var pathEditor = $"Core2D-Editor-{App.DefaultTheme}.{extension}";
 
-                    Util.Render(contentPanel, size, pathDashboard);
+                    Renderer.Render(contentPanel, size, pathDashboard);
                     Dispatcher.UIThread.RunJobs();
 
                     editor?.OnNew(null);
                     Dispatcher.UIThread.RunJobs();
 
-                    Util.Render(contentPanel, size, pathEditor);
+                    Renderer.Render(contentPanel, size, pathEditor);
                     Dispatcher.UIThread.RunJobs();
                 }
 

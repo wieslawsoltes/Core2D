@@ -8,7 +8,7 @@ using Avalonia;
 using Avalonia.Threading;
 using Core2D.ViewModels.Editor;
 
-namespace Core2D.Desktop
+namespace Core2D.Util
 {
     internal class RequestHandler
     {
@@ -36,7 +36,7 @@ namespace Core2D.Desktop
 
             sb.AppendLine("<html><body>");
 
-            await Util.RunUiJob(() => 
+            await Renderer.RunUiJob(() => 
             {
                 var control = Repl.GetMainView();
                 if (control is { })
@@ -60,7 +60,7 @@ namespace Core2D.Desktop
 
                     var size = new Size(1366, 690);
                     using var stream = new MemoryStream();
-                    Util.RenderAsSvg(control, size, stream);
+                    Renderer.RenderAsSvg(control, size, stream);
                     stream.Position = 0;
                     using var reader = new StreamReader(stream);
                     var svg = reader.ReadToEnd();
@@ -82,7 +82,7 @@ namespace Core2D.Desktop
         }
     }
 
-    internal static class Server
+    public static class Server
     {
         public static async Task Run()
         {
