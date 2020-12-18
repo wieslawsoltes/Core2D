@@ -43,17 +43,15 @@ namespace Core2D.Util
                 {
                     if (url == "/new")
                     {
-                        var editor = control.DataContext as ProjectEditorViewModel;
-                        editor?.OnNew(null);
+                        (control.DataContext as ProjectEditorViewModel)?.OnNew(null);
                         Dispatcher.UIThread.RunJobs();
                     }
                     else if (url == "/close")
                     {
-                        var editor = control.DataContext as ProjectEditorViewModel;
-                        editor?.OnCloseProject();
+                        (control.DataContext as ProjectEditorViewModel)?.OnCloseProject();
                         Dispatcher.UIThread.RunJobs();
                     }
- 
+
                     Console.WriteLine($"Rendering...");
                     var sw = new Stopwatch();
                     sw.Start();
