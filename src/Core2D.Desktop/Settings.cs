@@ -27,5 +27,6 @@ namespace Core2D.Desktop
         public double ScreenshotHeight { get; set; } = 690;
         public string? VncHost { get; set; } = null;
         public int VncPort { get; set; } = 5901;
+        public bool HttpServer { get; set; }
     }
 }

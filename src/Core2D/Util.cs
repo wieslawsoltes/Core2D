@@ -47,7 +47,7 @@ namespace Core2D
             }
         }
 
-        public static void RenderAsSkp(Control target, Size size, string path, double dpi = 96)
+        public static void RenderAsSkp(Control target, Size size, Stream stream, double dpi = 96)
         {
             var bounds = SKRect.Create(new SKSize((float)size.Width, (float)size.Height));
             using var pictureRecorder = new SKPictureRecorder();
@@ -58,13 +58,11 @@ namespace Core2D
             using var renderTarget = new CustomRenderTarget(canvas, dpi);
             ImmediateRenderer.Render(target, renderTarget);
             using var picture = pictureRecorder.EndRecording();
-            using var stream = File.Create(path);
             picture.Serialize(stream);
         }
 
-        public static void RenderAsSvg(Control target, Size size, string path, double dpi = 96)
+        public static void RenderAsSvg(Control target, Size size, Stream stream, double dpi = 96)
         {
-            using var stream = File.Create(path);
             using var wstream = new SKManagedWStream(stream);
             var bounds = SKRect.Create(new SKSize((float)size.Width, (float)size.Height));
             using var canvas = SKSvgCanvas.Create(bounds, wstream);
@@ -75,9 +73,8 @@ namespace Core2D
             ImmediateRenderer.Render(target, renderTarget);
         }
 
-        public static void RenderAsPdf(Control target, Size size, string path, double dpi = 72)
+        public static void RenderAsPdf(Control target, Size size, Stream stream, double dpi = 72)
         {
-            using var stream = File.Create(path);
             using var wstream = new SKManagedWStream(stream);
             using var document = SKDocument.CreatePdf(stream, (float)dpi);
             using var canvas = document.BeginPage((float)size.Width, (float)size.Height);
@@ -102,17 +99,20 @@ namespace Core2D
             
             if (path.EndsWith("skp", StringComparison.OrdinalIgnoreCase))
             {
-                RenderAsSkp(control, size, path);
+                using var stream = File.Create(path);
+                RenderAsSkp(control, size, stream);
             }
 
             if (path.EndsWith("svg", StringComparison.OrdinalIgnoreCase))
             {
-                RenderAsSvg(control, size, path);
+                using var stream = File.Create(path);
+                RenderAsSvg(control, size, stream);
             }
             
             if (path.EndsWith("pdf", StringComparison.OrdinalIgnoreCase))
             {
-                RenderAsPdf(control, size, path);
+                using var stream = File.Create(path);
+                RenderAsPdf(control, size, stream);
             }
         }
 

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
@@ -38,7 +41,7 @@ namespace Core2D.Desktop
             }
         }
 
-        private static void Repl()
+        private static void RunRepl()
         {
             s_replThread = new Thread(ReplThread)
             {
@@ -66,7 +69,7 @@ namespace Core2D.Desktop
                         await Util.RunUiJob(async () =>
                         {
                             var options = ScriptOptions.Default.WithImports("System");
-                            state = await CSharpScript.RunAsync(code, options, new ReplGlobals());
+                            state = await CSharpScript.RunAsync(code, options, new Repl());
                         });
                     }
                 }
@@ -140,6 +143,90 @@ namespace Core2D.Desktop
             });
         }
 
+        class RequestHandler
+        {
+            private  HttpListenerContext _context;
+
+            public RequestHandler(HttpListenerContext context)
+            {
+                _context = context;
+            }
+
+            public async Task ProcessRequest()
+            {
+                var msg = $"{_context.Request.HttpMethod} {_context.Request.Url}";
+                Console.WriteLine(msg);
+ 
+                var url = _context.Request.RawUrl;
+                if (url != null && url != "/" && url != "" && url != "/new" && url != "/close")
+                {
+                    _context.Response.StatusCode = 401;
+                    _context.Response.Close();
+                    return;
+                }
+
+                var sb = new StringBuilder();
+
+                sb.AppendLine("<html><body>");
+
+                await Util.RunUiJob(() => 
+                {
+                    var control = Repl.GetMainView();
+                    if (control is { })
+                    {
+                        if (url == "/new")
+                        {
+                            var editor = control.DataContext as ProjectEditorViewModel;
+                            editor?.OnNew(null);
+                            Dispatcher.UIThread.RunJobs();
+                        }
+                        else if (url == "/close")
+                        {
+                            var editor = control.DataContext as ProjectEditorViewModel;
+                            editor?.OnCloseProject();
+                            Dispatcher.UIThread.RunJobs();
+                        }
+                        Console.WriteLine($"Rendering...");
+                        var sw = new Stopwatch();
+                        sw.Start();
+                        var size = new Size(1366, 690);
+                        using var stream = new MemoryStream();
+                        Util.RenderAsSvg(control, size, stream);
+                        stream.Position = 0;
+                        using var reader = new StreamReader(stream);
+                        var svg = reader.ReadToEnd();
+                        sb.AppendLine(svg);
+                        sw.Stop();
+                        Console.WriteLine($"Done in {sw.ElapsedMilliseconds}ms");
+                    }
+                });
+
+                sb.AppendLine("</body></html>");
+
+                var bytes = Encoding.UTF8.GetBytes(sb.ToString());
+                _context.Response.ContentLength64 = bytes.Length;
+                _context.Response.ContentType = "text/html";
+                _context.Response.StatusCode = 200;
+                _context.Response.OutputStream.Write(bytes, 0, bytes.Length);
+                _context.Response.OutputStream.Close();
+            }
+        }
+
+        static async Task RunServer()
+        {
+            var listener = new HttpListener();
+            listener.Prefixes.Add("http://*:8080/");
+            listener.Start();
+
+            Console.WriteLine("Listening...");
+
+            while(true)
+            {
+                var ctx = await listener.GetContextAsync();
+                await new RequestHandler(ctx).ProcessRequest();
+            }
+        }
+
         private static void StartAvaloniaApp(Settings settings, string[] args)
         {
             var builder = BuildAvaloniaApp();
@@ -153,7 +240,7 @@ namespace Core2D.Desktop
 
                 if (settings.Repl)
                 {
-                    Repl();
+                    RunRepl();
                 }
 
                 if (settings.UseSkia)
@@ -211,6 +298,11 @@ namespace Core2D.Desktop
                     builder.AfterSetup(async _ => await ProcessSettings(settings))
                            .StartWithHeadlessVncPlatform(settings.VncHost, settings.VncPort, args, ShutdownMode.OnMainWindowClose);
                     return;
+                }
+
+                if (settings.HttpServer)
+                {
+                    Task.Run(RunServer);
                 }
 
                 builder.AfterSetup(async _ => await ProcessSettings(settings))
@@ -360,6 +452,12 @@ namespace Core2D.Desktop
                 new Option(new[] { "--vncPort" }, "Vnc port")
                 {
                     Argument = new Argument<int>(getDefaultValue: () => 5901)
+                });
+
+            rootCommand.AddOption(
+                new Option(new[] { "--httpServer" }, "Run as http server")
+                {
+                    Argument = new Argument<bool>()
                 });
 
             return rootCommand;

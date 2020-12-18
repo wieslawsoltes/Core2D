@@ -3,11 +3,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Core2D.ViewModels.Editor;
-using Core2D.Views;
 
 namespace Core2D.Desktop
 {
-    public class ReplGlobals
+    public class Repl
     {
         public static Application GetApplication()
         {
@@ -20,10 +19,10 @@ namespace Core2D.Desktop
             return applicationLifetime?.MainWindow;
         }
 
-        public static MainView? GetMainView()
+        public static Control? GetMainView()
         {
             var mainWindow = GetMainWindow();
-            return mainWindow?.Content as MainView;
+            return mainWindow?.Content as Control;
         }
 
         public static ProjectEditorViewModel? GetEditor()
