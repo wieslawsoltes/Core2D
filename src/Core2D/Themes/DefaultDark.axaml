@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
     <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
     <Style>
         <Style.Resources>
             <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
