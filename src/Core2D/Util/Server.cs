@@ -12,7 +12,7 @@ namespace Core2D.Util
 {
     internal class RequestHandler
     {
-        private  HttpListenerContext _context;
+        private readonly HttpListenerContext _context;
 
         public RequestHandler(HttpListenerContext context)
         {
@@ -43,34 +43,37 @@ namespace Core2D.Util
             await Renderer.RunUiJob(() => 
             {
                 var control = Repl.GetMainView();
-                if (control is { })
+                if (control is null)
                 {
-                    if (url == "/new")
-                    {
+                    return;
+                }
+
+                switch (url)
+                {
+                    case "/new":
                         (control.DataContext as ProjectEditorViewModel)?.OnNew(null);
                         Dispatcher.UIThread.RunJobs();
-                    }
-                    else if (url == "/close")
-                    {
+                        break;
+                    case "/close":
                         (control.DataContext as ProjectEditorViewModel)?.OnCloseProject();
                         Dispatcher.UIThread.RunJobs();
-                    }
-
-                    Console.WriteLine($"Rendering...");
-                    var sw = new Stopwatch();
-                    sw.Start();
-
-                    var size = new Size(1366, 690);
-                    using var stream = new MemoryStream();
-                    Renderer.RenderAsSvg(control, size, stream);
-                    stream.Position = 0;
-                    using var reader = new StreamReader(stream);
-                    var svg = reader.ReadToEnd();
-                    sb.AppendLine(svg);
-
-                    sw.Stop();
-                    Console.WriteLine($"Done in {sw.ElapsedMilliseconds}ms");
+                        break;
                 }
+
+                Console.WriteLine($"Rendering...");
+                var sw = new Stopwatch();
+                sw.Start();
+
+                var size = new Size(1366, 690);
+                using var stream = new MemoryStream();
+                Renderer.RenderAsSvg(control, size, stream);
+                stream.Position = 0;
+                using var reader = new StreamReader(stream);
+                var svg = reader.ReadToEnd();
+                sb.AppendLine(svg);
+
+                sw.Stop();
+                Console.WriteLine($"Done in {sw.ElapsedMilliseconds}ms");
             });
 
             sb.AppendLine("</body></html>");
