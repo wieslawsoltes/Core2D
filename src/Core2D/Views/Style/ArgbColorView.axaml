@@ -43,12 +43,13 @@
                 <Border BorderThickness="0" CornerRadius="0" Background="{Binding Value, Converter={StaticResource ArgbColorToBrushConverter}}" />
             </Panel>
         </ToggleButton>
-        <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft" Width="450" Height="300">
+        <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft">
             <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="0">
                 <cp:ColorPicker x:Name="ArgbColorPicker" Color="{Binding Value, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}" Margin="8">
                     <cp:ColorPicker.Styles>
-                        <Style Selector="cp|ColorPicker /template/ GridSplitter#PART_GridSplitter">
-                            <Setter Property="Background" Value="Transparent" />
+                        <Style Selector="cp|ColorPicker /template/ Grid#PART_PickerGrid">
+                            <Setter Property="MinHeight" Value="200" />
+                            <Setter Property="MinWidth" Value="200" />
                         </Style>
                     </cp:ColorPicker.Styles>
                 </cp:ColorPicker>

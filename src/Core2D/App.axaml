@@ -9,7 +9,7 @@
     </Application.Resources>
     <Application.Styles>
         <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
-        <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.xaml"/>
+        <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml"/>
         <StyleInclude Source="avares://Core2D/Icons.axaml" />
     </Application.Styles>
     <Application.DataTemplates>

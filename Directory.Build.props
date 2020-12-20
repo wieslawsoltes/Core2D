@@ -31,7 +31,7 @@
     <AvaloniaAvaloniaEditVersion>0.10.0-rc1</AvaloniaAvaloniaEditVersion>
     <AvaloniaXamlBehaviorsVersion>0.10.0-rc1</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>3.0.0-rc1</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>0.10.0-rc1</ThemeEditorControlsColorPickerVersion>
+    <ThemeEditorControlsColorPickerVersion>0.10.0-build20201220-01</ThemeEditorControlsColorPickerVersion>
     <SystemCommandLineVersion>2.0.0-beta1.20574.7</SystemCommandLineVersion>
   </PropertyGroup>
   <PropertyGroup>
