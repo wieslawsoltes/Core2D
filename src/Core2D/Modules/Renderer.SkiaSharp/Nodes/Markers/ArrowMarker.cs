@@ -1,7 +1,7 @@
 ﻿#nullable disable
 using SkiaSharp;
 
-namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Marker
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers
 {
     internal class ArrowMarker : MarkerBase
     {

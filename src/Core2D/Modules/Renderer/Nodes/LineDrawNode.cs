@@ -3,7 +3,7 @@ using System;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using Core2D.Model.Style;
-using Core2D.Modules.Renderer.Nodes.Marker;
+using Core2D.Modules.Renderer.Nodes.Markers;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Spatial;

@@ -1,8 +1,8 @@
-﻿using Core2D.Model;
-using Core2D.ViewModels;
+﻿#nullable disable
+using Core2D.Model;
 using Xunit;
 
-namespace Core2D.ViewModels.UnitTests.ViewModels.Path
+namespace Core2D.ViewModels.UnitTests.Shapes.Path
 {
     public class PathSizeTests
     {

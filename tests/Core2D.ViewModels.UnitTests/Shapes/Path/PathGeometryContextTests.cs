@@ -1,12 +1,12 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Core2D.Model;
 using Core2D.Model.Path;
-using Core2D.ViewModels;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
 using Xunit;
 
-namespace Core2D.ViewModels.UnitTests.ViewModels.Path
+namespace Core2D.ViewModels.UnitTests.Shapes.Path
 {
     public class PathGeometryContextTests
     {

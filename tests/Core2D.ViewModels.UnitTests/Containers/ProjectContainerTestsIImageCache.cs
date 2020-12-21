@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿#nullable disable
+using System.Collections.Generic;
 using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Renderer;
-using Core2D.ViewModels;
 using Xunit;
 
-namespace Core2D.ViewModels.UnitTests.ViewModels.Containers
+namespace Core2D.ViewModels.UnitTests.Containers
 {
-    public class ProjectContainerTests_IImageCache
+    public class ProjectContainerTestsIImageCache
     {
         private readonly IFactory _factory = new Factory(null);
 

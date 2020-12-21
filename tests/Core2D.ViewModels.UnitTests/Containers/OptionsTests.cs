@@ -1,8 +1,8 @@
-﻿using Core2D.Model;
-using Core2D.ViewModels;
+﻿#nullable disable
+using Core2D.Model;
 using Xunit;
 
-namespace Core2D.ViewModels.UnitTests.ViewModels.Containers
+namespace Core2D.ViewModels.UnitTests.Containers
 {
     public class OptionsTests
     {

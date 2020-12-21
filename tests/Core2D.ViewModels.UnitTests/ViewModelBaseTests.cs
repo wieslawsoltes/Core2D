@@ -1,10 +1,10 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Core2D.ViewModels;
 using Xunit;
 
-namespace Core2D.ViewModels.UnitTests.ViewModels
+namespace Core2D.ViewModels.UnitTests
 {
     public class ViewModelBaseTests
     {
@@ -97,7 +97,6 @@ namespace Core2D.ViewModels.UnitTests.ViewModels
 
             public Class1() : base(null)
             {
-                
             }
             
             public override object Copy(IDictionary<object, object> shared)

@@ -1,9 +1,9 @@
-﻿using Core2D.Model;
-using Core2D.ViewModels;
+﻿#nullable disable
+using Core2D.Model;
 using Core2D.ViewModels.Shapes;
 using Xunit;
 
-namespace Core2D.ViewModels.UnitTests.ViewModels.Shapes
+namespace Core2D.ViewModels.UnitTests.Shapes
 {
     public class RectangleShapeTests
     {

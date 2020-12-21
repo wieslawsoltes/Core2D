@@ -1,14 +1,14 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Renderer;
-using Core2D.ViewModels;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Shapes;
 using Xunit;
 
-namespace Core2D.ViewModels.UnitTests.ViewModels.Shapes
+namespace Core2D.ViewModels.UnitTests.Shapes
 {
     public class GroupShapeTests
     {

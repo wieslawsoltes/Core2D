@@ -1,5 +1,5 @@
 ﻿#nullable disable
-namespace Core2D.Modules.Renderer.Nodes.Marker
+namespace Core2D.Modules.Renderer.Nodes.Markers
 {
     internal class RectangleMarker : MarkerBase
     {

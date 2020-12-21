@@ -1,5 +1,5 @@
 ﻿#nullable disable
-namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Marker
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers
 {
     internal class NoneMarker : MarkerBase
     {

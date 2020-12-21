@@ -3,7 +3,7 @@ using Core2D.Model.Renderer.Nodes;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
-namespace Core2D.Modules.Renderer.Nodes.Marker
+namespace Core2D.Modules.Renderer.Nodes.Markers
 {
     internal abstract class MarkerBase : IMarker
     {

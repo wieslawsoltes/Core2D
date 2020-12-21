@@ -4,7 +4,7 @@ using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using SkiaSharp;
 
-namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Marker
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers
 {
     internal abstract class MarkerBase : IMarker
     {
