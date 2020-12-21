@@ -210,7 +210,6 @@ namespace {namespaceName}
 				return;
 			}
 
-
 			var overridenIgnoreDataMemberOpt = attributeData.NamedArguments.SingleOrDefault(kvp => kvp.Key == "IgnoreDataMember").Value;
 			var ignoreDataMember = false;
 
