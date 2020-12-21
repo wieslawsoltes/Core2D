@@ -1,11 +1,10 @@
-﻿#nullable disable
-namespace Core2D.Model.Renderer
+﻿namespace Core2D.Model.Renderer
 {
-    public interface ICache<TKey, TValue>
+    public interface ICache<in TKey, TValue>
     {
-        TValue Get(TKey key);
+        TValue? Get(TKey key);
 
-        void Set(TKey key, TValue value);
+        void Set(TKey key, TValue? value);
 
         void Reset();
     }
