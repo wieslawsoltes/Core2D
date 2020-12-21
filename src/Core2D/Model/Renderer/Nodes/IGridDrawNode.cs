@@ -1,4 +1,5 @@
-﻿namespace Core2D.Model.Renderer.Nodes
+﻿#nullable disable
+namespace Core2D.Model.Renderer.Nodes
 {
     public interface IGridDrawNode : IDrawNode
     {

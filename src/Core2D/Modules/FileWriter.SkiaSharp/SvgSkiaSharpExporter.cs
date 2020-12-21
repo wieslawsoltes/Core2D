@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.IO;
 using Core2D.Model;
 using Core2D.Model.Renderer;

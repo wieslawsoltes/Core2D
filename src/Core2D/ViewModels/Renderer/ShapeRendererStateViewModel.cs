@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable disable
+using System;
 using Core2D.Model.Renderer;
-using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Renderer

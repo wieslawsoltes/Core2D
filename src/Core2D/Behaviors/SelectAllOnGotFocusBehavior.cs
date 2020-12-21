@@ -1,4 +1,4 @@
-﻿using Avalonia;
+﻿#nullable disable
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;

@@ -1,4 +1,5 @@
-﻿using Core2D.ViewModels.Shapes;
+﻿#nullable disable
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Model.Renderer.Nodes
 {

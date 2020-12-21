@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#nullable disable
+using System.Collections.Generic;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;

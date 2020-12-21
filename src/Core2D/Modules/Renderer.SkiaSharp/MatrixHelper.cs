@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿#nullable disable
+using SkiaSharp;
 using static System.Math;
 
 namespace Core2D.Modules.Renderer.SkiaSharp

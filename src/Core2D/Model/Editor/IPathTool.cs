@@ -1,4 +1,5 @@
-﻿namespace Core2D.Model.Editor
+﻿#nullable disable
+namespace Core2D.Model.Editor
 {
     public interface IPathTool : ITool
     {

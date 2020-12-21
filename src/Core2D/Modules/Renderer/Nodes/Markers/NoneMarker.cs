@@ -1,4 +1,5 @@
-﻿namespace Core2D.Modules.Renderer.Nodes.Marker
+﻿#nullable disable
+namespace Core2D.Modules.Renderer.Nodes.Marker
 {
     internal class NoneMarker : MarkerBase
     {

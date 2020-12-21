@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Avalonia;
 using Avalonia.Xaml.Interactivity;
 using AvaloniaEdit;

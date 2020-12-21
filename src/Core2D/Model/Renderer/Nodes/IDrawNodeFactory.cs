@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 

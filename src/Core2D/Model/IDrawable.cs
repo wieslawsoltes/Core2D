@@ -1,4 +1,5 @@
-﻿using Core2D.Model.Renderer;
+﻿#nullable disable
+using Core2D.Model.Renderer;
 using Core2D.ViewModels.Style;
 
 namespace Core2D.Model

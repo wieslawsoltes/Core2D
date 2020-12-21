@@ -1,3 +1,4 @@
+#nullable disable
 using System;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Style;

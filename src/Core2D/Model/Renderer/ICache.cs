@@ -1,4 +1,5 @@
-﻿namespace Core2D.Model.Renderer
+﻿#nullable disable
+namespace Core2D.Model.Renderer
 {
     public interface ICache<TKey, TValue>
     {

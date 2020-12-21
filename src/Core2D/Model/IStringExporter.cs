@@ -1,4 +1,5 @@
-﻿namespace Core2D.Model
+﻿#nullable disable
+namespace Core2D.Model
 {
     public interface IStringExporter
     {

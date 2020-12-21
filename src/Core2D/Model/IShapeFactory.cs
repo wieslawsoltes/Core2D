@@ -1,4 +1,5 @@
-﻿using Core2D.Model.Path;
+﻿#nullable disable
+using Core2D.Model.Path;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Shapes;
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using Core2D.Modules.Renderer.SkiaSharp.Nodes;

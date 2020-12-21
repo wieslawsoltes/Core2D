@@ -1,4 +1,4 @@
-﻿using Core2D.ViewModels.Shapes;
+﻿#nullable disable
 using static System.Math;
 
 namespace Core2D.ViewModels.Shapes

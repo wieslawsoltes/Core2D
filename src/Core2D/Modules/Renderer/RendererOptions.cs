@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿#nullable disable
+using Avalonia;
 using Avalonia.Data;
 using Core2D.Model;
 using Core2D.Model.Renderer;

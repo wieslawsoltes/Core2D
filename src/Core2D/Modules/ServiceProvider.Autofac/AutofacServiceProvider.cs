@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Autofac;
 
 namespace Core2D.Modules.ServiceProvider.Autofac

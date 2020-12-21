@@ -1,4 +1,5 @@
-﻿namespace Core2D.Model.Input
+﻿#nullable disable
+namespace Core2D.Model.Input
 {
     public abstract class InputTarget
     {

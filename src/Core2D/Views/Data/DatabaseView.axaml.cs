@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.ComponentModel;
 using Avalonia;
 using Avalonia.Collections;
@@ -12,8 +13,8 @@ namespace Core2D.Views.Data
 {
     public class DatabaseView : UserControl
     {
-        private TextBox _filterRecordsText;
-        private DataGrid _rowsDataGrid;
+        private readonly TextBox _filterRecordsText;
+        private readonly DataGrid _rowsDataGrid;
         private DatabaseViewModel _databaseViewModel;
         private string _recordsFilter;
         private DataGridCollectionView _recordsView;

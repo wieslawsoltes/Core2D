@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Core2D.Model.Style;
 using Core2D.ViewModels.Style;
 using AM = Avalonia.Media;

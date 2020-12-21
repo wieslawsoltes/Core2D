@@ -1,8 +1,8 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
-using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 

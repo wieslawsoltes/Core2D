@@ -7,7 +7,7 @@ namespace Core2D.Configuration.Windows
     {
         public static WindowConfiguration Save(Window window)
         {
-            return new WindowConfiguration()
+            return new()
             {
                 Width = window.Width,
                 Height = window.Height,

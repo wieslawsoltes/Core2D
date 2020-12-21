@@ -1,4 +1,5 @@
-﻿using Core2D.Model;
+﻿#nullable disable
+using Core2D.Model;
 using Autofac;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;

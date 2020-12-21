@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Core2D.ViewModels.Style;
 
 namespace Core2D.Model.Renderer.Nodes

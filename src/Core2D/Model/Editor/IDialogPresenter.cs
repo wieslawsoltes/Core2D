@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#nullable disable
+using System.Collections.Generic;
 using Core2D.ViewModels.Editor;
 
 namespace Core2D.Model.Editor

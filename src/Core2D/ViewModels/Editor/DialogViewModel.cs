@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Core2D.Model.Editor;
 
 namespace Core2D.ViewModels.Editor

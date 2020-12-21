@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
 using Core2D.ViewModels.Shapes;
 using Spatial;

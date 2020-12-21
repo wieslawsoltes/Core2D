@@ -1,4 +1,5 @@
-﻿namespace Core2D.ViewModels.Editor
+﻿#nullable disable
+namespace Core2D.ViewModels.Editor
 {
     public class ProjectEditorConfiguration
     {

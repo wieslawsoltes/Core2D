@@ -1,4 +1,5 @@
-﻿namespace Core2D.ViewModels.Layout
+﻿#nullable disable
+namespace Core2D.ViewModels.Layout
 {
     public enum StackMode
     {

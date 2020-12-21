@@ -1,4 +1,7 @@
-﻿namespace Core2D.Model
+﻿#nullable disable
+using System.IO;
+
+namespace Core2D.Model
 {
     public interface IFileSystem
     {
@@ -6,17 +9,17 @@
 
         bool Exists(string path);
 
-        System.IO.Stream Open(string path);
+        Stream Open(string path);
 
-        System.IO.Stream Create(string path);
+        Stream Create(string path);
 
-        byte[] ReadBinary(System.IO.Stream stream);
+        byte[] ReadBinary(Stream stream);
 
-        void WriteBinary(System.IO.Stream stream, byte[] bytes);
+        void WriteBinary(Stream stream, byte[] bytes);
 
-        string ReadUtf8Text(System.IO.Stream stream);
+        string ReadUtf8Text(Stream stream);
 
-        void WriteUtf8Text(System.IO.Stream stream, string text);
+        void WriteUtf8Text(Stream stream, string text);
 
         string ReadUtf8Text(string path);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Core2D.Model.Path;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;

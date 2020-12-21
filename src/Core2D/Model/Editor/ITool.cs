@@ -1,4 +1,5 @@
-﻿using Core2D.Model.Input;
+﻿#nullable disable
+using Core2D.Model.Input;
 using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Model.Editor

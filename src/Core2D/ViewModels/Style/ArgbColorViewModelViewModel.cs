@@ -1,9 +1,10 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using Core2D.Model.Model.Style;
+using Core2D.Model.Style;
 
 namespace Core2D.ViewModels.Style
 {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿#nullable disable
+using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;

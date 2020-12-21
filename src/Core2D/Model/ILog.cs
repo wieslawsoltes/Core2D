@@ -1,5 +1,5 @@
 ﻿using System;
-
+#nullable disable
 namespace Core2D.Model
 {
     public interface ILog : IDisposable

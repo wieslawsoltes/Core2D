@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using Core2D.Model.Renderer;
 
 namespace Core2D.ViewModels.Renderer

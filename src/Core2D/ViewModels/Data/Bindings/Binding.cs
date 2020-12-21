@@ -1,4 +1,5 @@
-﻿namespace Core2D.ViewModels.Data.Bindings
+﻿#nullable disable
+namespace Core2D.ViewModels.Data.Bindings
 {
     internal readonly struct Binding
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Reflection;
 using Autofac;
 using Core2D.Editor;

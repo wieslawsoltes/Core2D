@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 
 namespace Core2D.ViewModels.Editor.Recent
 {

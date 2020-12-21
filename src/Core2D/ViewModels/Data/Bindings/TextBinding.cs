@@ -1,8 +1,8 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
-using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Data.Bindings

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿#nullable disable
+using System.Linq;
 using Avalonia.Input;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
