@@ -10,9 +10,9 @@ namespace Core2D.ViewModels.Shapes
 {
     public partial class ConnectableShapeViewModel : BaseShapeViewModel
     {
-        [AutoNotify] private ImmutableArray<PointShapeViewModel> _connectors;
+        [AutoNotify] protected ImmutableArray<PointShapeViewModel> _connectors;
 
-        public ConnectableShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider, targetType)
+        protected ConnectableShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider, targetType)
         {
         }
 

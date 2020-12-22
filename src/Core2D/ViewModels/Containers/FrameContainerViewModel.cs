@@ -9,15 +9,15 @@ namespace Core2D.ViewModels.Containers
 {
     public partial class FrameContainerViewModel : BaseContainerViewModel, IDataObject
     {
-        [AutoNotify] private ImmutableArray<LayerContainerViewModel> _layers;
-        [AutoNotify] private LayerContainerViewModel _currentLayer;
-        [AutoNotify] private LayerContainerViewModel _workingLayer;
-        [AutoNotify] private LayerContainerViewModel _helperLayer;
-        [AutoNotify] private BaseShapeViewModel _currentShape;
-        [AutoNotify] private ImmutableArray<PropertyViewModel> _properties;
-        [AutoNotify] private RecordViewModel _record;
+        [AutoNotify] protected ImmutableArray<LayerContainerViewModel> _layers;
+        [AutoNotify] protected LayerContainerViewModel _currentLayer;
+        [AutoNotify] protected LayerContainerViewModel _workingLayer;
+        [AutoNotify] protected LayerContainerViewModel _helperLayer;
+        [AutoNotify] protected BaseShapeViewModel _currentShape;
+        [AutoNotify] protected ImmutableArray<PropertyViewModel> _properties;
+        [AutoNotify] protected RecordViewModel _record;
 
-        public FrameContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        protected FrameContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
 

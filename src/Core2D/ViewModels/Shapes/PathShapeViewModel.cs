@@ -1,6 +1,8 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
@@ -141,6 +143,49 @@ namespace Core2D.ViewModels.Shapes
             base.Invalidate();
 
             _geometry?.Invalidate();
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableStyle = default(IDisposable);
+            var disposableProperties = default(CompositeDisposable);
+            var disposableRecord = default(IDisposable);
+            var disposableGeometry = default(IDisposable);
+ 
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
+            ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
+            ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
+            ObserveObject(_geometry, ref disposableGeometry, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Style))
+                {
+                    ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Properties))
+                {
+                    ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Record))
+                {
+                    ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Geometry))
+                {
+                    ObserveObject(_geometry, ref disposableGeometry, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
 
         public string ToXamlString()

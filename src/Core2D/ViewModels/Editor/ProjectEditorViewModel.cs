@@ -3,8 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Core2D.Model;
 using Core2D.Model.Editor;
@@ -32,7 +36,7 @@ namespace Core2D.ViewModels.Editor
         [AutoNotify] private ProjectContainerViewModel _project;
         [AutoNotify] private string _projectPath;
         [AutoNotify] private bool _isProjectDirty;
-        [AutoNotify] private ProjectObserver _observer;
+        [AutoNotify] private IDisposable _observer;
         [AutoNotify] private bool _isToolIdle;
         [AutoNotify] private IEditorTool _currentTool;
         [AutoNotify] private IPathTool _currentPathTool;
@@ -2355,6 +2359,14 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
+
+        private Subject<(object sender, PropertyChangedEventArgs e)> _changes
+            = new Subject<(object sender, PropertyChangedEventArgs e)>();
+
+        private IObservable<(object sender, PropertyChangedEventArgs e)> _changesObservable
+            => _changes.AsObservable();
+
+
         public void OnLoad(ProjectContainerViewModel project, string path = null)
         {
             if (project is { })
@@ -2368,7 +2380,17 @@ namespace Core2D.ViewModels.Editor
                 Project.History = new StackHistory();
                 ProjectPath = path;
                 IsProjectDirty = false;
-                Observer = new ProjectObserver(this);
+
+                var changes = new Subject<(object sender, PropertyChangedEventArgs e)>();
+                var observable = changes.AsObservable().Subscribe(Invalidate);
+
+                Observer = new CompositeDisposable(changes, observable);
+
+                void Invalidate((object sender, PropertyChangedEventArgs e) x)
+                {
+                    _project?.CurrentContainer?.InvalidateLayer();
+                    IsProjectDirty = true;
+                }
             }
         }
 

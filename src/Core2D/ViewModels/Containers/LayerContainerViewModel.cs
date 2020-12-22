@@ -1,6 +1,8 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Containers
@@ -41,6 +43,27 @@ namespace Core2D.ViewModels.Containers
             {
                 shape.Invalidate();
             }
+        }
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableShapes = default(CompositeDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Shapes))
+                {
+                    ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
     }
 }

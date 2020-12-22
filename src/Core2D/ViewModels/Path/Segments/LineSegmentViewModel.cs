@@ -1,6 +1,8 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Path.Segments
@@ -32,6 +34,28 @@ namespace Core2D.ViewModels.Path.Segments
             base.Invalidate();
 
             Point.Invalidate();
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposablePoint = default(IDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveObject(_point, ref disposablePoint, mainDisposable, observer);
+ 
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Point))
+                {
+                    ObserveObject(_point, ref disposablePoint, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
 
         public override string ToXamlString()

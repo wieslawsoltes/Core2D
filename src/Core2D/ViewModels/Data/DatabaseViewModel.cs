@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 
 namespace Core2D.ViewModels.Data
 {
@@ -62,6 +64,35 @@ namespace Core2D.ViewModels.Data
             {
                 record.Invalidate();
             }
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableColumns = default(CompositeDisposable);
+            var disposableRecords = default(CompositeDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveList(_columns, ref disposableColumns, mainDisposable, observer);
+            ObserveList(_records, ref disposableRecords, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Columns))
+                {
+                    ObserveList(_columns, ref disposableColumns, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Records))
+                {
+                    ObserveList(_records, ref disposableRecords, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
     }
 }
