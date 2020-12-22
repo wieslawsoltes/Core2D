@@ -23,7 +23,7 @@ namespace Core2D.ViewModels.Path
         {
             points.Add(StartPoint);
 
-            foreach (var segment in Segments)
+            foreach (var segment in _segments)
             {
                 segment.GetPoints(points);
             }
@@ -33,9 +33,9 @@ namespace Core2D.ViewModels.Path
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= StartPoint.IsDirty();
+            isDirty |= _startPoint.IsDirty();
 
-            foreach (var segment in Segments)
+            foreach (var segment in _segments)
             {
                 isDirty |= segment.IsDirty();
             }
@@ -47,9 +47,9 @@ namespace Core2D.ViewModels.Path
         {
             base.Invalidate();
 
-            StartPoint.Invalidate();
+            _startPoint.Invalidate();
 
-            foreach (var segment in Segments)
+            foreach (var segment in _segments)
             {
                 segment.Invalidate();
             }

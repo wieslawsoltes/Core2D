@@ -17,14 +17,14 @@ namespace Core2D.ViewModels.Path.Segments
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
-            points.Add(Point);
+            points.Add(_point);
         }
 
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= Point.IsDirty();
+            isDirty |= _point.IsDirty();
 
             return isDirty;
         }
@@ -33,7 +33,7 @@ namespace Core2D.ViewModels.Path.Segments
         {
             base.Invalidate();
 
-            Point.Invalidate();
+            _point.Invalidate();
         }
 
         public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)

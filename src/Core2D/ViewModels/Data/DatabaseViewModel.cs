@@ -38,12 +38,12 @@ namespace Core2D.ViewModels.Data
         {
             var isDirty = base.IsDirty();
 
-            foreach (var column in Columns)
+            foreach (var column in _columns)
             {
                 isDirty |= column.IsDirty();
             }
 
-            foreach (var record in Records)
+            foreach (var record in _records)
             {
                 isDirty |= record.IsDirty();
             }
@@ -55,12 +55,12 @@ namespace Core2D.ViewModels.Data
         {
             base.Invalidate();
 
-            foreach (var column in Columns)
+            foreach (var column in _columns)
             {
                 column.Invalidate();
             }
 
-            foreach (var record in Records)
+            foreach (var record in _records)
             {
                 record.Invalidate();
             }

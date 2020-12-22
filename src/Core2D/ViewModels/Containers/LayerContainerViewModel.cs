@@ -27,7 +27,7 @@ namespace Core2D.ViewModels.Containers
         {
             var isDirty = base.IsDirty();
 
-            foreach (var shape in Shapes)
+            foreach (var shape in _shapes)
             {
                 isDirty |= shape.IsDirty();
             }
@@ -39,7 +39,7 @@ namespace Core2D.ViewModels.Containers
         {
             base.Invalidate();
 
-            foreach (var shape in Shapes)
+            foreach (var shape in _shapes)
             {
                 shape.Invalidate();
             }

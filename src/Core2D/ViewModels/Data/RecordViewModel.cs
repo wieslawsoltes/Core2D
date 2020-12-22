@@ -31,7 +31,7 @@ namespace Core2D.ViewModels.Data
         {
             var isDirty = base.IsDirty();
 
-            foreach (var value in Values)
+            foreach (var value in _values)
             {
                 isDirty |= value.IsDirty();
             }
@@ -43,7 +43,7 @@ namespace Core2D.ViewModels.Data
         {
             base.Invalidate();
 
-            foreach (var value in Values)
+            foreach (var value in _values)
             {
                 value.Invalidate();
             }

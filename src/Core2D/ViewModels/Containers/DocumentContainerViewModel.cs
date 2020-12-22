@@ -18,7 +18,7 @@ namespace Core2D.ViewModels.Containers
         {
             var isDirty = base.IsDirty();
 
-            foreach (var page in Pages)
+            foreach (var page in _pages)
             {
                 isDirty |= page.IsDirty();
             }
@@ -30,7 +30,7 @@ namespace Core2D.ViewModels.Containers
         {
             base.Invalidate();
 
-            foreach (var page in Pages)
+            foreach (var page in _pages)
             {
                 page.Invalidate();
             }

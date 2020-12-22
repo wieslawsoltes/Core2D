@@ -23,7 +23,7 @@ namespace Core2D.ViewModels.Path
         {
             var isDirty = base.IsDirty();
 
-            foreach (var figure in Figures)
+            foreach (var figure in _figures)
             {
                 isDirty |= figure.IsDirty();
             }
@@ -35,7 +35,7 @@ namespace Core2D.ViewModels.Path
         {
             base.Invalidate();
 
-            foreach (var figure in Figures)
+            foreach (var figure in _figures)
             {
                 figure.Invalidate();
             }

@@ -19,11 +19,11 @@ namespace Core2D.ViewModels.Containers
         {
             var isDirty = base.IsDirty();
 
-            foreach (var item in Items)
+            foreach (var item in _items)
             {
-                if (item is ViewModelBase viewModelBase)
+                if (item is ViewModelBase vm)
                 {
-                    isDirty |= viewModelBase.IsDirty();
+                    isDirty |= vm.IsDirty();
                 }
             }
 
@@ -34,7 +34,7 @@ namespace Core2D.ViewModels.Containers
         {
             base.Invalidate();
 
-            foreach (var item in Items)
+            foreach (var item in _items)
             {
                 if (item is ViewModelBase viewModelBase)
                 {

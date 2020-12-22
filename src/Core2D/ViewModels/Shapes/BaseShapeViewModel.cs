@@ -85,7 +85,7 @@ namespace Core2D.ViewModels.Shapes
         {
             var isDirty = base.IsDirty();
 
-            foreach (var property in Properties)
+            foreach (var property in _properties)
             {
                 isDirty |= property.IsDirty();
             }
@@ -102,7 +102,7 @@ namespace Core2D.ViewModels.Shapes
         {
             base.Invalidate();
 
-            foreach (var property in Properties)
+            foreach (var property in _properties)
             {
                 property.Invalidate();
             }
