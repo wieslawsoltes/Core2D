@@ -44,7 +44,7 @@
                                              TintColor="{DynamicResource SystemAltHighColor}"
                                              TintOpacity="1"
                                              FallbackColor="{DynamicResource AcrylicFallbackColor}"
-                                             MaterialOpacity="0.85" />
+                                             MaterialOpacity="0.55" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
