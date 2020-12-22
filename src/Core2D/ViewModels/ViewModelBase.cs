@@ -47,40 +47,28 @@ namespace Core2D.ViewModels
         {
             if (propertyDisposable is { })
             {
-                if (mainDisposable is { })
-                {
-                    mainDisposable.Remove(propertyDisposable);
-                }
+                mainDisposable?.Remove(propertyDisposable);
 
                 propertyDisposable.Dispose();
                 propertyDisposable = default;
             }
 
-            if (handler is { })
-            {
-                PropertyChanged += handler;
+            PropertyChanged += handler;
 
-                propertyDisposable = Disposable.Create(() => PropertyChanged -= handler);
+            propertyDisposable = Disposable.Create(() => PropertyChanged -= handler);
 
-                if (mainDisposable is { } && propertyDisposable is { })
-                {
-                    mainDisposable.Add(propertyDisposable);
-                }
-            }
+            mainDisposable?.Add(propertyDisposable);
         }
 
         protected void ObserveObject<T>(
-            T obj,
+            T? obj,
             ref IDisposable? objDisposable,
             CompositeDisposable? mainDisposable,
             IObserver<(object? sender, PropertyChangedEventArgs e)> observer) where T : ViewModelBase
         {
             if (objDisposable is { })
             {
-                if (mainDisposable is { })
-                {
-                    mainDisposable.Remove(objDisposable);
-                }
+                mainDisposable?.Remove(objDisposable);
 
                 objDisposable.Dispose();
                 objDisposable = default;
@@ -98,17 +86,14 @@ namespace Core2D.ViewModels
         }
 
         protected void ObserveList<T>(
-            IList<T> list,
+            IEnumerable<T>? list,
             ref CompositeDisposable? listDisposable,
             CompositeDisposable? mainDisposable,
             IObserver<(object? sender, PropertyChangedEventArgs e)> observer) where T : ViewModelBase
         {
             if (listDisposable is { })
             {
-                if (mainDisposable is { })
-                {
-                    mainDisposable.Remove(listDisposable);
-                }
+                mainDisposable?.Remove(listDisposable);
 
                 listDisposable.Dispose();
                 listDisposable = default;
@@ -127,10 +112,7 @@ namespace Core2D.ViewModels
                     }
                 }
 
-                if (mainDisposable is { })
-                {
-                    mainDisposable.Add(listDisposable);
-                }
+                mainDisposable?.Add(listDisposable);
             }
         }
 
