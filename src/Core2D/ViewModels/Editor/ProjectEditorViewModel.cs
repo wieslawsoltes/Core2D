@@ -32,7 +32,7 @@ namespace Core2D.ViewModels.Editor
 {
     public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {
-        private ShapeEditor _shapeEditor;
+        private readonly ShapeEditor _shapeEditor;
         [AutoNotify] private ProjectContainerViewModel _project;
         [AutoNotify] private string _projectPath;
         [AutoNotify] private bool _isProjectDirty;
