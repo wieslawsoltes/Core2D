@@ -150,7 +150,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _endHelperPoint.Y = a.End.Y;
             }
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
 
         public void Reset()
@@ -203,7 +203,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _endHelperPoint = null;
             }
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
     }
 }

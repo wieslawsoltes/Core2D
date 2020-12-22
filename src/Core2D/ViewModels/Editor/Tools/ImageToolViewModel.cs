@@ -65,7 +65,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         }
 
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_image);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         ToStateBottomRight();
                         Move(_image);
                         _currentState = State.BottomRight;
@@ -137,7 +137,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             }
                             _image.BottomRight.X = (double)sx;
                             _image.BottomRight.Y = (double)sy;
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                             Move(_image);
                         }
                     }
@@ -177,7 +177,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.BottomRight:
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_image);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                     }
                     break;
             }

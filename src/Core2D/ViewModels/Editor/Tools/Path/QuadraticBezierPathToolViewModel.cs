@@ -51,7 +51,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         ToStatePoint3();
                         Move(null);
                         _currentState = State.Point3;
@@ -72,7 +72,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                                 _quadraticBezier.Point3 = point2;
                             }
                         }
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         ToStatePoint2();
                         Move(null);
                         _currentState = State.Point2;
@@ -100,7 +100,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         pathTool.GeometryContext.QuadraticBezierTo(
                             _quadraticBezier.Point2,
                             _quadraticBezier.Point3);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         ToStatePoint3();
                         Move(null);
                         _currentState = State.Point3;
@@ -155,7 +155,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         _quadraticBezier.Point2.Y = (double)sy;
                         _quadraticBezier.Point3.X = (double)sx;
                         _quadraticBezier.Point3.Y = (double)sy;
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         Move(null);
                     }
                     break;
@@ -167,7 +167,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         }
                         _quadraticBezier.Point2.X = (double)sx;
                         _quadraticBezier.Point2.Y = (double)sy;
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         Move(null);
                     }
                     break;

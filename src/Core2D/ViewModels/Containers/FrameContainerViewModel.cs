@@ -29,13 +29,13 @@ namespace Core2D.ViewModels.Containers
             {
                 foreach (var layer in _layers)
                 {
-                    layer.InvalidateLayer();
+                    layer.RaiseInvalidateLayer();
                 }
             }
 
-            _workingLayer?.InvalidateLayer();
+            _workingLayer?.RaiseInvalidateLayer();
 
-            _helperLayer?.InvalidateLayer();
+            _helperLayer?.RaiseInvalidateLayer();
         }
 
         public override bool IsDirty()

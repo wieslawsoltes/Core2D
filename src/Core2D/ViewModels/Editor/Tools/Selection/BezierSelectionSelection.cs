@@ -114,7 +114,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _helperPoint4.Y = _cubicBezier.Point4.Y;
             }
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
 
         public void Reset()
@@ -161,7 +161,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _helperPoint4 = null;
             }
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
     }
 }

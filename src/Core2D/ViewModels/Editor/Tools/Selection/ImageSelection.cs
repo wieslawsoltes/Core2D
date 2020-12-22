@@ -47,7 +47,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _bottomRightHelperPoint.Y = _image.BottomRight.Y;
             }
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
 
         public void Reset()
@@ -64,7 +64,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _bottomRightHelperPoint = null;
             }
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
     }
 }

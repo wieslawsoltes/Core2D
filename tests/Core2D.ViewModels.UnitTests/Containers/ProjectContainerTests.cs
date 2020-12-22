@@ -213,7 +213,7 @@ namespace Core2D.ViewModels.UnitTests.Containers
 
             bool raised = false;
 
-            layer.InvalidateLayerHandler += (sender, e) =>
+            layer.InvalidateLayer += (sender, e) =>
             {
                 raised = true;
             };

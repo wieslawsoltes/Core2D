@@ -7,21 +7,34 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Containers
 {
-    public class InvalidateLayerEventArgs : EventArgs { }
+    public class InvalidateLayerEventArgs : EventArgs
+    {
+        public LayerContainerViewModel Layer { get; }
+        
+        public InvalidateLayerEventArgs(LayerContainerViewModel layer)
+        {
+            Layer = layer;
+        }
+    }
 
     public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
 
     public partial class LayerContainerViewModel : BaseContainerViewModel
     {
-        public event InvalidateLayerEventHandler InvalidateLayerHandler;
-
+        private readonly InvalidateLayerEventArgs _invalidateLayerEventArgs;
         [AutoNotify] private ImmutableArray<BaseShapeViewModel> _shapes;
+
+        public event InvalidateLayerEventHandler InvalidateLayer;
 
         public LayerContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+            _invalidateLayerEventArgs = new InvalidateLayerEventArgs(this);
         }
 
-        public void InvalidateLayer() => InvalidateLayerHandler?.Invoke(this, new InvalidateLayerEventArgs());
+        public void RaiseInvalidateLayer()
+        {
+            InvalidateLayer?.Invoke(this, _invalidateLayerEventArgs);
+        }
 
         public override bool IsDirty()
         {

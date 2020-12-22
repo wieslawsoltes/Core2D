@@ -3129,7 +3129,7 @@ namespace Core2D.ViewModels.Editor
                 layer.Shapes = next;
 
                 Project.SelectedShapes = default;
-                layer.InvalidateLayer();
+                layer.RaiseInvalidateLayer();
 
                 OnHideDecorator();
             }
@@ -3175,7 +3175,7 @@ namespace Core2D.ViewModels.Editor
 
             if (layer is { })
             {
-                layer.InvalidateLayer();
+                layer.RaiseInvalidateLayer();
             }
             else
             {
@@ -3199,7 +3199,7 @@ namespace Core2D.ViewModels.Editor
 
             if (layer is { })
             {
-                layer.InvalidateLayer();
+                layer.RaiseInvalidateLayer();
             }
             else
             {
@@ -3218,7 +3218,7 @@ namespace Core2D.ViewModels.Editor
 
             if (layer is { })
             {
-                layer.InvalidateLayer();
+                layer.RaiseInvalidateLayer();
             }
             else
             {

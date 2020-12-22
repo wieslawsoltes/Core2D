@@ -56,7 +56,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             }
                         }
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         ToStateEnd();
                         Move(_line);
                         _currentState = State.End;
@@ -137,7 +137,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             }
                             _line.End.X = (double)sx;
                             _line.End.Y = (double)sy;
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                             Move(_line);
                         }
                     }
@@ -177,7 +177,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.End:
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                     }
                     break;
             }

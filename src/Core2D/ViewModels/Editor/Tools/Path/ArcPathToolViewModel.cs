@@ -61,7 +61,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
                             _defaultSweepDirection);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         ToStateEnd();
                         Move(null);
                         _currentState = State.End;
@@ -90,7 +90,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                             _defaultRotationAngle,
                             _defaultIsLargeArc,
                             _defaultSweepDirection);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         Move(null);
                         _currentState = State.End;
                     }
@@ -149,7 +149,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         arc.Point = _arc.End;
                         arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
                         arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         Move(null);
                     }
                     break;
