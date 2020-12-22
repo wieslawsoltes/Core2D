@@ -2381,14 +2381,16 @@ namespace Core2D.ViewModels.Editor
                 ProjectPath = path;
                 IsProjectDirty = false;
 
-                var changes = new Subject<(object sender, PropertyChangedEventArgs e)>();
-                var observable = changes.AsObservable().Subscribe(Invalidate);
+                var propertyChangedSubject = new Subject<(object sender, PropertyChangedEventArgs e)>();
+                var propertyChangedDisposable = Project.Subscribe(propertyChangedSubject);
+                var observable = propertyChangedSubject.Subscribe(ProjectChanged);
 
-                Observer = new CompositeDisposable(changes, observable);
+                Observer = new CompositeDisposable(propertyChangedDisposable, observable, propertyChangedSubject);
 
-                void Invalidate((object sender, PropertyChangedEventArgs e) x)
+                void ProjectChanged((object sender, PropertyChangedEventArgs e) x)
                 {
                     _project?.CurrentContainer?.InvalidateLayer();
+                    CanvasPlatform?.InvalidateControl?.Invoke();
                     IsProjectDirty = true;
                 }
             }
