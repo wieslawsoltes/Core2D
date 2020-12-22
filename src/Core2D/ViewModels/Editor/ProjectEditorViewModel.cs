@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reactive.Disposables;
@@ -2387,9 +2388,10 @@ namespace Core2D.ViewModels.Editor
 
                 Observer = new CompositeDisposable(propertyChangedDisposable, observable, propertyChangedSubject);
 
-                void ProjectChanged((object sender, PropertyChangedEventArgs e) x)
+                void ProjectChanged((object sender, PropertyChangedEventArgs e) arg)
                 {
-                    _project?.CurrentContainer?.InvalidateLayer();
+                    // Debug.WriteLine($"[Changed] {arg.sender}.{arg.e.PropertyName}");
+                    // _project?.CurrentContainer?.InvalidateLayer();
                     CanvasPlatform?.InvalidateControl?.Invoke();
                     IsProjectDirty = true;
                 }
