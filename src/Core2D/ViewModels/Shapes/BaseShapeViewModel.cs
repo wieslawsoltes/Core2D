@@ -13,15 +13,15 @@ namespace Core2D.ViewModels.Shapes
     {
         private readonly IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
 
-        [AutoNotify] private ShapeStateFlags _state;
-        [AutoNotify] private ShapeStyleViewModel _style;
-        [AutoNotify] private bool _isStroked;
-        [AutoNotify] private bool _isFilled;
-        [AutoNotify] private ImmutableArray<PropertyViewModel> _properties;
-        [AutoNotify] private RecordViewModel _record;
-        [AutoNotify(SetterModifier = AccessModifier.None)] private Type _targetType;
+        [AutoNotify] protected ShapeStateFlags _state;
+        [AutoNotify] protected ShapeStyleViewModel _style;
+        [AutoNotify] protected bool _isStroked;
+        [AutoNotify] protected bool _isFilled;
+        [AutoNotify] protected ImmutableArray<PropertyViewModel> _properties;
+        [AutoNotify] protected RecordViewModel _record;
+        [AutoNotify(SetterModifier = AccessModifier.None)] protected Type _targetType;
 
-        public BaseShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider)
+        protected BaseShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider)
         {
             _targetType = targetType;
         }
@@ -85,7 +85,7 @@ namespace Core2D.ViewModels.Shapes
         {
             var isDirty = base.IsDirty();
 
-            foreach (var property in Properties)
+            foreach (var property in _properties)
             {
                 isDirty |= property.IsDirty();
             }
@@ -102,7 +102,7 @@ namespace Core2D.ViewModels.Shapes
         {
             base.Invalidate();
 
-            foreach (var property in Properties)
+            foreach (var property in _properties)
             {
                 property.Invalidate();
             }

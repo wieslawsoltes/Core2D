@@ -1,6 +1,8 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 using System.Text;
 using Core2D.Model.Path;
 
@@ -21,7 +23,7 @@ namespace Core2D.ViewModels.Path
         {
             var isDirty = base.IsDirty();
 
-            foreach (var figure in Figures)
+            foreach (var figure in _figures)
             {
                 isDirty |= figure.IsDirty();
             }
@@ -33,10 +35,32 @@ namespace Core2D.ViewModels.Path
         {
             base.Invalidate();
 
-            foreach (var figure in Figures)
+            foreach (var figure in _figures)
             {
                 figure.Invalidate();
             }
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableFigures = default(CompositeDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveList(_figures, ref disposableFigures, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Figures))
+                {
+                    ObserveList(_figures, ref disposableFigures, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
 
         public string ToXamlString(ImmutableArray<PathFigureViewModel> figures)

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 using System.Text;
 using Core2D.ViewModels.Shapes;
 
@@ -21,7 +23,7 @@ namespace Core2D.ViewModels.Path
         {
             points.Add(StartPoint);
 
-            foreach (var segment in Segments)
+            foreach (var segment in _segments)
             {
                 segment.GetPoints(points);
             }
@@ -31,9 +33,9 @@ namespace Core2D.ViewModels.Path
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= StartPoint.IsDirty();
+            isDirty |= _startPoint.IsDirty();
 
-            foreach (var segment in Segments)
+            foreach (var segment in _segments)
             {
                 isDirty |= segment.IsDirty();
             }
@@ -45,12 +47,41 @@ namespace Core2D.ViewModels.Path
         {
             base.Invalidate();
 
-            StartPoint.Invalidate();
+            _startPoint.Invalidate();
 
-            foreach (var segment in Segments)
+            foreach (var segment in _segments)
             {
                 segment.Invalidate();
             }
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableStartPoint = default(IDisposable);
+            var disposableSegments = default(CompositeDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveObject(_startPoint, ref disposableStartPoint, mainDisposable, observer);
+            ObserveList(_segments, ref disposableSegments, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(StartPoint))
+                {
+                    ObserveObject(_startPoint, ref disposableStartPoint, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Segments))
+                {
+                    ObserveList(_segments, ref disposableSegments, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
 
         public string ToXamlString(ImmutableArray<PathSegmentViewModel> segments)

@@ -1,6 +1,8 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
@@ -106,6 +108,56 @@ namespace Core2D.ViewModels.Shapes
             base.Invalidate();
             _start.Invalidate();
             _end.Invalidate();
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableStyle = default(IDisposable);
+            var disposableProperties = default(CompositeDisposable);
+            var disposableRecord = default(IDisposable);
+            var disposableStart = default(IDisposable);
+            var disposableEnd = default(IDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
+            ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
+            ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
+            ObserveObject(_start, ref disposableStart, mainDisposable, observer);
+            ObserveObject(_end, ref disposableEnd, mainDisposable, observer);
+  
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Style))
+                {
+                    ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Properties))
+                {
+                    ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Record))
+                {
+                    ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Start))
+                {
+                    ObserveObject(_start, ref disposableStart, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(End))
+                {
+                    ObserveObject(_end, ref disposableEnd, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
     }
 }

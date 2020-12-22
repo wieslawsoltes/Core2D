@@ -1,6 +1,8 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 
 namespace Core2D.ViewModels.Style
 {
@@ -42,6 +44,42 @@ namespace Core2D.ViewModels.Style
             _stroke.Invalidate();
             _fill.Invalidate();
             _textStyle.Invalidate();
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableStroke = default(IDisposable);
+            var disposableFill = default(IDisposable);
+            var disposableTextStyle = default(IDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveObject(_stroke, ref disposableStroke, mainDisposable, observer);
+            ObserveObject(_fill, ref disposableFill, mainDisposable, observer);
+            ObserveObject(_textStyle, ref disposableTextStyle, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Stroke))
+                {
+                    ObserveObject(_stroke, ref disposableStroke, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Fill))
+                {
+                    ObserveObject(_fill, ref disposableFill, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(TextStyle))
+                {
+                    ObserveObject(_textStyle, ref disposableTextStyle, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
     }
 }

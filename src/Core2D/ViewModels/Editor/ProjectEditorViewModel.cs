@@ -3,8 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Core2D.Model;
 using Core2D.Model.Editor;
@@ -28,11 +33,11 @@ namespace Core2D.ViewModels.Editor
 {
     public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {
-        private ShapeEditor _shapeEditor;
+        private readonly ShapeEditor _shapeEditor;
         [AutoNotify] private ProjectContainerViewModel _project;
         [AutoNotify] private string _projectPath;
         [AutoNotify] private bool _isProjectDirty;
-        [AutoNotify] private ProjectObserver _observer;
+        [AutoNotify] private IDisposable _observer;
         [AutoNotify] private bool _isToolIdle;
         [AutoNotify] private IEditorTool _currentTool;
         [AutoNotify] private IPathTool _currentPathTool;
@@ -2355,6 +2360,14 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
+
+        private Subject<(object sender, PropertyChangedEventArgs e)> _changes
+            = new Subject<(object sender, PropertyChangedEventArgs e)>();
+
+        private IObservable<(object sender, PropertyChangedEventArgs e)> _changesObservable
+            => _changes.AsObservable();
+
+
         public void OnLoad(ProjectContainerViewModel project, string path = null)
         {
             if (project is { })
@@ -2368,7 +2381,20 @@ namespace Core2D.ViewModels.Editor
                 Project.History = new StackHistory();
                 ProjectPath = path;
                 IsProjectDirty = false;
-                Observer = new ProjectObserver(this);
+
+                var propertyChangedSubject = new Subject<(object sender, PropertyChangedEventArgs e)>();
+                var propertyChangedDisposable = Project.Subscribe(propertyChangedSubject);
+                var observable = propertyChangedSubject.Subscribe(ProjectChanged);
+
+                Observer = new CompositeDisposable(propertyChangedDisposable, observable, propertyChangedSubject);
+
+                void ProjectChanged((object sender, PropertyChangedEventArgs e) arg)
+                {
+                    // Debug.WriteLine($"[Changed] {arg.sender}.{arg.e.PropertyName}");
+                    // _project?.CurrentContainer?.InvalidateLayer();
+                    CanvasPlatform?.InvalidateControl?.Invoke();
+                    IsProjectDirty = true;
+                }
             }
         }
 
@@ -3107,7 +3133,7 @@ namespace Core2D.ViewModels.Editor
                 layer.Shapes = next;
 
                 Project.SelectedShapes = default;
-                layer.InvalidateLayer();
+                layer.RaiseInvalidateLayer();
 
                 OnHideDecorator();
             }
@@ -3153,7 +3179,7 @@ namespace Core2D.ViewModels.Editor
 
             if (layer is { })
             {
-                layer.InvalidateLayer();
+                layer.RaiseInvalidateLayer();
             }
             else
             {
@@ -3177,7 +3203,7 @@ namespace Core2D.ViewModels.Editor
 
             if (layer is { })
             {
-                layer.InvalidateLayer();
+                layer.RaiseInvalidateLayer();
             }
             else
             {
@@ -3196,7 +3222,7 @@ namespace Core2D.ViewModels.Editor
 
             if (layer is { })
             {
-                layer.InvalidateLayer();
+                layer.RaiseInvalidateLayer();
             }
             else
             {

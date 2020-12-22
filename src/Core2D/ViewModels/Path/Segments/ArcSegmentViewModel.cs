@@ -1,7 +1,9 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.Reactive.Disposables;
 using Core2D.Model.Path;
 using Core2D.ViewModels.Shapes;
 
@@ -23,14 +25,14 @@ namespace Core2D.ViewModels.Path.Segments
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
-            points.Add(Point);
+            points.Add(_point);
         }
 
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= Point.IsDirty();
+            isDirty |= _point.IsDirty();
             isDirty |= Size.IsDirty();
 
             return isDirty;
@@ -40,8 +42,37 @@ namespace Core2D.ViewModels.Path.Segments
         {
             base.Invalidate();
 
-            Point.Invalidate();
-            Size.Invalidate();
+            _point.Invalidate();
+            _size.Invalidate();
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposablePoint = default(IDisposable);
+            var disposableSize = default(IDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveObject(_point, ref disposablePoint, mainDisposable, observer);
+            ObserveObject(_size, ref disposableSize, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Point))
+                {
+                    ObserveObject(_point, ref disposablePoint, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Size))
+                {
+                    ObserveObject(_size, ref disposableSize, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
 
         public override string ToXamlString()

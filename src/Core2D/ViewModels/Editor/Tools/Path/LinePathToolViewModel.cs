@@ -48,7 +48,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
                         _line.End = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.LineTo(_line.End);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         ToStateEnd();
                         Move(null);
                         _currentState = State.End;
@@ -72,7 +72,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         _line.Start = _line.End;
                         _line.End = factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.LineTo(_line.End);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         Move(null);
                         _currentState = State.End;
                     }
@@ -123,7 +123,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         }
                         _line.End.X = (double)sx;
                         _line.End.Y = (double)sy;
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         Move(null);
                     }
                     break;

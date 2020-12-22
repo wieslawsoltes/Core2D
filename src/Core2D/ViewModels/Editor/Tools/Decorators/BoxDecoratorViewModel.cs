@@ -250,7 +250,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 _bottomLeftHandle.State |= ShapeStateFlags.Visible;
             }
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
 
         public void Show()
@@ -293,7 +293,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             shapesBuilder.Add(_rightHandle);
             _layer.Shapes = shapesBuilder.ToImmutable();
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
 
         public void Hide()
@@ -332,7 +332,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             shapesBuilder.Remove(_leftHandle);
             shapesBuilder.Remove(_rightHandle);
             _layer.Shapes = shapesBuilder.ToImmutable();
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
 
         public bool HitTest(InputArgs args)
@@ -353,7 +353,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 _currentHandle = null;
                 _points = null;
                 _rotateAngle = 0m;
-                _layer.InvalidateLayer();
+                _layer.RaiseInvalidateLayer();
             }
 
             double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
@@ -412,7 +412,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                     _historyY = _startY;
                     _points = null;
                     _rotateAngle = 0m;
-                    _layer.InvalidateLayer();
+                    _layer.RaiseInvalidateLayer();
                     return true;
                 }
             }

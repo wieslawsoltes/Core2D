@@ -1,6 +1,5 @@
 ﻿#nullable disable
 using Core2D.Model.Renderer;
-using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Shapes
 {

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
@@ -107,6 +109,56 @@ namespace Core2D.ViewModels.Shapes
             {
                 shape.Invalidate();
             }
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableStyle = default(IDisposable);
+            var disposableProperties = default(CompositeDisposable);
+            var disposableRecord = default(IDisposable);
+            var disposableShapes = default(CompositeDisposable);
+            var disposableConnectors = default(CompositeDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
+            ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
+            ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
+            ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
+            ObserveList(_connectors, ref disposableConnectors, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Style))
+                {
+                    ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Properties))
+                {
+                    ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Record))
+                {
+                    ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Shapes))
+                {
+                    ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Connectors))
+                {
+                    ObserveList(_connectors, ref disposableConnectors, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
     }
 }

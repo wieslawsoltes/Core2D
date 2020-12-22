@@ -76,8 +76,8 @@ namespace Core2D.ViewModels.Editor.Tools
             }
 
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
-            editor.Project.CurrentContainer.HelperLayer.InvalidateLayer();
+            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+            editor.Project.CurrentContainer.HelperLayer.RaiseInvalidateLayer();
         }
 
         public PointShapeViewModel GetLastPathPoint()
@@ -183,7 +183,7 @@ namespace Core2D.ViewModels.Editor.Tools
             if (Path?.Geometry is { })
             {
                 editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
-                editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
 
                 if (!(Path.Geometry.Figures.Length == 1) || !(Path.Geometry.Figures[0].Segments.Length <= 1))
                 {

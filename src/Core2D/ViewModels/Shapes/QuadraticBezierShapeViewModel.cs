@@ -1,6 +1,8 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reactive.Disposables;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
@@ -124,6 +126,63 @@ namespace Core2D.ViewModels.Shapes
             _point1.Invalidate();
             _point2.Invalidate();
             _point3.Invalidate();
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableStyle = default(IDisposable);
+            var disposableProperties = default(CompositeDisposable);
+            var disposableRecord = default(IDisposable);
+            var disposablePoint1 = default(IDisposable);
+            var disposablePoint2 = default(IDisposable);
+            var disposablePoint3 = default(IDisposable);
+ 
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
+            ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
+            ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
+            ObserveObject(_point1, ref disposablePoint1, mainDisposable, observer);
+            ObserveObject(_point2, ref disposablePoint2, mainDisposable, observer);
+            ObserveObject(_point3, ref disposablePoint3, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Style))
+                {
+                    ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Properties))
+                {
+                    ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Record))
+                {
+                    ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Point1))
+                {
+                    ObserveObject(_point1, ref disposablePoint1, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Point2))
+                {
+                    ObserveObject(_point2, ref disposablePoint2, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Point3))
+                {
+                    ObserveObject(_point3, ref disposablePoint3, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
     }
 }

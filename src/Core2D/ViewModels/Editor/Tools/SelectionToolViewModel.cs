@@ -175,7 +175,7 @@ namespace Core2D.ViewModels.Editor.Tools
                                 if (editor.Project.SelectedShapes is null)
                                 {
                                     editor.Project.SelectedShapes = new HashSet<BaseShapeViewModel>() { result };
-                                    editor.Project.CurrentContainer.CurrentLayer.InvalidateLayer();
+                                    editor.Project.CurrentContainer.CurrentLayer.RaiseInvalidateLayer();
                                     editor.OnShowOrHideDecorator();
                                     HitTestDecorator(args, isControl, false);
                                     break;
@@ -198,7 +198,7 @@ namespace Core2D.ViewModels.Editor.Tools
                                             editor.OnShowOrHideDecorator();
                                             HitTestDecorator(args, isControl, false);
                                         }
-                                        editor.Project.CurrentContainer.CurrentLayer.InvalidateLayer();
+                                        editor.Project.CurrentContainer.CurrentLayer.RaiseInvalidateLayer();
                                         break;
                                     }
                                     else
@@ -208,7 +208,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                                         editor.Project.SelectedShapes = selected;
 
-                                        editor.Project.CurrentContainer.CurrentLayer.InvalidateLayer();
+                                        editor.Project.CurrentContainer.CurrentLayer.RaiseInvalidateLayer();
                                         editor.OnShowOrHideDecorator();
                                         HitTestDecorator(args, isControl, false);
                                         break;
@@ -271,7 +271,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             true, true);
                         _rectangleShape.State |= ShapeStateFlags.Thickness;
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         _currentState = State.Selected;
                     }
                     break;
@@ -282,7 +282,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _rectangleShape.BottomRight.X = x;
                             _rectangleShape.BottomRight.Y = y;
                             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                             _currentState = State.None;
                             editor.IsToolIdle = true;
                         }
@@ -307,7 +307,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _rectangleShape.BottomRight.X = args.X;
                             _rectangleShape.BottomRight.Y = args.Y;
                             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         }
 
                         if (IsSelectionAvailable() && !isControl)
@@ -430,7 +430,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         {
                             MoveSelectionCacheTo(args);
                             editor.OnUpdateDecorator();
-                            editor.Project.CurrentContainer.CurrentLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.CurrentLayer.RaiseInvalidateLayer();
                             break;
                         }
 
@@ -438,7 +438,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         {
                             _rectangleShape.BottomRight.X = args.X;
                             _rectangleShape.BottomRight.Y = args.Y;
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         }
                     }
                     break;
@@ -464,8 +464,8 @@ namespace Core2D.ViewModels.Editor.Tools
             DisposeMoveSelectionCache();
             editor.OnHideDecorator();
 
-            editor.Project?.CurrentContainer?.CurrentLayer?.InvalidateLayer();
-            editor.Project?.CurrentContainer?.WorkingLayer?.InvalidateLayer();
+            editor.Project?.CurrentContainer?.CurrentLayer?.RaiseInvalidateLayer();
+            editor.Project?.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
 
             editor.IsToolIdle = true;
         }

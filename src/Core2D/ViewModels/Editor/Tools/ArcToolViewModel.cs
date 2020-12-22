@@ -55,7 +55,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _arc.Point1 = result;
                         }
 
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         ToStatePoint2();
                         Move(_arc);
                         _currentState = State.Point2;
@@ -76,7 +76,7 @@ namespace Core2D.ViewModels.Editor.Tools
                                 _arc.Point2 = result;
                             }
 
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                             ToStatePoint3();
                             Move(_arc);
                             _currentState = State.Point3;
@@ -104,7 +104,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             }
 
                             editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_arc);
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                             ToStatePoint4();
                             Move(_arc);
                             _currentState = State.Point4;
@@ -186,7 +186,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             }
                             _arc.Point2.X = (double)sx;
                             _arc.Point2.Y = (double)sy;
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                             Move(_arc);
                         }
                     }
@@ -201,7 +201,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             }
                             _arc.Point3.X = (double)sx;
                             _arc.Point3.Y = (double)sy;
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                             Move(_arc);
                         }
                     }
@@ -216,7 +216,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             }
                             _arc.Point4.X = (double)sx;
                             _arc.Point4.Y = (double)sy;
-                            editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                             Move(_arc);
                         }
                     }
@@ -286,7 +286,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.Point4:
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
-                        editor.Project.CurrentContainer.WorkingLayer.InvalidateLayer();
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                     }
                     break;
             }

@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using Core2D.Model;
 using Core2D.Model.History;
 using Core2D.ViewModels.Data;
@@ -161,34 +164,34 @@ namespace Core2D.ViewModels.Containers
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= Options.IsDirty();
+            isDirty |= _options.IsDirty();
 
-            foreach (var styleLibrary in StyleLibraries)
+            foreach (var styleLibrary in _styleLibraries)
             {
                 isDirty |= styleLibrary.IsDirty();
             }
 
-            foreach (var groupLibrary in GroupLibraries)
+            foreach (var groupLibrary in _groupLibraries)
             {
                 isDirty |= groupLibrary.IsDirty();
             }
 
-            foreach (var database in Databases)
+            foreach (var database in _databases)
             {
                 isDirty |= database.IsDirty();
             }
 
-            foreach (var template in Templates)
+            foreach (var template in _templates)
             {
                 isDirty |= template.IsDirty();
             }
 
-            foreach (var script in Scripts)
+            foreach (var script in _scripts)
             {
                 isDirty |= script.IsDirty();
             }
 
-            foreach (var document in Documents)
+            foreach (var document in _documents)
             {
                 isDirty |= document.IsDirty();
             }
@@ -200,37 +203,101 @@ namespace Core2D.ViewModels.Containers
         {
             base.Invalidate();
 
-            Options.Invalidate();
+            _options.Invalidate();
 
-            foreach (var styleLibrary in StyleLibraries)
+            foreach (var styleLibrary in _styleLibraries)
             {
                 styleLibrary.Invalidate();
             }
 
-            foreach (var groupLibrary in GroupLibraries)
+            foreach (var groupLibrary in _groupLibraries)
             {
                 groupLibrary.Invalidate();
             }
 
-            foreach (var database in Databases)
+            foreach (var database in _databases)
             {
                 database.Invalidate();
             }
 
-            foreach (var template in Templates)
+            foreach (var template in _templates)
             {
                 template.Invalidate();
             }
 
-            foreach (var script in Scripts)
+            foreach (var script in _scripts)
             {
                 script.Invalidate();
             }
 
-            foreach (var document in Documents)
+            foreach (var document in _documents)
             {
                 document.Invalidate();
             }
+        }
+
+        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        {
+            var mainDisposable = new CompositeDisposable();
+            var disposablePropertyChanged = default(IDisposable);
+            var disposableOptions = default(IDisposable);
+            var disposableStyleLibraries = default(CompositeDisposable);
+            var disposableGroupLibraries = default(CompositeDisposable);
+            var disposableDatabases = default(CompositeDisposable);
+            var disposableTemplates = default(CompositeDisposable);
+            var disposableScripts = default(CompositeDisposable);
+            var disposableDocuments = default(CompositeDisposable);
+
+            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+            ObserveObject(_options, ref disposableOptions, mainDisposable, observer);
+            ObserveList(_styleLibraries, ref disposableStyleLibraries, mainDisposable, observer);
+            ObserveList(_groupLibraries, ref disposableGroupLibraries, mainDisposable, observer);
+            ObserveList(_databases, ref disposableDatabases, mainDisposable, observer);
+            ObserveList(_templates, ref disposableTemplates, mainDisposable, observer);
+            ObserveList(_scripts, ref disposableScripts, mainDisposable, observer);
+            ObserveList(_documents, ref disposableDocuments, mainDisposable, observer);
+
+            void Handler(object sender, PropertyChangedEventArgs e) 
+            {
+                if (e.PropertyName == nameof(Options))
+                {
+                    ObserveObject(_options, ref disposableOptions, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(StyleLibraries))
+                {
+                    ObserveList(_styleLibraries, ref disposableStyleLibraries, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(GroupLibraries))
+                {
+                    ObserveList(_groupLibraries, ref disposableGroupLibraries, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Databases))
+                {
+                    ObserveList(_databases, ref disposableDatabases, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Templates))
+                {
+                    ObserveList(_templates, ref disposableTemplates, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Scripts))
+                {
+                    ObserveList(_scripts, ref disposableScripts, mainDisposable, observer);
+                }
+
+                if (e.PropertyName == nameof(Documents))
+                {
+                    ObserveList(_documents, ref disposableDocuments, mainDisposable, observer);
+                }
+
+                observer.OnNext((sender, e));
+            }
+
+            return mainDisposable;
         }
     }
 }

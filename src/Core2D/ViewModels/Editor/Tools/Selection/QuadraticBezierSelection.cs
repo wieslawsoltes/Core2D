@@ -88,7 +88,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _helperPoint3.Y = _quadraticBezier.Point3.Y;
             }
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
 
         public void Reset()
@@ -123,7 +123,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _helperPoint3 = null;
             }
 
-            _layer.InvalidateLayer();
+            _layer.RaiseInvalidateLayer();
         }
     }
 }

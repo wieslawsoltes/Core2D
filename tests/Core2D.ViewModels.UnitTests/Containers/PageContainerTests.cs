@@ -58,10 +58,10 @@ namespace Core2D.ViewModels.UnitTests.Containers
 
             int count = 0;
 
-            layer1.InvalidateLayerHandler += (sender, e) => count++;
-            layer2.InvalidateLayerHandler += (sender, e) => count++;
-            workingLayer.InvalidateLayerHandler += (sender, e) => count++;
-            helperLayer.InvalidateLayerHandler += (sender, e) => count++;
+            layer1.InvalidateLayer += (sender, e) => count++;
+            layer2.InvalidateLayer += (sender, e) => count++;
+            workingLayer.InvalidateLayer += (sender, e) => count++;
+            helperLayer.InvalidateLayer += (sender, e) => count++;
 
             target.InvalidateLayer();
 
@@ -118,7 +118,7 @@ namespace Core2D.ViewModels.UnitTests.Containers
 
             bool raised = false;
 
-            layer.InvalidateLayerHandler += (sender, e) =>
+            layer.InvalidateLayer += (sender, e) =>
             {
                 raised = true;
             };
