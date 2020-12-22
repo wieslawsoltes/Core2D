@@ -16,6 +16,8 @@ namespace Core2D.ViewModels.Editor
 {
     public partial class ProjectObserver : IDisposable
     {
+        private static readonly PropertyChangedEventArgs _backgroundPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(TemplateContainerViewModel.Background));
+        private static readonly PropertyChangedEventArgs _gridStrokeColorPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(IGrid.GridStrokeColor));
         private readonly ProjectEditorViewModel _editor;
         private readonly Action _invalidateContainer;
         private readonly Action _invalidateStyles;
@@ -178,15 +180,15 @@ namespace Core2D.ViewModels.Editor
 
         private void ObserveTemplateBackground(object sender, PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(TemplateContainerViewModel.Background));
+            _editor.Project.CurrentContainer.RaisePropertyChanged(_backgroundPropertyChangedEventArgs);
             var container = _editor.Project.CurrentContainer;
             if (container is PageContainerViewModel page)
             {
-                page.Template.RaisePropertyChanged(nameof(TemplateContainerViewModel.Background));
+                page.Template.RaisePropertyChanged(_backgroundPropertyChangedEventArgs);
             }
             if (container is TemplateContainerViewModel template)
             {
-                template.RaisePropertyChanged(nameof(TemplateContainerViewModel.Background));
+                template.RaisePropertyChanged(_backgroundPropertyChangedEventArgs);
             }
             _invalidateLayers();
             MarkAsDirty();
@@ -194,15 +196,15 @@ namespace Core2D.ViewModels.Editor
 
         private void ObserveGridStrokeColor(object sender, PropertyChangedEventArgs e)
         {
-            _editor.Project.CurrentContainer.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
+            _editor.Project.CurrentContainer.RaisePropertyChanged(_gridStrokeColorPropertyChangedEventArgs);
             var container = _editor.Project.CurrentContainer;
             if (container is PageContainerViewModel page)
             {
-                page.Template.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
+                page.Template.RaisePropertyChanged(_gridStrokeColorPropertyChangedEventArgs);
             }
             if (container is TemplateContainerViewModel template)
             {
-                template.RaisePropertyChanged(nameof(IGrid.GridStrokeColor));
+                template.RaisePropertyChanged(_gridStrokeColorPropertyChangedEventArgs);
             }
             _invalidateLayers();
             MarkAsDirty();

@@ -41,6 +41,24 @@ namespace Core2D.ViewModels
             throw new NotImplementedException();
         }
 
+        public void RaisePropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, e);
+        }
+
+        protected bool RaiseAndSetIfChanged<T>(ref T field, T value, PropertyChangedEventArgs e)
+        {
+            if (Equals(field, value))
+            {
+                return false;
+            }
+            field = value;
+            _isDirty = true;
+            RaisePropertyChanged(e);
+            return true;
+        }
+
+        /*
         public void RaisePropertyChanged([CallerMemberName] string propertyName = default)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -57,5 +75,6 @@ namespace Core2D.ViewModels
             RaisePropertyChanged(propertyName);
             return true;
         }
+        */
     }
 }

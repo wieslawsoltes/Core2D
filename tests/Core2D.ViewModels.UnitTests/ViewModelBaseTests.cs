@@ -83,6 +83,8 @@ namespace Core2D.ViewModels.UnitTests
 
         private class Class1 : ViewModelBase
         {
+            private static readonly PropertyChangedEventArgs _testPropertyPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(TestProperty));
+
             public bool TestPropertyUpdated;
 
             private string _testProperty;
@@ -91,7 +93,7 @@ namespace Core2D.ViewModels.UnitTests
                 get { return _testProperty; }
                 set
                 {
-                    TestPropertyUpdated = RaiseAndSetIfChanged(ref _testProperty, value);
+                    TestPropertyUpdated = RaiseAndSetIfChanged(ref _testProperty, value, _testPropertyPropertyChangedEventArgs);
                 }
             }
 

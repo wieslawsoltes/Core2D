@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Renderer;
@@ -8,6 +9,8 @@ namespace Core2D.ViewModels.Containers
 {
     public partial class ProjectContainerViewModel : IImageCache
     {
+        private static readonly PropertyChangedEventArgs _keysPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(Keys));
+
         private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
         private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKeyViewModel(_serviceProvider) { Key = i.Key }).ToList();
@@ -25,7 +28,7 @@ namespace Core2D.ViewModels.Containers
             }
 
             _images.Add(key, bytes);
-            RaisePropertyChanged(nameof(Keys));
+            RaisePropertyChanged(_keysPropertyChangedEventArgs);
             return key;
         }
 
@@ -37,7 +40,7 @@ namespace Core2D.ViewModels.Containers
             }
 
             _images.Add(key, bytes);
-            RaisePropertyChanged(nameof(Keys));
+            RaisePropertyChanged(_keysPropertyChangedEventArgs);
         }
 
         public byte[] GetImage(string key)
@@ -55,7 +58,7 @@ namespace Core2D.ViewModels.Containers
         public void RemoveImage(string key)
         {
             _images.Remove(key);
-            RaisePropertyChanged(nameof(Keys));
+            RaisePropertyChanged(_keysPropertyChangedEventArgs);
         }
 
         public void PurgeUnusedImages(ICollection<string> used)
@@ -67,7 +70,7 @@ namespace Core2D.ViewModels.Containers
                     _images.Remove(kvp.Key);
                 }
             }
-            RaisePropertyChanged(nameof(Keys));
+            RaisePropertyChanged(_keysPropertyChangedEventArgs);
         }
     }
 }

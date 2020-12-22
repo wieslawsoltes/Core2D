@@ -31,7 +31,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private DocumentContainerViewModel _currentDocument;
         [AutoNotify] private FrameContainerViewModel _currentContainer;
         [AutoNotify] private ViewModelBase _selected;
-        [AutoNotify] private ISet<BaseShapeViewModel> _selectedShapes;
+        [AutoNotify(IgnoreDataMember = true)] private ISet<BaseShapeViewModel> _selectedShapes;
 
         public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
