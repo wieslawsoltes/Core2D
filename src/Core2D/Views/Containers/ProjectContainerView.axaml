@@ -39,7 +39,7 @@
                 <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+X" x:CompileBindings="False" />
                 <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+C" x:CompileBindings="False" />
                 <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+V" x:CompileBindings="False" />
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
+                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding #DocumentsTreeView.SelectedItems}" Gesture="Delete" x:CompileBindings="False" />
                 <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
             </TreeView.KeyBindings>
             <TreeView.ContextMenu>
