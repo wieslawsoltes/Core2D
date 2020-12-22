@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace Core2D.ViewModels
 {
@@ -10,71 +9,34 @@ namespace Core2D.ViewModels
     {
         private bool _isDirty;
         protected readonly IServiceProvider _serviceProvider;
-
         [AutoNotify] private ViewModelBase _owner;
         [AutoNotify] private string _name = "";
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ViewModelBase(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public virtual bool IsDirty()
-        {
-            return _isDirty;
-        }
+        public virtual bool IsDirty() => _isDirty;
 
-        public virtual void Invalidate()
-        {
-            _isDirty = false;
-        }
+        public virtual void Invalidate() => _isDirty = false;
 
-        public virtual void MarkAsDirty()
-        {
-            _isDirty = true;
-        }
+        public virtual void MarkAsDirty() => _isDirty = true;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public virtual object Copy(IDictionary<object, object> shared) =>  throw new NotImplementedException();
 
-        public virtual object Copy(IDictionary<object, object> shared)
-        {
-            throw new NotImplementedException();
-        }
+        public void RaisePropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
 
-        public void RaisePropertyChanged(PropertyChangedEventArgs e)
+        protected void RaiseAndSetIfChanged<T>(ref T field, T value, PropertyChangedEventArgs e)
         {
-            PropertyChanged?.Invoke(this, e);
-        }
-
-        protected bool RaiseAndSetIfChanged<T>(ref T field, T value, PropertyChangedEventArgs e)
-        {
-            if (Equals(field, value))
+            if (!Equals(field, value))
             {
-                return false;
+                field = value;
+                _isDirty = true;
+                PropertyChanged?.Invoke(this, e);
             }
-            field = value;
-            _isDirty = true;
-            RaisePropertyChanged(e);
-            return true;
         }
-
-        /*
-        public void RaisePropertyChanged([CallerMemberName] string propertyName = default)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool RaiseAndSetIfChanged<T>(ref T field, T value, [CallerMemberName] string propertyName = default)
-        {
-            if (Equals(field, value))
-            {
-                return false;
-            }
-            field = value;
-            _isDirty = true;
-            RaisePropertyChanged(propertyName);
-            return true;
-        }
-        */
     }
 }

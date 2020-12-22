@@ -68,33 +68,16 @@ namespace Core2D.ViewModels.UnitTests
             Assert.Equal(1, count);
         }
 
-        [Fact]
-        [Trait("Core2D", "Base")]
-        public void Update_Returns_Boolean()
-        {
-            var target = new Class1();
-
-            target.TestProperty = "Test";
-            Assert.True(target.TestPropertyUpdated);
-
-            target.TestProperty = "Test";
-            Assert.False(target.TestPropertyUpdated);
-        }
 
         private class Class1 : ViewModelBase
         {
             private static readonly PropertyChangedEventArgs _testPropertyPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(TestProperty));
-
-            public bool TestPropertyUpdated;
-
             private string _testProperty;
+
             public string TestProperty
             {
-                get { return _testProperty; }
-                set
-                {
-                    TestPropertyUpdated = RaiseAndSetIfChanged(ref _testProperty, value, _testPropertyPropertyChangedEventArgs);
-                }
+                get =>_testProperty;
+                set => RaiseAndSetIfChanged(ref _testProperty, value, _testPropertyPropertyChangedEventArgs);
             }
 
             public Class1() : base(null)
