@@ -5,6 +5,7 @@ using Avalonia.Input;
 using Avalonia.VisualTree;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.DragAndDrop.Handlers
 {
@@ -23,7 +24,7 @@ namespace Core2D.DragAndDrop.Handlers
 
         private bool ValidateContainer(TreeView treeView, DragEventArgs e, object sourceContext, object targetContext, bool bExecute)
         {
-            if (!(IsContainer(sourceContext))
+            if ((!IsContainer(sourceContext) && !(sourceContext is BaseShapeViewModel))
                 || !(targetContext is ProjectContainerViewModel)
                 || !(treeView.GetVisualAt(e.GetPosition(treeView)) is IControl targetControl)
                 || !(treeView.GetVisualRoot() is IControl rootControl)
@@ -37,6 +38,61 @@ namespace Core2D.DragAndDrop.Handlers
 
             switch (sourceContext)
             {
+                    case BaseShapeViewModel sourceShape:
+                    {
+                        switch (targetControl.DataContext)
+                        {
+                            case LayerContainerViewModel targetLayer:
+                                {
+                                    if (e.DragEffects == DragDropEffects.Copy)
+                                    {
+                                        if (bExecute)
+                                        {
+                                            var shape = editor?.CloneShape(sourceShape);
+                                            editor?.Project.AddShape(targetLayer, shape);
+                                        }
+                                        return true;
+                                    }
+                                    else if (e.DragEffects == DragDropEffects.Move)
+                                    {
+                                        if (bExecute)
+                                        {
+                                            editor?.Project?.RemoveShape(sourceShape);
+                                            editor?.Project.AddShape(targetLayer, sourceShape);
+                                        }
+                                        return true;
+                                    }
+                                    else if (e.DragEffects == DragDropEffects.Link)
+                                    {
+                                        if (bExecute)
+                                        {
+                                            editor?.Project.AddShape(targetLayer, sourceShape);
+                                            e.DragEffects = DragDropEffects.None;
+                                        }
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            case FrameContainerViewModel targetContainer:
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO:
+                                    }
+                                    return true;
+                                }
+                            case DocumentContainerViewModel targetDocument:
+                                {
+                                    if (bExecute)
+                                    {
+                                        // TODO:
+                                    }
+                                    return true;
+                                }
+                        }
+
+                        return false;
+                    }
                 case LayerContainerViewModel sourceLayer:
                     {
                         switch (targetControl.DataContext)
