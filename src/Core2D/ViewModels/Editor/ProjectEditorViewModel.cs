@@ -859,9 +859,14 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnDelete(object item)
+        private void Delete(object item)
         {
-            if (item is LayerContainerViewModel layer)
+            if (item is BaseShapeViewModel shape)
+            {
+                Project?.RemoveShape(shape);
+                OnDeselectAll();
+            }
+            else if (item is LayerContainerViewModel layer)
             {
                 Project?.RemoveLayer(layer);
 
@@ -871,7 +876,7 @@ namespace Core2D.ViewModels.Editor
                     owner.SetCurrentLayer(selected);
                 }
             }
-            if (item is PageContainerViewModel page)
+            else if (item is PageContainerViewModel page)
             {
                 Project?.RemovePage(page);
 
@@ -889,6 +894,23 @@ namespace Core2D.ViewModels.Editor
             else if (item is ProjectEditorViewModel || item is null)
             {
                 OnDeleteSelected();
+            }
+        }
+
+        public void OnDelete(object item)
+        {
+            if (item is IList<object> objects)
+            {
+                var copy = objects.ToList();
+
+                foreach (var obj in copy)
+                {
+                    Delete(obj);
+                }
+            }
+            else
+            {
+                Delete(item);
             }
         }
 
