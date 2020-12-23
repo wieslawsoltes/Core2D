@@ -9,7 +9,7 @@
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Page}"
-             d:DesignWidth="250" d:DesignHeight="400"
+             d:DesignWidth="250" d:DesignHeight="600"
              x:DataType="vmc:PageContainerViewModel" x:CompileBindings="True">
     <StackPanel>
         <Expander Header="Data" IsExpanded="False">
