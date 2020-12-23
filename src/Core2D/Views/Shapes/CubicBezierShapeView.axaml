@@ -11,7 +11,7 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:CubicBezierShapeViewModel" x:CompileBindings="True">
     <StackPanel>
-        <Expander Header="CubicBezier">
+        <Expander Header="CubicBezier" IsExpanded="True">
             <StackPanel>
                 <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
                 <TextBox Text="{Binding Name, Mode=TwoWay}" />
