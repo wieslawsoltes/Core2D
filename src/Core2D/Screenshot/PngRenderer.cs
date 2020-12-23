@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 
-namespace Core2D.Util.Rendering
+namespace Core2D.Screenshot
 {
     public static class PngRenderer
     {

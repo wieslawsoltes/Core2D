@@ -14,6 +14,7 @@ using Avalonia.Headless;
 using Avalonia.OpenGL;
 using Avalonia.Threading;
 using Core2D.Configuration.Themes;
+using Core2D.Screenshot;
 using Core2D.Util;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
@@ -88,7 +89,7 @@ namespace Core2D.Desktop
 
                 if (mainWindow?.FindControl<Panel>("ContentPanel") is { } contentPanel)
                 {
-                    var editor = contentPanel?.DataContext as ProjectEditorViewModel;
+                    var editor = contentPanel.DataContext as ProjectEditorViewModel;
 
                     var pt = new Point(-1, -1);
                     headlessWindow?.MouseMove(pt);
@@ -98,13 +99,13 @@ namespace Core2D.Desktop
                     var pathDashboard = $"Core2D-Dashboard-{App.DefaultTheme}.{extension}";
                     var pathEditor = $"Core2D-Editor-{App.DefaultTheme}.{extension}";
 
-                    Renderer.Render(contentPanel, size, pathDashboard);
+                    Capture.Save(contentPanel, size, pathDashboard);
                     Dispatcher.UIThread.RunJobs();
 
                     editor?.OnNew(null);
                     Dispatcher.UIThread.RunJobs();
 
-                    Renderer.Render(contentPanel, size, pathEditor);
+                    Capture.Save(contentPanel, size, pathEditor);
                     Dispatcher.UIThread.RunJobs();
                 }
 

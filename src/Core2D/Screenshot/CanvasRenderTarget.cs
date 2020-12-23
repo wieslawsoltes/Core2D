@@ -4,7 +4,7 @@ using Avalonia.Rendering;
 using Avalonia.Skia.Helpers;
 using SkiaSharp;
 
-namespace Core2D.Util.Rendering
+namespace Core2D.Screenshot
 {
     public class CanvasRenderTarget : IRenderTarget
     {
@@ -24,7 +24,6 @@ namespace Core2D.Util.Rendering
 
         public void Dispose()
         {
-            _canvas.Flush();
         }
     }
 }
