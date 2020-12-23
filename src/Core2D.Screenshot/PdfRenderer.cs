@@ -8,7 +8,7 @@ namespace Core2D.Screenshot
 {
     public static class PdfRenderer
     {
-        public static void Render(Control target, Size size, Stream stream, double dpi = 110)
+        public static void Render(Control target, Size size, Stream stream, double dpi = 72)
         {
             using var wstream = new SKManagedWStream(stream);
             using var document = SKDocument.CreatePdf(stream, (float)dpi);
