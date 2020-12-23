@@ -29,7 +29,7 @@
     <MathSpatialVersion>1.4.0</MathSpatialVersion>
     <AvaloniaVersion>0.10.0-rc1</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.0-rc1</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>0.10.0-build20201223-05</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaXamlBehaviorsVersion>0.10.0-build20201223-06</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>3.0.0-rc1</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>0.10.0-build20201220-02</ThemeEditorControlsColorPickerVersion>
     <SystemCommandLineVersion>2.0.0-beta1.20574.7</SystemCommandLineVersion>
