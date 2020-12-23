@@ -189,7 +189,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 _selection.Reset();
                 _selection = null;
             }
-            
+
             editor.IsToolIdle = true;
         }
     }

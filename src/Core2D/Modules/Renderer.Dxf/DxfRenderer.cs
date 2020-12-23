@@ -6,7 +6,6 @@ using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.Model.Style;
 using Core2D.ViewModels;
-using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
 using Core2D.ViewModels.Renderer;
@@ -693,7 +692,7 @@ namespace Core2D.Modules.Renderer.Dxf
                 TextHAlignment.Right => rect.X + rect.Width,
                 _ => rect.X,
             };
-            var y =style.TextStyle.TextVAlignment switch
+            var y = style.TextStyle.TextVAlignment switch
             {
                 TextVAlignment.Center => rect.Y + rect.Height / 2.0,
                 TextVAlignment.Bottom => rect.Y + rect.Height,
@@ -796,7 +795,7 @@ namespace Core2D.Modules.Renderer.Dxf
             if (path.IsStroked || path.IsFilled)
             {
                 var dxf = dc as DXF.DxfDocument;
- 
+
                 CreateHatchBoundsAndEntities(path.Geometry, out var bounds, out var entities);
                 if (entities is null || bounds is null)
                 {

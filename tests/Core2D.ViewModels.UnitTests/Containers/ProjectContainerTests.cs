@@ -190,7 +190,7 @@ namespace Core2D.ViewModels.UnitTests.Containers
 
             var layer = _factory.CreateLayerContainer("Layer1", page);
             page.Layers = page.Layers.Add(layer);
- 
+
             target.SetSelected(layer);
 
             Assert.Equal(layer, page.CurrentLayer);

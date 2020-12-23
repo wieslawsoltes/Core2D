@@ -153,14 +153,14 @@ namespace Core2D.ViewModels.Shapes
             var disposableProperties = default(CompositeDisposable);
             var disposableRecord = default(IDisposable);
             var disposableGeometry = default(IDisposable);
- 
+
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
             ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
             ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
             ObserveObject(_geometry, ref disposableGeometry, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Style))
                 {

@@ -32,7 +32,7 @@ namespace Core2D.Behaviors
 
             if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
             {
-                contextMenu.ContextMenuOpening += ContextMenu_ContextMenuOpening; 
+                contextMenu.ContextMenuOpening += ContextMenu_ContextMenuOpening;
             }
         }
 
@@ -42,7 +42,7 @@ namespace Core2D.Behaviors
 
             if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
             {
-                contextMenu.ContextMenuOpening -= ContextMenu_ContextMenuOpening; 
+                contextMenu.ContextMenuOpening -= ContextMenu_ContextMenuOpening;
             }
         }
 

@@ -20,7 +20,7 @@ namespace Core2D.Behaviors
             get => GetValue(TargetControlProperty);
             set => SetValue(TargetControlProperty, value);
         }
-        
+
         public Key Key
         {
             get => GetValue(KeyProperty);

@@ -6,8 +6,8 @@ using Core2D.Model.Style;
 using Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Spatial;
 using SkiaSharp;
+using Spatial;
 
 namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 {

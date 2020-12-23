@@ -17,7 +17,7 @@ namespace Core2D.Behaviors
             get => GetValue(TargetControlProperty);
             set => SetValue(TargetControlProperty, value);
         }
-        
+
         protected override void OnAttached()
         {
             base.OnAttached();

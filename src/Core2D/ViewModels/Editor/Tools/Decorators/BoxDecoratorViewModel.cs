@@ -228,8 +228,8 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
             _rightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeSmall);
             _rightHandle.TopLeft.Y = (double)(_groupBox.Bounds.CenterY - _sizeSmall);
-            _rightHandle.BottomRight.X =(double)( _groupBox.Bounds.Right + _sizeSmall);
-            _rightHandle.BottomRight.Y =(double)( _groupBox.Bounds.CenterY + _sizeSmall);
+            _rightHandle.BottomRight.X = (double)(_groupBox.Bounds.Right + _sizeSmall);
+            _rightHandle.BottomRight.Y = (double)(_groupBox.Bounds.CenterY + _sizeSmall);
 
             if (_groupBox.Bounds.Height <= 0m || _groupBox.Bounds.Width <= 0m)
             {

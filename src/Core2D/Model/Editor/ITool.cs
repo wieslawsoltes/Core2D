@@ -7,7 +7,7 @@ namespace Core2D.Model.Editor
     public interface ITool
     {
         string Title { get; }
-        
+
         void BeginDown(InputArgs args);
 
         void BeginUp(InputArgs args);

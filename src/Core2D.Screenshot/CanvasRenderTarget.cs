@@ -10,7 +10,7 @@ namespace Core2D.Screenshot
     {
         private readonly SKCanvas _canvas;
         private readonly double _dpi;
-            
+
         public CanvasRenderTarget(SKCanvas canvas, double dpi)
         {
             _canvas = canvas;

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reactive.Disposables;
@@ -213,7 +212,7 @@ namespace Core2D.ViewModels.Editor
             var update = string.IsNullOrEmpty(shape.Name) || input.Any(x => x != shape && x.Name == shape.Name);
             if (update)
             {
-                shape.Name = shape.GetType().Name.Replace("ShapeViewModel", " ") + count; 
+                shape.Name = shape.GetType().Name.Replace("ShapeViewModel", " ") + count;
             }
         }
 

@@ -131,7 +131,7 @@ namespace Core2D.ViewModels.Designer
             // Project
 
             var containerFactory = serviceProvider.GetService<IContainerFactory>();
- 
+
             Project = containerFactory.GetProject();
 
             Template = factory.CreateTemplateContainer();

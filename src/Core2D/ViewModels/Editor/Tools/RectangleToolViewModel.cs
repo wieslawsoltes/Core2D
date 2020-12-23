@@ -1,11 +1,8 @@
 ﻿#nullable disable
 using System;
-using System.Linq;
-using Avalonia;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
-using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor.Tools.Selection;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
@@ -180,7 +177,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 _selection.Reset();
                 _selection = null;
             }
-            
+
             editor.IsToolIdle = true;
         }
     }

@@ -257,7 +257,7 @@ namespace Core2D.ViewModels.Containers
             ObserveList(_scripts, ref disposableScripts, mainDisposable, observer);
             ObserveList(_documents, ref disposableDocuments, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Options))
                 {

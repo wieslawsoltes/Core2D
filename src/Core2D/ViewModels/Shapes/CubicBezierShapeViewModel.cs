@@ -167,7 +167,7 @@ namespace Core2D.ViewModels.Shapes
             ObserveObject(_point3, ref disposablePoint3, mainDisposable, observer);
             ObserveObject(_point4, ref disposablePoint4, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Style))
                 {

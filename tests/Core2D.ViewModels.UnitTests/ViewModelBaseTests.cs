@@ -76,14 +76,14 @@ namespace Core2D.ViewModels.UnitTests
 
             public string TestProperty
             {
-                get =>_testProperty;
+                get => _testProperty;
                 set => RaiseAndSetIfChanged(ref _testProperty, value, _testPropertyPropertyChangedEventArgs);
             }
 
             public Class1() : base(null)
             {
             }
-            
+
             public override object Copy(IDictionary<object, object> shared)
             {
                 throw new NotImplementedException();

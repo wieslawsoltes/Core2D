@@ -7,7 +7,8 @@ using Core2D.ViewModels.Shapes;
 namespace Core2D.ViewModels.Editor.Tools
 {
     public partial class NoneToolViewModel : ViewModelBase, IEditorTool
-    {        public string Title => "None";
+    {
+        public string Title => "None";
 
         public NoneToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {

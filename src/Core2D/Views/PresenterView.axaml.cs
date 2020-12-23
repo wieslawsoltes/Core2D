@@ -199,7 +199,7 @@ namespace Core2D.Views
                             s_templatePresenter.Render(context, customState.Renderer, customState.Selection, customState.Container, 0.0, 0.0);
                             if (customState.Container is PageContainerViewModel page)
                             {
-                                page.Template?.Invalidate();  
+                                page.Template?.Invalidate();
                             }
                         }
                     }

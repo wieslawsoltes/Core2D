@@ -43,7 +43,7 @@ namespace Core2D.ViewModels.Containers
 
             return isDirty;
         }
-        
+
         public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
@@ -65,7 +65,7 @@ namespace Core2D.ViewModels.Containers
             ObserveObject(_background, ref disposableBackground, mainDisposable, observer);
             ObserveObject(_gridStrokeColor, ref disposableGridStrokeColor, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Layers))
                 {

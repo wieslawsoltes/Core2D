@@ -66,7 +66,7 @@ namespace Core2D.ViewModels.Path
             ObserveObject(_startPoint, ref disposableStartPoint, mainDisposable, observer);
             ObserveList(_segments, ref disposableSegments, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(StartPoint))
                 {

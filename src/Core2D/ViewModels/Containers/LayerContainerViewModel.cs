@@ -10,7 +10,7 @@ namespace Core2D.ViewModels.Containers
     public class InvalidateLayerEventArgs : EventArgs
     {
         public LayerContainerViewModel Layer { get; }
-        
+
         public InvalidateLayerEventArgs(LayerContainerViewModel layer)
         {
             Layer = layer;
@@ -66,7 +66,7 @@ namespace Core2D.ViewModels.Containers
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Shapes))
                 {

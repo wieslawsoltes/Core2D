@@ -138,9 +138,9 @@ namespace Core2D.ViewModels.UnitTests.Shapes.Path
 
             public TestSegmentViewModel() : base(null)
             {
-                
+
             }
-            
+
             public override void GetPoints(IList<PointShapeViewModel> points)
             {
                 points.Add(Point);

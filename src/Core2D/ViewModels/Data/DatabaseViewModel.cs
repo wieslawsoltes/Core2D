@@ -77,7 +77,7 @@ namespace Core2D.ViewModels.Data
             ObserveList(_columns, ref disposableColumns, mainDisposable, observer);
             ObserveList(_records, ref disposableRecords, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Columns))
                 {

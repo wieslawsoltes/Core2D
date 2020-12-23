@@ -57,7 +57,7 @@ namespace Core2D.ViewModels.Path.Segments
             ObserveObject(_point2, ref disposablePoint2, mainDisposable, observer);
             ObserveObject(_point3, ref disposablePoint3, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Point1))
                 {

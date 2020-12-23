@@ -81,7 +81,7 @@ namespace Core2D.ViewModels.Containers
 
             _workingLayer?.Invalidate();
             _helperLayer?.Invalidate();
- 
+
             foreach (var property in _properties)
             {
                 property.Invalidate();

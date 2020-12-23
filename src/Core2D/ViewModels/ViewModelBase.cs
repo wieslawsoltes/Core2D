@@ -26,7 +26,7 @@ namespace Core2D.ViewModels
 
         public virtual void MarkAsDirty() => _isDirty = true;
 
-        public virtual object Copy(IDictionary<object, object> shared) =>  throw new NotImplementedException();
+        public virtual object Copy(IDictionary<object, object> shared) => throw new NotImplementedException();
 
         public void RaisePropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
 
@@ -124,7 +124,7 @@ namespace Core2D.ViewModels
 
             return disposablePropertyChanged;
 
-            void Handler(object? sender, PropertyChangedEventArgs e) 
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 observer.OnNext((sender, e));
             }

@@ -266,7 +266,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 _selectionSelection.Reset();
                 _selectionSelection = null;
             }
-            
+
             editor.IsToolIdle = true;
         }
     }

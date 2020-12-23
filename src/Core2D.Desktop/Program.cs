@@ -349,7 +349,7 @@ namespace Core2D.Desktop
                 {
                     Argument = new Argument<double>(getDefaultValue: () => 1366)
                 });
-            
+
             rootCommand.AddOption(
                 new Option(new[] { "--screenshotHeight" }, "Screenshots height")
                 {

@@ -8,7 +8,7 @@ namespace Core2D.ViewModels.UnitTests.Style
     public class ShapeStyleTests
     {
         private readonly IFactory _factory = new Factory(null);
-        
+
         [Fact]
         [Trait("Core2D.Style", "Style")]
         public void ConvertDoubleArrayToDashes_Should_Return_Dashes_String()
@@ -90,7 +90,7 @@ namespace Core2D.ViewModels.UnitTests.Style
             var target = StyleHelper.ConvertDashesToFloatArray(dashes, 1.0);
             Assert.Null(target);
         }
-        
+
         [Fact]
         [Trait("Core2D.Style", "Style")]
         public void Inherits_From_ViewModelBase()

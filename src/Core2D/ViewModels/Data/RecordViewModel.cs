@@ -48,7 +48,7 @@ namespace Core2D.ViewModels.Data
                 value.Invalidate();
             }
         }
-        
+
         public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
@@ -58,7 +58,7 @@ namespace Core2D.ViewModels.Data
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveList(_values, ref disposableValues, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Values))
                 {

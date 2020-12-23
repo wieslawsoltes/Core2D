@@ -78,7 +78,7 @@ namespace Core2D.Modules.SvgExporter.Svg
                         var fill = argbColor.ToSvgString();
                         var fillOpacity = (argbColor.A / 255.0).ToString(CultureInfo.InvariantCulture);
                         var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
-                        sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>"); 
+                        sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>");
                     }
                 }
             }

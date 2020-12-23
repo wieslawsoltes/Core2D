@@ -494,7 +494,7 @@ namespace Core2D.Editor
                     width = template.Width;
                     height = template.Height;
                 }
- 
+
                 editor.DataFlow.Bind(container, db, record);
 
                 using var bitmap = new System.Drawing.Bitmap((int)width, (int)height);

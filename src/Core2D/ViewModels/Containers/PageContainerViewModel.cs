@@ -58,7 +58,7 @@ namespace Core2D.ViewModels.Containers
             ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
             ObserveObject(_template, ref disposableTemplate, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Layers))
                 {

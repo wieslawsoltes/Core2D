@@ -59,7 +59,7 @@ namespace Core2D.ViewModels.Style
             ObserveObject(_fill, ref disposableFill, mainDisposable, observer);
             ObserveObject(_textStyle, ref disposableTextStyle, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Stroke))
                 {

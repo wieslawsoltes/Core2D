@@ -42,7 +42,7 @@ namespace Core2D.Util
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
 
-            await Utilities.RunUiJob(() => 
+            await Utilities.RunUiJob(() =>
             {
                 var control = Repl.GetMainView();
                 if (control is null)
@@ -99,7 +99,7 @@ namespace Core2D.Util
 
             Console.WriteLine("Listening...");
 
-            while(true)
+            while (true)
             {
                 var ctx = await listener.GetContextAsync();
                 await new RequestHandler(ctx).ProcessRequest();

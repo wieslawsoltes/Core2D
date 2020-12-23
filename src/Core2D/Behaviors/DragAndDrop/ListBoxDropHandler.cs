@@ -12,8 +12,8 @@ namespace Core2D.Behaviors.DragAndDrop
     {
         internal bool ValidateLibrary<T>(ListBox listBox, DragEventArgs e, object sourceContext, object targetContext, bool bExecute) where T : ViewModelBase
         {
-            if (!(sourceContext is T sourceItem) 
-                || !(targetContext is LibraryViewModel<T> library) 
+            if (!(sourceContext is T sourceItem)
+                || !(targetContext is LibraryViewModel<T> library)
                 || !(listBox.GetVisualAt(e.GetPosition(listBox)) is IControl targetControl)
                 || !(listBox.GetVisualRoot() is IControl rootControl)
                 || !(rootControl.DataContext is ProjectEditorViewModel editor)

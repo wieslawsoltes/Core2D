@@ -96,7 +96,7 @@ namespace Core2D.ViewModels.UnitTests.Containers
         {
             var target = _factory.CreateTemplateContainer();
             var argbColor = _factory.CreateArgbColor();
-            
+
             target.Background = argbColor;
 
             Assert.Equal(argbColor, target.Background);

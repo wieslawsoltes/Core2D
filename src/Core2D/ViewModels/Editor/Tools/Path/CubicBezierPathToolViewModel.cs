@@ -270,7 +270,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                 _selectionSelection.Reset();
                 _selectionSelection = null;
             }
-            
+
             editor.IsToolIdle = true;
         }
     }

@@ -28,7 +28,7 @@ namespace Core2D.Behaviors
             var source = AssociatedObject;
             if (AssociatedObject is { })
             {
-                source.PointerPressed += Source_PointerPressed; 
+                source.PointerPressed += Source_PointerPressed;
             }
         }
 
@@ -39,7 +39,7 @@ namespace Core2D.Behaviors
             var source = AssociatedObject;
             if (source is { })
             {
-                source.PointerPressed -= Source_PointerPressed; 
+                source.PointerPressed -= Source_PointerPressed;
             }
 
             _parent = null;
@@ -59,7 +59,7 @@ namespace Core2D.Behaviors
 
                 _previous = e.GetPosition(_parent);
                 _parent.PointerMoved += Parent_PointerMoved;
-                _parent.PointerReleased += Parent_PointerReleased; 
+                _parent.PointerReleased += Parent_PointerReleased;
             }
         }
 
@@ -74,7 +74,7 @@ namespace Core2D.Behaviors
                     tr.X += pos.X - _previous.X;
                     tr.Y += pos.Y - _previous.Y;
                 }
-                _previous = pos; 
+                _previous = pos;
             }
         }
 
@@ -84,7 +84,7 @@ namespace Core2D.Behaviors
             {
                 _parent.PointerMoved -= Parent_PointerMoved;
                 _parent.PointerReleased -= Parent_PointerReleased;
-                _parent = null; 
+                _parent = null;
             }
         }
     }

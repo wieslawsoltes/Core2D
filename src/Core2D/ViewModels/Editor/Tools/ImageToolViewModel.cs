@@ -32,7 +32,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.TopLeft:
                     {
                         editor.IsToolIdle = false;
- 
+
                         if (editor.ImageImporter is null)
                         {
                             editor.IsToolIdle = true;
@@ -189,7 +189,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 _selection.Reset();
                 _selection = null;
             }
-            
+
             editor.IsToolIdle = true;
         }
     }

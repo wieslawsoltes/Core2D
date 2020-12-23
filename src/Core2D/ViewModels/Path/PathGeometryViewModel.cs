@@ -50,7 +50,7 @@ namespace Core2D.ViewModels.Path
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveList(_figures, ref disposableFigures, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Figures))
                 {

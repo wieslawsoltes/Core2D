@@ -29,7 +29,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 case State.Point:
                     {
                         _point = factory.CreatePointShape(
-                            (double)sx, 
+                            (double)sx,
                             (double)sy);
 
                         editor.SetShapeName(_point);

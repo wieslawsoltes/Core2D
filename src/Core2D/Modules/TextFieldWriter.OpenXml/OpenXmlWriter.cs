@@ -49,7 +49,7 @@ namespace Core2D.Modules.TextFieldWriter.OpenXml
                 {
                     var value = record.Values[j];
                     values[i + 1, j + 1] = value.Content;
-                }    
+                }
             }
         }
 

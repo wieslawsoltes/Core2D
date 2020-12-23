@@ -2,8 +2,8 @@
 using Core2D.Model.Renderer.Nodes;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Spatial;
 using SkiaSharp;
+using Spatial;
 
 namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 {

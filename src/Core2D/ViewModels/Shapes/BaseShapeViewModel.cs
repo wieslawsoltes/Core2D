@@ -30,7 +30,7 @@ namespace Core2D.ViewModels.Shapes
         {
             State ^= ShapeStateFlags.Default;
         }
-        
+
         public void ToggleVisibleShapeState()
         {
             State ^= ShapeStateFlags.Visible;

@@ -138,7 +138,7 @@ namespace Core2D.ViewModels.Shapes
             var disposablePoint1 = default(IDisposable);
             var disposablePoint2 = default(IDisposable);
             var disposablePoint3 = default(IDisposable);
- 
+
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
             ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
@@ -147,7 +147,7 @@ namespace Core2D.ViewModels.Shapes
             ObserveObject(_point2, ref disposablePoint2, mainDisposable, observer);
             ObserveObject(_point3, ref disposablePoint3, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Style))
                 {

@@ -8,8 +8,8 @@ using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Spatial;
 using A = Avalonia;
-using AM = Avalonia.Media;
 using ACP = Avalonia.Controls.PanAndZoom;
+using AM = Avalonia.Media;
 
 namespace Core2D.Modules.Renderer.Nodes
 {

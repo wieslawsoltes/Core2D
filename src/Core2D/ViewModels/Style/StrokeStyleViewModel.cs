@@ -72,7 +72,7 @@ namespace Core2D.ViewModels.Style
             ObserveObject(_startArrow, ref disposableStartArrow, mainDisposable, observer);
             ObserveObject(_endArrow, ref disposableEndArrow, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Color))
                 {

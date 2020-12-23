@@ -117,7 +117,7 @@ namespace Core2D.Modules.Renderer.Nodes
 
             if (FormattedText is { })
             {
-                context.DrawText(Stroke.Brush, Origin, FormattedText); 
+                context.DrawText(Stroke.Brush, Origin, FormattedText);
             }
         }
     }

@@ -224,7 +224,7 @@ namespace Core2D.Behaviors.DragAndDrop
 
             switch (sourceContext)
             {
-                    case BaseShapeViewModel sourceShape:
+                case BaseShapeViewModel sourceShape:
                     {
                         return ValidateShape(e, bExecute, targetControl, editor, sourceShape);
                     }

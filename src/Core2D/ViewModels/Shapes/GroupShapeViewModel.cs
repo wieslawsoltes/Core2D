@@ -128,7 +128,7 @@ namespace Core2D.ViewModels.Shapes
             ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
             ObserveList(_connectors, ref disposableConnectors, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Style))
                 {

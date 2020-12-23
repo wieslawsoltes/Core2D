@@ -55,7 +55,7 @@ namespace Core2D
 
             builder.RegisterAssemblyTypes(typeof(ViewModelBase).GetTypeInfo().Assembly)
                 .PublicOnly()
-                .Where(t => 
+                .Where(t =>
                 {
                     return (
                             t.Namespace.StartsWith(nameof(Core2D.ViewModels.Containers))
@@ -64,7 +64,7 @@ namespace Core2D
                             || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Scripting))
                             || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Shapes))
                             || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Style))
-                           )  
+                           )
                            && t.Name.EndsWith("ViewModel");
                 })
                 .AsSelf();

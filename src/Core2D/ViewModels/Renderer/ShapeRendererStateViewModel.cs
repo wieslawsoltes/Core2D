@@ -68,7 +68,7 @@ namespace Core2D.ViewModels.Renderer
             ObserveObject(_selectionStyle, ref disposableSelectionStyle, mainDisposable, observer);
             ObserveObject(_helperStyle, ref disposableHelperStyle, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e) 
+            void Handler(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(PointStyle))
                 {
