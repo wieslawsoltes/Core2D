@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:idd="using:Core2D.DragAndDrop"
+             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
              xmlns:views="using:Core2D.Views"
              xmlns:vmdt="using:Core2D.ViewModels.Data"

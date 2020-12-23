@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-             xmlns:idd="using:Core2D.DragAndDrop"
-             xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
+             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
@@ -14,7 +14,7 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
     <UserControl.Resources>
-        <handlers:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler" />
+        <dd:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler" />
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">

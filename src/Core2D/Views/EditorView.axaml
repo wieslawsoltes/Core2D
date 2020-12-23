@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
-             xmlns:idd="using:Core2D.DragAndDrop"
+             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:behaviors="using:Core2D.Behaviors"
-             xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
+             xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
              xmlns:paz="using:Avalonia.Controls.PanAndZoom"
              xmlns:views="using:Core2D.Views"
@@ -24,7 +24,7 @@
     <UserControl.Resources>
         <converters:FirstSelectedItemValueConverter x:Key="FirstSelectedItemValueConverter" />
         <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter" />
-        <handlers:EditorDropHandler x:Key="EditorDropHandler" />
+        <dd:EditorDropHandler x:Key="EditorDropHandler" />
         <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
             <VisualBrush.Visual>
                 <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="#FFF0F0F0" />

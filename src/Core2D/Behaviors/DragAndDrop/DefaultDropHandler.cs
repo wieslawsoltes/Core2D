@@ -4,8 +4,9 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.VisualTree;
+using Avalonia.Xaml.Interactions.DragAndDrop;
 
-namespace Core2D.DragAndDrop
+namespace Core2D.Behaviors.DragAndDrop
 {
     public abstract class DefaultDropHandler : IDropHandler
     {

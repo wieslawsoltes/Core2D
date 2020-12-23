@@ -6,8 +6,8 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
-             xmlns:idd="using:Core2D.DragAndDrop"
-             xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
+             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmer="using:Core2D.ViewModels.Editor.Recent"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
@@ -16,7 +16,7 @@
              d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.Resources>
-        <handlers:EditorDropHandler x:Key="EditorDropHandler" />
+        <dd:EditorDropHandler x:Key="EditorDropHandler" />
     </UserControl.Resources>
     <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />

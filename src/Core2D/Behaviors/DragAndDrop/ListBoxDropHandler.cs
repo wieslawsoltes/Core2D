@@ -8,7 +8,7 @@ using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
-namespace Core2D.DragAndDrop.Handlers
+namespace Core2D.Behaviors.DragAndDrop
 {
     public abstract class ListBoxDropHandler : DefaultDropHandler
     {

@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-             xmlns:idd="using:Core2D.DragAndDrop"
-             xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
+             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
@@ -17,7 +17,7 @@
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:IsGroupConverter x:Key="IsGroupConverter" />
-        <handlers:GroupsListBoxDropHandler x:Key="GroupsListBoxDropHandler" />
+        <dd:GroupsListBoxDropHandler x:Key="GroupsListBoxDropHandler" />
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
         <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">

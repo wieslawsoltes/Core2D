@@ -7,7 +7,7 @@ using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.DragAndDrop.Handlers
+namespace Core2D.Behaviors.DragAndDrop
 {
     public class ProjectTreeViewDropHandler : DefaultDropHandler
     {

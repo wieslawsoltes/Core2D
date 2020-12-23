@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
-             xmlns:idd="using:Core2D.DragAndDrop"
+             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:behaviors="using:Core2D.Behaviors"
-             xmlns:handlers="using:Core2D.DragAndDrop.Handlers"
+             xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
@@ -20,7 +20,7 @@
         <converters:BaseShapeIconConverter x:Key="BaseShapeIconConverter" />
         <converters:ContainerToTypeStringConverter x:Key="ContainerToTypeStringConverter"/>
         <converters:ShapeToTypeStringConverter x:Key="ShapeToTypeStringConverter" />
-        <handlers:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
+        <dd:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
     </UserControl.Resources>
     <DockPanel>
         <Grid DockPanel.Dock="Top" RowDefinitions="*" ColumnDefinitions="*,Auto">
