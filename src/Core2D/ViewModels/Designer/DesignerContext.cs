@@ -53,7 +53,11 @@ namespace Core2D.ViewModels.Designer
 
         public static FontStyleFlags FontStyle { get; private set; }
 
-        public static ShapeStyleViewModel Style { get; private set; }
+        public static ShapeStyleViewModel ShapeStyle { get; private set; }
+
+        public static StrokeStyleViewModel StrokeStyle { get; private set; }
+
+        public static FillStyleViewModel FillStyle { get; private set; }
 
         public static TextStyleViewModel TextStyle { get; private set; }
 
@@ -163,22 +167,24 @@ namespace Core2D.ViewModels.Designer
             ArgbColor = factory.CreateArgbColor(128, 255, 0, 0);
             ArrowStyle = factory.CreateArrowStyle();
             FontStyle = FontStyleFlags.Regular;
-            Style = factory.CreateShapeStyle("Default");
+            ShapeStyle = factory.CreateShapeStyle("Default");
+            StrokeStyle = factory.CreateStrokeStyle();
+            FillStyle = factory.CreateFillStyle();
             TextStyle = factory.CreateTextStyle();
 
             // Shapes
 
-            Arc = factory.CreateArcShape(0, 0, Style);
-            CubicBezier = factory.CreateCubicBezierShape(0, 0, Style);
-            Ellipse = factory.CreateEllipseShape(0, 0, Style);
+            Arc = factory.CreateArcShape(0, 0, ShapeStyle);
+            CubicBezier = factory.CreateCubicBezierShape(0, 0, ShapeStyle);
+            Ellipse = factory.CreateEllipseShape(0, 0, ShapeStyle);
             Group = factory.CreateGroupShape("Group");
-            Image = factory.CreateImageShape(0, 0, Style, "key");
-            Line = factory.CreateLineShape(0, 0, Style);
-            Path = factory.CreatePathShape(Style, null);
+            Image = factory.CreateImageShape(0, 0, ShapeStyle, "key");
+            Line = factory.CreateLineShape(0, 0, ShapeStyle);
+            Path = factory.CreatePathShape(ShapeStyle, null);
             Point = factory.CreatePointShape();
-            QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, Style);
-            Rectangle = factory.CreateRectangleShape(0, 0, Style);
-            Text = factory.CreateTextShape(0, 0, Style, "Text");
+            QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, ShapeStyle);
+            Rectangle = factory.CreateRectangleShape(0, 0, ShapeStyle);
+            Text = factory.CreateTextShape(0, 0, ShapeStyle, "Text");
 
             // Path
 
