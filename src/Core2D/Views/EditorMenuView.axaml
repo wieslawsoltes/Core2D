@@ -9,7 +9,7 @@
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
-             d:DesignWidth="800" d:DesignHeight="20"
+             d:DesignWidth="800" d:DesignHeight="32"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:ToolIconConverter x:Key="ToolIconConverter" />
