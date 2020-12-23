@@ -34,7 +34,7 @@ namespace Core2D.Util
 
         public static async Task Screenshot(string path = "screenshot.png", double width = 1366, double height = 690)
         {
-            await Renderer.RunUiJob(() => Renderer.Render(GetMainView(), new Size(width, height), path));
+            await Utilities.RunUiJob(() => Renderer.Render(GetMainView(), new Size(width, height), path));
         }
     }
 }

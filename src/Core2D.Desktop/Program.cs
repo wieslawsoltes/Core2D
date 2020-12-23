@@ -60,11 +60,11 @@ namespace Core2D.Desktop
 
                     if (state is { } previous)
                     {
-                        await Renderer.RunUiJob(async () => { state = await previous.ContinueWithAsync(code); });
+                        await Utilities.RunUiJob(async () => { state = await previous.ContinueWithAsync(code); });
                     }
                     else
                     {
-                        await Renderer.RunUiJob(async () =>
+                        await Utilities.RunUiJob(async () =>
                         {
                             var options = ScriptOptions.Default.WithImports("System");
                             state = await CSharpScript.RunAsync(code, options, new Repl());

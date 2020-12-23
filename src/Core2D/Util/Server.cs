@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Threading;
+using Core2D.Util.Rendering;
 using Core2D.ViewModels.Editor;
 
 namespace Core2D.Util
@@ -41,7 +42,7 @@ namespace Core2D.Util
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
 
-            await Renderer.RunUiJob(() => 
+            await Utilities.RunUiJob(() => 
             {
                 var control = Repl.GetMainView();
                 if (control is null)
@@ -67,7 +68,7 @@ namespace Core2D.Util
 
                 var size = new Size(1366, 690);
                 using var stream = new MemoryStream();
-                Renderer.RenderAsSvg(control, size, stream);
+                SvgRenderer.Render(control, size, stream);
                 stream.Position = 0;
                 using var reader = new StreamReader(stream);
                 var svg = reader.ReadToEnd();
