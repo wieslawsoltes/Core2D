@@ -28,12 +28,12 @@ namespace Core2D.Screenshot
 
         public static async Task Save(TopLevel root)
         {
-            var dlg = new SaveFileDialog() {Title = "Save"};
-            dlg.Filters.Add(new FileDialogFilter() {Name = "Png", Extensions = {"png"}});
-            dlg.Filters.Add(new FileDialogFilter() {Name = "Svg", Extensions = {"svg"}});
-            dlg.Filters.Add(new FileDialogFilter() {Name = "Pdf", Extensions = {"pdf"}});
-            dlg.Filters.Add(new FileDialogFilter() {Name = "Skp", Extensions = {"skp"}});
-            dlg.Filters.Add(new FileDialogFilter() {Name = "All", Extensions = {"*"}});
+            var dlg = new SaveFileDialog() { Title = "Save" };
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Png", Extensions = { "png" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Svg", Extensions = { "svg" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Skp", Extensions = { "skp" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = "screenshot";
             dlg.DefaultExtension = "png";
             var result = await dlg.ShowAsync(root as Window);
@@ -49,12 +49,12 @@ namespace Core2D.Screenshot
             {
                 return;
             }
-            
+
             if (path.EndsWith("png", StringComparison.OrdinalIgnoreCase))
             {
                 PngRenderer.Render(control, size, path);
             }
-            
+
             if (path.EndsWith("skp", StringComparison.OrdinalIgnoreCase))
             {
                 using var stream = File.Create(path);
