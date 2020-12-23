@@ -955,7 +955,7 @@ namespace Core2D.ViewModels
                 Properties = ImmutableArray.Create<PropertyViewModel>()
             };
 
-            template.Background = CreateArgbColor(0x00, 0xFF, 0xFF, 0xFF);
+            template.Background = CreateArgbColor(0xFF, 0xFF, 0xFF, 0xFF);
             template.Width = width;
             template.Height = height;
 
