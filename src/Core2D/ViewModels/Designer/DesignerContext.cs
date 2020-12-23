@@ -106,6 +106,8 @@ namespace Core2D.ViewModels.Designer
             // Editor
 
             Editor = serviceProvider.GetService<ProjectEditorViewModel>();
+            Editor.CurrentTool = Editor.Tools.FirstOrDefault(x => x.Title == "Selection");
+            Editor.CurrentPathTool = Editor.PathTools.FirstOrDefault(x => x.Title == "Line");
 
             // Recent Projects
 
