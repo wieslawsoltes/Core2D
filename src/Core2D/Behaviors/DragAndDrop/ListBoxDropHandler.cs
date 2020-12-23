@@ -5,8 +5,6 @@ using Avalonia.VisualTree;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
-using Core2D.ViewModels.Shapes;
-using Core2D.ViewModels.Style;
 
 namespace Core2D.Behaviors.DragAndDrop
 {
@@ -59,90 +57,6 @@ namespace Core2D.Behaviors.DragAndDrop
                 return true;
             }
 
-            return false;
-        }
-    }
-
-    public class StylesListBoxDropHandler : ListBoxDropHandler
-    {
-        public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
-        {
-            if (e.Source is IControl && sender is ListBox listBox)
-            {
-                return ValidateLibrary<ShapeStyleViewModel>(listBox, e, sourceContext, targetContext, false);
-            }
-            return false;
-        }
-
-        public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
-        {
-            if (e.Source is IControl && sender is ListBox listBox)
-            {
-                return ValidateLibrary<ShapeStyleViewModel>(listBox, e, sourceContext, targetContext, true);
-            }
-            return false;
-        }
-    }
-
-    public class GroupsListBoxDropHandler : ListBoxDropHandler
-    {
-        public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
-        {
-            if (e.Source is IControl && sender is ListBox listBox)
-            {
-                return ValidateLibrary<GroupShapeViewModel>(listBox, e, sourceContext, targetContext, false);
-            }
-            return false;
-        }
-
-        public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
-        {
-            if (e.Source is IControl && sender is ListBox listBox)
-            {
-                return ValidateLibrary<GroupShapeViewModel>(listBox, e, sourceContext, targetContext, true);
-            }
-            return false;
-        }
-    }
-
-    public class TemplatesListBoxDropHandler : ListBoxDropHandler
-    {
-        public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
-        {
-            if (e.Source is IControl && sender is ListBox listBox)
-            {
-                // TODO:
-            }
-            return false;
-        }
-
-        public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
-        {
-            if (e.Source is IControl && sender is ListBox listBox)
-            {
-                // TODO:
-            }
-            return false;
-        }
-    }
-
-    public class ScriptsListBoxDropHandler : ListBoxDropHandler
-    {
-        public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
-        {
-            if (e.Source is IControl && sender is ListBox listBox)
-            {
-                // TODO:
-            }
-            return false;
-        }
-
-        public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
-        {
-            if (e.Source is IControl && sender is ListBox listBox)
-            {
-                // TODO:
-            }
             return false;
         }
     }

@@ -22,6 +22,192 @@ namespace Core2D.Behaviors.DragAndDrop
             };
         }
 
+        private static bool ValidateShape(DragEventArgs e, bool bExecute, IControl targetControl, ProjectEditorViewModel editor, BaseShapeViewModel sourceShape)
+        {
+            switch (targetControl.DataContext)
+            {
+                case LayerContainerViewModel targetLayer:
+                    {
+                        if (e.DragEffects == DragDropEffects.Copy)
+                        {
+                            if (bExecute)
+                            {
+                                var shape = editor?.CloneShape(sourceShape);
+                                editor?.Project.AddShape(targetLayer, shape);
+                            }
+                            return true;
+                        }
+                        else if (e.DragEffects == DragDropEffects.Move)
+                        {
+                            if (bExecute)
+                            {
+                                editor?.Project?.RemoveShape(sourceShape);
+                                editor?.Project.AddShape(targetLayer, sourceShape);
+                            }
+                            return true;
+                        }
+                        else if (e.DragEffects == DragDropEffects.Link)
+                        {
+                            if (bExecute)
+                            {
+                                editor?.Project.AddShape(targetLayer, sourceShape);
+                                e.DragEffects = DragDropEffects.None;
+                            }
+                            return true;
+                        }
+                        return false;
+                    }
+                case FrameContainerViewModel targetContainer:
+                    {
+                        if (bExecute)
+                        {
+                            // TODO:
+                        }
+                        return true;
+                    }
+                case DocumentContainerViewModel targetDocument:
+                    {
+                        if (bExecute)
+                        {
+                            // TODO:
+                        }
+                        return true;
+                    }
+            }
+
+            return false;
+        }
+
+        private static bool ValidateLayer(DragEventArgs e, bool bExecute, IControl targetControl, ProjectEditorViewModel editor, LayerContainerViewModel sourceLayer)
+        {
+            switch (targetControl.DataContext)
+            {
+                case LayerContainerViewModel targetLayer:
+                    {
+                        if (bExecute)
+                        {
+                            // TODO:
+                        }
+                        return true;
+                    }
+                case FrameContainerViewModel targetContainer:
+                    {
+                        if (e.DragEffects == DragDropEffects.Copy)
+                        {
+                            if (bExecute)
+                            {
+                                var layer = editor?.Clone(sourceLayer);
+                                editor?.Project.AddLayer(targetContainer, layer);
+                            }
+                            return true;
+                        }
+                        else if (e.DragEffects == DragDropEffects.Move)
+                        {
+                            if (bExecute)
+                            {
+                                editor?.Project?.RemoveLayer(sourceLayer);
+                                editor?.Project.AddLayer(targetContainer, sourceLayer);
+                            }
+                            return true;
+                        }
+                        else if (e.DragEffects == DragDropEffects.Link)
+                        {
+                            if (bExecute)
+                            {
+                                editor?.Project.AddLayer(targetContainer, sourceLayer);
+                                e.DragEffects = DragDropEffects.None;
+                            }
+                            return true;
+                        }
+                        return false;
+                    }
+                case DocumentContainerViewModel targetDocument:
+                    {
+                        return false;
+                    }
+            }
+
+            return false;
+        }
+
+        private static bool ValidatePage(DragEventArgs e, bool bExecute, IControl targetControl, ProjectEditorViewModel editor, PageContainerViewModel sourceContainer)
+        {
+            switch (targetControl.DataContext)
+            {
+                case LayerContainerViewModel targetLayer:
+                    {
+                        return false;
+                    }
+                case PageContainerViewModel targetPage:
+                    {
+                        if (bExecute)
+                        {
+                            // TODO:
+                        }
+                        return true;
+                    }
+                case DocumentContainerViewModel targetDocument:
+                    {
+                        if (e.DragEffects == DragDropEffects.Copy)
+                        {
+                            if (bExecute)
+                            {
+                                var page = editor?.Clone(sourceContainer);
+                                editor?.Project.AddPage(targetDocument, page);
+                                editor?.Project?.SetCurrentContainer(page);
+                            }
+                            return true;
+                        }
+                        else if (e.DragEffects == DragDropEffects.Move)
+                        {
+                            if (bExecute)
+                            {
+                                editor?.Project?.RemovePage(sourceContainer);
+                                editor?.Project.AddPage(targetDocument, sourceContainer);
+                                editor?.Project?.SetCurrentContainer(sourceContainer);
+                            }
+                            return true;
+                        }
+                        else if (e.DragEffects == DragDropEffects.Link)
+                        {
+                            if (bExecute)
+                            {
+                                editor?.Project.AddPage(targetDocument, sourceContainer);
+                                editor?.Project?.SetCurrentContainer(sourceContainer);
+                            }
+                            return true;
+                        }
+                        return false;
+                    }
+            }
+
+            return false;
+        }
+
+        private static bool ValidateDocument(bool bExecute, IControl targetControl, ProjectEditorViewModel editor, DocumentContainerViewModel sourceDocument)
+        {
+            switch (targetControl.DataContext)
+            {
+                case LayerContainerViewModel targetLayer:
+                    {
+                        return false;
+                    }
+                case FrameContainerViewModel targetContainer:
+                    {
+                        return false;
+                    }
+                case DocumentContainerViewModel targetDocument:
+                    {
+                        if (bExecute)
+                        {
+                            // TODO:
+                        }
+                        return true;
+                    }
+            }
+            return false;
+        }
+
         private bool ValidateContainer(TreeView treeView, DragEventArgs e, object sourceContext, object targetContext, bool bExecute)
         {
             if ((!IsContainer(sourceContext) && !(sourceContext is BaseShapeViewModel))
@@ -40,185 +226,19 @@ namespace Core2D.Behaviors.DragAndDrop
             {
                     case BaseShapeViewModel sourceShape:
                     {
-                        switch (targetControl.DataContext)
-                        {
-                            case LayerContainerViewModel targetLayer:
-                                {
-                                    if (e.DragEffects == DragDropEffects.Copy)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            var shape = editor?.CloneShape(sourceShape);
-                                            editor?.Project.AddShape(targetLayer, shape);
-                                        }
-                                        return true;
-                                    }
-                                    else if (e.DragEffects == DragDropEffects.Move)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            editor?.Project?.RemoveShape(sourceShape);
-                                            editor?.Project.AddShape(targetLayer, sourceShape);
-                                        }
-                                        return true;
-                                    }
-                                    else if (e.DragEffects == DragDropEffects.Link)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            editor?.Project.AddShape(targetLayer, sourceShape);
-                                            e.DragEffects = DragDropEffects.None;
-                                        }
-                                        return true;
-                                    }
-                                    return false;
-                                }
-                            case FrameContainerViewModel targetContainer:
-                                {
-                                    if (bExecute)
-                                    {
-                                        // TODO:
-                                    }
-                                    return true;
-                                }
-                            case DocumentContainerViewModel targetDocument:
-                                {
-                                    if (bExecute)
-                                    {
-                                        // TODO:
-                                    }
-                                    return true;
-                                }
-                        }
-
-                        return false;
+                        return ValidateShape(e, bExecute, targetControl, editor, sourceShape);
                     }
                 case LayerContainerViewModel sourceLayer:
                     {
-                        switch (targetControl.DataContext)
-                        {
-                            case LayerContainerViewModel targetLayer:
-                                {
-                                    if (bExecute)
-                                    {
-                                        // TODO:
-                                    }
-                                    return true;
-                                }
-                            case FrameContainerViewModel targetContainer:
-                                {
-                                    if (e.DragEffects == DragDropEffects.Copy)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            var layer = editor?.Clone(sourceLayer);
-                                            editor?.Project.AddLayer(targetContainer, layer);
-                                        }
-                                        return true;
-                                    }
-                                    else if (e.DragEffects == DragDropEffects.Move)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            editor?.Project?.RemoveLayer(sourceLayer);
-                                            editor?.Project.AddLayer(targetContainer, sourceLayer);
-                                        }
-                                        return true;
-                                    }
-                                    else if (e.DragEffects == DragDropEffects.Link)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            editor?.Project.AddLayer(targetContainer, sourceLayer);
-                                            e.DragEffects = DragDropEffects.None;
-                                        }
-                                        return true;
-                                    }
-                                    return false;
-                                }
-                            case DocumentContainerViewModel targetDocument:
-                                {
-                                    return false;
-                                }
-                        }
-
-                        return false;
+                        return ValidateLayer(e, bExecute, targetControl, editor, sourceLayer);
                     }
-                case PageContainerViewModel sourceContainer:
+                case PageContainerViewModel sourcePage:
                     {
-                        switch (targetControl.DataContext)
-                        {
-                            case LayerContainerViewModel targetLayer:
-                                {
-                                    return false;
-                                }
-                            case PageContainerViewModel targetPage:
-                                {
-                                    if (bExecute)
-                                    {
-                                        // TODO:
-                                    }
-                                    return true;
-                                }
-                            case DocumentContainerViewModel targetDocument:
-                                {
-                                    if (e.DragEffects == DragDropEffects.Copy)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            var page = editor?.Clone(sourceContainer);
-                                            editor?.Project.AddPage(targetDocument, page);
-                                            editor?.Project?.SetCurrentContainer(page);
-                                        }
-                                        return true;
-                                    }
-                                    else if (e.DragEffects == DragDropEffects.Move)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            editor?.Project?.RemovePage(sourceContainer);
-                                            editor?.Project.AddPage(targetDocument, sourceContainer);
-                                            editor?.Project?.SetCurrentContainer(sourceContainer);
-                                        }
-                                        return true;
-                                    }
-                                    else if (e.DragEffects == DragDropEffects.Link)
-                                    {
-                                        if (bExecute)
-                                        {
-                                            editor?.Project.AddPage(targetDocument, sourceContainer);
-                                            editor?.Project?.SetCurrentContainer(sourceContainer);
-                                        }
-                                        return true;
-                                    }
-                                    return false;
-                                }
-                        }
-
-                        return false;
+                        return ValidatePage(e, bExecute, targetControl, editor, sourcePage);
                     }
                 case DocumentContainerViewModel sourceDocument:
                     {
-                        switch (targetControl.DataContext)
-                        {
-                            case LayerContainerViewModel targetLayer:
-                                {
-                                    return false;
-                                }
-                            case FrameContainerViewModel targetContainer:
-                                {
-                                    return false;
-                                }
-                            case DocumentContainerViewModel targetDocument:
-                                {
-                                    if (bExecute)
-                                    {
-                                        // TODO:
-                                    }
-                                    return true;
-                                }
-                        }
-                        return false;
+                        return ValidateDocument(bExecute, targetControl, editor, sourceDocument);
                     }
             }
 
