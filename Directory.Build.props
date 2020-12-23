@@ -1,6 +1,6 @@
 <Project>
  <PropertyGroup>
-   <Deterministic>true</Deterministic>
+    <Deterministic>true</Deterministic>
     <LangVersion>preview</LangVersion>
  </PropertyGroup>
   <PropertyGroup>
