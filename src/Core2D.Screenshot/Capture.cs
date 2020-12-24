@@ -32,6 +32,7 @@ namespace Core2D.Screenshot
             dlg.Filters.Add(new FileDialogFilter() { Name = "Png", Extensions = { "png" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "Svg", Extensions = { "svg" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Xps", Extensions = { "xps" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "Skp", Extensions = { "skp" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
             dlg.InitialFileName = "screenshot";
@@ -58,19 +59,25 @@ namespace Core2D.Screenshot
             if (path.EndsWith("skp", StringComparison.OrdinalIgnoreCase))
             {
                 using var stream = File.Create(path);
-                SkpRenderer.Render(control, size, stream);
+                SkpRenderer.Render(control, size, stream, 96, false);
             }
 
             if (path.EndsWith("svg", StringComparison.OrdinalIgnoreCase))
             {
                 using var stream = File.Create(path);
-                SvgRenderer.Render(control, size, stream);
+                SvgRenderer.Render(control, size, stream, 96, false);
             }
 
             if (path.EndsWith("pdf", StringComparison.OrdinalIgnoreCase))
             {
                 using var stream = File.Create(path);
-                PdfRenderer.Render(control, size, stream);
+                PdfRenderer.Render(control, size, stream, 96, false);
+            }
+            
+            if (path.EndsWith("xps", StringComparison.OrdinalIgnoreCase))
+            {
+                using var stream = File.Create(path);
+                XpsRenderer.Render(control, size, stream, 96, false);
             }
         }
     }
