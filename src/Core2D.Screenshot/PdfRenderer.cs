@@ -13,7 +13,6 @@ namespace Core2D.Screenshot
             using var wstream = new SKManagedWStream(stream);
             using var document = SKDocument.CreatePdf(stream, (float)dpi);
             using var canvas = document.BeginPage((float)size.Width, (float)size.Height);
-            using var renderer = new ImmediateRenderer(target);
             target.Measure(size);
             target.Arrange(new Rect(size));
             using var renderTarget = new CanvasRenderTarget(canvas, dpi);

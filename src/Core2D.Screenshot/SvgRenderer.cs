@@ -13,7 +13,6 @@ namespace Core2D.Screenshot
             using var wstream = new SKManagedWStream(stream);
             var bounds = SKRect.Create(new SKSize((float)size.Width, (float)size.Height));
             using var canvas = SKSvgCanvas.Create(bounds, wstream);
-            using var renderer = new ImmediateRenderer(target);
             target.Measure(size);
             target.Arrange(new Rect(size));
             using var renderTarget = new CanvasRenderTarget(canvas, dpi);
