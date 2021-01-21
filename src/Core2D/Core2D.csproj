@@ -29,7 +29,7 @@
     <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
     <PackageReference Include="System.IO.Compression" Version="$(SystemIOCompressionVersion)" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="$(SystemTextEncodingCodePagesVersion)" />
-    <PackageReference Include="Svg.Skia.Picture" Version="$(SvgSkiaPictureVersion)" />
+    <PackageReference Include="Svg.Skia" Version="$(SvgSkiaVersion)" />
     <PackageReference Include="Math.Spatial" Version="$(MathSpatialVersion)" />
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />

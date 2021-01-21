@@ -12,12 +12,13 @@ using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Svg.Skia;
-using SP = Svg.Picture;
+using SP = Svg.Model;
 
 namespace Core2D.Modules.Renderer.SkiaSharp
 {
     public class SkiaSharpSvgConverter : ISvgConverter
     {
+        private static readonly SP.IAssetLoader _assetLoader = new SkiaAssetLoader();
         private readonly IServiceProvider _serviceProvider;
 
         public SkiaSharpSvgConverter(IServiceProvider serviceProvider)
@@ -25,25 +26,25 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             _serviceProvider = serviceProvider;
         }
 
-        private static bool IsStroked(SP.Paint paint)
+        private static bool IsStroked(SP.Painting.Paint paint)
         {
             if (paint is null)
             {
                 return false;
             }
-            return paint.Style == SP.PaintStyle.Stroke || paint.Style == SP.PaintStyle.StrokeAndFill;
+            return paint.Style == SP.Painting.PaintStyle.Stroke || paint.Style == SP.Painting.PaintStyle.StrokeAndFill;
         }
 
-        private static bool IsFilled(SP.Paint paint)
+        private static bool IsFilled(SP.Painting.Paint paint)
         {
             if (paint is null)
             {
                 return false;
             }
-            return paint.Style == SP.PaintStyle.Fill || paint.Style == SP.PaintStyle.StrokeAndFill;
+            return paint.Style == SP.Painting.PaintStyle.Fill || paint.Style == SP.Painting.PaintStyle.StrokeAndFill;
         }
 
-        private static ArgbColorViewModel ToArgbColor(SP.ColorShader colorShader, IFactory factory)
+        private static ArgbColorViewModel ToArgbColor(SP.Painting.Shaders.ColorShader colorShader, IFactory factory)
         {
             return factory.CreateArgbColor(
                 colorShader.Color.Alpha,
@@ -52,39 +53,39 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 colorShader.Color.Blue);
         }
 
-        private static LineCap ToLineCap(SP.StrokeCap strokeCap)
+        private static LineCap ToLineCap(SP.Painting.StrokeCap strokeCap)
         {
             switch (strokeCap)
             {
                 default:
-                case SP.StrokeCap.Butt:
+                case SP.Painting.StrokeCap.Butt:
                     return LineCap.Flat;
 
-                case SP.StrokeCap.Round:
+                case SP.Painting.StrokeCap.Round:
                     return LineCap.Round;
 
-                case SP.StrokeCap.Square:
+                case SP.Painting.StrokeCap.Square:
                     return LineCap.Square;
             }
         }
 
-        public static TextHAlignment ToTextHAlignment(SP.TextAlign textAlign)
+        public static TextHAlignment ToTextHAlignment(SP.Painting.TextAlign textAlign)
         {
             switch (textAlign)
             {
                 default:
-                case SP.TextAlign.Left:
+                case SP.Painting.TextAlign.Left:
                     return TextHAlignment.Left;
 
-                case SP.TextAlign.Center:
+                case SP.Painting.TextAlign.Center:
                     return TextHAlignment.Center;
 
-                case SP.TextAlign.Right:
+                case SP.Painting.TextAlign.Right:
                     return TextHAlignment.Right;
             }
         }
 
-        private static ShapeStyleViewModel ToStyle(SP.Paint paint, IFactory factory)
+        private static ShapeStyleViewModel ToStyle(SP.Painting.Paint paint, IFactory factory)
         {
             var style = factory.CreateShapeStyle("Style");
 
@@ -95,20 +96,20 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
             switch (paint.Shader)
             {
-                case SP.ColorShader colorShader:
+                case SP.Painting.Shaders.ColorShader colorShader:
                     style.Stroke.Color = ToArgbColor(colorShader, factory);
                     style.Fill.Color = ToArgbColor(colorShader, factory);
                     break;
 
-                case SP.LinearGradientShader linearGradientShader:
+                case SP.Painting.Shaders.LinearGradientShader linearGradientShader:
                     // TODO:
                     break;
 
-                case SP.TwoPointConicalGradientShader twoPointConicalGradientShader:
+                case SP.Painting.Shaders.TwoPointConicalGradientShader twoPointConicalGradientShader:
                     // TODO:
                     break;
 
-                case SP.PictureShader pictureShader:
+                case SP.Painting.Shaders.PictureShader pictureShader:
                     // TODO:
                     break;
 
@@ -120,7 +121,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
             style.Stroke.LineCap = ToLineCap(paint.StrokeCap);
 
-            if (paint.PathEffect is SP.DashPathEffect dashPathEffect && dashPathEffect.Intervals is { })
+            if (paint.PathEffect is SP.Painting.PathEffects.DashPathEffect dashPathEffect && dashPathEffect.Intervals is { })
             {
                 style.Stroke.Dashes = StyleHelper.ConvertFloatArrayToDashes(dashPathEffect.Intervals);
                 style.Stroke.DashOffset = dashPathEffect.Phase;
@@ -137,12 +138,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
                 style.TextStyle.TextHAlignment = ToTextHAlignment(paint.TextAlign);
 
-                if (paint.Typeface.Weight == SP.FontStyleWeight.Bold)
+                if (paint.Typeface.Weight == SP.Painting.FontStyleWeight.Bold)
                 {
                     style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Bold;
                 }
 
-                if (paint.Typeface.Style == SP.FontStyleSlant.Italic)
+                if (paint.Typeface.Style == SP.Painting.FontStyleSlant.Italic)
                 {
                     style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Italic;
                 }
@@ -151,7 +152,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return style;
         }
 
-        public static PathGeometryViewModel ToPathGeometry(SP.Path path, bool isFilled, IFactory factory)
+        public static PathGeometryViewModel ToPathGeometry(SP.Primitives.Path path, bool isFilled, IFactory factory)
         {
             if (path.Commands is null)
             {
@@ -160,7 +161,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
             var geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<PathFigureViewModel>(),
-                path.FillType == SP.PathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
+                path.FillType == SP.Primitives.PathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
             var context = factory.CreateGeometryContext(geometry);
 
@@ -174,7 +175,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
                 switch (pathCommand)
                 {
-                    case SP.MoveToPathCommand moveToPathCommand:
+                    case SP.Primitives.PathCommands.MoveToPathCommand moveToPathCommand:
                         {
                             if (endFigure == true && haveFigure == false)
                             {
@@ -190,12 +191,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                             }
                             else
                             {
-                                if (path.Commands[i + 1] is SP.MoveToPathCommand)
+                                if (path.Commands[i + 1] is SP.Primitives.PathCommands.MoveToPathCommand)
                                 {
                                     return geometry;
                                 }
 
-                                if (path.Commands[i + 1] is SP.ClosePathCommand)
+                                if (path.Commands[i + 1] is SP.Primitives.PathCommands.ClosePathCommand)
                                 {
                                     return geometry;
                                 }
@@ -209,7 +210,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                         }
                         break;
 
-                    case SP.LineToPathCommand lineToPathCommand:
+                    case SP.Primitives.PathCommands.LineToPathCommand lineToPathCommand:
                         {
                             if (endFigure == false)
                             {
@@ -223,7 +224,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                         }
                         break;
 
-                    case SP.ArcToPathCommand arcToPathCommand:
+                    case SP.Primitives.PathCommands.ArcToPathCommand arcToPathCommand:
                         {
                             if (endFigure == false)
                             {
@@ -237,13 +238,13 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                             var ry = arcToPathCommand.Ry;
                             var size = factory.CreatePathSize(rx, ry);
                             var rotationAngle = arcToPathCommand.XAxisRotate;
-                            var isLargeArc = arcToPathCommand.LargeArc == SP.PathArcSize.Large;
-                            var sweep = arcToPathCommand.Sweep == SP.PathDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise;
+                            var isLargeArc = arcToPathCommand.LargeArc == SP.Primitives.PathArcSize.Large;
+                            var sweep = arcToPathCommand.Sweep == SP.Primitives.PathDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise;
                             context.ArcTo(point, size, rotationAngle, isLargeArc, sweep);
                         }
                         break;
 
-                    case SP.QuadToPathCommand quadToPathCommand:
+                    case SP.Primitives.PathCommands.QuadToPathCommand quadToPathCommand:
                         {
                             if (endFigure == false)
                             {
@@ -260,7 +261,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                         }
                         break;
 
-                    case SP.CubicToPathCommand cubicToPathCommand:
+                    case SP.Primitives.PathCommands.CubicToPathCommand cubicToPathCommand:
                         {
                             if (endFigure == false)
                             {
@@ -280,7 +281,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                         }
                         break;
 
-                    case SP.ClosePathCommand _:
+                    case SP.Primitives.PathCommands.ClosePathCommand _:
                         {
                             if (endFigure == false)
                             {
@@ -313,7 +314,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return geometry;
         }
 
-        public static PathGeometryViewModel ToPathGeometry(SP.AddPolyPathCommand addPolyPathCommand, SP.PathFillType fillType, bool isFilled, bool isClosed, IFactory factory)
+        public static PathGeometryViewModel ToPathGeometry(SP.Primitives.PathCommands.AddPolyPathCommand addPolyPathCommand, SP.Primitives.PathFillType fillType, bool isFilled, bool isClosed, IFactory factory)
         {
             if (addPolyPathCommand.Points is null || addPolyPathCommand.Points.Count < 2)
             {
@@ -322,7 +323,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
             var geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<PathFigureViewModel>(),
-                fillType == SP.PathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
+                fillType == SP.Primitives.PathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
             var context = factory.CreateGeometryContext(geometry);
 
@@ -344,55 +345,55 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return geometry;
         }
 
-        private static void ToShape(SP.Picture picture, List<BaseShapeViewModel> shapes, IFactory factory)
+        private static void ToShape(SP.Primitives.Picture picture, List<BaseShapeViewModel> shapes, IFactory factory)
         {
             foreach (var canvasCommand in picture.Commands)
             {
                 switch (canvasCommand)
                 {
-                    case SP.ClipPathCanvasCommand clipPathCanvasCommand:
+                    case SP.Primitives.CanvasCommands.ClipPathCanvasCommand clipPathCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.ClipRectCanvasCommand clipRectCanvasCommand:
+                    case SP.Primitives.CanvasCommands.ClipRectCanvasCommand clipRectCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.SaveCanvasCommand _:
+                    case SP.Primitives.CanvasCommands.SaveCanvasCommand _:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.RestoreCanvasCommand _:
+                    case SP.Primitives.CanvasCommands.RestoreCanvasCommand _:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.SetMatrixCanvasCommand setMatrixCanvasCommand:
+                    case SP.Primitives.CanvasCommands.SetMatrixCanvasCommand setMatrixCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.SaveLayerCanvasCommand saveLayerCanvasCommand:
+                    case SP.Primitives.CanvasCommands.SaveLayerCanvasCommand saveLayerCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.DrawImageCanvasCommand drawImageCanvasCommand:
+                    case SP.Primitives.CanvasCommands.DrawImageCanvasCommand drawImageCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.DrawPathCanvasCommand drawPathCanvasCommand:
+                    case SP.Primitives.CanvasCommands.DrawPathCanvasCommand drawPathCanvasCommand:
                         {
                             if (drawPathCanvasCommand.Path is { } && drawPathCanvasCommand.Paint is { })
                             {
@@ -403,7 +404,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
                                     switch (pathCommand)
                                     {
-                                        case SP.AddRectPathCommand addRectPathCommand:
+                                        case SP.Primitives.PathCommands.AddRectPathCommand addRectPathCommand:
                                             {
                                                 var style = ToStyle(drawPathCanvasCommand.Paint, factory);
                                                 var rectangleShape = factory.CreateRectangleShape(
@@ -419,13 +420,13 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                                             }
                                             break;
 
-                                        case SP.AddRoundRectPathCommand addRoundRectPathCommand:
+                                        case SP.Primitives.PathCommands.AddRoundRectPathCommand addRoundRectPathCommand:
                                             {
                                                 // TODO:
                                             }
                                             break;
 
-                                        case SP.AddOvalPathCommand addOvalPathCommand:
+                                        case SP.Primitives.PathCommands.AddOvalPathCommand addOvalPathCommand:
                                             {
                                                 var style = ToStyle(drawPathCanvasCommand.Paint, factory);
                                                 var ellipseShape = factory.CreateEllipseShape(
@@ -441,7 +442,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                                             }
                                             break;
 
-                                        case SP.AddCirclePathCommand addCirclePathCommand:
+                                        case SP.Primitives.PathCommands.AddCirclePathCommand addCirclePathCommand:
                                             {
                                                 var style = ToStyle(drawPathCanvasCommand.Paint, factory);
                                                 var x = addCirclePathCommand.X;
@@ -460,7 +461,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                                             }
                                             break;
 
-                                        case SP.AddPolyPathCommand addPolyPathCommand:
+                                        case SP.Primitives.PathCommands.AddPolyPathCommand addPolyPathCommand:
                                             {
                                                 if (addPolyPathCommand.Points is { })
                                                 {
@@ -497,7 +498,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                                     var pathCommand1 = drawPathCanvasCommand.Path.Commands[0];
                                     var pathCommand2 = drawPathCanvasCommand.Path.Commands[1];
 
-                                    if (pathCommand1 is SP.MoveToPathCommand moveTo && pathCommand2 is SP.LineToPathCommand lineTo)
+                                    if (pathCommand1 is SP.Primitives.PathCommands.MoveToPathCommand moveTo && pathCommand2 is SP.Primitives.PathCommands.LineToPathCommand lineTo)
                                     {
                                         var style = ToStyle(drawPathCanvasCommand.Paint, factory);
                                         var pathShape = factory.CreateLineShape(
@@ -526,13 +527,13 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                         }
                         break;
 
-                    case SP.DrawTextBlobCanvasCommand drawTextBlobCanvasCommand:
+                    case SP.Primitives.CanvasCommands.DrawTextBlobCanvasCommand drawTextBlobCanvasCommand:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.DrawTextCanvasCommand drawTextCanvasCommand:
+                    case SP.Primitives.CanvasCommands.DrawTextCanvasCommand drawTextCanvasCommand:
                         {
                             if (drawTextCanvasCommand.Paint is { })
                             {
@@ -548,7 +549,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                         }
                         break;
 
-                    case SP.DrawTextOnPathCanvasCommand drawTextOnPathCanvasCommand:
+                    case SP.Primitives.PathCommands.DrawTextOnPathCanvasCommand drawTextOnPathCanvasCommand:
                         {
                             // TODO:
                         }
@@ -572,7 +573,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
         private IList<BaseShapeViewModel> Convert(Svg.SvgDocument document, out double width, out double height)
         {
-            var picture = SKSvg.ToModel(document);
+            var picture = SP.SvgModelExtensions.ToModel(document, _assetLoader);
             if (picture is null)
             {
                 width = double.NaN;
@@ -596,7 +597,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
         public IList<BaseShapeViewModel> Convert(string path, out double width, out double height)
         {
-            var document = SKSvg.Open(path);
+            var document = SP.SvgModelExtensions.Open(path);
             if (document is null)
             {
                 width = double.NaN;
@@ -610,7 +611,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
         public IList<BaseShapeViewModel> FromString(string text, out double width, out double height)
         {
             using var stream = ToStream(text);
-            var document = SKSvg.Open(stream);
+            var document = SP.SvgModelExtensions.Open(stream);
             if (document is null)
             {
                 width = double.NaN;
