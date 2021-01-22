@@ -549,7 +549,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                         }
                         break;
 
-                    case SP.Primitives.PathCommands.DrawTextOnPathCanvasCommand drawTextOnPathCanvasCommand:
+                    case SP.Primitives.CanvasCommands.DrawTextOnPathCanvasCommand drawTextOnPathCanvasCommand:
                         {
                             // TODO:
                         }

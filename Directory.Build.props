@@ -5,7 +5,7 @@
  </PropertyGroup>
   <PropertyGroup>
     <VersionPrefix>0.10.0</VersionPrefix>
-    <VersionSuffix>rc2</VersionSuffix>
+    <VersionSuffix></VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
@@ -25,13 +25,13 @@
     <SystemCollectionsImmutableVersion>5.0.0</SystemCollectionsImmutableVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
-    <SvgSkiaVersion>0.5.0-rc2</SvgSkiaVersion>
+    <SvgSkiaVersion>0.5.0</SvgSkiaVersion>
     <MathSpatialVersion>1.4.0</MathSpatialVersion>
-    <AvaloniaVersion>0.10.0-rc2</AvaloniaVersion>
+    <AvaloniaVersion>0.10.0</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.0-rc1</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>0.10.0-rc2</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>3.0.0-rc2</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>0.10.0-rc2</ThemeEditorControlsColorPickerVersion>
+    <AvaloniaXamlBehaviorsVersion>0.10.0</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>3.0.0</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>0.10.0</ThemeEditorControlsColorPickerVersion>
     <SystemCommandLineVersion>2.0.0-beta1.20574.7</SystemCommandLineVersion>
   </PropertyGroup>
   <PropertyGroup>
