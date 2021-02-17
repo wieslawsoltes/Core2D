@@ -1,1 +1,0 @@
-OnExecuteCode("CanvasPlatform.ResetZoom();");

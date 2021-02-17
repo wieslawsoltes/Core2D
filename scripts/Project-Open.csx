@@ -1,1 +1,0 @@
-OnOpenProject("Project.project");

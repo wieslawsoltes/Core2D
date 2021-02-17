@@ -1,1 +1,0 @@
-OnImportSvg(@"file.svg");
