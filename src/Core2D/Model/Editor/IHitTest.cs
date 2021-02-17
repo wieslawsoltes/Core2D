@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Core2D.ViewModels.Shapes;
-using Spatial;
+using Core2D.Spatial;
 
 namespace Core2D.Model.Editor
 {

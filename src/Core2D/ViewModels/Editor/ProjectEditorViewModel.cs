@@ -25,7 +25,7 @@ using Core2D.ViewModels.Renderer;
 using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Spatial;
+using Core2D.Spatial;
 using static System.Math;
 
 namespace Core2D.ViewModels.Editor

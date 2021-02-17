@@ -6,7 +6,7 @@ using Core2D.Model.Style;
 using Core2D.Modules.Renderer.Nodes.Markers;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Spatial;
+using Core2D.Spatial;
 using A = Avalonia;
 using ACP = Avalonia.Controls.PanAndZoom;
 using AM = Avalonia.Media;

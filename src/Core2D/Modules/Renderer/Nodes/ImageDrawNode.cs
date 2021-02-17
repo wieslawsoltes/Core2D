@@ -5,7 +5,7 @@ using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Spatial;
+using Core2D.Spatial;
 using A = Avalonia;
 using AM = Avalonia.Media;
 using AMI = Avalonia.Media.Imaging;

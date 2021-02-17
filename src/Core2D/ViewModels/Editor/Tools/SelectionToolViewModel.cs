@@ -7,7 +7,7 @@ using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Shapes;
-using Spatial;
+using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Tools
 {

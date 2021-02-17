@@ -26,7 +26,6 @@
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
     <SvgSkiaVersion>0.5.0</SvgSkiaVersion>
-    <MathSpatialVersion>1.4.0</MathSpatialVersion>
     <AvaloniaVersion>0.10.0</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.0-rc1</AvaloniaAvaloniaEditVersion>
     <AvaloniaXamlBehaviorsVersion>0.10.0</AvaloniaXamlBehaviorsVersion>

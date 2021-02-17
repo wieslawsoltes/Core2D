@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core2D.ViewModels.Shapes;
-using Spatial;
-using Spatial.ConvexHull;
-using Spatial.Sat;
+using Core2D.Spatial;
+using Core2D.Spatial.ConvexHull;
+using Core2D.Spatial.Sat;
 
 namespace Core2D.ViewModels.Editor.Bounds
 {

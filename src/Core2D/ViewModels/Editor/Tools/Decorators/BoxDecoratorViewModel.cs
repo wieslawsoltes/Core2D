@@ -9,7 +9,7 @@ using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Layout;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Spatial;
+using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Tools.Decorators
 {

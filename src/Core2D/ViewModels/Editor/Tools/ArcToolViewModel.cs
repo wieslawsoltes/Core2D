@@ -6,8 +6,8 @@ using Core2D.Model.Input;
 using Core2D.ViewModels.Editor.Tools.Selection;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Spatial;
-using Spatial.Arc;
+using Core2D.Spatial;
+using Core2D.Spatial.Arc;
 
 namespace Core2D.ViewModels.Editor.Tools
 {

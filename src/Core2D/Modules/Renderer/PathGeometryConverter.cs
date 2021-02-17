@@ -6,8 +6,8 @@ using Core2D.Model.Path;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
 using Core2D.ViewModels.Shapes;
-using Spatial;
-using Spatial.Arc;
+using Core2D.Spatial;
+using Core2D.Spatial.Arc;
 using A = Avalonia;
 using AM = Avalonia.Media;
 

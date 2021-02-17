@@ -9,8 +9,8 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Renderer;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Spatial;
-using Spatial.Arc;
+using Core2D.Spatial;
+using Core2D.Spatial.Arc;
 
 namespace Core2D.Modules.Renderer.WinForms
 {
