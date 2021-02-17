@@ -5,12 +5,6 @@
 
 [![Build status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/Core2D)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=54)
 
-[![Github All Releases](https://img.shields.io/github/downloads/wieslawsoltes/core2d/total.svg)](https://github.com/wieslawsoltes/core2d)
-[![GitHub release](https://img.shields.io/github/release/wieslawsoltes/core2d.svg)](https://github.com/wieslawsoltes/core2d)
-[![Github Releases](https://img.shields.io/github/downloads/wieslawsoltes/core2d/latest/total.svg)](https://github.com/wieslawsoltes/core2d)
-
-[![BuitlWithDot.Net shield](https://builtwithdot.net/project/116/core2d/badge)](https://builtwithdot.net/project/116/core2d)
-
 A multi-platform data driven 2D diagram editor.
 
 ## About
