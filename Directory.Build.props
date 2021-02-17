@@ -33,7 +33,4 @@
     <ThemeEditorControlsColorPickerVersion>0.10.0</ThemeEditorControlsColorPickerVersion>
     <SystemCommandLineVersion>2.0.0-beta1.20574.7</SystemCommandLineVersion>
   </PropertyGroup>
-  <PropertyGroup>
-    <!--<DefineConstants>$(DefineConstants);USE_SKIA</DefineConstants>-->
-  </PropertyGroup>
 </Project>
