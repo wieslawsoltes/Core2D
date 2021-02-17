@@ -24,5 +24,3 @@ jobs:
         dotnet-version: 5.0.100
     - name: Build Release
       run: dotnet build -c Release
-    - name: Test Release
-      run: dotnet test -c Release
