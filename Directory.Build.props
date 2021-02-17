@@ -1,7 +1,7 @@
 <Project>
  <PropertyGroup>
     <Deterministic>true</Deterministic>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>latest</LangVersion>
  </PropertyGroup>
   <PropertyGroup>
     <VersionPrefix>0.10.0</VersionPrefix>
