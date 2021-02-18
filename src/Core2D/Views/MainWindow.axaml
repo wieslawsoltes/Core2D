@@ -15,9 +15,6 @@
         TransparencyLevelHint="AcrylicBlur"
         Foreground="{DynamicResource SystemBaseHighColor}"
         UseLayoutRounding="True" RenderOptions.BitmapInterpolationMode="HighQuality"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="PreferSystemChrome, OSXThickTitleBar"
-        ExtendClientAreaTitleBarHeightHint="{DynamicResource MenuBarHeight}"
         Icon="/Assets/Core2D.ico"
         mc:Ignorable="d"
         d:DataContext="{x:Static vmd:DesignerContext.Editor}"
@@ -32,11 +29,6 @@
             <Binding Path="IsProjectDirty" />
         </MultiBinding>
     </Window.Title>
-    <Window.Styles>
-        <Style Selector="Window[IsExtendedIntoWindowDecorations=False] Panel#MainViewPanel">
-            <Setter Property="Margin" Value="{DynamicResource MainViewMargin}" />
-        </Style>
-    </Window.Styles>
     <Panel x:Name="ContentPanel">
         <ExperimentalAcrylicBorder DockPanel.Dock="Left" IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
@@ -47,18 +39,14 @@
                                              MaterialOpacity="0.85" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
-        <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
-            <Panel x:Name="MainViewPanel">
-                <views:MainView x:Name="MainView" Margin="{Binding #MainWindow.WindowDecorationMargin}" />
+        <DockPanel>
+            <Panel x:Name="MainMenuPanel" DockPanel.Dock="Top">
+                <views:DashboardMenuView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
+                <views:EditorMenuView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
             </Panel>
-        </Panel>
-        <Panel x:Name="MainMenuPanel" Margin="{Binding #MainWindow.OffScreenMargin}">
-            <views:DashboardMenuView HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
-            <views:EditorMenuView HorizontalAlignment="Left"
-                                  VerticalAlignment="Top"
-                                  IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
-        </Panel>
+            <Panel x:Name="MainViewPanel">
+                <views:MainView x:Name="MainView" />
+            </Panel>
+        </DockPanel>
     </Panel>
 </Window>
