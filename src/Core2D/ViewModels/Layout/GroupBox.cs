@@ -31,12 +31,12 @@ namespace Core2D.ViewModels.Layout
 
         public static bool IsPointMovable(PointShapeViewModel point, BaseShapeViewModel parent)
         {
-            if (point.State.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShapeViewModel ower && ower.State.HasFlag(ShapeStateFlags.Locked)))
+            if (point.State.HasFlag(ShapeStateFlags.Locked) || (point.Owner is BaseShapeViewModel owner && owner.State.HasFlag(ShapeStateFlags.Locked)))
             {
                 return false;
             }
 
-            if (point.State.HasFlag(ShapeStateFlags.Connector) && point.Owner != parent)
+            if (point.State.HasFlag(ShapeStateFlags.Connector) && point.Owner != null && point.Owner != parent)
             {
                 return false;
             }
