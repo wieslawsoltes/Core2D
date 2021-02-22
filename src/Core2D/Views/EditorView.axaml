@@ -23,6 +23,7 @@
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
     <UserControl.Resources>
         <converters:FirstSelectedItemValueConverter x:Key="FirstSelectedItemValueConverter" />
+        <converters:FirstSelectedItemStyleValueConverter x:Key="FirstSelectedItemStyleValueConverter" />
         <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter" />
         <dd:EditorDropHandler x:Key="EditorDropHandler" />
         <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
@@ -248,15 +249,19 @@
                     </TabItem>
                     <TabItem Header="Style">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ContentControl Content="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemStyleValueConverter}}"
+                                            Margin="0,0,8,0"/>
+                        </ScrollViewer>
+                        <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <style:ShapeStyleView x:DataType="vme:ProjectEditorViewModel" Margin="0,0,8,0">
                                 <style:ShapeStyleView.DataContext>
                                     <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
                                         <Binding Path="Project.SelectedShapes" FallbackValue="{x:Null}" />
-                                        <Binding Path="Project.CurrentStyleLibrary.Selected" FallbackValue="{x:Null}" />
+                                        <Binding Path="2" FallbackValue="{x:Null}" />
                                     </MultiBinding>
                                 </style:ShapeStyleView.DataContext>
                             </style:ShapeStyleView>
-                        </ScrollViewer>
+                        </ScrollViewer>-->
                     </TabItem>
                     <TabItem Header="Data">
                         <ScrollViewer DataContext="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
