@@ -76,6 +76,8 @@ namespace Core2D.ViewModels.Containers
                         CurrentContainer.InvalidateLayer();
                     }
                 }
+
+                // SelectedShapes = new HashSet<BaseShapeViewModel>() { shape };
             }
             else if (value is LayerContainerViewModel layer && _documents is { })
             {
