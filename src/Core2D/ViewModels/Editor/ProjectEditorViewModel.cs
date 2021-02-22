@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Core2D.Model;
