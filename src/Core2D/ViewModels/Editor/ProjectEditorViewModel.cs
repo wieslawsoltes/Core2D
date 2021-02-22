@@ -2381,14 +2381,6 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-
-        private Subject<(object sender, PropertyChangedEventArgs e)> _changes
-            = new Subject<(object sender, PropertyChangedEventArgs e)>();
-
-        private IObservable<(object sender, PropertyChangedEventArgs e)> _changesObservable
-            => _changes.AsObservable();
-
-
         public void OnLoad(ProjectContainerViewModel project, string path = null)
         {
             if (project is { })
