@@ -30,7 +30,8 @@
         </MultiBinding>
     </Window.Title>
     <Panel x:Name="ContentPanel">
-        <ExperimentalAcrylicBorder DockPanel.Dock="Left" IsHitTestVisible="False">
+        <Border IsHitTestVisible="False" Background="{DynamicResource AcrylicFallbackColor}"/>
+        <!--<ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial BackgroundSource="Digger"
                                              TintColor="{DynamicResource SystemAltHighColor}"
@@ -38,7 +39,7 @@
                                              FallbackColor="{DynamicResource AcrylicFallbackColor}"
                                              MaterialOpacity="0.85" />
             </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>
+        </ExperimentalAcrylicBorder>-->
         <DockPanel>
             <Panel x:Name="MainMenuPanel" DockPanel.Dock="Top">
                 <views:DashboardMenuView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
