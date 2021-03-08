@@ -61,13 +61,9 @@ namespace Core2D.Modules.Renderer.Nodes
 #endif
             if (scale != 1.0)
             {
-                var translateDisposable = context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY));
-                var scaleDisposable =  context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale));
-
+                using var translateDisposable = context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY));
+                using var scaleDisposable =  context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale));
                 OnDraw(dc, zoom);
-
-                scaleDisposable.Dispose();
-                translateDisposable.Dispose();
             }
             else
             {
