@@ -13,7 +13,12 @@
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
-
+  
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);CUSTOM_DRAW</DefineConstants>
+<!--    <DefineConstants>$(DefineConstants);CUSTOM_DRAW_SKIA</DefineConstants>-->
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)" PrivateAssets="All" />
     <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />

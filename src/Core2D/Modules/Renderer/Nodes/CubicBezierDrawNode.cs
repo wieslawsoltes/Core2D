@@ -4,6 +4,7 @@ using Core2D.Model.Renderer.Nodes;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using AM = Avalonia.Media;
+using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Nodes
 {
@@ -29,9 +30,13 @@ namespace Core2D.Modules.Renderer.Nodes
 
         public override void OnDraw(object dc, double zoom)
         {
+#if CUSTOM_DRAW
+            var context = dc as AP.IDrawingContextImpl;
+            context.DrawGeometry(CubicBezier.IsFilled ? Fill : null, CubicBezier.IsStroked ? Stroke : null, Geometry.PlatformImpl);
+#else
             var context = dc as AM.DrawingContext;
-
             context.DrawGeometry(CubicBezier.IsFilled ? Fill : null, CubicBezier.IsStroked ? Stroke : null, Geometry);
+#endif
         }
     }
 }
