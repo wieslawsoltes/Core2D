@@ -162,7 +162,7 @@ namespace Core2D.Views
                 DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
                 PresenterType = PresenterType,
             };
-#if CUSTOM_DRAW
+#if CUSTOM_DRAW || CUSTOM_DRAW_SKIA
             var offset = this.TranslatePoint(new Point(0, 0), ZoomBorder) ?? default;
             var bounds = new Rect(
                 offset.X > 0.0 ? -offset.X : 0.0,
