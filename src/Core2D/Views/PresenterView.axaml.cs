@@ -5,12 +5,12 @@ using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Core2D.Model.Renderer;
-#if CUSTOM_DRAW
+#if CUSTOM_DRAW || CUSTOM_DRAW_SKIA
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
+#endif
 #if CUSTOM_DRAW_SKIA
 using Avalonia.Skia;
-#endif
 #endif
 using Core2D.Modules.Renderer;
 using Core2D.Model;
@@ -42,7 +42,7 @@ namespace Core2D.Views
         public PresenterType PresenterType;
     }
 
-#if CUSTOM_DRAW
+#if CUSTOM_DRAW || CUSTOM_DRAW_SKIA
     internal class CustomDrawOperation : ICustomDrawOperation
     {
         public PresenterView PresenterView { get; set; }
