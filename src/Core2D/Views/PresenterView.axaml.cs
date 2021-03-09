@@ -163,11 +163,19 @@ namespace Core2D.Views
                 PresenterType = PresenterType,
             };
 #if CUSTOM_DRAW
+            var offset = this.TranslatePoint(new Point(0, 0), ZoomBorder) ?? default;
+            var bounds = new Rect(
+                offset.X > 0.0 ? -offset.X : 0.0,
+                offset.Y > 0.0 ? -offset.Y : 0.0,
+                ZoomBorder.Bounds.Width + (offset.X > 0.0 ? offset.X : -offset.X),
+                ZoomBorder.Bounds.Height + (offset.Y > 0.0 ? offset.Y : -offset.Y));
+
             var customDrawOperation = new CustomDrawOperation
             {
                 PresenterView = this,
                 CustomState = customState,
-                Bounds = ZoomBorder?.Bounds ?? this.Bounds
+                // Bounds = ZoomBorder?.Bounds ?? this.Bounds
+                Bounds = bounds
             };
             context.Custom(customDrawOperation);
 #else
