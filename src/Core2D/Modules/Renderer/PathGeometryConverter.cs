@@ -19,7 +19,7 @@ namespace Core2D.Modules.Renderer
 
         private static AM.FillRule ToFillRule(this FillRule fillRule) => fillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd;
 
-        public static AM.StreamGeometry ToGeometry(PathGeometryViewModel path)
+        public static AM.Geometry ToGeometry(PathGeometryViewModel path)
         {
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
