@@ -24,7 +24,7 @@ namespace Core2D.Modules.Renderer.Nodes
         {
             ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
-            Geometry = PathGeometryConverter.ToGeometry(Path.Geometry);
+            Geometry = PathGeometryConverter.ToStreamGeometry(Path.Geometry);
             Center = Geometry.Bounds.Center;
         }
 
