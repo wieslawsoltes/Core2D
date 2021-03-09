@@ -25,7 +25,7 @@ namespace Core2D.Modules.Renderer
 
         private static AM.FillRule ToFillRule(this FillRule fillRule) => fillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd;
 
-        public static AM.Geometry ToGeometry(PathGeometryViewModel path)
+        public static AM.Geometry ToGeometry(PathGeometryViewModel path, bool isFilled)
         {
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
@@ -34,7 +34,7 @@ namespace Core2D.Modules.Renderer
 
             foreach (var figure in path.Figures)
             {
-                context.BeginFigure(figure.StartPoint.ToPoint(), false);
+                context.BeginFigure(figure.StartPoint.ToPoint(), isFilled);
 
                 foreach (var segment in figure.Segments)
                 {
@@ -76,7 +76,7 @@ namespace Core2D.Modules.Renderer
             return geometry;
         }
 
-        public static AP.IGeometryImpl ToGeometryImpl(PathGeometryViewModel path)
+        public static AP.IGeometryImpl ToGeometryImpl(PathGeometryViewModel path, bool isFilled)
         {
             var factory = A.AvaloniaLocator.Current.GetService<AP.IPlatformRenderInterface>();
             var geometry = factory.CreateStreamGeometry();
@@ -86,7 +86,7 @@ namespace Core2D.Modules.Renderer
 
             foreach (var figure in path.Figures)
             {
-                context.BeginFigure(figure.StartPoint.ToPoint(), false);
+                context.BeginFigure(figure.StartPoint.ToPoint(), isFilled);
 
                 foreach (var segment in figure.Segments)
                 {
