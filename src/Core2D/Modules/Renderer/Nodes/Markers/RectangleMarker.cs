@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using Core2D.Modules.Renderer.Media;
 using A = Avalonia;
+using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Nodes.Markers
