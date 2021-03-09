@@ -14,6 +14,7 @@
   <PropertyGroup>
     <MicrosoftNETFrameworkReferenceAssembliesVersion>1.0.0</MicrosoftNETFrameworkReferenceAssembliesVersion>
     <SystemDrawingCommonVersion>5.0.0</SystemDrawingCommonVersion>
+    <SystemTextJsonVersion>5.0.1</SystemTextJsonVersion>
     <AutofacVersion>6.1.0</AutofacVersion>
     <CsvHelperVersion>18.0.0</CsvHelperVersion>
     <DocumentFormatOpenXmlVersion>2.11.3</DocumentFormatOpenXmlVersion>
