@@ -71,82 +71,56 @@ namespace Core2D.Modules.Renderer
         public static AM.StreamGeometry ToStreamGeometry(PathGeometryViewModel xpg)
         {
             var sg = new AM.StreamGeometry();
+            using var sgc = sg.Open();
+            sgc.SetFillRule(xpg.FillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd);
 
-            using (var sgc = sg.Open())
+            foreach (var xpf in xpg.Figures)
             {
-                PointShapeViewModel previous = default;
+                sgc.BeginFigure(new A.Point(xpf.StartPoint.X, xpf.StartPoint.Y), false);
 
-                sgc.SetFillRule(xpg.FillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd);
-
-                foreach (var xpf in xpg.Figures)
+                foreach (var segment in xpf.Segments)
                 {
-                    sgc.BeginFigure(new A.Point(xpf.StartPoint.X, xpf.StartPoint.Y), false);
-
-                    previous = xpf.StartPoint;
-
-                    foreach (var segment in xpf.Segments)
+                    if (segment is ArcSegmentViewModel arcSegment)
                     {
-                        if (segment is ArcSegmentViewModel arcSegment)
-                        {
-                            sgc.ArcTo(
-                                new A.Point(arcSegment.Point.X, arcSegment.Point.Y),
-                                new A.Size(arcSegment.Size.Width, arcSegment.Size.Height),
-                                arcSegment.RotationAngle,
-                                arcSegment.IsLargeArc,
-                                arcSegment.SweepDirection == SweepDirection.Clockwise ? AM.SweepDirection.Clockwise : AM.SweepDirection.CounterClockwise);
-
-                            previous = arcSegment.Point;
-                        }
-                        else if (segment is CubicBezierSegmentViewModel cubicBezierSegment)
-                        {
-                            sgc.CubicBezierTo(
-                                new A.Point(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
-                                new A.Point(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
-                                new A.Point(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y));
-
-                            previous = cubicBezierSegment.Point3;
-                        }
-                        else if (segment is LineSegmentViewModel lineSegment)
-                        {
-                            sgc.LineTo(
-                                new A.Point(lineSegment.Point.X, lineSegment.Point.Y));
-
-                            previous = lineSegment.Point;
-                        }
-                        else if (segment is QuadraticBezierSegmentViewModel quadraticBezierSegment)
-                        {
-                            sgc.QuadraticBezierTo(
-                                new A.Point(
-                                    quadraticBezierSegment.Point1.X,
-                                    quadraticBezierSegment.Point1.Y),
-                                new A.Point(
-                                    quadraticBezierSegment.Point2.X,
-                                    quadraticBezierSegment.Point2.Y));
-
-                            previous = quadraticBezierSegment.Point2;
-                        }
-                        else
-                        {
-                            throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                        }
+                        sgc.ArcTo(
+                            new A.Point(arcSegment.Point.X, arcSegment.Point.Y),
+                            new A.Size(arcSegment.Size.Width, arcSegment.Size.Height),
+                            arcSegment.RotationAngle,
+                            arcSegment.IsLargeArc,
+                            arcSegment.SweepDirection == SweepDirection.Clockwise ? AM.SweepDirection.Clockwise : AM.SweepDirection.CounterClockwise);
                     }
-
-                    sgc.EndFigure(xpf.IsClosed);
+                    else if (segment is CubicBezierSegmentViewModel cubicBezierSegment)
+                    {
+                        sgc.CubicBezierTo(
+                            new A.Point(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
+                            new A.Point(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
+                            new A.Point(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y));
+                    }
+                    else if (segment is LineSegmentViewModel lineSegment)
+                    {
+                        sgc.LineTo(
+                            new A.Point(lineSegment.Point.X, lineSegment.Point.Y));
+                    }
+                    else if (segment is QuadraticBezierSegmentViewModel quadraticBezierSegment)
+                    {
+                        sgc.QuadraticBezierTo(
+                            new A.Point(
+                                quadraticBezierSegment.Point1.X,
+                                quadraticBezierSegment.Point1.Y),
+                            new A.Point(
+                                quadraticBezierSegment.Point2.X,
+                                quadraticBezierSegment.Point2.Y));
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
+                    }
                 }
+
+                sgc.EndFigure(xpf.IsClosed);
             }
 
             return sg;
-        }
-
-        public static PathGeometryViewModel ToPathGeometry(string pathData, IFactory factory)
-        {
-            var pg = AM.PathGeometry.Parse(pathData);
-            return ToPathGeometry(pg, factory);
-        }
-
-        public static AM.Geometry ToGeometry(PathGeometryViewModel xpg)
-        {
-            return ToStreamGeometry(xpg);
         }
 
         public static AM.Geometry ToGeometry(EllipseShapeViewModel ellipse)
@@ -206,16 +180,6 @@ namespace Core2D.Modules.Renderer
                 new A.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
             sgc.EndFigure(false);
             return sg;
-        }
-
-        public static string ToSource(PathGeometryViewModel xpg)
-        {
-            return ToStreamGeometry(xpg).ToString();
-        }
-
-        public static string ToSource(AM.StreamGeometry sg)
-        {
-            return sg.ToString();
         }
     }
 }
