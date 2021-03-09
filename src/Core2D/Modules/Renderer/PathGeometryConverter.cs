@@ -1,7 +1,5 @@
 ﻿#nullable disable
 using System;
-using System.Collections.Immutable;
-using Core2D.Model;
 using Core2D.Model.Path;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
@@ -117,16 +115,16 @@ namespace Core2D.Modules.Renderer
 
         public static AM.Geometry ToGeometry(QuadraticBezierShapeViewModel quadraticBezier)
         {
-            var sg = new AM.StreamGeometry();
-            using var sgc = sg.Open();
-            sgc.BeginFigure(
+            var geometry = new AM.StreamGeometry();
+            using var context = geometry.Open();
+            context.BeginFigure(
                 new A.Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
                 quadraticBezier.IsFilled);
-            sgc.QuadraticBezierTo(
+            context.QuadraticBezierTo(
                 new A.Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
                 new A.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
-            sgc.EndFigure(false);
-            return sg;
+            context.EndFigure(false);
+            return geometry;
         }
     }
 }
