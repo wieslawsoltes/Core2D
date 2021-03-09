@@ -28,9 +28,9 @@ namespace Core2D.Modules.Renderer.Nodes
             ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
 #if CUSTOM_DRAW
-            Geometry = PathGeometryConverter.ToGeometryImpl(Path.Geometry);
+            Geometry = PathGeometryConverter.ToGeometryImpl(Path.Geometry, Path.IsFilled);
 #else
-            Geometry = PathGeometryConverter.ToGeometry(Path.Geometry);
+            Geometry = PathGeometryConverter.ToGeometry(Path.Geometry, Path.IsFilled);
 #endif
             Center = Geometry.Bounds.Center;
         }
