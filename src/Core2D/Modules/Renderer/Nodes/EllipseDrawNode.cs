@@ -13,8 +13,11 @@ namespace Core2D.Modules.Renderer.Nodes
     {
         public EllipseShapeViewModel Ellipse { get; set; }
         public A.Rect Rect { get; set; }
+#if CUSTOM_DRAW
+        public AP.IGeometryImpl Geometry { get; set; }
+#else
         public AM.Geometry Geometry { get; set; }
-
+#endif
         public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
             : base()
         {
@@ -27,7 +30,11 @@ namespace Core2D.Modules.Renderer.Nodes
         {
             ScaleThickness = Ellipse.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Ellipse.State.HasFlag(ShapeStateFlags.Size);
+#if CUSTOM_DRAW
+            Geometry = PathGeometryConverter.ToGeometryImpl(Ellipse);
+#else
             Geometry = PathGeometryConverter.ToGeometry(Ellipse);
+#endif
             Rect = Geometry.Bounds;
             Center = Geometry.Bounds.Center;
         }
@@ -36,7 +43,7 @@ namespace Core2D.Modules.Renderer.Nodes
         {
 #if CUSTOM_DRAW
             var context = dc as AP.IDrawingContextImpl;
-            context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry.PlatformImpl);
+            context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
 #else
             var context = dc as AM.DrawingContext;
             context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);

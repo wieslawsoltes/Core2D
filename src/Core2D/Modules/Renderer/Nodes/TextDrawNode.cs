@@ -94,7 +94,8 @@ namespace Core2D.Modules.Renderer.Nodes
             var size = FormattedText.Bounds.Size;
             var rect = Rect;
 
-            var originX = rect.X; // NOTE: Using AM.TextAlignment
+            // NOTE: Using AM.TextAlignment
+            var originX = rect.X;
             //var originX = Style.TextStyle.TextHAlignment switch
             //{
             //    TextHAlignment.Left => rect.X,
