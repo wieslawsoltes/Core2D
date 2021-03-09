@@ -138,9 +138,9 @@ namespace Core2D.Modules.Renderer
             return sg;
         }
 
-        public static PathGeometryViewModel ToPathGeometry(string source, IFactory factory)
+        public static PathGeometryViewModel ToPathGeometry(string pathData, IFactory factory)
         {
-            var pg = AM.PathGeometry.Parse(source);
+            var pg = AM.PathGeometry.Parse(pathData);
             return ToPathGeometry(pg, factory);
         }
 
