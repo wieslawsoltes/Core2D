@@ -158,6 +158,13 @@ namespace Core2D.Desktop
                     RunRepl();
                 }
 
+#if ENABLE_DIRECT2D1
+                if (settings.UseDirect2D1)
+                {
+                    builder.UseDirect2D1();
+                }
+#endif
+
                 if (settings.UseSkia)
                 {
                     builder.UseSkia();
@@ -176,7 +183,11 @@ namespace Core2D.Desktop
                     AllowEglInitialization = settings.AllowEglInitialization,
                     UseWgl = settings.UseWgl,
                     UseDeferredRendering = settings.UseDeferredRendering,
+#if ENABLE_DIRECT2D1
+                    UseWindowsUIComposition = !settings.UseDirect2D1 && settings.UseWindowsUIComposition
+#else
                     UseWindowsUIComposition = settings.UseWindowsUIComposition
+#endif
                 });
 
                 if (settings.UseDirectX11)
@@ -265,6 +276,14 @@ namespace Core2D.Desktop
                 {
                     Argument = new Argument<bool>()
                 });
+
+#if ENABLE_DIRECT2D1
+            rootCommand.AddOption(
+                new Option(new[] { "--useDirect2D1" }, "Use Direct2D1 renderer")
+                {
+                    Argument = new Argument<bool>()
+                });
+#endif
 
             rootCommand.AddOption(
                 new Option(new[] { "--useSkia" }, "Use Skia renderer")
