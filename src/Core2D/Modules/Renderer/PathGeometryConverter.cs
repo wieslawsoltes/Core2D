@@ -13,52 +13,54 @@ namespace Core2D.Modules.Renderer
 {
     public static class PathGeometryConverter
     {
+        private static A.Point ToPoint(this PointShapeViewModel point) => new(point.X, point.Y);
+
+        private static A.Size ToSize(this PathSizeViewModel size) => new( size.Width, size.Height);
+
+        private static AM.FillRule ToFillRule(this FillRule fillRule) => fillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd;
+
         public static AM.StreamGeometry ToGeometry(PathGeometryViewModel path)
         {
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
-            context.SetFillRule(path.FillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd);
+
+            context.SetFillRule(path.FillRule.ToFillRule());
 
             foreach (var figure in path.Figures)
             {
-                context.BeginFigure(new A.Point(figure.StartPoint.X, figure.StartPoint.Y), false);
+                context.BeginFigure(figure.StartPoint.ToPoint(), false);
 
                 foreach (var segment in figure.Segments)
                 {
-                    if (segment is ArcSegmentViewModel arcSegment)
+                    switch (segment)
                     {
-                        context.ArcTo(
-                            new A.Point(arcSegment.Point.X, arcSegment.Point.Y),
-                            new A.Size(arcSegment.Size.Width, arcSegment.Size.Height),
-                            arcSegment.RotationAngle,
-                            arcSegment.IsLargeArc,
-                            arcSegment.SweepDirection == SweepDirection.Clockwise ? AM.SweepDirection.Clockwise : AM.SweepDirection.CounterClockwise);
-                    }
-                    else if (segment is CubicBezierSegmentViewModel cubicBezierSegment)
-                    {
-                        context.CubicBezierTo(
-                            new A.Point(cubicBezierSegment.Point1.X, cubicBezierSegment.Point1.Y),
-                            new A.Point(cubicBezierSegment.Point2.X, cubicBezierSegment.Point2.Y),
-                            new A.Point(cubicBezierSegment.Point3.X, cubicBezierSegment.Point3.Y));
-                    }
-                    else if (segment is LineSegmentViewModel lineSegment)
-                    {
-                        context.LineTo(
-                            new A.Point(lineSegment.Point.X, lineSegment.Point.Y));
-                    }
-                    else if (segment is QuadraticBezierSegmentViewModel quadraticBezierSegment)
-                    {
-                        context.QuadraticBezierTo(
-                            new A.Point(
-                                quadraticBezierSegment.Point1.X,
-                                quadraticBezierSegment.Point1.Y),
-                            new A.Point(
-                                quadraticBezierSegment.Point2.X,
-                                quadraticBezierSegment.Point2.Y));
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
+                        case ArcSegmentViewModel arcSegment:
+                            context.ArcTo(
+                                arcSegment.Point.ToPoint(),
+                                arcSegment.Size.ToSize(),
+                                arcSegment.RotationAngle,
+                                arcSegment.IsLargeArc,
+                                arcSegment.SweepDirection == SweepDirection.Clockwise 
+                                    ? AM.SweepDirection.Clockwise 
+                                    : AM.SweepDirection.CounterClockwise);
+                            break;
+                        case CubicBezierSegmentViewModel cubicBezierSegment:
+                            context.CubicBezierTo(
+                                cubicBezierSegment.Point1.ToPoint(),
+                                cubicBezierSegment.Point2.ToPoint(),
+                                cubicBezierSegment.Point3.ToPoint());
+                            break;
+                        case LineSegmentViewModel lineSegment:
+                            context.LineTo(
+                                lineSegment.Point.ToPoint());
+                            break;
+                        case QuadraticBezierSegmentViewModel quadraticBezierSegment:
+                            context.QuadraticBezierTo(
+                                quadraticBezierSegment.Point1.ToPoint(),
+                                quadraticBezierSegment.Point2.ToPoint());
+                            break;
+                        default:
+                            throw new NotSupportedException("Not supported segment type: " + segment.GetType());
                     }
                 }
 
@@ -70,10 +72,13 @@ namespace Core2D.Modules.Renderer
 
         public static AM.Geometry ToGeometry(EllipseShapeViewModel ellipse)
         {
-            var rect2 = Rect2.FromPoints(ellipse.TopLeft.X, ellipse.TopLeft.Y, ellipse.BottomRight.X, ellipse.BottomRight.Y);
+            var rect2 = Rect2.FromPoints(
+                ellipse.TopLeft.X, 
+                ellipse.TopLeft.Y, 
+                ellipse.BottomRight.X, 
+                ellipse.BottomRight.Y);
             var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
-            var geometry = new AM.EllipseGeometry(rect);
-            return geometry;
+            return new AM.EllipseGeometry(rect);
         }
 
         public static AM.Geometry ToGeometry(ArcShapeViewModel arc)
@@ -103,12 +108,12 @@ namespace Core2D.Modules.Renderer
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
             context.BeginFigure(
-                new A.Point(cubicBezier.Point1.X, cubicBezier.Point1.Y),
+                cubicBezier.Point1.ToPoint(),
                 cubicBezier.IsFilled);
             context.CubicBezierTo(
-                new A.Point(cubicBezier.Point2.X, cubicBezier.Point2.Y),
-                new A.Point(cubicBezier.Point3.X, cubicBezier.Point3.Y),
-                new A.Point(cubicBezier.Point4.X, cubicBezier.Point4.Y));
+                cubicBezier.Point2.ToPoint(),
+                cubicBezier.Point3.ToPoint(),
+                cubicBezier.Point4.ToPoint());
             context.EndFigure(false);
             return geometry;
         }
@@ -118,11 +123,11 @@ namespace Core2D.Modules.Renderer
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
             context.BeginFigure(
-                new A.Point(quadraticBezier.Point1.X, quadraticBezier.Point1.Y),
+                quadraticBezier.Point1.ToPoint(),
                 quadraticBezier.IsFilled);
             context.QuadraticBezierTo(
-                new A.Point(quadraticBezier.Point2.X, quadraticBezier.Point2.Y),
-                new A.Point(quadraticBezier.Point3.X, quadraticBezier.Point3.Y));
+                quadraticBezier.Point2.ToPoint(),
+                quadraticBezier.Point3.ToPoint());
             context.EndFigure(false);
             return geometry;
         }
