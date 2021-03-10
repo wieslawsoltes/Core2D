@@ -43,9 +43,9 @@ namespace Core2D.Modules.Renderer
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
         }
 
-        private static void SetPathSegment(PathSegmentViewModel segment, AP.IGeometryContext context)
+        private static void SetPathSegment(PathSegmentViewModel pathSegment, AP.IGeometryContext context)
         {
-            switch (segment)
+            switch (pathSegment)
             {
                 case ArcSegmentViewModel arcSegment:
                     context.ArcTo(
@@ -73,7 +73,7 @@ namespace Core2D.Modules.Renderer
                         quadraticBezierSegment.Point2.ToPoint());
                     break;
                 default:
-                    throw new NotSupportedException("Not supported segment type: " + segment.GetType());
+                    throw new NotSupportedException("Not supported segment type: " + pathSegment.GetType());
             }
         }
 
@@ -94,7 +94,7 @@ namespace Core2D.Modules.Renderer
             }
         }
 
-        private static void SetCubicBezier(CubicBezierShapeViewModel cubicBezier, AP.IGeometryContext context)
+        private static void SetCubicBezierFigure(CubicBezierShapeViewModel cubicBezier, AP.IGeometryContext context)
         {
             context.BeginFigure(
                 cubicBezier.Point1.ToPoint(),
@@ -106,7 +106,7 @@ namespace Core2D.Modules.Renderer
             context.EndFigure(false);
         }
 
-        private static void SetQuadraticBezier(QuadraticBezierShapeViewModel quadraticBezier, AP.IGeometryContext context)
+        private static void SetQuadraticBezierFigure(QuadraticBezierShapeViewModel quadraticBezier, AP.IGeometryContext context)
         {
             context.BeginFigure(
                 quadraticBezier.Point1.ToPoint(),
@@ -117,7 +117,7 @@ namespace Core2D.Modules.Renderer
             context.EndFigure(false);
         }
 
-        private static void SetArc(ArcShapeViewModel arc, AP.IGeometryContext context)
+        private static void SetArcFigure(ArcShapeViewModel arc, AP.IGeometryContext context)
         {
             var wpfArc = ToWpfArc(arc);
             context.BeginFigure(
@@ -150,7 +150,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
-            SetArc(arc, context);
+            SetArcFigure(arc, context);
             return geometry;
         }
 
@@ -158,7 +158,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
-            SetCubicBezier(cubicBezier, context);
+            SetCubicBezierFigure(cubicBezier, context);
             return geometry;
         }
 
@@ -166,7 +166,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
-            SetQuadraticBezier(quadraticBezier, context);
+            SetQuadraticBezierFigure(quadraticBezier, context);
             return geometry;
         }
 
@@ -188,7 +188,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
-            SetArc(arc, context);
+            SetArcFigure(arc, context);
             return geometry;
         }
 
@@ -196,7 +196,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
-            SetCubicBezier(cubicBezier, context);
+            SetCubicBezierFigure(cubicBezier, context);
             return geometry;
         }
 
@@ -204,7 +204,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
-            SetQuadraticBezier(quadraticBezier, context);
+            SetQuadraticBezierFigure(quadraticBezier, context);
             return geometry;
         }
     }
