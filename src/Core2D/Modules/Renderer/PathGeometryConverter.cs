@@ -14,6 +14,8 @@ namespace Core2D.Modules.Renderer
 {
     public static class PathGeometryConverter
     {
+        private static AP.IPlatformRenderInterface Factory => A.AvaloniaLocator.Current.GetService<AP.IPlatformRenderInterface>();
+
         private static T GetService<T>(this A.IAvaloniaDependencyResolver resolver)
         {
             return (T) resolver.GetService(typeof (T));
@@ -78,8 +80,7 @@ namespace Core2D.Modules.Renderer
 
         public static AP.IGeometryImpl ToGeometryImpl(PathGeometryViewModel path, bool isFilled)
         {
-            var factory = A.AvaloniaLocator.Current.GetService<AP.IPlatformRenderInterface>();
-            var geometry = factory.CreateStreamGeometry();
+            var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
 
             context.SetFillRule(path.FillRule.ToFillRule());
@@ -148,8 +149,7 @@ namespace Core2D.Modules.Renderer
         public static AP.IGeometryImpl ToGeometryImpl(EllipseShapeViewModel ellipse)
         {
             var rect = ToRect(ellipse);
-            var factory = A.AvaloniaLocator.Current.GetService<AP.IPlatformRenderInterface>();
-            return factory.CreateEllipseGeometry(rect);
+            return Factory.CreateEllipseGeometry(rect);
         }
 
         private static WpfArc ToWpfArc(ArcShapeViewModel arc)
@@ -181,8 +181,7 @@ namespace Core2D.Modules.Renderer
 
         public static AP.IGeometryImpl ToGeometryImpl(ArcShapeViewModel arc)
         {
-            var factory = A.AvaloniaLocator.Current.GetService<AP.IPlatformRenderInterface>();
-            var geometry = factory.CreateStreamGeometry();
+            var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
             var wpfArc = ToWpfArc(arc);
             context.BeginFigure(
@@ -215,8 +214,7 @@ namespace Core2D.Modules.Renderer
 
         public static AP.IGeometryImpl ToGeometryImpl(CubicBezierShapeViewModel cubicBezier)
         {
-            var factory = A.AvaloniaLocator.Current.GetService<AP.IPlatformRenderInterface>();
-            var geometry = factory.CreateStreamGeometry();
+            var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
             context.BeginFigure(
                 cubicBezier.Point1.ToPoint(),
@@ -245,8 +243,7 @@ namespace Core2D.Modules.Renderer
 
         public static AP.IGeometryImpl ToGeometryImpl(QuadraticBezierShapeViewModel quadraticBezier)
         {
-            var factory = A.AvaloniaLocator.Current.GetService<AP.IPlatformRenderInterface>();
-            var geometry = factory.CreateStreamGeometry();
+            var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
             context.BeginFigure(
                 quadraticBezier.Point1.ToPoint(),
