@@ -43,54 +43,100 @@ namespace Core2D.Modules.Renderer
                 Point2.FromXY(arc.Point4.X, arc.Point4.Y));
         }
 
-        public static AM.Geometry ToGeometry(PathGeometryViewModel path, bool isFilled)
+        private static void SetPathSegment(PathSegmentViewModel segment, AP.IGeometryContext context)
         {
-            var geometry = new AM.StreamGeometry();
-            using var context = geometry.Open();
+            switch (segment)
+            {
+                case ArcSegmentViewModel arcSegment:
+                    context.ArcTo(
+                        arcSegment.Point.ToPoint(),
+                        arcSegment.Size.ToSize(),
+                        arcSegment.RotationAngle,
+                        arcSegment.IsLargeArc,
+                        arcSegment.SweepDirection == SweepDirection.Clockwise
+                            ? AM.SweepDirection.Clockwise
+                            : AM.SweepDirection.CounterClockwise);
+                    break;
+                case CubicBezierSegmentViewModel cubicBezierSegment:
+                    context.CubicBezierTo(
+                        cubicBezierSegment.Point1.ToPoint(),
+                        cubicBezierSegment.Point2.ToPoint(),
+                        cubicBezierSegment.Point3.ToPoint());
+                    break;
+                case LineSegmentViewModel lineSegment:
+                    context.LineTo(
+                        lineSegment.Point.ToPoint());
+                    break;
+                case QuadraticBezierSegmentViewModel quadraticBezierSegment:
+                    context.QuadraticBezierTo(
+                        quadraticBezierSegment.Point1.ToPoint(),
+                        quadraticBezierSegment.Point2.ToPoint());
+                    break;
+                default:
+                    throw new NotSupportedException("Not supported segment type: " + segment.GetType());
+            }
+        }
 
-            context.SetFillRule(path.FillRule.ToFillRule());
+        private static void SetGeometryContext(PathGeometryViewModel pathGeometry, bool isFilled, AP.IGeometryContext context)
+        {
+            context.SetFillRule(pathGeometry.FillRule.ToFillRule());
 
-            foreach (var figure in path.Figures)
+            foreach (var figure in pathGeometry.Figures)
             {
                 context.BeginFigure(figure.StartPoint.ToPoint(), isFilled);
 
                 foreach (var segment in figure.Segments)
                 {
-                    switch (segment)
-                    {
-                        case ArcSegmentViewModel arcSegment:
-                            context.ArcTo(
-                                arcSegment.Point.ToPoint(),
-                                arcSegment.Size.ToSize(),
-                                arcSegment.RotationAngle,
-                                arcSegment.IsLargeArc,
-                                arcSegment.SweepDirection == SweepDirection.Clockwise 
-                                    ? AM.SweepDirection.Clockwise 
-                                    : AM.SweepDirection.CounterClockwise);
-                            break;
-                        case CubicBezierSegmentViewModel cubicBezierSegment:
-                            context.CubicBezierTo(
-                                cubicBezierSegment.Point1.ToPoint(),
-                                cubicBezierSegment.Point2.ToPoint(),
-                                cubicBezierSegment.Point3.ToPoint());
-                            break;
-                        case LineSegmentViewModel lineSegment:
-                            context.LineTo(
-                                lineSegment.Point.ToPoint());
-                            break;
-                        case QuadraticBezierSegmentViewModel quadraticBezierSegment:
-                            context.QuadraticBezierTo(
-                                quadraticBezierSegment.Point1.ToPoint(),
-                                quadraticBezierSegment.Point2.ToPoint());
-                            break;
-                        default:
-                            throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                    }
+                    SetPathSegment(segment, context);
                 }
 
                 context.EndFigure(figure.IsClosed);
             }
+        }
 
+        private static void SetCubicBezier(CubicBezierShapeViewModel cubicBezier, AP.IGeometryContext context)
+        {
+            context.BeginFigure(
+                cubicBezier.Point1.ToPoint(),
+                cubicBezier.IsFilled);
+            context.CubicBezierTo(
+                cubicBezier.Point2.ToPoint(),
+                cubicBezier.Point3.ToPoint(),
+                cubicBezier.Point4.ToPoint());
+            context.EndFigure(false);
+        }
+
+        private static void SetQuadraticBezier(QuadraticBezierShapeViewModel quadraticBezier, AP.IGeometryContext context)
+        {
+            context.BeginFigure(
+                quadraticBezier.Point1.ToPoint(),
+                quadraticBezier.IsFilled);
+            context.QuadraticBezierTo(
+                quadraticBezier.Point2.ToPoint(),
+                quadraticBezier.Point3.ToPoint());
+            context.EndFigure(false);
+        }
+
+        private static void SetArc(ArcShapeViewModel arc, AP.IGeometryContext context)
+        {
+            var wpfArc = ToWpfArc(arc);
+            context.BeginFigure(
+                new A.Point(wpfArc.Start.X, wpfArc.Start.Y),
+                arc.IsFilled);
+            context.ArcTo(
+                new A.Point(wpfArc.End.X, wpfArc.End.Y),
+                new A.Size(wpfArc.Radius.Width, wpfArc.Radius.Height),
+                0.0,
+                wpfArc.IsLargeArc,
+                AM.SweepDirection.Clockwise);
+            context.EndFigure(false);
+        }
+
+        public static AM.Geometry ToGeometry(PathGeometryViewModel pathGeometry, bool isFilled)
+        {
+            var geometry = new AM.StreamGeometry();
+            using var context = geometry.Open();
+            SetGeometryContext(pathGeometry, isFilled, context);
             return geometry;
         }
 
@@ -104,17 +150,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
-            var wpfArc = ToWpfArc(arc);
-            context.BeginFigure(
-                new A.Point(wpfArc.Start.X, wpfArc.Start.Y),
-                arc.IsFilled);
-            context.ArcTo(
-                new A.Point(wpfArc.End.X, wpfArc.End.Y),
-                new A.Size(wpfArc.Radius.Width, wpfArc.Radius.Height),
-                0.0,
-                wpfArc.IsLargeArc,
-                AM.SweepDirection.Clockwise);
-            context.EndFigure(false);
+            SetArc(arc, context);
             return geometry;
         }
 
@@ -122,14 +158,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
-            context.BeginFigure(
-                cubicBezier.Point1.ToPoint(),
-                cubicBezier.IsFilled);
-            context.CubicBezierTo(
-                cubicBezier.Point2.ToPoint(),
-                cubicBezier.Point3.ToPoint(),
-                cubicBezier.Point4.ToPoint());
-            context.EndFigure(false);
+            SetCubicBezier(cubicBezier, context);
             return geometry;
         }
 
@@ -137,64 +166,15 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = new AM.StreamGeometry();
             using var context = geometry.Open();
-            context.BeginFigure(
-                quadraticBezier.Point1.ToPoint(),
-                quadraticBezier.IsFilled);
-            context.QuadraticBezierTo(
-                quadraticBezier.Point2.ToPoint(),
-                quadraticBezier.Point3.ToPoint());
-            context.EndFigure(false);
+            SetQuadraticBezier(quadraticBezier, context);
             return geometry;
         }
 
-        public static AP.IGeometryImpl ToGeometryImpl(PathGeometryViewModel path, bool isFilled)
+        public static AP.IGeometryImpl ToGeometryImpl(PathGeometryViewModel pathGeometry, bool isFilled)
         {
             var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
-
-            context.SetFillRule(path.FillRule.ToFillRule());
-
-            foreach (var figure in path.Figures)
-            {
-                context.BeginFigure(figure.StartPoint.ToPoint(), isFilled);
-
-                foreach (var segment in figure.Segments)
-                {
-                    switch (segment)
-                    {
-                        case ArcSegmentViewModel arcSegment:
-                            context.ArcTo(
-                                arcSegment.Point.ToPoint(),
-                                arcSegment.Size.ToSize(),
-                                arcSegment.RotationAngle,
-                                arcSegment.IsLargeArc,
-                                arcSegment.SweepDirection == SweepDirection.Clockwise 
-                                    ? AM.SweepDirection.Clockwise 
-                                    : AM.SweepDirection.CounterClockwise);
-                            break;
-                        case CubicBezierSegmentViewModel cubicBezierSegment:
-                            context.CubicBezierTo(
-                                cubicBezierSegment.Point1.ToPoint(),
-                                cubicBezierSegment.Point2.ToPoint(),
-                                cubicBezierSegment.Point3.ToPoint());
-                            break;
-                        case LineSegmentViewModel lineSegment:
-                            context.LineTo(
-                                lineSegment.Point.ToPoint());
-                            break;
-                        case QuadraticBezierSegmentViewModel quadraticBezierSegment:
-                            context.QuadraticBezierTo(
-                                quadraticBezierSegment.Point1.ToPoint(),
-                                quadraticBezierSegment.Point2.ToPoint());
-                            break;
-                        default:
-                            throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                    }
-                }
-
-                context.EndFigure(figure.IsClosed);
-            }
-
+            SetGeometryContext(pathGeometry, isFilled, context);
             return geometry;
         }
 
@@ -208,17 +188,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
-            var wpfArc = ToWpfArc(arc);
-            context.BeginFigure(
-                new A.Point(wpfArc.Start.X, wpfArc.Start.Y),
-                arc.IsFilled);
-            context.ArcTo(
-                new A.Point(wpfArc.End.X, wpfArc.End.Y),
-                new A.Size(wpfArc.Radius.Width, wpfArc.Radius.Height),
-                0.0,
-                wpfArc.IsLargeArc,
-                AM.SweepDirection.Clockwise);
-            context.EndFigure(false);
+            SetArc(arc, context);
             return geometry;
         }
 
@@ -226,14 +196,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
-            context.BeginFigure(
-                cubicBezier.Point1.ToPoint(),
-                cubicBezier.IsFilled);
-            context.CubicBezierTo(
-                cubicBezier.Point2.ToPoint(),
-                cubicBezier.Point3.ToPoint(),
-                cubicBezier.Point4.ToPoint());
-            context.EndFigure(false);
+            SetCubicBezier(cubicBezier, context);
             return geometry;
         }
 
@@ -241,13 +204,7 @@ namespace Core2D.Modules.Renderer
         {
             var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
-            context.BeginFigure(
-                quadraticBezier.Point1.ToPoint(),
-                quadraticBezier.IsFilled);
-            context.QuadraticBezierTo(
-                quadraticBezier.Point2.ToPoint(),
-                quadraticBezier.Point3.ToPoint());
-            context.EndFigure(false);
+            SetQuadraticBezier(quadraticBezier, context);
             return geometry;
         }
     }
