@@ -10,6 +10,7 @@ using Core2D.Spatial;
 using A = Avalonia;
 using ACP = Avalonia.Controls.PanAndZoom;
 using AM = Avalonia.Media;
+using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Nodes
 {
@@ -171,8 +172,11 @@ namespace Core2D.Modules.Renderer.Nodes
 
         public override void OnDraw(object dc, double zoom)
         {
+#if CUSTOM_DRAW
+            var context = dc as AP.IDrawingContextImpl;
+#else
             var context = dc as AM.DrawingContext;
-
+#endif
             if (Line.IsStroked)
             {
                 context.DrawLine(Stroke, P0, P1);

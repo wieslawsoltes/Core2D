@@ -10,6 +10,9 @@ namespace Core2D.Desktop
         public FileInfo? Project { get; set; }
         public bool Repl { get; set; }
         public bool UseSkia { get; set; }
+#if ENABLE_DIRECT2D1
+        public bool UseDirect2D1 { get; set; }
+#endif
         public bool EnableMultiTouch { get; set; } = true;
         public bool UseGpu { get; set; } = true;
         public bool AllowEglInitialization { get; set; } = true;

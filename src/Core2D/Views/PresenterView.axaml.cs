@@ -5,9 +5,11 @@ using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Core2D.Model.Renderer;
-#if USE_SKIA
+#if CUSTOM_DRAW || CUSTOM_DRAW_SKIA
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
+#endif
+#if CUSTOM_DRAW_SKIA
 using Avalonia.Skia;
 #endif
 using Core2D.Modules.Renderer;
@@ -40,7 +42,7 @@ namespace Core2D.Views
         public PresenterType PresenterType;
     }
 
-#if USE_SKIA
+#if CUSTOM_DRAW || CUSTOM_DRAW_SKIA
     internal class CustomDrawOperation : ICustomDrawOperation
     {
         public PresenterView PresenterView { get; set; }
@@ -59,6 +61,7 @@ namespace Core2D.Views
 
         public void Render(IDrawingContextImpl context)
         {
+#if CUSTOM_DRAW_SKIA
             var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
             if (canvas is null)
             {
@@ -70,6 +73,9 @@ namespace Core2D.Views
             PresenterView.Draw(CustomState, canvas);
 
             canvas.Restore();
+#else
+            PresenterView.Draw(CustomState, context);
+#endif
         }
     }
 #endif
@@ -156,12 +162,20 @@ namespace Core2D.Views
                 DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
                 PresenterType = PresenterType,
             };
-#if USE_SKIA
+#if CUSTOM_DRAW || CUSTOM_DRAW_SKIA
+            var offset = this.TranslatePoint(new Point(0, 0), ZoomBorder) ?? default;
+            var bounds = new Rect(
+                offset.X > 0.0 ? -offset.X : 0.0,
+                offset.Y > 0.0 ? -offset.Y : 0.0,
+                ZoomBorder.Bounds.Width + (offset.X > 0.0 ? offset.X : -offset.X),
+                ZoomBorder.Bounds.Height + (offset.Y > 0.0 ? offset.Y : -offset.Y));
+
             var customDrawOperation = new CustomDrawOperation
             {
                 PresenterView = this,
                 CustomState = customState,
-                Bounds = ZoomBorder is { } ? ZoomBorder.Bounds : this.Bounds
+                // Bounds = ZoomBorder?.Bounds ?? this.Bounds
+                Bounds = bounds
             };
             context.Custom(customDrawOperation);
 #else

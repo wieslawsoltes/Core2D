@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net5.0;net461</TargetFrameworks>
     <OutputType>Library</OutputType>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
@@ -14,9 +14,15 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);CUSTOM_DRAW</DefineConstants>
+<!--    <DefineConstants>$(DefineConstants);CUSTOM_DRAW_SKIA</DefineConstants>-->
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)" PrivateAssets="All" />
     <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
+    <PackageReference Include="System.Text.Json" Version="$(SystemTextJsonVersion)" />
     <PackageReference Include="Autofac" Version="$(AutofacVersion)" />
     <PackageReference Include="CsvHelper" Version="$(CsvHelperVersion)" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="$(DocumentFormatOpenXmlVersion)" />

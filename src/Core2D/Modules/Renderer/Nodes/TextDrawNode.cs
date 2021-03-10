@@ -7,6 +7,7 @@ using Core2D.ViewModels.Style;
 using Core2D.Spatial;
 using A = Avalonia;
 using AM = Avalonia.Media;
+using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Nodes
 {
@@ -93,7 +94,8 @@ namespace Core2D.Modules.Renderer.Nodes
             var size = FormattedText.Bounds.Size;
             var rect = Rect;
 
-            var originX = rect.X; // NOTE: Using AM.TextAlignment
+            // NOTE: Using AM.TextAlignment
+            var originX = rect.X;
             //var originX = Style.TextStyle.TextHAlignment switch
             //{
             //    TextHAlignment.Left => rect.X,
@@ -113,12 +115,19 @@ namespace Core2D.Modules.Renderer.Nodes
 
         public override void OnDraw(object dc, double zoom)
         {
+#if CUSTOM_DRAW
+            var context = dc as AP.IDrawingContextImpl;
+            if (FormattedText is { })
+            {
+                context.DrawText(Stroke.Brush, Origin, FormattedText.PlatformImpl);
+            }
+#else
             var context = dc as AM.DrawingContext;
-
             if (FormattedText is { })
             {
                 context.DrawText(Stroke.Brush, Origin, FormattedText);
             }
+#endif
         }
     }
 }

@@ -116,26 +116,24 @@ namespace Core2D.Modules.Renderer.PdfSharp
             dataFlow.Bind(container.Template, db, record);
             dataFlow.Bind(container, db, record);
 
-            using (XGraphics gfx = XGraphics.FromPdfPage(pdfPage))
-            {
-                // Calculate x and y page scale factors.
-                double scaleX = pdfPage.Width.Value / container.Template.Width;
-                double scaleY = pdfPage.Height.Value / container.Template.Height;
-                double scale = Math.Min(scaleX, scaleY);
+            using XGraphics gfx = XGraphics.FromPdfPage(pdfPage);
+            // Calculate x and y page scale factors.
+            double scaleX = pdfPage.Width.Value / container.Template.Width;
+            double scaleY = pdfPage.Height.Value / container.Template.Height;
+            double scale = Math.Min(scaleX, scaleY);
 
-                // Set scaling function.
-                _scaleToPage = (value) => value * scale;
+            // Set scaling function.
+            _scaleToPage = (value) => value * scale;
 
-                // Draw container template contents to pdf graphics.
-                Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
+            // Draw container template contents to pdf graphics.
+            Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
 
 
-                // Draw template contents to pdf graphics.
-                presenter.Render(gfx, this, null, container.Template, 0, 0);
+            // Draw template contents to pdf graphics.
+            presenter.Render(gfx, this, null, container.Template, 0, 0);
 
-                // Draw page contents to pdf graphics.
-                presenter.Render(gfx, this, null, container, 0, 0);
-            }
+            // Draw page contents to pdf graphics.
+            presenter.Render(gfx, this, null, container, 0, 0);
 
             return pdfPage;
         }

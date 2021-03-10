@@ -1,10 +1,12 @@
 ﻿#nullable disable
 using System;
 using Core2D.Model.Renderer.Nodes;
+using Core2D.Modules.Renderer.Media;
 using Core2D.ViewModels.Style;
 using A = Avalonia;
 using ACP = Avalonia.Controls.PanAndZoom;
 using AM = Avalonia.Media;
+using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Nodes
 {
@@ -52,14 +54,21 @@ namespace Core2D.Modules.Renderer.Nodes
                 Stroke = AvaloniaDrawUtil.ToPen(Style, thickness);
             }
 
+#if CUSTOM_DRAW
+            var context = dc as AP.IDrawingContextImpl;
+#else
             var context = dc as AM.DrawingContext;
-            var translateDisposable = scale != 1.0 ? context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY)) : default(IDisposable);
-            var scaleDisposable = scale != 1.0 ? context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale)) : default(IDisposable);
-
-            OnDraw(dc, zoom);
-
-            scaleDisposable?.Dispose();
-            translateDisposable?.Dispose();
+#endif
+            if (scale != 1.0)
+            {
+                using var translateDisposable = context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY));
+                using var scaleDisposable =  context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale));
+                OnDraw(dc, zoom);
+            }
+            else
+            {
+                OnDraw(dc, zoom);
+            }
         }
 
         public abstract void OnDraw(object dc, double zoom);

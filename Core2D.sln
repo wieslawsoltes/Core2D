@@ -11,6 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Generators", "src\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Desktop", "src\Core2D.Desktop\Core2D.Desktop.csproj", "{0AFCF95C-41E1-4F26-8DF5-2CF112527A71}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{2054893F-E436-4482-B4D3-1BED82C2603D}"
+ProjectSection(SolutionItems) = preProject
+	.editorconfig = .editorconfig
+	Directory.Build.props = Directory.Build.props
+	global.json = global.json
+	NuGet.Config = NuGet.Config
+	omnisharp.json = omnisharp.json
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
