@@ -76,11 +76,7 @@ namespace Core2D.Modules.Renderer.Nodes
 
         public override void OnDraw(object dc, double zoom)
         {
-#if CUSTOM_DRAW
             var context = dc as AP.IDrawingContextImpl;
-#else
-            var context = dc as AM.DrawingContext;
-#endif
             if (Grid.GridStrokeColor is { })
             {
                 if (Grid.IsGridEnabled)
@@ -109,11 +105,7 @@ namespace Core2D.Modules.Renderer.Nodes
 
                 if (Grid.IsBorderEnabled)
                 {
-#if CUSTOM_DRAW
                     context.DrawRectangle(null, Stroke, Rect);
-#else
-                    context.DrawRectangle(Stroke, Rect);
-#endif
                 }
             }
         }

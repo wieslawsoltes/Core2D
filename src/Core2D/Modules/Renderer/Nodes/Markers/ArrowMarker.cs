@@ -14,11 +14,8 @@ namespace Core2D.Modules.Renderer.Nodes.Markers
 
         public override void Draw(object dc)
         {
-#if CUSTOM_DRAW
             var context = dc as AP.IDrawingContextImpl;
-#else
-            var context = dc as AM.DrawingContext;
-#endif
+
             if (ShapeViewModel.IsStroked)
             {
                 context.DrawLine(Pen, P11, P21);

@@ -90,11 +90,7 @@ namespace Core2D
 
             // Dependencies
 
-#if CUSTOM_DRAW_SKIA
-            builder.RegisterType<SkiaSharpRendererViewModel>().As<IShapeRenderer>().InstancePerDependency();
-#else
             builder.RegisterType<AvaloniaRendererViewModel>().As<IShapeRenderer>().InstancePerDependency();
-#endif
             builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
             builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
             builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();

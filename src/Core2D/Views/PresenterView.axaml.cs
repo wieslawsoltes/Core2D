@@ -5,13 +5,8 @@ using Avalonia.Controls.PanAndZoom;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Core2D.Model.Renderer;
-#if CUSTOM_DRAW || CUSTOM_DRAW_SKIA
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
-#endif
-#if CUSTOM_DRAW_SKIA
-using Avalonia.Skia;
-#endif
 using Core2D.Modules.Renderer;
 using Core2D.Model;
 using Core2D.ViewModels.Containers;
@@ -42,7 +37,6 @@ namespace Core2D.Views
         public PresenterType PresenterType;
     }
 
-#if CUSTOM_DRAW || CUSTOM_DRAW_SKIA
     internal class CustomDrawOperation : ICustomDrawOperation
     {
         public PresenterView PresenterView { get; set; }
@@ -61,24 +55,9 @@ namespace Core2D.Views
 
         public void Render(IDrawingContextImpl context)
         {
-#if CUSTOM_DRAW_SKIA
-            var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
-            if (canvas is null)
-            {
-                return;
-            }
-
-            canvas.Save();
-
-            PresenterView.Draw(CustomState, canvas);
-
-            canvas.Restore();
-#else
             PresenterView.Draw(CustomState, context);
-#endif
         }
     }
-#endif
 
     public class PresenterView : UserControl
     {
@@ -154,6 +133,11 @@ namespace Core2D.Views
         {
             base.Render(context);
 
+            RenderImpl(context);
+        }
+
+        private void RenderImpl(DrawingContext context)
+        {
             var customState = new CustomState()
             {
                 Container = Container,
@@ -162,7 +146,7 @@ namespace Core2D.Views
                 DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
                 PresenterType = PresenterType,
             };
-#if CUSTOM_DRAW || CUSTOM_DRAW_SKIA
+
             var offset = this.TranslatePoint(new Point(0, 0), ZoomBorder) ?? default;
             var bounds = new Rect(
                 offset.X > 0.0 ? -offset.X : 0.0,
@@ -174,16 +158,13 @@ namespace Core2D.Views
             {
                 PresenterView = this,
                 CustomState = customState,
-                // Bounds = ZoomBorder?.Bounds ?? this.Bounds
                 Bounds = bounds
             };
+
             context.Custom(customDrawOperation);
-#else
-            Draw(customState, context);
-#endif
         }
 
-        internal void Draw(CustomState customState, object context)
+        internal static void Draw(CustomState customState, object context)
         {
             switch (customState.PresenterType)
             {

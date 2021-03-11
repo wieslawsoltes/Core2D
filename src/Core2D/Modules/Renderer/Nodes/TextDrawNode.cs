@@ -115,19 +115,11 @@ namespace Core2D.Modules.Renderer.Nodes
 
         public override void OnDraw(object dc, double zoom)
         {
-#if CUSTOM_DRAW
             var context = dc as AP.IDrawingContextImpl;
             if (FormattedText is { })
             {
                 context.DrawText(Stroke.Brush, Origin, FormattedText.PlatformImpl);
             }
-#else
-            var context = dc as AM.DrawingContext;
-            if (FormattedText is { })
-            {
-                context.DrawText(Stroke.Brush, Origin, FormattedText);
-            }
-#endif
         }
     }
 }

@@ -77,7 +77,6 @@ namespace Core2D.Modules.Renderer.Nodes
 
         public override void OnDraw(object dc, double zoom)
         {
-#if CUSTOM_DRAW
             var context = dc as AP.IDrawingContextImpl;
             if (Image.IsFilled)
             {
@@ -88,27 +87,12 @@ namespace Core2D.Modules.Renderer.Nodes
             {
                 context.DrawRectangle(null, Stroke, DestRect);
             }
-#else
-            var context = dc as AM.DrawingContext;
-            if (Image.IsFilled)
-            {
-                context.FillRectangle(Fill, DestRect);
-            }
 
-            if (Image.IsStroked)
-            {
-                context.DrawRectangle(Stroke, DestRect);
-            }
-#endif
             if (ImageCached is { })
             {
                 try
                 {
-#if CUSTOM_DRAW
                     context.DrawBitmap(ImageCached.PlatformImpl, 1.0, SourceRect, DestRect);
-#else
-                    context.DrawImage(ImageCached, SourceRect, DestRect);
-#endif
                 }
                 catch (Exception ex)
                 {

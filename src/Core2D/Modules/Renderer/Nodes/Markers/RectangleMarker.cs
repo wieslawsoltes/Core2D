@@ -12,7 +12,6 @@ namespace Core2D.Modules.Renderer.Nodes.Markers
 
         public override void Draw(object dc)
         {
-#if CUSTOM_DRAW
             var context = dc as AP.IDrawingContextImpl;
             using var rotationDisposable = context.PushPreTransform(Rotation);
 
@@ -25,20 +24,6 @@ namespace Core2D.Modules.Renderer.Nodes.Markers
             {
                 context.DrawRectangle(null, Pen, Rect);
             }
-#else
-            var context = dc as AM.DrawingContext;
-            using var rotationDisposable = context.PushPreTransform(Rotation);
-
-            if (ShapeViewModel.IsFilled)
-            {
-                context.FillRectangle(Brush, Rect);
-            }
-
-            if (ShapeViewModel.IsStroked)
-            {
-                context.DrawRectangle(Pen, Rect);
-            }
-#endif
         }
     }
 }

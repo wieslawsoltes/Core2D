@@ -54,11 +54,7 @@ namespace Core2D.Modules.Renderer.Nodes
                 Stroke = AvaloniaDrawUtil.ToPen(Style, thickness);
             }
 
-#if CUSTOM_DRAW
             var context = dc as AP.IDrawingContextImpl;
-#else
-            var context = dc as AM.DrawingContext;
-#endif
             if (scale != 1.0)
             {
                 using var translateDisposable = context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY));

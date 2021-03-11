@@ -34,7 +34,6 @@ namespace Core2D.Modules.Renderer.Nodes
 
         public override void OnDraw(object dc, double zoom)
         {
-#if CUSTOM_DRAW
             var context = dc as AP.IDrawingContextImpl;
             if (Rectangle.IsFilled)
             {
@@ -45,18 +44,6 @@ namespace Core2D.Modules.Renderer.Nodes
             {
                 context.DrawRectangle(null, Stroke, Rect);
             }
-#else
-            var context = dc as AM.DrawingContext;
-            if (Rectangle.IsFilled)
-            {
-                context.FillRectangle(Fill, Rect);
-            }
-
-            if (Rectangle.IsStroked)
-            {
-                context.DrawRectangle(Stroke, Rect);
-            }
-#endif
         }
     }
 }
