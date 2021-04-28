@@ -4,7 +4,7 @@
     <LangVersion>latest</LangVersion>
  </PropertyGroup>
   <PropertyGroup>
-    <VersionPrefix>0.10.0</VersionPrefix>
+    <VersionPrefix>0.10.2</VersionPrefix>
     <VersionSuffix></VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
@@ -26,12 +26,12 @@
     <SystemCollectionsImmutableVersion>5.0.0</SystemCollectionsImmutableVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
-    <SvgSkiaVersion>0.5.0</SvgSkiaVersion>
-    <AvaloniaVersion>0.10.0</AvaloniaVersion>
-    <AvaloniaAvaloniaEditVersion>0.10.0-rc1</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>0.10.0</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>3.0.0</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>0.10.0</ThemeEditorControlsColorPickerVersion>
+    <SvgSkiaVersion>0.5.2</SvgSkiaVersion>
+    <AvaloniaVersion>0.10.2</AvaloniaVersion>
+    <AvaloniaAvaloniaEditVersion>0.10.0</AvaloniaAvaloniaEditVersion>
+    <AvaloniaXamlBehaviorsVersion>0.10.2</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>3.2.0</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>0.10.2</ThemeEditorControlsColorPickerVersion>
     <SystemCommandLineVersion>2.0.0-beta1.20574.7</SystemCommandLineVersion>
   </PropertyGroup>
 </Project>
