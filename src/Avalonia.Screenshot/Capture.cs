@@ -125,7 +125,7 @@ namespace Avalonia.Screenshot
     {
         public static void AttachCapture(this TopLevel root)
         {
-            AttachCapture(root, new KeyGesture(Key.F12));
+            AttachCapture(root, new KeyGesture(Key.F6));
         }
 
         public static void AttachCapture(this TopLevel root, KeyGesture gesture)
