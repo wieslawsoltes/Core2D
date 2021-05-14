@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Avalonia.Screenshot\Avalonia.Screenshot.csproj" />
     <ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
