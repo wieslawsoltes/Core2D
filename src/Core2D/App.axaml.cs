@@ -95,7 +95,7 @@ namespace Core2D
                 Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}",
                 Description = "A multi-platform data driven 2D diagram editor.",
                 Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
-                License = "Licensed under the AGPL-3.0 License. See LICENSE file in the project root for full license information.",
+                License = "Licensed under the MIT License. See LICENSE file in the project root for full license information.",
                 OperatingSystem = $"{runtimeInfo.OperatingSystem}",
                 IsDesktop = runtimeInfo.IsDesktop,
                 IsMobile = runtimeInfo.IsMobile,

@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Core2D.Screenshot;
+using Avalonia.Screenshot;
 
 namespace Core2D.Views
 {
@@ -11,7 +11,7 @@ namespace Core2D.Views
         {
             InitializeComponent();
             this.AttachDevTools();
-            this.AttachScreenshot();
+            this.AttachCapture();
         }
 
         private void InitializeComponent()
