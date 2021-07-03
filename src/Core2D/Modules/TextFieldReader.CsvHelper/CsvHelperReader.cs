@@ -31,15 +31,14 @@ namespace Core2D.Modules.TextFieldReader.CsvHelper
             var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
             {
                 Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                CultureInfo = CultureInfo.CurrentCulture,
                 AllowComments = true,
                 Comment = '#'
             };
 
             using var csvParser = new CSV.CsvParser(reader, configuration);
-            while (true)
+            while (csvParser.Read())
             {
-                var fields = csvParser.Read();
+                var fields = csvParser.Record;
                 if (fields is null)
                 {
                     break;
