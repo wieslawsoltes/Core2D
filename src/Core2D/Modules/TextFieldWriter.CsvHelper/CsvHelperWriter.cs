@@ -28,8 +28,7 @@ namespace Core2D.Modules.TextFieldWriter.CsvHelper
 
             var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
             {
-                Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator,
-                CultureInfo = CultureInfo.CurrentCulture
+                Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator
             };
 
             using (var csvWriter = new CSV.CsvWriter(writer, configuration))
