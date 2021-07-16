@@ -16,6 +16,13 @@ namespace Core2D.ViewModels.Docking
 {
     public class DockFactory : Factory
     {
+        private IDocumentDock? _documentDock;
+        private IRootDock? _rootDock;
+
+        public IDocumentDock? DocumentDock => _documentDock;
+
+        public IRootDock? RootDock => _rootDock;
+
         public override IDocumentDock CreateDocumentDock()
         {
             return new PageDocumentDock();
@@ -228,7 +235,7 @@ namespace Core2D.ViewModels.Docking
                 VisibleDockables = CreateList<IDockable>(),
                 CanCreateDocument = true
             };
-            
+
             // Home
 
             var homeLayout = new ProportionalDock
@@ -333,6 +340,9 @@ namespace Core2D.ViewModels.Docking
             rootDock.ActiveDockable = dashboardRootDock;
             rootDock.DefaultDockable = dashboardRootDock;
             rootDock.VisibleDockables = CreateList<IDockable>(dashboardRootDock, homeRootDock);
+
+            _documentDock = documentDock;
+            _rootDock = rootDock;
 
             return rootDock;
         }
