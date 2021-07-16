@@ -3,7 +3,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Core2D.ViewModels;
-using ReactiveUI;
+using Dock.Model.ReactiveUI.Core;
 
 namespace Core2D
 {
@@ -22,7 +22,7 @@ namespace Core2D
 
         public bool Match(object data)
         {
-            return data is ViewModelBase or ReactiveObject;
+            return data is ViewModelBase or DockableBase;
         }
     }
 }

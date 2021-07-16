@@ -48,7 +48,8 @@ namespace Core2D
             }
 
             var viewModelBaseSymbol = compilation.GetTypeByMetadataName("Core2D.ViewModels.ViewModelBase");
-            if (viewModelBaseSymbol is null)
+            var dockableBaseSymbol = compilation.GetTypeByMetadataName("Dock.Model.ReactiveUI.Core.DockableBase");
+            if (viewModelBaseSymbol is null || dockableBaseSymbol is null)
             {
                 return;
             }
@@ -82,6 +83,11 @@ namespace Core2D
                                 break;
                             }
                             if (SymbolEqualityComparer.Default.Equals(baseType, viewModelBaseSymbol))
+                            {
+                                namedTypeSymbolViewModels.Add(namedTypeSymbol);
+                                break;
+                            }
+                            if (SymbolEqualityComparer.Default.Equals(baseType, dockableBaseSymbol))
                             {
                                 namedTypeSymbolViewModels.Add(namedTypeSymbol);
                                 break;
