@@ -240,7 +240,6 @@ namespace Core2D.ViewModels.Docking
             {
                 Id = "HomeView",
                 Title = "Home",
-                Proportion = 1,
                 ActiveDockable = homeLayout,
                 VisibleDockables = CreateList<IDockable>(homeLayout)
             };
@@ -264,9 +263,9 @@ namespace Core2D.ViewModels.Docking
                     homeStatusBarViewModel
                 )
             };
-            
+  
             // Dashboard
-            
+ 
             var dashboardMenuViewModel = new DashboardMenuViewModel()
             {
                 Id = "DashboardMenuView",
