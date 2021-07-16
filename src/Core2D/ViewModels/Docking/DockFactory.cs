@@ -254,9 +254,9 @@ namespace Core2D.ViewModels.Docking
                 Proportion = 0
             };
 
-            var homeProportionalDock = new ProportionalDock
+            var homeDock = new ProportionalDock
             {
-                Id = "Home",
+                Id = "HomeDock",
                 Proportion = 1,
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>
@@ -275,20 +275,19 @@ namespace Core2D.ViewModels.Docking
             {
                 Id = "DashboardMenuView",
                 Title = "Dashboard Menu",
-                Proportion = 0
+                Proportion = 0.1
             };
 
             var dashboardViewModel = new DashboardViewModel
             {
                 Id = "DashboardView",
                 Title = "Dashboard",
-                Proportion = 1
+                Proportion = 0.9
             };
 
-            var dashboardProportionalDock = new ProportionalDock
+            var dashboardDock = new ProportionalDock
             {
-                Id = "Dashboard",
-                Proportion = 1,
+                Id = "DashboardDock",
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>
                 (                    
@@ -297,15 +296,29 @@ namespace Core2D.ViewModels.Docking
                     dashboardViewModel
                 )
             };
+            
+            var dashboardRootDock = CreateRootDock();
+            dashboardRootDock.Id = "Dashboard";
+            dashboardRootDock.IsCollapsable = false;
+            dashboardRootDock.ActiveDockable = dashboardDock;
+            dashboardRootDock.DefaultDockable = dashboardDock;
+            dashboardRootDock.VisibleDockables = CreateList<IDockable>(dashboardDock);
+
+            var homeRootDock = CreateRootDock();
+            homeRootDock.Id = "Home";
+            homeRootDock.IsCollapsable = false;
+            homeRootDock.ActiveDockable = homeDock;
+            homeRootDock.DefaultDockable = homeDock;
+            homeRootDock.VisibleDockables = CreateList<IDockable>(homeDock);
 
             // Root
 
             var rootDock = CreateRootDock();
-
+            homeRootDock.Id = "Root";
             rootDock.IsCollapsable = false;
-            rootDock.ActiveDockable = dashboardProportionalDock;
-            rootDock.DefaultDockable = homeProportionalDock;
-            rootDock.VisibleDockables = CreateList<IDockable>(dashboardProportionalDock, homeProportionalDock);
+            rootDock.ActiveDockable = dashboardRootDock;
+            rootDock.DefaultDockable = dashboardRootDock;
+            rootDock.VisibleDockables = CreateList<IDockable>(dashboardRootDock, homeRootDock);
 
             return rootDock;
         }
