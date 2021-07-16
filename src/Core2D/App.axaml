@@ -11,6 +11,7 @@
         <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
         <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml"/>
         <StyleInclude Source="avares://Core2D/Icons.axaml" />
+        <StyleInclude Source="avares://Core2D/Dock.axaml" />
     </Application.Styles>
     <Application.DataTemplates>
         <local:ViewLocator />
