@@ -219,6 +219,7 @@ namespace Core2D.ViewModels.Docking
 
             var homeLayout = new ProportionalDock
             {
+                Proportion = 1,
                 Orientation = Orientation.Horizontal,
                 VisibleDockables = CreateList<IDockable>
                 (
@@ -233,13 +234,15 @@ namespace Core2D.ViewModels.Docking
             var homeMenuViewModel = new HomeMenuViewModel()
             {
                 Id = "HomeMenuView",
-                Title = "Home Menu"
+                Title = "Home Menu",
+                Proportion = 0
             };
 
             var homeViewModel = new HomeViewModel
             {
                 Id = "HomeView",
                 Title = "Home",
+                Proportion = 1,
                 ActiveDockable = homeLayout,
                 VisibleDockables = CreateList<IDockable>(homeLayout)
             };
@@ -247,17 +250,21 @@ namespace Core2D.ViewModels.Docking
             var homeStatusBarViewModel = new HomeStatusBarViewModel()
             {
                 Id = "HomeStatusBarView",
-                Title = "Home StatusBar"
+                Title = "Home StatusBar",
+                Proportion = 0
             };
 
             var homeProportionalDock = new ProportionalDock
             {
                 Id = "Home",
+                Proportion = 1,
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>
                 (                    
                     homeMenuViewModel,
+                    new SplitterDockable(),
                     homeViewModel,
+                    new SplitterDockable(),
                     homeStatusBarViewModel
                 )
             };
@@ -283,6 +290,7 @@ namespace Core2D.ViewModels.Docking
                 VisibleDockables = CreateList<IDockable>
                 (                    
                     dashboardMenuViewModel,
+                    new SplitterDockable(),
                     dashboardViewModel
                 )
             };
