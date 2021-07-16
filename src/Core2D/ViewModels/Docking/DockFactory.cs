@@ -274,18 +274,21 @@ namespace Core2D.ViewModels.Docking
             var dashboardMenuViewModel = new DashboardMenuViewModel()
             {
                 Id = "DashboardMenuView",
-                Title = "Dashboard Menu"
+                Title = "Dashboard Menu",
+                Proportion = 0
             };
 
             var dashboardViewModel = new DashboardViewModel
             {
                 Id = "DashboardView",
-                Title = "Dashboard"
+                Title = "Dashboard",
+                Proportion = 1
             };
 
             var dashboardProportionalDock = new ProportionalDock
             {
                 Id = "Dashboard",
+                Proportion = 1,
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>
                 (                    
