@@ -219,7 +219,6 @@ namespace Core2D.ViewModels.Docking
 
             var homeLayout = new ProportionalDock
             {
-                Proportion = 1,
                 Orientation = Orientation.Horizontal,
                 VisibleDockables = CreateList<IDockable>
                 (
@@ -234,8 +233,7 @@ namespace Core2D.ViewModels.Docking
             var homeMenuViewModel = new HomeMenuViewModel()
             {
                 Id = "HomeMenuView",
-                Title = "Home Menu",
-                Proportion = 0
+                Title = "Home Menu"
             };
 
             var homeViewModel = new HomeViewModel
@@ -250,14 +248,12 @@ namespace Core2D.ViewModels.Docking
             var homeStatusBarViewModel = new HomeStatusBarViewModel()
             {
                 Id = "HomeStatusBarView",
-                Title = "Home StatusBar",
-                Proportion = 0
+                Title = "Home StatusBar"
             };
 
             var homeDock = new ProportionalDock
             {
                 Id = "HomeDock",
-                Proportion = 1,
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>
                 (                    
@@ -274,15 +270,13 @@ namespace Core2D.ViewModels.Docking
             var dashboardMenuViewModel = new DashboardMenuViewModel()
             {
                 Id = "DashboardMenuView",
-                Title = "Dashboard Menu",
-                Proportion = 0.1
+                Title = "Dashboard Menu"
             };
 
             var dashboardViewModel = new DashboardViewModel
             {
                 Id = "DashboardView",
-                Title = "Dashboard",
-                Proportion = 0.9
+                Title = "Dashboard"
             };
 
             var dashboardDock = new ProportionalDock
@@ -314,7 +308,7 @@ namespace Core2D.ViewModels.Docking
             // Root
 
             var rootDock = CreateRootDock();
-            homeRootDock.Id = "Root";
+            rootDock.Id = "Root";
             rootDock.IsCollapsable = false;
             rootDock.ActiveDockable = dashboardRootDock;
             rootDock.DefaultDockable = dashboardRootDock;
