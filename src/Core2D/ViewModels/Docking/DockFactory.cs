@@ -31,6 +31,16 @@ namespace Core2D.ViewModels.Docking
                 Title = "Project"
             };
 
+            var projectDock = new ToolDock
+            {
+                Id = "ProjectDock",
+                Title = "Project",
+                ActiveDockable = projectViewModel,
+                VisibleDockables = CreateList<IDockable>(projectViewModel),
+                Alignment = Alignment.Left,
+                GripMode = GripMode.AutoHide
+            };
+
             var leftProportionalDock = new ProportionalDock
             {
                 Proportion = 0.25,
@@ -38,13 +48,7 @@ namespace Core2D.ViewModels.Docking
                 ActiveDockable = null,
                 VisibleDockables = CreateList<IDockable>
                 (
-                    new ToolDock
-                    {
-                        ActiveDockable = projectViewModel,
-                        VisibleDockables = CreateList<IDockable>(projectViewModel),
-                        Alignment = Alignment.Left,
-                        GripMode = GripMode.Hidden
-                    }
+                    projectDock
                 )
             };
 
