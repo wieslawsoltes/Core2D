@@ -195,6 +195,19 @@ namespace Core2D.ViewModels.Docking
 
             // Right Dock
 
+            var propertiesDock = new ToolDock
+            {
+                Id = "PropertiesDock",
+                Title = "Properties",
+                ActiveDockable = propertiesToolDock,
+                VisibleDockables = CreateList<IDockable>(
+                    propertiesToolDock,
+                    librariesToolDock,
+                    optionsToolDock),
+                Alignment = Alignment.Right,
+                GripMode = GripMode.AutoHide
+            };
+
             var rightProportionalDock = new ProportionalDock
             {
                 Proportion = 0.25,
@@ -202,16 +215,7 @@ namespace Core2D.ViewModels.Docking
                 ActiveDockable = null,
                 VisibleDockables = CreateList<IDockable>
                 (
-                    new ToolDock
-                    {
-                        ActiveDockable = propertiesToolDock,
-                        VisibleDockables = CreateList<IDockable>(
-                            propertiesToolDock, 
-                            librariesToolDock,
-                            optionsToolDock),
-                        Alignment = Alignment.Right,
-                        GripMode = GripMode.Hidden
-                    }
+                    propertiesDock
                 )
             };
 
