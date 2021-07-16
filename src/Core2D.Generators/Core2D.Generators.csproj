@@ -7,6 +7,10 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <IncludeBuildOutput>False</IncludeBuildOutput>
+    <NoPackageAnalysis>True</NoPackageAnalysis>
+    <IsRoslynComponent>true</IsRoslynComponent>
   </PropertyGroup>
 
   <ItemGroup>
