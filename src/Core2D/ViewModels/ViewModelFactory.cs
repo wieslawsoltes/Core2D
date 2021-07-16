@@ -21,11 +21,11 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels
 {
-    public partial class Factory : IFactory
+    public partial class ViewModelFactory : IViewModelFactory
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public Factory(IServiceProvider serviceProvider)
+        public ViewModelFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

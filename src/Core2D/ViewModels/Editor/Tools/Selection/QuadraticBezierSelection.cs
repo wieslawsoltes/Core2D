@@ -30,8 +30,8 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void ToStatePoint3()
         {
-            _helperPoint1 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
-            _helperPoint3 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _helperPoint1 = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _helperPoint3 = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
             _layer.Shapes = _layer.Shapes.Add(_helperPoint3);
@@ -39,13 +39,13 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void ToStatePoint2()
         {
-            _line12 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _styleViewModel);
+            _line12 = _serviceProvider.GetService<IViewModelFactory>().CreateLineShape(0, 0, _styleViewModel);
             _line12.State |= ShapeStateFlags.Thickness;
 
-            _line32 = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _styleViewModel);
+            _line32 = _serviceProvider.GetService<IViewModelFactory>().CreateLineShape(0, 0, _styleViewModel);
             _line32.State |= ShapeStateFlags.Thickness;
 
-            _helperPoint2 = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _helperPoint2 = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_line12);
             _layer.Shapes = _layer.Shapes.Add(_line32);

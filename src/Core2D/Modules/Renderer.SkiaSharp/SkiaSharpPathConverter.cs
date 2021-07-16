@@ -28,7 +28,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             {
                 return null;
             }
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var first = shapes.FirstOrDefault();
             var style = first.Style is { } ?
                 (ShapeStyleViewModel)first.Style?.Copy(null) :
@@ -50,7 +50,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             {
                 return null;
             }
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 (ShapeStyleViewModel)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
@@ -71,7 +71,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             {
                 return null;
             }
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 (ShapeStyleViewModel)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
@@ -108,7 +108,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             {
                 return null;
             }
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 (ShapeStyleViewModel)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
@@ -142,7 +142,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 return null;
             }
             var result = path.ToWinding();
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 (ShapeStyleViewModel)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
@@ -163,7 +163,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             {
                 return null;
             }
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 (ShapeStyleViewModel)shape.Style?.Copy(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
@@ -206,7 +206,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 return null;
             }
 
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var shape = shapes.FirstOrDefault();
             var style = shape.Style is { } ?
                 (ShapeStyleViewModel)shape.Style?.Copy(null) :
@@ -229,7 +229,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             {
                 return null;
             }
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
             var pathShape = factory.CreatePathShape(

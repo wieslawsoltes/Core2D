@@ -50,7 +50,7 @@ namespace Core2D.ViewModels.Editor
         private readonly Lazy<DataFlow> _dataFlow;
         private readonly Lazy<IShapeRenderer> _renderer;
         private readonly Lazy<IFileSystem> _fileSystem;
-        private readonly Lazy<IFactory> _factory;
+        private readonly Lazy<IViewModelFactory> _factory;
         private readonly Lazy<IContainerFactory> _containerFactory;
         private readonly Lazy<IShapeFactory> _shapeFactory;
         private readonly Lazy<ITextClipboard> _textClipboard;
@@ -84,7 +84,7 @@ namespace Core2D.ViewModels.Editor
 
         public IFileSystem FileSystem => _fileSystem.Value;
 
-        public IFactory Factory => _factory.Value;
+        public IViewModelFactory ViewModelFactory => _factory.Value;
 
         public IContainerFactory ContainerFactory => _containerFactory.Value;
 
@@ -135,7 +135,7 @@ namespace Core2D.ViewModels.Editor
             _dataFlow = serviceProvider.GetServiceLazily<DataFlow>();
             _renderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
             _fileSystem = serviceProvider.GetServiceLazily<IFileSystem>();
-            _factory = serviceProvider.GetServiceLazily<IFactory>();
+            _factory = serviceProvider.GetServiceLazily<IViewModelFactory>();
             _containerFactory = serviceProvider.GetServiceLazily<IContainerFactory>();
             _shapeFactory = serviceProvider.GetServiceLazily<IShapeFactory>();
             _textClipboard = serviceProvider.GetServiceLazily<ITextClipboard>();
@@ -267,7 +267,7 @@ namespace Core2D.ViewModels.Editor
             {
                 var page =
                     ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
-                    ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
+                    ?? ViewModelFactory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
                 Project?.AddPage(document, page);
                 Project?.SetCurrentContainer(page);
@@ -278,7 +278,7 @@ namespace Core2D.ViewModels.Editor
         {
             var page =
                 ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
-                ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
+                ?? ViewModelFactory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
             Project?.AddPage(selected, page);
             Project?.SetCurrentContainer(page);
@@ -288,7 +288,7 @@ namespace Core2D.ViewModels.Editor
         {
             var document =
                 ContainerFactory?.GetDocument(Project, ProjectEditorConfiguration.DefaultDocumentName)
-                ?? Factory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
+                ?? ViewModelFactory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
 
             Project?.AddDocument(document);
             Project?.SetCurrentDocument(document);
@@ -298,7 +298,7 @@ namespace Core2D.ViewModels.Editor
         public void OnNewProject()
         {
             OnUnload();
-            OnLoad(ContainerFactory?.GetProject() ?? Factory.CreateProjectContainer(), string.Empty);
+            OnLoad(ContainerFactory?.GetProject() ?? ViewModelFactory.CreateProjectContainer(), string.Empty);
             CanvasPlatform?.ResetZoom?.Invoke();
             CanvasPlatform?.InvalidateControl?.Invoke();
         }
@@ -311,7 +311,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     if (!string.IsNullOrEmpty(path) && FileSystem.Exists(path))
                     {
-                        var project = Factory.OpenProjectContainer(path, FileSystem, JsonSerializer);
+                        var project = ViewModelFactory.OpenProjectContainer(path, FileSystem, JsonSerializer);
                         if (project is { })
                         {
                             OnOpenProjectImpl(project, path);
@@ -362,7 +362,7 @@ namespace Core2D.ViewModels.Editor
                         OnHideDecorator();
                     }
 
-                    Factory.SaveProjectContainer(Project, path, FileSystem, JsonSerializer);
+                    ViewModelFactory.SaveProjectContainer(Project, path, FileSystem, JsonSerializer);
                     OnAddRecent(path, Project.Name);
 
                     if (string.IsNullOrEmpty(ProjectPath))
@@ -1949,7 +1949,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnAddDatabase()
         {
-            var db = Factory.CreateDatabase(ProjectEditorConfiguration.DefaultDatabaseName);
+            var db = ViewModelFactory.CreateDatabase(ProjectEditorConfiguration.DefaultDatabaseName);
             Project.AddDatabase(db);
             Project.SetCurrentDatabase(db);
         }
@@ -1962,7 +1962,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnAddColumn(DatabaseViewModel db)
         {
-            Project.AddColumn(db, Factory.CreateColumn(db, ProjectEditorConfiguration.DefaulColumnName));
+            Project.AddColumn(db, ViewModelFactory.CreateColumn(db, ProjectEditorConfiguration.DefaulColumnName));
         }
 
         public void OnRemoveColumn(ColumnViewModel column)
@@ -1972,7 +1972,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnAddRecord(DatabaseViewModel db)
         {
-            Project.AddRecord(db, Factory.CreateRecord(db, ProjectEditorConfiguration.DefaulValue));
+            Project.AddRecord(db, ViewModelFactory.CreateRecord(db, ProjectEditorConfiguration.DefaulValue));
         }
 
         public void OnRemoveRecord(RecordViewModel record)
@@ -2012,7 +2012,7 @@ namespace Core2D.ViewModels.Editor
         {
             if (owner is IDataObject data)
             {
-                Project.AddProperty(data, Factory.CreateProperty(owner, ProjectEditorConfiguration.DefaulPropertyName, ProjectEditorConfiguration.DefaulValue));
+                Project.AddProperty(data, ViewModelFactory.CreateProperty(owner, ProjectEditorConfiguration.DefaulPropertyName, ProjectEditorConfiguration.DefaulValue));
             }
         }
 
@@ -2023,7 +2023,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnAddGroupLibrary()
         {
-            var gl = Factory.CreateLibrary<GroupShapeViewModel>(ProjectEditorConfiguration.DefaulGroupLibraryName);
+            var gl = ViewModelFactory.CreateLibrary<GroupShapeViewModel>(ProjectEditorConfiguration.DefaulGroupLibraryName);
             Project.AddGroupLibrary(gl);
             Project.SetCurrentGroupLibrary(gl);
         }
@@ -2070,7 +2070,7 @@ namespace Core2D.ViewModels.Editor
         {
             if (container is { })
             {
-                Project.AddLayer(container, Factory.CreateLayerContainer(ProjectEditorConfiguration.DefaultLayerName, container));
+                Project.AddLayer(container, ViewModelFactory.CreateLayerContainer(ProjectEditorConfiguration.DefaultLayerName, container));
             }
         }
 
@@ -2088,7 +2088,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnAddStyleLibrary()
         {
-            var sl = Factory.CreateLibrary<ShapeStyleViewModel>(ProjectEditorConfiguration.DefaulStyleLibraryName);
+            var sl = ViewModelFactory.CreateLibrary<ShapeStyleViewModel>(ProjectEditorConfiguration.DefaulStyleLibraryName);
             Project.AddStyleLibrary(sl);
             Project.SetCurrentStyleLibrary(sl);
         }
@@ -2114,7 +2114,7 @@ namespace Core2D.ViewModels.Editor
             }
             else
             {
-                var style = Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                var style = ViewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                 Project.AddStyle(libraryViewModel, style);
             }
         }
@@ -2165,7 +2165,7 @@ namespace Core2D.ViewModels.Editor
                 var template = ContainerFactory.GetTemplate(Project, "Empty");
                 if (template is null)
                 {
-                    template = Factory.CreateTemplateContainer(ProjectEditorConfiguration.DefaultTemplateName);
+                    template = ViewModelFactory.CreateTemplateContainer(ProjectEditorConfiguration.DefaultTemplateName);
                 }
 
                 Project.AddTemplate(template);
@@ -2194,7 +2194,7 @@ namespace Core2D.ViewModels.Editor
         {
             if (Project is { })
             {
-                var script = Factory.CreateScript(ProjectEditorConfiguration.DefaultScriptName);
+                var script = ViewModelFactory.CreateScript(ProjectEditorConfiguration.DefaultScriptName);
                 Project.AddScript(script);
             }
         }
@@ -2280,7 +2280,7 @@ namespace Core2D.ViewModels.Editor
             {
                 var page =
                     ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
-                    ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
+                    ?? ViewModelFactory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
                 Project.AddPage(Project.CurrentDocument, page);
                 Project.SetCurrentContainer(page);
@@ -2296,7 +2296,7 @@ namespace Core2D.ViewModels.Editor
                     int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
                         ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
-                        ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
+                        ?? ViewModelFactory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
                     Project.AddPageAt(Project.CurrentDocument, page, index);
                     Project.SetCurrentContainer(page);
@@ -2313,7 +2313,7 @@ namespace Core2D.ViewModels.Editor
                     int index = Project.CurrentDocument.Pages.IndexOf(selected);
                     var page =
                         ContainerFactory?.GetPage(Project, ProjectEditorConfiguration.DefaultPageName)
-                        ?? Factory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
+                        ?? ViewModelFactory.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
 
                     Project.AddPageAt(Project.CurrentDocument, page, index + 1);
                     Project.SetCurrentContainer(page);
@@ -2327,7 +2327,7 @@ namespace Core2D.ViewModels.Editor
             {
                 var document =
                     ContainerFactory?.GetDocument(Project, ProjectEditorConfiguration.DefaultDocumentName)
-                    ?? Factory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
+                    ?? ViewModelFactory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
 
                 Project.AddDocument(document);
                 Project.SetCurrentDocument(document);
@@ -2344,7 +2344,7 @@ namespace Core2D.ViewModels.Editor
                     int index = Project.Documents.IndexOf(selected);
                     var document =
                         ContainerFactory?.GetDocument(Project, ProjectEditorConfiguration.DefaultDocumentName)
-                        ?? Factory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
+                        ?? ViewModelFactory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
 
                     Project.AddDocumentAt(document, index);
                     Project.SetCurrentDocument(document);
@@ -2362,7 +2362,7 @@ namespace Core2D.ViewModels.Editor
                     int index = Project.Documents.IndexOf(selected);
                     var document =
                         ContainerFactory?.GetDocument(Project, ProjectEditorConfiguration.DefaultDocumentName)
-                        ?? Factory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
+                        ?? ViewModelFactory.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
 
                     Project.AddDocumentAt(document, index + 1);
                     Project.SetCurrentDocument(document);
@@ -2643,7 +2643,7 @@ namespace Core2D.ViewModels.Editor
                         // Create Imported database.
                         if (Project?.CurrentDatabase is null && shape.Record.Owner is DatabaseViewModel owner)
                         {
-                            var db = Factory.CreateDatabase(
+                            var db = ViewModelFactory.CreateDatabase(
                                 ProjectEditorConfiguration.ImportedDatabaseName,
                                 owner.Columns);
                             Project.AddDatabase(db);
@@ -2900,13 +2900,13 @@ namespace Core2D.ViewModels.Editor
         {
             var selected = Project.CurrentStyleLibrary?.Selected is { } ?
                 Project.CurrentStyleLibrary.Selected :
-                Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                ViewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (ShapeStyleViewModel)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
             decimal sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
             decimal sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
 
-            var image = Factory.CreateImageShape((double)sx, (double)sy, style, key);
+            var image = ViewModelFactory.CreateImageShape((double)sx, (double)sy, style, key);
             image.BottomRight.X = (double)(sx + 320m);
             image.BottomRight.Y = (double)(sy + 180m);
 
@@ -3017,13 +3017,13 @@ namespace Core2D.ViewModels.Editor
         {
             var selected = Project.CurrentStyleLibrary?.Selected is { } ?
                 Project.CurrentStyleLibrary.Selected :
-                Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                ViewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (ShapeStyleViewModel)selected.Copy(null);
             var layer = Project?.CurrentContainer?.CurrentLayer;
             decimal sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
             decimal sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
 
-            var g = Factory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
+            var g = ViewModelFactory.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
 
             g.Record = record;
 
@@ -3041,19 +3041,19 @@ namespace Core2D.ViewModels.Editor
                 if (column.IsVisible)
                 {
                     var binding = "{" + db.Columns[i].Name + "}";
-                    var text = Factory.CreateTextShape(px, py, px + width, py + height, style, binding);
+                    var text = ViewModelFactory.CreateTextShape(px, py, px + width, py + height, style, binding);
                     g.AddShape(text);
                     py += height;
                 }
             }
 
-            var rectangle = Factory.CreateRectangleShape((double)sx, (double)sy, (double)sx + width, (double)sy + (length * height), style);
+            var rectangle = ViewModelFactory.CreateRectangleShape((double)sx, (double)sy, (double)sx + width, (double)sy + (length * height), style);
             g.AddShape(rectangle);
 
-            var pt = Factory.CreatePointShape((double)sx + (width / 2), (double)sy);
-            var pb = Factory.CreatePointShape((double)sx + (width / 2), (double)sy + (length * height));
-            var pl = Factory.CreatePointShape((double)sx, (double)sy + ((length * height) / 2));
-            var pr = Factory.CreatePointShape((double)sx + width, (double)sy + ((length * height) / 2));
+            var pt = ViewModelFactory.CreatePointShape((double)sx + (width / 2), (double)sy);
+            var pb = ViewModelFactory.CreatePointShape((double)sx + (width / 2), (double)sy + (length * height));
+            var pl = ViewModelFactory.CreatePointShape((double)sx, (double)sy + ((length * height) / 2));
+            var pr = ViewModelFactory.CreatePointShape((double)sx + width, (double)sy + ((length * height) / 2));
 
             g.AddConnectorAsNone(pt);
             g.AddConnectorAsNone(pb);
@@ -3460,7 +3460,7 @@ namespace Core2D.ViewModels.Editor
                     point.Y = nearest.Y;
                 }
 
-                var split = Factory.CreateLineShape(
+                var split = ViewModelFactory.CreateLineShape(
                     x, y,
                     (ShapeStyleViewModel)line.Style.Copy(null),
                     line.IsStroked);
@@ -3516,7 +3516,7 @@ namespace Core2D.ViewModels.Editor
             LineShapeViewModel split;
             if (line.Start.X > line.End.X || line.Start.Y > line.End.Y)
             {
-                split = Factory.CreateLineShape(
+                split = ViewModelFactory.CreateLineShape(
                     p0,
                     line.End,
                     (ShapeStyleViewModel)line.Style.Copy(null),
@@ -3526,7 +3526,7 @@ namespace Core2D.ViewModels.Editor
             }
             else
             {
-                split = Factory.CreateLineShape(
+                split = ViewModelFactory.CreateLineShape(
                     p1,
                     line.End,
                     (ShapeStyleViewModel)line.Style.Copy(null),
@@ -3629,7 +3629,7 @@ namespace Core2D.ViewModels.Editor
             if (layer is { } && shapes is { })
             {
                 var source = layer.Shapes.ToBuilder();
-                var group = Factory.CreateGroupShape(name);
+                var group = ViewModelFactory.CreateGroupShape(name);
                 group.Group(shapes, source);
 
                 var previous = layer.Shapes;

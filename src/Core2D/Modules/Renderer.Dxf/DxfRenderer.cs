@@ -32,8 +32,8 @@ namespace Core2D.Modules.Renderer.Dxf
 
         public DxfRenderer(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _state = serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = serviceProvider.GetService<IFactory>().CreateCache<string, DXFO.ImageDefinition>();
+            _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
+            _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, DXFO.ImageDefinition>();
         }
 
         private static double s_lineweightFactor = 96.0 / 2540.0;

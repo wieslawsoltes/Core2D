@@ -36,7 +36,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
         [AutoNotify] private bool _isFilled;
         [AutoNotify] private LayerContainerViewModel _layer;
         [AutoNotify] private IList<BaseShapeViewModel> _shapes;
-        private readonly IFactory _factory;
+        private readonly IViewModelFactory _viewModelFactory;
         private readonly decimal _sizeLarge;
         private readonly decimal _sizeSmall;
         private readonly decimal _rotateDistance;
@@ -71,25 +71,25 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
         public BoxDecoratorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _factory = serviceProvider.GetService<IFactory>();
+            _viewModelFactory = serviceProvider.GetService<IViewModelFactory>();
             _sizeLarge = 4m;
             _sizeSmall = 4m;
             _rotateDistance = -16.875m;
-            _handleStyle = _factory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
-            _boundsStyle = _factory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-            _selectedHandleStyle = _factory.CreateShapeStyle("SelectedHandle", 255, 0, 191, 255, 255, 0, 191, 255, 2.0);
-            _selectedBoundsStyle = _factory.CreateShapeStyle("SelectedBounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-            _rotateHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rotateHandle");
-            _topLeftHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topLeftHandle");
-            _topRightHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topRightHandle");
-            _bottomLeftHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomLeftHandle");
-            _bottomRightHandle = _factory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomRightHandle");
-            _topHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topHandle");
-            _bottomHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomHandle");
-            _leftHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_leftHandle");
-            _rightHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
-            _boundsHandle = _factory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_boundsHandle");
-            _rotateLine = _factory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
+            _handleStyle = _viewModelFactory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
+            _boundsStyle = _viewModelFactory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
+            _selectedHandleStyle = _viewModelFactory.CreateShapeStyle("SelectedHandle", 255, 0, 191, 255, 255, 0, 191, 255, 2.0);
+            _selectedBoundsStyle = _viewModelFactory.CreateShapeStyle("SelectedBounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
+            _rotateHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rotateHandle");
+            _topLeftHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topLeftHandle");
+            _topRightHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topRightHandle");
+            _bottomLeftHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomLeftHandle");
+            _bottomRightHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomRightHandle");
+            _topHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topHandle");
+            _bottomHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomHandle");
+            _leftHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_leftHandle");
+            _rightHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
+            _boundsHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_boundsHandle");
+            _rotateLine = _viewModelFactory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
             _handles = new List<BaseShapeViewModel>
             {
                 //_rotateHandle,

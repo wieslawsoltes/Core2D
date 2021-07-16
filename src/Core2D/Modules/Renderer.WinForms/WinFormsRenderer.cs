@@ -24,8 +24,8 @@ namespace Core2D.Modules.Renderer.WinForms
 
         public WinFormsRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0) : base(serviceProvider)
         {
-            _state = serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = serviceProvider.GetService<IFactory>().CreateCache<string, Image>(bi => bi.Dispose());
+            _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
+            _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, Image>(bi => bi.Dispose());
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
         }

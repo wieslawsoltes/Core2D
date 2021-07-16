@@ -21,7 +21,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         PointShapeViewModel IShapeFactory.Point(double x, double y, bool isStandalone)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var point = factory.CreatePointShape(x, y);
@@ -34,7 +34,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         LineShapeViewModel IShapeFactory.Line(double x1, double y1, double x2, double y2, bool isStroked)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -51,7 +51,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         LineShapeViewModel IShapeFactory.Line(PointShapeViewModel start, PointShapeViewModel end, bool isStroked)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -68,7 +68,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         ArcShapeViewModel IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -88,7 +88,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         ArcShapeViewModel IShapeFactory.Arc(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, bool isStroked, bool isFilled)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -108,7 +108,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         CubicBezierShapeViewModel IShapeFactory.CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -128,7 +128,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         CubicBezierShapeViewModel IShapeFactory.CubicBezier(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, bool isStroked, bool isFilled)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -148,7 +148,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         QuadraticBezierShapeViewModel IShapeFactory.QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -167,7 +167,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         QuadraticBezierShapeViewModel IShapeFactory.QuadraticBezier(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, bool isStroked, bool isFilled)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -186,13 +186,13 @@ namespace Core2D.ViewModels.Editor.Factories
 
         PathGeometryViewModel IShapeFactory.Geometry(FillRule fillRule)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             return factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), fillRule);
         }
 
         PathShapeViewModel IShapeFactory.Path(PathGeometryViewModel geometry, bool isStroked, bool isFilled)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -210,7 +210,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         RectangleShapeViewModel IShapeFactory.Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -229,7 +229,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         RectangleShapeViewModel IShapeFactory.Rectangle(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, bool isStroked, bool isFilled, string text)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -248,7 +248,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         EllipseShapeViewModel IShapeFactory.Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -267,7 +267,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         EllipseShapeViewModel IShapeFactory.Ellipse(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, bool isStroked, bool isFilled, string text)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -286,7 +286,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         TextShapeViewModel IShapeFactory.Text(double x1, double y1, double x2, double y2, string text, bool isStroked)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -304,7 +304,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         TextShapeViewModel IShapeFactory.Text(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, string text, bool isStroked)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -322,7 +322,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         ImageShapeViewModel IShapeFactory.Image(string path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var style = project.CurrentStyleLibrary?.Selected is { } ?
@@ -342,7 +342,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         ImageShapeViewModel IShapeFactory.Image(string path, PointShapeViewModel topLeft, PointShapeViewModel bottomRight, bool isStroked, bool isFilled, string text)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
             var fileSystem = editor.FileSystem;

@@ -35,12 +35,12 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void ToStatePoint2()
         {
-            _ellipse = _serviceProvider.GetService<IFactory>().CreateEllipseShape(0, 0, _styleViewModel);
+            _ellipse = _serviceProvider.GetService<IViewModelFactory>().CreateEllipseShape(0, 0, _styleViewModel);
             _ellipse.State |= ShapeStateFlags.Thickness;
 
-            _p1HelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
-            _p2HelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
-            _centerHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _p1HelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _p2HelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _centerHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_ellipse);
             _layer.Shapes = _layer.Shapes.Add(_p1HelperPoint);
@@ -62,10 +62,10 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _p2HelperPoint = null;
             }
 
-            _startLine = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _styleViewModel);
+            _startLine = _serviceProvider.GetService<IViewModelFactory>().CreateLineShape(0, 0, _styleViewModel);
             _startLine.State |= ShapeStateFlags.Thickness;
 
-            _startHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _startHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_startLine);
             _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
@@ -79,10 +79,10 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _ellipse = null;
             }
 
-            _endLine = _serviceProvider.GetService<IFactory>().CreateLineShape(0, 0, _styleViewModel);
+            _endLine = _serviceProvider.GetService<IViewModelFactory>().CreateLineShape(0, 0, _styleViewModel);
             _endLine.State |= ShapeStateFlags.Thickness;
 
-            _endHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _endHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_endLine);
             _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);

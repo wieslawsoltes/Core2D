@@ -18,7 +18,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.Model
 {
-    public interface IFactory
+    public interface IViewModelFactory
     {
         LibraryViewModel<T> CreateLibrary<T>(string name);
 

@@ -99,7 +99,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void InitializeWorkingPath(PointShapeViewModel start)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
             Geometry = factory.CreatePathGeometry(
@@ -114,7 +114,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                 editor.Project.CurrentStyleLibrary.Selected :
-                editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                editor.ViewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             Path = factory.CreatePathShape(
                 "",
                 (ShapeStyleViewModel)style.Copy(null),

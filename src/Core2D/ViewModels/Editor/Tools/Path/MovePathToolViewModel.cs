@@ -21,7 +21,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public void BeginDown(InputArgs args)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)

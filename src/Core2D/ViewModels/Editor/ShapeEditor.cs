@@ -21,7 +21,7 @@ namespace Core2D.ViewModels.Editor
 
         public void BreakPathFigure(PathFigureViewModel pathFigure, ShapeStyleViewModel style, bool isStroked, bool isFilled, List<BaseShapeViewModel> result)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
 
             var firstPoint = pathFigure.StartPoint;
             var lastPoint = pathFigure.StartPoint;
@@ -134,7 +134,7 @@ namespace Core2D.ViewModels.Editor
 
         public bool BreakPathShape(PathShapeViewModel pathShape, List<BaseShapeViewModel> result)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
 
             if (pathShape.Geometry.Figures.Length == 1)
             {

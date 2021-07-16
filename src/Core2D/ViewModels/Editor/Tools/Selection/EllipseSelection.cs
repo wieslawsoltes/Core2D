@@ -26,8 +26,8 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void ToStateBottomRight()
         {
-            _topLeftHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
-            _bottomRightHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _topLeftHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _bottomRightHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);

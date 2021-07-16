@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         private LibraryViewModel<ShapeStyleViewModel> DefaultStyleLibrary()
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var sgd = factory.CreateLibrary<ShapeStyleViewModel>("Default");
 
             var builder = sgd.Items.ToBuilder();
@@ -34,7 +34,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         private TemplateContainerViewModel CreateDefaultTemplate(IContainerFactory containerFactory, ProjectContainerViewModel project, string name)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var template = containerFactory.GetTemplate(project, name);
 
             template.IsGridEnabled = false;
@@ -53,7 +53,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         TemplateContainerViewModel IContainerFactory.GetTemplate(ProjectContainerViewModel project, string name)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var template = factory.CreateTemplateContainer(name);
             template.Background = factory.CreateArgbColor(0xFF, 0xFF, 0xFF, 0xFF);
             return template;
@@ -61,7 +61,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
         PageContainerViewModel IContainerFactory.GetPage(ProjectContainerViewModel project, string name)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var container = factory.CreatePageContainer(name);
             container.Template = project.CurrentTemplate ?? (this as IContainerFactory).GetTemplate(project, "Default");
             return container;
@@ -69,14 +69,14 @@ namespace Core2D.ViewModels.Editor.Factories
 
         DocumentContainerViewModel IContainerFactory.GetDocument(ProjectContainerViewModel project, string name)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var document = factory.CreateDocumentContainer(name);
             return document;
         }
 
         ProjectContainerViewModel IContainerFactory.GetProject()
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var containerFactory = this as IContainerFactory;
             var project = factory.CreateProjectContainer("Project1");
 

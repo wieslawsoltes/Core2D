@@ -26,8 +26,8 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void ToStateEnd()
         {
-            _startHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
-            _endHelperPoint = _serviceProvider.GetService<IFactory>().CreatePointShape(0, 0);
+            _startHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _endHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
 
             _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
             _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);

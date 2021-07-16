@@ -97,7 +97,7 @@ namespace Core2D.Modules.TextFieldReader.OpenXml
                 name = System.IO.Path.GetFileNameWithoutExtension(fileStream.Name);
             }
 
-            return _serviceProvider.GetService<IFactory>().FromFields(name, fields);
+            return _serviceProvider.GetService<IViewModelFactory>().FromFields(name, fields);
         }
     }
 }

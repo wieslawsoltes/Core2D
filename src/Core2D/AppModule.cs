@@ -76,7 +76,7 @@ namespace Core2D
             builder.RegisterType<DialogViewModel>().As<DialogViewModel>().InstancePerDependency();
             builder.RegisterType<ProjectEditorViewModel>().As<ProjectEditorViewModel>().InstancePerLifetimeScope();
 
-            builder.RegisterType<Factory>().As<IFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<ViewModelFactory>().As<IViewModelFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ContainerFactory>().As<IContainerFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
 

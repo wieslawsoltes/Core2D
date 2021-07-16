@@ -24,7 +24,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void BeginDown(InputArgs args)
         {
-            var factory = _serviceProvider.GetService<IFactory>();
+            var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             (double x, double y) = args;
             (decimal sx, decimal sy) = editor.TryToSnap(args);
@@ -35,7 +35,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.Factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                            editor.ViewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _line = factory.CreateLineShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

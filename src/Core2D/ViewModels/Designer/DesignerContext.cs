@@ -101,7 +101,7 @@ namespace Core2D.ViewModels.Designer
 
         public static void InitializeContext(IServiceProvider serviceProvider)
         {
-            var factory = serviceProvider.GetService<IFactory>();
+            var factory = serviceProvider.GetService<IViewModelFactory>();
 
             // Editor
 

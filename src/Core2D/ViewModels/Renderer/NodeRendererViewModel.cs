@@ -18,9 +18,9 @@ namespace Core2D.ViewModels.Renderer
 
         protected NodeRendererViewModel(IServiceProvider serviceProvider, IDrawNodeFactory drawNodeFactory) : base(serviceProvider)
         {
-            _state = serviceProvider.GetService<IFactory>().CreateShapeRendererState();
-            _biCache = serviceProvider.GetService<IFactory>().CreateCache<string, IDisposable>(x => x.Dispose());
-            _drawNodeCache = serviceProvider.GetService<IFactory>().CreateCache<object, IDrawNode>(x => x.Dispose());
+            _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
+            _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, IDisposable>(x => x.Dispose());
+            _drawNodeCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<object, IDrawNode>(x => x.Dispose());
             _drawNodeFactory = drawNodeFactory;
         }
 

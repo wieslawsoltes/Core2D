@@ -71,13 +71,13 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
         }
 
-        public static PathGeometryViewModel ToPathGeometry(SKPath path, IFactory factory)
+        public static PathGeometryViewModel ToPathGeometry(SKPath path, IViewModelFactory viewModelFactory)
         {
-            var geometry = factory.CreatePathGeometry(
+            var geometry = viewModelFactory.CreatePathGeometry(
                 ImmutableArray.Create<PathFigureViewModel>(),
                 path.FillType == SKPathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
-            var context = factory.CreateGeometryContext(geometry);
+            var context = viewModelFactory.CreateGeometryContext(geometry);
 
             using var iterator = path.CreateRawIterator();
             var points = new SKPoint[4];
@@ -90,7 +90,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                     case SKPathVerb.Move:
                     {
                         context.BeginFigure(
-                            factory.CreatePointShape(points[0].X, points[0].Y),
+                            viewModelFactory.CreatePointShape(points[0].X, points[0].Y),
                             false);
                     }
                         break;
@@ -98,24 +98,24 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                     case SKPathVerb.Line:
                     {
                         context.LineTo(
-                            factory.CreatePointShape(points[1].X, points[1].Y));
+                            viewModelFactory.CreatePointShape(points[1].X, points[1].Y));
                     }
                         break;
 
                     case SKPathVerb.Cubic:
                     {
                         context.CubicBezierTo(
-                            factory.CreatePointShape(points[1].X, points[1].Y),
-                            factory.CreatePointShape(points[2].X, points[2].Y),
-                            factory.CreatePointShape(points[3].X, points[3].Y));
+                            viewModelFactory.CreatePointShape(points[1].X, points[1].Y),
+                            viewModelFactory.CreatePointShape(points[2].X, points[2].Y),
+                            viewModelFactory.CreatePointShape(points[3].X, points[3].Y));
                     }
                         break;
 
                     case SKPathVerb.Quad:
                     {
                         context.QuadraticBezierTo(
-                            factory.CreatePointShape(points[1].X, points[1].Y),
-                            factory.CreatePointShape(points[2].X, points[2].Y));
+                            viewModelFactory.CreatePointShape(points[1].X, points[1].Y),
+                            viewModelFactory.CreatePointShape(points[2].X, points[2].Y));
                     }
                         break;
 
@@ -123,11 +123,11 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                     {
                         var quads = SKPath.ConvertConicToQuads(points[0], points[1], points[2], iterator.ConicWeight(), 1);
                         context.QuadraticBezierTo(
-                            factory.CreatePointShape(quads[1].X, quads[1].Y),
-                            factory.CreatePointShape(quads[2].X, quads[2].Y));
+                            viewModelFactory.CreatePointShape(quads[1].X, quads[1].Y),
+                            viewModelFactory.CreatePointShape(quads[2].X, quads[2].Y));
                         context.QuadraticBezierTo(
-                            factory.CreatePointShape(quads[3].X, quads[3].Y),
-                            factory.CreatePointShape(quads[4].X, quads[4].Y));
+                            viewModelFactory.CreatePointShape(quads[3].X, quads[3].Y),
+                            viewModelFactory.CreatePointShape(quads[4].X, quads[4].Y));
                     }
                         break;
 
