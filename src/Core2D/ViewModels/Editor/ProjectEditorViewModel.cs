@@ -164,6 +164,8 @@ namespace Core2D.ViewModels.Editor
                 _dockFactory?.InitLayout(_rootDock);
                 _rootDock.Navigate.Execute("Home");
             }
+
+            _dockFactory.DocumentDock?.CreateDocument?.Execute(null);
         }
 
         public void ShowDialog(DialogViewModel dialog)
