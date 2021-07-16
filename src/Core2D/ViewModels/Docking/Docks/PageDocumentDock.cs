@@ -18,7 +18,10 @@ namespace Core2D.ViewModels.Docking.Docks
                 return;
             }
 
-            var page = new PageViewModel();
+            var page = new PageViewModel()
+            {
+                Title = "Page"
+            };
 
             Factory?.AddDockable(this, page);
             Factory?.SetActiveDockable(page);
