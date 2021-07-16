@@ -178,6 +178,8 @@ namespace Core2D.ViewModels.Docking
 
             var optionsToolDock = new ToolDock
             {
+                Id = "OptionsDock",
+                Title = "Options",
                 ActiveDockable = styleLibraryViewModel,
                 VisibleDockables = CreateList<IDockable>(
                     projectOptionsViewModel, 
@@ -186,7 +188,7 @@ namespace Core2D.ViewModels.Docking
                     imageOptionsViewModel,
                     browserOptionsViewModel),
                 Alignment = Alignment.Right,
-                GripMode = GripMode.Hidden
+                GripMode = GripMode.AutoHide
             };
 
             // Right Dock
