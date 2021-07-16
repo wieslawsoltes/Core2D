@@ -3,6 +3,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Core2D.ViewModels;
+using ReactiveUI;
 
 namespace Core2D
 {
@@ -21,7 +22,7 @@ namespace Core2D
 
         public bool Match(object data)
         {
-            return data is ViewModelBase;
+            return data is ViewModelBase or ReactiveObject;
         }
     }
 }
