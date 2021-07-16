@@ -158,6 +158,7 @@ namespace Core2D.ViewModels.Editor
 
             _dockFactory = new DockFactory();
             _rootDock = _dockFactory.CreateLayout();
+
             if (_rootDock is { })
             {
                 _dockFactory?.InitLayout(_rootDock);
