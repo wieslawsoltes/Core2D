@@ -161,7 +161,7 @@ namespace Core2D.ViewModels.Editor
             if (_rootDock is { })
             {
                 _dockFactory?.InitLayout(_rootDock);
-                _rootDock.Navigate.Execute("Home");
+                _rootDock.Navigate.Execute("Dashboard");
             }
         }
 
