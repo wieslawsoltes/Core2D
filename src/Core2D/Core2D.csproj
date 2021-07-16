@@ -41,6 +41,8 @@
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="$(AvaloniaXamlBehaviorsVersion)" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="$(AvaloniaControlsPanAndZoomVersion)" />
     <PackageReference Include="ThemeEditor.Controls.ColorPicker" Version="$(ThemeEditorControlsColorPickerVersion)" />
+    <PackageReference Include="Dock.Avalonia" Version="$(DockAvaloniaVersion)" />
+    <PackageReference Include="Dock.Model.ReactiveUI" Version="$(DockAvaloniaVersion)" />
   </ItemGroup>
 
   <ItemGroup>
