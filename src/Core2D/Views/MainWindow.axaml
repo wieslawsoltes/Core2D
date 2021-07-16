@@ -41,10 +41,10 @@
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>-->
         <DockPanel>
-            <Panel x:Name="MainMenuPanel" DockPanel.Dock="Top">
+            <!--<Panel x:Name="MainMenuPanel" DockPanel.Dock="Top">
                 <views:DashboardMenuView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
                 <views:EditorMenuView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
-            </Panel>
+            </Panel>-->
             <Panel x:Name="MainViewPanel">
                 <views:MainView x:Name="MainView" />
             </Panel>
