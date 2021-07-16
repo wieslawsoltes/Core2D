@@ -25,6 +25,9 @@ using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Core2D.Spatial;
+using Core2D.ViewModels.Docking;
+using Dock.Model.Controls;
+using Dock.Model.Core;
 using static System.Math;
 
 namespace Core2D.ViewModels.Editor
@@ -32,6 +35,8 @@ namespace Core2D.ViewModels.Editor
     public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {
         private readonly ShapeEditor _shapeEditor;
+        private readonly IFactory _dockFactory;
+        [AutoNotify] private IRootDock _rootDock;
         [AutoNotify] private ProjectContainerViewModel _project;
         [AutoNotify] private string _projectPath;
         [AutoNotify] private bool _isProjectDirty;
@@ -150,6 +155,14 @@ namespace Core2D.ViewModels.Editor
             _styleEditor = serviceProvider.GetServiceLazily<StyleEditorViewModel>();
             _pathConverter = serviceProvider.GetServiceLazily<IPathConverter>();
             _svgConverter = serviceProvider.GetServiceLazily<ISvgConverter>();
+
+            _dockFactory = new DockFactory();
+            _rootDock = _dockFactory.CreateLayout();
+            if (_rootDock is { })
+            {
+                _dockFactory?.InitLayout(_rootDock);
+                _rootDock.Navigate.Execute("Home");
+            }
         }
 
         public void ShowDialog(DialogViewModel dialog)
