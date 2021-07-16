@@ -86,6 +86,8 @@ namespace Core2D.ViewModels.Docking
 
             var propertiesToolDock = new ToolDock
             {
+                Id = "PropertiesDock",
+                Title = "Properties",
                 ActiveDockable = pagePropertiesViewModel,
                 VisibleDockables = CreateList<IDockable>(
                     pagePropertiesViewModel, 
@@ -94,7 +96,7 @@ namespace Core2D.ViewModels.Docking
                     dataPropertiesViewModel,
                     statePropertiesViewModel),
                 Alignment = Alignment.Right,
-                GripMode = GripMode.Hidden
+                GripMode = GripMode.AutoHide
             };
 
             // Libraries Dock
