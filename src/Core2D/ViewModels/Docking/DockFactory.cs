@@ -247,13 +247,15 @@ namespace Core2D.ViewModels.Docking
             var homeMenuViewModel = new HomeMenuViewModel()
             {
                 Id = "HomeMenuView",
-                Title = "Home Menu"
+                Title = "Home Menu",
+                Proportion = 0.1
             };
 
             var homeViewModel = new HomeViewModel
             {
                 Id = "HomeView",
                 Title = "Home",
+                Proportion = 0.8,
                 ActiveDockable = homeLayout,
                 VisibleDockables = CreateList<IDockable>(homeLayout)
             };
@@ -261,12 +263,14 @@ namespace Core2D.ViewModels.Docking
             var homeStatusBarViewModel = new HomeStatusBarViewModel()
             {
                 Id = "HomeStatusBarView",
-                Title = "Home StatusBar"
+                Title = "Home StatusBar",
+                Proportion = 0.1
             };
 
             var homeDock = new ProportionalDock
             {
                 Id = "HomeDock",
+                Proportion = 1.0,
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>
                 (                    
@@ -283,18 +287,21 @@ namespace Core2D.ViewModels.Docking
             var dashboardMenuViewModel = new DashboardMenuViewModel()
             {
                 Id = "DashboardMenuView",
-                Title = "Dashboard Menu"
+                Title = "Dashboard Menu",
+                Proportion = 0.1
             };
 
             var dashboardViewModel = new DashboardViewModel
             {
                 Id = "DashboardView",
-                Title = "Dashboard"
+                Title = "Dashboard",
+                Proportion = 0.9
             };
 
             var dashboardDock = new ProportionalDock
             {
                 Id = "DashboardDock",
+                Proportion = 1.0,
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>
                 (                    
