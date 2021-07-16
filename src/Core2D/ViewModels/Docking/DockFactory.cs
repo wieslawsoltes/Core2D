@@ -133,6 +133,8 @@ namespace Core2D.ViewModels.Docking
 
             var librariesToolDock = new ToolDock
             {
+                Id = "LibrariesDock",
+                Title = "Libraries",
                 ActiveDockable = styleLibraryViewModel,
                 VisibleDockables = CreateList<IDockable>(
                     styleLibraryViewModel, 
@@ -141,7 +143,7 @@ namespace Core2D.ViewModels.Docking
                     templateLibraryViewModel,
                     scriptLibraryViewModel),
                 Alignment = Alignment.Right,
-                GripMode = GripMode.Hidden
+                GripMode = GripMode.AutoHide
             };
 
             // Options Dock
