@@ -35,7 +35,7 @@ namespace Core2D.ViewModels.Editor
     public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {
         private readonly ShapeEditor _shapeEditor;
-        private readonly IFactory _dockFactory;
+        private readonly DockFactory _dockFactory;
         [AutoNotify] private IRootDock _rootDock;
         [AutoNotify] private ProjectContainerViewModel _project;
         [AutoNotify] private string _projectPath;
