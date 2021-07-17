@@ -277,7 +277,6 @@ namespace Core2D.ViewModels.Docking
             var homeDock = new ProportionalDock
             {
                 Id = "HomeDock",
-                Proportion = 1.0,
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>
                 (                    
