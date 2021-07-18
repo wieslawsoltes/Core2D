@@ -41,8 +41,8 @@ namespace Core2D.ViewModels.Docking
 
             var projectViewModel = new ProjectViewModel()
             {
-                Id = "Project",
-                Title = "Project"
+                Id = "ProjectExlorer",
+                Title = "Project Explorer"
             };
 
             var projectDock = new ToolDock
@@ -356,7 +356,7 @@ namespace Core2D.ViewModels.Docking
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
-                ["Project"] = () => _projectEditor,
+                ["ProjectExlorer"] = () => _projectEditor,
                 ["ProjectDock"] = () => _projectEditor,
                 ["PageProperties"] = () => _projectEditor,
                 ["ShapeProperties"] = () => _projectEditor,
