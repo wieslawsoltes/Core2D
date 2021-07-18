@@ -17,6 +17,7 @@ namespace Core2D
             {
                 return func?.Invoke();
             }
+
             throw new Exception($"Unable to create view for type: {type}");
         }
 
