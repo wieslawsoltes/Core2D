@@ -4,8 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:Core2D.ViewModels.Docking.Views"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
-             d:DesignWidth="800" d:DesignHeight="600"
+             d:DesignWidth="1200" d:DesignHeight="32"
              x:DataType="vm:HomeStatusBarViewModel" x:CompileBindings="True">
-  <!-- TODO: -->
+  <Panel DataContext="{Binding Context}">
+    <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}" 
+           x:DataType="vme:ProjectEditorViewModel" 
+           x:CompileBindings="True">
+      <TextBlock DataContext="{Binding Project}"
+                 Text="{Binding SelectedShapes.Count, FallbackValue='Selected: 0', StringFormat='{}Selected: {0}'}"
+                 HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,12,0" />
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <CheckBox Content="Stroked" IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}" MinWidth="0"
+                    Margin="12,0,0,0" VerticalAlignment="Center" />
+          <CheckBox Content="Filled" IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}" MinWidth="0"
+                    Margin="12,0,0,0" VerticalAlignment="Center" />
+          <CheckBox Content="Snap" IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" MinWidth="0"
+                    Margin="12,0,0,0" VerticalAlignment="Center" />
+          <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" MinWidth="0"
+                    Margin="12,0,6,0" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel DataContext="{Binding PageState}" Orientation="Horizontal" HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+          <CheckBox Content="Decorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0"
+                    VerticalAlignment="Center" />
+          <CheckBox Content="Points" IsChecked="{Binding DrawPoints, Mode=TwoWay}" MinWidth="0" Margin="12,0,0,0"
+                    VerticalAlignment="Center" />
+        </StackPanel>
+      </StackPanel>
+    </Panel>
+  </Panel>
 </UserControl>

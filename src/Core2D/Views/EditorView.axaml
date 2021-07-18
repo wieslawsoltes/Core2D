@@ -36,7 +36,7 @@
     <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
     <behaviors:AttachEditorBehavior />
   </i:Interaction.Behaviors>
-  <Grid ColumnDefinitions="250,6,*,6,250" RowDefinitions="*,Auto">
+  <Grid ColumnDefinitions="250,6,*,6,250" RowDefinitions="*">
     <containers:ProjectContainerView DataContext="{Binding Project}" Padding="8,0,0,0" Grid.Column="0" Grid.Row="0" />
     <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6"
                   Grid.Column="1" Grid.Row="0" />
@@ -353,6 +353,5 @@
         </TabControl>
       </TabItem>
     </TabControl>
-    <views:StatusView Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" />
   </Grid>
 </UserControl>

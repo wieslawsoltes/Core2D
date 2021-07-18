@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="using:Core2D.Views"
-             xmlns:id="clr-namespace:Dock.Avalonia;assembly=Dock.Avalonia"
              xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
@@ -25,7 +24,7 @@
   <Panel>
     <Panel>
       <idc:DockControl Layout="{Binding RootDock}" />
-      <!-- <views:DashboardView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" /> -->
+      <!-- TODO: -->
       <!-- <views:EditorView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" /> -->
     </Panel>
     <ItemsControl Items="{Binding Dialogs}">
