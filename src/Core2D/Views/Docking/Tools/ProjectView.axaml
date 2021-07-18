@@ -4,8 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:containers="using:Core2D.Views.Containers"
              mc:Ignorable="d"
-             d:DesignWidth="800" d:DesignHeight="600"
+             d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vm:ProjectViewModel" x:CompileBindings="True">
-  <!-- TODO: -->
+ <Panel DataContext="{Binding Context}">
+   <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}"
+          x:DataType="vme:ProjectEditorViewModel" 
+          x:CompileBindings="True">
+     <containers:ProjectContainerView DataContext="{Binding Project}" />
+   </Panel>
+ </Panel>
 </UserControl>
