@@ -156,18 +156,19 @@ namespace Core2D.ViewModels.Editor
             _pathConverter = serviceProvider.GetServiceLazily<IPathConverter>();
             _svgConverter = serviceProvider.GetServiceLazily<ISvgConverter>();
 
-            _dockFactory = new DockFactory();
+            _dockFactory = new DockFactory(this);
             _rootDock = _dockFactory.CreateLayout();
-
-            if (_rootDock is { })
-            {
-                _dockFactory?.InitLayout(_rootDock);
-                _rootDock.Navigate.Execute("Home");
-            }
-
-            _dockFactory.DocumentDock?.CreateDocument?.Execute(null);
+            _dockFactory?.InitLayout(_rootDock);
+            // TODO:
+            _dockFactory.PagesDock?.CreateDocument?.Execute(null);
+            NavigateTo("Dashboard");
         }
 
+        public void NavigateTo(string id)
+        {
+            _rootDock?.Navigate.Execute(id);
+        }
+        
         public void ShowDialog(DialogViewModel dialog)
         {
             _dialogs.Add(dialog);
@@ -317,6 +318,7 @@ namespace Core2D.ViewModels.Editor
             OnLoad(ContainerFactory?.GetProject() ?? ViewModelFactory.CreateProjectContainer(), string.Empty);
             CanvasPlatform?.ResetZoom?.Invoke();
             CanvasPlatform?.InvalidateControl?.Invoke();
+            NavigateTo("Home");
         }
 
         public void OnOpenProject(string path)
@@ -364,6 +366,7 @@ namespace Core2D.ViewModels.Editor
         {
             Project?.History?.Reset();
             OnUnload();
+            NavigateTo("Dashboard");
         }
 
         public void OnSaveProject(string path)
