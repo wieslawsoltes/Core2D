@@ -6,6 +6,7 @@ using Core2D.ViewModels.Docking.Tools.Libraries;
 using Core2D.ViewModels.Docking.Tools.Options;
 using Core2D.ViewModels.Docking.Tools.Properties;
 using Core2D.ViewModels.Docking.Views;
+using Core2D.ViewModels.Editor;
 using Dock.Avalonia.Controls;
 using Dock.Model.Controls;
 using Dock.Model.Core;
@@ -16,12 +17,18 @@ namespace Core2D.ViewModels.Docking
 {
     public class DockFactory : Factory
     {
-        private IDocumentDock? _documentDock;
+        private readonly ProjectEditorViewModel _projectEditor;
+        private IDocumentDock? _pagesDock;
         private IRootDock? _rootDock;
 
-        public IDocumentDock? DocumentDock => _documentDock;
+        public IDocumentDock? PagesDock => _pagesDock;
 
         public IRootDock? RootDock => _rootDock;
+
+        public DockFactory(ProjectEditorViewModel projectEditor)
+        {
+            _projectEditor = projectEditor;
+        }
 
         public override IDocumentDock CreateDocumentDock()
         {
@@ -230,6 +237,8 @@ namespace Core2D.ViewModels.Docking
 
             var documentDock = new PageDocumentDock
             {
+                Id = "PagesDock",
+                Title = "Pages",
                 IsCollapsable = false,
                 ActiveDockable = null,
                 VisibleDockables = CreateList<IDockable>(),
@@ -255,14 +264,14 @@ namespace Core2D.ViewModels.Docking
             {
                 Id = "HomeMenuView",
                 Title = "Home Menu",
-                Proportion = 0.1
+                Dock = DockMode.Top
             };
 
             var homeViewModel = new HomeViewModel
             {
                 Id = "HomeView",
                 Title = "Home",
-                Proportion = 0.8,
+                Dock = DockMode.Center,
                 ActiveDockable = homeLayout,
                 VisibleDockables = CreateList<IDockable>(homeLayout)
             };
@@ -271,20 +280,18 @@ namespace Core2D.ViewModels.Docking
             {
                 Id = "HomeStatusBarView",
                 Title = "Home StatusBar",
-                Proportion = 0.1
+                Dock = DockMode.Bottom
             };
 
-            var homeDock = new ProportionalDock
+            var homeDock = new DockDock()
             {
                 Id = "HomeDock",
-                Orientation = Orientation.Vertical,
+                LastChildFill = true,
                 VisibleDockables = CreateList<IDockable>
                 (                    
                     homeMenuViewModel,
-                    new SplitterDockable(),
-                    homeViewModel,
-                    new SplitterDockable(),
-                    homeStatusBarViewModel
+                    homeStatusBarViewModel,
+                    homeViewModel
                 )
             };
   
@@ -294,29 +301,28 @@ namespace Core2D.ViewModels.Docking
             {
                 Id = "DashboardMenuView",
                 Title = "Dashboard Menu",
-                Proportion = 0.1
+                Dock = DockMode.Top
             };
 
             var dashboardViewModel = new DashboardViewModel
             {
                 Id = "DashboardView",
                 Title = "Dashboard",
-                Proportion = 0.9
+                Dock = DockMode.Center
             };
 
-            var dashboardDock = new ProportionalDock
+            var dashboardDock = new DockDock()
             {
                 Id = "DashboardDock",
                 Proportion = 1.0,
-                Orientation = Orientation.Vertical,
+                LastChildFill = true,
                 VisibleDockables = CreateList<IDockable>
                 (                    
                     dashboardMenuViewModel,
-                    new SplitterDockable(),
                     dashboardViewModel
                 )
             };
-            
+
             var dashboardRootDock = CreateRootDock();
             dashboardRootDock.Id = "Dashboard";
             dashboardRootDock.IsCollapsable = false;
@@ -340,7 +346,7 @@ namespace Core2D.ViewModels.Docking
             rootDock.DefaultDockable = dashboardRootDock;
             rootDock.VisibleDockables = CreateList<IDockable>(dashboardRootDock, homeRootDock);
 
-            _documentDock = documentDock;
+            _pagesDock = documentDock;
             _rootDock = rootDock;
 
             return rootDock;
@@ -350,12 +356,41 @@ namespace Core2D.ViewModels.Docking
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
-                // TODO:
+                ["Project"] = () => _projectEditor,
+                ["ProjectDock"] = () => _projectEditor,
+                ["PageProperties"] = () => _projectEditor,
+                ["ShapeProperties"] = () => _projectEditor,
+                ["StyleProperties"] = () => _projectEditor,
+                ["DataProperties"] = () => _projectEditor,
+                ["StateProperties"] = () => _projectEditor,
+                ["PropertiesDock"] = () => _projectEditor,
+                ["StyleLibrary"] = () => _projectEditor,
+                ["GroupLibrary"] = () => _projectEditor,
+                ["DatabaseLibrary"] = () => _projectEditor,
+                ["TemplateLibrary"] = () => _projectEditor,
+                ["ScriptLibrary"] = () => _projectEditor,
+                ["LibrariesDock"] = () => _projectEditor,
+                ["ProjectOptions"] = () => _projectEditor,
+                ["RendererOptions"] = () => _projectEditor,
+                ["ZoomOptions"] = () => _projectEditor,
+                ["ImageOptions"] = () => _projectEditor,
+                ["BrowserOptions"] = () => _projectEditor,
+                ["OptionsDock"] = () => _projectEditor,
+                ["PropertiesDock"] = () => _projectEditor,
+                ["PagesDock"] = () => _projectEditor,
+                ["HomeMenuView"] = () => _projectEditor,
+                ["HomeView"] = () => _projectEditor,
+                ["HomeStatusBarView"] = () => _projectEditor,
+                ["HomeDock"] = () => _projectEditor,
+                ["DashboardMenuView"] = () => _projectEditor,
+                ["DashboardView"] = () => _projectEditor,
+                ["DashboardDock"] = () => _projectEditor,
             };
 
             DockableLocator = new Dictionary<string, Func<IDockable?>>()
             {
-                // TODO:
+                ["Root"] = () => _rootDock,
+                ["Pages"] = () => _pagesDock
             };
 
             HostWindowLocator = new Dictionary<string, Func<IHostWindow>>
