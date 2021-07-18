@@ -12,24 +12,25 @@
              d:DataContext="{x:Static vmd:DesignerContext.Script}"
              d:DesignWidth="1000" d:DesignHeight="600"
              x:DataType="vms:ScriptViewModel" x:CompileBindings="True">
-    <UserControl.KeyBindings>
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}" CommandParameter="{Binding #ScriptTextEditor.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False" />
-    </UserControl.KeyBindings>
-    <Panel>
-        <ae:TextEditor x:Name="ScriptTextEditor"
-                       Margin="0"
-                       Background="White"
-                       Foreground="Black"
-                       SyntaxHighlighting="C#"
-                       HorizontalScrollBarVisibility="Auto"
-                       VerticalScrollBarVisibility="Auto"
-                       FontFamily="{DynamicResource CodeFontFamily}"
-                       FontWeight="Normal"
-                       FontSize="14"
-                       WordWrap="False">
-            <i:Interaction.Behaviors>
-                <behaviors:DocumentTextBindingBehavior Text="{Binding Code, Mode=TwoWay}" />
-            </i:Interaction.Behaviors>
-        </ae:TextEditor>
-    </Panel>
+  <UserControl.KeyBindings>
+    <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}"
+                CommandParameter="{Binding #ScriptTextEditor.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False" />
+  </UserControl.KeyBindings>
+  <Panel>
+    <ae:TextEditor x:Name="ScriptTextEditor"
+                   Margin="0"
+                   Background="White"
+                   Foreground="Black"
+                   SyntaxHighlighting="C#"
+                   HorizontalScrollBarVisibility="Auto"
+                   VerticalScrollBarVisibility="Auto"
+                   FontFamily="{DynamicResource CodeFontFamily}"
+                   FontWeight="Normal"
+                   FontSize="14"
+                   WordWrap="False">
+      <i:Interaction.Behaviors>
+        <behaviors:DocumentTextBindingBehavior Text="{Binding Code, Mode=TwoWay}" />
+      </i:Interaction.Behaviors>
+    </ae:TextEditor>
+  </Panel>
 </UserControl>

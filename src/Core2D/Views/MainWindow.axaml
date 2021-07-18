@@ -20,18 +20,18 @@
         d:DataContext="{x:Static vmd:DesignerContext.Editor}"
         d:DesignWidth="1200" d:DesignHeight="580"
         x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
-    <Window.Resources>
-        <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter" />
-    </Window.Resources>
-    <Window.Title>
-        <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToTitleMultiConverter}">
-            <Binding Path="Project.Name" />
-            <Binding Path="IsProjectDirty" />
-        </MultiBinding>
-    </Window.Title>
-    <Panel x:Name="ContentPanel">
-        <Border IsHitTestVisible="False" Background="{DynamicResource AcrylicFallbackColor}"/>
-        <!--<ExperimentalAcrylicBorder IsHitTestVisible="False">
+  <Window.Resources>
+    <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter" />
+  </Window.Resources>
+  <Window.Title>
+    <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToTitleMultiConverter}">
+      <Binding Path="Project.Name" />
+      <Binding Path="IsProjectDirty" />
+    </MultiBinding>
+  </Window.Title>
+  <Panel x:Name="ContentPanel">
+    <Border IsHitTestVisible="False" Background="{DynamicResource AcrylicFallbackColor}" />
+    <!--<ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial BackgroundSource="Digger"
                                              TintColor="{DynamicResource SystemAltHighColor}"
@@ -40,14 +40,14 @@
                                              MaterialOpacity="0.85" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>-->
-        <DockPanel>
-            <!--<Panel x:Name="MainMenuPanel" DockPanel.Dock="Top">
+    <DockPanel>
+      <!--<Panel x:Name="MainMenuPanel" DockPanel.Dock="Top">
                 <views:DashboardMenuView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
                 <views:EditorMenuView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
             </Panel>-->
-            <Panel x:Name="MainViewPanel">
-                <views:MainView x:Name="MainView" />
-            </Panel>
-        </DockPanel>
-    </Panel>
+      <Panel x:Name="MainViewPanel">
+        <views:MainView x:Name="MainView" />
+      </Panel>
+    </DockPanel>
+  </Panel>
 </Window>

@@ -11,26 +11,26 @@
              d:DataContext="{x:Static vmd:DesignerContext.Document}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:DocumentContainerViewModel" x:CompileBindings="True">
+  <StackPanel>
     <StackPanel>
-        <StackPanel>
-            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
-            <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        </StackPanel>
-        <Expander Header="Pages" IsExpanded="False">
-            <ListBox x:Name="PagesListBox" Items="{Binding Pages}">
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="vmc:PageContainerViewModel">
-                        <TextBlock Text="{Binding Name}" Background="Transparent">
-                            <i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                            </i:Interaction.Behaviors>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
-        </Expander>
-        <Expander Header="Selected Page" IsExpanded="False">
-            <ContentControl Content="{Binding #PagesListBox.SelectedItem}" />
-        </Expander>
+      <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+      <TextBox Text="{Binding Name, Mode=TwoWay}" />
     </StackPanel>
+    <Expander Header="Pages" IsExpanded="False">
+      <ListBox x:Name="PagesListBox" Items="{Binding Pages}">
+        <ListBox.DataTemplates>
+          <DataTemplate DataType="vmc:PageContainerViewModel">
+            <TextBlock Text="{Binding Name}" Background="Transparent">
+              <i:Interaction.Behaviors>
+                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+              </i:Interaction.Behaviors>
+            </TextBlock>
+          </DataTemplate>
+        </ListBox.DataTemplates>
+      </ListBox>
+    </Expander>
+    <Expander Header="Selected Page" IsExpanded="False">
+      <ContentControl Content="{Binding #PagesListBox.SelectedItem}" />
+    </Expander>
+  </StackPanel>
 </UserControl>

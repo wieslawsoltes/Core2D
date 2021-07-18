@@ -7,5 +7,5 @@
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:HomeViewModel" x:CompileBindings="True">
-    <ContentControl Content="{Binding ActiveDockable}" />
+  <ContentControl Content="{Binding ActiveDockable}" />
 </UserControl>

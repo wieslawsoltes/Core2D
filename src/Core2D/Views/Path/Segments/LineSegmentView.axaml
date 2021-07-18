@@ -9,9 +9,9 @@
              d:DataContext="{x:Static vmd:DesignerContext.LineSegment}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmps:LineSegmentViewModel" x:CompileBindings="True">
-    <StackPanel>
-        <Expander Header="Point" IsExpanded="False">
-            <ContentControl Content="{Binding Point}" />
-        </Expander>
-    </StackPanel>
+  <StackPanel>
+    <Expander Header="Point" IsExpanded="False">
+      <ContentControl Content="{Binding Point}" />
+    </Expander>
+  </StackPanel>
 </UserControl>

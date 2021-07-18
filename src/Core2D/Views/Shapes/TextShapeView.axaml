@@ -10,25 +10,27 @@
              d:DataContext="{x:Static vmd:DesignerContext.Text}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:TextShapeViewModel" x:CompileBindings="True">
-    <StackPanel>
-        <Expander Header="Text" IsExpanded="True">
-            <StackPanel>
-                <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Name, Mode=TwoWay}" />
-                <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-                <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-                <Label Content="Text" Margin="{DynamicResource TextControlThemePadding}" />
-                <DockPanel>
-                    <Button Content="..." Command="{Binding $parent[UserControl].OnEditTextBinding}" CommandParameter="{Binding}" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Margin="6,0,0,0" Width="30" DockPanel.Dock="Right" x:CompileBindings="False" />
-                    <TextBox Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="True" HorizontalAlignment="Stretch" />
-                </DockPanel>
-            </StackPanel>
-        </Expander>
-        <Expander Header="TopLeft" IsExpanded="False">
-            <ContentControl Content="{Binding TopLeft}" />
-        </Expander>
-        <Expander Header="BottomRight" IsExpanded="False">
-            <ContentControl Content="{Binding BottomRight}" />
-        </Expander>
-    </StackPanel>
+  <StackPanel>
+    <Expander Header="Text" IsExpanded="True">
+      <StackPanel>
+        <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding Name, Mode=TwoWay}" />
+        <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <Label Content="Text" Margin="{DynamicResource TextControlThemePadding}" />
+        <DockPanel>
+          <Button Content="..." Command="{Binding $parent[UserControl].OnEditTextBinding}" CommandParameter="{Binding}"
+                  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  Padding="0" Margin="6,0,0,0" Width="30" DockPanel.Dock="Right" x:CompileBindings="False" />
+          <TextBox Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="True" HorizontalAlignment="Stretch" />
+        </DockPanel>
+      </StackPanel>
+    </Expander>
+    <Expander Header="TopLeft" IsExpanded="False">
+      <ContentControl Content="{Binding TopLeft}" />
+    </Expander>
+    <Expander Header="BottomRight" IsExpanded="False">
+      <ContentControl Content="{Binding BottomRight}" />
+    </Expander>
+  </StackPanel>
 </UserControl>
