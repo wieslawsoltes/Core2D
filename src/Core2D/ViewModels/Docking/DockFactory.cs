@@ -104,7 +104,7 @@ namespace Core2D.ViewModels.Docking
                 Title = "Properties",
                 ActiveDockable = pagePropertiesViewModel,
                 VisibleDockables = CreateList<IDockable>(
-                    pagePropertiesViewModel, 
+                    pagePropertiesViewModel,
                     shapePropertiesViewModel,
                     stylePropertiesViewModel,
                     dataPropertiesViewModel,
@@ -132,13 +132,13 @@ namespace Core2D.ViewModels.Docking
                 Id = "DatabaseLibrary",
                 Title = "Databases"
             };
-            
+
             var templateLibraryViewModel = new TemplateLibraryViewModel()
             {
                 Id = "TemplateLibrary",
                 Title = "Templates"
             };
-            
+
             var scriptLibraryViewModel = new ScriptLibraryViewModel()
             {
                 Id = "ScriptLibrary",
@@ -151,7 +151,7 @@ namespace Core2D.ViewModels.Docking
                 Title = "Libraries",
                 ActiveDockable = styleLibraryViewModel,
                 VisibleDockables = CreateList<IDockable>(
-                    styleLibraryViewModel, 
+                    styleLibraryViewModel,
                     groupLibraryViewModel,
                     databaseLibraryViewModel,
                     templateLibraryViewModel,
@@ -198,7 +198,7 @@ namespace Core2D.ViewModels.Docking
                 Title = "Options",
                 ActiveDockable = styleLibraryViewModel,
                 VisibleDockables = CreateList<IDockable>(
-                    projectOptionsViewModel, 
+                    projectOptionsViewModel,
                     rendererOptionsViewModel,
                     zoomOptionsViewModel,
                     imageOptionsViewModel,
@@ -258,7 +258,7 @@ namespace Core2D.ViewModels.Docking
                     new SplitterDockable(),
                     rightProportionalDock
                 )
-            };   
+            };
 
             var homeMenuViewModel = new HomeMenuViewModel()
             {
@@ -288,15 +288,15 @@ namespace Core2D.ViewModels.Docking
                 Id = "HomeDock",
                 LastChildFill = true,
                 VisibleDockables = CreateList<IDockable>
-                (                    
+                (
                     homeMenuViewModel,
                     homeStatusBarViewModel,
                     homeViewModel
                 )
             };
-  
+
             // Dashboard
- 
+
             var dashboardMenuViewModel = new DashboardMenuViewModel()
             {
                 Id = "DashboardMenuView",
@@ -317,7 +317,7 @@ namespace Core2D.ViewModels.Docking
                 Proportion = 1.0,
                 LastChildFill = true,
                 VisibleDockables = CreateList<IDockable>
-                (                    
+                (
                     dashboardMenuViewModel,
                     dashboardViewModel
                 )
