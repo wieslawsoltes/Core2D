@@ -354,6 +354,7 @@ namespace Core2D.ViewModels.Editor
                     OnAddRecent(path, project.Name);
                     CanvasPlatform?.ResetZoom?.Invoke();
                     CanvasPlatform?.InvalidateControl?.Invoke();
+                    NavigateTo("Home");
                 }
             }
             catch (Exception ex)
