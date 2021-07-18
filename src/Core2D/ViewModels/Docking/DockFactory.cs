@@ -52,7 +52,7 @@ namespace Core2D.ViewModels.Docking
                 ActiveDockable = projectViewModel,
                 VisibleDockables = CreateList<IDockable>(projectViewModel),
                 Alignment = Alignment.Left,
-                GripMode = GripMode.AutoHide
+                GripMode = GripMode.Visible
             };
 
             var leftProportionalDock = new ProportionalDock
@@ -110,7 +110,7 @@ namespace Core2D.ViewModels.Docking
                     dataPropertiesViewModel,
                     statePropertiesViewModel),
                 Alignment = Alignment.Right,
-                GripMode = GripMode.AutoHide
+                GripMode = GripMode.Visible
             };
 
             // Libraries Dock
@@ -157,7 +157,7 @@ namespace Core2D.ViewModels.Docking
                     templateLibraryViewModel,
                     scriptLibraryViewModel),
                 Alignment = Alignment.Right,
-                GripMode = GripMode.AutoHide
+                GripMode = GripMode.Visible
             };
 
             // Options Dock
@@ -204,7 +204,7 @@ namespace Core2D.ViewModels.Docking
                     imageOptionsViewModel,
                     browserOptionsViewModel),
                 Alignment = Alignment.Right,
-                GripMode = GripMode.AutoHide
+                GripMode = GripMode.Visible
             };
 
             // Right Dock
@@ -219,7 +219,7 @@ namespace Core2D.ViewModels.Docking
                     librariesToolDock,
                     optionsToolDock),
                 Alignment = Alignment.Right,
-                GripMode = GripMode.AutoHide
+                GripMode = GripMode.Visible
             };
 
             var rightProportionalDock = new ProportionalDock
