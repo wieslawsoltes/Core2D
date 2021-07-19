@@ -41,7 +41,7 @@ namespace Core2D.ViewModels.Docking
 
             var projectViewModel = new ProjectViewModel()
             {
-                Id = "ProjectExlorer",
+                Id = "ProjectExplorer",
                 Title = "Project Explorer"
             };
 
@@ -356,7 +356,7 @@ namespace Core2D.ViewModels.Docking
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
-                ["ProjectExlorer"] = () => _projectEditor,
+                ["ProjectExplorer"] = () => _projectEditor,
                 ["ProjectDock"] = () => _projectEditor,
                 ["PageProperties"] = () => _projectEditor,
                 ["ShapeProperties"] = () => _projectEditor,
@@ -384,7 +384,7 @@ namespace Core2D.ViewModels.Docking
                 ["HomeDock"] = () => _projectEditor,
                 ["DashboardMenuView"] = () => _projectEditor,
                 ["DashboardView"] = () => _projectEditor,
-                ["DashboardDock"] = () => _projectEditor,
+                ["DashboardDock"] = () => _projectEditor
             };
 
             DockableLocator = new Dictionary<string, Func<IDockable?>>()
