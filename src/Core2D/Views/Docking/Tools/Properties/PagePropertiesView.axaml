@@ -4,8 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Properties"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:PagePropertiesViewModel" x:CompileBindings="True">
-  <!-- TODO: -->
+  <Panel DataContext="{Binding Context}">
+    <Panel x:DataType="vme:ProjectEditorViewModel">
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ContentControl Content="{Binding Project.CurrentContainer}"
+                        Margin="0,0,8,0" />
+      </ScrollViewer>
+    </Panel>
+  </Panel>
 </UserControl>

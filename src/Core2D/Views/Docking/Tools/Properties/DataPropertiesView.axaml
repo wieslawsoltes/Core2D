@@ -3,9 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:views="using:Core2D.Views"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Properties"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:DataPropertiesViewModel" x:CompileBindings="True">
-  <!-- TODO: -->
+  <UserControl.Resources>
+    <converters:FirstSelectedItemValueConverter x:Key="FirstSelectedItemValueConverter" />
+  </UserControl.Resources>
+  <Panel DataContext="{Binding Context}">
+    <Panel x:DataType="vme:ProjectEditorViewModel">
+      <ScrollViewer DataContext="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
+        <views:DataObjectView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
+                              Margin="0,0,8,0"
+                              x:CompileBindings="False" />
+      </ScrollViewer>
+    </Panel>
+  </Panel>
 </UserControl>

@@ -3,9 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="using:Core2D.Converters"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Properties"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:StylePropertiesViewModel" x:CompileBindings="True">
-  <!-- TODO: -->
+  <UserControl.Resources>
+    <converters:FirstSelectedItemStyleValueConverter x:Key="FirstSelectedItemStyleValueConverter" />
+    <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter" />
+  </UserControl.Resources>
+      <Panel DataContext="{Binding Context}">
+        <Panel x:DataType="vme:ProjectEditorViewModel">
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ContentControl Content="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemStyleValueConverter}}"
+                        Margin="0,0,8,0" />
+      </ScrollViewer>
+      <!--
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <style:ShapeStyleView x:DataType="vme:ProjectEditorViewModel" Margin="0,0,8,0">
+          <style:ShapeStyleView.DataContext>
+            <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
+              <Binding Path="Project.SelectedShapes" FallbackValue="{x:Null}" />
+              <Binding Path="2" FallbackValue="{x:Null}" />
+            </MultiBinding>
+          </style:ShapeStyleView.DataContext>
+        </style:ShapeStyleView>
+      </ScrollViewer>
+      -->
+    </Panel>
+  </Panel>
 </UserControl>

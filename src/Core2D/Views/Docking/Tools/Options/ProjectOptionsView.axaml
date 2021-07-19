@@ -3,9 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:containers="using:Core2D.Views.Containers"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Options"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:ProjectOptionsViewModel" x:CompileBindings="True">
-  <!-- TODO: -->
+  <Panel DataContext="{Binding Context}">
+    <Panel x:DataType="vme:ProjectEditorViewModel">
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <containers:OptionsView DataContext="{Binding Project.Options}" />
+      </ScrollViewer>
+    </Panel>
+  </Panel>
 </UserControl>
