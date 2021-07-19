@@ -24,8 +24,6 @@
   <Panel>
     <Panel>
       <idc:DockControl Layout="{Binding RootDock}" />
-      <!-- TODO: -->
-      <!-- <views:EditorView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" /> -->
     </Panel>
     <ItemsControl Items="{Binding Dialogs}">
       <ItemsControl.ItemsPanel>
