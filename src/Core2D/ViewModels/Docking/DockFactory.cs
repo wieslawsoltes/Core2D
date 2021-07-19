@@ -356,6 +356,7 @@ namespace Core2D.ViewModels.Docking
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
+                ["PageDocument"] = () => _projectEditor,
                 ["ProjectExplorer"] = () => _projectEditor,
                 ["ProjectDock"] = () => _projectEditor,
                 ["PageProperties"] = () => _projectEditor,
