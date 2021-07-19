@@ -14,7 +14,8 @@
     <dd:EditorDropHandler x:Key="EditorDropHandler" />
   </UserControl.Resources>
   <i:Interaction.Behaviors>
-    <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
+    <idd:ContextDropBehavior Context="{Binding Context, FallbackValue={x:Null}}" 
+                             Handler="{StaticResource EditorDropHandler}" />
   </i:Interaction.Behaviors>
   <ContentControl Content="{Binding ActiveDockable}" />
 </UserControl>
