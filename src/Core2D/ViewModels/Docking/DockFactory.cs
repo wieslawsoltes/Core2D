@@ -100,7 +100,7 @@ namespace Core2D.ViewModels.Docking
 
             var propertiesToolDock = new ToolDock
             {
-                Id = "PropertiesDock",
+                Id = "PropertiesToolDock",
                 Title = "Properties",
                 ActiveDockable = pagePropertiesViewModel,
                 VisibleDockables = CreateList<IDockable>(
@@ -147,7 +147,7 @@ namespace Core2D.ViewModels.Docking
 
             var librariesToolDock = new ToolDock
             {
-                Id = "LibrariesDock",
+                Id = "LibrariesToolDock",
                 Title = "Libraries",
                 ActiveDockable = styleLibraryViewModel,
                 VisibleDockables = CreateList<IDockable>(
@@ -194,7 +194,7 @@ namespace Core2D.ViewModels.Docking
 
             var optionsToolDock = new ToolDock
             {
-                Id = "OptionsDock",
+                Id = "OptionsToolDock",
                 Title = "Options",
                 ActiveDockable = styleLibraryViewModel,
                 VisibleDockables = CreateList<IDockable>(
@@ -364,19 +364,19 @@ namespace Core2D.ViewModels.Docking
                 ["StyleProperties"] = () => _projectEditor,
                 ["DataProperties"] = () => _projectEditor,
                 ["StateProperties"] = () => _projectEditor,
-                ["PropertiesDock"] = () => _projectEditor,
+                ["PropertiesToolDock"] = () => _projectEditor,
                 ["StyleLibrary"] = () => _projectEditor,
                 ["GroupLibrary"] = () => _projectEditor,
                 ["DatabaseLibrary"] = () => _projectEditor,
                 ["TemplateLibrary"] = () => _projectEditor,
                 ["ScriptLibrary"] = () => _projectEditor,
-                ["LibrariesDock"] = () => _projectEditor,
+                ["LibrariesToolDock"] = () => _projectEditor,
                 ["ProjectOptions"] = () => _projectEditor,
                 ["RendererOptions"] = () => _projectEditor,
                 ["ZoomOptions"] = () => _projectEditor,
                 ["ImageOptions"] = () => _projectEditor,
                 ["BrowserOptions"] = () => _projectEditor,
-                ["OptionsDock"] = () => _projectEditor,
+                ["OptionsToolDock"] = () => _projectEditor,
                 ["PropertiesDock"] = () => _projectEditor,
                 ["PagesDock"] = () => _projectEditor,
                 ["HomeMenuView"] = () => _projectEditor,
