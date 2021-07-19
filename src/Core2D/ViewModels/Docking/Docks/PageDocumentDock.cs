@@ -20,6 +20,7 @@ namespace Core2D.ViewModels.Docking.Docks
 
             var page = new PageViewModel()
             {
+                Id = "PageDocument",
                 Title = "Page"
             };
 
