@@ -11,8 +11,7 @@
   <Panel DataContext="{Binding Context}">
     <Panel x:DataType="vme:ProjectEditorViewModel">
       <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <ContentControl Content="{Binding Project.CurrentContainer}"
-                        Margin="0,0,8,0" />
+        <ContentControl Content="{Binding Project.CurrentContainer}" />
       </ScrollViewer>
     </Panel>
   </Panel>

@@ -16,12 +16,11 @@
       <Panel DataContext="{Binding Context}">
         <Panel x:DataType="vme:ProjectEditorViewModel">
       <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <ContentControl Content="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemStyleValueConverter}}"
-                        Margin="0,0,8,0" />
+        <ContentControl Content="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemStyleValueConverter}}" />
       </ScrollViewer>
       <!--
       <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <style:ShapeStyleView x:DataType="vme:ProjectEditorViewModel" Margin="0,0,8,0">
+        <style:ShapeStyleView x:DataType="vme:ProjectEditorViewModel">
           <style:ShapeStyleView.DataContext>
             <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
               <Binding Path="Project.SelectedShapes" FallbackValue="{x:Null}" />

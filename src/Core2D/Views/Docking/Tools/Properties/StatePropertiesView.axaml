@@ -20,7 +20,6 @@
                     VerticalScrollBarVisibility="Auto">
         <renderer:ShapeStateView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
                                  DataContext="{Binding}"
-                                 Margin="0,0,8,0"
                                  x:CompileBindings="False" />
       </ScrollViewer>
     </Panel>
