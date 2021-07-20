@@ -126,11 +126,11 @@
                             Background="Transparent" ClipToBounds="False"
                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
               <paz:ZoomBorder.ContextMenu>
-                <ContextMenu x:Name="TemplateContextMenu" DataContext="{Binding #PageZoomBorder.DataContext}">
-                  <MenuItem Header="Cu_t" InputGesture="Ctrl+X" />
-                  <MenuItem Header="_Copy" InputGesture="Ctrl+C" />
-                  <MenuItem Header="_Paste" InputGesture="Ctrl+V" />
-                  <MenuItem Header="_Delete" InputGesture="Delete" />
+                <ContextMenu x:Name="TemplateContextMenu" DataContext="{Binding #PageZoomBorder.DataContext}" x:CompileBindings="False">
+                  <MenuItem Header="Cu_t" Command="{Binding OnCut}" InputGesture="Ctrl+X" />
+                  <MenuItem Header="_Copy" Command="{Binding OnCopy}" InputGesture="Ctrl+C" />
+                  <MenuItem Header="_Paste" Command="{Binding OnPaste}" InputGesture="Ctrl+V" />
+                  <MenuItem Header="_Delete" Command="{Binding OnDelete}" CommandParameter="{Binding}" InputGesture="Delete" />
                 </ContextMenu>
               </paz:ZoomBorder.ContextMenu>
               <i:Interaction.Behaviors>
