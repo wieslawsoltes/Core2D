@@ -42,8 +42,8 @@
       </ExperimentalAcrylicBorder.Material>
     </ExperimentalAcrylicBorder>
     -->
-    <Panel x:Name="MainViewPanel">
-      <views:MainView x:Name="MainView" />
+    <Panel>
+      <views:MainView />
     </Panel>
   </Panel>
 </Window>
