@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.Views.DataObjectView"
+﻿<UserControl x:Class="Core2D.Views.Data.DataObjectView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -34,9 +34,11 @@
             <ItemsControl.DataTemplates>
               <DataTemplate DataType="vmdt:PropertyViewModel">
                 <Panel VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                  <!--<i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                            </i:Interaction.Behaviors>-->
+                  <!--
+                  <i:Interaction.Behaviors>
+                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                  </i:Interaction.Behaviors>
+                  -->
                   <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
                 </Panel>
               </DataTemplate>
@@ -50,9 +52,11 @@
               <DataTemplate DataType="vmdt:PropertyViewModel">
                 <DockPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="Transparent"
                            Margin="0,2,0,2">
-                  <!--<i:Interaction.Behaviors>
-                                        <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                                    </i:Interaction.Behaviors>-->
+                  <!--
+                  <i:Interaction.Behaviors>
+                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                  </i:Interaction.Behaviors>
+                  -->
                   <Button Content="-" Command="{Binding $parent[TopLevel].DataContext.OnRemoveProperty}"
                           CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch"
                           VerticalContentAlignment="Center" HorizontalAlignment="Stretch"

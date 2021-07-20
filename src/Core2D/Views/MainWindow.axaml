@@ -31,23 +31,19 @@
   </Window.Title>
   <Panel x:Name="ContentPanel">
     <Border IsHitTestVisible="False" Background="{DynamicResource AcrylicFallbackColor}" />
-    <!--<ExperimentalAcrylicBorder IsHitTestVisible="False">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial BackgroundSource="Digger"
-                                             TintColor="{DynamicResource SystemAltHighColor}"
-                                             TintOpacity="1"
-                                             FallbackColor="{DynamicResource AcrylicFallbackColor}"
-                                             MaterialOpacity="0.85" />
-            </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>-->
-    <DockPanel>
-      <!--<Panel x:Name="MainMenuPanel" DockPanel.Dock="Top">
-                <views:DashboardMenuView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
-                <views:EditorMenuView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
-            </Panel>-->
-      <Panel x:Name="MainViewPanel">
-        <views:MainView x:Name="MainView" />
-      </Panel>
-    </DockPanel>
+    <!--
+    <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial BackgroundSource="Digger"
+                                     TintColor="{DynamicResource SystemAltHighColor}"
+                                     TintOpacity="1"
+                                     FallbackColor="{DynamicResource AcrylicFallbackColor}"
+                                     MaterialOpacity="0.85" />
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+    -->
+    <Panel x:Name="MainViewPanel">
+      <views:MainView x:Name="MainView" />
+    </Panel>
   </Panel>
 </Window>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:views="using:Core2D.Views"
+             xmlns:data="using:Core2D.Views.Data"
              xmlns:renderer="using:Core2D.Views.Renderer"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
@@ -31,7 +31,7 @@
       <renderer:GridView />
     </Expander>
     <Expander Header="Data" IsExpanded="False">
-      <views:DataObjectView />
+      <data:DataObjectView />
     </Expander>
   </StackPanel>
 </UserControl>

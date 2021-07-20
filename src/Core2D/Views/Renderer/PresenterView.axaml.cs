@@ -13,7 +13,7 @@ using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Renderer.Presenters;
 
-namespace Core2D.Views
+namespace Core2D.Views.Renderer
 {
     public enum PresenterType
     {

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:views="using:Core2D.Views"
+             xmlns:data="using:Core2D.Views.Data"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Properties"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              mc:Ignorable="d"
@@ -18,8 +18,8 @@
       <ScrollViewer DataContext="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}"
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
-        <views:DataObjectView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
-                              x:CompileBindings="False" />
+        <data:DataObjectView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
+                             x:CompileBindings="False" />
       </ScrollViewer>
     </Panel>
   </Panel>

@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.Views
+namespace Core2D.Views.Data
 {
-    public class ZoomView : UserControl
+    public class DataObjectView : UserControl
     {
-        public ZoomView()
+        public DataObjectView()
         {
             InitializeComponent();
         }

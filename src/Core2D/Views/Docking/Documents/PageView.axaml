@@ -7,7 +7,7 @@
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:behaviors="using:Core2D.Behaviors"
              xmlns:paz="using:Avalonia.Controls.PanAndZoom"
-             xmlns:views="using:Core2D.Views"
+             xmlns:renderer="using:Core2D.Views.Renderer"
              xmlns:vm="using:Core2D.ViewModels.Docking.Documents"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
@@ -155,30 +155,30 @@
                        Width="{Binding Template.Width, TargetNullValue={Binding Width}}"
                        Height="{Binding Template.Height, TargetNullValue={Binding Height}}"
                        x:CompileBindings="False">
-                  <views:PresenterView x:Name="PresenterViewData"
-                                       ZoomBorder="{Binding #PageZoomBorder}"
-                                       Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
-                                       Selection="{Binding $parent[TopLevel].DataContext.Project}"
-                                       DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
-                                       Container="{Binding}"
-                                       PresenterType="Data"
-                                       ClipToBounds="False" />
-                  <views:PresenterView x:Name="PresenterViewTemplate"
-                                       ZoomBorder="{Binding #PageZoomBorder}"
-                                       Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
-                                       Selection="{Binding $parent[TopLevel].DataContext.Project}"
-                                       DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
-                                       Container="{Binding}"
-                                       PresenterType="Template"
-                                       ClipToBounds="False" />
-                  <views:PresenterView x:Name="PresenterViewEditor"
-                                       ZoomBorder="{Binding #PageZoomBorder}"
-                                       Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
-                                       Selection="{Binding $parent[TopLevel].DataContext.Project}"
-                                       DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
-                                       Container="{Binding}"
-                                       PresenterType="Editor"
-                                       ClipToBounds="False" />
+                  <renderer:PresenterView x:Name="PresenterViewData"
+                                          ZoomBorder="{Binding #PageZoomBorder}"
+                                          Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
+                                          Selection="{Binding $parent[TopLevel].DataContext.Project}"
+                                          DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
+                                          Container="{Binding}"
+                                          PresenterType="Data"
+                                          ClipToBounds="False" />
+                  <renderer:PresenterView x:Name="PresenterViewTemplate"
+                                          ZoomBorder="{Binding #PageZoomBorder}"
+                                          Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
+                                          Selection="{Binding $parent[TopLevel].DataContext.Project}"
+                                          DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
+                                          Container="{Binding}"
+                                          PresenterType="Template"
+                                          ClipToBounds="False" />
+                  <renderer:PresenterView x:Name="PresenterViewEditor"
+                                          ZoomBorder="{Binding #PageZoomBorder}"
+                                          Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
+                                          Selection="{Binding $parent[TopLevel].DataContext.Project}"
+                                          DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
+                                          Container="{Binding}"
+                                          PresenterType="Editor"
+                                          ClipToBounds="False" />
                 </Panel>
                 <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                   <Canvas Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
