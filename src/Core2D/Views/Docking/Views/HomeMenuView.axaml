@@ -510,7 +510,7 @@
       </MenuItem>
       <MenuItem Padding="0">
         <MenuItem.Header>
-          <DockPanel Width="40" Height="40" Margin="2,0,2,0">
+          <DockPanel Margin="2,0,2,0">
             <Viewbox UseLayoutRounding="False"
                      Margin="4,0,6,0"
                      Height="7"
