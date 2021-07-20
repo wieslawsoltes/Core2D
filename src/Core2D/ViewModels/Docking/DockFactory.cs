@@ -388,7 +388,7 @@ namespace Core2D.ViewModels.Docking
                 ["DashboardDock"] = () => _projectEditor
             };
 
-            DockableLocator = new Dictionary<string, Func<IDockable?>>()
+            DockableLocator = new Dictionary<string, Func<IDockable?>>
             {
                 ["Root"] = () => _rootDock,
                 ["Pages"] = () => _pagesDock
