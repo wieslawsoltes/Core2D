@@ -8,7 +8,7 @@
   <StyleInclude Source="avares://Dock.Avalonia/Themes/DefaultTheme.axaml" />
   <Style>
     <Style.Resources>
-      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#1F1F1F</SolidColorBrush>
+      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#E2E2E2</SolidColorBrush>
     </Style.Resources>
   </Style>
   <!-- Other -->
