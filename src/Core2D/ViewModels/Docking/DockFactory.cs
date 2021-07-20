@@ -74,7 +74,7 @@ namespace Core2D.ViewModels.Docking
             var projectOptionsViewModel = new ProjectOptionsViewModel()
             {
                 Id = "ProjectOptions",
-                Title = "Project"
+                Title = "Options"
             };
 
             var rendererOptionsViewModel = new RendererOptionsViewModel()
@@ -175,15 +175,15 @@ namespace Core2D.ViewModels.Docking
 
             var optionsToolDock = new ToolDock
             {
+                Proportion = 0.35,
                 Id = "OptionsToolDock",
                 Title = "Options",
-                ActiveDockable = styleLibraryViewModel,
+                ActiveDockable = projectOptionsViewModel,
                 VisibleDockables = CreateList<IDockable>(
                     projectOptionsViewModel,
                     rendererOptionsViewModel,
                     zoomOptionsViewModel,
-                    imageOptionsViewModel,
-                    objectBrowserViewModel),
+                    imageOptionsViewModel),
                 Alignment = Alignment.Right,
                 GripMode = GripMode.Visible
             };
@@ -193,7 +193,9 @@ namespace Core2D.ViewModels.Docking
                 Id = "ProjectToolDock",
                 Title = "Project",
                 ActiveDockable = projectExplorerViewModel,
-                VisibleDockables = CreateList<IDockable>(projectExplorerViewModel),
+                VisibleDockables = CreateList<IDockable>(
+                    projectExplorerViewModel,
+                    objectBrowserViewModel),
                 Alignment = Alignment.Left,
                 GripMode = GripMode.Visible
             };
