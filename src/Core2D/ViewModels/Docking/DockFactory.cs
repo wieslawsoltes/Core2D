@@ -37,83 +37,7 @@ namespace Core2D.ViewModels.Docking
 
         public override IRootDock CreateLayout()
         {
-            // Left Dock
-
-            var projectViewModel = new ProjectViewModel()
-            {
-                Id = "ProjectExplorer",
-                Title = "Project Explorer"
-            };
-
-            var projectDock = new ToolDock
-            {
-                Id = "ProjectDock",
-                Title = "Project",
-                ActiveDockable = projectViewModel,
-                VisibleDockables = CreateList<IDockable>(projectViewModel),
-                Alignment = Alignment.Left,
-                GripMode = GripMode.Visible
-            };
-
-            var leftProportionalDock = new ProportionalDock
-            {
-                Proportion = 0.25,
-                Orientation = Orientation.Vertical,
-                ActiveDockable = null,
-                VisibleDockables = CreateList<IDockable>
-                (
-                    projectDock
-                )
-            };
-
-            // Properties Dock
-
-            var pagePropertiesViewModel = new PagePropertiesViewModel()
-            {
-                Id = "PageProperties",
-                Title = "Page"
-            };
-
-            var shapePropertiesViewModel = new ShapePropertiesViewModel()
-            {
-                Id = "ShapeProperties",
-                Title = "Shape"
-            };
-
-            var stylePropertiesViewModel = new StylePropertiesViewModel()
-            {
-                Id = "StyleProperties",
-                Title = "Style"
-            };
-
-            var dataPropertiesViewModel = new DataPropertiesViewModel()
-            {
-                Id = "DataProperties",
-                Title = "Data"
-            };
-
-            var statePropertiesViewModel = new StatePropertiesViewModel()
-            {
-                Id = "StateProperties",
-                Title = "State"
-            };
-
-            var propertiesToolDock = new ToolDock
-            {
-                Id = "PropertiesToolDock",
-                Title = "Properties",
-                ActiveDockable = pagePropertiesViewModel,
-                VisibleDockables = CreateList<IDockable>(
-                    pagePropertiesViewModel,
-                    shapePropertiesViewModel,
-                    stylePropertiesViewModel,
-                    dataPropertiesViewModel,
-                    statePropertiesViewModel),
-                Alignment = Alignment.Right,
-                GripMode = GripMode.Visible
-            };
-
-            // Libraries Dock
+            // Tool Windows - Libraries
 
             var styleLibraryViewModel = new StyleLibraryViewModel()
             {
@@ -145,22 +69,7 @@ namespace Core2D.ViewModels.Docking
                 Title = "Scripts"
             };
 
-            var librariesToolDock = new ToolDock
-            {
-                Id = "LibrariesToolDock",
-                Title = "Libraries",
-                ActiveDockable = styleLibraryViewModel,
-                VisibleDockables = CreateList<IDockable>(
-                    styleLibraryViewModel,
-                    groupLibraryViewModel,
-                    databaseLibraryViewModel,
-                    templateLibraryViewModel,
-                    scriptLibraryViewModel),
-                Alignment = Alignment.Right,
-                GripMode = GripMode.Visible
-            };
-
-            // Options Dock
+            // Tool Windows - Options
 
             var projectOptionsViewModel = new ProjectOptionsViewModel()
             {
@@ -186,10 +95,82 @@ namespace Core2D.ViewModels.Docking
                 Title = "Images"
             };
 
-            var browserOptionsViewModel = new BrowserOptionsViewModel()
+            // Tool Windows - Properties
+
+            var pagePropertiesViewModel = new PagePropertiesViewModel()
             {
-                Id = "BrowserOptions",
-                Title = "Browser"
+                Id = "PageProperties",
+                Title = "Page"
+            };
+
+            var shapePropertiesViewModel = new ShapePropertiesViewModel()
+            {
+                Id = "ShapeProperties",
+                Title = "Shape"
+            };
+
+            var stylePropertiesViewModel = new StylePropertiesViewModel()
+            {
+                Id = "StyleProperties",
+                Title = "Style"
+            };
+
+            var dataPropertiesViewModel = new DataPropertiesViewModel()
+            {
+                Id = "DataProperties",
+                Title = "Data"
+            };
+
+            var statePropertiesViewModel = new StatePropertiesViewModel()
+            {
+                Id = "StateProperties",
+                Title = "State"
+            };
+
+            // Tool Windows
+
+            var projectExplorerViewModel = new ProjectExplorerViewModel()
+            {
+                Id = "ProjectExplorer",
+                Title = "Project Explorer"
+            };
+
+            var objectBrowserViewModel = new ObjectBrowserViewModel()
+            {
+                Id = "ObjectBrowser",
+                Title = "Object Browser"
+            };
+
+            // Home Perspective
+
+            var propertiesToolDock = new ToolDock
+            {
+                Id = "PropertiesToolDock",
+                Title = "Properties",
+                ActiveDockable = pagePropertiesViewModel,
+                VisibleDockables = CreateList<IDockable>(
+                    pagePropertiesViewModel,
+                    shapePropertiesViewModel,
+                    stylePropertiesViewModel,
+                    dataPropertiesViewModel,
+                    statePropertiesViewModel),
+                Alignment = Alignment.Right,
+                GripMode = GripMode.Visible
+            };
+
+            var librariesToolDock = new ToolDock
+            {
+                Id = "LibrariesToolDock",
+                Title = "Libraries",
+                ActiveDockable = styleLibraryViewModel,
+                VisibleDockables = CreateList<IDockable>(
+                    styleLibraryViewModel,
+                    groupLibraryViewModel,
+                    databaseLibraryViewModel,
+                    templateLibraryViewModel,
+                    scriptLibraryViewModel),
+                Alignment = Alignment.Right,
+                GripMode = GripMode.Visible
             };
 
             var optionsToolDock = new ToolDock
@@ -202,42 +183,50 @@ namespace Core2D.ViewModels.Docking
                     rendererOptionsViewModel,
                     zoomOptionsViewModel,
                     imageOptionsViewModel,
-                    browserOptionsViewModel),
+                    objectBrowserViewModel),
                 Alignment = Alignment.Right,
                 GripMode = GripMode.Visible
             };
 
-            // Right Dock
-
-            var propertiesDock = new ToolDock
+            var projectToolDock = new ToolDock
             {
-                Id = "PropertiesDock",
-                Title = "Properties",
-                ActiveDockable = propertiesToolDock,
-                VisibleDockables = CreateList<IDockable>(
-                    propertiesToolDock,
-                    librariesToolDock,
-                    optionsToolDock),
-                Alignment = Alignment.Right,
+                Id = "ProjectToolDock",
+                Title = "Project",
+                ActiveDockable = projectExplorerViewModel,
+                VisibleDockables = CreateList<IDockable>(projectExplorerViewModel),
+                Alignment = Alignment.Left,
                 GripMode = GripMode.Visible
             };
 
-            var rightProportionalDock = new ProportionalDock
+            var leftDock = new ProportionalDock
             {
-                Proportion = 0.25,
+                Proportion = 0.20,
                 Orientation = Orientation.Vertical,
-                ActiveDockable = null,
+                ActiveDockable = projectToolDock,
                 VisibleDockables = CreateList<IDockable>
                 (
-                    propertiesDock
+                    projectToolDock,
+                    new SplitterDockable(),
+                    optionsToolDock
                 )
             };
 
-            // Document Dock
-
-            var documentDock = new PageDocumentDock
+            var rightDock = new ProportionalDock
             {
-                Id = "PagesDock",
+                Proportion = 0.20,
+                Orientation = Orientation.Vertical,
+                ActiveDockable = propertiesToolDock,
+                VisibleDockables = CreateList<IDockable>
+                (
+                    propertiesToolDock,
+                    new SplitterDockable(),
+                    librariesToolDock
+                )
+            };
+
+            var pageDocumentDock = new PageDocumentDock
+            {
+                Id = "PageDocumentDock",
                 Title = "Pages",
                 IsCollapsable = false,
                 ActiveDockable = null,
@@ -245,18 +234,16 @@ namespace Core2D.ViewModels.Docking
                 CanCreateDocument = true
             };
 
-            // Home
-
             var homeLayout = new ProportionalDock
             {
                 Orientation = Orientation.Horizontal,
                 VisibleDockables = CreateList<IDockable>
                 (
-                    leftProportionalDock,
+                    leftDock,
                     new SplitterDockable(),
-                    documentDock,
+                    pageDocumentDock,
                     new SplitterDockable(),
-                    rightProportionalDock
+                    rightDock
                 )
             };
 
@@ -295,7 +282,7 @@ namespace Core2D.ViewModels.Docking
                 )
             };
 
-            // Dashboard
+            // Dashboard Perspective
 
             var dashboardMenuViewModel = new DashboardMenuViewModel()
             {
@@ -323,6 +310,8 @@ namespace Core2D.ViewModels.Docking
                 )
             };
 
+            // Root Perspective
+
             var dashboardRootDock = CreateRootDock();
             dashboardRootDock.Id = "Dashboard";
             dashboardRootDock.IsCollapsable = false;
@@ -337,7 +326,7 @@ namespace Core2D.ViewModels.Docking
             homeRootDock.DefaultDockable = homeDock;
             homeRootDock.VisibleDockables = CreateList<IDockable>(homeDock);
 
-            // Root
+            // Root Dock
 
             var rootDock = CreateRootDock();
             rootDock.Id = "Root";
@@ -346,7 +335,7 @@ namespace Core2D.ViewModels.Docking
             rootDock.DefaultDockable = dashboardRootDock;
             rootDock.VisibleDockables = CreateList<IDockable>(dashboardRootDock, homeRootDock);
 
-            _pagesDock = documentDock;
+            _pagesDock = pageDocumentDock;
             _rootDock = rootDock;
 
             return rootDock;
@@ -356,33 +345,40 @@ namespace Core2D.ViewModels.Docking
         {
             ContextLocator = new Dictionary<string, Func<object>>
             {
+                // Documents
                 ["PageDocument"] = () => _projectEditor,
+                ["PageDocumentDock"] = () => _projectEditor,
+                // Explorers
                 ["ProjectExplorer"] = () => _projectEditor,
-                ["ProjectDock"] = () => _projectEditor,
+                ["ObjectBrowser"] = () => _projectEditor,
+                // Properties
                 ["PageProperties"] = () => _projectEditor,
                 ["ShapeProperties"] = () => _projectEditor,
                 ["StyleProperties"] = () => _projectEditor,
                 ["DataProperties"] = () => _projectEditor,
                 ["StateProperties"] = () => _projectEditor,
-                ["PropertiesToolDock"] = () => _projectEditor,
+                // Libraries
                 ["StyleLibrary"] = () => _projectEditor,
                 ["GroupLibrary"] = () => _projectEditor,
                 ["DatabaseLibrary"] = () => _projectEditor,
                 ["TemplateLibrary"] = () => _projectEditor,
                 ["ScriptLibrary"] = () => _projectEditor,
-                ["LibrariesToolDock"] = () => _projectEditor,
+                // Options
                 ["ProjectOptions"] = () => _projectEditor,
                 ["RendererOptions"] = () => _projectEditor,
                 ["ZoomOptions"] = () => _projectEditor,
                 ["ImageOptions"] = () => _projectEditor,
-                ["BrowserOptions"] = () => _projectEditor,
+                // Docks
+                ["ProjectToolDock"] = () => _projectEditor,
+                ["PropertiesToolDock"] = () => _projectEditor,
+                ["LibrariesToolDock"] = () => _projectEditor,
                 ["OptionsToolDock"] = () => _projectEditor,
-                ["PropertiesDock"] = () => _projectEditor,
-                ["PagesDock"] = () => _projectEditor,
+                // Home
                 ["HomeMenuView"] = () => _projectEditor,
                 ["HomeView"] = () => _projectEditor,
                 ["HomeStatusBarView"] = () => _projectEditor,
                 ["HomeDock"] = () => _projectEditor,
+                // Dashboard
                 ["DashboardMenuView"] = () => _projectEditor,
                 ["DashboardView"] = () => _projectEditor,
                 ["DashboardDock"] = () => _projectEditor

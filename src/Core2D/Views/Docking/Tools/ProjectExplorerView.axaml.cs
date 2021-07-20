@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Core2D.Views.Docking.Tools
 {
-    public class ProjectView : UserControl
+    public class ProjectExplorerView : UserControl
     {
-        public ProjectView()
+        public ProjectExplorerView()
         {
             InitializeComponent();
         }

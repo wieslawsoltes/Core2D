@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.Views.Docking.Tools.ProjectView"
+﻿<UserControl x:Class="Core2D.Views.Docking.Tools.ProjectExplorerView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,7 +9,7 @@
              xmlns:containers="using:Core2D.Views.Containers"
              mc:Ignorable="d"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vm:ProjectViewModel" x:CompileBindings="True">
+             x:DataType="vm:ProjectExplorerViewModel" x:CompileBindings="True">
  <Panel DataContext="{Binding Context}">
    <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}"
           x:DataType="vme:ProjectEditorViewModel" 

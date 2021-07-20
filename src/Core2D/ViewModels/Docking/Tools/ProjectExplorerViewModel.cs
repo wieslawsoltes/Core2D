@@ -2,7 +2,7 @@
 
 namespace Core2D.ViewModels.Docking.Tools
 {
-    public class ProjectViewModel : Tool
+    public class ProjectExplorerViewModel : Tool
     {
     }
 }

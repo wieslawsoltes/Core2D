@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.Views.Docking.Tools.Options
+namespace Core2D.Views.Docking.Tools
 {
-    public class BrowserOptionsView : UserControl
+    public class ObjectBrowserView : UserControl
     {
-        public BrowserOptionsView()
+        public ObjectBrowserView()
         {
             InitializeComponent();
         }
