@@ -161,7 +161,7 @@
                                        Selection="{Binding $parent[TopLevel].DataContext.Project}"
                                        DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
                                        Container="{Binding}"
-                                       DrawType="Data"
+                                       RenderType="Data"
                                        ClipToBounds="False" />
                   <renderer:RenderView x:Name="RenderViewTemplate"
                                        ZoomBorder="{Binding #PageZoomBorder}"
@@ -169,7 +169,7 @@
                                        Selection="{Binding $parent[TopLevel].DataContext.Project}"
                                        DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
                                        Container="{Binding}"
-                                       DrawType="Template"
+                                       RenderType="Template"
                                        ClipToBounds="False" />
                   <renderer:RenderView x:Name="RenderViewEditor"
                                        ZoomBorder="{Binding #PageZoomBorder}"
@@ -177,7 +177,7 @@
                                        Selection="{Binding $parent[TopLevel].DataContext.Project}"
                                        DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
                                        Container="{Binding}"
-                                       DrawType="Editor"
+                                       RenderType="Editor"
                                        ClipToBounds="False" />
                 </Panel>
                 <Panel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
