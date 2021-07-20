@@ -168,7 +168,12 @@ namespace Core2D.ViewModels.Editor
         {
             _rootDock?.Navigate.Execute(id);
         }
-        
+
+        public void OnToggleDockableVisibility(string id)
+        {
+            // TODO:
+        }
+
         public void ShowDialog(DialogViewModel dialog)
         {
             _dialogs.Add(dialog);
