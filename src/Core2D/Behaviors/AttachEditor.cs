@@ -53,9 +53,9 @@ namespace Core2D.Behaviors
                 return;
             }
 
-            var presenterViewData = _control.FindControl<Control>("PresenterViewData");
-            var presenterViewTemplate = _control.FindControl<Control>("PresenterViewTemplate");
-            var presenterViewEditor = _control.FindControl<Control>("PresenterViewEditor");
+            var presenterViewData = _control.FindControl<Control>("RenderViewData");
+            var presenterViewTemplate = _control.FindControl<Control>("RenderViewTemplate");
+            var presenterViewEditor = _control.FindControl<Control>("RenderViewEditor");
             var zoomBorder = _control.FindControl<ZoomBorder>("PageZoomBorder");
 
             if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
