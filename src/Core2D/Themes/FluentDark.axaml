@@ -1,5 +1,6 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:idc="using:Dock.Avalonia.Controls">
   <!-- Avalonia -->
   <StyleInclude Source="avares://Avalonia.Themes.Fluent/FluentDark.xaml" />
   <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml" />
@@ -8,8 +9,17 @@
   <StyleInclude Source="avares://Dock.Avalonia/Themes/FluentTheme.axaml" />
   <Style>
     <Style.Resources>
-      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#1F1F1F</SolidColorBrush>
+      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#292929</SolidColorBrush>
     </Style.Resources>
+  </Style>
+  <Style Selector="idc|ToolControl /template/ DockPanel#PART_DockPanel">
+    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
+  </Style>
+  <Style Selector="idc|ToolControl /template/ TabStrip#PART_TabStrip TabStripItem">
+    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
+  </Style>
+  <Style Selector="idc|ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
+    <Setter Property="Background" Value="{DynamicResource DockThemeBackgroundBrush}" />
   </Style>
   <!-- Other -->
   <Style>
