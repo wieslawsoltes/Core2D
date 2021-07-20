@@ -159,8 +159,20 @@ namespace Core2D.ViewModels.Editor
             _dockFactory = new DockFactory(this);
             _rootDock = _dockFactory.CreateLayout();
             _dockFactory?.InitLayout(_rootDock);
+
+            _dockFactory.DockableClosed += (sender, args) =>
+            {
+                Console.WriteLine($"DockableClosed {args.Dockable?.Id}");
+            };
+
+            _dockFactory.DockableRemoved += (sender, args) =>
+            {
+                Console.WriteLine($"DockableRemoved {args.Dockable?.Id}");
+            };
+
             // TODO:
             _dockFactory.PagesDock?.CreateDocument?.Execute(null);
+
             NavigateTo("Dashboard");
         }
 
