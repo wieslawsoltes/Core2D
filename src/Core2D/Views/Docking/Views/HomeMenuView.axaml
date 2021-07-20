@@ -112,7 +112,7 @@
           <MenuItem Header="Zoom _In" Command="{Binding Platform.OnZoomIn}" InputGesture="Ctrl+Add" />
           <MenuItem Header="Zoom _Out" Command="{Binding Platform.OnZoomOut}" InputGesture="Ctrl+Subtract" />
         </MenuItem>
-        <MenuItem Header="_Theme">
+        <MenuItem Header="T_heme">
           <MenuItem Header="Fluent _Light" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentLight" />
           <MenuItem Header="Fluent _Dark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentDark" />
           <Separator />
@@ -122,14 +122,11 @@
       </MenuItem>
       <MenuItem Header="_Project">
         <MenuItem Header="D_ata">
-          <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData}"
-                    CommandParameter="{Binding Project}" />
+          <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}" />
           <Separator />
-          <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}"
-                    CommandParameter="{Binding Project.CurrentDatabase}" />
+          <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}" />
           <Separator />
-          <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}"
-                    CommandParameter="{Binding Project.CurrentDatabase}" />
+          <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}" />
         </MenuItem>
         <MenuItem Header="O_ptions">
           <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
@@ -167,46 +164,35 @@
       <MenuItem Header="_Document">
         <MenuItem Header="_Add Document" Command="{Binding OnAddDocument}" CommandParameter="{Binding Mode=OneWay}" />
         <Separator />
-        <MenuItem Header="Insert Document Bef_ore" Command="{Binding OnInsertDocumentBefore}"
-                  CommandParameter="{Binding Project.CurrentDocument}" />
-        <MenuItem Header="Insert Document Aft_er" Command="{Binding OnInsertDocumentAfter}"
-                  CommandParameter="{Binding Project.CurrentDocument}" />
+        <MenuItem Header="Insert Document Bef_ore" Command="{Binding OnInsertDocumentBefore}" CommandParameter="{Binding Project.CurrentDocument}" />
+        <MenuItem Header="Insert Document Aft_er" Command="{Binding OnInsertDocumentAfter}" CommandParameter="{Binding Project.CurrentDocument}" />
         <Separator />
         <MenuItem Header="Cu_t Document" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentDocument}" />
         <MenuItem Header="_Copy Document" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentDocument}" />
-        <MenuItem Header="_Paste Document" Command="{Binding OnPaste}"
-                  CommandParameter="{Binding Project.CurrentDocument}" />
+        <MenuItem Header="_Paste Document" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentDocument}" />
         <Separator />
-        <MenuItem Header="_Delete Document" Command="{Binding OnDelete}"
-                  CommandParameter="{Binding Project.CurrentDocument}" />
+        <MenuItem Header="_Delete Document" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentDocument}" />
         <Separator />
-        <MenuItem Header="E_xport Document" Command="{Binding Platform.OnExport}"
-                  CommandParameter="{Binding Project.CurrentDocument}" />
+        <MenuItem Header="E_xport Document" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentDocument}" />
       </MenuItem>
       <MenuItem Header="P_age">
         <MenuItem Header="_Add Page" Command="{Binding OnAddPage}" CommandParameter="{Binding Mode=OneWay}" />
         <Separator />
-        <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}"
-                  CommandParameter="{Binding Project.CurrentContainer}" />
-        <MenuItem Header="Insert Page Aft_er" Command="{Binding OnInsertPageAfter}"
-                  CommandParameter="{Binding Project.CurrentContainer}" />
+        <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Project.CurrentContainer}" />
+        <MenuItem Header="Insert Page Aft_er"  Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Project.CurrentContainer}" />
         <Separator />
         <MenuItem Header="Cu_t Page" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentContainer}" />
         <MenuItem Header="_Copy Page" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentContainer}" />
         <MenuItem Header="_Paste Page" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentContainer}" />
         <Separator />
-        <MenuItem Header="_Delete Page" Command="{Binding OnDelete}"
-                  CommandParameter="{Binding Project.CurrentContainer}" />
+        <MenuItem Header="_Delete Page" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentContainer}" />
         <Separator />
-        <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}"
-                  CommandParameter="{Binding Project.CurrentContainer}" />
+        <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainer}" />
       </MenuItem>
       <MenuItem Header="_Layer">
-        <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}"
-                  CommandParameter="{Binding Project.CurrentContainer}" />
+        <MenuItem Header="_Add Layer" Command="{Binding OnAddLayer}" CommandParameter="{Binding Project.CurrentContainer}" />
         <Separator />
-        <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}"
-                  CommandParameter="{Binding Project.CurrentContainer.CurrentLayer}" />
+        <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Project.CurrentContainer.CurrentLayer}" />
       </MenuItem>
       <MenuItem Header="_Shape">
         <MenuItem Header="Du_plicate" Command="{Binding OnDuplicateSelected}" InputGesture="Ctrl+D" />
@@ -216,10 +202,8 @@
           <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U" />
         </MenuItem>
         <MenuItem Header="Rotat_e">
-          <MenuItem Header="Rotate _Right 90°" Command="{Binding OnRotateSelected}" CommandParameter="90"
-                    InputGesture="Ctrl+R" />
-          <MenuItem Header="Rotate _Left 90°" Command="{Binding OnRotateSelected}" CommandParameter="-90"
-                    InputGesture="Ctrl+L" />
+          <MenuItem Header="Rotate _Right 90°" Command="{Binding OnRotateSelected}" CommandParameter="90" InputGesture="Ctrl+R" />
+          <MenuItem Header="Rotate _Left 90°" Command="{Binding OnRotateSelected}" CommandParameter="-90" InputGesture="Ctrl+L" />
           <MenuItem Header="Flip _Horizontal" Command="{Binding OnFlipHorizontalSelected}" InputGesture="Ctrl+H" />
           <MenuItem Header="Flip _Vertical" Command="{Binding OnFlipVerticalSelected}" InputGesture="Ctrl+J" />
         </MenuItem>
@@ -234,8 +218,7 @@
           <MenuItem Header="_Vertically" Command="{Binding OnStackVerticallySelected}" InputGesture="Shift+Y" />
         </MenuItem>
         <MenuItem Header="Dis_tribute">
-          <MenuItem Header="_Horizontally" Command="{Binding OnDistributeHorizontallySelected}"
-                    InputGesture="Ctrl+Shift+H" />
+          <MenuItem Header="_Horizontally" Command="{Binding OnDistributeHorizontallySelected}" InputGesture="Ctrl+Shift+H" />
           <MenuItem Header="_Vertically" Command="{Binding OnDistributeVerticallySelected}" InputGesture="Ctrl+Shift+Y" />
         </MenuItem>
         <MenuItem Header="Alig_n">
@@ -248,15 +231,11 @@
           <MenuItem Header="_Bottom" Command="{Binding OnAlignBottomSelected}" InputGesture="Ctrl+Shift+Down" />
         </MenuItem>
         <MenuItem Header="_Arange">
-          <MenuItem Header="_Bring to Front" Command="{Binding OnBringToFrontSelected}"
-                    InputGesture="Ctrl+Shift+OemCloseBrackets" />
-          <MenuItem Header="Bring _Forward" Command="{Binding OnBringForwardSelected}"
-                    InputGesture="Ctrl+OemCloseBrackets" />
+          <MenuItem Header="_Bring to Front" Command="{Binding OnBringToFrontSelected}" InputGesture="Ctrl+Shift+OemCloseBrackets" />
+          <MenuItem Header="Bring _Forward" Command="{Binding OnBringForwardSelected}" InputGesture="Ctrl+OemCloseBrackets" />
           <Separator />
-          <MenuItem Header="Send Back_ward" Command="{Binding OnSendBackwardSelected}"
-                    InputGesture="Ctrl+OemOpenBrackets" />
-          <MenuItem Header="_Send to Back" Command="{Binding OnSendToBackSelected}"
-                    InputGesture="Ctrl+Shift+OemOpenBrackets" />
+          <MenuItem Header="Send Back_ward" Command="{Binding OnSendBackwardSelected}" InputGesture="Ctrl+OemOpenBrackets" />
+          <MenuItem Header="_Send to Back" Command="{Binding OnSendToBackSelected}" InputGesture="Ctrl+Shift+OemOpenBrackets" />
         </MenuItem>
         <Separator />
         <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}" />
@@ -266,18 +245,11 @@
         <MenuItem Header="_Simplify Path" Command="{Binding OnPathSimplify}" />
         <MenuItem Header="_Break Path" Command="{Binding OnPathBreak}" InputGesture="Ctrl+B" />
         <Separator />
-        <MenuItem Header="_Difference" Icon="{StaticResource DifferenceIcon}"
-                  ToolTip.Tip="Subtract the op path from the current path." Command="{Binding OnPathOp}"
-                  CommandParameter="Difference" InputGesture="Ctrl+Shift+D" />
-        <MenuItem Header="_Intersect" Icon="{StaticResource IntersectIcon}" ToolTip.Tip="Intersect the two paths."
-                  Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I" />
-        <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}" ToolTip.Tip="Union (inclusive-or) the two paths."
-                  Command="{Binding OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U" />
-        <MenuItem Header="_Xor" Icon="{StaticResource XorIcon}" ToolTip.Tip="Exclusive-or the two paths."
-                  Command="{Binding OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X" />
-        <MenuItem Header="_Reverse Difference" Icon="{StaticResource ReverseDifferenceIcon}"
-                  ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}"
-                  CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
+        <MenuItem Header="_Difference" Icon="{StaticResource DifferenceIcon}" ToolTip.Tip="Subtract the op path from the current path."  Command="{Binding OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D" />
+        <MenuItem Header="_Intersect" Icon="{StaticResource IntersectIcon}" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I" />
+        <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U" />
+        <MenuItem Header="_Xor" Icon="{StaticResource XorIcon}" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X" />
+        <MenuItem Header="_Reverse Difference" Icon="{StaticResource ReverseDifferenceIcon}" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
       </MenuItem>
       <MenuItem Header="F_ormat">
         <MenuItem Header="_Copy">
@@ -348,8 +320,7 @@
             <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2" />
             <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="0 2" />
             <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2" />
-            <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes}"
-                      CommandParameter="2 2 0 2 0 2" />
+            <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes}" CommandParameter="2 2 0 2 0 2" />
           </MenuItem>
           <MenuItem Header="Dash _Offset">
             <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetDashOffset}" CommandParameter="-5" />
@@ -367,10 +338,8 @@
           <MenuItem Header="_Start Arrow">
             <MenuItem Header="_Type">
               <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="None" />
-              <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetStartArrowType}"
-                        CommandParameter="Rectangle" />
-              <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetStartArrowType}"
-                        CommandParameter="Ellipse" />
+              <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Rectangle" />
+              <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Ellipse" />
               <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetStartArrowType}" CommandParameter="Arrow" />
             </MenuItem>
             <MenuItem Header="Radius_X">
@@ -403,10 +372,8 @@
           <MenuItem Header="_End Arrow">
             <MenuItem Header="_Type">
               <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="None" />
-              <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetEndArrowType}"
-                        CommandParameter="Rectangle" />
-              <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetEndArrowType}"
-                        CommandParameter="Ellipse" />
+              <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Rectangle" />
+              <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Ellipse" />
               <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetEndArrowType}" CommandParameter="Arrow" />
             </MenuItem>
             <MenuItem Header="Radius_X">
@@ -496,11 +463,9 @@
             <MenuItem Header="96" Command="{Binding StyleEditor.OnStyleSetFontSize}" CommandParameter="96" />
           </MenuItem>
           <MenuItem Header="Font S_tyle">
-            <MenuItem Header="Toggle _Regular" Command="{Binding StyleEditor.OnStyleSetFontStyle}"
-                      CommandParameter="Regular" />
+            <MenuItem Header="Toggle _Regular" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Regular" />
             <MenuItem Header="Toggle _Bold" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Bold" />
-            <MenuItem Header="Toggle _Italic" Command="{Binding StyleEditor.OnStyleSetFontStyle}"
-                      CommandParameter="Italic" />
+            <MenuItem Header="Toggle _Italic" Command="{Binding StyleEditor.OnStyleSetFontStyle}" CommandParameter="Italic" />
           </MenuItem>
           <MenuItem Header="_Horizontal Alignment">
             <MenuItem Header="Left" Command="{Binding StyleEditor.OnStyleSetTextHAlignment}" CommandParameter="Left" />
@@ -542,24 +507,19 @@
         </MenuItem.Header>
         <MenuItem Header="_None" Icon="{StaticResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N" />
         <Separator />
-        <MenuItem Header="_Selection" Icon="{StaticResource SelectionIcon}" Command="{Binding OnToolSelection}"
-                  InputGesture="S" />
+        <MenuItem Header="_Selection" Icon="{StaticResource SelectionIcon}" Command="{Binding OnToolSelection}" InputGesture="S" />
         <Separator />
         <MenuItem Header="_Point" Icon="{StaticResource PointIcon}" Command="{Binding OnToolPoint}" InputGesture="P" />
         <Separator />
         <MenuItem Header="_Line" Icon="{StaticResource LineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
         <MenuItem Header="_Arc" Icon="{StaticResource ArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
-        <MenuItem Header="Cubic _Bezier" Icon="{StaticResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}"
-                  InputGesture="B" />
-        <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource QuadraticBezierIcon}"
-                  Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
+        <MenuItem Header="Cubic _Bezier" Icon="{StaticResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
+        <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
         <Separator />
         <MenuItem Header="Pat_h" Icon="{StaticResource PathIcon}" Command="{Binding OnToolPath}" InputGesture="H" />
         <Separator />
-        <MenuItem Header="_Rectangle" Icon="{StaticResource RectangleIcon}" Command="{Binding OnToolRectangle}"
-                  InputGesture="R" />
-        <MenuItem Header="_Ellipse" Icon="{StaticResource EllipseIcon}" Command="{Binding OnToolEllipse}"
-                  InputGesture="E" />
+        <MenuItem Header="_Rectangle" Icon="{StaticResource RectangleIcon}" Command="{Binding OnToolRectangle}" InputGesture="R" />
+        <MenuItem Header="_Ellipse" Icon="{StaticResource EllipseIcon}" Command="{Binding OnToolEllipse}" InputGesture="E" />
         <Separator />
         <MenuItem Header="_Text" Icon="{StaticResource TextIcon}" Command="{Binding OnToolText}" InputGesture="T" />
         <Separator />
@@ -592,17 +552,14 @@
               </Panel>
             </Viewbox>
             <Panel Margin="0">
-              <Image Source="{Binding CurrentPathTool, Converter={StaticResource ToolIconConverter}}" Width="16"
-                     Height="16" />
+              <Image Source="{Binding CurrentPathTool, Converter={StaticResource ToolIconConverter}}" Width="16" Height="16" />
             </Panel>
           </DockPanel>
         </MenuItem.Header>
         <MenuItem Header="_Line" Icon="{StaticResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
         <MenuItem Header="_Arc" Icon="{StaticResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
-        <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}"
-                  Command="{Binding OnToolCubicBezier}" InputGesture="B" />
-        <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}"
-                  Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
+        <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
+        <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
         <Separator />
         <MenuItem Header="_Move" Icon="{StaticResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M" />
       </MenuItem>
