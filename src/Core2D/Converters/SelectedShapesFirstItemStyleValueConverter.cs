@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -8,9 +9,11 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Converters
 {
-    public class FirstSelectedItemStyleValueConverter : IValueConverter
+    public class SelectedShapesFirstItemStyleValueConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public static SelectedShapesFirstItemStyleValueConverter Instance = new();
+
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is ISet<BaseShapeViewModel> items && items.Count == 1)
             {
@@ -19,7 +22,7 @@ namespace Core2D.Converters
             return AvaloniaProperty.UnsetValue;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

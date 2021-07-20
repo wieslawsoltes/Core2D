@@ -10,9 +10,6 @@
              d:DataContext="{x:Static vmd:DesignerContext.PathGeometry}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmp:PathGeometryViewModel" x:CompileBindings="True">
-  <UserControl.Resources>
-    <converters:ViewModelToTypeStringConverter x:Key="ViewModelToTypeStringConverter" />
-  </UserControl.Resources>
   <StackPanel>
     <StackPanel>
       <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
@@ -29,11 +26,11 @@
         <TreeView.DataTemplates>
           <TreeDataTemplate DataType="vmp:PathFigureViewModel" ItemsSource="{Binding Segments}"
                             x:CompileBindings="False">
-            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                        Background="Transparent" />
           </TreeDataTemplate>
           <DataTemplate DataType="vmp:PathSegmentViewModel">
-            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                        Background="Transparent" />
           </DataTemplate>
         </TreeView.DataTemplates>

@@ -12,8 +12,6 @@
              d:DesignWidth="300" d:DesignHeight="400"
              x:DataType="vms:ArgbColorViewModel" x:CompileBindings="True">
   <UserControl.Resources>
-    <converters:HexToColorConverter x:Key="HexToColorConverter" />
-    <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter" />
     <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
       <VisualBrush.Visual>
         <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="LightGray" />
@@ -44,14 +42,14 @@
         <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
         <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
         <Border BorderThickness="0" CornerRadius="0"
-                Background="{Binding Value, Converter={StaticResource ArgbColorToBrushConverter}}" />
+                Background="{Binding Value, Converter={x:Static converters:ArgbColorToBrushConverter.Instance}}" />
       </Panel>
     </ToggleButton>
     <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True"
            PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft">
       <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="0">
         <cp:ColorPicker x:Name="ArgbColorPicker"
-                        Color="{Binding Value, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}" Margin="8">
+                        Color="{Binding Value, Mode=TwoWay, Converter={x:Static converters:HexToColorConverter.Instance}}" Margin="8">
           <cp:ColorPicker.Styles>
             <Style Selector="cp|ColorPicker /template/ Grid#PART_PickerGrid">
               <Setter Property="MinHeight" Value="200" />

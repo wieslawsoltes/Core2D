@@ -20,11 +20,8 @@
         d:DataContext="{x:Static vmd:DesignerContext.Editor}"
         d:DesignWidth="1200" d:DesignHeight="580"
         x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
-  <Window.Resources>
-    <converters:EditorToTitleMultiConverter x:Key="EditorToTitleMultiConverter" />
-  </Window.Resources>
   <Window.Title>
-    <MultiBinding Mode="OneWay" Converter="{StaticResource EditorToTitleMultiConverter}">
+    <MultiBinding Mode="OneWay" Converter="{x:Static converters:EditorToTitleMultiConverter.Instance}">
       <Binding Path="Project.Name" />
       <Binding Path="IsProjectDirty" />
     </MultiBinding>

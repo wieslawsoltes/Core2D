@@ -17,9 +17,6 @@
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:ObjectBrowserViewModel" x:CompileBindings="True">
-  <UserControl.Resources>
-    <converters:ViewModelToTypeStringConverter x:Key="ViewModelToTypeStringConverter" />
-  </UserControl.Resources>
   <Panel DataContext="{Binding Context}">
     <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}" 
            x:DataType="vme:ProjectEditorViewModel">
@@ -91,7 +88,7 @@
                 </TextBlock>
               </TreeDataTemplate>
               <DataTemplate DataType="core:ViewModelBase">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                            Background="Transparent">
                   <i:Interaction.Behaviors>
                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -177,7 +174,7 @@
               </TreeDataTemplate>
               <TreeDataTemplate DataType="vms:BaseShapeViewModel" ItemsSource="{Binding Resources}"
                                 x:CompileBindings="False">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                            Background="Transparent">
                   <i:Interaction.Behaviors>
                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -191,7 +188,7 @@
                 </TextBlock>
               </TreeDataTemplate>
               <DataTemplate DataType="core:ViewModelBase">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                            Background="Transparent">
                   <i:Interaction.Behaviors>
                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -220,7 +217,7 @@
             </TreeViewItem.Styles>
             <TreeViewItem.DataTemplates>
               <DataTemplate DataType="core:ViewModelBase">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                            Background="Transparent">
                   <i:Interaction.Behaviors>
                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -292,7 +289,7 @@
               </TreeDataTemplate>
               <TreeDataTemplate DataType="vms:BaseShapeViewModel" ItemsSource="{Binding Resources}"
                                 x:CompileBindings="False">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                            Background="Transparent">
                   <i:Interaction.Behaviors>
                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -306,7 +303,7 @@
                 </TextBlock>
               </TreeDataTemplate>
               <DataTemplate DataType="core:ViewModelBase">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                            Background="Transparent">
                   <i:Interaction.Behaviors>
                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

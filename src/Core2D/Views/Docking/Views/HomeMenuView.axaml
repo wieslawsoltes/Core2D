@@ -12,8 +12,6 @@
              d:DesignWidth="800" d:DesignHeight="32"
              x:DataType="vm:HomeMenuViewModel" x:CompileBindings="True">
   <UserControl.Resources>
-    <converters:ToolIconConverter x:Key="ToolIconConverter" />
-    <converters:ObjectEqualityMultiConverter x:Key="ObjectEqualityMultiConverter" />
     <!-- Menu-Shape -->
     <Image x:Key="DifferenceIcon" Source="{StaticResource Difference}" Width="16" Height="16" />
     <Image x:Key="IntersectIcon" Source="{StaticResource Intersect}" Width="16" Height="16" />
@@ -527,7 +525,7 @@
               </Panel>
             </Viewbox>
             <Panel Margin="0">
-              <Image Source="{Binding CurrentTool, Converter={StaticResource ToolIconConverter}}" Width="16" Height="16" />
+              <Image Source="{Binding CurrentTool, Converter={x:Static converters:ToolIconConverter.Instance}}" Width="16" Height="16" />
             </Panel>
           </DockPanel>
         </MenuItem.Header>
@@ -555,7 +553,7 @@
       </MenuItem>
       <MenuItem Padding="0">
         <MenuItem.IsVisible>
-          <MultiBinding Mode="OneWay" Converter="{StaticResource ObjectEqualityMultiConverter}">
+          <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
             <Binding Path="CurrentTool.Title" />
             <Binding Path="" Source="Path" />
           </MultiBinding>
@@ -578,7 +576,7 @@
               </Panel>
             </Viewbox>
             <Panel Margin="0">
-              <Image Source="{Binding CurrentPathTool, Converter={StaticResource ToolIconConverter}}" Width="16" Height="16" />
+              <Image Source="{Binding CurrentPathTool, Converter={x:Static converters:ToolIconConverter.Instance}}" Width="16" Height="16" />
             </Panel>
           </DockPanel>
         </MenuItem.Header>

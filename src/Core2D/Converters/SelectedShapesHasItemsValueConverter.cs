@@ -1,23 +1,20 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
-using Avalonia.Media;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Converters
 {
-    public class ArgbColorToBrushConverter : IValueConverter
+    public class SelectedShapesHasItemsValueConverter : IValueConverter
     {
-        public static ArgbColorToBrushConverter Instance = new();
+        public static SelectedShapesHasItemsValueConverter Instance = new();
 
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is uint n)
-            {
-                return new SolidColorBrush(Color.FromUInt32(n));
-            }
-            return AvaloniaProperty.UnsetValue;
+            return value is ISet<BaseShapeViewModel> items && items.Count > 0;
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

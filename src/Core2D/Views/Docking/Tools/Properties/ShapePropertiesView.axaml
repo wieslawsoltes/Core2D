@@ -9,13 +9,10 @@
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:ShapePropertiesViewModel" x:CompileBindings="True">
-  <UserControl.Resources>
-    <converters:FirstSelectedItemValueConverter x:Key="FirstSelectedItemValueConverter" />
-  </UserControl.Resources>
   <Panel DataContext="{Binding Context}">
     <Panel x:DataType="vme:ProjectEditorViewModel">
       <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <ContentControl Content="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemValueConverter}}" />
+        <ContentControl Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
       </ScrollViewer>
     </Panel>
   </Panel>

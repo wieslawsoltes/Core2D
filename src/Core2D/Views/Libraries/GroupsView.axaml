@@ -16,7 +16,6 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <UserControl.Resources>
-    <converters:IsGroupConverter x:Key="IsGroupConverter" />
     <dd:GroupsListBoxDropHandler x:Key="GroupsListBoxDropHandler" />
   </UserControl.Resources>
   <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
@@ -55,7 +54,7 @@
               Padding="12,4,12,4" />
       <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddGroup}"
               CommandParameter="{Binding CurrentGroupLibrary}"
-              IsVisible="{Binding $parent[TopLevel].DataContext.Project.CurrentContainer.CurrentShape, Converter={StaticResource IsGroupConverter}}"
+              IsVisible="{Binding $parent[TopLevel].DataContext.Project.CurrentContainer.CurrentShape, Converter={x:Static converters:IsGroupConverter.Instance}}"
               BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
     </StackPanel>
     <ListBox x:Name="GroupsListBox" Items="{Binding CurrentGroupLibrary.Items}"

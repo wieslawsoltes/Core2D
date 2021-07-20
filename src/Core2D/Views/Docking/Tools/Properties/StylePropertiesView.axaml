@@ -9,27 +9,16 @@
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:StylePropertiesViewModel" x:CompileBindings="True">
-  <UserControl.Resources>
-    <converters:FirstSelectedItemStyleValueConverter x:Key="FirstSelectedItemStyleValueConverter" />
-    <converters:StyleMultiValueConverter x:Key="StyleMultiValueConverter" />
-  </UserControl.Resources>
-      <Panel DataContext="{Binding Context}">
+  <Panel DataContext="{Binding Context}">
         <Panel x:DataType="vme:ProjectEditorViewModel">
-      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <ContentControl Content="{Binding Project.SelectedShapes, Converter={StaticResource FirstSelectedItemStyleValueConverter}}" />
-      </ScrollViewer>
-      <!--
-      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <style:ShapeStyleView x:DataType="vme:ProjectEditorViewModel">
-          <style:ShapeStyleView.DataContext>
-            <MultiBinding Converter="{StaticResource StyleMultiValueConverter}">
-              <Binding Path="Project.SelectedShapes" FallbackValue="{x:Null}" />
-              <Binding Path="2" FallbackValue="{x:Null}" />
-            </MultiBinding>
-          </style:ShapeStyleView.DataContext>
-        </style:ShapeStyleView>
-      </ScrollViewer>
-      -->
-    </Panel>
+          <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Panel>
+              <ContentControl Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemStyleValueConverter.Instance}}"
+                              IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}"/>
+              <ContentControl Content="{Binding Project.CurrentStyleLibrary.Selected}"
+                              IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}"/>
+            </Panel>
+          </ScrollViewer>
+        </Panel>
   </Panel>
 </UserControl>

@@ -13,9 +13,6 @@
              d:DataContext="{x:Static vmd:DesignerContext.Layer}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:LayerContainerViewModel" x:CompileBindings="True">
-  <UserControl.Resources>
-    <converters:ViewModelToTypeStringConverter x:Key="ViewModelToTypeStringConverter" />
-  </UserControl.Resources>
   <StackPanel>
     <StackPanel>
       <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
@@ -26,7 +23,7 @@
       <ListBox x:Name="ShapesListBox" Items="{Binding Shapes}">
         <ListBox.DataTemplates>
           <DataTemplate DataType="vms:BaseShapeViewModel">
-            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                        Background="Transparent">
               <i:Interaction.Behaviors>
                 <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />

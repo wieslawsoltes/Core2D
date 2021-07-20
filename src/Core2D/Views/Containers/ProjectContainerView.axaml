@@ -17,9 +17,6 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <UserControl.Resources>
-    <converters:BaseShapeIconConverter x:Key="BaseShapeIconConverter" />
-    <converters:ContainerToTypeStringConverter x:Key="ContainerToTypeStringConverter" />
-    <converters:ShapeToTypeStringConverter x:Key="ShapeToTypeStringConverter" />
     <dd:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
   </UserControl.Resources>
   <DockPanel>
@@ -136,7 +133,7 @@
               </StackPanel.ContextMenu>
               <TextBlock VerticalAlignment="Center" Margin="4">
                 <TextBlock.Text>
-                  <MultiBinding Mode="OneWay" Converter="{StaticResource ContainerToTypeStringConverter}">
+                  <MultiBinding Mode="OneWay" Converter="{x:Static converters:ContainerToTypeStringConverter.Instance}">
                     <Binding Path="Name" />
                     <Binding Path="" />
                   </MultiBinding>
@@ -211,7 +208,7 @@
               </StackPanel.ContextMenu>
               <TextBlock VerticalAlignment="Center" Margin="4">
                 <TextBlock.Text>
-                  <MultiBinding Mode="OneWay" Converter="{StaticResource ContainerToTypeStringConverter}">
+                  <MultiBinding Mode="OneWay" Converter="{x:Static converters:ContainerToTypeStringConverter.Instance}">
                     <Binding Path="Name" />
                     <Binding Path="" />
                   </MultiBinding>
@@ -272,7 +269,7 @@
               <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center" />
               <TextBlock VerticalAlignment="Center">
                 <TextBlock.Text>
-                  <MultiBinding Mode="OneWay" Converter="{StaticResource ContainerToTypeStringConverter}">
+                  <MultiBinding Mode="OneWay" Converter="{x:Static converters:ContainerToTypeStringConverter.Instance}">
                     <Binding Path="Name" />
                     <Binding Path="" />
                   </MultiBinding>
@@ -327,11 +324,11 @@
                             CommandParameter="{Binding Mode=OneWay}" />
                 </ContextMenu>
               </StackPanel.ContextMenu>
-              <Image Source="{Binding Mode=OneWay, Converter={StaticResource BaseShapeIconConverter}}" Width="16"
+              <Image Source="{Binding Mode=OneWay, Converter={x:Static converters:BaseShapeIconConverter.Instance}}" Width="16"
                      Height="16" Margin="8" />
               <TextBlock VerticalAlignment="Center">
                 <TextBlock.Text>
-                  <MultiBinding Mode="OneWay" Converter="{StaticResource ShapeToTypeStringConverter}">
+                  <MultiBinding Mode="OneWay" Converter="{x:Static converters:ShapeToTypeStringConverter.Instance}">
                     <Binding Path="Name" />
                     <Binding Path="" />
                   </MultiBinding>

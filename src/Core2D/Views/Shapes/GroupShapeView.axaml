@@ -6,7 +6,6 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:views="using:Core2D.Views"
              xmlns:vmdt="using:Core2D.ViewModels.Data"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
@@ -14,9 +13,6 @@
              d:DataContext="{x:Static vmd:DesignerContext.Group}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:GroupShapeViewModel" x:CompileBindings="True">
-  <UserControl.Resources>
-    <converters:ViewModelToTypeStringConverter x:Key="ViewModelToTypeStringConverter" />
-  </UserControl.Resources>
   <StackPanel>
     <Expander Header="Group" IsExpanded="True">
       <StackPanel>
@@ -67,7 +63,7 @@
         <ListBox x:Name="ShapesListBox" Items="{Binding Shapes}" Grid.Row="0">
           <ListBox.DataTemplates>
             <DataTemplate DataType="vms:BaseShapeViewModel">
-              <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+              <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                          Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <i:Interaction.Behaviors>
                   <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
@@ -88,7 +84,7 @@
         <ListBox x:Name="ConnectorsListBox" Items="{Binding Connectors}" Grid.Row="0">
           <ListBox.DataTemplates>
             <DataTemplate DataType="vms:PointShapeViewModel">
-              <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}"
+              <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                          Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <i:Interaction.Behaviors>
                   <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
