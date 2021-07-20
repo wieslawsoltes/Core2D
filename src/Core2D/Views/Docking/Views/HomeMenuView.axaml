@@ -102,6 +102,32 @@
         <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape" />
       </MenuItem>
       <MenuItem Header="_View">
+        <MenuItem Header="_Tool Windows">
+          <MenuItem Header="Project _Explorer" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ProjectExplorer" />
+          <Separator />
+          <MenuItem Header="Page Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="PageProperties" />
+          <MenuItem Header="Shape Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ShapeProperties" />
+          <MenuItem Header="Style Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StyleProperties" />
+          <MenuItem Header="Data Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="DataProperties" />
+          <MenuItem Header="State Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StateProperties" />
+          <Separator />
+          <MenuItem Header="Style Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StyleLibrary" />
+          <MenuItem Header="Group Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="GroupLibrary" />
+          <MenuItem Header="Database Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="DatabaseLibrary" />
+          <MenuItem Header="Template Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="TemplateLibrary" />
+          <MenuItem Header="Script Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ScriptLibrary" />
+          <Separator />
+          <MenuItem Header="Project Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ProjectOptions" />
+          <MenuItem Header="Renderer Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="RendererOptions" />
+          <MenuItem Header="Zoom Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ZoomOptions" />
+          <MenuItem Header="Image Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ImageOptions" />
+          <Separator />
+          <MenuItem Header="Object Browser" Command="{Binding OnToggleDockableVisibility}" CommandParameter="BrowserOptions" />
+        </MenuItem>
+        <MenuItem Header="_Appearance">
+          <MenuItem Header="_Main Menu" Command="{Binding OnToggleDockableVisibility}" CommandParameter="HomeMenuView" />
+          <MenuItem Header="_Status Bar" Command="{Binding OnToggleDockableVisibility}" CommandParameter="HomeStatusBarView" />
+        </MenuItem>
         <MenuItem Header="_Zoom">
           <MenuItem Header="_Actual Size" Command="{Binding Platform.OnZoomReset}" InputGesture="Ctrl+D0" />
           <MenuItem Header="Fit _Page" Command="{Binding Platform.OnZoomUniform}" InputGesture="Ctrl+D1" />
