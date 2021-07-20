@@ -143,43 +143,23 @@ namespace Core2D.ViewModels.Docking
 
             // Home Perspective
 
-            var propertiesToolDock = new ToolDock
+            var leftTopToolDock = new ToolDock
             {
-                Id = "PropertiesToolDock",
-                Title = "Properties",
+                ActiveDockable = projectExplorerViewModel,
+                VisibleDockables = CreateList<IDockable>(
+                    projectExplorerViewModel,
+                    objectBrowserViewModel,
+                    scriptLibraryViewModel),
+                Alignment = Alignment.Left,
+                GripMode = GripMode.Visible
+            };
+
+            var leftBottomToolDock = new ToolDock
+            {
+                Proportion = 0.35,
                 ActiveDockable = pagePropertiesViewModel,
                 VisibleDockables = CreateList<IDockable>(
                     pagePropertiesViewModel,
-                    shapePropertiesViewModel,
-                    stylePropertiesViewModel,
-                    dataPropertiesViewModel,
-                    statePropertiesViewModel),
-                Alignment = Alignment.Right,
-                GripMode = GripMode.Visible
-            };
-
-            var librariesToolDock = new ToolDock
-            {
-                Id = "LibrariesToolDock",
-                Title = "Libraries",
-                ActiveDockable = styleLibraryViewModel,
-                VisibleDockables = CreateList<IDockable>(
-                    styleLibraryViewModel,
-                    groupLibraryViewModel,
-                    databaseLibraryViewModel,
-                    templateLibraryViewModel,
-                    scriptLibraryViewModel),
-                Alignment = Alignment.Right,
-                GripMode = GripMode.Visible
-            };
-
-            var optionsToolDock = new ToolDock
-            {
-                Proportion = 0.35,
-                Id = "OptionsToolDock",
-                Title = "Options",
-                ActiveDockable = projectOptionsViewModel,
-                VisibleDockables = CreateList<IDockable>(
                     projectOptionsViewModel,
                     rendererOptionsViewModel,
                     zoomOptionsViewModel,
@@ -188,15 +168,28 @@ namespace Core2D.ViewModels.Docking
                 GripMode = GripMode.Visible
             };
 
-            var projectToolDock = new ToolDock
+            var rightTopToolDock = new ToolDock
             {
-                Id = "ProjectToolDock",
-                Title = "Project",
-                ActiveDockable = projectExplorerViewModel,
+                Proportion = 0.35,
+                ActiveDockable = shapePropertiesViewModel,
                 VisibleDockables = CreateList<IDockable>(
-                    projectExplorerViewModel,
-                    objectBrowserViewModel),
-                Alignment = Alignment.Left,
+                    shapePropertiesViewModel,
+                    dataPropertiesViewModel,
+                    statePropertiesViewModel,
+                    templateLibraryViewModel),
+                Alignment = Alignment.Right,
+                GripMode = GripMode.Visible
+            };
+
+            var rightBottomToolDock = new ToolDock
+            {
+                ActiveDockable = stylePropertiesViewModel,
+                VisibleDockables = CreateList<IDockable>(
+                    stylePropertiesViewModel,
+                    styleLibraryViewModel,
+                    groupLibraryViewModel,
+                    databaseLibraryViewModel),
+                Alignment = Alignment.Right,
                 GripMode = GripMode.Visible
             };
 
@@ -204,12 +197,12 @@ namespace Core2D.ViewModels.Docking
             {
                 Proportion = 0.20,
                 Orientation = Orientation.Vertical,
-                ActiveDockable = projectToolDock,
+                ActiveDockable = leftTopToolDock,
                 VisibleDockables = CreateList<IDockable>
                 (
-                    projectToolDock,
+                    leftTopToolDock,
                     new SplitterDockable(),
-                    optionsToolDock
+                    leftBottomToolDock
                 )
             };
 
@@ -217,12 +210,12 @@ namespace Core2D.ViewModels.Docking
             {
                 Proportion = 0.20,
                 Orientation = Orientation.Vertical,
-                ActiveDockable = propertiesToolDock,
+                ActiveDockable = rightTopToolDock,
                 VisibleDockables = CreateList<IDockable>
                 (
-                    propertiesToolDock,
+                    rightTopToolDock,
                     new SplitterDockable(),
-                    librariesToolDock
+                    rightBottomToolDock
                 )
             };
 
@@ -370,11 +363,6 @@ namespace Core2D.ViewModels.Docking
                 ["RendererOptions"] = () => _projectEditor,
                 ["ZoomOptions"] = () => _projectEditor,
                 ["ImageOptions"] = () => _projectEditor,
-                // Docks
-                ["ProjectToolDock"] = () => _projectEditor,
-                ["PropertiesToolDock"] = () => _projectEditor,
-                ["LibrariesToolDock"] = () => _projectEditor,
-                ["OptionsToolDock"] = () => _projectEditor,
                 // Home
                 ["HomeMenuView"] = () => _projectEditor,
                 ["HomeView"] = () => _projectEditor,
