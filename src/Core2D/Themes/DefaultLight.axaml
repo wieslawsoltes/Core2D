@@ -9,7 +9,7 @@
   <StyleInclude Source="avares://Dock.Avalonia/Themes/DefaultTheme.axaml" />
   <Style>
     <Style.Resources>
-      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#D3D3D3</SolidColorBrush>
+      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#F1F1F1</SolidColorBrush>
     </Style.Resources>
   </Style>
   <Style Selector="idc|ToolControl /template/ DockPanel#PART_DockPanel">
