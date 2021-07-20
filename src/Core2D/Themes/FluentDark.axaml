@@ -1,17 +1,23 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Avalonia -->
   <StyleInclude Source="avares://Avalonia.Themes.Fluent/FluentDark.xaml" />
   <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml" />
   <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+  <!-- Dock -->
   <StyleInclude Source="avares://Dock.Avalonia/Themes/FluentTheme.axaml" />
   <Style>
     <Style.Resources>
+      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#1F1F1F</SolidColorBrush>
+    </Style.Resources>
+  </Style>
+  <!-- Other -->
+  <Style>
+    <Style.Resources>
       <Color x:Key="SystemChromeMediumLowColor">Transparent</Color>
-      <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush"
-                       Color="{StaticResource SystemChromeMediumLowColor}" />
+      <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush" Color="{StaticResource SystemChromeMediumLowColor}" />
       <Color x:Key="SystemAltMediumLowColor">Transparent</Color>
-      <SolidColorBrush x:Key="SystemControlBackgroundAltMediumLowBrush"
-                       Color="{StaticResource SystemAltMediumLowColor}" />
+      <SolidColorBrush x:Key="SystemControlBackgroundAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}" />
       <StaticResource x:Key="TextControlBackground" ResourceKey="SystemControlBackgroundAltMediumLowBrush" />
       <SolidColorBrush x:Key="AcrylicFallbackColor">#1F1F1F</SolidColorBrush>
       <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
