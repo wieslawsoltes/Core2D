@@ -21,6 +21,9 @@
   <Style Selector="idc|ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
     <Setter Property="Background" Value="{DynamicResource DockThemeBackgroundBrush}" />
   </Style>
+  <Style Selector="idc|ToolControl /template/ Separator#PART_Separator">
+    <Setter Property="Margin" Value="1,0,1,0" />
+  </Style>
   <!-- Other -->
   <Style>
     <Style.Resources>
