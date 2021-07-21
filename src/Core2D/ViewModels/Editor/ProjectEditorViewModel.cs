@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reactive.Disposables;
@@ -35,8 +36,8 @@ namespace Core2D.ViewModels.Editor
     public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {
         private readonly ShapeEditor _shapeEditor;
-        private readonly DockFactory _dockFactory;
         [AutoNotify] private IRootDock _rootDock;
+        [AutoNotify] private IFactory _dockFactory;
         [AutoNotify] private ProjectContainerViewModel _project;
         [AutoNotify] private string _projectPath;
         [AutoNotify] private bool _isProjectDirty;
@@ -158,20 +159,23 @@ namespace Core2D.ViewModels.Editor
 
             _dockFactory = new DockFactory(this);
             _rootDock = _dockFactory.CreateLayout();
-            _dockFactory?.InitLayout(_rootDock);
 
-            _dockFactory.DockableClosed += (sender, args) =>
+            if (_rootDock is { })
             {
-                Console.WriteLine($"DockableClosed {args.Dockable?.Id}");
-            };
+                _dockFactory?.InitLayout(_rootDock);
 
-            _dockFactory.DockableRemoved += (sender, args) =>
-            {
-                Console.WriteLine($"DockableRemoved {args.Dockable?.Id}");
-            };
+                _dockFactory.DockableClosed += (sender, args) =>
+                {
+                    Debug.WriteLine($"DockableClosed {args.Dockable?.Id}");
+                };
 
-            // TODO:
-            _dockFactory.PagesDock?.CreateDocument?.Execute(null);
+                _dockFactory.DockableRemoved += (sender, args) =>
+                {
+                    Debug.WriteLine($"DockableRemoved {args.Dockable?.Id}");
+                };
+
+                _dockFactory.GetDockable<IDocumentDock>("Pages")?.CreateDocument?.Execute(null);
+            }
 
             NavigateTo("Dashboard");
         }
