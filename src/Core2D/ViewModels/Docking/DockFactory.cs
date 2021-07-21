@@ -324,7 +324,7 @@ namespace Core2D.ViewModels.Docking
             homeRootDock.Id = "Home";
             homeRootDock.ActiveDockable = homeDockDock;
             homeRootDock.DefaultDockable = homeDockDock;
-            homeRootDock.VisibleDockables = CreateList<IDockable>(homeDock);
+            homeRootDock.VisibleDockables = CreateList<IDockable>(homeDockDock);
             homeRootDock.IsCollapsable = false;
 
             // Root Dock
