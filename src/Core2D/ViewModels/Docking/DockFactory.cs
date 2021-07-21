@@ -236,6 +236,7 @@ namespace Core2D.ViewModels.Docking
             {
                 Id = "HomeDock",
                 Orientation = Orientation.Horizontal,
+                ActiveDockable = documentDock,
                 VisibleDockables = CreateList<IDockable>
                 (
                     leftDock,
@@ -270,6 +271,7 @@ namespace Core2D.ViewModels.Docking
 
             var homeDockDock = new DockDock()
             {
+                Id = "HomeDockDock",
                 LastChildFill = true,
                 VisibleDockables = CreateList<IDockable>
                 (
@@ -375,10 +377,16 @@ namespace Core2D.ViewModels.Docking
                 ["HomeView"] = () => _projectEditor,
                 ["HomeDock"] = () => _projectEditor,
                 ["HomeStatusBarView"] = () => _projectEditor,
+                ["HomeDockDock"] = () => _projectEditor,
                 // Dashboard
                 ["DashboardMenuView"] = () => _projectEditor,
                 ["DashboardView"] = () => _projectEditor,
-                ["DashboardDock"] = () => _projectEditor
+                ["DashboardDock"] = () => _projectEditor,
+                ["DashboardDockDock"] = () => _projectEditor,
+                // Root
+                ["Dashboard"] = () => _projectEditor,
+                ["Home"] = () => _projectEditor,
+                ["Root"] = () => _projectEditor
             };
 
             DockableLocator = new Dictionary<string, Func<IDockable?>>
