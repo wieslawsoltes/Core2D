@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +9,9 @@ namespace Core2D.Converters
 {
     public class ObjectEqualityMultiConverter : IMultiValueConverter
     {
-        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
+        public static ObjectEqualityMultiConverter Instance = new();
+
+        public object? Convert(IList<object?>? values, Type targetType, object? parameter, CultureInfo culture)
         {
             if (values is { } && values.Count == 2 && values[0] != AvaloniaProperty.UnsetValue && values[1] != AvaloniaProperty.UnsetValue)
             {

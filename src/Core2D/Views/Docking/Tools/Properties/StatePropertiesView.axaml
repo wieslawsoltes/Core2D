@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Core2D.Views.Docking.Tools.Properties.StatePropertiesView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:renderer="using:Core2D.Views.Renderer"
+             xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Properties"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
+             mc:Ignorable="d"
+             d:DesignWidth="800" d:DesignHeight="600"
+             x:DataType="vm:StatePropertiesViewModel" x:CompileBindings="True">
+  <Panel DataContext="{Binding Context}">
+    <Panel x:DataType="vme:ProjectEditorViewModel">
+      <ScrollViewer DataContext="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
+        <renderer:ShapeStateView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                 DataContext="{Binding}"
+                                 x:CompileBindings="False" />
+      </ScrollViewer>
+    </Panel>
+  </Panel>
+</UserControl>

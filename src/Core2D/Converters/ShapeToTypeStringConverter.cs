@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,9 +10,11 @@ namespace Core2D.Converters
 {
     public class ShapeToTypeStringConverter : IMultiValueConverter
     {
-        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
+        public static ShapeToTypeStringConverter Instance = new();
+
+        public object Convert(IList<object?>? values, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (values.Count == 2 && values[0] is string name && values[1] is BaseShapeViewModel shape)
+            if (values?.Count == 2 && values[0] is string name && values[1] is BaseShapeViewModel shape)
             {
                 if (string.IsNullOrEmpty(name))
                 {

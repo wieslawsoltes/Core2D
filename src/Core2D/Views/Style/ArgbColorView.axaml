@@ -11,49 +11,53 @@
              d:DataContext="{x:Static vmd:DesignerContext.ArgbColor}"
              d:DesignWidth="300" d:DesignHeight="400"
              x:DataType="vms:ArgbColorViewModel" x:CompileBindings="True">
-    <UserControl.Resources>
-        <converters:HexToColorConverter x:Key="HexToColorConverter"/>
-        <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter" />
-        <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
-            <VisualBrush.Visual>
-                <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="LightGray" />
-            </VisualBrush.Visual>
-        </VisualBrush>
-    </UserControl.Resources>
-    <Grid Margin="{DynamicResource TextControlThemePadding}">
-        <ToggleButton Name="PopupButton" BorderThickness="0" Background="Transparent" Padding="0" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-            <ToggleButton.Styles>
-                <Style Selector="ToggleButton">
-                    <Setter Property="RenderTransform" Value="none" />
-                    <Setter Property="Transitions" Value="{x:Null}" />
-                </Style>
-                <Style Selector="ToggleButton:pressed">
-                    <Setter Property="RenderTransform" Value="none" />
-                </Style>
-                <Style Selector="ToggleButton:checked /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
-                    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-                </Style>
-                <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
-                </Style>
-            </ToggleButton.Styles>
-            <Panel Height="30" DockPanel.Dock="Top">
-                <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
-                <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
-                <Border BorderThickness="0" CornerRadius="0" Background="{Binding Value, Converter={StaticResource ArgbColorToBrushConverter}}" />
-            </Panel>
-        </ToggleButton>
-        <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True" PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft">
-            <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="0">
-                <cp:ColorPicker x:Name="ArgbColorPicker" Color="{Binding Value, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}" Margin="8">
-                    <cp:ColorPicker.Styles>
-                        <Style Selector="cp|ColorPicker /template/ Grid#PART_PickerGrid">
-                            <Setter Property="MinHeight" Value="200" />
-                            <Setter Property="MinWidth" Value="200" />
-                        </Style>
-                    </cp:ColorPicker.Styles>
-                </cp:ColorPicker>
-            </Border>
-        </Popup>
-    </Grid>
+  <UserControl.Resources>
+    <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
+      <VisualBrush.Visual>
+        <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="LightGray" />
+      </VisualBrush.Visual>
+    </VisualBrush>
+  </UserControl.Resources>
+  <Grid Margin="{DynamicResource TextControlThemePadding}">
+    <ToggleButton Name="PopupButton" BorderThickness="0" Background="Transparent" Padding="0" Height="30"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch"
+                  VerticalContentAlignment="Stretch">
+      <ToggleButton.Styles>
+        <Style Selector="ToggleButton">
+          <Setter Property="RenderTransform" Value="none" />
+          <Setter Property="Transitions" Value="{x:Null}" />
+        </Style>
+        <Style Selector="ToggleButton:pressed">
+          <Setter Property="RenderTransform" Value="none" />
+        </Style>
+        <Style
+          Selector="ToggleButton:checked /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
+          <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+        </Style>
+        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+          <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+        </Style>
+      </ToggleButton.Styles>
+      <Panel Height="30" DockPanel.Dock="Top">
+        <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
+        <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
+        <Border BorderThickness="0" CornerRadius="0"
+                Background="{Binding Value, Converter={x:Static converters:ArgbColorToBrushConverter.Instance}}" />
+      </Panel>
+    </ToggleButton>
+    <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True"
+           PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft">
+      <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="0">
+        <cp:ColorPicker x:Name="ArgbColorPicker"
+                        Color="{Binding Value, Mode=TwoWay, Converter={x:Static converters:HexToColorConverter.Instance}}" Margin="8">
+          <cp:ColorPicker.Styles>
+            <Style Selector="cp|ColorPicker /template/ Grid#PART_PickerGrid">
+              <Setter Property="MinHeight" Value="200" />
+              <Setter Property="MinWidth" Value="200" />
+            </Style>
+          </cp:ColorPicker.Styles>
+        </cp:ColorPicker>
+      </Border>
+    </Popup>
+  </Grid>
 </UserControl>

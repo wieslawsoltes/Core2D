@@ -4,38 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="using:Core2D.Views"
+             xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
-    <UserControl.KeyBindings>
-        <!-- File -->
-        <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnOpen}" Gesture="Ctrl+O" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnCloseProject}" Gesture="Ctrl+F4" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnSave}" Gesture="Ctrl+S" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnSaveAs}" Gesture="Ctrl+Shift+S" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4" x:CompileBindings="False" />
-    </UserControl.KeyBindings>
+  <UserControl.KeyBindings>
+    <!-- File -->
+    <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N" x:CompileBindings="False" />
+    <KeyBinding Command="{Binding Platform.OnOpen}" Gesture="Ctrl+O" x:CompileBindings="False" />
+    <KeyBinding Command="{Binding OnCloseProject}" Gesture="Ctrl+F4" x:CompileBindings="False" />
+    <KeyBinding Command="{Binding Platform.OnSave}" Gesture="Ctrl+S" x:CompileBindings="False" />
+    <KeyBinding Command="{Binding Platform.OnSaveAs}" Gesture="Ctrl+Shift+S" x:CompileBindings="False" />
+    <KeyBinding Command="{Binding Platform.OnExport}" Gesture="Ctrl+E" x:CompileBindings="False" />
+    <KeyBinding Command="{Binding Platform.OnExit}" Gesture="Alt+F4" x:CompileBindings="False" />
+  </UserControl.KeyBindings>
+  <Panel>
     <Panel>
-        <Panel>
-            <views:DashboardView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNull}}" />
-            <views:EditorView IsVisible="{Binding Project, Converter={x:Static ObjectConverters.IsNotNull}}" />
-        </Panel>
-        <ItemsControl Items="{Binding Dialogs}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Panel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <views:DialogView />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+      <idc:DockControl Layout="{Binding RootDock}" />
     </Panel>
+    <ItemsControl Items="{Binding Dialogs}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <Panel />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <views:DialogView />
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </Panel>
 </UserControl>

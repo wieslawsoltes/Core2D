@@ -11,38 +11,37 @@
              d:DataContext="{x:Static vmd:DesignerContext.TextStyle}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:TextStyleViewModel" x:CompileBindings="True">
-    <UserControl.Resources>
-        <converters:FontStyleFlagsConverter x:Key="FontStyleFlagsConverter" />
-    </UserControl.Resources>
+  <StackPanel>
+    <Label Content="FontName" Margin="{DynamicResource TextControlThemePadding}" />
+    <TextBox Text="{Binding FontName, Mode=TwoWay}" />
+    <Label Content="FontFile" Margin="{DynamicResource TextControlThemePadding}" />
+    <TextBox Text="{Binding FontFile, Mode=TwoWay}" />
+    <Label Content="FontSize" Margin="{DynamicResource TextControlThemePadding}" />
+    <TextBox Text="{Binding FontSize, Mode=TwoWay}" />
+    <Label Content="FontStyle" Margin="{DynamicResource TextControlThemePadding}" />
     <StackPanel>
-        <Label Content="FontName" Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding FontName, Mode=TwoWay}" />
-        <Label Content="FontFile" Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding FontFile, Mode=TwoWay}" />
-        <Label Content="FontSize" Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding FontSize, Mode=TwoWay}" />
-        <Label Content="FontStyle" Margin="{DynamicResource TextControlThemePadding}" />
-        <StackPanel>
-            <CheckBox Content="Regular" 
-                      Command="{Binding ToggleRegularFontStyle}"
-                      IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static ms:FontStyleFlags.Regular}}"
-                      HorizontalAlignment="Stretch"
-                      IsVisible="False"
-                      x:CompileBindings="False" />
-            <CheckBox Content="Bold" 
-                      Command="{Binding ToggleBoldFontStyle}"
-                      IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static ms:FontStyleFlags.Bold}}"
-                      HorizontalAlignment="Stretch"
-                      x:CompileBindings="False" />
-            <CheckBox Content="Italic" 
-                      Command="{Binding ToggleItalicFontStyle}"
-                      IsChecked="{Binding FontStyle, Mode=OneWay, Converter={StaticResource FontStyleFlagsConverter}, ConverterParameter={x:Static ms:FontStyleFlags.Italic}}"
-                      HorizontalAlignment="Stretch"
-                      x:CompileBindings="False" />
-        </StackPanel>
-        <Label Content="HAlignment" Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox Items="{x:Static vms:TextStyleViewModel.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <Label Content="VAlignment" Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox Items="{x:Static vms:TextStyleViewModel.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+      <CheckBox Content="Regular"
+                Command="{Binding ToggleRegularFontStyle}"
+                IsChecked="{Binding FontStyle, Mode=OneWay, Converter={x:Static converters:FontStyleFlagsConverter.Instance}, ConverterParameter={x:Static ms:FontStyleFlags.Regular}}"
+                HorizontalAlignment="Stretch"
+                IsVisible="False"
+                x:CompileBindings="False" />
+      <CheckBox Content="Bold"
+                Command="{Binding ToggleBoldFontStyle}"
+                IsChecked="{Binding FontStyle, Mode=OneWay, Converter={x:Static converters:FontStyleFlagsConverter.Instance}, ConverterParameter={x:Static ms:FontStyleFlags.Bold}}"
+                HorizontalAlignment="Stretch"
+                x:CompileBindings="False" />
+      <CheckBox Content="Italic"
+                Command="{Binding ToggleItalicFontStyle}"
+                IsChecked="{Binding FontStyle, Mode=OneWay, Converter={x:Static converters:FontStyleFlagsConverter.Instance}, ConverterParameter={x:Static ms:FontStyleFlags.Italic}}"
+                HorizontalAlignment="Stretch"
+                x:CompileBindings="False" />
     </StackPanel>
+    <Label Content="HAlignment" Margin="{DynamicResource TextControlThemePadding}" />
+    <ComboBox Items="{x:Static vms:TextStyleViewModel.TextHAlignmentValues}"
+              SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+    <Label Content="VAlignment" Margin="{DynamicResource TextControlThemePadding}" />
+    <ComboBox Items="{x:Static vms:TextStyleViewModel.TextVAlignmentValues}"
+              SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+  </StackPanel>
 </UserControl>

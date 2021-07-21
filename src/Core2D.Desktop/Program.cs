@@ -12,6 +12,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
 using Avalonia.OpenGL;
+using Avalonia.ReactiveUI;
 using Avalonia.Screenshot;
 using Avalonia.Threading;
 using Core2D.Configuration.Themes;
@@ -304,6 +305,7 @@ namespace Core2D.Desktop
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                          .UsePlatformDetect()
+                         .UseReactiveUI()
                          .LogToTrace();
     }
 }

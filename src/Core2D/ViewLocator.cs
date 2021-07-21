@@ -3,6 +3,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Core2D.ViewModels;
+using Dock.Model.ReactiveUI.Core;
 
 namespace Core2D
 {
@@ -16,12 +17,13 @@ namespace Core2D
             {
                 return func?.Invoke();
             }
+
             throw new Exception($"Unable to create view for type: {type}");
         }
 
         public bool Match(object data)
         {
-            return data is ViewModelBase;
+            return data is ViewModelBase or DockableBase;
         }
     }
 }

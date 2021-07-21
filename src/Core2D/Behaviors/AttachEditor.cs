@@ -20,7 +20,7 @@ namespace Core2D.Behaviors
         public AttachEditor(Control control)
         {
             _control = control;
-            _control.GetObservable(Control.DataContextProperty).Subscribe(Changed);
+            _control.GetObservable(StyledElement.DataContextProperty).Subscribe(Changed);
         }
 
         public void InvalidateChild(double zoomX, double zoomY, double offsetX, double offsetY)
@@ -53,10 +53,10 @@ namespace Core2D.Behaviors
                 return;
             }
 
-            var presenterViewData = _control.Find<Control>("PresenterViewData");
-            var presenterViewTemplate = _control.Find<Control>("PresenterViewTemplate");
-            var presenterViewEditor = _control.Find<Control>("PresenterViewEditor");
-            var zoomBorder = _control.Find<ZoomBorder>("PageZoomBorder");
+            var presenterViewData = _control.FindControl<Control>("RenderViewData");
+            var presenterViewTemplate = _control.FindControl<Control>("RenderViewTemplate");
+            var presenterViewEditor = _control.FindControl<Control>("RenderViewEditor");
+            var zoomBorder = _control.FindControl<ZoomBorder>("PageZoomBorder");
 
             if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
             {
@@ -94,8 +94,6 @@ namespace Core2D.Behaviors
                 return;
             }
 
-            var zoomBorder = _control.Find<ZoomBorder>("PageZoomBorder");
-
             if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
             {
                 canvasPlatform.InvalidateControl = null;
@@ -109,6 +107,7 @@ namespace Core2D.Behaviors
                 canvasPlatform.Zoom = null;
             }
 
+            var zoomBorder = _control.FindControl<ZoomBorder>("PageZoomBorder");
             if (zoomBorder is { })
             {
                 zoomBorder.ZoomChanged -= ZoomBorder_ZoomChanged;

@@ -10,47 +10,47 @@
              mc:Ignorable="d"
              d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="vme:DialogViewModel" x:CompileBindings="True">
-    <UserControl.KeyBindings>
-        <KeyBinding Command="{Binding Close}" Gesture="Escape" x:CompileBindings="False" />
-    </UserControl.KeyBindings>
-    <Panel IsVisible="{Binding ViewModel, Converter={x:Static ObjectConverters.IsNotNull}}">
-        <Panel IsVisible="{Binding IsOverlayVisible}" Background="{DynamicResource DialogOverlayColor}">
-            <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="PointerPressed">
-                    <ia:CallMethodAction TargetObject="{Binding}" MethodName="Close" />
-                </ia:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-        </Panel>
-        <Border x:Name="DragBorder"
-                CornerRadius="4" 
-                Background="{DynamicResource DialogBackground}" 
-                BoxShadow="{DynamicResource DialogBoxShadow}" 
-                VerticalAlignment="Center" HorizontalAlignment="Center">
-            <DockPanel MaxWidth="900" MaxHeight="700" Margin="0">
-                <Border x:Name="TitleBorder"
-                        IsVisible="{Binding IsTitleBarVisible}"
-                        CornerRadius="4"
-                        Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
-                        VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                        Height="36"
-                        DockPanel.Dock="Top">
-                    <i:Interaction.Behaviors>
-                        <behaviors:DragControlBehavior TargetControl="{Binding #DragBorder}" />
-                    </i:Interaction.Behaviors>
-                    <Label Content="{Binding Title}" Padding="8,6,8,6" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                </Border>
-                <Button x:Name="CloseButton"
-                        IsVisible="{Binding IsCloseButtonVisible}"
-                        Content="Close" 
-                        Command="{Binding Close}" x:CompileBindings="False"
-                        HorizontalAlignment="Right"
-                        Margin="20,0,20,20"
-                        Padding="20,10,20,10"
-                        DockPanel.Dock="Bottom" />
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="20">
-                    <ContentControl Content="{Binding ViewModel}" />
-                </ScrollViewer>
-            </DockPanel>
-        </Border>
+  <UserControl.KeyBindings>
+    <KeyBinding Command="{Binding Close}" Gesture="Escape" x:CompileBindings="False" />
+  </UserControl.KeyBindings>
+  <Panel IsVisible="{Binding ViewModel, Converter={x:Static ObjectConverters.IsNotNull}}">
+    <Panel IsVisible="{Binding IsOverlayVisible}" Background="{DynamicResource DialogOverlayColor}">
+      <i:Interaction.Behaviors>
+        <ia:EventTriggerBehavior EventName="PointerPressed">
+          <ia:CallMethodAction TargetObject="{Binding}" MethodName="Close" />
+        </ia:EventTriggerBehavior>
+      </i:Interaction.Behaviors>
     </Panel>
+    <Border x:Name="DragBorder"
+            CornerRadius="4"
+            Background="{DynamicResource DialogBackground}"
+            BoxShadow="{DynamicResource DialogBoxShadow}"
+            VerticalAlignment="Center" HorizontalAlignment="Center">
+      <DockPanel MaxWidth="900" MaxHeight="700" Margin="0">
+        <Border x:Name="TitleBorder"
+                IsVisible="{Binding IsTitleBarVisible}"
+                CornerRadius="4"
+                Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                Height="36"
+                DockPanel.Dock="Top">
+          <i:Interaction.Behaviors>
+            <behaviors:DragControlBehavior TargetControl="{Binding #DragBorder}" />
+          </i:Interaction.Behaviors>
+          <Label Content="{Binding Title}" Padding="8,6,8,6" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        </Border>
+        <Button x:Name="CloseButton"
+                IsVisible="{Binding IsCloseButtonVisible}"
+                Content="Close"
+                Command="{Binding Close}" x:CompileBindings="False"
+                HorizontalAlignment="Right"
+                Margin="20,0,20,20"
+                Padding="20,10,20,10"
+                DockPanel.Dock="Bottom" />
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="20">
+          <ContentControl Content="{Binding ViewModel}" />
+        </ScrollViewer>
+      </DockPanel>
+    </Border>
+  </Panel>
 </UserControl>

@@ -1,4 +1,4 @@
-#nullable disable
+#nullable enable
 using System;
 using System.Globalization;
 using Avalonia;
@@ -9,7 +9,9 @@ namespace Core2D.Converters
 {
     public class HexToColorConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public static HexToColorConverter Instance = new();
+
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is string s && targetType == typeof(Color))
             {
@@ -39,7 +41,7 @@ namespace Core2D.Converters
             return AvaloniaProperty.UnsetValue;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is Color c1 && targetType == typeof(string))
             {
