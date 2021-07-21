@@ -120,7 +120,7 @@
           <MenuItem Header="Zoom Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ZoomOptions" />
           <MenuItem Header="Image Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ImageOptions" />
           <Separator />
-          <MenuItem Header="Object Browser" Command="{Binding OnToggleDockableVisibility}" CommandParameter="BrowserOptions" />
+          <MenuItem Header="Object Browser" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ObjectBrowser" />
         </MenuItem>
         <MenuItem Header="_Appearance">
           <MenuItem Header="_Main Menu" Command="{Binding OnToggleDockableVisibility}" CommandParameter="HomeMenuView" />
