@@ -33,6 +33,6 @@
     <AvaloniaXamlBehaviorsVersion>0.10.6.10</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>3.6.0</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>0.10.6</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>0.10.6.5</DockAvaloniaVersion>
+    <DockAvaloniaVersion>0.10.6.6</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
