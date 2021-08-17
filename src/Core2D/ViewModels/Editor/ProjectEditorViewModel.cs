@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reactive.Disposables;
@@ -25,6 +26,9 @@ using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Core2D.Spatial;
+using Core2D.ViewModels.Docking;
+using Dock.Model.Controls;
+using Dock.Model.Core;
 using static System.Math;
 
 namespace Core2D.ViewModels.Editor
@@ -32,6 +36,8 @@ namespace Core2D.ViewModels.Editor
     public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {
         private readonly ShapeEditor _shapeEditor;
+        [AutoNotify] private IRootDock _rootDock;
+        [AutoNotify] private IFactory _dockFactory;
         [AutoNotify] private ProjectContainerViewModel _project;
         [AutoNotify] private string _projectPath;
         [AutoNotify] private bool _isProjectDirty;
@@ -150,6 +156,38 @@ namespace Core2D.ViewModels.Editor
             _styleEditor = serviceProvider.GetServiceLazily<StyleEditorViewModel>();
             _pathConverter = serviceProvider.GetServiceLazily<IPathConverter>();
             _svgConverter = serviceProvider.GetServiceLazily<ISvgConverter>();
+
+            _dockFactory = new DockFactory(this);
+            _rootDock = _dockFactory.CreateLayout();
+
+            if (_rootDock is { })
+            {
+                _dockFactory?.InitLayout(_rootDock);
+
+                _dockFactory.DockableClosed += (sender, args) =>
+                {
+                    Debug.WriteLine($"DockableClosed {args.Dockable?.Id}");
+                };
+
+                _dockFactory.DockableRemoved += (sender, args) =>
+                {
+                    Debug.WriteLine($"DockableRemoved {args.Dockable?.Id}");
+                };
+
+                _dockFactory.GetDockable<IDocumentDock>("Pages")?.CreateDocument?.Execute(null);
+            }
+
+            NavigateTo("Dashboard");
+        }
+
+        public void NavigateTo(string id)
+        {
+            _rootDock?.Navigate.Execute(id);
+        }
+
+        public void OnToggleDockableVisibility(string id)
+        {
+            // TODO:
         }
 
         public void ShowDialog(DialogViewModel dialog)
@@ -301,6 +339,7 @@ namespace Core2D.ViewModels.Editor
             OnLoad(ContainerFactory?.GetProject() ?? ViewModelFactory.CreateProjectContainer(), string.Empty);
             CanvasPlatform?.ResetZoom?.Invoke();
             CanvasPlatform?.InvalidateControl?.Invoke();
+            NavigateTo("Home");
         }
 
         public void OnOpenProject(string path)
@@ -336,6 +375,7 @@ namespace Core2D.ViewModels.Editor
                     OnAddRecent(path, project.Name);
                     CanvasPlatform?.ResetZoom?.Invoke();
                     CanvasPlatform?.InvalidateControl?.Invoke();
+                    NavigateTo("Home");
                 }
             }
             catch (Exception ex)
@@ -348,6 +388,7 @@ namespace Core2D.ViewModels.Editor
         {
             Project?.History?.Reset();
             OnUnload();
+            NavigateTo("Dashboard");
         }
 
         public void OnSaveProject(string path)

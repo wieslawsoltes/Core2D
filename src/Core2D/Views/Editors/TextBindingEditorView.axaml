@@ -8,86 +8,115 @@
              mc:Ignorable="d"
              d:DesignWidth="1000" d:DesignHeight="600"
              x:CompileBindings="False">
-    <Grid ColumnDefinitions="30*,30*,30*" RowDefinitions="Auto,*,Auto">
-        <Label Content="Columns" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="0" />
-        <DockPanel Margin="6" Grid.Row="1" Grid.Column="0">
-            <ComboBox x:Name="DatabasesComboBox" Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
-                <ComboBox.DataTemplates>
-                    <DataTemplate DataType="vmdt:DatabaseViewModel">
-                        <Label Content="{Binding Name}" />
-                    </DataTemplate>
-                </ComboBox.DataTemplates>
-            </ComboBox>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ItemsControl VerticalAlignment="Stretch" Items="{Binding #DatabasesComboBox.SelectedItem.Columns}">
-                    <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="vmdt:ColumnViewModel">
-                            <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
-                                <Label Content="{Binding Name, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}" Grid.Column="0" />
-                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[UserControl].DataContext.OnUseColumnName}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.DataTemplates>
-                </ItemsControl>
-            </ScrollViewer>
-        </DockPanel>
-        <Label Content="Page Properties" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="1" />
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="6" Grid.Row="1" Grid.Column="1">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-                <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Editor.Project.CurrentContainer.Properties}">
-                    <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="vmdt:PropertyViewModel">
-                            <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                                <Label Content="{Binding Name, Mode=TwoWay}" VerticalAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.DataTemplates>
-                </ItemsControl>
-                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" />
-                <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Editor.Project.CurrentContainer.Properties}">
-                    <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="vmdt:PropertyViewModel">
-                            <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
-                                <Label Content="{Binding Value, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}" Grid.Column="0" />
-                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[UserControl].DataContext.OnUsePageProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.DataTemplates>
-                </ItemsControl>
-            </Grid>
-        </ScrollViewer>
-        <Label Content="Shape Properties" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="2" />
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="6" Grid.Row="1" Grid.Column="2">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-                <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Text.Properties}">
-                    <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="vmdt:PropertyViewModel">
-                            <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                                <Label Content="{Binding Name, Mode=TwoWay}" VerticalAlignment="Center" Margin="{DynamicResource TextControlThemePadding}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.DataTemplates>
-                </ItemsControl>
-                <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" />
-                <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Text.Properties}">
-                    <ItemsControl.DataTemplates>
-                        <DataTemplate DataType="vmdt:PropertyViewModel">
-                            <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
-                                <Label Content="{Binding Value, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}" Grid.Column="0" />
-                                <Button Content="+" Grid.Column="1" Command="{Binding $parent[UserControl].DataContext.OnUseShapeProperty}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.DataTemplates>
-                </ItemsControl>
-            </Grid>
-        </ScrollViewer>
-        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Margin="6" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-            <TextBox Text="{Binding Text.Text, Mode=TwoWay}" Margin="0" VerticalAlignment="Stretch" AcceptsReturn="True" Grid.Column="0" />
-            <Button Content="x" Grid.Column="1" Command="{Binding $parent[UserControl].DataContext.OnResetText}" CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
-        </Grid>
+  <Grid ColumnDefinitions="30*,30*,30*" RowDefinitions="Auto,*,Auto">
+    <Label Content="Columns" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="0" />
+    <DockPanel Margin="6" Grid.Row="1" Grid.Column="0">
+      <ComboBox x:Name="DatabasesComboBox" Items="{Binding Editor.Project.Databases}"
+                SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" DockPanel.Dock="Top"
+                HorizontalAlignment="Stretch">
+        <ComboBox.DataTemplates>
+          <DataTemplate DataType="vmdt:DatabaseViewModel">
+            <Label Content="{Binding Name}" />
+          </DataTemplate>
+        </ComboBox.DataTemplates>
+      </ComboBox>
+      <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ItemsControl VerticalAlignment="Stretch" Items="{Binding #DatabasesComboBox.SelectedItem.Columns}">
+          <ItemsControl.DataTemplates>
+            <DataTemplate DataType="vmdt:ColumnViewModel">
+              <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
+                <Label Content="{Binding Name, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}"
+                       Grid.Column="0" />
+                <Button Content="+" Grid.Column="1"
+                        Command="{Binding $parent[UserControl].DataContext.OnUseColumnName}"
+                        CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Center" HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.DataTemplates>
+        </ItemsControl>
+      </ScrollViewer>
+    </DockPanel>
+    <Label Content="Page Properties" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="1" />
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="6" Grid.Row="1"
+                  Grid.Column="1">
+      <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+        <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1"
+                      Items="{Binding Editor.Project.CurrentContainer.Properties}">
+          <ItemsControl.DataTemplates>
+            <DataTemplate DataType="vmdt:PropertyViewModel">
+              <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                <Label Content="{Binding Name, Mode=TwoWay}" VerticalAlignment="Center"
+                       Margin="{DynamicResource TextControlThemePadding}" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.DataTemplates>
+        </ItemsControl>
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6"
+                      Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" />
+        <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1"
+                      Items="{Binding Editor.Project.CurrentContainer.Properties}">
+          <ItemsControl.DataTemplates>
+            <DataTemplate DataType="vmdt:PropertyViewModel">
+              <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
+                <Label Content="{Binding Value, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}"
+                       Grid.Column="0" />
+                <Button Content="+" Grid.Column="1"
+                        Command="{Binding $parent[UserControl].DataContext.OnUsePageProperty}"
+                        CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Center" HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.DataTemplates>
+        </ItemsControl>
+      </Grid>
+    </ScrollViewer>
+    <Label Content="Shape Properties" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="2" />
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="6" Grid.Row="1"
+                  Grid.Column="2">
+      <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+        <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Text.Properties}">
+          <ItemsControl.DataTemplates>
+            <DataTemplate DataType="vmdt:PropertyViewModel">
+              <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                <Label Content="{Binding Name, Mode=TwoWay}" VerticalAlignment="Center"
+                       Margin="{DynamicResource TextControlThemePadding}" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.DataTemplates>
+        </ItemsControl>
+        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6"
+                      Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" />
+        <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
+        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Text.Properties}">
+          <ItemsControl.DataTemplates>
+            <DataTemplate DataType="vmdt:PropertyViewModel">
+              <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent" Margin="0,2,0,2">
+                <Label Content="{Binding Value, Mode=TwoWay}" Margin="{DynamicResource TextControlThemePadding}"
+                       Grid.Column="0" />
+                <Button Content="+" Grid.Column="1"
+                        Command="{Binding $parent[UserControl].DataContext.OnUseShapeProperty}"
+                        CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Center" HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center" Margin="6,0,0,0" x:CompileBindings="False" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.DataTemplates>
+        </ItemsControl>
+      </Grid>
+    </ScrollViewer>
+    <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Margin="6" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+      <TextBox Text="{Binding Text.Text, Mode=TwoWay}" Margin="0" VerticalAlignment="Stretch" AcceptsReturn="True"
+               Grid.Column="0" />
+      <Button Content="x" Grid.Column="1" Command="{Binding $parent[UserControl].DataContext.OnResetText}"
+              CommandParameter="{Binding}" Padding="0" VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+              HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0"
+              x:CompileBindings="False" />
     </Grid>
+  </Grid>
 </UserControl>

@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Core2D.Views.Docking.Tools.Properties.ShapePropertiesView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Properties"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
+             mc:Ignorable="d"
+             d:DesignWidth="800" d:DesignHeight="600"
+             x:DataType="vm:ShapePropertiesViewModel" x:CompileBindings="True">
+  <Panel DataContext="{Binding Context}">
+    <Panel x:DataType="vme:ProjectEditorViewModel">
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ContentControl Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
+      </ScrollViewer>
+    </Panel>
+  </Panel>
+</UserControl>

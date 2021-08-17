@@ -6,7 +6,6 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:views="using:Core2D.Views"
              xmlns:vmdt="using:Core2D.ViewModels.Data"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
@@ -14,90 +13,92 @@
              d:DataContext="{x:Static vmd:DesignerContext.Group}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:GroupShapeViewModel" x:CompileBindings="True">
-    <UserControl.Resources>
-        <converters:ViewModelToTypeStringConverter x:Key="ViewModelToTypeStringConverter" />
-    </UserControl.Resources>
-    <StackPanel>
-        <Expander Header="Group" IsExpanded="True">
-            <StackPanel>
-                <Label Content="Name"  Margin="{DynamicResource TextControlThemePadding}" />
-                <TextBox Text="{Binding Name, Mode=TwoWay}" />
-            </StackPanel>
-        </Expander>
-        <Expander Header="Properties" IsExpanded="True">
-            <ItemsControl Items="{Binding Shapes}">
+  <StackPanel>
+    <Expander Header="Group" IsExpanded="True">
+      <StackPanel>
+        <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding Name, Mode=TwoWay}" />
+      </StackPanel>
+    </Expander>
+    <Expander Header="Properties" IsExpanded="True">
+      <ItemsControl Items="{Binding Shapes}">
+        <ItemsControl.DataTemplates>
+          <DataTemplate DataType="vms:BaseShapeViewModel">
+            <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!Properties.Length}">
+              <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
+              <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Properties}">
                 <ItemsControl.DataTemplates>
-                    <DataTemplate DataType="vms:BaseShapeViewModel">
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" IsVisible="{Binding !!Properties.Length}">
-                            <Label Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
-                            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Properties}">
-                                <ItemsControl.DataTemplates>
-                                    <DataTemplate DataType="vmdt:PropertyViewModel">
-                                        <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                                            <!--<i:Interaction.Behaviors>
+                  <DataTemplate DataType="vmdt:PropertyViewModel">
+                    <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                      <!--<i:Interaction.Behaviors>
                                                     <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
                                                 </i:Interaction.Behaviors>-->
-                                            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.DataTemplates>
-                            </ItemsControl>
-                            <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
-                            <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-                            <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Properties}">
-                                <ItemsControl.DataTemplates>
-                                    <DataTemplate DataType="vmdt:PropertyViewModel">
-                                        <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                                            <!--<i:Interaction.Behaviors>
-                                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                                                </i:Interaction.Behaviors>-->
-                                            <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.DataTemplates>
-                            </ItemsControl>
-                        </Grid>
-                    </DataTemplate>
+                      <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
+                    </Grid>
+                  </DataTemplate>
                 </ItemsControl.DataTemplates>
-            </ItemsControl>
-        </Expander>
-        <Expander Header="Shapes" IsExpanded="False">
-            <Grid RowDefinitions="50*,6,50*">
-                <ListBox x:Name="ShapesListBox" Items="{Binding Shapes}" Grid.Row="0">
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="vms:BaseShapeViewModel">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <i:Interaction.Behaviors>
-                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                                </i:Interaction.Behaviors>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
-                <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1" />
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
-                    <ContentControl Content="{Binding #ShapesListBox.SelectedItem}" />
-                </ScrollViewer>
+              </ItemsControl>
+              <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent"
+                            Width="6" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+              <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
+              <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Properties}">
+                <ItemsControl.DataTemplates>
+                  <DataTemplate DataType="vmdt:PropertyViewModel">
+                    <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+                      <!--<i:Interaction.Behaviors>
+                                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                                                </i:Interaction.Behaviors>-->
+                      <TextBox VerticalAlignment="Center" Text="{Binding Value, Mode=TwoWay}" />
+                    </Grid>
+                  </DataTemplate>
+                </ItemsControl.DataTemplates>
+              </ItemsControl>
             </Grid>
-        </Expander>
-        <Expander Header="Connectors" IsExpanded="False">
-            <Grid RowDefinitions="50*,6,50*">
-                <ListBox x:Name="ConnectorsListBox" Items="{Binding Connectors}" Grid.Row="0">
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="vms:PointShapeViewModel">
-                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource ViewModelToTypeStringConverter}}" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <i:Interaction.Behaviors>
-                                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                                </i:Interaction.Behaviors>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
-                <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6" Grid.Row="1" />
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
-                    <ContentControl Content="{Binding #ConnectorsListBox.SelectedItem}" />
-                </ScrollViewer>
-            </Grid>
-        </Expander>
-    </StackPanel>
+          </DataTemplate>
+        </ItemsControl.DataTemplates>
+      </ItemsControl>
+    </Expander>
+    <Expander Header="Shapes" IsExpanded="False">
+      <Grid RowDefinitions="50*,6,50*">
+        <ListBox x:Name="ShapesListBox" Items="{Binding Shapes}" Grid.Row="0">
+          <ListBox.DataTemplates>
+            <DataTemplate DataType="vms:BaseShapeViewModel">
+              <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
+                         Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <i:Interaction.Behaviors>
+                  <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                </i:Interaction.Behaviors>
+              </TextBlock>
+            </DataTemplate>
+          </ListBox.DataTemplates>
+        </ListBox>
+        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6"
+                      Grid.Row="1" />
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
+          <ContentControl Content="{Binding #ShapesListBox.SelectedItem}" />
+        </ScrollViewer>
+      </Grid>
+    </Expander>
+    <Expander Header="Connectors" IsExpanded="False">
+      <Grid RowDefinitions="50*,6,50*">
+        <ListBox x:Name="ConnectorsListBox" Items="{Binding Connectors}" Grid.Row="0">
+          <ListBox.DataTemplates>
+            <DataTemplate DataType="vms:PointShapeViewModel">
+              <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
+                         Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <i:Interaction.Behaviors>
+                  <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                </i:Interaction.Behaviors>
+              </TextBlock>
+            </DataTemplate>
+          </ListBox.DataTemplates>
+        </ListBox>
+        <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6"
+                      Grid.Row="1" />
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2">
+          <ContentControl Content="{Binding #ConnectorsListBox.SelectedItem}" />
+        </ScrollViewer>
+      </Grid>
+    </Expander>
+  </StackPanel>
 </UserControl>

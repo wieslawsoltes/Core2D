@@ -9,19 +9,19 @@
              d:DataContext="{x:Static vmd:DesignerContext.ShapeStyle}"
              d:DesignWidth="250" d:DesignHeight="500"
              x:DataType="vms:ShapeStyleViewModel" x:CompileBindings="True">
+  <StackPanel>
     <StackPanel>
-        <StackPanel>
-            <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
-            <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        </StackPanel>
-        <Expander Header="Stroke" IsExpanded="True">
-            <ContentControl Content="{Binding Stroke}" />
-        </Expander>
-        <Expander Header="Fill" IsExpanded="True">
-            <ContentControl Content="{Binding Fill}" />
-        </Expander>
-        <Expander Header="Text" IsExpanded="False">
-            <ContentControl Content="{Binding TextStyle}" />
-        </Expander>
+      <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+      <TextBox Text="{Binding Name, Mode=TwoWay}" />
     </StackPanel>
+    <Expander Header="Stroke" IsExpanded="True">
+      <ContentControl Content="{Binding Stroke}" />
+    </Expander>
+    <Expander Header="Fill" IsExpanded="True">
+      <ContentControl Content="{Binding Fill}" />
+    </Expander>
+    <Expander Header="Text" IsExpanded="False">
+      <ContentControl Content="{Binding TextStyle}" />
+    </Expander>
+  </StackPanel>
 </UserControl>

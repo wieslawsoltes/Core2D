@@ -22,16 +22,17 @@
     <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
     <NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
     <PDFsharpVersion>1.50.5147</PDFsharpVersion>
-    <SkiaSharpVersion>2.88.0-preview.61</SkiaSharpVersion>
+    <SkiaSharpVersion>2.88.0-preview.120</SkiaSharpVersion>
     <SystemCollectionsImmutableVersion>5.0.0</SystemCollectionsImmutableVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
     <SystemCommandLineVersion>2.0.0-beta1.21308.1</SystemCommandLineVersion>
-    <SvgSkiaVersion>0.5.6.1</SvgSkiaVersion>
-    <AvaloniaVersion>0.10.6</AvaloniaVersion>
+    <SvgSkiaVersion>0.5.7</SvgSkiaVersion>
+    <AvaloniaVersion>0.10.7</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.4</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>0.10.6.10</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>3.6.0</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>0.10.6</ThemeEditorControlsColorPickerVersion>
+    <AvaloniaXamlBehaviorsVersion>0.10.7</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>3.7.0</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>0.10.7</ThemeEditorControlsColorPickerVersion>
+    <DockAvaloniaVersion>0.10.7</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>

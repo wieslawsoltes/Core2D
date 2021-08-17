@@ -16,275 +16,328 @@
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
-    <UserControl.Resources>
-        <converters:BaseShapeIconConverter x:Key="BaseShapeIconConverter" />
-        <converters:ContainerToTypeStringConverter x:Key="ContainerToTypeStringConverter"/>
-        <converters:ShapeToTypeStringConverter x:Key="ShapeToTypeStringConverter" />
-        <dd:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
-    </UserControl.Resources>
-    <DockPanel>
-        <Grid DockPanel.Dock="Top" RowDefinitions="*" ColumnDefinitions="*,Auto">
-            <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0" />
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" x:CompileBindings="False">
-                <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-                <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnNew}" CommandParameter="{Binding Selected}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-            </StackPanel>
-        </Grid>
-        <TreeView x:Name="DocumentsTreeView" SelectionMode="Multiple" Items="{Binding Documents}" SelectedItem="{Binding Selected, Mode=TwoWay}" x:CompileBindings="False">
+  <UserControl.Resources>
+    <dd:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
+  </UserControl.Resources>
+  <DockPanel>
+    <Grid DockPanel.Dock="Top" RowDefinitions="*" ColumnDefinitions="*,Auto">
+      <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent"
+               VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0" />
+      <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
+                  x:CompileBindings="False">
+        <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+                CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}" BorderBrush="Transparent"
+                Background="Transparent" Padding="12,4,12,4" />
+        <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnNew}"
+                CommandParameter="{Binding Selected}" BorderBrush="Transparent" Background="Transparent"
+                Padding="12,4,12,4" />
+      </StackPanel>
+    </Grid>
+    <TreeView x:Name="DocumentsTreeView" SelectionMode="Multiple" Items="{Binding Documents}"
+              SelectedItem="{Binding Selected, Mode=TwoWay}" x:CompileBindings="False">
+      <i:Interaction.Behaviors>
+        <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}"
+                                 Handler="{StaticResource ProjectTreeViewDropHandler}" />
+      </i:Interaction.Behaviors>
+      <TreeView.KeyBindings>
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnNew}"
+                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+N"
+                    x:CompileBindings="False" />
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+X"
+                    x:CompileBindings="False" />
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+C"
+                    x:CompileBindings="False" />
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+V"
+                    x:CompileBindings="False" />
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+                    CommandParameter="{Binding #DocumentsTreeView.SelectedItems}" Gesture="Delete"
+                    x:CompileBindings="False" />
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+E"
+                    x:CompileBindings="False" />
+      </TreeView.KeyBindings>
+      <TreeView.ContextMenu>
+        <ContextMenu x:CompileBindings="False">
+          <MenuItem Header="_Add Document" Command="{Binding $parent[TopLevel].DataContext.OnAddDocument}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+          <Separator />
+          <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+        </ContextMenu>
+      </TreeView.ContextMenu>
+      <TreeView.Styles>
+        <Style Selector="TreeViewItem" x:DataType="TreeViewItem">
+          <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay, FallbackValue=False}" />
+        </Style>
+      </TreeView.Styles>
+      <TreeView.DataTemplates>
+        <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" ItemsSource="{Binding Pages}"
+                          x:CompileBindings="False">
+          <Panel Background="Transparent">
             <i:Interaction.Behaviors>
-                <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ProjectTreeViewDropHandler}" />
+              <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+              <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
             </i:Interaction.Behaviors>
-            <TreeView.KeyBindings>
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnNew}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+N" x:CompileBindings="False" />
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+X" x:CompileBindings="False" />
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+C" x:CompileBindings="False" />
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+V" x:CompileBindings="False" />
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding #DocumentsTreeView.SelectedItems}" Gesture="Delete" x:CompileBindings="False" />
-                <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
-            </TreeView.KeyBindings>
-            <TreeView.ContextMenu>
+            <TextBox x:Name="TextBoxEdit"
+                     IsVisible="False"
+                     Height="{Binding #TextStackPanel.Bounds.Height}"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Padding="4,0,0,0"
+                     BorderThickness="0"
+                     Text="{Binding Name, Mode=TwoWay}">
+              <i:Interaction.Behaviors>
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
+                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
+                <behaviors:SelectAllOnGotFocusBehavior />
+              </i:Interaction.Behaviors>
+            </TextBox>
+            <StackPanel x:Name="TextStackPanel"
+                        Orientation="Horizontal"
+                        Background="Transparent"
+                        Focusable="True"
+                        IsVisible="{Binding !#TextBoxEdit.IsVisible}">
+              <i:Interaction.Behaviors>
+                <iac:BindTagToVisualRootDataContextBehavior />
+                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+              </i:Interaction.Behaviors>
+              <StackPanel.ContextMenu>
                 <ContextMenu x:CompileBindings="False">
-                    <MenuItem Header="_Add Document" Command="{Binding $parent[TopLevel].DataContext.OnAddDocument}" CommandParameter="{Binding Mode=OneWay}" />
-                    <Separator />
-                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="_Add Page" Command="{Binding $parent[TopLevel].DataContext.OnAddPage}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="Insert Document Bef_ore"
+                            Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentBefore}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="Insert Document Aft_er"
+                            Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentAfter}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                            CommandParameter="{Binding Mode=OneWay}" />
                 </ContextMenu>
-            </TreeView.ContextMenu>
-            <TreeView.Styles>
-                <Style Selector="TreeViewItem" x:DataType="TreeViewItem">
-                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay, FallbackValue=False}" />
-                </Style>
-            </TreeView.Styles>
-            <TreeView.DataTemplates>
-                <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" ItemsSource="{Binding Pages}" x:CompileBindings="False">
-                    <Panel Background="Transparent">
-                        <i:Interaction.Behaviors>
-                            <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
-                            <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}"/>
-                        </i:Interaction.Behaviors>
-                        <TextBox x:Name="TextBoxEdit" 
-                                 IsVisible="False"
-                                 Height="{Binding #TextStackPanel.Bounds.Height}"
-                                 VerticalContentAlignment="Center"
-                                 VerticalAlignment="Center"
-                                 Padding="4,0,0,0"
-                                 BorderThickness="0"
-                                 Text="{Binding Name, Mode=TwoWay}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
-                                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
-                                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
-                                <behaviors:SelectAllOnGotFocusBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                        <StackPanel x:Name="TextStackPanel" 
-                                    Orientation="Horizontal"
-                                    Background="Transparent"
-                                    Focusable="True"
-                                    IsVisible="{Binding !#TextBoxEdit.IsVisible}">
-                            <i:Interaction.Behaviors>
-                                <iac:BindTagToVisualRootDataContextBehavior />
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                            </i:Interaction.Behaviors>
-                            <StackPanel.ContextMenu>
-                                <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="_Add Page" Command="{Binding $parent[TopLevel].DataContext.OnAddPage}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="Insert Document Bef_ore" Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentBefore}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="Insert Document Aft_er" Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentAfter}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
-                                </ContextMenu>
-                            </StackPanel.ContextMenu>
-                            <TextBlock VerticalAlignment="Center" Margin="4">
-                                <TextBlock.Text>
-                                    <MultiBinding Mode="OneWay" Converter="{StaticResource ContainerToTypeStringConverter}">
-                                        <Binding Path="Name" />
-                                        <Binding Path="" />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Panel>
-                </TreeDataTemplate>
-                <TreeDataTemplate DataType="vmc:PageContainerViewModel" ItemsSource="{Binding Layers}" x:CompileBindings="False">
-                    <Panel Background="Transparent">
-                        <i:Interaction.Behaviors>
-                            <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
-                            <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}"/>
-                        </i:Interaction.Behaviors>
-                        <TextBox x:Name="TextBoxEdit" 
-                                 IsVisible="False"
-                                 Height="{Binding #TextStackPanel.Bounds.Height}"
-                                 VerticalContentAlignment="Center"
-                                 VerticalAlignment="Center"
-                                 Padding="4,0,0,0"
-                                 BorderThickness="0"
-                                 Text="{Binding Name, Mode=TwoWay}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
-                                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
-                                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
-                                <behaviors:SelectAllOnGotFocusBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                        <StackPanel x:Name="TextStackPanel" 
-                                    Orientation="Horizontal"
-                                    Background="Transparent"
-                                    Focusable="True"
-                                    IsVisible="{Binding !#TextBoxEdit.IsVisible}">
-                            <i:Interaction.Behaviors>
-                                <iac:BindTagToVisualRootDataContextBehavior />
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                            </i:Interaction.Behaviors>
-                            <StackPanel.ContextMenu>
-                                <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="Te_mplate" Items="{Binding $parent[TopLevel].DataContext.Project.Templates}">
-                                        <MenuItem.Styles>
-                                            <Style Selector="MenuItem">
-                                                <Setter Property="Header" Value="{Binding Name}" />
-                                                <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}" />
-                                                <Setter Property="CommandParameter" Value="{Binding}" />
-                                            </Style>
-                                        </MenuItem.Styles>
-                                    </MenuItem>
-                                    <Separator />
-                                    <MenuItem Header="Insert Page Bef_ore" Command="{Binding $parent[TopLevel].DataContext.OnInsertPageBefore}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="Insert Page Aft_er" Command="{Binding $parent[TopLevel].DataContext.OnInsertPageAfter}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
-                                </ContextMenu>
-                            </StackPanel.ContextMenu>
-                            <TextBlock VerticalAlignment="Center" Margin="4">
-                                <TextBlock.Text>
-                                    <MultiBinding Mode="OneWay" Converter="{StaticResource ContainerToTypeStringConverter}">
-                                        <Binding Path="Name" />
-                                        <Binding Path="" />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Panel>
-                </TreeDataTemplate>
-                <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
-                    <Panel Background="Transparent">
-                        <i:Interaction.Behaviors>
-                            <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
-                            <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}"/>
-                        </i:Interaction.Behaviors>
-                        <TextBox x:Name="TextBoxEdit" 
-                                 IsVisible="False"
-                                 Height="{Binding #TextStackPanel.Bounds.Height}"
-                                 VerticalContentAlignment="Center"
-                                 VerticalAlignment="Center"
-                                 Padding="4,0,0,0"
-                                 BorderThickness="0"
-                                 Text="{Binding Name, Mode=TwoWay}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
-                                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
-                                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
-                                <behaviors:SelectAllOnGotFocusBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                        <StackPanel x:Name="TextStackPanel" 
-                                    Orientation="Horizontal"
-                                    Background="Transparent"
-                                    Focusable="True"
-                                    IsVisible="{Binding !#TextBoxEdit.IsVisible}">
-                            <i:Interaction.Behaviors>
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                            </i:Interaction.Behaviors>
-                            <StackPanel.ContextMenu>
-                                <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="_Add Layer" Command="{Binding $parent[TopLevel].DataContext.OnAddLayer}" CommandParameter="{Binding Owner, Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveLayer}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
-                                </ContextMenu>
-                            </StackPanel.ContextMenu>
-                            <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center" />
-                            <TextBlock VerticalAlignment="Center">
-                                <TextBlock.Text>
-                                    <MultiBinding Mode="OneWay" Converter="{StaticResource ContainerToTypeStringConverter}">
-                                        <Binding Path="Name" />
-                                        <Binding Path="" />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Panel>
-                </TreeDataTemplate>
-                <DataTemplate DataType="vms:BaseShapeViewModel">
-                    <Panel Background="Transparent">
-                        <i:Interaction.Behaviors>
-                            <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
-                            <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}"/>
-                        </i:Interaction.Behaviors>
-                        <TextBox x:Name="TextBoxEdit" 
-                                 IsVisible="False"
-                                 Height="{Binding #TextStackPanel.Bounds.Height}"
-                                 VerticalContentAlignment="Center"
-                                 VerticalAlignment="Center"
-                                 Padding="4,0,0,0"
-                                 BorderThickness="0"
-                                 Text="{Binding Name, Mode=TwoWay}">
-                            <i:Interaction.Behaviors>
-                                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
-                                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
-                                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
-                                <behaviors:SelectAllOnGotFocusBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
-                        <StackPanel x:Name="TextStackPanel" 
-                                    Orientation="Horizontal"
-                                    Background="Transparent"
-                                    Focusable="True"
-                                    IsVisible="{Binding !#TextBoxEdit.IsVisible}">
-                            <i:Interaction.Behaviors>
-                                <iac:BindTagToVisualRootDataContextBehavior />
-                                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                            </i:Interaction.Behaviors>
-                            <StackPanel.ContextMenu>
-                                <ContextMenu x:CompileBindings="False">
-                                    <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}" CommandParameter="{Binding Mode=OneWay}" />
-                                    <Separator />
-                                    <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}" CommandParameter="{Binding Mode=OneWay}" />
-                                </ContextMenu>
-                            </StackPanel.ContextMenu>
-                            <Image Source="{Binding Mode=OneWay, Converter={StaticResource BaseShapeIconConverter}}" Width="16" Height="16" Margin="8" />
-                            <TextBlock VerticalAlignment="Center">
-                                <TextBlock.Text>
-                                    <MultiBinding Mode="OneWay" Converter="{StaticResource ShapeToTypeStringConverter}">
-                                        <Binding Path="Name" />
-                                        <Binding Path="" />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </Panel>
-                </DataTemplate>
-            </TreeView.DataTemplates>
-        </TreeView>
-    </DockPanel>
+              </StackPanel.ContextMenu>
+              <TextBlock VerticalAlignment="Center" Margin="4">
+                <TextBlock.Text>
+                  <MultiBinding Mode="OneWay" Converter="{x:Static converters:ContainerToTypeStringConverter.Instance}">
+                    <Binding Path="Name" />
+                    <Binding Path="" />
+                  </MultiBinding>
+                </TextBlock.Text>
+              </TextBlock>
+            </StackPanel>
+          </Panel>
+        </TreeDataTemplate>
+        <TreeDataTemplate DataType="vmc:PageContainerViewModel" ItemsSource="{Binding Layers}"
+                          x:CompileBindings="False">
+          <Panel Background="Transparent">
+            <i:Interaction.Behaviors>
+              <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+              <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+            </i:Interaction.Behaviors>
+            <TextBox x:Name="TextBoxEdit"
+                     IsVisible="False"
+                     Height="{Binding #TextStackPanel.Bounds.Height}"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Padding="4,0,0,0"
+                     BorderThickness="0"
+                     Text="{Binding Name, Mode=TwoWay}">
+              <i:Interaction.Behaviors>
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
+                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
+                <behaviors:SelectAllOnGotFocusBehavior />
+              </i:Interaction.Behaviors>
+            </TextBox>
+            <StackPanel x:Name="TextStackPanel"
+                        Orientation="Horizontal"
+                        Background="Transparent"
+                        Focusable="True"
+                        IsVisible="{Binding !#TextBoxEdit.IsVisible}">
+              <i:Interaction.Behaviors>
+                <iac:BindTagToVisualRootDataContextBehavior />
+                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+              </i:Interaction.Behaviors>
+              <StackPanel.ContextMenu>
+                <ContextMenu x:CompileBindings="False">
+                  <MenuItem Header="Te_mplate" Items="{Binding $parent[TopLevel].DataContext.Project.Templates}">
+                    <MenuItem.Styles>
+                      <Style Selector="MenuItem">
+                        <Setter Property="Header" Value="{Binding Name}" />
+                        <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}" />
+                        <Setter Property="CommandParameter" Value="{Binding}" />
+                      </Style>
+                    </MenuItem.Styles>
+                  </MenuItem>
+                  <Separator />
+                  <MenuItem Header="Insert Page Bef_ore"
+                            Command="{Binding $parent[TopLevel].DataContext.OnInsertPageBefore}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="Insert Page Aft_er"
+                            Command="{Binding $parent[TopLevel].DataContext.OnInsertPageAfter}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                </ContextMenu>
+              </StackPanel.ContextMenu>
+              <TextBlock VerticalAlignment="Center" Margin="4">
+                <TextBlock.Text>
+                  <MultiBinding Mode="OneWay" Converter="{x:Static converters:ContainerToTypeStringConverter.Instance}">
+                    <Binding Path="Name" />
+                    <Binding Path="" />
+                  </MultiBinding>
+                </TextBlock.Text>
+              </TextBlock>
+            </StackPanel>
+          </Panel>
+        </TreeDataTemplate>
+        <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}"
+                          x:CompileBindings="False">
+          <Panel Background="Transparent">
+            <i:Interaction.Behaviors>
+              <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+              <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+            </i:Interaction.Behaviors>
+            <TextBox x:Name="TextBoxEdit"
+                     IsVisible="False"
+                     Height="{Binding #TextStackPanel.Bounds.Height}"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Padding="4,0,0,0"
+                     BorderThickness="0"
+                     Text="{Binding Name, Mode=TwoWay}">
+              <i:Interaction.Behaviors>
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
+                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
+                <behaviors:SelectAllOnGotFocusBehavior />
+              </i:Interaction.Behaviors>
+            </TextBox>
+            <StackPanel x:Name="TextStackPanel"
+                        Orientation="Horizontal"
+                        Background="Transparent"
+                        Focusable="True"
+                        IsVisible="{Binding !#TextBoxEdit.IsVisible}">
+              <i:Interaction.Behaviors>
+                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+              </i:Interaction.Behaviors>
+              <StackPanel.ContextMenu>
+                <ContextMenu x:CompileBindings="False">
+                  <MenuItem Header="_Add Layer" Command="{Binding $parent[TopLevel].DataContext.OnAddLayer}"
+                            CommandParameter="{Binding Owner, Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveLayer}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                </ContextMenu>
+              </StackPanel.ContextMenu>
+              <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center" />
+              <TextBlock VerticalAlignment="Center">
+                <TextBlock.Text>
+                  <MultiBinding Mode="OneWay" Converter="{x:Static converters:ContainerToTypeStringConverter.Instance}">
+                    <Binding Path="Name" />
+                    <Binding Path="" />
+                  </MultiBinding>
+                </TextBlock.Text>
+              </TextBlock>
+            </StackPanel>
+          </Panel>
+        </TreeDataTemplate>
+        <DataTemplate DataType="vms:BaseShapeViewModel">
+          <Panel Background="Transparent">
+            <i:Interaction.Behaviors>
+              <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+              <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+            </i:Interaction.Behaviors>
+            <TextBox x:Name="TextBoxEdit"
+                     IsVisible="False"
+                     Height="{Binding #TextStackPanel.Bounds.Height}"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Padding="4,0,0,0"
+                     BorderThickness="0"
+                     Text="{Binding Name, Mode=TwoWay}">
+              <i:Interaction.Behaviors>
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
+                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
+                <behaviors:SelectAllOnGotFocusBehavior />
+              </i:Interaction.Behaviors>
+            </TextBox>
+            <StackPanel x:Name="TextStackPanel"
+                        Orientation="Horizontal"
+                        Background="Transparent"
+                        Focusable="True"
+                        IsVisible="{Binding !#TextBoxEdit.IsVisible}">
+              <i:Interaction.Behaviors>
+                <iac:BindTagToVisualRootDataContextBehavior />
+                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+              </i:Interaction.Behaviors>
+              <StackPanel.ContextMenu>
+                <ContextMenu x:CompileBindings="False">
+                  <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                </ContextMenu>
+              </StackPanel.ContextMenu>
+              <Image Source="{Binding Mode=OneWay, Converter={x:Static converters:BaseShapeIconConverter.Instance}}" Width="16"
+                     Height="16" Margin="8" />
+              <TextBlock VerticalAlignment="Center">
+                <TextBlock.Text>
+                  <MultiBinding Mode="OneWay" Converter="{x:Static converters:ShapeToTypeStringConverter.Instance}">
+                    <Binding Path="Name" />
+                    <Binding Path="" />
+                  </MultiBinding>
+                </TextBlock.Text>
+              </TextBlock>
+            </StackPanel>
+          </Panel>
+        </DataTemplate>
+      </TreeView.DataTemplates>
+    </TreeView>
+  </DockPanel>
 </UserControl>
