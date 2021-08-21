@@ -27,7 +27,7 @@
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
     <SystemCommandLineVersion>2.0.0-beta1.21308.1</SystemCommandLineVersion>
-    <SvgSkiaVersion>0.5.7</SvgSkiaVersion>
+    <SvgSkiaVersion>0.5.7.1</SvgSkiaVersion>
     <AvaloniaVersion>0.10.7</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.4</AvaloniaAvaloniaEditVersion>
     <AvaloniaXamlBehaviorsVersion>0.10.7</AvaloniaXamlBehaviorsVersion>
