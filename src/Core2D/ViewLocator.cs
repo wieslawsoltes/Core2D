@@ -18,7 +18,7 @@ namespace Core2D
                 return func?.Invoke();
             }
 
-            throw new Exception($"Unable to create view for type: {type}");
+            return new TextBlock { Text = $"Unable to create view for type: {type}" };
         }
 
         public bool Match(object data)
