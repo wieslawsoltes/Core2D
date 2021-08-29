@@ -12,6 +12,7 @@ using Core2D.ViewModels.Editors;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Docking;
 using Dock.Model.Controls;
+
 namespace Core2D.ViewModels.Editor
 {
     public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
