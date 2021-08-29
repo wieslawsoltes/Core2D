@@ -13,14 +13,14 @@
              d:DataContext="{x:Static vmd:DesignerContext.Group}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:GroupShapeViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <Expander Header="Group" IsExpanded="True">
+  <TabControl>
+    <TabItem Header="Group">
       <StackPanel>
         <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding Name, Mode=TwoWay}" />
       </StackPanel>
-    </Expander>
-    <Expander Header="Properties" IsExpanded="True">
+    </TabItem>
+    <TabItem Header="Properties">
       <ItemsControl Items="{Binding Shapes}">
         <ItemsControl.DataTemplates>
           <DataTemplate DataType="vms:BaseShapeViewModel">
@@ -57,8 +57,8 @@
           </DataTemplate>
         </ItemsControl.DataTemplates>
       </ItemsControl>
-    </Expander>
-    <Expander Header="Shapes" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="Shapes">
       <Grid RowDefinitions="50*,6,50*">
         <ListBox x:Name="ShapesListBox" Items="{Binding Shapes}" Grid.Row="0">
           <ListBox.DataTemplates>
@@ -78,8 +78,8 @@
           <ContentControl Content="{Binding #ShapesListBox.SelectedItem}" />
         </ScrollViewer>
       </Grid>
-    </Expander>
-    <Expander Header="Connectors" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="Connectors">
       <Grid RowDefinitions="50*,6,50*">
         <ListBox x:Name="ConnectorsListBox" Items="{Binding Connectors}" Grid.Row="0">
           <ListBox.DataTemplates>
@@ -99,6 +99,6 @@
           <ContentControl Content="{Binding #ConnectorsListBox.SelectedItem}" />
         </ScrollViewer>
       </Grid>
-    </Expander>
-  </StackPanel>
+    </TabItem>
+  </TabControl>
 </UserControl>

@@ -10,8 +10,8 @@
              d:DataContext="{x:Static vmd:DesignerContext.ShapeRendererState}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmr:ShapeRendererStateViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <Expander Header="Point" IsExpanded="False">
+  <TabControl>
+    <TabItem Header="Point">
       <StackPanel>
         <CheckBox Content="DrawDecorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
@@ -19,14 +19,14 @@
         <Label Content="PointSize" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding PointSize, Mode=TwoWay}" />
       </StackPanel>
-    </Expander>
-    <Expander Header="Normal Style" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="Normal Style">
       <ContentControl Content="{Binding PointStyle}" />
-    </Expander>
-    <Expander Header="Selected Style" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="Selected Style">
       <ContentControl Content="{Binding SelectedPointStyle}" />
-    </Expander>
-    <Expander Header="Zoom" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="Zoom">
       <StackPanel>
         <Label Content="PanX" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding PanX, Mode=TwoWay}" />
@@ -37,18 +37,18 @@
         <Label Content="ZoomY" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding ZoomY, Mode=TwoWay}" />
       </StackPanel>
-    </Expander>
-    <Expander Header="DrawShapeState" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="DrawShapeState">
       <ContentControl Content="{Binding DrawShapeState}" />
-    </Expander>
-    <Expander Header="ImageCache" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="ImageCache">
       <libraries:ImagesView DataContext="{Binding ImageCache}" />
-    </Expander>
-    <Expander Header="SelectionStyle" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="SelectionStyle">
       <ContentControl Content="{Binding SelectionStyle}" />
-    </Expander>
-    <Expander Header="HelperStyle" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="HelperStyle">
       <ContentControl Content="{Binding HelperStyle}" />
-    </Expander>
-  </StackPanel>
+    </TabItem>
+  </TabControl>
 </UserControl>

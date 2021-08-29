@@ -8,8 +8,8 @@
              mc:Ignorable="d"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="m:IDataObject" x:CompileBindings="True">
-  <StackPanel>
-    <Expander Header="Record" IsExpanded="True">
+  <TabControl>
+    <TabItem Header="Record">
       <DockPanel IsVisible="{Binding !!Record}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
                     IsVisible="{Binding !!Record}" DockPanel.Dock="Top">
@@ -19,8 +19,8 @@
         </StackPanel>
         <ContentControl Content="{Binding Record}" />
       </DockPanel>
-    </Expander>
-    <Expander Header="Properties" IsExpanded="True">
+    </TabItem>
+    <TabItem Header="Properties">
       <DockPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
                     DockPanel.Dock="Top">
@@ -70,6 +70,6 @@
           </ItemsControl>
         </Grid>
       </DockPanel>
-    </Expander>
-  </StackPanel>
+    </TabItem>
+  </TabControl>
 </UserControl>

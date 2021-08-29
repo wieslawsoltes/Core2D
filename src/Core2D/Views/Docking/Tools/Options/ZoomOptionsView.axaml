@@ -13,8 +13,8 @@
     <Panel x:DataType="vme:ProjectEditorViewModel">
       <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                     DataContext="{Binding CanvasPlatform.Zoom}">
-        <StackPanel x:DataType="paz:ZoomBorder">
-          <Expander Header="Status" IsExpanded="True">
+        <TabControl x:DataType="paz:ZoomBorder">
+          <TabItem Header="Status">
             <StackPanel>
               <Label Content="ZoomX" Margin="{DynamicResource TextControlThemePadding}" />
               <Label Content="{Binding ZoomX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}" />
@@ -40,8 +40,8 @@
                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                       Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False" />
             </StackPanel>
-          </Expander>
-          <Expander Header="Options" IsExpanded="False">
+          </TabItem>
+          <TabItem Header="Options">
             <StackPanel>
               <Label Content="PanButton" Margin="{DynamicResource TextControlThemePadding}" />
               <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}"
@@ -54,8 +54,8 @@
               <CheckBox Content="EnablePan" IsChecked="{Binding EnablePan}" HorizontalAlignment="Stretch" />
               <CheckBox Content="EnableZoom" IsChecked="{Binding EnableZoom}" HorizontalAlignment="Stretch" />
             </StackPanel>
-          </Expander>
-          <Expander Header="Constrains" IsExpanded="False">
+          </TabItem>
+          <TabItem Header="Constrains">
             <StackPanel>
               <Label Content="MinZoomX" Margin="{DynamicResource TextControlThemePadding}" />
               <TextBox Text="{Binding MinZoomX, Mode=TwoWay}" />
@@ -75,8 +75,8 @@
               <TextBox Text="{Binding MaxOffsetY, Mode=TwoWay}" />
               <CheckBox Content="EnableConstrains" IsChecked="{Binding EnableConstrains}" HorizontalAlignment="Stretch" />
             </StackPanel>
-          </Expander>
-        </StackPanel>
+          </TabItem>
+        </TabControl>
       </ScrollViewer>
     </Panel>
   </Panel>

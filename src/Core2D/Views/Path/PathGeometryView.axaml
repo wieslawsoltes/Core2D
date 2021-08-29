@@ -10,13 +10,15 @@
              d:DataContext="{x:Static vmd:DesignerContext.PathGeometry}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmp:PathGeometryViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <StackPanel>
-      <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
-      <ComboBox Items="{x:Static vmp:PathGeometryViewModel.FillRuleValues}"
-                SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-    </StackPanel>
-    <Expander Header="Figures" IsExpanded="False">
+  <TabControl>
+    <TabItem Header="Properties">
+      <StackPanel>
+        <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
+        <ComboBox Items="{x:Static vmp:PathGeometryViewModel.FillRuleValues}"
+                  SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="Figures">
       <TreeView x:Name="FiguresTreeView" Items="{Binding Figures}">
         <TreeView.Styles>
           <Style Selector="TreeViewItem">
@@ -35,9 +37,9 @@
           </DataTemplate>
         </TreeView.DataTemplates>
       </TreeView>
-    </Expander>
-    <Expander Header="Selected Figure" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="Selected Figure">
       <ContentControl Content="{Binding #FiguresTreeView.SelectedItem}" />
-    </Expander>
-  </StackPanel>
+    </TabItem>
+  </TabControl>
 </UserControl>

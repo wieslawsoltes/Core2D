@@ -12,14 +12,16 @@
              d:DataContext="{x:Static vmd:DesignerContext.PathFigure}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmp:PathFigureViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <StackPanel>
-      <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-    </StackPanel>
-    <Expander Header="StartPoint" IsExpanded="False">
+  <TabControl>
+    <TabItem Header="Properties">
+      <StackPanel>
+        <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="StartPoint">
       <ContentControl Content="{Binding StartPoint}" />
-    </Expander>
-    <Expander Header="Segments" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="Segments">
       <ListBox Items="{Binding Segments}">
         <ListBox.DataTemplates>
           <DataTemplate>
@@ -32,6 +34,6 @@
           </DataTemplate>
         </ListBox.DataTemplates>
       </ListBox>
-    </Expander>
-  </StackPanel>
+    </TabItem>
+  </TabControl>
 </UserControl>

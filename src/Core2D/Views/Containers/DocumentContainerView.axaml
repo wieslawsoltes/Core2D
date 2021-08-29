@@ -11,12 +11,13 @@
              d:DataContext="{x:Static vmd:DesignerContext.Document}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:DocumentContainerViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <StackPanel>
-      <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
-      <TextBox Text="{Binding Name, Mode=TwoWay}" />
-    </StackPanel>
-    <Expander Header="Pages" IsExpanded="False">
+  <TabControl>
+    <TabItem Header="Properties">
+      <StackPanel>
+        <TextBox Text="{Binding Name, Mode=TwoWay}" />
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="Pages">
       <ListBox x:Name="PagesListBox" Items="{Binding Pages}">
         <ListBox.DataTemplates>
           <DataTemplate DataType="vmc:PageContainerViewModel">
@@ -28,9 +29,9 @@
           </DataTemplate>
         </ListBox.DataTemplates>
       </ListBox>
-    </Expander>
-    <Expander Header="Selected Page" IsExpanded="False">
+    </TabItem>
+    <TabItem Header="Selected Page">
       <ContentControl Content="{Binding #PagesListBox.SelectedItem}" />
-    </Expander>
-  </StackPanel>
+    </TabItem>
+  </TabControl>
 </UserControl>

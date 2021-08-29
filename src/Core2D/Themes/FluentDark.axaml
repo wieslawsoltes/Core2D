@@ -44,20 +44,6 @@
       <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
     </Style.Resources>
   </Style>
-  <Style Selector="Expander">
-    <Style.Resources>
-      <Thickness x:Key="ExpanderHeaderPadding">16</Thickness>
-      <Thickness x:Key="ExpanderContentPadding">0</Thickness>
-    </Style.Resources>
-    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-    <Setter Property="VerticalContentAlignment" Value="Stretch" />
-  </Style>
-  <Style Selector="Expander /template/ ToggleButton#PART_toggle">
-    <Setter Property="HorizontalAlignment" Value="Stretch" />
-  </Style>
-  <Style Selector="Expander /template/ ToggleButton#PART_toggle:pointerover /template/ Border">
-    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightBaseMediumBrush}" />
-  </Style>
   <Style Selector="ListBoxItem">
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="Padding" Value="0,0,0,0" />
@@ -68,6 +54,9 @@
   <Style Selector="TabControl">
     <Setter Property="Margin" Value="0,0,0,0" />
     <Setter Property="Padding" Value="0,0,0,0" />
+  </Style>
+  <Style Selector="TabControl /template/ ContentPresenter#PART_SelectedContentHost">
+    <Setter Property="Padding" Value="0" />
   </Style>
   <Style Selector="TabItem">
     <Setter Property="FontWeight" Value="Normal" />

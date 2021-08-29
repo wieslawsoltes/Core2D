@@ -10,12 +10,12 @@
              d:DataContext="{x:Static vmd:DesignerContext.Page}"
              d:DesignWidth="250" d:DesignHeight="600"
              x:DataType="vmc:PageContainerViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <Expander Header="Data" IsExpanded="False">
-      <data:DataObjectView />
-    </Expander>
-    <Expander Header="Template" IsExpanded="True">
+  <TabControl>
+    <TabItem Header="Template">
       <ContentControl Content="{Binding Template}" />
-    </Expander>
-  </StackPanel>
+    </TabItem>
+    <TabItem Header="Data">
+      <data:DataObjectView />
+    </TabItem>
+  </TabControl>
 </UserControl>
