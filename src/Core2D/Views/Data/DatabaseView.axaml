@@ -14,7 +14,7 @@
   <TabControl>
     <TabItem Header="Records">
       <DockPanel>
-        <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" DockPanel.Dock="Top">
+        <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
           <TextBox x:Name="FilterRecordsTextBox" Text="" Watermark="Filter records" BorderBrush="Transparent"
                    Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0"
                    x:CompileBindings="False" />

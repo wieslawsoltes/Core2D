@@ -18,8 +18,8 @@
   <UserControl.Resources>
     <dd:GroupsListBoxDropHandler x:Key="GroupsListBoxDropHandler" />
   </UserControl.Resources>
-  <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
-    <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
+  <Grid RowDefinitions="Auto,Auto,Auto,*,12,Auto">
+    <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" Grid.Row="0">
       <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent"
                Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0"
                IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" Grid.Column="0" x:CompileBindings="False" />
@@ -35,6 +35,7 @@
     </Grid>
     <ComboBox Items="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" Grid.Row="1"
               IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" HorizontalAlignment="Stretch"
+              Margin="{DynamicResource ContentMargin}"
               x:CompileBindings="False">
       <ComboBox.DataTemplates>
         <DataTemplate>
@@ -43,7 +44,8 @@
       </ComboBox.DataTemplates>
     </ComboBox>
     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
-                IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}" x:CompileBindings="False">
+                IsVisible="{Binding !!$self.DataContext.CurrentGroupLibrary}"
+                Margin="{DynamicResource ContentMargin}" x:CompileBindings="False">
       <Button Content="insert" Command="{Binding $parent[TopLevel].DataContext.OnInsertGroup}"
               CommandParameter="{Binding CurrentGroupLibrary.Selected}"
               IsVisible="{Binding !!CurrentGroupLibrary.Selected}" BorderBrush="Transparent" Background="Transparent"
@@ -97,6 +99,6 @@
     </ListBox>
     <TextBox Text="{Binding #GroupsListBox.SelectedItem.Name, Mode=TwoWay}"
              IsVisible="{Binding !!#GroupsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent"
-             Margin="0,12,0,0" Grid.Row="4" x:CompileBindings="False" />
+             Margin="{DynamicResource ContentMargin}" Grid.Row="5" x:CompileBindings="False" />
   </Grid>
 </UserControl>

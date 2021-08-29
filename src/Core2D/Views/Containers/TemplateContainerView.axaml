@@ -14,7 +14,7 @@
   
   <TabControl>
     <TabItem Header="Size">
-      <Grid ColumnDefinitions="50*,6,50*">
+      <Grid ColumnDefinitions="50*,6,50*" Margin="{DynamicResource ContentMargin}">
         <StackPanel Grid.Column="0">
           <Label Content="Width" Margin="{DynamicResource TextControlThemePadding}" />
           <TextBox Text="{Binding Width, Mode=TwoWay}" />

@@ -12,13 +12,13 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="mr:IImageCache" x:CompileBindings="True">
   <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*">
-    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right"
+    <StackPanel Grid.Row="0" Grid.Column="0" Margin="{DynamicResource ContentMargin}" Orientation="Horizontal" HorizontalAlignment="Right"
                 VerticalAlignment="Center" x:CompileBindings="False">
       <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddImageKey}" BorderBrush="Transparent"
               Background="Transparent" Padding="12,4,12,4" />
     </StackPanel>
-    <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key" />
-    <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Keys}">
+    <TextBlock Grid.Column="0" Grid.Row="1" Margin="{DynamicResource ContentMargin}" VerticalAlignment="Center" Text="Key" />
+    <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Margin="{DynamicResource ContentMargin}" Items="{Binding Keys}">
       <ItemsControl.DataTemplates>
         <DataTemplate DataType="mr:IImageKey">
           <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">

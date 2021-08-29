@@ -11,7 +11,7 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <Grid RowDefinitions="Auto,Auto,*">
-    <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
+    <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" Grid.Row="0">
       <TextBox Text="{Binding CurrentDatabase.Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent"
                VerticalAlignment="Center" Margin="0,0,0,0" IsVisible="{Binding !!$self.DataContext.CurrentDatabase}"
                Grid.Column="0" x:CompileBindings="False" />
@@ -25,7 +25,8 @@
       </StackPanel>
     </Grid>
     <ComboBox Items="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" Grid.Row="1"
-              IsVisible="{Binding !!CurrentDatabase}" HorizontalAlignment="Stretch">
+              IsVisible="{Binding !!CurrentDatabase}" HorizontalAlignment="Stretch"
+              Margin="{DynamicResource ContentMargin}">
       <ComboBox.DataTemplates>
         <DataTemplate DataType="vmdt:DatabaseViewModel">
           <TextBlock Text="{Binding Name}" />

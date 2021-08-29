@@ -12,7 +12,7 @@
              x:DataType="vmp:PathGeometryViewModel" x:CompileBindings="True">
   <TabControl>
     <TabItem Header="Properties">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
         <ComboBox Items="{x:Static vmp:PathGeometryViewModel.FillRuleValues}"
                   SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />

@@ -12,7 +12,7 @@
              x:DataType="vms:PathShapeViewModel" x:CompileBindings="True">
   <TabControl>
     <TabItem Header="Path">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding Name, Mode=TwoWay}" />
         <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />

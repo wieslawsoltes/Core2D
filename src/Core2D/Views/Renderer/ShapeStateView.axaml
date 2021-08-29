@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:BaseShapeViewModel" x:CompileBindings="True">
-  <StackPanel>
+  <StackPanel Margin="{DynamicResource ContentMargin}">
     <CheckBox Content="Default"
               Command="{Binding ToggleDefaultShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Default}}"

@@ -9,7 +9,7 @@
              d:DataContext="{x:Static vmd:DesignerContext.Record}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmdt:RecordViewModel" x:CompileBindings="True">
-  <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+  <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" Margin="{DynamicResource ContentMargin}">
     <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" />
     <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" DataContext="{Binding Owner}"
                   Items="{Binding Columns}" x:DataType="vmdt:DatabaseViewModel">

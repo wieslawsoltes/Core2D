@@ -17,8 +17,8 @@
   <UserControl.Resources>
     <dd:StylesListBoxDropHandler x:Key="StylesListBoxDropHandler" />
   </UserControl.Resources>
-  <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
-    <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Grid.Row="0">
+  <Grid RowDefinitions="Auto,Auto,Auto,*,12,Auto">
+    <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" Grid.Row="0">
       <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent"
                Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0"
                IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" Grid.Column="0" x:CompileBindings="False" />
@@ -34,6 +34,7 @@
     </Grid>
     <ComboBox Items="{Binding StyleLibraries}" SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1"
               IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" HorizontalAlignment="Stretch"
+              Margin="{DynamicResource ContentMargin}"
               x:CompileBindings="False">
       <ComboBox.DataTemplates>
         <DataTemplate>
@@ -42,7 +43,9 @@
       </ComboBox.DataTemplates>
     </ComboBox>
     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
-                IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" x:CompileBindings="False">
+                IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" 
+                Margin="{DynamicResource ContentMargin}"
+                x:CompileBindings="False">
       <Button Content="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyStyle}"
               CommandParameter="{Binding CurrentStyleLibrary.Selected}"
               IsVisible="{Binding !!CurrentStyleLibrary.Selected}" BorderBrush="Transparent" Background="Transparent"
@@ -96,6 +99,6 @@
     </ListBox>
     <TextBox Text="{Binding #StylesListBox.SelectedItem.Name, Mode=TwoWay}"
              IsVisible="{Binding !!#StylesListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent"
-             Margin="0,12,0,0" Grid.Row="4" x:CompileBindings="False" />
+             Margin="{DynamicResource ContentMargin}" Grid.Row="5" x:CompileBindings="False" />
   </Grid>
 </UserControl>

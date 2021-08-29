@@ -16,8 +16,9 @@
   <UserControl.Resources>
     <dd:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler" />
   </UserControl.Resources>
-  <Grid RowDefinitions="Auto,*,Auto">
+  <Grid RowDefinitions="Auto,*,12,Auto">
     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
+                Margin="{DynamicResource ContentMargin}"
                 x:CompileBindings="False">
       <Button Content="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}"
               CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#TemplatesListBox.SelectedItem}"
@@ -81,6 +82,6 @@
     </ListBox>
     <TextBox Text="{Binding #TemplatesListBox.SelectedItem.Name, Mode=TwoWay}"
              IsVisible="{Binding !!#TemplatesListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent"
-             Margin="0,12,0,0" Grid.Row="2" x:CompileBindings="False" />
+             Margin="{DynamicResource ContentMargin}" Grid.Row="3" x:CompileBindings="False" />
   </Grid>
 </UserControl>

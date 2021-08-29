@@ -34,7 +34,12 @@
       <Thickness x:Key="MainViewMargin">0,40,0,0</Thickness>
       <x:Double x:Key="MenuBarHeight">40</x:Double>
       <Thickness x:Key="MenuBarItemPadding">12,0,12,0</Thickness>
+      <Thickness x:Key="ContentMargin">6,0,6,0</Thickness>
     </Style.Resources>
+  </Style>
+  <Style Selector="Label">
+    <Setter Property="Margin" Value="0,0,0,0" />
+    <Setter Property="Padding" Value="0,6,0,6" />
   </Style>
   <Style Selector="ListBoxItem">
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />

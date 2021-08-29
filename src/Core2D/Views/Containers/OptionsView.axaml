@@ -12,7 +12,7 @@
              x:DataType="vmc:OptionsViewModel" x:CompileBindings="True">
   <TabControl>
     <TabItem Header="General">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <CheckBox Content="SnapToGrid" IsChecked="{Binding SnapToGrid, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         <Label Content="SnapX" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding SnapX, Mode=TwoWay}" />
@@ -27,7 +27,7 @@
       </StackPanel>
     </TabItem>
     <TabItem Header="Defaults">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
           <CheckBox Content="IsStroked" IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
           <CheckBox Content="IsFilled" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
           <CheckBox Content="IsClosed" IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch" />

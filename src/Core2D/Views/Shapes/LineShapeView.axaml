@@ -12,7 +12,7 @@
              x:DataType="vms:LineShapeViewModel" x:CompileBindings="True">
   <TabControl>
     <TabItem Header="Line">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding Name, Mode=TwoWay}" />
         <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />

@@ -11,7 +11,7 @@
              x:DataType="vms:ShapeStyleViewModel" x:CompileBindings="True">
   <TabControl>
     <TabItem Header="Properties">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding Name, Mode=TwoWay}" />
       </StackPanel>

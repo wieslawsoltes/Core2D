@@ -11,7 +11,7 @@
              d:DataContext="{x:Static vmd:DesignerContext.TextStyle}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:TextStyleViewModel" x:CompileBindings="True">
-  <StackPanel>
+  <StackPanel Margin="{DynamicResource ContentMargin}">
     <Label Content="FontName" Margin="{DynamicResource TextControlThemePadding}" />
     <TextBox Text="{Binding FontName, Mode=TwoWay}" />
     <Label Content="FontFile" Margin="{DynamicResource TextControlThemePadding}" />

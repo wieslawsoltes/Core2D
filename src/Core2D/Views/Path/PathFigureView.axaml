@@ -14,7 +14,7 @@
              x:DataType="vmp:PathFigureViewModel" x:CompileBindings="True">
   <TabControl>
     <TabItem Header="Properties">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch" />
       </StackPanel>
     </TabItem>

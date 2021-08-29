@@ -15,7 +15,7 @@
              x:DataType="vmc:LayerContainerViewModel" x:CompileBindings="True">
   <TabControl>
     <TabItem Header="Properties">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <TextBox Text="{Binding Name, Mode=TwoWay}" />
         <CheckBox Content="IsVisible" IsChecked="{Binding IsVisible, Mode=TwoWay}" />
       </StackPanel>

@@ -20,7 +20,7 @@
     <dd:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
   </UserControl.Resources>
   <DockPanel>
-    <Grid DockPanel.Dock="Top" RowDefinitions="*" ColumnDefinitions="*,Auto">
+    <Grid DockPanel.Dock="Top" RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}">
       <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent"
                VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0" />
       <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"

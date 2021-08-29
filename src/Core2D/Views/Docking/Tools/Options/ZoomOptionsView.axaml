@@ -15,7 +15,7 @@
                     DataContext="{Binding CanvasPlatform.Zoom}">
         <TabControl x:DataType="paz:ZoomBorder">
           <TabItem Header="Status">
-            <StackPanel>
+            <StackPanel Margin="{DynamicResource ContentMargin}">
               <Label Content="ZoomX" Margin="{DynamicResource TextControlThemePadding}" />
               <Label Content="{Binding ZoomX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}" />
               <Label Content="ZoomY" Margin="{DynamicResource TextControlThemePadding}" />
@@ -42,7 +42,7 @@
             </StackPanel>
           </TabItem>
           <TabItem Header="Options">
-            <StackPanel>
+            <StackPanel Margin="{DynamicResource ContentMargin}">
               <Label Content="PanButton" Margin="{DynamicResource TextControlThemePadding}" />
               <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}"
                         HorizontalAlignment="Stretch" />
@@ -56,7 +56,7 @@
             </StackPanel>
           </TabItem>
           <TabItem Header="Constrains">
-            <StackPanel>
+            <StackPanel Margin="{DynamicResource ContentMargin}">
               <Label Content="MinZoomX" Margin="{DynamicResource TextControlThemePadding}" />
               <TextBox Text="{Binding MinZoomX, Mode=TwoWay}" />
               <Label Content="MaxZoomX" Margin="{DynamicResource TextControlThemePadding}" />
@@ -77,7 +77,6 @@
             </StackPanel>
           </TabItem>
         </TabControl>
-      </ScrollViewer>
     </Panel>
   </Panel>
 </UserControl>

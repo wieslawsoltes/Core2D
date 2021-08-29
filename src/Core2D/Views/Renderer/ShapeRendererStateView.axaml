@@ -12,7 +12,7 @@
              x:DataType="vmr:ShapeRendererStateViewModel" x:CompileBindings="True">
   <TabControl>
     <TabItem Header="Point">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <CheckBox Content="DrawDecorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
         <CheckBox Content="DrawPoints" IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch" />
@@ -27,7 +27,7 @@
       <ContentControl Content="{Binding SelectedPointStyle}" />
     </TabItem>
     <TabItem Header="Zoom">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <Label Content="PanX" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding PanX, Mode=TwoWay}" />
         <Label Content="PanY" Margin="{DynamicResource TextControlThemePadding}" />

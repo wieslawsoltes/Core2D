@@ -11,14 +11,14 @@
              x:DataType="mr:IGrid" x:CompileBindings="True">
   <TabControl>
     <TabItem Header="Properties">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <CheckBox Content="IsGridEnabled" IsChecked="{Binding IsGridEnabled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         <CheckBox Content="IsBorderEnabled" IsChecked="{Binding IsBorderEnabled, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
       </StackPanel>
     </TabItem>
     <TabItem Header="Offset">
-      <Grid ColumnDefinitions="25*,25*,25*,25*" RowDefinitions="Auto,Auto">
+      <Grid ColumnDefinitions="25*,25*,25*,25*" RowDefinitions="Auto,Auto" Margin="{DynamicResource ContentMargin}">
         <Label Content="Left" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="0" />
         <Label Content="Top" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="1" />
         <Label Content="Right" Margin="{DynamicResource TextControlThemePadding}" Grid.Row="0" Grid.Column="2" />
@@ -34,7 +34,7 @@
       </Grid>
     </TabItem>
     <TabItem Header="Cell">
-      <Grid ColumnDefinitions="50*,6,50*">
+      <Grid ColumnDefinitions="50*,6,50*" Margin="{DynamicResource ContentMargin}">
         <StackPanel Grid.Column="0">
           <Label Content="Width" Margin="{DynamicResource TextControlThemePadding}" />
           <TextBox Text="{Binding GridCellWidth, Mode=TwoWay}" />
@@ -51,7 +51,7 @@
         <ContentControl Content="{Binding GridStrokeColor}" />
     </TabItem>
     <TabItem Header="Thickness">
-      <StackPanel>
+      <StackPanel Margin="{DynamicResource ContentMargin}">
         <Label Content="Thickness" Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding GridStrokeThickness, Mode=TwoWay}" />
       </StackPanel>

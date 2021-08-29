@@ -21,6 +21,7 @@
   <Grid RowDefinitions="50*,6,50*">
     <Grid RowDefinitions="Auto,*,Auto" Grid.Row="0">
       <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
+                  Margin="{DynamicResource ContentMargin}"
                   x:CompileBindings="False">
         <Button Content="reset" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}" BorderBrush="Transparent"
                 Background="Transparent" Padding="12,4,12,4" />

@@ -12,7 +12,7 @@
     <TabItem Header="Record">
       <DockPanel IsVisible="{Binding !!Record}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
-                    IsVisible="{Binding !!Record}" DockPanel.Dock="Top">
+                    IsVisible="{Binding !!Record}" Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
           <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}"
                   CommandParameter="{Binding}" IsVisible="{Binding !!Record}" BorderBrush="Transparent"
                   Background="Transparent" Padding="12,4,12,4" x:CompileBindings="False" />
@@ -21,8 +21,9 @@
       </DockPanel>
     </TabItem>
     <TabItem Header="Properties">
-      <DockPanel>
+      <DockPanel Margin="{DynamicResource ContentMargin}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Margin="{DynamicResource ContentMargin}"
                     DockPanel.Dock="Top">
           <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddProperty}"
                   CommandParameter="{Binding}" BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4"
