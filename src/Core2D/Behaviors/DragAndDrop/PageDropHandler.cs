@@ -11,7 +11,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.Behaviors.DragAndDrop
 {
-    public class EditorDropHandler : DefaultDropHandler
+    public class PageDropHandler : DefaultDropHandler
     {
         public static readonly StyledProperty<IControl> RelativeToProperty = 
             AvaloniaProperty.Register<EditorDropHandler, IControl>(nameof(RelativeTo));

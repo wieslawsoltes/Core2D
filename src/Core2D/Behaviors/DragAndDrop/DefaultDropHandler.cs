@@ -8,7 +8,7 @@ using Avalonia.Xaml.Interactions.DragAndDrop;
 
 namespace Core2D.Behaviors.DragAndDrop
 {
-    public abstract class DefaultDropHandler : IDropHandler
+    public abstract class DefaultDropHandler : AvaloniaObject, IDropHandler
     {
         public static Point GetPosition(object sender, DragEventArgs e)
         {
