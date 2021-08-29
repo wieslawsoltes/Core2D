@@ -13,8 +13,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Platform;
-using Avalonia.Styling;
-using Core2D.Configuration.Themes;
 using Core2D.Configuration.Windows;
 using Core2D.Model;
 using Core2D.ViewModels;
@@ -30,15 +28,7 @@ namespace Core2D
 {
     public class App : Application
     {
-        public Styles DefaultDark { get; set; }
-
-        public Styles DefaultLight { get; set; }
-
-        public Styles FluentDark { get; set; }
-
-        public Styles FluentLight { get; set; }
-
-        public static ThemeName DefaultTheme { get; set; }
+        public static string DefaultTheme { get; set; }
 
         public static ICommand ChangeTheme { get; set; }
 
@@ -73,7 +63,7 @@ namespace Core2D
 
         static App()
         {
-            DefaultTheme = ThemeName.FluentDark;
+            DefaultTheme = "FluentDark";
 
             InitializeDesigner();
         }
@@ -281,57 +271,17 @@ namespace Core2D
             singleViewLifetime.MainView = mainView;
         }
 
-        public void InitTheme(ThemeName themeName)
-        {
-            switch (themeName)
-            {
-                case ThemeName.DefaultDark:
-                    Styles.Insert(0, DefaultDark);
-                    break;
-
-                case ThemeName.DefaultLight:
-                    Styles.Insert(0, DefaultLight);
-                    break;
-
-                case ThemeName.FluentDark:
-                    Styles.Insert(0, FluentDark);
-                    break;
-
-                default:
-                case ThemeName.FluentLight:
-                    Styles.Insert(0, FluentLight);
-                    break;
-            }
-        }
-
-        public void SetTheme(ThemeName themeName)
-        {
-            switch (themeName)
-            {
-                case ThemeName.DefaultDark:
-                    Styles[0] = DefaultDark;
-                    break;
-
-                case ThemeName.DefaultLight:
-                    Styles[0] = DefaultLight;
-                    break;
-
-                case ThemeName.FluentDark:
-                    Styles[0] = FluentDark;
-                    break;
-
-                default:
-                case ThemeName.FluentLight:
-                    Styles[0] = FluentLight;
-                    break;
-            }
-        }
-
         public void SetTheme(string themeName)
         {
-            if (Enum.TryParse<ThemeName>(themeName, out var result))
+            var theme = Current.Styles.Select(x => (StyleInclude)x).FirstOrDefault(x => x.Source is { } && x.Source.AbsolutePath.Contains("Themes"));
+            if (theme is { })
             {
-                SetTheme(result);
+                var index = Current.Styles.IndexOf(theme);
+
+                Current.Styles[index] = new StyleInclude(new Uri("avares://Core2D/App.axaml"))
+                {
+                    Source = new Uri($"avares://Core2D/Themes/{themeName}.axaml")
+                };
             }
         }
 
@@ -355,41 +305,7 @@ namespace Core2D
         {
             AvaloniaXamlLoader.Load(this);
 
-            DefaultDark = new Styles
-            {
-                new StyleInclude(new Uri("avares://Core2D/Styles"))
-                {
-                    Source = new Uri("avares://Core2D/Themes/DefaultDark.axaml")
-                }
-            };
-
-            DefaultLight = new Styles
-            {
-                new StyleInclude(new Uri("avares://Core2D/Styles"))
-                {
-                    Source = new Uri("avares://Core2D/Themes/DefaultLight.axaml")
-                }
-            };
-
-            FluentDark = new Styles
-            {
-                new StyleInclude(new Uri("avares://Core2D/Styles"))
-                {
-                    Source = new Uri("avares://Core2D/Themes/FluentDark.axaml")
-                }
-            };
-
-            FluentLight = new Styles
-            {
-                new StyleInclude(new Uri("avares://Core2D/Styles"))
-                {
-                    Source = new Uri("avares://Core2D/Themes/FluentLight.axaml")
-                }
-            };
-
             ChangeTheme = new ChangeThemeCommand(this);
-
-            InitTheme(DefaultTheme);
         }
     }
 }

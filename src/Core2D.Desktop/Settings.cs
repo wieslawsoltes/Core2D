@@ -1,11 +1,10 @@
 ﻿using System.IO;
-using Core2D.Configuration.Themes;
 
 namespace Core2D.Desktop
 {
     public class Settings
     {
-        public ThemeName? Theme { get; set; } = null;
+        public string? Theme { get; set; } = null;
         public FileInfo[]? Scripts { get; set; }
         public FileInfo? Project { get; set; }
         public bool Repl { get; set; }

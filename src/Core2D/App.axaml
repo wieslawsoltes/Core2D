@@ -8,6 +8,7 @@
     <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
   </Application.Resources>
   <Application.Styles>
+    <StyleInclude Source="avares://Core2D/Themes/FluentDark.axaml" />
     <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
     <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
     <StyleInclude Source="avares://Core2D/Icons.axaml" />

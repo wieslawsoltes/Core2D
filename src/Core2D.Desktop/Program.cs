@@ -15,7 +15,6 @@ using Avalonia.OpenGL;
 using Avalonia.ReactiveUI;
 using Avalonia.Screenshot;
 using Avalonia.Threading;
-using Core2D.Configuration.Themes;
 using Core2D.Util;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
@@ -151,7 +150,7 @@ namespace Core2D.Desktop
             {
                 if (settings.Theme is { })
                 {
-                    App.DefaultTheme = settings.Theme.Value;
+                    App.DefaultTheme = settings.Theme;
                 }
 
                 if (settings.Repl)
@@ -248,7 +247,7 @@ namespace Core2D.Desktop
                 Description = "A multi-platform data driven 2D diagram editor."
             };
 
-            rootCommand.AddOption(new Option(new[] { "--theme", "-t" }, "Set application theme", typeof(ThemeName)));
+            rootCommand.AddOption(new Option(new[] { "--theme", "-t" }, "Set application theme", typeof(string)));
             rootCommand.AddOption(new Option(new[] { "--scripts", "-s" }, "The relative or absolute path to the script files", typeof(FileInfo[])));
             rootCommand.AddOption(new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file", typeof(FileInfo)));
             rootCommand.AddOption(new Option(new[] { "--repl" }, "Run scripting repl", typeof(bool)));
