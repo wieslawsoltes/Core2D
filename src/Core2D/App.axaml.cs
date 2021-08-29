@@ -1,9 +1,10 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.Json;
 using System.Windows.Input;
 using Autofac;
 using Avalonia;
@@ -20,6 +21,10 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Designer;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
+using Dock.Model.ReactiveUI.Controls;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace Core2D
 {
@@ -108,8 +113,46 @@ namespace Core2D
             };
         }
 
+        private class ListContractResolver : DefaultContractResolver
+        {
+            private readonly Type _type;
+
+            public ListContractResolver(Type type)
+            {
+                _type = type;
+            }
+
+            public override JsonContract ResolveContract(Type type)
+            {
+                if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
+                {
+                    return base.ResolveContract(_type.MakeGenericType(type.GenericTypeArguments[0]));
+                }
+                return base.ResolveContract(type);
+            }
+
+            protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+            {
+                return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();
+            }
+        }
+        
         private void InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime desktopLifetime)
         {
+            var jsonSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                TypeNameHandling = TypeNameHandling.Objects,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ListContractResolver(typeof(ObservableCollection<>)),
+                NullValueHandling = NullValueHandling.Ignore,
+                Converters =
+                {
+                    new KeyValuePairConverter()
+                }
+            };
+
             var builder = new ContainerBuilder();
 
             builder.RegisterModule<AppModule>();
@@ -130,7 +173,7 @@ namespace Core2D
                 var jsonWindowSettings = fileSystem?.ReadUtf8Text(windowSettingsPath);
                 if (!string.IsNullOrEmpty(jsonWindowSettings))
                 {
-                    windowSettings = JsonSerializer.Deserialize<WindowConfiguration>(jsonWindowSettings);
+                    windowSettings = JsonConvert.DeserializeObject<WindowConfiguration>(jsonWindowSettings, jsonSettings);
                 }
             }
 
@@ -140,6 +183,26 @@ namespace Core2D
             if (fileSystem.Exists(recentPath))
             {
                 editor.OnLoadRecent(recentPath);
+            }
+
+            var rootDock = default(RootDock);
+            var rootDockPath = System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.layout");
+            if (fileSystem.Exists(rootDockPath))
+            {
+                var jsonRootDock = fileSystem?.ReadUtf8Text(rootDockPath);
+                if (!string.IsNullOrEmpty(jsonRootDock))
+                {
+                    rootDock = JsonConvert.DeserializeObject<RootDock>(jsonRootDock, jsonSettings);
+                    if (rootDock is { })
+                    {
+                        editor.LoadLayout(rootDock);
+                    }
+                }
+            }
+
+            if (rootDock is null)
+            {
+                editor.CreateLayout();
             }
 
             editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
@@ -168,10 +231,16 @@ namespace Core2D
                 editor.OnSaveRecent(recentPath);
 
                 windowSettings = WindowConfigurationFactory.Save(mainWindow);
-                var jsonWindowSettings = JsonSerializer.Serialize(windowSettings, new JsonSerializerOptions() { WriteIndented = true });
+                var jsonWindowSettings = JsonConvert.SerializeObject(windowSettings, jsonSettings);
                 if (!string.IsNullOrEmpty(jsonWindowSettings))
                 {
                     fileSystem?.WriteUtf8Text(windowSettingsPath, jsonWindowSettings);
+                }
+
+                var jsonRootDock = JsonConvert.SerializeObject(editor.RootDock, jsonSettings);
+                if (!string.IsNullOrEmpty(jsonRootDock))
+                {
+                    fileSystem?.WriteUtf8Text(rootDockPath, jsonRootDock);
                 }
             };
 
