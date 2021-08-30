@@ -12,12 +12,12 @@ namespace Core2D.ViewModels
         [AutoNotify] private ViewModelBase? _owner;
         [AutoNotify] private string _name = "";
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         public ViewModelBase(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected IServiceProvider ServiceProvider { get; }
 
