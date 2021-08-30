@@ -29,7 +29,7 @@ namespace Core2D.ViewModels.Shapes
             base.Invalidate();
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
@@ -44,7 +44,7 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
         }
 
@@ -52,7 +52,7 @@ namespace Core2D.ViewModels.Shapes
         {
         }
 
-        public override void Move(ISelection selection, decimal dx, decimal dy)
+        public override void Move(ISelection? selection, decimal dx, decimal dy)
         {
             X = (double)((decimal)_x + dx);
             Y = (double)((decimal)_y + dy);
