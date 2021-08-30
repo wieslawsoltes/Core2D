@@ -44,7 +44,7 @@ namespace Core2D.ViewModels.Shapes
             base.DrawPoints(dc, renderer, selection);
         }
 
-        public override void Bind(DataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object? db, object? r)
         {
             var record = Record ?? r;
 

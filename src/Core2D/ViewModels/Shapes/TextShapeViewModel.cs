@@ -58,7 +58,7 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override void Bind(DataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object? db, object? r)
         {
             var record = Record ?? r;
 

@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Shapes
 {
     public partial class BaseShapeViewModel : ViewModelBase, IDataObject
     {
-        private readonly IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
+        private readonly IDictionary<string, object?> _propertyCache = new Dictionary<string, object?>();
 
         // ReSharper disable InconsistentNaming
         // ReSharper disable MemberCanBePrivate.Global
@@ -74,12 +74,12 @@ namespace Core2D.ViewModels.Shapes
             return false;
         }
 
-        public virtual void Bind(DataFlow dataFlow, object db, object r)
+        public virtual void Bind(DataFlow dataFlow, object? db, object? r)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void SetProperty(string name, object value)
+        public virtual void SetProperty(string name, object? value)
         {
             _propertyCache[name] = value;
         }

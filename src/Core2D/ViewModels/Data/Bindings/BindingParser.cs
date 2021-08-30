@@ -1,29 +1,29 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Data.Bindings
 {
     internal static class BindingParser
     {
-        public static char s_startChar = '{';
-        public static char s_endChar = '}';
+        private const char StartChar = '{';
+        private const char EndChar = '}';
 
-        public static List<Binding> Parse(string text)
+        public static List<BindingPart> Parse(string text)
         {
-            var bindings = new List<Binding>();
+            var bindings = new List<BindingPart>();
 
             for (int i = 0; i < text.Length; i++)
             {
-                var start = text.IndexOf(s_startChar, i);
+                var start = text.IndexOf(StartChar, i);
                 if (start >= 0)
                 {
-                    var end = text.IndexOf(s_endChar, start);
+                    var end = text.IndexOf(EndChar, start);
                     if (end >= start)
                     {
                         var length = end - start + 1;
                         var path = text.Substring(start + 1, length - 2);
                         var value = text.Substring(start, length);
-                        var binding = new Binding(start, end, length, path, value);
+                        var binding = new BindingPart(start, length, path, value);
                         bindings.Add(binding);
                         i = end;
                     }
