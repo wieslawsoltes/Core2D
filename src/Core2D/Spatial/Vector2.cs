@@ -27,21 +27,21 @@ namespace Core2D.Spatial
         public Vector2(double value)
             : this()
         {
-            this.X = value;
-            this.Y = value;
+            X = value;
+            Y = value;
         }
 
         public Vector2(double x, double y)
             : this()
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
 
         public void Deconstruct(out double x, out double y)
         {
-            x = this.X;
-            y = this.Y;
+            x = X;
+            y = Y;
         }
 
         public Vector2 Negate()
@@ -209,7 +209,7 @@ namespace Core2D.Spatial
 
         public Vector2 Slerp(Vector2 v, double amount)
         {
-            double dot = Clamp(this.Dot(v), -1.0, 1.0);
+            double dot = Clamp(Dot(v), -1.0, 1.0);
             double theta = Math.Acos(dot) * amount;
             Vector2 relative = (v - (this * dot)).Normalize();
             return (this * Math.Cos(theta)) + (relative * Math.Sin(theta));

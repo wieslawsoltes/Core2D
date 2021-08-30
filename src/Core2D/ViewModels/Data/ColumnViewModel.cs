@@ -16,8 +16,8 @@ namespace Core2D.ViewModels.Data
         {
             return new ColumnViewModel(ServiceProvider)
             {
-                Name = this.Name,
-                IsVisible = this.IsVisible
+                Name = Name,
+                IsVisible = IsVisible
             };
         }
 

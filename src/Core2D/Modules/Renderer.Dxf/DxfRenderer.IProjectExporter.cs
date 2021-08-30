@@ -78,7 +78,7 @@ namespace Core2D.Modules.Renderer.Dxf
 
             if (stream is FileStream fileStream)
             {
-                _outputPath = System.IO.Path.GetDirectoryName(fileStream.Name);
+                _outputPath = Path.GetDirectoryName(fileStream.Name);
             }
             else
             {
@@ -99,7 +99,7 @@ namespace Core2D.Modules.Renderer.Dxf
 
             if (stream is FileStream fileStream)
             {
-                _outputPath = System.IO.Path.GetDirectoryName(fileStream.Name);
+                _outputPath = Path.GetDirectoryName(fileStream.Name);
             }
             else
             {
@@ -120,7 +120,7 @@ namespace Core2D.Modules.Renderer.Dxf
 
             if (stream is FileStream fileStream)
             {
-                _outputPath = System.IO.Path.GetDirectoryName(fileStream.Name);
+                _outputPath = Path.GetDirectoryName(fileStream.Name);
             }
             else
             {

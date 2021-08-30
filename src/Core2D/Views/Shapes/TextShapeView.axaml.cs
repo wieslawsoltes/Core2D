@@ -19,7 +19,7 @@ namespace Core2D.Views.Shapes
 
         public void OnEditTextBinding(object shape)
         {
-            if (this.VisualRoot is TopLevel topLevel
+            if (VisualRoot is TopLevel topLevel
                 && topLevel.DataContext is ProjectEditorViewModel editor
                 && shape is TextShapeViewModel text)
             {

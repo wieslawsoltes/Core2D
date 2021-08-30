@@ -9,14 +9,14 @@ namespace Core2D.Spatial
 
         public Size2(double width, double height)
         {
-            this.Width = width;
-            this.Height = height;
+            Width = width;
+            Height = height;
         }
 
         public void Deconstruct(out double width, out double height)
         {
-            width = this.Width;
-            height = this.Height;
+            width = Width;
+            height = Height;
         }
     }
 }

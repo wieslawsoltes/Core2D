@@ -20,14 +20,14 @@ namespace Core2D.ViewModels.Data
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            var columns = this._columns.Copy(shared).ToImmutable();
-            var records = this._records.Copy(shared).ToImmutable();
+            var columns = _columns.Copy(shared).ToImmutable();
+            var records = _records.Copy(shared).ToImmutable();
             var currentRecordIndex = _records.IndexOf(_currentRecord);
 
             return new DatabaseViewModel(ServiceProvider)
             {
-                Name = this.Name,
-                IdColumnName = this.IdColumnName,
+                Name = Name,
+                IdColumnName = IdColumnName,
                 Columns = columns,
                 Records = records,
                 CurrentRecord = records[currentRecordIndex]

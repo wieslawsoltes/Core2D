@@ -9,8 +9,8 @@ namespace Core2D.Spatial.Sat
 
         public MinimumTranslationVector(Vector2 smallest, double overlap)
         {
-            this.Smallest = smallest;
-            this.Overlap = overlap;
+            Smallest = smallest;
+            Overlap = overlap;
         }
     }
 }

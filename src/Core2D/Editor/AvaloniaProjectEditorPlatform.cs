@@ -158,7 +158,7 @@ namespace Core2D.Editor
                     {
                         if (item is { })
                         {
-                            string resultExtension = System.IO.Path.GetExtension(item);
+                            string resultExtension = Path.GetExtension(item);
                             if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                             {
                                 ServiceProvider.GetService<ProjectEditorViewModel>().OnImportJson(item);
@@ -171,7 +171,7 @@ namespace Core2D.Editor
             {
                 if (ServiceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    string resultExtension = System.IO.Path.GetExtension(path);
+                    string resultExtension = Path.GetExtension(path);
                     if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         ServiceProvider.GetService<ProjectEditorViewModel>().OnImportJson(path);
@@ -207,7 +207,7 @@ namespace Core2D.Editor
                 var result = await dlg.ShowAsync(GetWindow());
                 if (result is { })
                 {
-                    string resultExtension = System.IO.Path.GetExtension(result);
+                    string resultExtension = Path.GetExtension(result);
                     if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         editor.OnExportJson(result, item);
@@ -257,7 +257,7 @@ namespace Core2D.Editor
             var result = await dlg.ShowAsync(GetWindow());
             if (result is { })
             {
-                string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
+                string ext = Path.GetExtension(result).ToLower().TrimStart('.');
                 var writer = editor.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                 if (writer is { })
                 {
@@ -622,7 +622,7 @@ namespace Core2D.Editor
                 {
                     return;
                 }
-                string ext = System.IO.Path.GetExtension(path).ToLower().TrimStart('.');
+                string ext = Path.GetExtension(path).ToLower().TrimStart('.');
                 var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                 if (reader is { })
                 {
@@ -647,7 +647,7 @@ namespace Core2D.Editor
                 var result = await dlg.ShowAsync(GetWindow());
                 if (result is { })
                 {
-                    string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
+                    string ext = Path.GetExtension(result).ToLower().TrimStart('.');
                     var writer = editor.TextFieldWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                     if (writer is { })
                     {
@@ -676,7 +676,7 @@ namespace Core2D.Editor
                     {
                         return;
                     }
-                    string ext = System.IO.Path.GetExtension(path).ToLower().TrimStart('.');
+                    string ext = Path.GetExtension(path).ToLower().TrimStart('.');
                     var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                     if (reader is { })
                     {

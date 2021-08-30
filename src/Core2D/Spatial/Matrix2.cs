@@ -14,22 +14,22 @@ namespace Core2D.Spatial
 
         public Matrix2(double m11, double m12, double m21, double m22, double offsetX, double offsetY)
         {
-            this.M11 = m11;
-            this.M12 = m12;
-            this.M21 = m21;
-            this.M22 = m22;
-            this.OffsetX = offsetX;
-            this.OffsetY = offsetY;
+            M11 = m11;
+            M12 = m12;
+            M21 = m21;
+            M22 = m22;
+            OffsetX = offsetX;
+            OffsetY = offsetY;
         }
 
         public void Deconstruct(out double m11, out double m12, out double m21, out double m22, out double offsetX, out double offsetY)
         {
-            m11 = this.M11;
-            m12 = this.M12;
-            m21 = this.M21;
-            m22 = this.M22;
-            offsetX = this.OffsetX;
-            offsetY = this.OffsetY;
+            m11 = M11;
+            m12 = M12;
+            m21 = M21;
+            m22 = M22;
+            offsetX = OffsetX;
+            offsetY = OffsetY;
         }
 
         public static readonly Matrix2 Identity = new Matrix2(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);

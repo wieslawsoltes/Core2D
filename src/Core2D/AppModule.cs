@@ -54,12 +54,12 @@ namespace Core2D
                 .Where(t =>
                 {
                     return (
-                            t.Namespace.StartsWith(nameof(Core2D.ViewModels.Containers))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Data))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Path))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Scripting))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Shapes))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Style))
+                            t.Namespace.StartsWith(nameof(ViewModels.Containers))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Data))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Path))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Scripting))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Shapes))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Style))
                            )
                            && t.Name.EndsWith("ViewModel");
                 })

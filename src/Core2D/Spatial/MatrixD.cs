@@ -16,22 +16,22 @@ namespace Core2D.Spatial
 
         public MatrixD(decimal m11, decimal m12, decimal m21, decimal m22, decimal offsetX, decimal offsetY)
         {
-            this.M11 = m11;
-            this.M12 = m12;
-            this.M21 = m21;
-            this.M22 = m22;
-            this.OffsetX = offsetX;
-            this.OffsetY = offsetY;
+            M11 = m11;
+            M12 = m12;
+            M21 = m21;
+            M22 = m22;
+            OffsetX = offsetX;
+            OffsetY = offsetY;
         }
 
         public void Deconstruct(out decimal m11, out decimal m12, out decimal m21, out decimal m22, out decimal offsetX, out decimal offsetY)
         {
-            m11 = this.M11;
-            m12 = this.M12;
-            m21 = this.M21;
-            m22 = this.M22;
-            offsetX = this.OffsetX;
-            offsetY = this.OffsetY;
+            m11 = M11;
+            m12 = M12;
+            m21 = M21;
+            m22 = M22;
+            offsetX = OffsetX;
+            offsetY = OffsetY;
         }
 
         public static readonly MatrixD Identity = new MatrixD(1m, 0m, 0m, 1m, 0m, 0m);

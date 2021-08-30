@@ -11,14 +11,14 @@ namespace Core2D.Spatial
 
         public PointD(decimal x, decimal y)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
 
         public void Deconstruct(out decimal x, out decimal y)
         {
-            x = this.X;
-            y = this.Y;
+            x = X;
+            y = Y;
         }
 
         public static PointD FromXY(decimal x, decimal y)
