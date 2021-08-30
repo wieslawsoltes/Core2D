@@ -5,6 +5,7 @@
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
     <Nullable>enable</Nullable>
+    <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
   </PropertyGroup>
 
   <ItemGroup>

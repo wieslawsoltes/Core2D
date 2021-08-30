@@ -8,6 +8,7 @@
     <NoWarn>$(NoWarn);NU1701</NoWarn>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
+    <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
   </PropertyGroup>
 
   <ItemGroup>
