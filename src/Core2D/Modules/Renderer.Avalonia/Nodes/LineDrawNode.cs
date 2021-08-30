@@ -34,7 +34,6 @@ namespace Core2D.Modules.Renderer.Nodes
             switch (style.ArrowType)
             {
                 default:
-                case ArrowType.None:
                     {
                         var marker = new NoneMarker();
 
@@ -193,8 +192,12 @@ namespace Core2D.Modules.Renderer.Nodes
 
         public override void OnDraw(object? dc, double zoom)
         {
-            var context = dc as AP.IDrawingContextImpl;
-            if (context is null)
+            if (dc is not AP.IDrawingContextImpl context)
+            {
+                return;
+            }
+
+            if (Line.Start is null || Line.End is null)
             {
                 return;
             }
