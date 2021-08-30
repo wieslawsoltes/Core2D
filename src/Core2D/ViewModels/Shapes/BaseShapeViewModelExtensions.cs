@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +6,7 @@ namespace Core2D.ViewModels.Shapes
 {
     public static class BaseShapeViewModelExtensions
     {
-        public static IEnumerable<BaseShapeViewModel> GetAllShapes(this IEnumerable<BaseShapeViewModel> shapes)
+        public static IEnumerable<BaseShapeViewModel> GetAllShapes(this IEnumerable<BaseShapeViewModel>? shapes)
         {
             if (shapes is null)
             {
@@ -31,9 +31,9 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public static IEnumerable<T> GetAllShapes<T>(this IEnumerable<BaseShapeViewModel> shapes)
+        public static IEnumerable<T> GetAllShapes<T>(this IEnumerable<BaseShapeViewModel>? shapes)
         {
-            return GetAllShapes(shapes)?.Where(s => s is T).Cast<T>();
+            return GetAllShapes(shapes).Where(s => s is T).Cast<T>();
         }
     }
 }
