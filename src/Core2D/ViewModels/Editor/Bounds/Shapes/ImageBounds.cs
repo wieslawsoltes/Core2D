@@ -8,7 +8,7 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class ImageBounds : IBounds
+    public class ImageBounds : IBounds
     {
         public Type TargetType => typeof(ImageShapeViewModel);
 
@@ -47,6 +47,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
                 image.BottomRight.X,
                 image.BottomRight.Y);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (image.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).Contains(target);
@@ -70,6 +71,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
                 image.BottomRight.X,
                 image.BottomRight.Y);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (image.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);

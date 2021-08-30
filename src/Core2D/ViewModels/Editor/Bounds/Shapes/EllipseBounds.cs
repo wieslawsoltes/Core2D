@@ -8,7 +8,7 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class EllipseBounds : IBounds
+    public class EllipseBounds : IBounds
     {
         public Type TargetType => typeof(EllipseShapeViewModel);
 
@@ -47,6 +47,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
                 ellipse.BottomRight.X,
                 ellipse.BottomRight.Y);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (ellipse.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).Contains(target);
@@ -70,6 +71,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
                 ellipse.BottomRight.X,
                 ellipse.BottomRight.Y);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (ellipse.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);

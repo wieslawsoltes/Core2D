@@ -1,7 +1,6 @@
 ﻿#nullable disable
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Shapes;
@@ -9,9 +8,9 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class PathBounds : IBounds
+    public class PathBounds : IBounds
     {
-        private List<PointShapeViewModel> _points = new List<PointShapeViewModel>();
+        private readonly List<PointShapeViewModel> _points = new();
 
         public Type TargetType => typeof(PathShapeViewModel);
 
@@ -48,8 +47,9 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
             _points.Clear();
             path.GetPoints(_points);
 
-            if (_points.Count() > 0)
+            if (_points.Count > 0)
             {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (path.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
                 {
                     return HitTestHelper.Contains(_points, target, scale);
@@ -73,8 +73,9 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
             _points.Clear();
             path.GetPoints(_points);
 
-            if (_points.Count() > 0)
+            if (_points.Count > 0)
             {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (path.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
                 {
                     return HitTestHelper.Overlap(_points, target, scale);

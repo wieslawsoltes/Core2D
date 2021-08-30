@@ -8,7 +8,7 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class RectangleBounds : IBounds
+    public class RectangleBounds : IBounds
     {
         public Type TargetType => typeof(RectangleShapeViewModel);
 
@@ -47,6 +47,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
                 rectangle.BottomRight.X,
                 rectangle.BottomRight.Y);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (rectangle.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).Contains(target);
@@ -70,6 +71,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
                 rectangle.BottomRight.X,
                 rectangle.BottomRight.Y);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (rectangle.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);

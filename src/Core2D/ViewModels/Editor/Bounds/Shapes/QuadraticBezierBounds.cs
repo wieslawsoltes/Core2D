@@ -8,9 +8,10 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class QuadraticBezierBounds : IBounds
+    public class QuadraticBezierBounds : IBounds
     {
-        private List<PointShapeViewModel> _points = new List<PointShapeViewModel>();
+        private readonly List<PointShapeViewModel> _points = new();
+
         public Type TargetType => typeof(QuadraticBezierShapeViewModel);
 
         public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
@@ -50,6 +51,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
             _points.Clear();
             quadratic.GetPoints(_points);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (quadratic.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Contains(_points, target, scale);
@@ -70,6 +72,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
             _points.Clear();
             quadratic.GetPoints(_points);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (quadratic.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Overlap(_points, target, scale);

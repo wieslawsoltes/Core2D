@@ -9,7 +9,7 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class GroupBounds : IBounds
+    public class GroupBounds : IBounds
     {
         public Type TargetType => typeof(GroupShapeViewModel);
 
@@ -42,11 +42,11 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
             var hasSize = group.State.HasFlag(ShapeStateFlags.Size);
 
-            foreach (var GroupShape in group.Shapes.Reverse())
+            foreach (var groupShape in group.Shapes.Reverse())
             {
-                var hitTest = registered[GroupShape.TargetType];
-                var result = hitTest.Contains(GroupShape, target, radius, hasSize ? scale : 1.0, registered);
-                if (result == true)
+                var hitTest = registered[groupShape.TargetType];
+                var result = hitTest.Contains(groupShape, target, radius, hasSize ? scale : 1.0, registered);
+                if (result)
                 {
                     return true;
                 }
@@ -63,11 +63,11 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
             var hasSize = group.State.HasFlag(ShapeStateFlags.Size);
 
-            foreach (var GroupShape in group.Shapes.Reverse())
+            foreach (var groupShape in group.Shapes.Reverse())
             {
-                var hitTest = registered[GroupShape.TargetType];
-                var result = hitTest.Overlaps(GroupShape, target, radius, hasSize ? scale : 1.0, registered);
-                if (result == true)
+                var hitTest = registered[groupShape.TargetType];
+                var result = hitTest.Overlaps(groupShape, target, radius, hasSize ? scale : 1.0, registered);
+                if (result)
                 {
                     return true;
                 }
