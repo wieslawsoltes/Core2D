@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,6 +12,10 @@ namespace Core2D.ViewModels.Style
     {
         [AutoNotify] private uint _value;
 
+        public ArgbColorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         public byte A => (byte)((_value >> 24) & 0xff);
 
         public byte R => (byte)((_value >> 16) & 0xff);
@@ -20,15 +24,11 @@ namespace Core2D.ViewModels.Style
 
         public byte B => (byte)(_value & 0xff);
 
-        public ArgbColorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
-        {
-        }
-
         public override object Copy(IDictionary<object, object> shared)
         {
             return new ArgbColorViewModel(ServiceProvider)
             {
-                Value = this.Value
+                Value = Value
             };
         }
 
@@ -38,29 +38,15 @@ namespace Core2D.ViewModels.Style
             return isDirty;
         }
 
-        public override void Invalidate()
-        {
-            base.Invalidate();
-        }
-
         public string ToXamlString()
             => ToXamlHex(this);
 
         public string ToSvgString()
             => ToSvgHex(this);
 
-        public static ArgbColorViewModel FromUInt32(uint value)
-        {
-            // TODO: IServiceProvider
-            return new ArgbColorViewModel(null)
-            {
-                Value = value
-            };
-        }
-
         public static uint ToUint32(byte a, byte r, byte g, byte b)
         {
-            return ((uint)a << 24) | ((uint)r << 16) | ((uint)g << 8) | (uint)b;
+            return ((uint)a << 24) | ((uint)r << 16) | ((uint)g << 8) | b;
         }
 
         public static string ToString(ArgbColorViewModel value)
@@ -100,7 +86,7 @@ namespace Core2D.ViewModels.Style
                 var member = typeof(Colors).GetTypeInfo().DeclaredProperties.FirstOrDefault(x => x.Name.ToUpperInvariant() == upper);
                 if (member is { })
                 {
-                    color = (uint)member.GetValue(null);
+                    color = (uint)(member.GetValue(null) ?? throw new InvalidOperationException());
                 }
                 else
                 {
@@ -109,20 +95,15 @@ namespace Core2D.ViewModels.Style
             }
         }
 
-        public static ArgbColorViewModel Parse(string s)
+        private static string ToXamlHex(ArgbColorViewModel c)
         {
-            Parse(s, out var value);
-            return FromUInt32(value);
+            return $"#{c.A:X2}{c.R:X2}{c.G:X2}{c.B:X2}";
         }
 
-        public static string ToXamlHex(ArgbColorViewModel c)
+        private static string ToSvgHex(ArgbColorViewModel c)
         {
-            return string.Concat('#', c.A.ToString("X2"), c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2"));
-        }
-
-        public static string ToSvgHex(ArgbColorViewModel c)
-        {
-            return string.Concat('#', c.R.ToString("X2"), c.G.ToString("X2"), c.B.ToString("X2")); // NOTE: Not using c.A.ToString("X2")
+            // NOTE: Not using c.A.ToString("X2")
+            return $"#{c.R:X2}{c.G:X2}{c.B:X2}";
         }
     }
 }
