@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ namespace Core2D.ViewModels.Style
 {
     public partial class FillStyleViewModel : ViewModelBase
     {
-        [AutoNotify] private BaseColorViewModel _color;
+        [AutoNotify] private BaseColorViewModel? _color;
 
         public FillStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -18,8 +18,8 @@ namespace Core2D.ViewModels.Style
         {
             return new FillStyleViewModel(ServiceProvider)
             {
-                Name = this.Name,
-                Color = (BaseColorViewModel)this._color.Copy(shared)
+                Name = Name,
+                Color = (BaseColorViewModel?)_color?.Copy(shared)
             };
         }
 
@@ -27,7 +27,10 @@ namespace Core2D.ViewModels.Style
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _color.IsDirty();
+            if (_color != null)
+            {
+                isDirty |= _color.IsDirty();
+            }
 
             return isDirty;
         }
@@ -35,10 +38,10 @@ namespace Core2D.ViewModels.Style
         public override void Invalidate()
         {
             base.Invalidate();
-            _color.Invalidate();
+            _color?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -47,7 +50,7 @@ namespace Core2D.ViewModels.Style
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveObject(_color, ref disposableColor, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Color))
                 {

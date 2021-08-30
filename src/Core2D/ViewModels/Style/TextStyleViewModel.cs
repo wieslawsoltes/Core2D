@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model.Style;
@@ -11,12 +11,12 @@ namespace Core2D.ViewModels.Style
 
         public static TextVAlignment[] TextVAlignmentValues { get; } = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
 
-        [AutoNotify] private string _fontName;
-        [AutoNotify] private string _fontFile;
+        [AutoNotify] private string? _fontName;
+        [AutoNotify] private string? _fontFile;
         [AutoNotify] private double _fontSize;
         [AutoNotify] private FontStyleFlags _fontStyle;
-        [AutoNotify] private TextHAlignment _textHAlignment;
-        [AutoNotify] private TextVAlignment _textVAlignment;
+        [AutoNotify] private TextHAlignment? _textHAlignment;
+        [AutoNotify] private TextVAlignment? _textVAlignment;
 
         public TextStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -41,13 +41,13 @@ namespace Core2D.ViewModels.Style
         {
             return new TextStyleViewModel(ServiceProvider)
             {
-                Name = this.Name,
-                FontName = this._fontName,
-                FontFile = this._fontFile,
-                FontSize = this._fontSize,
-                FontStyle = this._fontStyle,
-                TextHAlignment = this._textHAlignment,
-                TextVAlignment = this._textVAlignment
+                Name = Name,
+                FontName = _fontName,
+                FontFile = _fontFile,
+                FontSize = _fontSize,
+                FontStyle = _fontStyle,
+                TextHAlignment = _textHAlignment,
+                TextVAlignment = _textVAlignment
             };
         }
 
@@ -55,11 +55,6 @@ namespace Core2D.ViewModels.Style
         {
             var isDirty = base.IsDirty();
             return isDirty;
-        }
-
-        public override void Invalidate()
-        {
-            base.Invalidate();
         }
     }
 }
