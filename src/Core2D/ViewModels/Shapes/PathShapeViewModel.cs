@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,59 +12,43 @@ namespace Core2D.ViewModels.Shapes
 {
     public partial class PathShapeViewModel : BaseShapeViewModel
     {
-        private List<PointShapeViewModel> _points;
+        private List<PointShapeViewModel>? _points;
 
-        [AutoNotify] private PathGeometryViewModel _geometry;
+        [AutoNotify] private PathGeometryViewModel? _geometry;
 
         public PathShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(PathShapeViewModel))
         {
-        }
-
-        private void UpdatePoints()
-        {
-            if (_points is null)
-            {
-                _points = new List<PointShapeViewModel>();
-                GetPoints(_points);
-            }
-            else
-            {
-                _points.Clear();
-                GetPoints(_points);
-            }
         }
 
         public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawPath(dc, this, Style);
+                renderer?.DrawPath(dc, this, Style);
             }
         }
 
         public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
-            if (selection?.SelectedShapes is { })
+            if (selection?.SelectedShapes is null)
             {
-                if (selection.SelectedShapes.Contains(this))
-                {
-                    UpdatePoints();
+                return;
+            }
 
-                    foreach (var point in _points)
+            if (selection.SelectedShapes.Contains(this))
+            {
+                foreach (var point in GetPathPoints())
+                {
+                    point.DrawShape(dc, renderer, selection);
+                }
+            }
+            else
+            {
+                foreach (var point in GetPathPoints())
+                {
+                    if (selection.SelectedShapes.Contains(point))
                     {
                         point.DrawShape(dc, renderer, selection);
-                    }
-                }
-                else
-                {
-                    UpdatePoints();
-
-                    foreach (var point in _points)
-                    {
-                        if (selection.SelectedShapes.Contains(point))
-                        {
-                            point.DrawShape(dc, renderer, selection);
-                        }
                     }
                 }
             }
@@ -76,9 +60,7 @@ namespace Core2D.ViewModels.Shapes
 
             dataFlow.Bind(this, db, record);
 
-            UpdatePoints();
-
-            foreach (var point in _points)
+            foreach (var point in GetPathPoints())
             {
                 point.Bind(dataFlow, db, record);
             }
@@ -86,9 +68,7 @@ namespace Core2D.ViewModels.Shapes
 
         public override void Move(ISelection? selection, decimal dx, decimal dy)
         {
-            UpdatePoints();
-
-            foreach (var point in _points)
+            foreach (var point in GetPathPoints())
             {
                 point.Move(selection, dx, dy);
             }
@@ -98,9 +78,7 @@ namespace Core2D.ViewModels.Shapes
         {
             base.Select(selection);
 
-            UpdatePoints();
-
-            foreach (var point in _points)
+            foreach (var point in GetPathPoints())
             {
                 point.Select(selection);
             }
@@ -110,9 +88,7 @@ namespace Core2D.ViewModels.Shapes
         {
             base.Deselect(selection);
 
-            UpdatePoints();
-
-            foreach (var point in _points)
+            foreach (var point in GetPathPoints())
             {
                 point.Deselect(selection);
             }
@@ -120,9 +96,12 @@ namespace Core2D.ViewModels.Shapes
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
-            foreach (var figure in _geometry.Figures)
+            if (_geometry != null)
             {
-                figure.GetPoints(points);
+                foreach (var figure in _geometry.Figures)
+                {
+                    figure.GetPoints(points);
+                }
             }
         }
 
@@ -145,7 +124,7 @@ namespace Core2D.ViewModels.Shapes
             _geometry?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -160,7 +139,7 @@ namespace Core2D.ViewModels.Shapes
             ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
             ObserveObject(_geometry, ref disposableGeometry, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Style))
                 {
@@ -188,10 +167,26 @@ namespace Core2D.ViewModels.Shapes
             return mainDisposable;
         }
 
-        public string ToXamlString()
-            => _geometry?.ToXamlString();
+        private List<PointShapeViewModel> GetPathPoints()
+        {
+            if (_points is null)
+            {
+                _points = new List<PointShapeViewModel>();
+                GetPoints(_points);
+            }
+            else
+            {
+                _points.Clear();
+                GetPoints(_points);
+            }
 
-        public string ToSvgString()
-            => _geometry?.ToSvgString();
+            return _points;
+        }
+
+        public string ToXamlString() 
+            => _geometry?.ToXamlString() ?? "";
+
+        public string ToSvgString() 
+            => _geometry?.ToSvgString() ?? "";
     }
 }

@@ -30,61 +30,6 @@ namespace Core2D.ViewModels.Shapes
             _targetType = targetType;
         }
 
-        public void ToggleDefaultShapeState()
-        {
-            State ^= ShapeStateFlags.Default;
-        }
-
-        public void ToggleVisibleShapeState()
-        {
-            State ^= ShapeStateFlags.Visible;
-        }
-
-        public void TogglePrintableShapeState()
-        {
-            State ^= ShapeStateFlags.Printable;
-        }
-
-        public void ToggleLockedShapeState()
-        {
-            State ^= ShapeStateFlags.Locked;
-        }
-
-        public void ToggleSizeShapeState()
-        {
-            State ^= ShapeStateFlags.Size;
-        }
-
-        public void ToggleThicknessShapeState()
-        {
-            State ^= ShapeStateFlags.Thickness;
-        }
-
-        public void ToggleConnectorShapeState()
-        {
-            State ^= ShapeStateFlags.Connector;
-        }
-
-        public void ToggleNoneShapeState()
-        {
-            State ^= ShapeStateFlags.None;
-        }
-
-        public void ToggleStandaloneShapeState()
-        {
-            State ^= ShapeStateFlags.Standalone;
-        }
-
-        public void ToggleInputShapeState()
-        {
-            State ^= ShapeStateFlags.Input;
-        }
-
-        public void ToggleOutputShapeState()
-        {
-            State ^= ShapeStateFlags.Output;
-        }
-
         public override bool IsDirty()
         {
             var isDirty = base.IsDirty();
@@ -182,6 +127,61 @@ namespace Core2D.ViewModels.Shapes
         public virtual void GetPoints(IList<PointShapeViewModel> points)
         {
             throw new NotImplementedException();
+        }
+
+        public void ToggleDefaultShapeState()
+        {
+            State ^= ShapeStateFlags.Default;
+        }
+
+        public void ToggleVisibleShapeState()
+        {
+            State ^= ShapeStateFlags.Visible;
+        }
+
+        public void TogglePrintableShapeState()
+        {
+            State ^= ShapeStateFlags.Printable;
+        }
+
+        public void ToggleLockedShapeState()
+        {
+            State ^= ShapeStateFlags.Locked;
+        }
+
+        public void ToggleSizeShapeState()
+        {
+            State ^= ShapeStateFlags.Size;
+        }
+
+        public void ToggleThicknessShapeState()
+        {
+            State ^= ShapeStateFlags.Thickness;
+        }
+
+        public void ToggleConnectorShapeState()
+        {
+            State ^= ShapeStateFlags.Connector;
+        }
+
+        public void ToggleNoneShapeState()
+        {
+            State ^= ShapeStateFlags.None;
+        }
+
+        public void ToggleStandaloneShapeState()
+        {
+            State ^= ShapeStateFlags.Standalone;
+        }
+
+        public void ToggleInputShapeState()
+        {
+            State ^= ShapeStateFlags.Input;
+        }
+
+        public void ToggleOutputShapeState()
+        {
+            State ^= ShapeStateFlags.Output;
         }
     }
 }

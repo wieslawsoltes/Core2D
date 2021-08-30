@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -18,30 +18,25 @@ namespace Core2D.ViewModels.Shapes
         {
         }
 
-        public override bool IsDirty()
-        {
-            var isDirty = base.IsDirty();
-            return isDirty;
-        }
-
-        public override void Invalidate()
-        {
-            base.Invalidate();
-        }
-
         public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
-            if (State.HasFlag(ShapeStateFlags.Visible))
+            if (!State.HasFlag(ShapeStateFlags.Visible))
             {
-                var isSelected = selection?.SelectedShapes is { } ? (selection.SelectedShapes.Count > 0 && selection.SelectedShapes.Contains(this)) : false;
-                var style = isSelected ? renderer.State.SelectedPointStyle : renderer.State.PointStyle;
-                var size = renderer.State.PointSize;
-                if (style is null || size <= 0.0)
-                {
-                    return;
-                }
-                renderer.DrawPoint(dc, this, style);
+                return;
             }
+
+            var isSelected = selection?.SelectedShapes is not null 
+                             && selection.SelectedShapes.Count > 0 
+                             && selection.SelectedShapes.Contains(this);
+
+            var style = isSelected ? renderer?.State.SelectedPointStyle : renderer?.State.PointStyle;
+            var size = renderer?.State.PointSize;
+            if (style is null || size <= 0.0)
+            {
+                return;
+            }
+
+            renderer?.DrawPoint(dc, this, style);
         }
 
         public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
@@ -61,6 +56,12 @@ namespace Core2D.ViewModels.Shapes
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
             points.Add(this);
+        }
+
+        public override bool IsDirty()
+        {
+            var isDirty = base.IsDirty();
+            return isDirty;
         }
 
         public PointShapeViewModel Clone()

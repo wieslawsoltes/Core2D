@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +11,9 @@ namespace Core2D.ViewModels.Shapes
 {
     public partial class ImageShapeViewModel : BaseShapeViewModel
     {
-        [AutoNotify] private PointShapeViewModel _topLeft;
-        [AutoNotify] private PointShapeViewModel _bottomRight;
-        [AutoNotify] private string _key;
+        [AutoNotify] private PointShapeViewModel? _topLeft;
+        [AutoNotify] private PointShapeViewModel? _bottomRight;
+        [AutoNotify] private string? _key;
 
         public ImageShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(ImageShapeViewModel))
         {
@@ -23,30 +23,37 @@ namespace Core2D.ViewModels.Shapes
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawImage(dc, this, Style);
+                renderer?.DrawImage(dc, this, Style);
             }
         }
 
         public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
-            if (selection?.SelectedShapes is { })
+            if (_topLeft is null || _bottomRight is null)
             {
-                if (selection.SelectedShapes.Contains(this))
+                return;
+            }
+
+            if (selection?.SelectedShapes is null)
+            {
+                return;
+            }
+
+            if (selection.SelectedShapes.Contains(this))
+            {
+                _topLeft.DrawShape(dc, renderer, selection);
+                _bottomRight.DrawShape(dc, renderer, selection);
+            }
+            else
+            {
+                if (selection.SelectedShapes.Contains(_topLeft))
                 {
                     _topLeft.DrawShape(dc, renderer, selection);
-                    _bottomRight.DrawShape(dc, renderer, selection);
                 }
-                else
-                {
-                    if (selection.SelectedShapes.Contains(_topLeft))
-                    {
-                        _topLeft.DrawShape(dc, renderer, selection);
-                    }
 
-                    if (selection.SelectedShapes.Contains(_bottomRight))
-                    {
-                        _bottomRight.DrawShape(dc, renderer, selection);
-                    }
+                if (selection.SelectedShapes.Contains(_bottomRight))
+                {
+                    _bottomRight.DrawShape(dc, renderer, selection);
                 }
             }
         }
@@ -57,12 +64,17 @@ namespace Core2D.ViewModels.Shapes
 
             dataFlow.Bind(this, db, record);
 
-            _topLeft.Bind(dataFlow, db, record);
-            _bottomRight.Bind(dataFlow, db, record);
+            _topLeft?.Bind(dataFlow, db, record);
+            _bottomRight?.Bind(dataFlow, db, record);
         }
 
         public override void Move(ISelection? selection, decimal dx, decimal dy)
         {
+            if (_topLeft is null || _bottomRight is null)
+            {
+                return;
+            }
+
             if (!_topLeft.State.HasFlag(ShapeStateFlags.Connector))
             {
                 _topLeft.Move(selection, dx, dy);
@@ -77,19 +89,26 @@ namespace Core2D.ViewModels.Shapes
         public override void Select(ISelection? selection)
         {
             base.Select(selection);
-            _topLeft.Select(selection);
-            _bottomRight.Select(selection);
+
+            _topLeft?.Select(selection);
+            _bottomRight?.Select(selection);
         }
 
         public override void Deselect(ISelection? selection)
         {
             base.Deselect(selection);
-            _topLeft.Deselect(selection);
-            _bottomRight.Deselect(selection);
+
+            _topLeft?.Deselect(selection);
+            _bottomRight?.Deselect(selection);
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
+            if (_topLeft is null || _bottomRight is null)
+            {
+                return;
+            }
+
             points.Add(_topLeft);
             points.Add(_bottomRight);
         }
@@ -98,8 +117,15 @@ namespace Core2D.ViewModels.Shapes
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _topLeft.IsDirty();
-            isDirty |= _bottomRight.IsDirty();
+            if (_topLeft != null)
+            {
+                isDirty |= _topLeft.IsDirty();
+            }
+
+            if (_bottomRight != null)
+            {
+                isDirty |= _bottomRight.IsDirty();
+            }
 
             return isDirty;
         }
@@ -107,11 +133,12 @@ namespace Core2D.ViewModels.Shapes
         public override void Invalidate()
         {
             base.Invalidate();
-            _topLeft.Invalidate();
-            _bottomRight.Invalidate();
+
+            _topLeft?.Invalidate();
+            _bottomRight?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -128,7 +155,7 @@ namespace Core2D.ViewModels.Shapes
             ObserveObject(_topLeft, ref disposableTopLeft, mainDisposable, observer);
             ObserveObject(_bottomRight, ref disposableBottomRight, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Style))
                 {
