@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using Core2D.Model;
 using Core2D.Model.History;
 using Core2D.ViewModels.Data;
@@ -18,27 +17,27 @@ namespace Core2D.ViewModels.Containers
 {
     public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelection
     {
-        [AutoNotify] private OptionsViewModel _options;
-        [AutoNotify] private IHistory _history;
+        [AutoNotify] private OptionsViewModel? _options;
+        [AutoNotify] private IHistory? _history;
         [AutoNotify] private ImmutableArray<LibraryViewModel<ShapeStyleViewModel>> _styleLibraries;
         [AutoNotify] private ImmutableArray<LibraryViewModel<GroupShapeViewModel>> _groupLibraries;
         [AutoNotify] private ImmutableArray<DatabaseViewModel> _databases;
         [AutoNotify] private ImmutableArray<TemplateContainerViewModel> _templates;
         [AutoNotify] private ImmutableArray<ScriptViewModel> _scripts;
         [AutoNotify] private ImmutableArray<DocumentContainerViewModel> _documents;
-        [AutoNotify] private LibraryViewModel<ShapeStyleViewModel> _currentStyleLibrary;
-        [AutoNotify] private LibraryViewModel<GroupShapeViewModel> _currentGroupLibrary;
-        [AutoNotify] private DatabaseViewModel _currentDatabase;
-        [AutoNotify] private TemplateContainerViewModel _currentTemplate;
-        [AutoNotify] private ScriptViewModel _currentScript;
-        [AutoNotify] private DocumentContainerViewModel _currentDocument;
-        [AutoNotify] private FrameContainerViewModel _currentContainer;
-        [AutoNotify] private ViewModelBase _selected;
-        [AutoNotify(IgnoreDataMember = true)] private ISet<BaseShapeViewModel> _selectedShapes;
+        [AutoNotify] private LibraryViewModel<ShapeStyleViewModel>? _currentStyleLibrary;
+        [AutoNotify] private LibraryViewModel<GroupShapeViewModel> ?_currentGroupLibrary;
+        [AutoNotify] private DatabaseViewModel? _currentDatabase;
+        [AutoNotify] private TemplateContainerViewModel? _currentTemplate;
+        [AutoNotify] private ScriptViewModel? _currentScript;
+        [AutoNotify] private DocumentContainerViewModel? _currentDocument;
+        [AutoNotify] private FrameContainerViewModel? _currentContainer;
+        [AutoNotify] private ViewModelBase? _selected;
+        [AutoNotify(IgnoreDataMember = true)] private ISet<BaseShapeViewModel>? _selectedShapes;
 
         public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            PropertyChanged += (sender, e) =>
+            PropertyChanged += (_, e) =>
             {
                 if (e.PropertyName == nameof(Selected))
                 {
@@ -101,7 +100,7 @@ namespace Core2D.ViewModels.Containers
                     }
                 }
             }
-            else if (value is FrameContainerViewModel container && _documents is { })
+            else if (value is FrameContainerViewModel container)
             {
                 var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
                 if (document is { })
@@ -238,7 +237,7 @@ namespace Core2D.ViewModels.Containers
             }
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -259,7 +258,7 @@ namespace Core2D.ViewModels.Containers
             ObserveList(_scripts, ref disposableScripts, mainDisposable, observer);
             ObserveList(_documents, ref disposableDocuments, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Options))
                 {

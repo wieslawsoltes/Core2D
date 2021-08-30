@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Immutable;
 using System.ComponentModel;
@@ -36,7 +36,7 @@ namespace Core2D.ViewModels.Containers
             }
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -45,7 +45,7 @@ namespace Core2D.ViewModels.Containers
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveList(_pages, ref disposablePages, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Pages))
                 {
