@@ -553,7 +553,11 @@ namespace Core2D.ViewModels.Editor
             BaseColorViewModel value;
             try
             {
-                value = ArgbColorViewModel.Parse(color);
+                ArgbColorViewModel.Parse(color, out var v);
+                value = new ArgbColorViewModel(ServiceProvider)
+                {
+                    Value = v
+                };
             }
             catch
             {
@@ -594,7 +598,11 @@ namespace Core2D.ViewModels.Editor
             BaseColorViewModel value;
             try
             {
-                value = ArgbColorViewModel.Parse(color);
+                ArgbColorViewModel.Parse(color, out var v);
+                value = new ArgbColorViewModel(ServiceProvider)
+                {
+                    Value = v
+                };
             }
             catch
             {
