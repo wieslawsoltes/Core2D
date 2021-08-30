@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ namespace Core2D.ViewModels.Path.Segments
 {
     public partial class LineSegmentViewModel : PathSegmentViewModel
     {
-        [AutoNotify] private PointShapeViewModel _point;
+        [AutoNotify] private PointShapeViewModel? _point;
 
         public LineSegmentViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -17,6 +17,11 @@ namespace Core2D.ViewModels.Path.Segments
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
+            if (_point is null)
+            {
+                return;
+            }
+
             points.Add(_point);
         }
 
@@ -24,7 +29,10 @@ namespace Core2D.ViewModels.Path.Segments
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _point.IsDirty();
+            if (_point != null)
+            {
+                isDirty |= _point.IsDirty();
+            }
 
             return isDirty;
         }
@@ -33,10 +41,10 @@ namespace Core2D.ViewModels.Path.Segments
         {
             base.Invalidate();
 
-            _point.Invalidate();
+            _point?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -45,7 +53,7 @@ namespace Core2D.ViewModels.Path.Segments
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveObject(_point, ref disposablePoint, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Point))
                 {
@@ -59,9 +67,21 @@ namespace Core2D.ViewModels.Path.Segments
         }
 
         public override string ToXamlString()
-            => $"L{Point.ToXamlString()}";
+        {
+            if (_point is null)
+            {
+                return "";
+            }
+            return $"L{_point.ToXamlString()}";
+        }
 
         public override string ToSvgString()
-            => $"L{Point.ToSvgString()}";
+        {
+            if (_point is null)
+            {
+                return "";
+            }
+            return $"L{_point.ToSvgString()}";
+        }
     }
 }

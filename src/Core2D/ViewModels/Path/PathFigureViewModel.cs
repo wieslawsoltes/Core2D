@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Path
 {
     public partial class PathFigureViewModel : ViewModelBase
     {
-        [AutoNotify] private PointShapeViewModel _startPoint;
+        [AutoNotify] private PointShapeViewModel? _startPoint;
         [AutoNotify] private ImmutableArray<PathSegmentViewModel> _segments;
         [AutoNotify] private bool _isClosed;
 
@@ -21,7 +21,12 @@ namespace Core2D.ViewModels.Path
 
         public void GetPoints(IList<PointShapeViewModel> points)
         {
-            points.Add(StartPoint);
+            if (_startPoint == null)
+            {
+                return;
+            }
+
+            points.Add(_startPoint);
 
             foreach (var segment in _segments)
             {
@@ -33,7 +38,10 @@ namespace Core2D.ViewModels.Path
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _startPoint.IsDirty();
+            if (_startPoint != null)
+            {
+                isDirty |= _startPoint.IsDirty();
+            }
 
             foreach (var segment in _segments)
             {
@@ -47,7 +55,7 @@ namespace Core2D.ViewModels.Path
         {
             base.Invalidate();
 
-            _startPoint.Invalidate();
+            _startPoint?.Invalidate();
 
             foreach (var segment in _segments)
             {
@@ -55,7 +63,7 @@ namespace Core2D.ViewModels.Path
             }
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -66,7 +74,7 @@ namespace Core2D.ViewModels.Path
             ObserveObject(_startPoint, ref disposableStartPoint, mainDisposable, observer);
             ObserveList(_segments, ref disposableSegments, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(StartPoint))
                 {
@@ -84,48 +92,50 @@ namespace Core2D.ViewModels.Path
             return mainDisposable;
         }
 
-        public string ToXamlString(ImmutableArray<PathSegmentViewModel> segments)
+        private string ToXamlString(ImmutableArray<PathSegmentViewModel> segments)
         {
             if (segments.Length == 0)
             {
-                return string.Empty;
+                return "";
             }
             var sb = new StringBuilder();
-            for (int i = 0; i < segments.Length; i++)
+            foreach (var segment in segments)
             {
-                sb.Append(segments[i].ToXamlString());
+                sb.Append(segment.ToXamlString());
             }
             return sb.ToString();
         }
 
-        public string ToSvgString(ImmutableArray<PathSegmentViewModel> segments)
+        private string ToSvgString(ImmutableArray<PathSegmentViewModel> segments)
         {
             if (segments.Length == 0)
             {
-                return string.Empty;
+                return "";
             }
             var sb = new StringBuilder();
-            for (int i = 0; i < segments.Length; i++)
+            foreach (var segment in segments)
             {
-                sb.Append(segments[i].ToSvgString());
+                sb.Append(segment.ToSvgString());
             }
             return sb.ToString();
         }
 
         public string ToXamlString()
         {
-            return
-                (StartPoint is { } ? "M" + StartPoint.ToXamlString() : "")
-                + (Segments is { } ? ToXamlString(Segments) : "")
-                + (IsClosed ? "z" : "");
+            if (_startPoint == null)
+            {
+                return "";
+            }
+            return $"M{_startPoint.ToXamlString()}{ToXamlString(_segments)}{(_isClosed ? "z" : "")}";
         }
 
         public string ToSvgString()
         {
-            return
-                (StartPoint is { } ? "M" + StartPoint.ToSvgString() : "")
-                + (Segments is { } ? ToSvgString(Segments) : "")
-                + (IsClosed ? "z" : "");
+            if (_startPoint == null)
+            {
+                return "";
+            }
+            return $"M{_startPoint.ToSvgString()}{ToSvgString(_segments)}{(_isClosed ? "z" : "")}";
         }
     }
 }
