@@ -147,6 +147,11 @@
               </i:Interaction.Behaviors>
               <Panel DataContext="{Binding Project.CurrentContainer}" VerticalAlignment="Center"
                      HorizontalAlignment="Center">
+                <!-- <Panel.Transitions> -->
+                <!--   <Transitions> -->
+                <!--     <paz:TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/> -->
+                <!--   </Transitions> -->
+                <!-- </Panel.Transitions> -->
                 <Panel x:Name="ContainerPanel"
                        Background="Transparent"
                        HorizontalAlignment="Center" VerticalAlignment="Center"
