@@ -23,7 +23,7 @@ namespace Core2D.Modules.Renderer.Nodes
             UpdateGeometry();
         }
 
-        public override void UpdateGeometry()
+        public sealed override void UpdateGeometry()
         {
             ScaleThickness = Ellipse.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Ellipse.State.HasFlag(ShapeStateFlags.Size);

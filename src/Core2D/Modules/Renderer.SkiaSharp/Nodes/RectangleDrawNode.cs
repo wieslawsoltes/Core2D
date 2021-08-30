@@ -21,7 +21,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
             UpdateGeometry();
         }
 
-        public override void UpdateGeometry()
+        public sealed override void UpdateGeometry()
         {
             ScaleThickness = Rectangle.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Rectangle.State.HasFlag(ShapeStateFlags.Size);

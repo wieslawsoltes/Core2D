@@ -31,7 +31,7 @@ namespace Core2D.Modules.Renderer.Nodes
             UpdateGeometry();
         }
 
-        public override void UpdateGeometry()
+        public sealed override void UpdateGeometry()
         {
             ScaleThickness = Text.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Text.State.HasFlag(ShapeStateFlags.Size);
