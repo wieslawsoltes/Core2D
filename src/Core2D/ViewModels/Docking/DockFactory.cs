@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using Core2D.ViewModels.Docking.Docks;
 using Core2D.ViewModels.Docking.Tools;
