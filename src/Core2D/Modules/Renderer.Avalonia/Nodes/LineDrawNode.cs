@@ -127,7 +127,7 @@ namespace Core2D.Modules.Renderer.Nodes
                 double x2 = Line.End.X;
                 double y2 = Line.End.Y;
 
-                if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
+                if (Style?.Stroke?.StartArrow is not null && Style.Stroke.StartArrow.ArrowType != ArrowType.None)
                 {
                     double a1 = Math.Atan2(y1 - y2, x1 - x2);
                     var marker = CreateArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrow);
@@ -141,7 +141,7 @@ namespace Core2D.Modules.Renderer.Nodes
                     P0 = new A.Point(x1, y1);
                 }
 
-                if (Style.Stroke.EndArrow.ArrowType != ArrowType.None)
+                if (Style?.Stroke?.EndArrow is not null && Style.Stroke.EndArrow.ArrowType != ArrowType.None)
                 {
                     double a2 = Math.Atan2(y2 - y1, x2 - x1);
                     var marker = CreateArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrow);
@@ -179,12 +179,12 @@ namespace Core2D.Modules.Renderer.Nodes
         {
             base.UpdateStyle();
 
-            if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
+            if (Style?.Stroke?.StartArrow is not null && Style.Stroke.StartArrow.ArrowType != ArrowType.None)
             {
                 StartMarker?.UpdateStyle();
             }
 
-            if (Style.Stroke.EndArrow.ArrowType != ArrowType.None)
+            if (Style?.Stroke?.EndArrow is not null && Style.Stroke.EndArrow.ArrowType != ArrowType.None)
             {
                 EndMarker?.UpdateStyle();
             }
@@ -206,12 +206,12 @@ namespace Core2D.Modules.Renderer.Nodes
             {
                 context.DrawLine(Stroke, P0, P1);
 
-                if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
+                if (Style?.Stroke?.StartArrow is not null && Style.Stroke.StartArrow.ArrowType != ArrowType.None)
                 {
                     StartMarker?.Draw(dc);
                 }
 
-                if (Style.Stroke.EndArrow.ArrowType != ArrowType.None)
+                if (Style?.Stroke?.EndArrow is not null && Style.Stroke.EndArrow.ArrowType != ArrowType.None)
                 {
                     EndMarker?.Draw(dc);
                 }
