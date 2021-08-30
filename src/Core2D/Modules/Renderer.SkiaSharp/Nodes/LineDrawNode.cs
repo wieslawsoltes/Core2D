@@ -31,8 +31,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
             switch (style.ArrowType)
             {
                 default:
-                case ArrowType.None:
-                    {
+                {
                         var marker = new NoneMarker();
 
                         marker.ShapeViewModel = Line;
@@ -190,11 +189,19 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 
         public override void OnDraw(object? dc, double zoom)
         {
-            var canvas = dc as SKCanvas;
+            if (dc is not SKCanvas canvas)
+            {
+                return;
+            }
+
+            if (Line.Start is null || Line.End is null)
+            {
+                return;
+            }
 
             if (Line.IsStroked)
             {
-                canvas?.DrawLine(P0, P1, Stroke);
+                canvas.DrawLine(P0, P1, Stroke);
 
                 if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
                 {
