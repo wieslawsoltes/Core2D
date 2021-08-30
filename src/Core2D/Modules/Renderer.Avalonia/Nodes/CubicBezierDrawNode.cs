@@ -3,10 +3,9 @@ using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Nodes
+namespace Core2D.Modules.Renderer.Avalonia.Nodes
 {
     internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
     {

@@ -1,16 +1,16 @@
 ﻿#nullable disable
 using System;
+using Core2D.Spatial;
+using Core2D.Spatial.Arc;
 using Core2D.Model.Path;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
 using Core2D.ViewModels.Shapes;
-using Core2D.Spatial;
-using Core2D.Spatial.Arc;
 using A = Avalonia;
 using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer
+namespace Core2D.Modules.Renderer.Avalonia
 {
     public static class PathGeometryConverter
     {

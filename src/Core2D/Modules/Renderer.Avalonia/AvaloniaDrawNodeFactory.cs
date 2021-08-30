@@ -2,11 +2,11 @@
 using System;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
-using Core2D.Modules.Renderer.Nodes;
+using Core2D.Modules.Renderer.Avalonia.Nodes;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
-namespace Core2D.Modules.Renderer
+namespace Core2D.Modules.Renderer.Avalonia
 {
     internal class AvaloniaDrawNodeFactory : IDrawNodeFactory
     {

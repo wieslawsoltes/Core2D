@@ -6,7 +6,7 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using SkiaSharp;
 
-namespace Core2D.Modules.FileWriter.SkiaSharpSkp
+namespace Core2D.Modules.FileWriter.SkiaSharp
 {
     public sealed class SkpSkiaSharpExporter : IProjectExporter
     {

@@ -7,7 +7,7 @@ using A = Avalonia;
 using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Nodes
+namespace Core2D.Modules.Renderer.Avalonia.Nodes
 {
     internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
     {

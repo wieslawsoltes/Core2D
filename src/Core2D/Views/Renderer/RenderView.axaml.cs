@@ -7,6 +7,7 @@ using Avalonia.Media;
 using Core2D.Model.Renderer;
 using Core2D.Modules.Renderer;
 using Core2D.Model;
+using Core2D.Modules.Renderer.Avalonia;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 

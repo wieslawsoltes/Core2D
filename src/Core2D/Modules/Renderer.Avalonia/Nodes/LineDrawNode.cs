@@ -3,16 +3,16 @@ using System;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using Core2D.Model.Style;
-using Core2D.Modules.Renderer.Nodes.Markers;
+using Core2D.Modules.Renderer.Avalonia.Nodes.Markers;
+using Core2D.Spatial;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Core2D.Spatial;
 using A = Avalonia;
 using ACP = Avalonia.Controls.PanAndZoom;
 using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Nodes
+namespace Core2D.Modules.Renderer.Avalonia.Nodes
 {
     internal class LineDrawNode : DrawNode, ILineDrawNode
     {

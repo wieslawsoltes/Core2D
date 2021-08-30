@@ -9,7 +9,7 @@ using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Renderer.Presenters;
 
-namespace Core2D.Modules.FileWriter.SkiaSharpSkp
+namespace Core2D.Modules.FileWriter.SkiaSharp
 {
     public sealed class SkpSkiaSharpWriter : IFileWriter
     {

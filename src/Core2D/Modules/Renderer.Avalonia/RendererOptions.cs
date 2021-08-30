@@ -5,7 +5,7 @@ using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
 
-namespace Core2D.Modules.Renderer
+namespace Core2D.Modules.Renderer.Avalonia
 {
     public class RendererOptions
     {
