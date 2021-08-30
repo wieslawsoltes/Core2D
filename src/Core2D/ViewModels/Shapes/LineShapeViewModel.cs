@@ -63,11 +63,8 @@ namespace Core2D.ViewModels.Shapes
 
             dataFlow.Bind(this, db, record);
 
-            if (_start is not null && _end is not null)
-            {
-                _start.Bind(dataFlow, db, record);
-                _end.Bind(dataFlow, db, record);
-            }
+            _start?.Bind(dataFlow, db, record);
+            _end?.Bind(dataFlow, db, record);
         }
 
         public override void Move(ISelection? selection, decimal dx, decimal dy)
@@ -92,26 +89,16 @@ namespace Core2D.ViewModels.Shapes
         {
             base.Select(selection);
 
-            if (_start is null || _end is null)
-            {
-                return;
-            }
-
-            _start.Select(selection);
-            _end.Select(selection);
+            _start?.Select(selection);
+            _end?.Select(selection);
         }
 
         public override void Deselect(ISelection? selection)
         {
             base.Deselect(selection);
-            
-            if (_start is null || _end is null)
-            {
-                return;
-            }
-
-            _start.Deselect(selection);
-            _end.Deselect(selection);
+ 
+            _start?.Deselect(selection);
+            _end?.Deselect(selection);
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)
@@ -129,9 +116,13 @@ namespace Core2D.ViewModels.Shapes
         {
             var isDirty = base.IsDirty();
 
-            if (_start is not null && _end is not null)
+            if (_start is not null)
             {
                 isDirty |= _start.IsDirty();
+            }
+
+            if (_end is not null)
+            {
                 isDirty |= _end.IsDirty();
             }
 
@@ -142,13 +133,8 @@ namespace Core2D.ViewModels.Shapes
         {
             base.Invalidate();
 
-            if (_start is null || _end is null)
-            {
-                return;
-            }
-
-            _start.Invalidate();
-            _end.Invalidate();
+            _start?.Invalidate();
+            _end?.Invalidate();
         }
 
         public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
