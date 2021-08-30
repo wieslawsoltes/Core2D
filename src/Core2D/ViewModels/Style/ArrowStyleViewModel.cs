@@ -17,7 +17,7 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ArrowStyleViewModel(_serviceProvider)
+            return new ArrowStyleViewModel(ServiceProvider)
             {
                 Name = this.Name,
                 ArrowType = this._arrowType,

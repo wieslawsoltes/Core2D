@@ -137,7 +137,7 @@ namespace Core2D.Modules.Renderer.Dxf
 
         private void Add(DXF.DxfDocument dxf, PageContainerViewModel container, IContainerPresenter presenter)
         {
-            var dataFlow = _serviceProvider.GetService<DataFlow>();
+            var dataFlow = ServiceProvider.GetService<DataFlow>();
             var db = (object)container.Properties;
             var record = (object)container.Record;
 

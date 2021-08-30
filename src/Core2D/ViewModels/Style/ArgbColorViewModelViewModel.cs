@@ -26,7 +26,7 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ArgbColorViewModel(_serviceProvider)
+            return new ArgbColorViewModel(ServiceProvider)
             {
                 Value = this.Value
             };

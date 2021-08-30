@@ -75,7 +75,7 @@ namespace Core2D.ViewModels.Editor.Tools
                 _quadraticBezierPathTool.Reset();
             }
 
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
             editor.Project.CurrentContainer.HelperLayer.RaiseInvalidateLayer();
         }
@@ -99,8 +99,8 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void InitializeWorkingPath(PointShapeViewModel start)
         {
-            var factory = _serviceProvider.GetService<IViewModelFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var factory = ServiceProvider.GetService<IViewModelFactory>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
             Geometry = factory.CreatePathGeometry(
                 ImmutableArray.Create<PathFigureViewModel>(),
@@ -140,45 +140,45 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void BeginDown(InputArgs args)
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.BeginDown(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.BeginDown(args);
         }
 
         public void BeginUp(InputArgs args)
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.BeginUp(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.BeginUp(args);
         }
 
         public void EndDown(InputArgs args)
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.EndDown(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.EndDown(args);
             Reset();
         }
 
         public void EndUp(InputArgs args)
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.EndUp(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.EndUp(args);
         }
 
         public void Move(InputArgs args)
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Move(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Move(args);
         }
 
         public void Move(BaseShapeViewModel shape)
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Move(shape);
+            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Move(shape);
         }
 
         public void Finalize(BaseShapeViewModel shape)
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Finalize(shape);
+            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Finalize(shape);
         }
 
         public void Reset()
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Reset();
+            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Reset();
 
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
             if (Path?.Geometry is { })
             {

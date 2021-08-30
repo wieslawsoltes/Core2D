@@ -33,9 +33,9 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public void BeginDown(InputArgs args)
         {
-            var factory = _serviceProvider.GetService<IViewModelFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-            var pathTool = _serviceProvider.GetService<PathToolViewModel>();
+            var factory = ServiceProvider.GetService<IViewModelFactory>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var pathTool = ServiceProvider.GetService<PathToolViewModel>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -122,8 +122,8 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-            var pathTool = _serviceProvider.GetService<PathToolViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var pathTool = ServiceProvider.GetService<PathToolViewModel>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -158,10 +158,10 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public void ToStateEnd()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             _selection?.Reset();
             _selection = new LineSelection(
-                _serviceProvider,
+                ServiceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _arc,
                 editor.PageState.HelperStyle);
@@ -180,8 +180,8 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-            var pathTool = _serviceProvider.GetService<PathToolViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var pathTool = ServiceProvider.GetService<PathToolViewModel>();
 
             switch (_currentState)
             {

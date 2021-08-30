@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Data
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ValueViewModel(_serviceProvider)
+            return new ValueViewModel(ServiceProvider)
             {
                 Name = Name,
                 Content = Content

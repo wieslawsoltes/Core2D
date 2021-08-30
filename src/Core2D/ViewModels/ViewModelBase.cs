@@ -9,7 +9,6 @@ namespace Core2D.ViewModels
     public partial class ViewModelBase : INotifyPropertyChanged
     {
         private bool _isDirty;
-        protected readonly IServiceProvider _serviceProvider;
         [AutoNotify] private ViewModelBase? _owner;
         [AutoNotify] private string _name = "";
 
@@ -17,8 +16,10 @@ namespace Core2D.ViewModels
 
         public ViewModelBase(IServiceProvider serviceProvider)
         {
-            _serviceProvider = serviceProvider;
+            ServiceProvider = serviceProvider;
         }
+
+        protected IServiceProvider ServiceProvider { get; }
 
         public virtual bool IsDirty() => _isDirty;
 
@@ -28,7 +29,7 @@ namespace Core2D.ViewModels
 
         public virtual object Copy(IDictionary<object, object> shared) => throw new NotImplementedException();
 
-        public void RaisePropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
+        protected void RaisePropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
 
         protected void RaiseAndSetIfChanged<T>(ref T field, T value, PropertyChangedEventArgs e)
         {
@@ -55,7 +56,9 @@ namespace Core2D.ViewModels
 
             PropertyChanged += handler;
 
-            propertyDisposable = Disposable.Create(() => PropertyChanged -= handler);
+            void Dispose() => PropertyChanged -= handler;
+
+            propertyDisposable = Disposable.Create(Dispose);
 
             mainDisposable?.Add(propertyDisposable);
         }

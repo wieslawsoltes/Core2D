@@ -16,7 +16,7 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new FillStyleViewModel(_serviceProvider)
+            return new FillStyleViewModel(ServiceProvider)
             {
                 Name = this.Name,
                 Color = (BaseColorViewModel)this._color.Copy(shared)

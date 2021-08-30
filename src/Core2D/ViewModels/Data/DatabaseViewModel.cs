@@ -24,7 +24,7 @@ namespace Core2D.ViewModels.Data
             var records = this._records.Copy(shared).ToImmutable();
             var currentRecordIndex = _records.IndexOf(_currentRecord);
 
-            return new DatabaseViewModel(_serviceProvider)
+            return new DatabaseViewModel(ServiceProvider)
             {
                 Name = this.Name,
                 IdColumnName = this.IdColumnName,

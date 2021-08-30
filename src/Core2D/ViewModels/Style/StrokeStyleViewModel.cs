@@ -27,7 +27,7 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new StrokeStyleViewModel(_serviceProvider)
+            return new StrokeStyleViewModel(ServiceProvider)
             {
                 Name = this.Name,
                 Color = (BaseColorViewModel)this._color.Copy(shared),

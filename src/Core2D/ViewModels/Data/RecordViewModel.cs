@@ -20,7 +20,7 @@ namespace Core2D.ViewModels.Data
         {
             var values = _values.Copy(shared).ToImmutable();
 
-            return new RecordViewModel(_serviceProvider)
+            return new RecordViewModel(ServiceProvider)
             {
                 Name = Name,
                 Values = values

@@ -265,7 +265,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 return;
             }
 
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             _previousDrawPoints = editor.PageState.DrawPoints;
             editor.PageState.DrawPoints = false;
 
@@ -305,7 +305,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
             if (_isVisible == true)
             {
-                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 editor.PageState.DrawPoints = _previousDrawPoints;
             }
 
@@ -342,7 +342,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 return false;
             }
 
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             (double x, double y) = args;
             (decimal sx, decimal sy) = editor.TryToSnap(args);
 
@@ -431,7 +431,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 return;
             }
 
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
             bool isProportionalResize = args.Modifier.HasFlag(ModifierFlags.Shift);
 

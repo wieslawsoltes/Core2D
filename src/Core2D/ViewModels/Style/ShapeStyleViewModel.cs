@@ -18,7 +18,7 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ShapeStyleViewModel(_serviceProvider)
+            return new ShapeStyleViewModel(ServiceProvider)
             {
                 Name = this.Name,
                 Stroke = (StrokeStyleViewModel)this._stroke.Copy(shared),

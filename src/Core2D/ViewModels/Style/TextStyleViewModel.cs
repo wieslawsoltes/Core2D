@@ -39,7 +39,7 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new TextStyleViewModel(_serviceProvider)
+            return new TextStyleViewModel(ServiceProvider)
             {
                 Name = this.Name,
                 FontName = this._fontName,

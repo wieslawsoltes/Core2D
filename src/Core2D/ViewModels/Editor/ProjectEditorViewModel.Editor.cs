@@ -783,7 +783,7 @@ namespace Core2D.ViewModels.Editor
 
             if (PageState.Decorator is null)
             {
-                PageState.Decorator = new BoxDecoratorViewModel(_serviceProvider);
+                PageState.Decorator = new BoxDecoratorViewModel(ServiceProvider);
             }
 
             PageState.Decorator.Layer = Project.CurrentContainer.WorkingLayer;
@@ -2317,7 +2317,7 @@ namespace Core2D.ViewModels.Editor
                     }
                 }
 
-                builder.Insert(0, RecentFileViewModel.Create(_serviceProvider, name, path));
+                builder.Insert(0, RecentFileViewModel.Create(ServiceProvider, name, path));
 
                 RecentProjects = builder.ToImmutable();
                 CurrentRecentProject = _recentProjects.FirstOrDefault();
@@ -2368,7 +2368,7 @@ namespace Core2D.ViewModels.Editor
             {
                 try
                 {
-                    var recent = RecentsViewModel.Create(_serviceProvider, _recentProjects, _currentRecentProject);
+                    var recent = RecentsViewModel.Create(ServiceProvider, _recentProjects, _currentRecentProject);
                     var json = JsonSerializer.Serialize(recent);
                     FileSystem.WriteUtf8Text(path, json);
                 }

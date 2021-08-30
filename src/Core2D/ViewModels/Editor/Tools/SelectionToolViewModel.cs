@@ -58,7 +58,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         private void GenerateMoveSelectionCache()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
             if (editor.Project.SelectedShapes is { })
             {
@@ -90,7 +90,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         private void MoveSelectionCacheTo(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             decimal dx = sx - _startX;
             decimal dy = sy - _startY;
@@ -111,13 +111,13 @@ namespace Core2D.ViewModels.Editor.Tools
 
         private bool IsSelectionAvailable()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             return editor?.Project?.SelectedShapes is { };
         }
 
         private bool HitTestDecorator(InputArgs args, bool isControl, bool isHover)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
             if (isControl == false && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible)
             {
@@ -135,8 +135,8 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void BeginDown(InputArgs args)
         {
-            var factory = _serviceProvider.GetService<IViewModelFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var factory = ServiceProvider.GetService<IViewModelFactory>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             (double x, double y) = args;
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -293,7 +293,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void BeginUp(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             switch (_currentState)
             {
                 case State.None:
@@ -370,7 +370,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void EndDown(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             switch (_currentState)
             {
                 case State.None:
@@ -394,7 +394,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             switch (_currentState)
             {
                 case State.None:
@@ -455,7 +455,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
             _currentState = State.None;
 

@@ -109,7 +109,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
             pdfPage.Size = PageSize.A3;
             pdfPage.Orientation = PageOrientation.Landscape;
 
-            var dataFlow = _serviceProvider.GetService<DataFlow>();
+            var dataFlow = ServiceProvider.GetService<DataFlow>();
             var db = (object)container.Properties;
             var record = (object)container.Record;
 

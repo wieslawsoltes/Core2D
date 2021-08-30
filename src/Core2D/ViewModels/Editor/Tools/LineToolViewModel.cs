@@ -24,8 +24,8 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void BeginDown(InputArgs args)
         {
-            var factory = _serviceProvider.GetService<IViewModelFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var factory = ServiceProvider.GetService<IViewModelFactory>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             (double x, double y) = args;
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
@@ -115,7 +115,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
@@ -147,9 +147,9 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void ToStateEnd()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             _selection = new LineSelection(
-                _serviceProvider,
+                ServiceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
                 _line,
                 editor.PageState.HelperStyle);
@@ -168,7 +168,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void Reset()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
             switch (_currentState)
             {
