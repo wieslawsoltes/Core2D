@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is PointShapeViewModel point))
+            if (shape is not PointShapeViewModel point)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -40,7 +40,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is PointShapeViewModel point))
+            if (shape is not PointShapeViewModel point)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -58,7 +58,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is PointShapeViewModel point))
+            if (shape is not PointShapeViewModel point)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
