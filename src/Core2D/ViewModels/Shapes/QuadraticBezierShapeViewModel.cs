@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Shapes
         {
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
@@ -27,7 +27,7 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             if (selection?.SelectedShapes is { })
             {
@@ -68,7 +68,7 @@ namespace Core2D.ViewModels.Shapes
             _point3.Bind(dataFlow, db, record);
         }
 
-        public override void Move(ISelection selection, decimal dx, decimal dy)
+        public override void Move(ISelection? selection, decimal dx, decimal dy)
         {
             if (!_point1.State.HasFlag(ShapeStateFlags.Connector))
             {
@@ -86,7 +86,7 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override void Select(ISelection selection)
+        public override void Select(ISelection? selection)
         {
             base.Select(selection);
             _point1.Select(selection);
@@ -94,7 +94,7 @@ namespace Core2D.ViewModels.Shapes
             _point3.Select(selection);
         }
 
-        public override void Deselect(ISelection selection)
+        public override void Deselect(ISelection? selection)
         {
             base.Deselect(selection);
             _point1.Deselect(selection);
