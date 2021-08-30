@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model.Style;
@@ -19,10 +19,10 @@ namespace Core2D.ViewModels.Style
         {
             return new ArrowStyleViewModel(ServiceProvider)
             {
-                Name = this.Name,
-                ArrowType = this._arrowType,
-                RadiusX = this._radiusX,
-                RadiusY = this._radiusY
+                Name = Name,
+                ArrowType = _arrowType,
+                RadiusX = _radiusX,
+                RadiusY = _radiusY
             };
         }
 
@@ -30,11 +30,6 @@ namespace Core2D.ViewModels.Style
         {
             var isDirty = base.IsDirty();
             return isDirty;
-        }
-
-        public override void Invalidate()
-        {
-            base.Invalidate();
         }
     }
 }
