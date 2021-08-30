@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -13,13 +13,17 @@ namespace Core2D.ViewModels.Shapes
     {
         private readonly IDictionary<string, object> _propertyCache = new Dictionary<string, object>();
 
+        // ReSharper disable InconsistentNaming
+        // ReSharper disable MemberCanBePrivate.Global
         [AutoNotify] protected ShapeStateFlags _state;
-        [AutoNotify] protected ShapeStyleViewModel _style;
+        [AutoNotify] protected ShapeStyleViewModel? _style;
         [AutoNotify] protected bool _isStroked;
         [AutoNotify] protected bool _isFilled;
         [AutoNotify] protected ImmutableArray<PropertyViewModel> _properties;
-        [AutoNotify] protected RecordViewModel _record;
-        [AutoNotify(SetterModifier = AccessModifier.None)] protected Type _targetType;
+        [AutoNotify] protected RecordViewModel? _record;
+        [AutoNotify(SetterModifier = AccessModifier.None)] protected readonly Type _targetType;
+        // ReSharper restore MemberCanBePrivate.Global
+        // ReSharper restore InconsistentNaming
 
         protected BaseShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider)
         {
@@ -110,17 +114,17 @@ namespace Core2D.ViewModels.Shapes
             Record?.Invalidate();
         }
 
-        public virtual void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
+        public virtual void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
+        public virtual void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             throw new NotImplementedException();
         }
 
-        public virtual bool Invalidate(IShapeRenderer renderer)
+        public virtual bool Invalidate(IShapeRenderer? renderer)
         {
             return false;
         }
@@ -135,7 +139,7 @@ namespace Core2D.ViewModels.Shapes
             _propertyCache[name] = value;
         }
 
-        public virtual object GetProperty(string name)
+        public virtual object? GetProperty(string name)
         {
             if (_propertyCache.ContainsKey(name))
             {
@@ -144,30 +148,34 @@ namespace Core2D.ViewModels.Shapes
             return null;
         }
 
-        public virtual void Move(ISelection selection, decimal dx, decimal dy)
+        public virtual void Move(ISelection? selection, decimal dx, decimal dy)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void Select(ISelection selection)
+        public virtual void Select(ISelection? selection)
         {
-            if (selection?.SelectedShapes is { })
+            if (selection?.SelectedShapes is null)
             {
-                if (!selection.SelectedShapes.Contains(this))
-                {
-                    selection.SelectedShapes.Add(this);
-                }
+                return;
+            }
+
+            if (!selection.SelectedShapes.Contains(this))
+            {
+                selection.SelectedShapes.Add(this);
             }
         }
 
-        public virtual void Deselect(ISelection selection)
+        public virtual void Deselect(ISelection? selection)
         {
-            if (selection?.SelectedShapes is { })
+            if (selection?.SelectedShapes is null)
             {
-                if (selection.SelectedShapes.Contains(this))
-                {
-                    selection.SelectedShapes.Remove(this);
-                }
+                return;
+            }
+
+            if (selection.SelectedShapes.Contains(this))
+            {
+                selection.SelectedShapes.Remove(this);
             }
         }
 

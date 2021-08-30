@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
@@ -16,8 +16,8 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
         public LineShapeViewModel Line { get; set; }
         public SKPoint P0 { get; set; }
         public SKPoint P1 { get; set; }
-        public IMarker StartMarker { get; set; }
-        public IMarker EndMarker { get; set; }
+        public IMarker? StartMarker { get; set; }
+        public IMarker? EndMarker { get; set; }
 
         public LineDrawNode(LineShapeViewModel line, ShapeStyleViewModel style)
         {
@@ -109,35 +109,48 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
 
         private void UpdateMarkers()
         {
-            double x1 = Line.Start.X;
-            double y1 = Line.Start.Y;
-            double x2 = Line.End.X;
-            double y2 = Line.End.Y;
-
-            if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
-            {
-                double a1 = Math.Atan2(y1 - y2, x1 - x2);
-                StartMarker = CreateArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrow);
-                StartMarker.UpdateStyle();
-                P0 = (StartMarker as MarkerBase).Point;
-            }
-            else
+            if (Line.Start is null || Line.End is null)
             {
                 StartMarker = null;
-                P0 = new SKPoint((float)x1, (float)y1);
-            }
+                P0 = new SKPoint();
 
-            if (Style.Stroke.EndArrow.ArrowType != ArrowType.None)
-            {
-                double a2 = Math.Atan2(y2 - y1, x2 - x1);
-                EndMarker = CreateArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrow);
-                EndMarker.UpdateStyle();
-                P1 = (EndMarker as MarkerBase).Point;
+                EndMarker = null;
+                P1 = new SKPoint();
             }
             else
             {
-                EndMarker = null;
-                P1 = new SKPoint((float)x2, (float)y2);
+                double x1 = Line.Start.X;
+                double y1 = Line.Start.Y;
+                double x2 = Line.End.X;
+                double y2 = Line.End.Y;
+
+                if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
+                {
+                    double a1 = Math.Atan2(y1 - y2, x1 - x2);
+                    var marker = CreateArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrow);
+                    StartMarker = marker;
+                    marker.UpdateStyle();
+                    P0 = marker.Point;
+                }
+                else
+                {
+                    StartMarker = null;
+                    P0 = new SKPoint((float)x1, (float)y1);
+                }
+
+                if (Style.Stroke.EndArrow.ArrowType != ArrowType.None)
+                {
+                    double a2 = Math.Atan2(y2 - y1, x2 - x1);
+                    var marker = CreateArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrow);
+                    marker.UpdateStyle();
+                    EndMarker = marker;
+                    P1 = marker.Point;
+                }
+                else
+                {
+                    EndMarker = null;
+                    P1 = new SKPoint((float)x2, (float)y2);
+                }
             }
         }
 
@@ -145,8 +158,17 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
         {
             ScaleThickness = Line.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Line.State.HasFlag(ShapeStateFlags.Size);
-            P0 = new SKPoint((float)Line.Start.X, (float)Line.Start.Y);
-            P1 = new SKPoint((float)Line.End.X, (float)Line.End.Y);
+            if (Line.Start is null || Line.End is null)
+            {
+                P0 = new SKPoint();
+                P1 = new SKPoint();
+            }
+            else
+            {
+                P0 = new SKPoint((float)Line.Start.X, (float)Line.Start.Y);
+                P1 = new SKPoint((float)Line.End.X, (float)Line.End.Y);
+            }
+
             Center = new SKPoint((float)((P0.X + P1.X) / 2.0), (float)((P0.Y + P1.Y) / 2.0));
             UpdateMarkers();
         }
@@ -166,13 +188,13 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
             }
         }
 
-        public override void OnDraw(object dc, double zoom)
+        public override void OnDraw(object? dc, double zoom)
         {
             var canvas = dc as SKCanvas;
 
             if (Line.IsStroked)
             {
-                canvas.DrawLine(P0, P1, Stroke);
+                canvas?.DrawLine(P0, P1, Stroke);
 
                 if (Style.Stroke.StartArrow.ArrowType != ArrowType.None)
                 {

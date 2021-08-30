@@ -1,6 +1,7 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.ViewModels.Style;
+using JetBrains.Annotations;
 
 namespace Core2D.Model.Renderer.Nodes
 {
@@ -11,7 +12,7 @@ namespace Core2D.Model.Renderer.Nodes
         bool ScaleSize { get; set; }
         void UpdateGeometry();
         void UpdateStyle();
-        void Draw(object dc, double zoom);
-        void OnDraw(object dc, double zoom);
+        void Draw(object? dc, double zoom);
+        void OnDraw(object? dc, double zoom);
     }
 }

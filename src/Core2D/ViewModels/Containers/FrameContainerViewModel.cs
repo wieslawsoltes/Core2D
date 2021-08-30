@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Immutable;
 using Core2D.Model;
@@ -9,13 +9,17 @@ namespace Core2D.ViewModels.Containers
 {
     public partial class FrameContainerViewModel : BaseContainerViewModel, IDataObject
     {
+        // ReSharper disable InconsistentNaming
+        // ReSharper disable MemberCanBePrivate.Global
         [AutoNotify] protected ImmutableArray<LayerContainerViewModel> _layers;
-        [AutoNotify] protected LayerContainerViewModel _currentLayer;
-        [AutoNotify] protected LayerContainerViewModel _workingLayer;
-        [AutoNotify] protected LayerContainerViewModel _helperLayer;
-        [AutoNotify] protected BaseShapeViewModel _currentShape;
+        [AutoNotify] protected LayerContainerViewModel? _currentLayer;
+        [AutoNotify] protected LayerContainerViewModel? _workingLayer;
+        [AutoNotify] protected LayerContainerViewModel? _helperLayer;
+        [AutoNotify] protected BaseShapeViewModel? _currentShape;
         [AutoNotify] protected ImmutableArray<PropertyViewModel> _properties;
-        [AutoNotify] protected RecordViewModel _record;
+        [AutoNotify] protected RecordViewModel? _record;
+        // ReSharper restore MemberCanBePrivate.Global
+        // ReSharper restore InconsistentNaming
 
         protected FrameContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -25,12 +29,9 @@ namespace Core2D.ViewModels.Containers
 
         public virtual void InvalidateLayer()
         {
-            if (_layers is { })
+            foreach (var layer in _layers)
             {
-                foreach (var layer in _layers)
-                {
-                    layer.RaiseInvalidateLayer();
-                }
+                layer.RaiseInvalidateLayer();
             }
 
             _workingLayer?.RaiseInvalidateLayer();

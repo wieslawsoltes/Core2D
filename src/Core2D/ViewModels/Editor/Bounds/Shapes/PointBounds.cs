@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model.Editor;
@@ -8,17 +8,18 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class PointBounds : IBounds
+    public class PointBounds : IBounds
     {
         public Type TargetType => typeof(PointShapeViewModel);
 
-        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
             if (!(shape is PointShapeViewModel point))
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (point.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 if (Point2.FromXY(point.X, point.Y).ExpandToRect(radius / scale).Contains(target.X, target.Y))
@@ -44,6 +45,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
                 throw new ArgumentNullException(nameof(shape));
             }
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (point.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return Point2.FromXY(point.X, point.Y).ExpandToRect(radius / scale).Contains(target.X, target.Y);
@@ -60,6 +62,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
             {
                 throw new ArgumentNullException(nameof(shape));
             }
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (point.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return Point2.FromXY(point.X, point.Y).ExpandToRect(radius / scale).IntersectsWith(target);

@@ -24,7 +24,7 @@ namespace Core2D.Views.Renderer
             }
 
             var db = (object) renderState.Container.Properties;
-            var record = (object) renderState.Container.Record;
+            var record = (object?) renderState.Container.Record;
 
             if (renderState.Container is PageContainerViewModel page)
             {
