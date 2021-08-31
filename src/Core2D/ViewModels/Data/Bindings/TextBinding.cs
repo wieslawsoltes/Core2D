@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
@@ -60,6 +61,61 @@ namespace Core2D.ViewModels.Data.Bindings
             return false;
         }
 
+        private static bool TryToBind(TextShapeViewModel shape, ImmutableArray<PropertyViewModel>? properties, RecordViewModel? record, List<BindingPart> bindings, string? text, out string? result)
+        {
+            var sb = new StringBuilder(text);
+            var count = 0;
+
+            bindings.Reverse();
+
+            foreach (var binding in bindings)
+            {
+                // Try to bind to internal Record or external (r) data record using Text property as Column.Name name.
+                if (record is { })
+                {
+                    var success = GetBindingValue(record, binding.Path, out var value);
+                    if (success && value is { })
+                    {
+                        sb.Replace(binding.Value, value, binding.Start, binding.Length);
+                        count++;
+                        continue;
+                    }
+                }
+
+                // Try to bind to external Properties database (e.g. Container.Properties) using Text property as Property.Name name.
+                if (properties is { Length: > 0 })
+                {
+                    var success = GetBindingValue(properties.Value, binding.Path, out var value);
+                    if (success && value is { })
+                    {
+                        sb.Replace(binding.Value, value, binding.Start, binding.Length);
+                        count++;
+                        continue;
+                    }
+                }
+
+                // Try to bind to internal Properties database (e.g. Properties) using Text property as Property.Name name.
+                if (shape.Properties.Length > 0)
+                {
+                    var success = GetBindingValue(shape.Properties, binding.Path, out var value);
+                    if (success && value is { })
+                    {
+                        sb.Replace(binding.Value, value, binding.Start, binding.Length);
+                        count++;
+                    }
+                }
+            }
+
+            if (count > 0)
+            {
+                result = sb.ToString();
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
+
         public static string? Bind(TextShapeViewModel shape, ImmutableArray<PropertyViewModel>? properties, RecordViewModel? externalRecordViewModel)
         {
             var text = shape.Text;
@@ -73,52 +129,9 @@ namespace Core2D.ViewModels.Data.Bindings
             var bindings = BindingParser.Parse(text);
             if (bindings.Count > 0)
             {
-                var sb = new StringBuilder(text);
-                var count = 0;
-
-                bindings.Reverse();
-
-                foreach (var binding in bindings)
+                if (TryToBind(shape, properties, record, bindings, text, out var result))
                 {
-                    // Try to bind to internal Record or external (r) data record using Text property as Column.Name name.
-                    if (record is { })
-                    {
-                        bool success = GetBindingValue(record, binding.Path, out var value);
-                        if (success && value is { })
-                        {
-                            sb.Replace(binding.Value, value, binding.Start, binding.Length);
-                            count++;
-                            continue;
-                        }
-                    }
-
-                    // Try to bind to external Properties database (e.g. Container.Properties) using Text property as Property.Name name.
-                    if (properties is { Length: > 0 })
-                    {
-                        bool success = GetBindingValue(properties.Value, binding.Path, out var value);
-                        if (success && value is { })
-                        {
-                            sb.Replace(binding.Value, value, binding.Start, binding.Length);
-                            count++;
-                            continue;
-                        }
-                    }
-
-                    // Try to bind to internal Properties database (e.g. Properties) using Text property as Property.Name name.
-                    if (shape.Properties.Length > 0)
-                    {
-                        bool success = GetBindingValue(shape.Properties, binding.Path, out var value);
-                        if (success && value is { })
-                        {
-                            sb.Replace(binding.Value, value, binding.Start, binding.Length);
-                            count++;
-                        }
-                    }
-                }
-
-                if (count > 0)
-                {
-                    return sb.ToString();
+                    return result;
                 }
             }
 
