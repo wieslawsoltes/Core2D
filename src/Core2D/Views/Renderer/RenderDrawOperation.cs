@@ -16,6 +16,7 @@ namespace Core2D.Views.Renderer
 
         private static readonly IContainerPresenter s_exportPresenter = new ExportPresenter();
 
+        // ReSharper disable once UnusedParameter.Local
         private static void DrawData(RenderState renderState, object context)
         {
             if (renderState.Container is null || renderState.DataFlow is null)
@@ -59,8 +60,8 @@ namespace Core2D.Views.Renderer
             s_editorPresenter.Render(context, renderState.Renderer, renderState.Selection, renderState.Container, 0.0, 0.0);
 
             renderState.Container?.Invalidate();
-            renderState.Renderer.State.PointStyle.Invalidate();
-            renderState.Renderer.State.SelectedPointStyle.Invalidate();
+            renderState.Renderer.State?.PointStyle?.Invalidate();
+            renderState.Renderer.State?.SelectedPointStyle?.Invalidate();
         }
 
         private static void DrawExport(RenderState renderState, object context)
