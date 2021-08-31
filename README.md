@@ -14,7 +14,7 @@ share data across multiple documents, edit documents using layers.
 It supports exporting documents to many popular file formats like pdf, bitmaps and dxf. 
 You can automate drawing and processing by using C# scripting.
 
-![image](https://user-images.githubusercontent.com/2297442/131456568-db1e3dd9-4351-44be-867e-f8cd50eb3066.png)
+![image](https://user-images.githubusercontent.com/2297442/131457358-7ebc2142-9316-4aad-a31a-f272f7663cea.png)
 
 ## Supported Platforms
 
