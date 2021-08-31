@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using Core2D.Model;
 using Core2D.Model.History;
 using Core2D.ViewModels.Data;
@@ -18,27 +17,27 @@ namespace Core2D.ViewModels.Containers
 {
     public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelection
     {
-        [AutoNotify] private OptionsViewModel _options;
-        [AutoNotify] private IHistory _history;
+        [AutoNotify] private OptionsViewModel? _options;
+        [AutoNotify] private IHistory? _history;
         [AutoNotify] private ImmutableArray<LibraryViewModel<ShapeStyleViewModel>> _styleLibraries;
         [AutoNotify] private ImmutableArray<LibraryViewModel<GroupShapeViewModel>> _groupLibraries;
         [AutoNotify] private ImmutableArray<DatabaseViewModel> _databases;
         [AutoNotify] private ImmutableArray<TemplateContainerViewModel> _templates;
         [AutoNotify] private ImmutableArray<ScriptViewModel> _scripts;
         [AutoNotify] private ImmutableArray<DocumentContainerViewModel> _documents;
-        [AutoNotify] private LibraryViewModel<ShapeStyleViewModel> _currentStyleLibrary;
-        [AutoNotify] private LibraryViewModel<GroupShapeViewModel> _currentGroupLibrary;
-        [AutoNotify] private DatabaseViewModel _currentDatabase;
-        [AutoNotify] private TemplateContainerViewModel _currentTemplate;
-        [AutoNotify] private ScriptViewModel _currentScript;
-        [AutoNotify] private DocumentContainerViewModel _currentDocument;
-        [AutoNotify] private FrameContainerViewModel _currentContainer;
-        [AutoNotify] private ViewModelBase _selected;
-        [AutoNotify(IgnoreDataMember = true)] private ISet<BaseShapeViewModel> _selectedShapes;
+        [AutoNotify] private LibraryViewModel<ShapeStyleViewModel>? _currentStyleLibrary;
+        [AutoNotify] private LibraryViewModel<GroupShapeViewModel> ?_currentGroupLibrary;
+        [AutoNotify] private DatabaseViewModel? _currentDatabase;
+        [AutoNotify] private TemplateContainerViewModel? _currentTemplate;
+        [AutoNotify] private ScriptViewModel? _currentScript;
+        [AutoNotify] private DocumentContainerViewModel? _currentDocument;
+        [AutoNotify] private FrameContainerViewModel? _currentContainer;
+        [AutoNotify] private ViewModelBase? _selected;
+        [AutoNotify(IgnoreDataMember = true)] private ISet<BaseShapeViewModel>? _selectedShapes;
 
         public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            PropertyChanged += (sender, e) =>
+            PropertyChanged += (_, e) =>
             {
                 if (e.PropertyName == nameof(Selected))
                 {
@@ -47,7 +46,7 @@ namespace Core2D.ViewModels.Containers
             };
         }
 
-        public void SetSelected(ViewModelBase value)
+        private void SetSelected(ViewModelBase? value)
         {
             Debug.WriteLine($"[SetSelected] {value?.Name} ({value?.GetType()})");
             if (value is BaseShapeViewModel shape)
@@ -59,7 +58,7 @@ namespace Core2D.ViewModels.Containers
 
                 var container = _documents
                     .SelectMany(x => x.Pages)
-                    .FirstOrDefault(c => c.Layers.Contains(layer));
+                    .FirstOrDefault(c => layer is not null && c.Layers.Contains(layer));
 
                 if (container is { } && layer is { })
                 {
@@ -79,7 +78,7 @@ namespace Core2D.ViewModels.Containers
 
                 // SelectedShapes = new HashSet<BaseShapeViewModel>() { shape };
             }
-            else if (value is LayerContainerViewModel layer && _documents is { })
+            else if (value is LayerContainerViewModel layer)
             {
                 var container = _documents
                     .SelectMany(x => x.Pages)
@@ -101,7 +100,7 @@ namespace Core2D.ViewModels.Containers
                     }
                 }
             }
-            else if (value is FrameContainerViewModel container && _documents is { })
+            else if (value is FrameContainerViewModel container)
             {
                 var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
                 if (document is { })
@@ -126,14 +125,14 @@ namespace Core2D.ViewModels.Containers
                 {
                     Debug.WriteLine($"  [CurrentDocument] {document.Name}");
                     CurrentDocument = document;
-                    if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
+                    if (!CurrentDocument.Pages.Contains(CurrentContainer))
                     {
                         var current = CurrentDocument.Pages.FirstOrDefault();
                         if (CurrentContainer != current)
                         {
                             Debug.WriteLine($"  [CurrentContainer] {current?.Name}");
                             CurrentContainer = current;
-                            CurrentContainer.InvalidateLayer();
+                            CurrentContainer?.InvalidateLayer();
                         }
                     }
                 }
@@ -166,7 +165,10 @@ namespace Core2D.ViewModels.Containers
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _options.IsDirty();
+            if (_options != null)
+            {
+                isDirty |= _options.IsDirty();
+            }
 
             foreach (var styleLibrary in _styleLibraries)
             {
@@ -205,7 +207,7 @@ namespace Core2D.ViewModels.Containers
         {
             base.Invalidate();
 
-            _options.Invalidate();
+            _options?.Invalidate();
 
             foreach (var styleLibrary in _styleLibraries)
             {
@@ -238,7 +240,7 @@ namespace Core2D.ViewModels.Containers
             }
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -259,7 +261,7 @@ namespace Core2D.ViewModels.Containers
             ObserveList(_scripts, ref disposableScripts, mainDisposable, observer);
             ObserveList(_documents, ref disposableDocuments, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Options))
                 {

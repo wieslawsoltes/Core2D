@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Globalization;
 
@@ -19,15 +19,10 @@ namespace Core2D.ViewModels.Path
             return isDirty;
         }
 
-        public override void Invalidate()
-        {
-            base.Invalidate();
-        }
-
         public string ToXamlString()
-            => $"{Width.ToString(CultureInfo.InvariantCulture)},{Height.ToString(CultureInfo.InvariantCulture)}";
+            => $"{_width.ToString(CultureInfo.InvariantCulture)},{Height.ToString(CultureInfo.InvariantCulture)}";
 
         public string ToSvgString()
-            => $"{Width.ToString(CultureInfo.InvariantCulture)},{Height.ToString(CultureInfo.InvariantCulture)}";
+            => $"{_height.ToString(CultureInfo.InvariantCulture)},{Height.ToString(CultureInfo.InvariantCulture)}";
     }
 }

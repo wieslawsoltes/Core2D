@@ -53,22 +53,22 @@ namespace Core2D.Modules.Renderer.WinForms
             var pen = new Pen(ToColor(style.Stroke.Color), (float)(style.Stroke.Thickness / State.ZoomX));
             switch (style.Stroke.LineCap)
             {
-                case Core2D.Model.Style.LineCap.Flat:
+                case Model.Style.LineCap.Flat:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
-                    pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
+                    pen.DashCap = DashCap.Flat;
                     break;
 
-                case Core2D.Model.Style.LineCap.Square:
+                case Model.Style.LineCap.Square:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Square;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Square;
-                    pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
+                    pen.DashCap = DashCap.Flat;
                     break;
 
-                case Core2D.Model.Style.LineCap.Round:
+                case Model.Style.LineCap.Round:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-                    pen.DashCap = System.Drawing.Drawing2D.DashCap.Round;
+                    pen.DashCap = DashCap.Round;
                     break;
             }
             if (style.Stroke.Dashes is { })
@@ -92,7 +92,7 @@ namespace Core2D.Modules.Renderer.WinForms
 
             pen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
             pen.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
-            pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
+            pen.DashCap = DashCap.Flat;
 
             return pen;
         }
@@ -315,7 +315,7 @@ namespace Core2D.Modules.Renderer.WinForms
 
             var pen = ToPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage);
 
-            var rect = Spatial.Rect2.FromPoints(
+            var rect = Rect2.FromPoints(
                 x + grid.GridOffsetLeft,
                 y + grid.GridOffsetTop,
                 x + width - grid.GridOffsetLeft + grid.GridOffsetRight,
@@ -581,16 +581,16 @@ namespace Core2D.Modules.Renderer.WinForms
 
             var brush = ToBrush(style.Stroke.Color);
 
-            var fontStyle = System.Drawing.FontStyle.Regular;
+            var fontStyle = FontStyle.Regular;
 
-            if (style.TextStyle.FontStyle.HasFlag(Core2D.Model.Style.FontStyleFlags.Bold))
+            if (style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
             {
-                fontStyle |= System.Drawing.FontStyle.Bold;
+                fontStyle |= FontStyle.Bold;
             }
 
-            if (style.TextStyle.FontStyle.HasFlag(Core2D.Model.Style.FontStyleFlags.Italic))
+            if (style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
             {
-                fontStyle |= System.Drawing.FontStyle.Italic;
+                fontStyle |= FontStyle.Italic;
             }
 
             Font font = new Font(

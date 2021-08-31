@@ -5,7 +5,7 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using SkiaSharp;
 
-namespace Core2D.Modules.FileWriter.SkiaSharpPdf
+namespace Core2D.Modules.FileWriter.SkiaSharp
 {
     public sealed class PdfSkiaSharpExporter : IProjectExporter
     {

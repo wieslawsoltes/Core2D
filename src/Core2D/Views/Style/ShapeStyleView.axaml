@@ -9,14 +9,13 @@
              d:DataContext="{x:Static vmd:DesignerContext.ShapeStyle}"
              d:DesignWidth="250" d:DesignHeight="500"
              x:DataType="vms:ShapeStyleViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Properties">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding Name, Mode=TwoWay}" />
-      </StackPanel>
-    </TabItem>
-    <TabItem Header="Stroke">
+  <DockPanel>
+    <StackPanel Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
+      <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+      <TextBox Text="{Binding Name, Mode=TwoWay}" />
+    </StackPanel>
+    <TabControl>
+      <TabItem Header="Stroke">
       <ContentControl Content="{Binding Stroke}" />
     </TabItem>
     <TabItem Header="Fill">
@@ -26,4 +25,5 @@
       <ContentControl Content="{Binding TextStyle}" />
     </TabItem>
   </TabControl>
+  </DockPanel>
 </UserControl>

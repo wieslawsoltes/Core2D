@@ -1,10 +1,11 @@
-﻿using System;
-#nullable disable
+﻿#nullable enable
+using System;
+
 namespace Core2D.Model
 {
     public interface ILog : IDisposable
     {
-        string LastMessage { get; }
+        string? LastMessage { get; }
 
         void Initialize(string path);
 

@@ -1,14 +1,13 @@
 ﻿#nullable disable
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
+using Core2D.Spatial;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Core2D.Spatial;
 using A = Avalonia;
-using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Nodes
+namespace Core2D.Modules.Renderer.Avalonia.Nodes
 {
     internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
     {
@@ -23,7 +22,7 @@ namespace Core2D.Modules.Renderer.Nodes
             UpdateGeometry();
         }
 
-        public override void UpdateGeometry()
+        public sealed override void UpdateGeometry()
         {
             ScaleThickness = Rectangle.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Rectangle.State.HasFlag(ShapeStateFlags.Size);

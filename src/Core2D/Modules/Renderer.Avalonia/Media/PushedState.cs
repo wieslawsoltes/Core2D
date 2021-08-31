@@ -3,7 +3,7 @@ using System;
 using A = Avalonia;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Media
+namespace Core2D.Modules.Renderer.Avalonia.Media
 {
     internal readonly struct PushedState : IDisposable
     {

@@ -2,7 +2,7 @@
 using System;
 using Core2D.ViewModels.Renderer;
 
-namespace Core2D.Modules.Renderer
+namespace Core2D.Modules.Renderer.Avalonia
 {
     public class AvaloniaRendererViewModel : NodeRendererViewModel
     {

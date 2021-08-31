@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,9 +8,9 @@ namespace Core2D.ViewModels.Style
 {
     public partial class ShapeStyleViewModel : ViewModelBase
     {
-        [AutoNotify] private StrokeStyleViewModel _stroke;
-        [AutoNotify] private FillStyleViewModel _fill;
-        [AutoNotify] private TextStyleViewModel _textStyle;
+        [AutoNotify] private StrokeStyleViewModel? _stroke;
+        [AutoNotify] private FillStyleViewModel? _fill;
+        [AutoNotify] private TextStyleViewModel? _textStyle;
 
         public ShapeStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -18,12 +18,12 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ShapeStyleViewModel(_serviceProvider)
+            return new ShapeStyleViewModel(ServiceProvider)
             {
-                Name = this.Name,
-                Stroke = (StrokeStyleViewModel)this._stroke.Copy(shared),
-                Fill = (FillStyleViewModel)this._fill.Copy(shared),
-                TextStyle = (TextStyleViewModel)this._textStyle.Copy(shared)
+                Name = Name,
+                Stroke = (StrokeStyleViewModel?)_stroke?.Copy(shared),
+                Fill = (FillStyleViewModel?)_fill?.Copy(shared),
+                TextStyle = (TextStyleViewModel?)_textStyle?.Copy(shared)
             };
         }
 
@@ -31,9 +31,20 @@ namespace Core2D.ViewModels.Style
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _stroke.IsDirty();
-            isDirty |= _fill.IsDirty();
-            isDirty |= _textStyle.IsDirty();
+            if (_stroke != null)
+            {
+                isDirty |= _stroke.IsDirty();
+            }
+
+            if (_fill != null)
+            {
+                isDirty |= _fill.IsDirty();
+            }
+
+            if (_textStyle != null)
+            {
+                isDirty |= _textStyle.IsDirty();
+            }
 
             return isDirty;
         }
@@ -41,12 +52,12 @@ namespace Core2D.ViewModels.Style
         public override void Invalidate()
         {
             base.Invalidate();
-            _stroke.Invalidate();
-            _fill.Invalidate();
-            _textStyle.Invalidate();
+            _stroke?.Invalidate();
+            _fill?.Invalidate();
+            _textStyle?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -59,7 +70,7 @@ namespace Core2D.ViewModels.Style
             ObserveObject(_fill, ref disposableFill, mainDisposable, observer);
             ObserveObject(_textStyle, ref disposableTextStyle, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Stroke))
                 {

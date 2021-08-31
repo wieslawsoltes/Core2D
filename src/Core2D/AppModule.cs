@@ -10,16 +10,12 @@ using Core2D.Modules.FileSystem.DotNet;
 using Core2D.Modules.FileWriter.Dxf;
 using Core2D.Modules.FileWriter.Emf;
 using Core2D.Modules.FileWriter.PdfSharp;
-using Core2D.Modules.FileWriter.SkiaSharpJpeg;
-using Core2D.Modules.FileWriter.SkiaSharpPdf;
-using Core2D.Modules.FileWriter.SkiaSharpPng;
-using Core2D.Modules.FileWriter.SkiaSharpSkp;
-using Core2D.Modules.FileWriter.SkiaSharpSvg;
-using Core2D.Modules.FileWriter.SkiaSharpWebp;
+using Core2D.Modules.FileWriter.SkiaSharp;
 using Core2D.Modules.FileWriter.Svg;
 using Core2D.Modules.FileWriter.Xaml;
 using Core2D.Modules.Log.Trace;
 using Core2D.Modules.Renderer;
+using Core2D.Modules.Renderer.Avalonia;
 using Core2D.Modules.Renderer.SkiaSharp;
 using Core2D.Modules.ScriptRunner.Roslyn;
 using Core2D.Modules.Serializer.Newtonsoft;
@@ -58,12 +54,12 @@ namespace Core2D
                 .Where(t =>
                 {
                     return (
-                            t.Namespace.StartsWith(nameof(Core2D.ViewModels.Containers))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Data))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Path))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Scripting))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Shapes))
-                            || t.Namespace.StartsWith(nameof(Core2D.ViewModels.Style))
+                            t.Namespace.StartsWith(nameof(ViewModels.Containers))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Data))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Path))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Scripting))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Shapes))
+                            || t.Namespace.StartsWith(nameof(ViewModels.Style))
                            )
                            && t.Name.EndsWith("ViewModel");
                 })

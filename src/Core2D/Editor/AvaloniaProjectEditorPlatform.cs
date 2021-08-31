@@ -28,7 +28,7 @@ namespace Core2D.Editor
 
         private MainWindow GetWindow()
         {
-            return _serviceProvider.GetService<MainWindow>();
+            return ServiceProvider.GetService<MainWindow>();
         }
 
         public async void OnOpen(string path)
@@ -42,23 +42,23 @@ namespace Core2D.Editor
                 var item = result?.FirstOrDefault();
                 if (item is { })
                 {
-                    var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                    var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                     editor.OnOpenProject(item);
                     editor.CanvasPlatform?.InvalidateControl?.Invoke();
                 }
             }
             else
             {
-                if (_serviceProvider.GetService<IFileSystem>().Exists(path))
+                if (ServiceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    _serviceProvider.GetService<ProjectEditorViewModel>().OnOpenProject(path);
+                    ServiceProvider.GetService<ProjectEditorViewModel>().OnOpenProject(path);
                 }
             }
         }
 
         public void OnSave()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             if (!string.IsNullOrEmpty(editor.ProjectPath))
             {
                 editor.OnSaveProject(editor.ProjectPath);
@@ -71,7 +71,7 @@ namespace Core2D.Editor
 
         public async void OnSaveAs()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
@@ -100,16 +100,16 @@ namespace Core2D.Editor
                     {
                         if (item is { })
                         {
-                            _serviceProvider.GetService<ProjectEditorViewModel>().OnImportJson(item);
+                            ServiceProvider.GetService<ProjectEditorViewModel>().OnImportJson(item);
                         }
                     }
                 }
             }
             else
             {
-                if (_serviceProvider.GetService<IFileSystem>().Exists(path))
+                if (ServiceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    _serviceProvider.GetService<ProjectEditorViewModel>().OnImportJson(path);
+                    ServiceProvider.GetService<ProjectEditorViewModel>().OnImportJson(path);
                 }
             }
         }
@@ -130,16 +130,16 @@ namespace Core2D.Editor
                     {
                         if (item is { })
                         {
-                            _serviceProvider.GetService<ProjectEditorViewModel>().OnImportSvg(item);
+                            ServiceProvider.GetService<ProjectEditorViewModel>().OnImportSvg(item);
                         }
                     }
                 }
             }
             else
             {
-                if (_serviceProvider.GetService<IFileSystem>().Exists(path))
+                if (ServiceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    _serviceProvider.GetService<ProjectEditorViewModel>().OnImportJson(path);
+                    ServiceProvider.GetService<ProjectEditorViewModel>().OnImportJson(path);
                 }
             }
         }
@@ -158,10 +158,10 @@ namespace Core2D.Editor
                     {
                         if (item is { })
                         {
-                            string resultExtension = System.IO.Path.GetExtension(item);
+                            string resultExtension = Path.GetExtension(item);
                             if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                             {
-                                _serviceProvider.GetService<ProjectEditorViewModel>().OnImportJson(item);
+                                ServiceProvider.GetService<ProjectEditorViewModel>().OnImportJson(item);
                             }
                         }
                     }
@@ -169,12 +169,12 @@ namespace Core2D.Editor
             }
             else
             {
-                if (_serviceProvider.GetService<IFileSystem>().Exists(path))
+                if (ServiceProvider.GetService<IFileSystem>().Exists(path))
                 {
-                    string resultExtension = System.IO.Path.GetExtension(path);
+                    string resultExtension = Path.GetExtension(path);
                     if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        _serviceProvider.GetService<ProjectEditorViewModel>().OnImportJson(path);
+                        ServiceProvider.GetService<ProjectEditorViewModel>().OnImportJson(path);
                     }
                 }
             }
@@ -182,7 +182,7 @@ namespace Core2D.Editor
 
         public async void OnExportJson(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
@@ -197,7 +197,7 @@ namespace Core2D.Editor
 
         public async void OnExportObject(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             if (item is { })
             {
                 var dlg = new SaveFileDialog() { Title = "Save" };
@@ -207,7 +207,7 @@ namespace Core2D.Editor
                 var result = await dlg.ShowAsync(GetWindow());
                 if (result is { })
                 {
-                    string resultExtension = System.IO.Path.GetExtension(result);
+                    string resultExtension = Path.GetExtension(result);
                     if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         editor.OnExportJson(result, item);
@@ -218,7 +218,7 @@ namespace Core2D.Editor
 
         public async void OnExport(object item)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
             string name = string.Empty;
 
@@ -257,7 +257,7 @@ namespace Core2D.Editor
             var result = await dlg.ShowAsync(GetWindow());
             if (result is { })
             {
-                string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
+                string ext = Path.GetExtension(result).ToLower().TrimStart('.');
                 var writer = editor.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                 if (writer is { })
                 {
@@ -279,7 +279,7 @@ namespace Core2D.Editor
                 {
                     if (result.All(r => r is { }))
                     {
-                        await _serviceProvider.GetService<ProjectEditorViewModel>().OnExecuteScriptFile(result);
+                        await ServiceProvider.GetService<ProjectEditorViewModel>().OnExecuteScriptFile(result);
                     }
                 }
             }
@@ -296,8 +296,8 @@ namespace Core2D.Editor
             {
                 if (item is null)
                 {
-                    var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-                    var exporter = new SvgSvgExporter(_serviceProvider);
+                    var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+                    var exporter = new SvgSvgExporter(ServiceProvider);
                     var container = editor.Project.CurrentContainer;
 
                     var width = 0.0;
@@ -339,7 +339,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -347,7 +347,7 @@ namespace Core2D.Editor
         {
             try
             {
-                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var converter = editor.SvgConverter;
 
                 var svgText = await editor.TextClipboard?.GetText();
@@ -362,7 +362,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -372,8 +372,8 @@ namespace Core2D.Editor
             {
                 if (item is null)
                 {
-                    var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-                    var exporter = new DrawingGroupXamlExporter(_serviceProvider);
+                    var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+                    var exporter = new DrawingGroupXamlExporter(ServiceProvider);
                     var container = editor.Project.CurrentContainer;
 
                     var sources = editor.Project?.SelectedShapes;
@@ -402,7 +402,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -471,7 +471,7 @@ namespace Core2D.Editor
 
             try
             {
-                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var imageChache = editor.Project as IImageCache;
                 var container = editor.Project.CurrentContainer;
                 var shapes = editor.Project.SelectedShapes;
@@ -514,7 +514,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -524,7 +524,7 @@ namespace Core2D.Editor
             {
                 if (item is null)
                 {
-                    var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                    var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                     var converter = editor.PathConverter;
                     var container = editor.Project.CurrentContainer;
 
@@ -554,7 +554,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -562,7 +562,7 @@ namespace Core2D.Editor
         {
             try
             {
-                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var converter = editor.PathConverter;
 
                 var svgPath = await editor.TextClipboard?.GetText();
@@ -577,7 +577,7 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -585,7 +585,7 @@ namespace Core2D.Editor
         {
             try
             {
-                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var converter = editor.PathConverter;
 
                 var svgPath = await editor.TextClipboard?.GetText();
@@ -600,13 +600,13 @@ namespace Core2D.Editor
             }
             catch (Exception ex)
             {
-                _serviceProvider.GetService<ILog>()?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
         public async void OnImportData(ProjectContainerViewModel project)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var dlg = new OpenFileDialog() { Title = "Open" };
             foreach (var reader in editor?.TextFieldReaders)
             {
@@ -622,7 +622,7 @@ namespace Core2D.Editor
                 {
                     return;
                 }
-                string ext = System.IO.Path.GetExtension(path).ToLower().TrimStart('.');
+                string ext = Path.GetExtension(path).ToLower().TrimStart('.');
                 var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                 if (reader is { })
                 {
@@ -635,7 +635,7 @@ namespace Core2D.Editor
         {
             if (db is { })
             {
-                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var dlg = new SaveFileDialog() { Title = "Save" };
                 foreach (var writer in editor?.TextFieldWriters)
                 {
@@ -647,7 +647,7 @@ namespace Core2D.Editor
                 var result = await dlg.ShowAsync(GetWindow());
                 if (result is { })
                 {
-                    string ext = System.IO.Path.GetExtension(result).ToLower().TrimStart('.');
+                    string ext = Path.GetExtension(result).ToLower().TrimStart('.');
                     var writer = editor.TextFieldWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                     if (writer is { })
                     {
@@ -661,7 +661,7 @@ namespace Core2D.Editor
         {
             if (db is { })
             {
-                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var dlg = new OpenFileDialog() { Title = "Open" };
                 foreach (var reader in editor?.TextFieldReaders)
                 {
@@ -676,7 +676,7 @@ namespace Core2D.Editor
                     {
                         return;
                     }
-                    string ext = System.IO.Path.GetExtension(path).ToLower().TrimStart('.');
+                    string ext = Path.GetExtension(path).ToLower().TrimStart('.');
                     var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
                     if (reader is { })
                     {
@@ -688,10 +688,10 @@ namespace Core2D.Editor
 
         public void OnAboutDialog()
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             if (editor.AboutInfo is { })
             {
-                var dialog = new DialogViewModel(_serviceProvider, editor)
+                var dialog = new DialogViewModel(ServiceProvider, editor)
                 {
                     Title = $"About {editor.AboutInfo.Title}",
                     IsOverlayVisible = true,
@@ -705,37 +705,37 @@ namespace Core2D.Editor
 
         public void OnZoomReset()
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.ResetZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.ResetZoom?.Invoke();
         }
 
         public void OnZoomFill()
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.FillZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.FillZoom?.Invoke();
         }
 
         public void OnZoomUniform()
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.UniformZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.UniformZoom?.Invoke();
         }
 
         public void OnZoomUniformToFill()
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.UniformToFillZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.UniformToFillZoom?.Invoke();
         }
 
         public void OnZoomAutoFit()
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.AutoFitZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.AutoFitZoom?.Invoke();
         }
 
         public void OnZoomIn()
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.InZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.InZoom?.Invoke();
         }
 
         public void OnZoomOut()
         {
-            _serviceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.OutZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.OutZoom?.Invoke();
         }
     }
 }

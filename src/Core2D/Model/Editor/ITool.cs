@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Core2D.Model.Input;
 using Core2D.ViewModels.Shapes;
 

@@ -1,4 +1,5 @@
-﻿namespace Core2D.Model.Style
+﻿#nullable enable
+namespace Core2D.Model.Style
 {
     public enum TextHAlignment
     {

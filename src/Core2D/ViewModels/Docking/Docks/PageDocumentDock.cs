@@ -1,4 +1,5 @@
-﻿using Core2D.ViewModels.Docking.Documents;
+﻿#nullable enable
+using Core2D.ViewModels.Docking.Documents;
 using Dock.Model.ReactiveUI.Controls;
 using ReactiveUI;
 

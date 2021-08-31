@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +13,8 @@ namespace Core2D.ViewModels.Path.Segments
     {
         public static SweepDirection[] SweepDirectionValues { get; } = (SweepDirection[])Enum.GetValues(typeof(SweepDirection));
 
-        [AutoNotify] private PointShapeViewModel _point;
-        [AutoNotify] private PathSizeViewModel _size;
+        [AutoNotify] private PointShapeViewModel? _point;
+        [AutoNotify] private PathSizeViewModel? _size;
         [AutoNotify] private double _rotationAngle;
         [AutoNotify] private bool _isLargeArc;
         [AutoNotify] private SweepDirection _sweepDirection;
@@ -25,6 +25,11 @@ namespace Core2D.ViewModels.Path.Segments
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
+            if (_point is null)
+            {
+                return;
+            }
+
             points.Add(_point);
         }
 
@@ -32,8 +37,15 @@ namespace Core2D.ViewModels.Path.Segments
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _point.IsDirty();
-            isDirty |= Size.IsDirty();
+            if (_point != null)
+            {
+                isDirty |= _point.IsDirty();
+            }
+
+            if (_size != null)
+            {
+                isDirty |= _size.IsDirty();
+            }
 
             return isDirty;
         }
@@ -42,11 +54,11 @@ namespace Core2D.ViewModels.Path.Segments
         {
             base.Invalidate();
 
-            _point.Invalidate();
-            _size.Invalidate();
+            _point?.Invalidate();
+            _size?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -57,7 +69,7 @@ namespace Core2D.ViewModels.Path.Segments
             ObserveObject(_point, ref disposablePoint, mainDisposable, observer);
             ObserveObject(_size, ref disposableSize, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Point))
                 {
@@ -76,9 +88,21 @@ namespace Core2D.ViewModels.Path.Segments
         }
 
         public override string ToXamlString()
-            => $"A{Size.ToXamlString()} {RotationAngle.ToString(CultureInfo.InvariantCulture)} {(IsLargeArc ? "1" : "0")} {(SweepDirection == SweepDirection.Clockwise ? "1" : "0")} {Point.ToXamlString()}";
+        {
+            if (_size is null || _point is null)
+            {
+                return "";
+            }
+            return $"A{_size.ToXamlString()} {RotationAngle.ToString(CultureInfo.InvariantCulture)} {(IsLargeArc ? "1" : "0")} {(SweepDirection == SweepDirection.Clockwise ? "1" : "0")} {_point.ToXamlString()}";
+        }
 
         public override string ToSvgString()
-            => $"A{Size.ToSvgString()} {RotationAngle.ToString(CultureInfo.InvariantCulture)} {(IsLargeArc ? "1" : "0")} {(SweepDirection == SweepDirection.Clockwise ? "1" : "0")} {Point.ToSvgString()}";
+        {
+            if (_size is null || _point is null)
+            {
+                return "";
+            }
+            return $"A{_size.ToSvgString()} {RotationAngle.ToString(CultureInfo.InvariantCulture)} {(IsLargeArc ? "1" : "0")} {(SweepDirection == SweepDirection.Clockwise ? "1" : "0")} {_point.ToSvgString()}";
+        }
     }
 }

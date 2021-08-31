@@ -10,14 +10,14 @@ namespace Core2D.Spatial
 
         public Point2(double x, double y)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
 
         public void Deconstruct(out double x, out double y)
         {
-            x = this.X;
-            y = this.Y;
+            x = X;
+            y = Y;
         }
 
         public static Point2 FromXY(double x, double y)

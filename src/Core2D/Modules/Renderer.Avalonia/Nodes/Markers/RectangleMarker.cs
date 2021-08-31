@@ -1,10 +1,9 @@
 ﻿#nullable disable
-using Core2D.Modules.Renderer.Media;
+using Core2D.Modules.Renderer.Avalonia.Media;
 using A = Avalonia;
-using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Nodes.Markers
+namespace Core2D.Modules.Renderer.Avalonia.Nodes.Markers
 {
     internal class RectangleMarker : MarkerBase
     {

@@ -2,10 +2,9 @@
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using A = Avalonia;
-using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Nodes
+namespace Core2D.Modules.Renderer.Avalonia.Nodes
 {
     internal class GridDrawNode : DrawNode, IGridDrawNode
     {
@@ -26,7 +25,7 @@ namespace Core2D.Modules.Renderer.Nodes
             UpdateGeometry();
         }
 
-        public override void UpdateGeometry()
+        public sealed override void UpdateGeometry()
         {
             ScaleThickness = true;
             ScaleSize = false;

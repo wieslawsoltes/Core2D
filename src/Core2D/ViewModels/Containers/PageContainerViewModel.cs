@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.ComponentModel;
 using System.Reactive.Disposables;
@@ -7,7 +7,7 @@ namespace Core2D.ViewModels.Containers
 {
     public partial class PageContainerViewModel : FrameContainerViewModel
     {
-        [AutoNotify] private TemplateContainerViewModel _template;
+        [AutoNotify] private TemplateContainerViewModel? _template;
 
         public PageContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -39,7 +39,7 @@ namespace Core2D.ViewModels.Containers
             _template?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -58,7 +58,7 @@ namespace Core2D.ViewModels.Containers
             ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
             ObserveObject(_template, ref disposableTemplate, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Layers))
                 {

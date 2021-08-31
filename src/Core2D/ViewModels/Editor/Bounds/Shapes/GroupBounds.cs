@@ -9,13 +9,13 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class GroupBounds : IBounds
+    public class GroupBounds : IBounds
     {
         public Type TargetType => typeof(GroupShapeViewModel);
 
         public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is GroupShapeViewModel group))
+            if (shape is not GroupShapeViewModel group)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -35,18 +35,18 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is GroupShapeViewModel group))
+            if (shape is not GroupShapeViewModel group)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
             var hasSize = group.State.HasFlag(ShapeStateFlags.Size);
 
-            foreach (var GroupShape in group.Shapes.Reverse())
+            foreach (var groupShape in group.Shapes.Reverse())
             {
-                var hitTest = registered[GroupShape.TargetType];
-                var result = hitTest.Contains(GroupShape, target, radius, hasSize ? scale : 1.0, registered);
-                if (result == true)
+                var hitTest = registered[groupShape.TargetType];
+                var result = hitTest.Contains(groupShape, target, radius, hasSize ? scale : 1.0, registered);
+                if (result)
                 {
                     return true;
                 }
@@ -56,18 +56,18 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is GroupShapeViewModel group))
+            if (shape is not GroupShapeViewModel group)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
             var hasSize = group.State.HasFlag(ShapeStateFlags.Size);
 
-            foreach (var GroupShape in group.Shapes.Reverse())
+            foreach (var groupShape in group.Shapes.Reverse())
             {
-                var hitTest = registered[GroupShape.TargetType];
-                var result = hitTest.Overlaps(GroupShape, target, radius, hasSize ? scale : 1.0, registered);
-                if (result == true)
+                var hitTest = registered[groupShape.TargetType];
+                var result = hitTest.Overlaps(groupShape, target, radius, hasSize ? scale : 1.0, registered);
+                if (result)
                 {
                     return true;
                 }

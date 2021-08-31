@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -9,10 +9,10 @@ namespace Core2D.ViewModels.Data
 {
     public partial class DatabaseViewModel : ViewModelBase
     {
-        [AutoNotify] private string _idColumnName;
+        [AutoNotify] private string? _idColumnName;
         [AutoNotify] private ImmutableArray<ColumnViewModel> _columns;
         [AutoNotify] private ImmutableArray<RecordViewModel> _records;
-        [AutoNotify] private RecordViewModel _currentRecord;
+        [AutoNotify] private RecordViewModel? _currentRecord;
 
         public DatabaseViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -20,17 +20,18 @@ namespace Core2D.ViewModels.Data
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            var columns = this._columns.Copy(shared).ToImmutable();
-            var records = this._records.Copy(shared).ToImmutable();
-            var currentRecordIndex = _records.IndexOf(_currentRecord);
+            var columns = _columns.Copy(shared).ToImmutable();
+            var records = _records.Copy(shared).ToImmutable();
+            var currentRecordIndex = _currentRecord is null ? -1 : _records.IndexOf(_currentRecord);
+            var currentRecord = currentRecordIndex == -1 ? null : records[currentRecordIndex];
 
-            return new DatabaseViewModel(_serviceProvider)
+            return new DatabaseViewModel(ServiceProvider)
             {
-                Name = this.Name,
-                IdColumnName = this.IdColumnName,
+                Name = Name,
+                IdColumnName = IdColumnName,
                 Columns = columns,
                 Records = records,
-                CurrentRecord = records[currentRecordIndex]
+                CurrentRecord = currentRecord
             };
         }
 
@@ -66,7 +67,7 @@ namespace Core2D.ViewModels.Data
             }
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -77,7 +78,7 @@ namespace Core2D.ViewModels.Data
             ObserveList(_columns, ref disposableColumns, mainDisposable, observer);
             ObserveList(_records, ref disposableRecords, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Columns))
                 {

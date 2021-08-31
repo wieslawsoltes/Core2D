@@ -1,14 +1,13 @@
 ﻿#nullable disable
-using System;
 using Core2D.Model.Renderer.Nodes;
-using Core2D.Modules.Renderer.Media;
+using Core2D.Modules.Renderer.Avalonia.Media;
 using Core2D.ViewModels.Style;
 using A = Avalonia;
 using ACP = Avalonia.Controls.PanAndZoom;
 using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Nodes
+namespace Core2D.Modules.Renderer.Avalonia.Nodes
 {
     internal abstract class DrawNode : IDrawNode
     {

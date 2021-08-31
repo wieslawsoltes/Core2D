@@ -3,15 +3,14 @@ using System;
 using System.Diagnostics;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
+using Core2D.Spatial;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
-using Core2D.Spatial;
 using A = Avalonia;
-using AM = Avalonia.Media;
 using AMI = Avalonia.Media.Imaging;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Nodes
+namespace Core2D.Modules.Renderer.Avalonia.Nodes
 {
     internal class ImageDrawNode : DrawNode, IImageDrawNode
     {
@@ -33,7 +32,7 @@ namespace Core2D.Modules.Renderer.Nodes
             UpdateGeometry();
         }
 
-        public override void UpdateGeometry()
+        public sealed override void UpdateGeometry()
         {
             ScaleThickness = Image.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Image.State.HasFlag(ShapeStateFlags.Size);

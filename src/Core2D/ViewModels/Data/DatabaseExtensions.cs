@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Collections.Immutable;
 using System.Linq;
 
@@ -6,7 +6,7 @@ namespace Core2D.ViewModels.Data
 {
     public static class DatabaseExtensions
     {
-        public static bool Update(this DatabaseViewModel destination, DatabaseViewModel source, out ImmutableArray<RecordViewModel>.Builder records)
+        public static bool Update(this DatabaseViewModel? destination, DatabaseViewModel? source, out ImmutableArray<RecordViewModel>.Builder? records)
         {
             bool isDirty = false;
             records = null;

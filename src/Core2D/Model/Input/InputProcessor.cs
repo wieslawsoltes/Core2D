@@ -1,20 +1,20 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 
 namespace Core2D.Model.Input
 {
     public class InputProcessor : IDisposable
     {
-        private IDisposable _beginDownDisposable;
-        private IDisposable _beginUpDisposable;
-        private IDisposable _endDownDisposable;
-        private IDisposable _endUpDisposable;
-        private IDisposable _moveDisposable;
+        private IDisposable? _beginDownDisposable;
+        private IDisposable? _beginUpDisposable;
+        private IDisposable? _endDownDisposable;
+        private IDisposable? _endUpDisposable;
+        private IDisposable? _moveDisposable;
 
-        private static IDisposable ConnectBeginDown(InputSource source, InputTarget target)
+        private static IDisposable? ConnectBeginDown(InputSource source, InputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextBeginDown);
-            return source.BeginDown.Subscribe(observer);
+            return source.BeginDown?.Subscribe(observer);
 
             static void OnNextBeginDown(InputTarget target, InputArgs args)
             {
@@ -25,10 +25,10 @@ namespace Core2D.Model.Input
             }
         }
 
-        private static IDisposable ConnectBeginUp(InputSource source, InputTarget target)
+        private static IDisposable? ConnectBeginUp(InputSource source, InputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextBeginUp);
-            return source.BeginUp.Subscribe(observer);
+            return source.BeginUp?.Subscribe(observer);
 
             static void OnNextBeginUp(InputTarget target, InputArgs args)
             {
@@ -39,10 +39,10 @@ namespace Core2D.Model.Input
             }
         }
 
-        private static IDisposable ConnectEndDown(InputSource source, InputTarget target)
+        private static IDisposable? ConnectEndDown(InputSource source, InputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextEndDown);
-            return source.EndDown.Subscribe(observer);
+            return source.EndDown?.Subscribe(observer);
 
             static void OnNextEndDown(InputTarget target, InputArgs args)
             {
@@ -53,10 +53,10 @@ namespace Core2D.Model.Input
             }
         }
 
-        private static IDisposable ConnectEndUp(InputSource source, InputTarget target)
+        private static IDisposable? ConnectEndUp(InputSource source, InputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextEndUp);
-            return source.EndUp.Subscribe(observer);
+            return source.EndUp?.Subscribe(observer);
 
             static void OnNextEndUp(InputTarget target, InputArgs args)
             {
@@ -67,10 +67,10 @@ namespace Core2D.Model.Input
             }
         }
 
-        private static IDisposable ConnectMove(InputSource source, InputTarget target)
+        private static IDisposable? ConnectMove(InputSource source, InputTarget target)
         {
             var observer = new InputArgsObserver(target, OnNextMove);
-            return source.Move.Subscribe(observer);
+            return source.Move?.Subscribe(observer);
 
             static void OnNextMove(InputTarget target, InputArgs args)
             {
@@ -79,31 +79,6 @@ namespace Core2D.Model.Input
                     target.Move(args);
                 }
             }
-        }
-
-        private static void DisconnectBeginDown(IDisposable disposable)
-        {
-            disposable?.Dispose();
-        }
-
-        private static void DisconnectBeginUp(IDisposable disposable)
-        {
-            disposable?.Dispose();
-        }
-
-        private static void DisconnectEndDown(IDisposable disposable)
-        {
-            disposable?.Dispose();
-        }
-
-        private static void DisconnectEndUp(IDisposable disposable)
-        {
-            disposable.Dispose();
-        }
-
-        private static void DisconnectMove(IDisposable disposable)
-        {
-            disposable?.Dispose();
         }
 
         public void Connect(InputSource source, InputTarget target)
@@ -117,11 +92,11 @@ namespace Core2D.Model.Input
 
         public void Disconnect()
         {
-            DisconnectBeginDown(_beginDownDisposable);
-            DisconnectBeginUp(_beginUpDisposable);
-            DisconnectEndDown(_endDownDisposable);
-            DisconnectEndUp(_endUpDisposable);
-            DisconnectMove(_moveDisposable);
+            _beginDownDisposable?.Dispose();
+            _beginUpDisposable?.Dispose();
+            _endDownDisposable?.Dispose();
+            _endUpDisposable?.Dispose();
+            _moveDisposable?.Dispose();
         }
 
         public void Dispose()

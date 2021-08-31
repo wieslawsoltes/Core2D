@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -18,7 +18,7 @@ namespace Core2D.ViewModels.Shapes
         {
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
@@ -31,7 +31,7 @@ namespace Core2D.ViewModels.Shapes
             base.DrawShape(dc, renderer, selection);
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
@@ -44,7 +44,7 @@ namespace Core2D.ViewModels.Shapes
             base.DrawPoints(dc, renderer, selection);
         }
 
-        public override void Bind(DataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object? db, object? r)
         {
             var record = Record ?? r;
 
@@ -56,7 +56,7 @@ namespace Core2D.ViewModels.Shapes
             base.Bind(dataFlow, db, record);
         }
 
-        public override void Move(ISelection selection, decimal dx, decimal dy)
+        public override void Move(ISelection? selection, decimal dx, decimal dy)
         {
             foreach (var shape in _shapes)
             {
@@ -67,16 +67,6 @@ namespace Core2D.ViewModels.Shapes
             }
 
             base.Move(selection, dx, dy);
-        }
-
-        public override void Select(ISelection selection)
-        {
-            base.Select(selection);
-        }
-
-        public override void Deselect(ISelection selection)
-        {
-            base.Deselect(selection);
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)
@@ -111,7 +101,7 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -128,7 +118,7 @@ namespace Core2D.ViewModels.Shapes
             ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
             ObserveList(_connectors, ref disposableConnectors, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Style))
                 {

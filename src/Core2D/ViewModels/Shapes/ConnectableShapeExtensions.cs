@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Core2D.Model.Renderer;
 
 namespace Core2D.ViewModels.Shapes

@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +9,9 @@ namespace Core2D.ViewModels.Path.Segments
 {
     public partial class CubicBezierSegmentViewModel : PathSegmentViewModel
     {
-        [AutoNotify] private PointShapeViewModel _point1;
-        [AutoNotify] private PointShapeViewModel _point2;
-        [AutoNotify] private PointShapeViewModel _point3;
+        [AutoNotify] private PointShapeViewModel? _point1;
+        [AutoNotify] private PointShapeViewModel? _point2;
+        [AutoNotify] private PointShapeViewModel? _point3;
 
         public CubicBezierSegmentViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -19,6 +19,11 @@ namespace Core2D.ViewModels.Path.Segments
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
+            if (_point1 is null || _point2 is null || _point3 is null)
+            {
+                return;
+            }
+
             points.Add(_point1);
             points.Add(_point2);
             points.Add(_point3);
@@ -28,9 +33,20 @@ namespace Core2D.ViewModels.Path.Segments
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _point1.IsDirty();
-            isDirty |= _point2.IsDirty();
-            isDirty |= _point3.IsDirty();
+            if (_point1 != null)
+            {
+                isDirty |= _point1.IsDirty();
+            }
+
+            if (_point2 != null)
+            {
+                isDirty |= _point2.IsDirty();
+            }
+
+            if (_point3 != null)
+            {
+                isDirty |= _point3.IsDirty();
+            }
 
             return isDirty;
         }
@@ -39,12 +55,12 @@ namespace Core2D.ViewModels.Path.Segments
         {
             base.Invalidate();
 
-            _point1.Invalidate();
-            _point2.Invalidate();
-            _point3.Invalidate();
+            _point1?.Invalidate();
+            _point2?.Invalidate();
+            _point3?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -57,7 +73,7 @@ namespace Core2D.ViewModels.Path.Segments
             ObserveObject(_point2, ref disposablePoint2, mainDisposable, observer);
             ObserveObject(_point3, ref disposablePoint3, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Point1))
                 {
@@ -81,9 +97,21 @@ namespace Core2D.ViewModels.Path.Segments
         }
 
         public override string ToXamlString()
-            => $"C{Point1.ToXamlString()} {Point2.ToXamlString()} {Point3.ToXamlString()}";
+        {
+            if (_point1 is null || _point2 is null || _point3 is null)
+            {
+                return "";
+            }
+            return $"C{_point1.ToXamlString()} {_point2.ToXamlString()} {_point3.ToXamlString()}";
+        }
 
         public override string ToSvgString()
-            => $"C{Point1.ToSvgString()} {Point2.ToSvgString()} {Point3.ToSvgString()}";
+        {
+            if (_point1 is null || _point2 is null || _point3 is null)
+            {
+                return "";
+            }
+            return $"C{_point1.ToSvgString()} {_point2.ToSvgString()} {_point3.ToSvgString()}";
+        }
     }
 }

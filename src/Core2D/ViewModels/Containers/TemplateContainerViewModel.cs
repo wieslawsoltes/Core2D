@@ -1,4 +1,4 @@
-#nullable disable
+#nullable enable
 using System;
 using System.ComponentModel;
 using System.Reactive.Disposables;
@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Containers
     {
         [AutoNotify] private double _width;
         [AutoNotify] private double _height;
-        [AutoNotify] private BaseColorViewModel _background;
+        [AutoNotify] private BaseColorViewModel? _background;
         [AutoNotify] private bool _isGridEnabled;
         [AutoNotify] private bool _isBorderEnabled;
         [AutoNotify] private double _gridOffsetLeft;
@@ -20,7 +20,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private double _gridOffsetBottom;
         [AutoNotify] private double _gridCellWidth;
         [AutoNotify] private double _gridCellHeight;
-        [AutoNotify] private BaseColorViewModel _gridStrokeColor;
+        [AutoNotify] private BaseColorViewModel? _gridStrokeColor;
         [AutoNotify] private double _gridStrokeThickness;
 
         public TemplateContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
@@ -44,7 +44,7 @@ namespace Core2D.ViewModels.Containers
             return isDirty;
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -65,7 +65,7 @@ namespace Core2D.ViewModels.Containers
             ObserveObject(_background, ref disposableBackground, mainDisposable, observer);
             ObserveObject(_gridStrokeColor, ref disposableGridStrokeColor, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Layers))
                 {

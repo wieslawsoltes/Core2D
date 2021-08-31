@@ -1,9 +1,9 @@
 ﻿#nullable disable
-using Core2D.Modules.Renderer.Media;
+using Core2D.Modules.Renderer.Avalonia.Media;
 using AP = Avalonia.Platform;
 using AM = Avalonia.Media;
 
-namespace Core2D.Modules.Renderer.Nodes.Markers
+namespace Core2D.Modules.Renderer.Avalonia.Nodes.Markers
 {
     internal class EllipseMarker : MarkerBase
     {

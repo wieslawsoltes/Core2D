@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 
@@ -14,10 +14,10 @@ namespace Core2D.ViewModels.Data
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new ColumnViewModel(_serviceProvider)
+            return new ColumnViewModel(ServiceProvider)
             {
-                Name = this.Name,
-                IsVisible = this.IsVisible
+                Name = Name,
+                IsVisible = IsVisible
             };
         }
 
@@ -25,11 +25,6 @@ namespace Core2D.ViewModels.Data
         {
             var isDirty = base.IsDirty();
             return isDirty;
-        }
-
-        public override void Invalidate()
-        {
-            base.Invalidate();
         }
     }
 }

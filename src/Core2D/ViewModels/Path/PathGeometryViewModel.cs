@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Immutable;
 using System.ComponentModel;
@@ -41,7 +41,7 @@ namespace Core2D.ViewModels.Path
             }
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -50,7 +50,7 @@ namespace Core2D.ViewModels.Path
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveList(_figures, ref disposableFigures, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Figures))
                 {
@@ -63,7 +63,7 @@ namespace Core2D.ViewModels.Path
             return mainDisposable;
         }
 
-        public string ToXamlString(ImmutableArray<PathFigureViewModel> figures)
+        private string ToXamlString(ImmutableArray<PathFigureViewModel> figures)
         {
             if (figures.Length == 0)
             {
@@ -75,13 +75,13 @@ namespace Core2D.ViewModels.Path
                 sb.Append(figures[i].ToXamlString());
                 if (i != figures.Length - 1)
                 {
-                    sb.Append(" ");
+                    sb.Append(' ');
                 }
             }
             return sb.ToString();
         }
 
-        public string ToSvgString(ImmutableArray<PathFigureViewModel> figures)
+        private string ToSvgString(ImmutableArray<PathFigureViewModel> figures)
         {
             if (figures.Length == 0)
             {
@@ -93,7 +93,7 @@ namespace Core2D.ViewModels.Path
                 sb.Append(figures[i].ToSvgString());
                 if (i != figures.Length - 1)
                 {
-                    sb.Append(" ");
+                    sb.Append(' ');
                 }
             }
             return sb.ToString();

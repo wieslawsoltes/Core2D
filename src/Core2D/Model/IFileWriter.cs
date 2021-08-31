@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.IO;
 
 namespace Core2D.Model
@@ -9,6 +9,6 @@ namespace Core2D.Model
 
         string Extension { get; }
 
-        void Save(Stream stream, object item, object options);
+        void Save(Stream stream, object item, object? options);
     }
 }

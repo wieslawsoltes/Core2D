@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -8,7 +8,7 @@ namespace Core2D.ViewModels.Style
 {
     public static class StyleHelper
     {
-        public static string ConvertDoubleArrayToDashes(double[] value)
+        public static string? ConvertDoubleArrayToDashes(double[]? value)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Core2D.ViewModels.Style
             return null;
         }
 
-        public static string ConvertFloatArrayToDashes(float[] value)
+        public static string? ConvertFloatArrayToDashes(float[]? value)
         {
             try
             {
@@ -43,13 +43,13 @@ namespace Core2D.ViewModels.Style
             return null;
         }
 
-        public static double[] ConvertDashesToDoubleArray(string value, double strokeWidth)
+        public static double[]? ConvertDashesToDoubleArray(string? value, double strokeWidth)
         {
             try
             {
                 if (value is { })
                 {
-                    string[] values = value.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] values = value.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
                     double[] array = new double[values.Length];
                     for (int i = 0; i < values.Length; i++)
                     {
@@ -70,13 +70,13 @@ namespace Core2D.ViewModels.Style
             return null;
         }
 
-        public static float[] ConvertDashesToFloatArray(string value, double strokeWidth)
+        public static float[]? ConvertDashesToFloatArray(string? value, double strokeWidth)
         {
             try
             {
                 if (value is { })
                 {
-                    string[] values = value.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] values = value.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
                     float[] array = new float[values.Length];
                     for (int i = 0; i < values.Length; i++)
                     {

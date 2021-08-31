@@ -21,14 +21,14 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public void BeginDown(InputArgs args)
         {
-            var factory = _serviceProvider.GetService<IViewModelFactory>();
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var factory = ServiceProvider.GetService<IViewModelFactory>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Move:
                     {
-                        var pathTool = _serviceProvider.GetService<PathToolViewModel>();
+                        var pathTool = ServiceProvider.GetService<PathToolViewModel>();
                         editor.CurrentPathTool = pathTool.PreviousPathTool;
 
                         var start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
@@ -56,7 +56,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public void Move(InputArgs args)
         {
-            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             (decimal sx, decimal sy) = editor.TryToSnap(args);
             switch (_currentState)
             {

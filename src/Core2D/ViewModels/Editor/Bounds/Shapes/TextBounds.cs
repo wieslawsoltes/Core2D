@@ -8,13 +8,13 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class TextBounds : IBounds
+    public class TextBounds : IBounds
     {
         public Type TargetType => typeof(TextShapeViewModel);
 
         public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is TextShapeViewModel text))
+            if (shape is not TextShapeViewModel text)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -36,7 +36,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is TextShapeViewModel text))
+            if (shape is not TextShapeViewModel text)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -47,6 +47,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
                 text.BottomRight.X,
                 text.BottomRight.Y);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (text.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).Contains(target);
@@ -59,7 +60,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is TextShapeViewModel text))
+            if (shape is not TextShapeViewModel text)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -70,6 +71,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
                 text.BottomRight.X,
                 text.BottomRight.Y);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (text.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);

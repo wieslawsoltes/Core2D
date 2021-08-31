@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model.Editor;
@@ -8,15 +8,20 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class LineBounds : IBounds
+    public class LineBounds : IBounds
     {
         public Type TargetType => typeof(LineShapeViewModel);
 
-        public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+        public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is LineShapeViewModel line))
+            if (shape is not LineShapeViewModel line)
             {
                 throw new ArgumentNullException(nameof(shape));
+            }
+
+            if (line.Start is null || line.End is null)
+            {
+                return null;
             }
 
             var pointHitTest = registered[typeof(PointShapeViewModel)];
@@ -36,13 +41,19 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is LineShapeViewModel line))
+            if (shape is not LineShapeViewModel line)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
+            if (line.Start is null || line.End is null)
+            {
+                return false;
+            }
+
             Point2 a;
             Point2 b;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (line.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 a = new Point2(line.Start.X * scale, line.Start.Y * scale);
@@ -61,13 +72,19 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is LineShapeViewModel line))
+            if (shape is not LineShapeViewModel line)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
+            if (line.Start is null || line.End is null)
+            {
+                return false;
+            }
+
             Point2 a;
             Point2 b;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (line.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 a = new Point2(line.Start.X * scale, line.Start.Y * scale);

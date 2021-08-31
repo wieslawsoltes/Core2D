@@ -8,15 +8,15 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class CubicBezierBounds : IBounds
+    public class CubicBezierBounds : IBounds
     {
-        private List<PointShapeViewModel> _points = new List<PointShapeViewModel>();
+        private readonly List<PointShapeViewModel> _points = new();
 
         public Type TargetType => typeof(CubicBezierShapeViewModel);
 
         public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is CubicBezierShapeViewModel cubic))
+            if (shape is not CubicBezierShapeViewModel cubic)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -48,7 +48,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is CubicBezierShapeViewModel cubic))
+            if (shape is not CubicBezierShapeViewModel cubic)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -56,6 +56,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
             _points.Clear();
             cubic.GetPoints(_points);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (cubic.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Contains(_points, target, scale);
@@ -68,7 +69,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is CubicBezierShapeViewModel cubic))
+            if (shape is not CubicBezierShapeViewModel cubic)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -76,6 +77,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
             _points.Clear();
             cubic.GetPoints(_points);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (cubic.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Overlap(_points, target, scale);

@@ -4,7 +4,7 @@ using Core2D.Model.Style;
 using Core2D.ViewModels.Style;
 using AM = Avalonia.Media;
 
-namespace Core2D.Modules.Renderer
+namespace Core2D.Modules.Renderer.Avalonia
 {
     internal static class AvaloniaDrawUtil
     {

@@ -19,7 +19,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
             UpdateGeometry();
         }
 
-        public override void UpdateGeometry()
+        public sealed override void UpdateGeometry()
         {
             ScaleThickness = CubicBezier.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = CubicBezier.State.HasFlag(ShapeStateFlags.Size);

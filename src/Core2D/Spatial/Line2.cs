@@ -10,28 +10,28 @@ namespace Core2D.Spatial
 
         public Line2(Point2 a, Point2 b)
         {
-            this.A = a;
-            this.B = b;
+            A = a;
+            B = b;
         }
 
         public Line2(double ax, double ay, double bx, double by)
         {
-            this.A = new Point2(ax, ay);
-            this.B = new Point2(bx, by);
+            A = new Point2(ax, ay);
+            B = new Point2(bx, by);
         }
 
         public void Deconstruct(out double ax, out double ay, out double bx, out double by)
         {
-            ax = this.A.X;
-            ay = this.A.Y;
-            bx = this.B.X;
-            by = this.B.Y;
+            ax = A.X;
+            ay = A.Y;
+            bx = B.X;
+            by = B.Y;
         }
 
         public void Deconstruct(out Point2 a, out Point2 b)
         {
-            a = this.A;
-            b = this.B;
+            a = A;
+            b = B;
         }
 
         public static Line2 FromPoints(double ax, double ay, double bx, double by, double dx = 0.0, double dy = 0.0)

@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 
@@ -6,7 +6,7 @@ namespace Core2D.ViewModels.Data
 {
     public partial class PropertyViewModel : ViewModelBase
     {
-        [AutoNotify] private string _value;
+        [AutoNotify] private string? _value;
 
         public PropertyViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Data
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new PropertyViewModel(_serviceProvider)
+            return new PropertyViewModel(ServiceProvider)
             {
                 Name = Name,
                 Value = Value
@@ -27,11 +27,6 @@ namespace Core2D.ViewModels.Data
             return isDirty;
         }
 
-        public override void Invalidate()
-        {
-            base.Invalidate();
-        }
-
-        public override string ToString() => _value.ToString();
+        public override string ToString() => _value ?? "";
     }
 }

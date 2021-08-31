@@ -8,7 +8,7 @@ namespace Core2D.Spatial
 
         public Polygon2(Point2[] points)
         {
-            this.Points = points;
+            Points = points;
         }
 
         public bool Contains(double x, double y)

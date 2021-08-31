@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Immutable;
 using System.ComponentModel;
@@ -9,6 +9,8 @@ namespace Core2D.ViewModels.Containers
 {
     public class InvalidateLayerEventArgs : EventArgs
     {
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
+        // ReSharper disable once MemberCanBePrivate.Global
         public LayerContainerViewModel Layer { get; }
 
         public InvalidateLayerEventArgs(LayerContainerViewModel layer)
@@ -24,7 +26,7 @@ namespace Core2D.ViewModels.Containers
         private readonly InvalidateLayerEventArgs _invalidateLayerEventArgs;
         [AutoNotify] private ImmutableArray<BaseShapeViewModel> _shapes;
 
-        public event InvalidateLayerEventHandler InvalidateLayer;
+        public event InvalidateLayerEventHandler? InvalidateLayer;
 
         public LayerContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -57,7 +59,7 @@ namespace Core2D.ViewModels.Containers
                 shape.Invalidate();
             }
         }
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -66,7 +68,7 @@ namespace Core2D.ViewModels.Containers
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Shapes))
                 {

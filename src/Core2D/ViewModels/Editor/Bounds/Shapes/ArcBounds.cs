@@ -8,13 +8,13 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes
 {
-    public partial class ArcBounds : IBounds
+    public class ArcBounds : IBounds
     {
         public Type TargetType => typeof(ArcShapeViewModel);
 
         public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is ArcShapeViewModel arc))
+            if (shape is not ArcShapeViewModel arc)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
@@ -46,13 +46,14 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is ArcShapeViewModel arc))
+            if (shape is not ArcShapeViewModel arc)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
             var rect = GetArcBounds(arc);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (arc.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).Contains(target);
@@ -65,13 +66,14 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
 
         public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
         {
-            if (!(shape is ArcShapeViewModel arc))
+            if (shape is not ArcShapeViewModel arc)
             {
                 throw new ArgumentNullException(nameof(shape));
             }
 
             var rect = GetArcBounds(arc);
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (arc.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
             {
                 return HitTestHelper.Inflate(ref rect, scale).IntersectsWith(target);
@@ -82,7 +84,7 @@ namespace Core2D.ViewModels.Editor.Bounds.Shapes
             }
         }
 
-        public static Rect2 GetArcBounds(ArcShapeViewModel arc)
+        private static Rect2 GetArcBounds(ArcShapeViewModel arc)
         {
             double x1 = arc.Point1.X;
             double y1 = arc.Point1.Y;

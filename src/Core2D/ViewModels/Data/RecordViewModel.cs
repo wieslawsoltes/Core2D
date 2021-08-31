@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -20,7 +20,7 @@ namespace Core2D.ViewModels.Data
         {
             var values = _values.Copy(shared).ToImmutable();
 
-            return new RecordViewModel(_serviceProvider)
+            return new RecordViewModel(ServiceProvider)
             {
                 Name = Name,
                 Values = values
@@ -49,7 +49,7 @@ namespace Core2D.ViewModels.Data
             }
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -58,7 +58,7 @@ namespace Core2D.ViewModels.Data
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveList(_values, ref disposableValues, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Values))
                 {

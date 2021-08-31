@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.ComponentModel;
 using System.Reactive.Disposables;
@@ -14,15 +14,15 @@ namespace Core2D.ViewModels.Renderer
         [AutoNotify] private double _zoomX;
         [AutoNotify] private double _zoomY;
         [AutoNotify] private ShapeStateFlags _drawShapeState;
-        [AutoNotify] private IImageCache _imageCache;
+        [AutoNotify] private IImageCache? _imageCache;
         [AutoNotify] private bool _drawDecorators;
         [AutoNotify] private bool _drawPoints;
-        [AutoNotify] private ShapeStyleViewModel _pointStyle;
-        [AutoNotify] private ShapeStyleViewModel _selectedPointStyle;
+        [AutoNotify] private ShapeStyleViewModel? _pointStyle;
+        [AutoNotify] private ShapeStyleViewModel? _selectedPointStyle;
         [AutoNotify] private double _pointSize;
-        [AutoNotify] private ShapeStyleViewModel _selectionStyle;
-        [AutoNotify] private ShapeStyleViewModel _helperStyle;
-        [AutoNotify] private IDecorator _decorator;
+        [AutoNotify] private ShapeStyleViewModel? _selectionStyle;
+        [AutoNotify] private ShapeStyleViewModel? _helperStyle;
+        [AutoNotify] private IDecorator? _decorator;
 
         public ShapeRendererStateViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -32,13 +32,25 @@ namespace Core2D.ViewModels.Renderer
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _pointStyle.IsDirty();
+            if (_pointStyle != null)
+            {
+                isDirty |= _pointStyle.IsDirty();
+            }
 
-            isDirty |= _selectedPointStyle.IsDirty();
+            if (_selectedPointStyle != null)
+            {
+                isDirty |= _selectedPointStyle.IsDirty();
+            }
 
-            isDirty |= _selectionStyle.IsDirty();
+            if (_selectionStyle != null)
+            {
+                isDirty |= _selectionStyle.IsDirty();
+            }
 
-            isDirty |= _helperStyle.IsDirty();
+            if (_helperStyle != null)
+            {
+                isDirty |= _helperStyle.IsDirty();
+            }
 
             return isDirty;
         }
@@ -47,13 +59,13 @@ namespace Core2D.ViewModels.Renderer
         {
             base.Invalidate();
 
-            _pointStyle.Invalidate();
-            _selectedPointStyle.Invalidate();
-            _selectionStyle.Invalidate();
-            _helperStyle.Invalidate();
+            _pointStyle?.Invalidate();
+            _selectedPointStyle?.Invalidate();
+            _selectionStyle?.Invalidate();
+            _helperStyle?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -68,7 +80,7 @@ namespace Core2D.ViewModels.Renderer
             ObserveObject(_selectionStyle, ref disposableSelectionStyle, mainDisposable, observer);
             ObserveObject(_helperStyle, ref disposableHelperStyle, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(PointStyle))
                 {

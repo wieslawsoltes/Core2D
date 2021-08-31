@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -10,41 +10,44 @@ namespace Core2D.ViewModels.Shapes
 {
     public partial class ConnectableShapeViewModel : BaseShapeViewModel
     {
+        // ReSharper disable once InconsistentNaming
         [AutoNotify] protected ImmutableArray<PointShapeViewModel> _connectors;
 
         protected ConnectableShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider, targetType)
         {
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
-            if (selection?.SelectedShapes is { })
+            if (selection?.SelectedShapes is null)
             {
-                if (selection.SelectedShapes.Contains(this))
+                return;
+            }
+
+            if (selection.SelectedShapes.Contains(this))
+            {
+                foreach (var connector in _connectors)
                 {
-                    foreach (var connector in _connectors)
+                    connector.DrawShape(dc, renderer, selection);
+                }
+            }
+            else
+            {
+                foreach (var connector in _connectors)
+                {
+                    if (selection.SelectedShapes.Contains(connector))
                     {
                         connector.DrawShape(dc, renderer, selection);
-                    }
-                }
-                else
-                {
-                    foreach (var connector in _connectors)
-                    {
-                        if (selection.SelectedShapes.Contains(connector))
-                        {
-                            connector.DrawShape(dc, renderer, selection);
-                        }
                     }
                 }
             }
         }
 
-        public override void Bind(DataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object? db, object? r)
         {
             var record = Record ?? r;
 
@@ -54,7 +57,7 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override void Move(ISelection selection, decimal dx, decimal dy)
+        public override void Move(ISelection? selection, decimal dx, decimal dy)
         {
             foreach (var connector in _connectors)
             {
@@ -62,7 +65,7 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override void Select(ISelection selection)
+        public override void Select(ISelection? selection)
         {
             base.Select(selection);
 
@@ -72,7 +75,7 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override void Deselect(ISelection selection)
+        public override void Deselect(ISelection? selection)
         {
             base.Deselect(selection);
 

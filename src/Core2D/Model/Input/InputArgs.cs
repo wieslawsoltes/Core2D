@@ -1,4 +1,5 @@
-﻿namespace Core2D.Model.Input
+﻿#nullable enable
+namespace Core2D.Model.Input
 {
     public readonly struct InputArgs
     {

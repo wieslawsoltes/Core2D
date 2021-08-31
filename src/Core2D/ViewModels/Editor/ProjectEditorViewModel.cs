@@ -107,13 +107,13 @@ namespace Core2D.ViewModels.Editor
 
         public DialogViewModel CreateTextBindingDialog(TextShapeViewModel text)
         {
-            var textBindingEditor = new TextBindingEditorViewModel(_serviceProvider)
+            var textBindingEditor = new TextBindingEditorViewModel(ServiceProvider)
             {
                 Editor = this,
                 Text = text
             };
 
-            return new DialogViewModel(_serviceProvider, this)
+            return new DialogViewModel(ServiceProvider, this)
             {
                 Title = "Text Binding",
                 IsOverlayVisible = false,

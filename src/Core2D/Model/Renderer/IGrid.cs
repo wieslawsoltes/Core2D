@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Core2D.ViewModels.Style;
 
 namespace Core2D.Model.Renderer
@@ -21,7 +21,7 @@ namespace Core2D.Model.Renderer
 
         double GridCellHeight { get; set; }
 
-        BaseColorViewModel GridStrokeColor { get; set; }
+        BaseColorViewModel? GridStrokeColor { get; set; }
 
         double GridStrokeThickness { get; set; }
 

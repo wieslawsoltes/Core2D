@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Collections.Generic;
 using Core2D.Model.Renderer;
 
@@ -13,15 +13,15 @@ namespace Core2D.ViewModels.Shapes
             group.Shapes = group.Shapes.Add(shape);
         }
 
-        public static void Group(this GroupShapeViewModel group, IEnumerable<BaseShapeViewModel> shapes, IList<BaseShapeViewModel> source = null)
+        public static void Group(this GroupShapeViewModel group, IEnumerable<BaseShapeViewModel>? shapes, IList<BaseShapeViewModel>? source = null)
         {
-            if (shapes is { })
+            if (shapes is not null)
             {
                 foreach (var shape in shapes)
                 {
-                    if (shape is PointShapeViewModel)
+                    if (shape is PointShapeViewModel pointShapeViewModel)
                     {
-                        group.AddConnectorAsNone(shape as PointShapeViewModel);
+                        group.AddConnectorAsNone(pointShapeViewModel);
                     }
                     else
                     {
@@ -35,29 +35,31 @@ namespace Core2D.ViewModels.Shapes
             source?.Add(@group);
         }
 
-        public static void Ungroup(IEnumerable<BaseShapeViewModel> shapes, IList<BaseShapeViewModel> source)
+        public static void Ungroup(IEnumerable<BaseShapeViewModel>? shapes, IList<BaseShapeViewModel>? source)
         {
-            if (shapes is { } && source is { })
+            if (shapes is null || source is null)
             {
-                foreach (var shape in shapes)
+                return;
+            }
+            
+            foreach (var shape in shapes)
+            {
+                if (shape is PointShapeViewModel point)
                 {
-                    if (shape is PointShapeViewModel point)
-                    {
-                        point.State &=
-                            ~(ShapeStateFlags.Connector
-                            | ShapeStateFlags.None
-                            | ShapeStateFlags.Input
-                            | ShapeStateFlags.Output);
-                    }
-
-                    shape.State |= ShapeStateFlags.Standalone;
-
-                    source?.Add(shape);
+                    point.State &=
+                        ~(ShapeStateFlags.Connector
+                          | ShapeStateFlags.None
+                          | ShapeStateFlags.Input
+                          | ShapeStateFlags.Output);
                 }
+
+                shape.State |= ShapeStateFlags.Standalone;
+
+                source?.Add(shape);
             }
         }
 
-        public static void Ungroup(this GroupShapeViewModel group, IList<BaseShapeViewModel> source)
+        public static void Ungroup(this GroupShapeViewModel group, IList<BaseShapeViewModel>? source)
         {
             Ungroup(group.Shapes, source);
             Ungroup(group.Connectors, source);

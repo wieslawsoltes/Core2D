@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +13,13 @@ namespace Core2D.ViewModels.Style
 
         public static ArrowType[] ArrowTypeValues { get; } = (ArrowType[])Enum.GetValues(typeof(ArrowType));
 
-        [AutoNotify] private BaseColorViewModel _color;
+        [AutoNotify] private BaseColorViewModel? _color;
         [AutoNotify] private double _thickness;
         [AutoNotify] private LineCap _lineCap;
-        [AutoNotify] private string _dashes;
+        [AutoNotify] private string? _dashes;
         [AutoNotify] private double _dashOffset;
-        [AutoNotify] private ArrowStyleViewModel _startArrow;
-        [AutoNotify] private ArrowStyleViewModel _endArrow;
+        [AutoNotify] private ArrowStyleViewModel? _startArrow;
+        [AutoNotify] private ArrowStyleViewModel ?_endArrow;
 
         public StrokeStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -27,16 +27,16 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object> shared)
         {
-            return new StrokeStyleViewModel(_serviceProvider)
+            return new StrokeStyleViewModel(ServiceProvider)
             {
-                Name = this.Name,
-                Color = (BaseColorViewModel)this._color.Copy(shared),
-                Thickness = this._thickness,
-                LineCap = this._lineCap,
-                Dashes = this._dashes,
-                DashOffset = this._dashOffset,
-                StartArrow = (ArrowStyleViewModel)this._startArrow.Copy(shared),
-                EndArrow = (ArrowStyleViewModel)this._endArrow.Copy(shared)
+                Name = Name,
+                Color = (BaseColorViewModel?)_color?.Copy(shared),
+                Thickness = _thickness,
+                LineCap = _lineCap,
+                Dashes = _dashes,
+                DashOffset = _dashOffset,
+                StartArrow = (ArrowStyleViewModel?)_startArrow?.Copy(shared),
+                EndArrow = (ArrowStyleViewModel?)_endArrow?.Copy(shared)
             };
         }
 
@@ -44,9 +44,20 @@ namespace Core2D.ViewModels.Style
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _color.IsDirty();
-            isDirty |= _startArrow.IsDirty();
-            isDirty |= _endArrow.IsDirty();
+            if (_color != null)
+            {
+                isDirty |= _color.IsDirty();
+            }
+
+            if (_startArrow != null)
+            {
+                isDirty |= _startArrow.IsDirty();
+            }
+
+            if (_endArrow != null)
+            {
+                isDirty |= _endArrow.IsDirty();
+            }
 
             return isDirty;
         }
@@ -54,12 +65,12 @@ namespace Core2D.ViewModels.Style
         public override void Invalidate()
         {
             base.Invalidate();
-            _color.Invalidate();
-            _startArrow.Invalidate();
-            _endArrow.Invalidate();
+            _color?.Invalidate();
+            _startArrow?.Invalidate();
+            _endArrow?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -72,7 +83,7 @@ namespace Core2D.ViewModels.Style
             ObserveObject(_startArrow, ref disposableStartArrow, mainDisposable, observer);
             ObserveObject(_endArrow, ref disposableEndArrow, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Color))
                 {

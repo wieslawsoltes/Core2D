@@ -1,5 +1,5 @@
 ﻿#nullable disable
-namespace Core2D.Modules.Renderer.Nodes.Markers
+namespace Core2D.Modules.Renderer.Avalonia.Nodes.Markers
 {
     internal class NoneMarker : MarkerBase
     {

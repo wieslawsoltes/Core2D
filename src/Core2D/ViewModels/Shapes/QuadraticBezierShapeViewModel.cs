@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,65 +11,77 @@ namespace Core2D.ViewModels.Shapes
 {
     public partial class QuadraticBezierShapeViewModel : BaseShapeViewModel
     {
-        [AutoNotify] private PointShapeViewModel _point1;
-        [AutoNotify] private PointShapeViewModel _point2;
-        [AutoNotify] private PointShapeViewModel _point3;
+        [AutoNotify] private PointShapeViewModel? _point1;
+        [AutoNotify] private PointShapeViewModel? _point2;
+        [AutoNotify] private PointShapeViewModel? _point3;
 
         public QuadraticBezierShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(QuadraticBezierShapeViewModel))
         {
         }
 
-        public override void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             if (State.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.DrawQuadraticBezier(dc, this, Style);
+                renderer?.DrawQuadraticBezier(dc, this, Style);
             }
         }
 
-        public override void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
+        public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
-            if (selection?.SelectedShapes is { })
+            if (_point1 is null || _point2 is null || _point3 is null)
             {
-                if (selection.SelectedShapes.Contains(this))
+                return;
+            }
+
+            if (selection?.SelectedShapes is null)
+            {
+                return;
+            }
+
+            if (selection.SelectedShapes.Contains(this))
+            {
+                _point1.DrawShape(dc, renderer, selection);
+                _point2.DrawShape(dc, renderer, selection);
+                _point3.DrawShape(dc, renderer, selection);
+            }
+            else
+            {
+                if (selection.SelectedShapes.Contains(_point1))
                 {
                     _point1.DrawShape(dc, renderer, selection);
-                    _point2.DrawShape(dc, renderer, selection);
-                    _point3.DrawShape(dc, renderer, selection);
                 }
-                else
+
+                if (selection.SelectedShapes.Contains(_point2))
                 {
-                    if (selection.SelectedShapes.Contains(_point1))
-                    {
-                        _point1.DrawShape(dc, renderer, selection);
-                    }
+                    _point2.DrawShape(dc, renderer, selection);
+                }
 
-                    if (selection.SelectedShapes.Contains(_point2))
-                    {
-                        _point2.DrawShape(dc, renderer, selection);
-                    }
-
-                    if (selection.SelectedShapes.Contains(_point3))
-                    {
-                        _point3.DrawShape(dc, renderer, selection);
-                    }
+                if (selection.SelectedShapes.Contains(_point3))
+                {
+                    _point3.DrawShape(dc, renderer, selection);
                 }
             }
         }
 
-        public override void Bind(DataFlow dataFlow, object db, object r)
+        public override void Bind(DataFlow dataFlow, object? db, object? r)
         {
             var record = Record ?? r;
 
             dataFlow.Bind(this, db, record);
 
-            _point1.Bind(dataFlow, db, record);
-            _point2.Bind(dataFlow, db, record);
-            _point3.Bind(dataFlow, db, record);
+            _point1?.Bind(dataFlow, db, record);
+            _point2?.Bind(dataFlow, db, record);
+            _point3?.Bind(dataFlow, db, record);
         }
 
-        public override void Move(ISelection selection, decimal dx, decimal dy)
+        public override void Move(ISelection? selection, decimal dx, decimal dy)
         {
+            if (_point1 is null || _point2 is null || _point3 is null)
+            {
+                return;
+            }
+
             if (!_point1.State.HasFlag(ShapeStateFlags.Connector))
             {
                 _point1.Move(selection, dx, dy);
@@ -86,24 +98,31 @@ namespace Core2D.ViewModels.Shapes
             }
         }
 
-        public override void Select(ISelection selection)
+        public override void Select(ISelection? selection)
         {
             base.Select(selection);
-            _point1.Select(selection);
-            _point2.Select(selection);
-            _point3.Select(selection);
+
+            _point1?.Select(selection);
+            _point2?.Select(selection);
+            _point3?.Select(selection);
         }
 
-        public override void Deselect(ISelection selection)
+        public override void Deselect(ISelection? selection)
         {
             base.Deselect(selection);
-            _point1.Deselect(selection);
-            _point2.Deselect(selection);
-            _point3.Deselect(selection);
+
+            _point1?.Deselect(selection);
+            _point2?.Deselect(selection);
+            _point3?.Deselect(selection);
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
+            if (_point1 is null || _point2 is null || _point3 is null)
+            {
+                return;
+            }
+
             points.Add(_point1);
             points.Add(_point2);
             points.Add(_point3);
@@ -113,9 +132,20 @@ namespace Core2D.ViewModels.Shapes
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _point1.IsDirty();
-            isDirty |= _point2.IsDirty();
-            isDirty |= _point3.IsDirty();
+            if (_point1 != null)
+            {
+                isDirty |= _point1.IsDirty();
+            }
+
+            if (_point2 != null)
+            {
+                isDirty |= _point2.IsDirty();
+            }
+
+            if (_point3 != null)
+            {
+                isDirty |= _point3.IsDirty();
+            }
 
             return isDirty;
         }
@@ -123,12 +153,13 @@ namespace Core2D.ViewModels.Shapes
         public override void Invalidate()
         {
             base.Invalidate();
-            _point1.Invalidate();
-            _point2.Invalidate();
-            _point3.Invalidate();
+
+            _point1?.Invalidate();
+            _point2?.Invalidate();
+            _point3?.Invalidate();
         }
 
-        public override IDisposable Subscribe(IObserver<(object sender, PropertyChangedEventArgs e)> observer)
+        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
         {
             var mainDisposable = new CompositeDisposable();
             var disposablePropertyChanged = default(IDisposable);
@@ -147,7 +178,7 @@ namespace Core2D.ViewModels.Shapes
             ObserveObject(_point2, ref disposablePoint2, mainDisposable, observer);
             ObserveObject(_point3, ref disposablePoint3, mainDisposable, observer);
 
-            void Handler(object sender, PropertyChangedEventArgs e)
+            void Handler(object? sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Style))
                 {
