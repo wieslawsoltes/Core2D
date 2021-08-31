@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Collections.Generic;
 using Core2D.ViewModels.Shapes;
 
@@ -6,6 +6,6 @@ namespace Core2D.Model
 {
     public interface ISelection
     {
-        ISet<BaseShapeViewModel> SelectedShapes { get; set; }
+        ISet<BaseShapeViewModel>? SelectedShapes { get; set; }
     }
 }

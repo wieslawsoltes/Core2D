@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,11 +9,15 @@ namespace Core2D.ViewModels.Containers
 {
     public partial class ProjectContainerViewModel : IImageCache
     {
-        private static readonly PropertyChangedEventArgs _keysPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(Keys));
+        private static readonly PropertyChangedEventArgs s_keysPropertyChangedEventArgs = new(nameof(Keys));
 
         private readonly IDictionary<string, byte[]> _images = new Dictionary<string, byte[]>();
 
-        private IEnumerable<IImageKey> GetKeys() => _images.Select(i => new ImageKeyViewModel(ServiceProvider) { Key = i.Key }).ToList();
+        private IEnumerable<IImageKey> GetKeys()
+        {
+            return _images.Select(i => new ImageKeyViewModel(ServiceProvider) { Key = i.Key })
+                          .ToList();
+        }
 
         public IEnumerable<IImageKey> Keys => GetKeys();
 
@@ -28,7 +32,7 @@ namespace Core2D.ViewModels.Containers
             }
 
             _images.Add(key, bytes);
-            RaisePropertyChanged(_keysPropertyChangedEventArgs);
+            RaisePropertyChanged(s_keysPropertyChangedEventArgs);
             return key;
         }
 
@@ -40,25 +44,23 @@ namespace Core2D.ViewModels.Containers
             }
 
             _images.Add(key, bytes);
-            RaisePropertyChanged(_keysPropertyChangedEventArgs);
+            RaisePropertyChanged(s_keysPropertyChangedEventArgs);
         }
 
-        public byte[] GetImage(string key)
+        public byte[]? GetImage(string key)
         {
-            if (_images.TryGetValue(key, out byte[] bytes))
+            if (_images.TryGetValue(key, out var bytes))
             {
                 return bytes;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         public void RemoveImage(string key)
         {
             _images.Remove(key);
-            RaisePropertyChanged(_keysPropertyChangedEventArgs);
+            RaisePropertyChanged(s_keysPropertyChangedEventArgs);
         }
 
         public void PurgeUnusedImages(ICollection<string> used)
@@ -70,7 +72,7 @@ namespace Core2D.ViewModels.Containers
                     _images.Remove(kvp.Key);
                 }
             }
-            RaisePropertyChanged(_keysPropertyChangedEventArgs);
+            RaisePropertyChanged(s_keysPropertyChangedEventArgs);
         }
     }
 }

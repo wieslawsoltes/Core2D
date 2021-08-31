@@ -46,7 +46,7 @@ namespace Core2D.ViewModels.Containers
             };
         }
 
-        public void SetSelected(ViewModelBase value)
+        private void SetSelected(ViewModelBase? value)
         {
             Debug.WriteLine($"[SetSelected] {value?.Name} ({value?.GetType()})");
             if (value is BaseShapeViewModel shape)
@@ -58,7 +58,7 @@ namespace Core2D.ViewModels.Containers
 
                 var container = _documents
                     .SelectMany(x => x.Pages)
-                    .FirstOrDefault(c => c.Layers.Contains(layer));
+                    .FirstOrDefault(c => layer is not null && c.Layers.Contains(layer));
 
                 if (container is { } && layer is { })
                 {
@@ -78,7 +78,7 @@ namespace Core2D.ViewModels.Containers
 
                 // SelectedShapes = new HashSet<BaseShapeViewModel>() { shape };
             }
-            else if (value is LayerContainerViewModel layer && _documents is { })
+            else if (value is LayerContainerViewModel layer)
             {
                 var container = _documents
                     .SelectMany(x => x.Pages)
@@ -125,14 +125,14 @@ namespace Core2D.ViewModels.Containers
                 {
                     Debug.WriteLine($"  [CurrentDocument] {document.Name}");
                     CurrentDocument = document;
-                    if (!CurrentDocument?.Pages.Contains(CurrentContainer) ?? false)
+                    if (!CurrentDocument.Pages.Contains(CurrentContainer))
                     {
                         var current = CurrentDocument.Pages.FirstOrDefault();
                         if (CurrentContainer != current)
                         {
                             Debug.WriteLine($"  [CurrentContainer] {current?.Name}");
                             CurrentContainer = current;
-                            CurrentContainer.InvalidateLayer();
+                            CurrentContainer?.InvalidateLayer();
                         }
                     }
                 }
@@ -165,7 +165,10 @@ namespace Core2D.ViewModels.Containers
         {
             var isDirty = base.IsDirty();
 
-            isDirty |= _options.IsDirty();
+            if (_options != null)
+            {
+                isDirty |= _options.IsDirty();
+            }
 
             foreach (var styleLibrary in _styleLibraries)
             {
@@ -204,7 +207,7 @@ namespace Core2D.ViewModels.Containers
         {
             base.Invalidate();
 
-            _options.Invalidate();
+            _options?.Invalidate();
 
             foreach (var styleLibrary in _styleLibraries)
             {
