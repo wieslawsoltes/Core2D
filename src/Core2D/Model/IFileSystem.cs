@@ -1,28 +1,28 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.IO;
 
 namespace Core2D.Model
 {
     public interface IFileSystem
     {
-        string GetBaseDirectory();
+        string? GetBaseDirectory();
 
         bool Exists(string path);
 
-        Stream Open(string path);
+        Stream? Open(string path);
 
-        Stream Create(string path);
+        Stream? Create(string path);
 
-        byte[] ReadBinary(Stream stream);
+        byte[]? ReadBinary(Stream stream);
 
-        void WriteBinary(Stream stream, byte[] bytes);
+        void WriteBinary(Stream stream, byte[]? bytes);
 
-        string ReadUtf8Text(Stream stream);
+        string? ReadUtf8Text(Stream stream);
 
-        void WriteUtf8Text(Stream stream, string text);
+        void WriteUtf8Text(Stream stream, string? text);
 
-        string ReadUtf8Text(string path);
+        string? ReadUtf8Text(string path);
 
-        void WriteUtf8Text(string path, string text);
+        void WriteUtf8Text(string path, string? text);
     }
 }

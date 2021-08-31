@@ -29,14 +29,24 @@ namespace Core2D.ViewModels.Shapes
                              && selection.SelectedShapes.Count > 0 
                              && selection.SelectedShapes.Contains(this);
 
-            var style = isSelected ? renderer?.State.SelectedPointStyle : renderer?.State.PointStyle;
-            var size = renderer?.State.PointSize;
-            if (style is null || size <= 0.0)
+            if (renderer?.State is not { } state)
             {
                 return;
             }
 
-            renderer?.DrawPoint(dc, this, style);
+            var style = isSelected ? state.SelectedPointStyle : state.PointStyle;
+            if (style is null)
+            {
+                return;
+            }
+
+            var size = state.PointSize;
+            if (size <= 0.0)
+            {
+                return;
+            }
+                
+            renderer.DrawPoint(dc, this, style);
         }
 
         public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)

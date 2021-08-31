@@ -1,4 +1,5 @@
-﻿namespace Core2D.Model.Editor
+﻿#nullable enable
+namespace Core2D.Model.Editor
 {
     public enum MoveMode
     {

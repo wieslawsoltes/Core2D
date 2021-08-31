@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 

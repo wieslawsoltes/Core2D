@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Tools.Decorators
 {
-    public partial class BoxDecoratorViewModel : ViewModelBase, IDrawable, IDecorator
+    public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
     {
         private enum Mode
         {
@@ -31,12 +31,11 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
         }
 
         private bool _isVisible;
-        [AutoNotify] private ShapeStyleViewModel _style;
+        [AutoNotify] private ShapeStyleViewModel? _style;
         [AutoNotify] private bool _isStroked;
         [AutoNotify] private bool _isFilled;
-        [AutoNotify] private LayerContainerViewModel _layer;
-        [AutoNotify] private IList<BaseShapeViewModel> _shapes;
-        private readonly IViewModelFactory _viewModelFactory;
+        [AutoNotify] private LayerContainerViewModel? _layer;
+        [AutoNotify] private IList<BaseShapeViewModel>? _shapes;
         private readonly decimal _sizeLarge;
         private readonly decimal _sizeSmall;
         private readonly decimal _rotateDistance;
@@ -56,14 +55,12 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
         private readonly RectangleShapeViewModel _bottomHandle;
         private readonly RectangleShapeViewModel _leftHandle;
         private readonly RectangleShapeViewModel _rightHandle;
-        private List<BaseShapeViewModel> _handles;
-        private BaseShapeViewModel _currentHandle;
-        private List<PointShapeViewModel> _points;
+        private readonly List<BaseShapeViewModel> _handles;
+        private BaseShapeViewModel? _currentHandle;
+        private List<PointShapeViewModel>? _points;
         private Mode _mode = Mode.None;
         private decimal _startX;
         private decimal _startY;
-        private decimal _historyX;
-        private decimal _historyY;
         private decimal _rotateAngle = 270m;
         private bool _previousDrawPoints = true;
 
@@ -71,25 +68,27 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
         public BoxDecoratorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _viewModelFactory = serviceProvider.GetService<IViewModelFactory>();
+            var viewModelFactory = serviceProvider.GetService<IViewModelFactory>();
+
             _sizeLarge = 4m;
             _sizeSmall = 4m;
             _rotateDistance = -16.875m;
-            _handleStyle = _viewModelFactory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255, 2.0);
-            _boundsStyle = _viewModelFactory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-            _selectedHandleStyle = _viewModelFactory.CreateShapeStyle("SelectedHandle", 255, 0, 191, 255, 255, 0, 191, 255, 2.0);
-            _selectedBoundsStyle = _viewModelFactory.CreateShapeStyle("SelectedBounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-            _rotateHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rotateHandle");
-            _topLeftHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topLeftHandle");
-            _topRightHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topRightHandle");
-            _bottomLeftHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomLeftHandle");
-            _bottomRightHandle = _viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomRightHandle");
-            _topHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topHandle");
-            _bottomHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomHandle");
-            _leftHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_leftHandle");
-            _rightHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
-            _boundsHandle = _viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_boundsHandle");
-            _rotateLine = _viewModelFactory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
+            _handleStyle = viewModelFactory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255);
+            _boundsStyle = viewModelFactory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
+            _selectedHandleStyle = viewModelFactory.CreateShapeStyle("SelectedHandle", 255, 0, 191, 255, 255, 0, 191, 255);
+            _selectedBoundsStyle = viewModelFactory.CreateShapeStyle("SelectedBounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
+            _rotateHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rotateHandle");
+            _topLeftHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topLeftHandle");
+            _topRightHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topRightHandle");
+            _bottomLeftHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomLeftHandle");
+            _bottomRightHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomRightHandle");
+            _topHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topHandle");
+            _bottomHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomHandle");
+            _leftHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_leftHandle");
+            _rightHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
+            _boundsHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_boundsHandle");
+            _rotateLine = viewModelFactory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
+
             _handles = new List<BaseShapeViewModel>
             {
                 //_rotateHandle,
@@ -104,6 +103,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 _boundsHandle,
                 //_rotateLine
             };
+
             _currentHandle = null;
             _rotateHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
             _topLeftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
@@ -140,7 +140,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             }
         }
 
-        public virtual void DrawShape(object dc, IShapeRenderer renderer, ISelection selection)
+        public virtual void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
             if (_isVisible)
             {
@@ -151,11 +151,11 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             }
         }
 
-        public virtual void DrawPoints(object dc, IShapeRenderer renderer, ISelection selection)
+        public virtual void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)
         {
         }
 
-        public virtual bool Invalidate(IShapeRenderer renderer)
+        public virtual bool Invalidate(IShapeRenderer? renderer)
         {
             return false;
         }
@@ -176,60 +176,137 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 _groupBox.Update();
             }
 
-            _boundsHandle.TopLeft.X = (double)_groupBox.Bounds.Left;
-            _boundsHandle.TopLeft.Y = (double)_groupBox.Bounds.Top;
-            _boundsHandle.BottomRight.X = (double)_groupBox.Bounds.Right;
-            _boundsHandle.BottomRight.Y = (double)_groupBox.Bounds.Bottom;
+            if (_boundsHandle.TopLeft is not null)
+            {
+                _boundsHandle.TopLeft.X = (double)_groupBox.Bounds.Left;
+                _boundsHandle.TopLeft.Y = (double)_groupBox.Bounds.Top;
+            }
 
-            _rotateLine.Start.X = (double)_groupBox.Bounds.CenterX;
-            _rotateLine.Start.Y = (double)_groupBox.Bounds.Top;
-            _rotateLine.End.X = (double)_groupBox.Bounds.CenterX;
-            _rotateLine.End.Y = (double)(_groupBox.Bounds.Top + _rotateDistance);
+            if (_boundsHandle.BottomRight is not null)
+            {
+                _boundsHandle.BottomRight.X = (double)_groupBox.Bounds.Right;
+                _boundsHandle.BottomRight.Y = (double)_groupBox.Bounds.Bottom;
+            }
 
-            _rotateHandle.TopLeft.X = (double)(_groupBox.Bounds.CenterX - _sizeLarge);
-            _rotateHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top + _rotateDistance - _sizeLarge);
-            _rotateHandle.BottomRight.X = (double)(_groupBox.Bounds.CenterX + _sizeLarge);
-            _rotateHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _rotateDistance + _sizeLarge);
+            if (_rotateLine.Start is not null)
+            {
+                _rotateLine.Start.X = (double)_groupBox.Bounds.CenterX;
+                _rotateLine.Start.Y = (double)_groupBox.Bounds.Top;
+            }
 
-            _topLeftHandle.TopLeft.X = (double)(_groupBox.Bounds.Left - _sizeLarge);
-            _topLeftHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top - _sizeLarge);
-            _topLeftHandle.BottomRight.X = (double)(_groupBox.Bounds.Left + _sizeLarge);
-            _topLeftHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _sizeLarge);
+            if (_rotateLine.End is not null)
+            {
+                _rotateLine.End.X = (double)_groupBox.Bounds.CenterX;
+                _rotateLine.End.Y = (double)(_groupBox.Bounds.Top + _rotateDistance);
+            }
 
-            _topRightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeLarge);
-            _topRightHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top - _sizeLarge);
-            _topRightHandle.BottomRight.X = (double)(_groupBox.Bounds.Right + _sizeLarge);
-            _topRightHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _sizeLarge);
+            if (_rotateHandle.TopLeft is not null)
+            {
+                _rotateHandle.TopLeft.X = (double)(_groupBox.Bounds.CenterX - _sizeLarge);
+                _rotateHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top + _rotateDistance - _sizeLarge);
+            }
 
-            _bottomLeftHandle.TopLeft.X = (double)(_groupBox.Bounds.Left - _sizeLarge);
-            _bottomLeftHandle.TopLeft.Y = (double)(_groupBox.Bounds.Bottom - _sizeLarge);
-            _bottomLeftHandle.BottomRight.X = (double)(_groupBox.Bounds.Left + _sizeLarge);
-            _bottomLeftHandle.BottomRight.Y = (double)(_groupBox.Bounds.Bottom + _sizeLarge);
+            if (_rotateHandle.BottomRight is not null)
+            {
+                _rotateHandle.BottomRight.X = (double)(_groupBox.Bounds.CenterX + _sizeLarge);
+                _rotateHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _rotateDistance + _sizeLarge);
+            }
 
-            _bottomRightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeLarge);
-            _bottomRightHandle.TopLeft.Y = (double)(_groupBox.Bounds.Bottom - _sizeLarge);
-            _bottomRightHandle.BottomRight.X = (double)(_groupBox.Bounds.Right + _sizeLarge);
-            _bottomRightHandle.BottomRight.Y = (double)(_groupBox.Bounds.Bottom + _sizeLarge);
+            if (_topLeftHandle.TopLeft is not null)
+            {
+                _topLeftHandle.TopLeft.X = (double)(_groupBox.Bounds.Left - _sizeLarge);
+                _topLeftHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top - _sizeLarge);
+            }
 
-            _topHandle.TopLeft.X = (double)(_groupBox.Bounds.CenterX - _sizeSmall);
-            _topHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top - _sizeSmall);
-            _topHandle.BottomRight.X = (double)(_groupBox.Bounds.CenterX + _sizeSmall);
-            _topHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _sizeSmall);
+            if (_topLeftHandle.BottomRight is not null)
+            {
+                _topLeftHandle.BottomRight.X = (double)(_groupBox.Bounds.Left + _sizeLarge);
+                _topLeftHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _sizeLarge);
+            }
 
-            _bottomHandle.TopLeft.X = (double)(_groupBox.Bounds.CenterX - _sizeSmall);
-            _bottomHandle.TopLeft.Y = (double)(_groupBox.Bounds.Bottom - _sizeSmall);
-            _bottomHandle.BottomRight.X = (double)(_groupBox.Bounds.CenterX + _sizeSmall);
-            _bottomHandle.BottomRight.Y = (double)(_groupBox.Bounds.Bottom + _sizeSmall);
+            if (_topRightHandle.TopLeft is not null)
+            {
+                _topRightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeLarge);
+                _topRightHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top - _sizeLarge);
+            }
 
-            _leftHandle.TopLeft.X = (double)(_groupBox.Bounds.Left - _sizeSmall);
-            _leftHandle.TopLeft.Y = (double)(_groupBox.Bounds.CenterY - _sizeSmall);
-            _leftHandle.BottomRight.X = (double)(_groupBox.Bounds.Left + _sizeSmall);
-            _leftHandle.BottomRight.Y = (double)(_groupBox.Bounds.CenterY + _sizeSmall);
+            if (_topRightHandle.BottomRight is not null)
+            {
+                _topRightHandle.BottomRight.X = (double)(_groupBox.Bounds.Right + _sizeLarge);
+                _topRightHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _sizeLarge);
+            }
 
-            _rightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeSmall);
-            _rightHandle.TopLeft.Y = (double)(_groupBox.Bounds.CenterY - _sizeSmall);
-            _rightHandle.BottomRight.X = (double)(_groupBox.Bounds.Right + _sizeSmall);
-            _rightHandle.BottomRight.Y = (double)(_groupBox.Bounds.CenterY + _sizeSmall);
+            if (_bottomLeftHandle.TopLeft is not null)
+            {
+                _bottomLeftHandle.TopLeft.X = (double)(_groupBox.Bounds.Left - _sizeLarge);
+                _bottomLeftHandle.TopLeft.Y = (double)(_groupBox.Bounds.Bottom - _sizeLarge);
+            }
+
+            if (_bottomLeftHandle.BottomRight is not null)
+            {
+                _bottomLeftHandle.BottomRight.X = (double)(_groupBox.Bounds.Left + _sizeLarge);
+                _bottomLeftHandle.BottomRight.Y = (double)(_groupBox.Bounds.Bottom + _sizeLarge);
+            }
+
+            if (_bottomRightHandle.TopLeft is not null)
+            {
+                _bottomRightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeLarge);
+                _bottomRightHandle.TopLeft.Y = (double)(_groupBox.Bounds.Bottom - _sizeLarge);
+            }
+
+            if (_bottomRightHandle.BottomRight is not null)
+            {
+                _bottomRightHandle.BottomRight.X = (double)(_groupBox.Bounds.Right + _sizeLarge);
+                _bottomRightHandle.BottomRight.Y = (double)(_groupBox.Bounds.Bottom + _sizeLarge);
+            }
+
+            if (_topHandle.TopLeft is not null)
+            {
+                _topHandle.TopLeft.X = (double)(_groupBox.Bounds.CenterX - _sizeSmall);
+                _topHandle.TopLeft.Y = (double)(_groupBox.Bounds.Top - _sizeSmall);
+            }
+
+            if (_topHandle.BottomRight is not null)
+            {
+                _topHandle.BottomRight.X = (double)(_groupBox.Bounds.CenterX + _sizeSmall);
+                _topHandle.BottomRight.Y = (double)(_groupBox.Bounds.Top + _sizeSmall);
+            }
+
+            if (_bottomHandle.TopLeft is not null)
+            {
+                _bottomHandle.TopLeft.X = (double)(_groupBox.Bounds.CenterX - _sizeSmall);
+                _bottomHandle.TopLeft.Y = (double)(_groupBox.Bounds.Bottom - _sizeSmall);
+            }
+
+            if (_bottomHandle.BottomRight is not null)
+            {
+                _bottomHandle.BottomRight.X = (double)(_groupBox.Bounds.CenterX + _sizeSmall);
+                _bottomHandle.BottomRight.Y = (double)(_groupBox.Bounds.Bottom + _sizeSmall);
+            }
+
+            if (_leftHandle.TopLeft is not null)
+            {
+                _leftHandle.TopLeft.X = (double)(_groupBox.Bounds.Left - _sizeSmall);
+                _leftHandle.TopLeft.Y = (double)(_groupBox.Bounds.CenterY - _sizeSmall);
+            }
+
+            if (_leftHandle.BottomRight is not null)
+            {
+                _leftHandle.BottomRight.X = (double)(_groupBox.Bounds.Left + _sizeSmall);
+                _leftHandle.BottomRight.Y = (double)(_groupBox.Bounds.CenterY + _sizeSmall);
+            }
+
+            if (_rightHandle.TopLeft is not null)
+            {
+                _rightHandle.TopLeft.X = (double)(_groupBox.Bounds.Right - _sizeSmall);
+                _rightHandle.TopLeft.Y = (double)(_groupBox.Bounds.CenterY - _sizeSmall);
+            }
+
+            if (_rightHandle.BottomRight is not null)
+            {
+                _rightHandle.BottomRight.X = (double)(_groupBox.Bounds.Right + _sizeSmall);
+                _rightHandle.BottomRight.Y = (double)(_groupBox.Bounds.CenterY + _sizeSmall);
+            }
 
             if (_groupBox.Bounds.Height <= 0m || _groupBox.Bounds.Width <= 0m)
             {
@@ -260,7 +337,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 return;
             }
 
-            if (_isVisible == true)
+            if (_isVisible)
             {
                 return;
             }
@@ -303,7 +380,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 return;
             }
 
-            if (_isVisible == true)
+            if (_isVisible)
             {
                 var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 editor.PageState.DrawPoints = _previousDrawPoints;
@@ -353,11 +430,11 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 _currentHandle = null;
                 _points = null;
                 _rotateAngle = 0m;
-                _layer.RaiseInvalidateLayer();
+                _layer?.RaiseInvalidateLayer();
             }
 
-            double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-            var handles = _handles.Where(x => x.State.HasFlag(ShapeStateFlags.Visible));
+            var radius = (editor.Project.Options?.HitThreshold ?? 7.0) / editor.PageState.ZoomX;
+            var handles = _handles.Where(h => h.State.HasFlag(ShapeStateFlags.Visible));
             var result = editor.HitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState.ZoomX);
             if (result is { })
             {
@@ -408,11 +485,9 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                     _currentHandle.Style = _currentHandle == _boundsHandle ? _selectedBoundsStyle : _selectedHandleStyle;
                     _startX = sx;
                     _startY = sy;
-                    _historyX = _startX;
-                    _historyY = _startY;
                     _points = null;
                     _rotateAngle = 0m;
-                    _layer.RaiseInvalidateLayer();
+                    _layer?.RaiseInvalidateLayer();
                     return true;
                 }
             }

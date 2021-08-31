@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -22,19 +22,19 @@ namespace Core2D.Model
     {
         LibraryViewModel<T> CreateLibrary<T>(string name);
 
-        LibraryViewModel<T> CreateLibrary<T>(string name, IEnumerable<T> items);
+        LibraryViewModel<T> CreateLibrary<T>(string name, IEnumerable<T>? items);
 
-        ValueViewModel CreateValue(string content);
+        ValueViewModel CreateValue(string? content);
 
-        PropertyViewModel CreateProperty(ViewModelBase owner, string name, string value);
+        PropertyViewModel CreateProperty(ViewModelBase owner, string name, string? value);
 
         ColumnViewModel CreateColumn(DatabaseViewModel owner, string name, bool isVisible = true);
 
         RecordViewModel CreateRecord(DatabaseViewModel owner, ImmutableArray<ValueViewModel> values);
 
-        RecordViewModel CreateRecord(DatabaseViewModel owner, string id, ImmutableArray<ValueViewModel> values);
+        RecordViewModel CreateRecord(DatabaseViewModel owner, string? id, ImmutableArray<ValueViewModel> values);
 
-        RecordViewModel CreateRecord(DatabaseViewModel owner, string value);
+        RecordViewModel CreateRecord(DatabaseViewModel owner, string? value);
 
         DatabaseViewModel CreateDatabase(string name, string idColumnName = "Id");
 
@@ -42,9 +42,9 @@ namespace Core2D.Model
 
         DatabaseViewModel CreateDatabase(string name, ImmutableArray<ColumnViewModel> columns, ImmutableArray<RecordViewModel> records, string idColumnName = "Id");
 
-        DatabaseViewModel FromFields(string name, IEnumerable<string[]> fields, string idColumnName = "Id");
+        DatabaseViewModel FromFields(string name, IEnumerable<string[]>? fields, string idColumnName = "Id");
 
-        ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue> dispose = null);
+        ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue>? dispose = null);
 
         ShapeRendererStateViewModel CreateShapeRendererState();
 
@@ -130,15 +130,15 @@ namespace Core2D.Model
 
         ArrowStyleViewModel CreateArrowStyle(ArrowType arrowType = ArrowType.None, double radiusX = 5.0, double radiusY = 3.0);
 
-        StrokeStyleViewModel CreateStrokeStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00, double thickness = 2.0, ArrowStyleViewModel startArrowStyleViewModel = null, ArrowStyleViewModel endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0);
+        StrokeStyleViewModel CreateStrokeStyle(string? name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00, double thickness = 2.0, ArrowStyleViewModel? startArrowStyleViewModel = null, ArrowStyleViewModel? endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string? dashes = default, double dashOffset = 0.0);
 
         StrokeStyleViewModel CreateStrokeStyle(string name, BaseColorViewModel colorViewModel, double thickness, ArrowStyleViewModel startArrowStyleViewModel, ArrowStyleViewModel endArrowStyleViewModel);
 
-        FillStyleViewModel CreateFillStyle(string name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
+        FillStyleViewModel CreateFillStyle(string? name = null, byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
 
         FillStyleViewModel CreateFillStyle(string name, BaseColorViewModel colorViewModel);
 
-        ShapeStyleViewModel CreateShapeStyle(string name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyleViewModel textStyleViewModel = null, ArrowStyleViewModel startArrowStyleViewModel = null, ArrowStyleViewModel endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string dashes = default, double dashOffset = 0.0);
+        ShapeStyleViewModel CreateShapeStyle(string? name = null, byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00, byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00, double thickness = 2.0, TextStyleViewModel? textStyleViewModel = null, ArrowStyleViewModel? startArrowStyleViewModel = null, ArrowStyleViewModel? endArrowStyleViewModel = null, LineCap lineCap = LineCap.Round, string? dashes = default, double dashOffset = 0.0);
 
         ShapeStyleViewModel CreateShapeStyle(string name, BaseColorViewModel stroke, BaseColorViewModel fill, double thickness, TextStyleViewModel textStyleViewModel, ArrowStyleViewModel startArrowStyleViewModel, ArrowStyleViewModel endArrowStyleViewModel);
 
@@ -148,7 +148,7 @@ namespace Core2D.Model
 
         ScriptViewModel CreateScript(string name = "Script", string code = "");
 
-        LayerContainerViewModel CreateLayerContainer(string name = "Layer", FrameContainerViewModel owner = null, bool isVisible = true);
+        LayerContainerViewModel CreateLayerContainer(string name = "Layer", FrameContainerViewModel? owner = null, bool isVisible = true);
 
         PageContainerViewModel CreatePageContainer(string name = "Page");
 

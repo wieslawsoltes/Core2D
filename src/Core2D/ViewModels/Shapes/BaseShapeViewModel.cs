@@ -9,7 +9,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes
 {
-    public partial class BaseShapeViewModel : ViewModelBase, IDataObject
+    public partial class BaseShapeViewModel : ViewModelBase, IDataObject, ISelectable, IConnectable, IDrawable
     {
         private readonly IDictionary<string, object?> _propertyCache = new Dictionary<string, object?>();
 
@@ -122,6 +122,21 @@ namespace Core2D.ViewModels.Shapes
             {
                 selection.SelectedShapes.Remove(this);
             }
+        }
+
+        public virtual bool Connect(PointShapeViewModel? point, PointShapeViewModel? target)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual bool Disconnect(PointShapeViewModel? point, out PointShapeViewModel? result)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual bool Disconnect()
+        {
+            throw new NotImplementedException();
         }
 
         public virtual void GetPoints(IList<PointShapeViewModel> points)

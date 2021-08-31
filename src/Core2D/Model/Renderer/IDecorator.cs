@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Collections.Generic;
 using Core2D.Model.Input;
 using Core2D.ViewModels.Containers;
@@ -8,9 +8,9 @@ namespace Core2D.Model.Renderer
 {
     public interface IDecorator : IDrawable
     {
-        LayerContainerViewModel Layer { get; set; }
+        LayerContainerViewModel? Layer { get; set; }
 
-        IList<BaseShapeViewModel> Shapes { get; set; }
+        IList<BaseShapeViewModel>? Shapes { get; set; }
 
         bool IsVisible { get; }
 
