@@ -9,7 +9,8 @@ namespace Core2D.ViewModels.Shapes
         {
             var dx = point.X - other.X;
             var dy = point.Y - other.Y;
-            return Sqrt(dx * dx + dy * dy);
+            // ReSharper disable once ArrangeRedundantParentheses
+            return Sqrt((dx * dx) + (dy * dy));
         }
     }
 }
