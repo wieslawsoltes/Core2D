@@ -62,7 +62,7 @@ Options:
 
 ## JetBrains Rider
 
-Core2D is developed using JetBrains Rider.
+Core2D is developed using [JetBrains Rider](https://www.jetbrains.com/rider/).
 
 ## License
 
