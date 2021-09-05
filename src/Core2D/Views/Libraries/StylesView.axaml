@@ -4,9 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
-             xmlns:behaviors="using:Core2D.Behaviors"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Style"
@@ -78,8 +77,8 @@
         <DataTemplate DataType="vms:ShapeStyleViewModel" x:CompileBindings="False">
           <Panel Background="Transparent">
             <i:Interaction.Behaviors>
-              <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
-              <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+              <iac:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+              <iac:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
             </i:Interaction.Behaviors>
             <TextBox x:Name="TextBoxEdit"
                      IsVisible="False"
@@ -90,10 +89,10 @@
                      BorderThickness="0"
                      Text="{Binding Name, Mode=TwoWay}">
               <i:Interaction.Behaviors>
-                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
-                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
-                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
-                <behaviors:SelectAllOnGotFocusBehavior />
+                <iac:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
+                <iac:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
+                <iac:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
+                <iac:SelectAllOnGotFocusBehavior />
               </i:Interaction.Behaviors>
             </TextBox>
             <StackPanel x:Name="TextStackPanel"

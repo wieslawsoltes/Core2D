@@ -30,7 +30,7 @@
     <SvgSkiaVersion>0.5.7.1</SvgSkiaVersion>
     <AvaloniaVersion>0.10.7</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.4</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>0.10.7</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaXamlBehaviorsVersion>0.10.7.1</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>4.0.0</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>0.10.7</ThemeEditorControlsColorPickerVersion>
     <DockAvaloniaVersion>0.10.7</DockAvaloniaVersion>

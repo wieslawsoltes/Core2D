@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:behaviors="using:Core2D.Behaviors"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              mc:Ignorable="d"
@@ -35,7 +36,7 @@
                 Height="36"
                 DockPanel.Dock="Top">
           <i:Interaction.Behaviors>
-            <behaviors:DragControlBehavior TargetControl="{Binding #DragBorder}" />
+            <iac:DragControlBehavior TargetControl="{Binding #DragBorder}" />
           </i:Interaction.Behaviors>
           <Label Content="{Binding Title}" Padding="8,6,8,6" HorizontalAlignment="Left" VerticalAlignment="Center" />
         </Border>
