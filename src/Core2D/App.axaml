@@ -13,6 +13,7 @@
     <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
     <StyleInclude Source="avares://Core2D/Icons.axaml" />
     <StyleInclude Source="avares://Core2D/Dock.axaml" />
+    <StyleInclude Source="avares://Core2D/Controls/EditableItem.axaml" />
   </Application.Styles>
   <Application.DataTemplates>
     <local:ViewLocator />

@@ -10,6 +10,7 @@
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:c="clr-namespace:Core2D.Controls"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -52,37 +53,27 @@
                     CommandParameter="{Binding #TemplatesListBox.SelectedItem}" Gesture="Ctrl+E"
                     x:CompileBindings="False" />
       </ListBox.KeyBindings>
+      <ListBox.Resources>
+        <ContextMenu x:Key="TemplateContainerContextMenu" x:CompileBindings="False">
+          <MenuItem Header="_Edit Template" Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+          <Separator />
+          <MenuItem Header="_Add Template" Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}" />
+          <Separator />
+          <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+          <Separator />
+          <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+        </ContextMenu>
+      </ListBox.Resources>
       <ListBox.DataTemplates>
         <DataTemplate DataType="vmc:TemplateContainerViewModel">
-          <TextBlock x:Name="TemplateTextBlock" Text="{Binding Name}" Background="Transparent">
-            <i:Interaction.Behaviors>
-              <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #TemplateTextBlock}"
-                                       x:CompileBindings="False">
-                <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}"
-                                        CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False" />
-              </ia:EventTriggerBehavior>
-              <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-            </i:Interaction.Behaviors>
-            <TextBlock.ContextMenu>
-              <ContextMenu x:CompileBindings="False">
-                <MenuItem Header="_Edit Template" Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}"
-                          CommandParameter="{Binding Mode=OneWay}" />
-                <Separator />
-                <MenuItem Header="_Add Template" Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}" />
-                <Separator />
-                <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}"
-                          CommandParameter="{Binding Mode=OneWay}" />
-                <Separator />
-                <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
-                          CommandParameter="{Binding Mode=OneWay}" />
-              </ContextMenu>
-            </TextBlock.ContextMenu>
-          </TextBlock>
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                          ContextMenu="{StaticResource TemplateContainerContextMenu}"
+                          Padding="0"/>
         </DataTemplate>
       </ListBox.DataTemplates>
     </ListBox>
-    <TextBox Text="{Binding #TemplatesListBox.SelectedItem.Name, Mode=TwoWay}"
-             IsVisible="{Binding !!#TemplatesListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent"
-             Margin="{DynamicResource ContentMargin}" Grid.Row="3" x:CompileBindings="False" />
   </Grid>
 </UserControl>

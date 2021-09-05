@@ -1,0 +1,52 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="using:Avalonia.Xaml.Interactivity"
+        xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
+        xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+        xmlns:controls="using:Core2D.Controls">
+  <Design.PreviewWith>
+    <controls:EditableItem IconContent="" />
+  </Design.PreviewWith>
+  <Style Selector="controls|EditableItem">
+    <Setter Property="Padding" Value="4" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent" x:CompileBindings="False">
+          <i:Interaction.Behaviors>
+            <iac:ShowOnDoubleTappedBehavior TargetControl="{Binding #PART_TextBox}" />
+            <iac:ShowOnKeyDownTappedBehavior TargetControl="{Binding #PART_TextBox}" />
+          </i:Interaction.Behaviors>
+          <TextBox x:Name="PART_TextBox"
+                   IsVisible="False"
+                   Height="{Binding #PART_StackPanel.Bounds.Height}"
+                   VerticalContentAlignment="Center"
+                   VerticalAlignment="Center"
+                   Padding="4,0,0,0"
+                   BorderThickness="0">
+            <i:Interaction.Behaviors>
+              <iac:HideOnKeyPressedBehavior TargetControl="{Binding #PART_TextBox}" Key="Escape" />
+              <iac:HideOnKeyPressedBehavior TargetControl="{Binding #PART_TextBox}" Key="Enter" />
+              <iac:HideOnLostFocusBehavior TargetControl="{Binding #PART_TextBox}" />
+              <iac:SelectAllOnGotFocusBehavior />
+            </i:Interaction.Behaviors>
+          </TextBox>
+          <StackPanel x:Name="PART_StackPanel"
+                      Orientation="Horizontal"
+                      Background="Transparent"
+                      Focusable="True"
+                      IsVisible="{Binding !#PART_TextBox.IsVisible}"
+                      ContextMenu="{TemplateBinding TextContextMenu}">
+            <i:Interaction.Behaviors>
+              <iac:BindTagToVisualRootDataContextBehavior />
+              <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+            </i:Interaction.Behaviors>
+            <ContentControl Content="{TemplateBinding IconContent}" />
+            <TextBlock Name="PART_TextBlock"
+                       VerticalAlignment="Center"
+                       Margin="{TemplateBinding Padding}" />
+          </StackPanel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

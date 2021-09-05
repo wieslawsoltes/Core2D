@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Style"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:c="clr-namespace:Core2D.Controls"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -73,48 +73,20 @@
         <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
                     CommandParameter="{Binding #StylesListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
       </ListBox.KeyBindings>
+      <ListBox.Resources>
+        <ContextMenu x:Key="ShapeStyleContextMenu" x:CompileBindings="False">
+          <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyle}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+          <Separator />
+          <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+        </ContextMenu>
+      </ListBox.Resources>
       <ListBox.DataTemplates>
-        <DataTemplate DataType="vms:ShapeStyleViewModel" x:CompileBindings="False">
-          <Panel Background="Transparent">
-            <i:Interaction.Behaviors>
-              <iac:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
-              <iac:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
-            </i:Interaction.Behaviors>
-            <TextBox x:Name="TextBoxEdit"
-                     IsVisible="False"
-                     Height="{Binding #TextStackPanel.Bounds.Height}"
-                     VerticalContentAlignment="Center"
-                     VerticalAlignment="Center"
-                     Padding="4,0,0,0"
-                     BorderThickness="0"
-                     Text="{Binding Name, Mode=TwoWay}">
-              <i:Interaction.Behaviors>
-                <iac:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
-                <iac:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
-                <iac:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
-                <iac:SelectAllOnGotFocusBehavior />
-              </i:Interaction.Behaviors>
-            </TextBox>
-            <StackPanel x:Name="TextStackPanel"
-                        Orientation="Horizontal"
-                        Background="Transparent"
-                        Focusable="True"
-                        IsVisible="{Binding !#TextBoxEdit.IsVisible}">
-              <i:Interaction.Behaviors>
-                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-              </i:Interaction.Behaviors>
-              <StackPanel.ContextMenu>
-                <ContextMenu x:CompileBindings="False">
-                  <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyle}"
-                            CommandParameter="{Binding Mode=OneWay}" />
-                  <Separator />
-                  <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
-                            CommandParameter="{Binding Mode=OneWay}" />
-                </ContextMenu>
-              </StackPanel.ContextMenu>
-              <TextBlock x:Name="StyleTextBlock" Text="{Binding Name}" Margin="4" />
-            </StackPanel>
-          </Panel>
+        <DataTemplate DataType="vms:ShapeStyleViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                          ContextMenu="{StaticResource ShapeStyleContextMenu}"
+                          Padding="0"/>
         </DataTemplate>
       </ListBox.DataTemplates>
     </ListBox>

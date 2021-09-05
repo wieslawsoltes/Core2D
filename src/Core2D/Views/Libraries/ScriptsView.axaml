@@ -4,14 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:scripting="using:Core2D.Views.Scripting"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Scripting"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:c="clr-namespace:Core2D.Controls"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -20,7 +19,7 @@
     <dd:ScriptsListBoxDropHandler x:Key="ScriptsListBoxDropHandler" />
   </UserControl.Resources>
   <Grid RowDefinitions="50*,6,50*">
-    <Grid RowDefinitions="Auto,*,Auto" Grid.Row="0">
+    <Grid RowDefinitions="Auto,*" Grid.Row="0">
       <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
                   Margin="{DynamicResource ContentMargin}"
                   x:CompileBindings="False">
@@ -54,43 +53,33 @@
                       CommandParameter="{Binding #ScriptsListBox.SelectedItem}" Gesture="Ctrl+E"
                       x:CompileBindings="False" />
         </ListBox.KeyBindings>
+        <ListBox.Resources>
+          <ContextMenu x:Key="ScriptContextMenu" x:CompileBindings="False">
+            <MenuItem Header="_Execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}"
+                      CommandParameter="{Binding Path=Code, Mode=OneWay}" />
+            <Separator />
+            <MenuItem Header="_Repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}"
+                      CommandParameter="{Binding Path=Code, Mode=OneWay}" />
+            <Separator />
+            <MenuItem Header="Re_set" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}" />
+            <Separator />
+            <MenuItem Header="_Add Script" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" />
+            <Separator />
+            <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}"
+                      CommandParameter="{Binding Mode=OneWay}" />
+            <Separator />
+            <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
+                      CommandParameter="{Binding Mode=OneWay}" />
+          </ContextMenu>
+        </ListBox.Resources>
         <ListBox.DataTemplates>
           <DataTemplate DataType="vms:ScriptViewModel">
-            <TextBlock x:Name="ScriptTextBlock" Text="{Binding Name}" Background="Transparent">
-              <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ScriptTextBlock}"
-                                         x:CompileBindings="False">
-                  <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnExecuteScript}"
-                                          CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False" />
-                </ia:EventTriggerBehavior>
-                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-              </i:Interaction.Behaviors>
-              <TextBlock.ContextMenu>
-                <ContextMenu x:CompileBindings="False">
-                  <MenuItem Header="_Execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}"
-                            CommandParameter="{Binding Path=Code, Mode=OneWay}" />
-                  <Separator />
-                  <MenuItem Header="_Repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}"
-                            CommandParameter="{Binding Path=Code, Mode=OneWay}" />
-                  <Separator />
-                  <MenuItem Header="Re_set" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}" />
-                  <Separator />
-                  <MenuItem Header="_Add Script" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" />
-                  <Separator />
-                  <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}"
-                            CommandParameter="{Binding Mode=OneWay}" />
-                  <Separator />
-                  <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
-                            CommandParameter="{Binding Mode=OneWay}" />
-                </ContextMenu>
-              </TextBlock.ContextMenu>
-            </TextBlock>
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ScriptContextMenu}"
+                            Padding="0"/>
           </DataTemplate>
         </ListBox.DataTemplates>
       </ListBox>
-      <TextBox Text="{Binding #ScriptsListBox.SelectedItem.Name, Mode=TwoWay}"
-               IsVisible="{Binding !!#ScriptsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent"
-               Margin="0,12,0,0" Grid.Row="2" x:CompileBindings="False" />
     </Grid>
     <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6"
                   Grid.Row="1" />

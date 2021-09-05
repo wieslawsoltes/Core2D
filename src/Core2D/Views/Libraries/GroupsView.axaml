@@ -4,14 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:c="clr-namespace:Core2D.Controls"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
@@ -19,7 +18,7 @@
   <UserControl.Resources>
     <dd:GroupsListBoxDropHandler x:Key="GroupsListBoxDropHandler" />
   </UserControl.Resources>
-  <Grid RowDefinitions="Auto,Auto,Auto,*,12,Auto">
+  <Grid RowDefinitions="Auto,Auto,Auto,*">
     <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" Grid.Row="0">
       <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent"
                Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0"
@@ -74,32 +73,22 @@
         <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
                     CommandParameter="{Binding #GroupsListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
       </ListBox.KeyBindings>
+      <ListBox.Resources>
+        <ContextMenu x:Key="GroupShapeContextMenu" x:CompileBindings="False">
+          <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+          <Separator />
+          <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+        </ContextMenu>
+      </ListBox.Resources>
       <ListBox.DataTemplates>
         <DataTemplate DataType="vms:GroupShapeViewModel">
-          <TextBlock x:Name="GroupTextBlock" Text="{Binding Name}" Background="Transparent">
-            <i:Interaction.Behaviors>
-              <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #GroupTextBlock}"
-                                       x:CompileBindings="False">
-                <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnInsertGroup}"
-                                        CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False" />
-              </ia:EventTriggerBehavior>
-              <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-            </i:Interaction.Behaviors>
-            <TextBlock.ContextMenu>
-              <ContextMenu x:CompileBindings="False">
-                <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveGroup}"
-                          CommandParameter="{Binding Mode=OneWay}" />
-                <Separator />
-                <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
-                          CommandParameter="{Binding Mode=OneWay}" />
-              </ContextMenu>
-            </TextBlock.ContextMenu>
-          </TextBlock>
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                          ContextMenu="{StaticResource GroupShapeContextMenu}"
+                          Padding="0"/>
         </DataTemplate>
       </ListBox.DataTemplates>
     </ListBox>
-    <TextBox Text="{Binding #GroupsListBox.SelectedItem.Name, Mode=TwoWay}"
-             IsVisible="{Binding !!#GroupsListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent"
-             Margin="{DynamicResource ContentMargin}" Grid.Row="5" x:CompileBindings="False" />
   </Grid>
 </UserControl>
