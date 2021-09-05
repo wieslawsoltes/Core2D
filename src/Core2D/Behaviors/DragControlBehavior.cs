@@ -26,7 +26,7 @@ namespace Core2D.Behaviors
             base.OnAttached();
 
             var source = AssociatedObject;
-            if (AssociatedObject is { })
+            if (source is { })
             {
                 source.PointerPressed += Source_PointerPressed;
             }
