@@ -6,6 +6,7 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:behaviors="using:Core2D.Behaviors"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Style"
@@ -17,7 +18,7 @@
   <UserControl.Resources>
     <dd:StylesListBoxDropHandler x:Key="StylesListBoxDropHandler" />
   </UserControl.Resources>
-  <Grid RowDefinitions="Auto,Auto,Auto,*,12,Auto">
+  <Grid RowDefinitions="Auto,Auto,Auto,*">
     <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" Grid.Row="0">
       <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent"
                Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0"
@@ -74,31 +75,49 @@
                     CommandParameter="{Binding #StylesListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
       </ListBox.KeyBindings>
       <ListBox.DataTemplates>
-        <DataTemplate DataType="vms:ShapeStyleViewModel">
-          <TextBlock x:Name="StyleTextBlock" Text="{Binding Name}" Background="Transparent">
+        <DataTemplate DataType="vms:ShapeStyleViewModel" x:CompileBindings="False">
+          <Panel Background="Transparent">
             <i:Interaction.Behaviors>
-              <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #StyleTextBlock}"
-                                       x:CompileBindings="False">
-                <ia:InvokeCommandAction Command="{Binding $parent[TopLevel].DataContext.OnApplyStyle}"
-                                        CommandParameter="{Binding Mode=OneWay}" x:CompileBindings="False" />
-              </ia:EventTriggerBehavior>
-              <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+              <behaviors:ShowOnDoubleTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
+              <behaviors:ShowOnKeyDownTappedBehavior TargetControl="{Binding #TextBoxEdit}" />
             </i:Interaction.Behaviors>
-            <TextBlock.ContextMenu>
-              <ContextMenu x:CompileBindings="False">
-                <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyle}"
-                          CommandParameter="{Binding Mode=OneWay}" />
-                <Separator />
-                <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
-                          CommandParameter="{Binding Mode=OneWay}" />
-              </ContextMenu>
-            </TextBlock.ContextMenu>
-          </TextBlock>
+            <TextBox x:Name="TextBoxEdit"
+                     IsVisible="False"
+                     Height="{Binding #TextStackPanel.Bounds.Height}"
+                     VerticalContentAlignment="Center"
+                     VerticalAlignment="Center"
+                     Padding="4,0,0,0"
+                     BorderThickness="0"
+                     Text="{Binding Name, Mode=TwoWay}">
+              <i:Interaction.Behaviors>
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Escape" />
+                <behaviors:HideOnKeyPressedBehavior TargetControl="{Binding #TextBoxEdit}" Key="Enter" />
+                <behaviors:HideOnLostFocusBehavior TargetControl="{Binding #TextBoxEdit}" />
+                <behaviors:SelectAllOnGotFocusBehavior />
+              </i:Interaction.Behaviors>
+            </TextBox>
+            <StackPanel x:Name="TextStackPanel"
+                        Orientation="Horizontal"
+                        Background="Transparent"
+                        Focusable="True"
+                        IsVisible="{Binding !#TextBoxEdit.IsVisible}">
+              <i:Interaction.Behaviors>
+                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+              </i:Interaction.Behaviors>
+              <StackPanel.ContextMenu>
+                <ContextMenu x:CompileBindings="False">
+                  <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyle}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                  <Separator />
+                  <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
+                            CommandParameter="{Binding Mode=OneWay}" />
+                </ContextMenu>
+              </StackPanel.ContextMenu>
+              <TextBlock x:Name="StyleTextBlock" Text="{Binding Name}" Margin="4" />
+            </StackPanel>
+          </Panel>
         </DataTemplate>
       </ListBox.DataTemplates>
     </ListBox>
-    <TextBox Text="{Binding #StylesListBox.SelectedItem.Name, Mode=TwoWay}"
-             IsVisible="{Binding !!#StylesListBox.SelectedItem}" BorderBrush="Transparent" Background="Transparent"
-             Margin="{DynamicResource ContentMargin}" Grid.Row="5" x:CompileBindings="False" />
   </Grid>
 </UserControl>
