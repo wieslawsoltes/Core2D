@@ -12,8 +12,10 @@
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
+             xmlns:vmp="using:Core2D.ViewModels.Path"
              xmlns:vmst="using:Core2D.ViewModels.Style"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:c="clr-namespace:Core2D.Controls"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:ObjectBrowserViewModel" x:CompileBindings="True">
@@ -25,186 +27,96 @@
     </ContextMenu>
   </UserControl.Resources>
   <Panel DataContext="{Binding Context}">
-    <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}" 
-           x:DataType="vme:ProjectEditorViewModel">
+    <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}" x:DataType="vme:ProjectEditorViewModel">
       <TreeView x:Name="ProjectTreeView">
         <TreeView.KeyBindings>
-          <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
-                      CommandParameter="{Binding #ProjectTreeView.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
+          <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" 
+                      CommandParameter="{Binding #ProjectTreeView.SelectedItem}" 
+                      Gesture="Ctrl+E" 
+                      x:CompileBindings="False" />
         </TreeView.KeyBindings>
-        <TreeViewItem Header="{Binding Name}" ContextMenu="{StaticResource ExportContextMenu}" DataContext="{Binding Project}" IsExpanded="True">
-          <TreeViewItem Header="Styles" ContextMenu="{StaticResource ExportContextMenu}" DataContext="{Binding StyleLibraries}" Items="{Binding}">
-            <TreeViewItem.Styles>
-              <Style Selector="TreeViewItem">
-                <Setter Property="IsExpanded" Value="False" />
-              </Style>
-            </TreeViewItem.Styles>
-            <TreeViewItem.DataTemplates>
-              <DataTemplate DataType="vmst:ShapeStyleViewModel">
-                <TextBlock Text="{Binding Name}" ContextMenu="{StaticResource ExportContextMenu}" Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </DataTemplate>
-            </TreeViewItem.DataTemplates>
-          </TreeViewItem>
-          <TreeViewItem Header="Groups" ContextMenu="{StaticResource ExportContextMenu}" DataContext="{Binding GroupLibraries}" Items="{Binding}">
-            <TreeViewItem.Styles>
-              <Style Selector="TreeViewItem">
-                <Setter Property="IsExpanded" Value="False" />
-              </Style>
-            </TreeViewItem.Styles>
-            <TreeViewItem.DataTemplates>
-              <TreeDataTemplate DataType="vms:GroupShapeViewModel" ItemsSource="{Binding Resources}"
-                                x:CompileBindings="False">
-                <TextBlock Text="{Binding Name}" ContextMenu="{StaticResource ExportContextMenu}" Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </TreeDataTemplate>
-              <DataTemplate DataType="core:ViewModelBase">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                           ContextMenu="{StaticResource ExportContextMenu}"
-                           Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </DataTemplate>
-            </TreeViewItem.DataTemplates>
-          </TreeViewItem>
-          <TreeViewItem Header="Databases" ContextMenu="{StaticResource ExportContextMenu}" DataContext="{Binding Databases}" Items="{Binding}">
-            <TreeViewItem.Styles>
-              <Style Selector="TreeViewItem">
-                <Setter Property="IsExpanded" Value="False" />
-              </Style>
-            </TreeViewItem.Styles>
-            <TreeViewItem.DataTemplates>
-              <DataTemplate DataType="vmdt:DatabaseViewModel">
-                <TextBlock Text="{Binding Name}" ContextMenu="{StaticResource ExportContextMenu}" Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </DataTemplate>
-            </TreeViewItem.DataTemplates>
-          </TreeViewItem>
-          <TreeViewItem Header="Templates" ContextMenu="{StaticResource ExportContextMenu}" DataContext="{Binding Templates}" Items="{Binding}">
-            <TreeViewItem.Styles>
-              <Style Selector="TreeViewItem">
-                <Setter Property="IsExpanded" Value="False" />
-              </Style>
-            </TreeViewItem.Styles>
-            <TreeViewItem.DataTemplates>
-              <TreeDataTemplate DataType="vmc:PageContainerViewModel" ItemsSource="{Binding Layers}"
-                                x:CompileBindings="False">
-                <TextBlock Text="{Binding Name}" ContextMenu="{StaticResource ExportContextMenu}" Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </TreeDataTemplate>
-              <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}"
-                                x:CompileBindings="False">
-                <TextBlock Text="{Binding Name}" ContextMenu="{StaticResource ExportContextMenu}" Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </TreeDataTemplate>
-              <TreeDataTemplate DataType="vms:BaseShapeViewModel" ItemsSource="{Binding Resources}"
-                                x:CompileBindings="False">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                           ContextMenu="{StaticResource ExportContextMenu}"
-                           Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </TreeDataTemplate>
-              <DataTemplate DataType="core:ViewModelBase">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                           ContextMenu="{StaticResource ExportContextMenu}"
-                           Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </DataTemplate>
-            </TreeViewItem.DataTemplates>
-          </TreeViewItem>
-          <TreeViewItem Header="Scripts" ContextMenu="{StaticResource ExportContextMenu}" DataContext="{Binding Scripts}" Items="{Binding}">
-            <TreeViewItem.Styles>
-              <Style Selector="TreeViewItem">
-                <Setter Property="IsExpanded" Value="False" />
-              </Style>
-            </TreeViewItem.Styles>
-            <TreeViewItem.DataTemplates>
-              <DataTemplate DataType="core:ViewModelBase">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                           ContextMenu="{StaticResource ExportContextMenu}"
-                           Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </DataTemplate>
-            </TreeViewItem.DataTemplates>
-          </TreeViewItem>
-          <TreeViewItem Header="Documents" ContextMenu="{StaticResource ExportContextMenu}" DataContext="{Binding Documents}" Items="{Binding}">
-            <TreeViewItem.Styles>
-              <Style Selector="TreeViewItem">
-                <Setter Property="IsExpanded" Value="False" />
-              </Style>
-            </TreeViewItem.Styles>
-            <TreeViewItem.DataTemplates>
-              <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" ItemsSource="{Binding Pages}"
-                                x:CompileBindings="False">
-                <TextBlock Text="{Binding Name}" ContextMenu="{StaticResource ExportContextMenu}" Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </TreeDataTemplate>
-              <TreeDataTemplate DataType="vmc:PageContainerViewModel" ItemsSource="{Binding Layers}"
-                                x:CompileBindings="False">
-                <TextBlock Text="{Binding Name}" ContextMenu="{StaticResource ExportContextMenu}" Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </TreeDataTemplate>
-              <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}"
-                                x:CompileBindings="False">
-                <TextBlock Text="{Binding Name}" ContextMenu="{StaticResource ExportContextMenu}" Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </TreeDataTemplate>
-              <TreeDataTemplate DataType="vms:BaseShapeViewModel" ItemsSource="{Binding Resources}"
-                                x:CompileBindings="False">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                           ContextMenu="{StaticResource ExportContextMenu}"
-                           Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </TreeDataTemplate>
-              <DataTemplate DataType="core:ViewModelBase">
-                <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                           ContextMenu="{StaticResource ExportContextMenu}"
-                           Background="Transparent">
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                </TextBlock>
-              </DataTemplate>
-            </TreeViewItem.DataTemplates>
-          </TreeViewItem>
+        <TreeView.Styles>
+          <Style Selector="TreeViewItem">
+            <Setter Property="IsExpanded" Value="False" />
+          </Style>
+        </TreeView.Styles>
+        <TreeView.DataTemplates>
+          <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" ItemsSource="{Binding Pages}" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </TreeDataTemplate>
+          <TreeDataTemplate DataType="vmc:PageContainerViewModel" ItemsSource="{Binding Layers}" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </TreeDataTemplate>
+          <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </TreeDataTemplate>
+          <TreeDataTemplate DataType="vms:GroupShapeViewModel" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </TreeDataTemplate>
+          <TreeDataTemplate DataType="vms:PathShapeViewModel" ItemsSource="{Binding Geometry.Figures, FallbackValue={x:Null}}" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </TreeDataTemplate>
+          <TreeDataTemplate DataType="vmp:PathFigureViewModel" ItemsSource="{Binding Segments, FallbackValue={x:Null}}" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </TreeDataTemplate>
+          <DataTemplate DataType="vms:BaseShapeViewModel" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </DataTemplate>
+          <DataTemplate DataType="vmst:ShapeStyleViewModel" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </DataTemplate>
+          <DataTemplate DataType="vmdt:DatabaseViewModel" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </DataTemplate>
+          <DataTemplate DataType="core:ViewModelBase" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </DataTemplate>
+        </TreeView.DataTemplates>
+        <!-- Project -->
+        <TreeViewItem Header="{Binding Name}" 
+                      ContextMenu="{StaticResource ExportContextMenu}" 
+                      DataContext="{Binding Project}" 
+                      IsExpanded="True">
+          <!-- Styles -->
+          <TreeViewItem Header="Styles" 
+                        ContextMenu="{StaticResource ExportContextMenu}" 
+                        DataContext="{Binding StyleLibraries}" 
+                        Items="{Binding}"/>
+          <!-- Groups -->
+          <TreeViewItem Header="Groups" 
+                        ContextMenu="{StaticResource ExportContextMenu}" 
+                        DataContext="{Binding GroupLibraries}" 
+                        Items="{Binding}"/>
+          <!-- Databases -->
+          <TreeViewItem Header="Databases" 
+                        ContextMenu="{StaticResource ExportContextMenu}" 
+                        DataContext="{Binding Databases}" 
+                        Items="{Binding}"/>
+          <!-- Templates -->
+          <TreeViewItem Header="Templates" 
+                        ContextMenu="{StaticResource ExportContextMenu}" 
+                        DataContext="{Binding Templates}" 
+                        Items="{Binding}"/>
+          <!-- Scripts -->
+          <TreeViewItem Header="Scripts" 
+                        ContextMenu="{StaticResource ExportContextMenu}" 
+                        DataContext="{Binding Scripts}" 
+                        Items="{Binding}"/>
+          <!-- Documents -->
+          <TreeViewItem Header="Documents" 
+                        ContextMenu="{StaticResource ExportContextMenu}"
+                        DataContext="{Binding Documents}" 
+                        Items="{Binding}"/>
         </TreeViewItem>
       </TreeView>
     </Panel>
