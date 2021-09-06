@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Editor.Recent
 {
@@ -9,6 +10,11 @@ namespace Core2D.ViewModels.Editor.Recent
 
         public RecentFileViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public static RecentFileViewModel Create(IServiceProvider serviceProvider, string name, string path)

@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.Model.Style;
@@ -26,6 +27,11 @@ namespace Core2D.Modules.Renderer.PdfSharp
             _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
             _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, XImage>(bi => bi.Dispose());
             _scaleToPage = (value) => (float)(value * 1.0);
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         private static XColor ToXColor(BaseColorViewModel colorViewModel)

@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace Core2D.ViewModels.Containers
@@ -11,6 +12,11 @@ namespace Core2D.ViewModels.Containers
 
         public LibraryViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public void SetSelected(ViewModelBase item) => Selected = item;

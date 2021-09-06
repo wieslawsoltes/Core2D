@@ -25,6 +25,11 @@ namespace Core2D.ViewModels.Editor
         {
         }
 
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
+        }
+
         public void OnCopyStyle()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();

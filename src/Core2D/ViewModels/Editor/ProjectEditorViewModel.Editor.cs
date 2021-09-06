@@ -2642,7 +2642,6 @@ namespace Core2D.ViewModels.Editor
         {
             try
             {
-                var templates = document?.Pages.Select(c => c?.Template)?.ToArray();
                 var json = JsonSerializer?.Serialize(document);
                 if (!string.IsNullOrEmpty(json))
                 {
@@ -2654,7 +2653,6 @@ namespace Core2D.ViewModels.Editor
                             var container = clone.Pages[i];
                             var shapes = container.Layers.SelectMany(l => l.Shapes);
                             TryToRestoreRecords(shapes);
-                            container.Template = templates[i];
                         }
                         return clone;
                     }

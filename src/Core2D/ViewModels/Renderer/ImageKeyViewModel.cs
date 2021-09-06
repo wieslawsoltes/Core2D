@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+using System;
+using System.Collections.Generic;
 using Core2D.Model.Renderer;
 
 namespace Core2D.ViewModels.Renderer
@@ -9,6 +11,14 @@ namespace Core2D.ViewModels.Renderer
 
         public ImageKeyViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            return new ImageKeyViewModel(ServiceProvider)
+            {
+                Key = _key
+            };
         }
     }
 }

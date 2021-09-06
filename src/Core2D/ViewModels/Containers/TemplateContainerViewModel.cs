@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
 using Core2D.Model.Renderer;
@@ -25,6 +26,11 @@ namespace Core2D.ViewModels.Containers
 
         public TemplateContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public override bool IsDirty()

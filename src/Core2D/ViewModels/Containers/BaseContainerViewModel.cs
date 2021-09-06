@@ -1,9 +1,10 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class BaseContainerViewModel : ViewModelBase
+    public abstract partial class BaseContainerViewModel : ViewModelBase
     {
         [AutoNotify] private bool _isVisible;
         [AutoNotify] private bool _isExpanded;

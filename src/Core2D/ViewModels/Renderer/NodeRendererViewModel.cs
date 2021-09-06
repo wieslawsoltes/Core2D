@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
@@ -22,6 +23,11 @@ namespace Core2D.ViewModels.Renderer
             _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, IDisposable>(x => x.Dispose());
             _drawNodeCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<object, IDrawNode>(x => x.Dispose());
             _drawNodeFactory = drawNodeFactory;
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public void ClearCache()

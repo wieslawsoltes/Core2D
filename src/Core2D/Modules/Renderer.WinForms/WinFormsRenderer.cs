@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using Core2D.Model;
@@ -28,6 +29,11 @@ namespace Core2D.Modules.Renderer.WinForms
             _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, Image>(bi => bi.Dispose());
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         private static Color ToColor(BaseColorViewModel colorViewModel)

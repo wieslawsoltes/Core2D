@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Model;
 using Core2D.ViewModels.Data;
@@ -7,7 +8,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class FrameContainerViewModel : BaseContainerViewModel, IDataObject
+    public abstract partial class FrameContainerViewModel : BaseContainerViewModel, IDataObject
     {
         // ReSharper disable InconsistentNaming
         // ReSharper disable MemberCanBePrivate.Global

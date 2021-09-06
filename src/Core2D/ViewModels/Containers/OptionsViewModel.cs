@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using Core2D.Model.Editor;
 using Core2D.Model.Path;
 
@@ -22,6 +23,11 @@ namespace Core2D.ViewModels.Containers
 
         public OptionsViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
     }
 }

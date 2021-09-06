@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Core2D.ViewModels.Path
@@ -11,6 +12,15 @@ namespace Core2D.ViewModels.Path
 
         public PathSizeViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            return new PathSizeViewModel(ServiceProvider)
+            {
+                Width = _width,
+                Height = _height
+            };
         }
 
         public override bool IsDirty()

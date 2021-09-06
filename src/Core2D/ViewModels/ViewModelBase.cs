@@ -6,7 +6,7 @@ using System.Reactive.Disposables;
 
 namespace Core2D.ViewModels
 {
-    public partial class ViewModelBase : INotifyPropertyChanged
+    public abstract partial class ViewModelBase : INotifyPropertyChanged
     {
         private bool _isDirty;
         [AutoNotify] private ViewModelBase? _owner;
@@ -27,7 +27,7 @@ namespace Core2D.ViewModels
 
         public virtual void MarkAsDirty() => _isDirty = true;
 
-        public virtual object Copy(IDictionary<object, object>? shared) => throw new NotImplementedException();
+        public abstract object Copy(IDictionary<object, object>? shared);
 
         protected void RaisePropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
 

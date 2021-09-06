@@ -23,6 +23,11 @@ namespace Core2D.ViewModels.Path.Segments
         {
         }
 
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
             if (_point is null)

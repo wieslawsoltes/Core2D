@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -57,6 +58,11 @@ namespace Core2D.ViewModels.Editor
             {
                 Debug.WriteLine($"DockableRemoved {args.Dockable?.Id}");
             };
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public void CreateLayout()

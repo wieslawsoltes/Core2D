@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Reactive.Disposables;
@@ -31,6 +32,11 @@ namespace Core2D.ViewModels.Containers
         public LayerContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             _invalidateLayerEventArgs = new InvalidateLayerEventArgs(this);
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public void RaiseInvalidateLayer()

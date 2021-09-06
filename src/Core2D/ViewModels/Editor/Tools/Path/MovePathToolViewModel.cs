@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
@@ -17,6 +18,11 @@ namespace Core2D.ViewModels.Editor.Tools.Path
         public MovePathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             _currentState = State.Move;
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public void BeginDown(InputArgs args)

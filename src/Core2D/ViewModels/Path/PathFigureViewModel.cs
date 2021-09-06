@@ -19,6 +19,11 @@ namespace Core2D.ViewModels.Path
         {
         }
 
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
+        }
+
         public void GetPoints(IList<PointShapeViewModel> points)
         {
             if (_startPoint == null)

@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Model;
@@ -41,6 +42,11 @@ namespace Core2D.ViewModels.Editor.Tools
             _quadraticBezierPathTool = serviceProvider.GetService<QuadraticBezierPathToolViewModel>();
             _movePathTool = serviceProvider.GetService<MovePathToolViewModel>();
             IsInitialized = false;
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public void RemoveLastSegment<T>() where T : PathSegmentViewModel

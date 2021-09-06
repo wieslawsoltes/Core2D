@@ -5,7 +5,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Path
 {
-    public partial class PathSegmentViewModel : ViewModelBase
+    public abstract partial class PathSegmentViewModel : ViewModelBase
     {
         [AutoNotify] private bool _isStroked;
 

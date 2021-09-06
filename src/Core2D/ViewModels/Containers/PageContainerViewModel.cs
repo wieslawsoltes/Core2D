@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
 
@@ -11,6 +12,11 @@ namespace Core2D.ViewModels.Containers
 
         public PageContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public override void InvalidateLayer()

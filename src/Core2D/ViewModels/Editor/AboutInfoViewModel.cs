@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Editor
 {
@@ -35,6 +36,11 @@ namespace Core2D.ViewModels.Editor
 
         public AboutInfoViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public override string ToString() =>

@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.ViewModels.Shapes;
@@ -12,6 +13,11 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public NoneToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public void BeginDown(InputArgs args)

@@ -1,5 +1,6 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -24,6 +25,11 @@ namespace Core2D.Editor
     {
         public AvaloniaProjectEditorPlatform(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         private MainWindow GetWindow()

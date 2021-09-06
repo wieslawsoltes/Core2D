@@ -1,5 +1,6 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
@@ -8,14 +9,19 @@ namespace Core2D.ViewModels.Editors
 {
     public partial class TextBindingEditorViewModel : ViewModelBase
     {
-        [AutoNotify] private ProjectEditorViewModel _editor;
-        [AutoNotify] private TextShapeViewModel _text;
+        [AutoNotify] private ProjectEditorViewModel? _editor;
+        [AutoNotify] private TextShapeViewModel? _text;
 
         public TextBindingEditorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
 
-        public void OnUseColumnName(ColumnViewModel column)
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnUseColumnName(ColumnViewModel? column)
         {
             if (_text is { } && column is { })
             {
@@ -31,7 +37,7 @@ namespace Core2D.ViewModels.Editors
             }
         }
 
-        public void OnUsePageProperty(PropertyViewModel property)
+        public void OnUsePageProperty(PropertyViewModel? property)
         {
             if (_text is { } && property is { })
             {
@@ -47,7 +53,7 @@ namespace Core2D.ViewModels.Editors
             }
         }
 
-        public void OnUseShapeProperty(PropertyViewModel property)
+        public void OnUseShapeProperty(PropertyViewModel? property)
         {
             if (_text is { } && property is { })
             {

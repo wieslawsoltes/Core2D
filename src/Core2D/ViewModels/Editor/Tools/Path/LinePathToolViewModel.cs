@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Editor;
@@ -23,6 +24,11 @@ namespace Core2D.ViewModels.Editor.Tools.Path
         {
             _currentState = State.Start;
             _line = new LineShapeViewModel(serviceProvider);
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
         }
 
         public void BeginDown(InputArgs args)
