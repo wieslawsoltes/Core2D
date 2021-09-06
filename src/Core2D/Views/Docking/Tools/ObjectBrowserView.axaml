@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools"
              xmlns:core="using:Core2D.ViewModels"
@@ -41,6 +39,10 @@
           </Style>
         </TreeView.Styles>
         <TreeView.DataTemplates>
+          <TreeDataTemplate DataType="{x:Type vmc:LibraryViewModel`1}" ItemsSource="{Binding Items, FallbackValue={x:Null}}" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </TreeDataTemplate>
           <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" ItemsSource="{Binding Pages}" x:CompileBindings="False">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
