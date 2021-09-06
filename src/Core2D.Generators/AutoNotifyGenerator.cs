@@ -167,7 +167,7 @@ using Core2D.ViewModels;
 namespace {namespaceName}
 {{
 	[DataContract(IsReference = true)]
-    public partial {(classSymbol.IsAbstract ? " abstract " : "")}class {classSymbol.ToDisplayString(format)} : {notifySymbol.ToDisplayString()}
+    public{(classSymbol.IsAbstract ? " abstract " : "")} partial class {classSymbol.ToDisplayString(format)} : {notifySymbol.ToDisplayString()}
     {{");
             }
             else
@@ -181,7 +181,7 @@ using Core2D.ViewModels;
 namespace {namespaceName}
 {{
 	[DataContract(IsReference = true)]
-    public partial {(classSymbol.IsAbstract ? " abstract " : "")}class {classSymbol.ToDisplayString(format)}
+    public{(classSymbol.IsAbstract ? " abstract" : "")} partial class {classSymbol.ToDisplayString(format)}
     {{");
             }
 
