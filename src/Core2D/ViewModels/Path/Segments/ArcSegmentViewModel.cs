@@ -25,7 +25,16 @@ namespace Core2D.ViewModels.Path.Segments
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            throw new NotImplementedException();
+            return new ArcSegmentViewModel(ServiceProvider)
+            {
+                Name = Name,
+                IsStroked = IsStroked,
+                Point = (PointShapeViewModel?)_point?.Copy(shared),
+                Size = (PathSizeViewModel?)_size?.Copy(shared),
+                RotationAngle = RotationAngle,
+                IsLargeArc = IsLargeArc,
+                SweepDirection = SweepDirection
+            };
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)

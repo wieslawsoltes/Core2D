@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 
@@ -6,7 +6,7 @@ namespace Core2D.ViewModels.Editor.Recent
 {
     public partial class RecentFileViewModel : ViewModelBase
     {
-        [AutoNotify] private string _path;
+        [AutoNotify] private string? _path;
 
         public RecentFileViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -14,7 +14,10 @@ namespace Core2D.ViewModels.Editor.Recent
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            throw new NotImplementedException();
+            return new RecentFileViewModel(ServiceProvider)
+            {
+                Path = Path
+            };
         }
 
         public static RecentFileViewModel Create(IServiceProvider serviceProvider, string name, string path)

@@ -17,7 +17,12 @@ namespace Core2D.ViewModels.Path.Segments
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            throw new NotImplementedException();
+            return new LineSegmentViewModel(ServiceProvider)
+            {
+                Name = Name,
+                IsStroked = IsStroked,
+                Point = (PointShapeViewModel?)_point?.Copy(shared),
+            };
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)

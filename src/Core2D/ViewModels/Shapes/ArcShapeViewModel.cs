@@ -6,6 +6,7 @@ using System.Reactive.Disposables;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes
 {
@@ -18,6 +19,24 @@ namespace Core2D.ViewModels.Shapes
 
         public ArcShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(ArcShapeViewModel))
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            return new ArcShapeViewModel(ServiceProvider)
+            {
+                Name = Name,
+                State = State,
+                Style = (ShapeStyleViewModel?)_style?.Copy(shared),
+                IsStroked = IsStroked,
+                IsFilled = IsFilled,
+                Properties = _properties.Copy(shared).ToImmutable(),
+                Record = _record,
+                Point1 = (PointShapeViewModel?)_point1?.Copy(shared),
+                Point2 = (PointShapeViewModel?)_point2?.Copy(shared),
+                Point3 = (PointShapeViewModel?)_point3?.Copy(shared),
+                Point4 = (PointShapeViewModel?)_point4?.Copy(shared)
+            };
         }
 
         public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)

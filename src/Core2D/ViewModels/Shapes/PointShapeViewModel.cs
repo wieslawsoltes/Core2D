@@ -6,6 +6,7 @@ using System.Globalization;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes
 {
@@ -16,6 +17,22 @@ namespace Core2D.ViewModels.Shapes
 
         public PointShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(PointShapeViewModel))
         {
+        }
+
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            return new PointShapeViewModel(ServiceProvider)
+            {
+                Name = Name,
+                State = State,
+                Style = (ShapeStyleViewModel?)_style?.Copy(shared),
+                IsStroked = IsStroked,
+                IsFilled = IsFilled,
+                Properties = _properties.Copy(shared).ToImmutable(),
+                Record = _record,
+                X = X,
+                Y = Y,
+            };
         }
 
         public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)

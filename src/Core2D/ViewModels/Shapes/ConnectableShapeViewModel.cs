@@ -8,7 +8,7 @@ using Core2D.ViewModels.Data;
 
 namespace Core2D.ViewModels.Shapes
 {
-    public partial class ConnectableShapeViewModel : BaseShapeViewModel
+    public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
     {
         // ReSharper disable once InconsistentNaming
         [AutoNotify] protected ImmutableArray<PointShapeViewModel> _connectors;

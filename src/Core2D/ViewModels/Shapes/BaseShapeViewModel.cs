@@ -9,7 +9,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes
 {
-    public partial class BaseShapeViewModel : ViewModelBase, IDataObject, ISelectable, IConnectable, IDrawable
+    public abstract partial class BaseShapeViewModel : ViewModelBase, IDataObject, ISelectable, IConnectable, IDrawable
     {
         private readonly IDictionary<string, object?> _propertyCache = new Dictionary<string, object?>();
 
@@ -28,11 +28,6 @@ namespace Core2D.ViewModels.Shapes
         protected BaseShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider)
         {
             _targetType = targetType;
-        }
-
-        public override object Copy(IDictionary<object, object>? shared)
-        {
-            throw new NotImplementedException();
         }
 
         public override bool IsDirty()

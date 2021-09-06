@@ -16,7 +16,16 @@ namespace Core2D.ViewModels.Containers
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            throw new NotImplementedException();
+            var items = _items.Copy(shared).ToImmutable();
+            var selectedIndex = _selected is null ? -1 : _items.IndexOf(_selected);
+            var selected = selectedIndex == -1 ? null : items[selectedIndex];
+
+            return new LibraryViewModel(ServiceProvider)
+            {
+                Name = Name,
+                Items = items,
+                Selected = selected
+            };
         }
 
         public void SetSelected(ViewModelBase item) => Selected = item;

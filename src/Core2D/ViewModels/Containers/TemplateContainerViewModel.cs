@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
 using Core2D.Model.Renderer;
+using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
@@ -30,7 +31,64 @@ namespace Core2D.ViewModels.Containers
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            throw new NotImplementedException();
+            var layers = _layers.Copy(shared).ToImmutable();
+            var currentLayerIndex = _currentLayer is null ? -1 : _layers.IndexOf(_currentLayer);
+            var currentLayer = currentLayerIndex == -1 ? null : layers[currentLayerIndex];
+
+            var currentShapeIndex = -1;
+            var currentShapeLayer = default(LayerContainerViewModel?);
+            var currentShape = default(BaseShapeViewModel?);
+            if (_currentShape is not null)
+            {
+                foreach (var layer in _layers)
+                {
+                    var index = layer.Shapes.IndexOf(_currentShape);
+                    if (index >= 0)
+                    {
+                        currentShapeLayer = layer;
+                        currentShapeIndex = index;
+                        break;
+                    }
+                }
+            }
+
+            if (_currentShape is not null && currentShapeIndex != -1 && currentShapeLayer is not null)
+            {
+                var currentShapeLayerIndex = _layers.IndexOf(currentShapeLayer);
+                if (currentShapeLayerIndex >= 0)
+                {
+                    currentShape = layers[currentShapeLayerIndex].Shapes[currentShapeIndex];
+                }
+            }
+
+            var properties = _properties.Copy(shared).ToImmutable();
+
+            return new TemplateContainerViewModel(ServiceProvider)
+            {
+                Name = Name,
+                IsVisible = IsVisible,
+                IsExpanded = IsExpanded,
+                Layers = layers,
+                CurrentLayer = currentLayer,
+                WorkingLayer = (LayerContainerViewModel?)_workingLayer?.Copy(shared),
+                HelperLayer = (LayerContainerViewModel?)_helperLayer?.Copy(shared),
+                CurrentShape = currentShape,
+                Properties = properties,
+                Record = _record,
+                Width = Width,
+                Height = Height,
+                Background = (BaseColorViewModel?)_background?.Copy(shared),
+                IsGridEnabled = IsGridEnabled,
+                IsBorderEnabled = IsBorderEnabled,
+                GridOffsetLeft = GridOffsetLeft,
+                GridOffsetTop = GridOffsetTop,
+                GridOffsetRight = GridOffsetRight,
+                GridOffsetBottom = GridOffsetBottom,
+                GridCellWidth = GridCellWidth,
+                GridCellHeight = GridCellHeight,
+                GridStrokeColor = (BaseColorViewModel?)_gridStrokeColor?.Copy(shared),
+                GridStrokeThickness = GridStrokeThickness
+            };
         }
 
         public override bool IsDirty()
