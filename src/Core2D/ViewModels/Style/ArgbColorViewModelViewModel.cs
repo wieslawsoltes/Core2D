@@ -24,7 +24,7 @@ namespace Core2D.ViewModels.Style
 
         public byte B => (byte)(_value & 0xff);
 
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             return new ArgbColorViewModel(ServiceProvider)
             {

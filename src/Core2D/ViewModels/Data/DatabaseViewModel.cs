@@ -18,7 +18,7 @@ namespace Core2D.ViewModels.Data
         {
         }
 
-        public override object Copy(IDictionary<object, object> shared)
+        public override object Copy(IDictionary<object, object>? shared)
         {
             var columns = _columns.Copy(shared).ToImmutable();
             var records = _records.Copy(shared).ToImmutable();
