@@ -20,9 +20,9 @@ namespace Core2D.Model
 {
     public interface IViewModelFactory
     {
-        LibraryViewModel<T> CreateLibrary<T>(string name);
+        LibraryViewModel CreateLibrary(string name);
 
-        LibraryViewModel<T> CreateLibrary<T>(string name, IEnumerable<T>? items);
+        LibraryViewModel CreateLibrary(string name, IEnumerable<ViewModelBase>? items);
 
         ValueViewModel CreateValue(string? content);
 

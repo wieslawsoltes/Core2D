@@ -4,16 +4,16 @@ using System.Collections.Immutable;
 
 namespace Core2D.ViewModels.Containers
 {
-    public partial class LibraryViewModel<T> : ViewModelBase
+    public partial class LibraryViewModel : ViewModelBase
     {
-        [AutoNotify] private ImmutableArray<T> _items;
-        [AutoNotify] private T? _selected;
+        [AutoNotify] private ImmutableArray<ViewModelBase> _items;
+        [AutoNotify] private ViewModelBase? _selected;
 
         public LibraryViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
 
-        public void SetSelected(T item) => Selected = item;
+        public void SetSelected(ViewModelBase item) => Selected = item;
 
         public override bool IsDirty()
         {
@@ -21,9 +21,9 @@ namespace Core2D.ViewModels.Containers
 
             foreach (var item in _items)
             {
-                if (item is ViewModelBase vm)
+                if (item is { } viewModelBase)
                 {
-                    isDirty |= vm.IsDirty();
+                    isDirty |= viewModelBase.IsDirty();
                 }
             }
 
@@ -36,7 +36,7 @@ namespace Core2D.ViewModels.Containers
 
             foreach (var item in _items)
             {
-                if (item is ViewModelBase viewModelBase)
+                if (item is { } viewModelBase)
                 {
                     viewModelBase.Invalidate();
                 }

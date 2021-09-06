@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.VisualTree;
@@ -13,7 +14,8 @@ namespace Core2D.Behaviors.DragAndDrop
         internal bool ValidateLibrary<T>(ListBox listBox, DragEventArgs e, object sourceContext, object targetContext, bool bExecute) where T : ViewModelBase
         {
             if (!(sourceContext is T sourceItem)
-                || !(targetContext is LibraryViewModel<T> library)
+                || !(targetContext is LibraryViewModel library)
+                || !(library.Items.All(x => x is T))
                 || !(listBox.GetVisualAt(e.GetPosition(listBox)) is IControl targetControl)
                 || !(listBox.GetVisualRoot() is IControl rootControl)
                 || !(rootControl.DataContext is ProjectEditorViewModel editor)

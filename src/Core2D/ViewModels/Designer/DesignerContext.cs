@@ -37,9 +37,9 @@ namespace Core2D.ViewModels.Designer
 
         public static ProjectContainerViewModel Project { get; private set; }
 
-        public static LibraryViewModel<ShapeStyleViewModel> CurrentStyleLibrary { get; private set; }
+        public static LibraryViewModel CurrentStyleLibrary { get; private set; }
 
-        public static LibraryViewModel<GroupShapeViewModel> CurrentGroupLibrary { get; private set; }
+        public static LibraryViewModel CurrentGroupLibrary { get; private set; }
 
         public static ShapeStateFlags State { get; private set; }
 

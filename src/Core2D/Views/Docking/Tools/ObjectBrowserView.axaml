@@ -39,7 +39,7 @@
           </Style>
         </TreeView.Styles>
         <TreeView.DataTemplates>
-          <TreeDataTemplate DataType="{x:Type vmc:LibraryViewModel`1}" ItemsSource="{Binding Items, FallbackValue={x:Null}}" x:CompileBindings="False">
+          <TreeDataTemplate DataType="{x:Type vmc:LibraryViewModel}" ItemsSource="{Binding Items, FallbackValue={x:Null}}" x:CompileBindings="False">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>

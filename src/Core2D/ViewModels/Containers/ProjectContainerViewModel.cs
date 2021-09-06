@@ -11,7 +11,6 @@ using Core2D.Model.History;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
-using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
 {
@@ -19,14 +18,14 @@ namespace Core2D.ViewModels.Containers
     {
         [AutoNotify] private OptionsViewModel? _options;
         [AutoNotify] private IHistory? _history;
-        [AutoNotify] private ImmutableArray<LibraryViewModel<ShapeStyleViewModel>> _styleLibraries;
-        [AutoNotify] private ImmutableArray<LibraryViewModel<GroupShapeViewModel>> _groupLibraries;
+        [AutoNotify] private ImmutableArray<LibraryViewModel> _styleLibraries;
+        [AutoNotify] private ImmutableArray<LibraryViewModel> _groupLibraries;
         [AutoNotify] private ImmutableArray<DatabaseViewModel> _databases;
         [AutoNotify] private ImmutableArray<TemplateContainerViewModel> _templates;
         [AutoNotify] private ImmutableArray<ScriptViewModel> _scripts;
         [AutoNotify] private ImmutableArray<DocumentContainerViewModel> _documents;
-        [AutoNotify] private LibraryViewModel<ShapeStyleViewModel>? _currentStyleLibrary;
-        [AutoNotify] private LibraryViewModel<GroupShapeViewModel> ?_currentGroupLibrary;
+        [AutoNotify] private LibraryViewModel? _currentStyleLibrary;
+        [AutoNotify] private LibraryViewModel? _currentGroupLibrary;
         [AutoNotify] private DatabaseViewModel? _currentDatabase;
         [AutoNotify] private TemplateContainerViewModel? _currentTemplate;
         [AutoNotify] private ScriptViewModel? _currentScript;
@@ -157,9 +156,9 @@ namespace Core2D.ViewModels.Containers
 
         public void SetCurrentDatabase(DatabaseViewModel db) => CurrentDatabase = db;
 
-        public void SetCurrentGroupLibrary(LibraryViewModel<GroupShapeViewModel> libraryViewModel) => CurrentGroupLibrary = libraryViewModel;
+        public void SetCurrentGroupLibrary(LibraryViewModel libraryViewModel) => CurrentGroupLibrary = libraryViewModel;
 
-        public void SetCurrentStyleLibrary(LibraryViewModel<ShapeStyleViewModel> libraryViewModel) => CurrentStyleLibrary = libraryViewModel;
+        public void SetCurrentStyleLibrary(LibraryViewModel libraryViewModel) => CurrentStyleLibrary = libraryViewModel;
 
         public override bool IsDirty()
         {

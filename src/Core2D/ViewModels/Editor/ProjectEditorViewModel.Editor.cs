@@ -320,23 +320,23 @@ namespace Core2D.ViewModels.Editor
                 }
                 Project.AddItems(Project?.CurrentGroupLibrary, groups);
             }
-            else if (item is LibraryViewModel<ShapeStyleViewModel> sl)
+            else if (item is LibraryViewModel sl && sl.Items.All(x => x is ShapeStyleViewModel))
             {
                 Project.AddStyleLibrary(sl);
             }
-            else if (item is IList<LibraryViewModel<ShapeStyleViewModel>> sll)
+            else if (item is IList<LibraryViewModel> sll && sll.All(x => x.Items.All(_ => _ is ShapeStyleViewModel)))
             {
                 Project.AddStyleLibraries(sll);
             }
-            else if (item is LibraryViewModel<GroupShapeViewModel> gl)
+            else if (item is LibraryViewModel gl && gl.Items.All(x => x is GroupShapeViewModel))
             {
-                TryToRestoreRecords(gl.Items);
+                TryToRestoreRecords(gl.Items.Cast<GroupShapeViewModel>());
                 Project.AddGroupLibrary(gl);
             }
-            else if (item is IList<LibraryViewModel<GroupShapeViewModel>> gll)
+            else if (item is IList<LibraryViewModel> gll && gll.All(x => x.Items.All(_ => _ is GroupShapeViewModel)))
             {
                 var shapes = gll.SelectMany(x => x.Items);
-                TryToRestoreRecords(shapes);
+                TryToRestoreRecords(shapes.Cast<GroupShapeViewModel>());
                 Project.AddGroupLibraries(gll);
             }
             else if (item is DatabaseViewModel db)
@@ -1874,18 +1874,18 @@ namespace Core2D.ViewModels.Editor
 
         public void OnAddGroupLibrary()
         {
-            var gl = ViewModelFactory.CreateLibrary<GroupShapeViewModel>(ProjectEditorConfiguration.DefaulGroupLibraryName);
+            var gl = ViewModelFactory.CreateLibrary(ProjectEditorConfiguration.DefaulGroupLibraryName);
             Project.AddGroupLibrary(gl);
             Project.SetCurrentGroupLibrary(gl);
         }
 
-        public void OnRemoveGroupLibrary(LibraryViewModel<GroupShapeViewModel> libraryViewModel)
+        public void OnRemoveGroupLibrary(LibraryViewModel libraryViewModel)
         {
             Project.RemoveGroupLibrary(libraryViewModel);
             Project.SetCurrentGroupLibrary(Project?.GroupLibraries.FirstOrDefault());
         }
 
-        public void OnAddGroup(LibraryViewModel<GroupShapeViewModel> libraryViewModel)
+        public void OnAddGroup(LibraryViewModel libraryViewModel)
         {
             if (Project is { } && libraryViewModel is { })
             {
@@ -1939,18 +1939,18 @@ namespace Core2D.ViewModels.Editor
 
         public void OnAddStyleLibrary()
         {
-            var sl = ViewModelFactory.CreateLibrary<ShapeStyleViewModel>(ProjectEditorConfiguration.DefaulStyleLibraryName);
+            var sl = ViewModelFactory.CreateLibrary(ProjectEditorConfiguration.DefaulStyleLibraryName);
             Project.AddStyleLibrary(sl);
             Project.SetCurrentStyleLibrary(sl);
         }
 
-        public void OnRemoveStyleLibrary(LibraryViewModel<ShapeStyleViewModel> libraryViewModel)
+        public void OnRemoveStyleLibrary(LibraryViewModel libraryViewModel)
         {
             Project.RemoveStyleLibrary(libraryViewModel);
             Project.SetCurrentStyleLibrary(Project?.StyleLibraries.FirstOrDefault());
         }
 
-        public void OnAddStyle(LibraryViewModel<ShapeStyleViewModel> libraryViewModel)
+        public void OnAddStyle(LibraryViewModel libraryViewModel)
         {
             if (Project?.SelectedShapes is { })
             {
@@ -3672,7 +3672,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void MoveItem<T>(LibraryViewModel<T> libraryViewModel, int sourceIndex, int targetIndex)
+        public void MoveItem(LibraryViewModel libraryViewModel, int sourceIndex, int targetIndex)
         {
             if (sourceIndex < targetIndex)
             {
@@ -3704,7 +3704,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void SwapItem<T>(LibraryViewModel<T> libraryViewModel, int sourceIndex, int targetIndex)
+        public void SwapItem(LibraryViewModel libraryViewModel, int sourceIndex, int targetIndex)
         {
             var item1 = libraryViewModel.Items[sourceIndex];
             var item2 = libraryViewModel.Items[targetIndex];
@@ -3718,7 +3718,7 @@ namespace Core2D.ViewModels.Editor
             libraryViewModel.Items = next;
         }
 
-        public void InsertItem<T>(LibraryViewModel<T> libraryViewModel, T item, int index)
+        public void InsertItem(LibraryViewModel libraryViewModel, ViewModelBase item, int index)
         {
             var builder = libraryViewModel.Items.ToBuilder();
             builder.Insert(index, item);

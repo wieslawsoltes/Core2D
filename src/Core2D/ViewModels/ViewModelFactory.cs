@@ -30,22 +30,22 @@ namespace Core2D.ViewModels
             _serviceProvider = serviceProvider;
         }
 
-        public LibraryViewModel<T> CreateLibrary<T>(string name)
+        public LibraryViewModel CreateLibrary(string name)
         {
-            return new LibraryViewModel<T>(_serviceProvider)
+            return new LibraryViewModel(_serviceProvider)
             {
                 Name = name,
-                Items = ImmutableArray.Create<T>(),
+                Items = ImmutableArray.Create<ViewModelBase>(),
                 Selected = default
             };
         }
 
-        public LibraryViewModel<T> CreateLibrary<T>(string name, IEnumerable<T> items)
+        public LibraryViewModel CreateLibrary(string name, IEnumerable<ViewModelBase> items)
         {
-            return new LibraryViewModel<T>(_serviceProvider)
+            return new LibraryViewModel(_serviceProvider)
             {
                 Name = name,
-                Items = ImmutableArray.CreateRange<T>(items),
+                Items = ImmutableArray.CreateRange<ViewModelBase>(items),
                 Selected = items.FirstOrDefault()
             };
         }
@@ -996,8 +996,8 @@ namespace Core2D.ViewModels
             {
                 Name = name,
                 Options = CreateOptions(),
-                StyleLibraries = ImmutableArray.Create<LibraryViewModel<ShapeStyleViewModel>>(),
-                GroupLibraries = ImmutableArray.Create<LibraryViewModel<GroupShapeViewModel>>(),
+                StyleLibraries = ImmutableArray.Create<LibraryViewModel>(),
+                GroupLibraries = ImmutableArray.Create<LibraryViewModel>(),
                 Databases = ImmutableArray.Create<DatabaseViewModel>(),
                 Templates = ImmutableArray.Create<TemplateContainerViewModel>(),
                 Scripts = ImmutableArray.Create<ScriptViewModel>(),

@@ -451,7 +451,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddGroupLibrary(this ProjectContainerViewModel project, LibraryViewModel<GroupShapeViewModel> library)
+        public static void AddGroupLibrary(this ProjectContainerViewModel project, LibraryViewModel library)
         {
             if (project?.GroupLibraries is { } && library is { })
             {
@@ -462,7 +462,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddGroupLibraries(this ProjectContainerViewModel project, IEnumerable<LibraryViewModel<GroupShapeViewModel>> libraries)
+        public static void AddGroupLibraries(this ProjectContainerViewModel project, IEnumerable<LibraryViewModel> libraries)
         {
             if (project?.GroupLibraries is { } && libraries is { })
             {
@@ -476,7 +476,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void RemoveGroupLibrary(this ProjectContainerViewModel project, LibraryViewModel<GroupShapeViewModel> library)
+        public static void RemoveGroupLibrary(this ProjectContainerViewModel project, LibraryViewModel library)
         {
             if (project?.GroupLibraries is { } && library is { })
             {
@@ -487,7 +487,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddStyleLibrary(this ProjectContainerViewModel project, LibraryViewModel<ShapeStyleViewModel> library)
+        public static void AddStyleLibrary(this ProjectContainerViewModel project, LibraryViewModel library)
         {
             if (project?.StyleLibraries is { } && library is { })
             {
@@ -498,7 +498,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddStyleLibraries(this ProjectContainerViewModel project, IEnumerable<LibraryViewModel<ShapeStyleViewModel>> libraries)
+        public static void AddStyleLibraries(this ProjectContainerViewModel project, IEnumerable<LibraryViewModel> libraries)
         {
             if (project?.StyleLibraries is { } && libraries is { })
             {
@@ -512,7 +512,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void RemoveStyleLibrary(this ProjectContainerViewModel project, LibraryViewModel<ShapeStyleViewModel> library)
+        public static void RemoveStyleLibrary(this ProjectContainerViewModel project, LibraryViewModel library)
         {
             if (project?.CurrentStyleLibrary is { } && library is { })
             {
@@ -523,12 +523,12 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddStyle(this ProjectContainerViewModel project, LibraryViewModel<ShapeStyleViewModel> library, ShapeStyleViewModel style)
+        public static void AddStyle(this ProjectContainerViewModel project, LibraryViewModel library, ShapeStyleViewModel style)
         {
             AddItem(project, library, style);
         }
 
-        public static LibraryViewModel<ShapeStyleViewModel> RemoveStyle(this ProjectContainerViewModel project, ShapeStyleViewModel style)
+        public static LibraryViewModel RemoveStyle(this ProjectContainerViewModel project, ShapeStyleViewModel style)
         {
             if (project?.StyleLibraries is { } && style is { })
             {
@@ -570,12 +570,12 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddGroup(this ProjectContainerViewModel project, LibraryViewModel<GroupShapeViewModel> library, GroupShapeViewModel group)
+        public static void AddGroup(this ProjectContainerViewModel project, LibraryViewModel library, GroupShapeViewModel group)
         {
             AddItem(project, library, group);
         }
 
-        public static LibraryViewModel<GroupShapeViewModel> RemoveGroup(this ProjectContainerViewModel project, GroupShapeViewModel group)
+        public static LibraryViewModel RemoveGroup(this ProjectContainerViewModel project, GroupShapeViewModel group)
         {
             if (project?.GroupLibraries is { } && group is { })
             {
@@ -592,7 +592,7 @@ namespace Core2D.ViewModels.Editor
             return null;
         }
 
-        public static void AddItem<T>(this ProjectContainerViewModel project, LibraryViewModel<T> libraryViewModel, T item)
+        public static void AddItem(this ProjectContainerViewModel project, LibraryViewModel libraryViewModel, ViewModelBase item)
         {
             if (libraryViewModel?.Items is { } && item is { })
             {
@@ -603,7 +603,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public static void AddItems<T>(this ProjectContainerViewModel project, LibraryViewModel<T> library, IEnumerable<T> items)
+        public static void AddItems(this ProjectContainerViewModel project, LibraryViewModel library, IEnumerable<ViewModelBase> items)
         {
             if (library?.Items is { } && items is { })
             {

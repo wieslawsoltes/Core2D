@@ -17,10 +17,10 @@ namespace Core2D.ViewModels.Editor.Factories
             _serviceProvider = serviceProvider;
         }
 
-        private LibraryViewModel<ShapeStyleViewModel> DefaultStyleLibrary()
+        private LibraryViewModel DefaultStyleLibrary()
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
-            var sgd = factory.CreateLibrary<ShapeStyleViewModel>("Default");
+            var sgd = factory.CreateLibrary("Default");
 
             var builder = sgd.Items.ToBuilder();
 
@@ -82,7 +82,7 @@ namespace Core2D.ViewModels.Editor.Factories
 
             // Group Libraries
             var glBuilder = project.GroupLibraries.ToBuilder();
-            glBuilder.Add(factory.CreateLibrary<GroupShapeViewModel>("Default"));
+            glBuilder.Add(factory.CreateLibrary("Default"));
             project.GroupLibraries = glBuilder.ToImmutable();
 
             project.SetCurrentGroupLibrary(project.GroupLibraries.FirstOrDefault());
