@@ -51,6 +51,10 @@
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
+          <TreeDataTemplate DataType="vmc:TemplateContainerViewModel" ItemsSource="{Binding Layers}" x:CompileBindings="False">
+            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                            ContextMenu="{StaticResource ExportContextMenu}"/>
+          </TreeDataTemplate>
           <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
