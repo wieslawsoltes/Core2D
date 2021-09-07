@@ -12,7 +12,7 @@ namespace Core2D.ViewModels
         [AutoNotify] private ViewModelBase? _owner;
         [AutoNotify] private string _name = "";
 
-        public ViewModelBase(IServiceProvider serviceProvider)
+        protected ViewModelBase(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
         }
