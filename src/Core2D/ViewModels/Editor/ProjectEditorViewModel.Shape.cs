@@ -15,26 +15,18 @@ namespace Core2D.ViewModels.Editor
     {
         public void OnDuplicateSelected()
         {
+            if (Project?.SelectedShapes is null)
+            {
+                return;
+            }
+
             try
             {
-                if (Project?.SelectedShapes is null)
+                var copy = Copy(Project.SelectedShapes.ToList());
+                if (copy is { })
                 {
-                    return;
+                    OnPasteShapes(copy);
                 }
-
-                var json = JsonSerializer?.Serialize(Project.SelectedShapes.ToList());
-                if (string.IsNullOrEmpty(json))
-                {
-                    return;
-                }
-
-                var shapes = JsonSerializer?.Deserialize<IList<BaseShapeViewModel>>(json);
-                if (shapes?.Count() <= 0)
-                {
-                    return;
-                }
-
-                OnPasteShapes(shapes);
             }
             catch (Exception ex)
             {

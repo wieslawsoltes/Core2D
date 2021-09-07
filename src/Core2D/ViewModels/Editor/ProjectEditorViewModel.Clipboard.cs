@@ -141,26 +141,38 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
+        private List<BaseShapeViewModel>? Copy(IList<BaseShapeViewModel> shapes)
+        {
+            if (shapes.Count > 0)
+            {
+                var shapesToCopy = new List<BaseShapeViewModel>(shapes.Count);
+                var shared = new Dictionary<object, object>();
+
+                foreach (var shape in shapes)
+                {
+                    var copy = shape.CopyShared(shared);
+                    if (copy is { })
+                    {
+                        shapesToCopy.Add(copy);
+                    }
+                }
+
+                return shapesToCopy;
+            }
+
+            return null;
+        }
+
         public void OnCopyShapes(IList<BaseShapeViewModel> shapes)
         {
             try
             {
-                if (shapes.Count > 0)
+                var copy = Copy(shapes);
+                if (copy is { })
                 {
-                    ShapesToCopy = new List<BaseShapeViewModel>(shapes.Count);
-
-                    var shared = new Dictionary<object, object>();
- 
-                    foreach (var shape in shapes)
-                    {
-                        var copy = shape.CopyShared(shared);
-                        if (copy is { })
-                        {
-                            ShapesToCopy.Add(copy);
-                        }
-                    }
+                    ShapesToCopy = copy;
                 }
-
+ 
                 // TODO:
                 // var json = JsonSerializer?.Serialize(shapes);
                 // if (!string.IsNullOrEmpty(json))
@@ -352,22 +364,14 @@ namespace Core2D.ViewModels.Editor
                     // {
                     //     OnTryPaste(text);
                     // }
-                    
-                    if (ShapesToCopy is { } && ShapesToCopy.Count > 0)
+
+                    if (ShapesToCopy is { })
                     {
-                        var shapesToPaste = new List<BaseShapeViewModel>(ShapesToCopy.Count);
-                        var shared = new Dictionary<object, object>();
- 
-                        foreach (var s in ShapesToCopy)
+                        var copy = Copy(ShapesToCopy);
+                        if (copy is { })
                         {
-                            var copy = s.CopyShared(shared);
-                            if (copy is { })
-                            {
-                                shapesToPaste.Add(copy);
-                            }
+                            OnPasteShapes(copy);
                         }
-                        
-                        OnPasteShapes(shapesToPaste);
                     }
                 }
             }
