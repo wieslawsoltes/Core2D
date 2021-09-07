@@ -103,116 +103,6 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        private void RestoreShape(BaseShapeViewModel shape)
-        {
-            var shapes = Enumerable.Repeat(shape, 1).ToList();
-            TryToRestoreRecords(shapes);
-        }
-
-        public T? CloneShape<T>(T shape) where T : BaseShapeViewModel
-        {
-            try
-            {
-                if (JsonSerializer is { } serializer)
-                {
-                    var json = serializer.Serialize(shape);
-                    if (!string.IsNullOrEmpty(json))
-                    {
-                        var clone = serializer.Deserialize<T>(json);
-                        if (clone is { })
-                        {
-                            RestoreShape(clone);
-                            return clone;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-
-            return default;
-        }
-
-        public LayerContainerViewModel? Clone(LayerContainerViewModel? container)
-        {
-            try
-            {
-                var json = JsonSerializer?.Serialize(container);
-                if (!string.IsNullOrEmpty(json))
-                {
-                    var clone = JsonSerializer?.Deserialize<LayerContainerViewModel>(json);
-                    if (clone is { })
-                    {
-                        var shapes = clone.Shapes;
-                        TryToRestoreRecords(shapes);
-                        return clone;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-
-            return default;
-        }
-
-        public PageContainerViewModel? Clone(PageContainerViewModel? container)
-        {
-            try
-            {
-                var template = container?.Template;
-                var json = JsonSerializer?.Serialize(container);
-                if (!string.IsNullOrEmpty(json))
-                {
-                    var clone = JsonSerializer?.Deserialize<PageContainerViewModel>(json);
-                    if (clone is { })
-                    {
-                        var shapes = clone.Layers.SelectMany(l => l.Shapes);
-                        TryToRestoreRecords(shapes);
-                        clone.Template = template;
-                        return clone;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-
-            return default;
-        }
-
-        public DocumentContainerViewModel? Clone(DocumentContainerViewModel? document)
-        {
-            try
-            {
-                var json = JsonSerializer?.Serialize(document);
-                if (!string.IsNullOrEmpty(json))
-                {
-                    var clone = JsonSerializer?.Deserialize<DocumentContainerViewModel>(json);
-                    if (clone is { })
-                    {
-                        for (int i = 0; i < clone.Pages.Length; i++)
-                        {
-                            var container = clone.Pages[i];
-                            var shapes = container.Layers.SelectMany(l => l.Shapes);
-                            TryToRestoreRecords(shapes);
-                        }
-                        return clone;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-
-            return default;
-        }
-
         private void Delete(object? item)
         {
             if (item is BaseShapeViewModel shape)
@@ -429,7 +319,7 @@ namespace Core2D.ViewModels.Editor
                     if (document is { })
                     {
                         int index = document.Pages.IndexOf(page);
-                        var clone = Clone(PageToCopy);
+                        var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
                         Project.ReplacePage(document, clone, index);
                         Project?.SetCurrentContainer(clone);
                     }
@@ -439,14 +329,14 @@ namespace Core2D.ViewModels.Editor
             {
                 if (PageToCopy is { })
                 {
-                    var clone = Clone(PageToCopy);
+                    var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
                     Project?.AddPage(document, clone);
                     Project?.SetCurrentContainer(clone);
                 }
                 else if (DocumentToCopy is { })
                 {
                     int index = Project.Documents.IndexOf(document);
-                    var clone = Clone(DocumentToCopy);
+                    var clone = DocumentToCopy?.CopyShared(new Dictionary<object, object>());
                     Project.ReplaceDocument(clone, index);
                     Project.SetCurrentDocument(clone);
                     Project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
