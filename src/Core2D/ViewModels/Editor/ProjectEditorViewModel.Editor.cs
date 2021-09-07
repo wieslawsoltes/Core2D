@@ -7,7 +7,6 @@ using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Core2D.Model;
-using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
@@ -551,93 +550,6 @@ namespace Core2D.ViewModels.Editor
             catch (Exception ex)
             {
                 Log?.LogException(ex);
-            }
-        }
-
-        public void OnUndo()
-        {
-            try
-            {
-                if (Project?.History.CanUndo() ?? false)
-                {
-                    Deselect();
-                    Project?.History.Undo();
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-        }
-
-        public void OnRedo()
-        {
-            try
-            {
-                if (Project?.History.CanRedo() ?? false)
-                {
-                    Deselect();
-                    Project?.History.Redo();
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-        }
-
-        private void Delete(object item)
-        {
-            if (item is BaseShapeViewModel shape)
-            {
-                Project?.RemoveShape(shape);
-                OnDeselectAll();
-            }
-            else if (item is LayerContainerViewModel layer)
-            {
-                Project?.RemoveLayer(layer);
-
-                var selected = Project?.CurrentContainer?.Layers.FirstOrDefault();
-                if (layer.Owner is FrameContainerViewModel owner)
-                {
-                    owner.SetCurrentLayer(selected);
-                }
-            }
-            else if (item is PageContainerViewModel page)
-            {
-                Project?.RemovePage(page);
-
-                var selected = Project?.CurrentDocument?.Pages.FirstOrDefault();
-                Project?.SetCurrentContainer(selected);
-            }
-            else if (item is DocumentContainerViewModel document)
-            {
-                Project?.RemoveDocument(document);
-
-                var selected = Project?.Documents.FirstOrDefault();
-                Project?.SetCurrentDocument(selected);
-                Project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
-            }
-            else if (item is ProjectEditorViewModel || item is null)
-            {
-                OnDeleteSelected();
-            }
-        }
-
-        public void OnDelete(object item)
-        {
-            if (item is IList<object> objects)
-            {
-                var copy = objects.ToList();
-
-                foreach (var obj in copy)
-                {
-                    Delete(obj);
-                }
-            }
-            else
-            {
-                Delete(item);
             }
         }
 
@@ -1270,6 +1182,38 @@ namespace Core2D.ViewModels.Editor
         public bool CanRedo()
         {
             return Project?.History?.CanRedo() ?? false;
+        }
+
+        public void OnUndo()
+        {
+            try
+            {
+                if (Project?.History.CanUndo() ?? false)
+                {
+                    Deselect();
+                    Project?.History.Undo();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log?.LogException(ex);
+            }
+        }
+
+        public void OnRedo()
+        {
+            try
+            {
+                if (Project?.History.CanRedo() ?? false)
+                {
+                    Deselect();
+                    Project?.History.Redo();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log?.LogException(ex);
+            }
         }
 
         public async Task<bool> OnDropFiles(string[] files, double x, double y)
