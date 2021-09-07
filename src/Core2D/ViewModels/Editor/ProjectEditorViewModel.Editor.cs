@@ -46,7 +46,7 @@ namespace Core2D.ViewModels.Editor
             return string.Empty;
         }
 
-        public void SetShapeName(BaseShapeViewModel shape, IEnumerable<BaseShapeViewModel> source = null)
+        public void SetShapeName(BaseShapeViewModel shape, IEnumerable<BaseShapeViewModel>? source = null)
         {
             var input = source ?? _project.GetAllShapes();
             var shapes = input.Where(s => s.GetType() == shape.GetType() && s != shape).ToList();
