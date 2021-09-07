@@ -21,7 +21,7 @@ using Core2D.Views;
 
 namespace Core2D.Editor
 {
-    public partial class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatform
+    public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatform
     {
         public AvaloniaProjectEditorPlatform(IServiceProvider serviceProvider) : base(serviceProvider)
         {
@@ -37,7 +37,7 @@ namespace Core2D.Editor
             return ServiceProvider.GetService<MainWindow>();
         }
 
-        public async void OnOpen(string path)
+        public async void OnOpen(string? path)
         {
             if (path is null)
             {
@@ -90,7 +90,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnImportJson(string path)
+        public async void OnImportJson(string? path)
         {
             if (path is null)
             {
@@ -120,7 +120,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnImportSvg(string path)
+        public async void OnImportSvg(string? path)
         {
             if (path is null)
             {
@@ -150,7 +150,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnImportObject(string path)
+        public async void OnImportObject(string? path)
         {
             if (path is null)
             {
@@ -186,7 +186,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnExportJson(object item)
+        public async void OnExportJson(object? item)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var dlg = new SaveFileDialog() { Title = "Save" };
@@ -201,7 +201,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnExportObject(object item)
+        public async void OnExportObject(object? item)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             if (item is { })
@@ -222,7 +222,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnExport(object item)
+        public async void OnExport(object? item)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
@@ -272,7 +272,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnExecuteScriptFile(string path)
+        public async void OnExecuteScriptFile(string? path)
         {
             if (path is null)
             {
@@ -296,7 +296,7 @@ namespace Core2D.Editor
             GetWindow().Close();
         }
 
-        public void OnCopyAsSvg(object item)
+        public void OnCopyAsSvg(object? item)
         {
             try
             {
@@ -372,7 +372,7 @@ namespace Core2D.Editor
             }
         }
 
-        public void OnCopyAsXaml(object item)
+        public void OnCopyAsXaml(object? item)
         {
             try
             {
@@ -468,7 +468,7 @@ namespace Core2D.Editor
             }
         }
 
-        public void OnCopyAsEmf(object item)
+        public void OnCopyAsEmf(object? item)
         {
             if (Environment.OSVersion.Platform != PlatformID.Win32NT)
             {
@@ -524,7 +524,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnCopyAsPathData(object item)
+        public async void OnCopyAsPathData(object? item)
         {
             try
             {
@@ -610,7 +610,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnImportData(ProjectContainerViewModel project)
+        public async void OnImportData(ProjectContainerViewModel? project)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var dlg = new OpenFileDialog() { Title = "Open" };
@@ -637,7 +637,7 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnExportData(DatabaseViewModel db)
+        public async void OnExportData(DatabaseViewModel? db)
         {
             if (db is { })
             {
@@ -663,13 +663,17 @@ namespace Core2D.Editor
             }
         }
 
-        public async void OnUpdateData(DatabaseViewModel db)
+        public async void OnUpdateData(DatabaseViewModel? db)
         {
             if (db is { })
             {
                 var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+                if (editor is null)
+                {
+                    return;
+                }
                 var dlg = new OpenFileDialog() { Title = "Open" };
-                foreach (var reader in editor?.TextFieldReaders)
+                foreach (var reader in editor.TextFieldReaders)
                 {
                     dlg.Filters.Add(new FileDialogFilter() { Name = reader.Name, Extensions = { reader.Extension } });
                 }

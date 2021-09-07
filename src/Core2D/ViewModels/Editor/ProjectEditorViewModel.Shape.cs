@@ -54,9 +54,12 @@ namespace Core2D.ViewModels.Editor
         public void OnUngroupSelected()
         {
             var result = Ungroup(Project?.SelectedShapes);
-            if (result == true && PageState is { })
+            if (result && PageState is { })
             {
-                Project.SelectedShapes = null;
+                if (Project is { })
+                {
+                    Project.SelectedShapes = null;
+                }
                 OnHideDecorator();
             }
         }
@@ -98,32 +101,48 @@ namespace Core2D.ViewModels.Editor
 
         public void OnMoveUpSelected()
         {
+            if (Project?.Options is null)
+            {
+                return;
+            }
             MoveBy(
-                Project?.SelectedShapes,
+                Project.SelectedShapes,
                 0m,
                 Project.Options.SnapToGrid ? (decimal)-Project.Options.SnapY : -1m);
         }
 
         public void OnMoveDownSelected()
         {
+            if (Project?.Options is null)
+            {
+                return;
+            }
             MoveBy(
-                Project?.SelectedShapes,
+                Project.SelectedShapes,
                 0m,
                 Project.Options.SnapToGrid ? (decimal)Project.Options.SnapY : 1m);
         }
 
         public void OnMoveLeftSelected()
         {
+            if (Project?.Options is null)
+            {
+                return;
+            }
             MoveBy(
-                Project?.SelectedShapes,
+                Project.SelectedShapes,
                 Project.Options.SnapToGrid ? (decimal)-Project.Options.SnapX : -1m,
                 0m);
         }
 
         public void OnMoveRightSelected()
         {
+            if (Project?.Options is null)
+            {
+                return;
+            }
             MoveBy(
-                Project?.SelectedShapes,
+                Project.SelectedShapes,
                 Project.Options.SnapToGrid ? (decimal)Project.Options.SnapX : 1m,
                 0m);
         }
@@ -302,7 +321,7 @@ namespace Core2D.ViewModels.Editor
             var sources = Project?.SelectedShapes;
             var source = Project?.SelectedShapes?.FirstOrDefault();
 
-            if (sources is { } && sources.Count == 1)
+            if (sources is { Count: 1 } && source is not null)
             {
                 var path = PathConverter.ToPathShape(source);
                 if (path is { })
@@ -321,7 +340,7 @@ namespace Core2D.ViewModels.Editor
                 }
             }
 
-            if (sources is { } && sources.Count > 1)
+            if (sources is { Count: > 1 })
             {
                 var path = PathConverter.ToPathShape(sources);
                 if (path is null)
@@ -362,7 +381,7 @@ namespace Core2D.ViewModels.Editor
             var sources = Project?.SelectedShapes;
             var source = Project?.SelectedShapes?.FirstOrDefault();
 
-            if (sources is { } && sources.Count == 1)
+            if (sources is { Count: 1 } && source is not null)
             {
                 var path = PathConverter.ToStrokePathShape(source);
                 if (path is { })
@@ -384,7 +403,7 @@ namespace Core2D.ViewModels.Editor
                 }
             }
 
-            if (sources is { } && sources.Count > 1)
+            if (sources is { Count: > 1 })
             {
                 var paths = new List<PathShapeViewModel>();
                 var shapes = new List<BaseShapeViewModel>();
@@ -438,7 +457,7 @@ namespace Core2D.ViewModels.Editor
             var sources = Project?.SelectedShapes;
             var source = Project?.SelectedShapes?.FirstOrDefault();
 
-            if (sources is { } && sources.Count == 1)
+            if (sources is { Count: 1 } && source is not null)
             {
                 var path = PathConverter.ToFillPathShape(source);
                 if (path is { })
@@ -460,7 +479,7 @@ namespace Core2D.ViewModels.Editor
                 }
             }
 
-            if (sources is { } && sources.Count > 1)
+            if (sources is { Count: > 1 })
             {
                 var paths = new List<PathShapeViewModel>();
                 var shapes = new List<BaseShapeViewModel>();
@@ -514,7 +533,7 @@ namespace Core2D.ViewModels.Editor
             var sources = Project?.SelectedShapes;
             var source = Project?.SelectedShapes?.FirstOrDefault();
 
-            if (sources is { } && sources.Count == 1)
+            if (sources is { Count: 1 } && source is not null)
             {
                 var path = PathConverter.ToWindingPathShape(source);
                 if (path is { })
@@ -536,7 +555,7 @@ namespace Core2D.ViewModels.Editor
                 }
             }
 
-            if (sources is { } && sources.Count > 1)
+            if (sources is { Count: > 1 })
             {
                 var paths = new List<PathShapeViewModel>();
                 var shapes = new List<BaseShapeViewModel>();
@@ -590,7 +609,7 @@ namespace Core2D.ViewModels.Editor
             var sources = Project?.SelectedShapes;
             var source = Project?.SelectedShapes?.FirstOrDefault();
 
-            if (sources is { } && sources.Count == 1)
+            if (sources is { Count: 1 } && source is not null)
             {
                 var path = PathConverter.Simplify(source);
                 if (path is { })
@@ -609,7 +628,7 @@ namespace Core2D.ViewModels.Editor
                 }
             }
 
-            if (sources is { } && sources.Count > 1)
+            if (sources is { Count: > 1 })
             {
                 var paths = new List<PathShapeViewModel>();
                 var shapes = new List<BaseShapeViewModel>();
@@ -659,28 +678,28 @@ namespace Core2D.ViewModels.Editor
 
             var sources = Project?.SelectedShapes;
 
-            if (sources is { } && sources.Count >= 1)
+            if (sources is { Count: >= 1 })
             {
                 var result = new List<BaseShapeViewModel>();
                 var remove = new List<BaseShapeViewModel>();
 
                 foreach (var s in sources)
                 {
-                    _shapeEditor.BreakShape(s, result, remove);
+                    _shapeEditor?.BreakShape(s, result, remove);
                 }
 
                 if (result.Count > 0)
                 {
                     var shapesBuilder = layer.Shapes.ToBuilder();
 
-                    for (int i = 0; i < remove.Count; i++)
+                    foreach (var t in remove)
                     {
-                        shapesBuilder.Remove(remove[i]);
+                        shapesBuilder.Remove(t);
                     }
 
-                    for (int i = 0; i < result.Count; i++)
+                    foreach (var t in result)
                     {
-                        shapesBuilder.Add(result[i]);
+                        shapesBuilder.Add(t);
                     }
 
                     var previous = layer.Shapes;
@@ -893,14 +912,25 @@ namespace Core2D.ViewModels.Editor
             OnUpdateDecorator();
         }
 
-        private void MoveShapesByWithHistory(IEnumerable<BaseShapeViewModel> shapes, decimal dx, decimal dy)
+        private void MoveShapesByWithHistory(List<BaseShapeViewModel>? shapes, decimal dx, decimal dy)
         {
+            if (shapes is null)
+            {
+                return;
+            }
             MoveShapesBy(shapes, dx, dy);
             OnUpdateDecorator();
 
             var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
             var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
-            Project?.History?.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
+            Project?.History?.Snapshot(previous, next, (s) =>
+            {
+                if (s is null)
+                {
+                    return;
+                }
+                MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY);
+            });
         }
 
         public void MoveBy(ISet<BaseShapeViewModel>? shapes, decimal dx, decimal dy)
@@ -923,14 +953,14 @@ namespace Core2D.ViewModels.Editor
                         }
                     }
 
-                    var distinct = points.Distinct().ToList();
+                    var distinct = points.Distinct().Cast<BaseShapeViewModel>().ToList();
                     MoveShapesByWithHistory(distinct, dx, dy);
                 }
                     break;
 
                 case MoveMode.Shape:
                 {
-                    var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
+                    var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked)).ToList();
                     MoveShapesByWithHistory(items, dx, dy);
                 }
                     break;

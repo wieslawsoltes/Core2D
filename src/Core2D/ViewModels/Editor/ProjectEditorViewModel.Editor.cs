@@ -37,7 +37,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public string GetName(object item)
+        public string GetName(object? item)
         {
             if (item is ViewModelBase observable)
             {
