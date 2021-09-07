@@ -16,11 +16,13 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new FillStyleViewModel(ServiceProvider)
+            var copy = new FillStyleViewModel(ServiceProvider)
             {
                 Name = Name,
-                Color = (BaseColorViewModel?)_color?.Copy(shared)
+                Color = _color?.CopyShared(shared)
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

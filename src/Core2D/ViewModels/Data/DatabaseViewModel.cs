@@ -20,12 +20,11 @@ namespace Core2D.ViewModels.Data
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            var columns = _columns.Copy(shared).ToImmutable();
-            var records = _records.Copy(shared).ToImmutable();
-            var currentRecordIndex = _currentRecord is null ? -1 : _records.IndexOf(_currentRecord);
-            var currentRecord = currentRecordIndex == -1 ? null : records[currentRecordIndex];
+            var columns = _columns.CopyShared(shared).ToImmutable();
+            var records = _records.CopyShared(shared).ToImmutable();
+            var currentRecord = _currentRecord.GetCurrentItem(ref _records, ref records);
 
-            return new DatabaseViewModel(ServiceProvider)
+            var copy = new DatabaseViewModel(ServiceProvider)
             {
                 Name = Name,
                 IdColumnName = IdColumnName,
@@ -33,6 +32,8 @@ namespace Core2D.ViewModels.Data
                 Records = records,
                 CurrentRecord = currentRecord
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

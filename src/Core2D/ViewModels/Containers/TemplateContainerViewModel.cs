@@ -31,53 +31,26 @@ namespace Core2D.ViewModels.Containers
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            var layers = _layers.Copy(shared).ToImmutable();
-            var currentLayerIndex = _currentLayer is null ? -1 : _layers.IndexOf(_currentLayer);
-            var currentLayer = currentLayerIndex == -1 ? null : layers[currentLayerIndex];
+            var layers = _layers.CopyShared(shared).ToImmutable();
+            var currentLayer = _currentLayer.GetCurrentItem(ref _layers, ref layers);
+            var currentShape = _currentShape.GetCurrentItem(ref _layers, ref layers, x => x.Shapes);
+            var properties = _properties.CopyShared(shared).ToImmutable();
 
-            var currentShapeIndex = -1;
-            var currentShapeLayer = default(LayerContainerViewModel?);
-            var currentShape = default(BaseShapeViewModel?);
-            if (_currentShape is not null)
-            {
-                foreach (var layer in _layers)
-                {
-                    var index = layer.Shapes.IndexOf(_currentShape);
-                    if (index >= 0)
-                    {
-                        currentShapeLayer = layer;
-                        currentShapeIndex = index;
-                        break;
-                    }
-                }
-            }
-
-            if (_currentShape is not null && currentShapeIndex != -1 && currentShapeLayer is not null)
-            {
-                var currentShapeLayerIndex = _layers.IndexOf(currentShapeLayer);
-                if (currentShapeLayerIndex >= 0)
-                {
-                    currentShape = layers[currentShapeLayerIndex].Shapes[currentShapeIndex];
-                }
-            }
-
-            var properties = _properties.Copy(shared).ToImmutable();
-
-            return new TemplateContainerViewModel(ServiceProvider)
+            var copy = new TemplateContainerViewModel(ServiceProvider)
             {
                 Name = Name,
                 IsVisible = IsVisible,
                 IsExpanded = IsExpanded,
                 Layers = layers,
                 CurrentLayer = currentLayer,
-                WorkingLayer = (LayerContainerViewModel?)_workingLayer?.Copy(shared),
-                HelperLayer = (LayerContainerViewModel?)_helperLayer?.Copy(shared),
+                WorkingLayer = _workingLayer?.CopyShared(shared),
+                HelperLayer = _helperLayer?.CopyShared(shared),
                 CurrentShape = currentShape,
                 Properties = properties,
                 Record = _record,
                 Width = Width,
                 Height = Height,
-                Background = (BaseColorViewModel?)_background?.Copy(shared),
+                Background = _background?.CopyShared(shared),
                 IsGridEnabled = IsGridEnabled,
                 IsBorderEnabled = IsBorderEnabled,
                 GridOffsetLeft = GridOffsetLeft,
@@ -86,9 +59,11 @@ namespace Core2D.ViewModels.Containers
                 GridOffsetBottom = GridOffsetBottom,
                 GridCellWidth = GridCellWidth,
                 GridCellHeight = GridCellHeight,
-                GridStrokeColor = (BaseColorViewModel?)_gridStrokeColor?.Copy(shared),
+                GridStrokeColor = _gridStrokeColor?.CopyShared(shared),
                 GridStrokeThickness = GridStrokeThickness
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

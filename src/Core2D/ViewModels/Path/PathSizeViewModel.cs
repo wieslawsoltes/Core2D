@@ -16,11 +16,13 @@ namespace Core2D.ViewModels.Path
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new PathSizeViewModel(ServiceProvider)
+            var copy = new PathSizeViewModel(ServiceProvider)
             {
                 Width = _width,
                 Height = _height
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

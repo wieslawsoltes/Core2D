@@ -6,7 +6,6 @@ using System.Reactive.Disposables;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
-using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes
 {
@@ -22,19 +21,21 @@ namespace Core2D.ViewModels.Shapes
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new QuadraticBezierShapeViewModel(ServiceProvider)
+            var copy = new QuadraticBezierShapeViewModel(ServiceProvider)
             {
                 Name = Name,
                 State = State,
-                Style = (ShapeStyleViewModel?)_style?.Copy(shared),
+                Style = _style?.CopyShared(shared),
                 IsStroked = IsStroked,
                 IsFilled = IsFilled,
-                Properties = _properties.Copy(shared).ToImmutable(),
+                Properties = _properties.CopyShared(shared).ToImmutable(),
                 Record = _record,
-                Point1 = (PointShapeViewModel?)_point1?.Copy(shared),
-                Point2 = (PointShapeViewModel?)_point2?.Copy(shared),
-                Point3 = (PointShapeViewModel?)_point3?.Copy(shared)
+                Point1 = _point1?.CopyShared(shared),
+                Point2 = _point2?.CopyShared(shared),
+                Point3 = _point3?.CopyShared(shared)
             };
+
+            return copy;
         }
 
         public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)

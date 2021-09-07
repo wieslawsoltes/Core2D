@@ -14,10 +14,12 @@ namespace Core2D.ViewModels.Editor.Recent
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new RecentFileViewModel(ServiceProvider)
+            var copy = new RecentFileViewModel(ServiceProvider)
             {
                 Path = Path
             };
+
+            return copy;
         }
 
         public static RecentFileViewModel Create(IServiceProvider serviceProvider, string name, string path)

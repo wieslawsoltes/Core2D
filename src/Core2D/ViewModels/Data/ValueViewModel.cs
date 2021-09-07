@@ -14,11 +14,13 @@ namespace Core2D.ViewModels.Data
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new ValueViewModel(ServiceProvider)
+            var copy = new ValueViewModel(ServiceProvider)
             {
                 Name = Name,
                 Content = Content
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

@@ -27,7 +27,7 @@ namespace Core2D.ViewModels.Containers
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new OptionsViewModel(ServiceProvider)
+            var copy = new OptionsViewModel(ServiceProvider)
             {
                 SnapToGrid = SnapToGrid,
                 SnapX = SnapX,
@@ -40,6 +40,8 @@ namespace Core2D.ViewModels.Containers
                 DefaultFillRule = DefaultFillRule,
                 TryToConnect = TryToConnect
             };
+
+            return copy;
         }
     }
 }

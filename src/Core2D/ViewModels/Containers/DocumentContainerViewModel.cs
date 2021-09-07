@@ -17,15 +17,17 @@ namespace Core2D.ViewModels.Containers
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            var pages = _pages.Copy(shared).ToImmutable();
+            var pages = _pages.CopyShared(shared).ToImmutable();
 
-            return new DocumentContainerViewModel(ServiceProvider)
+            var copy = new DocumentContainerViewModel(ServiceProvider)
             {
                 Name = Name,
                 IsVisible = IsVisible,
                 IsExpanded = IsExpanded,
                 Pages = pages
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

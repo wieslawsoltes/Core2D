@@ -18,13 +18,15 @@ namespace Core2D.ViewModels.Data
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            var values = _values.Copy(shared).ToImmutable();
+            var values = _values.CopyShared(shared).ToImmutable();
 
-            return new RecordViewModel(ServiceProvider)
+            var copy = new RecordViewModel(ServiceProvider)
             {
                 Name = Name,
                 Values = values
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

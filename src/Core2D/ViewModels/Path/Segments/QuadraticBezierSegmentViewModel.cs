@@ -18,13 +18,15 @@ namespace Core2D.ViewModels.Path.Segments
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new QuadraticBezierSegmentViewModel(ServiceProvider)
+            var copy = new QuadraticBezierSegmentViewModel(ServiceProvider)
             {
                 Name = Name,
                 IsStroked = IsStroked,
-                Point1 = (PointShapeViewModel?)_point1?.Copy(shared),
-                Point2 = (PointShapeViewModel?)_point2?.Copy(shared)
+                Point1 = _point1?.CopyShared(shared),
+                Point2 = _point2?.CopyShared(shared)
             };
+
+            return copy;
         }
 
         public override void GetPoints(IList<PointShapeViewModel> points)

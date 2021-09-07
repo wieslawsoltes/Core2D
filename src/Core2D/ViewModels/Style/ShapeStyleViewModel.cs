@@ -18,13 +18,15 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new ShapeStyleViewModel(ServiceProvider)
+            var copy = new ShapeStyleViewModel(ServiceProvider)
             {
                 Name = Name,
-                Stroke = (StrokeStyleViewModel?)_stroke?.Copy(shared),
-                Fill = (FillStyleViewModel?)_fill?.Copy(shared),
-                TextStyle = (TextStyleViewModel?)_textStyle?.Copy(shared)
+                Stroke = _stroke?.CopyShared(shared),
+                Fill = _fill?.CopyShared(shared),
+                TextStyle = _textStyle?.CopyShared(shared)
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

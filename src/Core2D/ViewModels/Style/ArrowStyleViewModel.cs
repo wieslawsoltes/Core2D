@@ -17,13 +17,15 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new ArrowStyleViewModel(ServiceProvider)
+            var copy = new ArrowStyleViewModel(ServiceProvider)
             {
                 Name = Name,
                 ArrowType = _arrowType,
                 RadiusX = _radiusX,
                 RadiusY = _radiusY
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

@@ -21,15 +21,17 @@ namespace Core2D.ViewModels.Path
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            var segments = _segments.Copy(shared).ToImmutable();
+            var segments = _segments.CopyShared(shared).ToImmutable();
 
-            return new PathFigureViewModel(ServiceProvider)
+            var copy = new PathFigureViewModel(ServiceProvider)
             {
                 Name = Name,
-                StartPoint = (PointShapeViewModel?)_startPoint?.Copy(shared),
+                StartPoint = _startPoint?.CopyShared(shared),
                 Segments = segments,
                 IsClosed = IsClosed
             };
+
+            return copy;
         }
 
         public void GetPoints(IList<PointShapeViewModel> points)

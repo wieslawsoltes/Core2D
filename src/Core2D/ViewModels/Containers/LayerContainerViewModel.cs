@@ -36,15 +36,17 @@ namespace Core2D.ViewModels.Containers
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            var shapes = _shapes.Copy(shared).ToImmutable();
+            var shapes = _shapes.CopyShared(shared).ToImmutable();
 
-            return new LayerContainerViewModel(ServiceProvider)
+            var copy = new LayerContainerViewModel(ServiceProvider)
             {
                 Name = Name,
                 IsVisible = IsVisible,
                 IsExpanded = IsExpanded,
                 Shapes = shapes
             };
+
+            return copy;
         }
 
         public void RaiseInvalidateLayer()

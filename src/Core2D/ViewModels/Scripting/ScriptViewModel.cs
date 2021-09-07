@@ -14,10 +14,12 @@ namespace Core2D.ViewModels.Scripting
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new ScriptViewModel(ServiceProvider)
+            var copy = new ScriptViewModel(ServiceProvider)
             {
                 Code = _code
             };
+
+            return copy;
         }
     }
 }

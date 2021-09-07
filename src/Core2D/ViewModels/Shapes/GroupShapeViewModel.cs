@@ -7,7 +7,6 @@ using System.Reactive.Disposables;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
-using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes
 {
@@ -21,18 +20,20 @@ namespace Core2D.ViewModels.Shapes
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new GroupShapeViewModel(ServiceProvider)
+            var copy = new GroupShapeViewModel(ServiceProvider)
             {
                 Name = Name,
                 State = State,
-                Style = (ShapeStyleViewModel?)_style?.Copy(shared),
+                Style = _style?.CopyShared(shared),
                 IsStroked = IsStroked,
                 IsFilled = IsFilled,
-                Properties = _properties.Copy(shared).ToImmutable(),
+                Properties = _properties.CopyShared(shared).ToImmutable(),
                 Record = _record,
-                Connectors = _connectors.Copy(shared).ToImmutable(),
-                Shapes = _shapes.Copy(shared).ToImmutable()
+                Connectors = _connectors.CopyShared(shared).ToImmutable(),
+                Shapes = _shapes.CopyShared(shared).ToImmutable()
             };
+
+            return copy;
         }
 
         public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)

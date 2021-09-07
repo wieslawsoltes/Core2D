@@ -47,7 +47,55 @@ namespace Core2D.ViewModels.Containers
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            throw new NotImplementedException();
+            var styleLibraries = _styleLibraries.CopyShared(shared).ToImmutable();
+            var groupLibraries = _groupLibraries.CopyShared(shared).ToImmutable();
+            var databases = _databases.CopyShared(shared).ToImmutable();
+            var templates = _templates.CopyShared(shared).ToImmutable();
+            var scripts = _scripts.CopyShared(shared).ToImmutable();
+            var documents = _documents.CopyShared(shared).ToImmutable();
+
+            var currentStyleLibrary = _currentStyleLibrary.GetCurrentItem(ref _styleLibraries, ref styleLibraries);  
+            var currentGroupLibrary = _currentGroupLibrary.GetCurrentItem(ref _styleLibraries, ref styleLibraries); 
+            var currentDatabase = _currentDatabase.GetCurrentItem(ref _databases, ref databases); 
+            var currentTemplate = _currentTemplate.GetCurrentItem(ref _templates, ref templates); 
+            var currentScript = _currentScript.GetCurrentItem(ref _scripts, ref scripts); 
+            var currentDocument = _currentDocument.GetCurrentItem(ref _documents, ref documents);
+            var currentContainer = _currentContainer switch
+            {
+                PageContainerViewModel page => page.GetCurrentItem(ref _documents, ref documents, x => x.Pages),
+                TemplateContainerViewModel template => template.GetCurrentItem(ref _templates, ref templates),
+                _ => default(FrameContainerViewModel?)
+            };
+
+            var copy = new ProjectContainerViewModel(ServiceProvider)
+            {
+                Options = _options?.CopyShared(shared),
+                StyleLibraries = styleLibraries,
+                GroupLibraries = groupLibraries,
+                Databases = databases,
+                Templates = templates,
+                Scripts = scripts,
+                Documents = documents,
+                CurrentStyleLibrary = currentStyleLibrary,
+                CurrentGroupLibrary = currentGroupLibrary,
+                CurrentDatabase = currentDatabase,
+                CurrentTemplate = currentTemplate,
+                CurrentScript = currentScript,
+                CurrentDocument = currentDocument,
+                CurrentContainer = currentContainer
+            };
+
+            if (_selected is { } && shared is { })
+            {
+                if (shared.TryGetValue(_selected, out var selected))
+                {
+                    copy.Selected = selected as ViewModelBase;
+                }
+            }
+
+            copy.History = null;
+
+            return copy;
         }
 
         private void SetSelected(ViewModelBase? value)

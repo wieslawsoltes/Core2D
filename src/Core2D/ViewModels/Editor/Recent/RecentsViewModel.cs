@@ -16,16 +16,17 @@ namespace Core2D.ViewModels.Editor.Recent
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            var files = _files.Copy(shared).ToImmutable();
-            var currentIndex = _current is null ? -1 : _files.IndexOf(_current);
-            var current = currentIndex == -1 ? null : files[currentIndex];
+            var files = _files.CopyShared(shared).ToImmutable();
+            var current = _current.GetCurrentItem(ref _files, ref files);
 
-            return new RecentsViewModel(ServiceProvider)
+            var copy = new RecentsViewModel(ServiceProvider)
             {
                 Name = Name,
                 Files = files,
                 Current = current
             };
+
+            return copy;
         }
 
         public static RecentsViewModel Create(IServiceProvider serviceProvider, ImmutableArray<RecentFileViewModel> files, RecentFileViewModel current)

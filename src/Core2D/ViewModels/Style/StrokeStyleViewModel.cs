@@ -27,17 +27,19 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new StrokeStyleViewModel(ServiceProvider)
+            var copy = new StrokeStyleViewModel(ServiceProvider)
             {
                 Name = Name,
-                Color = (BaseColorViewModel?)_color?.Copy(shared),
+                Color = _color?.CopyShared(shared),
                 Thickness = _thickness,
                 LineCap = _lineCap,
                 Dashes = _dashes,
                 DashOffset = _dashOffset,
-                StartArrow = (ArrowStyleViewModel?)_startArrow?.Copy(shared),
-                EndArrow = (ArrowStyleViewModel?)_endArrow?.Copy(shared)
+                StartArrow = _startArrow?.CopyShared(shared),
+                EndArrow = _endArrow?.CopyShared(shared)
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

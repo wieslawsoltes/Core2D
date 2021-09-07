@@ -15,10 +15,7 @@ namespace Core2D.ViewModels.Renderer
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new ImageKeyViewModel(ServiceProvider)
-            {
-                Key = _key
-            };
+            throw new NotImplementedException();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new TextStyleViewModel(ServiceProvider)
+            var copy = new TextStyleViewModel(ServiceProvider)
             {
                 Name = Name,
                 FontName = _fontName,
@@ -49,6 +49,8 @@ namespace Core2D.ViewModels.Style
                 TextHAlignment = _textHAlignment,
                 TextVAlignment = _textVAlignment
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

@@ -26,10 +26,12 @@ namespace Core2D.ViewModels.Style
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new ArgbColorViewModel(ServiceProvider)
+            var copy = new ArgbColorViewModel(ServiceProvider)
             {
                 Value = Value
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

@@ -22,14 +22,16 @@ namespace Core2D.ViewModels.Path
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            var figures = _figures.Copy(shared).ToImmutable();
+            var figures = _figures.CopyShared(shared).ToImmutable();
 
-            return new PathGeometryViewModel(ServiceProvider)
+            var copy = new PathGeometryViewModel(ServiceProvider)
             {
                 Name = Name,
                 Figures = figures,
                 FillRule = FillRule
             };
+
+            return copy;
         }
 
         public override bool IsDirty()

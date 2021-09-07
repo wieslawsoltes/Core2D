@@ -7,7 +7,6 @@ using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Path;
-using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes
 {
@@ -23,17 +22,19 @@ namespace Core2D.ViewModels.Shapes
 
         public override object Copy(IDictionary<object, object>? shared)
         {
-            return new PathShapeViewModel(ServiceProvider)
+            var copy = new PathShapeViewModel(ServiceProvider)
             {
                 Name = Name,
                 State = State,
-                Style = (ShapeStyleViewModel?)_style?.Copy(shared),
+                Style = _style?.CopyShared(shared),
                 IsStroked = IsStroked,
                 IsFilled = IsFilled,
-                Properties = _properties.Copy(shared).ToImmutable(),
+                Properties = _properties.CopyShared(shared).ToImmutable(),
                 Record = _record,
-                Geometry = (PathGeometryViewModel?)_geometry?.Copy(shared)
+                Geometry = _geometry?.CopyShared(shared)
             };
+
+            return copy;
         }
 
         public override void DrawShape(object? dc, IShapeRenderer? renderer, ISelection? selection)
