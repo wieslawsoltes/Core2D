@@ -729,7 +729,7 @@ namespace Core2D.ViewModels.Editor
             {
                 if (Project.SelectedShapes?.Count == 1 && Project.SelectedShapes?.FirstOrDefault() is GroupShapeViewModel group)
                 {
-                    var clone = CloneShape(group);
+                    var clone = group.CopyShared(new Dictionary<object, object>());
                     if (clone is { })
                     {
                         Project?.AddGroup(libraryViewModel, clone);
@@ -1467,7 +1467,7 @@ namespace Core2D.ViewModels.Editor
 
             try
             {
-                var clone = CloneShape(shape);
+                var clone = shape.CopyShared(new Dictionary<object, object>());
                 if (clone is { })
                 {
                     Deselect(Project?.CurrentContainer?.CurrentLayer);
