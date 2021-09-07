@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Linq;
 using Core2D.Model.Editor;
 

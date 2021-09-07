@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Core2D.Model.Input;
 
 namespace Core2D.ViewModels.Editor

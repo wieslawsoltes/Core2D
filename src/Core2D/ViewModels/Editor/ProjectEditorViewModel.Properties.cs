@@ -16,19 +16,19 @@ namespace Core2D.ViewModels.Editor
 {
     public partial class ProjectEditorViewModel
     {
-        [AutoNotify] private IRootDock _rootDock;
-        [AutoNotify] private IFactory _dockFactory;
-        [AutoNotify] private ProjectContainerViewModel _project;
-        [AutoNotify] private string _projectPath;
+        [AutoNotify] private IRootDock? _rootDock;
+        [AutoNotify] private IFactory? _dockFactory;
+        [AutoNotify] private ProjectContainerViewModel? _project;
+        [AutoNotify] private string? _projectPath;
         [AutoNotify] private bool _isProjectDirty;
-        [AutoNotify] private IDisposable _observer;
+        [AutoNotify] private IDisposable? _observer;
         [AutoNotify] private bool _isToolIdle;
-        [AutoNotify] private IEditorTool _currentTool;
-        [AutoNotify] private IPathTool _currentPathTool;
+        [AutoNotify] private IEditorTool? _currentTool;
+        [AutoNotify] private IPathTool? _currentPathTool;
         [AutoNotify] private ImmutableArray<RecentFileViewModel> _recentProjects;
-        [AutoNotify] private RecentFileViewModel _currentRecentProject;
-        [AutoNotify] private AboutInfoViewModel _aboutInfo;
-        [AutoNotify] private IList<DialogViewModel> _dialogs;
+        [AutoNotify] private RecentFileViewModel? _currentRecentProject;
+        [AutoNotify] private AboutInfoViewModel? _aboutInfo;
+        [AutoNotify] private IList<DialogViewModel>? _dialogs;
         private readonly ShapeEditor _shapeEditor;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
@@ -65,9 +65,9 @@ namespace Core2D.ViewModels.Editor
 
         public IShapeRenderer Renderer => _renderer.Value;
 
-        public ShapeRendererStateViewModel PageState => _renderer.Value?.State;
+        public ShapeRendererStateViewModel PageState => _renderer?.Value?.State;
 
-        public ISelection Selection => _project;
+        public ISelection? Selection => _project;
 
         public IFileSystem FileSystem => _fileSystem.Value;
 
@@ -101,6 +101,6 @@ namespace Core2D.ViewModels.Editor
 
         public ISvgConverter SvgConverter => _svgConverter.Value;
 
-        private object ScriptState { get; set; }
+        private object? ScriptState { get; set; }
     }
 }
