@@ -738,84 +738,81 @@ namespace Core2D.ViewModels.Editor
             Select(layer, path);
         }
 
-        private GroupShapeViewModel Group(LayerContainerViewModel layer, ISet<BaseShapeViewModel> shapes, string name)
+        private GroupShapeViewModel? Group(LayerContainerViewModel? layer, ISet<BaseShapeViewModel>? shapes, string name)
         {
-            if (layer is { } && shapes is { })
+            if (layer is null || shapes is null)
             {
-                var source = layer.Shapes.ToBuilder();
-                var group = ViewModelFactory.CreateGroupShape(name);
-                group.Group(shapes, source);
-
-                var previous = layer.Shapes;
-                var next = source.ToImmutable();
-                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
-                return group;
+                return null;
             }
+            var source = layer.Shapes.ToBuilder();
+            var group = ViewModelFactory?.CreateGroupShape(name);
+            group?.Group(shapes, source);
 
-            return null;
+            var previous = layer.Shapes;
+            var next = source.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            return group;
+
         }
 
-        private void Ungroup(LayerContainerViewModel layer, ISet<BaseShapeViewModel> shapes)
+        private void Ungroup(LayerContainerViewModel? layer, ISet<BaseShapeViewModel>? shapes)
         {
-            if (layer is { } && shapes is { })
+            if (layer is null || shapes is null)
             {
-                var source = layer.Shapes.ToBuilder();
+                return;
+            }
+            var source = layer.Shapes.ToBuilder();
 
-                foreach (var shape in shapes)
+            foreach (var shape in shapes)
+            {
+                if (shape is GroupShapeViewModel group)
                 {
-                    if (shape is GroupShapeViewModel group)
-                    {
-                        group.Ungroup(source);
-                    }
+                    group.Ungroup(source);
                 }
-
-                var previous = layer.Shapes;
-                var next = source.ToImmutable();
-                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
             }
+
+            var previous = layer.Shapes;
+            var next = source.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
         }
 
-        public GroupShapeViewModel Group(ISet<BaseShapeViewModel> shapes, string name)
+        public GroupShapeViewModel? Group(ISet<BaseShapeViewModel>? shapes, string name)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            if (layer is { })
-            {
-                return Group(layer, shapes, name);
-            }
-
-            return null;
+            return layer is { } ? Group(layer, shapes, name) : null;
         }
 
-        public bool Ungroup(ISet<BaseShapeViewModel> shapes)
+        public bool Ungroup(ISet<BaseShapeViewModel>? shapes)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            if (layer is { } && shapes is { })
+            if (layer is null || shapes is null)
             {
-                Ungroup(layer, shapes);
-                return true;
+                return false;
             }
+            Ungroup(layer, shapes);
+            return true;
 
-            return false;
         }
 
         private void Swap(BaseShapeViewModel shape, int sourceIndex, int targetIndex)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            if (layer?.Shapes is { })
+            if (layer?.Shapes is null)
             {
-                if (sourceIndex < targetIndex)
+                return;
+            }
+            if (sourceIndex < targetIndex)
+            {
+                Project.SwapShape(layer, shape, targetIndex + 1, sourceIndex);
+            }
+            else
+            {
+                if (layer.Shapes.Length + 1 > sourceIndex + 1)
                 {
-                    Project.SwapShape(layer, shape, targetIndex + 1, sourceIndex);
-                }
-                else
-                {
-                    if (layer.Shapes.Length + 1 > sourceIndex + 1)
-                    {
-                        Project.SwapShape(layer, shape, targetIndex, sourceIndex + 1);
-                    }
+                    Project.SwapShape(layer, shape, targetIndex, sourceIndex + 1);
                 }
             }
         }
@@ -823,60 +820,64 @@ namespace Core2D.ViewModels.Editor
         public void BringToFront(BaseShapeViewModel source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            if (layer is { })
+            if (layer is null)
             {
-                var items = layer.Shapes;
-                int sourceIndex = items.IndexOf(source);
-                int targetIndex = items.Length - 1;
-                if (targetIndex >= 0 && sourceIndex != targetIndex)
-                {
-                    Swap(source, sourceIndex, targetIndex);
-                }
+                return;
+            }
+            var items = layer.Shapes;
+            var sourceIndex = items.IndexOf(source);
+            var targetIndex = items.Length - 1;
+            if (targetIndex >= 0 && sourceIndex != targetIndex)
+            {
+                Swap(source, sourceIndex, targetIndex);
             }
         }
 
         public void BringForward(BaseShapeViewModel source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            if (layer is { })
+            if (layer is null)
             {
-                var items = layer.Shapes;
-                int sourceIndex = items.IndexOf(source);
-                int targetIndex = sourceIndex + 1;
-                if (targetIndex < items.Length)
-                {
-                    Swap(source, sourceIndex, targetIndex);
-                }
+                return;
+            }
+            var items = layer.Shapes;
+            var sourceIndex = items.IndexOf(source);
+            var targetIndex = sourceIndex + 1;
+            if (targetIndex < items.Length)
+            {
+                Swap(source, sourceIndex, targetIndex);
             }
         }
 
         public void SendBackward(BaseShapeViewModel source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            if (layer is { })
+            if (layer is null)
             {
-                var items = layer.Shapes;
-                int sourceIndex = items.IndexOf(source);
-                int targetIndex = sourceIndex - 1;
-                if (targetIndex >= 0)
-                {
-                    Swap(source, sourceIndex, targetIndex);
-                }
+                return;
+            }
+            var items = layer.Shapes;
+            var sourceIndex = items.IndexOf(source);
+            var targetIndex = sourceIndex - 1;
+            if (targetIndex >= 0)
+            {
+                Swap(source, sourceIndex, targetIndex);
             }
         }
 
         public void SendToBack(BaseShapeViewModel source)
         {
             var layer = Project?.CurrentContainer?.CurrentLayer;
-            if (layer is { })
+            if (layer is null)
             {
-                var items = layer.Shapes;
-                int sourceIndex = items.IndexOf(source);
-                int targetIndex = 0;
-                if (sourceIndex != targetIndex)
-                {
-                    Swap(source, sourceIndex, targetIndex);
-                }
+                return;
+            }
+            var items = layer.Shapes;
+            var sourceIndex = items.IndexOf(source);
+            var targetIndex = 0;
+            if (sourceIndex != targetIndex)
+            {
+                Swap(source, sourceIndex, targetIndex);
             }
         }
 
@@ -902,36 +903,37 @@ namespace Core2D.ViewModels.Editor
             Project?.History?.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
         }
 
-        public void MoveBy(ISet<BaseShapeViewModel> shapes, decimal dx, decimal dy)
+        public void MoveBy(ISet<BaseShapeViewModel>? shapes, decimal dx, decimal dy)
         {
-            if (shapes is { })
+            if (shapes is null)
             {
-                switch (Project?.Options?.MoveMode)
+                return;
+            }
+            switch (Project?.Options?.MoveMode)
+            {
+                case MoveMode.Point:
                 {
-                    case MoveMode.Point:
+                    var points = new List<PointShapeViewModel>();
+
+                    foreach (var shape in shapes)
+                    {
+                        if (!shape.State.HasFlag(ShapeStateFlags.Locked))
                         {
-                            var points = new List<PointShapeViewModel>();
-
-                            foreach (var shape in shapes)
-                            {
-                                if (!shape.State.HasFlag(ShapeStateFlags.Locked))
-                                {
-                                    shape.GetPoints(points);
-                                }
-                            }
-
-                            var distinct = points.Distinct().ToList();
-                            MoveShapesByWithHistory(distinct, dx, dy);
+                            shape.GetPoints(points);
                         }
-                        break;
+                    }
 
-                    case MoveMode.Shape:
-                        {
-                            var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                            MoveShapesByWithHistory(items, dx, dy);
-                        }
-                        break;
+                    var distinct = points.Distinct().ToList();
+                    MoveShapesByWithHistory(distinct, dx, dy);
                 }
+                    break;
+
+                case MoveMode.Shape:
+                {
+                    var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
+                    MoveShapesByWithHistory(items, dx, dy);
+                }
+                    break;
             }
         }
 
@@ -951,7 +953,7 @@ namespace Core2D.ViewModels.Editor
             }
             else
             {
-                int removeIndex = sourceIndex + 1;
+                var removeIndex = sourceIndex + 1;
                 if (libraryViewModel.Items.Length + 1 > removeIndex)
                 {
                     var item = libraryViewModel.Items[sourceIndex];

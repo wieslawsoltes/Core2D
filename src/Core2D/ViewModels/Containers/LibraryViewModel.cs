@@ -29,7 +29,7 @@ namespace Core2D.ViewModels.Containers
             return copy;
         }
 
-        public void SetSelected(ViewModelBase item) => Selected = item;
+        public void SetSelected(ViewModelBase? item) => Selected = item;
 
         public override bool IsDirty()
         {

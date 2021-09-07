@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using System.Linq;
-using Core2D.Model.Editor;
 
 namespace Core2D.ViewModels.Editor
 {
@@ -14,113 +13,113 @@ namespace Core2D.ViewModels.Editor
 
         public void OnToolNone()
         {
-            CurrentTool?.Reset();
+            OnResetTool();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "None");
         }
 
         public void OnToolSelection()
         {
-            CurrentTool?.Reset();
+            OnResetTool();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Selection");
         }
 
         public void OnToolPoint()
         {
-            CurrentTool?.Reset();
+            OnResetTool();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Point");
         }
 
         public void OnToolLine()
         {
-            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Line")
+            if (CurrentTool?.Title == "Path" && CurrentPathTool?.Title != "Line")
             {
                 CurrentPathTool?.Reset();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Line");
             }
             else
             {
-                CurrentTool?.Reset();
+                OnResetTool();
                 CurrentTool = Tools.FirstOrDefault(t => t.Title == "Line");
             }
         }
 
         public void OnToolArc()
         {
-            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Arc")
+            if (CurrentTool?.Title == "Path" && CurrentPathTool?.Title != "Arc")
             {
                 CurrentPathTool?.Reset();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Arc");
             }
             else
             {
-                CurrentTool?.Reset();
+                OnResetTool();
                 CurrentTool = Tools.FirstOrDefault(t => t.Title == "Arc");
             }
         }
 
         public void OnToolCubicBezier()
         {
-            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "CubicBezier")
+            if (CurrentTool?.Title == "Path" && CurrentPathTool?.Title != "CubicBezier")
             {
                 CurrentPathTool?.Reset();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "CubicBezier");
             }
             else
             {
-                CurrentTool?.Reset();
+                OnResetTool();
                 CurrentTool = Tools.FirstOrDefault(t => t.Title == "CubicBezier");
             }
         }
 
         public void OnToolQuadraticBezier()
         {
-            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "QuadraticBezier")
+            if (CurrentTool?.Title == "Path" && CurrentPathTool?.Title != "QuadraticBezier")
             {
                 CurrentPathTool?.Reset();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "QuadraticBezier");
             }
             else
             {
-                CurrentTool?.Reset();
+                OnResetTool();
                 CurrentTool = Tools.FirstOrDefault(t => t.Title == "QuadraticBezier");
             }
         }
 
         public void OnToolPath()
         {
-            CurrentTool?.Reset();
+            OnResetTool();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Path");
         }
 
         public void OnToolRectangle()
         {
-            CurrentTool?.Reset();
+            OnResetTool();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Rectangle");
         }
 
         public void OnToolEllipse()
         {
-            CurrentTool?.Reset();
+            OnResetTool();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Ellipse");
         }
 
         public void OnToolText()
         {
-            CurrentTool?.Reset();
+            OnResetTool();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Text");
         }
 
         public void OnToolImage()
         {
-            CurrentTool?.Reset();
+            OnResetTool();
             CurrentTool = Tools.FirstOrDefault(t => t.Title == "Image");
         }
 
         public void OnToolMove()
         {
-            if (CurrentTool.Title == "Path" && CurrentPathTool.Title != "Move")
+            if (CurrentTool?.Title == "Path" && CurrentPathTool?.Title != "Move")
             {
-                CurrentPathTool?.Reset();
+                OnResetPathTool();
                 CurrentPathTool = PathTools.FirstOrDefault(t => t.Title == "Move");
             }
         }
@@ -128,6 +127,11 @@ namespace Core2D.ViewModels.Editor
         public void OnResetTool()
         {
             CurrentTool?.Reset();
+        }
+        
+        public void OnResetPathTool()
+        {
+            CurrentPathTool?.Reset();
         }
     }
 }

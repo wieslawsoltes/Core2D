@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core2D.Model;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Shapes;
@@ -20,9 +19,14 @@ namespace Core2D.ViewModels.Editor
 
         private BaseShapeViewModel? HoveredShapeViewModel { get; set; }
 
-        private void UpdateShapeNames(IEnumerable<BaseShapeViewModel> shapes)
+        private void UpdateShapeNames(IEnumerable<BaseShapeViewModel>? shapes)
         {
-            var all = _project.GetAllShapes().ToList();
+            if (Project is null || shapes is null)
+            {
+                return;
+            }
+            
+            var all = Project.GetAllShapes().ToList();
             var source = new List<BaseShapeViewModel>();
 
             foreach (var shape in shapes)
@@ -32,10 +36,10 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        private IDictionary<string, RecordViewModel> GenerateRecordDictionaryById()
+        private IDictionary<string, RecordViewModel>? GenerateRecordDictionaryById()
         {
             return Project?.Databases
-                .Where(d => d?.Records is { } && d?.Records.Length > 0)
+                .Where(d => d.Records.Length > 0)
                 .SelectMany(d => d.Records)
                 .ToDictionary(s => s.Id);
         }
@@ -50,11 +54,15 @@ namespace Core2D.ViewModels.Editor
                 }
 
                 var records = GenerateRecordDictionaryById();
+                if (records is null)
+                {
+                    return;
+                }
 
                 // Try to restore shape record.
                 foreach (var shape in shapes.GetAllShapes())
                 {
-                    if (shape?.Record is null)
+                    if (shape.Record is null)
                     {
                         continue;
                     }
@@ -69,19 +77,23 @@ namespace Core2D.ViewModels.Editor
                         // Create Imported database.
                         if (Project?.CurrentDatabase is null && shape.Record.Owner is DatabaseViewModel owner)
                         {
-                            var db = ViewModelFactory.CreateDatabase(
+                            var db = ViewModelFactory?.CreateDatabase(
                                 ProjectEditorConfiguration.ImportedDatabaseName,
                                 owner.Columns);
                             Project.AddDatabase(db);
-                            Project.SetCurrentDatabase(db);
+                            Project?.SetCurrentDatabase(db);
                         }
 
                         // Add missing data record.
-                        shape.Record.Owner = Project.CurrentDatabase;
+                        shape.Record.Owner = Project?.CurrentDatabase;
                         Project?.AddRecord(Project?.CurrentDatabase, shape.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();
+                        if (records is null)
+                        {
+                            return;
+                        }
                     }
                 }
             }
@@ -97,11 +109,11 @@ namespace Core2D.ViewModels.Editor
             TryToRestoreRecords(shapes);
         }
 
-        public T CloneShape<T>(T shape) where T : BaseShapeViewModel
+        public T? CloneShape<T>(T shape) where T : BaseShapeViewModel
         {
             try
             {
-                if (JsonSerializer is IJsonSerializer serializer)
+                if (JsonSerializer is { } serializer)
                 {
                     var json = serializer.Serialize(shape);
                     if (!string.IsNullOrEmpty(json))
@@ -123,7 +135,7 @@ namespace Core2D.ViewModels.Editor
             return default;
         }
 
-        public LayerContainerViewModel Clone(LayerContainerViewModel container)
+        public LayerContainerViewModel? Clone(LayerContainerViewModel? container)
         {
             try
             {
@@ -147,7 +159,7 @@ namespace Core2D.ViewModels.Editor
             return default;
         }
 
-        public PageContainerViewModel Clone(PageContainerViewModel container)
+        public PageContainerViewModel? Clone(PageContainerViewModel? container)
         {
             try
             {
@@ -173,7 +185,7 @@ namespace Core2D.ViewModels.Editor
             return default;
         }
 
-        public DocumentContainerViewModel Clone(DocumentContainerViewModel document)
+        public DocumentContainerViewModel? Clone(DocumentContainerViewModel? document)
         {
             try
             {
@@ -201,7 +213,7 @@ namespace Core2D.ViewModels.Editor
             return default;
         }
 
-        private void Delete(object item)
+        private void Delete(object? item)
         {
             if (item is BaseShapeViewModel shape)
             {
@@ -272,7 +284,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnPasteShapes(IEnumerable<BaseShapeViewModel> shapes)
+        public void OnPasteShapes(IEnumerable<BaseShapeViewModel>? shapes)
         {
             try
             {
@@ -310,11 +322,10 @@ namespace Core2D.ViewModels.Editor
 
             try
             {
-                var shapes = JsonSerializer?.Deserialize<IList<BaseShapeViewModel>>(text);
-                if (shapes?.Count() > 0)
+                var shapes = JsonSerializer?.Deserialize<IList<BaseShapeViewModel>?>(text);
+                if (shapes?.Count > 0)
                 {
                     OnPasteShapes(shapes);
-                    return;
                 }
             }
             catch (Exception ex)
@@ -343,7 +354,7 @@ namespace Core2D.ViewModels.Editor
             return false;
         }
 
-        public void OnCut(object item)
+        public void OnCut(object? item)
         {
             if (item is BaseShapeViewModel shape)
             {
@@ -376,7 +387,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnCopy(object item)
+        public void OnCopy(object? item)
         {
             if (item is BaseShapeViewModel shape)
             {
@@ -404,7 +415,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public async void OnPaste(object item)
+        public async void OnPaste(object? item)
         {
             if (Project is { } && item is BaseShapeViewModel shape)
             {
@@ -420,7 +431,7 @@ namespace Core2D.ViewModels.Editor
                         int index = document.Pages.IndexOf(page);
                         var clone = Clone(PageToCopy);
                         Project.ReplacePage(document, clone, index);
-                        Project.SetCurrentContainer(clone);
+                        Project?.SetCurrentContainer(clone);
                     }
                 }
             }
@@ -430,7 +441,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     var clone = Clone(PageToCopy);
                     Project?.AddPage(document, clone);
-                    Project.SetCurrentContainer(clone);
+                    Project?.SetCurrentContainer(clone);
                 }
                 else if (DocumentToCopy is { })
                 {
@@ -460,7 +471,10 @@ namespace Core2D.ViewModels.Editor
                         foreach (var s in ShapesToCopy)
                         {
                             var copy = s.CopyShared(shared);
-                            shapesToPaste.Add(copy);
+                            if (copy is { })
+                            {
+                                shapesToPaste.Add(copy);
+                            }
                         }
                         
                         OnPasteShapes(shapesToPaste);
@@ -476,7 +490,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnDelete(object item)
+        public void OnDelete(object? item)
         {
             if (item is IList<object> objects)
             {

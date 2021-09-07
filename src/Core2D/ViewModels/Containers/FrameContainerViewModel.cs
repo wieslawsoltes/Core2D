@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Model;
 using Core2D.ViewModels.Data;
@@ -26,7 +25,7 @@ namespace Core2D.ViewModels.Containers
         {
         }
 
-        public void SetCurrentLayer(LayerContainerViewModel layer) => CurrentLayer = layer;
+        public void SetCurrentLayer(LayerContainerViewModel? layer) => CurrentLayer = layer;
 
         public virtual void InvalidateLayer()
         {

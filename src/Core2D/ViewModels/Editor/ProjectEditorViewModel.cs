@@ -49,12 +49,12 @@ namespace Core2D.ViewModels.Editor
 
             _dockFactory = new DockFactory(this);
 
-            _dockFactory.DockableClosed += (sender, args) =>
+            _dockFactory.DockableClosed += (_, args) =>
             {
                 Debug.WriteLine($"DockableClosed {args.Dockable?.Id}");
             };
 
-            _dockFactory.DockableRemoved += (sender, args) =>
+            _dockFactory.DockableRemoved += (_, args) =>
             {
                 Debug.WriteLine($"DockableRemoved {args.Dockable?.Id}");
             };
@@ -67,14 +67,14 @@ namespace Core2D.ViewModels.Editor
 
         public void CreateLayout()
         {
-            _rootDock = _dockFactory.CreateLayout();
+            _rootDock = _dockFactory?.CreateLayout();
 
             if (_rootDock is { })
             {
                 _dockFactory?.InitLayout(_rootDock);
             }
 
-            _dockFactory.GetDockable<IDocumentDock>("Pages")?.CreateDocument?.Execute(null);
+            _dockFactory?.GetDockable<IDocumentDock>("Pages")?.CreateDocument?.Execute(null);
 
             NavigateTo("Dashboard");
         }
@@ -91,7 +91,7 @@ namespace Core2D.ViewModels.Editor
             NavigateTo("Dashboard");
         }
 
-        public void NavigateTo(string id)
+        private void NavigateTo(string id)
         {
             _rootDock?.Navigate.Execute(id);
         }
@@ -101,14 +101,20 @@ namespace Core2D.ViewModels.Editor
             // TODO:
         }
 
-        public void ShowDialog(DialogViewModel dialog)
+        public void ShowDialog(DialogViewModel? dialog)
         {
-            _dialogs.Add(dialog);
+            if (dialog is { })
+            {
+                _dialogs?.Add(dialog);
+            }
         }
 
-        public void CloseDialog(DialogViewModel dialog)
+        public void CloseDialog(DialogViewModel? dialog)
         {
-            _dialogs.Remove(dialog);
+            if (dialog is { })
+            {
+                _dialogs?.Remove(dialog);
+            }
         }
 
         public DialogViewModel CreateTextBindingDialog(TextShapeViewModel text)

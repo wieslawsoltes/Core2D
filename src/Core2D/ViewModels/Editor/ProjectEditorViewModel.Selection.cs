@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Core2D.Model.Editor;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor.Tools.Decorators;
 using Core2D.ViewModels.Shapes;
@@ -27,7 +26,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = Project.SelectedShapes?.ToList();
+            var shapes = Project?.SelectedShapes?.ToList();
             if (shapes is null || shapes.Count <= 0)
             {
                 return;
@@ -38,7 +37,7 @@ namespace Core2D.ViewModels.Editor
                 PageState.Decorator = new BoxDecoratorViewModel(ServiceProvider);
             }
 
-            PageState.Decorator.Layer = Project.CurrentContainer.WorkingLayer;
+            PageState.Decorator.Layer = Project?.CurrentContainer?.WorkingLayer;
             PageState.Decorator.Shapes = shapes;
             PageState.Decorator.Update(true);
             PageState.Decorator.Show();
@@ -86,19 +85,19 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            if (Project.SelectedShapes?.Count == 1 && Project.SelectedShapes?.FirstOrDefault() is PointShapeViewModel)
+            if (Project?.SelectedShapes?.Count == 1 && Project.SelectedShapes?.FirstOrDefault() is PointShapeViewModel)
             {
                 OnHideDecorator();
                 return;
             }
 
-            if (Project.SelectedShapes?.Count == 1 && Project.SelectedShapes?.FirstOrDefault() is LineShapeViewModel)
+            if (Project?.SelectedShapes?.Count == 1 && Project.SelectedShapes?.FirstOrDefault() is LineShapeViewModel)
             {
                 OnHideDecorator();
                 return;
             }
 
-            if (Project.SelectedShapes is { })
+            if (Project?.SelectedShapes is { })
             {
                 OnShowDecorator();
             }
@@ -212,11 +211,14 @@ namespace Core2D.ViewModels.Editor
             OnHideDecorator();
         }
 
-        public void Select(LayerContainerViewModel layer, BaseShapeViewModel shape)
+        public void Select(LayerContainerViewModel? layer, BaseShapeViewModel shape)
         {
             if (PageState is { })
             {
-                Project.SelectedShapes = new HashSet<BaseShapeViewModel>() { shape };
+                if (Project is { })
+                {
+                    Project.SelectedShapes = new HashSet<BaseShapeViewModel> { shape };
+                }
 
                 if (PageState.DrawPoints == true)
                 {
@@ -235,7 +237,7 @@ namespace Core2D.ViewModels.Editor
                 }
             }
 
-            if (layer.Owner is FrameContainerViewModel owner)
+            if (layer?.Owner is FrameContainerViewModel owner)
             {
                 owner.CurrentShape = shape;
             }
@@ -250,16 +252,19 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void Select(LayerContainerViewModel layer, ISet<BaseShapeViewModel> shapes)
+        public void Select(LayerContainerViewModel? layer, ISet<BaseShapeViewModel> shapes)
         {
             if (PageState is { })
             {
-                Project.SelectedShapes = shapes;
+                if (Project is { })
+                {
+                    Project.SelectedShapes = shapes;
+                }
 
                 OnShowDecorator();
             }
 
-            if (layer.Owner is FrameContainerViewModel owner && owner.CurrentShape is { })
+            if (layer?.Owner is FrameContainerViewModel owner && owner.CurrentShape is { })
             {
                 owner.CurrentShape = default;
             }
@@ -274,11 +279,11 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void Deselect(LayerContainerViewModel layer)
+        public void Deselect(LayerContainerViewModel? layer)
         {
             Deselect();
 
-            if (layer.Owner is FrameContainerViewModel owner && owner.CurrentShape is { })
+            if (layer?.Owner is FrameContainerViewModel owner && owner.CurrentShape is { })
             {
                 owner.CurrentShape = default;
             }
@@ -293,83 +298,75 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public bool TryToSelectShape(LayerContainerViewModel layer, double x, double y, bool deselect = true)
+        public bool TryToSelectShape(LayerContainerViewModel? layer, double x, double y, bool deselect = true)
         {
-            if (layer is { })
+            if (layer is null)
             {
-                var shapes = layer.Shapes.Reverse();
-                double radius = Project.Options.HitThreshold / PageState.ZoomX;
+                return false;
+            }
 
-                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
-                if (point is { })
-                {
-                    Select(layer, point);
-                    return true;
-                }
+            var shapes = layer.Shapes.Reverse();
+            double radius = Project.Options.HitThreshold / PageState.ZoomX;
 
-                var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
-                if (shape is { })
-                {
-                    Select(layer, shape);
-                    return true;
-                }
+            var point = HitTest?.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            if (point is { })
+            {
+                Select(layer, point);
+                return true;
+            }
 
-                if (deselect)
-                {
-                    Deselect(layer);
-                }
+            var shape = HitTest?.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            if (shape is { })
+            {
+                Select(layer, shape);
+                return true;
+            }
+
+            if (deselect)
+            {
+                Deselect(layer);
             }
 
             return false;
         }
 
-        public bool TryToSelectShapes(LayerContainerViewModel layer, RectangleShapeViewModel rectangle, bool deselect = true, bool includeSelected = false)
+        public bool TryToSelectShapes(LayerContainerViewModel? layer, RectangleShapeViewModel? rectangle, bool deselect = true, bool includeSelected = false)
         {
-            if (layer is { })
+            if (layer is null || rectangle is null)
             {
-                var rect = Rect2.FromPoints(
-                    rectangle.TopLeft.X,
-                    rectangle.TopLeft.Y,
-                    rectangle.BottomRight.X,
-                    rectangle.BottomRight.Y);
-                var shapes = layer.Shapes;
-                double radius = Project.Options.HitThreshold / PageState.ZoomX;
-                var result = HitTest.TryToGetShapes(shapes, rect, radius, PageState.ZoomX);
-                if (result is { })
+                return false;
+            }
+            
+            var rect = Rect2.FromPoints(
+                rectangle.TopLeft.X,
+                rectangle.TopLeft.Y,
+                rectangle.BottomRight.X,
+                rectangle.BottomRight.Y);
+            var shapes = layer.Shapes;
+            double radius = Project.Options.HitThreshold / PageState.ZoomX;
+            var result = HitTest.TryToGetShapes(shapes, rect, radius, PageState.ZoomX);
+            if (result is { })
+            {
+                if (result.Count > 0)
                 {
-                    if (result.Count > 0)
+                    if (includeSelected)
                     {
-                        if (includeSelected)
+                        if (Project?.SelectedShapes is { })
                         {
-                            if (Project?.SelectedShapes is { })
+                            foreach (var shape in Project.SelectedShapes)
                             {
-                                foreach (var shape in Project.SelectedShapes)
+                                if (result.Contains(shape))
                                 {
-                                    if (result.Contains(shape))
-                                    {
-                                        result.Remove(shape);
-                                    }
-                                    else
-                                    {
-                                        result.Add(shape);
-                                    }
-                                }
-                            }
-
-                            if (result.Count > 0)
-                            {
-                                if (result.Count == 1)
-                                {
-                                    Select(layer, result.FirstOrDefault());
+                                    result.Remove(shape);
                                 }
                                 else
                                 {
-                                    Select(layer, result);
+                                    result.Add(shape);
                                 }
-                                return true;
                             }
                         }
-                        else
+
+                        if (result.Count > 0)
                         {
                             if (result.Count == 1)
                             {
@@ -382,33 +379,49 @@ namespace Core2D.ViewModels.Editor
                             return true;
                         }
                     }
+                    else
+                    {
+                        if (result.Count == 1)
+                        {
+                            Select(layer, result.FirstOrDefault());
+                        }
+                        else
+                        {
+                            Select(layer, result);
+                        }
+                        return true;
+                    }
                 }
+            }
 
-                if (deselect)
-                {
-                    Deselect(layer);
-                }
+            if (deselect)
+            {
+                Deselect(layer);
             }
 
             return false;
         }
 
-        public void Hover(LayerContainerViewModel layer, BaseShapeViewModel shape)
+        public void Hover(LayerContainerViewModel? layer, BaseShapeViewModel shape)
         {
-            if (layer is { })
+            if (layer is null)
             {
-                Select(layer, shape);
-                HoveredShapeViewModel = shape;
+                return;
             }
+            
+            Select(layer, shape);
+            HoveredShapeViewModel = shape;
         }
 
-        public void Dehover(LayerContainerViewModel layer)
+        public void Dehover(LayerContainerViewModel? layer)
         {
-            if (layer is { } && HoveredShapeViewModel is { })
+            if (layer is null || HoveredShapeViewModel is null)
             {
-                HoveredShapeViewModel = default;
-                Deselect(layer);
+                return;
             }
+            
+            HoveredShapeViewModel = default;
+            Deselect(layer);
         }
 
         public bool TryToHoverShape(double x, double y)
@@ -423,31 +436,33 @@ namespace Core2D.ViewModels.Editor
                 return false;
             }
 
-            if (!(Project.SelectedShapes?.Count == 1 && HoveredShapeViewModel != Project.SelectedShapes?.FirstOrDefault()))
+            if (Project.SelectedShapes?.Count == 1 && HoveredShapeViewModel != Project.SelectedShapes?.FirstOrDefault())
             {
-                var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
+                return false;
+            }
+            
+            var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
 
-                double radius = Project.Options.HitThreshold / PageState.ZoomX;
-                var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
-                if (point is { })
+            double radius = Project.Options.HitThreshold / PageState.ZoomX;
+            var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            if (point is { })
+            {
+                Hover(Project.CurrentContainer?.CurrentLayer, point);
+                return true;
+            }
+            else
+            {
+                var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+                if (shape is { })
                 {
-                    Hover(Project.CurrentContainer?.CurrentLayer, point);
+                    Hover(Project.CurrentContainer?.CurrentLayer, shape);
                     return true;
                 }
                 else
                 {
-                    var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
-                    if (shape is { })
+                    if (Project.SelectedShapes?.Count == 1 && HoveredShapeViewModel == Project.SelectedShapes?.FirstOrDefault())
                     {
-                        Hover(Project.CurrentContainer?.CurrentLayer, shape);
-                        return true;
-                    }
-                    else
-                    {
-                        if (Project.SelectedShapes?.Count == 1 && HoveredShapeViewModel == Project.SelectedShapes?.FirstOrDefault())
-                        {
-                            Dehover(Project.CurrentContainer?.CurrentLayer);
-                        }
+                        Dehover(Project.CurrentContainer?.CurrentLayer);
                     }
                 }
             }
@@ -455,37 +470,43 @@ namespace Core2D.ViewModels.Editor
             return false;
         }
 
-        public PointShapeViewModel TryToGetConnectionPoint(double x, double y)
+        public PointShapeViewModel? TryToGetConnectionPoint(double x, double y)
         {
-            if (Project.Options.TryToConnect)
+            if (Project?.Options is null)
             {
-                var shapes = Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
-                double radius = Project.Options.HitThreshold / PageState.ZoomX;
-                return HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
+                return null;
             }
-            return null;
+            if (!Project.Options.TryToConnect)
+            {
+                return null;
+            }
+            var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
+            double radius = Project.Options.HitThreshold / PageState.ZoomX;
+            return HitTest?.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
         }
 
-        private void SwapLineStart(LineShapeViewModel line, PointShapeViewModel point)
+        private void SwapLineStart(LineShapeViewModel? line, PointShapeViewModel? point)
         {
-            if (line?.Start is { } && point is { })
+            if (line?.Start is null || point is null)
             {
-                var previous = line.Start;
-                var next = point;
-                Project?.History?.Snapshot(previous, next, (p) => line.Start = p);
-                line.Start = next;
+                return;
             }
+            var previous = line.Start;
+            var next = point;
+            Project?.History?.Snapshot(previous, next, (p) => line.Start = p);
+            line.Start = next;
         }
 
-        private void SwapLineEnd(LineShapeViewModel line, PointShapeViewModel point)
+        private void SwapLineEnd(LineShapeViewModel? line, PointShapeViewModel? point)
         {
-            if (line?.End is { } && point is { })
+            if (line?.End is null || point is null)
             {
-                var previous = line.End;
-                var next = point;
-                Project?.History?.Snapshot(previous, next, (p) => line.End = p);
-                line.End = next;
+                return;
             }
+            var previous = line.End;
+            var next = point;
+            Project?.History?.Snapshot(previous, next, (p) => line.End = p);
+            line.End = next;
         }
 
         public bool TryToSplitLine(double x, double y, PointShapeViewModel point, bool select = false)
@@ -593,86 +614,86 @@ namespace Core2D.ViewModels.Editor
 
         public bool TryToConnectLines(IEnumerable<LineShapeViewModel> lines, ImmutableArray<PointShapeViewModel> connectors)
         {
-            if (connectors.Length > 0)
+            if (connectors.Length <= 0)
             {
-                var lineToPoints = new Dictionary<LineShapeViewModel, IList<PointShapeViewModel>>();
+                return false;
+            }
 
-                double threshold = Project.Options.HitThreshold / PageState.ZoomX;
-                double scale = PageState.ZoomX;
+            var lineToPoints = new Dictionary<LineShapeViewModel, IList<PointShapeViewModel>>();
 
-                // Find possible connector to line connections.
-                foreach (var connector in connectors)
+            double threshold = Project.Options.HitThreshold / PageState.ZoomX;
+            double scale = PageState.ZoomX;
+
+            // Find possible connector to line connections.
+            foreach (var connector in connectors)
+            {
+                LineShapeViewModel result = null;
+                foreach (var line in lines)
                 {
-                    LineShapeViewModel result = null;
-                    foreach (var line in lines)
+                    double radius = Project.Options.HitThreshold / PageState.ZoomX;
+                    if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold, scale))
                     {
-                        double radius = Project.Options.HitThreshold / PageState.ZoomX;
-                        if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold, scale))
-                        {
-                            result = line;
-                            break;
-                        }
+                        result = line;
+                        break;
                     }
+                }
 
-                    if (result is { })
+                if (result is { })
+                {
+                    if (lineToPoints.ContainsKey(result))
                     {
-                        if (lineToPoints.ContainsKey(result))
+                        lineToPoints[result].Add(connector);
+                    }
+                    else
+                    {
+                        lineToPoints.Add(result, new List<PointShapeViewModel>());
+                        lineToPoints[result].Add(connector);
+                    }
+                }
+            }
+
+            // Try to split lines using connectors.
+            bool success = false;
+            foreach (var kv in lineToPoints)
+            {
+                var line = kv.Key;
+                var points = kv.Value;
+                if (points.Count == 2)
+                {
+                    var p0 = points[0];
+                    var p1 = points[1];
+                    bool horizontal = Abs(p0.Y - p1.Y) < threshold;
+                    bool vertical = Abs(p0.X - p1.X) < threshold;
+
+                    // Points are aligned horizontally.
+                    if (horizontal && !vertical)
+                    {
+                        if (p0.X <= p1.X)
                         {
-                            lineToPoints[result].Add(connector);
+                            success = TryToSplitLine(line, p0, p1);
                         }
                         else
                         {
-                            lineToPoints.Add(result, new List<PointShapeViewModel>());
-                            lineToPoints[result].Add(connector);
+                            success = TryToSplitLine(line, p1, p0);
                         }
                     }
-                }
 
-                // Try to split lines using connectors.
-                bool success = false;
-                foreach (var kv in lineToPoints)
-                {
-                    var line = kv.Key;
-                    var points = kv.Value;
-                    if (points.Count == 2)
+                    // Points are aligned vertically.
+                    if (!horizontal && vertical)
                     {
-                        var p0 = points[0];
-                        var p1 = points[1];
-                        bool horizontal = Abs(p0.Y - p1.Y) < threshold;
-                        bool vertical = Abs(p0.X - p1.X) < threshold;
-
-                        // Points are aligned horizontally.
-                        if (horizontal && !vertical)
+                        if (p0.Y >= p1.Y)
                         {
-                            if (p0.X <= p1.X)
-                            {
-                                success = TryToSplitLine(line, p0, p1);
-                            }
-                            else
-                            {
-                                success = TryToSplitLine(line, p1, p0);
-                            }
+                            success = TryToSplitLine(line, p1, p0);
                         }
-
-                        // Points are aligned vertically.
-                        if (!horizontal && vertical)
+                        else
                         {
-                            if (p0.Y >= p1.Y)
-                            {
-                                success = TryToSplitLine(line, p1, p0);
-                            }
-                            else
-                            {
-                                success = TryToSplitLine(line, p0, p1);
-                            }
+                            success = TryToSplitLine(line, p0, p1);
                         }
                     }
                 }
-
-                return success;
             }
 
-            return false;
+            return success;
         }
     }
 }

@@ -191,27 +191,27 @@ namespace Core2D.ViewModels.Containers
             }
         }
 
-        public void SetCurrentDocument(DocumentContainerViewModel document)
+        public void SetCurrentDocument(DocumentContainerViewModel? document)
         {
             CurrentDocument = document;
             Selected = document;
         }
 
-        public void SetCurrentContainer(FrameContainerViewModel container)
+        public void SetCurrentContainer(FrameContainerViewModel? container)
         {
             CurrentContainer = container;
             Selected = container;
         }
 
-        public void SetCurrentTemplate(TemplateContainerViewModel template) => CurrentTemplate = template;
+        public void SetCurrentTemplate(TemplateContainerViewModel? template) => CurrentTemplate = template;
 
-        public void SetCurrentScript(ScriptViewModel script) => CurrentScript = script;
+        public void SetCurrentScript(ScriptViewModel? script) => CurrentScript = script;
 
-        public void SetCurrentDatabase(DatabaseViewModel db) => CurrentDatabase = db;
+        public void SetCurrentDatabase(DatabaseViewModel? db) => CurrentDatabase = db;
 
-        public void SetCurrentGroupLibrary(LibraryViewModel libraryViewModel) => CurrentGroupLibrary = libraryViewModel;
+        public void SetCurrentGroupLibrary(LibraryViewModel? libraryViewModel) => CurrentGroupLibrary = libraryViewModel;
 
-        public void SetCurrentStyleLibrary(LibraryViewModel libraryViewModel) => CurrentStyleLibrary = libraryViewModel;
+        public void SetCurrentStyleLibrary(LibraryViewModel? libraryViewModel) => CurrentStyleLibrary = libraryViewModel;
 
         public override bool IsDirty()
         {
