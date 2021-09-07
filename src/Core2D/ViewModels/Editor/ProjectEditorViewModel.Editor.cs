@@ -692,10 +692,24 @@ namespace Core2D.ViewModels.Editor
             {
                 if (await CanPaste())
                 {
-                    var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
-                    if (!string.IsNullOrEmpty(text))
+                    //var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
+                    //if (!string.IsNullOrEmpty(text))
+                    //{
+                    //    OnTryPaste(text);
+                    //}
+                    
+                    if (_shapesToCopy is { } && _shapesToCopy.Count > 0)
                     {
-                        OnTryPaste(text);
+                        var shapesToPaste = new List<BaseShapeViewModel>(_shapesToCopy.Count);
+                        var shared = new Dictionary<object, object>();
+ 
+                        foreach (var s in _shapesToCopy)
+                        {
+                            var copy = s.CopyShared(shared);
+                            shapesToPaste.Add(copy);
+                        }
+                        
+                        OnPasteShapes(shapesToPaste);
                     }
                 }
             }
@@ -2398,7 +2412,8 @@ namespace Core2D.ViewModels.Editor
         {
             try
             {
-                return await (TextClipboard?.ContainsText() ?? Task.FromResult(false));
+                //return await (TextClipboard?.ContainsText() ?? Task.FromResult(false));
+                return await Task.Run(() => _shapesToCopy is { } && _shapesToCopy.Count > 0);
             }
             catch (Exception ex)
             {
@@ -2407,15 +2422,30 @@ namespace Core2D.ViewModels.Editor
             return false;
         }
 
+        private IList<BaseShapeViewModel>? _shapesToCopy;
+
         public void OnCopyShapes(IList<BaseShapeViewModel> shapes)
         {
             try
             {
-                var json = JsonSerializer?.Serialize(shapes);
-                if (!string.IsNullOrEmpty(json))
+                if (shapes.Count > 0)
                 {
-                    TextClipboard?.SetText(json);
+                    _shapesToCopy = new List<BaseShapeViewModel>(shapes.Count);
+
+                    var shared = new Dictionary<object, object>();
+ 
+                    foreach (var shape in shapes)
+                    {
+                        var copy = shape.CopyShared(shared);
+                        _shapesToCopy.Add(copy);
+                    }
                 }
+
+                //var json = JsonSerializer?.Serialize(shapes);
+                //if (!string.IsNullOrEmpty(json))
+                //{
+                //    TextClipboard?.SetText(json);
+                //}
             }
             catch (Exception ex)
             {
@@ -2539,7 +2569,7 @@ namespace Core2D.ViewModels.Editor
             try
             {
                 Deselect(Project?.CurrentContainer?.CurrentLayer);
-                TryToRestoreRecords(shapes);
+                //TryToRestoreRecords(shapes);
                 UpdateShapeNames(shapes);
                 Project.AddShapes(Project?.CurrentContainer?.CurrentLayer, shapes);
                 OnSelect(shapes);
