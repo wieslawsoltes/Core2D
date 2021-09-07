@@ -33,7 +33,8 @@ namespace Core2D.ViewModels.Containers
                 HelperLayer = _helperLayer?.CopyShared(shared),
                 CurrentShape = currentShape,
                 Properties = properties,
-                Record = _record
+                Record = _record,
+                Template = _template?.CopyShared(shared)
             };
 
             return copy;
