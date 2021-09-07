@@ -1,8 +1,10 @@
 ﻿#nullable disable
+using System.Collections.Generic;
 using System.Diagnostics;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.VisualTree;
+using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
@@ -32,7 +34,7 @@ namespace Core2D.Behaviors.DragAndDrop
                         {
                             if (bExecute)
                             {
-                                var shape = editor?.CloneShape(sourceShape);
+                                var shape = sourceShape?.CopyShared(new Dictionary<object, object>());
                                 editor?.Project.AddShape(targetLayer, shape);
                             }
                             return true;
@@ -96,7 +98,7 @@ namespace Core2D.Behaviors.DragAndDrop
                         {
                             if (bExecute)
                             {
-                                var layer = editor?.Clone(sourceLayer);
+                                var layer = sourceLayer?.CopyShared(new Dictionary<object, object>());
                                 editor?.Project.AddLayer(targetContainer, layer);
                             }
                             return true;
@@ -152,7 +154,7 @@ namespace Core2D.Behaviors.DragAndDrop
                         {
                             if (bExecute)
                             {
-                                var page = editor?.Clone(sourceContainer);
+                                var page = sourceContainer?.CopyShared(new Dictionary<object, object>());
                                 editor?.Project.AddPage(targetDocument, page);
                                 editor?.Project?.SetCurrentContainer(page);
                             }
