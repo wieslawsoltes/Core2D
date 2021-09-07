@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -9,15 +9,13 @@ using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor.Recent;
 using Core2D.ViewModels.Renderer;
-using Core2D.ViewModels.Shapes;
 using Dock.Model.Controls;
 using Dock.Model.Core;
 
 namespace Core2D.ViewModels.Editor
 {
-    public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
+    public partial class ProjectEditorViewModel
     {
-        private readonly ShapeEditor _shapeEditor;
         [AutoNotify] private IRootDock _rootDock;
         [AutoNotify] private IFactory _dockFactory;
         [AutoNotify] private ProjectContainerViewModel _project;
@@ -31,6 +29,7 @@ namespace Core2D.ViewModels.Editor
         [AutoNotify] private RecentFileViewModel _currentRecentProject;
         [AutoNotify] private AboutInfoViewModel _aboutInfo;
         [AutoNotify] private IList<DialogViewModel> _dialogs;
+        private readonly ShapeEditor _shapeEditor;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
         private readonly Lazy<IHitTest> _hitTest;

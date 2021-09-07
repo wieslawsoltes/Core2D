@@ -11,7 +11,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Editor
 {
-    public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
+    public partial class ProjectEditorViewModel
     {
         public void OnDuplicateSelected()
         {
