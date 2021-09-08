@@ -62,7 +62,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var container = factory.CreatePageContainer(name);
             container.Template = project.CurrentTemplate is { } 
-                ? (TemplateContainerViewModel)project.CurrentTemplate.Copy(null)
+                ? project.CurrentTemplate.CopyShared(null)
                 : (this as IContainerFactory).GetTemplate(project, "Default");
             return container;
         }
