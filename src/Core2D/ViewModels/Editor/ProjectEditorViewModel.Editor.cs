@@ -1481,7 +1481,7 @@ namespace Core2D.ViewModels.Editor
                     {
                         if (clone is GroupShapeViewModel group)
                         {
-                            var shapes = Project?.CurrentContainer?.CurrentLayer?.Shapes.GetAllShapes<LineShapeViewModel>();
+                            var shapes = Project?.CurrentContainer?.CurrentLayer?.Shapes.GetAllShapes<LineShapeViewModel>().ToList();
                             TryToConnectLines(shapes, group.Connectors);
                         }
                     }

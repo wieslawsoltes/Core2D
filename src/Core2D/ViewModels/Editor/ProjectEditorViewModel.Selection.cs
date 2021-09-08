@@ -520,50 +520,51 @@ namespace Core2D.ViewModels.Editor
             var radius = Project.Options.HitThreshold / PageState.ZoomX;
             var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
 
-            if (result is LineShapeViewModel line)
+            if (result is not LineShapeViewModel line)
             {
-                if (!Project.Options.SnapToGrid)
-                {
-                    var a = new Point2(line.Start.X, line.Start.Y);
-                    var b = new Point2(line.End.X, line.End.Y);
-                    var target = new Point2(x, y);
-                    var nearest = target.NearestOnLine(a, b);
-                    point.X = nearest.X;
-                    point.Y = nearest.Y;
-                }
-
-                var split = ViewModelFactory.CreateLineShape(
-                    x, y,
-                    (ShapeStyleViewModel)line.Style.Copy(null),
-                    line.IsStroked);
-
-                var ds = point.DistanceTo(line.Start);
-                var de = point.DistanceTo(line.End);
-
-                if (ds < de)
-                {
-                    split.Start = line.Start;
-                    split.End = point;
-                    SwapLineStart(line, point);
-                }
-                else
-                {
-                    split.Start = point;
-                    split.End = line.End;
-                    SwapLineEnd(line, point);
-                }
-
-                Project.AddShape(Project.CurrentContainer.CurrentLayer, split);
-
-                if (select)
-                {
-                    Select(Project.CurrentContainer.CurrentLayer, point);
-                }
-
-                return true;
+                return false;
+            }
+            
+            if (!Project.Options.SnapToGrid)
+            {
+                var a = new Point2(line.Start.X, line.Start.Y);
+                var b = new Point2(line.End.X, line.End.Y);
+                var target = new Point2(x, y);
+                var nearest = target.NearestOnLine(a, b);
+                point.X = nearest.X;
+                point.Y = nearest.Y;
             }
 
-            return false;
+            var split = ViewModelFactory.CreateLineShape(
+                x, y,
+                (ShapeStyleViewModel)line.Style.Copy(null),
+                line.IsStroked);
+
+            var ds = point.DistanceTo(line.Start);
+            var de = point.DistanceTo(line.End);
+
+            if (ds < de)
+            {
+                split.Start = line.Start;
+                split.End = point;
+                SwapLineStart(line, point);
+            }
+            else
+            {
+                split.Start = point;
+                split.End = line.End;
+                SwapLineEnd(line, point);
+            }
+
+            Project.AddShape(Project.CurrentContainer.CurrentLayer, split);
+
+            if (@select)
+            {
+                Select(Project.CurrentContainer.CurrentLayer, point);
+            }
+
+            return true;
+
         }
 
         public bool TryToSplitLine(LineShapeViewModel line, PointShapeViewModel p0, PointShapeViewModel p1)
@@ -612,25 +613,37 @@ namespace Core2D.ViewModels.Editor
             return true;
         }
 
-        public bool TryToConnectLines(IEnumerable<LineShapeViewModel> lines, ImmutableArray<PointShapeViewModel> connectors)
+        public bool TryToConnectLines(IList<LineShapeViewModel> lines, ImmutableArray<PointShapeViewModel> connectors)
         {
             if (connectors.Length <= 0)
             {
                 return false;
             }
 
-            var lineToPoints = new Dictionary<LineShapeViewModel, IList<PointShapeViewModel>>();
-
-            var threshold = Project.Options.HitThreshold / PageState.ZoomX;
-            var scale = PageState.ZoomX;
+            var lineToPointsMap = new Dictionary<LineShapeViewModel, IList<PointShapeViewModel>>();
+            var threshold = Project?.Options is null || PageState is null ? 1.0 : Project.Options.HitThreshold / PageState.ZoomX;
+            var scale = PageState?.ZoomX ?? 1.0;
 
             // Find possible connector to line connections.
+            FinConnectors(lines, connectors, lineToPointsMap, threshold, scale);
+
+            // Try to split lines using connectors.
+            return TryToSplitUsingConnectors(lineToPointsMap, threshold);
+        }
+
+        private void FinConnectors(IList<LineShapeViewModel> lines, ImmutableArray<PointShapeViewModel> connectors, IDictionary<LineShapeViewModel, IList<PointShapeViewModel>> lineToPointsMap, double threshold, double scale)
+        {
+            if (HitTest is null)
+            {
+                return;
+            }
+
             foreach (var connector in connectors)
             {
-                LineShapeViewModel result = null;
+                LineShapeViewModel? result = null;
+                
                 foreach (var line in lines)
                 {
-                    var radius = Project.Options.HitThreshold / PageState.ZoomX;
                     if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold, scale))
                     {
                         result = line;
@@ -638,58 +651,50 @@ namespace Core2D.ViewModels.Editor
                     }
                 }
 
-                if (result is { })
+                if (result is null)
                 {
-                    if (lineToPoints.ContainsKey(result))
-                    {
-                        lineToPoints[result].Add(connector);
-                    }
-                    else
-                    {
-                        lineToPoints.Add(result, new List<PointShapeViewModel>());
-                        lineToPoints[result].Add(connector);
-                    }
+                    continue;
+                }
+
+                if (lineToPointsMap.ContainsKey(result))
+                {
+                    lineToPointsMap[result].Add(connector);
+                }
+                else
+                {
+                    lineToPointsMap.Add(result, new List<PointShapeViewModel>());
+                    lineToPointsMap[result].Add(connector);
                 }
             }
-
-            // Try to split lines using connectors.
+        }
+   
+        private bool TryToSplitUsingConnectors(IDictionary<LineShapeViewModel, IList<PointShapeViewModel>> lineToPointsMap, double threshold)
+        {
             var success = false;
-            foreach (var kv in lineToPoints)
+            
+            foreach (var kv in lineToPointsMap)
             {
                 var line = kv.Key;
                 var points = kv.Value;
-                if (points.Count == 2)
+                if (points.Count != 2)
                 {
-                    var p0 = points[0];
-                    var p1 = points[1];
-                    var horizontal = Abs(p0.Y - p1.Y) < threshold;
-                    var vertical = Abs(p0.X - p1.X) < threshold;
+                    continue;
+                }
+                var p0 = points[0];
+                var p1 = points[1];
+                var horizontal = Abs(p0.Y - p1.Y) < threshold;
+                var vertical = Abs(p0.X - p1.X) < threshold;
 
-                    // Points are aligned horizontally.
-                    if (horizontal && !vertical)
-                    {
-                        if (p0.X <= p1.X)
-                        {
-                            success = TryToSplitLine(line, p0, p1);
-                        }
-                        else
-                        {
-                            success = TryToSplitLine(line, p1, p0);
-                        }
-                    }
+                // Points are aligned horizontally.
+                if (horizontal && !vertical)
+                {
+                    success = p0.X <= p1.X ? TryToSplitLine(line, p0, p1) : TryToSplitLine(line, p1, p0);
+                }
 
-                    // Points are aligned vertically.
-                    if (!horizontal && vertical)
-                    {
-                        if (p0.Y >= p1.Y)
-                        {
-                            success = TryToSplitLine(line, p1, p0);
-                        }
-                        else
-                        {
-                            success = TryToSplitLine(line, p0, p1);
-                        }
-                    }
+                // Points are aligned vertically.
+                if (!horizontal && vertical)
+                {
+                    success = p0.Y >= p1.Y ? TryToSplitLine(line, p1, p0) : TryToSplitLine(line, p0, p1);
                 }
             }
 
