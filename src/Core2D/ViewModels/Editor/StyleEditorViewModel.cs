@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,9 +11,13 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor
 {
-    public partial class StyleEditorViewModel : ViewModelBase
+    public class StyleEditorViewModel : ViewModelBase
     {
-        private const NumberStyles _numberStyles = NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
+        private const NumberStyles NumberStyles = 
+            System.Globalization.NumberStyles.AllowLeadingSign 
+            | System.Globalization.NumberStyles.AllowDecimalPoint 
+            | System.Globalization.NumberStyles.AllowThousands;
+
         private ShapeStyleViewModel _shapeStyleCopy;
         private BaseColorViewModel _strokeCopy;
         private BaseColorViewModel _fillCopy;
@@ -488,7 +492,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnStyleSetThickness(string thickness)
         {
-            if (!double.TryParse(thickness, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(thickness, NumberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -537,7 +541,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnStyleSetDashOffset(string dashOffset)
         {
-            if (!double.TryParse(dashOffset, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(dashOffset, NumberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -582,7 +586,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnStyleSetStrokeTransparency(string alpha)
         {
-            if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            if (!byte.TryParse(alpha, NumberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -625,7 +629,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnStyleSetFillTransparency(string alpha)
         {
-            if (!byte.TryParse(alpha, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            if (!byte.TryParse(alpha, NumberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -654,7 +658,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnStyleSetFontSize(string fontSize)
         {
-            if (!double.TryParse(fontSize, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(fontSize, NumberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -734,7 +738,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnStyleSetStartArrowRadiusX(string radius)
         {
-            if (!double.TryParse(radius, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(radius, NumberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -750,7 +754,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnStyleSetStartArrowRadiusY(string radius)
         {
-            if (!double.TryParse(radius, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(radius, NumberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -784,7 +788,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnStyleSetEndArrowRadiusX(string radius)
         {
-            if (!double.TryParse(radius, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(radius, NumberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
@@ -802,7 +806,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnStyleSetEndArrowRadiusY(string radius)
         {
-            if (!double.TryParse(radius, _numberStyles, CultureInfo.InvariantCulture, out var value))
+            if (!double.TryParse(radius, NumberStyles, CultureInfo.InvariantCulture, out var value))
             {
                 return;
             }
