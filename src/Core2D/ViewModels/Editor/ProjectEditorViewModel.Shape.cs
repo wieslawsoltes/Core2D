@@ -315,46 +315,59 @@ namespace Core2D.ViewModels.Editor
 
             if (sources is { Count: 1 } && source is not null)
             {
-                var path = PathConverter.ToPathShape(source);
-                if (path is { })
-                {
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    var index = shapesBuilder.IndexOf(source);
-                    shapesBuilder[index] = path;
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, path);
-                }
+                CreatePath(source, layer);
             }
 
             if (sources is { Count: > 1 })
             {
-                var path = PathConverter.ToPathShape(sources);
-                if (path is null)
-                {
-                    return;
-                }
-
-                var shapesBuilder = layer.Shapes.ToBuilder();
-
-                foreach (var shape in sources)
-                {
-                    shapesBuilder.Remove(shape);
-                }
-                shapesBuilder.Add(path);
-
-                var previous = layer.Shapes;
-                var next = shapesBuilder.ToImmutable();
-                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
-                Select(layer, path);
+                CreatePath(sources, layer);
             }
+        }
+
+        private void CreatePath(BaseShapeViewModel source, LayerContainerViewModel layer)
+        {
+            var path = PathConverter?.ToPathShape(source);
+            if (path == null)
+            {
+                return;
+            }
+            
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            var index = shapesBuilder.IndexOf(source);
+            shapesBuilder[index] = path;
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, path);
+        }
+
+        private void CreatePath(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
+        {
+            var path = PathConverter?.ToPathShape(sources);
+            if (path is null)
+            {
+                return;
+            }
+
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            foreach (var shape in sources)
+            {
+                shapesBuilder.Remove(shape);
+            }
+
+            shapesBuilder.Add(path);
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, path);
         }
 
         public void OnCreateStrokePath()
@@ -375,62 +388,78 @@ namespace Core2D.ViewModels.Editor
 
             if (sources is { Count: 1 } && source is not null)
             {
-                var path = PathConverter.ToStrokePathShape(source);
-                if (path is { })
-                {
-                    path.IsStroked = false;
-                    path.IsFilled = true;
-
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    var index = shapesBuilder.IndexOf(source);
-                    shapesBuilder[index] = path;
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, path);
-                }
+                CreateStrokePath(source, layer);
             }
 
             if (sources is { Count: > 1 })
             {
-                var paths = new List<PathShapeViewModel>();
-                var shapes = new List<BaseShapeViewModel>();
-
-                foreach (var s in sources)
-                {
-                    var path = PathConverter.ToStrokePathShape(s);
-                    if (path is { })
-                    {
-                        path.IsStroked = false;
-                        path.IsFilled = true;
-
-                        paths.Add(path);
-                        shapes.Add(s);
-                    }
-                }
-
-                if (paths.Count > 0)
-                {
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    for (int i = 0; i < paths.Count; i++)
-                    {
-                        var index = shapesBuilder.IndexOf(shapes[i]);
-                        shapesBuilder[index] = paths[i];
-                    }
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, new HashSet<BaseShapeViewModel>(paths));
-                }
+                CreateStrokePath(sources, layer);
             }
+        }
+
+        private void CreateStrokePath(BaseShapeViewModel source, LayerContainerViewModel layer)
+        {
+            var path = PathConverter?.ToStrokePathShape(source);
+            if (path is null)
+            {
+                return;
+            }
+            
+            path.IsStroked = false;
+            path.IsFilled = true;
+
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            var index = shapesBuilder.IndexOf(source);
+            shapesBuilder[index] = path;
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, path);
+        }
+
+        private void CreateStrokePath(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
+        {
+            var paths = new List<PathShapeViewModel>();
+            var shapes = new List<BaseShapeViewModel>();
+
+            foreach (var s in sources)
+            {
+                var path = PathConverter?.ToStrokePathShape(s);
+                if (path is null)
+                {
+                    continue;
+                }
+                
+                path.IsStroked = false;
+                path.IsFilled = true;
+
+                paths.Add(path);
+                shapes.Add(s);
+            }
+
+            if (paths.Count <= 0)
+            {
+                return;
+            }
+            
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            for (int i = 0; i < paths.Count; i++)
+            {
+                var index = shapesBuilder.IndexOf(shapes[i]);
+                shapesBuilder[index] = paths[i];
+            }
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, new HashSet<BaseShapeViewModel>(paths));
         }
 
         public void OnCreateFillPath()
@@ -451,62 +480,78 @@ namespace Core2D.ViewModels.Editor
 
             if (sources is { Count: 1 } && source is not null)
             {
-                var path = PathConverter.ToFillPathShape(source);
-                if (path is { })
-                {
-                    path.IsStroked = false;
-                    path.IsFilled = true;
-
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    var index = shapesBuilder.IndexOf(source);
-                    shapesBuilder[index] = path;
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, path);
-                }
+                CreateFillPath(source, layer);
             }
 
             if (sources is { Count: > 1 })
             {
-                var paths = new List<PathShapeViewModel>();
-                var shapes = new List<BaseShapeViewModel>();
-
-                foreach (var s in sources)
-                {
-                    var path = PathConverter.ToFillPathShape(s);
-                    if (path is { })
-                    {
-                        path.IsStroked = false;
-                        path.IsFilled = true;
-
-                        paths.Add(path);
-                        shapes.Add(s);
-                    }
-                }
-
-                if (paths.Count > 0)
-                {
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    for (int i = 0; i < paths.Count; i++)
-                    {
-                        var index = shapesBuilder.IndexOf(shapes[i]);
-                        shapesBuilder[index] = paths[i];
-                    }
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, new HashSet<BaseShapeViewModel>(paths));
-                }
+                CreateFillPath(sources, layer);
             }
+        }
+
+        private void CreateFillPath(BaseShapeViewModel source, LayerContainerViewModel layer)
+        {
+            var path = PathConverter?.ToFillPathShape(source);
+            if (path is null)
+            {
+                return;
+            }
+            
+            path.IsStroked = false;
+            path.IsFilled = true;
+
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            var index = shapesBuilder.IndexOf(source);
+            shapesBuilder[index] = path;
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, path);
+        }
+
+        private void CreateFillPath(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
+        {
+            var paths = new List<PathShapeViewModel>();
+            var shapes = new List<BaseShapeViewModel>();
+
+            foreach (var s in sources)
+            {
+                var path = PathConverter?.ToFillPathShape(s);
+                if (path is null)
+                {
+                    continue;
+                }
+                
+                path.IsStroked = false;
+                path.IsFilled = true;
+
+                paths.Add(path);
+                shapes.Add(s);
+            }
+
+            if (paths.Count <= 0)
+            {
+                return;
+            }
+            
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            for (int i = 0; i < paths.Count; i++)
+            {
+                var index = shapesBuilder.IndexOf(shapes[i]);
+                shapesBuilder[index] = paths[i];
+            }
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, new HashSet<BaseShapeViewModel>(paths));
         }
 
         public void OnCreateWindingPath()
@@ -527,62 +572,78 @@ namespace Core2D.ViewModels.Editor
 
             if (sources is { Count: 1 } && source is not null)
             {
-                var path = PathConverter.ToWindingPathShape(source);
-                if (path is { })
-                {
-                    path.IsStroked = false;
-                    path.IsFilled = true;
-
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    var index = shapesBuilder.IndexOf(source);
-                    shapesBuilder[index] = path;
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, path);
-                }
+                CreateWindingPath(source, layer);
             }
 
             if (sources is { Count: > 1 })
             {
-                var paths = new List<PathShapeViewModel>();
-                var shapes = new List<BaseShapeViewModel>();
-
-                foreach (var s in sources)
-                {
-                    var path = PathConverter.ToWindingPathShape(s);
-                    if (path is { })
-                    {
-                        path.IsStroked = false;
-                        path.IsFilled = true;
-
-                        paths.Add(path);
-                        shapes.Add(s);
-                    }
-                }
-
-                if (paths.Count > 0)
-                {
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    for (int i = 0; i < paths.Count; i++)
-                    {
-                        var index = shapesBuilder.IndexOf(shapes[i]);
-                        shapesBuilder[index] = paths[i];
-                    }
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, new HashSet<BaseShapeViewModel>(paths));
-                }
+                CreateWindingPath(sources, layer);
             }
+        }
+
+        private void CreateWindingPath(BaseShapeViewModel source, LayerContainerViewModel layer)
+        {
+            var path = PathConverter?.ToWindingPathShape(source);
+            if (path is null)
+            {
+                return;
+            }
+            
+            path.IsStroked = false;
+            path.IsFilled = true;
+
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            var index = shapesBuilder.IndexOf(source);
+            shapesBuilder[index] = path;
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, path);
+        }
+
+        private void CreateWindingPath(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
+        {
+            var paths = new List<PathShapeViewModel>();
+            var shapes = new List<BaseShapeViewModel>();
+
+            foreach (var s in sources)
+            {
+                var path = PathConverter?.ToWindingPathShape(s);
+                if (path is null)
+                {
+                    continue;
+                }
+                
+                path.IsStroked = false;
+                path.IsFilled = true;
+
+                paths.Add(path);
+                shapes.Add(s);
+            }
+
+            if (paths.Count <= 0)
+            {
+                return;
+            }
+            
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            for (int i = 0; i < paths.Count; i++)
+            {
+                var index = shapesBuilder.IndexOf(shapes[i]);
+                shapesBuilder[index] = paths[i];
+            }
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, new HashSet<BaseShapeViewModel>(paths));
         }
 
         public void OnPathSimplify()
@@ -603,56 +664,72 @@ namespace Core2D.ViewModels.Editor
 
             if (sources is { Count: 1 } && source is not null)
             {
-                var path = PathConverter.Simplify(source);
-                if (path is { })
-                {
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    var index = shapesBuilder.IndexOf(source);
-                    shapesBuilder[index] = path;
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, path);
-                }
+                PathSimplify(source, layer);
             }
 
             if (sources is { Count: > 1 })
             {
-                var paths = new List<PathShapeViewModel>();
-                var shapes = new List<BaseShapeViewModel>();
-
-                foreach (var s in sources)
-                {
-                    var path = PathConverter.Simplify(s);
-                    if (path is { })
-                    {
-                        paths.Add(path);
-                        shapes.Add(s);
-                    }
-                }
-
-                if (paths.Count > 0)
-                {
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    for (int i = 0; i < paths.Count; i++)
-                    {
-                        var index = shapesBuilder.IndexOf(shapes[i]);
-                        shapesBuilder[index] = paths[i];
-                    }
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, new HashSet<BaseShapeViewModel>(paths));
-                }
+                PathSimplify(sources, layer);
             }
+        }
+
+        private void PathSimplify(BaseShapeViewModel source, LayerContainerViewModel layer)
+        {
+            var path = PathConverter?.Simplify(source);
+            if (path is null)
+            {
+                return;
+            }
+            
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            var index = shapesBuilder.IndexOf(source);
+            shapesBuilder[index] = path;
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, path);
+        }
+
+        private void PathSimplify(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
+        {
+            var paths = new List<PathShapeViewModel>();
+            var shapes = new List<BaseShapeViewModel>();
+
+            foreach (var s in sources)
+            {
+                var path = PathConverter?.Simplify(s);
+                if (path is null)
+                {
+                    continue;
+                }
+                
+                paths.Add(path);
+                shapes.Add(s);
+            }
+
+            if (paths.Count <= 0)
+            {
+                return;
+            }
+            
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            for (int i = 0; i < paths.Count; i++)
+            {
+                var index = shapesBuilder.IndexOf(shapes[i]);
+                shapesBuilder[index] = paths[i];
+            }
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, new HashSet<BaseShapeViewModel>(paths));
         }
 
         public void OnPathBreak()
@@ -670,38 +747,42 @@ namespace Core2D.ViewModels.Editor
 
             var sources = Project?.SelectedShapes;
 
-            if (sources is { Count: >= 1 })
+            if (sources is not { Count: >= 1 })
             {
-                var result = new List<BaseShapeViewModel>();
-                var remove = new List<BaseShapeViewModel>();
-
-                foreach (var s in sources)
-                {
-                    _shapeEditor?.BreakShape(s, result, remove);
-                }
-
-                if (result.Count > 0)
-                {
-                    var shapesBuilder = layer.Shapes.ToBuilder();
-
-                    foreach (var t in remove)
-                    {
-                        shapesBuilder.Remove(t);
-                    }
-
-                    foreach (var t in result)
-                    {
-                        shapesBuilder.Add(t);
-                    }
-
-                    var previous = layer.Shapes;
-                    var next = shapesBuilder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
-
-                    Select(layer, new HashSet<BaseShapeViewModel>(result));
-                }
+                return;
             }
+            
+            var result = new List<BaseShapeViewModel>();
+            var remove = new List<BaseShapeViewModel>();
+
+            foreach (var s in sources)
+            {
+                _shapeEditor?.BreakShape(s, result, remove);
+            }
+
+            if (result.Count <= 0)
+            {
+                return;
+            }
+            
+            var shapesBuilder = layer.Shapes.ToBuilder();
+
+            foreach (var t in remove)
+            {
+                shapesBuilder.Remove(t);
+            }
+
+            foreach (var t in result)
+            {
+                shapesBuilder.Add(t);
+            }
+
+            var previous = layer.Shapes;
+            var next = shapesBuilder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(layer, new HashSet<BaseShapeViewModel>(result));
         }
 
         public void OnPathOp(string op)
@@ -931,6 +1012,7 @@ namespace Core2D.ViewModels.Editor
             {
                 return;
             }
+            
             switch (Project?.Options?.MoveMode)
             {
                 case MoveMode.Point:
@@ -947,15 +1029,14 @@ namespace Core2D.ViewModels.Editor
 
                     var distinct = points.Distinct().Cast<BaseShapeViewModel>().ToList();
                     MoveShapesByWithHistory(distinct, dx, dy);
-                }
                     break;
-
+                }
                 case MoveMode.Shape:
                 {
                     var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked)).ToList();
                     MoveShapesByWithHistory(items, dx, dy);
-                }
                     break;
+                }
             }
         }
 
