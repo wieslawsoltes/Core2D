@@ -29,7 +29,6 @@ namespace Core2D.ViewModels.Editor
         [AutoNotify] private RecentFileViewModel? _currentRecentProject;
         [AutoNotify] private AboutInfoViewModel? _aboutInfo;
         [AutoNotify] private IList<DialogViewModel>? _dialogs;
-        private readonly ShapeEditor? _shapeEditor;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
         private readonly Lazy<IHitTest>? _hitTest;
