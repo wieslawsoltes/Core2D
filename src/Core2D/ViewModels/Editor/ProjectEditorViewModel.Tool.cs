@@ -124,12 +124,12 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnResetTool()
+        private void OnResetTool()
         {
             CurrentTool?.Reset();
         }
-        
-        public void OnResetPathTool()
+
+        private void OnResetPathTool()
         {
             CurrentPathTool?.Reset();
         }
