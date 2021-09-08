@@ -81,7 +81,7 @@ namespace Core2D.ViewModels.Editor
                                 ProjectEditorConfiguration.ImportedDatabaseName,
                                 owner.Columns);
                             Project.AddDatabase(db);
-                            Project?.SetCurrentDatabase(db);
+                            Project.SetCurrentDatabase(db);
                         }
 
                         // Add missing data record.
