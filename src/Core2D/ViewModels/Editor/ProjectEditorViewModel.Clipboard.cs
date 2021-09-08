@@ -12,6 +12,7 @@ namespace Core2D.ViewModels.Editor
 {
     public interface IClipboardService
     {
+        IList<BaseShapeViewModel>? Copy(IList<BaseShapeViewModel> shapes);
         void OnCopyShapes(IList<BaseShapeViewModel> shapes);
         void OnPasteShapes(IEnumerable<BaseShapeViewModel>? shapes);
         void OnTryPaste(string text);
@@ -194,7 +195,7 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        private List<BaseShapeViewModel>? Copy(IList<BaseShapeViewModel> shapes)
+        public IList<BaseShapeViewModel>? Copy(IList<BaseShapeViewModel> shapes)
         {
             if (shapes.Count > 0)
             {
