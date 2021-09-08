@@ -155,7 +155,7 @@
                     x:CompileBindings="False" />
       </TreeView.KeyBindings>
       <TreeView.Styles>
-        <Style Selector="TreeViewItem" x:DataType="TreeViewItem">
+        <Style Selector="TreeViewItem">
           <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay, FallbackValue=False}" />
         </Style>
       </TreeView.Styles>

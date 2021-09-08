@@ -12,7 +12,7 @@ namespace Core2D.ViewModels.Containers
         protected BaseContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             _isVisible = true;
-            _isExpanded = true;
+            _isExpanded = false;
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using Core2D.Model.Renderer;
 
 namespace Core2D.ViewModels.Renderer
 {
-    public partial class Cache<TKey, TValue> : ICache<TKey, TValue> where TKey : notnull
+    public class Cache<TKey, TValue> : ICache<TKey, TValue> where TKey : notnull
     {
         private IDictionary<TKey, TValue?> _storage;
         private readonly Action<TValue>? _dispose;

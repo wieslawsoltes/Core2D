@@ -1,14 +1,12 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Linq;
 using Core2D.Model;
 using Core2D.ViewModels.Containers;
-using Core2D.ViewModels.Shapes;
-using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Factories
 {
-    public partial class ContainerFactory : IContainerFactory
+    public class ContainerFactory : IContainerFactory
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -64,7 +62,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var container = factory.CreatePageContainer(name);
             container.Template = project.CurrentTemplate is { } 
-                ? (TemplateContainerViewModel)project.CurrentTemplate.Copy(null)
+                ? project.CurrentTemplate.CopyShared(null)
                 : (this as IContainerFactory).GetTemplate(project, "Default");
             return container;
         }

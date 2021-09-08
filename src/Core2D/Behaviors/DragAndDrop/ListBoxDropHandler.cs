@@ -36,9 +36,12 @@ namespace Core2D.Behaviors.DragAndDrop
             {
                 if (bExecute)
                 {
-                    var clone = (T)sourceItem.Copy(null);
-                    clone.Name += "-copy";
-                    editor.InsertItem(library, clone, targetIndex + 1);
+                    var clone = sourceItem.CopyShared(null);
+                    if (clone is { })
+                    {
+                        clone.Name += "-copy";
+                        editor.InsertItem(library, clone, targetIndex + 1);
+                    }
                 }
                 return true;
             }

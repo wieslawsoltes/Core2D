@@ -29,7 +29,7 @@ namespace Core2D.ViewModels.Editor.Recent
             return copy;
         }
 
-        public static RecentsViewModel Create(IServiceProvider serviceProvider, ImmutableArray<RecentFileViewModel> files, RecentFileViewModel current)
+        public static RecentsViewModel Create(IServiceProvider serviceProvider, ImmutableArray<RecentFileViewModel> files, RecentFileViewModel? current)
         {
             return new RecentsViewModel(serviceProvider)
             {
