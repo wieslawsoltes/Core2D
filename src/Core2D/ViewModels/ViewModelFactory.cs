@@ -920,6 +920,7 @@ namespace Core2D.ViewModels
             return new LayerContainerViewModel(_serviceProvider)
             {
                 Name = name,
+                IsExpanded = false,
                 Owner = owner,
                 Shapes = ImmutableArray.Create<BaseShapeViewModel>(),
                 IsVisible = isVisible
@@ -931,6 +932,7 @@ namespace Core2D.ViewModels
             var page = new PageContainerViewModel(_serviceProvider)
             {
                 Name = name,
+                IsExpanded = false,
                 Layers = ImmutableArray.Create<LayerContainerViewModel>(),
                 Properties = ImmutableArray.Create<PropertyViewModel>()
             };
@@ -951,6 +953,7 @@ namespace Core2D.ViewModels
             var template = new TemplateContainerViewModel(_serviceProvider)
             {
                 Name = name,
+                IsExpanded = false,
                 Layers = ImmutableArray.Create<LayerContainerViewModel>(),
                 Properties = ImmutableArray.Create<PropertyViewModel>()
             };
@@ -986,6 +989,7 @@ namespace Core2D.ViewModels
             return new DocumentContainerViewModel(_serviceProvider)
             {
                 Name = name,
+                IsExpanded = true,
                 Pages = ImmutableArray.Create<PageContainerViewModel>()
             };
         }
@@ -995,6 +999,7 @@ namespace Core2D.ViewModels
             return new ProjectContainerViewModel(_serviceProvider)
             {
                 Name = name,
+                IsExpanded = true,
                 Options = CreateOptions(),
                 StyleLibraries = ImmutableArray.Create<LibraryViewModel>(),
                 GroupLibraries = ImmutableArray.Create<LibraryViewModel>(),
