@@ -307,154 +307,139 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            switch (item)
+            if (item is ShapeStyleViewModel style)
             {
-                case ShapeStyleViewModel style:
+                Project?.AddStyle(Project?.CurrentStyleLibrary, style);
+            }
+            else if (item is IList<ShapeStyleViewModel> styleList)
+            {
+                Project.AddItems(Project?.CurrentStyleLibrary, styleList);
+            }
+            else if (item is GroupShapeViewModel group)
+            {
+                if (restore)
                 {
-                    Project?.AddStyle(Project?.CurrentStyleLibrary, style);
-                    break;
+                    var shapes = Enumerable.Repeat(@group, 1);
+                    TryToRestoreRecords(shapes);
                 }
-                case IList<ShapeStyleViewModel> styleList:
-                {
-                    Project.AddItems(Project?.CurrentStyleLibrary, styleList);
-                    break;
-                }
-                case GroupShapeViewModel group:
-                {
-                    if (restore)
-                    {
-                        var shapes = Enumerable.Repeat(@group, 1);
-                        TryToRestoreRecords(shapes);
-                    }
-                    Project.AddGroup(Project?.CurrentGroupLibrary, @group);
-                    break;
-                }
-                case BaseShapeViewModel model:
-                {
-                    Project?.AddShape(Project?.CurrentContainer?.CurrentLayer, model);
-                    break;
-                }
-                case IList<GroupShapeViewModel> groups:
-                {
-                    if (restore)
-                    {
-                        TryToRestoreRecords(groups);
-                    }
-                    Project.AddItems(Project?.CurrentGroupLibrary, groups);
-                    break;
-                }
-                case LibraryViewModel sl when sl.Items.All(x => x is ShapeStyleViewModel):
-                {
-                    Project.AddStyleLibrary(sl);
-                    break;
-                }
-                case IList<LibraryViewModel> sll when sll.All(x => x.Items.All(_ => _ is ShapeStyleViewModel)):
-                {
-                    Project.AddStyleLibraries(sll);
-                    break;
-                }
-                case LibraryViewModel gl when gl.Items.All(x => x is GroupShapeViewModel):
-                {
-                    TryToRestoreRecords(gl.Items.Cast<GroupShapeViewModel>());
-                    Project.AddGroupLibrary(gl);
-                    break;
-                }
-                case IList<LibraryViewModel> gll when gll.All(x => x.Items.All(_ => _ is GroupShapeViewModel)):
-                {
-                    var shapes = gll.SelectMany(x => x.Items);
-                    TryToRestoreRecords(shapes.Cast<GroupShapeViewModel>());
-                    Project.AddGroupLibraries(gll);
-                    break;
-                }
-                case DatabaseViewModel db:
-                {
-                    Project?.AddDatabase(db);
-                    Project?.SetCurrentDatabase(db);
-                    break;
-                }
-                case LayerContainerViewModel layer:
-                {
-                    if (restore)
-                    {
-                        TryToRestoreRecords(layer.Shapes);
-                    }
-                    Project?.AddLayer(Project?.CurrentContainer, layer);
-                    break;
-                }
-                case TemplateContainerViewModel template:
-                {
-                    if (restore)
-                    {
-                        var shapes = template.Layers.SelectMany(x => x.Shapes);
-                        TryToRestoreRecords(shapes);
-                    }
-                    Project?.AddTemplate(template);
-                    break;
-                }
-                case PageContainerViewModel page:
-                {
-                    if (restore)
-                    {
-                        var shapes = Enumerable.Concat(
-                            page.Layers.SelectMany(x => x.Shapes),
-                            page.Template?.Layers.SelectMany(x => x.Shapes));
-                        TryToRestoreRecords(shapes);
-                    }
-                    Project?.AddPage(Project?.CurrentDocument, page);
-                    break;
-                }
-                case IList<TemplateContainerViewModel> templates:
-                {
-                    if (restore)
-                    {
-                        var shapes = templates.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
-                        TryToRestoreRecords(shapes);
-                    }
 
-                    // Import as templates.
-                    Project.AddTemplates(templates);
-                    break;
-                }
-                case IList<ScriptViewModel> scripts:
+                Project.AddGroup(Project?.CurrentGroupLibrary, @group);
+            }
+            else if (item is BaseShapeViewModel model)
+            {
+                Project?.AddShape(Project?.CurrentContainer?.CurrentLayer, model);
+            }
+            else if (item is IList<GroupShapeViewModel> groups)
+            {
+                if (restore)
                 {
-                    // Import as scripts.
-                    Project.AddScripts(scripts);
-                    break;
+                    TryToRestoreRecords(groups);
                 }
-                case ScriptViewModel script:
-                {
-                    Project?.AddScript(script);
-                    break;
-                }
-                case DocumentContainerViewModel document:
-                {
-                    if (restore)
-                    {
-                        var shapes = Enumerable.Concat(
-                            document.Pages.SelectMany(x => x.Layers).SelectMany(x => x.Shapes),
-                            document.Pages.SelectMany(x => x.Template.Layers).SelectMany(x => x.Shapes));
-                        TryToRestoreRecords(shapes);
-                    }
-                    Project?.AddDocument(document);
-                    break;
-                }
-                case OptionsViewModel options:
-                {
-                    if (Project is { })
-                    {
-                        Project.Options = options;
-                    }
 
-                    break;
-                }
-                case ProjectContainerViewModel project:
+                Project.AddItems(Project?.CurrentGroupLibrary, groups);
+            }
+            else if (item is LibraryViewModel sl && sl.Items.All(x => x is ShapeStyleViewModel))
+            {
+                Project.AddStyleLibrary(sl);
+            }
+            else if (item is IList<LibraryViewModel> sll && sll.All(x => x.Items.All(_ => _ is ShapeStyleViewModel)))
+            {
+                Project.AddStyleLibraries(sll);
+            }
+            else if (item is LibraryViewModel gl && gl.Items.All(x => x is GroupShapeViewModel))
+            {
+                TryToRestoreRecords(gl.Items.Cast<GroupShapeViewModel>());
+                Project.AddGroupLibrary(gl);
+            }
+            else if (item is IList<LibraryViewModel> gll && gll.All(x => x.Items.All(_ => _ is GroupShapeViewModel)))
+            {
+                var shapes = gll.SelectMany(x => x.Items);
+                TryToRestoreRecords(shapes.Cast<GroupShapeViewModel>());
+                Project.AddGroupLibraries(gll);
+            }
+            else if (item is DatabaseViewModel db)
+            {
+                Project?.AddDatabase(db);
+                Project?.SetCurrentDatabase(db);
+            }
+            else if (item is LayerContainerViewModel layer)
+            {
+                if (restore)
                 {
-                    OnUnload();
-                    OnLoad(project, string.Empty);
-                    break;
+                    TryToRestoreRecords(layer.Shapes);
                 }
-                default:
-                    throw new NotSupportedException("Not supported import object.");
+
+                Project?.AddLayer(Project?.CurrentContainer, layer);
+            }
+            else if (item is TemplateContainerViewModel template)
+            {
+                if (restore)
+                {
+                    var shapes = template.Layers.SelectMany(x => x.Shapes);
+                    TryToRestoreRecords(shapes);
+                }
+
+                Project?.AddTemplate(template);
+            }
+            else if (item is PageContainerViewModel page)
+            {
+                if (restore)
+                {
+                    var shapes = Enumerable.Concat(
+                        page.Layers.SelectMany(x => x.Shapes),
+                        page.Template?.Layers.SelectMany(x => x.Shapes));
+                    TryToRestoreRecords(shapes);
+                }
+
+                Project?.AddPage(Project?.CurrentDocument, page);
+            }
+            else if (item is IList<TemplateContainerViewModel> templates)
+            {
+                if (restore)
+                {
+                    var shapes = templates.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
+                    TryToRestoreRecords(shapes);
+                }
+
+                // Import as templates.
+                Project.AddTemplates(templates);
+            }
+            else if (item is IList<ScriptViewModel> scripts)
+            {
+                // Import as scripts.
+                Project.AddScripts(scripts);
+            }
+            else if (item is ScriptViewModel script)
+            {
+                Project?.AddScript(script);
+            }
+            else if (item is DocumentContainerViewModel document)
+            {
+                if (restore)
+                {
+                    var shapes = Enumerable.Concat(
+                        document.Pages.SelectMany(x => x.Layers).SelectMany(x => x.Shapes),
+                        document.Pages.SelectMany(x => x.Template.Layers).SelectMany(x => x.Shapes));
+                    TryToRestoreRecords(shapes);
+                }
+
+                Project?.AddDocument(document);
+            }
+            else if (item is OptionsViewModel options)
+            {
+                if (Project is { })
+                {
+                    Project.Options = options;
+                }
+            }
+            else if (item is ProjectContainerViewModel project)
+            {
+                OnUnload();
+                OnLoad(project, string.Empty);
+            }
+            else
+            {
+                throw new NotSupportedException("Not supported import object.");
             }
         }
 
