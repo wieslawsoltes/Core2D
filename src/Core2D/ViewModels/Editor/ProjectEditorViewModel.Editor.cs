@@ -58,6 +58,87 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
+        private IDictionary<string, RecordViewModel>? GenerateRecordDictionaryById()
+        {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null)
+            {
+                return default;
+            }
+            
+            return Project.Databases
+                .Where(d => d.Records.Length > 0)
+                .SelectMany(d => d.Records)
+                .ToDictionary(s => s.Id);
+        }
+
+        private void TryToRestoreRecords(IEnumerable<BaseShapeViewModel> shapes)
+        {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null)
+            {
+                return;
+            }
+
+            var ViewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            
+            try
+            {
+                if (Project?.Databases is null)
+                {
+                    return;
+                }
+
+                var records = GenerateRecordDictionaryById();
+                if (records is null)
+                {
+                    return;
+                }
+
+                // Try to restore shape record.
+                foreach (var shape in shapes.GetAllShapes())
+                {
+                    if (shape.Record is null)
+                    {
+                        continue;
+                    }
+
+                    if (records.TryGetValue(shape.Record.Id, out var record))
+                    {
+                        // Use existing record.
+                        shape.Record = record;
+                    }
+                    else
+                    {
+                        // Create Imported database.
+                        if (Project?.CurrentDatabase is null && shape.Record.Owner is DatabaseViewModel owner)
+                        {
+                            var db = ViewModelFactory?.CreateDatabase(
+                                ProjectEditorConfiguration.ImportedDatabaseName,
+                                owner.Columns);
+                            Project.AddDatabase(db);
+                            Project.SetCurrentDatabase(db);
+                        }
+
+                        // Add missing data record.
+                        shape.Record.Owner = Project?.CurrentDatabase;
+                        Project?.AddRecord(Project?.CurrentDatabase, shape.Record);
+
+                        // Recreate records dictionary.
+                        records = GenerateRecordDictionaryById();
+                        if (records is null)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
+            }
+        }
+
         public void OnNew(object? item)
         {
             switch (item)
@@ -211,7 +292,7 @@ namespace Core2D.ViewModels.Editor
                 var isDecoratorVisible = PageState?.Decorator?.IsVisible == true;
                 if (isDecoratorVisible)
                 {
-                    OnHideDecorator();
+                    ServiceProvider.GetService<ISelectionService>()?.OnHideDecorator();
                 }
 
                 ViewModelFactory?.SaveProjectContainer(Project, path, FileSystem, JsonSerializer);
@@ -226,7 +307,7 @@ namespace Core2D.ViewModels.Editor
 
                 if (isDecoratorVisible)
                 {
-                    OnShowDecorator();
+                    ServiceProvider.GetService<ISelectionService>()?.OnShowDecorator();
                 }
             }
             catch (Exception ex)
@@ -472,7 +553,7 @@ namespace Core2D.ViewModels.Editor
             var shapes = SvgConverter.Convert(path, out _, out _);
             if (shapes is { })
             {
-                OnPasteShapes(shapes);
+                ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(shapes);
             }
         }
 
@@ -1334,7 +1415,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
             
-            Deselect();
+            ServiceProvider.GetService<ISelectionService>()?.Deselect();
             
             if (project is IImageCache imageCache)
             {
@@ -1385,7 +1466,7 @@ namespace Core2D.ViewModels.Editor
                 imageCache.PurgeUnusedImages(new HashSet<string>());
             }
             
-            Deselect();
+            ServiceProvider.GetService<ISelectionService>()?.Deselect();
             SetRenderersImageCache(null);
             Project = null;
             ProjectPath = string.Empty;
@@ -1503,7 +1584,7 @@ namespace Core2D.ViewModels.Editor
             {
                 if (Project?.History?.CanUndo() ?? false)
                 {
-                    Deselect();
+                    ServiceProvider.GetService<ISelectionService>()?.Deselect();
                     Project?.History.Undo();
                 }
             }
@@ -1519,7 +1600,7 @@ namespace Core2D.ViewModels.Editor
             {
                 if (Project?.History?.CanRedo() ?? false)
                 {
-                    Deselect();
+                    ServiceProvider.GetService<ISelectionService>()?.Deselect();
                     Project?.History.Redo();
                 }
             }
@@ -1676,7 +1757,7 @@ namespace Core2D.ViewModels.Editor
                 var clone = shape.CopyShared(new Dictionary<object, object>());
                 if (clone is { })
                 {
-                    Deselect(Project.CurrentContainer?.CurrentLayer);
+                    ServiceProvider.GetService<ISelectionService>()?.Deselect(Project.CurrentContainer?.CurrentLayer);
                     clone.Move(null, sx, sy);
 
                     Project.AddShape(Project?.CurrentContainer?.CurrentLayer, clone);
@@ -1688,7 +1769,7 @@ namespace Core2D.ViewModels.Editor
                         if (clone is GroupShapeViewModel group)
                         {
                             var shapes = Project?.CurrentContainer?.CurrentLayer?.Shapes.GetAllShapes<LineShapeViewModel>().ToList();
-                            TryToConnectLines(shapes, group.Connectors);
+                            ServiceProvider.GetService<ISelectionService>()?.TryToConnectLines(shapes, group.Connectors);
                         }
                     }
                 }

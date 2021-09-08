@@ -7,7 +7,7 @@ namespace Core2D.ViewModels.Editor
     {
         public void OnCancel()
         {
-            OnDeselectAll();
+            ServiceProvider.GetService<ISelectionService>()?.OnDeselectAll();
             OnResetTool();
         }
 
