@@ -306,7 +306,7 @@ namespace Core2D.ViewModels.Editor
             }
 
             var shapes = layer.Shapes.Reverse();
-            double radius = Project.Options.HitThreshold / PageState.ZoomX;
+            var radius = Project.Options.HitThreshold / PageState.ZoomX;
 
             var point = HitTest?.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
             if (point is { })
@@ -343,7 +343,7 @@ namespace Core2D.ViewModels.Editor
                 rectangle.BottomRight.X,
                 rectangle.BottomRight.Y);
             var shapes = layer.Shapes;
-            double radius = Project.Options.HitThreshold / PageState.ZoomX;
+            var radius = Project.Options.HitThreshold / PageState.ZoomX;
             var result = HitTest.TryToGetShapes(shapes, rect, radius, PageState.ZoomX);
             if (result is { })
             {
@@ -443,7 +443,7 @@ namespace Core2D.ViewModels.Editor
             
             var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
 
-            double radius = Project.Options.HitThreshold / PageState.ZoomX;
+            var radius = Project.Options.HitThreshold / PageState.ZoomX;
             var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
             if (point is { })
             {
@@ -481,7 +481,7 @@ namespace Core2D.ViewModels.Editor
                 return null;
             }
             var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
-            double radius = Project.Options.HitThreshold / PageState.ZoomX;
+            var radius = Project.Options.HitThreshold / PageState.ZoomX;
             return HitTest?.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
         }
 
@@ -517,7 +517,7 @@ namespace Core2D.ViewModels.Editor
             }
 
             var shapes = Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
-            double radius = Project.Options.HitThreshold / PageState.ZoomX;
+            var radius = Project.Options.HitThreshold / PageState.ZoomX;
             var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
 
             if (result is LineShapeViewModel line)
@@ -537,8 +537,8 @@ namespace Core2D.ViewModels.Editor
                     (ShapeStyleViewModel)line.Style.Copy(null),
                     line.IsStroked);
 
-                double ds = point.DistanceTo(line.Start);
-                double de = point.DistanceTo(line.End);
+                var ds = point.DistanceTo(line.Start);
+                var de = point.DistanceTo(line.End);
 
                 if (ds < de)
                 {
@@ -621,8 +621,8 @@ namespace Core2D.ViewModels.Editor
 
             var lineToPoints = new Dictionary<LineShapeViewModel, IList<PointShapeViewModel>>();
 
-            double threshold = Project.Options.HitThreshold / PageState.ZoomX;
-            double scale = PageState.ZoomX;
+            var threshold = Project.Options.HitThreshold / PageState.ZoomX;
+            var scale = PageState.ZoomX;
 
             // Find possible connector to line connections.
             foreach (var connector in connectors)
@@ -630,7 +630,7 @@ namespace Core2D.ViewModels.Editor
                 LineShapeViewModel result = null;
                 foreach (var line in lines)
                 {
-                    double radius = Project.Options.HitThreshold / PageState.ZoomX;
+                    var radius = Project.Options.HitThreshold / PageState.ZoomX;
                     if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold, scale))
                     {
                         result = line;
@@ -653,7 +653,7 @@ namespace Core2D.ViewModels.Editor
             }
 
             // Try to split lines using connectors.
-            bool success = false;
+            var success = false;
             foreach (var kv in lineToPoints)
             {
                 var line = kv.Key;
@@ -662,8 +662,8 @@ namespace Core2D.ViewModels.Editor
                 {
                     var p0 = points[0];
                     var p1 = points[1];
-                    bool horizontal = Abs(p0.Y - p1.Y) < threshold;
-                    bool vertical = Abs(p0.X - p1.X) < threshold;
+                    var horizontal = Abs(p0.Y - p1.Y) < threshold;
+                    var vertical = Abs(p0.X - p1.X) < threshold;
 
                     // Points are aligned horizontally.
                     if (horizontal && !vertical)
