@@ -60,45 +60,47 @@ namespace Core2D.ViewModels.Editor
 
         public void OnNew(object? item)
         {
-            if (item is LayerContainerViewModel layer)
+            switch (item)
             {
-                if (layer.Owner is PageContainerViewModel page)
+                case LayerContainerViewModel layer:
                 {
-                    OnAddLayer(page);
+                    if (layer.Owner is PageContainerViewModel page)
+                    {
+                        OnAddLayer(page);
+                    }
+
+                    break;
                 }
-            }
-            else if (item is PageContainerViewModel page)
-            {
-                OnNewPage(page);
-            }
-            else if (item is DocumentContainerViewModel document)
-            {
-                OnNewPage(document);
-            }
-            else if (item is ProjectContainerViewModel)
-            {
-                OnNewDocument();
-            }
-            else if (item is ProjectEditorViewModel)
-            {
-                OnNewProject();
-            }
-            else if (item is null)
-            {
-                if (Project is null)
+                case PageContainerViewModel page:
+                {
+                    OnNewPage(page);
+                    break;
+                }
+                case DocumentContainerViewModel document:
+                {
+                    OnNewPage(document);
+                    break;
+                }
+                case ProjectContainerViewModel:
+                {
+                    OnNewDocument();
+                    break;
+                }
+                case ProjectEditorViewModel:
+                case null when Project is null:
                 {
                     OnNewProject();
+                    break;
                 }
-                else
+                case null when Project.CurrentDocument is null:
                 {
-                    if (Project.CurrentDocument is null)
-                    {
-                        OnNewDocument();
-                    }
-                    else
-                    {
-                        OnNewPage(Project.CurrentDocument);
-                    }
+                    OnNewDocument();
+                    break;
+                }
+                case null:
+                {
+                    OnNewPage(Project.CurrentDocument);
+                    break;
                 }
             }
         }
