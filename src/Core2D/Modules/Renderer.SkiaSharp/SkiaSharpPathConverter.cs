@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +21,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             _serviceProvider = serviceProvider;
         }
 
-        public PathShapeViewModel ToPathShape(IEnumerable<BaseShapeViewModel> shapes)
+        public PathShapeViewModel? ToPathShape(IEnumerable<BaseShapeViewModel>? shapes)
         {
+            if (shapes is null)
+            {
+                return null;
+            }
             var path = PathGeometryConverter.ToSKPath(shapes);
             if (path is null)
             {
@@ -30,8 +34,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var first = shapes.FirstOrDefault();
-            var style = first.Style is { } ?
-                (ShapeStyleViewModel)first.Style?.Copy(null) :
+            if (first is null)
+            {
+                return null;
+            }
+            var style = first?.Style is { } ?
+                first.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
             var pathShape = factory.CreatePathShape(
@@ -43,8 +51,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return pathShape;
         }
 
-        public PathShapeViewModel ToPathShape(BaseShapeViewModel shape)
+        public PathShapeViewModel? ToPathShape(BaseShapeViewModel? shape)
         {
+            if (shape is null)
+            {
+                return null;
+            }
             var path = PathGeometryConverter.ToSKPath(shape);
             if (path is null)
             {
@@ -52,7 +64,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
-                (ShapeStyleViewModel)shape.Style?.Copy(null) :
+                shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
             var pathShape = factory.CreatePathShape(
@@ -64,8 +76,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return pathShape;
         }
 
-        public PathShapeViewModel ToStrokePathShape(BaseShapeViewModel shape)
+        public PathShapeViewModel? ToStrokePathShape(BaseShapeViewModel? shape)
         {
+            if (shape is null)
+            {
+                return null;
+            }
             var path = PathGeometryConverter.ToSKPath(shape);
             if (path is null)
             {
@@ -73,10 +89,10 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
-                (ShapeStyleViewModel)shape.Style?.Copy(null) :
+                shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var stroke = (BaseColorViewModel)style.Stroke.Color.Copy(null);
-            var fill = (BaseColorViewModel)style.Fill.Color.Copy(null);
+            var stroke = style?.Stroke?.Color.CopyShared(null);
+            var fill = style?.Fill?.Color.CopyShared(null);
             style.Stroke.Color = fill;
             style.Fill.Color = stroke;
             using var pen = SkiaSharpDrawUtil.ToSKPaintPen(style, style.Stroke.Thickness);
@@ -101,8 +117,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return null;
         }
 
-        public PathShapeViewModel ToFillPathShape(BaseShapeViewModel shape)
+        public PathShapeViewModel? ToFillPathShape(BaseShapeViewModel? shape)
         {
+            if (shape is null)
+            {
+                return null;
+            }
             var path = PathGeometryConverter.ToSKPath(shape);
             if (path is null)
             {
@@ -110,7 +130,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
-                (ShapeStyleViewModel)shape.Style?.Copy(null) :
+                shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             using var brush = SkiaSharpDrawUtil.ToSKPaintBrush(style.Fill.Color);
             var result = brush.GetFillPath(path, 1.0f);
@@ -134,8 +154,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return null;
         }
 
-        public PathShapeViewModel ToWindingPathShape(BaseShapeViewModel shape)
+        public PathShapeViewModel? ToWindingPathShape(BaseShapeViewModel? shape)
         {
+            if (shape is null)
+            {
+                return null;
+            }
             var path = PathGeometryConverter.ToSKPath(shape);
             if (path is null)
             {
@@ -144,7 +168,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var result = path.ToWinding();
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
-                (ShapeStyleViewModel)shape.Style?.Copy(null) :
+                shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var geometry = PathGeometryConverter.ToPathGeometry(result, factory);
             var pathShape = factory.CreatePathShape(
@@ -156,8 +180,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return pathShape;
         }
 
-        public PathShapeViewModel Simplify(BaseShapeViewModel shape)
+        public PathShapeViewModel? Simplify(BaseShapeViewModel? shape)
         {
+            if (shape is null)
+            {
+                return null;
+            }
             var path = PathGeometryConverter.ToSKPath(shape)?.Simplify();
             if (path is null)
             {
@@ -165,7 +193,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
-                (ShapeStyleViewModel)shape.Style?.Copy(null) :
+                shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
             var pathShape = factory.CreatePathShape(
@@ -177,7 +205,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return pathShape;
         }
 
-        public PathShapeViewModel Op(IEnumerable<BaseShapeViewModel> shapes, PathOp op)
+        public PathShapeViewModel? Op(IEnumerable<BaseShapeViewModel>? shapes, PathOp op)
         {
             if (shapes is null || shapes.Count() <= 0)
             {
@@ -195,7 +223,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 }
             }
 
-            if (paths is null || paths.Count <= 0)
+            if (paths.Count <= 0)
             {
                 return null;
             }
@@ -209,7 +237,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var shape = shapes.FirstOrDefault();
             var style = shape.Style is { } ?
-                (ShapeStyleViewModel)shape.Style?.Copy(null) :
+                shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var geometry = PathGeometryConverter.ToPathGeometry(result, factory);
             var pathShape = factory.CreatePathShape(
@@ -222,8 +250,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return pathShape;
         }
 
-        public PathShapeViewModel FromSvgPathData(string svgPath, bool isStroked, bool isFilled)
+        public PathShapeViewModel? FromSvgPathData(string? svgPath, bool isStroked, bool isFilled)
         {
+            if (svgPath is null)
+            {
+                return null;
+            }
             var path = SKPath.ParseSvgPathData(svgPath);
             if (path is null)
             {
@@ -241,8 +273,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return pathShape;
         }
 
-        public string ToSvgPathData(BaseShapeViewModel shape)
+        public string? ToSvgPathData(BaseShapeViewModel? shape)
         {
+            if (shape is null)
+            {
+                return null;
+            }
             var path = PathGeometryConverter.ToSKPath(shape);
             return path?.ToSvgPathData();
         }
