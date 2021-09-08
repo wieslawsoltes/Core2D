@@ -20,7 +20,6 @@ namespace Core2D.ViewModels.Editor
     {
         public ProjectEditorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _shapeEditor = new ShapeEditor(serviceProvider);
             _recentProjects = ImmutableArray.Create<RecentFileViewModel>();
             _currentRecentProject = default;
             _dialogs = new ObservableCollection<DialogViewModel>();
