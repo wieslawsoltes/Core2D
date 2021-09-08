@@ -105,39 +105,49 @@ namespace Core2D.ViewModels.Editor
 
         private void Delete(object? item)
         {
-            if (item is BaseShapeViewModel shape)
+            switch (item)
             {
-                Project?.RemoveShape(shape);
-                OnDeselectAll();
-            }
-            else if (item is LayerContainerViewModel layer)
-            {
-                Project?.RemoveLayer(layer);
-
-                var selected = Project?.CurrentContainer?.Layers.FirstOrDefault();
-                if (layer.Owner is FrameContainerViewModel owner)
+                case BaseShapeViewModel shape:
                 {
-                    owner.SetCurrentLayer(selected);
+                    Project?.RemoveShape(shape);
+                    OnDeselectAll();
+                    break;
                 }
-            }
-            else if (item is PageContainerViewModel page)
-            {
-                Project?.RemovePage(page);
+                case LayerContainerViewModel layer:
+                {
+                    Project?.RemoveLayer(layer);
 
-                var selected = Project?.CurrentDocument?.Pages.FirstOrDefault();
-                Project?.SetCurrentContainer(selected);
-            }
-            else if (item is DocumentContainerViewModel document)
-            {
-                Project?.RemoveDocument(document);
+                    var selected = Project?.CurrentContainer?.Layers.FirstOrDefault();
+                    if (layer.Owner is FrameContainerViewModel owner)
+                    {
+                        owner.SetCurrentLayer(selected);
+                    }
 
-                var selected = Project?.Documents.FirstOrDefault();
-                Project?.SetCurrentDocument(selected);
-                Project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
-            }
-            else if (item is ProjectEditorViewModel || item is null)
-            {
-                OnDeleteSelected();
+                    break;
+                }
+                case PageContainerViewModel page:
+                {
+                    Project?.RemovePage(page);
+
+                    var selected = Project?.CurrentDocument?.Pages.FirstOrDefault();
+                    Project?.SetCurrentContainer(selected);
+                    break;
+                }
+                case DocumentContainerViewModel document:
+                {
+                    Project?.RemoveDocument(document);
+
+                    var selected = Project?.Documents.FirstOrDefault();
+                    Project?.SetCurrentDocument(selected);
+                    Project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
+                    break;
+                }
+                case ProjectEditorViewModel:
+                case null:
+                {
+                    OnDeleteSelected();
+                    break;
+                }
             }
         }
 
@@ -258,128 +268,167 @@ namespace Core2D.ViewModels.Editor
 
         public void OnCut(object? item)
         {
-            if (item is BaseShapeViewModel shape)
+            switch (item)
             {
-                // TODO:
-            }
-            else if (item is PageContainerViewModel page)
-            {
-                PageToCopy = page;
-                DocumentToCopy = default;
-                Project?.RemovePage(page);
-                Project?.SetCurrentContainer(Project?.CurrentDocument?.Pages.FirstOrDefault());
-            }
-            else if (item is DocumentContainerViewModel document)
-            {
-                PageToCopy = default;
-                DocumentToCopy = document;
-                Project?.RemoveDocument(document);
-
-                var selected = Project?.Documents.FirstOrDefault();
-                Project?.SetCurrentDocument(selected);
-                Project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
-            }
-            else if (item is ProjectEditorViewModel || item is null)
-            {
-                if (CanCopy())
+                case BaseShapeViewModel shape:
                 {
-                    OnCopy(item);
-                    OnDeleteSelected();
+                    // TODO:
+                    break;
+                }
+                case PageContainerViewModel page:
+                {
+                    PageToCopy = page;
+                    DocumentToCopy = default;
+                    Project?.RemovePage(page);
+                    Project?.SetCurrentContainer(Project?.CurrentDocument?.Pages.FirstOrDefault());
+                    break;
+                }
+                case DocumentContainerViewModel document:
+                {
+                    PageToCopy = default;
+                    DocumentToCopy = document;
+                    Project?.RemoveDocument(document);
+
+                    var selected = Project?.Documents.FirstOrDefault();
+                    Project?.SetCurrentDocument(selected);
+                    Project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
+                    break;
+                }
+                case ProjectEditorViewModel:
+                case null:
+                {
+                    if (CanCopy())
+                    {
+                        OnCopy(item);
+                        OnDeleteSelected();
+                    }
+
+                    break;
                 }
             }
         }
 
         public void OnCopy(object? item)
         {
-            if (item is BaseShapeViewModel shape)
+            switch (item)
             {
-                // TODO:
-            }
-            else if (item is PageContainerViewModel page)
-            {
-                PageToCopy = page;
-                DocumentToCopy = default;
-            }
-            else if (item is DocumentContainerViewModel document)
-            {
-                PageToCopy = default;
-                DocumentToCopy = document;
-            }
-            else if (item is ProjectEditorViewModel || item is null)
-            {
-                if (CanCopy())
+                case BaseShapeViewModel shape:
                 {
-                    if (Project?.SelectedShapes is { })
+                    // TODO:
+                    break;
+                }
+                case PageContainerViewModel page:
+                {
+                    PageToCopy = page;
+                    DocumentToCopy = default;
+                    break;
+                }
+                case DocumentContainerViewModel document:
+                {
+                    PageToCopy = default;
+                    DocumentToCopy = document;
+                    break;
+                }
+                case ProjectEditorViewModel:
+                case null:
+                {
+                    if (CanCopy())
                     {
-                        OnCopyShapes(Project.SelectedShapes.ToList());
+                        if (Project?.SelectedShapes is { })
+                        {
+                            OnCopyShapes(Project.SelectedShapes.ToList());
+                        }
                     }
+
+                    break;
                 }
             }
         }
 
         public async void OnPaste(object? item)
         {
-            if (Project is { } && item is BaseShapeViewModel shape)
+            switch (Project)
             {
-                // TODO:
-            }
-            else if (Project is { } && item is PageContainerViewModel page)
-            {
-                if (PageToCopy is { })
-                {
-                    var document = Project?.Documents.FirstOrDefault(d => d.Pages.Contains(page));
-                    if (document is { })
-                    {
-                        int index = document.Pages.IndexOf(page);
-                        var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
-                        Project.ReplacePage(document, clone, index);
-                        Project?.SetCurrentContainer(clone);
-                    }
-                }
-            }
-            else if (Project is { } && item is DocumentContainerViewModel document)
-            {
-                if (PageToCopy is { })
-                {
-                    var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
-                    Project?.AddPage(document, clone);
-                    Project?.SetCurrentContainer(clone);
-                }
-                else if (DocumentToCopy is { })
-                {
-                    int index = Project.Documents.IndexOf(document);
-                    var clone = DocumentToCopy?.CopyShared(new Dictionary<object, object>());
-                    Project.ReplaceDocument(clone, index);
-                    Project.SetCurrentDocument(clone);
-                    Project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
-                }
-            }
-            else if (item is ProjectEditorViewModel || item is null)
-            {
-                if (await CanPaste())
+                case { } when item is BaseShapeViewModel shape:
                 {
                     // TODO:
-                    // var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
-                    // if (!string.IsNullOrEmpty(text))
-                    // {
-                    //     OnTryPaste(text);
-                    // }
-
-                    if (ShapesToCopy is { })
+                    break;
+                }
+                case { } when item is PageContainerViewModel page:
+                {
+                    if (PageToCopy is { })
                     {
-                        var copy = Copy(ShapesToCopy);
-                        if (copy is { })
+                        var document = Project?.Documents.FirstOrDefault(d => d.Pages.Contains(page));
+                        if (document is { })
                         {
-                            OnPasteShapes(copy);
+                            int index = document.Pages.IndexOf(page);
+                            var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
+                            Project.ReplacePage(document, clone, index);
+                            Project?.SetCurrentContainer(clone);
                         }
                     }
+
+                    break;
                 }
-            }
-            else if (item is string text)
-            {
-                if (!string.IsNullOrEmpty(text))
+                case { } when item is DocumentContainerViewModel document:
                 {
-                    OnTryPaste(text);
+                    if (PageToCopy is { })
+                    {
+                        var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
+                        Project?.AddPage(document, clone);
+                        Project?.SetCurrentContainer(clone);
+                    }
+                    else if (DocumentToCopy is { })
+                    {
+                        int index = Project.Documents.IndexOf(document);
+                        var clone = DocumentToCopy?.CopyShared(new Dictionary<object, object>());
+                        Project.ReplaceDocument(clone, index);
+                        Project.SetCurrentDocument(clone);
+                        Project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
+                    }
+
+                    break;
+                }
+                default:
+                {
+                    switch (item)
+                    {
+                        case ProjectEditorViewModel:
+                        case null:
+                        {
+                            if (await CanPaste())
+                            {
+                                // TODO:
+                                // var text = await (TextClipboard?.GetText() ?? Task.FromResult(string.Empty));
+                                // if (!string.IsNullOrEmpty(text))
+                                // {
+                                //     OnTryPaste(text);
+                                // }
+
+                                if (ShapesToCopy is { })
+                                {
+                                    var copy = Copy(ShapesToCopy);
+                                    if (copy is { })
+                                    {
+                                        OnPasteShapes(copy);
+                                    }
+                                }
+                            }
+
+                            break;
+                        }
+                        case string text:
+                        {
+                            if (!string.IsNullOrEmpty(text))
+                            {
+                                OnTryPaste(text);
+                            }
+
+                            break;
+                        }
+                    }
+
+                    break;
                 }
             }
         }
