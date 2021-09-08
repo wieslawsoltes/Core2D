@@ -908,7 +908,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            if (Project?.SelectedShapes is { })
+            if (Project.SelectedShapes is { })
             {
                 foreach (var shape in Project.SelectedShapes)
                 {
