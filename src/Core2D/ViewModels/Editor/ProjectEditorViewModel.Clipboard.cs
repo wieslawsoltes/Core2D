@@ -3,24 +3,47 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core2D.Model;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Editor
 {
-    public partial class ProjectEditorViewModel
+    public interface IClipboardService
     {
+        void OnCopyShapes(IList<BaseShapeViewModel> shapes);
+        void OnPasteShapes(IEnumerable<BaseShapeViewModel>? shapes);
+        void OnTryPaste(string text);
+        bool CanCopy();
+        Task<bool> CanPaste();
+        void OnCut(object? item);
+        void OnCopy(object? item);
+        void OnPaste(object? item);
+        void OnDelete(object? item);
+    }
+
+    public class ClipboardServiceViewModel : ViewModelBase, IClipboardService
+    {
+        public ClipboardServiceViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
         private IList<BaseShapeViewModel>? ShapesToCopy { get; set; }
 
         private PageContainerViewModel? PageToCopy { get; set; }
 
         private DocumentContainerViewModel? DocumentToCopy { get; set; }
 
-        private BaseShapeViewModel? HoveredShapeViewModel { get; set; }
+        public override object Copy(IDictionary<object, object>? shared)
+        {
+            throw new NotImplementedException();
+        }
 
         private void UpdateShapeNames(IEnumerable<BaseShapeViewModel>? shapes)
         {
+            var Editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
             if (Project is null || shapes is null)
             {
                 return;
@@ -31,14 +54,20 @@ namespace Core2D.ViewModels.Editor
 
             foreach (var shape in shapes)
             {
-                SetShapeName(shape, all.Concat(source));
+                Editor.SetShapeName(shape, all.Concat(source));
                 source.Add(shape);
             }
         }
 
         private IDictionary<string, RecordViewModel>? GenerateRecordDictionaryById()
         {
-            return Project?.Databases
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null)
+            {
+                return default;
+            }
+            
+            return Project.Databases
                 .Where(d => d.Records.Length > 0)
                 .SelectMany(d => d.Records)
                 .ToDictionary(s => s.Id);
@@ -46,6 +75,14 @@ namespace Core2D.ViewModels.Editor
 
         private void TryToRestoreRecords(IEnumerable<BaseShapeViewModel> shapes)
         {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null)
+            {
+                return;
+            }
+
+            var ViewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            
             try
             {
                 if (Project?.Databases is null)
@@ -99,18 +136,24 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
         private void Delete(object? item)
         {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null)
+            {
+                return;
+            }
+
             switch (item)
             {
                 case BaseShapeViewModel shape:
                 {
                     Project?.RemoveShape(shape);
-                    OnDeselectAll();
+                    ServiceProvider.GetService<ISelectionService>()?.OnDeselectAll();
                     break;
                 }
                 case LayerContainerViewModel layer:
@@ -145,7 +188,7 @@ namespace Core2D.ViewModels.Editor
                 case ProjectEditorViewModel:
                 case null:
                 {
-                    OnDeleteSelected();
+                    ServiceProvider.GetService<ISelectionService>()?.OnDeleteSelected();
                     break;
                 }
             }
@@ -192,24 +235,30 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
         public void OnPasteShapes(IEnumerable<BaseShapeViewModel>? shapes)
         {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null )
+            {
+                return;
+            }
+
             try
             {
-                Deselect(Project?.CurrentContainer?.CurrentLayer);
+                ServiceProvider.GetService<ISelectionService>()?.Deselect(Project?.CurrentContainer?.CurrentLayer);
                 // TODO:
                 // TryToRestoreRecords(shapes);
                 UpdateShapeNames(shapes);
                 Project.AddShapes(Project?.CurrentContainer?.CurrentLayer, shapes);
-                OnSelect(shapes);
+                ServiceProvider.GetService<ISelectionService>()?.OnSelect(shapes);
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -219,7 +268,8 @@ namespace Core2D.ViewModels.Editor
             {
                 if (!string.IsNullOrEmpty(text))
                 {
-                    var pathShape = PathConverter?.FromSvgPathData(text, isStroked: false, isFilled: true);
+                    
+                    var pathShape = ServiceProvider.GetService<IPathConverter>()?.FromSvgPathData(text, isStroked: false, isFilled: true);
                     if (pathShape is { })
                     {
                         OnPasteShapes(Enumerable.Repeat<BaseShapeViewModel>(pathShape, 1));
@@ -229,12 +279,12 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
 
             try
             {
-                var shapes = JsonSerializer?.Deserialize<IList<BaseShapeViewModel>?>(text);
+                var shapes = ServiceProvider.GetService<IJsonSerializer>()?.Deserialize<IList<BaseShapeViewModel>?>(text);
                 if (shapes?.Count > 0)
                 {
                     OnPasteShapes(shapes);
@@ -242,13 +292,19 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
         public bool CanCopy()
         {
-            return Project?.SelectedShapes is { };
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null)
+            {
+                return false;
+            }
+
+            return Project.SelectedShapes is { };
         }
 
         public async Task<bool> CanPaste()
@@ -261,13 +317,19 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
             return false;
         }
 
         public void OnCut(object? item)
         {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null )
+            {
+                return;
+            }
+
             switch (item)
             {
                 case BaseShapeViewModel shape:
@@ -300,7 +362,7 @@ namespace Core2D.ViewModels.Editor
                     if (CanCopy())
                     {
                         OnCopy(item);
-                        OnDeleteSelected();
+                        ServiceProvider.GetService<ISelectionService>()?.OnDeleteSelected();
                     }
 
                     break;
@@ -310,6 +372,12 @@ namespace Core2D.ViewModels.Editor
 
         public void OnCopy(object? item)
         {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null )
+            {
+                return;
+            }
+
             switch (item)
             {
                 case BaseShapeViewModel shape:
@@ -347,6 +415,12 @@ namespace Core2D.ViewModels.Editor
 
         public async void OnPaste(object? item)
         {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null )
+            {
+                return;
+            }
+
             switch (Project)
             {
                 case { } when item is BaseShapeViewModel shape:
