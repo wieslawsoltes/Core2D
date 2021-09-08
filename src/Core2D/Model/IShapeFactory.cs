@@ -41,8 +41,8 @@ namespace Core2D.Model
 
         TextShapeViewModel Text(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, string? text, bool isStroked);
 
-        ImageShapeViewModel Image(string? path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string? text);
+        ImageShapeViewModel? Image(string? path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string? text);
 
-        ImageShapeViewModel Image(string? path, PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, bool isStroked, bool isFilled, string? text);
+        ImageShapeViewModel? Image(string? path, PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, bool isStroked, bool isFilled, string? text);
     }
 }
