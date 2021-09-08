@@ -140,19 +140,21 @@ namespace Core2D.ViewModels.Editor
             try
             {
                 var container = Project?.CurrentContainer;
-                if (container is { })
+                if (container is null)
                 {
-                    foreach (var layer in container.Layers)
-                    {
-                        Project?.ClearLayer(layer);
-                    }
-
-                    container.WorkingLayer.Shapes = ImmutableArray.Create<BaseShapeViewModel>();
-                    container.HelperLayer.Shapes = ImmutableArray.Create<BaseShapeViewModel>();
-
-                    Project.CurrentContainer.InvalidateLayer();
-                    OnHideDecorator();
+                    return;
                 }
+                
+                foreach (var layer in container.Layers)
+                {
+                    Project?.ClearLayer(layer);
+                }
+
+                container.WorkingLayer.Shapes = ImmutableArray.Create<BaseShapeViewModel>();
+                container.HelperLayer.Shapes = ImmutableArray.Create<BaseShapeViewModel>();
+
+                Project.CurrentContainer.InvalidateLayer();
+                OnHideDecorator();
             }
             catch (Exception ex)
             {
@@ -179,26 +181,28 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            if (Project.SelectedShapes?.Count > 0)
+            if (!(Project.SelectedShapes?.Count > 0))
             {
-                var layer = Project.CurrentContainer.CurrentLayer;
-
-                var builder = layer.Shapes.ToBuilder();
-                foreach (var shape in Project.SelectedShapes)
-                {
-                    builder.Remove(shape);
-                }
-
-                var previous = layer.Shapes;
-                var next = builder.ToImmutable();
-                Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
-                Project.SelectedShapes = default;
-                layer.RaiseInvalidateLayer();
-
-                OnHideDecorator();
+                return;
             }
+            
+            var layer = Project.CurrentContainer.CurrentLayer;
+
+            var builder = layer.Shapes.ToBuilder();
+            foreach (var shape in Project.SelectedShapes)
+            {
+                builder.Remove(shape);
+            }
+
+            var previous = layer.Shapes;
+            var next = builder.ToImmutable();
+            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Project.SelectedShapes = default;
+            layer.RaiseInvalidateLayer();
+
+            OnHideDecorator();
         }
 
         public void Deselect()
