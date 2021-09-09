@@ -18,67 +18,97 @@
     <dd:StylesListBoxDropHandler x:Key="StylesListBoxDropHandler" />
   </UserControl.Resources>
   <Grid RowDefinitions="Auto,Auto,Auto,*">
-    <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" Grid.Row="0">
-      <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay}" BorderBrush="Transparent"
-               Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0"
-               IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" Grid.Column="0" x:CompileBindings="False" />
-      <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
-                  x:CompileBindings="False">
-        <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyleLibrary}"
+    <Grid RowDefinitions="*" 
+          ColumnDefinitions="*,Auto" 
+          Margin="{DynamicResource ContentMargin}" 
+          Grid.Row="0">
+      <TextBox Text="{Binding CurrentStyleLibrary.Name, Mode=TwoWay, FallbackValue={x:Null}}" 
+               BorderBrush="Transparent"
+               Background="Transparent" 
+               VerticalAlignment="Center" 
+               Margin="0,0,0,0"
+               IsVisible="{Binding !!CurrentStyleLibrary}" 
+               Grid.Column="0"  />
+      <StackPanel Orientation="Horizontal" 
+                  HorizontalAlignment="Right" 
+                  VerticalAlignment="Center"
+                  Grid.Column="1">
+        <Button Content="&#727;" 
+                Command="{Binding RemoveStyleLibrary}"
                 CommandParameter="{Binding CurrentStyleLibrary}"
-                IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" BorderBrush="Transparent"
+                IsVisible="{Binding !!CurrentStyleLibrary}" 
+                BorderBrush="Transparent"
+                Background="Transparent" 
+                Padding="12,4,12,4" />
+        <Button Content="+" 
+                Command="{Binding AddStyleLibrary}"
+                BorderBrush="Transparent" 
                 Background="Transparent" Padding="12,4,12,4" />
-        <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddStyleLibrary}"
-                BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
       </StackPanel>
     </Grid>
-    <ComboBox Items="{Binding StyleLibraries}" SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1"
-              IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" HorizontalAlignment="Stretch"
+    <ComboBox Items="{Binding StyleLibraries}" 
+              SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" 
+              IsVisible="{Binding !!CurrentStyleLibrary}" 
+              HorizontalAlignment="Stretch"
               Margin="{DynamicResource ContentMargin}"
-              x:CompileBindings="False">
+              Grid.Row="1">
       <ComboBox.DataTemplates>
         <DataTemplate>
           <TextBlock Text="{Binding Name}" />
         </DataTemplate>
       </ComboBox.DataTemplates>
     </ComboBox>
-    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
-                IsVisible="{Binding !!$self.DataContext.CurrentStyleLibrary}" 
-                Margin="{DynamicResource ContentMargin}"
-                x:CompileBindings="False">
-      <Button Content="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyStyle}"
-              CommandParameter="{Binding CurrentStyleLibrary.Selected}"
-              IsVisible="{Binding !!CurrentStyleLibrary.Selected}" BorderBrush="Transparent" Background="Transparent"
+    <StackPanel Grid.Row="2" 
+                Orientation="Horizontal" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Center"
+                IsVisible="{Binding !!CurrentStyleLibrary}" 
+                Margin="{DynamicResource ContentMargin}">
+      <Button Content="apply" 
+              Command="{Binding ApplyStyle}"
+              CommandParameter="{Binding CurrentStyleLibrary.Selected, FallbackValue={x:Null}}"
+              IsVisible="{Binding !!CurrentStyleLibrary.Selected}" 
+              BorderBrush="Transparent" 
+              Background="Transparent"
               Padding="12,4,12,4" />
-      <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyle}"
-              CommandParameter="{Binding CurrentStyleLibrary.Selected}"
-              IsVisible="{Binding !!CurrentStyleLibrary.Selected}" BorderBrush="Transparent" Background="Transparent"
+      <Button Content="&#727;" 
+              Command="{Binding RemoveStyle}"
+              CommandParameter="{Binding CurrentStyleLibrary.Selected, FallbackValue={x:Null}}"
+              IsVisible="{Binding !!CurrentStyleLibrary.Selected}" 
+              BorderBrush="Transparent" 
+              Background="Transparent"
               Padding="12,4,12,4" />
-      <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddStyle}"
-              CommandParameter="{Binding CurrentStyleLibrary}" BorderBrush="Transparent" Background="Transparent"
+      <Button Content="+" 
+              Command="{Binding AddStyle}"
+              BorderBrush="Transparent" 
+              Background="Transparent"
               Padding="12,4,12,4" />
     </StackPanel>
-    <ListBox x:Name="StylesListBox" Items="{Binding CurrentStyleLibrary.Items}"
-             SelectedItem="{Binding CurrentStyleLibrary.Selected, Mode=TwoWay}" Grid.Row="3">
+    <ListBox x:Name="StylesListBox" 
+             Items="{Binding CurrentStyleLibrary.Items, FallbackValue={x:Null}}"
+             SelectedItem="{Binding CurrentStyleLibrary.Selected, Mode=TwoWay, FallbackValue={x:Null}}" 
+             Grid.Row="3">
       <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding CurrentStyleLibrary, FallbackValue={x:Null}}"
                                  Handler="{StaticResource StylesListBoxDropHandler}" />
       </i:Interaction.Behaviors>
       <ListBox.KeyBindings>
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddStyle}"
-                    CommandParameter="{Binding #StylesListBox.DataContext, Mode=OneWay}" Gesture="Ctrl+N"
-                    x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyle}"
-                    CommandParameter="{Binding #StylesListBox.SelectedItem}" Gesture="Delete" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
-                    CommandParameter="{Binding #StylesListBox.SelectedItem}" Gesture="Ctrl+E" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding AddStyle}"
+                    Gesture="Ctrl+N" />
+        <KeyBinding Command="{Binding RemoveStyle}"
+                    CommandParameter="{Binding CurrentStyleLibrary.Selected, FallbackValue={x:Null}}" 
+                    Gesture="Delete" />
+        <KeyBinding Command="{Binding ExportStyle}"
+                    CommandParameter="{Binding CurrentStyleLibrary.Selected, FallbackValue={x:Null}}" 
+                    Gesture="Ctrl+E"  />
       </ListBox.KeyBindings>
       <ListBox.Resources>
-        <ContextMenu x:Key="ShapeStyleContextMenu" x:CompileBindings="False">
-          <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveStyle}"
+        <ContextMenu x:Key="ShapeStyleContextMenu" x:DataType="vms:ShapeStyleViewModel">
+          <MenuItem Header="_Delete" 
+                    Command="{Binding RemoveStyle}"
                     CommandParameter="{Binding Mode=OneWay}" />
           <Separator />
-          <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
+          <MenuItem Header="E_xport" Command="{Binding ExportStyle}"
                     CommandParameter="{Binding Mode=OneWay}" />
         </ContextMenu>
       </ListBox.Resources>
