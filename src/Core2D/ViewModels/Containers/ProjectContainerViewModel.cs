@@ -6,9 +6,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Windows.Input;
 using Core2D.Model;
+using Core2D.Model.Editor;
 using Core2D.Model.History;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 
@@ -36,6 +39,16 @@ namespace Core2D.ViewModels.Containers
 
         public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+            ApplyTemplate = new Command<TemplateContainerViewModel>(OnApplyTemplate);
+
+            EditTemplate = new Command<TemplateContainerViewModel>(OnEditTemplate);
+
+            AddTemplate = new Command(OnAddTemplate);
+
+            RemoveTemplate = new Command<TemplateContainerViewModel>(OnRemoveTemplate);
+
+            ExportTemplate = new Command<TemplateContainerViewModel>(OnExportTemplate);
+
             PropertyChanged += (_, e) =>
             {
                 if (e.PropertyName == nameof(Selected))
@@ -44,6 +57,16 @@ namespace Core2D.ViewModels.Containers
                 }
             };
         }
+
+        public ICommand ApplyTemplate { get; }
+
+        public ICommand EditTemplate { get; }
+
+        public ICommand AddTemplate { get; }
+
+        public ICommand RemoveTemplate { get; }
+
+        public ICommand ExportTemplate { get; }
 
         public override object Copy(IDictionary<object, object>? shared)
         {
@@ -354,6 +377,60 @@ namespace Core2D.ViewModels.Containers
             }
 
             return mainDisposable;
+        }
+
+        public void OnApplyTemplate(TemplateContainerViewModel? template)
+        {
+            var container = CurrentContainer;
+            if (container is PageContainerViewModel page)
+            {
+                this.ApplyTemplate(page, template);
+                CurrentContainer?.InvalidateLayer();
+            }
+        }
+
+        public void OnEditTemplate(FrameContainerViewModel? template)
+        {
+            if (template is null)
+            {
+                return;
+            }
+
+            SetCurrentContainer(template);
+            CurrentContainer?.InvalidateLayer();
+        }
+
+        public void OnAddTemplate()
+        {
+            var containerFactory = ServiceProvider.GetService<IContainerFactory>();
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+
+            var template = containerFactory?.GetTemplate(this, "Empty") 
+                           ?? viewModelFactory?.CreateTemplateContainer(ProjectEditorConfiguration.DefaultTemplateName);
+            if (template is { })
+            {
+                this.AddTemplate(template);
+            }
+        }
+
+        public void OnRemoveTemplate(TemplateContainerViewModel? template)
+        {
+            if (template is null)
+            {
+                return;
+            }
+            this.RemoveTemplate(template);
+            SetCurrentTemplate(Templates.FirstOrDefault());
+        }
+
+        public void OnExportTemplate(FrameContainerViewModel? template)
+        {
+            if (template is null)
+            {
+                return;
+            }
+            
+            ServiceProvider.GetService<IProjectEditorPlatform>().OnExportObject(template);
         }
     }
 }
