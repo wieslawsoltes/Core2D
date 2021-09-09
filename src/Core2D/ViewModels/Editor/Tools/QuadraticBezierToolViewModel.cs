@@ -32,7 +32,8 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
@@ -49,7 +50,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         editor.SetShapeName(_quadraticBezier);
 
-                        var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                        var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result is { })
                         {
                             _quadraticBezier.Point1 = result;
@@ -71,7 +72,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _quadraticBezier.Point3.X = (double)sx;
                             _quadraticBezier.Point3.Y = (double)sy;
 
-                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                            var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result is { })
                             {
                                 _quadraticBezier.Point3 = result;
@@ -91,7 +92,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _quadraticBezier.Point2.X = (double)sx;
                             _quadraticBezier.Point2.Y = (double)sy;
 
-                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                            var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result is { })
                             {
                                 _quadraticBezier.Point2 = result;
@@ -132,14 +133,15 @@ namespace Core2D.ViewModels.Editor.Tools
         public void Move(InputArgs args)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -149,7 +151,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape((double)sx, (double)sy);
+                                selection.TryToHoverShape((double)sx, (double)sy);
                             }
                             _quadraticBezier.Point2.X = (double)sx;
                             _quadraticBezier.Point2.Y = (double)sy;
@@ -166,7 +168,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape((double)sx, (double)sy);
+                                selection.TryToHoverShape((double)sx, (double)sy);
                             }
                             _quadraticBezier.Point2.X = (double)sx;
                             _quadraticBezier.Point2.Y = (double)sy;

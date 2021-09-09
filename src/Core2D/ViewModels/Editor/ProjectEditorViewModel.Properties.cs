@@ -31,7 +31,6 @@ namespace Core2D.ViewModels.Editor
         [AutoNotify] private IList<DialogViewModel>? _dialogs;
         private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
-        private readonly Lazy<IHitTest>? _hitTest;
         private readonly Lazy<ILog>? _log;
         private readonly Lazy<DataFlow>? _dataFlow;
         private readonly Lazy<IShapeRenderer>? _renderer;
@@ -39,6 +38,9 @@ namespace Core2D.ViewModels.Editor
         private readonly Lazy<IViewModelFactory>? _factory;
         private readonly Lazy<IContainerFactory>? _containerFactory;
         private readonly Lazy<IShapeFactory>? _shapeFactory;
+        private readonly Lazy<ISelectionService>? _selectionService;
+        private readonly Lazy<IShapeService>? _shapeService;
+        private readonly Lazy<IClipboardService>? _clipboardService;
         private readonly Lazy<ITextClipboard>? _textClipboard;
         private readonly Lazy<IJsonSerializer>? _jsonSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
@@ -55,8 +57,6 @@ namespace Core2D.ViewModels.Editor
         public ImmutableArray<IEditorTool> Tools => _tools.Value;
 
         public ImmutableArray<IPathTool> PathTools => _pathTools.Value;
-
-        public IHitTest? HitTest => _hitTest?.Value;
 
         public ILog? Log => _log?.Value;
 
@@ -75,6 +75,12 @@ namespace Core2D.ViewModels.Editor
         public IContainerFactory? ContainerFactory => _containerFactory?.Value;
 
         public IShapeFactory? ShapeFactory => _shapeFactory?.Value;
+
+        public ISelectionService? SelectionService => _selectionService?.Value;
+
+        public IShapeService? ShapeService => _shapeService?.Value;
+        
+        public IClipboardService? ClipboardService => _clipboardService?.Value;
 
         public ITextClipboard? TextClipboard => _textClipboard?.Value;
 

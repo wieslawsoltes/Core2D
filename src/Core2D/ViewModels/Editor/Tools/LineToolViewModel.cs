@@ -32,8 +32,9 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var selection = ServiceProvider.GetService<ISelectionService>();
             (double x, double y) = args;
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
@@ -51,14 +52,14 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                            var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result is { })
                             {
                                 _line.Start = result;
                             }
                             else
                             {
-                                editor.TryToSplitLine(x, y, _line.Start);
+                                selection.TryToSplitLine(x, y, _line.Start);
                             }
                         }
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
@@ -77,14 +78,14 @@ namespace Core2D.ViewModels.Editor.Tools
 
                             if (editor.Project.Options.TryToConnect)
                             {
-                                var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                                var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                                 if (result is { })
                                 {
                                     _line.End = result;
                                 }
                                 else
                                 {
-                                    editor.TryToSplitLine(x, y, _line.End);
+                                    selection.TryToSplitLine(x, y, _line.End);
                                 }
                             }
 
@@ -122,14 +123,15 @@ namespace Core2D.ViewModels.Editor.Tools
         public void Move(InputArgs args)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -139,7 +141,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape((double)sx, (double)sy);
+                                selection.TryToHoverShape((double)sx, (double)sy);
                             }
                             _line.End.X = (double)sx;
                             _line.End.Y = (double)sy;

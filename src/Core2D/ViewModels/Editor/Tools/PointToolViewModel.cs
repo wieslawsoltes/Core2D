@@ -29,7 +29,8 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point:
@@ -42,7 +43,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         if (editor.Project.Options.TryToConnect)
                         {
-                            if (!editor.TryToSplitLine(args.X, args.Y, _point, true))
+                            if (!selection.TryToSplitLine(args.X, args.Y, _point, true))
                             {
                                 editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
                             }
@@ -71,14 +72,15 @@ namespace Core2D.ViewModels.Editor.Tools
         public void Move(InputArgs args)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core2D.Model;
+using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
@@ -425,8 +426,10 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            var hitTest = ServiceProvider.GetService<IHitTest>();
             (double x, double y) = args;
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
 
             _mode = Mode.None;
             if (_currentHandle is { })
@@ -440,7 +443,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
             var radius = (editor.Project.Options?.HitThreshold ?? 7.0) / editor.PageState.ZoomX;
             var handles = _handles.Where(h => h.State.HasFlag(ShapeStateFlags.Visible));
-            var result = editor.HitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState.ZoomX);
+            var result = hitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState.ZoomX);
             if (result is { })
             {
                 if (result == _boundsHandle)
@@ -512,10 +515,11 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var selection = ServiceProvider.GetService<ISelectionService>();
 
             bool isProportionalResize = args.Modifier.HasFlag(ModifierFlags.Shift);
 
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             decimal dx = sx - _startX;
             decimal dy = sy - _startY;
             _startX = sx;

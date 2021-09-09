@@ -7,6 +7,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Core2D.Model;
+using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
@@ -18,25 +19,12 @@ using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Core2D.Spatial;
+using Core2D.ViewModels.Editor.Bounds;
 
 namespace Core2D.ViewModels.Editor
 {
     public partial class ProjectEditorViewModel
     {
-        public (decimal sx, decimal sy) TryToSnap(InputArgs args)
-        {
-            if (Project is { } && Project.Options.SnapToGrid == true)
-            {
-                return (
-                    PointUtil.Snap((decimal)args.X, (decimal)Project.Options.SnapX),
-                    PointUtil.Snap((decimal)args.Y, (decimal)Project.Options.SnapY));
-            }
-            else
-            {
-                return ((decimal)args.X, (decimal)args.Y);
-            }
-        }
-
         public string GetName(object? item)
         {
             if (item is ViewModelBase observable)
@@ -1809,7 +1797,7 @@ namespace Core2D.ViewModels.Editor
                     {
                         var shapes = layer.Shapes.Reverse();
                         var radius = Project.Options.HitThreshold / PageState.ZoomX;
-                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+                        var result = ServiceProvider.GetService<IHitTest>().TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
                         if (result is { })
                         {
                             if (bExecute)
@@ -1925,7 +1913,7 @@ namespace Core2D.ViewModels.Editor
                     {
                         var shapes = layer.Shapes.Reverse();
                         var radius = Project.Options.HitThreshold / PageState.ZoomX;
-                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+                        var result = ServiceProvider.GetService<IHitTest>().TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
                         if (result is { })
                         {
                             if (bExecute == true)

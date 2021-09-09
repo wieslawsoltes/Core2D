@@ -5,18 +5,21 @@ using System.Collections.Immutable;
 using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Editor;
+using Core2D.Model.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor.Tools.Decorators;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Core2D.Spatial;
+using Core2D.ViewModels.Layout;
 using static System.Math;
 
 namespace Core2D.ViewModels.Editor
 {
     public interface ISelectionService
     {
+        (decimal sx, decimal sy) TryToSnap(InputArgs args);
         void OnShowDecorator();
         void OnUpdateDecorator();
         void OnHideDecorator();
@@ -52,6 +55,21 @@ namespace Core2D.ViewModels.Editor
         public override object Copy(IDictionary<object, object>? shared)
         {
             throw new NotImplementedException();
+        }
+
+        public (decimal sx, decimal sy) TryToSnap(InputArgs args)
+        {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is { } && Project.Options?.SnapToGrid == true)
+            {
+                return (
+                    PointUtil.Snap((decimal)args.X, (decimal)Project.Options.SnapX),
+                    PointUtil.Snap((decimal)args.Y, (decimal)Project.Options.SnapY));
+            }
+            else
+            {
+                return ((decimal)args.X, (decimal)args.Y);
+            }
         }
 
         public void OnShowDecorator()
