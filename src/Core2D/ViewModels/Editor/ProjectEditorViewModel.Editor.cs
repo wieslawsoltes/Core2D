@@ -48,13 +48,13 @@ namespace Core2D.ViewModels.Editor
 
         private IDictionary<string, RecordViewModel>? GenerateRecordDictionaryById()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return default;
             }
             
-            return Project.Databases
+            return project.Databases
                 .Where(d => d.Records.Length > 0)
                 .SelectMany(d => d.Records)
                 .ToDictionary(s => s.Id);
@@ -62,17 +62,17 @@ namespace Core2D.ViewModels.Editor
 
         private void TryToRestoreRecords(IEnumerable<BaseShapeViewModel> shapes)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var ViewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
             
             try
             {
-                if (Project?.Databases is null)
+                if (project?.Databases is null)
                 {
                     return;
                 }
@@ -99,18 +99,18 @@ namespace Core2D.ViewModels.Editor
                     else
                     {
                         // Create Imported database.
-                        if (Project?.CurrentDatabase is null && shape.Record.Owner is DatabaseViewModel owner)
+                        if (project?.CurrentDatabase is null && shape.Record.Owner is DatabaseViewModel owner)
                         {
-                            var db = ViewModelFactory?.CreateDatabase(
+                            var db = viewModelFactory?.CreateDatabase(
                                 ProjectEditorConfiguration.ImportedDatabaseName,
                                 owner.Columns);
-                            Project.AddDatabase(db);
-                            Project.SetCurrentDatabase(db);
+                            project.AddDatabase(db);
+                            project.SetCurrentDatabase(db);
                         }
 
                         // Add missing data record.
-                        shape.Record.Owner = Project?.CurrentDatabase;
-                        Project?.AddRecord(Project?.CurrentDatabase, shape.Record);
+                        shape.Record.Owner = project?.CurrentDatabase;
+                        project?.AddRecord(project?.CurrentDatabase, shape.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();

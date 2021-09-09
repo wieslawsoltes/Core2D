@@ -6,7 +6,6 @@ using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
-using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor.Tools.Decorators;
 using Core2D.ViewModels.Shapes;
@@ -59,12 +58,12 @@ namespace Core2D.ViewModels.Editor
 
         public (decimal sx, decimal sy) TryToSnap(InputArgs args)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is { } && Project.Options?.SnapToGrid == true)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is { } && project.Options?.SnapToGrid == true)
             {
                 return (
-                    PointUtil.Snap((decimal)args.X, (decimal)Project.Options.SnapX),
-                    PointUtil.Snap((decimal)args.Y, (decimal)Project.Options.SnapY));
+                    PointUtil.Snap((decimal)args.X, (decimal)project.Options.SnapX),
+                    PointUtil.Snap((decimal)args.Y, (decimal)project.Options.SnapY));
             }
             else
             {
@@ -74,109 +73,104 @@ namespace Core2D.ViewModels.Editor
 
         public void OnShowDecorator()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return;
             }
 
-            if (PageState.DrawDecorators == false)
+            if (pageState.DrawDecorators == false)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes?.ToList();
+            var shapes = project?.SelectedShapes?.ToList();
             if (shapes is null || shapes.Count <= 0)
             {
                 return;
             }
 
-            if (PageState.Decorator is null)
+            if (pageState.Decorator is null)
             {
-                PageState.Decorator = new BoxDecoratorViewModel(ServiceProvider);
+                pageState.Decorator = new BoxDecoratorViewModel(ServiceProvider);
             }
 
-            PageState.Decorator.Layer = Project?.CurrentContainer?.WorkingLayer;
-            PageState.Decorator.Shapes = shapes;
-            PageState.Decorator.Update(true);
-            PageState.Decorator.Show();
+            pageState.Decorator.Layer = project?.CurrentContainer?.WorkingLayer;
+            pageState.Decorator.Shapes = shapes;
+            pageState.Decorator.Update(true);
+            pageState.Decorator.Show();
         }
 
         public void OnUpdateDecorator()
         {
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return;
             }
 
-            if (PageState is null)
+            if (pageState.DrawDecorators == false)
             {
                 return;
             }
 
-            if (PageState.DrawDecorators == false)
-            {
-                return;
-            }
-
-            PageState.Decorator?.Update(false);
+            pageState.Decorator?.Update(false);
         }
 
         public void OnHideDecorator()
         {
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return;
             }
 
-            if (PageState.DrawDecorators == false)
+            if (pageState.DrawDecorators == false)
             {
                 return;
             }
 
-            PageState.Decorator?.Hide();
+            pageState.Decorator?.Hide();
         }
 
         public void OnShowOrHideDecorator()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return;
             }
 
-            if (PageState.DrawDecorators == false)
+            if (pageState.DrawDecorators == false)
             {
                 return;
             }
 
-            if (Project?.SelectedShapes?.Count == 1 && Project.SelectedShapes?.FirstOrDefault() is PointShapeViewModel)
-            {
-                OnHideDecorator();
-                return;
-            }
-
-            if (Project?.SelectedShapes?.Count == 1 && Project.SelectedShapes?.FirstOrDefault() is LineShapeViewModel)
+            if (project?.SelectedShapes?.Count == 1 && project.SelectedShapes?.FirstOrDefault() is PointShapeViewModel)
             {
                 OnHideDecorator();
                 return;
             }
 
-            if (Project?.SelectedShapes is { })
+            if (project?.SelectedShapes?.Count == 1 && project.SelectedShapes?.FirstOrDefault() is LineShapeViewModel)
+            {
+                OnHideDecorator();
+                return;
+            }
+
+            if (project?.SelectedShapes is { })
             {
                 OnShowDecorator();
             }
@@ -188,18 +182,18 @@ namespace Core2D.ViewModels.Editor
 
         public void OnSelectAll()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
             try
             {
-                Deselect(Project?.CurrentContainer?.CurrentLayer);
+                Deselect(project?.CurrentContainer?.CurrentLayer);
                 Select(
-                    Project?.CurrentContainer?.CurrentLayer,
-                    new HashSet<BaseShapeViewModel>(Project?.CurrentContainer?.CurrentLayer?.Shapes));
+                    project?.CurrentContainer?.CurrentLayer,
+                    new HashSet<BaseShapeViewModel>(project?.CurrentContainer?.CurrentLayer?.Shapes));
             }
             catch (Exception ex)
             {
@@ -209,15 +203,15 @@ namespace Core2D.ViewModels.Editor
 
         public void OnDeselectAll()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
             try
             {
-                Deselect(Project?.CurrentContainer?.CurrentLayer);
+                Deselect(project?.CurrentContainer?.CurrentLayer);
                 OnUpdateDecorator();
             }
             catch (Exception ex)
@@ -228,15 +222,15 @@ namespace Core2D.ViewModels.Editor
 
         public void OnClearAll()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
             try
             {
-                var container = Project?.CurrentContainer;
+                var container = project?.CurrentContainer;
                 if (container is null)
                 {
                     return;
@@ -244,13 +238,13 @@ namespace Core2D.ViewModels.Editor
                 
                 foreach (var layer in container.Layers)
                 {
-                    Project?.ClearLayer(layer);
+                    project?.ClearLayer(layer);
                 }
 
                 container.WorkingLayer.Shapes = ImmutableArray.Create<BaseShapeViewModel>();
                 container.HelperLayer.Shapes = ImmutableArray.Create<BaseShapeViewModel>();
 
-                Project.CurrentContainer.InvalidateLayer();
+                project.CurrentContainer.InvalidateLayer();
                 OnHideDecorator();
             }
             catch (Exception ex)
@@ -261,60 +255,60 @@ namespace Core2D.ViewModels.Editor
 
         public void OnSelect(IEnumerable<BaseShapeViewModel> shapes)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
             if (shapes?.Count() == 1)
             {
-                Select(Project?.CurrentContainer?.CurrentLayer, shapes.FirstOrDefault());
+                Select(project?.CurrentContainer?.CurrentLayer, shapes.FirstOrDefault());
             }
             else
             {
-                Select(Project?.CurrentContainer?.CurrentLayer, new HashSet<BaseShapeViewModel>(shapes));
+                Select(project?.CurrentContainer?.CurrentLayer, new HashSet<BaseShapeViewModel>(shapes));
             }
         }
 
         public void OnDeleteSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return;
             }
 
-            if (Project?.CurrentContainer?.CurrentLayer is null || PageState is null)
+            if (project?.CurrentContainer?.CurrentLayer is null || pageState is null)
             {
                 return;
             }
 
-            if (!(Project.SelectedShapes?.Count > 0))
+            if (!(project.SelectedShapes?.Count > 0))
             {
                 return;
             }
             
-            var layer = Project.CurrentContainer.CurrentLayer;
+            var layer = project.CurrentContainer.CurrentLayer;
 
             var builder = layer.Shapes.ToBuilder();
-            foreach (var shape in Project.SelectedShapes)
+            foreach (var shape in project.SelectedShapes)
             {
                 builder.Remove(shape);
             }
 
             var previous = layer.Shapes;
             var next = builder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
-            Project.SelectedShapes = default;
+            project.SelectedShapes = default;
             layer.RaiseInvalidateLayer();
 
             OnHideDecorator();
@@ -322,15 +316,15 @@ namespace Core2D.ViewModels.Editor
 
         public void Deselect()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            if (Project?.SelectedShapes is { })
+            if (project?.SelectedShapes is { })
             {
-                Project.SelectedShapes = default;
+                project.SelectedShapes = default;
             }
 
             OnHideDecorator();
@@ -338,17 +332,17 @@ namespace Core2D.ViewModels.Editor
 
         public void Select(LayerContainerViewModel? layer, BaseShapeViewModel shape)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
 
-            if (PageState is { })
+            if (pageState is { })
             {
-                if (Project is { })
+                if (project is { })
                 {
-                    Project.SelectedShapes = new HashSet<BaseShapeViewModel> { shape };
+                    project.SelectedShapes = new HashSet<BaseShapeViewModel> { shape };
                 }
 
-                if (PageState.DrawPoints == true)
+                if (pageState.DrawPoints == true)
                 {
                     OnHideDecorator();
                 }
@@ -382,14 +376,14 @@ namespace Core2D.ViewModels.Editor
 
         public void Select(LayerContainerViewModel? layer, ISet<BaseShapeViewModel> shapes)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
 
-            if (PageState is { })
+            if (pageState is { })
             {
-                if (Project is { })
+                if (project is { })
                 {
-                    Project.SelectedShapes = shapes;
+                    project.SelectedShapes = shapes;
                 }
 
                 OnShowDecorator();
@@ -431,19 +425,19 @@ namespace Core2D.ViewModels.Editor
 
         public bool TryToSelectShape(LayerContainerViewModel? layer, double x, double y, bool deselect = true)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return false;
             }
 
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return false;
             }
 
-            var HitTest = ServiceProvider.GetService<IHitTest>();
+            var hitTest = ServiceProvider.GetService<IHitTest>();
 
             if (layer is null)
             {
@@ -451,16 +445,16 @@ namespace Core2D.ViewModels.Editor
             }
 
             var shapes = layer.Shapes.Reverse();
-            var radius = Project.Options.HitThreshold / PageState.ZoomX;
+            var radius = project.Options.HitThreshold / pageState.ZoomX;
 
-            var point = HitTest?.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            var point = hitTest?.TryToGetPoint(shapes, new Point2(x, y), radius, pageState.ZoomX);
             if (point is { })
             {
                 Select(layer, point);
                 return true;
             }
 
-            var shape = HitTest?.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            var shape = hitTest?.TryToGetShape(shapes, new Point2(x, y), radius, pageState.ZoomX);
             if (shape is { })
             {
                 Select(layer, shape);
@@ -477,19 +471,19 @@ namespace Core2D.ViewModels.Editor
 
         public bool TryToSelectShapes(LayerContainerViewModel? layer, RectangleShapeViewModel? rectangle, bool deselect = true, bool includeSelected = false)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return false;
             }
 
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return false;
             }
 
-            var HitTest = ServiceProvider.GetService<IHitTest>();
+            var hitTest = ServiceProvider.GetService<IHitTest>();
 
             if (layer is null || rectangle is null)
             {
@@ -502,8 +496,8 @@ namespace Core2D.ViewModels.Editor
                 rectangle.BottomRight.X,
                 rectangle.BottomRight.Y);
             var shapes = layer.Shapes;
-            var radius = Project.Options.HitThreshold / PageState.ZoomX;
-            var result = HitTest.TryToGetShapes(shapes, rect, radius, PageState.ZoomX);
+            var radius = project.Options.HitThreshold / pageState.ZoomX;
+            var result = hitTest.TryToGetShapes(shapes, rect, radius, pageState.ZoomX);
             if (result is { Count: > 0 })
             {
                 if (includeSelected)
@@ -529,15 +523,15 @@ namespace Core2D.ViewModels.Editor
 
         private bool TryToSelectShapesIncludeSelected(LayerContainerViewModel? layer, ISet<BaseShapeViewModel> result)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return false;
             }
 
-            if (Project.SelectedShapes is { })
+            if (project.SelectedShapes is { })
             {
-                foreach (var shape in Project.SelectedShapes)
+                foreach (var shape in project.SelectedShapes)
                 {
                     if (result.Contains(shape))
                     {
@@ -605,55 +599,55 @@ namespace Core2D.ViewModels.Editor
 
         public bool TryToHoverShape(double x, double y)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return false;
             }
 
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return false;
             }
 
-            if (Project?.CurrentContainer?.CurrentLayer is null)
+            if (project?.CurrentContainer?.CurrentLayer is null)
             {
                 return false;
             }
 
-            if (Project.SelectedShapes?.Count > 1)
+            if (project.SelectedShapes?.Count > 1)
             {
                 return false;
             }
 
-            if (Project.SelectedShapes?.Count == 1 && HoveredShapeViewModel != Project.SelectedShapes?.FirstOrDefault())
+            if (project.SelectedShapes?.Count == 1 && HoveredShapeViewModel != project.SelectedShapes?.FirstOrDefault())
             {
                 return false;
             }
             
-            var HitTest = ServiceProvider.GetService<IHitTest>();
+            var hitTest = ServiceProvider.GetService<IHitTest>();
 
-            var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
+            var shapes = project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
 
-            var radius = Project.Options.HitThreshold / PageState.ZoomX;
-            var point = HitTest.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            var radius = project.Options.HitThreshold / pageState.ZoomX;
+            var point = hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, pageState.ZoomX);
             if (point is { })
             {
-                Hover(Project.CurrentContainer?.CurrentLayer, point);
+                Hover(project.CurrentContainer?.CurrentLayer, point);
                 return true;
             }
 
-            var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            var shape = hitTest.TryToGetShape(shapes, new Point2(x, y), radius, pageState.ZoomX);
             if (shape is { })
             {
-                Hover(Project.CurrentContainer?.CurrentLayer, shape);
+                Hover(project.CurrentContainer?.CurrentLayer, shape);
                 return true;
             }
 
-            if (Project.SelectedShapes?.Count == 1 && HoveredShapeViewModel == Project.SelectedShapes?.FirstOrDefault())
+            if (project.SelectedShapes?.Count == 1 && HoveredShapeViewModel == project.SelectedShapes?.FirstOrDefault())
             {
-                Dehover(Project.CurrentContainer?.CurrentLayer);
+                Dehover(project.CurrentContainer?.CurrentLayer);
             }
 
             return false;
@@ -661,39 +655,39 @@ namespace Core2D.ViewModels.Editor
 
         public PointShapeViewModel? TryToGetConnectionPoint(double x, double y)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return null;
             }
 
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return null;
             }
 
-            if (Project?.Options is null)
+            if (project?.Options is null)
             {
                 return null;
             }
             
-            if (!Project.Options.TryToConnect)
+            if (!project.Options.TryToConnect)
             {
                 return null;
             }
             
-            var HitTest = ServiceProvider.GetService<IHitTest>();
+            var hitTest = ServiceProvider.GetService<IHitTest>();
 
-            var shapes = Project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
-            var radius = Project.Options.HitThreshold / PageState.ZoomX;
-            return HitTest?.TryToGetPoint(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            var shapes = project.CurrentContainer?.CurrentLayer?.Shapes.Reverse();
+            var radius = project.Options.HitThreshold / pageState.ZoomX;
+            return hitTest?.TryToGetPoint(shapes, new Point2(x, y), radius, pageState.ZoomX);
         }
 
         private void SwapLineStart(LineShapeViewModel? line, PointShapeViewModel? point)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -704,14 +698,14 @@ namespace Core2D.ViewModels.Editor
             }
             var previous = line.Start;
             var next = point;
-            Project?.History?.Snapshot(previous, next, (p) => line.Start = p);
+            project?.History?.Snapshot(previous, next, (p) => line.Start = p);
             line.Start = next;
         }
 
         private void SwapLineEnd(LineShapeViewModel? line, PointShapeViewModel? point)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -722,42 +716,42 @@ namespace Core2D.ViewModels.Editor
             }
             var previous = line.End;
             var next = point;
-            Project?.History?.Snapshot(previous, next, (p) => line.End = p);
+            project?.History?.Snapshot(previous, next, (p) => line.End = p);
             line.End = next;
         }
 
         public bool TryToSplitLine(double x, double y, PointShapeViewModel point, bool select = false)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return false;
             }
 
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return false;
             }
 
-            if (Project?.CurrentContainer is null || Project?.Options is null)
+            if (project?.CurrentContainer is null || project?.Options is null)
             {
                 return false;
             }
 
-            var HitTest = ServiceProvider.GetService<IHitTest>();
-            var ViewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var hitTest = ServiceProvider.GetService<IHitTest>();
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
 
-            var shapes = Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
-            var radius = Project.Options.HitThreshold / PageState.ZoomX;
-            var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            var shapes = project.CurrentContainer.CurrentLayer.Shapes.Reverse();
+            var radius = project.Options.HitThreshold / pageState.ZoomX;
+            var result = hitTest.TryToGetShape(shapes, new Point2(x, y), radius, pageState.ZoomX);
 
             if (result is not LineShapeViewModel line)
             {
                 return false;
             }
             
-            if (!Project.Options.SnapToGrid)
+            if (!project.Options.SnapToGrid)
             {
                 var a = new Point2(line.Start.X, line.Start.Y);
                 var b = new Point2(line.End.X, line.End.Y);
@@ -767,7 +761,7 @@ namespace Core2D.ViewModels.Editor
                 point.Y = nearest.Y;
             }
 
-            var split = ViewModelFactory?.CreateLineShape(
+            var split = viewModelFactory?.CreateLineShape(
                 x, y,
                 (ShapeStyleViewModel)line.Style.Copy(null),
                 line.IsStroked);
@@ -788,11 +782,11 @@ namespace Core2D.ViewModels.Editor
                 SwapLineEnd(line, point);
             }
 
-            Project.AddShape(Project.CurrentContainer.CurrentLayer, split);
+            project.AddShape(project.CurrentContainer.CurrentLayer, split);
 
             if (@select)
             {
-                Select(Project.CurrentContainer.CurrentLayer, point);
+                Select(project.CurrentContainer.CurrentLayer, point);
             }
 
             return true;
@@ -801,18 +795,18 @@ namespace Core2D.ViewModels.Editor
 
         public bool TryToSplitLine(LineShapeViewModel line, PointShapeViewModel p0, PointShapeViewModel p1)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return false;
             }
 
-            if (Project?.Options is null)
+            if (project?.Options is null)
             {
                 return false;
             }
 
-            var ViewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
 
             // Points must be aligned horizontally or vertically.
             if (p0.X != p1.X && p0.Y != p1.Y)
@@ -829,7 +823,7 @@ namespace Core2D.ViewModels.Editor
             LineShapeViewModel split;
             if (line.Start.X > line.End.X || line.Start.Y > line.End.Y)
             {
-                split = ViewModelFactory?.CreateLineShape(
+                split = viewModelFactory?.CreateLineShape(
                     p0,
                     line.End,
                     (ShapeStyleViewModel)line.Style.Copy(null),
@@ -839,7 +833,7 @@ namespace Core2D.ViewModels.Editor
             }
             else
             {
-                split = ViewModelFactory?.CreateLineShape(
+                split = viewModelFactory?.CreateLineShape(
                     p1,
                     line.End,
                     (ShapeStyleViewModel)line.Style.Copy(null),
@@ -848,21 +842,21 @@ namespace Core2D.ViewModels.Editor
                 SwapLineEnd(line, p0);
             }
 
-            Project.AddShape(Project.CurrentContainer?.CurrentLayer, split);
+            project.AddShape(project.CurrentContainer?.CurrentLayer, split);
 
             return true;
         }
 
         public bool TryToConnectLines(IList<LineShapeViewModel> lines, ImmutableArray<PointShapeViewModel> connectors)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return false;
             }
 
-            var PageState = ServiceProvider.GetService<IShapeRenderer>()?.State;
-            if (PageState is null)
+            var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+            if (pageState is null)
             {
                 return false;
             }
@@ -873,8 +867,8 @@ namespace Core2D.ViewModels.Editor
             }
 
             var lineToPointsMap = new Dictionary<LineShapeViewModel, IList<PointShapeViewModel>>();
-            var threshold = Project?.Options is null || PageState is null ? 1.0 : Project.Options.HitThreshold / PageState.ZoomX;
-            var scale = PageState?.ZoomX ?? 1.0;
+            var threshold = project?.Options is null || pageState is null ? 1.0 : project.Options.HitThreshold / pageState.ZoomX;
+            var scale = pageState?.ZoomX ?? 1.0;
 
             // Find possible connector to line connections.
             FinConnectors(lines, connectors, lineToPointsMap, threshold, scale);
@@ -885,8 +879,8 @@ namespace Core2D.ViewModels.Editor
 
         private void FinConnectors(IList<LineShapeViewModel> lines, ImmutableArray<PointShapeViewModel> connectors, IDictionary<LineShapeViewModel, IList<PointShapeViewModel>> lineToPointsMap, double threshold, double scale)
         {
-            var HitTest = ServiceProvider.GetService<IHitTest>();
-            if (HitTest is null)
+            var hitTest = ServiceProvider.GetService<IHitTest>();
+            if (hitTest is null)
             {
                 return;
             }
@@ -897,7 +891,7 @@ namespace Core2D.ViewModels.Editor
                 
                 foreach (var line in lines)
                 {
-                    if (HitTest.Contains(line, new Point2(connector.X, connector.Y), threshold, scale))
+                    if (hitTest.Contains(line, new Point2(connector.X, connector.Y), threshold, scale))
                     {
                         result = line;
                         break;

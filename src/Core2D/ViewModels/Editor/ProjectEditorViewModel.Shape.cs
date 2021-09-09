@@ -71,20 +71,20 @@ namespace Core2D.ViewModels.Editor
 
         public void OnDuplicateSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            if (Project.SelectedShapes is null)
+            if (project.SelectedShapes is null)
             {
                 return;
             }
 
             try
             {
-                var copy = ServiceProvider.GetService<IClipboardService>()?.Copy(Project.SelectedShapes.ToList());
+                var copy = ServiceProvider.GetService<IClipboardService>()?.Copy(project.SelectedShapes.ToList());
                 if (copy is { })
                 {
                     ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(copy);
@@ -98,33 +98,33 @@ namespace Core2D.ViewModels.Editor
 
         public void OnGroupSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var group = Group(Project?.SelectedShapes, ProjectEditorConfiguration.DefaulGroupName);
+            var group = Group(project?.SelectedShapes, ProjectEditorConfiguration.DefaulGroupName);
             if (group is { })
             {
-                ServiceProvider.GetService<ISelectionService>()?.Select(Project?.CurrentContainer?.CurrentLayer, group);
+                ServiceProvider.GetService<ISelectionService>()?.Select(project?.CurrentContainer?.CurrentLayer, group);
             }
         }
 
         public void OnUngroupSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var result = Ungroup(Project?.SelectedShapes);
+            var result = Ungroup(project?.SelectedShapes);
             if (result)
             {
-                if (Project is { })
+                if (project is { })
                 {
-                    Project.SelectedShapes = null;
+                    project.SelectedShapes = null;
                 }
                 ServiceProvider.GetService<ISelectionService>()?.OnHideDecorator();
             }
@@ -132,8 +132,8 @@ namespace Core2D.ViewModels.Editor
 
         public void OnRotateSelected(string degrees)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -143,297 +143,297 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
+            var sources = project?.SelectedShapes;
             if (sources is { })
             {
-                BoxLayout.Rotate(sources, (decimal)value, Project?.History);
+                BoxLayout.Rotate(sources, (decimal)value, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnFlipHorizontalSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
+            var sources = project?.SelectedShapes;
             if (sources is { })
             {
-                BoxLayout.Flip(sources, FlipMode.Horizontal, Project?.History);
+                BoxLayout.Flip(sources, FlipMode.Horizontal, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnFlipVerticalSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
+            var sources = project?.SelectedShapes;
             if (sources is { })
             {
-                BoxLayout.Flip(sources, FlipMode.Vertical, Project?.History);
+                BoxLayout.Flip(sources, FlipMode.Vertical, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnMoveUpSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            if (Project?.Options is null)
+            if (project?.Options is null)
             {
                 return;
             }
             MoveBy(
-                Project.SelectedShapes,
+                project.SelectedShapes,
                 0m,
-                Project.Options.SnapToGrid ? (decimal)-Project.Options.SnapY : -1m);
+                project.Options.SnapToGrid ? (decimal)-project.Options.SnapY : -1m);
         }
 
         public void OnMoveDownSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            if (Project?.Options is null)
+            if (project?.Options is null)
             {
                 return;
             }
             MoveBy(
-                Project.SelectedShapes,
+                project.SelectedShapes,
                 0m,
-                Project.Options.SnapToGrid ? (decimal)Project.Options.SnapY : 1m);
+                project.Options.SnapToGrid ? (decimal)project.Options.SnapY : 1m);
         }
 
         public void OnMoveLeftSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            if (Project?.Options is null)
+            if (project?.Options is null)
             {
                 return;
             }
             MoveBy(
-                Project.SelectedShapes,
-                Project.Options.SnapToGrid ? (decimal)-Project.Options.SnapX : -1m,
+                project.SelectedShapes,
+                project.Options.SnapToGrid ? (decimal)-project.Options.SnapX : -1m,
                 0m);
         }
 
         public void OnMoveRightSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            if (Project?.Options is null)
+            if (project?.Options is null)
             {
                 return;
             }
             MoveBy(
-                Project.SelectedShapes,
-                Project.Options.SnapToGrid ? (decimal)Project.Options.SnapX : 1m,
+                project.SelectedShapes,
+                project.Options.SnapToGrid ? (decimal)project.Options.SnapX : 1m,
                 0m);
         }
 
         public void OnStackHorizontallySelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Stack(items, StackMode.Horizontal, Project?.History);
+                BoxLayout.Stack(items, StackMode.Horizontal, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnStackVerticallySelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Stack(items, StackMode.Vertical, Project?.History);
+                BoxLayout.Stack(items, StackMode.Vertical, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnDistributeHorizontallySelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Distribute(items, DistributeMode.Horizontal, Project?.History);
+                BoxLayout.Distribute(items, DistributeMode.Horizontal, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnDistributeVerticallySelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Distribute(items, DistributeMode.Vertical, Project?.History);
+                BoxLayout.Distribute(items, DistributeMode.Vertical, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnAlignLeftSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Left, Project?.History);
+                BoxLayout.Align(items, AlignMode.Left, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnAlignCenteredSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Centered, Project?.History);
+                BoxLayout.Align(items, AlignMode.Centered, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnAlignRightSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Right, Project?.History);
+                BoxLayout.Align(items, AlignMode.Right, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnAlignTopSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Top, Project?.History);
+                BoxLayout.Align(items, AlignMode.Top, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnAlignCenterSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Center, Project?.History);
+                BoxLayout.Align(items, AlignMode.Center, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnAlignBottomSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var shapes = Project?.SelectedShapes;
+            var shapes = project?.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Bottom, Project?.History);
+                BoxLayout.Align(items, AlignMode.Bottom, project?.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
 
         public void OnBringToFrontSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
+            var sources = project?.SelectedShapes;
             if (sources is { })
             {
                 foreach (var s in sources)
@@ -445,13 +445,13 @@ namespace Core2D.ViewModels.Editor
 
         public void OnBringForwardSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
+            var sources = project?.SelectedShapes;
             if (sources is { })
             {
                 foreach (var s in sources)
@@ -463,13 +463,13 @@ namespace Core2D.ViewModels.Editor
 
         public void OnSendBackwardSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
+            var sources = project?.SelectedShapes;
             if (sources is { })
             {
                 foreach (var s in sources.Reverse())
@@ -481,13 +481,13 @@ namespace Core2D.ViewModels.Editor
 
         public void OnSendToBackSelected()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
+            var sources = project?.SelectedShapes;
             if (sources is { })
             {
                 foreach (var s in sources.Reverse())
@@ -499,26 +499,26 @@ namespace Core2D.ViewModels.Editor
 
         public void OnCreatePath()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var PathConverter = ServiceProvider.GetService<IPathConverter>();
-            if (PathConverter is null)
+            var pathConverter = ServiceProvider.GetService<IPathConverter>();
+            if (pathConverter is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
-            var source = Project?.SelectedShapes?.FirstOrDefault();
+            var sources = project?.SelectedShapes;
+            var source = project?.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -533,8 +533,8 @@ namespace Core2D.ViewModels.Editor
 
         private void CreatePath(BaseShapeViewModel source, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -552,7 +552,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -560,8 +560,8 @@ namespace Core2D.ViewModels.Editor
 
         private void CreatePath(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -583,7 +583,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -591,26 +591,26 @@ namespace Core2D.ViewModels.Editor
 
         public void OnCreateStrokePath()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var PathConverter = ServiceProvider.GetService<IPathConverter>();
-            if (PathConverter is null)
+            var pathConverter = ServiceProvider.GetService<IPathConverter>();
+            if (pathConverter is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
-            var source = Project?.SelectedShapes?.FirstOrDefault();
+            var sources = project?.SelectedShapes;
+            var source = project?.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -625,8 +625,8 @@ namespace Core2D.ViewModels.Editor
 
         private void CreateStrokePath(BaseShapeViewModel source, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -647,7 +647,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -655,8 +655,8 @@ namespace Core2D.ViewModels.Editor
 
         private void CreateStrokePath(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -694,7 +694,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -702,26 +702,26 @@ namespace Core2D.ViewModels.Editor
 
         public void OnCreateFillPath()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var PathConverter = ServiceProvider.GetService<IPathConverter>();
-            if (PathConverter is null)
+            var pathConverter = ServiceProvider.GetService<IPathConverter>();
+            if (pathConverter is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
-            var source = Project?.SelectedShapes?.FirstOrDefault();
+            var sources = project?.SelectedShapes;
+            var source = project?.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -736,8 +736,8 @@ namespace Core2D.ViewModels.Editor
 
         private void CreateFillPath(BaseShapeViewModel source, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -758,7 +758,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -766,8 +766,8 @@ namespace Core2D.ViewModels.Editor
 
         private void CreateFillPath(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -805,7 +805,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -813,26 +813,26 @@ namespace Core2D.ViewModels.Editor
 
         public void OnCreateWindingPath()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var PathConverter = ServiceProvider.GetService<IPathConverter>();
-            if (PathConverter is null)
+            var pathConverter = ServiceProvider.GetService<IPathConverter>();
+            if (pathConverter is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
-            var source = Project?.SelectedShapes?.FirstOrDefault();
+            var sources = project?.SelectedShapes;
+            var source = project?.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -847,8 +847,8 @@ namespace Core2D.ViewModels.Editor
 
         private void CreateWindingPath(BaseShapeViewModel source, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -869,7 +869,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -877,8 +877,8 @@ namespace Core2D.ViewModels.Editor
 
         private void CreateWindingPath(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -916,7 +916,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -924,26 +924,26 @@ namespace Core2D.ViewModels.Editor
 
         public void OnPathSimplify()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var PathConverter = ServiceProvider.GetService<IPathConverter>();
-            if (PathConverter is null)
+            var pathConverter = ServiceProvider.GetService<IPathConverter>();
+            if (pathConverter is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
-            var source = Project?.SelectedShapes?.FirstOrDefault();
+            var sources = project?.SelectedShapes;
+            var source = project?.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -958,8 +958,8 @@ namespace Core2D.ViewModels.Editor
 
         private void PathSimplify(BaseShapeViewModel source, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -977,7 +977,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -985,8 +985,8 @@ namespace Core2D.ViewModels.Editor
 
         private void PathSimplify(ISet<BaseShapeViewModel> sources, LayerContainerViewModel layer)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -1021,7 +1021,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -1029,25 +1029,25 @@ namespace Core2D.ViewModels.Editor
 
         public void OnPathBreak()
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var PathConverter = ServiceProvider.GetService<IPathConverter>();
-            if (PathConverter is null)
+            var pathConverter = ServiceProvider.GetService<IPathConverter>();
+            if (pathConverter is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
+            var sources = project?.SelectedShapes;
 
             if (sources is not { Count: >= 1 })
             {
@@ -1081,7 +1081,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(result));
@@ -1089,8 +1089,8 @@ namespace Core2D.ViewModels.Editor
 
         public void OnPathOp(string op)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -1100,25 +1100,25 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var PathConverter = ServiceProvider.GetService<IPathConverter>();
-            if (PathConverter is null)
+            var pathConverter = ServiceProvider.GetService<IPathConverter>();
+            if (pathConverter is null)
             {
                 return;
             }
 
-            var sources = Project?.SelectedShapes;
+            var sources = project?.SelectedShapes;
             if (sources is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var path = PathConverter.Op(sources, pathOp);
+            var path = pathConverter.Op(sources, pathOp);
             if (path is null)
             {
                 return;
@@ -1133,7 +1133,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -1141,8 +1141,8 @@ namespace Core2D.ViewModels.Editor
 
         private GroupShapeViewModel? Group(LayerContainerViewModel? layer, ISet<BaseShapeViewModel>? shapes, string name)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return null;
             }
@@ -1157,7 +1157,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = source.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             return group;
@@ -1166,8 +1166,8 @@ namespace Core2D.ViewModels.Editor
 
         private void Ungroup(LayerContainerViewModel? layer, ISet<BaseShapeViewModel>? shapes)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -1188,31 +1188,31 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = source.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
         }
 
         public GroupShapeViewModel? Group(ISet<BaseShapeViewModel>? shapes, string name)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return null;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             return layer is { } ? Group(layer, shapes, name) : null;
         }
 
         public bool Ungroup(ISet<BaseShapeViewModel>? shapes)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return false;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null || shapes is null)
             {
                 return false;
@@ -1224,39 +1224,39 @@ namespace Core2D.ViewModels.Editor
 
         private void Swap(BaseShapeViewModel shape, int sourceIndex, int targetIndex)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer?.Shapes is null)
             {
                 return;
             }
             if (sourceIndex < targetIndex)
             {
-                Project.SwapShape(layer, shape, targetIndex + 1, sourceIndex);
+                project.SwapShape(layer, shape, targetIndex + 1, sourceIndex);
             }
             else
             {
                 if (layer.Shapes.Length + 1 > sourceIndex + 1)
                 {
-                    Project.SwapShape(layer, shape, targetIndex, sourceIndex + 1);
+                    project.SwapShape(layer, shape, targetIndex, sourceIndex + 1);
                 }
             }
         }
 
         public void BringToFront(BaseShapeViewModel source)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
@@ -1272,13 +1272,13 @@ namespace Core2D.ViewModels.Editor
 
         public void BringForward(BaseShapeViewModel source)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
@@ -1294,13 +1294,13 @@ namespace Core2D.ViewModels.Editor
 
         public void SendBackward(BaseShapeViewModel source)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
@@ -1316,13 +1316,13 @@ namespace Core2D.ViewModels.Editor
 
         public void SendToBack(BaseShapeViewModel source)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
 
-            var layer = Project?.CurrentContainer?.CurrentLayer;
+            var layer = project?.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
@@ -1350,8 +1350,8 @@ namespace Core2D.ViewModels.Editor
 
         private void MoveShapesByWithHistory(List<BaseShapeViewModel>? shapes, decimal dx, decimal dy)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -1365,7 +1365,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
             var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
-            Project?.History?.Snapshot(previous, next, (s) =>
+            project?.History?.Snapshot(previous, next, (s) =>
             {
                 if (s is null)
                 {
@@ -1377,8 +1377,8 @@ namespace Core2D.ViewModels.Editor
 
         public void MoveBy(ISet<BaseShapeViewModel>? shapes, decimal dx, decimal dy)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -1388,7 +1388,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
             
-            switch (Project?.Options?.MoveMode)
+            switch (project?.Options?.MoveMode)
             {
                 case MoveMode.Point:
                 {
@@ -1417,8 +1417,8 @@ namespace Core2D.ViewModels.Editor
 
         public void MoveItem(LibraryViewModel libraryViewModel, int sourceIndex, int targetIndex)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -1432,7 +1432,7 @@ namespace Core2D.ViewModels.Editor
 
                 var previous = libraryViewModel.Items;
                 var next = builder.ToImmutable();
-                Project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+                project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
                 libraryViewModel.Items = next;
             }
             else
@@ -1447,7 +1447,7 @@ namespace Core2D.ViewModels.Editor
 
                     var previous = libraryViewModel.Items;
                     var next = builder.ToImmutable();
-                    Project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+                    project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
                     libraryViewModel.Items = next;
                 }
             }
@@ -1455,8 +1455,8 @@ namespace Core2D.ViewModels.Editor
 
         public void SwapItem(LibraryViewModel libraryViewModel, int sourceIndex, int targetIndex)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -1469,14 +1469,14 @@ namespace Core2D.ViewModels.Editor
 
             var previous = libraryViewModel.Items;
             var next = builder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+            project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
             libraryViewModel.Items = next;
         }
 
         public void InsertItem(LibraryViewModel libraryViewModel, ViewModelBase item, int index)
         {
-            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (Project is null)
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
             {
                 return;
             }
@@ -1486,7 +1486,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = libraryViewModel.Items;
             var next = builder.ToImmutable();
-            Project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+            project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
             libraryViewModel.Items = next;
         }
     }
