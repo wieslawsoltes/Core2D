@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Windows.Input;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Editor;
 
 namespace Core2D.ViewModels.Style
 {
@@ -14,7 +17,16 @@ namespace Core2D.ViewModels.Style
 
         public ShapeStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+            RemoveStyle = new Command<ShapeStyleViewModel?>(x => GetProject()?.OnRemoveStyle(x));
+
+            ExportStyle = new Command<ShapeStyleViewModel?>(x => GetProject()?.OnExportStyle(x));
+
+            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
+
+        public ICommand RemoveStyle { get; }
+
+        public ICommand ExportStyle { get; }
 
         public override object Copy(IDictionary<object, object>? shared)
         {
