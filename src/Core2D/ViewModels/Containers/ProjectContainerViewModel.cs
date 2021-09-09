@@ -14,6 +14,7 @@ using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
 {
@@ -39,15 +40,27 @@ namespace Core2D.ViewModels.Containers
 
         public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            ApplyTemplate = new Command<TemplateContainerViewModel>(OnApplyTemplate);
+            AddStyleLibrary = new Command(OnAddStyleLibrary);
 
-            EditTemplate = new Command<TemplateContainerViewModel>(OnEditTemplate);
+            RemoveStyleLibrary = new Command<LibraryViewModel?>(OnRemoveStyleLibrary);
+
+            ApplyStyle = new Command<ShapeStyleViewModel?>(OnApplyStyle);
+
+            AddStyle = new Command(OnAddStyle);
+
+            ExportStyle = new Command<ShapeStyleViewModel?>(OnExportStyle);
+
+            RemoveStyle = new Command<ShapeStyleViewModel?>(OnRemoveStyle);
+
+            ApplyTemplate = new Command<TemplateContainerViewModel?>(OnApplyTemplate);
+
+            EditTemplate = new Command<TemplateContainerViewModel?>(OnEditTemplate);
 
             AddTemplate = new Command(OnAddTemplate);
 
-            RemoveTemplate = new Command<TemplateContainerViewModel>(OnRemoveTemplate);
+            RemoveTemplate = new Command<TemplateContainerViewModel?>(OnRemoveTemplate);
 
-            ExportTemplate = new Command<TemplateContainerViewModel>(OnExportTemplate);
+            ExportTemplate = new Command<TemplateContainerViewModel?>(OnExportTemplate);
 
             PropertyChanged += (_, e) =>
             {
@@ -57,6 +70,18 @@ namespace Core2D.ViewModels.Containers
                 }
             };
         }
+
+        public ICommand AddStyleLibrary { get; }
+
+        public ICommand RemoveStyleLibrary { get; }
+
+        public ICommand ApplyStyle { get; }
+
+        public ICommand AddStyle { get; }
+
+        public ICommand RemoveStyle { get; }
+
+        public ICommand ExportStyle { get; }
 
         public ICommand ApplyTemplate { get; }
 
@@ -377,6 +402,83 @@ namespace Core2D.ViewModels.Containers
             }
 
             return mainDisposable;
+        }
+
+        public void OnAddStyleLibrary()
+        {
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var sl = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaulStyleLibraryName);
+            if (sl is null)
+            {
+                return;
+            }
+            
+            this.AddStyleLibrary(sl);
+            SetCurrentStyleLibrary(sl);
+        }
+
+        public void OnRemoveStyleLibrary(LibraryViewModel? libraryViewModel)
+        {
+            this.RemoveStyleLibrary(libraryViewModel);
+            SetCurrentStyleLibrary(StyleLibraries.FirstOrDefault());
+        }
+
+        public void OnApplyStyle(ShapeStyleViewModel? style)
+        {
+            if (style is null)
+            {
+                return;
+            }
+
+            if (!(SelectedShapes?.Count > 0))
+            {
+                return;
+            }
+            
+            foreach (var shape in SelectedShapes)
+            {
+                this.ApplyStyle(shape, style);
+            }
+        }
+
+        public void OnAddStyle()
+        {
+            if (SelectedShapes is { })
+            {
+                foreach (var shape in SelectedShapes)
+                {
+                    if (shape.Style is { })
+                    {
+                        var style = (ShapeStyleViewModel)shape.Style.Copy(null);
+                        this.AddStyle(CurrentStyleLibrary, style);
+                    }
+                }
+            }
+            else
+            {
+                var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+                var style = viewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                if (style is { })
+                {
+                    this.AddStyle(CurrentStyleLibrary, style);
+                }
+            }
+        }
+
+        public void OnRemoveStyle(ShapeStyleViewModel? style)
+        {
+            var library = this.RemoveStyle(style);
+            library?.SetSelected(library.Items.FirstOrDefault());
+        }
+
+        public void OnExportStyle(ShapeStyleViewModel? style)
+        {
+            if (style is null)
+            {
+                return;
+            }
+
+            ServiceProvider.GetService<IProjectEditorPlatform>().OnExportObject(style);
         }
 
         public void OnApplyTemplate(TemplateContainerViewModel? template)
