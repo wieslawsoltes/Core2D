@@ -28,13 +28,13 @@ namespace Core2D.ViewModels.Containers
 
         public TemplateContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            ApplyTemplate = new Command<TemplateContainerViewModel>(x => GetProject()?.OnApplyTemplate(x));
+            ApplyTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnApplyTemplate(x));
 
-            EditTemplate = new Command<TemplateContainerViewModel>(x => GetProject()?.OnEditTemplate(x));
+            EditTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnEditTemplate(x));
 
-            RemoveTemplate = new Command<TemplateContainerViewModel>(x => GetProject()?.OnRemoveTemplate(x));
+            RemoveTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnRemoveTemplate(x));
 
-            ExportTemplate = new Command<TemplateContainerViewModel>(x => GetProject()?.OnExportTemplate(x));
+            ExportTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnExportTemplate(x));
 
             ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
