@@ -322,7 +322,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     if (CanCopy())
                     {
-                        if (Project?.SelectedShapes is { })
+                        if (Project.SelectedShapes is { })
                         {
                             OnCopyShapes(Project.SelectedShapes.ToList());
                         }
@@ -343,7 +343,7 @@ namespace Core2D.ViewModels.Editor
 
             switch (Project)
             {
-                case { } when item is BaseShapeViewModel shape:
+                case { } when item is BaseShapeViewModel:
                 {
                     // TODO:
                     break;
@@ -352,14 +352,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     if (PageToCopy is { })
                     {
-                        var document = Project?.Documents.FirstOrDefault(d => d.Pages.Contains(page));
-                        if (document is { })
-                        {
-                            int index = document.Pages.IndexOf(page);
-                            var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
-                            Project.ReplacePage(document, clone, index);
-                            Project?.SetCurrentContainer(clone);
-                        }
+                        PastePageIntoPage(Project, page);
                     }
 
                     break;
@@ -368,17 +361,11 @@ namespace Core2D.ViewModels.Editor
                 {
                     if (PageToCopy is { })
                     {
-                        var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
-                        Project?.AddPage(document, clone);
-                        Project?.SetCurrentContainer(clone);
+                        PastePageIntoDocument(Project, document);
                     }
                     else if (DocumentToCopy is { })
                     {
-                        int index = Project.Documents.IndexOf(document);
-                        var clone = DocumentToCopy?.CopyShared(new Dictionary<object, object>());
-                        Project.ReplaceDocument(clone, index);
-                        Project.SetCurrentDocument(clone);
-                        Project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
+                        PasteDocumentIntoDocument(Project, document);
                     }
 
                     break;
@@ -425,6 +412,43 @@ namespace Core2D.ViewModels.Editor
                     break;
                 }
             }
+        }
+
+        private void PastePageIntoPage(ProjectContainerViewModel project, PageContainerViewModel page)
+        {
+            var document = project.Documents.FirstOrDefault(d => d.Pages.Contains(page));
+            if (document is null)
+            {
+                return;
+            }
+            var index = document.Pages.IndexOf(page);
+            var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
+            project.ReplacePage(document, clone, index);
+            project.SetCurrentContainer(clone);
+        }
+
+        private void PastePageIntoDocument(ProjectContainerViewModel project, DocumentContainerViewModel document)
+        {
+            var clone = PageToCopy?.CopyShared(new Dictionary<object, object>());
+            if (clone is null)
+            {
+                return;
+            }
+            project.AddPage(document, clone);
+            project.SetCurrentContainer(clone);
+        }
+
+        private void PasteDocumentIntoDocument(ProjectContainerViewModel project, DocumentContainerViewModel document)
+        {
+            var index = project.Documents.IndexOf(document);
+            var clone = DocumentToCopy?.CopyShared(new Dictionary<object, object>());
+            if (clone is null)
+            {
+                return;
+            }
+            project.ReplaceDocument(clone, index);
+            project.SetCurrentDocument(clone);
+            project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
         }
 
         public void OnDelete(object? item)
