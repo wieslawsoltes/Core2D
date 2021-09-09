@@ -20,13 +20,11 @@ namespace Core2D.ViewModels.Editor
     {
         public ProjectEditorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            _shapeEditor = new ShapeEditor(serviceProvider);
             _recentProjects = ImmutableArray.Create<RecentFileViewModel>();
             _currentRecentProject = default;
             _dialogs = new ObservableCollection<DialogViewModel>();
             _tools = serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>((tools) => tools.ToImmutableArray());
             _pathTools = serviceProvider.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>((tools) => tools.ToImmutableArray());
-            _hitTest = serviceProvider.GetServiceLazily<IHitTest>(hitTests => hitTests.Register(serviceProvider.GetService<IBounds[]>()));
             _log = serviceProvider.GetServiceLazily<ILog>();
             _dataFlow = serviceProvider.GetServiceLazily<DataFlow>();
             _renderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
@@ -34,6 +32,9 @@ namespace Core2D.ViewModels.Editor
             _factory = serviceProvider.GetServiceLazily<IViewModelFactory>();
             _containerFactory = serviceProvider.GetServiceLazily<IContainerFactory>();
             _shapeFactory = serviceProvider.GetServiceLazily<IShapeFactory>();
+            _selectionService = serviceProvider.GetServiceLazily<ISelectionService>();
+            _shapeService = serviceProvider.GetServiceLazily<IShapeService>();
+            _clipboardService = serviceProvider.GetServiceLazily<IClipboardService>();
             _textClipboard = serviceProvider.GetServiceLazily<ITextClipboard>();
             _jsonSerializer = serviceProvider.GetServiceLazily<IJsonSerializer>();
             _fileWriters = serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());

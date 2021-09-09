@@ -41,14 +41,15 @@ namespace Core2D.ViewModels.Editor.Tools.Path
         {
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var selection = ServiceProvider.GetService<ISelectionService>();
             var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
                     {
                         editor.IsToolIdle = false;
-                        _arc.Start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
+                        _arc.Start = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_arc.Start);
@@ -80,7 +81,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         _arc.End.Y = (double)sy;
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var end = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                            var end = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (end is { })
                             {
                                 _arc.End = end;
@@ -129,15 +130,16 @@ namespace Core2D.ViewModels.Editor.Tools.Path
         public void Move(InputArgs args)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var selection = ServiceProvider.GetService<ISelectionService>();
             var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Start:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -146,7 +148,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                         _arc.End.X = (double)sx;
                         _arc.End.Y = (double)sy;

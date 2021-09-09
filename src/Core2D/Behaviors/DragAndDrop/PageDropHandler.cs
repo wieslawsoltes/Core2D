@@ -22,7 +22,7 @@ namespace Core2D.Behaviors.DragAndDrop
             set => SetValue(RelativeToProperty, value);
         }
 
-        private bool Validate(ProjectEditorViewModel editorViewModel, object sender, DragEventArgs e, bool bExecute)
+        private bool Validate(ProjectEditorViewModel editor, object sender, DragEventArgs e, bool bExecute)
         {
             var point = GetPosition(RelativeTo ?? sender, e);
 
@@ -32,7 +32,10 @@ namespace Core2D.Behaviors.DragAndDrop
 
                 if (bExecute)
                 {
-                    editorViewModel?.OnTryPaste(text);
+                    if (text is { })
+                    {
+                        editor?.ClipboardService?.OnTryPaste(text);
+                    }
                 }
 
                 return true;
@@ -45,24 +48,22 @@ namespace Core2D.Behaviors.DragAndDrop
                 switch (data)
                 {
                     case BaseShapeViewModel shape:
-                        return editorViewModel?.OnDropShape(shape, point.X, point.Y, bExecute) == true;
+                        return editor?.OnDropShape(shape, point.X, point.Y, bExecute) == true;
                     case RecordViewModel record:
-                        return editorViewModel?.OnDropRecord(record, point.X, point.Y, bExecute) == true;
+                        return editor?.OnDropRecord(record, point.X, point.Y, bExecute) == true;
                     case ShapeStyleViewModel style:
-                        return editorViewModel?.OnDropStyle(style, point.X, point.Y, bExecute) == true;
+                        return editor?.OnDropStyle(style, point.X, point.Y, bExecute) == true;
                     case TemplateContainerViewModel template:
-                        return editorViewModel?.OnDropTemplate(template, point.X, point.Y, bExecute) == true;
-                    default:
-                        break;
+                        return editor?.OnDropTemplate(template, point.X, point.Y, bExecute) == true;
                 }
             }
 
             if (e.Data.Contains(DataFormats.FileNames))
             {
-                var files = e.Data.GetFileNames().ToArray();
+                var files = e.Data.GetFileNames()?.ToArray();
                 if (bExecute)
                 {
-                    editorViewModel?.OnDropFiles(files, point.X, point.Y);
+                    editor?.OnDropFiles(files, point.X, point.Y);
                 }
                 return true;
             }

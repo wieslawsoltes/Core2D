@@ -76,10 +76,10 @@
         <MenuItem Header="_Undo" Command="{Binding OnUndo}" InputGesture="Ctrl+Z" />
         <MenuItem Header="_Redo" Command="{Binding OnRedo}" InputGesture="Ctrl+Y" />
         <Separator />
-        <MenuItem Header="Cu_t" Command="{Binding OnCut}" InputGesture="Ctrl+X" />
-        <MenuItem Header="_Copy" Command="{Binding OnCopy}" InputGesture="Ctrl+C" />
-        <MenuItem Header="_Paste" Command="{Binding OnPaste}" InputGesture="Ctrl+V" />
-        <MenuItem Header="_Delete" Command="{Binding OnDelete}" InputGesture="Delete" />
+        <MenuItem Header="Cu_t" Command="{Binding ClipboardService.OnCut}" InputGesture="Ctrl+X" />
+        <MenuItem Header="_Copy" Command="{Binding ClipboardService.OnCopy}" InputGesture="Ctrl+C" />
+        <MenuItem Header="_Paste" Command="{Binding ClipboardService.OnPaste}" InputGesture="Ctrl+V" />
+        <MenuItem Header="_Delete" Command="{Binding ClipboardService.OnDelete}" InputGesture="Delete" />
         <Separator />
         <MenuItem Header="Copy As _Xaml" Command="{Binding Platform.OnCopyAsXaml}" />
         <Separator />
@@ -92,10 +92,10 @@
         <MenuItem Header="Paste Stroked Svg Path Data" Command="{Binding Platform.OnPastePathDataStroked}" />
         <MenuItem Header="Paste Filled Svg Path Data" Command="{Binding Platform.OnPastePathDataFilled}" />
         <Separator />
-        <MenuItem Header="Select _All" Command="{Binding OnSelectAll}" InputGesture="Ctrl+A" />
-        <MenuItem Header="De_select All" Command="{Binding OnDeselectAll}" InputGesture="Ctrl+Shift+A" />
+        <MenuItem Header="Select _All" Command="{Binding SelectionService.OnSelectAll}" InputGesture="Ctrl+A" />
+        <MenuItem Header="De_select All" Command="{Binding SelectionService.OnDeselectAll}" InputGesture="Ctrl+Shift+A" />
         <Separator />
-        <MenuItem Header="Cl_ear All" Command="{Binding OnClearAll}" />
+        <MenuItem Header="Cl_ear All" Command="{Binding SelectionService.OnClearAll}" />
         <Separator />
         <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape" />
       </MenuItem>
@@ -191,11 +191,11 @@
         <MenuItem Header="Insert Document Bef_ore" Command="{Binding OnInsertDocumentBefore}" CommandParameter="{Binding Project.CurrentDocument}" />
         <MenuItem Header="Insert Document Aft_er" Command="{Binding OnInsertDocumentAfter}" CommandParameter="{Binding Project.CurrentDocument}" />
         <Separator />
-        <MenuItem Header="Cu_t Document" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentDocument}" />
-        <MenuItem Header="_Copy Document" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentDocument}" />
-        <MenuItem Header="_Paste Document" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentDocument}" />
+        <MenuItem Header="Cu_t Document" Command="{Binding ClipboardService.OnCut}" CommandParameter="{Binding Project.CurrentDocument}" />
+        <MenuItem Header="_Copy Document" Command="{Binding ClipboardService.OnCopy}" CommandParameter="{Binding Project.CurrentDocument}" />
+        <MenuItem Header="_Paste Document" Command="{Binding ClipboardService.OnPaste}" CommandParameter="{Binding Project.CurrentDocument}" />
         <Separator />
-        <MenuItem Header="_Delete Document" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentDocument}" />
+        <MenuItem Header="_Delete Document" Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding Project.CurrentDocument}" />
         <Separator />
         <MenuItem Header="E_xport Document" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentDocument}" />
       </MenuItem>
@@ -205,11 +205,11 @@
         <MenuItem Header="Insert Page Bef_ore" Command="{Binding OnInsertPageBefore}" CommandParameter="{Binding Project.CurrentContainer}" />
         <MenuItem Header="Insert Page Aft_er"  Command="{Binding OnInsertPageAfter}" CommandParameter="{Binding Project.CurrentContainer}" />
         <Separator />
-        <MenuItem Header="Cu_t Page" Command="{Binding OnCut}" CommandParameter="{Binding Project.CurrentContainer}" />
-        <MenuItem Header="_Copy Page" Command="{Binding OnCopy}" CommandParameter="{Binding Project.CurrentContainer}" />
-        <MenuItem Header="_Paste Page" Command="{Binding OnPaste}" CommandParameter="{Binding Project.CurrentContainer}" />
+        <MenuItem Header="Cu_t Page" Command="{Binding ClipboardService.OnCut}" CommandParameter="{Binding Project.CurrentContainer}" />
+        <MenuItem Header="_Copy Page" Command="{Binding ClipboardService.OnCopy}" CommandParameter="{Binding Project.CurrentContainer}" />
+        <MenuItem Header="_Paste Page" Command="{Binding ClipboardService.OnPaste}" CommandParameter="{Binding Project.CurrentContainer}" />
         <Separator />
-        <MenuItem Header="_Delete Page" Command="{Binding OnDelete}" CommandParameter="{Binding Project.CurrentContainer}" />
+        <MenuItem Header="_Delete Page" Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding Project.CurrentContainer}" />
         <Separator />
         <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport}" CommandParameter="{Binding Project.CurrentContainer}" />
       </MenuItem>
@@ -219,61 +219,61 @@
         <MenuItem Header="_Delete Layer" Command="{Binding OnRemoveLayer}" CommandParameter="{Binding Project.CurrentContainer.CurrentLayer}" />
       </MenuItem>
       <MenuItem Header="_Shape">
-        <MenuItem Header="Du_plicate" Command="{Binding OnDuplicateSelected}" InputGesture="Ctrl+D" />
+        <MenuItem Header="Du_plicate" Command="{Binding ShapeService.OnDuplicateSelected}" InputGesture="Ctrl+D" />
         <Separator />
         <MenuItem Header="_Group">
-          <MenuItem Header="_Group" Command="{Binding OnGroupSelected}" InputGesture="Ctrl+G" />
-          <MenuItem Header="U_ngroup" Command="{Binding OnUngroupSelected}" InputGesture="Ctrl+U" />
+          <MenuItem Header="_Group" Command="{Binding ShapeService.OnGroupSelected}" InputGesture="Ctrl+G" />
+          <MenuItem Header="U_ngroup" Command="{Binding ShapeService.OnUngroupSelected}" InputGesture="Ctrl+U" />
         </MenuItem>
         <MenuItem Header="Rotat_e">
-          <MenuItem Header="Rotate _Right 90°" Command="{Binding OnRotateSelected}" CommandParameter="90" InputGesture="Ctrl+R" />
-          <MenuItem Header="Rotate _Left 90°" Command="{Binding OnRotateSelected}" CommandParameter="-90" InputGesture="Ctrl+L" />
-          <MenuItem Header="Flip _Horizontal" Command="{Binding OnFlipHorizontalSelected}" InputGesture="Ctrl+H" />
-          <MenuItem Header="Flip _Vertical" Command="{Binding OnFlipVerticalSelected}" InputGesture="Ctrl+J" />
+          <MenuItem Header="Rotate _Right 90°" Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="90" InputGesture="Ctrl+R" />
+          <MenuItem Header="Rotate _Left 90°" Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="-90" InputGesture="Ctrl+L" />
+          <MenuItem Header="Flip _Horizontal" Command="{Binding ShapeService.OnFlipHorizontalSelected}" InputGesture="Ctrl+H" />
+          <MenuItem Header="Flip _Vertical" Command="{Binding ShapeService.OnFlipVerticalSelected}" InputGesture="Ctrl+J" />
         </MenuItem>
         <MenuItem Header="_Move">
-          <MenuItem Header="_Up" Command="{Binding OnMoveUpSelected}" InputGesture="Up" />
-          <MenuItem Header="_Down" Command="{Binding OnMoveDownSelected}" InputGesture="Down" />
-          <MenuItem Header="_Left" Command="{Binding OnMoveLeftSelected}" InputGesture="Left" />
-          <MenuItem Header="_Right" Command="{Binding OnMoveRightSelected}" InputGesture="Right" />
+          <MenuItem Header="_Up" Command="{Binding ShapeService.OnMoveUpSelected}" InputGesture="Up" />
+          <MenuItem Header="_Down" Command="{Binding ShapeService.OnMoveDownSelected}" InputGesture="Down" />
+          <MenuItem Header="_Left" Command="{Binding ShapeService.OnMoveLeftSelected}" InputGesture="Left" />
+          <MenuItem Header="_Right" Command="{Binding ShapeService.OnMoveRightSelected}" InputGesture="Right" />
         </MenuItem>
         <MenuItem Header="Stac_k">
-          <MenuItem Header="_Horizontally" Command="{Binding OnStackHorizontallySelected}" InputGesture="Shift+H" />
-          <MenuItem Header="_Vertically" Command="{Binding OnStackVerticallySelected}" InputGesture="Shift+Y" />
+          <MenuItem Header="_Horizontally" Command="{Binding ShapeService.OnStackHorizontallySelected}" InputGesture="Shift+H" />
+          <MenuItem Header="_Vertically" Command="{Binding ShapeService.OnStackVerticallySelected}" InputGesture="Shift+Y" />
         </MenuItem>
         <MenuItem Header="Dis_tribute">
-          <MenuItem Header="_Horizontally" Command="{Binding OnDistributeHorizontallySelected}" InputGesture="Ctrl+Shift+H" />
-          <MenuItem Header="_Vertically" Command="{Binding OnDistributeVerticallySelected}" InputGesture="Ctrl+Shift+Y" />
+          <MenuItem Header="_Horizontally" Command="{Binding ShapeService.OnDistributeHorizontallySelected}" InputGesture="Ctrl+Shift+H" />
+          <MenuItem Header="_Vertically" Command="{Binding ShapeService.OnDistributeVerticallySelected}" InputGesture="Ctrl+Shift+Y" />
         </MenuItem>
         <MenuItem Header="Alig_n">
-          <MenuItem Header="_Left" Command="{Binding OnAlignLeftSelected}" InputGesture="Ctrl+Shift+Left" />
-          <MenuItem Header="_Centered" Command="{Binding OnAlignCenteredSelected}" InputGesture="Ctrl+Shift+Subtract" />
-          <MenuItem Header="_Right" Command="{Binding OnAlignRightSelected}" InputGesture="Ctrl+Shift+Right" />
+          <MenuItem Header="_Left" Command="{Binding ShapeService.OnAlignLeftSelected}" InputGesture="Ctrl+Shift+Left" />
+          <MenuItem Header="_Centered" Command="{Binding ShapeService.OnAlignCenteredSelected}" InputGesture="Ctrl+Shift+Subtract" />
+          <MenuItem Header="_Right" Command="{Binding ShapeService.OnAlignRightSelected}" InputGesture="Ctrl+Shift+Right" />
           <Separator />
-          <MenuItem Header="_Top" Command="{Binding OnAlignTopSelected}" InputGesture="Ctrl+Shift+Up" />
-          <MenuItem Header="C_enter" Command="{Binding OnAlignCenterSelected}" InputGesture="Ctrl+Shift+OemPipe" />
-          <MenuItem Header="_Bottom" Command="{Binding OnAlignBottomSelected}" InputGesture="Ctrl+Shift+Down" />
+          <MenuItem Header="_Top" Command="{Binding ShapeService.OnAlignTopSelected}" InputGesture="Ctrl+Shift+Up" />
+          <MenuItem Header="C_enter" Command="{Binding ShapeService.OnAlignCenterSelected}" InputGesture="Ctrl+Shift+OemPipe" />
+          <MenuItem Header="_Bottom" Command="{Binding ShapeService.OnAlignBottomSelected}" InputGesture="Ctrl+Shift+Down" />
         </MenuItem>
         <MenuItem Header="_Arange">
-          <MenuItem Header="_Bring to Front" Command="{Binding OnBringToFrontSelected}" InputGesture="Ctrl+Shift+OemCloseBrackets" />
-          <MenuItem Header="Bring _Forward" Command="{Binding OnBringForwardSelected}" InputGesture="Ctrl+OemCloseBrackets" />
+          <MenuItem Header="_Bring to Front" Command="{Binding ShapeService.OnBringToFrontSelected}" InputGesture="Ctrl+Shift+OemCloseBrackets" />
+          <MenuItem Header="Bring _Forward" Command="{Binding ShapeService.OnBringForwardSelected}" InputGesture="Ctrl+OemCloseBrackets" />
           <Separator />
-          <MenuItem Header="Send Back_ward" Command="{Binding OnSendBackwardSelected}" InputGesture="Ctrl+OemOpenBrackets" />
-          <MenuItem Header="_Send to Back" Command="{Binding OnSendToBackSelected}" InputGesture="Ctrl+Shift+OemOpenBrackets" />
+          <MenuItem Header="Send Back_ward" Command="{Binding ShapeService.OnSendBackwardSelected}" InputGesture="Ctrl+OemOpenBrackets" />
+          <MenuItem Header="_Send to Back" Command="{Binding ShapeService.OnSendToBackSelected}" InputGesture="Ctrl+Shift+OemOpenBrackets" />
         </MenuItem>
         <Separator />
-        <MenuItem Header="Create Pat_h" Command="{Binding OnCreatePath}" />
-        <MenuItem Header="Create Str_oke Path" Command="{Binding OnCreateStrokePath}" />
-        <MenuItem Header="Create _Fill Path" Command="{Binding OnCreateFillPath}" />
-        <MenuItem Header="Create _Winding Path" Command="{Binding OnCreateWindingPath}" />
-        <MenuItem Header="_Simplify Path" Command="{Binding OnPathSimplify}" />
-        <MenuItem Header="_Break Path" Command="{Binding OnPathBreak}" InputGesture="Ctrl+B" />
+        <MenuItem Header="Create Pat_h" Command="{Binding ShapeService.OnCreatePath}" />
+        <MenuItem Header="Create Str_oke Path" Command="{Binding ShapeService.OnCreateStrokePath}" />
+        <MenuItem Header="Create _Fill Path" Command="{Binding ShapeService.OnCreateFillPath}" />
+        <MenuItem Header="Create _Winding Path" Command="{Binding ShapeService.OnCreateWindingPath}" />
+        <MenuItem Header="_Simplify Path" Command="{Binding ShapeService.OnPathSimplify}" />
+        <MenuItem Header="_Break Path" Command="{Binding ShapeService.OnPathBreak}" InputGesture="Ctrl+B" />
         <Separator />
-        <MenuItem Header="_Difference" Icon="{StaticResource DifferenceIcon}" ToolTip.Tip="Subtract the op path from the current path."  Command="{Binding OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D" />
-        <MenuItem Header="_Intersect" Icon="{StaticResource IntersectIcon}" ToolTip.Tip="Intersect the two paths." Command="{Binding OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I" />
-        <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U" />
-        <MenuItem Header="_Xor" Icon="{StaticResource XorIcon}" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X" />
-        <MenuItem Header="_Reverse Difference" Icon="{StaticResource ReverseDifferenceIcon}" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
+        <MenuItem Header="_Difference" Icon="{StaticResource DifferenceIcon}" ToolTip.Tip="Subtract the op path from the current path."  Command="{Binding ShapeService.OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D" />
+        <MenuItem Header="_Intersect" Icon="{StaticResource IntersectIcon}" ToolTip.Tip="Intersect the two paths." Command="{Binding ShapeService.OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I" />
+        <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding ShapeService.OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U" />
+        <MenuItem Header="_Xor" Icon="{StaticResource XorIcon}" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding ShapeService.OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X" />
+        <MenuItem Header="_Reverse Difference" Icon="{StaticResource ReverseDifferenceIcon}" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding ShapeService.OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
       </MenuItem>
       <MenuItem Header="F_ormat">
         <MenuItem Header="_Copy">

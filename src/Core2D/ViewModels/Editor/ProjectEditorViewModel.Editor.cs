@@ -7,6 +7,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Core2D.Model;
+using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
@@ -18,25 +19,12 @@ using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Core2D.Spatial;
+using Core2D.ViewModels.Editor.Bounds;
 
 namespace Core2D.ViewModels.Editor
 {
     public partial class ProjectEditorViewModel
     {
-        public (decimal sx, decimal sy) TryToSnap(InputArgs args)
-        {
-            if (Project is { } && Project.Options.SnapToGrid == true)
-            {
-                return (
-                    PointUtil.Snap((decimal)args.X, (decimal)Project.Options.SnapX),
-                    PointUtil.Snap((decimal)args.Y, (decimal)Project.Options.SnapY));
-            }
-            else
-            {
-                return ((decimal)args.X, (decimal)args.Y);
-            }
-        }
-
         public string GetName(object? item)
         {
             if (item is ViewModelBase observable)
@@ -55,6 +43,87 @@ namespace Core2D.ViewModels.Editor
             if (update)
             {
                 shape.Name = shape.GetType().Name.Replace("ShapeViewModel", " ") + count;
+            }
+        }
+
+        private IDictionary<string, RecordViewModel>? GenerateRecordDictionaryById()
+        {
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
+            {
+                return default;
+            }
+            
+            return project.Databases
+                .Where(d => d.Records.Length > 0)
+                .SelectMany(d => d.Records)
+                .ToDictionary(s => s.Id);
+        }
+
+        private void TryToRestoreRecords(IEnumerable<BaseShapeViewModel> shapes)
+        {
+            var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (project is null)
+            {
+                return;
+            }
+
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            
+            try
+            {
+                if (project?.Databases is null)
+                {
+                    return;
+                }
+
+                var records = GenerateRecordDictionaryById();
+                if (records is null)
+                {
+                    return;
+                }
+
+                // Try to restore shape record.
+                foreach (var shape in shapes.GetAllShapes())
+                {
+                    if (shape.Record is null)
+                    {
+                        continue;
+                    }
+
+                    if (records.TryGetValue(shape.Record.Id, out var record))
+                    {
+                        // Use existing record.
+                        shape.Record = record;
+                    }
+                    else
+                    {
+                        // Create Imported database.
+                        if (project?.CurrentDatabase is null && shape.Record.Owner is DatabaseViewModel owner)
+                        {
+                            var db = viewModelFactory?.CreateDatabase(
+                                ProjectEditorConfiguration.ImportedDatabaseName,
+                                owner.Columns);
+                            project.AddDatabase(db);
+                            project.SetCurrentDatabase(db);
+                        }
+
+                        // Add missing data record.
+                        shape.Record.Owner = project?.CurrentDatabase;
+                        project?.AddRecord(project?.CurrentDatabase, shape.Record);
+
+                        // Recreate records dictionary.
+                        records = GenerateRecordDictionaryById();
+                        if (records is null)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -211,7 +280,7 @@ namespace Core2D.ViewModels.Editor
                 var isDecoratorVisible = PageState?.Decorator?.IsVisible == true;
                 if (isDecoratorVisible)
                 {
-                    OnHideDecorator();
+                    ServiceProvider.GetService<ISelectionService>()?.OnHideDecorator();
                 }
 
                 ViewModelFactory?.SaveProjectContainer(Project, path, FileSystem, JsonSerializer);
@@ -226,7 +295,7 @@ namespace Core2D.ViewModels.Editor
 
                 if (isDecoratorVisible)
                 {
-                    OnShowDecorator();
+                    ServiceProvider.GetService<ISelectionService>()?.OnShowDecorator();
                 }
             }
             catch (Exception ex)
@@ -472,7 +541,7 @@ namespace Core2D.ViewModels.Editor
             var shapes = SvgConverter.Convert(path, out _, out _);
             if (shapes is { })
             {
-                OnPasteShapes(shapes);
+                ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(shapes);
             }
         }
 
@@ -1334,7 +1403,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
             
-            Deselect();
+            ServiceProvider.GetService<ISelectionService>()?.Deselect();
             
             if (project is IImageCache imageCache)
             {
@@ -1385,7 +1454,7 @@ namespace Core2D.ViewModels.Editor
                 imageCache.PurgeUnusedImages(new HashSet<string>());
             }
             
-            Deselect();
+            ServiceProvider.GetService<ISelectionService>()?.Deselect();
             SetRenderersImageCache(null);
             Project = null;
             ProjectPath = string.Empty;
@@ -1503,7 +1572,7 @@ namespace Core2D.ViewModels.Editor
             {
                 if (Project?.History?.CanUndo() ?? false)
                 {
-                    Deselect();
+                    ServiceProvider.GetService<ISelectionService>()?.Deselect();
                     Project?.History.Undo();
                 }
             }
@@ -1519,7 +1588,7 @@ namespace Core2D.ViewModels.Editor
             {
                 if (Project?.History?.CanRedo() ?? false)
                 {
-                    Deselect();
+                    ServiceProvider.GetService<ISelectionService>()?.Deselect();
                     Project?.History.Redo();
                 }
             }
@@ -1676,7 +1745,7 @@ namespace Core2D.ViewModels.Editor
                 var clone = shape.CopyShared(new Dictionary<object, object>());
                 if (clone is { })
                 {
-                    Deselect(Project.CurrentContainer?.CurrentLayer);
+                    ServiceProvider.GetService<ISelectionService>()?.Deselect(Project.CurrentContainer?.CurrentLayer);
                     clone.Move(null, sx, sy);
 
                     Project.AddShape(Project?.CurrentContainer?.CurrentLayer, clone);
@@ -1688,7 +1757,7 @@ namespace Core2D.ViewModels.Editor
                         if (clone is GroupShapeViewModel group)
                         {
                             var shapes = Project?.CurrentContainer?.CurrentLayer?.Shapes.GetAllShapes<LineShapeViewModel>().ToList();
-                            TryToConnectLines(shapes, group.Connectors);
+                            ServiceProvider.GetService<ISelectionService>()?.TryToConnectLines(shapes, group.Connectors);
                         }
                     }
                 }
@@ -1728,7 +1797,7 @@ namespace Core2D.ViewModels.Editor
                     {
                         var shapes = layer.Shapes.Reverse();
                         var radius = Project.Options.HitThreshold / PageState.ZoomX;
-                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+                        var result = ServiceProvider.GetService<IHitTest>().TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
                         if (result is { })
                         {
                             if (bExecute)
@@ -1844,7 +1913,7 @@ namespace Core2D.ViewModels.Editor
                     {
                         var shapes = layer.Shapes.Reverse();
                         var radius = Project.Options.HitThreshold / PageState.ZoomX;
-                        var result = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+                        var result = ServiceProvider.GetService<IHitTest>().TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
                         if (result is { })
                         {
                             if (bExecute == true)

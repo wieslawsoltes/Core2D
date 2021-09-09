@@ -35,14 +35,14 @@
                 Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentAfter}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+      <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
                 CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+      <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
                 CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+      <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+      <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
@@ -66,14 +66,14 @@
                 Command="{Binding $parent[TopLevel].DataContext.OnInsertPageAfter}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+      <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
                 CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+      <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
                 CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+      <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+      <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
@@ -83,11 +83,11 @@
       <MenuItem Header="_Add Layer" Command="{Binding $parent[TopLevel].DataContext.OnAddLayer}"
                 CommandParameter="{Binding Owner, Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+      <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
                 CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+      <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
                 CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+      <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveLayer}"
@@ -97,14 +97,14 @@
                 CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
     <ContextMenu x:Key="BaseShapeContextMenu" x:CompileBindings="False">
-      <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+      <MenuItem Header="Cu_t" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
                 CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+      <MenuItem Header="_Copy" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
                 CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+      <MenuItem Header="_Paste" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+      <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
@@ -117,7 +117,7 @@
                VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="0" />
       <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
                   x:CompileBindings="False">
-        <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+        <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
                 CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}" BorderBrush="Transparent"
                 Background="Transparent" Padding="12,4,12,4" />
         <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnNew}"
@@ -138,16 +138,16 @@
         <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnNew}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+N"
                     x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnCut}"
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+X"
                     x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnCopy}"
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+C"
                     x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnPaste}"
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" Gesture="Ctrl+V"
                     x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnDelete}"
+        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItems}" Gesture="Delete"
                     x:CompileBindings="False" />
         <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"

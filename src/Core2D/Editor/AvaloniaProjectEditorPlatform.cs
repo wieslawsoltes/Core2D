@@ -303,6 +303,7 @@ namespace Core2D.Editor
                 if (item is null)
                 {
                     var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+                    var textClipboard = ServiceProvider.GetService<ITextClipboard>();
                     var exporter = new SvgSvgExporter(ServiceProvider);
                     var container = editor.Project.CurrentContainer;
 
@@ -326,7 +327,7 @@ namespace Core2D.Editor
                         var xaml = exporter.Create(sources, width, height);
                         if (!string.IsNullOrEmpty(xaml))
                         {
-                            editor.TextClipboard?.SetText(xaml);
+                            textClipboard?.SetText(xaml);
                         }
                         return;
                     }
@@ -337,7 +338,7 @@ namespace Core2D.Editor
                         var xaml = exporter.Create(shapes, width, height);
                         if (!string.IsNullOrEmpty(xaml))
                         {
-                            editor.TextClipboard?.SetText(xaml);
+                           textClipboard?.SetText(xaml);
                         }
                         return;
                     }
@@ -353,16 +354,17 @@ namespace Core2D.Editor
         {
             try
             {
-                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-                var converter = editor.SvgConverter;
+                var textClipboard = ServiceProvider.GetService<ITextClipboard>();
+                var clipboard = ServiceProvider.GetService<IClipboardService>();
+                var converter = ServiceProvider.GetService<ISvgConverter>();
 
-                var svgText = await editor.TextClipboard?.GetText();
+                var svgText = await textClipboard?.GetText();
                 if (!string.IsNullOrEmpty(svgText))
                 {
                     var shapes = converter.FromString(svgText, out _, out _);
                     if (shapes is { })
                     {
-                        editor.OnPasteShapes(shapes);
+                        clipboard.OnPasteShapes(shapes);
                     }
                 }
             }
@@ -379,6 +381,7 @@ namespace Core2D.Editor
                 if (item is null)
                 {
                     var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+                    var textClipboard = ServiceProvider.GetService<ITextClipboard>();
                     var exporter = new DrawingGroupXamlExporter(ServiceProvider);
                     var container = editor.Project.CurrentContainer;
 
@@ -388,7 +391,7 @@ namespace Core2D.Editor
                         var xaml = exporter.Create(sources, null);
                         if (!string.IsNullOrEmpty(xaml))
                         {
-                            editor.TextClipboard?.SetText(xaml);
+                            textClipboard?.SetText(xaml);
                         }
                         return;
                     }
@@ -400,7 +403,7 @@ namespace Core2D.Editor
                         var xaml = exporter.Create(shapes, key);
                         if (!string.IsNullOrEmpty(xaml))
                         {
-                            editor.TextClipboard?.SetText(xaml);
+                           textClipboard?.SetText(xaml);
                         }
                         return;
                     }
@@ -531,7 +534,8 @@ namespace Core2D.Editor
                 if (item is null)
                 {
                     var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-                    var converter = editor.PathConverter;
+                    var textClipboard = ServiceProvider.GetService<ITextClipboard>();
+                    var converter = ServiceProvider.GetService<IPathConverter>();
                     var container = editor.Project.CurrentContainer;
 
                     var shapes = editor.Project?.SelectedShapes ?? container?.Layers.SelectMany(x => x.Shapes);
@@ -554,7 +558,7 @@ namespace Core2D.Editor
                     var result = sb.ToString();
                     if (!string.IsNullOrEmpty(result))
                     {
-                        await editor.TextClipboard?.SetText(result);
+                        await textClipboard?.SetText(result);
                     }
                 }
             }
@@ -568,16 +572,17 @@ namespace Core2D.Editor
         {
             try
             {
-                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-                var converter = editor.PathConverter;
+                var textClipboard = ServiceProvider.GetService<ITextClipboard>();
+                var clipboard = ServiceProvider.GetService<IClipboardService>();
+                var converter = ServiceProvider.GetService<IPathConverter>();
 
-                var svgPath = await editor.TextClipboard?.GetText();
+                var svgPath = await textClipboard?.GetText();
                 if (!string.IsNullOrEmpty(svgPath))
                 {
                     var pathShape = converter.FromSvgPathData(svgPath, isStroked: true, isFilled: false);
                     if (pathShape is { })
                     {
-                        editor.OnPasteShapes(Enumerable.Repeat<BaseShapeViewModel>(pathShape, 1));
+                        clipboard.OnPasteShapes(Enumerable.Repeat<BaseShapeViewModel>(pathShape, 1));
                     }
                 }
             }
@@ -591,16 +596,17 @@ namespace Core2D.Editor
         {
             try
             {
-                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-                var converter = editor.PathConverter;
+                var textClipboard = ServiceProvider.GetService<ITextClipboard>();
+                var clipboard = ServiceProvider.GetService<IClipboardService>();
+                var converter = ServiceProvider.GetService<IPathConverter>();
 
-                var svgPath = await editor.TextClipboard?.GetText();
+                var svgPath = await textClipboard?.GetText();
                 if (!string.IsNullOrEmpty(svgPath))
                 {
                     var pathShape = converter.FromSvgPathData(svgPath, isStroked: false, isFilled: true);
                     if (pathShape is { })
                     {
-                        editor.OnPasteShapes(Enumerable.Repeat<BaseShapeViewModel>(pathShape, 1));
+                        clipboard.OnPasteShapes(Enumerable.Repeat<BaseShapeViewModel>(pathShape, 1));
                     }
                 }
             }

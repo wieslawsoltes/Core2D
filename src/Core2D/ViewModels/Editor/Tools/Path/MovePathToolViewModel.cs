@@ -29,7 +29,8 @@ namespace Core2D.ViewModels.Editor.Tools.Path
         {
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Move:
@@ -37,7 +38,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         var pathTool = ServiceProvider.GetService<PathToolViewModel>();
                         editor.CurrentPathTool = pathTool.PreviousPathTool;
 
-                        var start = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
+                        var start = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         pathTool.GeometryContext.BeginFigure(
                                 start,
                                 editor.Project.Options.DefaultIsClosed);
@@ -63,14 +64,15 @@ namespace Core2D.ViewModels.Editor.Tools.Path
         public void Move(InputArgs args)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Move:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;

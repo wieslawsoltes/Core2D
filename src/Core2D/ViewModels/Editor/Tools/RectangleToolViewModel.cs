@@ -32,7 +32,8 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.TopLeft:
@@ -50,7 +51,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         editor.SetShapeName(_rectangle);
 
-                        var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                        var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                         if (result is { })
                         {
                             _rectangle.TopLeft = result;
@@ -70,7 +71,7 @@ namespace Core2D.ViewModels.Editor.Tools
                             _rectangle.BottomRight.X = (double)sx;
                             _rectangle.BottomRight.Y = (double)sy;
 
-                            var result = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                            var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (result is { })
                             {
                                 _rectangle.BottomRight = result;
@@ -110,14 +111,15 @@ namespace Core2D.ViewModels.Editor.Tools
         public void Move(InputArgs args)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.TopLeft:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -127,7 +129,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         {
                             if (editor.Project.Options.TryToConnect)
                             {
-                                editor.TryToHoverShape((double)sx, (double)sy);
+                                selection.TryToHoverShape((double)sx, (double)sy);
                             }
                             _rectangle.BottomRight.X = (double)sx;
                             _rectangle.BottomRight.Y = (double)sy;

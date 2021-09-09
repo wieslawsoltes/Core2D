@@ -35,14 +35,15 @@ namespace Core2D.ViewModels.Editor.Tools.Path
         {
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var selection = ServiceProvider.GetService<ISelectionService>();
             var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
                     {
                         editor.IsToolIdle = false;
-                        _quadraticBezier.Point1 = editor.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
+                        _quadraticBezier.Point1 = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
                         if (!pathTool.IsInitialized)
                         {
                             pathTool.InitializeWorkingPath(_quadraticBezier.Point1);
@@ -69,7 +70,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         _quadraticBezier.Point3.Y = (double)sy;
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var point2 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                            var point2 = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point2 is { })
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
@@ -90,7 +91,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                         _quadraticBezier.Point2.Y = (double)sy;
                         if (editor.Project.Options.TryToConnect)
                         {
-                            var point1 = editor.TryToGetConnectionPoint((double)sx, (double)sy);
+                            var point1 = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point1 is { })
                             {
                                 var figure = pathTool.Geometry.Figures.LastOrDefault();
@@ -140,14 +141,15 @@ namespace Core2D.ViewModels.Editor.Tools.Path
         public void Move(InputArgs args)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            (decimal sx, decimal sy) = editor.TryToSnap(args);
+            var selection = ServiceProvider.GetService<ISelectionService>();
+            (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
                 case State.Point1:
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                     }
                     break;
@@ -155,7 +157,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                         _quadraticBezier.Point2.X = (double)sx;
                         _quadraticBezier.Point2.Y = (double)sy;
@@ -169,7 +171,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                     {
                         if (editor.Project.Options.TryToConnect)
                         {
-                            editor.TryToHoverShape((double)sx, (double)sy);
+                            selection.TryToHoverShape((double)sx, (double)sy);
                         }
                         _quadraticBezier.Point2.X = (double)sx;
                         _quadraticBezier.Point2.Y = (double)sy;

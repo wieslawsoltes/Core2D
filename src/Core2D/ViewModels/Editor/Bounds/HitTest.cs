@@ -11,9 +11,11 @@ namespace Core2D.ViewModels.Editor.Bounds
     {
         public IDictionary<Type, IBounds> Registered { get; }
 
-        public HitTest()
+        public HitTest(IServiceProvider serviceProvider)
         {
             Registered = new Dictionary<Type, IBounds>();
+
+            Register(serviceProvider.GetService<IBounds[]>());
         }
 
         public void Register(IBounds hitTest)

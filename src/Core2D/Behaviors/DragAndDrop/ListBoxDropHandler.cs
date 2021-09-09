@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -40,7 +40,7 @@ namespace Core2D.Behaviors.DragAndDrop
                     if (clone is { })
                     {
                         clone.Name += "-copy";
-                        editor.InsertItem(library, clone, targetIndex + 1);
+                        editor.ShapeService?.InsertItem(library, clone, targetIndex + 1);
                     }
                 }
                 return true;
@@ -49,7 +49,7 @@ namespace Core2D.Behaviors.DragAndDrop
             {
                 if (bExecute)
                 {
-                    editor.MoveItem(library, sourceIndex, targetIndex);
+                    editor.ShapeService?.MoveItem(library, sourceIndex, targetIndex);
                 }
                 return true;
             }
@@ -57,7 +57,7 @@ namespace Core2D.Behaviors.DragAndDrop
             {
                 if (bExecute)
                 {
-                    editor.SwapItem(library, sourceIndex, targetIndex);
+                    editor.ShapeService?.SwapItem(library, sourceIndex, targetIndex);
                 }
                 return true;
             }
