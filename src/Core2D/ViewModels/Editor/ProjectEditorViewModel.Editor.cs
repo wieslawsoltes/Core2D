@@ -8,7 +8,6 @@ using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Core2D.Model;
 using Core2D.Model.Editor;
-using Core2D.Model.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
@@ -19,7 +18,6 @@ using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Core2D.Spatial;
-using Core2D.ViewModels.Editor.Bounds;
 
 namespace Core2D.ViewModels.Editor
 {
@@ -942,96 +940,6 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnAddStyleLibrary()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            var sl = ViewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaulStyleLibraryName);
-            if (sl is null)
-            {
-                return;
-            }
-            
-            Project.AddStyleLibrary(sl);
-            Project?.SetCurrentStyleLibrary(sl);
-        }
-
-        public void OnRemoveStyleLibrary(LibraryViewModel libraryViewModel)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            Project.RemoveStyleLibrary(libraryViewModel);
-            Project?.SetCurrentStyleLibrary(Project?.StyleLibraries.FirstOrDefault());
-        }
-
-        public void OnAddStyle(LibraryViewModel libraryViewModel)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (Project.SelectedShapes is { })
-            {
-                foreach (var shape in Project.SelectedShapes)
-                {
-                    if (shape.Style is { })
-                    {
-                        var style = (ShapeStyleViewModel)shape.Style.Copy(null);
-                        Project.AddStyle(libraryViewModel, style);
-                    }
-                }
-            }
-            else
-            {
-                var style = ViewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-                if (style is { })
-                {
-                    Project.AddStyle(libraryViewModel, style);
-                }
-            }
-        }
-
-        public void OnRemoveStyle(ShapeStyleViewModel? style)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            var library = Project.RemoveStyle(style);
-            library?.SetSelected(library.Items.FirstOrDefault());
-        }
-
-        public void OnApplyStyle(ShapeStyleViewModel? style)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (style is null)
-            {
-                return;
-            }
-
-            if (!(Project?.SelectedShapes?.Count > 0))
-            {
-                return;
-            }
-            
-            foreach (var shape in Project.SelectedShapes)
-            {
-                Project?.ApplyStyle(shape, style);
-            }
-        }
-
         public void OnAddShape(BaseShapeViewModel? shape)
         {
             if (Project is null)
@@ -1841,7 +1749,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     if (bExecute)
                     {
-                        OnApplyStyle(style);
+                        Project.OnApplyStyle(style);
                     }
                     return true;
                 }
