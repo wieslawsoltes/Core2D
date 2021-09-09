@@ -1065,52 +1065,6 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnAddTemplate()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            var template = ContainerFactory?.GetTemplate(Project, "Empty") 
-                           ?? ViewModelFactory?.CreateTemplateContainer(ProjectEditorConfiguration.DefaultTemplateName);
-            if (template is { })
-            {
-                Project.AddTemplate(template);
-            }
-        }
-
-        public void OnRemoveTemplate(TemplateContainerViewModel? template)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (template is null)
-            {
-                return;
-            }
-            Project.RemoveTemplate(template);
-            Project.SetCurrentTemplate(Project?.Templates.FirstOrDefault());
-        }
-
-        public void OnEditTemplate(FrameContainerViewModel? template)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (template is null)
-            {
-                return;
-            }
-
-            Project.SetCurrentContainer(template);
-            Project.CurrentContainer?.InvalidateLayer();
-        }
-
         public void OnAddScript()
         {
             if (Project is null)
@@ -1136,21 +1090,6 @@ namespace Core2D.ViewModels.Editor
             
             Project.RemoveScript(script);
             Project.SetCurrentScript(Project?.Scripts.FirstOrDefault());
-        }
-
-        public void OnApplyTemplate(TemplateContainerViewModel? template)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            var container = Project.CurrentContainer;
-            if (container is PageContainerViewModel page)
-            {
-                Project.ApplyTemplate(page, template);
-                Project.CurrentContainer?.InvalidateLayer();
-            }
         }
 
         public string? OnGetImageKey(string path)
@@ -1946,7 +1885,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     if (bExecute)
                     {
-                        OnApplyTemplate(template);
+                        Project.OnApplyTemplate(template);
                     }
                     return true;
                 }
