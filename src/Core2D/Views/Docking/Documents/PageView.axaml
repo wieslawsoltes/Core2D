@@ -42,7 +42,7 @@
         <KeyBinding Command="{Binding ClipboardService.OnCut}" Gesture="Ctrl+X" x:CompileBindings="False" />
         <KeyBinding Command="{Binding ClipboardService.OnCopy}" Gesture="Ctrl+C" x:CompileBindings="False" />
         <KeyBinding Command="{Binding ClipboardService.OnPaste}" Gesture="Ctrl+V" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ClipboardService.OnSelectAll}" Gesture="Ctrl+A" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding SelectionService.OnSelectAll}" Gesture="Ctrl+A" x:CompileBindings="False" />
         <!-- View -->
         <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+D0" x:CompileBindings="False" />
         <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+NumPad0" x:CompileBindings="False" />
