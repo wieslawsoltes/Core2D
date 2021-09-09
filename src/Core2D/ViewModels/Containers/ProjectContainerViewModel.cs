@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Core2D.Model;
 using Core2D.Model.Editor;
@@ -62,6 +63,40 @@ namespace Core2D.ViewModels.Containers
 
             ExportTemplate = new Command<TemplateContainerViewModel?>(OnExportTemplate);
 
+            AddGroupLibrary = new Command(OnAddGroupLibrary);
+
+            RemoveGroupLibrary = new Command<LibraryViewModel?>(OnRemoveGroupLibrary);
+
+            AddGroup = new Command(OnAddGroup);
+
+            RemoveGroup = new Command<GroupShapeViewModel?>(OnRemoveGroup);
+
+            InsertGroup = new Command<GroupShapeViewModel?>(OnInsertGroup);
+
+            ExportGroup = new Command<GroupShapeViewModel?>(OnExportGroup);
+
+            AddDatabase = new Command(OnAddDatabase);
+
+            RemoveDatabase = new Command<DatabaseViewModel?>(OnRemoveDatabase);
+
+            AddImageKey = new Command<string?>(async path => await OnAddImageKey(path));
+
+            RemoveImageKey = new Command<string?>(OnRemoveImageKey);
+
+            ResetRepl = new Command(OnResetRepl);
+
+            ExecuteRepl = new Command<string?>(async code => await OnExecuteRepl(code));
+
+            ExecuteCode = new Command<string?>(async code => await OnExecuteCode(code));
+
+            ExecuteScript = new Command<ScriptViewModel?>(async script => await OnExecuteScript(script));
+
+            AddScript = new Command(OnAddScript);
+
+            RemoveScript = new Command<ScriptViewModel?>(OnRemoveScript);
+
+            ExportScript = new Command<ScriptViewModel?>(OnExportScript);
+
             PropertyChanged += (_, e) =>
             {
                 if (e.PropertyName == nameof(Selected))
@@ -70,6 +105,8 @@ namespace Core2D.ViewModels.Containers
                 }
             };
         }
+
+        private object? ScriptState { get; set; }
 
         public ICommand AddStyleLibrary { get; }
 
@@ -92,6 +129,40 @@ namespace Core2D.ViewModels.Containers
         public ICommand RemoveTemplate { get; }
 
         public ICommand ExportTemplate { get; }
+
+        public ICommand AddGroupLibrary { get; }
+
+        public ICommand RemoveGroupLibrary { get; }
+
+        public ICommand AddGroup { get; }
+
+        public ICommand RemoveGroup { get; }
+
+        public ICommand InsertGroup { get; }
+
+        public ICommand ExportGroup { get; }
+
+        public ICommand AddDatabase { get; }
+
+        public ICommand RemoveDatabase { get; }
+
+        public ICommand AddImageKey { get; }
+
+        public ICommand RemoveImageKey { get; }
+
+        public ICommand ResetRepl { get; }
+
+        public ICommand ExecuteRepl { get; }
+
+        public ICommand ExecuteCode { get; }
+
+        public ICommand ExecuteScript { get; }
+
+        public ICommand AddScript { get; }
+
+        public ICommand RemoveScript { get; }
+
+        public ICommand ExportScript { get; }
 
         public override object Copy(IDictionary<object, object>? shared)
         {
@@ -506,7 +577,6 @@ namespace Core2D.ViewModels.Containers
         {
             var containerFactory = ServiceProvider.GetService<IContainerFactory>();
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-
             var template = containerFactory?.GetTemplate(this, "Empty") 
                            ?? viewModelFactory?.CreateTemplateContainer(ProjectEditorConfiguration.DefaultTemplateName);
             if (template is { })
@@ -533,6 +603,221 @@ namespace Core2D.ViewModels.Containers
             }
             
             ServiceProvider.GetService<IProjectEditorPlatform>().OnExportObject(template);
+        }
+
+        public void OnAddGroupLibrary()
+        {
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var gl = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaulGroupLibraryName);
+            if (gl is null)
+            {
+                return;
+            }
+
+            this.AddGroupLibrary(gl);
+            SetCurrentGroupLibrary(gl);
+        }
+
+        public void OnRemoveGroupLibrary(LibraryViewModel? libraryViewModel)
+        {
+            this.RemoveGroupLibrary(libraryViewModel);
+            SetCurrentGroupLibrary(GroupLibraries.FirstOrDefault());
+        }
+
+        public void OnAddGroup()
+        {
+            if (SelectedShapes?.Count == 1 && SelectedShapes?.FirstOrDefault() is GroupShapeViewModel group)
+            {
+                var clone = group.CopyShared(new Dictionary<object, object>());
+                if (clone is { })
+                {
+                    this.AddGroup(CurrentGroupLibrary, clone);
+                }
+            }
+        }
+
+        public void OnRemoveGroup(GroupShapeViewModel? group)
+        {
+            if (group is null)
+            {
+                return;
+            }
+            
+            var library = this.RemoveGroup(@group);
+            library?.SetSelected(library.Items.FirstOrDefault());
+        }
+
+        public void OnInsertGroup(GroupShapeViewModel? group)
+        {
+            if (group is null)
+            {
+                return;
+            }
+
+            if (CurrentContainer is { })
+            {
+                ServiceProvider.GetService<ProjectEditorViewModel>()?.OnDropShapeAsClone(group, 0.0, 0.0);
+            }
+        }
+
+        public void OnExportGroup(GroupShapeViewModel? group)
+        {
+            if (group is null)
+            {
+                return;
+            }
+
+            ServiceProvider.GetService<IProjectEditorPlatform>().OnExportObject(group);
+        }
+
+        public void OnAddDatabase()
+        {
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var db = viewModelFactory?.CreateDatabase(ProjectEditorConfiguration.DefaultDatabaseName);
+            if (db is null)
+            {
+                return;
+            }
+            this.AddDatabase(db);
+            SetCurrentDatabase(db);
+        }
+
+        public void OnRemoveDatabase(DatabaseViewModel? db)
+        {
+            this.RemoveDatabase(db);
+            SetCurrentDatabase(Databases.FirstOrDefault());
+        }
+
+        public async Task<string?> OnAddImageKey(string? path)
+        {
+            var imageImporter = ServiceProvider.GetService<IImageImporter>();
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            
+            if (path is null || string.IsNullOrEmpty(path))
+            {
+                var key = await (imageImporter?.GetImageKeyAsync() ?? Task.FromResult(default(string)));
+                if (key is null || string.IsNullOrEmpty(key))
+                {
+                    return default;
+                }
+
+                return key;
+            }
+
+            using var stream = fileSystem?.Open(path);
+            if (stream is null)
+            {
+                return default;
+            }
+
+            var bytes = fileSystem?.ReadBinary(stream);
+            if (bytes is null)
+            {
+                return default;
+            }
+
+            return AddImageFromFile(path, bytes);
+        }
+
+        public void OnRemoveImageKey(string? key)
+        {
+            if (key is null)
+            {
+                return;
+            }
+
+            RemoveImage(key);
+        }
+
+        public void OnResetRepl()
+        {
+            ScriptState = null;
+        }
+        
+        public async Task OnExecuteRepl(string? code)
+        {
+            var scriptRunner = ServiceProvider.GetService<IScriptRunner>();
+            if (scriptRunner is null)
+            {
+                return;
+            }
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(code))
+                {
+                    ScriptState = await scriptRunner.Execute(code, ScriptState);
+                }
+            }
+            catch (Exception ex)
+            {
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
+            }
+        }
+
+        public async Task OnExecuteCode(string? code)
+        {
+            var scriptRunner = ServiceProvider.GetService<IScriptRunner>();
+            if (scriptRunner is null)
+            {
+                return;
+            }
+            
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(code))
+                {
+                    await scriptRunner.Execute(code, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
+            }
+        }
+
+        public async Task OnExecuteScript(ScriptViewModel? script)
+        {
+            try
+            {
+                var code = script?.Code;
+                if (!string.IsNullOrWhiteSpace(code))
+                {
+                    await OnExecuteRepl(code);
+                }
+            }
+            catch (Exception ex)
+            {
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
+            }
+        }
+
+        public void OnAddScript()
+        {
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var script = viewModelFactory?.CreateScript(ProjectEditorConfiguration.DefaultScriptName);
+            this.AddScript(script);
+        }
+
+        public void OnRemoveScript(ScriptViewModel? script)
+        {
+            if (script is null)
+            {
+                return;
+            }
+
+            this.RemoveScript(script);
+            SetCurrentScript(Scripts.FirstOrDefault());
+        }
+
+        public void OnExportScript(ScriptViewModel? script)
+        {
+            if (script is null)
+            {
+                return;
+            }
+
+            ServiceProvider.GetService<IProjectEditorPlatform>().OnExportObject(script);
         }
     }
 }

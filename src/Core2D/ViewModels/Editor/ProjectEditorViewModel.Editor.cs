@@ -576,51 +576,6 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public async Task OnExecuteCode(string csharp)
-        {
-            if (ScriptRunner is null)
-            {
-                return;
-            }
-            
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(csharp))
-                {
-                    await ScriptRunner.Execute(csharp, null);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-        }
-
-        public async Task OnExecuteRepl(string csharp)
-        {
-            if (ScriptRunner is null)
-            {
-                return;
-            }
-
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(csharp))
-                {
-                    ScriptState = await ScriptRunner.Execute(csharp, ScriptState);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-        }
-
-        public void OnResetRepl()
-        {
-            ScriptState = null;
-        }
-
         public async Task OnExecuteScriptFile(string path)
         {
             try
@@ -628,7 +583,11 @@ namespace Core2D.ViewModels.Editor
                 var csharp = FileSystem?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    await OnExecuteCode(csharp);
+                    if (Project is null)
+                    {
+                        return;
+                    }
+                    await Project.OnExecuteCode(csharp);
                 }
             }
             catch (Exception ex)
@@ -642,22 +601,6 @@ namespace Core2D.ViewModels.Editor
             foreach (var path in paths)
             {
                 await OnExecuteScriptFile(path);
-            }
-        }
-
-        public async Task OnExecuteScript(ScriptViewModel script)
-        {
-            try
-            {
-                var csharp = script?.Code;
-                if (!string.IsNullOrWhiteSpace(csharp))
-                {
-                    await OnExecuteRepl(csharp);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
             }
         }
 
@@ -699,33 +642,6 @@ namespace Core2D.ViewModels.Editor
             {
                 Project.Options.TryToConnect = !Project.Options.TryToConnect;
             }
-        }
-
-        public void OnAddDatabase()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            var db = ViewModelFactory?.CreateDatabase(ProjectEditorConfiguration.DefaultDatabaseName);
-            if (db is null)
-            {
-                return;
-            }
-            Project.AddDatabase(db);
-            Project?.SetCurrentDatabase(db);
-        }
-
-        public void OnRemoveDatabase(DatabaseViewModel db)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            Project.RemoveDatabase(db);
-            Project?.SetCurrentDatabase(Project.Databases.FirstOrDefault());
         }
 
         public void OnAddColumn(DatabaseViewModel db)
@@ -832,80 +748,6 @@ namespace Core2D.ViewModels.Editor
             Project.RemoveProperty(property);
         }
 
-        public void OnAddGroupLibrary()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            var gl = ViewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaulGroupLibraryName);
-            if (gl is null)
-            {
-                return;
-            }
-            
-            Project.AddGroupLibrary(gl);
-            Project?.SetCurrentGroupLibrary(gl);
-        }
-
-        public void OnRemoveGroupLibrary(LibraryViewModel libraryViewModel)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            Project.RemoveGroupLibrary(libraryViewModel);
-            Project?.SetCurrentGroupLibrary(Project?.GroupLibraries.FirstOrDefault());
-        }
-
-        public void OnAddGroup(LibraryViewModel? libraryViewModel)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (libraryViewModel is null)
-            {
-                return;
-            }
-            
-            if (Project.SelectedShapes?.Count == 1 && Project.SelectedShapes?.FirstOrDefault() is GroupShapeViewModel group)
-            {
-                var clone = @group.CopyShared(new Dictionary<object, object>());
-                if (clone is { })
-                {
-                    Project?.AddGroup(libraryViewModel, clone);
-                }
-            }
-        }
-
-        public void OnRemoveGroup(GroupShapeViewModel? group)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (group is null)
-            {
-                return;
-            }
-            
-            var library = Project.RemoveGroup(@group);
-            library?.SetSelected(library.Items.FirstOrDefault());
-        }
-
-        public void OnInsertGroup(GroupShapeViewModel group)
-        {
-            if (Project?.CurrentContainer is { })
-            {
-                OnDropShapeAsClone(group, 0.0, 0.0);
-            }
-        }
-
         public void OnAddLayer(FrameContainerViewModel? container)
         {
             if (Project is null)
@@ -973,33 +815,6 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnAddScript()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            var script = ViewModelFactory?.CreateScript(ProjectEditorConfiguration.DefaultScriptName);
-            Project.AddScript(script);
-        }
-
-        public void OnRemoveScript(ScriptViewModel? script)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            if (script is null)
-            {
-                return;
-            }
-            
-            Project.RemoveScript(script);
-            Project.SetCurrentScript(Project?.Scripts.FirstOrDefault());
-        }
-
         public string? OnGetImageKey(string path)
         {
             if (Project is null)
@@ -1023,62 +838,6 @@ namespace Core2D.ViewModels.Editor
                 return key;
             }
             return default;
-        }
-
-        public async Task<string?> OnAddImageKey(string? path)
-        {
-            if (Project is null)
-            {
-                return default;
-            }
-
-            if (path is null || string.IsNullOrEmpty(path))
-            {
-                var key = await (ImageImporter?.GetImageKeyAsync() ?? Task.FromResult(default(string)));
-                if (key is null || string.IsNullOrEmpty(key))
-                {
-                    return default;
-                }
-
-                return key;
-            }
-
-            using var stream = FileSystem?.Open(path);
-            if (stream is null)
-            {
-                return default;
-            }
-
-            var bytes = FileSystem?.ReadBinary(stream);
-            if (bytes is null)
-            {
-                return default;
-            }
-            
-            if (Project is IImageCache imageCache)
-            {
-                var key = imageCache.AddImageFromFile(path, bytes);
-                return key;
-            }
-            
-            return default;
-        }
-
-        public void OnRemoveImageKey(string? key)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            if (key is null)
-            {
-                return;
-            }
-            if (Project is IImageCache imageCache)
-            {
-                imageCache.RemoveImage(key);
-            }
         }
 
         public void OnAddPage(object item)
