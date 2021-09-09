@@ -504,52 +504,18 @@ namespace Core2D.ViewModels.Editor
             var shapes = layer.Shapes;
             var radius = Project.Options.HitThreshold / PageState.ZoomX;
             var result = HitTest.TryToGetShapes(shapes, rect, radius, PageState.ZoomX);
-            if (result is { })
+            if (result is { Count: > 0 })
             {
-                if (result.Count > 0)
+                if (includeSelected)
                 {
-                    if (includeSelected)
+                    if (TryToSelectShapesIncludeSelected(layer, result))
                     {
-                        if (Project?.SelectedShapes is { })
-                        {
-                            foreach (var shape in Project.SelectedShapes)
-                            {
-                                if (result.Contains(shape))
-                                {
-                                    result.Remove(shape);
-                                }
-                                else
-                                {
-                                    result.Add(shape);
-                                }
-                            }
-                        }
-
-                        if (result.Count > 0)
-                        {
-                            if (result.Count == 1)
-                            {
-                                Select(layer, result.FirstOrDefault());
-                            }
-                            else
-                            {
-                                Select(layer, result);
-                            }
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        if (result.Count == 1)
-                        {
-                            Select(layer, result.FirstOrDefault());
-                        }
-                        else
-                        {
-                            Select(layer, result);
-                        }
                         return true;
                     }
+                }
+                else
+                {
+                    return TryToSelectShapesResetSelected(layer, result);
                 }
             }
 
@@ -559,6 +525,60 @@ namespace Core2D.ViewModels.Editor
             }
 
             return false;
+        }
+
+        private bool TryToSelectShapesIncludeSelected(LayerContainerViewModel? layer, ISet<BaseShapeViewModel> result)
+        {
+            var Project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+            if (Project is null)
+            {
+                return false;
+            }
+
+            if (Project.SelectedShapes is { })
+            {
+                foreach (var shape in Project.SelectedShapes)
+                {
+                    if (result.Contains(shape))
+                    {
+                        result.Remove(shape);
+                    }
+                    else
+                    {
+                        result.Add(shape);
+                    }
+                }
+            }
+
+            if (result.Count > 0)
+            {
+                if (result.Count == 1)
+                {
+                    Select(layer, result.First());
+                }
+                else
+                {
+                    Select(layer, result);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool TryToSelectShapesResetSelected(LayerContainerViewModel? layer, ISet<BaseShapeViewModel> result)
+        {
+            if (result.Count == 1)
+            {
+                Select(layer, result.First());
+            }
+            else
+            {
+                Select(layer, result);
+            }
+
+            return true;
         }
 
         public void Hover(LayerContainerViewModel? layer, BaseShapeViewModel shape)
@@ -623,21 +643,17 @@ namespace Core2D.ViewModels.Editor
                 Hover(Project.CurrentContainer?.CurrentLayer, point);
                 return true;
             }
-            else
+
+            var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+            if (shape is { })
             {
-                var shape = HitTest.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
-                if (shape is { })
-                {
-                    Hover(Project.CurrentContainer?.CurrentLayer, shape);
-                    return true;
-                }
-                else
-                {
-                    if (Project.SelectedShapes?.Count == 1 && HoveredShapeViewModel == Project.SelectedShapes?.FirstOrDefault())
-                    {
-                        Dehover(Project.CurrentContainer?.CurrentLayer);
-                    }
-                }
+                Hover(Project.CurrentContainer?.CurrentLayer, shape);
+                return true;
+            }
+
+            if (Project.SelectedShapes?.Count == 1 && HoveredShapeViewModel == Project.SelectedShapes?.FirstOrDefault())
+            {
+                Dehover(Project.CurrentContainer?.CurrentLayer);
             }
 
             return false;
