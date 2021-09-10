@@ -209,7 +209,6 @@ namespace Core2D.ViewModels.Shapes
             return _points;
         }
 
-
         private string ToXamlString(ImmutableArray<PathFigureViewModel> figures)
         {
             if (figures.Length == 0)
