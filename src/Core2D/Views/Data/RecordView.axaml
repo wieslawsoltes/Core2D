@@ -9,32 +9,54 @@
              d:DataContext="{x:Static vmd:DesignerContext.Record}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmdt:RecordViewModel" x:CompileBindings="True">
-  <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" Margin="{DynamicResource ContentMargin}">
-    <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" />
-    <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" DataContext="{Binding Owner}"
-                  Items="{Binding Columns}" x:DataType="vmdt:DatabaseViewModel">
+  <Grid RowDefinitions="Auto,*" 
+        ColumnDefinitions="50*,Auto,50*" 
+        Margin="{DynamicResource ContentMargin}">
+    <TextBlock VerticalAlignment="Center" 
+               Text="Name" 
+               Grid.Column="0" Grid.Row="0" />
+    <ItemsControl DataContext="{Binding Owner}"
+                  Items="{Binding Columns}" 
+                  VerticalAlignment="Stretch" 
+                  Grid.Column="0" Grid.Row="1" 
+                  x:DataType="vmdt:DatabaseViewModel">
       <ItemsControl.DataTemplates>
         <DataTemplate DataType="vmdt:ColumnViewModel">
-          <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-            <!--<i:Interaction.Behaviors>
-                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                        </i:Interaction.Behaviors>-->
-            <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
+          <Grid VerticalAlignment="Top" 
+                Background="Transparent" 
+                Margin="0,2,0,2">
+            <!--
+            <i:Interaction.Behaviors>
+              <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+            </i:Interaction.Behaviors>
+            -->
+            <TextBox VerticalAlignment="Center" 
+                     Text="{Binding Name, Mode=TwoWay}" />
           </Grid>
         </DataTemplate>
       </ItemsControl.DataTemplates>
     </ItemsControl>
-    <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6"
+    <GridSplitter ResizeDirection="Columns" 
+                  ResizeBehavior="PreviousAndNext" 
+                  Background="Transparent" 
+                  Width="6"
                   Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
     <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" />
-    <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
+    <ItemsControl Items="{Binding Values}"
+                  VerticalAlignment="Stretch" 
+                  Grid.Column="2" Grid.Row="1">
       <ItemsControl.DataTemplates>
         <DataTemplate DataType="vmdt:ValueViewModel">
-          <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-            <!--<i:Interaction.Behaviors>
-                            <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                        </i:Interaction.Behaviors>-->
-            <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}" />
+          <Grid VerticalAlignment="Top" 
+                Background="Transparent" 
+                Margin="0,2,0,2">
+            <!--
+            <i:Interaction.Behaviors>
+              <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+            </i:Interaction.Behaviors
+            -->
+            <TextBox VerticalAlignment="Center" 
+                     Text="{Binding Content, Mode=TwoWay}" />
           </Grid>
         </DataTemplate>
       </ItemsControl.DataTemplates>

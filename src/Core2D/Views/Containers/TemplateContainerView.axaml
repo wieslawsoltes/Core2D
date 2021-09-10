@@ -16,13 +16,18 @@
     <TabItem Header="Size">
       <Grid ColumnDefinitions="50*,6,50*" Margin="{DynamicResource ContentMargin}">
         <StackPanel Grid.Column="0">
-          <Label Content="Width" Margin="{DynamicResource TextControlThemePadding}" />
+          <Label Content="Width" 
+                 Margin="{DynamicResource TextControlThemePadding}" />
           <TextBox Text="{Binding Width, Mode=TwoWay}" />
         </StackPanel>
-        <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6"
+        <GridSplitter ResizeDirection="Columns" 
+                      ResizeBehavior="PreviousAndNext" 
+                      Background="Transparent" 
+                      Width="6"
                       Grid.Column="1" />
         <StackPanel Grid.Column="2">
-          <Label Content="Height" Margin="{DynamicResource TextControlThemePadding}" />
+          <Label Content="Height" 
+                 Margin="{DynamicResource TextControlThemePadding}" />
           <TextBox Text="{Binding Height, Mode=TwoWay}" />
         </StackPanel>
       </Grid>

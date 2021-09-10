@@ -20,55 +20,81 @@
   </UserControl.Resources>
   <Grid RowDefinitions="50*,6,50*">
     <Grid RowDefinitions="Auto,*" Grid.Row="0">
-      <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
-                  Margin="{DynamicResource ContentMargin}"
-                  x:CompileBindings="False">
-        <Button Content="reset" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}" BorderBrush="Transparent"
+      <StackPanel Grid.Row="0" 
+                  Orientation="Horizontal" 
+                  HorizontalAlignment="Right" 
+                  VerticalAlignment="Center"
+                  Margin="{DynamicResource ContentMargin}">
+        <Button Content="reset" 
+                Command="{Binding ResetRepl}"
+                BorderBrush="Transparent"
+                Background="Transparent" 
+                Padding="12,4,12,4" />
+        <Button Content="repl" 
+                Command="{Binding ExecuteRepl}"
+                CommandParameter="{Binding CurrentScript.Code, FallbackValue={x:Null}}" 
+                IsVisible="{Binding !!CurrentScript}"
+                BorderBrush="Transparent" 
                 Background="Transparent" Padding="12,4,12,4" />
-        <Button Content="repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}"
-                CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}"
-                BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-        <Button Content="execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}"
-                CommandParameter="{Binding CurrentScript.Code}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}"
-                BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-        <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}"
-                CommandParameter="{Binding CurrentScript}" IsVisible="{Binding !!#ScriptsListBox.SelectedItem}"
-                BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-        <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" BorderBrush="Transparent"
-                Background="Transparent" Padding="12,4,12,4" />
+        <Button Content="execute" 
+                Command="{Binding ExecuteCode}"
+                CommandParameter="{Binding CurrentScript.Code, FallbackValue={x:Null}}" 
+                IsVisible="{Binding !!CurrentScript}"
+                BorderBrush="Transparent" 
+                Background="Transparent" 
+                Padding="12,4,12,4" />
+        <Button Content="&#727;" 
+                Command="{Binding RemoveScript}"
+                CommandParameter="{Binding CurrentScript}" 
+                IsVisible="{Binding !!CurrentScript}"
+                BorderBrush="Transparent" 
+                Background="Transparent"
+                Padding="12,4,12,4" />
+        <Button Content="+" Command="{Binding AddScript}" 
+                BorderBrush="Transparent"
+                Background="Transparent" 
+                Padding="12,4,12,4" />
       </StackPanel>
-      <ListBox x:Name="ScriptsListBox" Items="{Binding Scripts}" SelectedItem="{Binding CurrentScript, Mode=TwoWay}"
+      <ListBox x:Name="ScriptsListBox" 
+               Items="{Binding Scripts}" 
+               SelectedItem="{Binding CurrentScript, Mode=TwoWay}"
                Grid.Row="1">
         <i:Interaction.Behaviors>
           <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}"
                                    Handler="{StaticResource ScriptsListBoxDropHandler}" />
         </i:Interaction.Behaviors>
         <ListBox.KeyBindings>
-          <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" Gesture="Ctrl+N"
-                      x:CompileBindings="False" />
-          <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}"
-                      CommandParameter="{Binding #ScriptsListBox.SelectedItem}" Gesture="Delete"
-                      x:CompileBindings="False" />
-          <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
-                      CommandParameter="{Binding #ScriptsListBox.SelectedItem}" Gesture="Ctrl+E"
-                      x:CompileBindings="False" />
+          <KeyBinding Command="{Binding AddScript}" 
+                      Gesture="Ctrl+N" />
+          <KeyBinding Command="{Binding RemoveScript}"
+                      CommandParameter="{Binding CurrentScript}" 
+                      Gesture="Delete" />
+          <KeyBinding Command="{Binding ExportScript}"
+                      CommandParameter="{Binding CurrentScript}" 
+                      Gesture="Ctrl+E" />
         </ListBox.KeyBindings>
         <ListBox.Resources>
-          <ContextMenu x:Key="ScriptContextMenu" x:CompileBindings="False">
-            <MenuItem Header="_Execute" Command="{Binding $parent[TopLevel].DataContext.OnExecuteCode}"
+          <ContextMenu x:Key="ScriptContextMenu" x:DataType="vms:ScriptViewModel">
+            <MenuItem Header="_Execute" 
+                      Command="{Binding ExecuteCode}"
                       CommandParameter="{Binding Path=Code, Mode=OneWay}" />
             <Separator />
-            <MenuItem Header="_Repl" Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}"
+            <MenuItem Header="_Repl" 
+                      Command="{Binding ExecuteRepl}"
                       CommandParameter="{Binding Path=Code, Mode=OneWay}" />
             <Separator />
-            <MenuItem Header="Re_set" Command="{Binding $parent[TopLevel].DataContext.OnResetRepl}" />
+            <MenuItem Header="Re_set" 
+                      Command="{Binding ResetRepl}" />
             <Separator />
-            <MenuItem Header="_Add Script" Command="{Binding $parent[TopLevel].DataContext.OnAddScript}" />
+            <MenuItem Header="_Add Script" 
+                      Command="{Binding AddScript}" />
             <Separator />
-            <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveScript}"
+            <MenuItem Header="_Delete" 
+                      Command="{Binding RemoveScript}"
                       CommandParameter="{Binding Mode=OneWay}" />
             <Separator />
-            <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
+            <MenuItem Header="E_xport" 
+                      Command="{Binding ExportScript}"
                       CommandParameter="{Binding Mode=OneWay}" />
           </ContextMenu>
         </ListBox.Resources>
@@ -81,8 +107,12 @@
         </ListBox.DataTemplates>
       </ListBox>
     </Grid>
-    <GridSplitter ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" Height="6"
+    <GridSplitter ResizeDirection="Rows" 
+                  ResizeBehavior="PreviousAndNext" 
+                  Background="Transparent" 
+                  Height="6"
                   Grid.Row="1" />
-    <scripting:ScriptView DataContext="{Binding CurrentScript}" Grid.Row="2" />
+    <scripting:ScriptView DataContext="{Binding CurrentScript}"
+                          Grid.Row="2" />
   </Grid>
 </UserControl>

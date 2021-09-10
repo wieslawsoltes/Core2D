@@ -105,7 +105,5 @@ namespace Core2D.ViewModels.Editor
         public IPathConverter? PathConverter => _pathConverter?.Value;
 
         public ISvgConverter? SvgConverter => _svgConverter?.Value;
-
-        private object? ScriptState { get; set; }
     }
 }

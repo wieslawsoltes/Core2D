@@ -8,7 +8,6 @@ using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Core2D.Model;
 using Core2D.Model.Editor;
-using Core2D.Model.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
@@ -19,7 +18,6 @@ using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Core2D.Spatial;
-using Core2D.ViewModels.Editor.Bounds;
 
 namespace Core2D.ViewModels.Editor
 {
@@ -36,7 +34,11 @@ namespace Core2D.ViewModels.Editor
 
         public void SetShapeName(BaseShapeViewModel shape, IEnumerable<BaseShapeViewModel>? source = null)
         {
-            var input = source ?? _project.GetAllShapes();
+            var input = source ?? _project?.GetAllShapes();
+            if (input is null)
+            {
+                return;
+            }
             var shapes = input.Where(s => s.GetType() == shape.GetType() && s != shape).ToList();
             var count = shapes.Count + 1;
             var update = string.IsNullOrEmpty(shape.Name) || input.Any(x => x != shape && x.Name == shape.Name);
@@ -578,51 +580,6 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public async Task OnExecuteCode(string csharp)
-        {
-            if (ScriptRunner is null)
-            {
-                return;
-            }
-            
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(csharp))
-                {
-                    await ScriptRunner.Execute(csharp, null);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-        }
-
-        public async Task OnExecuteRepl(string csharp)
-        {
-            if (ScriptRunner is null)
-            {
-                return;
-            }
-
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(csharp))
-                {
-                    ScriptState = await ScriptRunner.Execute(csharp, ScriptState);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
-            }
-        }
-
-        public void OnResetRepl()
-        {
-            ScriptState = null;
-        }
-
         public async Task OnExecuteScriptFile(string path)
         {
             try
@@ -630,7 +587,11 @@ namespace Core2D.ViewModels.Editor
                 var csharp = FileSystem?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
-                    await OnExecuteCode(csharp);
+                    if (Project is null)
+                    {
+                        return;
+                    }
+                    await Project.OnExecuteCode(csharp);
                 }
             }
             catch (Exception ex)
@@ -644,22 +605,6 @@ namespace Core2D.ViewModels.Editor
             foreach (var path in paths)
             {
                 await OnExecuteScriptFile(path);
-            }
-        }
-
-        public async Task OnExecuteScript(ScriptViewModel script)
-        {
-            try
-            {
-                var csharp = script?.Code;
-                if (!string.IsNullOrWhiteSpace(csharp))
-                {
-                    await OnExecuteRepl(csharp);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log?.LogException(ex);
             }
         }
 
@@ -701,33 +646,6 @@ namespace Core2D.ViewModels.Editor
             {
                 Project.Options.TryToConnect = !Project.Options.TryToConnect;
             }
-        }
-
-        public void OnAddDatabase()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            var db = ViewModelFactory?.CreateDatabase(ProjectEditorConfiguration.DefaultDatabaseName);
-            if (db is null)
-            {
-                return;
-            }
-            Project.AddDatabase(db);
-            Project?.SetCurrentDatabase(db);
-        }
-
-        public void OnRemoveDatabase(DatabaseViewModel db)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            Project.RemoveDatabase(db);
-            Project?.SetCurrentDatabase(Project.Databases.FirstOrDefault());
         }
 
         public void OnAddColumn(DatabaseViewModel db)
@@ -834,80 +752,6 @@ namespace Core2D.ViewModels.Editor
             Project.RemoveProperty(property);
         }
 
-        public void OnAddGroupLibrary()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            var gl = ViewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaulGroupLibraryName);
-            if (gl is null)
-            {
-                return;
-            }
-            
-            Project.AddGroupLibrary(gl);
-            Project?.SetCurrentGroupLibrary(gl);
-        }
-
-        public void OnRemoveGroupLibrary(LibraryViewModel libraryViewModel)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            Project.RemoveGroupLibrary(libraryViewModel);
-            Project?.SetCurrentGroupLibrary(Project?.GroupLibraries.FirstOrDefault());
-        }
-
-        public void OnAddGroup(LibraryViewModel? libraryViewModel)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (libraryViewModel is null)
-            {
-                return;
-            }
-            
-            if (Project.SelectedShapes?.Count == 1 && Project.SelectedShapes?.FirstOrDefault() is GroupShapeViewModel group)
-            {
-                var clone = @group.CopyShared(new Dictionary<object, object>());
-                if (clone is { })
-                {
-                    Project?.AddGroup(libraryViewModel, clone);
-                }
-            }
-        }
-
-        public void OnRemoveGroup(GroupShapeViewModel? group)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (group is null)
-            {
-                return;
-            }
-            
-            var library = Project.RemoveGroup(@group);
-            library?.SetSelected(library.Items.FirstOrDefault());
-        }
-
-        public void OnInsertGroup(GroupShapeViewModel group)
-        {
-            if (Project?.CurrentContainer is { })
-            {
-                OnDropShapeAsClone(group, 0.0, 0.0);
-            }
-        }
-
         public void OnAddLayer(FrameContainerViewModel? container)
         {
             if (Project is null)
@@ -939,96 +783,6 @@ namespace Core2D.ViewModels.Editor
             if (layer.Owner is FrameContainerViewModel owner)
             {
                 owner.SetCurrentLayer(owner.Layers.FirstOrDefault());
-            }
-        }
-
-        public void OnAddStyleLibrary()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            var sl = ViewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaulStyleLibraryName);
-            if (sl is null)
-            {
-                return;
-            }
-            
-            Project.AddStyleLibrary(sl);
-            Project?.SetCurrentStyleLibrary(sl);
-        }
-
-        public void OnRemoveStyleLibrary(LibraryViewModel libraryViewModel)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            Project.RemoveStyleLibrary(libraryViewModel);
-            Project?.SetCurrentStyleLibrary(Project?.StyleLibraries.FirstOrDefault());
-        }
-
-        public void OnAddStyle(LibraryViewModel libraryViewModel)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (Project.SelectedShapes is { })
-            {
-                foreach (var shape in Project.SelectedShapes)
-                {
-                    if (shape.Style is { })
-                    {
-                        var style = (ShapeStyleViewModel)shape.Style.Copy(null);
-                        Project.AddStyle(libraryViewModel, style);
-                    }
-                }
-            }
-            else
-            {
-                var style = ViewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-                if (style is { })
-                {
-                    Project.AddStyle(libraryViewModel, style);
-                }
-            }
-        }
-
-        public void OnRemoveStyle(ShapeStyleViewModel? style)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            var library = Project.RemoveStyle(style);
-            library?.SetSelected(library.Items.FirstOrDefault());
-        }
-
-        public void OnApplyStyle(ShapeStyleViewModel? style)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (style is null)
-            {
-                return;
-            }
-
-            if (!(Project?.SelectedShapes?.Count > 0))
-            {
-                return;
-            }
-            
-            foreach (var shape in Project.SelectedShapes)
-            {
-                Project?.ApplyStyle(shape, style);
             }
         }
 
@@ -1065,94 +819,6 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnAddTemplate()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            var template = ContainerFactory?.GetTemplate(Project, "Empty") 
-                           ?? ViewModelFactory?.CreateTemplateContainer(ProjectEditorConfiguration.DefaultTemplateName);
-            if (template is { })
-            {
-                Project.AddTemplate(template);
-            }
-        }
-
-        public void OnRemoveTemplate(TemplateContainerViewModel? template)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (template is null)
-            {
-                return;
-            }
-            Project.RemoveTemplate(template);
-            Project.SetCurrentTemplate(Project?.Templates.FirstOrDefault());
-        }
-
-        public void OnEditTemplate(FrameContainerViewModel? template)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-
-            if (template is null)
-            {
-                return;
-            }
-
-            Project.SetCurrentContainer(template);
-            Project.CurrentContainer?.InvalidateLayer();
-        }
-
-        public void OnAddScript()
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            var script = ViewModelFactory?.CreateScript(ProjectEditorConfiguration.DefaultScriptName);
-            Project.AddScript(script);
-        }
-
-        public void OnRemoveScript(ScriptViewModel? script)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            if (script is null)
-            {
-                return;
-            }
-            
-            Project.RemoveScript(script);
-            Project.SetCurrentScript(Project?.Scripts.FirstOrDefault());
-        }
-
-        public void OnApplyTemplate(TemplateContainerViewModel? template)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            var container = Project.CurrentContainer;
-            if (container is PageContainerViewModel page)
-            {
-                Project.ApplyTemplate(page, template);
-                Project.CurrentContainer?.InvalidateLayer();
-            }
-        }
-
         public string? OnGetImageKey(string path)
         {
             if (Project is null)
@@ -1176,62 +842,6 @@ namespace Core2D.ViewModels.Editor
                 return key;
             }
             return default;
-        }
-
-        public async Task<string?> OnAddImageKey(string? path)
-        {
-            if (Project is null)
-            {
-                return default;
-            }
-
-            if (path is null || string.IsNullOrEmpty(path))
-            {
-                var key = await (ImageImporter?.GetImageKeyAsync() ?? Task.FromResult(default(string)));
-                if (key is null || string.IsNullOrEmpty(key))
-                {
-                    return default;
-                }
-
-                return key;
-            }
-
-            using var stream = FileSystem?.Open(path);
-            if (stream is null)
-            {
-                return default;
-            }
-
-            var bytes = FileSystem?.ReadBinary(stream);
-            if (bytes is null)
-            {
-                return default;
-            }
-            
-            if (Project is IImageCache imageCache)
-            {
-                var key = imageCache.AddImageFromFile(path, bytes);
-                return key;
-            }
-            
-            return default;
-        }
-
-        public void OnRemoveImageKey(string? key)
-        {
-            if (Project is null)
-            {
-                return;
-            }
-            
-            if (key is null)
-            {
-                return;
-            }
-            if (Project is IImageCache imageCache)
-            {
-                imageCache.RemoveImage(key);
-            }
         }
 
         public void OnAddPage(object item)
@@ -1902,7 +1512,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     if (bExecute)
                     {
-                        OnApplyStyle(style);
+                        Project.OnApplyStyle(style);
                     }
                     return true;
                 }
@@ -1946,7 +1556,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     if (bExecute)
                     {
-                        OnApplyTemplate(template);
+                        Project.OnApplyTemplate(template);
                     }
                     return true;
                 }

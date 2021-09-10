@@ -13,16 +13,31 @@
   <TabControl>
     <TabItem Header="Text">
       <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+        <Label Content="Name" 
+               Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        <CheckBox Content="IsStroked" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <CheckBox Content="IsFilled" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <Label Content="Text" Margin="{DynamicResource TextControlThemePadding}" />
+        <CheckBox Content="IsStroked"
+                  IsChecked="{Binding IsStroked, Mode=TwoWay}" 
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="IsFilled" 
+                  IsChecked="{Binding IsFilled, Mode=TwoWay}" 
+                  HorizontalAlignment="Stretch" />
+        <Label Content="Text" 
+               Margin="{DynamicResource TextControlThemePadding}" />
         <DockPanel>
-          <Button Content="..." Command="{Binding $parent[UserControl].OnEditTextBinding}" CommandParameter="{Binding}"
-                  HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  Padding="0" Margin="6,0,0,0" Width="30" DockPanel.Dock="Right" x:CompileBindings="False" />
-          <TextBox Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="True" HorizontalAlignment="Stretch" />
+          <Button Content="..."
+                  Command="{Binding $parent[UserControl].OnEditTextBinding}" 
+                  CommandParameter="{Binding}"
+                  HorizontalContentAlignment="Center" 
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Padding="0" Margin="6,0,0,0" 
+                  Width="30" 
+                  DockPanel.Dock="Right" 
+                  x:CompileBindings="False" />
+          <TextBox Text="{Binding Text, Mode=TwoWay}" 
+                   AcceptsReturn="True" 
+                   HorizontalAlignment="Stretch" />
         </DockPanel>
       </StackPanel>
     </TabItem>

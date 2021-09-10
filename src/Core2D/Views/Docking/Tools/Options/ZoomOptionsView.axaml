@@ -11,48 +11,79 @@
              x:DataType="vm:ZoomOptionsViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}">
     <Panel x:DataType="vme:ProjectEditorViewModel">
-      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" 
+                    VerticalScrollBarVisibility="Auto"
                     DataContext="{Binding CanvasPlatform.Zoom}">
         <TabControl x:DataType="paz:ZoomBorder">
           <TabItem Header="Status">
             <StackPanel Margin="{DynamicResource ContentMargin}">
-              <Label Content="ZoomX" Margin="{DynamicResource TextControlThemePadding}" />
-              <Label Content="{Binding ZoomX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}" />
-              <Label Content="ZoomY" Margin="{DynamicResource TextControlThemePadding}" />
-              <Label Content="{Binding ZoomY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}" />
-              <Label Content="OffsetX" Margin="{DynamicResource TextControlThemePadding}" />
-              <Label Content="{Binding OffsetX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}" />
-              <Label Content="OffsetY" Margin="{DynamicResource TextControlThemePadding}" />
-              <Label Content="{Binding OffsetY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}" />
-              <Button Content="Reset" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomReset}"
+              <Label Content="ZoomX"
+                     Margin="{DynamicResource TextControlThemePadding}" />
+              <Label Content="{Binding ZoomX, Mode=OneWay}" 
+                     Margin="{DynamicResource TextControlThemePadding}" />
+              <Label Content="ZoomY" 
+                     Margin="{DynamicResource TextControlThemePadding}" />
+              <Label Content="{Binding ZoomY, Mode=OneWay}" 
+                     Margin="{DynamicResource TextControlThemePadding}" />
+              <Label Content="OffsetX" 
+                     Margin="{DynamicResource TextControlThemePadding}" />
+              <Label Content="{Binding OffsetX, Mode=OneWay}" 
+                     Margin="{DynamicResource TextControlThemePadding}" />
+              <Label Content="OffsetY" 
+                     Margin="{DynamicResource TextControlThemePadding}" />
+              <Label Content="{Binding OffsetY, Mode=OneWay}" 
+                     Margin="{DynamicResource TextControlThemePadding}" />
+              <Button Content="Reset" 
+                      Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomReset}"
+                      HorizontalAlignment="Stretch" 
+                      HorizontalContentAlignment="Center"
+                      Margin="{DynamicResource TextControlThemePadding}" 
+                      x:CompileBindings="False" />
+              <Button Content="Fill" 
+                      Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomFill}"
                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                      Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False" />
-              <Button Content="Fill" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomFill}"
-                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                      Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False" />
-              <Button Content="Uniform" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniform}"
-                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                      Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False" />
-              <Button Content="UniformToFill" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniformToFill}"
-                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                      Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False" />
-              <Button Content="AutoFit" Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomAutoFit}"
-                      HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                      Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False" />
+                      Margin="{DynamicResource TextControlThemePadding}" 
+                      x:CompileBindings="False" />
+              <Button Content="Uniform" 
+                      Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniform}"
+                      HorizontalAlignment="Stretch" 
+                      HorizontalContentAlignment="Center"
+                      Margin="{DynamicResource TextControlThemePadding}"
+                      x:CompileBindings="False" />
+              <Button Content="UniformToFill" 
+                      Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniformToFill}"
+                      HorizontalAlignment="Stretch" 
+                      HorizontalContentAlignment="Center"
+                      Margin="{DynamicResource TextControlThemePadding}" 
+                      x:CompileBindings="False" />
+              <Button Content="AutoFit" 
+                      Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomAutoFit}"
+                      HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Center"
+                      Margin="{DynamicResource TextControlThemePadding}" 
+                      x:CompileBindings="False" />
             </StackPanel>
           </TabItem>
           <TabItem Header="Options">
             <StackPanel Margin="{DynamicResource ContentMargin}">
               <Label Content="PanButton" Margin="{DynamicResource TextControlThemePadding}" />
-              <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}"
+              <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" 
+                        SelectedItem="{Binding PanButton, Mode=TwoWay}"
                         HorizontalAlignment="Stretch" />
-              <Label Content="Stretch" Margin="{DynamicResource TextControlThemePadding}" />
-              <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}"
+              <Label Content="Stretch" 
+                     Margin="{DynamicResource TextControlThemePadding}" />
+              <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" 
+                        SelectedItem="{Binding Stretch, Mode=TwoWay}"
                         HorizontalAlignment="Stretch" />
-              <Label Content="ZoomSpeed" Margin="{DynamicResource TextControlThemePadding}" />
+              <Label Content="ZoomSpeed" 
+                     Margin="{DynamicResource TextControlThemePadding}" />
               <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}" />
-              <CheckBox Content="EnablePan" IsChecked="{Binding EnablePan}" HorizontalAlignment="Stretch" />
-              <CheckBox Content="EnableZoom" IsChecked="{Binding EnableZoom}" HorizontalAlignment="Stretch" />
+              <CheckBox Content="EnablePan" 
+                        IsChecked="{Binding EnablePan}" 
+                        HorizontalAlignment="Stretch" />
+              <CheckBox Content="EnableZoom" 
+                        IsChecked="{Binding EnableZoom}"
+                        HorizontalAlignment="Stretch" />
             </StackPanel>
           </TabItem>
           <TabItem Header="Constrains">

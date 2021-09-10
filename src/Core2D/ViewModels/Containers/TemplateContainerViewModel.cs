@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Windows.Input;
 using Core2D.Model.Renderer;
-using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Containers
@@ -27,7 +28,24 @@ namespace Core2D.ViewModels.Containers
 
         public TemplateContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+            ApplyTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnApplyTemplate(x));
+
+            EditTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnEditTemplate(x));
+
+            RemoveTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnRemoveTemplate(x));
+
+            ExportTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnExportTemplate(x));
+
+            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
+
+        public ICommand ApplyTemplate { get; }
+
+        public ICommand EditTemplate { get; }
+
+        public ICommand RemoveTemplate { get; }
+
+        public ICommand ExportTemplate { get; }
 
         public override object Copy(IDictionary<object, object>? shared)
         {

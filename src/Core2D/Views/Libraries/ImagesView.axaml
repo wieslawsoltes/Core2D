@@ -5,31 +5,54 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
-             xmlns:mr="using:Core2D.Model.Renderer"
+             xmlns:vmc="using:Core2D.ViewModels.Containers"
+             xmlns:vmr="using:Core2D.ViewModels.Renderer"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Project}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="mr:IImageCache" x:CompileBindings="True">
+             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*">
-    <StackPanel Grid.Row="0" Grid.Column="0" Margin="{DynamicResource ContentMargin}" Orientation="Horizontal" HorizontalAlignment="Right"
-                VerticalAlignment="Center" x:CompileBindings="False">
-      <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddImageKey}" BorderBrush="Transparent"
-              Background="Transparent" Padding="12,4,12,4" />
+    <StackPanel Grid.Row="0" 
+                Grid.Column="0"
+                Margin="{DynamicResource ContentMargin}" 
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center">
+      <Button Content="+" 
+              Command="{Binding AddImageKey}" 
+              BorderBrush="Transparent"
+              Background="Transparent" 
+              Padding="12,4,12,4" />
     </StackPanel>
-    <TextBlock Grid.Column="0" Grid.Row="1" Margin="{DynamicResource ContentMargin}" VerticalAlignment="Center" Text="Key" />
-    <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Margin="{DynamicResource ContentMargin}" Items="{Binding Keys}">
+    <TextBlock Margin="{DynamicResource ContentMargin}" 
+               VerticalAlignment="Center" 
+               Text="Key"
+               Grid.Column="0" 
+               Grid.Row="1" />
+    <ItemsControl VerticalAlignment="Stretch"
+                  Margin="{DynamicResource ContentMargin}"
+                  Items="{Binding Keys}"
+                  Grid.Column="0" 
+                  Grid.Row="2" >
       <ItemsControl.DataTemplates>
-        <DataTemplate DataType="mr:IImageKey">
+        <DataTemplate DataType="vmr:ImageKeyViewModel">
           <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
             <i:Interaction.Behaviors>
               <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
             </i:Interaction.Behaviors>
-            <TextBox VerticalAlignment="Center" Text="{Binding Key, Mode=OneWay}" Grid.Column="0" />
-            <Button Content="-" Grid.Column="1" Command="{Binding $parent[TopLevel].DataContext.OnRemoveImageKey}"
-                    CommandParameter="{Binding Key}" Padding="0" VerticalAlignment="Stretch"
-                    VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                    x:CompileBindings="False" />
+            <TextBox VerticalAlignment="Center" 
+                     Text="{Binding Key, Mode=OneWay}" 
+                     Grid.Column="0" />
+            <Button Content="-" 
+                    Command="{Binding RemoveImageKey}"
+                    CommandParameter="{Binding Key}" 
+                    Padding="0" 
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Center" 
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Center"
+                    Grid.Column="1" />
           </Grid>
         </DataTemplate>
       </ItemsControl.DataTemplates>

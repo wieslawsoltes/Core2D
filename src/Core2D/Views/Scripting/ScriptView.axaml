@@ -14,7 +14,9 @@
              x:DataType="vms:ScriptViewModel" x:CompileBindings="True">
   <UserControl.KeyBindings>
     <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnExecuteRepl}"
-                CommandParameter="{Binding #ScriptTextEditor.Text}" Gesture="Ctrl+Enter" x:CompileBindings="False" />
+                CommandParameter="{Binding #ScriptTextEditor.Text}" 
+                Gesture="Ctrl+Enter" 
+                x:CompileBindings="False" />
   </UserControl.KeyBindings>
   <Panel>
     <ae:TextEditor x:Name="ScriptTextEditor"

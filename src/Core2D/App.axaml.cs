@@ -30,36 +30,7 @@ namespace Core2D
     {
         public static string DefaultTheme { get; set; }
 
-        public static ICommand ChangeTheme { get; set; }
-
-        private class ChangeThemeCommand : ICommand
-        {
-            private readonly App _app;
-
-#pragma warning disable CS0067
-
-            public event EventHandler CanExecuteChanged;
-
-#pragma warning restore CS0067
-
-            public ChangeThemeCommand(App app)
-            {
-                _app = app;
-            }
-
-            public bool CanExecute(object parameter)
-            {
-                return true;
-            }
-
-            public void Execute(object parameter)
-            {
-                if (parameter is string value)
-                {
-                    _app.SetTheme(value);
-                }
-            }
-        }
+        public static ICommand ChangeTheme { get; private set; }
 
         static App()
         {
@@ -305,7 +276,7 @@ namespace Core2D
         {
             AvaloniaXamlLoader.Load(this);
 
-            ChangeTheme = new ChangeThemeCommand(this);
+            ChangeTheme = new Command<string>(SetTheme);
         }
     }
 }

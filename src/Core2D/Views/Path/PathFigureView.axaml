@@ -15,7 +15,9 @@
   <TabControl>
     <TabItem Header="Properties">
       <StackPanel Margin="{DynamicResource ContentMargin}">
-        <CheckBox Content="IsClosed" IsChecked="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        <CheckBox Content="IsClosed" 
+                  IsChecked="{Binding IsClosed, Mode=TwoWay}" 
+                  HorizontalAlignment="Stretch" />
       </StackPanel>
     </TabItem>
     <TabItem Header="StartPoint">

@@ -4,8 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
@@ -19,51 +17,72 @@
     <dd:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler" />
   </UserControl.Resources>
   <Grid RowDefinitions="Auto,*,12,Auto">
-    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"
-                Margin="{DynamicResource ContentMargin}"
-                x:CompileBindings="False">
-      <Button Content="apply" Command="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}"
-              CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#TemplatesListBox.SelectedItem}"
-              BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-      <Button Content="edit" Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}"
-              CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#TemplatesListBox.SelectedItem}"
-              BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-      <Button Content="&#727;" Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}"
-              CommandParameter="{Binding CurrentTemplate}" IsVisible="{Binding !!#TemplatesListBox.SelectedItem}"
-              BorderBrush="Transparent" Background="Transparent" Padding="12,4,12,4" />
-      <Button Content="+" Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}" BorderBrush="Transparent"
+    <StackPanel Grid.Row="0" 
+                Orientation="Horizontal" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Center"
+                Margin="{DynamicResource ContentMargin}">
+      <Button Content="apply"
+              Command="{Binding ApplyTemplate}"
+              CommandParameter="{Binding CurrentTemplate}" 
+              IsVisible="{Binding !!CurrentTemplate}"
+              BorderBrush="Transparent"
+              Background="Transparent" 
+              Padding="12,4,12,4" />
+      <Button Content="edit"
+              Command="{Binding EditTemplate}"
+              CommandParameter="{Binding CurrentTemplate}" 
+              IsVisible="{Binding !!CurrentTemplate}"
+              BorderBrush="Transparent" 
+              Background="Transparent"
+              Padding="12,4,12,4" />
+      <Button Content="&#727;" 
+              Command="{Binding RemoveTemplate}"
+              CommandParameter="{Binding CurrentTemplate}" 
+              IsVisible="{Binding !!CurrentTemplate}"
+              BorderBrush="Transparent" 
+              Background="Transparent"
+              Padding="12,4,12,4" />
+      <Button Content="+" 
+              Command="{Binding AddTemplate}" 
+              BorderBrush="Transparent"
               Background="Transparent" Padding="12,4,12,4" />
     </StackPanel>
-    <ListBox x:Name="TemplatesListBox" Items="{Binding Templates}"
-             SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" Grid.Row="1">
+    <ListBox x:Name="TemplatesListBox" 
+             Items="{Binding Templates}"
+             SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" 
+             Grid.Row="1">
       <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}"
                                  Handler="{StaticResource TemplatesListBoxDropHandler}" />
       </i:Interaction.Behaviors>
       <ListBox.KeyBindings>
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}" Gesture="Ctrl+N"
-                    x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}"
-                    CommandParameter="{Binding #TemplatesListBox.SelectedItem}" Gesture="Ctrl+T"
-                    x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}"
-                    CommandParameter="{Binding #TemplatesListBox.SelectedItem}" Gesture="Delete"
-                    x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
-                    CommandParameter="{Binding #TemplatesListBox.SelectedItem}" Gesture="Ctrl+E"
-                    x:CompileBindings="False" />
+        <KeyBinding Command="{Binding AddTemplate}" 
+                    Gesture="Ctrl+N" />
+        <KeyBinding Command="{Binding EditTemplate}"
+                    CommandParameter="{Binding CurrentTemplate}" 
+                    Gesture="Ctrl+T" />
+        <KeyBinding Command="{Binding RemoveTemplate}"
+                    CommandParameter="{Binding CurrentTemplate}"
+                    Gesture="Delete" />
+        <KeyBinding Command="{Binding ExportTemplate}"
+                    CommandParameter="{Binding CurrentTemplate}" 
+                    Gesture="Ctrl+E" />
       </ListBox.KeyBindings>
       <ListBox.Resources>
-        <ContextMenu x:Key="TemplateContainerContextMenu" x:CompileBindings="False">
-          <MenuItem Header="_Edit Template" Command="{Binding $parent[TopLevel].DataContext.OnEditTemplate}"
+        <ContextMenu x:Key="TemplateContainerContextMenu" 
+                     x:DataType="vmc:TemplateContainerViewModel">
+          <MenuItem Header="_Edit Template" 
+                    Command="{Binding EditTemplate}"
+                    CommandParameter="{Binding 
+                    Mode=OneWay}" />
+          <Separator />
+          <MenuItem Header="_Delete" 
+                    Command="{Binding RemoveTemplate}"
                     CommandParameter="{Binding Mode=OneWay}" />
           <Separator />
-          <MenuItem Header="_Add Template" Command="{Binding $parent[TopLevel].DataContext.OnAddTemplate}" />
-          <Separator />
-          <MenuItem Header="_Delete" Command="{Binding $parent[TopLevel].DataContext.OnRemoveTemplate}"
-                    CommandParameter="{Binding Mode=OneWay}" />
-          <Separator />
-          <MenuItem Header="E_xport" Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
+          <MenuItem Header="E_xport" 
+                    Command="{Binding ExportTemplate}"
                     CommandParameter="{Binding Mode=OneWay}" />
         </ContextMenu>
       </ListBox.Resources>

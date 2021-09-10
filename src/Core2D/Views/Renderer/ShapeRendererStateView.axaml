@@ -13,10 +13,14 @@
   <TabControl>
     <TabItem Header="Point">
       <StackPanel Margin="{DynamicResource ContentMargin}">
-        <CheckBox Content="DrawDecorators" IsChecked="{Binding DrawDecorators, Mode=TwoWay}"
+        <CheckBox Content="DrawDecorators" 
+                  IsChecked="{Binding DrawDecorators, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
-        <CheckBox Content="DrawPoints" IsChecked="{Binding DrawPoints, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <Label Content="PointSize" Margin="{DynamicResource TextControlThemePadding}" />
+        <CheckBox Content="DrawPoints" 
+                  IsChecked="{Binding DrawPoints, Mode=TwoWay}" 
+                  HorizontalAlignment="Stretch" />
+        <Label Content="PointSize" 
+               Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding PointSize, Mode=TwoWay}" />
       </StackPanel>
     </TabItem>
@@ -28,13 +32,17 @@
     </TabItem>
     <TabItem Header="Zoom">
       <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="PanX" Margin="{DynamicResource TextControlThemePadding}" />
+        <Label Content="PanX" 
+               Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding PanX, Mode=TwoWay}" />
-        <Label Content="PanY" Margin="{DynamicResource TextControlThemePadding}" />
+        <Label Content="PanY" 
+               Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding PanY, Mode=TwoWay}" />
-        <Label Content="ZoomX" Margin="{DynamicResource TextControlThemePadding}" />
+        <Label Content="ZoomX" 
+               Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding ZoomX, Mode=TwoWay}" />
-        <Label Content="ZoomY" Margin="{DynamicResource TextControlThemePadding}" />
+        <Label Content="ZoomY" 
+               Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding ZoomY, Mode=TwoWay}" />
       </StackPanel>
     </TabItem>
