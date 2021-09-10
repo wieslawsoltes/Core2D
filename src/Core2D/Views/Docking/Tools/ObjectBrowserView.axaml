@@ -88,37 +88,30 @@
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </DataTemplate>
         </TreeView.DataTemplates>
-        <!-- Project -->
         <TreeViewItem Header="{Binding Name}" 
                       ContextMenu="{StaticResource ExportContextMenu}" 
                       DataContext="{Binding Project}" 
                       IsExpanded="True">
-          <!-- Styles -->
           <TreeViewItem Header="Styles" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding StyleLibraries}" 
                         Items="{Binding}"/>
-          <!-- Groups -->
           <TreeViewItem Header="Groups" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding GroupLibraries}" 
                         Items="{Binding}"/>
-          <!-- Databases -->
           <TreeViewItem Header="Databases" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding Databases}" 
                         Items="{Binding}"/>
-          <!-- Templates -->
           <TreeViewItem Header="Templates" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding Templates}" 
                         Items="{Binding}"/>
-          <!-- Scripts -->
           <TreeViewItem Header="Scripts" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding Scripts}" 
                         Items="{Binding}"/>
-          <!-- Documents -->
           <TreeViewItem Header="Documents" 
                         ContextMenu="{StaticResource ExportContextMenu}"
                         DataContext="{Binding Documents}" 
