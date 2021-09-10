@@ -146,11 +146,17 @@
       </MenuItem>
       <MenuItem Header="_Project">
         <MenuItem Header="D_ata">
-          <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData}" CommandParameter="{Binding Project}" />
+          <MenuItem Header="_Import Database..." 
+                    Command="{Binding Platform.OnImportData}" 
+                    CommandParameter="{Binding Project}" />
           <Separator />
-          <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData}" CommandParameter="{Binding Project.CurrentDatabase}" />
+          <MenuItem Header="_Export Database..." 
+                    Command="{Binding Platform.OnExportData}"
+                    CommandParameter="{Binding Project.CurrentDatabase}" />
           <Separator />
-          <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData}" CommandParameter="{Binding Project.CurrentDatabase}" />
+          <MenuItem Header="_Update Database..." 
+                    Command="{Binding Platform.OnUpdateData}" 
+                    CommandParameter="{Binding Project.CurrentDatabase}" />
         </MenuItem>
         <MenuItem Header="O_ptions">
           <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
@@ -269,11 +275,34 @@
         <MenuItem Header="_Simplify Path" Command="{Binding ShapeService.OnPathSimplify}" />
         <MenuItem Header="_Break Path" Command="{Binding ShapeService.OnPathBreak}" InputGesture="Ctrl+B" />
         <Separator />
-        <MenuItem Header="_Difference" Icon="{StaticResource DifferenceIcon}" ToolTip.Tip="Subtract the op path from the current path."  Command="{Binding ShapeService.OnPathOp}" CommandParameter="Difference" InputGesture="Ctrl+Shift+D" />
-        <MenuItem Header="_Intersect" Icon="{StaticResource IntersectIcon}" ToolTip.Tip="Intersect the two paths." Command="{Binding ShapeService.OnPathOp}" CommandParameter="Intersect" InputGesture="Ctrl+Shift+I" />
-        <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}" ToolTip.Tip="Union (inclusive-or) the two paths." Command="{Binding ShapeService.OnPathOp}" CommandParameter="Union" InputGesture="Ctrl+Shift+U" />
-        <MenuItem Header="_Xor" Icon="{StaticResource XorIcon}" ToolTip.Tip="Exclusive-or the two paths." Command="{Binding ShapeService.OnPathOp}" CommandParameter="Xor" InputGesture="Ctrl+Shift+X" />
-        <MenuItem Header="_Reverse Difference" Icon="{StaticResource ReverseDifferenceIcon}" ToolTip.Tip="Subtract the current path from the op path." Command="{Binding ShapeService.OnPathOp}" CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
+        <MenuItem Header="_Difference" 
+                  Icon="{StaticResource DifferenceIcon}" 
+                  ToolTip.Tip="Subtract the op path from the current path." 
+                  Command="{Binding ShapeService.OnPathOp}" 
+                  CommandParameter="Difference" 
+                  InputGesture="Ctrl+Shift+D" />
+        <MenuItem Header="_Intersect" 
+                  Icon="{StaticResource IntersectIcon}" 
+                  ToolTip.Tip="Intersect the two paths."
+                  Command="{Binding ShapeService.OnPathOp}" 
+                  CommandParameter="Intersect" 
+                  InputGesture="Ctrl+Shift+I" />
+        <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}"
+                  ToolTip.Tip="Union (inclusive-or) the two paths."
+                  Command="{Binding ShapeService.OnPathOp}" 
+                  CommandParameter="Union" 
+                  InputGesture="Ctrl+Shift+U" />
+        <MenuItem Header="_Xor"
+                  Icon="{StaticResource XorIcon}"
+                  ToolTip.Tip="Exclusive-or the two paths."
+                  Command="{Binding ShapeService.OnPathOp}"
+                  CommandParameter="Xor"
+                  InputGesture="Ctrl+Shift+X" />
+        <MenuItem Header="_Reverse Difference" 
+                  Icon="{StaticResource ReverseDifferenceIcon}"
+                  ToolTip.Tip="Subtract the current path from the op path."
+                  Command="{Binding ShapeService.OnPathOp}" 
+                  CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
       </MenuItem>
       <MenuItem Header="F_ormat">
         <MenuItem Header="_Copy">

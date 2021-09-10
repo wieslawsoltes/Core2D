@@ -10,9 +10,11 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmp:PathSizeViewModel" x:CompileBindings="True">
   <StackPanel Margin="{DynamicResource ContentMargin}">
-    <Label Content="Width" Margin="{DynamicResource TextControlThemePadding}" />
+    <Label Content="Width"
+           Margin="{DynamicResource TextControlThemePadding}" />
     <TextBox Text="{Binding Width, Mode=TwoWay}" />
-    <Label Content="Height" Margin="{DynamicResource TextControlThemePadding}" />
+    <Label Content="Height" 
+           Margin="{DynamicResource TextControlThemePadding}" />
     <TextBox Text="{Binding Height, Mode=TwoWay}" />
   </StackPanel>
 </UserControl>

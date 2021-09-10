@@ -10,8 +10,10 @@
              d:DesignWidth="250" d:DesignHeight="500"
              x:DataType="vms:ShapeStyleViewModel" x:CompileBindings="True">
   <DockPanel>
-    <StackPanel Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
-      <Label Content="Name" Margin="{DynamicResource TextControlThemePadding}" />
+    <StackPanel Margin="{DynamicResource ContentMargin}" 
+                DockPanel.Dock="Top">
+      <Label Content="Name" 
+             Margin="{DynamicResource TextControlThemePadding}" />
       <TextBox Text="{Binding Name, Mode=TwoWay}" />
     </StackPanel>
     <TabControl>

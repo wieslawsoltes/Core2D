@@ -13,20 +13,24 @@
   <TabControl>
     <TabItem Header="Properties">
       <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
+        <Label Content="FillRule" 
+               Margin="{DynamicResource TextControlThemePadding}" />
         <ComboBox Items="{x:Static vmp:PathGeometryViewModel.FillRuleValues}"
-                  SelectedItem="{Binding FillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                  SelectedItem="{Binding FillRule, Mode=TwoWay}" 
+                  HorizontalAlignment="Stretch" />
       </StackPanel>
     </TabItem>
     <TabItem Header="Figures">
-      <TreeView x:Name="FiguresTreeView" Items="{Binding Figures}">
+      <TreeView x:Name="FiguresTreeView" 
+                Items="{Binding Figures}">
         <TreeView.Styles>
           <Style Selector="TreeViewItem">
             <Setter Property="IsExpanded" Value="False" />
           </Style>
         </TreeView.Styles>
         <TreeView.DataTemplates>
-          <TreeDataTemplate DataType="vmp:PathFigureViewModel" ItemsSource="{Binding Segments}"
+          <TreeDataTemplate DataType="vmp:PathFigureViewModel" 
+                            ItemsSource="{Binding Segments}"
                             x:CompileBindings="False">
             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                        Background="Transparent" />

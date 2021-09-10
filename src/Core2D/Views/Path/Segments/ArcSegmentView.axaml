@@ -12,12 +12,17 @@
   <TabControl>
     <TabItem Header="Properties">
       <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="RotationAngle" Margin="{DynamicResource TextControlThemePadding}" />
+        <Label Content="RotationAngle" 
+               Margin="{DynamicResource TextControlThemePadding}" />
         <TextBox Text="{Binding RotationAngle, Mode=TwoWay}" />
-        <CheckBox Content="IsLargeArc" IsChecked="{Binding IsLargeArc, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-        <Label Content="SweepDirection" Margin="{DynamicResource TextControlThemePadding}" />
+        <CheckBox Content="IsLargeArc" 
+                  IsChecked="{Binding IsLargeArc, Mode=TwoWay}"
+                  HorizontalAlignment="Stretch" />
+        <Label Content="SweepDirection"
+               Margin="{DynamicResource TextControlThemePadding}" />
         <ComboBox Items="{x:Static vmps:ArcSegmentViewModel.SweepDirectionValues}"
-                  SelectedItem="{Binding SweepDirection, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                  SelectedItem="{Binding SweepDirection, Mode=TwoWay}" 
+                  HorizontalAlignment="Stretch" />
       </StackPanel>
     </TabItem>
     <TabItem Header="Point">

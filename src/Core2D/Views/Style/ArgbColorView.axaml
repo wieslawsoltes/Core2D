@@ -19,8 +19,14 @@
     </VisualBrush>
   </UserControl.Resources>
   <Grid Margin="{DynamicResource TextControlThemePadding}">
-    <ToggleButton Name="PopupButton" BorderThickness="0" Background="Transparent" Padding="0" Height="30"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch"
+    <ToggleButton Name="PopupButton"
+                  BorderThickness="0" 
+                  Background="Transparent" 
+                  Padding="0"
+                  Height="30"
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Top" 
+                  HorizontalContentAlignment="Stretch"
                   VerticalContentAlignment="Stretch">
       <ToggleButton.Styles>
         <Style Selector="ToggleButton">
@@ -39,17 +45,27 @@
         </Style>
       </ToggleButton.Styles>
       <Panel Height="30" DockPanel.Dock="Top">
-        <Border BorderThickness="0" CornerRadius="0" Background="DarkGray" />
-        <Border BorderThickness="0" CornerRadius="0" Background="{DynamicResource ColorCheckerBoard}" />
-        <Border BorderThickness="0" CornerRadius="0"
+        <Border BorderThickness="0" 
+                CornerRadius="0"
+                Background="DarkGray" />
+        <Border BorderThickness="0" 
+                CornerRadius="0" 
+                Background="{DynamicResource ColorCheckerBoard}" />
+        <Border BorderThickness="0" 
+                CornerRadius="0"
                 Background="{Binding Value, Converter={x:Static converters:ArgbColorToBrushConverter.Instance}}" />
       </Panel>
     </ToggleButton>
-    <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" IsLightDismissEnabled="True"
-           PlacementMode="AnchorAndGravity" PlacementGravity="BottomLeft" PlacementAnchor="BottomLeft">
-      <Border Background="{DynamicResource SystemChromeMediumColor}" CornerRadius="0">
+    <Popup IsOpen="{Binding #PopupButton.IsChecked, Mode=TwoWay}" 
+           IsLightDismissEnabled="True"
+           PlacementMode="AnchorAndGravity" 
+           PlacementGravity="BottomLeft" 
+           PlacementAnchor="BottomLeft">
+      <Border Background="{DynamicResource SystemChromeMediumColor}" 
+              CornerRadius="0">
         <cp:ColorPicker x:Name="ArgbColorPicker"
-                        Color="{Binding Value, Mode=TwoWay, Converter={x:Static converters:HexToColorConverter.Instance}}" Margin="8">
+                        Color="{Binding Value, Mode=TwoWay, Converter={x:Static converters:HexToColorConverter.Instance}}" 
+                        Margin="8">
           <cp:ColorPicker.Styles>
             <Style Selector="cp|ColorPicker /template/ Grid#PART_PickerGrid">
               <Setter Property="MinHeight" Value="200" />
