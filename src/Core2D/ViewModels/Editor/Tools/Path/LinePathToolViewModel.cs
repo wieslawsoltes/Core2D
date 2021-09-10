@@ -70,7 +70,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                             var end = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (end is { })
                             {
-                                var figure = pathTool.Geometry.Figures.LastOrDefault();
+                                var figure = pathTool.Path.Figures.LastOrDefault();
                                 var line = figure.Segments.LastOrDefault() as LineSegmentViewModel;
                                 line.Point = end;
                             }

@@ -13,19 +13,10 @@ namespace Core2D.ViewModels.Path
         {
         }
 
-        public virtual void GetPoints(IList<PointShapeViewModel> points)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void GetPoints(IList<PointShapeViewModel> points);
 
-        public virtual string ToXamlString()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string ToXamlString();
 
-        public virtual string ToSvgString()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string ToSvgString();
     }
 }

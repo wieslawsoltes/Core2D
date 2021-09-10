@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System.Collections.Immutable;
 using Core2D.Model.Path;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Shapes;
@@ -25,9 +26,7 @@ namespace Core2D.Model
 
         QuadraticBezierShapeViewModel QuadraticBezier(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, bool isStroked, bool isFilled);
 
-        PathGeometryViewModel Geometry(FillRule fillRule);
-
-        PathShapeViewModel Path(PathGeometryViewModel? geometry, bool isStroked, bool isFilled);
+        PathShapeViewModel Path(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule, bool isStroked, bool isFilled);
 
         RectangleShapeViewModel Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string? text);
 

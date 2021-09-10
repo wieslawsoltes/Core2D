@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
-             xmlns:vmp="using:Core2D.ViewModels.Path"
+             xmlns:vms="using:Core2D.ViewModels.Shapes"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Options}"
@@ -47,7 +47,7 @@
                     IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" 
                     HorizontalAlignment="Stretch" />
           <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
-          <ComboBox Items="{x:Static vmp:PathGeometryViewModel.FillRuleValues}"
+          <ComboBox Items="{x:Static vms:PathShapeViewModel.FillRuleValues}"
                     SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" 
                     HorizontalAlignment="Stretch" />
         </StackPanel>

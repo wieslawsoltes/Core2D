@@ -73,7 +73,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                             var point2 = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point2 is { })
                             {
-                                var figure = pathTool.Geometry.Figures.LastOrDefault();
+                                var figure = pathTool.Path.Figures.LastOrDefault();
                                 var quadraticBezier = figure.Segments.LastOrDefault() as QuadraticBezierSegmentViewModel;
                                 quadraticBezier.Point2 = point2;
                                 _quadraticBezier.Point3 = point2;
@@ -94,7 +94,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                             var point1 = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                             if (point1 is { })
                             {
-                                var figure = pathTool.Geometry.Figures.LastOrDefault();
+                                var figure = pathTool.Path.Figures.LastOrDefault();
                                 var quadraticBezier = figure.Segments.LastOrDefault() as QuadraticBezierSegmentViewModel;
                                 quadraticBezier.Point1 = point1;
                                 _quadraticBezier.Point2 = point1;

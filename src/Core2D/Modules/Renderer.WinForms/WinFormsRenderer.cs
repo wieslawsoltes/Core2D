@@ -724,7 +724,7 @@ namespace Core2D.Modules.Renderer.WinForms
         {
             var _gfx = dc as Graphics;
 
-            var gp = path.Geometry.ToGraphicsPath(_scaleToPage);
+            var gp = path.ToGraphicsPath(_scaleToPage);
 
             if (path.IsFilled && path.IsStroked)
             {

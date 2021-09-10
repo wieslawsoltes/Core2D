@@ -41,13 +41,11 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var style = first?.Style is { } ?
                 first.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
-            var pathShape = factory.CreatePathShape(
-                "Path",
-                style,
-                geometry,
-                first.IsStroked,
-                first.IsFilled);
+            var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
+            pathShape.Name = "Path";
+            pathShape.Style = style;
+            pathShape.IsStroked = first.IsStroked;
+            pathShape.IsFilled = first.IsFilled;
             return pathShape;
         }
 
@@ -66,13 +64,11 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
-            var pathShape = factory.CreatePathShape(
-                "Path",
-                style,
-                geometry,
-                shape.IsStroked,
-                shape.IsFilled);
+            var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
+            pathShape.Name = "Path";
+            pathShape.Style = style;
+            pathShape.IsStroked = shape.IsStroked;
+            pathShape.IsFilled = shape.IsFilled;
             return pathShape;
         }
 
@@ -104,13 +100,11 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                     result.Dispose();
                     return null;
                 }
-                var geometry = PathGeometryConverter.ToPathGeometry(result, factory);
-                var pathShape = factory.CreatePathShape(
-                    "Path",
-                    style,
-                    geometry,
-                    true,
-                    false);
+                var pathShape = PathGeometryConverter.ToPathGeometry(result, factory);
+                pathShape.Name = "Path";
+                pathShape.Style = style;
+                pathShape.IsStroked = true;
+                pathShape.IsFilled = false;
                 result.Dispose();
                 return pathShape;
             }
@@ -141,13 +135,11 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                     result.Dispose();
                     return null;
                 }
-                var geometry = PathGeometryConverter.ToPathGeometry(result, factory);
-                var pathShape = factory.CreatePathShape(
-                    "Path",
-                    style,
-                    geometry,
-                    false,
-                    true);
+                var pathShape = PathGeometryConverter.ToPathGeometry(result, factory);
+                pathShape.Name = "Path";
+                pathShape.Style = style;
+                pathShape.IsStroked = false;
+                pathShape.IsFilled = true;
                 result.Dispose();
                 return pathShape;
             }
@@ -170,13 +162,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(result, factory);
-            var pathShape = factory.CreatePathShape(
-                "Path",
-                style,
-                geometry,
-                shape.IsStroked,
-                shape.IsFilled);
+            var pathShape = PathGeometryConverter.ToPathGeometry(result, factory);
+            pathShape.Name = "Path";
+            pathShape.Style = style;
+            pathShape.IsStroked = shape.IsStroked;
+            pathShape.IsFilled = shape.IsFilled;
+            result.Dispose();
             return pathShape;
         }
 
@@ -195,13 +186,11 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
-            var pathShape = factory.CreatePathShape(
-                "Path",
-                style,
-                geometry,
-                shape.IsStroked,
-                shape.IsFilled);
+            var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
+            pathShape.Name = "Path";
+            pathShape.Style = style;
+            pathShape.IsStroked = shape.IsStroked;
+            pathShape.IsFilled = shape.IsFilled;
             return pathShape;
         }
 
@@ -239,13 +228,11 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
                 factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(result, factory);
-            var pathShape = factory.CreatePathShape(
-                "Path",
-                style,
-                geometry,
-                shape.IsStroked,
-                shape.IsFilled);
+            var pathShape = PathGeometryConverter.ToPathGeometry(result, factory);
+            pathShape.Name = "Path";
+            pathShape.Style = style;
+            pathShape.IsStroked = shape.IsStroked;
+            pathShape.IsFilled = shape.IsFilled;
             result.Dispose();
             return pathShape;
         }
@@ -263,13 +250,11 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
-            var geometry = PathGeometryConverter.ToPathGeometry(path, factory);
-            var pathShape = factory.CreatePathShape(
-                "Path",
-                style,
-                geometry,
-                isStroked,
-                isFilled);
+            var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
+            pathShape.Name = "Path";
+            pathShape.Style = style;
+            pathShape.IsStroked = isStroked;
+            pathShape.IsFilled = isFilled;
             return pathShape;
         }
 

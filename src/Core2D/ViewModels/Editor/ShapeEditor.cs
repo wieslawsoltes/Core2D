@@ -136,28 +136,28 @@ namespace Core2D.ViewModels.Editor
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
 
-            if (pathShape.Geometry.Figures.Length == 1)
+            if (pathShape.Figures.Length == 1)
             {
-                BreakPathFigure(pathShape.Geometry.Figures[0], pathShape.Style, pathShape.IsStroked, pathShape.IsFilled, result);
+                BreakPathFigure(pathShape.Figures[0], pathShape.Style, pathShape.IsStroked, pathShape.IsFilled, result);
                 return true;
             }
-            else if (pathShape.Geometry.Figures.Length > 1)
+            else if (pathShape.Figures.Length > 1)
             {
-                foreach (var pathFigure in pathShape.Geometry.Figures)
+                foreach (var pathFigure in pathShape.Figures)
                 {
                     var style = pathShape.Style is { } ?
                         (ShapeStyleViewModel)pathShape.Style?.Copy(null) :
                         factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
 
-                    var convertedGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), pathShape.Geometry.FillRule);
-                    convertedGeometry.Figures = convertedGeometry.Figures.Add(pathFigure);
-
                     var convertedPathShape = factory.CreatePathShape(
                         pathShape.Name,
                         style,
-                        convertedGeometry,
+                        ImmutableArray.Create<PathFigureViewModel>(),
+                        pathShape.FillRule,
                         pathShape.IsStroked,
                         pathShape.IsFilled);
+                    
+                    convertedPathShape.Figures = convertedPathShape.Figures.Add(pathFigure);
 
                     result.Add(convertedPathShape);
                 }

@@ -91,8 +91,6 @@ namespace Core2D.ViewModels.Designer
 
         public static PathFigureViewModel PathFigure { get; private set; }
 
-        public static PathGeometryViewModel PathGeometry { get; private set; }
-
         public static PathSizeViewModel PathSize { get; private set; }
 
         public static QuadraticBezierSegmentViewModel QuadraticBezierSegment { get; private set; }
@@ -182,7 +180,7 @@ namespace Core2D.ViewModels.Designer
             Group = factory.CreateGroupShape("Group");
             Image = factory.CreateImageShape(0, 0, ShapeStyle, "key");
             Line = factory.CreateLineShape(0, 0, ShapeStyle);
-            Path = factory.CreatePathShape(ShapeStyle, null);
+            Path = factory.CreatePathShape(ShapeStyle, ImmutableArray.Create<PathFigureViewModel>(), FillRule.EvenOdd);
             Point = factory.CreatePointShape();
             QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, ShapeStyle);
             Rectangle = factory.CreateRectangleShape(0, 0, ShapeStyle);
@@ -194,7 +192,6 @@ namespace Core2D.ViewModels.Designer
             CubicBezierSegment = factory.CreateCubicBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), factory.CreatePointShape());
             LineSegment = factory.CreateLineSegment(factory.CreatePointShape());
             PathFigure = factory.CreatePathFigure(factory.CreatePointShape(), false);
-            PathGeometry = factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), FillRule.EvenOdd);
             PathSize = factory.CreatePathSize();
             QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape());
 

@@ -58,13 +58,7 @@ namespace Core2D.Model
 
         PathSizeViewModel CreatePathSize(double width = 0.0, double height = 0.0);
 
-        PathGeometryViewModel CreatePathGeometry();
-
-        PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero);
-
-        GeometryContext CreateGeometryContext();
-
-        GeometryContext CreateGeometryContext(PathGeometryViewModel geometry);
+        GeometryContext CreateGeometryContext(PathShapeViewModel path);
 
         PathFigureViewModel CreatePathFigure(bool isClosed = false);
 
@@ -108,9 +102,9 @@ namespace Core2D.Model
 
         EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
-        PathShapeViewModel CreatePathShape(ShapeStyleViewModel? style, PathGeometryViewModel? geometry, bool isStroked = true, bool isFilled = true);
+        PathShapeViewModel CreatePathShape(ShapeStyleViewModel? style, ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero, bool isStroked = true, bool isFilled = true);
 
-        PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel? style, PathGeometryViewModel? geometry, bool isStroked = true, bool isFilled = true);
+        PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel? style, ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero, bool isStroked = true, bool isFilled = true);
 
         TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, string text, bool isStroked = true, string name = "");
 

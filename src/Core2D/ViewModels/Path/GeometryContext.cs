@@ -9,19 +9,19 @@ namespace Core2D.ViewModels.Path
     public class GeometryContext
     {
         private readonly IViewModelFactory _viewModelFactory;
-        private readonly PathGeometryViewModel _geometry;
+        private readonly PathShapeViewModel _path;
         private PathFigureViewModel? _currentFigure;
 
-        public GeometryContext(IViewModelFactory viewModelFactory, PathGeometryViewModel geometry)
+        public GeometryContext(IViewModelFactory viewModelFactory, PathShapeViewModel path)
         {
             _viewModelFactory = viewModelFactory;
-            _geometry = geometry ?? throw new ArgumentNullException(nameof(geometry));
+            _path = path ?? throw new ArgumentNullException(nameof(path));
         }
 
         public void BeginFigure(PointShapeViewModel startPoint, bool isClosed = true)
         {
             _currentFigure = _viewModelFactory.CreatePathFigure(startPoint, isClosed);
-            _geometry.Figures = _geometry.Figures.Add(_currentFigure);
+            _path.Figures = _path.Figures.Add(_currentFigure);
         }
 
         public void SetClosedState(bool isClosed)

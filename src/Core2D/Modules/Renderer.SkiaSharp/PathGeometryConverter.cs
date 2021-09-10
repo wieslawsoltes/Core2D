@@ -71,9 +71,10 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
         }
 
-        public static PathGeometryViewModel ToPathGeometry(SKPath path, IViewModelFactory viewModelFactory)
+        public static PathShapeViewModel ToPathGeometry(SKPath path, IViewModelFactory viewModelFactory)
         {
-            var geometry = viewModelFactory.CreatePathGeometry(
+            var geometry = viewModelFactory.CreatePathShape(
+                null,
                 ImmutableArray.Create<PathFigureViewModel>(),
                 path.FillType == SKPathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
@@ -421,25 +422,20 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return path;
         }
 
-        public static SKPath ToSKPath(this PathGeometryViewModel pathGeometryViewModel)
+        public static SKPath ToSKPath(this PathShapeViewModel pathShapeViewModel)
         {
-            var fillType = pathGeometryViewModel.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
+            var fillType = pathShapeViewModel.FillRule == FillRule.EvenOdd ? SKPathFillType.EvenOdd : SKPathFillType.Winding;
             var path = new SKPath
             {
                 FillType = fillType
             };
 
-            foreach (var pathFigure in pathGeometryViewModel.Figures)
+            foreach (var pathFigure in pathShapeViewModel.Figures)
             {
                 CreateFigure(pathFigure, path);
             }
 
             return path;
-        }
-
-        public static SKPath ToSKPath(this PathShapeViewModel path)
-        {
-            return ToSKPath(path.Geometry);
         }
 
         public static SKPathOp ToSKPathOp(PathOp op)
