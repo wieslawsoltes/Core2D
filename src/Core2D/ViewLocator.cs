@@ -1,5 +1,4 @@
-#nullable disable
-using System;
+#nullable enable
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Core2D.ViewModels;
@@ -13,12 +12,9 @@ namespace Core2D
         public IControl Build(object data)
         {
             var type = data.GetType();
-            if (s_views.TryGetValue(type, out var func))
-            {
-                return func?.Invoke();
-            }
-
-            return new TextBlock { Text = $"Unable to create view for type: {type}" };
+            return s_views.TryGetValue(type, out var func) 
+                ? func.Invoke() 
+                : new TextBlock { Text = $"Unable to create view for type: {type}" };
         }
 
         public bool Match(object data)
