@@ -9,62 +9,52 @@
              mc:Ignorable="d"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:BaseShapeViewModel" x:CompileBindings="True">
-  <StackPanel Margin="{DynamicResource ContentMargin}">
+  <StackPanel Margin="{DynamicResource ContentMargin}"
+              x:CompileBindings="False">
     <CheckBox Content="Default"
               Command="{Binding ToggleDefaultShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Default}}"
               HorizontalAlignment="Stretch"
-              IsVisible="False"
-              x:CompileBindings="False" />
+              IsVisible="False" />
     <CheckBox Content="Visible"
               Command="{Binding ToggleVisibleShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Visible}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
     <CheckBox Content="Printable"
               Command="{Binding TogglePrintableShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Printable}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
     <CheckBox Content="Locked"
               Command="{Binding ToggleLockedShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Locked}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
     <CheckBox Content="Size"
               Command="{Binding ToggleSizeShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Size}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
     <CheckBox Content="Thickness"
               Command="{Binding ToggleThicknessShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Thickness}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
     <CheckBox Content="Connector"
               Command="{Binding ToggleConnectorShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Connector}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
     <CheckBox Content="None"
               Command="{Binding ToggleNoneShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.None}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
     <CheckBox Content="Standalone"
               Command="{Binding ToggleStandaloneShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Standalone}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
     <CheckBox Content="Input"
               Command="{Binding ToggleInputShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Input}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
     <CheckBox Content="Output"
               Command="{Binding ToggleOutputShapeState}"
               IsChecked="{Binding State, Mode=OneWay, Converter={x:Static converters:ShapeStateFlagsConverter.Instance}, ConverterParameter={x:Static mr:ShapeStateFlags.Output}}"
-              HorizontalAlignment="Stretch"
-              x:CompileBindings="False" />
+              HorizontalAlignment="Stretch" />
   </StackPanel>
 </UserControl>
