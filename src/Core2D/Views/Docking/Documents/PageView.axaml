@@ -26,7 +26,7 @@
   <Panel DataContext="{Binding Context}">
     <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}"
            x:DataType="vme:ProjectEditorViewModel" 
-           x:CompileBindings="True"
+           x:CompileBindings="False"
            Background="Transparent">
       <i:Interaction.Behaviors>
         <behaviors:AttachEditorBehavior />
@@ -35,87 +35,87 @@
       </i:Interaction.Behaviors>
       <Panel.KeyBindings>
         <!-- Edit -->
-        <KeyBinding Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding}" Gesture="Delete" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnCancel}" Gesture="Escape" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ClipboardService.OnCut}" Gesture="Ctrl+X" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ClipboardService.OnCopy}" Gesture="Ctrl+C" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ClipboardService.OnPaste}" Gesture="Ctrl+V" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding SelectionService.OnSelectAll}" Gesture="Ctrl+A" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding}" Gesture="Delete" />
+        <KeyBinding Command="{Binding OnCancel}" Gesture="Escape" />
+        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z" />
+        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y" />
+        <KeyBinding Command="{Binding ClipboardService.OnCut}" Gesture="Ctrl+X" />
+        <KeyBinding Command="{Binding ClipboardService.OnCopy}" Gesture="Ctrl+C" />
+        <KeyBinding Command="{Binding ClipboardService.OnPaste}" Gesture="Ctrl+V" />
+        <KeyBinding Command="{Binding SelectionService.OnSelectAll}" Gesture="Ctrl+A" />
         <!-- View -->
-        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+D0" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+NumPad0" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+D1" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+NumPad1" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="X" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+D2" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+NumPad2" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+D3" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+NumPad3" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+D4" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+NumPad4" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="Ctrl+Add" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="Ctrl+OemPlus" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="Ctrl+Subtract" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="Ctrl+OemMinus" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+D0" />
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+NumPad0" />
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z" />
+        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+D1" />
+        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+NumPad1" />
+        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="X" />
+        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+D2" />
+        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+NumPad2" />
+        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+D3" />
+        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+NumPad3" />
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+D4" />
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+NumPad4" />
+        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="Ctrl+Add" />
+        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="Ctrl+OemPlus" />
+        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="Ctrl+Subtract" />
+        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="Ctrl+OemMinus" />
         <!-- Options -->
-        <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToggleDefaultIsClosed}" Gesture="D" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K" />
+        <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F" />
+        <KeyBinding Command="{Binding OnToggleDefaultIsClosed}" Gesture="D" />
+        <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G" />
+        <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C" />
         <!-- Shape -->
-        <KeyBinding Command="{Binding ShapeService.OnDuplicateSelected}" Gesture="Ctrl+D" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnGroupSelected}" Gesture="Ctrl+G" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnUngroupSelected}" Gesture="Ctrl+U" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="90" Gesture="Ctrl+R" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="-90" Gesture="Ctrl+L" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnFlipHorizontalSelected}" Gesture="Ctrl+H" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnFlipVerticalSelected}" Gesture="Ctrl+J" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnMoveUpSelected}" Gesture="Up" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnMoveDownSelected}" Gesture="Down" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnMoveLeftSelected}" Gesture="Left" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnMoveRightSelected}" Gesture="Right" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnStackHorizontallySelected}" Gesture="Shift+H" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnStackVerticallySelected}" Gesture="Shift+Y" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnDistributeHorizontallySelected}" Gesture="Ctrl+Shift+H" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnDistributeVerticallySelected}" Gesture="Ctrl+Shift+Y" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignLeftSelected}" Gesture="Ctrl+Shift+Left" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignCenteredSelected}" Gesture="Ctrl+Shift+OemMinus" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignCenteredSelected}" Gesture="Ctrl+Shift+Subtract" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignRightSelected}" Gesture="Ctrl+Shift+Right" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignTopSelected}" Gesture="Ctrl+Shift+Up" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignCenterSelected}" Gesture="Ctrl+Shift+OemPipe" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignBottomSelected}" Gesture="Ctrl+Shift+Down" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnBringToFrontSelected}" Gesture="Ctrl+Shift+OemCloseBrackets" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnBringForwardSelected}" Gesture="Ctrl+OemCloseBrackets" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnSendBackwardSelected}" Gesture="Ctrl+OemOpenBrackets" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnSendToBackSelected}" Gesture="Ctrl+Shift+OemOpenBrackets" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnPathBreak}" Gesture="Ctrl+B" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Difference" Gesture="Ctrl+Shift+D" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Intersect" Gesture="Ctrl+Shift+I" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Union" Gesture="Ctrl+Shift+U" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Xor" Gesture="Ctrl+Shift+X" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="ReverseDifference" Gesture="Ctrl+Shift+R" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding ShapeService.OnDuplicateSelected}" Gesture="Ctrl+D" />
+        <KeyBinding Command="{Binding ShapeService.OnGroupSelected}" Gesture="Ctrl+G" />
+        <KeyBinding Command="{Binding ShapeService.OnUngroupSelected}" Gesture="Ctrl+U" />
+        <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="90" Gesture="Ctrl+R" />
+        <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="-90" Gesture="Ctrl+L" />
+        <KeyBinding Command="{Binding ShapeService.OnFlipHorizontalSelected}" Gesture="Ctrl+H" />
+        <KeyBinding Command="{Binding ShapeService.OnFlipVerticalSelected}" Gesture="Ctrl+J" />
+        <KeyBinding Command="{Binding ShapeService.OnMoveUpSelected}" Gesture="Up" />
+        <KeyBinding Command="{Binding ShapeService.OnMoveDownSelected}" Gesture="Down" />
+        <KeyBinding Command="{Binding ShapeService.OnMoveLeftSelected}" Gesture="Left" />
+        <KeyBinding Command="{Binding ShapeService.OnMoveRightSelected}" Gesture="Right" />
+        <KeyBinding Command="{Binding ShapeService.OnStackHorizontallySelected}" Gesture="Shift+H" />
+        <KeyBinding Command="{Binding ShapeService.OnStackVerticallySelected}" Gesture="Shift+Y" />
+        <KeyBinding Command="{Binding ShapeService.OnDistributeHorizontallySelected}" Gesture="Ctrl+Shift+H" />
+        <KeyBinding Command="{Binding ShapeService.OnDistributeVerticallySelected}" Gesture="Ctrl+Shift+Y" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignLeftSelected}" Gesture="Ctrl+Shift+Left" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignCenteredSelected}" Gesture="Ctrl+Shift+OemMinus" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignCenteredSelected}" Gesture="Ctrl+Shift+Subtract" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignRightSelected}" Gesture="Ctrl+Shift+Right" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignTopSelected}" Gesture="Ctrl+Shift+Up" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignCenterSelected}" Gesture="Ctrl+Shift+OemPipe" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignBottomSelected}" Gesture="Ctrl+Shift+Down" />
+        <KeyBinding Command="{Binding ShapeService.OnBringToFrontSelected}" Gesture="Ctrl+Shift+OemCloseBrackets" />
+        <KeyBinding Command="{Binding ShapeService.OnBringForwardSelected}" Gesture="Ctrl+OemCloseBrackets" />
+        <KeyBinding Command="{Binding ShapeService.OnSendBackwardSelected}" Gesture="Ctrl+OemOpenBrackets" />
+        <KeyBinding Command="{Binding ShapeService.OnSendToBackSelected}" Gesture="Ctrl+Shift+OemOpenBrackets" />
+        <KeyBinding Command="{Binding ShapeService.OnPathBreak}" Gesture="Ctrl+B" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Difference" Gesture="Ctrl+Shift+D" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Intersect" Gesture="Ctrl+Shift+I" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Union" Gesture="Ctrl+Shift+U" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Xor" Gesture="Ctrl+Shift+X" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="ReverseDifference" Gesture="Ctrl+Shift+R" />
         <!-- Format -->
-        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C" />
+        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V" />
         <!-- Tool -->
-        <KeyBinding Command="{Binding OnToolNone}" Gesture="N" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolSelection}" Gesture="S" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolPoint}" Gesture="P" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolLine}" Gesture="L" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolArc}" Gesture="A" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolCubicBezier}" Gesture="B" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolQuadraticBezier}" Gesture="Q" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolPath}" Gesture="H" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolMove}" Gesture="M" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolRectangle}" Gesture="R" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolEllipse}" Gesture="E" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolText}" Gesture="T" x:CompileBindings="False" />
-        <KeyBinding Command="{Binding OnToolImage}" Gesture="I" x:CompileBindings="False" />
+        <KeyBinding Command="{Binding OnToolNone}" Gesture="N" />
+        <KeyBinding Command="{Binding OnToolSelection}" Gesture="S" />
+        <KeyBinding Command="{Binding OnToolPoint}" Gesture="P" />
+        <KeyBinding Command="{Binding OnToolLine}" Gesture="L" />
+        <KeyBinding Command="{Binding OnToolArc}" Gesture="A" />
+        <KeyBinding Command="{Binding OnToolCubicBezier}" Gesture="B" />
+        <KeyBinding Command="{Binding OnToolQuadraticBezier}" Gesture="Q" />
+        <KeyBinding Command="{Binding OnToolPath}" Gesture="H" />
+        <KeyBinding Command="{Binding OnToolMove}" Gesture="M" />
+        <KeyBinding Command="{Binding OnToolRectangle}" Gesture="R" />
+        <KeyBinding Command="{Binding OnToolEllipse}" Gesture="E" />
+        <KeyBinding Command="{Binding OnToolText}" Gesture="T" />
+        <KeyBinding Command="{Binding OnToolImage}" Gesture="I" />
       </Panel.KeyBindings>
       <Panel Background="#FFF5F5F5" />
       <Panel Background="{DynamicResource TemplateCheckerBoard}" />
@@ -128,7 +128,7 @@
                             Background="Transparent" ClipToBounds="False"
                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
               <paz:ZoomBorder.ContextMenu>
-                <ContextMenu x:Name="TemplateContextMenu" DataContext="{Binding #PageZoomBorder.DataContext}" x:CompileBindings="False">
+                <ContextMenu x:Name="TemplateContextMenu" DataContext="{Binding #PageZoomBorder.DataContext}">
                   <MenuItem Header="Cu_t" Command="{Binding ClipboardService.OnCut}" InputGesture="Ctrl+X" />
                   <MenuItem Header="_Copy" Command="{Binding ClipboardService.OnCopy}" InputGesture="Ctrl+C" />
                   <MenuItem Header="_Paste" Command="{Binding ClipboardService.OnPaste}" InputGesture="Ctrl+V" />
@@ -137,27 +137,21 @@
               </paz:ZoomBorder.ContextMenu>
               <i:Interaction.Behaviors>
                 <behaviors:EnableContextMenuBehavior IsEnabled="{Binding $parent[TopLevel].DataContext.IsToolIdle}"
-                                                     ContextMenu="{Binding #TemplateContextMenu}"
-                                                     x:CompileBindings="False" />
+                                                     ContextMenu="{Binding #TemplateContextMenu}"/>
               <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}">
                 <idd:ContextDropBehavior.Handler>
                   <dd:PageDropHandler RelativeTo="{Binding #ContainerPanel}" />
                 </idd:ContextDropBehavior.Handler>
               </idd:ContextDropBehavior>
               </i:Interaction.Behaviors>
-              <Panel DataContext="{Binding Project.CurrentContainer}" VerticalAlignment="Center"
+              <Panel DataContext="{Binding Project.CurrentContainer}" 
+                     VerticalAlignment="Center"
                      HorizontalAlignment="Center">
-                <!-- <Panel.Transitions> -->
-                <!--   <Transitions> -->
-                <!--     <paz:TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/> -->
-                <!--   </Transitions> -->
-                <!-- </Panel.Transitions> -->
                 <Panel x:Name="ContainerPanel"
                        Background="Transparent"
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        Width="{Binding Template.Width, TargetNullValue={Binding Width}}"
-                       Height="{Binding Template.Height, TargetNullValue={Binding Height}}"
-                       x:CompileBindings="False">
+                       Height="{Binding Template.Height, TargetNullValue={Binding Height}}">
                   <renderer:RenderView x:Name="RenderViewData"
                                        ZoomBorder="{Binding #PageZoomBorder}"
                                        Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
