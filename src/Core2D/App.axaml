@@ -14,6 +14,7 @@
     <StyleInclude Source="avares://Core2D/Icons.axaml" />
     <StyleInclude Source="avares://Core2D/Dock.axaml" />
     <StyleInclude Source="avares://Core2D/Controls/EditableItem.axaml" />
+    <StyleInclude Source="avares://Core2D/Controls/ToggleItem.axaml" />
   </Application.Styles>
   <Application.DataTemplates>
     <local:ViewLocator />
