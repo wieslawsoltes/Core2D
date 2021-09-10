@@ -12,7 +12,6 @@
              d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
   <UserControl.KeyBindings>
-    <!-- File -->
     <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="Ctrl+N" x:CompileBindings="False" />
     <KeyBinding Command="{Binding Platform.OnOpen}" Gesture="Ctrl+O" x:CompileBindings="False" />
     <KeyBinding Command="{Binding OnCloseProject}" Gesture="Ctrl+F4" x:CompileBindings="False" />
