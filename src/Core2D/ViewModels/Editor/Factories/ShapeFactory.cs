@@ -184,13 +184,7 @@ namespace Core2D.ViewModels.Editor.Factories
             return quadraticBezier;
         }
 
-        PathGeometryViewModel IShapeFactory.Geometry(FillRule fillRule)
-        {
-            var factory = _serviceProvider.GetService<IViewModelFactory>();
-            return factory.CreatePathGeometry(ImmutableArray.Create<PathFigureViewModel>(), fillRule);
-        }
-
-        PathShapeViewModel IShapeFactory.Path(PathGeometryViewModel geometry, bool isStroked, bool isFilled)
+        PathShapeViewModel IShapeFactory.Path(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule, bool isStroked, bool isFilled)
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
@@ -201,7 +195,8 @@ namespace Core2D.ViewModels.Editor.Factories
             var path = factory.CreatePathShape(
                 "",
                 style.CopyShared(null),
-                geometry,
+                figures,
+                fillRule,
                 isStroked,
                 isFilled);
             project.AddShape(project.CurrentContainer.CurrentLayer, path);

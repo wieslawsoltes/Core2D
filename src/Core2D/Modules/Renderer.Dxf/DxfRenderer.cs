@@ -343,7 +343,7 @@ namespace Core2D.Modules.Renderer.Dxf
             }
         }
 
-        private void CreateHatchBoundsAndEntities(PathGeometryViewModel pg, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
+        private void CreateHatchBoundsAndEntities(PathShapeViewModel pg, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
         {
             bounds = new List<DXFE.HatchBoundaryPath>();
             entities = new List<DXFE.EntityObject>();
@@ -801,7 +801,7 @@ namespace Core2D.Modules.Renderer.Dxf
             {
                 var dxf = dc as DXF.DxfDocument;
 
-                CreateHatchBoundsAndEntities(path.Geometry, out var bounds, out var entities);
+                CreateHatchBoundsAndEntities(path, out var bounds, out var entities);
                 if (entities is null || bounds is null)
                 {
                     return;

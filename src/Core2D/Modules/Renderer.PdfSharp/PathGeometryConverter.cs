@@ -3,13 +3,14 @@ using System;
 using Core2D.Model.Path;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Shapes;
 using PDF = PdfSharp.Drawing;
 
 namespace Core2D.Modules.Renderer.PdfSharp
 {
     public static class PathGeometryConverter
     {
-        public static PDF.XGraphicsPath ToXGraphicsPath(this PathGeometryViewModel pg, Func<double, double> scale)
+        public static PDF.XGraphicsPath ToXGraphicsPath(this PathShapeViewModel pg, Func<double, double> scale)
         {
             var gp = new PDF.XGraphicsPath()
             {

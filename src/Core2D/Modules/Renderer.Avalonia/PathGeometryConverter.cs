@@ -24,14 +24,14 @@ namespace Core2D.Modules.Renderer.Avalonia
 
         private static AM.FillRule ToFillRule(this FillRule fillRule) => fillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd;
 
-        public static AP.IGeometryImpl ToGeometryImpl(PathGeometryViewModel pathGeometry, bool isFilled)
+        public static AP.IGeometryImpl ToGeometryImpl(PathShapeViewModel path, bool isFilled)
         {
             var geometry = Factory.CreateStreamGeometry();
             using var context = geometry.Open();
 
-            context.SetFillRule(pathGeometry.FillRule.ToFillRule());
+            context.SetFillRule(path.FillRule.ToFillRule());
 
-            foreach (var figure in pathGeometry.Figures)
+            foreach (var figure in path.Figures)
             {
                 context.BeginFigure(figure.StartPoint.ToPoint(), isFilled);
 

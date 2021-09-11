@@ -3,13 +3,14 @@ using System;
 using Core2D.Model.Path;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Shapes;
 using D2D = System.Drawing.Drawing2D;
 
 namespace Core2D.Modules.Renderer.WinForms
 {
     public static class PathGeometryConverter
     {
-        public static D2D.GraphicsPath ToGraphicsPath(this PathGeometryViewModel pg, Func<double, float> scale)
+        public static D2D.GraphicsPath ToGraphicsPath(this PathShapeViewModel pg, Func<double, float> scale)
         {
             var gp = new D2D.GraphicsPath
             {

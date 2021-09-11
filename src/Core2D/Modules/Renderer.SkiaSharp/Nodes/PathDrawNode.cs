@@ -23,7 +23,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
         {
             ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
-            Geometry = PathGeometryConverter.ToSKPath(Path.Geometry);
+            Geometry = PathGeometryConverter.ToSKPath(Path);
             Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
         }
 

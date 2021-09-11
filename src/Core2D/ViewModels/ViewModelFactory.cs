@@ -285,32 +285,9 @@ namespace Core2D.ViewModels
             };
         }
 
-        public PathGeometryViewModel CreatePathGeometry()
+        public GeometryContext CreateGeometryContext(PathShapeViewModel path)
         {
-            return new PathGeometryViewModel(_serviceProvider)
-            {
-                Figures = ImmutableArray.Create<PathFigureViewModel>(),
-                FillRule = FillRule.Nonzero
-            };
-        }
-
-        public GeometryContext CreateGeometryContext()
-        {
-            return new GeometryContext(this, CreatePathGeometry());
-        }
-
-        public GeometryContext CreateGeometryContext(PathGeometryViewModel geometry)
-        {
-            return new GeometryContext(this, geometry);
-        }
-
-        public PathGeometryViewModel CreatePathGeometry(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero)
-        {
-            return new PathGeometryViewModel(_serviceProvider)
-            {
-                Figures = figures,
-                FillRule = fillRule
-            };
+            return new GeometryContext(this, path);
         }
 
         public PathFigureViewModel CreatePathFigure(bool isClosed = false)
@@ -617,7 +594,7 @@ namespace Core2D.ViewModels
             return ellipseShape;
         }
 
-        public PathShapeViewModel CreatePathShape(ShapeStyleViewModel? style, PathGeometryViewModel? geometry, bool isStroked = true, bool isFilled = true)
+        public PathShapeViewModel CreatePathShape(ShapeStyleViewModel? style, ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero, bool isStroked = true, bool isFilled = true)
         {
             var pathShape = new PathShapeViewModel(_serviceProvider)
             {
@@ -626,28 +603,24 @@ namespace Core2D.ViewModels
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Geometry = geometry
+                FillRule = fillRule,
+                Figures = figures
             };
-
-            if (geometry is { })
+            
+            foreach (var figure in figures)
             {
-                geometry.Owner = pathShape;
+                figure.Owner = pathShape;
 
-                foreach (var figure in geometry.Figures)
+                foreach (var segment in figure.Segments)
                 {
-                    figure.Owner = pathShape;
-
-                    foreach (var segment in figure.Segments)
-                    {
-                        segment.Owner = pathShape;
-                    }
+                    segment.Owner = pathShape;
                 }
             }
 
             return pathShape;
         }
 
-        public PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel? style, PathGeometryViewModel? geometry, bool isStroked = true, bool isFilled = true)
+        public PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel? style, ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero, bool isStroked = true, bool isFilled = true)
         {
             var pathShape = new PathShapeViewModel(_serviceProvider)
             {
@@ -657,7 +630,8 @@ namespace Core2D.ViewModels
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Geometry = geometry
+                FillRule = fillRule,
+                Figures = figures
             };
             return pathShape;
         }

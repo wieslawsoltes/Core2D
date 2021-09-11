@@ -74,10 +74,10 @@ namespace Core2D.Modules.SvgExporter.Svg
                 {
                     if (shape.Style.Fill.Color is ArgbColorViewModel argbColor)
                     {
-                        var geometry = path.Geometry.ToSvgString();
+                        var geometry = path.ToSvgString();
                         var fill = argbColor.ToSvgString();
                         var fillOpacity = (argbColor.A / 255.0).ToString(CultureInfo.InvariantCulture);
-                        var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
+                        var fillRule = path.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
                         sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>");
                     }
                 }
@@ -89,10 +89,10 @@ namespace Core2D.Modules.SvgExporter.Svg
                 {
                     if (shape.Style.Stroke.Color is ArgbColorViewModel argbColor)
                     {
-                        var geometry = path.Geometry.ToSvgString();
+                        var geometry = path.ToSvgString();
                         var fill = argbColor.ToSvgString();
                         var fillOpacity = (argbColor.A / 255.0).ToString(CultureInfo.InvariantCulture);
-                        var fillRule = path.Geometry.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
+                        var fillRule = path.FillRule == FillRule.Nonzero ? "nonzero" : "evenodd";
                         sb.AppendLine($"    <path fill=\"{fill}\" fill-opacity=\"{fillOpacity}\" fill-rule=\"{fillRule}\" d=\"{geometry}\"/>");
                     }
                 }

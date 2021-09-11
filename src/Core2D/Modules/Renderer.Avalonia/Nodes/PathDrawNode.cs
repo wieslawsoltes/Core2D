@@ -23,7 +23,7 @@ namespace Core2D.Modules.Renderer.Avalonia.Nodes
         {
             ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
             ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
-            Geometry = PathGeometryConverter.ToGeometryImpl(Path.Geometry, Path.IsFilled);
+            Geometry = PathGeometryConverter.ToGeometryImpl(Path, Path.IsFilled);
             Center = Geometry.Bounds.Center;
         }
 

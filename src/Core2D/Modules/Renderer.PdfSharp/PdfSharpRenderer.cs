@@ -704,7 +704,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
         {
             var _gfx = dc as XGraphics;
 
-            var gp = path.Geometry.ToXGraphicsPath(_scaleToPage);
+            var gp = path.ToXGraphicsPath(_scaleToPage);
 
             if (path.IsFilled && path.IsStroked)
             {

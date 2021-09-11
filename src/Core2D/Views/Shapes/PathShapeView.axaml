@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="using:Core2D.Converters"
              xmlns:views="using:Core2D.Views"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
+             xmlns:vmp="using:Core2D.ViewModels.Path"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Path}"
@@ -22,10 +24,37 @@
         <CheckBox Content="IsFilled" 
                   IsChecked="{Binding IsFilled, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
+        <Label Content="FillRule" 
+               Margin="{DynamicResource TextControlThemePadding}" />
+        <ComboBox Items="{x:Static vms:PathShapeViewModel.FillRuleValues}"
+                  SelectedItem="{Binding FillRule, Mode=TwoWay}" 
+                  HorizontalAlignment="Stretch" />
       </StackPanel>
     </TabItem>
-    <TabItem Header="Geometry">
-      <ContentControl Content="{Binding Geometry}" />
+    <TabItem Header="Figures">
+      <TreeView x:Name="FiguresTreeView" 
+                Items="{Binding Figures}">
+        <TreeView.Styles>
+          <Style Selector="TreeViewItem">
+            <Setter Property="IsExpanded" Value="False" />
+          </Style>
+        </TreeView.Styles>
+        <TreeView.DataTemplates>
+          <TreeDataTemplate DataType="vmp:PathFigureViewModel" 
+                            ItemsSource="{Binding Segments}"
+                            x:CompileBindings="False">
+            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
+                       Background="Transparent" />
+          </TreeDataTemplate>
+          <DataTemplate DataType="vmp:PathSegmentViewModel">
+            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
+                       Background="Transparent" />
+          </DataTemplate>
+        </TreeView.DataTemplates>
+      </TreeView>
+    </TabItem>
+    <TabItem Header="Selected Figure">
+      <ContentControl Content="{Binding #FiguresTreeView.SelectedItem}" />
     </TabItem>
   </TabControl>
 </UserControl>

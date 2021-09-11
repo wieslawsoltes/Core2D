@@ -1,9 +1,12 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Text;
 using Core2D.Model;
+using Core2D.Model.Path;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Path;
@@ -12,9 +15,12 @@ namespace Core2D.ViewModels.Shapes
 {
     public partial class PathShapeViewModel : BaseShapeViewModel
     {
+        public static FillRule[] FillRuleValues { get; } = (FillRule[])Enum.GetValues(typeof(FillRule));
+
         private List<PointShapeViewModel>? _points;
 
-        [AutoNotify] private PathGeometryViewModel? _geometry;
+        [AutoNotify] private ImmutableArray<PathFigureViewModel> _figures;
+        [AutoNotify] private FillRule _fillRule;
 
         public PathShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(PathShapeViewModel))
         {
@@ -22,6 +28,8 @@ namespace Core2D.ViewModels.Shapes
 
         public override object Copy(IDictionary<object, object>? shared)
         {
+            var figures = _figures.CopyShared(shared).ToImmutable();
+
             var copy = new PathShapeViewModel(ServiceProvider)
             {
                 Name = Name,
@@ -31,7 +39,8 @@ namespace Core2D.ViewModels.Shapes
                 IsFilled = IsFilled,
                 Properties = _properties.CopyShared(shared).ToImmutable(),
                 Record = _record,
-                Geometry = _geometry?.CopyShared(shared)
+                Figures = figures,
+                FillRule = FillRule
             };
 
             return copy;
@@ -113,12 +122,9 @@ namespace Core2D.ViewModels.Shapes
 
         public override void GetPoints(IList<PointShapeViewModel> points)
         {
-            if (_geometry != null)
+            foreach (var figure in _figures)
             {
-                foreach (var figure in _geometry.Figures)
-                {
-                    figure.GetPoints(points);
-                }
+                figure.GetPoints(points);
             }
         }
 
@@ -126,9 +132,9 @@ namespace Core2D.ViewModels.Shapes
         {
             var isDirty = base.IsDirty();
 
-            if (_geometry is { })
+            foreach (var figure in _figures)
             {
-                isDirty |= _geometry.IsDirty();
+                isDirty |= figure.IsDirty();
             }
 
             return isDirty;
@@ -138,7 +144,10 @@ namespace Core2D.ViewModels.Shapes
         {
             base.Invalidate();
 
-            _geometry?.Invalidate();
+            foreach (var figure in _figures)
+            {
+                figure.Invalidate();
+            }
         }
 
         public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
@@ -148,13 +157,13 @@ namespace Core2D.ViewModels.Shapes
             var disposableStyle = default(IDisposable);
             var disposableProperties = default(CompositeDisposable);
             var disposableRecord = default(IDisposable);
-            var disposableGeometry = default(IDisposable);
+            var disposableFigures = default(CompositeDisposable);
 
             ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
             ObserveObject(_style, ref disposableStyle, mainDisposable, observer);
             ObserveList(_properties, ref disposableProperties, mainDisposable, observer);
             ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
-            ObserveObject(_geometry, ref disposableGeometry, mainDisposable, observer);
+            ObserveList(_figures, ref disposableFigures, mainDisposable, observer);
 
             void Handler(object? sender, PropertyChangedEventArgs e)
             {
@@ -173,9 +182,9 @@ namespace Core2D.ViewModels.Shapes
                     ObserveObject(_record, ref disposableRecord, mainDisposable, observer);
                 }
 
-                if (e.PropertyName == nameof(Geometry))
+                if (e.PropertyName == nameof(Figures))
                 {
-                    ObserveObject(_geometry, ref disposableGeometry, mainDisposable, observer);
+                    ObserveList(_figures, ref disposableFigures, mainDisposable, observer);
                 }
 
                 observer.OnNext((sender, e));
@@ -200,10 +209,66 @@ namespace Core2D.ViewModels.Shapes
             return _points;
         }
 
-        public string ToXamlString() 
-            => _geometry?.ToXamlString() ?? "";
+        private string ToXamlString(ImmutableArray<PathFigureViewModel> figures)
+        {
+            if (figures.Length == 0)
+            {
+                return string.Empty;
+            }
+            var sb = new StringBuilder();
+            for (int i = 0; i < figures.Length; i++)
+            {
+                sb.Append(figures[i].ToXamlString());
+                if (i != figures.Length - 1)
+                {
+                    sb.Append(' ');
+                }
+            }
+            return sb.ToString();
+        }
 
-        public string ToSvgString() 
-            => _geometry?.ToSvgString() ?? "";
+        private string ToSvgString(ImmutableArray<PathFigureViewModel> figures)
+        {
+            if (figures.Length == 0)
+            {
+                return string.Empty;
+            }
+            var sb = new StringBuilder();
+            for (int i = 0; i < figures.Length; i++)
+            {
+                sb.Append(figures[i].ToSvgString());
+                if (i != figures.Length - 1)
+                {
+                    sb.Append(' ');
+                }
+            }
+            return sb.ToString();
+        }
+
+        public string ToXamlString()
+        {
+            string figuresString = string.Empty;
+
+            if (Figures.Length > 0)
+            {
+                figuresString = ToXamlString(Figures);
+            }
+
+            if (FillRule == FillRule.Nonzero)
+            {
+                return "F1" + figuresString;
+            }
+
+            return figuresString;
+        }
+
+        public string ToSvgString()
+        {
+            if (Figures.Length > 0)
+            {
+                return ToSvgString(Figures);
+            }
+            return string.Empty;
+        }
     }
 }

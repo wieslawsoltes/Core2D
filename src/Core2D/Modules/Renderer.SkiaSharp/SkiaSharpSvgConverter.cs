@@ -152,14 +152,15 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return style;
         }
 
-        public static PathGeometryViewModel ToPathGeometry(SP.SKPath path, bool isFilled, IViewModelFactory viewModelFactory)
+        public static PathShapeViewModel ToPathGeometry(SP.SKPath path, bool isFilled, IViewModelFactory viewModelFactory)
         {
             if (path.Commands is null)
             {
                 return null;
             }
 
-            var geometry = viewModelFactory.CreatePathGeometry(
+            var geometry = viewModelFactory.CreatePathShape(
+                null,
                 ImmutableArray.Create<PathFigureViewModel>(),
                 path.FillType == SP.SKPathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
@@ -314,14 +315,15 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return geometry;
         }
 
-        public static PathGeometryViewModel ToPathGeometry(SP.AddPolyPathCommand addPolyPathCommand, SP.SKPathFillType fillType, bool isFilled, bool isClosed, IViewModelFactory viewModelFactory)
+        public static PathShapeViewModel ToPathGeometry(SP.AddPolyPathCommand addPolyPathCommand, SP.SKPathFillType fillType, bool isFilled, bool isClosed, IViewModelFactory viewModelFactory)
         {
             if (addPolyPathCommand.Points is null || addPolyPathCommand.Points.Count < 2)
             {
                 return null;
             }
 
-            var geometry = viewModelFactory.CreatePathGeometry(
+            var geometry = viewModelFactory.CreatePathShape(
+                null,
                 ImmutableArray.Create<PathFigureViewModel>(),
                 fillType == SP.SKPathFillType.EvenOdd ? FillRule.EvenOdd : FillRule.Nonzero);
 
@@ -476,7 +478,8 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                                                         var pathShape = viewModelFactory.CreatePathShape(
                                                             "Path",
                                                             style,
-                                                            polyGeometry,
+                                                            ImmutableArray.Create<PathFigureViewModel>(),
+                                                            FillRule.Nonzero,
                                                             IsStroked(drawPathCanvasCommand.Paint),
                                                             IsFilled(drawPathCanvasCommand.Paint));
                                                         shapes.Add(pathShape);
@@ -511,17 +514,14 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                                     }
                                 }
 
-                                var geometry = ToPathGeometry(drawPathCanvasCommand.Path, IsFilled(drawPathCanvasCommand.Paint), viewModelFactory);
-                                if (geometry is { })
+                                var path = ToPathGeometry(drawPathCanvasCommand.Path, IsFilled(drawPathCanvasCommand.Paint), viewModelFactory);
+                                if (path is { })
                                 {
-                                    var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
-                                    var pathShape = viewModelFactory.CreatePathShape(
-                                        "Path",
-                                        style,
-                                        geometry,
-                                        IsStroked(drawPathCanvasCommand.Paint),
-                                        IsFilled(drawPathCanvasCommand.Paint));
-                                    shapes.Add(pathShape);
+                                    path.Name = "Path";
+                                    path.Style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
+                                    path.IsStroked = IsStroked(drawPathCanvasCommand.Paint);
+                                    path.IsStroked = IsFilled(drawPathCanvasCommand.Paint);
+                                    shapes.Add(path);
                                 }
                             }
                         }

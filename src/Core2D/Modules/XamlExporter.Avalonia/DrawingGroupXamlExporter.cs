@@ -69,7 +69,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
                 var path = converter.ToFillPathShape(shape);
                 if (path is { })
                 {
-                    var geometry = path.Geometry.ToXamlString();
+                    var geometry = path.ToXamlString();
                     var brush = (shape.Style.Fill.Color as ArgbColorViewModel).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
@@ -80,7 +80,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
                 var path = converter.ToStrokePathShape(shape);
                 if (path is { })
                 {
-                    var geometry = path.Geometry.ToXamlString();
+                    var geometry = path.ToXamlString();
                     var brush = (shape.Style.Stroke.Color as ArgbColorViewModel).ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
