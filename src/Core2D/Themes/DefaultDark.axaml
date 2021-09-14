@@ -1,24 +1,23 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:idc="using:Dock.Avalonia.Controls">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <!-- Avalonia -->
   <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
   <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
   <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
   <!-- Dock -->
-  <StyleInclude Source="avares://Dock.Avalonia/Themes/DefaultTheme.axaml" />
+  <StyleInclude Source="avares://Dock.Avalonia/Themes/DockDefaultTheme.axaml" />
   <Style>
     <Style.Resources>
       <SolidColorBrush x:Key="DockThemeBackgroundBrush">#292929</SolidColorBrush>
     </Style.Resources>
   </Style>
-  <Style Selector="idc|ToolControl /template/ DockPanel#PART_DockPanel">
+  <Style Selector="ToolControl /template/ DockPanel#PART_DockPanel">
     <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
   </Style>
-  <Style Selector="idc|ToolControl /template/ TabStrip#PART_TabStrip TabStripItem">
+  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem">
     <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
   </Style>
-  <Style Selector="idc|ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
+  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
     <Setter Property="Background" Value="{DynamicResource DockThemeBackgroundBrush}" />
   </Style>
   <!-- Other -->
