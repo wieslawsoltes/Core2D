@@ -53,15 +53,19 @@ namespace Core2D
                 .PublicOnly()
                 .Where(t =>
                 {
-                    return (
-                            t.Namespace.StartsWith(nameof(ViewModels.Containers))
-                            || t.Namespace.StartsWith(nameof(ViewModels.Data))
-                            || t.Namespace.StartsWith(nameof(ViewModels.Path))
-                            || t.Namespace.StartsWith(nameof(ViewModels.Scripting))
-                            || t.Namespace.StartsWith(nameof(ViewModels.Shapes))
-                            || t.Namespace.StartsWith(nameof(ViewModels.Style))
-                           )
-                           && t.Name.EndsWith("ViewModel");
+                    if ((
+                            t.Namespace.StartsWith("Core2D.ViewModels.Containers")
+                            || t.Namespace.StartsWith("Core2D.ViewModels.Data")
+                            || t.Namespace.StartsWith("Core2D.ViewModels.Path")
+                            || t.Namespace.StartsWith("Core2D.ViewModels.Scripting")
+                            || t.Namespace.StartsWith("Core2D.ViewModels.Shapes")
+                            || t.Namespace.StartsWith("Core2D.ViewModels.Style")
+                        )
+                        && t.Name.EndsWith("ViewModel"))
+                    {
+                        return true;
+                    }
+                    return false;
                 })
                 .AsSelf();
 
@@ -82,11 +86,28 @@ namespace Core2D
             builder.RegisterType<ContainerFactory>().As<IContainerFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
 
-            builder.RegisterAssemblyTypes(typeof(IEditorTool).GetTypeInfo().Assembly).As<IEditorTool>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(IPathTool).GetTypeInfo().Assembly).As<IPathTool>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(typeof(IEditorTool).GetTypeInfo().Assembly)
+                .PublicOnly()
+                .Where(t => t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools"))
+                .As<IEditorTool>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterAssemblyTypes(typeof(IPathTool).GetTypeInfo().Assembly)
+                .PublicOnly()
+                .Where(t => t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools.Path"))
+                .As<IPathTool>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<HitTest>().As<IHitTest>().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly).As<IBounds>().AsSelf().InstancePerLifetimeScope();
+            
+            builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly)
+                .PublicOnly()
+                .Where(t => t.Namespace.StartsWith("Core2D.ViewModels.Editor.Bounds.Shapes"))
+                .As<IBounds>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<DataFlow>().As<DataFlow>().InstancePerLifetimeScope();
 
