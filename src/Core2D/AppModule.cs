@@ -67,7 +67,8 @@ namespace Core2D
                     }
                     return false;
                 })
-                .AsSelf();
+                .AsSelf()
+                .InstancePerDependency();
 
             // Editor
 
