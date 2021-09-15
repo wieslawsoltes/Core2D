@@ -121,12 +121,19 @@
       <Panel Background="{DynamicResource TemplateCheckerBoard}" />
       <Panel>
         <Panel ClipToBounds="True">
-          <ScrollViewer x:Name="PageScrollViewer" HorizontalScrollBarVisibility="Auto"
+          <ScrollViewer x:Name="PageScrollViewer" 
+                        HorizontalScrollBarVisibility="Auto"
                         VerticalScrollBarVisibility="Auto">
             <paz:ZoomBorder x:Name="PageZoomBorder"
-                            Stretch="None" ZoomSpeed="1.2" PanButton="Middle" EnablePan="True" EnableZoom="True"
-                            Background="Transparent" ClipToBounds="False"
-                            VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            Stretch="None"
+                            ZoomSpeed="1.2" 
+                            PanButton="Middle" 
+                            EnablePan="True" 
+                            EnableZoom="True"
+                            Background="Transparent" 
+                            ClipToBounds="False"
+                            VerticalAlignment="Stretch" 
+                            HorizontalAlignment="Stretch">
               <paz:ZoomBorder.ContextMenu>
                 <ContextMenu x:Name="TemplateContextMenu" DataContext="{Binding #PageZoomBorder.DataContext}">
                   <MenuItem Header="Cu_t" Command="{Binding ClipboardService.OnCut}" InputGesture="Ctrl+X" />
