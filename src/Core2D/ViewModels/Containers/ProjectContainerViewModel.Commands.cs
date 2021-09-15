@@ -17,6 +17,7 @@ namespace Core2D.ViewModels.Containers
 {
     public partial class ProjectContainerViewModel
     {
+        [IgnoreDataMember]
         private object? ScriptState { get; set; }
 
         [IgnoreDataMember]
