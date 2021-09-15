@@ -72,4 +72,7 @@
   <Style Selector="DataGridColumnHeader">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
   </Style>
+  <Style Selector="ToolTip">
+    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
+  </Style>
 </Styles>
