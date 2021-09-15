@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using Core2D.Modules.XamlExporter.Avalonia;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Modules.FileWriter.Xaml
 {
@@ -49,8 +51,13 @@ namespace Core2D.Modules.FileWriter.Xaml
                 dataFlow.Bind(page.Template, db, record);
                 dataFlow.Bind(page, db, record);
 
-                var shapes = page.Layers.SelectMany(x => x.Shapes);
-                if (shapes is { })
+                var shapes = new List<BaseShapeViewModel>();
+                if (page.Template is { } template)
+                {
+                    shapes.AddRange(template.Layers.SelectMany(x => x.Shapes));
+                }
+                shapes.AddRange(page.Layers.SelectMany(x => x.Shapes));
+
                 {
                     var key = page?.Name;
                     var xaml = exporter.Create(shapes, key);
