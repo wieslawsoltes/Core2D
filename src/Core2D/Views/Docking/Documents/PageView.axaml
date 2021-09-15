@@ -152,15 +152,16 @@
               </idd:ContextDropBehavior>
               </i:Interaction.Behaviors>
               <Panel DataContext="{Binding Project.CurrentContainer}" 
-                     VerticalAlignment="Center"
-                     HorizontalAlignment="Center">
+                     VerticalAlignment="Stretch"
+                     HorizontalAlignment="Stretch"
+                     ClipToBounds="False">
                 <Panel x:Name="ContainerPanel"
                        Background="Transparent"
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        Width="{Binding Template.Width, TargetNullValue={Binding Width}}"
-                       Height="{Binding Template.Height, TargetNullValue={Binding Height}}">
+                       Height="{Binding Template.Height, TargetNullValue={Binding Height}}"
+                       ClipToBounds="False">
                   <renderer:RenderView x:Name="RenderViewData"
-                                       ZoomBorder="{Binding #PageZoomBorder}"
                                        Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
                                        Selection="{Binding $parent[TopLevel].DataContext.Project}"
                                        DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
@@ -168,7 +169,6 @@
                                        RenderType="Data"
                                        ClipToBounds="False" />
                   <renderer:RenderView x:Name="RenderViewTemplate"
-                                       ZoomBorder="{Binding #PageZoomBorder}"
                                        Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
                                        Selection="{Binding $parent[TopLevel].DataContext.Project}"
                                        DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
@@ -176,7 +176,6 @@
                                        RenderType="Template"
                                        ClipToBounds="False" />
                   <renderer:RenderView x:Name="RenderViewEditor"
-                                       ZoomBorder="{Binding #PageZoomBorder}"
                                        Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
                                        Selection="{Binding $parent[TopLevel].DataContext.Project}"
                                        DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
