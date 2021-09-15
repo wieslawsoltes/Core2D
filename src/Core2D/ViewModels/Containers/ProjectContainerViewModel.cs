@@ -22,7 +22,7 @@ namespace Core2D.ViewModels.Containers
     public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelection
     {
         [AutoNotify] private OptionsViewModel? _options;
-        [AutoNotify] private IHistory? _history;
+        [AutoNotify(IgnoreDataMember = true)] private IHistory? _history;
         [AutoNotify] private ImmutableArray<LibraryViewModel> _styleLibraries;
         [AutoNotify] private ImmutableArray<LibraryViewModel> _groupLibraries;
         [AutoNotify] private ImmutableArray<DatabaseViewModel> _databases;
