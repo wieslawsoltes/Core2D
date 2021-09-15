@@ -22,7 +22,7 @@ namespace Core2D.Modules.Renderer.PdfSharp
 
         [AutoNotify] private ShapeRendererStateViewModel _state;
 
-        public PdfSharpRenderer(IServiceProvider serviceProvider) : base(serviceProvider)
+        public PdfSharpRenderer(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
             _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, XImage>(bi => bi.Dispose());

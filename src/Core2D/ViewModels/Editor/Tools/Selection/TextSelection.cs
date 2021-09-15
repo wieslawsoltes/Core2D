@@ -18,7 +18,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
         private PointShapeViewModel _bottomRightHelperPoint;
         private RectangleShapeViewModel _helperRectangle;
 
-        public TextSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, TextShapeViewModel shape, ShapeStyleViewModel style)
+        public TextSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, TextShapeViewModel shape, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

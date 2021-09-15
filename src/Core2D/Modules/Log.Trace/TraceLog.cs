@@ -17,7 +17,7 @@ namespace Core2D.Modules.Log.Trace
         private SD.TraceListener _listener;
         private System.IO.Stream _stream;
 
-        public TraceLog(IServiceProvider serviceProvider)
+        public TraceLog(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

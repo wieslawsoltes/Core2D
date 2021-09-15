@@ -25,7 +25,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
         private PointShapeViewModel _startHelperPoint;
         private PointShapeViewModel _endHelperPoint;
 
-        public ArcSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, ArcShapeViewModel shapeViewModel, ShapeStyleViewModel style)
+        public ArcSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, ArcShapeViewModel shapeViewModel, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

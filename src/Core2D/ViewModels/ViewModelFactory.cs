@@ -25,7 +25,7 @@ namespace Core2D.ViewModels
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ViewModelFactory(IServiceProvider serviceProvider)
+        public ViewModelFactory(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

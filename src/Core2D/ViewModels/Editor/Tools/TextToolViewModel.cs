@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Text";
 
-        public TextToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public TextToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

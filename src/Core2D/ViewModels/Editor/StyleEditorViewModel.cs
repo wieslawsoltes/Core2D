@@ -25,7 +25,7 @@ namespace Core2D.ViewModels.Editor
         private ArrowStyleViewModel _endArrowStyleCopy;
         private ArrowStyleViewModel _startArrowStyleCopy;
 
-        public StyleEditorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public StyleEditorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

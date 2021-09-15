@@ -39,7 +39,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private ViewModelBase? _selected;
         [AutoNotify(IgnoreDataMember = true)] private ISet<BaseShapeViewModel>? _selectedShapes;
 
-        public ProjectContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ProjectContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             AddStyleLibrary = new Command(OnAddStyleLibrary);
             RemoveStyleLibrary = new Command<LibraryViewModel?>(OnRemoveStyleLibrary);

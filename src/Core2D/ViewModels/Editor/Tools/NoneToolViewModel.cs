@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Editor.Tools
     {
         public string Title => "None";
 
-        public NoneToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public NoneToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

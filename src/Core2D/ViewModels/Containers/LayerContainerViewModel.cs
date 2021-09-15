@@ -29,7 +29,7 @@ namespace Core2D.ViewModels.Containers
 
         public event InvalidateLayerEventHandler? InvalidateLayer;
 
-        public LayerContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public LayerContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _invalidateLayerEventArgs = new InvalidateLayerEventArgs(this);
         }

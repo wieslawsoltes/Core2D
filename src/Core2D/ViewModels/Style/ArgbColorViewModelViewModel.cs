@@ -12,7 +12,7 @@ namespace Core2D.ViewModels.Style
     {
         [AutoNotify] private uint _value;
 
-        public ArgbColorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ArgbColorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

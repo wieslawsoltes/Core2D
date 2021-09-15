@@ -6,7 +6,7 @@ namespace Core2D.Modules.Renderer.Avalonia
 {
     public class AvaloniaRendererViewModel : NodeRendererViewModel
     {
-        public AvaloniaRendererViewModel(IServiceProvider serviceProvider)
+        public AvaloniaRendererViewModel(IServiceProvider? serviceProvider)
             : base(serviceProvider, new AvaloniaDrawNodeFactory())
         {
         }

@@ -97,7 +97,7 @@ namespace Core2D.ViewModels.Designer
 
         public static ShapeRendererStateViewModel ShapeRendererState { get; private set; }
 
-        public static void InitializeContext(IServiceProvider serviceProvider)
+        public static void InitializeContext(IServiceProvider? serviceProvider)
         {
             var factory = serviceProvider.GetService<IViewModelFactory>();
 

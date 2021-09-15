@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Containers
     {
         [AutoNotify] private TemplateContainerViewModel? _template;
 
-        public PageContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public PageContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

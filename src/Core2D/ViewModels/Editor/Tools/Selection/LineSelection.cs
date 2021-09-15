@@ -16,7 +16,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
         private PointShapeViewModel _startHelperPoint;
         private PointShapeViewModel _endHelperPoint;
 
-        public LineSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, LineShapeViewModel shape, ShapeStyleViewModel style)
+        public LineSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, LineShapeViewModel shape, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

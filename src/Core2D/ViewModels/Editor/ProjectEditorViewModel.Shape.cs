@@ -60,7 +60,7 @@ namespace Core2D.ViewModels.Editor
 
     public class ShapeServiceViewModel : ViewModelBase, IShapeService
     {
-        public ShapeServiceViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ShapeServiceViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

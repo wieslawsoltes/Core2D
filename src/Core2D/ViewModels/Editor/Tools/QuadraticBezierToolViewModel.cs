@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "QuadraticBezier";
 
-        public QuadraticBezierToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public QuadraticBezierToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

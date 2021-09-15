@@ -15,7 +15,7 @@ namespace Core2D.ViewModels.Editor
         [AutoNotify] private bool _isCloseButtonVisible;
         [AutoNotify] private ViewModelBase? _viewModel;
 
-        public DialogViewModel(IServiceProvider serviceProvider, IDialogPresenter dialogPresenter) : base(serviceProvider)
+        public DialogViewModel(IServiceProvider? serviceProvider, IDialogPresenter dialogPresenter) : base(serviceProvider)
         {
             _dialogPresenter = dialogPresenter;
         }

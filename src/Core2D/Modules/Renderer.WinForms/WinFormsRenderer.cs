@@ -23,7 +23,7 @@ namespace Core2D.Modules.Renderer.WinForms
 
         [AutoNotify] private ShapeRendererStateViewModel _state;
 
-        public WinFormsRenderer(IServiceProvider serviceProvider, double textScaleFactor = 1.0) : base(serviceProvider)
+        public WinFormsRenderer(IServiceProvider? serviceProvider, double textScaleFactor = 1.0) : base(serviceProvider)
         {
             _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
             _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, Image>(bi => bi.Dispose());

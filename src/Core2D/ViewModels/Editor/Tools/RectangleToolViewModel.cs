@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Rectangle";
 
-        public RectangleToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public RectangleToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

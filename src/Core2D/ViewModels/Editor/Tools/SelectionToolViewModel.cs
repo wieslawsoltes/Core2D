@@ -25,7 +25,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Selection";
 
-        public SelectionToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public SelectionToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Image";
 
-        public ImageToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ImageToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

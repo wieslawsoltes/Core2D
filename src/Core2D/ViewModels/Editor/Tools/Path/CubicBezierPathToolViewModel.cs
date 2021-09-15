@@ -20,7 +20,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public string Title => "CubicBezier";
 
-        public CubicBezierPathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public CubicBezierPathToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _currentState = State.Point1;
             _cubicBezier = new CubicBezierShapeViewModel(serviceProvider);

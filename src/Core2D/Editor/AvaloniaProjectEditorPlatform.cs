@@ -23,7 +23,7 @@ namespace Core2D.Editor
 {
     public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatform
     {
-        public AvaloniaProjectEditorPlatform(IServiceProvider serviceProvider) : base(serviceProvider)
+        public AvaloniaProjectEditorPlatform(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

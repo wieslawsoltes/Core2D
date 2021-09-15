@@ -16,7 +16,7 @@ namespace Core2D.Modules.FileWriter.Svg
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public SvgSvgWriter(IServiceProvider serviceProvider)
+        public SvgSvgWriter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

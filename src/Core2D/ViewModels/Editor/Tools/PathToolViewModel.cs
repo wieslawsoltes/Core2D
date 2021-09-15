@@ -32,7 +32,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Path";
 
-        public PathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public PathToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _linePathTool = serviceProvider.GetService<LinePathToolViewModel>();
             _arcPathTool = serviceProvider.GetService<ArcPathToolViewModel>();

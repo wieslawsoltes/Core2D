@@ -15,7 +15,7 @@ namespace Core2D.Modules.SvgExporter.Svg
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public SvgSvgExporter(IServiceProvider serviceProvider)
+        public SvgSvgExporter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

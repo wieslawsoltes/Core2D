@@ -9,7 +9,7 @@ namespace Core2D.Modules.FileSystem.DotNet
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public DotNetFileSystem(IServiceProvider serviceProvider)
+        public DotNetFileSystem(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

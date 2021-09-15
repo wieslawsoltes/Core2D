@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private double _x;
         [AutoNotify] private double _y;
 
-        public PointShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(PointShapeViewModel))
+        public PointShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(PointShapeViewModel))
         {
         }
 

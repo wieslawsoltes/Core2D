@@ -12,7 +12,7 @@ namespace Core2D.ViewModels.Editors
         [AutoNotify] private ProjectEditorViewModel? _editor;
         [AutoNotify] private TextShapeViewModel? _text;
 
-        public TextBindingEditorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public TextBindingEditorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

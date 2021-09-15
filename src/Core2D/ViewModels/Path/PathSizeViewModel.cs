@@ -10,7 +10,7 @@ namespace Core2D.ViewModels.Path
         [AutoNotify] private double _width;
         [AutoNotify] private double _height;
 
-        public PathSizeViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public PathSizeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

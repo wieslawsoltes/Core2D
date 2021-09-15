@@ -34,7 +34,7 @@ namespace Core2D.ViewModels.Editor
 
         public string RenderingSubsystemName { get; set; }
 
-        public AboutInfoViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public AboutInfoViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

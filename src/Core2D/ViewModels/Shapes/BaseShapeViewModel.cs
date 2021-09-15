@@ -25,7 +25,7 @@ namespace Core2D.ViewModels.Shapes
         // ReSharper restore MemberCanBePrivate.Global
         // ReSharper restore InconsistentNaming
 
-        protected BaseShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider)
+        protected BaseShapeViewModel(IServiceProvider? serviceProvider, Type targetType) : base(serviceProvider)
         {
             _targetType = targetType;
         }

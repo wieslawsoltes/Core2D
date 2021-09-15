@@ -14,7 +14,7 @@ namespace Core2D.Modules.FileWriter.PdfSharp
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public PdfSharpWriter(IServiceProvider serviceProvider)
+        public PdfSharpWriter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

@@ -14,7 +14,7 @@ namespace Core2D.Editor
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public AvaloniaImageImporter(IServiceProvider serviceProvider)
+        public AvaloniaImageImporter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

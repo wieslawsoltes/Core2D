@@ -22,7 +22,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private ImmutableArray<PathFigureViewModel> _figures;
         [AutoNotify] private FillRule _fillRule;
 
-        public PathShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(PathShapeViewModel))
+        public PathShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(PathShapeViewModel))
         {
         }
 

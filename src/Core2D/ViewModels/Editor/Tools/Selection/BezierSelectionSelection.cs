@@ -22,7 +22,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
         private PointShapeViewModel _helperPoint3;
         private PointShapeViewModel _helperPoint4;
 
-        public BezierSelectionSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, CubicBezierShapeViewModel shape, ShapeStyleViewModel style)
+        public BezierSelectionSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, CubicBezierShapeViewModel shape, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

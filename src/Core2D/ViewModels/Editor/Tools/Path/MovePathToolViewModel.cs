@@ -15,7 +15,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public string Title => "Move";
 
-        public MovePathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public MovePathToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _currentState = State.Move;
         }

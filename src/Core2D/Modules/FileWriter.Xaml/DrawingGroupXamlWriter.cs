@@ -18,7 +18,7 @@ namespace Core2D.Modules.FileWriter.Xaml
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public DrawingGroupXamlWriter(IServiceProvider serviceProvider)
+        public DrawingGroupXamlWriter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

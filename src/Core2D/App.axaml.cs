@@ -53,7 +53,7 @@ namespace Core2D
             }
         }
 
-        public AboutInfoViewModel CreateAboutInfo(IServiceProvider serviceProvider, RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
+        public AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider, RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
         {
             return new AboutInfoViewModel(serviceProvider)
             {

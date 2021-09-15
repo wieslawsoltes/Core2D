@@ -8,7 +8,7 @@ namespace Core2D.ViewModels.Data
     {
         [AutoNotify] private string? _content;
 
-        public ValueViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ValueViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

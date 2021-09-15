@@ -13,7 +13,7 @@ namespace Core2D.Modules.ScriptRunner.Roslyn
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public RoslynScriptRunner(IServiceProvider serviceProvider)
+        public RoslynScriptRunner(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

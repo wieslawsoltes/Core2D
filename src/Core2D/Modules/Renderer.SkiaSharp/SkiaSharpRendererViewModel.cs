@@ -6,7 +6,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 {
     public class SkiaSharpRendererViewModel : NodeRendererViewModel
     {
-        public SkiaSharpRendererViewModel(IServiceProvider serviceProvider)
+        public SkiaSharpRendererViewModel(IServiceProvider? serviceProvider)
             : base(serviceProvider, new SkiaSharpDrawNodeFactory())
         {
         }

@@ -18,7 +18,7 @@ namespace Core2D.ViewModels.Style
         [AutoNotify] private TextHAlignment? _textHAlignment;
         [AutoNotify] private TextVAlignment? _textVAlignment;
 
-        public TextStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public TextStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

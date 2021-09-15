@@ -15,7 +15,7 @@ namespace Core2D.Modules.TextFieldReader.OpenXml
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public OpenXmlReader(IServiceProvider serviceProvider)
+        public OpenXmlReader(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

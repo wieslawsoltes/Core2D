@@ -13,7 +13,7 @@ namespace Core2D.ViewModels.Renderer
     {
         [AutoNotify] private string? _key;
 
-        public ImageKeyViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ImageKeyViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             RemoveImageKey = new Command<string?>(x => GetProject()?.OnRemoveImageKey(x));
 

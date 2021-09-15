@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Editor.Factories
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ShapeFactory(IServiceProvider serviceProvider)
+        public ShapeFactory(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

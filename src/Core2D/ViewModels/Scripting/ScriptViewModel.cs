@@ -12,7 +12,7 @@ namespace Core2D.ViewModels.Scripting
     {
         [AutoNotify] private string? _code;
 
-        public ScriptViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ScriptViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             ResetRepl = new Command(() => GetProject()?.OnResetRepl());
 

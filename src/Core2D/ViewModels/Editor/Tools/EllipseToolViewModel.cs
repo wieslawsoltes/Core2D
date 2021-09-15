@@ -24,7 +24,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Ellipse";
 
-        public EllipseToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public EllipseToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

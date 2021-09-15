@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Runtime.Serialization;
 
 namespace Core2D.ViewModels
 {
@@ -12,14 +13,15 @@ namespace Core2D.ViewModels
         [AutoNotify] private ViewModelBase? _owner;
         [AutoNotify] private string _name = "";
 
-        protected ViewModelBase(IServiceProvider serviceProvider)
+        protected ViewModelBase(IServiceProvider? serviceProvider)
         {
             ServiceProvider = serviceProvider;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected IServiceProvider ServiceProvider { get; }
+        [IgnoreDataMember]
+        protected IServiceProvider? ServiceProvider { get; }
 
         public virtual bool IsDirty() => _isDirty;
 

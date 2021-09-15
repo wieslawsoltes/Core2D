@@ -15,7 +15,7 @@ namespace Core2D.ViewModels.Path
         [AutoNotify] private ImmutableArray<PathSegmentViewModel> _segments;
         [AutoNotify] private bool _isClosed;
 
-        public PathFigureViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public PathFigureViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

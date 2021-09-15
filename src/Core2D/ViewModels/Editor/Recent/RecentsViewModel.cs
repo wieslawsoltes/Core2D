@@ -10,7 +10,7 @@ namespace Core2D.ViewModels.Editor.Recent
         [AutoNotify] private ImmutableArray<RecentFileViewModel> _files = ImmutableArray.Create<RecentFileViewModel>();
         [AutoNotify] private RecentFileViewModel? _current;
 
-        public RecentsViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public RecentsViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 
@@ -29,7 +29,7 @@ namespace Core2D.ViewModels.Editor.Recent
             return copy;
         }
 
-        public static RecentsViewModel Create(IServiceProvider serviceProvider, ImmutableArray<RecentFileViewModel> files, RecentFileViewModel? current)
+        public static RecentsViewModel Create(IServiceProvider? serviceProvider, ImmutableArray<RecentFileViewModel> files, RecentFileViewModel? current)
         {
             return new RecentsViewModel(serviceProvider)
             {

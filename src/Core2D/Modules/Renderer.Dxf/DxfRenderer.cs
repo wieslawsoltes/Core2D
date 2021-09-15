@@ -30,7 +30,7 @@ namespace Core2D.Modules.Renderer.Dxf
 
         [AutoNotify] private ShapeRendererStateViewModel _state;
 
-        public DxfRenderer(IServiceProvider serviceProvider) : base(serviceProvider)
+        public DxfRenderer(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
             _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, DXFO.ImageDefinition>();

@@ -21,7 +21,7 @@ namespace Core2D.ViewModels.Style
         [AutoNotify] private ArrowStyleViewModel? _startArrow;
         [AutoNotify] private ArrowStyleViewModel ?_endArrow;
 
-        public StrokeStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public StrokeStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

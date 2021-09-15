@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Data
         [AutoNotify] private ImmutableArray<RecordViewModel> _records;
         [AutoNotify] private RecordViewModel? _currentRecord;
 
-        public DatabaseViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public DatabaseViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

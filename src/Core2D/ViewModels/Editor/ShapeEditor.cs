@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Editor
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ShapeEditor(IServiceProvider serviceProvider)
+        public ShapeEditor(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

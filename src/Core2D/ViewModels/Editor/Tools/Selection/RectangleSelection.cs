@@ -16,7 +16,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
         private PointShapeViewModel _topLeftHelperPoint;
         private PointShapeViewModel _bottomRightHelperPoint;
 
-        public RectangleSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, RectangleShapeViewModel shape, ShapeStyleViewModel style)
+        public RectangleSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, RectangleShapeViewModel shape, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

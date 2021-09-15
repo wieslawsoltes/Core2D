@@ -67,7 +67,7 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
 
         public bool IsVisible => _isVisible;
 
-        public BoxDecoratorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public BoxDecoratorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             var viewModelFactory = serviceProvider.GetService<IViewModelFactory>();
 

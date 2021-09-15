@@ -10,7 +10,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private ImmutableArray<ViewModelBase> _items;
         [AutoNotify] private ViewModelBase? _selected;
 
-        public LibraryViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public LibraryViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

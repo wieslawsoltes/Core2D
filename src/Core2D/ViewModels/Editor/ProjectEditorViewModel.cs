@@ -18,7 +18,7 @@ namespace Core2D.ViewModels.Editor
 {
     public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {
-        public ProjectEditorViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ProjectEditorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _recentProjects = ImmutableArray.Create<RecentFileViewModel>();
             _currentRecentProject = default;

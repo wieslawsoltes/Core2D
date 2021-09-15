@@ -45,7 +45,7 @@ namespace Core2D.ViewModels.Editor
 
     public class SelectionServiceViewModel : ViewModelBase, ISelectionService
     {
-        public SelectionServiceViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public SelectionServiceViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

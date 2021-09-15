@@ -12,7 +12,7 @@ namespace Core2D.Modules.FileWriter.Dxf
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public DxfWriter(IServiceProvider serviceProvider)
+        public DxfWriter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

@@ -25,7 +25,7 @@ namespace Core2D.ViewModels.Renderer
         [AutoNotify] private ShapeStyleViewModel? _helperStyle;
         [AutoNotify] private IDecorator? _decorator;
 
-        public ShapeRendererStateViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ShapeRendererStateViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

@@ -13,7 +13,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public DrawingGroupXamlExporter(IServiceProvider serviceProvider)
+        public DrawingGroupXamlExporter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

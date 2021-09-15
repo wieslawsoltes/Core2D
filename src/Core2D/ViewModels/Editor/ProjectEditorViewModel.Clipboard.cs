@@ -26,7 +26,7 @@ namespace Core2D.ViewModels.Editor
 
     public class ClipboardServiceViewModel : ViewModelBase, IClipboardService
     {
-        public ClipboardServiceViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ClipboardServiceViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

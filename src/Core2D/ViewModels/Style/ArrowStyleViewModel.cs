@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Style
         [AutoNotify] private double _radiusX;
         [AutoNotify] private double _radiusY;
 
-        public ArrowStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ArrowStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

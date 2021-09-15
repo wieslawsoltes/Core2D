@@ -10,7 +10,7 @@ namespace Core2D.ViewModels.Style
     {
         [AutoNotify] private BaseColorViewModel? _color;
 
-        public FillStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public FillStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

@@ -18,7 +18,7 @@ namespace Core2D.Editor
         [AutoNotify] private Action? _outZoom;
         [AutoNotify] private object? _zoom;
 
-        public AvaloniaEditorCanvasPlatform(IServiceProvider serviceProvider) : base(serviceProvider)
+        public AvaloniaEditorCanvasPlatform(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

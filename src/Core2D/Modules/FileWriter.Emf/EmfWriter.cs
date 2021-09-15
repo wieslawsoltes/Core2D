@@ -21,7 +21,7 @@ namespace Core2D.Modules.FileWriter.Emf
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public EmfWriter(IServiceProvider serviceProvider)
+        public EmfWriter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

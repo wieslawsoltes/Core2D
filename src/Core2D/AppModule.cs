@@ -60,6 +60,7 @@ namespace Core2D
                             || t.Namespace.StartsWith("Core2D.ViewModels.Scripting")
                             || t.Namespace.StartsWith("Core2D.ViewModels.Shapes")
                             || t.Namespace.StartsWith("Core2D.ViewModels.Style")
+                            || t.Namespace.StartsWith("Core2D.ViewModels.Editor.Recent")
                         )
                         && t.Name.EndsWith("ViewModel"))
                     {

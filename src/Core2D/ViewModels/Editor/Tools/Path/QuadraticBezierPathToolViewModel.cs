@@ -20,7 +20,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public string Title => "QuadraticBezier";
 
-        public QuadraticBezierPathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public QuadraticBezierPathToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _currentState = State.Point1;
             _quadraticBezier = new QuadraticBezierShapeViewModel(serviceProvider);

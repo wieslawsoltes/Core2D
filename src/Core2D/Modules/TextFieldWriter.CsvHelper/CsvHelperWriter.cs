@@ -13,7 +13,7 @@ namespace Core2D.Modules.TextFieldWriter.CsvHelper
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public CsvHelperWriter(IServiceProvider serviceProvider)
+        public CsvHelperWriter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

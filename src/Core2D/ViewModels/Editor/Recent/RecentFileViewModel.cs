@@ -8,7 +8,7 @@ namespace Core2D.ViewModels.Editor.Recent
     {
         [AutoNotify] private string? _path;
 
-        public RecentFileViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public RecentFileViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 
@@ -22,7 +22,7 @@ namespace Core2D.ViewModels.Editor.Recent
             return copy;
         }
 
-        public static RecentFileViewModel Create(IServiceProvider serviceProvider, string name, string path)
+        public static RecentFileViewModel Create(IServiceProvider? serviceProvider, string name, string path)
         {
             return new RecentFileViewModel(serviceProvider)
             {

@@ -20,7 +20,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public string Title => "Line";
 
-        public LinePathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public LinePathToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _currentState = State.Start;
             _line = new LineShapeViewModel(serviceProvider);

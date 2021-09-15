@@ -12,7 +12,7 @@ namespace Core2D.ViewModels.Data
         [AutoNotify] private string _id = Guid.NewGuid().ToString();
         [AutoNotify] private ImmutableArray<ValueViewModel> _values = ImmutableArray.Create<ValueViewModel>();
 
-        public RecordViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public RecordViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

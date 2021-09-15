@@ -26,7 +26,7 @@ namespace Core2D.ViewModels.Editor.Tools.Path
 
         public string Title => "Arc";
 
-        public ArcPathToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ArcPathToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _currentState = State.Start;
             _arc = new LineShapeViewModel(serviceProvider);

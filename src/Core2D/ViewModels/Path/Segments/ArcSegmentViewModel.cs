@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Path.Segments
         [AutoNotify] private bool _isLargeArc;
         [AutoNotify] private SweepDirection _sweepDirection;
 
-        public ArcSegmentViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ArcSegmentViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

@@ -21,7 +21,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
         private static readonly Svg.Model.IAssetLoader _assetLoader = new SkiaAssetLoader();
         private readonly IServiceProvider _serviceProvider;
 
-        public SkiaSharpSvgConverter(IServiceProvider serviceProvider)
+        public SkiaSharpSvgConverter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

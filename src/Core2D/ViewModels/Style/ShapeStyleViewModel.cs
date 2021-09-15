@@ -16,7 +16,7 @@ namespace Core2D.ViewModels.Style
         [AutoNotify] private FillStyleViewModel? _fill;
         [AutoNotify] private TextStyleViewModel? _textStyle;
 
-        public ShapeStyleViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ShapeStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             RemoveStyle = new Command<ShapeStyleViewModel?>(x => GetProject()?.OnRemoveStyle(x));
 

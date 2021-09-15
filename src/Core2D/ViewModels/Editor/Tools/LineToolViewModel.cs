@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Line";
 
-        public LineToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public LineToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

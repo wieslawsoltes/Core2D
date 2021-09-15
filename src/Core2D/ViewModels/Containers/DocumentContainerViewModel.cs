@@ -11,7 +11,7 @@ namespace Core2D.ViewModels.Containers
     {
         [AutoNotify] private ImmutableArray<PageContainerViewModel> _pages;
 
-        public DocumentContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public DocumentContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

@@ -10,7 +10,7 @@ namespace Core2D.ViewModels.Editor.Factories
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ContainerFactory(IServiceProvider serviceProvider)
+        public ContainerFactory(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

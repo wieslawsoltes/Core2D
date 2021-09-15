@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Shapes
     {
         [AutoNotify] private ImmutableArray<BaseShapeViewModel> _shapes;
 
-        public GroupShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(GroupShapeViewModel))
+        public GroupShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(GroupShapeViewModel))
         {
         }
 

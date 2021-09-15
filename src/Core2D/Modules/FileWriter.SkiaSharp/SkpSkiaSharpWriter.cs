@@ -15,7 +15,7 @@ namespace Core2D.Modules.FileWriter.SkiaSharp
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public SkpSkiaSharpWriter(IServiceProvider serviceProvider)
+        public SkpSkiaSharpWriter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

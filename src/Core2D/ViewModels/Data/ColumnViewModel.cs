@@ -8,7 +8,7 @@ namespace Core2D.ViewModels.Data
     {
         [AutoNotify] private bool _isVisible;
 
-        public ColumnViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ColumnViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

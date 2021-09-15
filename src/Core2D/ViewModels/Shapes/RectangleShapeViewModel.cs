@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Shapes
         [AutoNotify] private PointShapeViewModel? _topLeft;
         [AutoNotify] private PointShapeViewModel? _bottomRight;
 
-        public RectangleShapeViewModel(IServiceProvider serviceProvider) : base(serviceProvider, typeof(RectangleShapeViewModel))
+        public RectangleShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(RectangleShapeViewModel))
         {
         }
 

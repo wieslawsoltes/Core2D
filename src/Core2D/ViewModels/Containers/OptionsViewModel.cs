@@ -21,7 +21,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private FillRule _defaultFillRule = FillRule.EvenOdd;
         [AutoNotify] private bool _tryToConnect;
 
-        public OptionsViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public OptionsViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

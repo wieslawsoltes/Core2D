@@ -16,7 +16,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Point";
 
-        public PointToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public PointToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

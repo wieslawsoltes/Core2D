@@ -13,7 +13,7 @@ namespace Core2D.Modules.TextFieldWriter.OpenXml
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public OpenXmlWriter(IServiceProvider serviceProvider)
+        public OpenXmlWriter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

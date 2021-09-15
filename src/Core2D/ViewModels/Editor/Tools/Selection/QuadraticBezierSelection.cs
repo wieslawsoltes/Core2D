@@ -20,7 +20,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
         private PointShapeViewModel _helperPoint2;
         private PointShapeViewModel _helperPoint3;
 
-        public QuadraticBezierSelection(IServiceProvider serviceProvider, LayerContainerViewModel layer, QuadraticBezierShapeViewModel shape, ShapeStyleViewModel style)
+        public QuadraticBezierSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, QuadraticBezierShapeViewModel shape, ShapeStyleViewModel style)
         {
             _serviceProvider = serviceProvider;
             _layer = layer;

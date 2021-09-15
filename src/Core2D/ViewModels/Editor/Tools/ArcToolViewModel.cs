@@ -23,7 +23,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "Arc";
 
-        public ArcToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ArcToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

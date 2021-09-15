@@ -27,7 +27,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private BaseColorViewModel? _gridStrokeColor;
         [AutoNotify] private double _gridStrokeThickness;
 
-        public TemplateContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public TemplateContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             ApplyTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnApplyTemplate(x));
 

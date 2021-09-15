@@ -13,7 +13,7 @@ namespace Core2D.ViewModels.Shapes
         // ReSharper disable once InconsistentNaming
         [AutoNotify] protected ImmutableArray<PointShapeViewModel> _connectors;
 
-        protected ConnectableShapeViewModel(IServiceProvider serviceProvider, Type targetType) : base(serviceProvider, targetType)
+        protected ConnectableShapeViewModel(IServiceProvider? serviceProvider, Type targetType) : base(serviceProvider, targetType)
         {
         }
 

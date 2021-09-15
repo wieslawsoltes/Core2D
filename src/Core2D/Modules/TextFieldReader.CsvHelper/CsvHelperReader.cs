@@ -15,7 +15,7 @@ namespace Core2D.Modules.TextFieldReader.CsvHelper
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public CsvHelperReader(IServiceProvider serviceProvider)
+        public CsvHelperReader(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

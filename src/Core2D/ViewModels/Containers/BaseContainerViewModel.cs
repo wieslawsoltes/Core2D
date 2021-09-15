@@ -9,7 +9,7 @@ namespace Core2D.ViewModels.Containers
         [AutoNotify] private bool _isVisible;
         [AutoNotify] private bool _isExpanded;
 
-        protected BaseContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        protected BaseContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _isVisible = true;
             _isExpanded = false;

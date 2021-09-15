@@ -19,7 +19,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public string Title => "CubicBezier";
 
-        public CubicBezierToolViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        public CubicBezierToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 

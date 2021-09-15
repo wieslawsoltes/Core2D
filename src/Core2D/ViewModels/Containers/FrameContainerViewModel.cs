@@ -21,7 +21,7 @@ namespace Core2D.ViewModels.Containers
         // ReSharper restore MemberCanBePrivate.Global
         // ReSharper restore InconsistentNaming
 
-        protected FrameContainerViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+        protected FrameContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
         }
 
