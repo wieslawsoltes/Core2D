@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Windows.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
@@ -19,6 +20,8 @@ namespace Core2D.ViewModels.Renderer
             ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
 
+        
+        [IgnoreDataMember]
         public ICommand RemoveImageKey { get; }
 
         public override object Copy(IDictionary<object, object>? shared)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Runtime.Serialization;
 using System.Windows.Input;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
@@ -24,8 +25,12 @@ namespace Core2D.ViewModels.Style
             ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
 
+        
+        [IgnoreDataMember]
         public ICommand RemoveStyle { get; }
 
+        
+        [IgnoreDataMember]
         public ICommand ExportStyle { get; }
 
         public override object Copy(IDictionary<object, object>? shared)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Runtime.Serialization;
 using System.Windows.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Editor;
@@ -39,12 +40,16 @@ namespace Core2D.ViewModels.Containers
             ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
 
+        [IgnoreDataMember]
         public ICommand ApplyTemplate { get; }
 
+        [IgnoreDataMember]
         public ICommand EditTemplate { get; }
 
+        [IgnoreDataMember]
         public ICommand RemoveTemplate { get; }
 
+        [IgnoreDataMember]
         public ICommand ExportTemplate { get; }
 
         public override object Copy(IDictionary<object, object>? shared)

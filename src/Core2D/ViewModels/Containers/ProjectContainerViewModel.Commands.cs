@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Core2D.Model;
@@ -18,60 +19,88 @@ namespace Core2D.ViewModels.Containers
     {
         private object? ScriptState { get; set; }
 
+        [IgnoreDataMember]
         public ICommand AddStyleLibrary { get; }
 
+        [IgnoreDataMember]
         public ICommand RemoveStyleLibrary { get; }
 
+        [IgnoreDataMember]
         public ICommand ApplyStyle { get; }
 
+        [IgnoreDataMember]
         public ICommand AddStyle { get; }
 
+        [IgnoreDataMember]
         public ICommand RemoveStyle { get; }
 
+        [IgnoreDataMember]
         public ICommand ExportStyle { get; }
 
+        [IgnoreDataMember]
         public ICommand ApplyTemplate { get; }
 
+        [IgnoreDataMember]
         public ICommand EditTemplate { get; }
 
+        [IgnoreDataMember]
         public ICommand AddTemplate { get; }
 
+        [IgnoreDataMember]
         public ICommand RemoveTemplate { get; }
 
+        [IgnoreDataMember]
         public ICommand ExportTemplate { get; }
 
+        [IgnoreDataMember]
         public ICommand AddGroupLibrary { get; }
 
+        [IgnoreDataMember]
         public ICommand RemoveGroupLibrary { get; }
 
+        [IgnoreDataMember]
         public ICommand AddGroup { get; }
 
+        [IgnoreDataMember]
         public ICommand RemoveGroup { get; }
 
+        [IgnoreDataMember]
         public ICommand InsertGroup { get; }
 
+        [IgnoreDataMember]
         public ICommand ExportGroup { get; }
 
+        [IgnoreDataMember]
         public ICommand AddDatabase { get; }
 
+        [IgnoreDataMember]
         public ICommand RemoveDatabase { get; }
 
+        [IgnoreDataMember]
         public ICommand AddImageKey { get; }
 
+        [IgnoreDataMember]
         public ICommand RemoveImageKey { get; }
 
+        [IgnoreDataMember]
         public ICommand ResetRepl { get; }
 
+        [IgnoreDataMember]
         public ICommand ExecuteRepl { get; }
 
+        [IgnoreDataMember]
         public ICommand ExecuteCode { get; }
 
+        [IgnoreDataMember]
         public ICommand ExecuteScript { get; }
 
+        [IgnoreDataMember]
         public ICommand AddScript { get; }
 
+        [IgnoreDataMember]
         public ICommand RemoveScript { get; }
 
+        [IgnoreDataMember]
         public ICommand ExportScript { get; }
 
         public void OnAddStyleLibrary()
