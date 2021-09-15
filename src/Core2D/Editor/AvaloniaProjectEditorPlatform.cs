@@ -396,16 +396,31 @@ namespace Core2D.Editor
                         return;
                     }
 
-                    var shapes = container.Layers.SelectMany(x => x.Shapes);
-                    if (shapes is { })
+                    var shapes = new List<BaseShapeViewModel>();
+
+                    if (container is PageContainerViewModel page)
+                    {
+                        if (page.Template is { } template)
+                        {
+                            shapes.AddRange(template.Layers.SelectMany(x => x.Shapes));
+                        }
+                        shapes.AddRange(page.Layers.SelectMany(x => x.Shapes));
+                    }
+                    else
+                    {
+                        if (container is { })
+                        {
+                            shapes.AddRange(container.Layers.SelectMany(x => x.Shapes));
+                        }
+                    }
+
                     {
                         var key = container?.Name;
                         var xaml = exporter.Create(shapes, key);
                         if (!string.IsNullOrEmpty(xaml))
                         {
-                           textClipboard?.SetText(xaml);
+                            textClipboard?.SetText(xaml);
                         }
-                        return;
                     }
                 }
             }
