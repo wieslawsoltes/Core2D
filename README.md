@@ -3,6 +3,11 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/wieslawsoltes/core2d/badge)](https://www.codefactor.io/repository/github/wieslawsoltes/core2d)
 
 [![Build status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/Core2D)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=54)
+[![CI](https://github.com/wieslawsoltes/Core2D/actions/workflows/build.yml/badge.svg)](https://github.com/wieslawsoltes/Core2D/actions/workflows/build.yml)
+
+[![GitHub release](https://img.shields.io/github/release/wieslawsoltes/Core2D.svg)](https://github.com/wieslawsoltes/Core2D/releases)
+[![Github All Releases](https://img.shields.io/github/downloads/wieslawsoltes/Core2D/total.svg)](https://github.com/wieslawsoltes/Core2D/releases)
+[![Github Releases](https://img.shields.io/github/downloads/wieslawsoltes/Core2D/latest/total.svg)](https://github.com/wieslawsoltes/Core2D/releases)
 
 A multi-platform data driven 2D diagram editor.
 
