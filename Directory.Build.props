@@ -17,8 +17,8 @@
     <SystemTextJsonVersion>5.0.2</SystemTextJsonVersion>
     <AutofacVersion>6.2.0</AutofacVersion>
     <CsvHelperVersion>27.1.1</CsvHelperVersion>
-    <DocumentFormatOpenXmlVersion>2.13.0</DocumentFormatOpenXmlVersion>
-    <MicrosoftCodeAnalysisCSharpScriptingVersion>3.10.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
+    <DocumentFormatOpenXmlVersion>2.13.1</DocumentFormatOpenXmlVersion>
+    <MicrosoftCodeAnalysisCSharpScriptingVersion>3.11.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
     <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
     <NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
     <PDFsharpVersion>1.50.5147</PDFsharpVersion>
