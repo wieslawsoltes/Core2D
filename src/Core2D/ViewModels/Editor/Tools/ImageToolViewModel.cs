@@ -33,6 +33,8 @@ namespace Core2D.ViewModels.Editor.Tools
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+            var imageImporter = ServiceProvider.GetService<IImageImporter>();
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
@@ -40,13 +42,13 @@ namespace Core2D.ViewModels.Editor.Tools
                     {
                         editor.IsToolIdle = false;
 
-                        if (editor.ImageImporter is null)
+                        if (imageImporter is null)
                         {
                             editor.IsToolIdle = true;
                             return;
                         }
 
-                        var key = await editor.ImageImporter.GetImageKeyAsync();
+                        var key = await imageImporter.GetImageKeyAsync();
                         if (key is null || string.IsNullOrEmpty(key))
                         {
                             editor.IsToolIdle = true;
@@ -55,7 +57,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.ViewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                            viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _image = factory.CreateImageShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

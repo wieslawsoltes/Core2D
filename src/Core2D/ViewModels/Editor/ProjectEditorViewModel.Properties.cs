@@ -35,8 +35,6 @@ namespace Core2D.ViewModels.Editor
         private readonly Lazy<DataFlow>? _dataFlow;
         private readonly Lazy<IShapeRenderer>? _renderer;
         private readonly Lazy<IFileSystem>? _fileSystem;
-        private readonly Lazy<IViewModelFactory>? _factory;
-        private readonly Lazy<IContainerFactory>? _containerFactory;
         private readonly Lazy<ISelectionService>? _selectionService;
         private readonly Lazy<IShapeService>? _shapeService;
         private readonly Lazy<IClipboardService>? _clipboardService;
@@ -44,11 +42,9 @@ namespace Core2D.ViewModels.Editor
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
         private readonly Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>> _textFieldReaders;
         private readonly Lazy<ImmutableArray<ITextFieldWriter<DatabaseViewModel>>> _textFieldWriters;
-        private readonly Lazy<IImageImporter>? _imageImporter;
         private readonly Lazy<IProjectEditorPlatform>? _platform;
         private readonly Lazy<IEditorCanvasPlatform>? _canvasPlatform;
         private readonly Lazy<StyleEditorViewModel>? _styleEditor;
-        private readonly Lazy<ISvgConverter>? _svgConverter;
 
         public ImmutableArray<IEditorTool> Tools => _tools.Value;
 
@@ -64,10 +60,6 @@ namespace Core2D.ViewModels.Editor
 
         public IFileSystem? FileSystem => _fileSystem?.Value;
 
-        public IViewModelFactory? ViewModelFactory => _factory?.Value;
-
-        public IContainerFactory? ContainerFactory => _containerFactory?.Value;
-
         public ISelectionService? SelectionService => _selectionService?.Value;
 
         public IShapeService? ShapeService => _shapeService?.Value;
@@ -82,14 +74,10 @@ namespace Core2D.ViewModels.Editor
 
         public ImmutableArray<ITextFieldWriter<DatabaseViewModel>> TextFieldWriters => _textFieldWriters.Value;
 
-        public IImageImporter? ImageImporter => _imageImporter?.Value;
-
         public IProjectEditorPlatform? Platform => _platform?.Value;
 
         public IEditorCanvasPlatform? CanvasPlatform => _canvasPlatform?.Value;
 
         public StyleEditorViewModel? StyleEditor => _styleEditor?.Value;
-
-        public ISvgConverter? SvgConverter => _svgConverter?.Value;
     }
 }

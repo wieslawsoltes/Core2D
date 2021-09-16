@@ -29,8 +29,6 @@ namespace Core2D.ViewModels.Editor
             _dataFlow = serviceProvider.GetServiceLazily<DataFlow>();
             _renderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
             _fileSystem = serviceProvider.GetServiceLazily<IFileSystem>();
-            _factory = serviceProvider.GetServiceLazily<IViewModelFactory>();
-            _containerFactory = serviceProvider.GetServiceLazily<IContainerFactory>();
             _selectionService = serviceProvider.GetServiceLazily<ISelectionService>();
             _shapeService = serviceProvider.GetServiceLazily<IShapeService>();
             _clipboardService = serviceProvider.GetServiceLazily<IClipboardService>();
@@ -38,11 +36,9 @@ namespace Core2D.ViewModels.Editor
             _fileWriters = serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
             _textFieldReaders = serviceProvider.GetServiceLazily<ITextFieldReader<DatabaseViewModel>[], ImmutableArray<ITextFieldReader<DatabaseViewModel>>>((readers) => readers.ToImmutableArray());
             _textFieldWriters = serviceProvider.GetServiceLazily<ITextFieldWriter<DatabaseViewModel>[], ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>((writers) => writers.ToImmutableArray());
-            _imageImporter = serviceProvider.GetServiceLazily<IImageImporter>();
             _platform = serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
             _canvasPlatform = serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
             _styleEditor = serviceProvider.GetServiceLazily<StyleEditorViewModel>();
-            _svgConverter = serviceProvider.GetServiceLazily<ISvgConverter>();
 
             _dockFactory = new DockFactory(this);
 

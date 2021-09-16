@@ -66,7 +66,7 @@ namespace Core2D.Model
 
         PointShapeViewModel CreatePointShape(double x = 0.0, double y = 0.0, string name = "");
 
-        LineShapeViewModel CreateLineShape(PointShapeViewModel start, PointShapeViewModel end, ShapeStyleViewModel? style, bool isStroked = true, string name = "");
+        LineShapeViewModel CreateLineShape(PointShapeViewModel? start, PointShapeViewModel? end, ShapeStyleViewModel? style, bool isStroked = true, string name = "");
 
         LineShapeViewModel CreateLineShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, bool isStroked = true, string name = "");
 
@@ -76,47 +76,47 @@ namespace Core2D.Model
 
         ArcShapeViewModel CreateArcShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
-        ArcShapeViewModel CreateArcShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
+        ArcShapeViewModel CreateArcShape(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, PointShapeViewModel? point4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
         QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
         QuadraticBezierShapeViewModel CreateQuadraticBezierShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
-        QuadraticBezierShapeViewModel CreateQuadraticBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
+        QuadraticBezierShapeViewModel CreateQuadraticBezierShape(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
         CubicBezierShapeViewModel CreateCubicBezierShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
         CubicBezierShapeViewModel CreateCubicBezierShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
-        CubicBezierShapeViewModel CreateCubicBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
+        CubicBezierShapeViewModel CreateCubicBezierShape(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, PointShapeViewModel? point4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
         RectangleShapeViewModel CreateRectangleShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
         RectangleShapeViewModel CreateRectangleShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
-        RectangleShapeViewModel CreateRectangleShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
+        RectangleShapeViewModel CreateRectangleShape(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
         EllipseShapeViewModel CreateEllipseShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
         EllipseShapeViewModel CreateEllipseShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
-        EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
+        EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 
         PathShapeViewModel CreatePathShape(ShapeStyleViewModel? style, ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero, bool isStroked = true, bool isFilled = true);
 
         PathShapeViewModel CreatePathShape(string name, ShapeStyleViewModel? style, ImmutableArray<PathFigureViewModel> figures, FillRule fillRule = FillRule.Nonzero, bool isStroked = true, bool isFilled = true);
 
-        TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, string text, bool isStroked = true, string name = "");
+        TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, string? text, bool isStroked = true, string name = "");
 
-        TextShapeViewModel CreateTextShape(double x, double y, ShapeStyleViewModel? style, string text, bool isStroked = true, string name = "");
+        TextShapeViewModel CreateTextShape(double x, double y, ShapeStyleViewModel? style, string? text, bool isStroked = true, string name = "");
 
-        TextShapeViewModel CreateTextShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel? style, string text, bool isStroked = true, string name = "");
+        TextShapeViewModel CreateTextShape(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, ShapeStyleViewModel? style, string? text, bool isStroked = true, string name = "");
 
         ImageShapeViewModel CreateImageShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
         ImageShapeViewModel CreateImageShape(double x, double y, ShapeStyleViewModel? style, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
-        ImageShapeViewModel CreateImageShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel? style, string key, bool isStroked = false, bool isFilled = false, string name = "");
+        ImageShapeViewModel CreateImageShape(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, ShapeStyleViewModel? style, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
         GroupShapeViewModel CreateGroupShape(string name = "g");
 

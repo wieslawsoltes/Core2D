@@ -47,6 +47,7 @@ namespace Core2D.ViewModels.Editor.Tools
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
@@ -61,7 +62,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.ViewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                            viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _ellipse = factory.CreateEllipseShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

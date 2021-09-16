@@ -23,7 +23,7 @@ namespace Core2D.ViewModels
 {
     public class ViewModelFactory : IViewModelFactory
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public ViewModelFactory(IServiceProvider? serviceProvider)
         {
@@ -99,7 +99,7 @@ namespace Core2D.ViewModels
                 Owner = owner
             };
 
-            if (!string.IsNullOrWhiteSpace(id))
+            if (id is { } && !string.IsNullOrWhiteSpace(id))
             {
                 record.Id = id;
             }
@@ -324,7 +324,7 @@ namespace Core2D.ViewModels
             return pointShape;
         }
 
-        public LineShapeViewModel CreateLineShape(PointShapeViewModel start, PointShapeViewModel end, ShapeStyleViewModel? style, bool isStroked = true, string name = "")
+        public LineShapeViewModel CreateLineShape(PointShapeViewModel? start, PointShapeViewModel? end, ShapeStyleViewModel? style, bool isStroked = true, string name = "")
         {
             var lineShape = new LineShapeViewModel(_serviceProvider)
             {
@@ -395,7 +395,7 @@ namespace Core2D.ViewModels
             return CreateArcShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public ArcShapeViewModel CreateArcShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
+        public ArcShapeViewModel CreateArcShape(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, PointShapeViewModel? point4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var arcShape = new ArcShapeViewModel(_serviceProvider)
             {
@@ -441,7 +441,7 @@ namespace Core2D.ViewModels
             return CreateQuadraticBezierShape(x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
+        public QuadraticBezierShapeViewModel CreateQuadraticBezierShape(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var quadraticBezierShape = new QuadraticBezierShapeViewModel(_serviceProvider)
             {
@@ -488,7 +488,7 @@ namespace Core2D.ViewModels
             return CreateCubicBezierShape(x, y, x, y, x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public CubicBezierShapeViewModel CreateCubicBezierShape(PointShapeViewModel point1, PointShapeViewModel point2, PointShapeViewModel point3, PointShapeViewModel point4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
+        public CubicBezierShapeViewModel CreateCubicBezierShape(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, PointShapeViewModel? point4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var cubicBezierShape = new CubicBezierShapeViewModel(_serviceProvider)
             {
@@ -532,7 +532,7 @@ namespace Core2D.ViewModels
             return CreateRectangleShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public RectangleShapeViewModel CreateRectangleShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
+        public RectangleShapeViewModel CreateRectangleShape(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var rectangleShape = new RectangleShapeViewModel(_serviceProvider)
             {
@@ -574,7 +574,7 @@ namespace Core2D.ViewModels
             return CreateEllipseShape(x, y, x, y, style, isStroked, isFilled, name);
         }
 
-        public EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
+        public EllipseShapeViewModel CreateEllipseShape(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
         {
             var ellipseShape = new EllipseShapeViewModel(_serviceProvider)
             {
@@ -636,7 +636,7 @@ namespace Core2D.ViewModels
             return pathShape;
         }
 
-        public TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, string text, bool isStroked = true, string name = "")
+        public TextShapeViewModel CreateTextShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, string? text, bool isStroked = true, string name = "")
         {
             var textShape = new TextShapeViewModel(_serviceProvider)
             {
@@ -656,12 +656,12 @@ namespace Core2D.ViewModels
             return textShape;
         }
 
-        public TextShapeViewModel CreateTextShape(double x, double y, ShapeStyleViewModel? style, string text, bool isStroked = true, string name = "")
+        public TextShapeViewModel CreateTextShape(double x, double y, ShapeStyleViewModel? style, string? text, bool isStroked = true, string name = "")
         {
             return CreateTextShape(x, y, x, y, style, text, isStroked, name);
         }
 
-        public TextShapeViewModel CreateTextShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel? style, string text, bool isStroked = true, string name = "")
+        public TextShapeViewModel CreateTextShape(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, ShapeStyleViewModel? style, string? text, bool isStroked = true, string name = "")
         {
             var textShape = new TextShapeViewModel(_serviceProvider)
             {
@@ -707,7 +707,7 @@ namespace Core2D.ViewModels
             return CreateImageShape(x, y, x, y, style, key, isStroked, isFilled, name);
         }
 
-        public ImageShapeViewModel CreateImageShape(PointShapeViewModel topLeft, PointShapeViewModel bottomRight, ShapeStyleViewModel? style, string key, bool isStroked = false, bool isFilled = false, string name = "")
+        public ImageShapeViewModel CreateImageShape(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, ShapeStyleViewModel? style, string key, bool isStroked = false, bool isFilled = false, string name = "")
         {
             var imageShape = new ImageShapeViewModel(_serviceProvider)
             {

@@ -33,6 +33,7 @@ namespace Core2D.ViewModels.Editor.Tools
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
@@ -41,7 +42,7 @@ namespace Core2D.ViewModels.Editor.Tools
                         editor.IsToolIdle = false;
                         var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            editor.ViewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                            viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
                         _text = factory.CreateTextShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

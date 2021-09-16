@@ -105,10 +105,11 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
 
             var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                 editor.Project.CurrentStyleLibrary.Selected :
-                editor.ViewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             Path = factory.CreatePathShape(
                 "",
                 (ShapeStyleViewModel)style.Copy(null),
