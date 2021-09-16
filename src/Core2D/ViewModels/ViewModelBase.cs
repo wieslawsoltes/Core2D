@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Runtime.Serialization;
+using System.Windows.Input;
+using Core2D.Model.Editor;
+using Core2D.ViewModels.Editor;
 
 namespace Core2D.ViewModels
 {
@@ -16,7 +19,32 @@ namespace Core2D.ViewModels
         protected ViewModelBase(IServiceProvider? serviceProvider)
         {
             ServiceProvider = serviceProvider;
+
+            CutCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
+
+            CopyCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
+
+            PasteCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
+
+            DeleteCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnDelete(x));
+
+            ExportCommand = new Command<object?>(x => ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(x));
         }
+
+        [IgnoreDataMember]
+        public ICommand CutCommand { get; }
+        
+        [IgnoreDataMember]
+        public ICommand CopyCommand { get; }
+
+        [IgnoreDataMember]
+        public ICommand PasteCommand { get; }
+
+        [IgnoreDataMember]
+        public ICommand DeleteCommand { get; }
+
+        [IgnoreDataMember]
+        public ICommand ExportCommand { get; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

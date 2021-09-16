@@ -17,122 +17,111 @@
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <UserControl.Resources>
     <dd:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
-    <ContextMenu x:Key="ProjectContainerContextMenu" x:CompileBindings="False">
+    <ContextMenu x:Key="ProjectContainerContextMenu" x:DataType="vmc:ProjectContainerViewModel">
       <MenuItem Header="_Add Document" 
-                Command="{Binding $parent[TopLevel].DataContext.OnAddDocument}"
+                Command="{Binding AddDocument}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="E_xport" 
-                Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                Command="{Binding ExportCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
-    <ContextMenu x:Key="DocumentContainerContextMenu" x:CompileBindings="False">
+    <ContextMenu x:Key="DocumentContainerContextMenu" x:DataType="vmc:DocumentContainerViewModel">
       <MenuItem Header="_Add Page" 
-                Command="{Binding $parent[TopLevel].DataContext.OnAddPage}"
+                Command="{Binding AddPage}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="Insert Document Bef_ore"
-                Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentBefore}"
+                Command="{Binding InsertDocumentBefore}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="Insert Document Aft_er"
-                Command="{Binding $parent[TopLevel].DataContext.OnInsertDocumentAfter}"
+                Command="{Binding InsertDocumentAfter}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="Cu_t" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
+                Command="{Binding CutCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="_Copy" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
+                Command="{Binding CopyCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="_Paste" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
+                Command="{Binding PasteCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="_Delete" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
+                Command="{Binding DeleteCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="E_xport" 
-                Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                Command="{Binding ExportCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
-    <ContextMenu x:Key="PageContainerContextMenu" x:CompileBindings="False">
-      <MenuItem Header="Te_mplate" 
-                Items="{Binding $parent[TopLevel].DataContext.Project.Templates}">
-        <MenuItem.Styles>
-          <Style Selector="MenuItem">
-            <Setter Property="Header" Value="{Binding Name}" />
-            <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.OnApplyTemplate}" />
-            <Setter Property="CommandParameter" Value="{Binding}" />
-          </Style>
-        </MenuItem.Styles>
-      </MenuItem>
-      <Separator />
+    <ContextMenu x:Key="PageContainerContextMenu" x:DataType="vmc:PageContainerViewModel">
       <MenuItem Header="Insert Page Bef_ore"
-                Command="{Binding $parent[TopLevel].DataContext.OnInsertPageBefore}"
+                Command="{Binding InsertPageBefore}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="Insert Page Aft_er"
-                Command="{Binding $parent[TopLevel].DataContext.OnInsertPageAfter}"
+                Command="{Binding InsertPageAfter}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="Cu_t" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
+                Command="{Binding CutCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="_Copy" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
+                Command="{Binding CopyCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="_Paste" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
+                Command="{Binding PasteCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="_Delete" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
+                Command="{Binding DeleteCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="E_xport" 
-                Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                Command="{Binding ExportCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
-    <ContextMenu x:Key="LayerContainerContextMenu" x:CompileBindings="False">
+    <ContextMenu x:Key="LayerContainerContextMenu" x:DataType="vmc:LayerContainerViewModel">
       <MenuItem Header="_Add Layer" 
-                Command="{Binding $parent[TopLevel].DataContext.OnAddLayer}"
+                Command="{Binding AddLayer}"
                 CommandParameter="{Binding Owner, Mode=OneWay}" />
       <Separator />
       <MenuItem Header="Cu_t" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
+                Command="{Binding CutCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="_Copy" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
+                Command="{Binding CopyCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="_Paste" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
+                Command="{Binding PasteCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="_Delete" 
-                Command="{Binding $parent[TopLevel].DataContext.OnRemoveLayer}"
+                Command="{Binding RemoveLayer}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="E_xport" 
-                Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                Command="{Binding ExportCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
-    <ContextMenu x:Key="BaseShapeContextMenu" x:CompileBindings="False">
+    <ContextMenu x:Key="BaseShapeContextMenu" x:DataType="vms:BaseShapeViewModel">
       <MenuItem Header="Cu_t" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
+                Command="{Binding CutCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="_Copy" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
+                Command="{Binding CopyCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <MenuItem Header="_Paste" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
+                Command="{Binding PasteCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="_Delete" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
+                Command="{Binding DeleteCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
       <MenuItem Header="E_xport" 
-                Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                Command="{Binding ExportCommand}"
                 CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
   </UserControl.Resources>
@@ -150,16 +139,16 @@
       <StackPanel Grid.Column="1" 
                   Orientation="Horizontal" 
                   HorizontalAlignment="Right" 
-                  VerticalAlignment="Center"
-                  x:CompileBindings="False">
+                  VerticalAlignment="Center">
         <Button Content="&#727;" 
-                Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
-                CommandParameter="{Binding Selected}" IsVisible="{Binding !!Selected}" 
+                Command="{Binding DeleteCommand}"
+                CommandParameter="{Binding Selected}"
+                IsVisible="{Binding !!Selected}" 
                 BorderBrush="Transparent"
                 Background="Transparent" 
                 Padding="12,4,12,4" />
         <Button Content="+" 
-                Command="{Binding $parent[TopLevel].DataContext.OnNew}"
+                Command="{Binding New}"
                 CommandParameter="{Binding Selected}" 
                 BorderBrush="Transparent" 
                 Background="Transparent"
@@ -169,56 +158,53 @@
     <TreeView x:Name="DocumentsTreeView" SelectionMode="Multiple" 
               Items="{Binding Documents}"
               SelectedItem="{Binding Selected, Mode=TwoWay}" 
-              ContextMenu="{StaticResource ProjectContainerContextMenu}"
-              x:CompileBindings="False">
+              ContextMenu="{StaticResource ProjectContainerContextMenu}">
       <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}"
                                  Handler="{StaticResource ProjectTreeViewDropHandler}" />
       </i:Interaction.Behaviors>
       <TreeView.KeyBindings>
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnNew}"
+        <KeyBinding Command="{Binding New}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
-                    Gesture="Ctrl+N"
-                    x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCut}"
+                    Gesture="Ctrl+N" />
+        <KeyBinding Command="{Binding CutCommand}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
-                    Gesture="Ctrl+X"
-                    x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnCopy}"
+                    Gesture="Ctrl+X" />
+        <KeyBinding Command="{Binding CopyCommand}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
-                    Gesture="Ctrl+C"
-                    x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnPaste}"
+                    Gesture="Ctrl+C" />
+        <KeyBinding Command="{Binding PasteCommand}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
-                    Gesture="Ctrl+V"
-                    x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.ClipboardService.OnDelete}"
+                    Gesture="Ctrl+V" />
+        <KeyBinding Command="{Binding DeleteCommand}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItems}" 
-                    Gesture="Delete"
-                    x:CompileBindings="False" />
-        <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExport}"
+                    Gesture="Delete" />
+        <KeyBinding Command="{Binding ExportCommand}"
                     CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
-                    Gesture="Ctrl+E"
-                    x:CompileBindings="False" />
+                    Gesture="Ctrl+E" />
       </TreeView.KeyBindings>
       <TreeView.Styles>
         <Style Selector="TreeViewItem">
-          <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay, FallbackValue=False}" />
+          <Setter Property="IsExpanded" 
+                  Value="{Binding IsExpanded, Mode=TwoWay, FallbackValue=False}" />
         </Style>
       </TreeView.Styles>
       <TreeView.DataTemplates>
         <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" 
-                          ItemsSource="{Binding Pages}">
+                          ItemsSource="{Binding Pages}"
+                          x:DataType="vmc:DocumentContainerViewModel" >
           <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                           ContextMenu="{StaticResource DocumentContainerContextMenu}"/>
         </TreeDataTemplate>
         <TreeDataTemplate DataType="vmc:PageContainerViewModel" 
-                          ItemsSource="{Binding Layers}">
+                          ItemsSource="{Binding Layers}"
+                          x:DataType="vmc:PageContainerViewModel" >
           <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                           ContextMenu="{StaticResource PageContainerContextMenu}"/>
         </TreeDataTemplate>
         <TreeDataTemplate DataType="vmc:LayerContainerViewModel" 
-                          ItemsSource="{Binding Shapes}">
+                          ItemsSource="{Binding Shapes}"
+                          x:DataType="vmc:LayerContainerViewModel" >
           <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                           ContextMenu="{StaticResource LayerContainerContextMenu}">
             <c:EditableItem.IconContent>
@@ -228,7 +214,7 @@
             </c:EditableItem.IconContent>
           </c:EditableItem>
         </TreeDataTemplate>
-        <DataTemplate DataType="vms:BaseShapeViewModel">
+        <DataTemplate DataType="vms:BaseShapeViewModel" x:DataType="vms:BaseShapeViewModel">
           <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                           ContextMenu="{StaticResource BaseShapeContextMenu}">
             <c:EditableItem.IconContent>

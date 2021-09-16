@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
-using Core2D.ViewModels.Shapes;
+using System.Runtime.Serialization;
+using System.Windows.Input;
+using Core2D.ViewModels.Editor;
 
 namespace Core2D.ViewModels.Containers
 {
@@ -13,7 +15,18 @@ namespace Core2D.ViewModels.Containers
 
         public PageContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
+            InsertPageBefore = new Command<object?>(x => GetProject()?.OnInsertPageBefore(x));
+            
+            InsertPageAfter = new Command<object?>(x => GetProject()?.OnInsertPageAfter(x));
+            
+            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
+
+        [IgnoreDataMember]
+        public ICommand InsertPageBefore { get; }
+
+        [IgnoreDataMember]
+        public ICommand InsertPageAfter { get; }
 
         public override object Copy(IDictionary<object, object>? shared)
         {

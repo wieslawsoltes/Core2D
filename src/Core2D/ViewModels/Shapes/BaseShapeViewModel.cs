@@ -2,9 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
+using System.Windows.Input;
 using Core2D.Model;
+using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes

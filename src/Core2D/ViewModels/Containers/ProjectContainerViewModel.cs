@@ -6,13 +6,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Core2D.Model;
-using Core2D.Model.Editor;
 using Core2D.Model.History;
 using Core2D.ViewModels.Data;
-using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
@@ -41,6 +37,8 @@ namespace Core2D.ViewModels.Containers
 
         public ProjectContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
+            New = new Command<object?>(OnNew);
+
             AddStyleLibrary = new Command(OnAddStyleLibrary);
             RemoveStyleLibrary = new Command<LibraryViewModel?>(OnRemoveStyleLibrary);
             ApplyStyle = new Command<ShapeStyleViewModel?>(OnApplyStyle);
@@ -61,15 +59,42 @@ namespace Core2D.ViewModels.Containers
             InsertGroup = new Command<GroupShapeViewModel?>(OnInsertGroup);
             ExportGroup = new Command<GroupShapeViewModel?>(OnExportGroup);
 
+            AddShape = new Command<BaseShapeViewModel?>(OnAddShape);
+            RemoveShape = new Command<BaseShapeViewModel?>(OnRemoveShape);
+
+            AddLayer = new Command<FrameContainerViewModel?>(OnAddLayer);
+            RemoveLayer = new Command<LayerContainerViewModel?>(OnRemoveLayer);
+
+            AddPage = new Command<object?>(OnAddPage);
+            InsertPageBefore = new Command<object?>(OnInsertPageBefore);
+            InsertPageAfter = new Command<object?>(OnInsertPageAfter);
+
+            AddDocument = new Command<object?>(OnAddDocument);
+            InsertDocumentBefore = new Command<object?>(OnInsertDocumentBefore);
+            InsertDocumentAfter = new Command<object?>(OnInsertDocumentAfter);
+
             AddDatabase = new Command(OnAddDatabase);
             RemoveDatabase = new Command<DatabaseViewModel?>(OnRemoveDatabase);
 
+            AddColumn = new Command<DatabaseViewModel?>(OnAddColumn);
+            RemoveColumn = new Command<ColumnViewModel?>(OnRemoveColumn);
+            AddRecord = new Command<DatabaseViewModel?>(OnAddRecord);
+            RemoveRecord = new Command<RecordViewModel?>(OnRemoveRecord);
+            ResetRecord = new Command<IDataObject?>(OnResetRecord);
+            ApplyRecord = new Command<RecordViewModel?>(OnApplyRecord);
+            AddProperty = new Command<ViewModelBase?>(OnAddProperty);
+            RemoveProperty = new Command<PropertyViewModel?>(OnRemoveProperty);
+
+            // ReSharper disable once AsyncVoidLambda
             AddImageKey = new Command<string?>(async path => await OnAddImageKey(path));
             RemoveImageKey = new Command<string?>(OnRemoveImageKey);
 
             ResetRepl = new Command(OnResetRepl);
+            // ReSharper disable once AsyncVoidLambda
             ExecuteRepl = new Command<string?>(async code => await OnExecuteRepl(code));
+            // ReSharper disable once AsyncVoidLambda
             ExecuteCode = new Command<string?>(async code => await OnExecuteCode(code));
+            // ReSharper disable once AsyncVoidLambda
             ExecuteScript = new Command<ScriptViewModel?>(async script => await OnExecuteScript(script));
             AddScript = new Command(OnAddScript);
             RemoveScript = new Command<ScriptViewModel?>(OnRemoveScript);

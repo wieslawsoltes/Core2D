@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Runtime.Serialization;
+using System.Windows.Input;
+using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Containers
@@ -32,7 +35,19 @@ namespace Core2D.ViewModels.Containers
         public LayerContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
             _invalidateLayerEventArgs = new InvalidateLayerEventArgs(this);
+
+            AddLayer = new Command<FrameContainerViewModel?>(x => GetProject()?.OnAddLayer(x));
+
+            RemoveLayer = new Command<LayerContainerViewModel?>(x => GetProject()?.OnRemoveLayer(x));
+
+            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
+
+        [IgnoreDataMember]
+        public ICommand AddLayer { get; }
+
+        [IgnoreDataMember]
+        public ICommand RemoveLayer { get; }
 
         public override object Copy(IDictionary<object, object>? shared)
         {

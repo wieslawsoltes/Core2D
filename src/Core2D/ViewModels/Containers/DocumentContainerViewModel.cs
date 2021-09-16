@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Runtime.Serialization;
+using System.Windows.Input;
+using Core2D.ViewModels.Editor;
 
 namespace Core2D.ViewModels.Containers
 {
@@ -13,8 +16,24 @@ namespace Core2D.ViewModels.Containers
 
         public DocumentContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
+            AddPage = new Command<object?>(x => GetProject()?.OnAddPage(x));
+
+            InsertDocumentBefore = new Command<object?>(x => GetProject()?.OnInsertDocumentBefore(x));
+
+            InsertDocumentAfter = new Command<object?>(x => GetProject()?.OnInsertDocumentAfter(x));
+
+            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
 
+        [IgnoreDataMember]
+        public ICommand AddPage { get; }
+        
+        [IgnoreDataMember]
+        public ICommand InsertDocumentBefore { get; }
+
+        [IgnoreDataMember]
+        public ICommand InsertDocumentAfter { get; }
+        
         public override object Copy(IDictionary<object, object>? shared)
         {
             var pages = _pages.CopyShared(shared).ToImmutable();

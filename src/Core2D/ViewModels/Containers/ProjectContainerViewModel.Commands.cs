@@ -21,6 +21,9 @@ namespace Core2D.ViewModels.Containers
         private object? ScriptState { get; set; }
 
         [IgnoreDataMember]
+        public ICommand New { get; }
+
+        [IgnoreDataMember]
         public ICommand AddStyleLibrary { get; }
 
         [IgnoreDataMember]
@@ -72,10 +75,64 @@ namespace Core2D.ViewModels.Containers
         public ICommand ExportGroup { get; }
 
         [IgnoreDataMember]
+        public ICommand AddShape { get; }
+
+        [IgnoreDataMember]
+        public ICommand RemoveShape { get; }
+
+        [IgnoreDataMember]
+        public ICommand AddLayer { get; }
+
+        [IgnoreDataMember]
+        public ICommand RemoveLayer { get; }
+
+        [IgnoreDataMember]
+        public ICommand AddPage { get; }
+
+        [IgnoreDataMember]
+        public ICommand InsertPageBefore { get; }
+
+        [IgnoreDataMember]
+        public ICommand InsertPageAfter { get; }
+
+        [IgnoreDataMember]
+        public ICommand AddDocument { get; }
+
+        [IgnoreDataMember]
+        public ICommand InsertDocumentBefore { get; }
+
+        [IgnoreDataMember]
+        public ICommand InsertDocumentAfter { get; }
+
+        [IgnoreDataMember]
         public ICommand AddDatabase { get; }
 
         [IgnoreDataMember]
         public ICommand RemoveDatabase { get; }
+
+        [IgnoreDataMember]
+        public ICommand AddColumn { get; }
+        
+        [IgnoreDataMember]
+        public ICommand RemoveColumn { get; }
+        
+        [IgnoreDataMember]
+        public ICommand AddRecord { get; }
+        
+        [IgnoreDataMember]
+        public ICommand RemoveRecord { get; }
+        
+        [IgnoreDataMember]
+        public ICommand ResetRecord { get; }
+        
+        [IgnoreDataMember]
+        public ICommand ApplyRecord { get; }
+        
+        [IgnoreDataMember]
+        public ICommand AddProperty { get; }
+        
+        [IgnoreDataMember]
+        public ICommand RemoveProperty { get; }
 
         [IgnoreDataMember]
         public ICommand AddImageKey { get; }
@@ -104,6 +161,11 @@ namespace Core2D.ViewModels.Containers
         [IgnoreDataMember]
         public ICommand ExportScript { get; }
 
+        public void OnNew(object? item)
+        {
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.OnNew(item);
+        }
+        
         public void OnAddStyleLibrary()
         {
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
@@ -178,7 +240,7 @@ namespace Core2D.ViewModels.Containers
                 return;
             }
 
-            ServiceProvider.GetService<IProjectEditorPlatform>().OnExportObject(style);
+            ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(style);
         }
 
         public void OnApplyTemplate(TemplateContainerViewModel? template)
@@ -231,7 +293,7 @@ namespace Core2D.ViewModels.Containers
                 return;
             }
             
-            ServiceProvider.GetService<IProjectEditorPlatform>().OnExportObject(template);
+            ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(template);
         }
 
         public void OnAddGroupLibrary()
@@ -296,7 +358,195 @@ namespace Core2D.ViewModels.Containers
                 return;
             }
 
-            ServiceProvider.GetService<IProjectEditorPlatform>().OnExportObject(group);
+            ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(group);
+        }
+
+        public void OnAddShape(BaseShapeViewModel? shape)
+        {
+            var layer = CurrentContainer?.CurrentLayer;
+            if (layer is { } && shape is { })
+            {
+                this.AddShape(layer, shape);
+            }
+        }
+
+        public void OnRemoveShape(BaseShapeViewModel? shape)
+        {
+            var layer = CurrentContainer?.CurrentLayer;
+            if (layer is null || shape is null)
+            {
+                return;
+            }
+            this.RemoveShape(layer, shape);
+            if (CurrentContainer is { })
+            {
+                CurrentContainer.CurrentShape = layer.Shapes.FirstOrDefault();
+            }
+        }
+
+        public void OnAddLayer(FrameContainerViewModel? container)
+        {
+            if (container is null)
+            {
+                return;
+            }
+
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            this.AddLayer(container, viewModelFactory?.CreateLayerContainer(ProjectEditorConfiguration.DefaultLayerName, container));
+        }
+
+        public void OnRemoveLayer(LayerContainerViewModel? layer)
+        {
+            if (layer is null)
+            {
+                return;
+            }
+            
+            this.RemoveLayer(layer);
+            if (layer.Owner is FrameContainerViewModel owner)
+            {
+                owner.SetCurrentLayer(owner.Layers.FirstOrDefault());
+            }
+        }
+
+        public void OnAddPage(object? item)
+        {
+            if (CurrentDocument is null)
+            {
+                return;
+            }
+            
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var containerFactory = ServiceProvider.GetService<IContainerFactory>();
+            var page =
+                containerFactory?.GetPage(this, ProjectEditorConfiguration.DefaultPageName)
+                ?? viewModelFactory?.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
+            if (page is null)
+            {
+                return;
+            }
+
+            this.AddPage(CurrentDocument, page);
+            SetCurrentContainer(page);
+        }
+
+        public void OnInsertPageBefore(object? item)
+        {
+            if (CurrentDocument is null)
+            {
+                return;
+            }
+
+            if (item is not PageContainerViewModel selected)
+            {
+                return;
+            }
+            var index = CurrentDocument.Pages.IndexOf(selected);
+
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var containerFactory = ServiceProvider.GetService<IContainerFactory>();
+            var page =
+                containerFactory?.GetPage(this, ProjectEditorConfiguration.DefaultPageName)
+                ?? viewModelFactory?.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
+            if (page is null)
+            {
+                return;
+            }
+
+            this.AddPageAt(CurrentDocument, page, index);
+            SetCurrentContainer(page);
+        }
+
+        public void OnInsertPageAfter(object? item)
+        {
+            if (CurrentDocument is null)
+            {
+                return;
+            }
+
+            if (item is not PageContainerViewModel selected)
+            {
+                return;
+            }
+            var index = CurrentDocument.Pages.IndexOf(selected);
+            
+
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var containerFactory = ServiceProvider.GetService<IContainerFactory>();
+            var page =
+                containerFactory?.GetPage(this, ProjectEditorConfiguration.DefaultPageName)
+                ?? viewModelFactory?.CreatePageContainer(ProjectEditorConfiguration.DefaultPageName);
+            if (page is null)
+            {
+                return;
+            }
+
+            this.AddPageAt(CurrentDocument, page, index + 1);
+            SetCurrentContainer(page);
+        }
+
+        public void OnAddDocument(object? item)
+        {
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var containerFactory = ServiceProvider.GetService<IContainerFactory>();
+            var document =
+                containerFactory?.GetDocument(this, ProjectEditorConfiguration.DefaultDocumentName)
+                ?? viewModelFactory?.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
+            if (document is null)
+            {
+                return;
+            }
+            
+            this.AddDocument(document);
+            SetCurrentDocument(document);
+            SetCurrentContainer(document.Pages.FirstOrDefault());
+        }
+
+        public void OnInsertDocumentBefore(object? item)
+        {
+            if (item is not DocumentContainerViewModel selected)
+            {
+                return;
+            }
+            
+            var index = Documents.IndexOf(selected);
+
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var containerFactory = ServiceProvider.GetService<IContainerFactory>();
+            var document =
+                containerFactory?.GetDocument(this, ProjectEditorConfiguration.DefaultDocumentName)
+                ?? viewModelFactory?.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
+            if (document is null)
+            {
+                return;
+            }
+
+            this.AddDocumentAt(document, index);
+            SetCurrentDocument(document);
+            SetCurrentContainer(document.Pages.FirstOrDefault());
+        }
+
+        public void OnInsertDocumentAfter(object? item)
+        {
+            if (item is not DocumentContainerViewModel selected)
+            {
+                return;
+            }
+            var index = Documents.IndexOf(selected);
+
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            var containerFactory = ServiceProvider.GetService<IContainerFactory>();
+            var document =
+                containerFactory?.GetDocument(this, ProjectEditorConfiguration.DefaultDocumentName)
+                ?? viewModelFactory?.CreateDocumentContainer(ProjectEditorConfiguration.DefaultDocumentName);
+            if (document is null)
+            {
+                return;
+            }
+
+            this.AddDocumentAt(document, index + 1);
+            SetCurrentDocument(document);
+            SetCurrentContainer(document.Pages.FirstOrDefault());
         }
 
         public void OnAddDatabase()
@@ -313,8 +563,88 @@ namespace Core2D.ViewModels.Containers
 
         public void OnRemoveDatabase(DatabaseViewModel? db)
         {
+            if (db is null)
+            {
+                return;
+            }
             this.RemoveDatabase(db);
             SetCurrentDatabase(Databases.FirstOrDefault());
+        }
+
+        public void OnAddColumn(DatabaseViewModel? db)
+        {
+            if (db is null)
+            {
+                return;
+            }
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            this.AddColumn(db, viewModelFactory?.CreateColumn(db, ProjectEditorConfiguration.DefaulColumnName));
+        }
+
+        public void OnRemoveColumn(ColumnViewModel? column)
+        {
+            this.RemoveColumn(column);
+        }
+
+        public void OnAddRecord(DatabaseViewModel? db)
+        {
+            if (db is null)
+            {
+                return;
+            }
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            this.AddRecord(db, viewModelFactory?.CreateRecord(db, ProjectEditorConfiguration.DefaulValue));
+        }
+
+        public void OnRemoveRecord(RecordViewModel? record)
+        {
+            this.RemoveRecord(record);
+        }
+
+        public void OnResetRecord(IDataObject? data)
+        {
+            this.ResetRecord(data);
+        }
+
+        public void OnApplyRecord(RecordViewModel? record)
+        {
+            if (record is null)
+            {
+                return;
+            }
+            
+            if (SelectedShapes?.Count > 0)
+            {
+                foreach (var shape in SelectedShapes)
+                {
+                    this.ApplyRecord(shape, record);
+                }
+            }
+
+            if (SelectedShapes is null)
+            {
+                var container = CurrentContainer;
+                if (container is { })
+                {
+                    this.ApplyRecord(container, record);
+                }
+            }
+        }
+
+        public void OnAddProperty(ViewModelBase? owner)
+        {
+            if (owner is not IDataObject data)
+            {
+                return;
+            }
+
+            var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+            this.AddProperty(data, viewModelFactory?.CreateProperty(owner, ProjectEditorConfiguration.DefaulPropertyName, ProjectEditorConfiguration.DefaulValue));
+        }
+
+        public void OnRemoveProperty(PropertyViewModel? property)
+        {
+            this.RemoveProperty(property);
         }
 
         public async Task<string?> OnAddImageKey(string? path)
@@ -446,7 +776,7 @@ namespace Core2D.ViewModels.Containers
                 return;
             }
 
-            ServiceProvider.GetService<IProjectEditorPlatform>().OnExportObject(script);
+            ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(script);
         }
     }
 }

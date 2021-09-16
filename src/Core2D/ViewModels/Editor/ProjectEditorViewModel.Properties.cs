@@ -29,26 +29,26 @@ namespace Core2D.ViewModels.Editor
         [AutoNotify] private RecentFileViewModel? _currentRecentProject;
         [AutoNotify] private AboutInfoViewModel? _aboutInfo;
         [AutoNotify] private IList<DialogViewModel>? _dialogs;
-        private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
-        private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
-        private readonly Lazy<ILog>? _log;
-        private readonly Lazy<DataFlow>? _dataFlow;
-        private readonly Lazy<IShapeRenderer>? _renderer;
-        private readonly Lazy<IFileSystem>? _fileSystem;
-        private readonly Lazy<ISelectionService>? _selectionService;
-        private readonly Lazy<IShapeService>? _shapeService;
-        private readonly Lazy<IClipboardService>? _clipboardService;
-        private readonly Lazy<IJsonSerializer>? _jsonSerializer;
+        private readonly Lazy<ImmutableArray<IEditorTool?>> _tools;
+        private readonly Lazy<ImmutableArray<IPathTool?>> _pathTools;
+        private readonly Lazy<ILog?>? _log;
+        private readonly Lazy<DataFlow?>? _dataFlow;
+        private readonly Lazy<IShapeRenderer?>? _renderer;
+        private readonly Lazy<IFileSystem?>? _fileSystem;
+        private readonly Lazy<ISelectionService?>? _selectionService;
+        private readonly Lazy<IShapeService?>? _shapeService;
+        private readonly Lazy<IClipboardService?>? _clipboardService;
+        private readonly Lazy<IJsonSerializer?>? _jsonSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
         private readonly Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>> _textFieldReaders;
         private readonly Lazy<ImmutableArray<ITextFieldWriter<DatabaseViewModel>>> _textFieldWriters;
-        private readonly Lazy<IProjectEditorPlatform>? _platform;
-        private readonly Lazy<IEditorCanvasPlatform>? _canvasPlatform;
-        private readonly Lazy<StyleEditorViewModel>? _styleEditor;
+        private readonly Lazy<IProjectEditorPlatform?>? _platform;
+        private readonly Lazy<IEditorCanvasPlatform?>? _canvasPlatform;
+        private readonly Lazy<StyleEditorViewModel?>? _styleEditor;
 
-        public ImmutableArray<IEditorTool> Tools => _tools.Value;
+        public ImmutableArray<IEditorTool?> Tools => _tools.Value;
 
-        public ImmutableArray<IPathTool> PathTools => _pathTools.Value;
+        public ImmutableArray<IPathTool?> PathTools => _pathTools.Value;
 
         public ILog? Log => _log?.Value;
 
@@ -56,7 +56,7 @@ namespace Core2D.ViewModels.Editor
 
         public IShapeRenderer? Renderer => _renderer?.Value;
 
-        public ShapeRendererStateViewModel? PageState => _renderer?.Value.State;
+        public ShapeRendererStateViewModel? PageState => _renderer?.Value?.State;
 
         public IFileSystem? FileSystem => _fileSystem?.Value;
 

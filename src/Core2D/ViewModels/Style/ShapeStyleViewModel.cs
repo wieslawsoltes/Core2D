@@ -25,7 +25,6 @@ namespace Core2D.ViewModels.Style
             ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
 
-        
         [IgnoreDataMember]
         public ICommand RemoveStyle { get; }
 
