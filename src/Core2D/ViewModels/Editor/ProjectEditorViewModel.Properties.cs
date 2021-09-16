@@ -37,21 +37,17 @@ namespace Core2D.ViewModels.Editor
         private readonly Lazy<IFileSystem>? _fileSystem;
         private readonly Lazy<IViewModelFactory>? _factory;
         private readonly Lazy<IContainerFactory>? _containerFactory;
-        private readonly Lazy<IShapeFactory>? _shapeFactory;
         private readonly Lazy<ISelectionService>? _selectionService;
         private readonly Lazy<IShapeService>? _shapeService;
         private readonly Lazy<IClipboardService>? _clipboardService;
-        private readonly Lazy<ITextClipboard>? _textClipboard;
         private readonly Lazy<IJsonSerializer>? _jsonSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
         private readonly Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>> _textFieldReaders;
         private readonly Lazy<ImmutableArray<ITextFieldWriter<DatabaseViewModel>>> _textFieldWriters;
         private readonly Lazy<IImageImporter>? _imageImporter;
-        private readonly Lazy<IScriptRunner>? _scriptRunner;
         private readonly Lazy<IProjectEditorPlatform>? _platform;
         private readonly Lazy<IEditorCanvasPlatform>? _canvasPlatform;
         private readonly Lazy<StyleEditorViewModel>? _styleEditor;
-        private readonly Lazy<IPathConverter>? _pathConverter;
         private readonly Lazy<ISvgConverter>? _svgConverter;
 
         public ImmutableArray<IEditorTool> Tools => _tools.Value;
@@ -66,23 +62,17 @@ namespace Core2D.ViewModels.Editor
 
         public ShapeRendererStateViewModel? PageState => _renderer?.Value.State;
 
-        public ISelection? Selection => _project;
-
         public IFileSystem? FileSystem => _fileSystem?.Value;
 
         public IViewModelFactory? ViewModelFactory => _factory?.Value;
 
         public IContainerFactory? ContainerFactory => _containerFactory?.Value;
 
-        public IShapeFactory? ShapeFactory => _shapeFactory?.Value;
-
         public ISelectionService? SelectionService => _selectionService?.Value;
 
         public IShapeService? ShapeService => _shapeService?.Value;
         
         public IClipboardService? ClipboardService => _clipboardService?.Value;
-
-        public ITextClipboard? TextClipboard => _textClipboard?.Value;
 
         public IJsonSerializer? JsonSerializer => _jsonSerializer?.Value;
 
@@ -94,15 +84,11 @@ namespace Core2D.ViewModels.Editor
 
         public IImageImporter? ImageImporter => _imageImporter?.Value;
 
-        public IScriptRunner? ScriptRunner => _scriptRunner?.Value;
-
         public IProjectEditorPlatform? Platform => _platform?.Value;
 
         public IEditorCanvasPlatform? CanvasPlatform => _canvasPlatform?.Value;
 
         public StyleEditorViewModel? StyleEditor => _styleEditor?.Value;
-
-        public IPathConverter? PathConverter => _pathConverter?.Value;
 
         public ISvgConverter? SvgConverter => _svgConverter?.Value;
     }
