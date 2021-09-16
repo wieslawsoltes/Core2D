@@ -159,7 +159,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
-                        selection.Dehover(editor.Project.CurrentContainer.CurrentLayer);
+                        selection.DeHover(editor.Project.CurrentContainer.CurrentLayer);
 
                         if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible == true)
                         {
@@ -387,7 +387,7 @@ namespace Core2D.ViewModels.Editor.Tools
             {
                 case State.None:
                     {
-                        selection.Dehover(editor.Project.CurrentContainer.CurrentLayer);
+                        selection.DeHover(editor.Project.CurrentContainer.CurrentLayer);
                     }
                     break;
                 case State.Selected:
@@ -473,7 +473,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             _currentState = State.None;
 
-            selection.Dehover(editor.Project?.CurrentContainer?.CurrentLayer);
+            selection.DeHover(editor.Project?.CurrentContainer?.CurrentLayer);
 
             DisposeMoveSelectionCache();
             selection.OnHideDecorator();
