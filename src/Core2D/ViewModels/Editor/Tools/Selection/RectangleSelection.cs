@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.Model;
 using Core2D.ViewModels.Containers;
@@ -7,14 +7,14 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public partial class RectangleSelection
+    public class RectangleSelection
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
         private readonly LayerContainerViewModel _layer;
         private readonly RectangleShapeViewModel _rectangle;
         private readonly ShapeStyleViewModel _styleViewModel;
-        private PointShapeViewModel _topLeftHelperPoint;
-        private PointShapeViewModel _bottomRightHelperPoint;
+        private PointShapeViewModel? _topLeftHelperPoint;
+        private PointShapeViewModel? _bottomRightHelperPoint;
 
         public RectangleSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, RectangleShapeViewModel shape, ShapeStyleViewModel style)
         {

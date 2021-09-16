@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.Model;
 using Core2D.ViewModels.Containers;
@@ -7,14 +7,14 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public partial class ImageSelection
+    public class ImageSelection
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
         private readonly LayerContainerViewModel _layer;
         private readonly ImageShapeViewModel _image;
         private readonly ShapeStyleViewModel _styleViewModel;
-        private PointShapeViewModel _topLeftHelperPoint;
-        private PointShapeViewModel _bottomRightHelperPoint;
+        private PointShapeViewModel? _topLeftHelperPoint;
+        private PointShapeViewModel? _bottomRightHelperPoint;
 
         public ImageSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, ImageShapeViewModel shape, ShapeStyleViewModel style)
         {

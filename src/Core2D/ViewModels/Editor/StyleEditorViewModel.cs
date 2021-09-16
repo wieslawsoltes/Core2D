@@ -36,6 +36,10 @@ namespace Core2D.ViewModels.Editor
         public void OnCopyStyle()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             if (editor.Project?.SelectedShapes is { })
             {
@@ -52,6 +56,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             foreach (var shape in GetShapes(editor))
             {
@@ -65,6 +73,10 @@ namespace Core2D.ViewModels.Editor
         public void OnCopyStroke()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             if (editor.Project?.SelectedShapes is { })
             {
@@ -81,6 +93,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             foreach (var shape in GetShapes(editor))
             {
@@ -100,6 +116,10 @@ namespace Core2D.ViewModels.Editor
         public void OnCopyFill()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             if (editor.Project?.SelectedShapes is { })
             {
@@ -116,6 +136,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             foreach (var shape in GetShapes(editor))
             {
@@ -135,6 +159,10 @@ namespace Core2D.ViewModels.Editor
         public void OnCopyStartArrowStyle()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             if (editor.Project?.SelectedShapes is { })
             {
@@ -151,6 +179,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             foreach (var shape in GetShapes(editor))
             {
@@ -170,6 +202,10 @@ namespace Core2D.ViewModels.Editor
         public void OnCopyEndArrowStyle()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             if (editor.Project?.SelectedShapes is { })
             {
@@ -186,6 +222,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             foreach (var shape in GetShapes(editor))
             {
@@ -205,6 +245,10 @@ namespace Core2D.ViewModels.Editor
         public void OnCopyTextStyle()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             if (editor.Project?.SelectedShapes is { })
             {
@@ -221,6 +265,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
 
             foreach (var shape in GetShapes(editor))
             {
@@ -517,6 +565,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -535,6 +588,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -548,6 +606,11 @@ namespace Core2D.ViewModels.Editor
         public void OnStyleSetDashes(string dashes)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -566,6 +629,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -593,6 +661,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -611,6 +684,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -638,6 +716,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -654,6 +737,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -667,6 +755,11 @@ namespace Core2D.ViewModels.Editor
         public void OnStyleSetFontName(string fontName)
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -683,6 +776,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -699,6 +797,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -715,6 +818,11 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+            
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -731,6 +839,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -747,6 +859,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -763,6 +879,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -779,6 +899,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -795,6 +919,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -813,6 +941,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))
@@ -831,6 +963,10 @@ namespace Core2D.ViewModels.Editor
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
             var history = editor.Project?.History;
 
             foreach (var shape in GetShapes(editor))

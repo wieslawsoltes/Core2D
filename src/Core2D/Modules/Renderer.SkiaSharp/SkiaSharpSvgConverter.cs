@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -18,15 +18,15 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 {
     public class SkiaSharpSvgConverter : ISvgConverter
     {
-        private static readonly Svg.Model.IAssetLoader _assetLoader = new SkiaAssetLoader();
-        private readonly IServiceProvider _serviceProvider;
+        private static readonly Svg.Model.IAssetLoader s_assetLoader = new SkiaAssetLoader();
+        private readonly IServiceProvider? _serviceProvider;
 
         public SkiaSharpSvgConverter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        private static bool IsStroked(SP.SKPaint paint)
+        private static bool IsStroked(SP.SKPaint? paint)
         {
             if (paint is null)
             {
@@ -35,7 +35,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return paint.Style == SP.SKPaintStyle.Stroke || paint.Style == SP.SKPaintStyle.StrokeAndFill;
         }
 
-        private static bool IsFilled(SP.SKPaint paint)
+        private static bool IsFilled(SP.SKPaint? paint)
         {
             if (paint is null)
             {
@@ -58,6 +58,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             switch (strokeCap)
             {
                 default:
+                // ReSharper disable once RedundantCaseLabel
                 case SP.SKStrokeCap.Butt:
                     return LineCap.Flat;
 
@@ -74,6 +75,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             switch (textAlign)
             {
                 default:
+                // ReSharper disable once RedundantCaseLabel
                 case SP.SKTextAlign.Left:
                     return TextHAlignment.Left;
 
@@ -85,7 +87,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
         }
 
-        private static ShapeStyleViewModel ToStyle(SP.SKPaint paint, IViewModelFactory viewModelFactory)
+        private static ShapeStyleViewModel ToStyle(SP.SKPaint? paint, IViewModelFactory viewModelFactory)
         {
             var style = viewModelFactory.CreateShapeStyle("Style");
 
@@ -97,37 +99,50 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             switch (paint.Shader)
             {
                 case SP.ColorShader colorShader:
-                    style.Stroke.Color = ToArgbColor(colorShader, viewModelFactory);
-                    style.Fill.Color = ToArgbColor(colorShader, viewModelFactory);
-                    break;
+                {
+                    if (style.Stroke is { })
+                    {
+                        style.Stroke.Color = ToArgbColor(colorShader, viewModelFactory);
+                    }
 
-                case SP.LinearGradientShader linearGradientShader:
+                    if (style.Fill is { })
+                    {
+                        style.Fill.Color = ToArgbColor(colorShader, viewModelFactory);
+                    }
+
+                    break;
+                }
+                case SP.LinearGradientShader _:
+                {
                     // TODO:
                     break;
-
-                case SP.TwoPointConicalGradientShader twoPointConicalGradientShader:
+                }
+                case SP.TwoPointConicalGradientShader _:
+                {
                     // TODO:
                     break;
-
-                case SP.PictureShader pictureShader:
+                }
+                case SP.PictureShader _:
+                {
                     // TODO:
                     break;
-
-                default:
-                    break;
+                }
             }
 
-            style.Stroke.Thickness = paint.StrokeWidth;
-
-            style.Stroke.LineCap = ToLineCap(paint.StrokeCap);
-
-            if (paint.PathEffect is SP.DashPathEffect dashPathEffect && dashPathEffect.Intervals is { })
+            if (style.Stroke is { })
             {
-                style.Stroke.Dashes = StyleHelper.ConvertFloatArrayToDashes(dashPathEffect.Intervals);
-                style.Stroke.DashOffset = dashPathEffect.Phase;
+                style.Stroke.Thickness = paint.StrokeWidth;
+
+                style.Stroke.LineCap = ToLineCap(paint.StrokeCap);
+
+                if (paint.PathEffect is SP.DashPathEffect dashPathEffect && dashPathEffect.Intervals is { })
+                {
+                    style.Stroke.Dashes = StyleHelper.ConvertFloatArrayToDashes(dashPathEffect.Intervals);
+                    style.Stroke.DashOffset = dashPathEffect.Phase;
+                }
             }
 
-            if (paint.Typeface is { })
+            if (paint.Typeface is { } && style.TextStyle is { })
             {
                 if (paint.Typeface.FamilyName is { })
                 {
@@ -152,9 +167,9 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return style;
         }
 
-        public static PathShapeViewModel ToPathGeometry(SP.SKPath path, bool isFilled, IViewModelFactory viewModelFactory)
+        public static PathShapeViewModel? ToPathGeometry(SP.SKPath? path, bool isFilled, IViewModelFactory viewModelFactory)
         {
-            if (path.Commands is null)
+            if (path?.Commands is null)
             {
                 return null;
             }
@@ -178,7 +193,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 {
                     case SP.MoveToPathCommand moveToPathCommand:
                         {
-                            if (endFigure == true && haveFigure == false)
+                            if (endFigure && haveFigure == false)
                             {
                                 return null;
                             }
@@ -297,9 +312,6 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                             context.SetClosedState(true);
                         }
                         break;
-
-                    default:
-                        break;
                 }
             }
 
@@ -315,9 +327,9 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return geometry;
         }
 
-        public static PathShapeViewModel ToPathGeometry(SP.AddPolyPathCommand addPolyPathCommand, SP.SKPathFillType fillType, bool isFilled, bool isClosed, IViewModelFactory viewModelFactory)
+        public static PathShapeViewModel? ToPathGeometry(SP.AddPolyPathCommand? addPolyPathCommand, SP.SKPathFillType fillType, bool isFilled, bool isClosed, IViewModelFactory viewModelFactory)
         {
-            if (addPolyPathCommand.Points is null || addPolyPathCommand.Points.Count < 2)
+            if (addPolyPathCommand?.Points is null || addPolyPathCommand.Points.Count < 2)
             {
                 return null;
             }
@@ -347,19 +359,23 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return geometry;
         }
 
-        private static void ToShape(SP.SKPicture picture, List<BaseShapeViewModel> shapes, IViewModelFactory viewModelFactory)
+        private static void ToShape(SP.SKPicture? picture, List<BaseShapeViewModel> shapes, IViewModelFactory viewModelFactory)
         {
+            if (picture?.Commands is null)
+            {
+                return;
+            }
             foreach (var canvasCommand in picture.Commands)
             {
                 switch (canvasCommand)
                 {
-                    case SP.ClipPathCanvasCommand clipPathCanvasCommand:
+                    case SP.ClipPathCanvasCommand _:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.ClipRectCanvasCommand clipRectCanvasCommand:
+                    case SP.ClipRectCanvasCommand _:
                         {
                             // TODO:
                         }
@@ -377,19 +393,19 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                         }
                         break;
 
-                    case SP.SetMatrixCanvasCommand setMatrixCanvasCommand:
+                    case SP.SetMatrixCanvasCommand _:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.SaveLayerCanvasCommand saveLayerCanvasCommand:
+                    case SP.SaveLayerCanvasCommand _:
                         {
                             // TODO:
                         }
                         break;
 
-                    case SP.DrawImageCanvasCommand drawImageCanvasCommand:
+                    case SP.DrawImageCanvasCommand _:
                         {
                             // TODO:
                         }
@@ -397,165 +413,158 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
                     case SP.DrawPathCanvasCommand drawPathCanvasCommand:
                         {
-                            if (drawPathCanvasCommand.Path is { } && drawPathCanvasCommand.Paint is { })
+                            if (drawPathCanvasCommand.Path.Commands?.Count == 1)
                             {
-                                if (drawPathCanvasCommand.Path.Commands?.Count == 1)
+                                var pathCommand = drawPathCanvasCommand.Path.Commands[0];
+                                var success = false;
+
+                                switch (pathCommand)
                                 {
-                                    var pathCommand = drawPathCanvasCommand.Path.Commands[0];
-                                    var success = false;
-
-                                    switch (pathCommand)
-                                    {
-                                        case SP.AddRectPathCommand addRectPathCommand:
-                                            {
-                                                var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
-                                                var rectangleShape = viewModelFactory.CreateRectangleShape(
-                                                    addRectPathCommand.Rect.Left,
-                                                    addRectPathCommand.Rect.Top,
-                                                    addRectPathCommand.Rect.Right,
-                                                    addRectPathCommand.Rect.Bottom,
-                                                    style,
-                                                    IsStroked(drawPathCanvasCommand.Paint),
-                                                    IsFilled(drawPathCanvasCommand.Paint));
-                                                shapes.Add(rectangleShape);
-                                                success = true;
-                                            }
-                                            break;
-
-                                        case SP.AddRoundRectPathCommand addRoundRectPathCommand:
-                                            {
-                                                // TODO:
-                                            }
-                                            break;
-
-                                        case SP.AddOvalPathCommand addOvalPathCommand:
-                                            {
-                                                var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
-                                                var ellipseShape = viewModelFactory.CreateEllipseShape(
-                                                    addOvalPathCommand.Rect.Left,
-                                                    addOvalPathCommand.Rect.Top,
-                                                    addOvalPathCommand.Rect.Right,
-                                                    addOvalPathCommand.Rect.Bottom,
-                                                    style,
-                                                    IsStroked(drawPathCanvasCommand.Paint),
-                                                    IsFilled(drawPathCanvasCommand.Paint));
-                                                shapes.Add(ellipseShape);
-                                                success = true;
-                                            }
-                                            break;
-
-                                        case SP.AddCirclePathCommand addCirclePathCommand:
-                                            {
-                                                var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
-                                                var x = addCirclePathCommand.X;
-                                                var y = addCirclePathCommand.Y;
-                                                var radius = addCirclePathCommand.Radius;
-                                                var ellipseShape = viewModelFactory.CreateEllipseShape(
-                                                    x - radius,
-                                                    y - radius,
-                                                    x + radius,
-                                                    y + radius,
-                                                    style,
-                                                    IsStroked(drawPathCanvasCommand.Paint),
-                                                    IsFilled(drawPathCanvasCommand.Paint));
-                                                shapes.Add(ellipseShape);
-                                                success = true;
-                                            }
-                                            break;
-
-                                        case SP.AddPolyPathCommand addPolyPathCommand:
-                                            {
-                                                if (addPolyPathCommand.Points is { })
-                                                {
-                                                    var polyGeometry = ToPathGeometry(
-                                                        addPolyPathCommand,
-                                                        drawPathCanvasCommand.Path.FillType,
-                                                        IsFilled(drawPathCanvasCommand.Paint),
-                                                        addPolyPathCommand.Close, viewModelFactory);
-                                                    if (polyGeometry is { })
-                                                    {
-                                                        var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
-                                                        var pathShape = viewModelFactory.CreatePathShape(
-                                                            "Path",
-                                                            style,
-                                                            ImmutableArray.Create<PathFigureViewModel>(),
-                                                            FillRule.Nonzero,
-                                                            IsStroked(drawPathCanvasCommand.Paint),
-                                                            IsFilled(drawPathCanvasCommand.Paint));
-                                                        shapes.Add(pathShape);
-                                                        success = true;
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                    }
-
-                                    if (success)
-                                    {
-                                        break;
-                                    }
-                                }
-
-                                if (drawPathCanvasCommand.Path.Commands?.Count == 2)
-                                {
-                                    var pathCommand1 = drawPathCanvasCommand.Path.Commands[0];
-                                    var pathCommand2 = drawPathCanvasCommand.Path.Commands[1];
-
-                                    if (pathCommand1 is SP.MoveToPathCommand moveTo && pathCommand2 is SP.LineToPathCommand lineTo)
+                                    case SP.AddRectPathCommand addRectPathCommand:
                                     {
                                         var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
-                                        var pathShape = viewModelFactory.CreateLineShape(
-                                            moveTo.X, moveTo.Y,
-                                            lineTo.X, lineTo.Y,
+                                        var rectangleShape = viewModelFactory.CreateRectangleShape(
+                                            addRectPathCommand.Rect.Left,
+                                            addRectPathCommand.Rect.Top,
+                                            addRectPathCommand.Rect.Right,
+                                            addRectPathCommand.Rect.Bottom,
                                             style,
-                                            IsStroked(drawPathCanvasCommand.Paint));
-                                        shapes.Add(pathShape);
-                                        break;
+                                            IsStroked(drawPathCanvasCommand.Paint),
+                                            IsFilled(drawPathCanvasCommand.Paint));
+                                        shapes.Add(rectangleShape);
+                                        success = true;
                                     }
+                                        break;
+
+                                    case SP.AddRoundRectPathCommand _:
+                                    {
+                                        // TODO:
+                                    }
+                                        break;
+
+                                    case SP.AddOvalPathCommand addOvalPathCommand:
+                                    {
+                                        var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
+                                        var ellipseShape = viewModelFactory.CreateEllipseShape(
+                                            addOvalPathCommand.Rect.Left,
+                                            addOvalPathCommand.Rect.Top,
+                                            addOvalPathCommand.Rect.Right,
+                                            addOvalPathCommand.Rect.Bottom,
+                                            style,
+                                            IsStroked(drawPathCanvasCommand.Paint),
+                                            IsFilled(drawPathCanvasCommand.Paint));
+                                        shapes.Add(ellipseShape);
+                                        success = true;
+                                    }
+                                        break;
+
+                                    case SP.AddCirclePathCommand addCirclePathCommand:
+                                    {
+                                        var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
+                                        var x = addCirclePathCommand.X;
+                                        var y = addCirclePathCommand.Y;
+                                        var radius = addCirclePathCommand.Radius;
+                                        var ellipseShape = viewModelFactory.CreateEllipseShape(
+                                            x - radius,
+                                            y - radius,
+                                            x + radius,
+                                            y + radius,
+                                            style,
+                                            IsStroked(drawPathCanvasCommand.Paint),
+                                            IsFilled(drawPathCanvasCommand.Paint));
+                                        shapes.Add(ellipseShape);
+                                        success = true;
+                                    }
+                                        break;
+
+                                    case SP.AddPolyPathCommand addPolyPathCommand:
+                                    {
+                                        if (addPolyPathCommand.Points is { })
+                                        {
+                                            var polyGeometry = ToPathGeometry(
+                                                addPolyPathCommand,
+                                                drawPathCanvasCommand.Path.FillType,
+                                                IsFilled(drawPathCanvasCommand.Paint),
+                                                addPolyPathCommand.Close, viewModelFactory);
+                                            if (polyGeometry is { })
+                                            {
+                                                var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
+                                                var pathShape = viewModelFactory.CreatePathShape(
+                                                    "Path",
+                                                    style,
+                                                    ImmutableArray.Create<PathFigureViewModel>(),
+                                                    FillRule.Nonzero,
+                                                    IsStroked(drawPathCanvasCommand.Paint),
+                                                    IsFilled(drawPathCanvasCommand.Paint));
+                                                shapes.Add(pathShape);
+                                                success = true;
+                                            }
+                                        }
+                                    }
+                                        break;
                                 }
 
-                                var path = ToPathGeometry(drawPathCanvasCommand.Path, IsFilled(drawPathCanvasCommand.Paint), viewModelFactory);
-                                if (path is { })
+                                if (success)
                                 {
-                                    path.Name = "Path";
-                                    path.Style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
-                                    path.IsStroked = IsStroked(drawPathCanvasCommand.Paint);
-                                    path.IsStroked = IsFilled(drawPathCanvasCommand.Paint);
-                                    shapes.Add(path);
+                                    break;
                                 }
+                            }
+
+                            if (drawPathCanvasCommand.Path.Commands?.Count == 2)
+                            {
+                                var pathCommand1 = drawPathCanvasCommand.Path.Commands[0];
+                                var pathCommand2 = drawPathCanvasCommand.Path.Commands[1];
+
+                                if (pathCommand1 is SP.MoveToPathCommand moveTo &&
+                                    pathCommand2 is SP.LineToPathCommand lineTo)
+                                {
+                                    var style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
+                                    var pathShape = viewModelFactory.CreateLineShape(
+                                        moveTo.X, moveTo.Y,
+                                        lineTo.X, lineTo.Y,
+                                        style,
+                                        IsStroked(drawPathCanvasCommand.Paint));
+                                    shapes.Add(pathShape);
+                                    break;
+                                }
+                            }
+
+                            var path = ToPathGeometry(drawPathCanvasCommand.Path, IsFilled(drawPathCanvasCommand.Paint),
+                                viewModelFactory);
+                            if (path is { })
+                            {
+                                path.Name = "Path";
+                                path.Style = ToStyle(drawPathCanvasCommand.Paint, viewModelFactory);
+                                path.IsStroked = IsStroked(drawPathCanvasCommand.Paint);
+                                path.IsStroked = IsFilled(drawPathCanvasCommand.Paint);
+                                shapes.Add(path);
                             }
                         }
                         break;
 
-                    case SP.DrawTextBlobCanvasCommand drawTextBlobCanvasCommand:
+                    case SP.DrawTextBlobCanvasCommand _:
                         {
                             // TODO:
                         }
                         break;
 
                     case SP.DrawTextCanvasCommand drawTextCanvasCommand:
-                        {
-                            if (drawTextCanvasCommand.Paint is { })
-                            {
-                                var style = ToStyle(drawTextCanvasCommand.Paint, viewModelFactory);
-                                var pathShape = viewModelFactory.CreateTextShape(
-                                    drawTextCanvasCommand.X,
-                                    drawTextCanvasCommand.Y,
-                                    style,
-                                    drawTextCanvasCommand.Text,
-                                    IsFilled(drawTextCanvasCommand.Paint));
-                                shapes.Add(pathShape);
-                            }
-                        }
+                    {
+                        var style = ToStyle(drawTextCanvasCommand.Paint, viewModelFactory);
+                        var pathShape = viewModelFactory.CreateTextShape(
+                            drawTextCanvasCommand.X,
+                            drawTextCanvasCommand.Y,
+                            style,
+                            drawTextCanvasCommand.Text,
+                            IsFilled(drawTextCanvasCommand.Paint));
+                        shapes.Add(pathShape);
+                    }
                         break;
 
-                    case SP.DrawTextOnPathCanvasCommand drawTextOnPathCanvasCommand:
+                    case SP.DrawTextOnPathCanvasCommand _:
                         {
                             // TODO:
                         }
-                        break;
-
-                    default:
                         break;
                 }
             }
@@ -571,9 +580,9 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return stream;
         }
 
-        private IList<BaseShapeViewModel> Convert(Svg.SvgDocument document, out double width, out double height)
+        private IList<BaseShapeViewModel>? Convert(Svg.SvgDocument document, out double width, out double height)
         {
-            var picture = Svg.Model.SvgExtensions.ToModel(document, _assetLoader, out _, out _);
+            var picture = Svg.Model.SvgExtensions.ToModel(document, s_assetLoader, out _, out _);
             if (picture is null)
             {
                 width = double.NaN;
@@ -583,6 +592,12 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 
             var shapes = new List<BaseShapeViewModel>();
             var factory = _serviceProvider.GetService<IViewModelFactory>();
+            if (factory is null)
+            {
+                width = double.NaN;
+                height = double.NaN;
+                return null;
+            }
 
             ToShape(picture, shapes, factory);
 
@@ -595,7 +610,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return Enumerable.Repeat<BaseShapeViewModel>(group, 1).ToList();
         }
 
-        public IList<BaseShapeViewModel> Convert(string path, out double width, out double height)
+        public IList<BaseShapeViewModel>? Convert(string path, out double width, out double height)
         {
             var document = Svg.Model.SvgExtensions.Open(path);
             if (document is null)
@@ -608,7 +623,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             return Convert(document, out width, out height);
         }
 
-        public IList<BaseShapeViewModel> FromString(string text, out double width, out double height)
+        public IList<BaseShapeViewModel>? FromString(string text, out double width, out double height)
         {
             using var stream = ToStream(text);
             var document = Svg.Model.SvgExtensions.Open(stream);

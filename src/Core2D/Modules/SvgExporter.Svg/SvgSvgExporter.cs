@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,20 +13,19 @@ namespace Core2D.Modules.SvgExporter.Svg
 {
     public class SvgSvgExporter : ISvgExporter
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public SvgSvgExporter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public string Create(object item, double width, double height)
+        public string Create(object? item, double width, double height)
         {
             var converter = _serviceProvider.GetService<IPathConverter>();
-
             if (converter is null)
             {
-                return null;
+                return "";
             }
 
             var sb = new StringBuilder();

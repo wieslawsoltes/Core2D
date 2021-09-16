@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +16,7 @@ namespace Core2D.Modules.FileWriter.Xaml
 {
     public sealed class DrawingGroupXamlWriter : IFileWriter
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public DrawingGroupXamlWriter(IServiceProvider? serviceProvider)
         {
@@ -27,7 +27,7 @@ namespace Core2D.Modules.FileWriter.Xaml
 
         public string Extension { get; } = "xaml";
 
-        public void Save(Stream stream, object item, object options)
+        public void Save(Stream stream, object? item, object? options)
         {
             if (item is null)
             {

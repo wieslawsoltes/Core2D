@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.Model;
 using Core2D.Model.Renderer;
@@ -8,17 +8,17 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public partial class QuadraticBezierSelection
+    public class QuadraticBezierSelection
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
         private readonly LayerContainerViewModel _layer;
         private readonly QuadraticBezierShapeViewModel _quadraticBezier;
         private readonly ShapeStyleViewModel _styleViewModel;
-        private LineShapeViewModel _line12;
-        private LineShapeViewModel _line32;
-        private PointShapeViewModel _helperPoint1;
-        private PointShapeViewModel _helperPoint2;
-        private PointShapeViewModel _helperPoint3;
+        private LineShapeViewModel? _line12;
+        private LineShapeViewModel? _line32;
+        private PointShapeViewModel? _helperPoint1;
+        private PointShapeViewModel? _helperPoint2;
+        private PointShapeViewModel? _helperPoint3;
 
         public QuadraticBezierSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, QuadraticBezierShapeViewModel shape, ShapeStyleViewModel style)
         {

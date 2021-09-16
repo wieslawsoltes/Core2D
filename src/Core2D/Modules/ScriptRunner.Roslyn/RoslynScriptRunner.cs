@@ -1,4 +1,4 @@
-#nullable disable
+#nullable enable
 using System;
 using System.Threading.Tasks;
 using Core2D.Model;
@@ -11,14 +11,14 @@ namespace Core2D.Modules.ScriptRunner.Roslyn
 {
     public class RoslynScriptRunner : IScriptRunner
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public RoslynScriptRunner(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<object> Execute(string code, object state)
+        public async Task<object?> Execute(string code, object? state)
         {
             try
             {

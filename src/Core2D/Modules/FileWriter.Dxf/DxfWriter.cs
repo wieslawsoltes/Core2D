@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.IO;
 using Core2D.Model;
@@ -10,7 +10,7 @@ namespace Core2D.Modules.FileWriter.Dxf
 {
     public sealed class DxfWriter : IFileWriter
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public DxfWriter(IServiceProvider? serviceProvider)
         {
@@ -21,7 +21,7 @@ namespace Core2D.Modules.FileWriter.Dxf
 
         public string Extension { get; } = "dxf";
 
-        public void Save(Stream stream, object item, object options)
+        public void Save(Stream stream, object? item, object? options)
         {
             if (item is null)
             {

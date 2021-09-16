@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.Model;
 using Core2D.ViewModels.Containers;
@@ -7,14 +7,14 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public partial class LineSelection
+    public class LineSelection
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
         private readonly LayerContainerViewModel _layer;
         private readonly LineShapeViewModel _line;
         private readonly ShapeStyleViewModel _styleViewModel;
-        private PointShapeViewModel _startHelperPoint;
-        private PointShapeViewModel _endHelperPoint;
+        private PointShapeViewModel? _startHelperPoint;
+        private PointShapeViewModel? _endHelperPoint;
 
         public LineSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, LineShapeViewModel shape, ShapeStyleViewModel style)
         {

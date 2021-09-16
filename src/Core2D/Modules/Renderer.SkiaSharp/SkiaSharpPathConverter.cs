@@ -14,7 +14,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
 {
     public class SkiaSharpPathConverter : IPathConverter
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public SkiaSharpPathConverter(IServiceProvider? serviceProvider)
         {

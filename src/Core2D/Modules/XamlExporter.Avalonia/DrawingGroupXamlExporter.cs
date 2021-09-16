@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,7 +11,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
 {
     public class DrawingGroupXamlExporter : IXamlExporter
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public DrawingGroupXamlExporter(IServiceProvider? serviceProvider)
         {
@@ -24,7 +24,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
 
             if (converter is null)
             {
-                return null;
+                return "";
             }
 
             var sb = new StringBuilder();
@@ -70,7 +70,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
                 if (path is { })
                 {
                     var geometry = path.ToXamlString();
-                    var brush = (shape.Style.Fill.Color as ArgbColorViewModel).ToXamlString();
+                    var brush = (shape.Style?.Fill?.Color as ArgbColorViewModel)?.ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }
@@ -81,7 +81,7 @@ namespace Core2D.Modules.XamlExporter.Avalonia
                 if (path is { })
                 {
                     var geometry = path.ToXamlString();
-                    var brush = (shape.Style.Stroke.Color as ArgbColorViewModel).ToXamlString();
+                    var brush = (shape.Style?.Stroke?.Color as ArgbColorViewModel)?.ToXamlString();
                     sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
                 }
             }

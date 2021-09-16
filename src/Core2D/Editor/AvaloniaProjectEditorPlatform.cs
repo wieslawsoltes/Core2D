@@ -32,7 +32,7 @@ namespace Core2D.Editor
             throw new NotImplementedException();
         }
 
-        private MainWindow GetWindow()
+        private MainWindow? GetWindow()
         {
             return ServiceProvider.GetService<MainWindow>();
         }
@@ -49,8 +49,11 @@ namespace Core2D.Editor
                 if (item is { })
                 {
                     var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-                    editor.OnOpenProject(item);
-                    editor.CanvasPlatform?.InvalidateControl?.Invoke();
+                    if (editor is { })
+                    {
+                        editor.OnOpenProject(item);
+                        editor.CanvasPlatform?.InvalidateControl?.Invoke();
+                    }
                 }
             }
             else
@@ -720,7 +723,7 @@ namespace Core2D.Editor
         public void OnAboutDialog()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            if (editor.AboutInfo is { })
+            if (editor?.AboutInfo is { })
             {
                 var dialog = new DialogViewModel(ServiceProvider, editor)
                 {
@@ -736,37 +739,37 @@ namespace Core2D.Editor
 
         public void OnZoomReset()
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.ResetZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CanvasPlatform?.ResetZoom?.Invoke();
         }
 
         public void OnZoomFill()
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.FillZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CanvasPlatform?.FillZoom?.Invoke();
         }
 
         public void OnZoomUniform()
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.UniformZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CanvasPlatform?.UniformZoom?.Invoke();
         }
 
         public void OnZoomUniformToFill()
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.UniformToFillZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CanvasPlatform?.UniformToFillZoom?.Invoke();
         }
 
         public void OnZoomAutoFit()
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.AutoFitZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CanvasPlatform?.AutoFitZoom?.Invoke();
         }
 
         public void OnZoomIn()
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.InZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CanvasPlatform?.InZoom?.Invoke();
         }
 
         public void OnZoomOut()
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CanvasPlatform?.OutZoom?.Invoke();
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CanvasPlatform?.OutZoom?.Invoke();
         }
     }
 }

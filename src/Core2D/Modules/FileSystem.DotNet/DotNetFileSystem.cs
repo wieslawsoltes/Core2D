@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Text;
 using Core2D.Model;
@@ -7,7 +7,7 @@ namespace Core2D.Modules.FileSystem.DotNet
 {
     public sealed class DotNetFileSystem : IFileSystem
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public DotNetFileSystem(IServiceProvider? serviceProvider)
         {

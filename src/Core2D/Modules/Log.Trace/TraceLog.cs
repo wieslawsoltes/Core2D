@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.Model;
 using SD = System.Diagnostics;
@@ -7,22 +7,23 @@ namespace Core2D.Modules.Log.Trace
 {
     public sealed class TraceLog : ILog
     {
-        private readonly IServiceProvider _serviceProvider;
+        // ReSharper disable once NotAccessedField.Local
+        private readonly IServiceProvider? _serviceProvider;
 
         private const string InformationPrefix = "Information: ";
         private const string WarningPrefix = "Warning: ";
         private const string ErrorPrefix = "Error: ";
 
-        private string _lastMessage;
-        private SD.TraceListener _listener;
-        private System.IO.Stream _stream;
+        private string? _lastMessage;
+        private SD.TraceListener? _listener;
+        private System.IO.Stream? _stream;
 
         public TraceLog(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public string LastMessage => _lastMessage;
+        public string? LastMessage => _lastMessage;
 
         private void SetLastMessage(string message) => _lastMessage = message;
 

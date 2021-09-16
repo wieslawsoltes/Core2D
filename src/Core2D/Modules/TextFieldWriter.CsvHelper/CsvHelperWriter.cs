@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Globalization;
 using System.IO;
@@ -11,19 +11,24 @@ namespace Core2D.Modules.TextFieldWriter.CsvHelper
 {
     public sealed class CsvHelperWriter : ITextFieldWriter<DatabaseViewModel>
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public CsvHelperWriter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public string Name { get; } = "Csv (CsvHelper)";
+        public string Name => "Csv (CsvHelper)";
 
-        public string Extension { get; } = "csv";
+        public string Extension => "csv";
 
-        public void Write(Stream stream, DatabaseViewModel database)
+        public void Write(Stream stream, DatabaseViewModel? database)
         {
+            if (database is null)
+            {
+                return;
+            }
+            
             using var writer = new StringWriter();
 
             var configuration = new CSV.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
@@ -46,7 +51,7 @@ namespace Core2D.Modules.TextFieldWriter.CsvHelper
 
                 foreach (var record in database.Records)
                 {
-                    csvWriter.WriteField(record.Id.ToString());
+                    csvWriter.WriteField(record.Id);
                     foreach (var value in record.Values)
                     {
                         csvWriter.WriteField(value.Content);

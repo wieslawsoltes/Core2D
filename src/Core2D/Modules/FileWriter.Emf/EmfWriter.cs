@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,7 +19,7 @@ namespace Core2D.Modules.FileWriter.Emf
 {
     public sealed class EmfWriter : IFileWriter
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public EmfWriter(IServiceProvider? serviceProvider)
         {
@@ -134,7 +134,7 @@ namespace Core2D.Modules.FileWriter.Emf
             }
         }
 
-        public void Save(Stream stream, object item, object options)
+        public void Save(Stream stream, object? item, object? options)
         {
             if (item is null)
             {

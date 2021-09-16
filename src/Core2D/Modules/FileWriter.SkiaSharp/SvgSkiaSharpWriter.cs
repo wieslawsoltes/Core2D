@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.IO;
 using Core2D.Model;
@@ -13,7 +13,7 @@ namespace Core2D.Modules.FileWriter.SkiaSharp
 {
     public sealed class SvgSkiaSharpWriter : IFileWriter
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public SvgSkiaSharpWriter(IServiceProvider? serviceProvider)
         {
@@ -24,7 +24,7 @@ namespace Core2D.Modules.FileWriter.SkiaSharp
 
         public string Extension { get; } = "svg";
 
-        public void Save(Stream stream, object item, object options)
+        public void Save(Stream stream, object? item, object? options)
         {
             if (item is null)
             {

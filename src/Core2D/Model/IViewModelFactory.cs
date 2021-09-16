@@ -42,7 +42,7 @@ namespace Core2D.Model
 
         DatabaseViewModel CreateDatabase(string name, ImmutableArray<ColumnViewModel> columns, ImmutableArray<RecordViewModel> records, string idColumnName = "Id");
 
-        DatabaseViewModel FromFields(string name, IEnumerable<string[]>? fields, string idColumnName = "Id");
+        DatabaseViewModel FromFields(string name, IEnumerable<string?[]>? fields, string idColumnName = "Id");
 
         ICache<TKey, TValue> CreateCache<TKey, TValue>(Action<TValue>? dispose = null) where TKey : notnull;
 

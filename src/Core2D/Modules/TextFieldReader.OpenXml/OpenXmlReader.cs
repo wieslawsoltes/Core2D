@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,18 +13,18 @@ namespace Core2D.Modules.TextFieldReader.OpenXml
 {
     public sealed class OpenXmlReader : ITextFieldReader<DatabaseViewModel>
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public OpenXmlReader(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public string Name { get; } = "Xlsx (OpenXml)";
+        public string Name => "Xlsx (OpenXml)";
 
-        public string Extension { get; } = "xlsx";
+        public string Extension => "xlsx";
 
-        private static string ToString(Cell c, SharedStringTablePart stringTable)
+        private static string? ToString(Cell c, SharedStringTablePart? stringTable)
         {
             if (c.DataType is null)
             {
@@ -66,17 +66,21 @@ namespace Core2D.Modules.TextFieldReader.OpenXml
             return null;
         }
 
-        public static IEnumerable<string[]> ReadFields(Stream stream)
+        private static IEnumerable<string?[]>? ReadFields(Stream stream)
         {
             var spreadsheetDocument = SpreadsheetDocument.Open(stream, false);
 
-            var workbookpart = spreadsheetDocument.WorkbookPart;
+            var workbookPart = spreadsheetDocument.WorkbookPart;
+            if (workbookPart is null)
+            {
+                yield break;
+            }
 
-            var worksheetPart = workbookpart.WorksheetParts.First();
+            var worksheetPart = workbookPart.WorksheetParts.First();
 
             var sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
 
-            var stringTable = workbookpart.GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
+            var stringTable = workbookPart.GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
 
             foreach (var row in sheetData.Elements<Row>())
             {
@@ -87,17 +91,23 @@ namespace Core2D.Modules.TextFieldReader.OpenXml
             spreadsheetDocument.Close();
         }
 
-        public DatabaseViewModel Read(Stream stream)
+        public DatabaseViewModel? Read(Stream stream)
         {
-            var fields = ReadFields(stream).ToList();
+            var fields = ReadFields(stream)?.ToList();
 
             var name = "Db";
+
             if (stream is FileStream fileStream)
             {
                 name = Path.GetFileNameWithoutExtension(fileStream.Name);
             }
 
-            return _serviceProvider.GetService<IViewModelFactory>().FromFields(name, fields);
+            if (fields is null)
+            {
+                return null;
+            }
+
+            return _serviceProvider.GetService<IViewModelFactory>()?.FromFields(name, fields);
         }
     }
 }

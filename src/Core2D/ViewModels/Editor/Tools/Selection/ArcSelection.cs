@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.Model;
 using Core2D.Model.Renderer;
@@ -10,20 +10,20 @@ using Core2D.Spatial.Arc;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public partial class ArcSelection
+    public class ArcSelection
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
         private readonly LayerContainerViewModel _layer;
         private readonly ArcShapeViewModel _arc;
         private readonly ShapeStyleViewModel _styleViewModel;
-        private LineShapeViewModel _startLine;
-        private LineShapeViewModel _endLine;
-        private EllipseShapeViewModel _ellipse;
-        private PointShapeViewModel _p1HelperPoint;
-        private PointShapeViewModel _p2HelperPoint;
-        private PointShapeViewModel _centerHelperPoint;
-        private PointShapeViewModel _startHelperPoint;
-        private PointShapeViewModel _endHelperPoint;
+        private LineShapeViewModel? _startLine;
+        private LineShapeViewModel? _endLine;
+        private EllipseShapeViewModel? _ellipse;
+        private PointShapeViewModel? _p1HelperPoint;
+        private PointShapeViewModel? _p2HelperPoint;
+        private PointShapeViewModel? _centerHelperPoint;
+        private PointShapeViewModel? _startHelperPoint;
+        private PointShapeViewModel? _endHelperPoint;
 
         public ArcSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, ArcShapeViewModel shapeViewModel, ShapeStyleViewModel style)
         {

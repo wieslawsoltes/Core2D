@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.Model;
 using Core2D.Model.Renderer;
@@ -8,15 +8,15 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public partial class TextSelection
+    public class TextSelection
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
         private readonly LayerContainerViewModel _layer;
         private readonly TextShapeViewModel _text;
         private readonly ShapeStyleViewModel _styleViewModel;
-        private PointShapeViewModel _topLeftHelperPoint;
-        private PointShapeViewModel _bottomRightHelperPoint;
-        private RectangleShapeViewModel _helperRectangle;
+        private PointShapeViewModel? _topLeftHelperPoint;
+        private PointShapeViewModel? _bottomRightHelperPoint;
+        private RectangleShapeViewModel? _helperRectangle;
 
         public TextSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, TextShapeViewModel shape, ShapeStyleViewModel style)
         {

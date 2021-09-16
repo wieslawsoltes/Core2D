@@ -152,7 +152,7 @@ namespace Core2D.ViewModels
             };
         }
 
-        public DatabaseViewModel FromFields(string name, IEnumerable<string[]>? fields, string idColumnName = "Id")
+        public DatabaseViewModel FromFields(string name, IEnumerable<string?[]>? fields, string idColumnName = "Id")
         {
             var db = CreateDatabase(name, idColumnName);
             var list = fields?.ToList();
@@ -161,7 +161,7 @@ namespace Core2D.ViewModels
                 return db;
             }
             
-            var tempColumns = list.First().Select(c => CreateColumn(db, c));
+            var tempColumns = list.First().Select(c => CreateColumn(db, c ?? "Column"));
             var columns = ImmutableArray.CreateRange(tempColumns);
 
             if (columns.Length >= 1 && columns[0].Name == idColumnName)

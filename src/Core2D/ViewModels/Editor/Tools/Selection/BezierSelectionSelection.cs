@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Core2D.Model;
 using Core2D.Model.Renderer;
@@ -8,19 +8,19 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor.Tools.Selection
 {
-    public partial class BezierSelectionSelection
+    public class BezierSelectionSelection
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
         private readonly LayerContainerViewModel _layer;
         private readonly CubicBezierShapeViewModel _cubicBezier;
         private readonly ShapeStyleViewModel _styleViewModel;
-        private LineShapeViewModel _line12;
-        private LineShapeViewModel _line43;
-        private LineShapeViewModel _line23;
-        private PointShapeViewModel _helperPoint1;
-        private PointShapeViewModel _helperPoint2;
-        private PointShapeViewModel _helperPoint3;
-        private PointShapeViewModel _helperPoint4;
+        private LineShapeViewModel? _line12;
+        private LineShapeViewModel? _line43;
+        private LineShapeViewModel? _line23;
+        private PointShapeViewModel? _helperPoint1;
+        private PointShapeViewModel? _helperPoint2;
+        private PointShapeViewModel? _helperPoint3;
+        private PointShapeViewModel? _helperPoint4;
 
         public BezierSelectionSelection(IServiceProvider? serviceProvider, LayerContainerViewModel layer, CubicBezierShapeViewModel shape, ShapeStyleViewModel style)
         {

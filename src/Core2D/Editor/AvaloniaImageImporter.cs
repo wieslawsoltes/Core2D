@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,16 +12,16 @@ namespace Core2D.Editor
 {
     public class AvaloniaImageImporter : IImageImporter
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public AvaloniaImageImporter(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        private MainWindow GetWindow()
+        private MainWindow? GetWindow()
         {
-            return _serviceProvider.GetService<MainWindow>();
+            return _serviceProvider?.GetService<MainWindow>();
         }
 
         public async Task<string> GetImageKeyAsync()

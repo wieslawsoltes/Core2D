@@ -8,16 +8,21 @@ namespace Core2D.ViewModels.Editor.Factories
 {
     public class ContainerFactory : IContainerFactory
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public ContainerFactory(IServiceProvider? serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        private LibraryViewModel DefaultStyleLibrary()
+        private LibraryViewModel? DefaultStyleLibrary()
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
+            if (factory is null)
+            {
+                return null;
+            }
+
             var sgd = factory.CreateLibrary("Default");
 
             var builder = sgd.Items.ToBuilder();
@@ -30,10 +35,19 @@ namespace Core2D.ViewModels.Editor.Factories
             return sgd;
         }
 
-        private TemplateContainerViewModel CreateDefaultTemplate(IContainerFactory containerFactory, ProjectContainerViewModel project, string name)
+        private TemplateContainerViewModel? CreateDefaultTemplate(IContainerFactory containerFactory, ProjectContainerViewModel project, string name)
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
+            if (factory is null)
+            {
+                return null;
+            }
+ 
             var template = containerFactory.GetTemplate(project, name);
+            if (template is null)
+            {
+                return null;
+            }
 
             template.IsGridEnabled = false;
             template.IsBorderEnabled = false;
@@ -49,17 +63,27 @@ namespace Core2D.ViewModels.Editor.Factories
             return template;
         }
 
-        TemplateContainerViewModel IContainerFactory.GetTemplate(ProjectContainerViewModel project, string name)
+        TemplateContainerViewModel? IContainerFactory.GetTemplate(ProjectContainerViewModel project, string name)
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
+            if (factory is null)
+            {
+                return null;
+            }
+
             var template = factory.CreateTemplateContainer(name);
             template.Background = factory.CreateArgbColor(0xFF, 0xFF, 0xFF, 0xFF);
             return template;
         }
 
-        PageContainerViewModel IContainerFactory.GetPage(ProjectContainerViewModel project, string name)
+        PageContainerViewModel? IContainerFactory.GetPage(ProjectContainerViewModel project, string name)
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
+            if (factory is null)
+            {
+                return null;
+            }
+
             var container = factory.CreatePageContainer(name);
             container.Template = project.CurrentTemplate is { } 
                 ? project.CurrentTemplate.CopyShared(null)
@@ -67,16 +91,26 @@ namespace Core2D.ViewModels.Editor.Factories
             return container;
         }
 
-        DocumentContainerViewModel IContainerFactory.GetDocument(ProjectContainerViewModel project, string name)
+        DocumentContainerViewModel? IContainerFactory.GetDocument(ProjectContainerViewModel project, string name)
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
+            if (factory is null)
+            {
+                return null;
+            }
+
             var document = factory.CreateDocumentContainer(name);
             return document;
         }
 
-        ProjectContainerViewModel IContainerFactory.GetProject()
+        ProjectContainerViewModel? IContainerFactory.GetProject()
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
+            if (factory is null)
+            {
+                return null;
+            }
+
             var containerFactory = this as IContainerFactory;
             var project = factory.CreateProjectContainer("Project1");
 
@@ -89,14 +123,22 @@ namespace Core2D.ViewModels.Editor.Factories
 
             // Style Libraries
             var sgBuilder = project.StyleLibraries.ToBuilder();
-            sgBuilder.Add(DefaultStyleLibrary());
+            var sl = DefaultStyleLibrary();
+            if (sl is { })
+            {
+                sgBuilder.Add(sl);
+            }
             project.StyleLibraries = sgBuilder.ToImmutable();
 
             project.SetCurrentStyleLibrary(project.StyleLibraries.FirstOrDefault());
 
             // Templates
             var templateBuilder = project.Templates.ToBuilder();
-            templateBuilder.Add(CreateDefaultTemplate(this, project, "Default"));
+            var template = CreateDefaultTemplate(this, project, "Default");
+            if (template is { })
+            {
+                templateBuilder.Add(template);
+            }
             project.Templates = templateBuilder.ToImmutable();
 
             project.SetCurrentTemplate(project.Templates.FirstOrDefault(t => t.Name == "Default"));
@@ -111,16 +153,18 @@ namespace Core2D.ViewModels.Editor.Factories
             // Documents and Pages
             var document = containerFactory.GetDocument(project, "Document1");
             var page = containerFactory.GetPage(project, "Page1");
+            if (document is { } && page is { })
+            {
+                var pageBuilder = document.Pages.ToBuilder();
+                pageBuilder.Add(page);
+                document.Pages = pageBuilder.ToImmutable();
 
-            var pageBuilder = document.Pages.ToBuilder();
-            pageBuilder.Add(page);
-            document.Pages = pageBuilder.ToImmutable();
+                var documentBuilder = project.Documents.ToBuilder();
+                documentBuilder.Add(document);
+                project.Documents = documentBuilder.ToImmutable();
 
-            var documentBuilder = project.Documents.ToBuilder();
-            documentBuilder.Add(document);
-            project.Documents = documentBuilder.ToImmutable();
-
-            project.SetCurrentContainer(page);
+                project.SetCurrentContainer(page);
+            }
 
             // Databases
             var db = factory.CreateDatabase("Default");

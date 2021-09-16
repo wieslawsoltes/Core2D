@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,7 +13,7 @@ namespace Core2D.Modules.TextFieldReader.CsvHelper
 {
     public sealed class CsvHelperReader : ITextFieldReader<DatabaseViewModel>
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
 
         public CsvHelperReader(IServiceProvider? serviceProvider)
         {
@@ -47,7 +47,7 @@ namespace Core2D.Modules.TextFieldReader.CsvHelper
             }
         }
 
-        public DatabaseViewModel Read(Stream stream)
+        public DatabaseViewModel? Read(Stream stream)
         {
             var fields = ReadFields(stream).ToList();
 
@@ -57,7 +57,7 @@ namespace Core2D.Modules.TextFieldReader.CsvHelper
                 name = Path.GetFileNameWithoutExtension(fileStream.Name);
             }
 
-            return _serviceProvider.GetService<IViewModelFactory>().FromFields(name, fields);
+            return _serviceProvider.GetService<IViewModelFactory>()?.FromFields(name, fields);
         }
     }
 }
