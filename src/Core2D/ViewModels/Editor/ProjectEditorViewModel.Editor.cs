@@ -104,7 +104,7 @@ namespace Core2D.ViewModels.Editor
                         if (project.CurrentDatabase is null && shape.Record.Owner is DatabaseViewModel owner)
                         {
                             var db = viewModelFactory?.CreateDatabase(
-                                ProjectEditorConfiguration.ImportedDatabaseName,
+                                ProjectEditorConfiguration.DefaultImportedDatabaseName,
                                 owner.Columns);
                             project.AddDatabase(db);
                             project.SetCurrentDatabase(db);
@@ -1037,12 +1037,12 @@ namespace Core2D.ViewModels.Editor
 
                     string ext = System.IO.Path.GetExtension(path);
 
-                    if (string.Compare(ext, ProjectEditorConfiguration.ProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(ext, ProjectEditorConfiguration.DefaultProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         OnOpenProject(path);
                         result = true;
                     }
-                    else if (string.Compare(ext, ProjectEditorConfiguration.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(ext, ProjectEditorConfiguration.DefaultCsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         var reader = TextFieldReaders.FirstOrDefault(r => r.Extension == "csv");
                         if (reader is { })
@@ -1051,7 +1051,7 @@ namespace Core2D.ViewModels.Editor
                             result = true;
                         }
                     }
-                    else if (string.Compare(ext, ProjectEditorConfiguration.XlsxExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(ext, ProjectEditorConfiguration.DefaultXlsxExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         var reader = TextFieldReaders.FirstOrDefault(r => r.Extension == "xlsx");
                         if (reader is { })
@@ -1060,22 +1060,22 @@ namespace Core2D.ViewModels.Editor
                             result = true;
                         }
                     }
-                    else if (string.Compare(ext, ProjectEditorConfiguration.JsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(ext, ProjectEditorConfiguration.DefaultJsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         OnImportJson(path);
                         result = true;
                     }
-                    else if (string.Compare(ext, ProjectEditorConfiguration.ScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(ext, ProjectEditorConfiguration.DefaultScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         await OnExecuteScriptFile(path);
                         result = true;
                     }
-                    else if (string.Compare(ext, ProjectEditorConfiguration.SvgExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(ext, ProjectEditorConfiguration.DefaultSvgExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         OnImportSvg(path);
                         result = true;
                     }
-                    else if (ProjectEditorConfiguration.ImageExtensions.Any(r => string.Compare(ext, r, StringComparison.OrdinalIgnoreCase) == 0))
+                    else if (ProjectEditorConfiguration.DefaultImageExtensions.Any(r => string.Compare(ext, r, StringComparison.OrdinalIgnoreCase) == 0))
                     {
                         var key = OnGetImageKey(path);
                         if (key is { } && !string.IsNullOrEmpty(key))
@@ -1104,7 +1104,7 @@ namespace Core2D.ViewModels.Editor
             }
             
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-            var selected = Project.CurrentStyleLibrary?.Selected ?? viewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var selected = Project.CurrentStyleLibrary?.Selected ?? viewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var style = (ShapeStyleViewModel?)selected?.Copy(null);
             var layer = Project.CurrentContainer?.CurrentLayer;
             var sx = Project.Options is not null && Project.Options.SnapToGrid 
@@ -1271,12 +1271,12 @@ namespace Core2D.ViewModels.Editor
 
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
 
-            var selected = Project.CurrentStyleLibrary?.Selected ?? viewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var selected = Project.CurrentStyleLibrary?.Selected ?? viewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var style = (ShapeStyleViewModel?)selected?.Copy(null);
             var layer = Project.CurrentContainer?.CurrentLayer;
             var sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
             var sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
-            var g = viewModelFactory?.CreateGroupShape(ProjectEditorConfiguration.DefaulGroupName);
+            var g = viewModelFactory?.CreateGroupShape(ProjectEditorConfiguration.DefaultGroupName);
             if (g is null)
             {
                 return;

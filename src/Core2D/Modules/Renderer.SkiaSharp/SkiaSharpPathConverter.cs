@@ -40,7 +40,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             }
             var style = first?.Style is { } ?
                 first.Style?.CopyShared(null) :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
             pathShape.Name = "Path";
             pathShape.Style = style;
@@ -63,7 +63,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
             pathShape.Name = "Path";
             pathShape.Style = style;
@@ -86,7 +86,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var stroke = style?.Stroke?.Color.CopyShared(null);
             var fill = style?.Fill?.Color.CopyShared(null);
             style.Stroke.Color = fill;
@@ -125,7 +125,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             using var brush = SkiaSharpDrawUtil.ToSKPaintBrush(style.Fill.Color);
             var result = brush.GetFillPath(path, 1.0f);
             if (result is { })
@@ -161,7 +161,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var pathShape = PathGeometryConverter.ToPathGeometry(result, factory);
             pathShape.Name = "Path";
             pathShape.Style = style;
@@ -185,7 +185,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
             pathShape.Name = "Path";
             pathShape.Style = style;
@@ -227,7 +227,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
             var shape = shapes.FirstOrDefault();
             var style = shape.Style is { } ?
                 shape.Style?.CopyShared(null) :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var pathShape = PathGeometryConverter.ToPathGeometry(result, factory);
             pathShape.Name = "Path";
             pathShape.Style = style;
@@ -249,7 +249,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp
                 return null;
             }
             var factory = _serviceProvider.GetService<IViewModelFactory>();
-            var style = factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
             pathShape.Name = "Path";
             pathShape.Style = style;

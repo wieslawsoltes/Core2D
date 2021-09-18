@@ -37,7 +37,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
             var style = project?.CurrentStyleLibrary?.Selected is { } ?
                 (ShapeStyleViewModel)project.CurrentStyleLibrary.Selected :
-                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var line = factory.CreateLineShape(
                 x1, y1,
                 x2, y2,
@@ -51,7 +51,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var line = factory.CreateLineShape(
                 start,
                 end,
@@ -65,7 +65,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var arc = factory.CreateArcShape(
                 x1, y1,
                 x2, y2,
@@ -82,7 +82,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var arc = factory.CreateArcShape(
                 point1,
                 point2,
@@ -99,7 +99,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var cubicBezier = factory.CreateCubicBezierShape(
                 x1, y1,
                 x2, y2,
@@ -116,7 +116,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var cubicBezier = factory.CreateCubicBezierShape(
                 point1,
                 point2,
@@ -133,7 +133,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var quadraticBezier = factory.CreateQuadraticBezierShape(
                 x1, y1,
                 x2, y2,
@@ -149,7 +149,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var quadraticBezier = factory.CreateQuadraticBezierShape(
                 point1,
                 point2,
@@ -165,7 +165,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var path = factory.CreatePathShape(
                 "",
                 style.CopyShared(null),
@@ -182,7 +182,7 @@ namespace Core2D.ViewModels.Editor.Factories
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
             var project = editor.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var rectangle = factory.CreateRectangleShape(
                 x1, y1,
                 x2, y2,
@@ -197,7 +197,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var rectangle = factory.CreateRectangleShape(
                 topLeft,
                 bottomRight,
@@ -212,7 +212,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var ellipse = factory.CreateEllipseShape(
                 x1, y1,
                 x2, y2,
@@ -227,7 +227,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var ellipse = factory.CreateEllipseShape(
                 topLeft,
                 bottomRight,
@@ -242,7 +242,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var txt = factory.CreateTextShape(
                 x1, y1,
                 x2, y2,
@@ -257,7 +257,7 @@ namespace Core2D.ViewModels.Editor.Factories
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var txt = factory.CreateTextShape(
                 topLeft,
                 bottomRight,
@@ -276,7 +276,7 @@ namespace Core2D.ViewModels.Editor.Factories
             }
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var image = factory.CreateImageShape(
                 x1, y1,
                 x2, y2,
@@ -321,7 +321,7 @@ namespace Core2D.ViewModels.Editor.Factories
             }
 
             var key = imageCache.AddImageFromFile(path, bytes);
-            var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+            var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             var image = factory.CreateImageShape(
                 topLeft,
                 bottomRight,

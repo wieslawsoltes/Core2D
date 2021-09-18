@@ -109,7 +109,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
             var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                 editor.Project.CurrentStyleLibrary.Selected :
-                viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
             Path = factory.CreatePathShape(
                 "",
                 (ShapeStyleViewModel)style.Copy(null),

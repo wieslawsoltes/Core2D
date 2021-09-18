@@ -169,7 +169,7 @@ namespace Core2D.ViewModels.Containers
         public void OnAddStyleLibrary()
         {
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-            var sl = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaulStyleLibraryName);
+            var sl = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaultStyleLibraryName);
             if (sl is null)
             {
                 return;
@@ -219,7 +219,7 @@ namespace Core2D.ViewModels.Containers
             else
             {
                 var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-                var style = viewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                var style = viewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
                 if (style is { })
                 {
                     this.AddStyle(CurrentStyleLibrary, style);
@@ -299,7 +299,7 @@ namespace Core2D.ViewModels.Containers
         public void OnAddGroupLibrary()
         {
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-            var gl = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaulGroupLibraryName);
+            var gl = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaultGroupLibraryName);
             if (gl is null)
             {
                 return;
@@ -578,7 +578,7 @@ namespace Core2D.ViewModels.Containers
                 return;
             }
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-            this.AddColumn(db, viewModelFactory?.CreateColumn(db, ProjectEditorConfiguration.DefaulColumnName));
+            this.AddColumn(db, viewModelFactory?.CreateColumn(db, ProjectEditorConfiguration.DefaultColumnName));
         }
 
         public void OnRemoveColumn(ColumnViewModel? column)
@@ -593,7 +593,7 @@ namespace Core2D.ViewModels.Containers
                 return;
             }
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-            this.AddRecord(db, viewModelFactory?.CreateRecord(db, ProjectEditorConfiguration.DefaulValue));
+            this.AddRecord(db, viewModelFactory?.CreateRecord(db, ProjectEditorConfiguration.DefaultValue));
         }
 
         public void OnRemoveRecord(RecordViewModel? record)
@@ -639,7 +639,7 @@ namespace Core2D.ViewModels.Containers
             }
 
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-            this.AddProperty(data, viewModelFactory?.CreateProperty(owner, ProjectEditorConfiguration.DefaulPropertyName, ProjectEditorConfiguration.DefaulValue));
+            this.AddProperty(data, viewModelFactory?.CreateProperty(owner, ProjectEditorConfiguration.DefaultPropertyName, ProjectEditorConfiguration.DefaultValue));
         }
 
         public void OnRemoveProperty(PropertyViewModel? property)

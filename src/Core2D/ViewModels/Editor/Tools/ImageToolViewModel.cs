@@ -57,7 +57,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
                         var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
                             editor.Project.CurrentStyleLibrary.Selected :
-                            viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
+                            viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
                         _image = factory.CreateImageShape(
                             (double)sx, (double)sy,
                             (ShapeStyleViewModel)style.Copy(null),

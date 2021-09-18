@@ -1,22 +1,22 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Editor
 {
-    public partial class AboutInfoViewModel : ViewModelBase
+    public class AboutInfoViewModel : ViewModelBase
     {
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public string Version { get; set; }
+        public string? Version { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        public string Copyright { get; set; }
+        public string? Copyright { get; set; }
 
-        public string License { get; set; }
+        public string? License { get; set; }
 
-        public string OperatingSystem { get; set; }
+        public string? OperatingSystem { get; set; }
 
         public bool IsDesktop { get; set; }
 
@@ -30,9 +30,9 @@ namespace Core2D.ViewModels.Editor
 
         public bool IsUnix { get; set; }
 
-        public string WindowingSubsystemName { get; set; }
+        public string? WindowingSubsystemName { get; set; }
 
-        public string RenderingSubsystemName { get; set; }
+        public string? RenderingSubsystemName { get; set; }
 
         public AboutInfoViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {

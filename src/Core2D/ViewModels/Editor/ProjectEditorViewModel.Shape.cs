@@ -58,7 +58,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var group = Group(project.SelectedShapes, ProjectEditorConfiguration.DefaulGroupName);
+            var group = Group(project.SelectedShapes, ProjectEditorConfiguration.DefaultGroupName);
             if (group is { })
             {
                 ServiceProvider.GetService<ISelectionService>()?.Select(project.CurrentContainer?.CurrentLayer, group);
