@@ -41,22 +41,22 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
         private readonly decimal _sizeSmall;
         private readonly decimal _rotateDistance;
         private GroupBox _groupBox;
-        private readonly ShapeStyleViewModel _handleStyle;
-        private readonly ShapeStyleViewModel _boundsStyle;
-        private readonly ShapeStyleViewModel _selectedHandleStyle;
-        private readonly ShapeStyleViewModel _selectedBoundsStyle;
-        private readonly RectangleShapeViewModel _boundsHandle;
-        private readonly LineShapeViewModel _rotateLine;
-        private readonly EllipseShapeViewModel _rotateHandle;
-        private readonly EllipseShapeViewModel _topLeftHandle;
-        private readonly EllipseShapeViewModel _topRightHandle;
-        private readonly EllipseShapeViewModel _bottomLeftHandle;
-        private readonly EllipseShapeViewModel _bottomRightHandle;
-        private readonly RectangleShapeViewModel _topHandle;
-        private readonly RectangleShapeViewModel _bottomHandle;
-        private readonly RectangleShapeViewModel _leftHandle;
-        private readonly RectangleShapeViewModel _rightHandle;
-        private readonly List<BaseShapeViewModel> _handles;
+        private readonly ShapeStyleViewModel? _handleStyle;
+        private readonly ShapeStyleViewModel? _boundsStyle;
+        private readonly ShapeStyleViewModel? _selectedHandleStyle;
+        private readonly ShapeStyleViewModel? _selectedBoundsStyle;
+        private readonly RectangleShapeViewModel? _boundsHandle;
+        private readonly LineShapeViewModel? _rotateLine;
+        private readonly EllipseShapeViewModel? _rotateHandle;
+        private readonly EllipseShapeViewModel? _topLeftHandle;
+        private readonly EllipseShapeViewModel? _topRightHandle;
+        private readonly EllipseShapeViewModel? _bottomLeftHandle;
+        private readonly EllipseShapeViewModel? _bottomRightHandle;
+        private readonly RectangleShapeViewModel? _topHandle;
+        private readonly RectangleShapeViewModel? _bottomHandle;
+        private readonly RectangleShapeViewModel? _leftHandle;
+        private readonly RectangleShapeViewModel? _rightHandle;
+        private readonly List<BaseShapeViewModel>? _handles;
         private BaseShapeViewModel? _currentHandle;
         private List<PointShapeViewModel>? _points;
         private Mode _mode = Mode.None;
@@ -74,49 +74,53 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             _sizeLarge = 4m;
             _sizeSmall = 4m;
             _rotateDistance = -16.875m;
-            _handleStyle = viewModelFactory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255);
-            _boundsStyle = viewModelFactory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-            _selectedHandleStyle = viewModelFactory.CreateShapeStyle("SelectedHandle", 255, 0, 191, 255, 255, 0, 191, 255);
-            _selectedBoundsStyle = viewModelFactory.CreateShapeStyle("SelectedBounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
-            _rotateHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rotateHandle");
-            _topLeftHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topLeftHandle");
-            _topRightHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topRightHandle");
-            _bottomLeftHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomLeftHandle");
-            _bottomRightHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomRightHandle");
-            _topHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topHandle");
-            _bottomHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomHandle");
-            _leftHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_leftHandle");
-            _rightHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
-            _boundsHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_boundsHandle");
-            _rotateLine = viewModelFactory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
-
-            _handles = new List<BaseShapeViewModel>
+            
+            if (viewModelFactory is not null)
             {
-                //_rotateHandle,
-                _topLeftHandle,
-                _topRightHandle,
-                _bottomLeftHandle,
-                _bottomRightHandle,
-                _topHandle,
-                _bottomHandle,
-                _leftHandle,
-                _rightHandle,
-                _boundsHandle,
-                //_rotateLine
-            };
+                _handleStyle = viewModelFactory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255);
+                _boundsStyle = viewModelFactory.CreateShapeStyle("Bounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
+                _selectedHandleStyle = viewModelFactory.CreateShapeStyle("SelectedHandle", 255, 0, 191, 255, 255, 0, 191, 255);
+                _selectedBoundsStyle = viewModelFactory.CreateShapeStyle("SelectedBounds", 255, 0, 191, 255, 255, 255, 255, 255, 1.0);
+                _rotateHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rotateHandle");
+                _topLeftHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topLeftHandle");
+                _topRightHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topRightHandle");
+                _bottomLeftHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomLeftHandle");
+                _bottomRightHandle = viewModelFactory.CreateEllipseShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomRightHandle");
+                _topHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_topHandle");
+                _bottomHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_bottomHandle");
+                _leftHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_leftHandle");
+                _rightHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _handleStyle, true, true, name: "_rightHandle");
+                _boundsHandle = viewModelFactory.CreateRectangleShape(0, 0, 0, 0, _boundsStyle, true, false, name: "_boundsHandle");
+                _rotateLine = viewModelFactory.CreateLineShape(0, 0, 0, 0, _boundsStyle, true, name: "_rotateLine");
 
-            _currentHandle = null;
-            _rotateHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _topLeftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _topRightHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _bottomLeftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _bottomRightHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _topHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _bottomHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _leftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _rightHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
-            _boundsHandle.State |= ShapeStateFlags.Thickness;
-            _rotateLine.State |= ShapeStateFlags.Thickness;
+                _handles = new List<BaseShapeViewModel>
+                {
+                    //_rotateHandle,
+                    _topLeftHandle,
+                    _topRightHandle,
+                    _bottomLeftHandle,
+                    _bottomRightHandle,
+                    _topHandle,
+                    _bottomHandle,
+                    _leftHandle,
+                    _rightHandle,
+                    _boundsHandle,
+                    //_rotateLine
+                };
+
+                _currentHandle = null;
+                _rotateHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+                _topLeftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+                _topRightHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+                _bottomLeftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+                _bottomRightHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+                _topHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+                _bottomHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+                _leftHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+                _rightHandle.State |= ShapeStateFlags.Size | ShapeStateFlags.Thickness;
+                _boundsHandle.State |= ShapeStateFlags.Thickness;
+                _rotateLine.State |= ShapeStateFlags.Thickness;
+            }
         }
 
         public override object Copy(IDictionary<object, object>? shared)
@@ -128,9 +132,12 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
         {
             var isDirty = base.IsDirty();
 
-            foreach (var handle in _handles)
+            if (_handles is { })
             {
-                isDirty |= handle.IsDirty();
+                foreach (var handle in _handles)
+                {
+                    isDirty |= handle.IsDirty();
+                }
             }
 
             return isDirty;
@@ -140,9 +147,12 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
         {
             base.Invalidate();
 
-            foreach (var handle in _handles)
+            if (_handles is { })
             {
-                handle.Invalidate();
+                foreach (var handle in _handles)
+                {
+                    handle.Invalidate();
+                }
             }
         }
 
@@ -150,9 +160,12 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
         {
             if (_isVisible)
             {
-                foreach (var handle in _handles)
+                if (_handles is { })
                 {
-                    handle.DrawShape(dc, renderer, selection);
+                    foreach (var handle in _handles)
+                    {
+                        handle.DrawShape(dc, renderer, selection);
+                    }
                 }
             }
         }
@@ -428,6 +441,11 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
             var hitTest = ServiceProvider.GetService<IHitTest>();
+            if (editor?.Project is null || selection is null || hitTest is null)
+            {
+                return false;
+            }
+            
             (double x, double y) = args;
             (decimal sx, decimal sy) = selection.TryToSnap(args);
 
@@ -441,9 +459,11 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 _layer?.RaiseInvalidateLayer();
             }
 
-            var radius = (editor.Project.Options?.HitThreshold ?? 7.0) / editor.PageState.ZoomX;
+            var radius = editor.Project.Options is not null && editor.PageState is not null
+                ? editor.Project.Options.HitThreshold / editor.PageState.ZoomX
+                :  7.0;
             var handles = _handles.Where(h => h.State.HasFlag(ShapeStateFlags.Visible));
-            var result = hitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState.ZoomX);
+            var result = hitTest.TryToGetShape(handles, new Point2(x, y), radius, editor.PageState?.ZoomX ?? 1.0);
             if (result is { })
             {
                 if (result == _boundsHandle)
@@ -514,8 +534,11 @@ namespace Core2D.ViewModels.Editor.Tools.Decorators
                 return;
             }
 
-            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+            if (selection is null)
+            {
+                return;
+            }
 
             bool isProportionalResize = args.Modifier.HasFlag(ModifierFlags.Shift);
 
