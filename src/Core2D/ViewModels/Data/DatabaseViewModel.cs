@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Runtime.Serialization;
+using System.Windows.Input;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Editor;
 
 namespace Core2D.ViewModels.Data
 {
@@ -16,7 +20,33 @@ namespace Core2D.ViewModels.Data
 
         public DatabaseViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
+            AddColumn = new Command<DatabaseViewModel?>(x => GetProject()?.OnAddColumn(x));
+            
+            RemoveColumn = new Command<ColumnViewModel?>(x => GetProject()?.OnRemoveColumn(x));
+            
+            AddRecord = new Command<DatabaseViewModel?>(x => GetProject()?.OnAddRecord(x));
+            
+            RemoveRecord = new Command<RecordViewModel?>(x => GetProject()?.OnRemoveRecord(x));
+
+            ApplyRecord = new Command<RecordViewModel?>(x => GetProject()?.OnApplyRecord(x));
+
+            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
+
+        [IgnoreDataMember]
+        public ICommand AddColumn { get; }
+        
+        [IgnoreDataMember]
+        public ICommand RemoveColumn { get; }
+        
+        [IgnoreDataMember]
+        public ICommand AddRecord { get; }
+        
+        [IgnoreDataMember]
+        public ICommand RemoveRecord { get; }
+        
+        [IgnoreDataMember]
+        public ICommand ApplyRecord { get; }
 
         public override object Copy(IDictionary<object, object>? shared)
         {

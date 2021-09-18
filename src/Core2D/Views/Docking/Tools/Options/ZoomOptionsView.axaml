@@ -13,7 +13,7 @@
     <Panel x:DataType="vme:ProjectEditorViewModel">
       <ScrollViewer HorizontalScrollBarVisibility="Auto" 
                     VerticalScrollBarVisibility="Auto"
-                    DataContext="{Binding CanvasPlatform.Zoom}">
+                    DataContext="{Binding CanvasPlatform.Zoom, FallbackValue={x:Null}}">
         <TabControl x:DataType="paz:ZoomBorder">
           <TabItem Header="Status">
             <StackPanel Margin="{DynamicResource ContentMargin}">
@@ -37,12 +37,12 @@
                       Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomReset}"
                       HorizontalAlignment="Stretch" 
                       HorizontalContentAlignment="Center"
-                      Margin="{DynamicResource TextControlThemePadding}" 
+                      Margin="{DynamicResource TextControlThemePadding}"
                       x:CompileBindings="False" />
               <Button Content="Fill" 
                       Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomFill}"
                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                      Margin="{DynamicResource TextControlThemePadding}" 
+                      Margin="{DynamicResource TextControlThemePadding}"
                       x:CompileBindings="False" />
               <Button Content="Uniform" 
                       Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniform}"
@@ -54,13 +54,13 @@
                       Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomUniformToFill}"
                       HorizontalAlignment="Stretch" 
                       HorizontalContentAlignment="Center"
-                      Margin="{DynamicResource TextControlThemePadding}" 
+                      Margin="{DynamicResource TextControlThemePadding}"
                       x:CompileBindings="False" />
               <Button Content="AutoFit" 
                       Command="{Binding $parent[TopLevel].DataContext.Platform.OnZoomAutoFit}"
                       HorizontalAlignment="Stretch"
                       HorizontalContentAlignment="Center"
-                      Margin="{DynamicResource TextControlThemePadding}" 
+                      Margin="{DynamicResource TextControlThemePadding}"
                       x:CompileBindings="False" />
             </StackPanel>
           </TabItem>

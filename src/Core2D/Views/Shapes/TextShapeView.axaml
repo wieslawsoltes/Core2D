@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:views="using:Core2D.Views"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
@@ -26,15 +25,14 @@
                Margin="{DynamicResource TextControlThemePadding}" />
         <DockPanel>
           <Button Content="..."
-                  Command="{Binding $parent[UserControl].OnEditTextBinding}" 
+                  Command="{Binding EditTextBinding}" 
                   CommandParameter="{Binding}"
                   HorizontalContentAlignment="Center" 
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   Padding="0" Margin="6,0,0,0" 
                   Width="30" 
-                  DockPanel.Dock="Right" 
-                  x:CompileBindings="False" />
+                  DockPanel.Dock="Right" />
           <TextBox Text="{Binding Text, Mode=TwoWay}" 
                    AcceptsReturn="True" 
                    HorizontalAlignment="Stretch" />

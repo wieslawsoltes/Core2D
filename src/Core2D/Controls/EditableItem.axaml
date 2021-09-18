@@ -11,7 +11,7 @@
     <Setter Property="Padding" Value="4" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Panel Background="Transparent" x:CompileBindings="False">
+        <Panel Background="Transparent">
           <i:Interaction.Behaviors>
             <iac:ShowOnDoubleTappedBehavior TargetControl="{Binding #PART_TextBox}" />
             <iac:ShowOnKeyDownTappedBehavior TargetControl="{Binding #PART_TextBox}" />

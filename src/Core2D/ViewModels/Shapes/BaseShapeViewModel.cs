@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
+using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Style;
@@ -32,7 +33,24 @@ namespace Core2D.ViewModels.Shapes
         protected BaseShapeViewModel(IServiceProvider? serviceProvider, Type targetType) : base(serviceProvider)
         {
             _targetType = targetType;
+
+            AddProperty = new Command<ViewModelBase?>(x => GetProject()?.OnAddProperty(x));
+            
+            RemoveProperty = new Command<PropertyViewModel?>(x => GetProject()?.OnRemoveProperty(x));
+
+            ResetRecord = new Command<IDataObject?>(x => GetProject()?.OnResetRecord(x));
+
+            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
+
+        [IgnoreDataMember]
+        public ICommand AddProperty { get; }
+
+        [IgnoreDataMember]
+        public ICommand RemoveProperty { get; }
+
+        [IgnoreDataMember]
+        public ICommand ResetRecord { get; }
 
         public override bool IsDirty()
         {

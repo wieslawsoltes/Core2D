@@ -123,11 +123,11 @@ namespace Core2D.ViewModels.Containers
         public ICommand RemoveRecord { get; }
         
         [IgnoreDataMember]
-        public ICommand ResetRecord { get; }
-        
-        [IgnoreDataMember]
         public ICommand ApplyRecord { get; }
         
+        [IgnoreDataMember]
+        public ICommand ResetRecord { get; }
+
         [IgnoreDataMember]
         public ICommand AddProperty { get; }
         
@@ -601,11 +601,6 @@ namespace Core2D.ViewModels.Containers
             this.RemoveRecord(record);
         }
 
-        public void OnResetRecord(IDataObject? data)
-        {
-            this.ResetRecord(data);
-        }
-
         public void OnApplyRecord(RecordViewModel? record)
         {
             if (record is null)
@@ -629,6 +624,11 @@ namespace Core2D.ViewModels.Containers
                     this.ApplyRecord(container, record);
                 }
             }
+        }
+
+        public void OnResetRecord(IDataObject? data)
+        {
+            this.ResetRecord(data);
         }
 
         public void OnAddProperty(ViewModelBase? owner)

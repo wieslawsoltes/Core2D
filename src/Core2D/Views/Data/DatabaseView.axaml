@@ -25,35 +25,31 @@
                    Background="Transparent" 
                    VerticalAlignment="Center" 
                    Margin="0,0,0,0" 
-                   Grid.Column="0"
-                   x:CompileBindings="False" />
+                   Grid.Column="0" />
           <StackPanel Grid.Column="1" 
                       Orientation="Horizontal" 
                       HorizontalAlignment="Right" 
                       VerticalAlignment="Center">
             <Button Content="apply" 
-                    Command="{Binding $parent[TopLevel].DataContext.OnApplyRecord}"
+                    Command="{Binding ApplyRecord}"
                     CommandParameter="{Binding CurrentRecord}" 
                     IsVisible="{Binding !!CurrentRecord}"
                     BorderBrush="Transparent" 
                     Background="Transparent" 
-                    Padding="12,4,12,4" 
-                    x:CompileBindings="False" />
+                    Padding="12,4,12,4" />
             <Button Content="&#727;"
-                    Command="{Binding $parent[TopLevel].DataContext.OnRemoveRecord}"
+                    Command="{Binding RemoveRecord}"
                     CommandParameter="{Binding CurrentRecord}" 
                     IsVisible="{Binding !!CurrentRecord}"
                     BorderBrush="Transparent" 
                     Background="Transparent" 
-                    Padding="12,4,12,4" 
-                    x:CompileBindings="False" />
+                    Padding="12,4,12,4" />
             <Button Content="+" 
-                    Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}"
+                    Command="{Binding AddRecord}"
                     CommandParameter="{Binding}" 
                     BorderBrush="Transparent" 
                     Background="Transparent" 
-                    Padding="12,4,12,4"
-                    x:CompileBindings="False" />
+                    Padding="12,4,12,4" />
           </StackPanel>
         </Grid>
         <DataGrid x:Name="RowsDataGrid" 
@@ -70,14 +66,12 @@
             <idd:TypedDragBehavior DataType="{x:Type vmdt:RecordViewModel}" />
           </i:Interaction.Behaviors>
           <DataGrid.KeyBindings>
-            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddRecord}"
+            <KeyBinding Command="{Binding AddRecord}"
                         CommandParameter="{Binding #RowsDataGrid.DataContext, Mode=OneWay}" 
-                        Gesture="Ctrl+N"
-                        x:CompileBindings="False" />
-            <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveRecord}"
+                        Gesture="Ctrl+N" />
+            <KeyBinding Command="{Binding RemoveRecord}"
                         CommandParameter="{Binding #RowsDataGrid.SelectedItem}" 
-                        Gesture="Delete"
-                        x:CompileBindings="False" />
+                        Gesture="Delete" />
           </DataGrid.KeyBindings>
         </DataGrid>
       </DockPanel>
@@ -92,18 +86,16 @@
                       VerticalAlignment="Center"
                       DockPanel.Dock="Top">
             <Button Content="&#727;" 
-                    Command="{Binding $parent[TopLevel].DataContext.OnRemoveColumn}"
+                    Command="{Binding RemoveColumn}"
                     CommandParameter="{Binding #ColumnsDataGrid.SelectedItem}" 
                     BorderBrush="Transparent"
-                    Background="Transparent" Padding="12,4,12,4" 
-                    x:CompileBindings="False" />
+                    Background="Transparent" Padding="12,4,12,4" />
             <Button Content="+" 
-                    Command="{Binding $parent[TopLevel].DataContext.OnAddColumn}"
+                    Command="{Binding AddColumn}"
                     CommandParameter="{Binding}" 
                     BorderBrush="Transparent"
                     Background="Transparent" 
-                    Padding="12,4,12,4"
-                    x:CompileBindings="False" />
+                    Padding="12,4,12,4" />
           </StackPanel>
           <DataGrid x:Name="ColumnsDataGrid" 
                     Items="{Binding Columns}" 
@@ -119,14 +111,12 @@
               <idd:TypedDragBehavior DataType="{x:Type vmdt:ColumnViewModel}" />
             </i:Interaction.Behaviors>
             <DataGrid.KeyBindings>
-              <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnAddColumn}" 
+              <KeyBinding Command="{Binding AddColumn}" 
                           CommandParameter="{Binding}"
-                          Gesture="Ctrl+N" 
-                          x:CompileBindings="False" />
-              <KeyBinding Command="{Binding $parent[TopLevel].DataContext.OnRemoveColumn}"
+                          Gesture="Ctrl+N" />
+              <KeyBinding Command="{Binding RemoveColumn}"
                           CommandParameter="{Binding #ColumnsDataGrid.SelectedItem}" 
-                          Gesture="Delete"
-                          x:CompileBindings="False" />
+                          Gesture="Delete" />
             </DataGrid.KeyBindings>
             <DataGrid.Columns>
               <DataGridTextColumn Header="Name"
@@ -136,7 +126,7 @@
                                       Binding="{Binding IsVisible}"
                                       x:DataType="vmdt:ColumnViewModel" />
               <DataGridTextColumn Header="Owner" 
-                                  Binding="{Binding Owner.Name}" 
+                                  Binding="{Binding Owner.Name, FallbackValue={x:Null}}" 
                                   IsReadOnly="True" />
             </DataGrid.Columns>
           </DataGrid>

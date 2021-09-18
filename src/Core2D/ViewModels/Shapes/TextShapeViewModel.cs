@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Runtime.Serialization;
+using System.Windows.Input;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
 
 namespace Core2D.ViewModels.Shapes
 {
@@ -17,7 +20,20 @@ namespace Core2D.ViewModels.Shapes
 
         public TextShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(TextShapeViewModel))
         {
+            
+            EditTextBinding = new Command<TextShapeViewModel?>(shape =>
+            {
+                if (shape is { } && GetProjectEditor() is { } editor)
+                {
+                    editor.ShowDialog(editor.CreateTextBindingDialog(shape));
+                }
+            });
+
+            ProjectEditorViewModel? GetProjectEditor() => ServiceProvider.GetService<ProjectEditorViewModel>();
         }
+
+        [IgnoreDataMember]
+        public ICommand EditTextBinding { get; }
 
         public override object Copy(IDictionary<object, object>? shared)
         {

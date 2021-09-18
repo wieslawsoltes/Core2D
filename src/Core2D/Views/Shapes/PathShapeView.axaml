@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="using:Core2D.Converters"
-             xmlns:views="using:Core2D.Views"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
              xmlns:vmp="using:Core2D.ViewModels.Path"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
@@ -41,8 +40,7 @@
         </TreeView.Styles>
         <TreeView.DataTemplates>
           <TreeDataTemplate DataType="vmp:PathFigureViewModel" 
-                            ItemsSource="{Binding Segments}"
-                            x:CompileBindings="False">
+                            ItemsSource="{Binding Segments}">
             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                        Background="Transparent" />
           </TreeDataTemplate>

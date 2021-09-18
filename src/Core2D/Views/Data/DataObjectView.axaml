@@ -18,12 +18,11 @@
                     Margin="{DynamicResource ContentMargin}"
                     DockPanel.Dock="Top">
           <Button Content="&#727;" 
-                  Command="{Binding $parent[TopLevel].DataContext.OnResetRecord}"
+                  Command="{Binding ResetRecord}"
                   CommandParameter="{Binding}" 
                   IsVisible="{Binding !!Record}" BorderBrush="Transparent"
                   Background="Transparent" 
-                  Padding="12,4,12,4" 
-                  x:CompileBindings="False" />
+                  Padding="12,4,12,4" />
         </StackPanel>
         <ContentControl Content="{Binding Record}" />
       </DockPanel>
@@ -36,12 +35,11 @@
                     Margin="{DynamicResource ContentMargin}"
                     DockPanel.Dock="Top">
           <Button Content="+" 
-                  Command="{Binding $parent[TopLevel].DataContext.OnAddProperty}"
+                  Command="{Binding AddProperty}"
                   CommandParameter="{Binding}"
                   BorderBrush="Transparent" 
                   Background="Transparent" 
-                  Padding="12,4,12,4"
-                  x:CompileBindings="False" />
+                  Padding="12,4,12,4" />
         </StackPanel>
         <Grid RowDefinitions="Auto,*" 
               ColumnDefinitions="50*,Auto,50*" 
@@ -89,7 +87,7 @@
                   </i:Interaction.Behaviors>
                   -->
                   <Button Content="-" 
-                          Command="{Binding $parent[TopLevel].DataContext.OnRemoveProperty}"
+                          Command="{Binding RemoveProperty}"
                           CommandParameter="{Binding}" 
                           Padding="0" 
                           VerticalAlignment="Stretch"
@@ -98,8 +96,7 @@
                           HorizontalContentAlignment="Center" 
                           Margin="6,0,0,0" 
                           Width="30" 
-                          DockPanel.Dock="Right"
-                          x:CompileBindings="False" />
+                          DockPanel.Dock="Right" />
                   <TextBox Text="{Binding Value, Mode=TwoWay}" 
                            VerticalAlignment="Stretch"
                            HorizontalAlignment="Stretch" />

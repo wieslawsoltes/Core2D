@@ -1,8 +1,11 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Immutable;
+using System.Runtime.Serialization;
+using System.Windows.Input;
 using Core2D.Model;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Containers
@@ -23,7 +26,23 @@ namespace Core2D.ViewModels.Containers
 
         protected FrameContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
         {
+            AddProperty = new Command<ViewModelBase?>(x => GetProject()?.OnAddProperty(x));
+            
+            RemoveProperty = new Command<PropertyViewModel?>(x => GetProject()?.OnRemoveProperty(x));
+
+            ResetRecord = new Command<IDataObject?>(x => GetProject()?.OnResetRecord(x));
+
+            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         }
+
+        [IgnoreDataMember]
+        public ICommand AddProperty { get; }
+
+        [IgnoreDataMember]
+        public ICommand RemoveProperty { get; }
+
+        [IgnoreDataMember]
+        public ICommand ResetRecord { get; }
 
         public void SetCurrentLayer(LayerContainerViewModel? layer) => CurrentLayer = layer;
 

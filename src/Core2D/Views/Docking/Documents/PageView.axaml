@@ -24,10 +24,10 @@
     </VisualBrush>
   </UserControl.Resources>
   <Panel DataContext="{Binding Context}">
-    <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}"
+    <Panel Background="Transparent"
+           d:DataContext="{x:Static vmd:DesignerContext.Editor}"
            x:DataType="vme:ProjectEditorViewModel" 
-           x:CompileBindings="False"
-           Background="Transparent">
+           x:CompileBindings="False">
       <i:Interaction.Behaviors>
         <behaviors:AttachEditorBehavior />
         <iac:FocusOnAttachedToVisualTreeBehavior />

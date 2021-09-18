@@ -11,39 +11,43 @@
              x:DataType="vm:DashboardMenuViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}">
     <Menu d:DataContext="{x:Static vmd:DesignerContext.Editor}" 
-          x:DataType="vme:ProjectEditorViewModel"
-          x:CompileBindings="False">
+          x:DataType="vme:ProjectEditorViewModel">
       <MenuItem Header="_File">
         <MenuItem Header="_New" 
                   Command="{Binding OnNew}" 
                   CommandParameter="{Binding}" 
-                  InputGesture="Ctrl+N" />
+                  InputGesture="Ctrl+N"
+                  x:CompileBindings="False" />
         <Separator />
         <MenuItem Header="_Open..." 
                   Command="{Binding Platform.OnOpen}" 
-                  InputGesture="Ctrl+O" />
+                  InputGesture="Ctrl+O"
+                  x:CompileBindings="False" />
         <Separator />
         <MenuItem Header="Execu_te Script..." 
-                  Command="{Binding Platform.OnExecuteScriptFile}" />
+                  Command="{Binding Platform.OnExecuteScriptFile}"
+                  x:CompileBindings="False" />
         <Separator />
         <MenuItem Header="_Recent" 
                   Items="{Binding RecentProjects}">
           <MenuItem.Styles>
             <Style Selector="MenuItem">
               <Setter Property="Header" Value="{Binding Name}" />
-              <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.Platform.OnOpen}" />
-              <Setter Property="CommandParameter" Value="{Binding Path}" />
+              <Setter Property="Command" Value="{Binding $parent[TopLevel].DataContext.Platform.OnOpen}" x:CompileBindings="False" />
+              <Setter Property="CommandParameter" Value="{Binding Path}" x:CompileBindings="False" />
             </Style>
           </MenuItem.Styles>
         </MenuItem>
         <Separator />
         <MenuItem Header="E_xit" 
                   Command="{Binding Platform.OnExit}" 
-                  InputGesture="Alt+F4" />
+                  InputGesture="Alt+F4"
+                  x:CompileBindings="False" />
       </MenuItem>
       <MenuItem Header="_Help">
         <MenuItem Header="_About Core2D" 
-                  Command="{Binding Platform.OnAboutDialog}" />
+                  Command="{Binding Platform.OnAboutDialog}"
+                  x:CompileBindings="False" />
       </MenuItem>
     </Menu>
   </Panel>

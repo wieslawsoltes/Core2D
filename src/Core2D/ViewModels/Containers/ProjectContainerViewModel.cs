@@ -78,10 +78,12 @@ namespace Core2D.ViewModels.Containers
 
             AddColumn = new Command<DatabaseViewModel?>(OnAddColumn);
             RemoveColumn = new Command<ColumnViewModel?>(OnRemoveColumn);
+
             AddRecord = new Command<DatabaseViewModel?>(OnAddRecord);
             RemoveRecord = new Command<RecordViewModel?>(OnRemoveRecord);
-            ResetRecord = new Command<IDataObject?>(OnResetRecord);
             ApplyRecord = new Command<RecordViewModel?>(OnApplyRecord);
+            ResetRecord = new Command<IDataObject?>(OnResetRecord);
+
             AddProperty = new Command<ViewModelBase?>(OnAddProperty);
             RemoveProperty = new Command<PropertyViewModel?>(OnRemoveProperty);
 

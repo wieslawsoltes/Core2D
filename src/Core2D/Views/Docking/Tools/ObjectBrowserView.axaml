@@ -18,9 +18,9 @@
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:ObjectBrowserViewModel" x:CompileBindings="True">
   <UserControl.Resources>
-    <ContextMenu x:Key="ExportContextMenu" x:CompileBindings="False">
+    <ContextMenu x:Key="ExportContextMenu" x:DataType="core:ViewModelBase">
       <MenuItem Header="E_xport" 
-                Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}"
+                Command="{Binding ExportCommand}"
                 CommandParameter="{Binding}" />
     </ContextMenu>
   </UserControl.Resources>
@@ -28,10 +28,10 @@
     <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}" x:DataType="vme:ProjectEditorViewModel">
       <TreeView x:Name="ProjectTreeView">
         <TreeView.KeyBindings>
-          <KeyBinding Command="{Binding $parent[TopLevel].DataContext.Platform.OnExportObject}" 
+          <KeyBinding Command="{Binding ExportCommand}" 
                       CommandParameter="{Binding #ProjectTreeView.SelectedItem}" 
-                      Gesture="Ctrl+E" 
-                      x:CompileBindings="False" />
+                      Gesture="Ctrl+E"
+                      x:DataType="core:ViewModelBase"/>
         </TreeView.KeyBindings>
         <TreeView.Styles>
           <Style Selector="TreeViewItem">
@@ -39,51 +39,67 @@
           </Style>
         </TreeView.Styles>
         <TreeView.DataTemplates>
-          <TreeDataTemplate DataType="{x:Type vmc:LibraryViewModel}" ItemsSource="{Binding Items, FallbackValue={x:Null}}" x:CompileBindings="False">
+          <TreeDataTemplate DataType="vmc:LibraryViewModel" 
+                            ItemsSource="{Binding Items, FallbackValue={x:Null}}"
+                            x:DataType="vmc:LibraryViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" ItemsSource="{Binding Pages}" x:CompileBindings="False">
+          <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" 
+                            ItemsSource="{Binding Pages}"
+                            x:DataType="vmc:DocumentContainerViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmc:PageContainerViewModel" ItemsSource="{Binding Layers}" x:CompileBindings="False">
+          <TreeDataTemplate DataType="vmc:PageContainerViewModel" 
+                            ItemsSource="{Binding Layers}"
+                            x:DataType="vmc:PageContainerViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmc:TemplateContainerViewModel" ItemsSource="{Binding Layers}" x:CompileBindings="False">
+          <TreeDataTemplate DataType="vmc:TemplateContainerViewModel"
+                            ItemsSource="{Binding Layers}"
+                            x:DataType="vmc:TemplateContainerViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmc:LayerContainerViewModel" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
+          <TreeDataTemplate DataType="vmc:LayerContainerViewModel" 
+                            ItemsSource="{Binding Shapes}"
+                            x:DataType="vmc:LayerContainerViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
-          <TreeDataTemplate DataType="vms:GroupShapeViewModel" ItemsSource="{Binding Shapes}" x:CompileBindings="False">
+          <TreeDataTemplate DataType="vms:GroupShapeViewModel" 
+                            ItemsSource="{Binding Shapes}"
+                            x:DataType="vms:GroupShapeViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
-          <TreeDataTemplate DataType="vms:PathShapeViewModel" ItemsSource="{Binding Geometry.Figures, FallbackValue={x:Null}}" x:CompileBindings="False">
+          <TreeDataTemplate DataType="vms:PathShapeViewModel" 
+                            ItemsSource="{Binding Figures, FallbackValue={x:Null}}"
+                            x:DataType="vms:PathShapeViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmp:PathFigureViewModel" ItemsSource="{Binding Segments, FallbackValue={x:Null}}" x:CompileBindings="False">
+          <TreeDataTemplate DataType="vmp:PathFigureViewModel" 
+                            ItemsSource="{Binding Segments, FallbackValue={x:Null}}"
+                            x:DataType="vmp:PathFigureViewModel">
             <c:EditableItem TextBinding="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
-          <DataTemplate DataType="vms:BaseShapeViewModel" x:CompileBindings="False">
+          <DataTemplate DataType="vms:BaseShapeViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </DataTemplate>
-          <DataTemplate DataType="vmst:ShapeStyleViewModel" x:CompileBindings="False">
+          <DataTemplate DataType="vmst:ShapeStyleViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </DataTemplate>
-          <DataTemplate DataType="vmdt:DatabaseViewModel" x:CompileBindings="False">
+          <DataTemplate DataType="vmdt:DatabaseViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </DataTemplate>
-          <DataTemplate DataType="core:ViewModelBase" x:CompileBindings="False">
+          <DataTemplate DataType="core:ViewModelBase">
             <c:EditableItem TextBinding="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </DataTemplate>
