@@ -58,10 +58,10 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var group = Group(project?.SelectedShapes, ProjectEditorConfiguration.DefaulGroupName);
+            var group = Group(project.SelectedShapes, ProjectEditorConfiguration.DefaulGroupName);
             if (group is { })
             {
-                ServiceProvider.GetService<ISelectionService>()?.Select(project?.CurrentContainer?.CurrentLayer, group);
+                ServiceProvider.GetService<ISelectionService>()?.Select(project.CurrentContainer?.CurrentLayer, group);
             }
         }
 
@@ -73,13 +73,10 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var result = Ungroup(project?.SelectedShapes);
+            var result = Ungroup(project.SelectedShapes);
             if (result)
             {
-                if (project is { })
-                {
-                    project.SelectedShapes = null;
-                }
+                project.SelectedShapes = null;
                 ServiceProvider.GetService<ISelectionService>()?.OnHideDecorator();
             }
         }
@@ -97,10 +94,10 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var sources = project?.SelectedShapes;
+            var sources = project.SelectedShapes;
             if (sources is { })
             {
-                BoxLayout.Rotate(sources, (decimal)value, project?.History);
+                BoxLayout.Rotate(sources, (decimal)value, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -113,10 +110,10 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var sources = project?.SelectedShapes;
+            var sources = project.SelectedShapes;
             if (sources is { })
             {
-                BoxLayout.Flip(sources, FlipMode.Horizontal, project?.History);
+                BoxLayout.Flip(sources, FlipMode.Horizontal, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -129,10 +126,10 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var sources = project?.SelectedShapes;
+            var sources = project.SelectedShapes;
             if (sources is { })
             {
-                BoxLayout.Flip(sources, FlipMode.Vertical, project?.History);
+                BoxLayout.Flip(sources, FlipMode.Vertical, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -145,7 +142,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            if (project?.Options is null)
+            if (project.Options is null)
             {
                 return;
             }
@@ -163,7 +160,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            if (project?.Options is null)
+            if (project.Options is null)
             {
                 return;
             }
@@ -181,7 +178,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            if (project?.Options is null)
+            if (project.Options is null)
             {
                 return;
             }
@@ -199,7 +196,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            if (project?.Options is null)
+            if (project.Options is null)
             {
                 return;
             }
@@ -217,11 +214,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Stack(items, StackMode.Horizontal, project?.History);
+                BoxLayout.Stack(items, StackMode.Horizontal, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -234,11 +231,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Stack(items, StackMode.Vertical, project?.History);
+                BoxLayout.Stack(items, StackMode.Vertical, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -251,11 +248,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Distribute(items, DistributeMode.Horizontal, project?.History);
+                BoxLayout.Distribute(items, DistributeMode.Horizontal, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -268,11 +265,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Distribute(items, DistributeMode.Vertical, project?.History);
+                BoxLayout.Distribute(items, DistributeMode.Vertical, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -285,11 +282,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Left, project?.History);
+                BoxLayout.Align(items, AlignMode.Left, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -302,11 +299,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Centered, project?.History);
+                BoxLayout.Align(items, AlignMode.Centered, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -319,11 +316,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Right, project?.History);
+                BoxLayout.Align(items, AlignMode.Right, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -336,11 +333,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Top, project?.History);
+                BoxLayout.Align(items, AlignMode.Top, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -353,11 +350,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Center, project?.History);
+                BoxLayout.Align(items, AlignMode.Center, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -370,11 +367,11 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var shapes = project?.SelectedShapes;
+            var shapes = project.SelectedShapes;
             if (shapes is { })
             {
                 var items = shapes.Where(s => !s.State.HasFlag(ShapeStateFlags.Locked));
-                BoxLayout.Align(items, AlignMode.Bottom, project?.History);
+                BoxLayout.Align(items, AlignMode.Bottom, project.History);
                 ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
             }
         }
@@ -387,7 +384,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var sources = project?.SelectedShapes;
+            var sources = project.SelectedShapes;
             if (sources is { })
             {
                 foreach (var s in sources)
@@ -405,7 +402,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var sources = project?.SelectedShapes;
+            var sources = project.SelectedShapes;
             if (sources is { })
             {
                 foreach (var s in sources)
@@ -423,7 +420,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var sources = project?.SelectedShapes;
+            var sources = project.SelectedShapes;
             if (sources is { })
             {
                 foreach (var s in sources.Reverse())
@@ -441,7 +438,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var sources = project?.SelectedShapes;
+            var sources = project.SelectedShapes;
             if (sources is { })
             {
                 foreach (var s in sources.Reverse())
@@ -465,14 +462,14 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = project?.SelectedShapes;
-            var source = project?.SelectedShapes?.FirstOrDefault();
+            var sources = project.SelectedShapes;
+            var source = project.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -506,7 +503,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -537,7 +534,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -557,14 +554,14 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = project?.SelectedShapes;
-            var source = project?.SelectedShapes?.FirstOrDefault();
+            var sources = project.SelectedShapes;
+            var source = project.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -601,7 +598,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -648,7 +645,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -668,14 +665,14 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = project?.SelectedShapes;
-            var source = project?.SelectedShapes?.FirstOrDefault();
+            var sources = project.SelectedShapes;
+            var source = project.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -712,7 +709,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -759,7 +756,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -779,14 +776,14 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = project?.SelectedShapes;
-            var source = project?.SelectedShapes?.FirstOrDefault();
+            var sources = project.SelectedShapes;
+            var source = project.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -823,7 +820,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -870,7 +867,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -890,14 +887,14 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = project?.SelectedShapes;
-            var source = project?.SelectedShapes?.FirstOrDefault();
+            var sources = project.SelectedShapes;
+            var source = project.SelectedShapes?.FirstOrDefault();
 
             if (sources is { Count: 1 } && source is not null)
             {
@@ -931,7 +928,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -975,7 +972,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -995,13 +992,13 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
             }
 
-            var sources = project?.SelectedShapes;
+            var sources = project.SelectedShapes;
 
             if (sources is not { Count: >= 1 })
             {
@@ -1035,7 +1032,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(result));
@@ -1060,13 +1057,13 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var sources = project?.SelectedShapes;
+            var sources = project.SelectedShapes;
             if (sources is null)
             {
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
@@ -1087,7 +1084,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = shapesBuilder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -1111,7 +1108,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = source.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
 
             return group;
@@ -1142,7 +1139,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = layer.Shapes;
             var next = source.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+            project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
             layer.Shapes = next;
         }
 
@@ -1154,7 +1151,7 @@ namespace Core2D.ViewModels.Editor
                 return null;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             return layer is { } ? Group(layer, shapes, name) : null;
         }
 
@@ -1166,7 +1163,7 @@ namespace Core2D.ViewModels.Editor
                 return false;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null || shapes is null)
             {
                 return false;
@@ -1184,7 +1181,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer?.Shapes is null)
             {
                 return;
@@ -1210,7 +1207,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
@@ -1232,7 +1229,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
@@ -1254,7 +1251,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
@@ -1276,7 +1273,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
 
-            var layer = project?.CurrentContainer?.CurrentLayer;
+            var layer = project.CurrentContainer?.CurrentLayer;
             if (layer is null)
             {
                 return;
@@ -1319,7 +1316,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
             var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
-            project?.History?.Snapshot(previous, next, (s) =>
+            project.History?.Snapshot(previous, next, (s) =>
             {
                 if (s is null)
                 {
@@ -1342,7 +1339,7 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
             
-            switch (project?.Options?.MoveMode)
+            switch (project.Options?.MoveMode)
             {
                 case MoveMode.Point:
                 {
@@ -1386,7 +1383,7 @@ namespace Core2D.ViewModels.Editor
 
                 var previous = libraryViewModel.Items;
                 var next = builder.ToImmutable();
-                project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+                project.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
                 libraryViewModel.Items = next;
             }
             else
@@ -1401,7 +1398,7 @@ namespace Core2D.ViewModels.Editor
 
                     var previous = libraryViewModel.Items;
                     var next = builder.ToImmutable();
-                    project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+                    project.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
                     libraryViewModel.Items = next;
                 }
             }
@@ -1423,7 +1420,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = libraryViewModel.Items;
             var next = builder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+            project.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
             libraryViewModel.Items = next;
         }
 
@@ -1440,7 +1437,7 @@ namespace Core2D.ViewModels.Editor
 
             var previous = libraryViewModel.Items;
             var next = builder.ToImmutable();
-            project?.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+            project.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
             libraryViewModel.Items = next;
         }
     }
