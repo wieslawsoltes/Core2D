@@ -367,9 +367,15 @@ namespace Core2D.ViewModels.Editor
                 return;
             }
             
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
+            {
+                return;
+            }
+
             try
             {
-                using var stream = FileSystem?.Open(path);
+                using var stream = fileSystem.Open(path);
                 if (stream is null)
                 {
                     return;
@@ -389,9 +395,15 @@ namespace Core2D.ViewModels.Editor
 
         public void OnExportData(string path, DatabaseViewModel? database, ITextFieldWriter<DatabaseViewModel>? writer)
         {
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
+            {
+                return;
+            }
+
             try
             {
-                using var stream = FileSystem?.Create(path);
+                using var stream = fileSystem?.Create(path);
                 if (stream is null)
                 {
                     return;
@@ -406,14 +418,20 @@ namespace Core2D.ViewModels.Editor
 
         public void OnUpdateData(string path, DatabaseViewModel database, ITextFieldReader<DatabaseViewModel> reader)
         {
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
+            {
+                return;
+            }
+
             try
             {
-                using var stream = FileSystem?.Open(path);
+                using var stream = fileSystem.Open(path);
                 if (stream is null)
                 {
                     return;
                 }
-                var db = reader?.Read(stream);
+                var db = reader.Read(stream);
                 if (db is { })
                 {
                     Project?.UpdateDatabase(database, db);
@@ -570,12 +588,24 @@ namespace Core2D.ViewModels.Editor
 
         public void OnImportJson(string path)
         {
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
+            {
+                return;
+            }
+
+            var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
+            if (jsonSerializer is null)
+            {
+                return;
+            }
+
             try
             {
-                var json = FileSystem?.ReadUtf8Text(path);
+                var json = fileSystem.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(json))
                 {
-                    var item = JsonSerializer?.Deserialize<object>(json);
+                    var item = jsonSerializer.Deserialize<object>(json);
                     if (item is { })
                     {
                         OnImportObject(item, true);
@@ -604,12 +634,24 @@ namespace Core2D.ViewModels.Editor
 
         public void OnExportJson(string path, object item)
         {
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
+            {
+                return;
+            }
+
+            var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
+            if (jsonSerializer is null)
+            {
+                return;
+            }
+
             try
             {
-                var json = JsonSerializer?.Serialize(item);
+                var json = jsonSerializer.Serialize(item);
                 if (!string.IsNullOrWhiteSpace(json))
                 {
-                    FileSystem?.WriteUtf8Text(path, json);
+                    fileSystem.WriteUtf8Text(path, json);
                 }
             }
             catch (Exception ex)
@@ -620,9 +662,15 @@ namespace Core2D.ViewModels.Editor
 
         public void OnExport(string path, object item, IFileWriter writer)
         {
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
+            {
+                return;
+            }
+
             try
             {
-                using var stream = FileSystem?.Create(path);
+                using var stream = fileSystem?.Create(path);
                 if (stream is null)
                 {
                     return;
@@ -637,9 +685,15 @@ namespace Core2D.ViewModels.Editor
 
         public async Task OnExecuteScriptFile(string path)
         {
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
+            {
+                return;
+            }
+
             try
             {
-                var csharp = FileSystem?.ReadUtf8Text(path);
+                var csharp = fileSystem?.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
                     if (Project is null)
@@ -709,13 +763,19 @@ namespace Core2D.ViewModels.Editor
             {
                 return default;
             }
-            
-            using var stream = FileSystem?.Open(path);
+           
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
+            {
+                return default;
+            }
+ 
+            using var stream = fileSystem?.Open(path);
             if (stream is null)
             {
                 return default;
             }
-            var bytes = FileSystem?.ReadBinary(stream);
+            var bytes = fileSystem?.ReadBinary(stream);
             if (bytes is null)
             {
                 return default;
@@ -840,24 +900,31 @@ namespace Core2D.ViewModels.Editor
 
         public void OnLoadRecent(string path)
         {
-            if (JsonSerializer is null)
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
             {
                 return;
             }
-            
+
+            var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
+            if (jsonSerializer is null)
+            {
+                return;
+            }
+
             try
             {
-                var json = FileSystem?.ReadUtf8Text(path);
+                var json = fileSystem.ReadUtf8Text(path);
                 if (json is null)
                 {
                     return;
                 }
-                var recent = JsonSerializer.Deserialize<RecentsViewModel>(json);
+                var recent = jsonSerializer.Deserialize<RecentsViewModel>(json);
                 if (recent is null)
                 {
                     return;
                 }
-                var remove = recent.Files.Where(x => FileSystem?.Exists(x.Path) == false).ToList();
+                var remove = recent.Files.Where(x => x.Path is null || fileSystem.Exists(x.Path) == false).ToList();
                 var builder = recent.Files.ToBuilder();
 
                 foreach (var file in remove)
@@ -867,8 +934,7 @@ namespace Core2D.ViewModels.Editor
 
                 RecentProjects = builder.ToImmutable();
 
-                if (recent.Current?.Path is { }
-                    && (FileSystem?.Exists(recent.Current.Path) ?? false))
+                if (recent.Current?.Path is { } && fileSystem.Exists(recent.Current.Path))
                 {
                     CurrentRecentProject = recent.Current;
                 }
@@ -885,16 +951,23 @@ namespace Core2D.ViewModels.Editor
 
         public void OnSaveRecent(string path)
         {
-            if (JsonSerializer is null)
+            var fileSystem = ServiceProvider.GetService<IFileSystem>();
+            if (fileSystem is null)
             {
                 return;
             }
-            
+
+            var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
+            if (jsonSerializer is null)
+            {
+                return;
+            }
+
             try
             {
                 var recent = RecentsViewModel.Create(ServiceProvider, _recentProjects, _currentRecentProject);
-                var json = JsonSerializer.Serialize(recent);
-                FileSystem?.WriteUtf8Text(path, json);
+                var json = jsonSerializer.Serialize(recent);
+                fileSystem.WriteUtf8Text(path, json);
             }
             catch (Exception ex)
             {

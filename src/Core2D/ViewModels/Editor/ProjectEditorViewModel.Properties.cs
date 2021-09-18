@@ -33,11 +33,9 @@ namespace Core2D.ViewModels.Editor
         private readonly Lazy<ImmutableArray<IPathTool?>> _pathTools;
         private readonly Lazy<DataFlow?>? _dataFlow;
         private readonly Lazy<IShapeRenderer?>? _renderer;
-        private readonly Lazy<IFileSystem?>? _fileSystem;
         private readonly Lazy<ISelectionService?>? _selectionService;
         private readonly Lazy<IShapeService?>? _shapeService;
         private readonly Lazy<IClipboardService?>? _clipboardService;
-        private readonly Lazy<IJsonSerializer?>? _jsonSerializer;
         private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
         private readonly Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>> _textFieldReaders;
         private readonly Lazy<ImmutableArray<ITextFieldWriter<DatabaseViewModel>>> _textFieldWriters;
@@ -55,15 +53,11 @@ namespace Core2D.ViewModels.Editor
 
         public ShapeRendererStateViewModel? PageState => _renderer?.Value?.State;
 
-        public IFileSystem? FileSystem => _fileSystem?.Value;
-
         public ISelectionService? SelectionService => _selectionService?.Value;
 
         public IShapeService? ShapeService => _shapeService?.Value;
         
         public IClipboardService? ClipboardService => _clipboardService?.Value;
-
-        public IJsonSerializer? JsonSerializer => _jsonSerializer?.Value;
 
         public ImmutableArray<IFileWriter> FileWriters => _fileWriters.Value;
 

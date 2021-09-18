@@ -27,11 +27,9 @@ namespace Core2D.ViewModels.Editor
             _pathTools = serviceProvider?.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>((tools) => tools.ToImmutableArray());
             _dataFlow = serviceProvider.GetServiceLazily<DataFlow>();
             _renderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
-            _fileSystem = serviceProvider.GetServiceLazily<IFileSystem>();
             _selectionService = serviceProvider.GetServiceLazily<ISelectionService>();
             _shapeService = serviceProvider.GetServiceLazily<IShapeService>();
             _clipboardService = serviceProvider.GetServiceLazily<IClipboardService>();
-            _jsonSerializer = serviceProvider.GetServiceLazily<IJsonSerializer>();
             _fileWriters = serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
             _textFieldReaders = serviceProvider.GetServiceLazily<ITextFieldReader<DatabaseViewModel>[], ImmutableArray<ITextFieldReader<DatabaseViewModel>>>((readers) => readers.ToImmutableArray());
             _textFieldWriters = serviceProvider.GetServiceLazily<ITextFieldWriter<DatabaseViewModel>[], ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>((writers) => writers.ToImmutableArray());
