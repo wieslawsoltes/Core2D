@@ -34,7 +34,7 @@
         <Border x:Name="TitleBorder"
                 IsVisible="{Binding IsTitleBarVisible}"
                 CornerRadius="4"
-                Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                Background="{DynamicResource AcrylicFallbackColor}"
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Stretch"
                 Height="36"
