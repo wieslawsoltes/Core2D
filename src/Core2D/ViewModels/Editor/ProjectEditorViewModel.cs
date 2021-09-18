@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
@@ -23,31 +22,65 @@ namespace Core2D.ViewModels.Editor
             _recentProjects = ImmutableArray.Create<RecentFileViewModel>();
             _currentRecentProject = default;
             _dialogs = new ObservableCollection<DialogViewModel>();
-            _tools = serviceProvider?.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>((tools) => tools.ToImmutableArray());
-            _pathTools = serviceProvider?.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>((tools) => tools.ToImmutableArray());
+            _tools = serviceProvider is null 
+                ? new Lazy<ImmutableArray<IEditorTool>>(() => new ImmutableArray<IEditorTool>()) 
+                : serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>(tools =>
+                  {
+                      if (tools is null)
+                      {
+                          return new ImmutableArray<IEditorTool>();
+                      }
+                      return tools.ToImmutableArray();
+                  });
+            _pathTools = serviceProvider is null 
+                ? new Lazy<ImmutableArray<IPathTool>>(() => new ImmutableArray<IPathTool>()) 
+                : serviceProvider.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>(pathTools =>
+                {
+                    if (pathTools is null)
+                    {
+                        return new ImmutableArray<IPathTool>();
+                    }
+                    return pathTools.ToImmutableArray();
+                });
             _dataFlow = serviceProvider.GetServiceLazily<DataFlow>();
             _renderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
             _selectionService = serviceProvider.GetServiceLazily<ISelectionService>();
             _shapeService = serviceProvider.GetServiceLazily<IShapeService>();
             _clipboardService = serviceProvider.GetServiceLazily<IClipboardService>();
-            _fileWriters = serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>((writers) => writers.ToImmutableArray());
-            _textFieldReaders = serviceProvider.GetServiceLazily<ITextFieldReader<DatabaseViewModel>[], ImmutableArray<ITextFieldReader<DatabaseViewModel>>>((readers) => readers.ToImmutableArray());
-            _textFieldWriters = serviceProvider.GetServiceLazily<ITextFieldWriter<DatabaseViewModel>[], ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>((writers) => writers.ToImmutableArray());
+            _fileWriters = serviceProvider is null 
+                ? new Lazy<ImmutableArray<IFileWriter>>(() => new ImmutableArray<IFileWriter>()) 
+                : serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>(writers =>
+                {
+                    if (writers is null)
+                    {
+                        return new ImmutableArray<IFileWriter>();
+                    }
+                    return writers.ToImmutableArray();
+                });  
+            _textFieldReaders = serviceProvider is null 
+                ? new Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>>(() => new ImmutableArray<ITextFieldReader<DatabaseViewModel>>()) 
+                : serviceProvider.GetServiceLazily<ITextFieldReader<DatabaseViewModel>[], ImmutableArray<ITextFieldReader<DatabaseViewModel>>>(readers =>
+                  {
+                      if (readers is null)
+                      {
+                          return new ImmutableArray<ITextFieldReader<DatabaseViewModel>>();
+                      }
+                      return readers.ToImmutableArray();
+                  });
+            _textFieldWriters = serviceProvider is null 
+                ? new Lazy<ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>(() => new ImmutableArray<ITextFieldWriter<DatabaseViewModel>>()) 
+                : serviceProvider.GetServiceLazily<ITextFieldWriter<DatabaseViewModel>[], ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>(writers =>
+                {
+                    if (writers is null)
+                    {
+                        return new ImmutableArray<ITextFieldWriter<DatabaseViewModel>>();
+                    }
+                    return writers.ToImmutableArray();
+                });
             _platform = serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
             _canvasPlatform = serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
             _styleEditor = serviceProvider.GetServiceLazily<StyleEditorViewModel>();
-
             _dockFactory = new DockFactory(this);
-
-            _dockFactory.DockableClosed += (_, args) =>
-            {
-                Debug.WriteLine($"DockableClosed {args.Dockable?.Id}");
-            };
-
-            _dockFactory.DockableRemoved += (_, args) =>
-            {
-                Debug.WriteLine($"DockableRemoved {args.Dockable?.Id}");
-            };
         }
 
         public override object Copy(IDictionary<object, object>? shared)

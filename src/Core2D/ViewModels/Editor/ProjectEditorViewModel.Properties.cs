@@ -29,8 +29,8 @@ namespace Core2D.ViewModels.Editor
         [AutoNotify] private RecentFileViewModel? _currentRecentProject;
         [AutoNotify] private AboutInfoViewModel? _aboutInfo;
         [AutoNotify] private IList<DialogViewModel>? _dialogs;
-        private readonly Lazy<ImmutableArray<IEditorTool?>> _tools;
-        private readonly Lazy<ImmutableArray<IPathTool?>> _pathTools;
+        private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
+        private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
         private readonly Lazy<DataFlow?>? _dataFlow;
         private readonly Lazy<IShapeRenderer?>? _renderer;
         private readonly Lazy<ISelectionService?>? _selectionService;
@@ -43,9 +43,9 @@ namespace Core2D.ViewModels.Editor
         private readonly Lazy<IEditorCanvasPlatform?>? _canvasPlatform;
         private readonly Lazy<StyleEditorViewModel?>? _styleEditor;
 
-        public ImmutableArray<IEditorTool?> Tools => _tools.Value;
+        public ImmutableArray<IEditorTool> Tools => _tools.Value;
 
-        public ImmutableArray<IPathTool?> PathTools => _pathTools.Value;
+        public ImmutableArray<IPathTool> PathTools => _pathTools.Value;
 
         public DataFlow? DataFlow => _dataFlow?.Value;
 
