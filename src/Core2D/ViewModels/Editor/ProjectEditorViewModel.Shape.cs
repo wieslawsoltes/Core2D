@@ -1010,7 +1010,7 @@ namespace Core2D.ViewModels.Editor
 
             foreach (var s in sources)
             {
-                ServiceProvider.GetService<ShapeEditor>()?.BreakShape(s, result, remove);
+                ServiceProvider.GetService<IShapeEditor>()?.BreakShape(s, result, remove);
             }
 
             if (result.Count <= 0)

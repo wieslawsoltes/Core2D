@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Core2D.Model;
+using Core2D.Model.Editor;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
 using Core2D.ViewModels.Shapes;
@@ -10,7 +11,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Editor
 {
-    public class ShapeEditor
+    public class ShapeEditor : IShapeEditor
     {
         private readonly IServiceProvider? _serviceProvider;
 
@@ -19,7 +20,7 @@ namespace Core2D.ViewModels.Editor
             _serviceProvider = serviceProvider;
         }
 
-        public void BreakPathFigure(PathFigureViewModel pathFigure, ShapeStyleViewModel style, bool isStroked, bool isFilled, List<BaseShapeViewModel> result)
+        public void BreakPathFigure(PathFigureViewModel pathFigure, ShapeStyleViewModel? style, bool isStroked, bool isFilled, List<BaseShapeViewModel> result)
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
             if (factory is null)
@@ -139,18 +140,23 @@ namespace Core2D.ViewModels.Editor
         public bool BreakPathShape(PathShapeViewModel pathShape, List<BaseShapeViewModel> result)
         {
             var factory = _serviceProvider.GetService<IViewModelFactory>();
+            if (factory is null)
+            {
+                return false;
+            }
 
             if (pathShape.Figures.Length == 1)
             {
                 BreakPathFigure(pathShape.Figures[0], pathShape.Style, pathShape.IsStroked, pathShape.IsFilled, result);
                 return true;
             }
-            else if (pathShape.Figures.Length > 1)
+
+            if (pathShape.Figures.Length > 1)
             {
                 foreach (var pathFigure in pathShape.Figures)
                 {
                     var style = pathShape.Style is { } ?
-                        (ShapeStyleViewModel)pathShape.Style?.Copy(null) :
+                        (ShapeStyleViewModel)pathShape.Style.Copy(null) :
                         factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
 
                     var convertedPathShape = factory.CreatePathShape(
@@ -178,7 +184,7 @@ namespace Core2D.ViewModels.Editor
             {
                 case PathShapeViewModel pathShape:
                     {
-                        if (BreakPathShape(pathShape, result) == true)
+                        if (BreakPathShape(pathShape, result))
                         {
                             remove.Add(pathShape);
                         }

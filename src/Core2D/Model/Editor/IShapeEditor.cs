@@ -6,7 +6,7 @@ using Core2D.ViewModels.Style;
 
 namespace Core2D.Model.Editor
 {
-    internal interface IShapeEditor
+    public interface IShapeEditor
     {
         void BreakPathFigure(PathFigureViewModel pathFigure, ShapeStyleViewModel style, bool isStroked, bool isFilled, List<BaseShapeViewModel> result);
 

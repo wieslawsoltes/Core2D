@@ -77,7 +77,7 @@ namespace Core2D
             builder.RegisterType<StyleEditorViewModel>().As<StyleEditorViewModel>().InstancePerLifetimeScope();
             builder.RegisterType<DialogViewModel>().As<DialogViewModel>().InstancePerDependency();
 
-            builder.RegisterType<ShapeEditor>().As<ShapeEditor>().InstancePerLifetimeScope();
+            builder.RegisterType<ShapeEditor>().As<IShapeEditor>().InstancePerLifetimeScope();
             builder.RegisterType<SelectionServiceViewModel>().As<ISelectionService>().InstancePerLifetimeScope();
             builder.RegisterType<ClipboardServiceViewModel>().As<IClipboardService>().InstancePerLifetimeScope();
             builder.RegisterType<ShapeServiceViewModel>().As<IShapeService>().InstancePerLifetimeScope();
