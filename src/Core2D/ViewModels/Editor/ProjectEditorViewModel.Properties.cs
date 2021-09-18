@@ -31,7 +31,6 @@ namespace Core2D.ViewModels.Editor
         [AutoNotify] private IList<DialogViewModel>? _dialogs;
         private readonly Lazy<ImmutableArray<IEditorTool?>> _tools;
         private readonly Lazy<ImmutableArray<IPathTool?>> _pathTools;
-        private readonly Lazy<ILog?>? _log;
         private readonly Lazy<DataFlow?>? _dataFlow;
         private readonly Lazy<IShapeRenderer?>? _renderer;
         private readonly Lazy<IFileSystem?>? _fileSystem;
@@ -49,8 +48,6 @@ namespace Core2D.ViewModels.Editor
         public ImmutableArray<IEditorTool?> Tools => _tools.Value;
 
         public ImmutableArray<IPathTool?> PathTools => _pathTools.Value;
-
-        public ILog? Log => _log?.Value;
 
         public DataFlow? DataFlow => _dataFlow?.Value;
 

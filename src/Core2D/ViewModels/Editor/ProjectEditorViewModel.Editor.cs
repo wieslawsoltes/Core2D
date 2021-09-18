@@ -285,7 +285,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -306,7 +306,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -356,7 +356,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -383,7 +383,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -400,7 +400,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -421,7 +421,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -584,7 +584,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -614,7 +614,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -631,7 +631,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -651,7 +651,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -816,7 +816,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -879,7 +879,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -898,7 +898,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -924,7 +924,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -940,7 +940,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -1017,7 +1017,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
 
             return false;
@@ -1071,7 +1071,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
             return false;
         }
@@ -1115,7 +1115,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
         }
 
@@ -1170,7 +1170,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
             return false;
         }
@@ -1305,7 +1305,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
             return false;
         }
@@ -1331,7 +1331,7 @@ namespace Core2D.ViewModels.Editor
             }
             catch (Exception ex)
             {
-                Log?.LogException(ex);
+                ServiceProvider.GetService<ILog>()?.LogException(ex);
             }
             return false;
         }
