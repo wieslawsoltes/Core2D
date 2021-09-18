@@ -30,7 +30,7 @@ namespace Core2D.ViewModels.Editor
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (project is null || shapes is null)
+            if (editor is null || project is null || shapes is null)
             {
                 return;
             }
@@ -57,15 +57,15 @@ namespace Core2D.ViewModels.Editor
             {
                 case BaseShapeViewModel shape:
                 {
-                    project?.RemoveShape(shape);
+                    project.RemoveShape(shape);
                     ServiceProvider.GetService<ISelectionService>()?.OnDeselectAll();
                     break;
                 }
                 case LayerContainerViewModel layer:
                 {
-                    project?.RemoveLayer(layer);
+                    project.RemoveLayer(layer);
 
-                    var selected = project?.CurrentContainer?.Layers.FirstOrDefault();
+                    var selected = project.CurrentContainer?.Layers.FirstOrDefault();
                     if (layer.Owner is FrameContainerViewModel owner)
                     {
                         owner.SetCurrentLayer(selected);
@@ -75,19 +75,19 @@ namespace Core2D.ViewModels.Editor
                 }
                 case PageContainerViewModel page:
                 {
-                    project?.RemovePage(page);
+                    project.RemovePage(page);
 
-                    var selected = project?.CurrentDocument?.Pages.FirstOrDefault();
-                    project?.SetCurrentContainer(selected);
+                    var selected = project.CurrentDocument?.Pages.FirstOrDefault();
+                    project.SetCurrentContainer(selected);
                     break;
                 }
                 case DocumentContainerViewModel document:
                 {
-                    project?.RemoveDocument(document);
+                    project.RemoveDocument(document);
 
-                    var selected = project?.Documents.FirstOrDefault();
-                    project?.SetCurrentDocument(selected);
-                    project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
+                    var selected = project.Documents.FirstOrDefault();
+                    project.SetCurrentDocument(selected);
+                    project.SetCurrentContainer(selected?.Pages.FirstOrDefault());
                     break;
                 }
                 case ProjectEditorViewModel:
@@ -144,21 +144,22 @@ namespace Core2D.ViewModels.Editor
             }
         }
 
-        public void OnPasteShapes(IEnumerable<BaseShapeViewModel>? shapes)
+        public void OnPasteShapes(IEnumerable<BaseShapeViewModel>? source)
         {
             var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (project is null )
+            if (project is null || source is null)
             {
                 return;
             }
 
             try
             {
-                ServiceProvider.GetService<ISelectionService>()?.Deselect(project?.CurrentContainer?.CurrentLayer);
+                ServiceProvider.GetService<ISelectionService>()?.Deselect(project.CurrentContainer?.CurrentLayer);
+                var shapes = source.ToList();
                 // TODO:
                 // TryToRestoreRecords(shapes);
                 UpdateShapeNames(shapes);
-                project.AddShapes(project?.CurrentContainer?.CurrentLayer, shapes);
+                project.AddShapes(project.CurrentContainer?.CurrentLayer, shapes);
                 ServiceProvider.GetService<ISelectionService>()?.OnSelect(shapes);
             }
             catch (Exception ex)
@@ -218,7 +219,7 @@ namespace Core2D.ViewModels.Editor
             {
                 // TODO:
                 // return await (TextClipboard?.ContainsText() ?? Task.FromResult(false));
-                return await Task.Run(() => ShapesToCopy is { } && ShapesToCopy.Count > 0);
+                return await Task.Run(() => ShapesToCopy is { Count: > 0 });
             }
             catch (Exception ex)
             {
@@ -230,14 +231,14 @@ namespace Core2D.ViewModels.Editor
         public void OnCut(object? item)
         {
             var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (project is null )
+            if (project is null)
             {
                 return;
             }
 
             switch (item)
             {
-                case BaseShapeViewModel shape:
+                case BaseShapeViewModel _:
                 {
                     // TODO:
                     break;
@@ -246,19 +247,19 @@ namespace Core2D.ViewModels.Editor
                 {
                     PageToCopy = page;
                     DocumentToCopy = default;
-                    project?.RemovePage(page);
-                    project?.SetCurrentContainer(project?.CurrentDocument?.Pages.FirstOrDefault());
+                    project.RemovePage(page);
+                    project.SetCurrentContainer(project.CurrentDocument?.Pages.FirstOrDefault());
                     break;
                 }
                 case DocumentContainerViewModel document:
                 {
                     PageToCopy = default;
                     DocumentToCopy = document;
-                    project?.RemoveDocument(document);
+                    project.RemoveDocument(document);
 
-                    var selected = project?.Documents.FirstOrDefault();
-                    project?.SetCurrentDocument(selected);
-                    project?.SetCurrentContainer(selected?.Pages.FirstOrDefault());
+                    var selected = project.Documents.FirstOrDefault();
+                    project.SetCurrentDocument(selected);
+                    project.SetCurrentContainer(selected?.Pages.FirstOrDefault());
                     break;
                 }
                 case ProjectEditorViewModel:
@@ -278,14 +279,14 @@ namespace Core2D.ViewModels.Editor
         public void OnCopy(object? item)
         {
             var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (project is null )
+            if (project is null)
             {
                 return;
             }
 
             switch (item)
             {
-                case BaseShapeViewModel shape:
+                case BaseShapeViewModel _:
                 {
                     // TODO:
                     break;
@@ -321,7 +322,7 @@ namespace Core2D.ViewModels.Editor
         public async void OnPaste(object? item)
         {
             var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-            if (project is null )
+            if (project is null)
             {
                 return;
             }
@@ -433,7 +434,7 @@ namespace Core2D.ViewModels.Editor
             }
             project.ReplaceDocument(clone, index);
             project.SetCurrentDocument(clone);
-            project.SetCurrentContainer(clone?.Pages.FirstOrDefault());
+            project.SetCurrentContainer(clone.Pages.FirstOrDefault());
         }
 
         public void OnDelete(object? item)
