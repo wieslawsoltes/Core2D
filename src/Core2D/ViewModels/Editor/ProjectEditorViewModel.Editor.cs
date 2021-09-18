@@ -38,7 +38,7 @@ namespace Core2D.ViewModels.Editor
             {
                 return;
             }
-            var input = source ?? _project.GetAllShapes();
+            var input = source?.ToList() ?? _project.GetAllShapes().ToList();
             var shapes = input.Where(s => s.GetType() == shape.GetType() && s != shape).ToList();
             var count = shapes.Count + 1;
             var update = string.IsNullOrEmpty(shape.Name) || input.Any(x => x != shape && x.Name == shape.Name);
@@ -74,7 +74,7 @@ namespace Core2D.ViewModels.Editor
             
             try
             {
-                if (project?.Databases is null)
+                if (project.Databases.Length == 0)
                 {
                     return;
                 }
@@ -101,7 +101,7 @@ namespace Core2D.ViewModels.Editor
                     else
                     {
                         // Create Imported database.
-                        if (project?.CurrentDatabase is null && shape.Record.Owner is DatabaseViewModel owner)
+                        if (project.CurrentDatabase is null && shape.Record.Owner is DatabaseViewModel owner)
                         {
                             var db = viewModelFactory?.CreateDatabase(
                                 ProjectEditorConfiguration.ImportedDatabaseName,
@@ -111,8 +111,8 @@ namespace Core2D.ViewModels.Editor
                         }
 
                         // Add missing data record.
-                        shape.Record.Owner = project?.CurrentDatabase;
-                        project?.AddRecord(project?.CurrentDatabase, shape.Record);
+                        shape.Record.Owner = project.CurrentDatabase;
+                        project.AddRecord(project.CurrentDatabase, shape.Record);
 
                         // Recreate records dictionary.
                         records = GenerateRecordDictionaryById();
@@ -178,7 +178,7 @@ namespace Core2D.ViewModels.Editor
 
         public void OnNewPage(PageContainerViewModel? selected)
         {
-            if (Project is null)
+            if (Project is null || selected is null)
             {
                 return;
             }
@@ -403,7 +403,7 @@ namespace Core2D.ViewModels.Editor
 
             try
             {
-                using var stream = fileSystem?.Create(path);
+                using var stream = fileSystem.Create(path);
                 if (stream is null)
                 {
                     return;
@@ -530,7 +530,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     var shapes = Enumerable.Concat(
                         page.Layers.SelectMany(x => x.Shapes),
-                        page.Template?.Layers.SelectMany(x => x.Shapes));
+                        page.Template is null ? Enumerable.Empty<BaseShapeViewModel>() : page.Template.Layers.SelectMany(x => x.Shapes));
                     TryToRestoreRecords(shapes);
                 }
 
@@ -562,7 +562,7 @@ namespace Core2D.ViewModels.Editor
                 {
                     var shapes = Enumerable.Concat(
                         document.Pages.SelectMany(x => x.Layers).SelectMany(x => x.Shapes),
-                        document.Pages.SelectMany(x => x.Template.Layers).SelectMany(x => x.Shapes));
+                        document.Pages.SelectMany(x => x.Template?.Layers ?? Enumerable.Empty<LayerContainerViewModel>()).SelectMany(x => x.Shapes));
                     TryToRestoreRecords(shapes);
                 }
 
@@ -603,7 +603,7 @@ namespace Core2D.ViewModels.Editor
             try
             {
                 var json = fileSystem.ReadUtf8Text(path);
-                if (!string.IsNullOrWhiteSpace(json))
+                if (json is not null && !string.IsNullOrWhiteSpace(json))
                 {
                     var item = jsonSerializer.Deserialize<object>(json);
                     if (item is { })
@@ -670,12 +670,12 @@ namespace Core2D.ViewModels.Editor
 
             try
             {
-                using var stream = fileSystem?.Create(path);
+                using var stream = fileSystem.Create(path);
                 if (stream is null)
                 {
                     return;
                 }
-                writer?.Save(stream, item, Project);
+                writer.Save(stream, item, Project);
             }
             catch (Exception ex)
             {
@@ -693,7 +693,7 @@ namespace Core2D.ViewModels.Editor
 
             try
             {
-                var csharp = fileSystem?.ReadUtf8Text(path);
+                var csharp = fileSystem.ReadUtf8Text(path);
                 if (!string.IsNullOrWhiteSpace(csharp))
                 {
                     if (Project is null)
@@ -770,12 +770,12 @@ namespace Core2D.ViewModels.Editor
                 return default;
             }
  
-            using var stream = fileSystem?.Open(path);
+            using var stream = fileSystem.Open(path);
             if (stream is null)
             {
                 return default;
             }
-            var bytes = fileSystem?.ReadBinary(stream);
+            var bytes = fileSystem.ReadBinary(stream);
             if (bytes is null)
             {
                 return default;
@@ -1044,7 +1044,7 @@ namespace Core2D.ViewModels.Editor
                     }
                     else if (string.Compare(ext, ProjectEditorConfiguration.CsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        var reader = TextFieldReaders.FirstOrDefault(x => x.Extension == "csv");
+                        var reader = TextFieldReaders.FirstOrDefault(r => r.Extension == "csv");
                         if (reader is { })
                         {
                             OnImportData(Project, path, reader);
@@ -1053,7 +1053,7 @@ namespace Core2D.ViewModels.Editor
                     }
                     else if (string.Compare(ext, ProjectEditorConfiguration.XlsxExtension, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        var reader = TextFieldReaders.FirstOrDefault(x => x.Extension == "xlsx");
+                        var reader = TextFieldReaders.FirstOrDefault(r => r.Extension == "xlsx");
                         if (reader is { })
                         {
                             OnImportData(Project, path, reader);
@@ -1075,7 +1075,7 @@ namespace Core2D.ViewModels.Editor
                         OnImportSvg(path);
                         result = true;
                     }
-                    else if (ProjectEditorConfiguration.ImageExtensions.Any(x => string.Compare(ext, x, StringComparison.OrdinalIgnoreCase) == 0))
+                    else if (ProjectEditorConfiguration.ImageExtensions.Any(r => string.Compare(ext, r, StringComparison.OrdinalIgnoreCase) == 0))
                     {
                         var key = OnGetImageKey(path);
                         if (key is { } && !string.IsNullOrEmpty(key))
@@ -1107,8 +1107,12 @@ namespace Core2D.ViewModels.Editor
             var selected = Project.CurrentStyleLibrary?.Selected ?? viewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaulStyleName);
             var style = (ShapeStyleViewModel?)selected?.Copy(null);
             var layer = Project.CurrentContainer?.CurrentLayer;
-            var sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
-            var sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
+            var sx = Project.Options is not null && Project.Options.SnapToGrid 
+                ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) 
+                : (decimal)x;
+            var sy = Project.Options is not null && Project.Options.SnapToGrid 
+                ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) 
+                : (decimal)y;
 
             var image = viewModelFactory?.CreateImageShape((double)sx, (double)sy, style, key);
             if (image is { })
@@ -1181,7 +1185,10 @@ namespace Core2D.ViewModels.Editor
                         if (clone is GroupShapeViewModel group)
                         {
                             var shapes = Project?.CurrentContainer?.CurrentLayer?.Shapes.GetAllShapes<LineShapeViewModel>().ToList();
-                            ServiceProvider.GetService<ISelectionService>()?.TryToConnectLines(shapes, group.Connectors);
+                            if (shapes is not null)
+                            {
+                                ServiceProvider.GetService<ISelectionService>()?.TryToConnectLines(shapes, group.Connectors);
+                            }
                         }
                     }
                 }
@@ -1216,12 +1223,14 @@ namespace Core2D.ViewModels.Editor
                 }
                 else
                 {
-                    var layer = Project?.CurrentContainer?.CurrentLayer;
+                    var layer = Project.CurrentContainer?.CurrentLayer;
                     if (layer is { })
                     {
                         var shapes = layer.Shapes.Reverse();
-                        var radius = Project.Options.HitThreshold / PageState.ZoomX;
-                        var result = ServiceProvider.GetService<IHitTest>()?.TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+                        var radius = Project.Options is not null && PageState is not null
+                            ? Project.Options.HitThreshold / PageState.ZoomX
+                            :  7.0;
+                        var result = ServiceProvider.GetService<IHitTest>()?.TryToGetShape(shapes, new Point2(x, y), radius, PageState?.ZoomX ?? 1.0);
                         if (result is { })
                         {
                             if (bExecute)
@@ -1363,11 +1372,13 @@ namespace Core2D.ViewModels.Editor
                     if (layer is { })
                     {
                         var shapes = layer.Shapes.Reverse();
-                        var radius = Project.Options.HitThreshold / PageState.ZoomX;
-                        var result = ServiceProvider.GetService<IHitTest>().TryToGetShape(shapes, new Point2(x, y), radius, PageState.ZoomX);
+                        var radius = Project.Options is not null && PageState is not null
+                            ? Project.Options.HitThreshold / PageState.ZoomX
+                            :  7.0;
+                        var result = ServiceProvider.GetService<IHitTest>()?.TryToGetShape(shapes, new Point2(x, y), radius, PageState?.ZoomX ?? 1.0);
                         if (result is { })
                         {
-                            if (bExecute == true)
+                            if (bExecute)
                             {
                                 Project.ApplyStyle(result, style);
                             }
