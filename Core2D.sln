@@ -1,26 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A5C9C74C-A503-4375-B56A-1411181B6E5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "src\Core2D\Core2D.csproj", "{3F804F82-57E8-47EE-BE48-FF19462C3B97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D", "src\Core2D\Core2D.csproj", "{3F804F82-57E8-47EE-BE48-FF19462C3B97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Generators", "src\Core2D.Generators\Core2D.Generators.csproj", "{C2E3F840-F1D4-4995-BF41-E3EE8BB3D0CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Generators", "src\Core2D.Generators\Core2D.Generators.csproj", "{C2E3F840-F1D4-4995-BF41-E3EE8BB3D0CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Desktop", "src\Core2D.Desktop\Core2D.Desktop.csproj", "{0AFCF95C-41E1-4F26-8DF5-2CF112527A71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Desktop", "src\Core2D.Desktop\Core2D.Desktop.csproj", "{0AFCF95C-41E1-4F26-8DF5-2CF112527A71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{2054893F-E436-4482-B4D3-1BED82C2603D}"
-ProjectSection(SolutionItems) = preProject
-	.editorconfig = .editorconfig
-	Directory.Build.props = Directory.Build.props
-	global.json = global.json
-	NuGet.Config = NuGet.Config
-	omnisharp.json = omnisharp.json
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		global.json = global.json
+		NuGet.Config = NuGet.Config
+		omnisharp.json = omnisharp.json
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Screenshot", "src\Avalonia.Screenshot\Avalonia.Screenshot.csproj", "{3EC50678-8D3B-4CC5-91CF-84A4BF2727BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Screenshot", "src\Avalonia.Screenshot\Avalonia.Screenshot.csproj", "{3EC50678-8D3B-4CC5-91CF-84A4BF2727BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,9 +30,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3F804F82-57E8-47EE-BE48-FF19462C3B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -84,10 +81,16 @@ Global
 		{3EC50678-8D3B-4CC5-91CF-84A4BF2727BE}.Release|x86.ActiveCfg = Release|Any CPU
 		{3EC50678-8D3B-4CC5-91CF-84A4BF2727BE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3F804F82-57E8-47EE-BE48-FF19462C3B97} = {A5C9C74C-A503-4375-B56A-1411181B6E5A}
 		{C2E3F840-F1D4-4995-BF41-E3EE8BB3D0CA} = {A5C9C74C-A503-4375-B56A-1411181B6E5A}
 		{0AFCF95C-41E1-4F26-8DF5-2CF112527A71} = {A5C9C74C-A503-4375-B56A-1411181B6E5A}
 		{3EC50678-8D3B-4CC5-91CF-84A4BF2727BE} = {A5C9C74C-A503-4375-B56A-1411181B6E5A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0720A3F0-7CD3-4F9C-8DFF-858B38D44C31}
 	EndGlobalSection
 EndGlobal
