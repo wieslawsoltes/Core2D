@@ -64,7 +64,11 @@ namespace Core2D.ViewModels.Editor.Tools
         private void GenerateMoveSelectionCache()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-
+            if (editor?.Project?.Options is null)
+            {
+                return;
+            }
+            
             if (editor.Project.SelectedShapes is { })
             {
                 var shapes = editor.Project.SelectedShapes
