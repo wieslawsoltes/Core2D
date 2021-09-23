@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +15,8 @@ namespace Core2D.ViewModels.Editor.Tools.Path
     {
         public enum State { Point1, Point4, Point2, Point3 }
         private State _currentState;
-        private CubicBezierShapeViewModel _cubicBezier;
-        private BezierSelectionSelection _selectionSelection;
+        private readonly CubicBezierShapeViewModel _cubicBezier;
+        private BezierSelectionSelection? _selectionSelection;
 
         public string Title => "CubicBezier";
 

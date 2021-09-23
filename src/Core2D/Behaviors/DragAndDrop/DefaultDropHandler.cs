@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -10,14 +10,14 @@ namespace Core2D.Behaviors.DragAndDrop
 {
     public abstract class DefaultDropHandler : AvaloniaObject, IDropHandler
     {
-        public static Point GetPosition(object sender, DragEventArgs e)
+        public static Point GetPosition(object? sender, DragEventArgs e)
         {
             var relativeTo = e.Source as IControl;
             var point = e.GetPosition(relativeTo);
             return point;
         }
 
-        public static Point GetPositionScreen(object sender, DragEventArgs e)
+        public static Point GetPositionScreen(object? sender, DragEventArgs e)
         {
             var relativeTo = e.Source as IControl;
             var point = e.GetPosition(relativeTo);
@@ -26,7 +26,7 @@ namespace Core2D.Behaviors.DragAndDrop
             return screenPoint;
         }
 
-        public virtual void Enter(object sender, DragEventArgs e, object sourceContext, object targetContext)
+        public virtual void Enter(object? sender, DragEventArgs e, object sourceContext, object targetContext)
         {
             if (Validate(sender, e, sourceContext, targetContext, null) == false)
             {
@@ -40,7 +40,7 @@ namespace Core2D.Behaviors.DragAndDrop
             }
         }
 
-        public virtual void Over(object sender, DragEventArgs e, object sourceContext, object targetContext)
+        public virtual void Over(object? sender, DragEventArgs e, object? sourceContext, object? targetContext)
         {
             if (Validate(sender, e, sourceContext, targetContext, null) == false)
             {
@@ -54,7 +54,7 @@ namespace Core2D.Behaviors.DragAndDrop
             }
         }
 
-        public virtual void Drop(object sender, DragEventArgs e, object sourceContext, object targetContext)
+        public virtual void Drop(object? sender, DragEventArgs e, object? sourceContext, object? targetContext)
         {
             if (Execute(sender, e, sourceContext, targetContext, null) == false)
             {
@@ -68,22 +68,22 @@ namespace Core2D.Behaviors.DragAndDrop
             }
         }
 
-        public virtual void Leave(object sender, RoutedEventArgs e)
+        public virtual void Leave(object? sender, RoutedEventArgs e)
         {
             Cancel(sender, e);
         }
 
-        public virtual bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
+        public virtual bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             return false;
         }
 
-        public virtual bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
+        public virtual bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             return false;
         }
 
-        public virtual void Cancel(object sender, RoutedEventArgs e)
+        public virtual void Cancel(object? sender, RoutedEventArgs e)
         {
         }
     }

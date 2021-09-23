@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Core2D.Model.Renderer.Nodes;
 using Core2D.Modules.Renderer.Avalonia.Media;
 using Core2D.ViewModels.Style;

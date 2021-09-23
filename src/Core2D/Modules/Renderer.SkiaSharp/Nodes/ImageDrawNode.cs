@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Diagnostics;
 using Core2D.Model.Renderer;

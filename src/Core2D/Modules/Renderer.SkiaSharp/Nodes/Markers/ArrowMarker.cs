@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using SkiaSharp;
 
 namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers

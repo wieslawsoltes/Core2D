@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Core2D.Modules.Renderer.Avalonia.Media;
 using AP = Avalonia.Platform;
 using AM = Avalonia.Media;

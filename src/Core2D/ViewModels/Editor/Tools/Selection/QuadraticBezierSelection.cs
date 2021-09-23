@@ -30,31 +30,55 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void ToStatePoint3()
         {
-            _helperPoint1 = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
-            _helperPoint3 = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _helperPoint1 = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
+            _helperPoint3 = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
 
-            _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
-            _layer.Shapes = _layer.Shapes.Add(_helperPoint3);
+            if (_helperPoint1 is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_helperPoint1);
+            }
+
+            if (_helperPoint3 is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_helperPoint3);
+            }
         }
 
         public void ToStatePoint2()
         {
-            _line12 = _serviceProvider.GetService<IViewModelFactory>().CreateLineShape(0, 0, _styleViewModel);
-            _line12.State |= ShapeStateFlags.Thickness;
+            _line12 = _serviceProvider.GetService<IViewModelFactory>()?.CreateLineShape(0, 0, _styleViewModel);
+            if (_line12 is { })
+            {
+                _line12.State |= ShapeStateFlags.Thickness;
+            }
 
-            _line32 = _serviceProvider.GetService<IViewModelFactory>().CreateLineShape(0, 0, _styleViewModel);
-            _line32.State |= ShapeStateFlags.Thickness;
+            _line32 = _serviceProvider.GetService<IViewModelFactory>()?.CreateLineShape(0, 0, _styleViewModel);
+            if (_line32 is { })
+            {
+                _line32.State |= ShapeStateFlags.Thickness;
+            }
 
-            _helperPoint2 = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _helperPoint2 = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
 
-            _layer.Shapes = _layer.Shapes.Add(_line12);
-            _layer.Shapes = _layer.Shapes.Add(_line32);
-            _layer.Shapes = _layer.Shapes.Add(_helperPoint2);
+            if (_line12 is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_line12);
+            }
+
+            if (_line32 is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_line32);
+            }
+
+            if (_helperPoint2 is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_helperPoint2);
+            }
         }
 
         public void Move()
         {
-            if (_line12 is { })
+            if (_line12?.Start is { } && _line12?.End is { } && _quadraticBezier.Point1 is { } && _quadraticBezier.Point2 is { })
             {
                 _line12.Start.X = _quadraticBezier.Point1.X;
                 _line12.Start.Y = _quadraticBezier.Point1.Y;
@@ -62,7 +86,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _line12.End.Y = _quadraticBezier.Point2.Y;
             }
 
-            if (_line32 is { })
+            if (_line32?.Start is { } && _line32?.End is { } &&  _quadraticBezier.Point3 is { } && _quadraticBezier.Point2 is { })
             {
                 _line32.Start.X = _quadraticBezier.Point3.X;
                 _line32.Start.Y = _quadraticBezier.Point3.Y;
@@ -70,19 +94,19 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _line32.End.Y = _quadraticBezier.Point2.Y;
             }
 
-            if (_helperPoint1 is { })
+            if (_helperPoint1 is { } && _quadraticBezier.Point1 is { })
             {
                 _helperPoint1.X = _quadraticBezier.Point1.X;
                 _helperPoint1.Y = _quadraticBezier.Point1.Y;
             }
 
-            if (_helperPoint2 is { })
+            if (_helperPoint2 is { } && _quadraticBezier.Point2 is { })
             {
                 _helperPoint2.X = _quadraticBezier.Point2.X;
                 _helperPoint2.Y = _quadraticBezier.Point2.Y;
             }
 
-            if (_helperPoint3 is { })
+            if (_helperPoint3 is { } && _quadraticBezier.Point3 is { })
             {
                 _helperPoint3.X = _quadraticBezier.Point3.X;
                 _helperPoint3.Y = _quadraticBezier.Point3.Y;

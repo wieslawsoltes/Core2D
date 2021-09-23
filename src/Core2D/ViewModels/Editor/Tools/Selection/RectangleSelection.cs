@@ -26,22 +26,29 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void ToStateBottomRight()
         {
-            _topLeftHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
-            _bottomRightHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _topLeftHelperPoint = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
+            _bottomRightHelperPoint = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
 
-            _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
-            _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);
+            if (_topLeftHelperPoint is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_topLeftHelperPoint);
+            }
+
+            if (_bottomRightHelperPoint is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_bottomRightHelperPoint);
+            }
         }
 
         public void Move()
         {
-            if (_topLeftHelperPoint is { })
+            if (_topLeftHelperPoint is { } && _rectangle.TopLeft is { })
             {
                 _topLeftHelperPoint.X = _rectangle.TopLeft.X;
                 _topLeftHelperPoint.Y = _rectangle.TopLeft.Y;
             }
 
-            if (_bottomRightHelperPoint is { })
+            if (_bottomRightHelperPoint is { } && _rectangle.BottomRight is { })
             {
                 _bottomRightHelperPoint.X = _rectangle.BottomRight.X;
                 _bottomRightHelperPoint.Y = _rectangle.BottomRight.Y;

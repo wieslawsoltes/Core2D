@@ -22,7 +22,7 @@ namespace Core2D.Behaviors.DragAndDrop
             set => SetValue(RelativeToProperty, value);
         }
 
-        private bool Validate(ProjectEditorViewModel editor, object sender, DragEventArgs e, bool bExecute)
+        private bool Validate(ProjectEditorViewModel editor, object? sender, DragEventArgs e, bool bExecute)
         {
             var point = GetPosition(RelativeTo ?? sender, e);
 
@@ -74,7 +74,7 @@ namespace Core2D.Behaviors.DragAndDrop
             return false;
         }
 
-        public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
+        public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             if (targetContext is ProjectEditorViewModel editor)
             {
@@ -83,7 +83,7 @@ namespace Core2D.Behaviors.DragAndDrop
             return false;
         }
 
-        public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
+        public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             if (targetContext is ProjectEditorViewModel editor)
             {

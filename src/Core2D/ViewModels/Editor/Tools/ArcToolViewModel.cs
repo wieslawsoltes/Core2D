@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model;
@@ -16,10 +16,10 @@ namespace Core2D.ViewModels.Editor.Tools
     {
         public enum State { Point1, Point2, Point3, Point4 }
         private State _currentState = State.Point1;
-        private ArcShapeViewModel _arc;
+        private ArcShapeViewModel? _arc;
         private bool _connectedPoint3;
         private bool _connectedPoint4;
-        private ArcSelection _selection;
+        private ArcSelection? _selection;
 
         public string Title => "Arc";
 
@@ -38,6 +38,12 @@ namespace Core2D.ViewModels.Editor.Tools
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+
+            if (factory is null || editor?.Project?.Options is null || selection is null || viewModelFactory is null)
+            {
+                return;
+            }
+
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
@@ -174,6 +180,12 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+            
+            if (editor?.Project?.Options is null || selection is null)
+            {
+                return;
+            }
+
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
@@ -236,6 +248,12 @@ namespace Core2D.ViewModels.Editor.Tools
         public void ToStatePoint2()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            
+            if (editor?.Project?.Options is null)
+            {
+                return;
+            }
+            
             _selection = new ArcSelection(
                 ServiceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
@@ -247,17 +265,17 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void ToStatePoint3()
         {
-            _selection.ToStatePoint3();
+            _selection?.ToStatePoint3();
         }
 
         public void ToStatePoint4()
         {
-            _selection.ToStatePoint4();
+            _selection?.ToStatePoint4();
         }
 
         public void Move(BaseShapeViewModel shape)
         {
-            _selection.Move();
+            _selection?.Move();
         }
 
         public void Finalize(BaseShapeViewModel shape)
@@ -285,6 +303,11 @@ namespace Core2D.ViewModels.Editor.Tools
         public void Reset()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+
+            if (editor?.Project?.Options is null)
+            {
+                return;
+            }
 
             switch (_currentState)
             {

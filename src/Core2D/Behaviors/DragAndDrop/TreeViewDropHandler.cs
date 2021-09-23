@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Collections.Generic;
 using System.Diagnostics;
 using Avalonia.Controls;
@@ -13,7 +13,7 @@ namespace Core2D.Behaviors.DragAndDrop
 {
     public class ProjectTreeViewDropHandler : DefaultDropHandler
     {
-        private bool IsContainer(object source)
+        private bool IsContainer(object? source)
         {
             return source switch
             {
@@ -35,7 +35,7 @@ namespace Core2D.Behaviors.DragAndDrop
                             if (bExecute)
                             {
                                 var shape = sourceShape?.CopyShared(new Dictionary<object, object>());
-                                editor?.Project.AddShape(targetLayer, shape);
+                                editor.Project?.AddShape(targetLayer, shape);
                             }
                             return true;
                         }
@@ -43,8 +43,8 @@ namespace Core2D.Behaviors.DragAndDrop
                         {
                             if (bExecute)
                             {
-                                editor?.Project?.RemoveShape(sourceShape);
-                                editor?.Project.AddShape(targetLayer, sourceShape);
+                                editor.Project?.RemoveShape(sourceShape);
+                                editor.Project?.AddShape(targetLayer, sourceShape);
                             }
                             return true;
                         }
@@ -52,7 +52,7 @@ namespace Core2D.Behaviors.DragAndDrop
                         {
                             if (bExecute)
                             {
-                                editor?.Project.AddShape(targetLayer, sourceShape);
+                                editor.Project?.AddShape(targetLayer, sourceShape);
                                 e.DragEffects = DragDropEffects.None;
                             }
                             return true;
@@ -99,7 +99,7 @@ namespace Core2D.Behaviors.DragAndDrop
                             if (bExecute)
                             {
                                 var layer = sourceLayer?.CopyShared(new Dictionary<object, object>());
-                                editor?.Project.AddLayer(targetContainer, layer);
+                                editor.Project?.AddLayer(targetContainer, layer);
                             }
                             return true;
                         }
@@ -107,8 +107,8 @@ namespace Core2D.Behaviors.DragAndDrop
                         {
                             if (bExecute)
                             {
-                                editor?.Project?.RemoveLayer(sourceLayer);
-                                editor?.Project.AddLayer(targetContainer, sourceLayer);
+                                editor.Project?.RemoveLayer(sourceLayer);
+                                editor.Project?.AddLayer(targetContainer, sourceLayer);
                             }
                             return true;
                         }
@@ -116,7 +116,7 @@ namespace Core2D.Behaviors.DragAndDrop
                         {
                             if (bExecute)
                             {
-                                editor?.Project.AddLayer(targetContainer, sourceLayer);
+                                editor.Project?.AddLayer(targetContainer, sourceLayer);
                                 e.DragEffects = DragDropEffects.None;
                             }
                             return true;
@@ -155,8 +155,8 @@ namespace Core2D.Behaviors.DragAndDrop
                             if (bExecute)
                             {
                                 var page = sourceContainer?.CopyShared(new Dictionary<object, object>());
-                                editor?.Project.AddPage(targetDocument, page);
-                                editor?.Project?.SetCurrentContainer(page);
+                                editor.Project?.AddPage(targetDocument, page);
+                                editor.Project?.SetCurrentContainer(page);
                             }
                             return true;
                         }
@@ -164,9 +164,9 @@ namespace Core2D.Behaviors.DragAndDrop
                         {
                             if (bExecute)
                             {
-                                editor?.Project?.RemovePage(sourceContainer);
-                                editor?.Project.AddPage(targetDocument, sourceContainer);
-                                editor?.Project?.SetCurrentContainer(sourceContainer);
+                                editor.Project?.RemovePage(sourceContainer);
+                                editor.Project?.AddPage(targetDocument, sourceContainer);
+                                editor.Project?.SetCurrentContainer(sourceContainer);
                             }
                             return true;
                         }
@@ -174,8 +174,8 @@ namespace Core2D.Behaviors.DragAndDrop
                         {
                             if (bExecute)
                             {
-                                editor?.Project.AddPage(targetDocument, sourceContainer);
-                                editor?.Project?.SetCurrentContainer(sourceContainer);
+                                editor.Project?.AddPage(targetDocument, sourceContainer);
+                                editor.Project?.SetCurrentContainer(sourceContainer);
                             }
                             return true;
                         }
@@ -210,7 +210,7 @@ namespace Core2D.Behaviors.DragAndDrop
             return false;
         }
 
-        private bool ValidateContainer(TreeView treeView, DragEventArgs e, object sourceContext, object targetContext, bool bExecute)
+        private bool ValidateContainer(TreeView treeView, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute)
         {
             if ((!IsContainer(sourceContext) && !(sourceContext is BaseShapeViewModel))
                 || !(targetContext is ProjectContainerViewModel)
@@ -247,7 +247,7 @@ namespace Core2D.Behaviors.DragAndDrop
             return false;
         }
 
-        public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
+        public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             if (e.Source is IControl && sender is TreeView treeView)
             {
@@ -256,7 +256,7 @@ namespace Core2D.Behaviors.DragAndDrop
             return false;
         }
 
-        public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
+        public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             if (e.Source is IControl && sender is TreeView treeView)
             {

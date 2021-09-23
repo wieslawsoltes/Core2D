@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
@@ -46,7 +46,7 @@ namespace Core2D.Behaviors
             }
         }
 
-        private void ContextMenu_ContextMenuOpening(object sender, CancelEventArgs e)
+        private void ContextMenu_ContextMenuOpening(object? sender, CancelEventArgs e)
         {
             e.Cancel = !IsEnabled;
         }

@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using A = Avalonia;

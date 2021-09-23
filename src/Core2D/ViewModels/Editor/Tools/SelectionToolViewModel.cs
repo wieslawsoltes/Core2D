@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +15,13 @@ namespace Core2D.ViewModels.Editor.Tools
     {
         public enum State { None, Selected }
         private State _currentState = State.None;
-        private RectangleShapeViewModel _rectangleShape;
+        private RectangleShapeViewModel? _rectangleShape;
         private decimal _startX;
         private decimal _startY;
         private decimal _historyX;
         private decimal _historyY;
-        private IEnumerable<PointShapeViewModel> _pointsCache;
-        private IEnumerable<BaseShapeViewModel> _shapesCache;
+        private IEnumerable<PointShapeViewModel>? _pointsCache;
+        private IEnumerable<BaseShapeViewModel>? _shapesCache;
 
         public string Title => "Selection";
 
@@ -98,6 +98,12 @@ namespace Core2D.ViewModels.Editor.Tools
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
             var shapeService = ServiceProvider.GetService<IShapeService>();
+
+            if (editor is null || selection is null || shapeService is null)
+            {
+                return;
+            }
+
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             decimal dx = sx - _startX;
             decimal dy = sy - _startY;
@@ -126,6 +132,11 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
+            if (editor?.PageState is null)
+            {
+                return false;
+            }
+
             if (isControl == false && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible)
             {
                 bool decoratorResult = editor.PageState.Decorator.HitTest(args);
@@ -146,6 +157,12 @@ namespace Core2D.ViewModels.Editor.Tools
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
             var hitTest = ServiceProvider.GetService<IHitTest>();
+
+            if (factory is null || editor?.Project is null || selection is null || hitTest is null)
+            {
+                return;
+            }
+
             (double x, double y) = args;
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
@@ -305,6 +322,12 @@ namespace Core2D.ViewModels.Editor.Tools
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
             var shapeService = ServiceProvider.GetService<IShapeService>();
+
+            if (editor is null || selection is null || shapeService is null)
+            {
+                return;
+            }
+
             switch (_currentState)
             {
                 case State.None:
@@ -383,6 +406,12 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+
+            if (editor is null || selection is null)
+            {
+                return;
+            }
+
             switch (_currentState)
             {
                 case State.None:
@@ -408,6 +437,12 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+
+            if (editor is null || selection is null)
+            {
+                return;
+            }
+
             switch (_currentState)
             {
                 case State.None:

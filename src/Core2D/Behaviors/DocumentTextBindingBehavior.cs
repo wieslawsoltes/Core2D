@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Avalonia;
 using Avalonia.Xaml.Interactivity;
@@ -41,7 +41,7 @@ namespace Core2D.Behaviors
             }
         }
 
-        private void TextChanged(object sender, EventArgs eventArgs)
+        private void TextChanged(object? sender, EventArgs eventArgs)
         {
             if (_textEditor?.Document is { })
             {

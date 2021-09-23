@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Core2D.Model.Renderer.Nodes;
 using Core2D.Spatial;
 using Core2D.ViewModels.Shapes;

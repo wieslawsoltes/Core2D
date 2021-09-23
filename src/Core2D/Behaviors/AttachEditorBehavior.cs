@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;
 

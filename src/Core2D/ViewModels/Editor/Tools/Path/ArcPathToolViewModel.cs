@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +17,13 @@ namespace Core2D.ViewModels.Editor.Tools.Path
     {
         public enum State { Start, End }
 
+        private const double DefaultRotationAngle = 0.0;
+        private const bool DefaultIsLargeArc = false;
+        private const SweepDirection DefaultSweepDirection = SweepDirection.Clockwise;
+
         private State _currentState;
-        private LineShapeViewModel _arc;
-        private LineSelection _selection;
-        private const double _defaultRotationAngle = 0.0;
-        private const bool _defaultIsLargeArc = false;
-        private const SweepDirection _defaultSweepDirection = SweepDirection.Clockwise;
+        private readonly LineShapeViewModel _arc;
+        private LineSelection? _selection;
 
         public string Title => "Arc";
 
@@ -65,9 +66,9 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                             factory.CreatePathSize(
                                 Abs(_arc.Start.X - _arc.End.X),
                                 Abs(_arc.Start.Y - _arc.End.Y)),
-                            _defaultRotationAngle,
-                            _defaultIsLargeArc,
-                            _defaultSweepDirection);
+                            DefaultRotationAngle,
+                            DefaultIsLargeArc,
+                            DefaultSweepDirection);
                         editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         ToStateEnd();
                         Move(null);
@@ -94,9 +95,9 @@ namespace Core2D.ViewModels.Editor.Tools.Path
                             factory.CreatePathSize(
                                 Abs(_arc.Start.X - _arc.End.X),
                                 Abs(_arc.Start.Y - _arc.End.Y)),
-                            _defaultRotationAngle,
-                            _defaultIsLargeArc,
-                            _defaultSweepDirection);
+                            DefaultRotationAngle,
+                            DefaultIsLargeArc,
+                            DefaultSweepDirection);
                         editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                         Move(null);
                         _currentState = State.End;

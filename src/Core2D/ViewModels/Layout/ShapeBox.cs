@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model.History;
@@ -48,17 +48,17 @@ namespace Core2D.ViewModels.Layout
             return (box1.Bounds.Height > box2.Bounds.Height) ? 1 : ((box1.Bounds.Height < box2.Bounds.Height) ? -1 : 0);
         }
 
-        public readonly BaseShapeViewModel _shapeViewModel;
+        public readonly BaseShapeViewModel ShapeViewModel;
         public readonly List<PointShapeViewModel> Points;
         public Box Bounds;
 
         public ShapeBox(BaseShapeViewModel shape)
         {
-            _shapeViewModel = shape;
+            ShapeViewModel = shape;
 
             Points = new List<PointShapeViewModel>();
 
-            _shapeViewModel.GetPoints(Points);
+            ShapeViewModel.GetPoints(Points);
 
             Bounds = new Box();
 
@@ -92,12 +92,13 @@ namespace Core2D.ViewModels.Layout
             Bounds.Height = Math.Abs(Bounds.Bottom - Bounds.Top);
         }
 
-        public void MoveByWithHistory(decimal dx, decimal dy, IHistory history)
+        public void MoveByWithHistory(decimal dx, decimal dy, IHistory? history)
         {
-            var previous = new { DeltaX = -dx, DeltaY = -dy, Shape = _shapeViewModel };
-            var next = new { DeltaX = dx, DeltaY = dy, Shape = _shapeViewModel };
-            history.Snapshot(previous, next, (s) => s.Shape.Move(null, s.DeltaX, s.DeltaY));
-            _shapeViewModel.Move(null, dx, dy);
+            var shapeViewModel = ShapeViewModel;
+            var previous = new { DeltaX = -dx, DeltaY = -dy, Shape = shapeViewModel };
+            var next = new { DeltaX = dx, DeltaY = dy, Shape = shapeViewModel };
+            history?.Snapshot(previous, next, (s) => s?.Shape.Move(null, s.DeltaX, s.DeltaY));
+            shapeViewModel.Move(null, dx, dy);
         }
     }
 }

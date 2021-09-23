@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -16,19 +16,19 @@ namespace Core2D.ViewModels.Editor.Tools
 {
     public partial class PathToolViewModel : ViewModelBase, IEditorTool
     {
-        private readonly LinePathToolViewModel _linePathTool;
-        private readonly ArcPathToolViewModel _arcPathTool;
-        private readonly CubicBezierPathToolViewModel _cubicBezierPathTool;
-        private readonly QuadraticBezierPathToolViewModel _quadraticBezierPathTool;
-        private readonly MovePathToolViewModel _movePathTool;
+        private readonly LinePathToolViewModel? _linePathTool;
+        private readonly ArcPathToolViewModel? _arcPathTool;
+        private readonly CubicBezierPathToolViewModel? _cubicBezierPathTool;
+        private readonly QuadraticBezierPathToolViewModel? _quadraticBezierPathTool;
+        private readonly MovePathToolViewModel? _movePathTool;
 
         internal bool IsInitialized { get; set; }
 
-        internal PathShapeViewModel Path { get; set; }
+        internal PathShapeViewModel? Path { get; set; }
 
-        internal GeometryContext GeometryContext { get; set; }
+        internal GeometryContext? GeometryContext { get; set; }
 
-        internal IPathTool PreviousPathTool { get; set; }
+        internal IPathTool? PreviousPathTool { get; set; }
 
         public string Title => "Path";
 
@@ -61,32 +61,32 @@ namespace Core2D.ViewModels.Editor.Tools
             if (PreviousPathTool == _linePathTool)
             {
                 RemoveLastSegment<LineSegmentViewModel>();
-                _linePathTool.Reset();
+                _linePathTool?.Reset();
             }
             else if (PreviousPathTool == _arcPathTool)
             {
                 RemoveLastSegment<ArcSegmentViewModel>();
-                _arcPathTool.Reset();
+                _arcPathTool?.Reset();
             }
             else if (PreviousPathTool == _cubicBezierPathTool)
             {
                 RemoveLastSegment<CubicBezierSegmentViewModel>();
-                _cubicBezierPathTool.Reset();
+                _cubicBezierPathTool?.Reset();
             }
             else if (PreviousPathTool == _quadraticBezierPathTool)
             {
                 RemoveLastSegment<QuadraticBezierSegmentViewModel>();
-                _quadraticBezierPathTool.Reset();
+                _quadraticBezierPathTool?.Reset();
             }
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-            editor.Project.CurrentContainer.HelperLayer.RaiseInvalidateLayer();
+            editor?.Project?.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
+            editor?.Project?.CurrentContainer?.HelperLayer?.RaiseInvalidateLayer();
         }
 
         public PointShapeViewModel GetLastPathPoint()
         {
-            var figure = Path.Figures.LastOrDefault();
+            var figure = Path?.Figures.LastOrDefault();
             if (figure is { })
             {
                 return (figure.Segments.LastOrDefault()) switch

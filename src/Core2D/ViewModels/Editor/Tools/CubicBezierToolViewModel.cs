@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model;
@@ -14,8 +14,8 @@ namespace Core2D.ViewModels.Editor.Tools
     {
         public enum State { Point1, Point4, Point2, Point3 }
         private State _currentState = State.Point1;
-        private CubicBezierShapeViewModel _cubicBezier;
-        private BezierSelectionSelection _selectionSelection;
+        private CubicBezierShapeViewModel? _cubicBezier;
+        private BezierSelectionSelection? _selectionSelection;
 
         public string Title => "CubicBezier";
 
@@ -34,6 +34,12 @@ namespace Core2D.ViewModels.Editor.Tools
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+
+            if (factory is null || editor?.Project?.Options is null || selection is null || viewModelFactory is null)
+            {
+                return;
+            }
+
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {

@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -13,16 +13,16 @@ namespace Core2D.Behaviors.DragAndDrop
 {
     public class PageDropHandler : DefaultDropHandler
     {
-        public static readonly StyledProperty<IControl> RelativeToProperty = 
-            AvaloniaProperty.Register<EditorDropHandler, IControl>(nameof(RelativeTo));
+        public static readonly StyledProperty<IControl?> RelativeToProperty = 
+            AvaloniaProperty.Register<EditorDropHandler, IControl?>(nameof(RelativeTo));
 
-        public IControl RelativeTo
+        public IControl? RelativeTo
         {
             get => GetValue(RelativeToProperty) as Control;
             set => SetValue(RelativeToProperty, value);
         }
 
-        private bool Validate(ProjectEditorViewModel editor, object sender, DragEventArgs e, bool bExecute)
+        private bool Validate(ProjectEditorViewModel editor, object? sender, DragEventArgs e, bool bExecute)
         {
             var point = GetPosition(RelativeTo ?? sender, e);
 
@@ -71,7 +71,7 @@ namespace Core2D.Behaviors.DragAndDrop
             return false;
         }
 
-        public override bool Validate(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
+        public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             if (targetContext is ProjectEditorViewModel editor)
             {
@@ -80,7 +80,7 @@ namespace Core2D.Behaviors.DragAndDrop
             return false;
         }
 
-        public override bool Execute(object sender, DragEventArgs e, object sourceContext, object targetContext, object state)
+        public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
             if (targetContext is ProjectEditorViewModel editor)
             {

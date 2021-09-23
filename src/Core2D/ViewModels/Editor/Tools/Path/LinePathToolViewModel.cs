@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +15,8 @@ namespace Core2D.ViewModels.Editor.Tools.Path
     {
         public enum State { Start, End }
         private State _currentState;
-        private LineShapeViewModel _line;
-        private LineSelection _selection;
+        private readonly LineShapeViewModel _line;
+        private LineSelection? _selection;
 
         public string Title => "Line";
 

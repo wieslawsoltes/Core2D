@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.ComponentModel;
 using Avalonia;
@@ -13,11 +13,11 @@ namespace Core2D.Views.Data
 {
     public class DatabaseView : UserControl
     {
-        private readonly TextBox _filterRecordsText;
-        private readonly DataGrid _rowsDataGrid;
-        private DatabaseViewModel _databaseViewModel;
-        private string _recordsFilter;
-        private DataGridCollectionView _recordsView;
+        private readonly TextBox? _filterRecordsText;
+        private readonly DataGrid? _rowsDataGrid;
+        private DatabaseViewModel? _databaseViewModel;
+        private string? _recordsFilter;
+        private DataGridCollectionView? _recordsView;
 
         public DatabaseView()
         {
@@ -46,13 +46,13 @@ namespace Core2D.Views.Data
 
         private bool FilterRecords(object arg)
         {
-            if (!string.IsNullOrWhiteSpace(_recordsFilter) && arg is RecordViewModel record)
+            if (_recordsFilter is { } && !string.IsNullOrWhiteSpace(_recordsFilter) && arg is RecordViewModel record)
             {
                 foreach (var value in record.Values)
                 {
-                    if (!string.IsNullOrWhiteSpace(value.Content))
+                    if (value is { } && !string.IsNullOrWhiteSpace(value.Content))
                     {
-                        if (value.Content.IndexOf(_recordsFilter, StringComparison.OrdinalIgnoreCase) != -1)
+                        if (value.Content?.IndexOf(_recordsFilter, StringComparison.OrdinalIgnoreCase) != -1)
                         {
                             return true;
                         }
@@ -64,7 +64,7 @@ namespace Core2D.Views.Data
             return true;
         }
 
-        private void RowsDataGrid_DataContextChanged(object sender, EventArgs e)
+        private void RowsDataGrid_DataContextChanged(object? sender, EventArgs e)
         {
             if (_databaseViewModel is { })
             {
@@ -84,7 +84,7 @@ namespace Core2D.Views.Data
             }
         }
 
-        private void DatabaseViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void DatabaseViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(DatabaseViewModel.Columns))
             {
@@ -105,7 +105,7 @@ namespace Core2D.Views.Data
             }
         }
 
-        private void Column_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Column_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ColumnViewModel.Name)
                 || e.PropertyName == nameof(ColumnViewModel.IsVisible))
@@ -119,22 +119,33 @@ namespace Core2D.Views.Data
 
         private void CreateRecordsView()
         {
-            _recordsView = new DataGridCollectionView(_databaseViewModel.Records);
-            _recordsView.Filter = FilterRecords;
-            _rowsDataGrid.Items = _recordsView;
+            if (_databaseViewModel is { } && _rowsDataGrid is { })
+            {
+                _recordsView = new DataGridCollectionView(_databaseViewModel.Records);
+                _recordsView.Filter = FilterRecords;
+                _rowsDataGrid.Items = _recordsView;
 
-            _recordsFilter = _filterRecordsText?.Text;
-            _recordsView?.Refresh();
+                _recordsFilter = _filterRecordsText?.Text;
+                _recordsView?.Refresh();
+            }
         }
 
         private void ResetRecordsView()
         {
-            _rowsDataGrid.Items = null;
+            if (_rowsDataGrid is { })
+            {
+                _rowsDataGrid.Items = null;
+            }
             _recordsView = null;
         }
 
         private void CreateColumns()
         {
+            if (_databaseViewModel is null || _rowsDataGrid is null)
+            {
+                return;
+            }
+            
             for (int i = 0; i < _databaseViewModel.Columns.Length; i++)
             {
                 var column = _databaseViewModel.Columns[i];
@@ -153,16 +164,19 @@ namespace Core2D.Views.Data
 
         private void ResetColumns()
         {
-            _rowsDataGrid.Columns.Clear();
+            _rowsDataGrid?.Columns.Clear();
         }
 
         private void UpdateHeaders()
         {
-            for (int i = 0; i < _databaseViewModel.Columns.Length; i++)
+            if (_databaseViewModel is { } && _rowsDataGrid is { })
             {
-                var column = _databaseViewModel.Columns[i];
-                _rowsDataGrid.Columns[i].Header = column.Name;
-                _rowsDataGrid.Columns[i].IsVisible = column.IsVisible;
+                for (int i = 0; i < _databaseViewModel.Columns.Length; i++)
+                {
+                    var column = _databaseViewModel.Columns[i];
+                    _rowsDataGrid.Columns[i].Header = column.Name;
+                    _rowsDataGrid.Columns[i].IsVisible = column.IsVisible;
+                }
             }
         }
     }

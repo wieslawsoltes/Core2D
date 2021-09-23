@@ -101,7 +101,7 @@ namespace Core2D.ViewModels.Layout
             {
                 foreach (var point in Boxes[i].Points)
                 {
-                    if (IsPointMovable(point, Boxes[i]._shapeViewModel))
+                    if (IsPointMovable(point, Boxes[i].ShapeViewModel))
                     {
                         points.Add(point);
                     }

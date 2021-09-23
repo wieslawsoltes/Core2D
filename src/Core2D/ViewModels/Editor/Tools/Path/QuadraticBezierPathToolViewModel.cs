@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +15,8 @@ namespace Core2D.ViewModels.Editor.Tools.Path
     {
         public enum State { Point1, Point3, Point2 }
         private State _currentState;
-        private QuadraticBezierShapeViewModel _quadraticBezier;
-        private QuadraticBezierSelection _selection;
+        private readonly QuadraticBezierShapeViewModel _quadraticBezier;
+        private QuadraticBezierSelection? _selection;
 
         public string Title => "QuadraticBezier";
 

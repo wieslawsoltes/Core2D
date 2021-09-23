@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using SkiaSharp;
 using static System.Math;
 

@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using A = Avalonia;
 using AP = Avalonia.Platform;
 

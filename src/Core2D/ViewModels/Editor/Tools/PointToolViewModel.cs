@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model;
@@ -12,7 +12,7 @@ namespace Core2D.ViewModels.Editor.Tools
     {
         public enum State { Point }
         private State _currentState = State.Point;
-        private PointShapeViewModel _point;
+        private PointShapeViewModel? _point;
 
         public string Title => "Point";
 
@@ -30,6 +30,12 @@ namespace Core2D.ViewModels.Editor.Tools
             var factory = ServiceProvider.GetService<IViewModelFactory>();
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+
+            if (factory is null || editor?.Project?.Options is null || selection is null)
+            {
+                return;
+            }
+
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {

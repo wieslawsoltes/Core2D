@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using Avalonia;
 using Avalonia.Controls;
@@ -118,7 +118,7 @@ namespace Core2D.Behaviors
             _inputTarget = null;
             _inputSource = null;
         }
-        private void ZoomBorder_ZoomChanged(object sender, ZoomChangedEventArgs e)
+        private void ZoomBorder_ZoomChanged(object? sender, ZoomChangedEventArgs e)
         {
             InvalidateChild(e.ZoomX, e.ZoomY, e.OffsetX, e.OffsetY);
         }

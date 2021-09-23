@@ -26,22 +26,29 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void ToStateEnd()
         {
-            _startHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
-            _endHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _startHelperPoint = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
+            _endHelperPoint = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
 
-            _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
-            _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);
+            if (_startHelperPoint is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
+            }
+
+            if (_endHelperPoint is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);
+            }
         }
 
         public void Move()
         {
-            if (_startHelperPoint is { })
+            if (_startHelperPoint is { } && _line.Start is { })
             {
                 _startHelperPoint.X = _line.Start.X;
                 _startHelperPoint.Y = _line.Start.Y;
             }
 
-            if (_endHelperPoint is { })
+            if (_endHelperPoint is { } && _line.End is { })
             {
                 _endHelperPoint.X = _line.End.X;
                 _endHelperPoint.Y = _line.End.Y;

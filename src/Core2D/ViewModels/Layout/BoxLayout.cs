@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Core2D.ViewModels.Layout
 {
     public static class BoxLayout
     {
-        public static void Stack(IEnumerable<BaseShapeViewModel> shapes, StackMode mode, IHistory history)
+        public static void Stack(IEnumerable<BaseShapeViewModel> shapes, StackMode mode, IHistory? history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length < 2)
@@ -52,7 +52,7 @@ namespace Core2D.ViewModels.Layout
             }
         }
 
-        public static void Distribute(IEnumerable<BaseShapeViewModel> shapes, DistributeMode mode, IHistory history)
+        public static void Distribute(IEnumerable<BaseShapeViewModel> shapes, DistributeMode mode, IHistory? history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length <= 2)
@@ -107,7 +107,7 @@ namespace Core2D.ViewModels.Layout
             }
         }
 
-        public static void Align(IEnumerable<BaseShapeViewModel> shapes, AlignMode mode, IHistory history)
+        public static void Align(IEnumerable<BaseShapeViewModel> shapes, AlignMode mode, IHistory? history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length <= 1)
@@ -149,7 +149,7 @@ namespace Core2D.ViewModels.Layout
             }
         }
 
-        public static void Flip(IEnumerable<BaseShapeViewModel> shapes, FlipMode mode, IHistory history)
+        public static void Flip(IEnumerable<BaseShapeViewModel> shapes, FlipMode mode, IHistory? history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length <= 0)
@@ -174,7 +174,7 @@ namespace Core2D.ViewModels.Layout
                             point.X = (double)x;
                         }
 
-                        history.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.X = (double)p.x));
+                        history?.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.X = (double)p.x));
                     }
                     break;
                 case FlipMode.Vertical:
@@ -190,13 +190,13 @@ namespace Core2D.ViewModels.Layout
                             point.Y = (double)y;
                         }
 
-                        history.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.Y = (double)p.y));
+                        history?.Snapshot(previous, next, (p) => previous.ForEach(p => p.point.Y = (double)p.y));
                     }
                     break;
             }
         }
 
-        public static void Rotate(IEnumerable<BaseShapeViewModel> shapes, decimal angle, IHistory history)
+        public static void Rotate(IEnumerable<BaseShapeViewModel> shapes, decimal angle, IHistory? history)
         {
             var groupBox = new GroupBox(shapes.ToList());
             if (groupBox.Boxes.Length <= 0)
@@ -222,7 +222,7 @@ namespace Core2D.ViewModels.Layout
                 point.Y = (double)y;
             }
 
-            history.Snapshot(previous, next, (p) => previous.ForEach(p =>
+            history?.Snapshot(previous, next, (p) => previous.ForEach(p =>
             {
                 p.point.X = (double)p.x;
                 p.point.Y = (double)p.y;

@@ -11,7 +11,7 @@ namespace Core2D.Behaviors.DragAndDrop
 {
     public abstract class ListBoxDropHandler : DefaultDropHandler
     {
-        internal bool ValidateLibrary<T>(ListBox listBox, DragEventArgs e, object sourceContext, object targetContext, bool bExecute) where T : ViewModelBase
+        internal bool ValidateLibrary<T>(ListBox listBox, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute) where T : ViewModelBase
         {
             if (!(sourceContext is T sourceItem)
                 || !(targetContext is LibraryViewModel library)

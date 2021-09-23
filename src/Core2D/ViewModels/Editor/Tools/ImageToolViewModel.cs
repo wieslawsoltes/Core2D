@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model;
@@ -14,8 +14,8 @@ namespace Core2D.ViewModels.Editor.Tools
     {
         public enum State { TopLeft, BottomRight }
         private State _currentState = State.TopLeft;
-        private ImageShapeViewModel _image;
-        private ImageSelection _selection;
+        private ImageShapeViewModel? _image;
+        private ImageSelection? _selection;
 
         public string Title => "Image";
 
@@ -35,6 +35,12 @@ namespace Core2D.ViewModels.Editor.Tools
             var selection = ServiceProvider.GetService<ISelectionService>();
             var imageImporter = ServiceProvider.GetService<IImageImporter>();
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+
+            if (factory is null || editor?.Project?.Options is null || selection is null || viewModelFactory is null)
+            {
+                return;
+            }
+
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {

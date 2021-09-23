@@ -35,17 +35,35 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
 
         public void ToStatePoint2()
         {
-            _ellipse = _serviceProvider.GetService<IViewModelFactory>().CreateEllipseShape(0, 0, _styleViewModel);
-            _ellipse.State |= ShapeStateFlags.Thickness;
+            _ellipse = _serviceProvider.GetService<IViewModelFactory>()?.CreateEllipseShape(0, 0, _styleViewModel);
+            if (_ellipse is { })
+            {
+                _ellipse.State |= ShapeStateFlags.Thickness;
+            }
 
-            _p1HelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
-            _p2HelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
-            _centerHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _p1HelperPoint = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
+            _p2HelperPoint = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
+            _centerHelperPoint = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
 
-            _layer.Shapes = _layer.Shapes.Add(_ellipse);
-            _layer.Shapes = _layer.Shapes.Add(_p1HelperPoint);
-            _layer.Shapes = _layer.Shapes.Add(_p2HelperPoint);
-            _layer.Shapes = _layer.Shapes.Add(_centerHelperPoint);
+            if (_ellipse is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_ellipse);
+            }
+
+            if (_p1HelperPoint is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_p1HelperPoint);
+            }
+
+            if (_p2HelperPoint is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_p2HelperPoint);
+            }
+
+            if (_centerHelperPoint is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_centerHelperPoint);
+            }
         }
 
         public void ToStatePoint3()
@@ -62,13 +80,23 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _p2HelperPoint = null;
             }
 
-            _startLine = _serviceProvider.GetService<IViewModelFactory>().CreateLineShape(0, 0, _styleViewModel);
-            _startLine.State |= ShapeStateFlags.Thickness;
+            _startLine = _serviceProvider.GetService<IViewModelFactory>()?.CreateLineShape(0, 0, _styleViewModel);
+            if (_startLine is { })
+            {
+                _startLine.State |= ShapeStateFlags.Thickness;
+            }
 
-            _startHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _startHelperPoint = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
 
-            _layer.Shapes = _layer.Shapes.Add(_startLine);
-            _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
+            if (_startLine is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_startLine);
+            }
+
+            if (_startHelperPoint is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_startHelperPoint);
+            }
         }
 
         public void ToStatePoint4()
@@ -79,24 +107,39 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _ellipse = null;
             }
 
-            _endLine = _serviceProvider.GetService<IViewModelFactory>().CreateLineShape(0, 0, _styleViewModel);
-            _endLine.State |= ShapeStateFlags.Thickness;
+            _endLine = _serviceProvider.GetService<IViewModelFactory>()?.CreateLineShape(0, 0, _styleViewModel);
+            if (_endLine is { })
+            {
+                _endLine.State |= ShapeStateFlags.Thickness;
+            }
 
-            _endHelperPoint = _serviceProvider.GetService<IViewModelFactory>().CreatePointShape(0, 0);
+            _endHelperPoint = _serviceProvider.GetService<IViewModelFactory>()?.CreatePointShape();
 
-            _layer.Shapes = _layer.Shapes.Add(_endLine);
-            _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);
+            if (_endLine is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_endLine);
+            }
+
+            if (_endHelperPoint is { })
+            {
+                _layer.Shapes = _layer.Shapes.Add(_endHelperPoint);
+            }
         }
 
         public void Move()
         {
+            if (_arc.Point1 is null || _arc.Point2 is null || _arc.Point3 is null || _arc.Point4 is null)
+            {
+                return;
+            }
+            
             var a = new WpfArc(
                 Point2.FromXY(_arc.Point1.X, _arc.Point1.Y),
                 Point2.FromXY(_arc.Point2.X, _arc.Point2.Y),
                 Point2.FromXY(_arc.Point3.X, _arc.Point3.Y),
                 Point2.FromXY(_arc.Point4.X, _arc.Point4.Y));
 
-            if (_ellipse is { })
+            if (_ellipse?.TopLeft is { } && _ellipse?.BottomRight is { })
             {
                 _ellipse.TopLeft.X = a.P1.X;
                 _ellipse.TopLeft.Y = a.P1.Y;
@@ -104,7 +147,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _ellipse.BottomRight.Y = a.P2.Y;
             }
 
-            if (_startLine is { })
+            if (_startLine?.Start is { } && _startLine?.End is { })
             {
                 _startLine.Start.X = a.Center.X;
                 _startLine.Start.Y = a.Center.Y;
@@ -112,7 +155,7 @@ namespace Core2D.ViewModels.Editor.Tools.Selection
                 _startLine.End.Y = a.Start.Y;
             }
 
-            if (_endLine is { })
+            if (_endLine?.Start is { } && _endLine?.End is { })
             {
                 _endLine.Start.X = a.Center.X;
                 _endLine.Start.Y = a.Center.Y;
