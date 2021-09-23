@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿#nullable enable
 using System;
 using System.Collections.Generic;
 using Core2D.Model.Renderer;
@@ -16,7 +16,7 @@ namespace Core2D.ViewModels.Layout
             point.Y = (double)transformed.Y;
         }
 
-        public static void TransformPoints(ref MatrixD matrix, IList<PointShapeViewModel> points)
+        public static void TransformPoints(ref MatrixD matrix, IList<PointShapeViewModel>? points)
         {
             if (points is null || points.Count == 0)
             {
@@ -141,7 +141,7 @@ namespace Core2D.ViewModels.Layout
             var newSize = oldSize - dy;
             if (newSize <= 0m || oldSize <= 0m)
             {
-                Translate(0m, dy, points);
+                // TODO: Translate(0m, dy, points);
                 return;
             }
             var scaleX = 1m;
@@ -159,7 +159,7 @@ namespace Core2D.ViewModels.Layout
             var newSize = oldSize + dy;
             if (newSize <= 0m || oldSize <= 0m)
             {
-                Translate(0m, dy, points);
+                // TODO: Translate(0m, dy, points);
                 return;
             }
             var scaleX = 1m;
@@ -177,7 +177,7 @@ namespace Core2D.ViewModels.Layout
             var newSize = oldSize - dx;
             if (newSize <= 0m || oldSize <= 0m)
             {
-                Translate(dx, 0m, points);
+                // TODO: Translate(dx, 0m, points);
                 return;
             }
             var scaleX = newSize / oldSize;
@@ -195,7 +195,7 @@ namespace Core2D.ViewModels.Layout
             var newSize = oldSize + dx;
             if (newSize <= 0m || oldSize <= 0m)
             {
-                Translate(dx, 0m, points);
+                // TODO: Translate(dx, 0m, points);
                 return;
             }
             var scaleX = newSize / oldSize;
