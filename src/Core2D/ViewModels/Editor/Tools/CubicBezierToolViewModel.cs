@@ -239,17 +239,17 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void ToStatePoint2()
         {
-            _selectionSelection.ToStatePoint2();
+            _selectionSelection?.ToStatePoint2();
         }
 
         public void ToStatePoint3()
         {
-            _selectionSelection.ToStatePoint3();
+            _selectionSelection?.ToStatePoint3();
         }
 
         public void Move(BaseShapeViewModel shape)
         {
-            _selectionSelection.Move();
+            _selectionSelection?.Move();
         }
 
         public void Finalize(BaseShapeViewModel shape)
@@ -259,7 +259,12 @@ namespace Core2D.ViewModels.Editor.Tools
         public void Reset()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-
+            
+            if (editor is null)
+            {
+                return;
+            }
+            
             switch (_currentState)
             {
                 case State.Point1:

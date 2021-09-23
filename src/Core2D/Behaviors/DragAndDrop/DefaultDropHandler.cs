@@ -26,7 +26,7 @@ namespace Core2D.Behaviors.DragAndDrop
             return screenPoint;
         }
 
-        public virtual void Enter(object? sender, DragEventArgs e, object sourceContext, object targetContext)
+        public virtual void Enter(object? sender, DragEventArgs e, object? sourceContext, object? targetContext)
         {
             if (Validate(sender, e, sourceContext, targetContext, null) == false)
             {

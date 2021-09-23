@@ -79,6 +79,12 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+
+            if (editor is null || selection is null)
+            {
+                return;
+            }
+            
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {

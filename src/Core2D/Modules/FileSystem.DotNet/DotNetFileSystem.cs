@@ -46,10 +46,13 @@ namespace Core2D.Modules.FileSystem.DotNet
             return ms.ToArray();
         }
 
-        void IFileSystem.WriteBinary(System.IO.Stream stream, byte[] bytes)
+        void IFileSystem.WriteBinary(System.IO.Stream stream, byte[]? bytes)
         {
-            using var bw = new System.IO.BinaryWriter(stream);
-            bw.Write(bytes);
+            if (bytes is { })
+            {
+                using var bw = new System.IO.BinaryWriter(stream);
+                bw.Write(bytes);
+            }
         }
 
         string IFileSystem.ReadUtf8Text(System.IO.Stream stream)
@@ -58,19 +61,19 @@ namespace Core2D.Modules.FileSystem.DotNet
             return sr.ReadToEnd();
         }
 
-        void IFileSystem.WriteUtf8Text(System.IO.Stream stream, string text)
+        void IFileSystem.WriteUtf8Text(System.IO.Stream stream, string? text)
         {
             using var sw = new System.IO.StreamWriter(stream, Encoding.UTF8);
             sw.Write(text);
         }
 
-        string IFileSystem.ReadUtf8Text(string path)
+        string? IFileSystem.ReadUtf8Text(string path)
         {
             using var fs = System.IO.File.OpenRead(path);
             return (this as IFileSystem).ReadUtf8Text(fs);
         }
 
-        void IFileSystem.WriteUtf8Text(string path, string text)
+        void IFileSystem.WriteUtf8Text(string path, string? text)
         {
             using var fs = System.IO.File.Create(path);
             (this as IFileSystem).WriteUtf8Text(fs, text);

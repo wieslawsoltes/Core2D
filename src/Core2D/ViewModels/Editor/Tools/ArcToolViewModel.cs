@@ -304,7 +304,7 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
-            if (editor?.Project?.Options is null)
+            if (editor is null)
             {
                 return;
             }

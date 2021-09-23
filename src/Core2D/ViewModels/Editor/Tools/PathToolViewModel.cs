@@ -141,45 +141,50 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void BeginDown(InputArgs args)
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.BeginDown(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.BeginDown(args);
         }
 
         public void BeginUp(InputArgs args)
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.BeginUp(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.BeginUp(args);
         }
 
         public void EndDown(InputArgs args)
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.EndDown(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.EndDown(args);
             Reset();
         }
 
         public void EndUp(InputArgs args)
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.EndUp(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.EndUp(args);
         }
 
         public void Move(InputArgs args)
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Move(args);
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Move(args);
         }
 
         public void Move(BaseShapeViewModel shape)
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Move(shape);
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Move(shape);
         }
 
         public void Finalize(BaseShapeViewModel shape)
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Finalize(shape);
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Finalize(shape);
         }
 
         public void Reset()
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>().CurrentPathTool?.Reset();
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Reset();
 
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+
+            if (editor is null)
+            {
+                return;
+            }
 
             if (Path is { })
             {

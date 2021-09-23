@@ -174,7 +174,7 @@ namespace Core2D.ViewModels.Editor.Tools
 
         public void Move(BaseShapeViewModel shape)
         {
-            _selection.Move();
+            _selection?.Move();
         }
 
         public void Finalize(BaseShapeViewModel shape)
@@ -184,6 +184,11 @@ namespace Core2D.ViewModels.Editor.Tools
         public void Reset()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+
+            if (editor is null)
+            {
+                return;
+            }
 
             switch (_currentState)
             {

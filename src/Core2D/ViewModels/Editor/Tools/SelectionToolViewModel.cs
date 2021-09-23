@@ -506,6 +506,11 @@ namespace Core2D.ViewModels.Editor.Tools
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
 
+            if (editor is null || selection is null)
+            {
+                return;
+            }
+
             _currentState = State.None;
 
             selection.DeHover(editor.Project?.CurrentContainer?.CurrentLayer);

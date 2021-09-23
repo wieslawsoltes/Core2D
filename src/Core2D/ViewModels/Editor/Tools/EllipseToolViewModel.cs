@@ -191,12 +191,12 @@ namespace Core2D.ViewModels.Editor.Tools
                 _ellipse,
                 editor.PageState.HelperStyle);
 
-            _selection.ToStateBottomRight();
+            _selection?.ToStateBottomRight();
         }
 
         public void Move(BaseShapeViewModel shape)
         {
-            _selection.Move();
+            _selection?.Move();
         }
 
         public void Finalize(BaseShapeViewModel shape)
@@ -206,7 +206,12 @@ namespace Core2D.ViewModels.Editor.Tools
         public void Reset()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-
+            
+            if (editor is null)
+            {
+                return;
+            }
+            
             switch (_currentState)
             {
                 case State.TopLeft:
