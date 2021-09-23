@@ -185,6 +185,11 @@ namespace Core2D.ViewModels.Editor.Tools
         public void ToStateBottomRight()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+
             _selection = new EllipseSelection(
                 ServiceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
