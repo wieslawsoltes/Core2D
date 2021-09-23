@@ -118,6 +118,11 @@ namespace Core2D.ViewModels.Editor.Tools
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var selection = ServiceProvider.GetService<ISelectionService>();
+            if (editor?.Project?.Options is null || selection is null)
+            {
+                return;
+            }
+
             (decimal sx, decimal sy) = selection.TryToSnap(args);
             switch (_currentState)
             {
@@ -148,6 +153,11 @@ namespace Core2D.ViewModels.Editor.Tools
         public void ToStateBottomRight()
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+
             _selection = new TextSelection(
                 ServiceProvider,
                 editor.Project.CurrentContainer.HelperLayer,
