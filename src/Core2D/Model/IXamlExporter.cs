@@ -1,8 +1,7 @@
 ﻿#nullable enable
-namespace Core2D.Model
+namespace Core2D.Model;
+
+public interface IXamlExporter
 {
-    public interface IXamlExporter
-    {
-        string Create(object item, string key);
-    }
+    string Create(object item, string key);
 }

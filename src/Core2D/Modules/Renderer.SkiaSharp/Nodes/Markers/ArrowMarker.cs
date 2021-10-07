@@ -1,24 +1,23 @@
 ﻿#nullable enable
 using SkiaSharp;
 
-namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers;
+
+internal class ArrowMarker : MarkerBase
 {
-    internal class ArrowMarker : MarkerBase
+    public SKPoint P11;
+    public SKPoint P21;
+    public SKPoint P12;
+    public SKPoint P22;
+
+    public override void Draw(object dc)
     {
-        public SKPoint P11;
-        public SKPoint P21;
-        public SKPoint P12;
-        public SKPoint P22;
+        var canvas = dc as SKCanvas;
 
-        public override void Draw(object dc)
+        if (ShapeViewModel.IsStroked)
         {
-            var canvas = dc as SKCanvas;
-
-            if (ShapeViewModel.IsStroked)
-            {
-                canvas.DrawLine(P11, P21, Pen);
-                canvas.DrawLine(P12, P22, Pen);
-            }
+            canvas.DrawLine(P11, P21, Pen);
+            canvas.DrawLine(P12, P22, Pen);
         }
     }
 }

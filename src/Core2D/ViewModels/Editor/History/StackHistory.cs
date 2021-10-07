@@ -3,87 +3,86 @@ using System;
 using System.Collections.Generic;
 using Core2D.Model.History;
 
-namespace Core2D.ViewModels.Editor.History
+namespace Core2D.ViewModels.Editor.History;
+
+public partial class StackHistory : IHistory
 {
-    public partial class StackHistory : IHistory
+    private readonly Stack<UndoRedo> _undos = new Stack<UndoRedo>();
+    private readonly Stack<UndoRedo> _redos = new Stack<UndoRedo>();
+
+    void IHistory.Snapshot<T>(T previous, T next, Action<T> update)
     {
-        private readonly Stack<UndoRedo> _undos = new Stack<UndoRedo>();
-        private readonly Stack<UndoRedo> _redos = new Stack<UndoRedo>();
-
-        void IHistory.Snapshot<T>(T previous, T next, Action<T> update)
+        var undo = UndoRedo.Create(() => update(previous), () => update(next));
+        if (_redos.Count > 0)
         {
-            var undo = UndoRedo.Create(() => update(previous), () => update(next));
-            if (_redos.Count > 0)
-            {
-                _redos.Clear();
-            }
-
-            _undos.Push(undo);
+            _redos.Clear();
         }
 
-        bool IHistory.CanUndo()
-        {
-            return _undos.Count > 0;
-        }
+        _undos.Push(undo);
+    }
 
-        bool IHistory.CanRedo()
-        {
-            return _redos.Count > 0;
-        }
+    bool IHistory.CanUndo()
+    {
+        return _undos.Count > 0;
+    }
 
-        bool IHistory.Undo()
-        {
-            if (_undos.Count <= 0)
-            {
-                return false;
-            }
+    bool IHistory.CanRedo()
+    {
+        return _redos.Count > 0;
+    }
 
-            var undo = _undos.Pop();
-            if (undo.Undo is { })
-            {
-                undo.Undo();
-                if (undo.Redo is { })
-                {
-                    var redo = UndoRedo.Create(undo.Undo, undo.Redo);
-                    _redos.Push(redo);
-                }
-                return true;
-            }
+    bool IHistory.Undo()
+    {
+        if (_undos.Count <= 0)
+        {
             return false;
         }
 
-        bool IHistory.Redo()
+        var undo = _undos.Pop();
+        if (undo.Undo is { })
         {
-            if (_redos.Count <= 0)
+            undo.Undo();
+            if (undo.Redo is { })
             {
-                return false;
+                var redo = UndoRedo.Create(undo.Undo, undo.Redo);
+                _redos.Push(redo);
             }
+            return true;
+        }
+        return false;
+    }
 
-            var redo = _redos.Pop();
-            if (redo.Redo is { })
-            {
-                redo.Redo();
-                if (redo.Undo is { })
-                {
-                    var undo = UndoRedo.Create(redo.Undo, redo.Redo);
-                    _undos.Push(undo);
-                }
-                return true;
-            }
+    bool IHistory.Redo()
+    {
+        if (_redos.Count <= 0)
+        {
             return false;
         }
 
-        void IHistory.Reset()
+        var redo = _redos.Pop();
+        if (redo.Redo is { })
         {
-            if (_undos is { } && _undos.Count > 0)
+            redo.Redo();
+            if (redo.Undo is { })
             {
-                _undos.Clear();
+                var undo = UndoRedo.Create(redo.Undo, redo.Redo);
+                _undos.Push(undo);
             }
+            return true;
+        }
+        return false;
+    }
 
-            if (_redos is { } && _redos.Count > 0)
-            {
-                _redos.Clear();
-            }
+    void IHistory.Reset()
+    {
+        if (_undos is { } && _undos.Count > 0)
+        {
+            _undos.Clear();
+        }
+
+        if (_redos is { } && _redos.Count > 0)
+        {
+            _redos.Clear();
         }
     }
 }

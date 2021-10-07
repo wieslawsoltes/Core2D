@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Core2D.Model.Renderer
+namespace Core2D.Model.Renderer;
+
+public interface IImageCache : INotifyPropertyChanged
 {
-    public interface IImageCache : INotifyPropertyChanged
-    {
-        IEnumerable<IImageKey>? Keys { get; }
+    IEnumerable<IImageKey>? Keys { get; }
 
-        string AddImageFromFile(string path, byte[] bytes);
+    string AddImageFromFile(string path, byte[] bytes);
 
-        void AddImage(string key, byte[] bytes);
+    void AddImage(string key, byte[] bytes);
 
-        byte[]? GetImage(string key);
+    byte[]? GetImage(string key);
 
-        void RemoveImage(string key);
+    void RemoveImage(string key);
 
-        void PurgeUnusedImages(ICollection<string> used);
-    }
+    void PurgeUnusedImages(ICollection<string> used);
 }

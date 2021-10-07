@@ -4,24 +4,23 @@ using Core2D.Model.Input;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Model.Renderer
+namespace Core2D.Model.Renderer;
+
+public interface IDecorator : IDrawable
 {
-    public interface IDecorator : IDrawable
-    {
-        LayerContainerViewModel? Layer { get; set; }
+    LayerContainerViewModel? Layer { get; set; }
 
-        IList<BaseShapeViewModel>? Shapes { get; set; }
+    IList<BaseShapeViewModel>? Shapes { get; set; }
 
-        bool IsVisible { get; }
+    bool IsVisible { get; }
 
-        void Update(bool rebuild = true);
+    void Update(bool rebuild = true);
 
-        void Show();
+    void Show();
 
-        void Hide();
+    void Hide();
 
-        bool HitTest(InputArgs args);
+    bool HitTest(InputArgs args);
 
-        void Move(InputArgs args);
-    }
+    void Move(InputArgs args);
 }

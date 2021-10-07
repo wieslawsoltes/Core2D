@@ -1,10 +1,9 @@
 ﻿#nullable enable
-namespace Core2D.Model.Path
-{
-    public enum SweepDirection
-    {
-        Clockwise,
+namespace Core2D.Model.Path;
 
-        Counterclockwise
-    }
+public enum SweepDirection
+{
+    Clockwise,
+
+    Counterclockwise
 }

@@ -1,10 +1,9 @@
 ﻿#nullable enable
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Model.Renderer.Nodes
+namespace Core2D.Model.Renderer.Nodes;
+
+public interface IPathDrawNode : IDrawNode
 {
-    public interface IPathDrawNode : IDrawNode
-    {
-        PathShapeViewModel Path { get; set; }
-    }
+    PathShapeViewModel Path { get; set; }
 }

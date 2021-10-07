@@ -1,26 +1,25 @@
 ﻿#nullable enable
 using System;
 
-namespace Core2D.Model.Editor
+namespace Core2D.Model.Editor;
+
+public interface IEditorCanvasPlatform
 {
-    public interface IEditorCanvasPlatform
-    {
-        Action? InvalidateControl { get; set; }
+    Action? InvalidateControl { get; set; }
 
-        Action? ResetZoom { get; set; }
+    Action? ResetZoom { get; set; }
 
-        Action? FillZoom { get; set; }
+    Action? FillZoom { get; set; }
 
-        Action? UniformZoom { get; set; }
+    Action? UniformZoom { get; set; }
 
-        Action? UniformToFillZoom { get; set; }
+    Action? UniformToFillZoom { get; set; }
 
-        Action? AutoFitZoom { get; set; }
+    Action? AutoFitZoom { get; set; }
 
-        Action? InZoom { get; set; }
+    Action? InZoom { get; set; }
 
-        Action? OutZoom { get; set; }
+    Action? OutZoom { get; set; }
 
-        object? Zoom { get; set; }
-    }
+    object? Zoom { get; set; }
 }

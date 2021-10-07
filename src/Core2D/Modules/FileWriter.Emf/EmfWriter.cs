@@ -15,157 +15,156 @@ using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Renderer.Presenters;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Modules.FileWriter.Emf
+namespace Core2D.Modules.FileWriter.Emf;
+
+public sealed class EmfWriter : IFileWriter
 {
-    public sealed class EmfWriter : IFileWriter
+    private readonly IServiceProvider? _serviceProvider;
+
+    public EmfWriter(IServiceProvider? serviceProvider)
     {
-        private readonly IServiceProvider? _serviceProvider;
+        _serviceProvider = serviceProvider;
+    }
 
-        public EmfWriter(IServiceProvider? serviceProvider)
+    public string Name { get; } = "Emf (WinForms)";
+
+    public string Extension { get; } = "emf";
+
+    public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShapeViewModel> shapes, IImageCache ic)
+    {
+        var g = default(Graphics);
+        var mf = default(Metafile);
+        var ms = new MemoryStream();
+
+        try
         {
-            _serviceProvider = serviceProvider;
-        }
-
-        public string Name { get; } = "Emf (WinForms)";
-
-        public string Extension { get; } = "emf";
-
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShapeViewModel> shapes, IImageCache ic)
-        {
-            var g = default(Graphics);
-            var mf = default(Metafile);
-            var ms = new MemoryStream();
-
-            try
+            using (g = Graphics.FromImage(bitmap))
             {
-                using (g = Graphics.FromImage(bitmap))
+                var hdc = g.GetHdc();
+                mf = new Metafile(ms, hdc);
+                g.ReleaseHdc(hdc);
+            }
+
+            using (g = Graphics.FromImage(mf))
+            {
+                var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
+                r.State.DrawShapeState = ShapeStateFlags.Printable;
+                r.State.ImageCache = ic;
+
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+                g.PageUnit = GraphicsUnit.Display;
+
+                foreach (var shape in shapes)
                 {
-                    var hdc = g.GetHdc();
-                    mf = new Metafile(ms, hdc);
-                    g.ReleaseHdc(hdc);
+                    shape.DrawShape(g, r, null);
                 }
 
-                using (g = Graphics.FromImage(mf))
-                {
-                    var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.State.DrawShapeState = ShapeStateFlags.Printable;
-                    r.State.ImageCache = ic;
-
-                    g.SmoothingMode = SmoothingMode.HighQuality;
-                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                    g.CompositingQuality = CompositingQuality.HighQuality;
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                    g.PageUnit = GraphicsUnit.Display;
-
-                    foreach (var shape in shapes)
-                    {
-                        shape.DrawShape(g, r, null);
-                    }
-
-                    r.ClearCache();
-                }
-            }
-            finally
-            {
-                g?.Dispose();
-
-                mf?.Dispose();
-            }
-            return ms;
-        }
-
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, FrameContainerViewModel container, IImageCache ic)
-        {
-            var g = default(Graphics);
-            var mf = default(Metafile);
-            var ms = new MemoryStream();
-
-            try
-            {
-                using (g = Graphics.FromImage(bitmap))
-                {
-                    var hdc = g.GetHdc();
-                    mf = new Metafile(ms, hdc);
-                    g.ReleaseHdc(hdc);
-                }
-
-                using (g = Graphics.FromImage(mf))
-                {
-                    var p = new ExportPresenter();
-                    var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                    r.State.DrawShapeState = ShapeStateFlags.Printable;
-                    r.State.ImageCache = ic;
-
-                    g.SmoothingMode = SmoothingMode.HighQuality;
-                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                    g.CompositingQuality = CompositingQuality.HighQuality;
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                    g.PageUnit = GraphicsUnit.Display;
-
-                    if (container is PageContainerViewModel page)
-                    {
-                        p.Render(g, r, null, page.Template, 0, 0);
-                    }
-                    p.Render(g, r, null, container, 0, 0);
-
-                    r.ClearCache();
-                }
-            }
-            finally
-            {
-                g?.Dispose();
-
-                mf?.Dispose();
-            }
-            return ms;
-        }
-
-        public void Save(Stream stream, PageContainerViewModel container, IImageCache ic)
-        {
-            if (container?.Template is { })
-            {
-                using var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height);
-                using var ms = MakeMetafileStream(bitmap, container, ic);
-                ms.WriteTo(stream);
+                r.ClearCache();
             }
         }
-
-        public void Save(Stream stream, object? item, object? options)
+        finally
         {
-            if (item is null)
+            g?.Dispose();
+
+            mf?.Dispose();
+        }
+        return ms;
+    }
+
+    public MemoryStream MakeMetafileStream(Bitmap bitmap, FrameContainerViewModel container, IImageCache ic)
+    {
+        var g = default(Graphics);
+        var mf = default(Metafile);
+        var ms = new MemoryStream();
+
+        try
+        {
+            using (g = Graphics.FromImage(bitmap))
             {
-                return;
+                var hdc = g.GetHdc();
+                mf = new Metafile(ms, hdc);
+                g.ReleaseHdc(hdc);
             }
 
-            var ic = options as IImageCache;
-            if (options is null)
+            using (g = Graphics.FromImage(mf))
             {
-                return;
-            }
+                var p = new ExportPresenter();
+                var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
+                r.State.DrawShapeState = ShapeStateFlags.Printable;
+                r.State.ImageCache = ic;
 
-            if (item is PageContainerViewModel page)
-            {
-                var dataFlow = _serviceProvider.GetService<DataFlow>();
-                var db = (object)page.Properties;
-                var record = (object)page.Record;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-                dataFlow.Bind(page.Template, db, record);
-                dataFlow.Bind(page, db, record);
+                g.PageUnit = GraphicsUnit.Display;
 
-                Save(stream, page, ic);
+                if (container is PageContainerViewModel page)
+                {
+                    p.Render(g, r, null, page.Template, 0, 0);
+                }
+                p.Render(g, r, null, container, 0, 0);
+
+                r.ClearCache();
             }
-            else if (item is DocumentContainerViewModel document)
-            {
-                throw new NotSupportedException("Saving documents as emf drawing is not supported.");
-            }
-            else if (item is ProjectContainerViewModel project)
-            {
-                throw new NotSupportedException("Saving projects as emf drawing is not supported.");
-            }
+        }
+        finally
+        {
+            g?.Dispose();
+
+            mf?.Dispose();
+        }
+        return ms;
+    }
+
+    public void Save(Stream stream, PageContainerViewModel container, IImageCache ic)
+    {
+        if (container?.Template is { })
+        {
+            using var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height);
+            using var ms = MakeMetafileStream(bitmap, container, ic);
+            ms.WriteTo(stream);
+        }
+    }
+
+    public void Save(Stream stream, object? item, object? options)
+    {
+        if (item is null)
+        {
+            return;
+        }
+
+        var ic = options as IImageCache;
+        if (options is null)
+        {
+            return;
+        }
+
+        if (item is PageContainerViewModel page)
+        {
+            var dataFlow = _serviceProvider.GetService<DataFlow>();
+            var db = (object)page.Properties;
+            var record = (object)page.Record;
+
+            dataFlow.Bind(page.Template, db, record);
+            dataFlow.Bind(page, db, record);
+
+            Save(stream, page, ic);
+        }
+        else if (item is DocumentContainerViewModel document)
+        {
+            throw new NotSupportedException("Saving documents as emf drawing is not supported.");
+        }
+        else if (item is ProjectContainerViewModel project)
+        {
+            throw new NotSupportedException("Saving projects as emf drawing is not supported.");
         }
     }
 }

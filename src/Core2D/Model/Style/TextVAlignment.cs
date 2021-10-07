@@ -1,12 +1,11 @@
 ﻿#nullable enable
-namespace Core2D.Model.Style
+namespace Core2D.Model.Style;
+
+public enum TextVAlignment
 {
-    public enum TextVAlignment
-    {
-        Top,
+    Top,
 
-        Center,
+    Center,
 
-        Bottom
-    }
+    Bottom
 }

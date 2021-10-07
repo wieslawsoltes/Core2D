@@ -1,30 +1,29 @@
 ﻿#nullable enable
 using SkiaSharp;
 
-namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers;
+
+internal class EllipseMarker : MarkerBase
 {
-    internal class EllipseMarker : MarkerBase
+    public SKRect Rect { get; set; }
+
+    public override void Draw(object dc)
     {
-        public SKRect Rect { get; set; }
+        var canvas = dc as SKCanvas;
 
-        public override void Draw(object dc)
+        var count = canvas.Save();
+        canvas.SetMatrix(MatrixHelper.Multiply(Rotation, canvas.TotalMatrix));
+
+        if (ShapeViewModel.IsFilled)
         {
-            var canvas = dc as SKCanvas;
-
-            var count = canvas.Save();
-            canvas.SetMatrix(MatrixHelper.Multiply(Rotation, canvas.TotalMatrix));
-
-            if (ShapeViewModel.IsFilled)
-            {
-                canvas.DrawOval(Rect, Brush);
-            }
-
-            if (ShapeViewModel.IsStroked)
-            {
-                canvas.DrawOval(Rect, Pen);
-            }
-
-            canvas.RestoreToCount(count);
+            canvas.DrawOval(Rect, Brush);
         }
+
+        if (ShapeViewModel.IsStroked)
+        {
+            canvas.DrawOval(Rect, Pen);
+        }
+
+        canvas.RestoreToCount(count);
     }
 }

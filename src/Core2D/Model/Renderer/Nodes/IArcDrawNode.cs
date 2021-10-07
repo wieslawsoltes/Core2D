@@ -1,10 +1,9 @@
 ﻿#nullable enable
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Model.Renderer.Nodes
+namespace Core2D.Model.Renderer.Nodes;
+
+public interface IArcDrawNode : IDrawNode
 {
-    public interface IArcDrawNode : IDrawNode
-    {
-        ArcShapeViewModel Arc { get; set; }
-    }
+    ArcShapeViewModel Arc { get; set; }
 }

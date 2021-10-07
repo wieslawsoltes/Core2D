@@ -1,12 +1,11 @@
 ﻿#nullable enable
-namespace Core2D.Model.Style
+namespace Core2D.Model.Style;
+
+public enum LineCap
 {
-    public enum LineCap
-    {
-        Flat = 0,
+    Flat = 0,
 
-        Square = 1,
+    Square = 1,
 
-        Round = 2
-    }
+    Round = 2
 }

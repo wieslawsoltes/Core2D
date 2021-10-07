@@ -5,29 +5,28 @@ using Avalonia;
 using Avalonia.Data.Converters;
 using Core2D.Model.Editor;
 
-namespace Core2D.Converters
+namespace Core2D.Converters;
+
+public class ToolIconConverter : IValueConverter
 {
-    public class ToolIconConverter : IValueConverter
+    public static ToolIconConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public static ToolIconConverter Instance = new();
-
-        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        if (value is ITool tool)
         {
-            if (value is ITool tool)
+            var key = $"{tool.Title}";
+
+            if (Application.Current.Styles.TryGetResource(key, out var resource))
             {
-                var key = $"{tool.Title}";
-
-                if (Application.Current.Styles.TryGetResource(key, out var resource))
-                {
-                    return resource;
-                }
+                return resource;
             }
-            return AvaloniaProperty.UnsetValue;
         }
+        return AvaloniaProperty.UnsetValue;
+    }
 
-        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

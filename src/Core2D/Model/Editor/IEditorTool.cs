@@ -1,7 +1,6 @@
 ﻿#nullable enable
-namespace Core2D.Model.Editor
+namespace Core2D.Model.Editor;
+
+public interface IEditorTool : ITool
 {
-    public interface IEditorTool : ITool
-    {
-    }
 }

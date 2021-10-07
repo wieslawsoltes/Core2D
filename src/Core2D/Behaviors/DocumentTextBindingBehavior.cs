@@ -4,59 +4,58 @@ using Avalonia;
 using Avalonia.Xaml.Interactivity;
 using AvaloniaEdit;
 
-namespace Core2D.Behaviors
+namespace Core2D.Behaviors;
+
+public class DocumentTextBindingBehavior : Behavior<TextEditor>
 {
-    public class DocumentTextBindingBehavior : Behavior<TextEditor>
+    private TextEditor _textEditor;
+
+    public static readonly StyledProperty<string> TextProperty =
+        AvaloniaProperty.Register<DocumentTextBindingBehavior, string>(nameof(Text));
+
+    public string Text
     {
-        private TextEditor _textEditor;
+        get => GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
 
-        public static readonly StyledProperty<string> TextProperty =
-            AvaloniaProperty.Register<DocumentTextBindingBehavior, string>(nameof(Text));
+    protected override void OnAttached()
+    {
+        base.OnAttached();
 
-        public string Text
+        if (AssociatedObject is TextEditor textEditor)
         {
-            get => GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
+            _textEditor = textEditor;
+            _textEditor.TextChanged += TextChanged;
+            this.GetObservable(TextProperty).Subscribe(TextPropertyChanged);
         }
+    }
 
-        protected override void OnAttached()
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
+
+        if (_textEditor is { })
         {
-            base.OnAttached();
-
-            if (AssociatedObject is TextEditor textEditor)
-            {
-                _textEditor = textEditor;
-                _textEditor.TextChanged += TextChanged;
-                this.GetObservable(TextProperty).Subscribe(TextPropertyChanged);
-            }
+            _textEditor.TextChanged -= TextChanged;
         }
+    }
 
-        protected override void OnDetaching()
+    private void TextChanged(object? sender, EventArgs eventArgs)
+    {
+        if (_textEditor?.Document is { })
         {
-            base.OnDetaching();
-
-            if (_textEditor is { })
-            {
-                _textEditor.TextChanged -= TextChanged;
-            }
+            Text = _textEditor.Document.Text;
         }
+    }
 
-        private void TextChanged(object? sender, EventArgs eventArgs)
+    private void TextPropertyChanged(string text)
+    {
+        if (_textEditor?.Document is { } && text is { })
         {
-            if (_textEditor?.Document is { })
-            {
-                Text = _textEditor.Document.Text;
-            }
-        }
-
-        private void TextPropertyChanged(string text)
-        {
-            if (_textEditor?.Document is { } && text is { })
-            {
-                var caretOffset = _textEditor.CaretOffset;
-                _textEditor.Document.Text = text;
-                _textEditor.CaretOffset = caretOffset;
-            }
+            var caretOffset = _textEditor.CaretOffset;
+            _textEditor.Document.Text = text;
+            _textEditor.CaretOffset = caretOffset;
         }
     }
 }

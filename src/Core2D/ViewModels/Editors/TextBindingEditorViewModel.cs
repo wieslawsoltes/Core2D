@@ -5,76 +5,75 @@ using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.ViewModels.Editors
+namespace Core2D.ViewModels.Editors;
+
+public partial class TextBindingEditorViewModel : ViewModelBase
 {
-    public partial class TextBindingEditorViewModel : ViewModelBase
+    [AutoNotify] private ProjectEditorViewModel? _editor;
+    [AutoNotify] private TextShapeViewModel? _text;
+
+    public TextBindingEditorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        [AutoNotify] private ProjectEditorViewModel? _editor;
-        [AutoNotify] private TextShapeViewModel? _text;
+    }
 
-        public TextBindingEditorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
-        {
-        }
+    public override object Copy(IDictionary<object, object>? shared)
+    {
+        throw new NotImplementedException();
+    }
 
-        public override object Copy(IDictionary<object, object>? shared)
+    public void OnUseColumnName(ColumnViewModel? column)
+    {
+        if (_text is { } && column is { })
         {
-            throw new NotImplementedException();
-        }
-
-        public void OnUseColumnName(ColumnViewModel? column)
-        {
-            if (_text is { } && column is { })
+            if (string.IsNullOrEmpty(_text.Text))
             {
-                if (string.IsNullOrEmpty(_text.Text))
-                {
-                    _text.Text = $"{{{column.Name}}}";
-                }
-                else
-                {
-                    var startIndex = _text.Text.Length;
-                    _text.Text = _text.Text.Insert(startIndex, $"{{{column.Name}}}");
-                }
+                _text.Text = $"{{{column.Name}}}";
+            }
+            else
+            {
+                var startIndex = _text.Text.Length;
+                _text.Text = _text.Text.Insert(startIndex, $"{{{column.Name}}}");
             }
         }
+    }
 
-        public void OnUsePageProperty(PropertyViewModel? property)
+    public void OnUsePageProperty(PropertyViewModel? property)
+    {
+        if (_text is { } && property is { })
         {
-            if (_text is { } && property is { })
+            if (string.IsNullOrEmpty(_text.Text))
             {
-                if (string.IsNullOrEmpty(_text.Text))
-                {
-                    _text.Text = $"{{{property.Name}}}";
-                }
-                else
-                {
-                    var startIndex = _text.Text.Length;
-                    _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
-                }
+                _text.Text = $"{{{property.Name}}}";
+            }
+            else
+            {
+                var startIndex = _text.Text.Length;
+                _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
             }
         }
+    }
 
-        public void OnUseShapeProperty(PropertyViewModel? property)
+    public void OnUseShapeProperty(PropertyViewModel? property)
+    {
+        if (_text is { } && property is { })
         {
-            if (_text is { } && property is { })
+            if (string.IsNullOrEmpty(_text.Text))
             {
-                if (string.IsNullOrEmpty(_text.Text))
-                {
-                    _text.Text = $"{{{property.Name}}}";
-                }
-                else
-                {
-                    var startIndex = _text.Text.Length;
-                    _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
-                }
+                _text.Text = $"{{{property.Name}}}";
+            }
+            else
+            {
+                var startIndex = _text.Text.Length;
+                _text.Text = _text.Text.Insert(startIndex, $"{{{property.Name}}}");
             }
         }
+    }
 
-        public void OnResetText()
+    public void OnResetText()
+    {
+        if (_text is { })
         {
-            if (_text is { })
-            {
-                _text.Text = "";
-            }
+            _text.Text = "";
         }
     }
 }

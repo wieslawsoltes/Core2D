@@ -8,41 +8,40 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
 
-namespace Core2D.Editor
+namespace Core2D.Editor;
+
+public class AvaloniaImageImporter : IImageImporter
 {
-    public class AvaloniaImageImporter : IImageImporter
+    private readonly IServiceProvider? _serviceProvider;
+
+    public AvaloniaImageImporter(IServiceProvider? serviceProvider)
     {
-        private readonly IServiceProvider? _serviceProvider;
+        _serviceProvider = serviceProvider;
+    }
 
-        public AvaloniaImageImporter(IServiceProvider? serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+    private MainWindow? GetWindow()
+    {
+        return _serviceProvider?.GetService<MainWindow>();
+    }
 
-        private MainWindow? GetWindow()
+    public async Task<string> GetImageKeyAsync()
+    {
+        try
         {
-            return _serviceProvider?.GetService<MainWindow>();
-        }
-
-        public async Task<string> GetImageKeyAsync()
-        {
-            try
+            var dlg = new OpenFileDialog() { Title = "Open" };
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+            var result = await dlg.ShowAsync(GetWindow());
+            var path = result?.FirstOrDefault();
+            if (path is { })
             {
-                var dlg = new OpenFileDialog() { Title = "Open" };
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var result = await dlg.ShowAsync(GetWindow());
-                var path = result?.FirstOrDefault();
-                if (path is { })
-                {
-                    return _serviceProvider.GetService<ProjectEditorViewModel>().OnGetImageKey(path);
-                }
+                return _serviceProvider.GetService<ProjectEditorViewModel>().OnGetImageKey(path);
             }
-            catch (Exception ex)
-            {
-                _serviceProvider.GetService<ILog>()?.LogException(ex);
-            }
-
-            return default;
         }
+        catch (Exception ex)
+        {
+            _serviceProvider.GetService<ILog>()?.LogException(ex);
+        }
+
+        return default;
     }
 }

@@ -3,20 +3,19 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Screenshot;
 
-namespace Core2D.Views
-{
-    public class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-            this.AttachDevTools();
-            this.AttachCapture();
-        }
+namespace Core2D.Views;
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+public class MainWindow : Window
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+        this.AttachDevTools();
+        this.AttachCapture();
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
     }
 }

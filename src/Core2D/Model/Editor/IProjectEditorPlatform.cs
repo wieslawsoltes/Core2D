@@ -2,66 +2,65 @@
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 
-namespace Core2D.Model.Editor
+namespace Core2D.Model.Editor;
+
+public interface IProjectEditorPlatform
 {
-    public interface IProjectEditorPlatform
-    {
-        void OnOpen(string? path);
+    void OnOpen(string? path);
 
-        void OnSave();
+    void OnSave();
 
-        void OnSaveAs();
+    void OnSaveAs();
 
-        void OnImportJson(string? path);
+    void OnImportJson(string? path);
 
-        void OnImportSvg(string? path);
+    void OnImportSvg(string? path);
 
-        void OnImportObject(string? path);
+    void OnImportObject(string? path);
 
-        void OnExportJson(object? item);
+    void OnExportJson(object? item);
 
-        void OnExportObject(object? item);
+    void OnExportObject(object? item);
 
-        void OnExport(object? item);
+    void OnExport(object? item);
 
-        void OnExecuteScriptFile(string? path);
+    void OnExecuteScriptFile(string? path);
 
-        void OnExit();
+    void OnExit();
 
-        void OnCopyAsXaml(object? item);
+    void OnCopyAsXaml(object? item);
 
-        void OnCopyAsSvg(object? item);
+    void OnCopyAsSvg(object? item);
 
-        void OnPasteSvg();
+    void OnPasteSvg();
 
-        void OnCopyAsEmf(object? item);
+    void OnCopyAsEmf(object? item);
 
-        void OnCopyAsPathData(object? item);
+    void OnCopyAsPathData(object? item);
 
-        void OnPastePathDataStroked();
+    void OnPastePathDataStroked();
 
-        void OnPastePathDataFilled();
+    void OnPastePathDataFilled();
 
-        void OnImportData(ProjectContainerViewModel? project);
+    void OnImportData(ProjectContainerViewModel? project);
 
-        void OnExportData(DatabaseViewModel? db);
+    void OnExportData(DatabaseViewModel? db);
 
-        void OnUpdateData(DatabaseViewModel? db);
+    void OnUpdateData(DatabaseViewModel? db);
 
-        void OnAboutDialog();
+    void OnAboutDialog();
 
-        void OnZoomReset();
+    void OnZoomReset();
 
-        void OnZoomFill();
+    void OnZoomFill();
 
-        void OnZoomUniform();
+    void OnZoomUniform();
 
-        void OnZoomUniformToFill();
+    void OnZoomUniformToFill();
 
-        void OnZoomAutoFit();
+    void OnZoomAutoFit();
 
-        void OnZoomIn();
+    void OnZoomIn();
 
-        void OnZoomOut();
-    }
+    void OnZoomOut();
 }

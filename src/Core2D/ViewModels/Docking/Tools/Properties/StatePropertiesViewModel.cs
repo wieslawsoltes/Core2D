@@ -1,9 +1,8 @@
 #nullable enable
 using Dock.Model.ReactiveUI.Controls;
 
-namespace Core2D.ViewModels.Docking.Tools.Properties
+namespace Core2D.ViewModels.Docking.Tools.Properties;
+
+public class StatePropertiesViewModel : Tool
 {
-    public class StatePropertiesViewModel : Tool
-    {
-    }
 }

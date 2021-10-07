@@ -1,9 +1,8 @@
 ﻿#nullable enable
-namespace Core2D.ViewModels.Layout
+namespace Core2D.ViewModels.Layout;
+
+public enum StackMode
 {
-    public enum StackMode
-    {
-        Horizontal,
-        Vertical
-    }
+    Horizontal,
+    Vertical
 }

@@ -1,12 +1,11 @@
-﻿namespace Core2D.ViewModels.Layout
+﻿namespace Core2D.ViewModels.Layout;
+
+public enum AlignMode
 {
-    public enum AlignMode
-    {
-        Left,
-        Centered,
-        Right,
-        Top,
-        Center,
-        Bottom
-    }
+    Left,
+    Centered,
+    Right,
+    Top,
+    Center,
+    Bottom
 }

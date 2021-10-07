@@ -11,208 +11,207 @@ using Core2D.ViewModels.Path.Segments;
 using Core2D.ViewModels.Shapes;
 using static System.Math;
 
-namespace Core2D.ViewModels.Editor.Tools.Path
+namespace Core2D.ViewModels.Editor.Tools.Path;
+
+public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
 {
-    public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
+    public enum State { Start, End }
+
+    private const double DefaultRotationAngle = 0.0;
+    private const bool DefaultIsLargeArc = false;
+    private const SweepDirection DefaultSweepDirection = SweepDirection.Clockwise;
+
+    private State _currentState;
+    private readonly LineShapeViewModel _arc;
+    private LineSelection? _selection;
+
+    public string Title => "Arc";
+
+    public ArcPathToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        public enum State { Start, End }
+        _currentState = State.Start;
+        _arc = new LineShapeViewModel(serviceProvider);
+    }
 
-        private const double DefaultRotationAngle = 0.0;
-        private const bool DefaultIsLargeArc = false;
-        private const SweepDirection DefaultSweepDirection = SweepDirection.Clockwise;
+    public override object Copy(IDictionary<object, object>? shared)
+    {
+        throw new NotImplementedException();
+    }
 
-        private State _currentState;
-        private readonly LineShapeViewModel _arc;
-        private LineSelection? _selection;
-
-        public string Title => "Arc";
-
-        public ArcPathToolViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
+    public void BeginDown(InputArgs args)
+    {
+        var factory = ServiceProvider.GetService<IViewModelFactory>();
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        var pathTool = ServiceProvider.GetService<PathToolViewModel>();
+        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        switch (_currentState)
         {
-            _currentState = State.Start;
-            _arc = new LineShapeViewModel(serviceProvider);
-        }
-
-        public override object Copy(IDictionary<object, object>? shared)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void BeginDown(InputArgs args)
-        {
-            var factory = ServiceProvider.GetService<IViewModelFactory>();
-            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            var selection = ServiceProvider.GetService<ISelectionService>();
-            var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-            (decimal sx, decimal sy) = selection.TryToSnap(args);
-            switch (_currentState)
+            case State.Start:
             {
-                case State.Start:
-                    {
-                        editor.IsToolIdle = false;
-                        _arc.Start = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
-                        if (!pathTool.IsInitialized)
-                        {
-                            pathTool.InitializeWorkingPath(_arc.Start);
-                        }
-                        else
-                        {
-                            _arc.Start = pathTool.GetLastPathPoint();
-                        }
+                editor.IsToolIdle = false;
+                _arc.Start = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
+                if (!pathTool.IsInitialized)
+                {
+                    pathTool.InitializeWorkingPath(_arc.Start);
+                }
+                else
+                {
+                    _arc.Start = pathTool.GetLastPathPoint();
+                }
 
-                        _arc.End = factory.CreatePointShape((double)sx, (double)sy);
-                        pathTool.GeometryContext.ArcTo(
-                            _arc.End,
-                            factory.CreatePathSize(
-                                Abs(_arc.Start.X - _arc.End.X),
-                                Abs(_arc.Start.Y - _arc.End.Y)),
-                            DefaultRotationAngle,
-                            DefaultIsLargeArc,
-                            DefaultSweepDirection);
-                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-                        ToStateEnd();
-                        Move(null);
-                        _currentState = State.End;
-                    }
-                    break;
-
-                case State.End:
-                    {
-                        _arc.End.X = (double)sx;
-                        _arc.End.Y = (double)sy;
-                        if (editor.Project.Options.TryToConnect)
-                        {
-                            var end = selection.TryToGetConnectionPoint((double)sx, (double)sy);
-                            if (end is { })
-                            {
-                                _arc.End = end;
-                            }
-                        }
-                        _arc.Start = _arc.End;
-                        _arc.End = factory.CreatePointShape((double)sx, (double)sy);
-                        pathTool.GeometryContext.ArcTo(
-                            _arc.End,
-                            factory.CreatePathSize(
-                                Abs(_arc.Start.X - _arc.End.X),
-                                Abs(_arc.Start.Y - _arc.End.Y)),
-                            DefaultRotationAngle,
-                            DefaultIsLargeArc,
-                            DefaultSweepDirection);
-                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-                        Move(null);
-                        _currentState = State.End;
-                    }
-                    break;
+                _arc.End = factory.CreatePointShape((double)sx, (double)sy);
+                pathTool.GeometryContext.ArcTo(
+                    _arc.End,
+                    factory.CreatePathSize(
+                        Abs(_arc.Start.X - _arc.End.X),
+                        Abs(_arc.Start.Y - _arc.End.Y)),
+                    DefaultRotationAngle,
+                    DefaultIsLargeArc,
+                    DefaultSweepDirection);
+                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                ToStateEnd();
+                Move(null);
+                _currentState = State.End;
             }
-        }
+                break;
 
-        public void BeginUp(InputArgs args)
-        {
-        }
-
-        public void EndDown(InputArgs args)
-        {
-            switch (_currentState)
+            case State.End:
             {
-                case State.Start:
-                    break;
-
-                case State.End:
-                    Reset();
-                    Finalize(null);
-                    break;
-            }
-        }
-
-        public void EndUp(InputArgs args)
-        {
-        }
-
-        public void Move(InputArgs args)
-        {
-            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            var selection = ServiceProvider.GetService<ISelectionService>();
-            var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-            (decimal sx, decimal sy) = selection.TryToSnap(args);
-            switch (_currentState)
-            {
-                case State.Start:
+                _arc.End.X = (double)sx;
+                _arc.End.Y = (double)sy;
+                if (editor.Project.Options.TryToConnect)
+                {
+                    var end = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    if (end is { })
                     {
-                        if (editor.Project.Options.TryToConnect)
-                        {
-                            selection.TryToHoverShape((double)sx, (double)sy);
-                        }
+                        _arc.End = end;
                     }
-                    break;
-
-                case State.End:
-                    {
-                        if (editor.Project.Options.TryToConnect)
-                        {
-                            selection.TryToHoverShape((double)sx, (double)sy);
-                        }
-                        _arc.End.X = (double)sx;
-                        _arc.End.Y = (double)sy;
-                        var figure = pathTool.Path.Figures.LastOrDefault();
-                        var arc = figure.Segments.LastOrDefault() as ArcSegmentViewModel;
-                        arc.Point = _arc.End;
-                        arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
-                        arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
-                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-                        Move(null);
-                    }
-                    break;
+                }
+                _arc.Start = _arc.End;
+                _arc.End = factory.CreatePointShape((double)sx, (double)sy);
+                pathTool.GeometryContext.ArcTo(
+                    _arc.End,
+                    factory.CreatePathSize(
+                        Abs(_arc.Start.X - _arc.End.X),
+                        Abs(_arc.Start.Y - _arc.End.Y)),
+                    DefaultRotationAngle,
+                    DefaultIsLargeArc,
+                    DefaultSweepDirection);
+                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                Move(null);
+                _currentState = State.End;
             }
+                break;
         }
+    }
 
-        public void ToStateEnd()
+    public void BeginUp(InputArgs args)
+    {
+    }
+
+    public void EndDown(InputArgs args)
+    {
+        switch (_currentState)
         {
-            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            _selection?.Reset();
-            _selection = new LineSelection(
-                ServiceProvider,
-                editor.Project.CurrentContainer.HelperLayer,
-                _arc,
-                editor.PageState.HelperStyle);
+            case State.Start:
+                break;
 
-            _selection.ToStateEnd();
+            case State.End:
+                Reset();
+                Finalize(null);
+                break;
         }
+    }
 
-        public void Move(BaseShapeViewModel shape)
+    public void EndUp(InputArgs args)
+    {
+    }
+
+    public void Move(InputArgs args)
+    {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        var pathTool = ServiceProvider.GetService<PathToolViewModel>();
+        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        switch (_currentState)
         {
-            _selection?.Move();
-        }
-
-        public void Finalize(BaseShapeViewModel shape)
-        {
-        }
-
-        public void Reset()
-        {
-            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-
-            switch (_currentState)
+            case State.Start:
             {
-                case State.Start:
-                    break;
-
-                case State.End:
-                    {
-                        pathTool.RemoveLastSegment<ArcSegmentViewModel>();
-                    }
-                    break;
+                if (editor.Project.Options.TryToConnect)
+                {
+                    selection.TryToHoverShape((double)sx, (double)sy);
+                }
             }
+                break;
 
-            _currentState = State.Start;
-
-            if (_selection is { })
+            case State.End:
             {
-                _selection.Reset();
-                _selection = null;
+                if (editor.Project.Options.TryToConnect)
+                {
+                    selection.TryToHoverShape((double)sx, (double)sy);
+                }
+                _arc.End.X = (double)sx;
+                _arc.End.Y = (double)sy;
+                var figure = pathTool.Path.Figures.LastOrDefault();
+                var arc = figure.Segments.LastOrDefault() as ArcSegmentViewModel;
+                arc.Point = _arc.End;
+                arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
+                arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
+                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                Move(null);
             }
-
-            editor.IsToolIdle = true;
+                break;
         }
+    }
+
+    public void ToStateEnd()
+    {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        _selection?.Reset();
+        _selection = new LineSelection(
+            ServiceProvider,
+            editor.Project.CurrentContainer.HelperLayer,
+            _arc,
+            editor.PageState.HelperStyle);
+
+        _selection.ToStateEnd();
+    }
+
+    public void Move(BaseShapeViewModel shape)
+    {
+        _selection?.Move();
+    }
+
+    public void Finalize(BaseShapeViewModel shape)
+    {
+    }
+
+    public void Reset()
+    {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        var pathTool = ServiceProvider.GetService<PathToolViewModel>();
+
+        switch (_currentState)
+        {
+            case State.Start:
+                break;
+
+            case State.End:
+            {
+                pathTool.RemoveLastSegment<ArcSegmentViewModel>();
+            }
+                break;
+        }
+
+        _currentState = State.Start;
+
+        if (_selection is { })
+        {
+            _selection.Reset();
+            _selection = null;
+        }
+
+        editor.IsToolIdle = true;
     }
 }

@@ -5,24 +5,23 @@ using Core2D.ViewModels.Style;
 using A = Avalonia;
 using AM = Avalonia.Media;
 
-namespace Core2D.Modules.Renderer.Avalonia.Nodes.Markers
+namespace Core2D.Modules.Renderer.Avalonia.Nodes.Markers;
+
+internal abstract class MarkerBase : IMarker
 {
-    internal abstract class MarkerBase : IMarker
+    public BaseShapeViewModel ShapeViewModel { get; set; }
+    public ShapeStyleViewModel ShapeStyleViewModel { get; set; }
+    public ArrowStyleViewModel Style { get; set; }
+    public AM.IBrush Brush { get; set; }
+    public AM.IPen Pen { get; set; }
+    public A.Matrix Rotation { get; set; }
+    public A.Point Point { get; set; }
+
+    public abstract void Draw(object dc);
+
+    public virtual void UpdateStyle()
     {
-        public BaseShapeViewModel ShapeViewModel { get; set; }
-        public ShapeStyleViewModel ShapeStyleViewModel { get; set; }
-        public ArrowStyleViewModel Style { get; set; }
-        public AM.IBrush Brush { get; set; }
-        public AM.IPen Pen { get; set; }
-        public A.Matrix Rotation { get; set; }
-        public A.Point Point { get; set; }
-
-        public abstract void Draw(object dc);
-
-        public virtual void UpdateStyle()
-        {
-            Brush = AvaloniaDrawUtil.ToBrush(ShapeStyleViewModel.Fill.Color);
-            Pen = AvaloniaDrawUtil.ToPen(ShapeStyleViewModel, ShapeStyleViewModel.Stroke.Thickness);
-        }
+        Brush = AvaloniaDrawUtil.ToBrush(ShapeStyleViewModel.Fill.Color);
+        Pen = AvaloniaDrawUtil.ToPen(ShapeStyleViewModel, ShapeStyleViewModel.Stroke.Thickness);
     }
 }

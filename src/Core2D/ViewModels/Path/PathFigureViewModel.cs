@@ -7,150 +7,149 @@ using System.Reactive.Disposables;
 using System.Text;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.ViewModels.Path
+namespace Core2D.ViewModels.Path;
+
+public partial class PathFigureViewModel : ViewModelBase
 {
-    public partial class PathFigureViewModel : ViewModelBase
+    [AutoNotify] private PointShapeViewModel? _startPoint;
+    [AutoNotify] private ImmutableArray<PathSegmentViewModel> _segments;
+    [AutoNotify] private bool _isClosed;
+
+    public PathFigureViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        [AutoNotify] private PointShapeViewModel? _startPoint;
-        [AutoNotify] private ImmutableArray<PathSegmentViewModel> _segments;
-        [AutoNotify] private bool _isClosed;
+    }
 
-        public PathFigureViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
+    public override object Copy(IDictionary<object, object>? shared)
+    {
+        var segments = _segments.CopyShared(shared).ToImmutable();
+
+        var copy = new PathFigureViewModel(ServiceProvider)
         {
+            Name = Name,
+            StartPoint = _startPoint?.CopyShared(shared),
+            Segments = segments,
+            IsClosed = IsClosed
+        };
+
+        return copy;
+    }
+
+    public void GetPoints(IList<PointShapeViewModel> points)
+    {
+        if (_startPoint == null)
+        {
+            return;
         }
 
-        public override object Copy(IDictionary<object, object>? shared)
+        points.Add(_startPoint);
+
+        foreach (var segment in _segments)
         {
-            var segments = _segments.CopyShared(shared).ToImmutable();
+            segment.GetPoints(points);
+        }
+    }
 
-            var copy = new PathFigureViewModel(ServiceProvider)
-            {
-                Name = Name,
-                StartPoint = _startPoint?.CopyShared(shared),
-                Segments = segments,
-                IsClosed = IsClosed
-            };
+    public override bool IsDirty()
+    {
+        var isDirty = base.IsDirty();
 
-            return copy;
+        if (_startPoint != null)
+        {
+            isDirty |= _startPoint.IsDirty();
         }
 
-        public void GetPoints(IList<PointShapeViewModel> points)
+        foreach (var segment in _segments)
         {
-            if (_startPoint == null)
-            {
-                return;
-            }
-
-            points.Add(_startPoint);
-
-            foreach (var segment in _segments)
-            {
-                segment.GetPoints(points);
-            }
+            isDirty |= segment.IsDirty();
         }
 
-        public override bool IsDirty()
+        return isDirty;
+    }
+
+    public override void Invalidate()
+    {
+        base.Invalidate();
+
+        _startPoint?.Invalidate();
+
+        foreach (var segment in _segments)
         {
-            var isDirty = base.IsDirty();
+            segment.Invalidate();
+        }
+    }
 
-            if (_startPoint != null)
+    public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
+    {
+        var mainDisposable = new CompositeDisposable();
+        var disposablePropertyChanged = default(IDisposable);
+        var disposableStartPoint = default(IDisposable);
+        var disposableSegments = default(CompositeDisposable);
+
+        ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+        ObserveObject(_startPoint, ref disposableStartPoint, mainDisposable, observer);
+        ObserveList(_segments, ref disposableSegments, mainDisposable, observer);
+
+        void Handler(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(StartPoint))
             {
-                isDirty |= _startPoint.IsDirty();
+                ObserveObject(_startPoint, ref disposableStartPoint, mainDisposable, observer);
             }
 
-            foreach (var segment in _segments)
+            if (e.PropertyName == nameof(Segments))
             {
-                isDirty |= segment.IsDirty();
+                ObserveList(_segments, ref disposableSegments, mainDisposable, observer);
             }
 
-            return isDirty;
+            observer.OnNext((sender, e));
         }
 
-        public override void Invalidate()
+        return mainDisposable;
+    }
+
+    private string ToXamlString(ImmutableArray<PathSegmentViewModel> segments)
+    {
+        if (segments.Length == 0)
         {
-            base.Invalidate();
-
-            _startPoint?.Invalidate();
-
-            foreach (var segment in _segments)
-            {
-                segment.Invalidate();
-            }
+            return "";
         }
-
-        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
+        var sb = new StringBuilder();
+        foreach (var segment in segments)
         {
-            var mainDisposable = new CompositeDisposable();
-            var disposablePropertyChanged = default(IDisposable);
-            var disposableStartPoint = default(IDisposable);
-            var disposableSegments = default(CompositeDisposable);
-
-            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
-            ObserveObject(_startPoint, ref disposableStartPoint, mainDisposable, observer);
-            ObserveList(_segments, ref disposableSegments, mainDisposable, observer);
-
-            void Handler(object? sender, PropertyChangedEventArgs e)
-            {
-                if (e.PropertyName == nameof(StartPoint))
-                {
-                    ObserveObject(_startPoint, ref disposableStartPoint, mainDisposable, observer);
-                }
-
-                if (e.PropertyName == nameof(Segments))
-                {
-                    ObserveList(_segments, ref disposableSegments, mainDisposable, observer);
-                }
-
-                observer.OnNext((sender, e));
-            }
-
-            return mainDisposable;
+            sb.Append(segment.ToXamlString());
         }
+        return sb.ToString();
+    }
 
-        private string ToXamlString(ImmutableArray<PathSegmentViewModel> segments)
+    private string ToSvgString(ImmutableArray<PathSegmentViewModel> segments)
+    {
+        if (segments.Length == 0)
         {
-            if (segments.Length == 0)
-            {
-                return "";
-            }
-            var sb = new StringBuilder();
-            foreach (var segment in segments)
-            {
-                sb.Append(segment.ToXamlString());
-            }
-            return sb.ToString();
+            return "";
         }
-
-        private string ToSvgString(ImmutableArray<PathSegmentViewModel> segments)
+        var sb = new StringBuilder();
+        foreach (var segment in segments)
         {
-            if (segments.Length == 0)
-            {
-                return "";
-            }
-            var sb = new StringBuilder();
-            foreach (var segment in segments)
-            {
-                sb.Append(segment.ToSvgString());
-            }
-            return sb.ToString();
+            sb.Append(segment.ToSvgString());
         }
+        return sb.ToString();
+    }
 
-        public string ToXamlString()
+    public string ToXamlString()
+    {
+        if (_startPoint == null)
         {
-            if (_startPoint == null)
-            {
-                return "";
-            }
-            return $"M{_startPoint.ToXamlString()}{ToXamlString(_segments)}{(_isClosed ? "z" : "")}";
+            return "";
         }
+        return $"M{_startPoint.ToXamlString()}{ToXamlString(_segments)}{(_isClosed ? "z" : "")}";
+    }
 
-        public string ToSvgString()
+    public string ToSvgString()
+    {
+        if (_startPoint == null)
         {
-            if (_startPoint == null)
-            {
-                return "";
-            }
-            return $"M{_startPoint.ToSvgString()}{ToSvgString(_segments)}{(_isClosed ? "z" : "")}";
+            return "";
         }
+        return $"M{_startPoint.ToSvgString()}{ToSvgString(_segments)}{(_isClosed ? "z" : "")}";
     }
 }

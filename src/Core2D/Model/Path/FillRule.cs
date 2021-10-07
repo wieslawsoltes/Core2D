@@ -1,10 +1,9 @@
 ﻿#nullable enable
-namespace Core2D.Model.Path
-{
-    public enum FillRule
-    {
-        Nonzero,
+namespace Core2D.Model.Path;
 
-        EvenOdd
-    }
+public enum FillRule
+{
+    Nonzero,
+
+    EvenOdd
 }

@@ -7,36 +7,35 @@ using Core2D.ViewModels.Editor;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
-namespace Core2D.Modules.ScriptRunner.Roslyn
+namespace Core2D.Modules.ScriptRunner.Roslyn;
+
+public class RoslynScriptRunner : IScriptRunner
 {
-    public class RoslynScriptRunner : IScriptRunner
+    private readonly IServiceProvider? _serviceProvider;
+
+    public RoslynScriptRunner(IServiceProvider? serviceProvider)
     {
-        private readonly IServiceProvider? _serviceProvider;
+        _serviceProvider = serviceProvider;
+    }
 
-        public RoslynScriptRunner(IServiceProvider? serviceProvider)
+    public async Task<object?> Execute(string code, object? state)
+    {
+        try
         {
-            _serviceProvider = serviceProvider;
+            if (state is ScriptState<object> previousState)
+            {
+                return await previousState.ContinueWithAsync(code);
+            }
+            var options = ScriptOptions.Default.WithImports("System");
+            var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+            return await CSharpScript.RunAsync(code, options, editor);
         }
-
-        public async Task<object?> Execute(string code, object? state)
+        catch (CompilationErrorException ex)
         {
-            try
-            {
-                if (state is ScriptState<object> previousState)
-                {
-                    return await previousState.ContinueWithAsync(code);
-                }
-                var options = ScriptOptions.Default.WithImports("System");
-                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-                return await CSharpScript.RunAsync(code, options, editor);
-            }
-            catch (CompilationErrorException ex)
-            {
-                var log = _serviceProvider.GetService<ILog>();
-                log?.LogException(ex);
-                log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
-            }
-            return null;
+            var log = _serviceProvider.GetService<ILog>();
+            log?.LogException(ex);
+            log?.LogError($"{Environment.NewLine}{ex.Diagnostics}");
         }
+        return null;
     }
 }

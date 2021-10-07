@@ -1,9 +1,8 @@
 #nullable enable
 using Dock.Model.ReactiveUI.Controls;
 
-namespace Core2D.ViewModels.Docking.Tools.Libraries
+namespace Core2D.ViewModels.Docking.Tools.Libraries;
+
+public class DatabaseLibraryViewModel : Tool
 {
-    public class DatabaseLibraryViewModel : Tool
-    {
-    }
 }

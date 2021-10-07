@@ -4,108 +4,107 @@ using Core2D.Model.Renderer.Nodes;
 using A = Avalonia;
 using AP = Avalonia.Platform;
 
-namespace Core2D.Modules.Renderer.Avalonia.Nodes
+namespace Core2D.Modules.Renderer.Avalonia.Nodes;
+
+internal class GridDrawNode : DrawNode, IGridDrawNode
 {
-    internal class GridDrawNode : DrawNode, IGridDrawNode
+    public A.Rect Rect { get; set; }
+    public IGrid Grid { get; set; }
+    public double X { get; set; }
+    public double Y { get; set; }
+    public double Width { get; set; }
+    public double Height { get; set; }
+
+    public GridDrawNode(IGrid grid, double x, double y, double width, double height)
     {
-        public A.Rect Rect { get; set; }
-        public IGrid Grid { get; set; }
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
+        Grid = grid;
+        X = x;
+        Y = y;
+        Width = width;
+        Height = height;
+        UpdateGeometry();
+    }
 
-        public GridDrawNode(IGrid grid, double x, double y, double width, double height)
+    public sealed override void UpdateGeometry()
+    {
+        ScaleThickness = true;
+        ScaleSize = false;
+        Rect = new A.Rect(
+            X + Grid.GridOffsetLeft,
+            Y + Grid.GridOffsetTop,
+            Width - Grid.GridOffsetLeft + Grid.GridOffsetRight,
+            Height - Grid.GridOffsetTop + Grid.GridOffsetBottom);
+        Center = Rect.Center;
+    }
+
+    public override void UpdateStyle()
+    {
+        if (Grid.GridStrokeColor is { })
         {
-            Grid = grid;
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
-            UpdateGeometry();
+            Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, Grid.GridStrokeThickness);
+        }
+        else
+        {
+            Stroke = null;
+        }
+    }
+
+    public override void Draw(object dc, double zoom)
+    {
+        var scale = ScaleSize ? 1.0 / zoom : 1.0;
+
+        double thickness = Grid.GridStrokeThickness;
+
+        if (ScaleThickness)
+        {
+            thickness /= zoom;
         }
 
-        public sealed override void UpdateGeometry()
+        if (scale != 1.0)
         {
-            ScaleThickness = true;
-            ScaleSize = false;
-            Rect = new A.Rect(
-                X + Grid.GridOffsetLeft,
-                Y + Grid.GridOffsetTop,
-                Width - Grid.GridOffsetLeft + Grid.GridOffsetRight,
-                Height - Grid.GridOffsetTop + Grid.GridOffsetBottom);
-            Center = Rect.Center;
+            thickness /= scale;
         }
 
-        public override void UpdateStyle()
+        if (Stroke is { } && Stroke.Thickness != thickness)
         {
-            if (Grid.GridStrokeColor is { })
-            {
-                Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, Grid.GridStrokeThickness);
-            }
-            else
-            {
-                Stroke = null;
-            }
+            Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, thickness);
         }
 
-        public override void Draw(object dc, double zoom)
+        OnDraw(dc, zoom);
+    }
+
+    public override void OnDraw(object dc, double zoom)
+    {
+        var context = dc as AP.IDrawingContextImpl;
+        if (Grid.GridStrokeColor is { })
         {
-            var scale = ScaleSize ? 1.0 / zoom : 1.0;
-
-            double thickness = Grid.GridStrokeThickness;
-
-            if (ScaleThickness)
+            if (Grid.IsGridEnabled)
             {
-                thickness /= zoom;
-            }
+                double ox = Rect.X;
+                double ex = Rect.X + Rect.Width;
+                double oy = Rect.Y;
+                double ey = Rect.Y + Rect.Height;
+                double cw = Grid.GridCellWidth;
+                double ch = Grid.GridCellHeight;
 
-            if (scale != 1.0)
-            {
-                thickness /= scale;
-            }
-
-            if (Stroke is { } && Stroke.Thickness != thickness)
-            {
-                Stroke = AvaloniaDrawUtil.ToPen(Grid.GridStrokeColor, thickness);
-            }
-
-            OnDraw(dc, zoom);
-        }
-
-        public override void OnDraw(object dc, double zoom)
-        {
-            var context = dc as AP.IDrawingContextImpl;
-            if (Grid.GridStrokeColor is { })
-            {
-                if (Grid.IsGridEnabled)
+                for (double x = ox + cw; x < ex; x += cw)
                 {
-                    double ox = Rect.X;
-                    double ex = Rect.X + Rect.Width;
-                    double oy = Rect.Y;
-                    double ey = Rect.Y + Rect.Height;
-                    double cw = Grid.GridCellWidth;
-                    double ch = Grid.GridCellHeight;
-
-                    for (double x = ox + cw; x < ex; x += cw)
-                    {
-                        var p0 = new A.Point(x, oy);
-                        var p1 = new A.Point(x, ey);
-                        context.DrawLine(Stroke, p0, p1);
-                    }
-
-                    for (double y = oy + ch; y < ey; y += ch)
-                    {
-                        var p0 = new A.Point(ox, y);
-                        var p1 = new A.Point(ex, y);
-                        context.DrawLine(Stroke, p0, p1);
-                    }
+                    var p0 = new A.Point(x, oy);
+                    var p1 = new A.Point(x, ey);
+                    context.DrawLine(Stroke, p0, p1);
                 }
 
-                if (Grid.IsBorderEnabled)
+                for (double y = oy + ch; y < ey; y += ch)
                 {
-                    context.DrawRectangle(null, Stroke, Rect);
+                    var p0 = new A.Point(ox, y);
+                    var p1 = new A.Point(ex, y);
+                    context.DrawLine(Stroke, p0, p1);
                 }
+            }
+
+            if (Grid.IsBorderEnabled)
+            {
+                context.DrawRectangle(null, Stroke, Rect);
             }
         }
     }

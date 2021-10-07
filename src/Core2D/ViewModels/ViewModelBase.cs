@@ -8,159 +8,158 @@ using System.Windows.Input;
 using Core2D.Model.Editor;
 using Core2D.ViewModels.Editor;
 
-namespace Core2D.ViewModels
+namespace Core2D.ViewModels;
+
+public abstract partial class ViewModelBase : INotifyPropertyChanged
 {
-    public abstract partial class ViewModelBase : INotifyPropertyChanged
+    private bool _isDirty;
+    [AutoNotify] private ViewModelBase? _owner;
+    [AutoNotify] private string _name = "";
+
+    protected ViewModelBase(IServiceProvider? serviceProvider)
     {
-        private bool _isDirty;
-        [AutoNotify] private ViewModelBase? _owner;
-        [AutoNotify] private string _name = "";
+        ServiceProvider = serviceProvider;
 
-        protected ViewModelBase(IServiceProvider? serviceProvider)
-        {
-            ServiceProvider = serviceProvider;
+        CutCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
 
-            CutCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
+        CopyCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
 
-            CopyCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
+        PasteCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
 
-            PasteCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
+        DeleteCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnDelete(x));
 
-            DeleteCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnDelete(x));
+        ExportCommand = new Command<object?>(x => ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(x));
+    }
 
-            ExportCommand = new Command<object?>(x => ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(x));
-        }
-
-        [IgnoreDataMember]
-        public ICommand CutCommand { get; }
+    [IgnoreDataMember]
+    public ICommand CutCommand { get; }
         
-        [IgnoreDataMember]
-        public ICommand CopyCommand { get; }
+    [IgnoreDataMember]
+    public ICommand CopyCommand { get; }
 
-        [IgnoreDataMember]
-        public ICommand PasteCommand { get; }
+    [IgnoreDataMember]
+    public ICommand PasteCommand { get; }
 
-        [IgnoreDataMember]
-        public ICommand DeleteCommand { get; }
+    [IgnoreDataMember]
+    public ICommand DeleteCommand { get; }
 
-        [IgnoreDataMember]
-        public ICommand ExportCommand { get; }
+    [IgnoreDataMember]
+    public ICommand ExportCommand { get; }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-        [IgnoreDataMember]
-        protected IServiceProvider? ServiceProvider { get; }
+    [IgnoreDataMember]
+    protected IServiceProvider? ServiceProvider { get; }
 
-        public virtual bool IsDirty() => _isDirty;
+    public virtual bool IsDirty() => _isDirty;
 
-        public virtual void Invalidate() => _isDirty = false;
+    public virtual void Invalidate() => _isDirty = false;
 
-        public virtual void MarkAsDirty() => _isDirty = true;
+    public virtual void MarkAsDirty() => _isDirty = true;
 
-        public abstract object Copy(IDictionary<object, object>? shared);
+    public abstract object Copy(IDictionary<object, object>? shared);
 
-        protected void RaisePropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
+    protected void RaisePropertyChanged(PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, e);
 
-        protected void RaiseAndSetIfChanged<T>(ref T field, T value, PropertyChangedEventArgs e)
+    protected void RaiseAndSetIfChanged<T>(ref T field, T value, PropertyChangedEventArgs e)
+    {
+        if (!Equals(field, value))
         {
-            if (!Equals(field, value))
-            {
-                field = value;
-                _isDirty = true;
-                PropertyChanged?.Invoke(this, e);
-            }
+            field = value;
+            _isDirty = true;
+            PropertyChanged?.Invoke(this, e);
+        }
+    }
+
+    protected void ObserveSelf(
+        PropertyChangedEventHandler handler,
+        ref IDisposable? propertyDisposable,
+        CompositeDisposable? mainDisposable)
+    {
+        if (propertyDisposable is { })
+        {
+            mainDisposable?.Remove(propertyDisposable);
+
+            propertyDisposable.Dispose();
+            propertyDisposable = default;
         }
 
-        protected void ObserveSelf(
-            PropertyChangedEventHandler handler,
-            ref IDisposable? propertyDisposable,
-            CompositeDisposable? mainDisposable)
+        PropertyChanged += handler;
+
+        void Dispose() => PropertyChanged -= handler;
+
+        propertyDisposable = Disposable.Create(Dispose);
+
+        mainDisposable?.Add(propertyDisposable);
+    }
+
+    protected void ObserveObject<T>(
+        T? obj,
+        ref IDisposable? objDisposable,
+        CompositeDisposable? mainDisposable,
+        IObserver<(object? sender, PropertyChangedEventArgs e)> observer) where T : ViewModelBase
+    {
+        if (objDisposable is { })
         {
-            if (propertyDisposable is { })
-            {
-                mainDisposable?.Remove(propertyDisposable);
+            mainDisposable?.Remove(objDisposable);
 
-                propertyDisposable.Dispose();
-                propertyDisposable = default;
-            }
-
-            PropertyChanged += handler;
-
-            void Dispose() => PropertyChanged -= handler;
-
-            propertyDisposable = Disposable.Create(Dispose);
-
-            mainDisposable?.Add(propertyDisposable);
+            objDisposable.Dispose();
+            objDisposable = default;
         }
 
-        protected void ObserveObject<T>(
-            T? obj,
-            ref IDisposable? objDisposable,
-            CompositeDisposable? mainDisposable,
-            IObserver<(object? sender, PropertyChangedEventArgs e)> observer) where T : ViewModelBase
+        if (obj is { })
         {
-            if (objDisposable is { })
-            {
-                mainDisposable?.Remove(objDisposable);
+            objDisposable = obj.Subscribe(observer);
 
-                objDisposable.Dispose();
-                objDisposable = default;
+            if (mainDisposable is { } && objDisposable is { })
+            {
+                mainDisposable.Add(objDisposable);
             }
+        }
+    }
 
-            if (obj is { })
+    protected void ObserveList<T>(
+        IEnumerable<T>? list,
+        ref CompositeDisposable? listDisposable,
+        CompositeDisposable? mainDisposable,
+        IObserver<(object? sender, PropertyChangedEventArgs e)> observer) where T : ViewModelBase
+    {
+        if (listDisposable is { })
+        {
+            mainDisposable?.Remove(listDisposable);
+
+            listDisposable.Dispose();
+            listDisposable = default;
+        }
+
+        if (list is { })
+        {
+            listDisposable = new CompositeDisposable();
+
+            foreach (var item in list)
             {
-                objDisposable = obj.Subscribe(observer);
-
-                if (mainDisposable is { } && objDisposable is { })
+                var itemDisposable = item.Subscribe(observer);
+                if (itemDisposable is { })
                 {
-                    mainDisposable.Add(objDisposable);
+                    listDisposable.Add(itemDisposable);
                 }
             }
+
+            mainDisposable?.Add(listDisposable);
         }
+    }
 
-        protected void ObserveList<T>(
-            IEnumerable<T>? list,
-            ref CompositeDisposable? listDisposable,
-            CompositeDisposable? mainDisposable,
-            IObserver<(object? sender, PropertyChangedEventArgs e)> observer) where T : ViewModelBase
+    public virtual IDisposable? Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
+    {
+        var disposablePropertyChanged = default(IDisposable);
+
+        ObserveSelf(Handler, ref disposablePropertyChanged, default);
+
+        return disposablePropertyChanged;
+
+        void Handler(object? sender, PropertyChangedEventArgs e)
         {
-            if (listDisposable is { })
-            {
-                mainDisposable?.Remove(listDisposable);
-
-                listDisposable.Dispose();
-                listDisposable = default;
-            }
-
-            if (list is { })
-            {
-                listDisposable = new CompositeDisposable();
-
-                foreach (var item in list)
-                {
-                    var itemDisposable = item.Subscribe(observer);
-                    if (itemDisposable is { })
-                    {
-                        listDisposable.Add(itemDisposable);
-                    }
-                }
-
-                mainDisposable?.Add(listDisposable);
-            }
-        }
-
-        public virtual IDisposable? Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
-        {
-            var disposablePropertyChanged = default(IDisposable);
-
-            ObserveSelf(Handler, ref disposablePropertyChanged, default);
-
-            return disposablePropertyChanged;
-
-            void Handler(object? sender, PropertyChangedEventArgs e)
-            {
-                observer.OnNext((sender, e));
-            }
+            observer.OnNext((sender, e));
         }
     }
 }

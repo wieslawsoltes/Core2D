@@ -9,107 +9,106 @@ using System.Windows.Input;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.ViewModels.Containers
-{
-    public class InvalidateLayerEventArgs : EventArgs
-    {
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        // ReSharper disable once MemberCanBePrivate.Global
-        public LayerContainerViewModel Layer { get; }
+namespace Core2D.ViewModels.Containers;
 
-        public InvalidateLayerEventArgs(LayerContainerViewModel layer)
-        {
-            Layer = layer;
-        }
+public class InvalidateLayerEventArgs : EventArgs
+{
+    // ReSharper disable once UnusedAutoPropertyAccessor.Global
+    // ReSharper disable once MemberCanBePrivate.Global
+    public LayerContainerViewModel Layer { get; }
+
+    public InvalidateLayerEventArgs(LayerContainerViewModel layer)
+    {
+        Layer = layer;
+    }
+}
+
+public delegate void InvalidateLayerEventHandler(object? sender, InvalidateLayerEventArgs e);
+
+public partial class LayerContainerViewModel : BaseContainerViewModel
+{
+    private readonly InvalidateLayerEventArgs _invalidateLayerEventArgs;
+    [AutoNotify] private ImmutableArray<BaseShapeViewModel> _shapes;
+
+    public event InvalidateLayerEventHandler? InvalidateLayer;
+
+    public LayerContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
+    {
+        _invalidateLayerEventArgs = new InvalidateLayerEventArgs(this);
+
+        AddLayer = new Command<FrameContainerViewModel?>(x => GetProject()?.OnAddLayer(x));
+
+        RemoveLayer = new Command<LayerContainerViewModel?>(x => GetProject()?.OnRemoveLayer(x));
+
+        ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }
 
-    public delegate void InvalidateLayerEventHandler(object? sender, InvalidateLayerEventArgs e);
+    [IgnoreDataMember]
+    public ICommand AddLayer { get; }
 
-    public partial class LayerContainerViewModel : BaseContainerViewModel
+    [IgnoreDataMember]
+    public ICommand RemoveLayer { get; }
+
+    public override object Copy(IDictionary<object, object>? shared)
     {
-        private readonly InvalidateLayerEventArgs _invalidateLayerEventArgs;
-        [AutoNotify] private ImmutableArray<BaseShapeViewModel> _shapes;
+        var shapes = _shapes.CopyShared(shared).ToImmutable();
 
-        public event InvalidateLayerEventHandler? InvalidateLayer;
-
-        public LayerContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
+        var copy = new LayerContainerViewModel(ServiceProvider)
         {
-            _invalidateLayerEventArgs = new InvalidateLayerEventArgs(this);
+            Name = Name,
+            IsVisible = IsVisible,
+            IsExpanded = IsExpanded,
+            Shapes = shapes
+        };
 
-            AddLayer = new Command<FrameContainerViewModel?>(x => GetProject()?.OnAddLayer(x));
+        return copy;
+    }
 
-            RemoveLayer = new Command<LayerContainerViewModel?>(x => GetProject()?.OnRemoveLayer(x));
+    public void RaiseInvalidateLayer()
+    {
+        InvalidateLayer?.Invoke(this, _invalidateLayerEventArgs);
+    }
 
-            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+    public override bool IsDirty()
+    {
+        var isDirty = base.IsDirty();
+
+        foreach (var shape in _shapes)
+        {
+            isDirty |= shape.IsDirty();
         }
 
-        [IgnoreDataMember]
-        public ICommand AddLayer { get; }
+        return isDirty;
+    }
 
-        [IgnoreDataMember]
-        public ICommand RemoveLayer { get; }
+    public override void Invalidate()
+    {
+        base.Invalidate();
 
-        public override object Copy(IDictionary<object, object>? shared)
+        foreach (var shape in _shapes)
         {
-            var shapes = _shapes.CopyShared(shared).ToImmutable();
+            shape.Invalidate();
+        }
+    }
+    public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
+    {
+        var mainDisposable = new CompositeDisposable();
+        var disposablePropertyChanged = default(IDisposable);
+        var disposableShapes = default(CompositeDisposable);
 
-            var copy = new LayerContainerViewModel(ServiceProvider)
+        ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+        ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
+
+        void Handler(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Shapes))
             {
-                Name = Name,
-                IsVisible = IsVisible,
-                IsExpanded = IsExpanded,
-                Shapes = shapes
-            };
-
-            return copy;
-        }
-
-        public void RaiseInvalidateLayer()
-        {
-            InvalidateLayer?.Invoke(this, _invalidateLayerEventArgs);
-        }
-
-        public override bool IsDirty()
-        {
-            var isDirty = base.IsDirty();
-
-            foreach (var shape in _shapes)
-            {
-                isDirty |= shape.IsDirty();
+                ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
             }
 
-            return isDirty;
+            observer.OnNext((sender, e));
         }
 
-        public override void Invalidate()
-        {
-            base.Invalidate();
-
-            foreach (var shape in _shapes)
-            {
-                shape.Invalidate();
-            }
-        }
-        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
-        {
-            var mainDisposable = new CompositeDisposable();
-            var disposablePropertyChanged = default(IDisposable);
-            var disposableShapes = default(CompositeDisposable);
-
-            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
-            ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
-
-            void Handler(object? sender, PropertyChangedEventArgs e)
-            {
-                if (e.PropertyName == nameof(Shapes))
-                {
-                    ObserveList(_shapes, ref disposableShapes, mainDisposable, observer);
-                }
-
-                observer.OnNext((sender, e));
-            }
-
-            return mainDisposable;
-        }
+        return mainDisposable;
     }
 }

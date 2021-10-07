@@ -3,31 +3,30 @@ using Core2D.ViewModels.Docking.Documents;
 using Dock.Model.ReactiveUI.Controls;
 using ReactiveUI;
 
-namespace Core2D.ViewModels.Docking.Docks
+namespace Core2D.ViewModels.Docking.Docks;
+
+public class PageDocumentDock : DocumentDock
 {
-    public class PageDocumentDock : DocumentDock
+    public PageDocumentDock()
     {
-        public PageDocumentDock()
+        CreateDocument = ReactiveCommand.Create(CreatePage);
+    }
+
+    private void CreatePage()
+    {
+        if (!CanCreateDocument)
         {
-            CreateDocument = ReactiveCommand.Create(CreatePage);
+            return;
         }
 
-        private void CreatePage()
+        var page = new PageViewModel()
         {
-            if (!CanCreateDocument)
-            {
-                return;
-            }
+            Id = "PageDocument",
+            Title = "Page"
+        };
 
-            var page = new PageViewModel()
-            {
-                Id = "PageDocument",
-                Title = "Page"
-            };
-
-            Factory?.AddDockable(this, page);
-            Factory?.SetActiveDockable(page);
-            Factory?.SetFocusedDockable(this, page);
-        }
+        Factory?.AddDockable(this, page);
+        Factory?.SetActiveDockable(page);
+        Factory?.SetFocusedDockable(this, page);
     }
 }

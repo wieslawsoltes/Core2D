@@ -1,31 +1,30 @@
 ﻿#nullable enable
 using System;
 
-namespace Core2D.Model.Renderer
+namespace Core2D.Model.Renderer;
+
+[Flags]
+public enum ShapeStateFlags
 {
-    [Flags]
-    public enum ShapeStateFlags
-    {
-        Default = 0,
+    Default = 0,
 
-        Visible = 1,
+    Visible = 1,
 
-        Printable = 2,
+    Printable = 2,
 
-        Locked = 4,
+    Locked = 4,
 
-        Size = 8,
+    Size = 8,
 
-        Thickness = 16,
+    Thickness = 16,
 
-        Connector = 32,
+    Connector = 32,
 
-        None = 64,
+    None = 64,
 
-        Standalone = 128,
+    Standalone = 128,
 
-        Input = 256,
+    Input = 256,
 
-        Output = 512
-    }
+    Output = 512
 }

@@ -8,89 +8,88 @@ using System.Runtime.Serialization;
 using System.Windows.Input;
 using Core2D.ViewModels.Editor;
 
-namespace Core2D.ViewModels.Containers
+namespace Core2D.ViewModels.Containers;
+
+public partial class DocumentContainerViewModel : BaseContainerViewModel
 {
-    public partial class DocumentContainerViewModel : BaseContainerViewModel
+    [AutoNotify] private ImmutableArray<PageContainerViewModel> _pages;
+
+    public DocumentContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        [AutoNotify] private ImmutableArray<PageContainerViewModel> _pages;
+        AddPage = new Command<object?>(x => GetProject()?.OnAddPage(x));
 
-        public DocumentContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
-        {
-            AddPage = new Command<object?>(x => GetProject()?.OnAddPage(x));
+        InsertDocumentBefore = new Command<object?>(x => GetProject()?.OnInsertDocumentBefore(x));
 
-            InsertDocumentBefore = new Command<object?>(x => GetProject()?.OnInsertDocumentBefore(x));
+        InsertDocumentAfter = new Command<object?>(x => GetProject()?.OnInsertDocumentAfter(x));
 
-            InsertDocumentAfter = new Command<object?>(x => GetProject()?.OnInsertDocumentAfter(x));
+        ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+    }
 
-            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        }
-
-        [IgnoreDataMember]
-        public ICommand AddPage { get; }
+    [IgnoreDataMember]
+    public ICommand AddPage { get; }
         
-        [IgnoreDataMember]
-        public ICommand InsertDocumentBefore { get; }
+    [IgnoreDataMember]
+    public ICommand InsertDocumentBefore { get; }
 
-        [IgnoreDataMember]
-        public ICommand InsertDocumentAfter { get; }
+    [IgnoreDataMember]
+    public ICommand InsertDocumentAfter { get; }
         
-        public override object Copy(IDictionary<object, object>? shared)
+    public override object Copy(IDictionary<object, object>? shared)
+    {
+        var pages = _pages.CopyShared(shared).ToImmutable();
+
+        var copy = new DocumentContainerViewModel(ServiceProvider)
         {
-            var pages = _pages.CopyShared(shared).ToImmutable();
+            Name = Name,
+            IsVisible = IsVisible,
+            IsExpanded = IsExpanded,
+            Pages = pages
+        };
 
-            var copy = new DocumentContainerViewModel(ServiceProvider)
-            {
-                Name = Name,
-                IsVisible = IsVisible,
-                IsExpanded = IsExpanded,
-                Pages = pages
-            };
+        return copy;
+    }
 
-            return copy;
+    public override bool IsDirty()
+    {
+        var isDirty = base.IsDirty();
+
+        foreach (var page in _pages)
+        {
+            isDirty |= page.IsDirty();
         }
 
-        public override bool IsDirty()
-        {
-            var isDirty = base.IsDirty();
+        return isDirty;
+    }
 
-            foreach (var page in _pages)
+    public override void Invalidate()
+    {
+        base.Invalidate();
+
+        foreach (var page in _pages)
+        {
+            page.Invalidate();
+        }
+    }
+
+    public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
+    {
+        var mainDisposable = new CompositeDisposable();
+        var disposablePropertyChanged = default(IDisposable);
+        var disposablePages = default(CompositeDisposable);
+
+        ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+        ObserveList(_pages, ref disposablePages, mainDisposable, observer);
+
+        void Handler(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Pages))
             {
-                isDirty |= page.IsDirty();
+                ObserveList(_pages, ref disposablePages, mainDisposable, observer);
             }
 
-            return isDirty;
+            observer.OnNext((sender, e));
         }
 
-        public override void Invalidate()
-        {
-            base.Invalidate();
-
-            foreach (var page in _pages)
-            {
-                page.Invalidate();
-            }
-        }
-
-        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
-        {
-            var mainDisposable = new CompositeDisposable();
-            var disposablePropertyChanged = default(IDisposable);
-            var disposablePages = default(CompositeDisposable);
-
-            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
-            ObserveList(_pages, ref disposablePages, mainDisposable, observer);
-
-            void Handler(object? sender, PropertyChangedEventArgs e)
-            {
-                if (e.PropertyName == nameof(Pages))
-                {
-                    ObserveList(_pages, ref disposablePages, mainDisposable, observer);
-                }
-
-                observer.OnNext((sender, e));
-            }
-
-            return mainDisposable;
-        }
+        return mainDisposable;
     }
 }

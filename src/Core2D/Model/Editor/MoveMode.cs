@@ -1,10 +1,9 @@
 ﻿#nullable enable
-namespace Core2D.Model.Editor
-{
-    public enum MoveMode
-    {
-        Point,
+namespace Core2D.Model.Editor;
 
-        Shape
-    }
+public enum MoveMode
+{
+    Point,
+
+    Shape
 }

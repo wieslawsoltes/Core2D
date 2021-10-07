@@ -1,15 +1,14 @@
 ﻿#nullable enable
 using System;
 
-namespace Core2D.Model.Style
+namespace Core2D.Model.Style;
+
+[Flags]
+public enum FontStyleFlags
 {
-    [Flags]
-    public enum FontStyleFlags
-    {
-        Regular = 0,
+    Regular = 0,
 
-        Bold = 1,
+    Bold = 1,
 
-        Italic = 2
-    }
+    Italic = 2
 }

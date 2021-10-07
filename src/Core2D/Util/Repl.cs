@@ -6,36 +6,35 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Screenshot;
 using Core2D.ViewModels.Editor;
 
-namespace Core2D.Util
+namespace Core2D.Util;
+
+public class Repl
 {
-    public class Repl
+    public static Application GetApplication()
     {
-        public static Application GetApplication()
-        {
-            return Application.Current;
-        }
+        return Application.Current;
+    }
 
-        public static Window GetMainWindow()
-        {
-            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)GetApplication().ApplicationLifetime;
-            return applicationLifetime?.MainWindow;
-        }
+    public static Window GetMainWindow()
+    {
+        var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)GetApplication().ApplicationLifetime;
+        return applicationLifetime?.MainWindow;
+    }
 
-        public static Control GetMainView()
-        {
-            var mainWindow = GetMainWindow();
-            return mainWindow?.Content as Control;
-        }
+    public static Control GetMainView()
+    {
+        var mainWindow = GetMainWindow();
+        return mainWindow?.Content as Control;
+    }
 
-        public static ProjectEditorViewModel GetEditor()
-        {
-            var mainWidow = GetMainWindow();
-            return mainWidow?.DataContext as ProjectEditorViewModel;
-        }
+    public static ProjectEditorViewModel GetEditor()
+    {
+        var mainWidow = GetMainWindow();
+        return mainWidow?.DataContext as ProjectEditorViewModel;
+    }
 
-        public static async Task Screenshot(string path = "screenshot.png", double width = 1366, double height = 690)
-        {
-            await Utilities.RunUiJob(() => Capture.Save(GetMainView(), new Size(width, height), path));
-        }
+    public static async Task Screenshot(string path = "screenshot.png", double width = 1366, double height = 690)
+    {
+        await Utilities.RunUiJob(() => Capture.Save(GetMainView(), new Size(width, height), path));
     }
 }

@@ -1,9 +1,8 @@
 ﻿#nullable enable
 using Dock.Model.ReactiveUI.Core;
 
-namespace Core2D.ViewModels.Docking.Views
+namespace Core2D.ViewModels.Docking.Views;
+
+public class DashboardMenuViewModel : DockBase
 {
-    public class DashboardMenuViewModel : DockBase
-    {
-    }
 }

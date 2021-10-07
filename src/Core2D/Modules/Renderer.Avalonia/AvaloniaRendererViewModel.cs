@@ -2,13 +2,12 @@
 using System;
 using Core2D.ViewModels.Renderer;
 
-namespace Core2D.Modules.Renderer.Avalonia
+namespace Core2D.Modules.Renderer.Avalonia;
+
+public class AvaloniaRendererViewModel : NodeRendererViewModel
 {
-    public class AvaloniaRendererViewModel : NodeRendererViewModel
+    public AvaloniaRendererViewModel(IServiceProvider? serviceProvider)
+        : base(serviceProvider, new AvaloniaDrawNodeFactory())
     {
-        public AvaloniaRendererViewModel(IServiceProvider? serviceProvider)
-            : base(serviceProvider, new AvaloniaDrawNodeFactory())
-        {
-        }
     }
 }

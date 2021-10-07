@@ -1,14 +1,13 @@
 ﻿#nullable enable
 using System.Threading.Tasks;
 
-namespace Core2D.Model
+namespace Core2D.Model;
+
+public interface ITextClipboard
 {
-    public interface ITextClipboard
-    {
-        Task<bool> ContainsText();
+    Task<bool> ContainsText();
 
-        Task<string?> GetText();
+    Task<string?> GetText();
 
-        Task SetText(string? text);
-    }
+    Task SetText(string? text);
 }

@@ -7,26 +7,25 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
 
-namespace Core2D.ViewModels.Renderer
+namespace Core2D.ViewModels.Renderer;
+
+public partial class ImageKeyViewModel : ViewModelBase, IImageKey
 {
-    public partial class ImageKeyViewModel : ViewModelBase, IImageKey
+    [AutoNotify] private string? _key;
+
+    public ImageKeyViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        [AutoNotify] private string? _key;
+        RemoveImageKey = new Command<string?>(x => GetProject()?.OnRemoveImageKey(x));
 
-        public ImageKeyViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
-        {
-            RemoveImageKey = new Command<string?>(x => GetProject()?.OnRemoveImageKey(x));
-
-            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        }
+        ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+    }
 
         
-        [IgnoreDataMember]
-        public ICommand RemoveImageKey { get; }
+    [IgnoreDataMember]
+    public ICommand RemoveImageKey { get; }
 
-        public override object Copy(IDictionary<object, object>? shared)
-        {
-            throw new NotImplementedException();
-        }
+    public override object Copy(IDictionary<object, object>? shared)
+    {
+        throw new NotImplementedException();
     }
 }

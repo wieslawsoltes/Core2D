@@ -7,24 +7,23 @@ using Avalonia;
 using Avalonia.Data.Converters;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Converters
+namespace Core2D.Converters;
+
+public class SelectedShapesFirstItemStyleValueConverter : IValueConverter
 {
-    public class SelectedShapesFirstItemStyleValueConverter : IValueConverter
+    public static SelectedShapesFirstItemStyleValueConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public static SelectedShapesFirstItemStyleValueConverter Instance = new();
-
-        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        if (value is ISet<BaseShapeViewModel> items && items.Count == 1)
         {
-            if (value is ISet<BaseShapeViewModel> items && items.Count == 1)
-            {
-                return items.First().Style;
-            }
-            return AvaloniaProperty.UnsetValue;
+            return items.First().Style;
         }
+        return AvaloniaProperty.UnsetValue;
+    }
 
-        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

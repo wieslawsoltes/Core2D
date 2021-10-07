@@ -9,69 +9,68 @@ using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Renderer.Presenters;
 
-namespace Core2D.Modules.FileWriter.SkiaSharp
-{
-    public sealed class PdfSkiaSharpWriter : IFileWriter
-    {
-        private readonly IServiceProvider? _serviceProvider;
+namespace Core2D.Modules.FileWriter.SkiaSharp;
 
-        public PdfSkiaSharpWriter(IServiceProvider? serviceProvider)
+public sealed class PdfSkiaSharpWriter : IFileWriter
+{
+    private readonly IServiceProvider? _serviceProvider;
+
+    public PdfSkiaSharpWriter(IServiceProvider? serviceProvider)
+    {
+        _serviceProvider = serviceProvider;
+    }
+
+    public string Name { get; } = "Pdf (SkiaSharp)";
+
+    public string Extension { get; } = "pdf";
+
+    public void Save(Stream stream, object? item, object? options)
+    {
+        if (item is null)
         {
-            _serviceProvider = serviceProvider;
+            return;
         }
 
-        public string Name { get; } = "Pdf (SkiaSharp)";
-
-        public string Extension { get; } = "pdf";
-
-        public void Save(Stream stream, object? item, object? options)
+        var ic = options as IImageCache;
+        if (options is null)
         {
-            if (item is null)
-            {
-                return;
-            }
+            return;
+        }
 
-            var ic = options as IImageCache;
-            if (options is null)
-            {
-                return;
-            }
+        IShapeRenderer renderer = new SkiaSharpRendererViewModel(_serviceProvider);
+        renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+        renderer.State.ImageCache = ic;
 
-            IShapeRenderer renderer = new SkiaSharpRendererViewModel(_serviceProvider);
-            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-            renderer.State.ImageCache = ic;
+        var presenter = new ExportPresenter();
 
-            var presenter = new ExportPresenter();
+        IProjectExporter exporter = new PdfSkiaSharpExporter(renderer, presenter, 72.0f);
 
-            IProjectExporter exporter = new PdfSkiaSharpExporter(renderer, presenter, 72.0f);
+        if (item is PageContainerViewModel page)
+        {
+            var dataFlow = _serviceProvider.GetService<DataFlow>();
+            var db = (object)page.Properties;
+            var record = (object)page.Record;
 
-            if (item is PageContainerViewModel page)
-            {
-                var dataFlow = _serviceProvider.GetService<DataFlow>();
-                var db = (object)page.Properties;
-                var record = (object)page.Record;
+            dataFlow.Bind(page.Template, db, record);
+            dataFlow.Bind(page, db, record);
 
-                dataFlow.Bind(page.Template, db, record);
-                dataFlow.Bind(page, db, record);
+            exporter.Save(stream, page);
+        }
+        else if (item is DocumentContainerViewModel document)
+        {
+            var dataFlow = _serviceProvider.GetService<DataFlow>();
 
-                exporter.Save(stream, page);
-            }
-            else if (item is DocumentContainerViewModel document)
-            {
-                var dataFlow = _serviceProvider.GetService<DataFlow>();
+            dataFlow.Bind(document);
 
-                dataFlow.Bind(document);
+            exporter.Save(stream, document);
+        }
+        else if (item is ProjectContainerViewModel project)
+        {
+            var dataFlow = _serviceProvider.GetService<DataFlow>();
 
-                exporter.Save(stream, document);
-            }
-            else if (item is ProjectContainerViewModel project)
-            {
-                var dataFlow = _serviceProvider.GetService<DataFlow>();
+            dataFlow.Bind(project);
 
-                dataFlow.Bind(project);
-
-                exporter.Save(stream, project);
-            }
+            exporter.Save(stream, project);
         }
     }
 }

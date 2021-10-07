@@ -9,87 +9,86 @@ using Core2D.Modules.Renderer.Avalonia;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 
-namespace Core2D.Views.Renderer
+namespace Core2D.Views.Renderer;
+
+public class RenderView : UserControl
 {
-    public class RenderView : UserControl
+    public static readonly StyledProperty<FrameContainerViewModel?> ContainerProperty =
+        AvaloniaProperty.Register<RenderView, FrameContainerViewModel?>(nameof(Container));
+
+    public static readonly StyledProperty<IShapeRenderer?> RendererProperty =
+        AvaloniaProperty.Register<RenderView, IShapeRenderer?>(nameof(Renderer));
+
+    public static readonly StyledProperty<ISelection?> SelectionProperty =
+        AvaloniaProperty.Register<RenderView, ISelection?>(nameof(Selection));
+
+    public static readonly StyledProperty<DataFlow?> DataFlowProperty =
+        AvaloniaProperty.Register<RenderView, DataFlow?>(nameof(DataFlow));
+
+    public static readonly StyledProperty<RenderType> RenderTypeProperty =
+        AvaloniaProperty.Register<RenderView, RenderType>(nameof(RenderType));
+
+    public FrameContainerViewModel? Container
     {
-        public static readonly StyledProperty<FrameContainerViewModel?> ContainerProperty =
-            AvaloniaProperty.Register<RenderView, FrameContainerViewModel?>(nameof(Container));
+        get => GetValue(ContainerProperty);
+        set => SetValue(ContainerProperty, value);
+    }
 
-        public static readonly StyledProperty<IShapeRenderer?> RendererProperty =
-            AvaloniaProperty.Register<RenderView, IShapeRenderer?>(nameof(Renderer));
+    public IShapeRenderer? Renderer
+    {
+        get => GetValue(RendererProperty);
+        set => SetValue(RendererProperty, value);
+    }
 
-        public static readonly StyledProperty<ISelection?> SelectionProperty =
-            AvaloniaProperty.Register<RenderView, ISelection?>(nameof(Selection));
+    public ISelection? Selection
+    {
+        get => GetValue(SelectionProperty);
+        set => SetValue(SelectionProperty, value);
+    }
 
-        public static readonly StyledProperty<DataFlow?> DataFlowProperty =
-            AvaloniaProperty.Register<RenderView, DataFlow?>(nameof(DataFlow));
+    public DataFlow? DataFlow
+    {
+        get => GetValue(DataFlowProperty);
+        set => SetValue(DataFlowProperty, value);
+    }
 
-        public static readonly StyledProperty<RenderType> RenderTypeProperty =
-            AvaloniaProperty.Register<RenderView, RenderType>(nameof(RenderType));
+    public RenderType RenderType
+    {
+        get => GetValue(RenderTypeProperty);
+        set => SetValue(RenderTypeProperty, value);
+    }
 
-        public FrameContainerViewModel? Container
+    public RenderView()
+    {
+        InitializeComponent();
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    public override void Render(DrawingContext context)
+    {
+        base.Render(context);
+
+        var drawState = new RenderState()
         {
-            get => GetValue(ContainerProperty);
-            set => SetValue(ContainerProperty, value);
-        }
+            Container = Container,
+            Renderer = Renderer ?? GetValue(RendererOptions.RendererProperty),
+            Selection = Selection ?? GetValue(RendererOptions.SelectionProperty),
+            DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
+            RenderType = RenderType,
+        };
 
-        public IShapeRenderer? Renderer
+        var customDrawOperation = new RenderDrawOperation
         {
-            get => GetValue(RendererProperty);
-            set => SetValue(RendererProperty, value);
-        }
+            RenderState = drawState,
+            Bounds = Bounds
+        };
 
-        public ISelection? Selection
-        {
-            get => GetValue(SelectionProperty);
-            set => SetValue(SelectionProperty, value);
-        }
+        // TODO: context.Custom(customDrawOperation);
 
-        public DataFlow? DataFlow
-        {
-            get => GetValue(DataFlowProperty);
-            set => SetValue(DataFlowProperty, value);
-        }
-
-        public RenderType RenderType
-        {
-            get => GetValue(RenderTypeProperty);
-            set => SetValue(RenderTypeProperty, value);
-        }
-
-        public RenderView()
-        {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-
-        public override void Render(DrawingContext context)
-        {
-            base.Render(context);
-
-            var drawState = new RenderState()
-            {
-                Container = Container,
-                Renderer = Renderer ?? GetValue(RendererOptions.RendererProperty),
-                Selection = Selection ?? GetValue(RendererOptions.SelectionProperty),
-                DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
-                RenderType = RenderType,
-            };
-
-            var customDrawOperation = new RenderDrawOperation
-            {
-                RenderState = drawState,
-                Bounds = Bounds
-            };
-
-            // TODO: context.Custom(customDrawOperation);
-
-            customDrawOperation.Render(context.PlatformImpl);
-        }
+        customDrawOperation.Render(context.PlatformImpl);
     }
 }

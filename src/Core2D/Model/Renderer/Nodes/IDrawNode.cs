@@ -3,22 +3,21 @@ using System;
 using Core2D.ViewModels.Style;
 using JetBrains.Annotations;
 
-namespace Core2D.Model.Renderer.Nodes
+namespace Core2D.Model.Renderer.Nodes;
+
+public interface IDrawNode : IDisposable
 {
-    public interface IDrawNode : IDisposable
-    {
-        ShapeStyleViewModel? Style { get; set; }
+    ShapeStyleViewModel? Style { get; set; }
 
-        bool ScaleThickness { get; set; }
+    bool ScaleThickness { get; set; }
 
-        bool ScaleSize { get; set; }
+    bool ScaleSize { get; set; }
 
-        void UpdateGeometry();
+    void UpdateGeometry();
 
-        void UpdateStyle();
+    void UpdateStyle();
 
-        void Draw(object? dc, double zoom);
+    void Draw(object? dc, double zoom);
 
-        void OnDraw(object? dc, double zoom);
-    }
+    void OnDraw(object? dc, double zoom);
 }

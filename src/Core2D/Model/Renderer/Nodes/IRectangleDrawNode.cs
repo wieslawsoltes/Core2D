@@ -1,10 +1,9 @@
 ﻿#nullable enable
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.Model.Renderer.Nodes
+namespace Core2D.Model.Renderer.Nodes;
+
+public interface IRectangleDrawNode : IDrawNode
 {
-    public interface IRectangleDrawNode : IDrawNode
-    {
-        RectangleShapeViewModel Rectangle { get; set; }
-    }
+    RectangleShapeViewModel Rectangle { get; set; }
 }

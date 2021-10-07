@@ -9,87 +9,86 @@ using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
-namespace Core2D.Behaviors.DragAndDrop
+namespace Core2D.Behaviors.DragAndDrop;
+
+public class EditorDropHandler : DefaultDropHandler
 {
-    public class EditorDropHandler : DefaultDropHandler
+    public static readonly StyledProperty<IControl?> RelativeToProperty = 
+        AvaloniaProperty.Register<EditorDropHandler, IControl?>(nameof(RelativeTo));
+
+    public IControl? RelativeTo
     {
-        public static readonly StyledProperty<IControl?> RelativeToProperty = 
-            AvaloniaProperty.Register<EditorDropHandler, IControl?>(nameof(RelativeTo));
+        get => GetValue(RelativeToProperty);
+        set => SetValue(RelativeToProperty, value);
+    }
 
-        public IControl? RelativeTo
+    private bool Validate(ProjectEditorViewModel editor, object? sender, DragEventArgs e, bool bExecute)
+    {
+        var point = GetPosition(RelativeTo ?? sender, e);
+
+        if (e.Data.Contains(DataFormats.Text))
         {
-            get => GetValue(RelativeToProperty);
-            set => SetValue(RelativeToProperty, value);
-        }
+            var text = e.Data.GetText();
 
-        private bool Validate(ProjectEditorViewModel editor, object? sender, DragEventArgs e, bool bExecute)
-        {
-            var point = GetPosition(RelativeTo ?? sender, e);
-
-            if (e.Data.Contains(DataFormats.Text))
+            if (bExecute)
             {
-                var text = e.Data.GetText();
-
-                if (bExecute)
+                if (text is { })
                 {
-                    if (text is { })
-                    {
-                        editor.ClipboardService?.OnTryPaste(text);
-                    }
-                }
-
-                return true;
-            }
-
-            foreach (var format in e.Data.GetDataFormats())
-            {
-                var data = e.Data.Get(format);
-
-                switch (data)
-                {
-                    case BaseShapeViewModel shape:
-                        return editor.OnDropShape(shape, point.X, point.Y, bExecute);
-                    case RecordViewModel record:
-                        return editor.OnDropRecord(record, point.X, point.Y, bExecute);
-                    case ShapeStyleViewModel style:
-                        return editor.OnDropStyle(style, point.X, point.Y, bExecute);
-                    case TemplateContainerViewModel template:
-                        return editor.OnDropTemplate(template, point.X, point.Y, bExecute);
+                    editor.ClipboardService?.OnTryPaste(text);
                 }
             }
 
-            if (e.Data.Contains(DataFormats.FileNames))
+            return true;
+        }
+
+        foreach (var format in e.Data.GetDataFormats())
+        {
+            var data = e.Data.Get(format);
+
+            switch (data)
             {
-                var files = e.Data.GetFileNames()?.ToArray();
-                if (bExecute)
+                case BaseShapeViewModel shape:
+                    return editor.OnDropShape(shape, point.X, point.Y, bExecute);
+                case RecordViewModel record:
+                    return editor.OnDropRecord(record, point.X, point.Y, bExecute);
+                case ShapeStyleViewModel style:
+                    return editor.OnDropStyle(style, point.X, point.Y, bExecute);
+                case TemplateContainerViewModel template:
+                    return editor.OnDropTemplate(template, point.X, point.Y, bExecute);
+            }
+        }
+
+        if (e.Data.Contains(DataFormats.FileNames))
+        {
+            var files = e.Data.GetFileNames()?.ToArray();
+            if (bExecute)
+            {
+                if (files is { })
                 {
-                    if (files is { })
-                    {
-                        return editor.OnDropFiles(files, point.X, point.Y).Result;
-                    }
+                    return editor.OnDropFiles(files, point.X, point.Y).Result;
                 }
-                return true;
             }
-
-            return false;
+            return true;
         }
 
-        public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
+        return false;
+    }
+
+    public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
+    {
+        if (targetContext is ProjectEditorViewModel editor)
         {
-            if (targetContext is ProjectEditorViewModel editor)
-            {
-                return Validate(editor, sender, e, false);
-            }
-            return false;
+            return Validate(editor, sender, e, false);
         }
+        return false;
+    }
 
-        public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
+    public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
+    {
+        if (targetContext is ProjectEditorViewModel editor)
         {
-            if (targetContext is ProjectEditorViewModel editor)
-            {
-                return Validate(editor, sender, e, true);
-            }
-            return false;
+            return Validate(editor, sender, e, true);
         }
+        return false;
     }
 }

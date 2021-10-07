@@ -1,10 +1,9 @@
 ﻿#nullable enable
-namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes.Markers;
+
+internal class NoneMarker : MarkerBase
 {
-    internal class NoneMarker : MarkerBase
+    public override void Draw(object dc)
     {
-        public override void Draw(object dc)
-        {
-        }
     }
 }

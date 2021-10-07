@@ -3,109 +3,108 @@ using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using SkiaSharp;
 
-namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes;
+
+internal class GridDrawNode : DrawNode, IGridDrawNode
 {
-    internal class GridDrawNode : DrawNode, IGridDrawNode
+    public SKRect Rect { get; set; }
+    public IGrid Grid { get; set; }
+    public double X { get; set; }
+    public double Y { get; set; }
+    public double Width { get; set; }
+    public double Height { get; set; }
+
+    public GridDrawNode(IGrid grid, double x, double y, double width, double height)
     {
-        public SKRect Rect { get; set; }
-        public IGrid Grid { get; set; }
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
+        Grid = grid;
+        X = x;
+        Y = y;
+        Width = width;
+        Height = height;
+        UpdateGeometry();
+    }
 
-        public GridDrawNode(IGrid grid, double x, double y, double width, double height)
+    public sealed override void UpdateGeometry()
+    {
+        ScaleThickness = true;
+        ScaleSize = false;
+        Rect = SKRect.Create(
+            (float)(X + Grid.GridOffsetLeft),
+            (float)(Y + Grid.GridOffsetTop),
+            (float)(Width - Grid.GridOffsetLeft + Grid.GridOffsetRight),
+            (float)(Height - Grid.GridOffsetTop + Grid.GridOffsetBottom));
+        Center = new SKPoint(Rect.MidX, Rect.MidY);
+    }
+
+    public override void UpdateStyle()
+    {
+        if (Grid.GridStrokeColor is { })
         {
-            Grid = grid;
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
-            UpdateGeometry();
+            Stroke = SkiaSharpDrawUtil.ToSKPaintPen(Grid.GridStrokeColor, Grid.GridStrokeThickness);
+        }
+        else
+        {
+            Stroke = null;
+        }
+    }
+
+    public override void Draw(object dc, double zoom)
+    {
+        var scale = ScaleSize ? 1.0 / zoom : 1.0;
+
+        double thickness = Grid.GridStrokeThickness;
+
+        if (ScaleThickness)
+        {
+            thickness /= zoom;
         }
 
-        public sealed override void UpdateGeometry()
+        if (scale != 1.0)
         {
-            ScaleThickness = true;
-            ScaleSize = false;
-            Rect = SKRect.Create(
-                (float)(X + Grid.GridOffsetLeft),
-                (float)(Y + Grid.GridOffsetTop),
-                (float)(Width - Grid.GridOffsetLeft + Grid.GridOffsetRight),
-                (float)(Height - Grid.GridOffsetTop + Grid.GridOffsetBottom));
-            Center = new SKPoint(Rect.MidX, Rect.MidY);
+            thickness /= scale;
         }
 
-        public override void UpdateStyle()
+        if (Stroke is { } && Stroke.StrokeWidth != thickness)
         {
-            if (Grid.GridStrokeColor is { })
-            {
-                Stroke = SkiaSharpDrawUtil.ToSKPaintPen(Grid.GridStrokeColor, Grid.GridStrokeThickness);
-            }
-            else
-            {
-                Stroke = null;
-            }
+            Stroke.StrokeWidth = (float)thickness;
         }
 
-        public override void Draw(object dc, double zoom)
+        OnDraw(dc, zoom);
+    }
+
+    public override void OnDraw(object dc, double zoom)
+    {
+        var canvas = dc as SKCanvas;
+
+        if (Grid.GridStrokeColor is { })
         {
-            var scale = ScaleSize ? 1.0 / zoom : 1.0;
-
-            double thickness = Grid.GridStrokeThickness;
-
-            if (ScaleThickness)
+            if (Grid.IsGridEnabled)
             {
-                thickness /= zoom;
-            }
+                float ox = Rect.Left;
+                float ex = Rect.Left + Rect.Width;
+                float oy = Rect.Top;
+                float ey = Rect.Top + Rect.Height;
+                float cw = (float)Grid.GridCellWidth;
+                float ch = (float)Grid.GridCellHeight;
 
-            if (scale != 1.0)
-            {
-                thickness /= scale;
-            }
-
-            if (Stroke is { } && Stroke.StrokeWidth != thickness)
-            {
-                Stroke.StrokeWidth = (float)thickness;
-            }
-
-            OnDraw(dc, zoom);
-        }
-
-        public override void OnDraw(object dc, double zoom)
-        {
-            var canvas = dc as SKCanvas;
-
-            if (Grid.GridStrokeColor is { })
-            {
-                if (Grid.IsGridEnabled)
+                for (float x = ox + cw; x < ex; x += cw)
                 {
-                    float ox = Rect.Left;
-                    float ex = Rect.Left + Rect.Width;
-                    float oy = Rect.Top;
-                    float ey = Rect.Top + Rect.Height;
-                    float cw = (float)Grid.GridCellWidth;
-                    float ch = (float)Grid.GridCellHeight;
-
-                    for (float x = ox + cw; x < ex; x += cw)
-                    {
-                        var p0 = new SKPoint(x, oy);
-                        var p1 = new SKPoint(x, ey);
-                        canvas.DrawLine(p0, p1, Stroke);
-                    }
-
-                    for (float y = oy + ch; y < ey; y += ch)
-                    {
-                        var p0 = new SKPoint(ox, y);
-                        var p1 = new SKPoint(ex, y);
-                        canvas.DrawLine(p0, p1, Stroke);
-                    }
+                    var p0 = new SKPoint(x, oy);
+                    var p1 = new SKPoint(x, ey);
+                    canvas.DrawLine(p0, p1, Stroke);
                 }
 
-                if (Grid.IsBorderEnabled)
+                for (float y = oy + ch; y < ey; y += ch)
                 {
-                    canvas.DrawRect(Rect, Stroke);
+                    var p0 = new SKPoint(ox, y);
+                    var p1 = new SKPoint(ex, y);
+                    canvas.DrawLine(p0, p1, Stroke);
                 }
+            }
+
+            if (Grid.IsBorderEnabled)
+            {
+                canvas.DrawRect(Rect, Stroke);
             }
         }
     }

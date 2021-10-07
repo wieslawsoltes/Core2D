@@ -1,8 +1,7 @@
-﻿namespace Core2D.ViewModels.Layout
+﻿namespace Core2D.ViewModels.Layout;
+
+public enum FlipMode
 {
-    public enum FlipMode
-    {
-        Horizontal,
-        Vertical
-    }
+    Horizontal,
+    Vertical
 }

@@ -5,24 +5,23 @@ using Avalonia;
 using Avalonia.Data.Converters;
 using Core2D.Model.Style;
 
-namespace Core2D.Converters
+namespace Core2D.Converters;
+
+public class FontStyleFlagsConverter : IValueConverter
 {
-    public class FontStyleFlagsConverter : IValueConverter
+    public static FontStyleFlagsConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public static FontStyleFlagsConverter Instance = new();
-
-        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        if (value is FontStyleFlags flags && parameter is FontStyleFlags flag)
         {
-            if (value is FontStyleFlags flags && parameter is FontStyleFlags flag)
-            {
-                return flags.HasFlag(flag);
-            }
-            return AvaloniaProperty.UnsetValue;
+            return flags.HasFlag(flag);
         }
+        return AvaloniaProperty.UnsetValue;
+    }
 
-        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

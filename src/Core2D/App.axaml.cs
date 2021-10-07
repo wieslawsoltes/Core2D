@@ -24,259 +24,258 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace Core2D
+namespace Core2D;
+
+public class App : Application
 {
-    public class App : Application
+    public static string DefaultTheme { get; set; }
+
+    public static ICommand ChangeTheme { get; private set; }
+
+    static App()
     {
-        public static string DefaultTheme { get; set; }
+        DefaultTheme = "FluentDark";
 
-        public static ICommand ChangeTheme { get; private set; }
+        InitializeDesigner();
+    }
 
-        static App()
+    public static void InitializeDesigner()
+    {
+        if (Design.IsDesignMode)
         {
-            DefaultTheme = "FluentDark";
-
-            InitializeDesigner();
-        }
-
-        public static void InitializeDesigner()
-        {
-            if (Design.IsDesignMode)
-            {
-                var builder = new ContainerBuilder();
-
-                builder.RegisterModule<AppModule>();
-
-                var container = builder.Build();
-
-                DesignerContext.InitializeContext(container.Resolve<IServiceProvider>());
-            }
-        }
-
-        public AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider, RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
-        {
-            return new AboutInfoViewModel(serviceProvider)
-            {
-                Title = "Core2D",
-                Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}",
-                Description = "A multi-platform data driven 2D diagram editor.",
-                Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
-                License = "Licensed under the MIT License. See LICENSE file in the project root for full license information.",
-                OperatingSystem = $"{runtimeInfo.OperatingSystem}",
-                IsDesktop = runtimeInfo.IsDesktop,
-                IsMobile = runtimeInfo.IsMobile,
-                IsCoreClr = runtimeInfo.IsCoreClr,
-                IsMono = runtimeInfo.IsMono,
-                IsDotNetFramework = runtimeInfo.IsDotNetFramework,
-                IsUnix = runtimeInfo.IsUnix,
-                WindowingSubsystemName = windowingSubsystem,
-                RenderingSubsystemName = renderingSubsystem
-            };
-        }
-
-        private class ListContractResolver : DefaultContractResolver
-        {
-            private readonly Type _type;
-
-            public ListContractResolver(Type type)
-            {
-                _type = type;
-            }
-
-            public override JsonContract ResolveContract(Type type)
-            {
-                if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
-                {
-                    return base.ResolveContract(_type.MakeGenericType(type.GenericTypeArguments[0]));
-                }
-                return base.ResolveContract(type);
-            }
-
-            protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-            {
-                return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();
-            }
-        }
-        
-        private void InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime desktopLifetime)
-        {
-            var jsonSettings = new JsonSerializerSettings()
-            {
-                Formatting = Formatting.Indented,
-                TypeNameHandling = TypeNameHandling.Objects,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ListContractResolver(typeof(ObservableCollection<>)),
-                NullValueHandling = NullValueHandling.Ignore,
-                Converters =
-                {
-                    new KeyValuePairConverter()
-                }
-            };
-
             var builder = new ContainerBuilder();
 
             builder.RegisterModule<AppModule>();
 
             var container = builder.Build();
 
-            var serviceProvider = container.Resolve<IServiceProvider>();
+            DesignerContext.InitializeContext(container.Resolve<IServiceProvider>());
+        }
+    }
 
-            var log = serviceProvider.GetService<ILog>();
-            var fileSystem = serviceProvider.GetService<IFileSystem>();
+    public AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider, RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
+    {
+        return new AboutInfoViewModel(serviceProvider)
+        {
+            Title = "Core2D",
+            Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}",
+            Description = "A multi-platform data driven 2D diagram editor.",
+            Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
+            License = "Licensed under the MIT License. See LICENSE file in the project root for full license information.",
+            OperatingSystem = $"{runtimeInfo.OperatingSystem}",
+            IsDesktop = runtimeInfo.IsDesktop,
+            IsMobile = runtimeInfo.IsMobile,
+            IsCoreClr = runtimeInfo.IsCoreClr,
+            IsMono = runtimeInfo.IsMono,
+            IsDotNetFramework = runtimeInfo.IsDotNetFramework,
+            IsUnix = runtimeInfo.IsUnix,
+            WindowingSubsystemName = windowingSubsystem,
+            RenderingSubsystemName = renderingSubsystem
+        };
+    }
 
-            log?.Initialize(System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.log"));
+    private class ListContractResolver : DefaultContractResolver
+    {
+        private readonly Type _type;
 
-            var windowSettings = default(WindowConfiguration);
-            var windowSettingsPath = System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.window");
-            if (fileSystem.Exists(windowSettingsPath))
+        public ListContractResolver(Type type)
+        {
+            _type = type;
+        }
+
+        public override JsonContract ResolveContract(Type type)
+        {
+            if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
             {
-                var jsonWindowSettings = fileSystem?.ReadUtf8Text(windowSettingsPath);
-                if (!string.IsNullOrEmpty(jsonWindowSettings))
+                return base.ResolveContract(_type.MakeGenericType(type.GenericTypeArguments[0]));
+            }
+            return base.ResolveContract(type);
+        }
+
+        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+        {
+            return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();
+        }
+    }
+        
+    private void InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime desktopLifetime)
+    {
+        var jsonSettings = new JsonSerializerSettings()
+        {
+            Formatting = Formatting.Indented,
+            TypeNameHandling = TypeNameHandling.Objects,
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            ContractResolver = new ListContractResolver(typeof(ObservableCollection<>)),
+            NullValueHandling = NullValueHandling.Ignore,
+            Converters =
+            {
+                new KeyValuePairConverter()
+            }
+        };
+
+        var builder = new ContainerBuilder();
+
+        builder.RegisterModule<AppModule>();
+
+        var container = builder.Build();
+
+        var serviceProvider = container.Resolve<IServiceProvider>();
+
+        var log = serviceProvider.GetService<ILog>();
+        var fileSystem = serviceProvider.GetService<IFileSystem>();
+
+        log?.Initialize(System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.log"));
+
+        var windowSettings = default(WindowConfiguration);
+        var windowSettingsPath = System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.window");
+        if (fileSystem.Exists(windowSettingsPath))
+        {
+            var jsonWindowSettings = fileSystem?.ReadUtf8Text(windowSettingsPath);
+            if (!string.IsNullOrEmpty(jsonWindowSettings))
+            {
+                windowSettings = JsonConvert.DeserializeObject<WindowConfiguration>(jsonWindowSettings, jsonSettings);
+            }
+        }
+
+        var editor = serviceProvider.GetService<ProjectEditorViewModel>();
+
+        var recentPath = System.IO.Path.Combine(fileSystem.GetBaseDirectory(), "Core2D.recent");
+        if (fileSystem.Exists(recentPath))
+        {
+            editor.OnLoadRecent(recentPath);
+        }
+
+        var rootDock = default(RootDock);
+        var rootDockPath = System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.layout");
+        if (fileSystem.Exists(rootDockPath))
+        {
+            var jsonRootDock = fileSystem?.ReadUtf8Text(rootDockPath);
+            if (!string.IsNullOrEmpty(jsonRootDock))
+            {
+                rootDock = JsonConvert.DeserializeObject<RootDock>(jsonRootDock, jsonSettings);
+                if (rootDock is { })
                 {
-                    windowSettings = JsonConvert.DeserializeObject<WindowConfiguration>(jsonWindowSettings, jsonSettings);
+                    editor.LoadLayout(rootDock);
                 }
             }
+        }
 
-            var editor = serviceProvider.GetService<ProjectEditorViewModel>();
+        if (rootDock is null)
+        {
+            editor.CreateLayout();
+        }
 
-            var recentPath = System.IO.Path.Combine(fileSystem.GetBaseDirectory(), "Core2D.recent");
-            if (fileSystem.Exists(recentPath))
+        editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
+        editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+        editor.IsToolIdle = true;
+
+        var runtimeInfo = AvaloniaLocator.Current.GetService<IRuntimePlatform>().GetRuntimeInfo();
+        var windowingPlatform = AvaloniaLocator.Current.GetService<IWindowingPlatform>();
+        var platformRenderInterface = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>();
+        var windowingSubsystemName = windowingPlatform.GetType().Assembly.GetName().Name;
+        var renderingSubsystemName = platformRenderInterface.GetType().Assembly.GetName().Name;
+        var aboutInfo = CreateAboutInfo(serviceProvider, runtimeInfo, windowingSubsystemName, renderingSubsystemName);
+        editor.AboutInfo = aboutInfo;
+
+        var mainWindow = serviceProvider.GetService<MainWindow>();
+
+        if (windowSettings is { })
+        {
+            WindowConfigurationFactory.Load(mainWindow, windowSettings);
+        }
+
+        mainWindow.DataContext = editor;
+
+        mainWindow.Closing += (sender, e) =>
+        {
+            editor.OnSaveRecent(recentPath);
+
+            windowSettings = WindowConfigurationFactory.Save(mainWindow);
+            var jsonWindowSettings = JsonConvert.SerializeObject(windowSettings, jsonSettings);
+            if (!string.IsNullOrEmpty(jsonWindowSettings))
             {
-                editor.OnLoadRecent(recentPath);
+                fileSystem?.WriteUtf8Text(windowSettingsPath, jsonWindowSettings);
             }
 
-            var rootDock = default(RootDock);
-            var rootDockPath = System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.layout");
-            if (fileSystem.Exists(rootDockPath))
+            var jsonRootDock = JsonConvert.SerializeObject(editor.RootDock, jsonSettings);
+            if (!string.IsNullOrEmpty(jsonRootDock))
             {
-                var jsonRootDock = fileSystem?.ReadUtf8Text(rootDockPath);
-                if (!string.IsNullOrEmpty(jsonRootDock))
-                {
-                    rootDock = JsonConvert.DeserializeObject<RootDock>(jsonRootDock, jsonSettings);
-                    if (rootDock is { })
-                    {
-                        editor.LoadLayout(rootDock);
-                    }
-                }
+                fileSystem?.WriteUtf8Text(rootDockPath, jsonRootDock);
             }
+        };
 
-            if (rootDock is null)
+        desktopLifetime.MainWindow = mainWindow;
+
+        desktopLifetime.Exit += (sennder, e) =>
+        {
+            log.Dispose();
+            container.Dispose();
+        };
+    }
+
+    private void InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime)
+    {
+        var builder = new ContainerBuilder();
+
+        builder.RegisterModule<AppModule>();
+
+        var container = builder.Build(); // TODO: Dispose()
+        var serviceProvider = container.Resolve<IServiceProvider>();
+
+        var log = serviceProvider.GetService<ILog>(); // TODO: Dispose()
+        var fileSystem = serviceProvider.GetService<IFileSystem>();
+
+        log?.Initialize(System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.log"));
+
+        var editor = serviceProvider.GetService<ProjectEditorViewModel>();
+
+        editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
+        editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+        editor.IsToolIdle = true;
+
+        var mainView = new MainView()
+        {
+            DataContext = editor
+        };
+
+        singleViewLifetime.MainView = mainView;
+    }
+
+    public void SetTheme(string themeName)
+    {
+        var theme = Current.Styles.Select(x => (StyleInclude)x).FirstOrDefault(x => x.Source is { } && x.Source.AbsolutePath.Contains("Themes"));
+        if (theme is { })
+        {
+            var index = Current.Styles.IndexOf(theme);
+
+            Current.Styles[index] = new StyleInclude(new Uri("avares://Core2D/App.axaml"))
             {
-                editor.CreateLayout();
-            }
-
-            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
-            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
-            editor.IsToolIdle = true;
-
-            var runtimeInfo = AvaloniaLocator.Current.GetService<IRuntimePlatform>().GetRuntimeInfo();
-            var windowingPlatform = AvaloniaLocator.Current.GetService<IWindowingPlatform>();
-            var platformRenderInterface = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>();
-            var windowingSubsystemName = windowingPlatform.GetType().Assembly.GetName().Name;
-            var renderingSubsystemName = platformRenderInterface.GetType().Assembly.GetName().Name;
-            var aboutInfo = CreateAboutInfo(serviceProvider, runtimeInfo, windowingSubsystemName, renderingSubsystemName);
-            editor.AboutInfo = aboutInfo;
-
-            var mainWindow = serviceProvider.GetService<MainWindow>();
-
-            if (windowSettings is { })
-            {
-                WindowConfigurationFactory.Load(mainWindow, windowSettings);
-            }
-
-            mainWindow.DataContext = editor;
-
-            mainWindow.Closing += (sender, e) =>
-            {
-                editor.OnSaveRecent(recentPath);
-
-                windowSettings = WindowConfigurationFactory.Save(mainWindow);
-                var jsonWindowSettings = JsonConvert.SerializeObject(windowSettings, jsonSettings);
-                if (!string.IsNullOrEmpty(jsonWindowSettings))
-                {
-                    fileSystem?.WriteUtf8Text(windowSettingsPath, jsonWindowSettings);
-                }
-
-                var jsonRootDock = JsonConvert.SerializeObject(editor.RootDock, jsonSettings);
-                if (!string.IsNullOrEmpty(jsonRootDock))
-                {
-                    fileSystem?.WriteUtf8Text(rootDockPath, jsonRootDock);
-                }
+                Source = new Uri($"avares://Core2D/Themes/{themeName}.axaml")
             };
-
-            desktopLifetime.MainWindow = mainWindow;
-
-            desktopLifetime.Exit += (sennder, e) =>
-            {
-                log.Dispose();
-                container.Dispose();
-            };
         }
+    }
 
-        private void InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime)
+    public override void OnFrameworkInitializationCompleted()
+    {
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
         {
-            var builder = new ContainerBuilder();
-
-            builder.RegisterModule<AppModule>();
-
-            var container = builder.Build(); // TODO: Dispose()
-            var serviceProvider = container.Resolve<IServiceProvider>();
-
-            var log = serviceProvider.GetService<ILog>(); // TODO: Dispose()
-            var fileSystem = serviceProvider.GetService<IFileSystem>();
-
-            log?.Initialize(System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.log"));
-
-            var editor = serviceProvider.GetService<ProjectEditorViewModel>();
-
-            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
-            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
-            editor.IsToolIdle = true;
-
-            var mainView = new MainView()
-            {
-                DataContext = editor
-            };
-
-            singleViewLifetime.MainView = mainView;
+            InitializationClassicDesktopStyle(desktopLifetime);
         }
-
-        public void SetTheme(string themeName)
+        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
         {
-            var theme = Current.Styles.Select(x => (StyleInclude)x).FirstOrDefault(x => x.Source is { } && x.Source.AbsolutePath.Contains("Themes"));
-            if (theme is { })
-            {
-                var index = Current.Styles.IndexOf(theme);
-
-                Current.Styles[index] = new StyleInclude(new Uri("avares://Core2D/App.axaml"))
-                {
-                    Source = new Uri($"avares://Core2D/Themes/{themeName}.axaml")
-                };
-            }
+            InitializeSingleView(singleViewLifetime);
         }
 
-        public override void OnFrameworkInitializationCompleted()
-        {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        base.OnFrameworkInitializationCompleted();
+    }
 
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
-            {
-                InitializationClassicDesktopStyle(desktopLifetime);
-            }
-            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
-            {
-                InitializeSingleView(singleViewLifetime);
-            }
+    public override void Initialize()
+    {
+        AvaloniaXamlLoader.Load(this);
 
-            base.OnFrameworkInitializationCompleted();
-        }
-
-        public override void Initialize()
-        {
-            AvaloniaXamlLoader.Load(this);
-
-            ChangeTheme = new Command<string>(SetTheme);
-        }
+        ChangeTheme = new Command<string>(SetTheme);
     }
 }

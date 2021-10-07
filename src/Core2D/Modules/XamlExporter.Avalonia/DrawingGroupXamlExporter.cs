@@ -7,83 +7,82 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
-namespace Core2D.Modules.XamlExporter.Avalonia
+namespace Core2D.Modules.XamlExporter.Avalonia;
+
+public class DrawingGroupXamlExporter : IXamlExporter
 {
-    public class DrawingGroupXamlExporter : IXamlExporter
+    private readonly IServiceProvider? _serviceProvider;
+
+    public DrawingGroupXamlExporter(IServiceProvider? serviceProvider)
     {
-        private readonly IServiceProvider? _serviceProvider;
+        _serviceProvider = serviceProvider;
+    }
 
-        public DrawingGroupXamlExporter(IServiceProvider? serviceProvider)
+    public string Create(object item, string key)
+    {
+        var converter = _serviceProvider.GetService<IPathConverter>();
+
+        if (converter is null)
         {
-            _serviceProvider = serviceProvider;
+            return "";
         }
 
-        public string Create(object item, string key)
+        var sb = new StringBuilder();
+
+        sb.AppendLine(!string.IsNullOrWhiteSpace(key) ? $"<DrawingGroup x:Key=\"{key}\">" : $"<DrawingGroup>");
+
+        switch (item)
         {
-            var converter = _serviceProvider.GetService<IPathConverter>();
-
-            if (converter is null)
+            case BaseShapeViewModel shape:
             {
-                return "";
+                ToGeometryDrawing(shape, sb, converter);
             }
-
-            var sb = new StringBuilder();
-
-            sb.AppendLine(!string.IsNullOrWhiteSpace(key) ? $"<DrawingGroup x:Key=\"{key}\">" : $"<DrawingGroup>");
-
-            switch (item)
+                break;
+            case IEnumerable<BaseShapeViewModel> shapes:
             {
-                case BaseShapeViewModel shape:
-                    {
-                        ToGeometryDrawing(shape, sb, converter);
-                    }
-                    break;
-                case IEnumerable<BaseShapeViewModel> shapes:
-                    {
-                        foreach (var shape in shapes)
-                        {
-                            ToGeometryDrawing(shape, sb, converter);
-                        }
-                    }
-                    break;
+                foreach (var shape in shapes)
+                {
+                    ToGeometryDrawing(shape, sb, converter);
+                }
             }
-
-            sb.AppendLine($"</DrawingGroup>");
-
-            return sb.ToString();
+                break;
         }
 
-        private void ToGeometryDrawing(BaseShapeViewModel shape, StringBuilder sb, IPathConverter converter)
+        sb.AppendLine($"</DrawingGroup>");
+
+        return sb.ToString();
+    }
+
+    private void ToGeometryDrawing(BaseShapeViewModel shape, StringBuilder sb, IPathConverter converter)
+    {
+        if (shape is GroupShapeViewModel group)
         {
-            if (shape is GroupShapeViewModel group)
+            foreach (var child in group.Shapes)
             {
-                foreach (var child in group.Shapes)
-                {
-                    ToGeometryDrawing(child, sb, converter);
-                }
-                return;
+                ToGeometryDrawing(child, sb, converter);
             }
+            return;
+        }
 
-            if (shape.IsFilled)
+        if (shape.IsFilled)
+        {
+            var path = converter.ToFillPathShape(shape);
+            if (path is { })
             {
-                var path = converter.ToFillPathShape(shape);
-                if (path is { })
-                {
-                    var geometry = path.ToXamlString();
-                    var brush = (shape.Style?.Fill?.Color as ArgbColorViewModel)?.ToXamlString();
-                    sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
-                }
+                var geometry = path.ToXamlString();
+                var brush = (shape.Style?.Fill?.Color as ArgbColorViewModel)?.ToXamlString();
+                sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
             }
+        }
 
-            if (shape.IsStroked)
+        if (shape.IsStroked)
+        {
+            var path = converter.ToStrokePathShape(shape);
+            if (path is { })
             {
-                var path = converter.ToStrokePathShape(shape);
-                if (path is { })
-                {
-                    var geometry = path.ToXamlString();
-                    var brush = (shape.Style?.Stroke?.Color as ArgbColorViewModel)?.ToXamlString();
-                    sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
-                }
+                var geometry = path.ToXamlString();
+                var brush = (shape.Style?.Stroke?.Color as ArgbColorViewModel)?.ToXamlString();
+                sb.AppendLine($"    <GeometryDrawing Brush=\"{brush}\" Geometry=\"{geometry}\"/>");
             }
         }
     }

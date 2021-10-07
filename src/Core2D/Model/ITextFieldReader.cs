@@ -1,14 +1,13 @@
 ﻿#nullable enable
 using System.IO;
 
-namespace Core2D.Model
+namespace Core2D.Model;
+
+public interface ITextFieldReader<out T>
 {
-    public interface ITextFieldReader<out T>
-    {
-        string Name { get; }
+    string Name { get; }
 
-        string Extension { get; }
+    string Extension { get; }
 
-        T? Read(Stream stream);
-    }
+    T? Read(Stream stream);
 }

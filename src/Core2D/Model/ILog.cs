@@ -1,28 +1,27 @@
 ﻿#nullable enable
 using System;
 
-namespace Core2D.Model
+namespace Core2D.Model;
+
+public interface ILog : IDisposable
 {
-    public interface ILog : IDisposable
-    {
-        string? LastMessage { get; }
+    string? LastMessage { get; }
 
-        void Initialize(string path);
+    void Initialize(string path);
 
-        void Close();
+    void Close();
 
-        void LogInformation(string message);
+    void LogInformation(string message);
 
-        void LogInformation(string format, params object[] args);
+    void LogInformation(string format, params object[] args);
 
-        void LogWarning(string message);
+    void LogWarning(string message);
 
-        void LogWarning(string format, params object[] args);
+    void LogWarning(string format, params object[] args);
 
-        void LogError(string message);
+    void LogError(string message);
 
-        void LogError(string format, params object[] args);
+    void LogError(string format, params object[] args);
 
-        void LogException(Exception ex);
-    }
+    void LogException(Exception ex);
 }

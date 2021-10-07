@@ -1,20 +1,19 @@
 ﻿#nullable enable
 using System;
 
-namespace Core2D.Model.History
+namespace Core2D.Model.History;
+
+public interface IHistory
 {
-    public interface IHistory
-    {
-        void Snapshot<T>(T? previous, T? next, Action<T?> update);
+    void Snapshot<T>(T? previous, T? next, Action<T?> update);
 
-        bool CanUndo();
+    bool CanUndo();
 
-        bool CanRedo();
+    bool CanRedo();
 
-        bool Undo();
+    bool Undo();
 
-        bool Redo();
+    bool Redo();
 
-        void Reset();
-    }
+    void Reset();
 }

@@ -1,32 +1,31 @@
 ﻿#nullable enable
-namespace Core2D.Model.Input
+namespace Core2D.Model.Input;
+
+public readonly struct InputArgs
 {
-    public readonly struct InputArgs
+    public double X { get; }
+
+    public double Y { get; }
+
+    public ModifierFlags Modifier { get; }
+
+    public InputArgs(double x, double y, ModifierFlags modifier)
     {
-        public double X { get; }
+        X = x;
+        Y = y;
+        Modifier = modifier;
+    }
 
-        public double Y { get; }
+    public void Deconstruct(out double x, out double y)
+    {
+        x = X;
+        y = Y;
+    }
 
-        public ModifierFlags Modifier { get; }
-
-        public InputArgs(double x, double y, ModifierFlags modifier)
-        {
-            X = x;
-            Y = y;
-            Modifier = modifier;
-        }
-
-        public void Deconstruct(out double x, out double y)
-        {
-            x = X;
-            y = Y;
-        }
-
-        public void Deconstruct(out double x, out double y, out ModifierFlags modifier)
-        {
-            x = X;
-            y = Y;
-            modifier = Modifier;
-        }
+    public void Deconstruct(out double x, out double y, out ModifierFlags modifier)
+    {
+        x = X;
+        y = Y;
+        modifier = Modifier;
     }
 }

@@ -8,107 +8,106 @@ using System.Windows.Input;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
 
-namespace Core2D.ViewModels.Style
+namespace Core2D.ViewModels.Style;
+
+public partial class ShapeStyleViewModel : ViewModelBase
 {
-    public partial class ShapeStyleViewModel : ViewModelBase
+    [AutoNotify] private StrokeStyleViewModel? _stroke;
+    [AutoNotify] private FillStyleViewModel? _fill;
+    [AutoNotify] private TextStyleViewModel? _textStyle;
+
+    public ShapeStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        [AutoNotify] private StrokeStyleViewModel? _stroke;
-        [AutoNotify] private FillStyleViewModel? _fill;
-        [AutoNotify] private TextStyleViewModel? _textStyle;
+        RemoveStyle = new Command<ShapeStyleViewModel?>(x => GetProject()?.OnRemoveStyle(x));
 
-        public ShapeStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
-        {
-            RemoveStyle = new Command<ShapeStyleViewModel?>(x => GetProject()?.OnRemoveStyle(x));
+        ExportStyle = new Command<ShapeStyleViewModel?>(x => GetProject()?.OnExportStyle(x));
 
-            ExportStyle = new Command<ShapeStyleViewModel?>(x => GetProject()?.OnExportStyle(x));
+        ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+    }
 
-            ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        }
-
-        [IgnoreDataMember]
-        public ICommand RemoveStyle { get; }
+    [IgnoreDataMember]
+    public ICommand RemoveStyle { get; }
 
         
-        [IgnoreDataMember]
-        public ICommand ExportStyle { get; }
+    [IgnoreDataMember]
+    public ICommand ExportStyle { get; }
 
-        public override object Copy(IDictionary<object, object>? shared)
+    public override object Copy(IDictionary<object, object>? shared)
+    {
+        var copy = new ShapeStyleViewModel(ServiceProvider)
         {
-            var copy = new ShapeStyleViewModel(ServiceProvider)
-            {
-                Name = Name,
-                Stroke = _stroke?.CopyShared(shared),
-                Fill = _fill?.CopyShared(shared),
-                TextStyle = _textStyle?.CopyShared(shared)
-            };
+            Name = Name,
+            Stroke = _stroke?.CopyShared(shared),
+            Fill = _fill?.CopyShared(shared),
+            TextStyle = _textStyle?.CopyShared(shared)
+        };
 
-            return copy;
+        return copy;
+    }
+
+    public override bool IsDirty()
+    {
+        var isDirty = base.IsDirty();
+
+        if (_stroke != null)
+        {
+            isDirty |= _stroke.IsDirty();
         }
 
-        public override bool IsDirty()
+        if (_fill != null)
         {
-            var isDirty = base.IsDirty();
-
-            if (_stroke != null)
-            {
-                isDirty |= _stroke.IsDirty();
-            }
-
-            if (_fill != null)
-            {
-                isDirty |= _fill.IsDirty();
-            }
-
-            if (_textStyle != null)
-            {
-                isDirty |= _textStyle.IsDirty();
-            }
-
-            return isDirty;
+            isDirty |= _fill.IsDirty();
         }
 
-        public override void Invalidate()
+        if (_textStyle != null)
         {
-            base.Invalidate();
-            _stroke?.Invalidate();
-            _fill?.Invalidate();
-            _textStyle?.Invalidate();
+            isDirty |= _textStyle.IsDirty();
         }
 
-        public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
+        return isDirty;
+    }
+
+    public override void Invalidate()
+    {
+        base.Invalidate();
+        _stroke?.Invalidate();
+        _fill?.Invalidate();
+        _textStyle?.Invalidate();
+    }
+
+    public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
+    {
+        var mainDisposable = new CompositeDisposable();
+        var disposablePropertyChanged = default(IDisposable);
+        var disposableStroke = default(IDisposable);
+        var disposableFill = default(IDisposable);
+        var disposableTextStyle = default(IDisposable);
+
+        ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
+        ObserveObject(_stroke, ref disposableStroke, mainDisposable, observer);
+        ObserveObject(_fill, ref disposableFill, mainDisposable, observer);
+        ObserveObject(_textStyle, ref disposableTextStyle, mainDisposable, observer);
+
+        void Handler(object? sender, PropertyChangedEventArgs e)
         {
-            var mainDisposable = new CompositeDisposable();
-            var disposablePropertyChanged = default(IDisposable);
-            var disposableStroke = default(IDisposable);
-            var disposableFill = default(IDisposable);
-            var disposableTextStyle = default(IDisposable);
-
-            ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
-            ObserveObject(_stroke, ref disposableStroke, mainDisposable, observer);
-            ObserveObject(_fill, ref disposableFill, mainDisposable, observer);
-            ObserveObject(_textStyle, ref disposableTextStyle, mainDisposable, observer);
-
-            void Handler(object? sender, PropertyChangedEventArgs e)
+            if (e.PropertyName == nameof(Stroke))
             {
-                if (e.PropertyName == nameof(Stroke))
-                {
-                    ObserveObject(_stroke, ref disposableStroke, mainDisposable, observer);
-                }
-
-                if (e.PropertyName == nameof(Fill))
-                {
-                    ObserveObject(_fill, ref disposableFill, mainDisposable, observer);
-                }
-
-                if (e.PropertyName == nameof(TextStyle))
-                {
-                    ObserveObject(_textStyle, ref disposableTextStyle, mainDisposable, observer);
-                }
-
-                observer.OnNext((sender, e));
+                ObserveObject(_stroke, ref disposableStroke, mainDisposable, observer);
             }
 
-            return mainDisposable;
+            if (e.PropertyName == nameof(Fill))
+            {
+                ObserveObject(_fill, ref disposableFill, mainDisposable, observer);
+            }
+
+            if (e.PropertyName == nameof(TextStyle))
+            {
+                ObserveObject(_textStyle, ref disposableTextStyle, mainDisposable, observer);
+            }
+
+            observer.OnNext((sender, e));
         }
+
+        return mainDisposable;
     }
 }

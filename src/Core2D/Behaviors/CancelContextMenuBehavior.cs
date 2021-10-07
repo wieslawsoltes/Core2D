@@ -4,51 +4,50 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Xaml.Interactivity;
 
-namespace Core2D.Behaviors
+namespace Core2D.Behaviors;
+
+public sealed class EnableContextMenuBehavior : Behavior<Control>
 {
-    public sealed class EnableContextMenuBehavior : Behavior<Control>
+    public static readonly StyledProperty<bool> IsEnabledProperty =
+        AvaloniaProperty.Register<EnableContextMenuBehavior, bool>(nameof(IsEnabled), true);
+
+    public static readonly StyledProperty<ContextMenu> ContextMenuProperty =
+        AvaloniaProperty.Register<EnableContextMenuBehavior, ContextMenu>(nameof(ContextMenu));
+
+    public bool IsEnabled
     {
-        public static readonly StyledProperty<bool> IsEnabledProperty =
-            AvaloniaProperty.Register<EnableContextMenuBehavior, bool>(nameof(IsEnabled), true);
+        get => GetValue(IsEnabledProperty);
+        set => SetValue(IsEnabledProperty, value);
+    }
 
-        public static readonly StyledProperty<ContextMenu> ContextMenuProperty =
-            AvaloniaProperty.Register<EnableContextMenuBehavior, ContextMenu>(nameof(ContextMenu));
+    public ContextMenu ContextMenu
+    {
+        get => GetValue(ContextMenuProperty);
+        set => SetValue(ContextMenuProperty, value);
+    }
 
-        public bool IsEnabled
+    protected override void OnAttached()
+    {
+        base.OnAttached();
+
+        if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
         {
-            get => GetValue(IsEnabledProperty);
-            set => SetValue(IsEnabledProperty, value);
+            contextMenu.ContextMenuOpening += ContextMenu_ContextMenuOpening;
         }
+    }
 
-        public ContextMenu ContextMenu
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
+
+        if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
         {
-            get => GetValue(ContextMenuProperty);
-            set => SetValue(ContextMenuProperty, value);
+            contextMenu.ContextMenuOpening -= ContextMenu_ContextMenuOpening;
         }
+    }
 
-        protected override void OnAttached()
-        {
-            base.OnAttached();
-
-            if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
-            {
-                contextMenu.ContextMenuOpening += ContextMenu_ContextMenuOpening;
-            }
-        }
-
-        protected override void OnDetaching()
-        {
-            base.OnDetaching();
-
-            if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
-            {
-                contextMenu.ContextMenuOpening -= ContextMenu_ContextMenuOpening;
-            }
-        }
-
-        private void ContextMenu_ContextMenuOpening(object? sender, CancelEventArgs e)
-        {
-            e.Cancel = !IsEnabled;
-        }
+    private void ContextMenu_ContextMenuOpening(object? sender, CancelEventArgs e)
+    {
+        e.Cancel = !IsEnabled;
     }
 }

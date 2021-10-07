@@ -1,18 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.Views.Docking.Tools.Properties
-{
-    public class ShapePropertiesView : UserControl
-    {
-        public ShapePropertiesView()
-        {
-            InitializeComponent();
-        }
+namespace Core2D.Views.Docking.Tools.Properties;
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+public class ShapePropertiesView : UserControl
+{
+    public ShapePropertiesView()
+    {
+        InitializeComponent();
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
     }
 }

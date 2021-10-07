@@ -17,187 +17,186 @@ using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
-namespace Core2D.ViewModels.Designer
+namespace Core2D.ViewModels.Designer;
+
+public class DesignerContext
 {
-    public class DesignerContext
+    public static ProjectEditorViewModel Editor { get; private set; }
+
+    public static TemplateContainerViewModel Template { get; private set; }
+
+    public static PageContainerViewModel Page { get; private set; }
+
+    public static DocumentContainerViewModel Document { get; private set; }
+
+    public static LayerContainerViewModel Layer { get; private set; }
+
+    public static OptionsViewModel Options { get; private set; }
+
+    public static ScriptViewModel Script { get; private set; }
+
+    public static ProjectContainerViewModel Project { get; private set; }
+
+    public static LibraryViewModel CurrentStyleLibrary { get; private set; }
+
+    public static LibraryViewModel CurrentGroupLibrary { get; private set; }
+
+    public static ShapeStateFlags State { get; private set; }
+
+    public static DatabaseViewModel Database { get; private set; }
+
+    public static RecordViewModel Record { get; private set; }
+
+    public static ArgbColorViewModel ArgbColor { get; private set; }
+
+    public static ArrowStyleViewModel ArrowStyle { get; private set; }
+
+    public static FontStyleFlags FontStyle { get; private set; }
+
+    public static ShapeStyleViewModel ShapeStyle { get; private set; }
+
+    public static StrokeStyleViewModel StrokeStyle { get; private set; }
+
+    public static FillStyleViewModel FillStyle { get; private set; }
+
+    public static TextStyleViewModel TextStyle { get; private set; }
+
+    public static ArcShapeViewModel Arc { get; private set; }
+
+    public static CubicBezierShapeViewModel CubicBezier { get; private set; }
+
+    public static EllipseShapeViewModel Ellipse { get; private set; }
+
+    public static GroupShapeViewModel Group { get; private set; }
+
+    public static ImageShapeViewModel Image { get; private set; }
+
+    public static LineShapeViewModel Line { get; private set; }
+
+    public static PathShapeViewModel Path { get; private set; }
+
+    public static PointShapeViewModel Point { get; private set; }
+
+    public static QuadraticBezierShapeViewModel QuadraticBezier { get; private set; }
+
+    public static RectangleShapeViewModel Rectangle { get; private set; }
+
+    public static TextShapeViewModel Text { get; private set; }
+
+    public static ArcSegmentViewModel ArcSegment { get; private set; }
+
+    public static CubicBezierSegmentViewModel CubicBezierSegment { get; private set; }
+
+    public static LineSegmentViewModel LineSegment { get; private set; }
+
+    public static PathFigureViewModel PathFigure { get; private set; }
+
+    public static PathSizeViewModel PathSize { get; private set; }
+
+    public static QuadraticBezierSegmentViewModel QuadraticBezierSegment { get; private set; }
+
+    public static ShapeRendererStateViewModel ShapeRendererState { get; private set; }
+
+    public static void InitializeContext(IServiceProvider? serviceProvider)
     {
-        public static ProjectEditorViewModel Editor { get; private set; }
+        var factory = serviceProvider.GetService<IViewModelFactory>();
 
-        public static TemplateContainerViewModel Template { get; private set; }
+        // Editor
 
-        public static PageContainerViewModel Page { get; private set; }
+        Editor = serviceProvider.GetService<ProjectEditorViewModel>();
+        Editor.CurrentTool = Editor.Tools.FirstOrDefault(x => x.Title == "Selection");
+        Editor.CurrentPathTool = Editor.PathTools.FirstOrDefault(x => x.Title == "Line");
 
-        public static DocumentContainerViewModel Document { get; private set; }
+        // Recent Projects
 
-        public static LayerContainerViewModel Layer { get; private set; }
+        Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create(serviceProvider, "Test1", "Test1.project"));
+        Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create(serviceProvider, "Test2", "Test2.project"));
 
-        public static OptionsViewModel Options { get; private set; }
+        // New Project
 
-        public static ScriptViewModel Script { get; private set; }
+        Editor.OnNewProject();
 
-        public static ProjectContainerViewModel Project { get; private set; }
+        // Data
 
-        public static LibraryViewModel CurrentStyleLibrary { get; private set; }
+        var db = factory.CreateDatabase("Db");
+        var fields = new string[] { "Column0", "Column1" };
+        var columns = ImmutableArray.CreateRange(fields.Select(c => factory.CreateColumn(db, c)));
+        db.Columns = columns;
+        var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => factory.CreateValue(c));
+        var record = factory.CreateRecord(
+            db,
+            ImmutableArray.CreateRange(values));
+        db.Records = db.Records.Add(record);
+        db.CurrentRecord = record;
 
-        public static LibraryViewModel CurrentGroupLibrary { get; private set; }
+        Database = db;
+        Record = record;
 
-        public static ShapeStateFlags State { get; private set; }
+        // Project
 
-        public static DatabaseViewModel Database { get; private set; }
+        var containerFactory = serviceProvider.GetService<IContainerFactory>();
 
-        public static RecordViewModel Record { get; private set; }
+        Project = containerFactory.GetProject();
 
-        public static ArgbColorViewModel ArgbColor { get; private set; }
+        Template = factory.CreateTemplateContainer();
 
-        public static ArrowStyleViewModel ArrowStyle { get; private set; }
+        Page = factory.CreatePageContainer();
+        var layer = Page.Layers.FirstOrDefault();
+        layer.Shapes = layer.Shapes.Add(factory.CreateLineShape(0, 0, null));
+        Page.CurrentLayer = layer;
+        Page.CurrentShape = layer.Shapes.FirstOrDefault();
+        Page.Template = Template;
 
-        public static FontStyleFlags FontStyle { get; private set; }
+        Document = factory.CreateDocumentContainer();
+        Layer = factory.CreateLayerContainer();
+        Options = factory.CreateOptions();
 
-        public static ShapeStyleViewModel ShapeStyle { get; private set; }
+        CurrentStyleLibrary = Project.CurrentStyleLibrary;
+        CurrentGroupLibrary = Project.CurrentGroupLibrary;
 
-        public static StrokeStyleViewModel StrokeStyle { get; private set; }
+        // Scripting
 
-        public static FillStyleViewModel FillStyle { get; private set; }
+        Script = factory.CreateScript();
 
-        public static TextStyleViewModel TextStyle { get; private set; }
+        // State
 
-        public static ArcShapeViewModel Arc { get; private set; }
+        State = ShapeStateFlags.Default;
 
-        public static CubicBezierShapeViewModel CubicBezier { get; private set; }
+        // Style
 
-        public static EllipseShapeViewModel Ellipse { get; private set; }
+        ArgbColor = factory.CreateArgbColor(128, 255, 0, 0);
+        ArrowStyle = factory.CreateArrowStyle();
+        FontStyle = FontStyleFlags.Regular;
+        ShapeStyle = factory.CreateShapeStyle("Default");
+        StrokeStyle = factory.CreateStrokeStyle();
+        FillStyle = factory.CreateFillStyle();
+        TextStyle = factory.CreateTextStyle();
 
-        public static GroupShapeViewModel Group { get; private set; }
+        // Shapes
 
-        public static ImageShapeViewModel Image { get; private set; }
+        Arc = factory.CreateArcShape(0, 0, ShapeStyle);
+        CubicBezier = factory.CreateCubicBezierShape(0, 0, ShapeStyle);
+        Ellipse = factory.CreateEllipseShape(0, 0, ShapeStyle);
+        Group = factory.CreateGroupShape("Group");
+        Image = factory.CreateImageShape(0, 0, ShapeStyle, "key");
+        Line = factory.CreateLineShape(0, 0, ShapeStyle);
+        Path = factory.CreatePathShape(ShapeStyle, ImmutableArray.Create<PathFigureViewModel>(), FillRule.EvenOdd);
+        Point = factory.CreatePointShape();
+        QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, ShapeStyle);
+        Rectangle = factory.CreateRectangleShape(0, 0, ShapeStyle);
+        Text = factory.CreateTextShape(0, 0, ShapeStyle, "Text");
 
-        public static LineShapeViewModel Line { get; private set; }
+        // Path
 
-        public static PathShapeViewModel Path { get; private set; }
+        ArcSegment = factory.CreateArcSegment(factory.CreatePointShape(), factory.CreatePathSize(), 180, true, SweepDirection.Clockwise);
+        CubicBezierSegment = factory.CreateCubicBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), factory.CreatePointShape());
+        LineSegment = factory.CreateLineSegment(factory.CreatePointShape());
+        PathFigure = factory.CreatePathFigure(factory.CreatePointShape(), false);
+        PathSize = factory.CreatePathSize();
+        QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape());
 
-        public static PointShapeViewModel Point { get; private set; }
+        // Renderer
 
-        public static QuadraticBezierShapeViewModel QuadraticBezier { get; private set; }
-
-        public static RectangleShapeViewModel Rectangle { get; private set; }
-
-        public static TextShapeViewModel Text { get; private set; }
-
-        public static ArcSegmentViewModel ArcSegment { get; private set; }
-
-        public static CubicBezierSegmentViewModel CubicBezierSegment { get; private set; }
-
-        public static LineSegmentViewModel LineSegment { get; private set; }
-
-        public static PathFigureViewModel PathFigure { get; private set; }
-
-        public static PathSizeViewModel PathSize { get; private set; }
-
-        public static QuadraticBezierSegmentViewModel QuadraticBezierSegment { get; private set; }
-
-        public static ShapeRendererStateViewModel ShapeRendererState { get; private set; }
-
-        public static void InitializeContext(IServiceProvider? serviceProvider)
-        {
-            var factory = serviceProvider.GetService<IViewModelFactory>();
-
-            // Editor
-
-            Editor = serviceProvider.GetService<ProjectEditorViewModel>();
-            Editor.CurrentTool = Editor.Tools.FirstOrDefault(x => x.Title == "Selection");
-            Editor.CurrentPathTool = Editor.PathTools.FirstOrDefault(x => x.Title == "Line");
-
-            // Recent Projects
-
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create(serviceProvider, "Test1", "Test1.project"));
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create(serviceProvider, "Test2", "Test2.project"));
-
-            // New Project
-
-            Editor.OnNewProject();
-
-            // Data
-
-            var db = factory.CreateDatabase("Db");
-            var fields = new string[] { "Column0", "Column1" };
-            var columns = ImmutableArray.CreateRange(fields.Select(c => factory.CreateColumn(db, c)));
-            db.Columns = columns;
-            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => factory.CreateValue(c));
-            var record = factory.CreateRecord(
-                db,
-                ImmutableArray.CreateRange(values));
-            db.Records = db.Records.Add(record);
-            db.CurrentRecord = record;
-
-            Database = db;
-            Record = record;
-
-            // Project
-
-            var containerFactory = serviceProvider.GetService<IContainerFactory>();
-
-            Project = containerFactory.GetProject();
-
-            Template = factory.CreateTemplateContainer();
-
-            Page = factory.CreatePageContainer();
-            var layer = Page.Layers.FirstOrDefault();
-            layer.Shapes = layer.Shapes.Add(factory.CreateLineShape(0, 0, null));
-            Page.CurrentLayer = layer;
-            Page.CurrentShape = layer.Shapes.FirstOrDefault();
-            Page.Template = Template;
-
-            Document = factory.CreateDocumentContainer();
-            Layer = factory.CreateLayerContainer();
-            Options = factory.CreateOptions();
-
-            CurrentStyleLibrary = Project.CurrentStyleLibrary;
-            CurrentGroupLibrary = Project.CurrentGroupLibrary;
-
-            // Scripting
-
-            Script = factory.CreateScript();
-
-            // State
-
-            State = ShapeStateFlags.Default;
-
-            // Style
-
-            ArgbColor = factory.CreateArgbColor(128, 255, 0, 0);
-            ArrowStyle = factory.CreateArrowStyle();
-            FontStyle = FontStyleFlags.Regular;
-            ShapeStyle = factory.CreateShapeStyle("Default");
-            StrokeStyle = factory.CreateStrokeStyle();
-            FillStyle = factory.CreateFillStyle();
-            TextStyle = factory.CreateTextStyle();
-
-            // Shapes
-
-            Arc = factory.CreateArcShape(0, 0, ShapeStyle);
-            CubicBezier = factory.CreateCubicBezierShape(0, 0, ShapeStyle);
-            Ellipse = factory.CreateEllipseShape(0, 0, ShapeStyle);
-            Group = factory.CreateGroupShape("Group");
-            Image = factory.CreateImageShape(0, 0, ShapeStyle, "key");
-            Line = factory.CreateLineShape(0, 0, ShapeStyle);
-            Path = factory.CreatePathShape(ShapeStyle, ImmutableArray.Create<PathFigureViewModel>(), FillRule.EvenOdd);
-            Point = factory.CreatePointShape();
-            QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, ShapeStyle);
-            Rectangle = factory.CreateRectangleShape(0, 0, ShapeStyle);
-            Text = factory.CreateTextShape(0, 0, ShapeStyle, "Text");
-
-            // Path
-
-            ArcSegment = factory.CreateArcSegment(factory.CreatePointShape(), factory.CreatePathSize(), 180, true, SweepDirection.Clockwise);
-            CubicBezierSegment = factory.CreateCubicBezierSegment(factory.CreatePointShape(), factory.CreatePointShape(), factory.CreatePointShape());
-            LineSegment = factory.CreateLineSegment(factory.CreatePointShape());
-            PathFigure = factory.CreatePathFigure(factory.CreatePointShape(), false);
-            PathSize = factory.CreatePathSize();
-            QuadraticBezierSegment = factory.CreateQuadraticBezierSegment(factory.CreatePointShape(), factory.CreatePointShape());
-
-            // Renderer
-
-            ShapeRendererState = factory.CreateShapeRendererState();
-        }
+        ShapeRendererState = factory.CreateShapeRendererState();
     }
 }

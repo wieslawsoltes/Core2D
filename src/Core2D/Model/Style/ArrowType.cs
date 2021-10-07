@@ -1,14 +1,13 @@
 ﻿#nullable enable
-namespace Core2D.Model.Style
+namespace Core2D.Model.Style;
+
+public enum ArrowType
 {
-    public enum ArrowType
-    {
-        None,
+    None,
 
-        Rectangle,
+    Rectangle,
 
-        Ellipse,
+    Ellipse,
 
-        Arrow
-    }
+    Arrow
 }

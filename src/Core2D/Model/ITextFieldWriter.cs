@@ -1,14 +1,13 @@
 ﻿#nullable enable
 using System.IO;
 
-namespace Core2D.Model
+namespace Core2D.Model;
+
+public interface ITextFieldWriter<in T>
 {
-    public interface ITextFieldWriter<in T>
-    {
-        string Name { get; }
+    string Name { get; }
 
-        string Extension { get; }
+    string Extension { get; }
 
-        void Write(Stream stream, T? database);
-    }
+    void Write(Stream stream, T? database);
 }

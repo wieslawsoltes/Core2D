@@ -1,14 +1,13 @@
 ﻿#nullable enable
 using System.IO;
 
-namespace Core2D.Model
+namespace Core2D.Model;
+
+public interface IFileWriter
 {
-    public interface IFileWriter
-    {
-        string Name { get; }
+    string Name { get; }
 
-        string Extension { get; }
+    string Extension { get; }
 
-        void Save(Stream stream, object item, object? options);
-    }
+    void Save(Stream stream, object item, object? options);
 }

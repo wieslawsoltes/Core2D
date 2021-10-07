@@ -3,60 +3,59 @@ using System;
 using System.Collections.Generic;
 using Core2D.Model.Style;
 
-namespace Core2D.ViewModels.Style
+namespace Core2D.ViewModels.Style;
+
+public partial class TextStyleViewModel : ViewModelBase
 {
-    public partial class TextStyleViewModel : ViewModelBase
+    public static TextHAlignment[] TextHAlignmentValues { get; } = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
+
+    public static TextVAlignment[] TextVAlignmentValues { get; } = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
+
+    [AutoNotify] private string? _fontName;
+    [AutoNotify] private string? _fontFile;
+    [AutoNotify] private double _fontSize;
+    [AutoNotify] private FontStyleFlags _fontStyle;
+    [AutoNotify] private TextHAlignment? _textHAlignment;
+    [AutoNotify] private TextVAlignment? _textVAlignment;
+
+    public TextStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        public static TextHAlignment[] TextHAlignmentValues { get; } = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
+    }
 
-        public static TextVAlignment[] TextVAlignmentValues { get; } = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
+    public void ToggleRegularFontStyle()
+    {
+        FontStyle ^= FontStyleFlags.Regular;
+    }
 
-        [AutoNotify] private string? _fontName;
-        [AutoNotify] private string? _fontFile;
-        [AutoNotify] private double _fontSize;
-        [AutoNotify] private FontStyleFlags _fontStyle;
-        [AutoNotify] private TextHAlignment? _textHAlignment;
-        [AutoNotify] private TextVAlignment? _textVAlignment;
+    public void ToggleBoldFontStyle()
+    {
+        FontStyle ^= FontStyleFlags.Bold;
+    }
 
-        public TextStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
+    public void ToggleItalicFontStyle()
+    {
+        FontStyle ^= FontStyleFlags.Italic;
+    }
+
+    public override object Copy(IDictionary<object, object>? shared)
+    {
+        var copy = new TextStyleViewModel(ServiceProvider)
         {
-        }
+            Name = Name,
+            FontName = _fontName,
+            FontFile = _fontFile,
+            FontSize = _fontSize,
+            FontStyle = _fontStyle,
+            TextHAlignment = _textHAlignment,
+            TextVAlignment = _textVAlignment
+        };
 
-        public void ToggleRegularFontStyle()
-        {
-            FontStyle ^= FontStyleFlags.Regular;
-        }
+        return copy;
+    }
 
-        public void ToggleBoldFontStyle()
-        {
-            FontStyle ^= FontStyleFlags.Bold;
-        }
-
-        public void ToggleItalicFontStyle()
-        {
-            FontStyle ^= FontStyleFlags.Italic;
-        }
-
-        public override object Copy(IDictionary<object, object>? shared)
-        {
-            var copy = new TextStyleViewModel(ServiceProvider)
-            {
-                Name = Name,
-                FontName = _fontName,
-                FontFile = _fontFile,
-                FontSize = _fontSize,
-                FontStyle = _fontStyle,
-                TextHAlignment = _textHAlignment,
-                TextVAlignment = _textVAlignment
-            };
-
-            return copy;
-        }
-
-        public override bool IsDirty()
-        {
-            var isDirty = base.IsDirty();
-            return isDirty;
-        }
+    public override bool IsDirty()
+    {
+        var isDirty = base.IsDirty();
+        return isDirty;
     }
 }

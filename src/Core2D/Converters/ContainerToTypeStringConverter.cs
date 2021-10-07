@@ -6,23 +6,22 @@ using Avalonia;
 using Avalonia.Data.Converters;
 using Core2D.ViewModels.Containers;
 
-namespace Core2D.Converters
-{
-    public class ContainerToTypeStringConverter : IMultiValueConverter
-    {
-        public static ContainerToTypeStringConverter Instance = new();
+namespace Core2D.Converters;
 
-        public object? Convert(IList<object>? values, Type targetType, object? parameter, CultureInfo culture)
+public class ContainerToTypeStringConverter : IMultiValueConverter
+{
+    public static ContainerToTypeStringConverter Instance = new();
+
+    public object? Convert(IList<object>? values, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (values?.Count == 2 && values[0] is string name && values[1] is BaseContainerViewModel container)
         {
-            if (values?.Count == 2 && values[0] is string name && values[1] is BaseContainerViewModel container)
+            if (string.IsNullOrEmpty(name))
             {
-                if (string.IsNullOrEmpty(name))
-                {
-                    return container.GetType().Name.Replace("ContainerViewModel", "");
-                }
-                return container.Name;
+                return container.GetType().Name.Replace("ContainerViewModel", "");
             }
-            return AvaloniaProperty.UnsetValue;
+            return container.Name;
         }
+        return AvaloniaProperty.UnsetValue;
     }
 }

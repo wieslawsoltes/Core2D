@@ -1,8 +1,7 @@
-﻿namespace Core2D.ViewModels.Layout
+﻿namespace Core2D.ViewModels.Layout;
+
+public enum DistributeMode
 {
-    public enum DistributeMode
-    {
-        Horizontal,
-        Vertical
-    }
+    Horizontal,
+    Vertical
 }

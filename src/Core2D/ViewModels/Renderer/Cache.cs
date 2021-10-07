@@ -3,50 +3,49 @@ using System;
 using System.Collections.Generic;
 using Core2D.Model.Renderer;
 
-namespace Core2D.ViewModels.Renderer
+namespace Core2D.ViewModels.Renderer;
+
+public class Cache<TKey, TValue> : ICache<TKey, TValue> where TKey : notnull
 {
-    public class Cache<TKey, TValue> : ICache<TKey, TValue> where TKey : notnull
+    private IDictionary<TKey, TValue?> _storage;
+    private readonly Action<TValue>? _dispose;
+
+    public Cache(Action<TValue>? dispose = null)
     {
-        private IDictionary<TKey, TValue?> _storage;
-        private readonly Action<TValue>? _dispose;
+        _dispose = dispose;
+        _storage = new Dictionary<TKey, TValue?>();
+    }
 
-        public Cache(Action<TValue>? dispose = null)
+    public TValue? Get(TKey key)
+    {
+        return _storage.TryGetValue(key, out var data) ? data : default;
+    }
+
+    public void Set(TKey key, TValue? value)
+    {
+        if (_storage.ContainsKey(key))
         {
-            _dispose = dispose;
-            _storage = new Dictionary<TKey, TValue?>();
+            _storage[key] = value;
         }
-
-        public TValue? Get(TKey key)
+        else
         {
-            return _storage.TryGetValue(key, out var data) ? data : default;
+            _storage.Add(key, value);
         }
+    }
 
-        public void Set(TKey key, TValue? value)
+    public void Reset()
+    {
+        if (_dispose is { })
         {
-            if (_storage.ContainsKey(key))
+            foreach (var data in _storage)
             {
-                _storage[key] = value;
-            }
-            else
-            {
-                _storage.Add(key, value);
-            }
-        }
-
-        public void Reset()
-        {
-            if (_dispose is { })
-            {
-                foreach (var data in _storage)
+                if (data.Value is not null)
                 {
-                    if (data.Value is not null)
-                    {
-                        _dispose(data.Value);
-                    }
+                    _dispose(data.Value);
                 }
             }
-            _storage.Clear();
-            _storage = new Dictionary<TKey, TValue?>();
         }
+        _storage.Clear();
+        _storage = new Dictionary<TKey, TValue?>();
     }
 }

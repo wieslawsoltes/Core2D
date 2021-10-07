@@ -2,81 +2,80 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Core2D.Spatial.DouglasPeucker
+namespace Core2D.Spatial.DouglasPeucker;
+
+public class RDP
 {
-    public class RDP
+    public BitArray DouglasPeucker(IList<Vector2> points, int startIndex, int lastIndex, double epsilon)
     {
-        public BitArray DouglasPeucker(IList<Vector2> points, int startIndex, int lastIndex, double epsilon)
+        var stack = new Stack<KeyValuePair<int, int>>();
+        stack.Push(new KeyValuePair<int, int>(startIndex, lastIndex));
+
+        int globalStartIndex = startIndex;
+        var bitArray = new BitArray(lastIndex - startIndex + 1, true);
+
+        while (stack.Count > 0)
         {
-            var stack = new Stack<KeyValuePair<int, int>>();
-            stack.Push(new KeyValuePair<int, int>(startIndex, lastIndex));
+            startIndex = stack.Peek().Key;
+            lastIndex = stack.Peek().Value;
+            stack.Pop();
 
-            int globalStartIndex = startIndex;
-            var bitArray = new BitArray(lastIndex - startIndex + 1, true);
+            double maxDistance = 0f;
+            int index = startIndex;
 
-            while (stack.Count > 0)
+            for (int i = index + 1; i < lastIndex; ++i)
             {
-                startIndex = stack.Peek().Key;
-                lastIndex = stack.Peek().Value;
-                stack.Pop();
-
-                double maxDistance = 0f;
-                int index = startIndex;
-
-                for (int i = index + 1; i < lastIndex; ++i)
+                if (bitArray[i - globalStartIndex])
                 {
-                    if (bitArray[i - globalStartIndex])
+                    double d = PointLineDistance(points[i], points[startIndex], points[lastIndex]);
+                    if (d > maxDistance)
                     {
-                        double d = PointLineDistance(points[i], points[startIndex], points[lastIndex]);
-                        if (d > maxDistance)
-                        {
-                            index = i;
-                            maxDistance = d;
-                        }
-                    }
-                }
-
-                if (maxDistance > epsilon)
-                {
-                    stack.Push(new KeyValuePair<int, int>(startIndex, index));
-                    stack.Push(new KeyValuePair<int, int>(index, lastIndex));
-                }
-                else
-                {
-                    for (int i = startIndex + 1; i < lastIndex; ++i)
-                    {
-                        bitArray[i - globalStartIndex] = false;
+                        index = i;
+                        maxDistance = d;
                     }
                 }
             }
 
-            return bitArray;
-        }
-
-        public IList<Vector2> DouglasPeucker(IList<Vector2> points, double epsilon)
-        {
-            var bitArray = DouglasPeucker(points, 0, points.Count - 1, epsilon);
-            var resList = new List<Vector2>();
-
-            for (int i = 0, n = points.Count; i < n; ++i)
+            if (maxDistance > epsilon)
             {
-                if (bitArray[i])
+                stack.Push(new KeyValuePair<int, int>(startIndex, index));
+                stack.Push(new KeyValuePair<int, int>(index, lastIndex));
+            }
+            else
+            {
+                for (int i = startIndex + 1; i < lastIndex; ++i)
                 {
-                    resList.Add(points[i]);
+                    bitArray[i - globalStartIndex] = false;
                 }
             }
-            return resList;
         }
 
-        public double PointLineDistance(Vector2 point, Vector2 start, Vector2 end)
+        return bitArray;
+    }
+
+    public IList<Vector2> DouglasPeucker(IList<Vector2> points, double epsilon)
+    {
+        var bitArray = DouglasPeucker(points, 0, points.Count - 1, epsilon);
+        var resList = new List<Vector2>();
+
+        for (int i = 0, n = points.Count; i < n; ++i)
         {
-            if (start == end)
+            if (bitArray[i])
             {
-                return point.Distance(start);
+                resList.Add(points[i]);
             }
-            double n = (double)Math.Abs(((end.X - start.X) * (start.Y - point.Y)) - ((start.X - point.X) * (end.Y - start.Y)));
-            double d = (double)Math.Sqrt(((end.X - start.X) * (end.X - start.X)) + ((end.Y - start.Y) * (end.Y - start.Y)));
-            return n / d;
         }
+        return resList;
+    }
+
+    public double PointLineDistance(Vector2 point, Vector2 start, Vector2 end)
+    {
+        if (start == end)
+        {
+            return point.Distance(start);
+        }
+        double n = (double)Math.Abs(((end.X - start.X) * (start.Y - point.Y)) - ((start.X - point.X) * (end.Y - start.Y)));
+        double d = (double)Math.Sqrt(((end.X - start.X) * (end.X - start.X)) + ((end.Y - start.Y) * (end.Y - start.Y)));
+        return n / d;
     }
 }

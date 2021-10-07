@@ -4,165 +4,164 @@ using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data.Bindings;
 using Core2D.ViewModels.Shapes;
 
-namespace Core2D.ViewModels.Data
+namespace Core2D.ViewModels.Data;
+
+public class DataFlow
 {
-    public class DataFlow
+    public void Bind(ProjectContainerViewModel? project)
     {
-        public void Bind(ProjectContainerViewModel? project)
+        if (project is null)
         {
-            if (project is null)
-            {
-                return;
-            }
-
-            foreach (var document in project.Documents)
-            {
-                Bind(document);
-            }
+            return;
         }
 
-        public void Bind(DocumentContainerViewModel? document)
+        foreach (var document in project.Documents)
         {
-            if (document is null)
-            {
-                return;
-            }
+            Bind(document);
+        }
+    }
 
-            foreach (var container in document.Pages)
-            {
-                var db = container.Properties;
-                var r = container.Record;
-
-                Bind(container.Template, db, r);
-                Bind(container, db, r);
-            }
+    public void Bind(DocumentContainerViewModel? document)
+    {
+        if (document is null)
+        {
+            return;
         }
 
-        public void Bind(FrameContainerViewModel? container, object? db, object? r)
+        foreach (var container in document.Pages)
         {
-            if (container is null)
-            {
-                return;
-            }
+            var db = container.Properties;
+            var r = container.Record;
 
-            foreach (var layer in container.Layers)
-            {
-                Bind(layer, db, r);
-            }
+            Bind(container.Template, db, r);
+            Bind(container, db, r);
+        }
+    }
+
+    public void Bind(FrameContainerViewModel? container, object? db, object? r)
+    {
+        if (container is null)
+        {
+            return;
         }
 
-        public void Bind(LayerContainerViewModel? layer, object? db, object? r)
+        foreach (var layer in container.Layers)
         {
-            if (layer is null)
-            {
-                return;
-            }
+            Bind(layer, db, r);
+        }
+    }
 
-            foreach (var shape in layer.Shapes)
-            {
-                shape.Bind(this, db, r);
-            }
+    public void Bind(LayerContainerViewModel? layer, object? db, object? r)
+    {
+        if (layer is null)
+        {
+            return;
         }
 
-        public void Bind(LineShapeViewModel? line, object? db, object? r)
+        foreach (var shape in layer.Shapes)
         {
-            if (line is null)
-            {
-                // ReSharper disable once RedundantJumpStatement
-                return;
-            }
+            shape.Bind(this, db, r);
+        }
+    }
 
-            // TODO: Bind LineShapeViewModel
+    public void Bind(LineShapeViewModel? line, object? db, object? r)
+    {
+        if (line is null)
+        {
+            // ReSharper disable once RedundantJumpStatement
+            return;
         }
 
-        public void Bind(RectangleShapeViewModel? rectangle, object? db, object? r)
-        {
-            if (rectangle is null)
-            {
-                // ReSharper disable once RedundantJumpStatement
-                return;
-            }
+        // TODO: Bind LineShapeViewModel
+    }
 
-            // TODO: Bind RectangleShapeViewModel
+    public void Bind(RectangleShapeViewModel? rectangle, object? db, object? r)
+    {
+        if (rectangle is null)
+        {
+            // ReSharper disable once RedundantJumpStatement
+            return;
         }
 
-        public void Bind(EllipseShapeViewModel? ellipse, object? db, object? r)
-        {
-            if (ellipse is null)
-            {
-                // ReSharper disable once RedundantJumpStatement
-                return;
-            }
+        // TODO: Bind RectangleShapeViewModel
+    }
 
-            // TODO: Bind EllipseShapeViewModel
+    public void Bind(EllipseShapeViewModel? ellipse, object? db, object? r)
+    {
+        if (ellipse is null)
+        {
+            // ReSharper disable once RedundantJumpStatement
+            return;
         }
 
-        public void Bind(ArcShapeViewModel? arc, object? db, object? r)
-        {
-            if (arc is null)
-            {
-                // ReSharper disable once RedundantJumpStatement
-                return;
-            }
+        // TODO: Bind EllipseShapeViewModel
+    }
 
-            // TODO: Bind ArcShapeViewModel
+    public void Bind(ArcShapeViewModel? arc, object? db, object? r)
+    {
+        if (arc is null)
+        {
+            // ReSharper disable once RedundantJumpStatement
+            return;
         }
 
-        public void Bind(CubicBezierShapeViewModel? cubicBezier, object? db, object? r)
-        {
-            if (cubicBezier is null)
-            {
-                // ReSharper disable once RedundantJumpStatement
-                return;
-            }
+        // TODO: Bind ArcShapeViewModel
+    }
 
-            // TODO: Bind CubicBezierShapeViewModel
+    public void Bind(CubicBezierShapeViewModel? cubicBezier, object? db, object? r)
+    {
+        if (cubicBezier is null)
+        {
+            // ReSharper disable once RedundantJumpStatement
+            return;
         }
 
-        public void Bind(QuadraticBezierShapeViewModel? quadraticBezier, object? db, object? r)
-        {
-            if (quadraticBezier is null)
-            {
-                // ReSharper disable once RedundantJumpStatement
-                return;
-            }
+        // TODO: Bind CubicBezierShapeViewModel
+    }
 
-            // TODO: Bind QuadraticBezierShapeViewModel
+    public void Bind(QuadraticBezierShapeViewModel? quadraticBezier, object? db, object? r)
+    {
+        if (quadraticBezier is null)
+        {
+            // ReSharper disable once RedundantJumpStatement
+            return;
         }
 
-        public void Bind(TextShapeViewModel? text, object? db, object? r)
-        {
-            if (text is null)
-            {
-                return;
-            }
+        // TODO: Bind QuadraticBezierShapeViewModel
+    }
 
-            var properties = (ImmutableArray<PropertyViewModel>?)db;
-            var record = (RecordViewModel?)r;
-            var value = TextBinding.Bind(text, properties, record);
-            text.SetProperty(nameof(TextShapeViewModel.Text), value);
+    public void Bind(TextShapeViewModel? text, object? db, object? r)
+    {
+        if (text is null)
+        {
+            return;
         }
 
-        public void Bind(ImageShapeViewModel? image, object? db, object? r)
-        {
-            if (image is null)
-            {
-                // ReSharper disable once RedundantJumpStatement
-                return;
-            }
+        var properties = (ImmutableArray<PropertyViewModel>?)db;
+        var record = (RecordViewModel?)r;
+        var value = TextBinding.Bind(text, properties, record);
+        text.SetProperty(nameof(TextShapeViewModel.Text), value);
+    }
 
-            // TODO: Bind ImageShapeViewModel
+    public void Bind(ImageShapeViewModel? image, object? db, object? r)
+    {
+        if (image is null)
+        {
+            // ReSharper disable once RedundantJumpStatement
+            return;
         }
 
-        public void Bind(PathShapeViewModel? path, object? db, object? r)
-        {
-            if (path is null)
-            {
-                // ReSharper disable once RedundantJumpStatement
-                return;
-            }
+        // TODO: Bind ImageShapeViewModel
+    }
 
-            // TODO: Bind PathShapeViewModel
+    public void Bind(PathShapeViewModel? path, object? db, object? r)
+    {
+        if (path is null)
+        {
+            // ReSharper disable once RedundantJumpStatement
+            return;
         }
+
+        // TODO: Bind PathShapeViewModel
     }
 }

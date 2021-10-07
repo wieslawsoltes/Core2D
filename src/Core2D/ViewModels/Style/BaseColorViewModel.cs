@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core2D.ViewModels.Style
+namespace Core2D.ViewModels.Style;
+
+public abstract partial class BaseColorViewModel : ViewModelBase
 {
-    public abstract partial class BaseColorViewModel : ViewModelBase
+    protected BaseColorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        protected BaseColorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
-        {
-        }
     }
 }

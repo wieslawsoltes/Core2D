@@ -8,67 +8,66 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 
-namespace Core2D.Modules.FileWriter.PdfSharp
-{
-    public sealed class PdfSharpWriter : IFileWriter
-    {
-        private readonly IServiceProvider? _serviceProvider;
+namespace Core2D.Modules.FileWriter.PdfSharp;
 
-        public PdfSharpWriter(IServiceProvider? serviceProvider)
+public sealed class PdfSharpWriter : IFileWriter
+{
+    private readonly IServiceProvider? _serviceProvider;
+
+    public PdfSharpWriter(IServiceProvider? serviceProvider)
+    {
+        _serviceProvider = serviceProvider;
+    }
+
+    public string Name { get; } = "Pdf (PdfSharp)";
+
+    public string Extension { get; } = "pdf";
+
+    public void Save(Stream stream, object? item, object? options)
+    {
+        if (item is null)
         {
-            _serviceProvider = serviceProvider;
+            return;
         }
 
-        public string Name { get; } = "Pdf (PdfSharp)";
-
-        public string Extension { get; } = "pdf";
-
-        public void Save(Stream stream, object? item, object? options)
+        var ic = options as IImageCache;
+        if (options is null)
         {
-            if (item is null)
-            {
-                return;
-            }
+            return;
+        }
 
-            var ic = options as IImageCache;
-            if (options is null)
-            {
-                return;
-            }
+        IProjectExporter exporter = new PdfSharpRenderer(_serviceProvider);
 
-            IProjectExporter exporter = new PdfSharpRenderer(_serviceProvider);
+        IShapeRenderer renderer = (IShapeRenderer)exporter;
+        renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+        renderer.State.ImageCache = ic;
 
-            IShapeRenderer renderer = (IShapeRenderer)exporter;
-            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-            renderer.State.ImageCache = ic;
+        if (item is PageContainerViewModel page)
+        {
+            var dataFlow = _serviceProvider.GetService<DataFlow>();
+            var db = (object)page.Properties;
+            var record = (object)page.Record;
 
-            if (item is PageContainerViewModel page)
-            {
-                var dataFlow = _serviceProvider.GetService<DataFlow>();
-                var db = (object)page.Properties;
-                var record = (object)page.Record;
+            dataFlow.Bind(page.Template, db, record);
+            dataFlow.Bind(page, db, record);
 
-                dataFlow.Bind(page.Template, db, record);
-                dataFlow.Bind(page, db, record);
+            exporter.Save(stream, page);
+        }
+        else if (item is DocumentContainerViewModel document)
+        {
+            var dataFlow = _serviceProvider.GetService<DataFlow>();
 
-                exporter.Save(stream, page);
-            }
-            else if (item is DocumentContainerViewModel document)
-            {
-                var dataFlow = _serviceProvider.GetService<DataFlow>();
+            dataFlow.Bind(document);
 
-                dataFlow.Bind(document);
+            exporter.Save(stream, document);
+        }
+        else if (item is ProjectContainerViewModel project)
+        {
+            var dataFlow = _serviceProvider.GetService<DataFlow>();
 
-                exporter.Save(stream, document);
-            }
-            else if (item is ProjectContainerViewModel project)
-            {
-                var dataFlow = _serviceProvider.GetService<DataFlow>();
+            dataFlow.Bind(project);
 
-                dataFlow.Bind(project);
-
-                exporter.Save(stream, project);
-            }
+            exporter.Save(stream, project);
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿#nullable enable
-namespace Core2D.Model
-{
-    public interface IStringExporter
-    {
-        string ToXamlString();
+namespace Core2D.Model;
 
-        string ToSvgString();
-    }
+public interface IStringExporter
+{
+    string ToXamlString();
+
+    string ToSvgString();
 }

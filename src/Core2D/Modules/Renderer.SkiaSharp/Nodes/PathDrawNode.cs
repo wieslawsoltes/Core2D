@@ -5,41 +5,40 @@ using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using SkiaSharp;
 
-namespace Core2D.Modules.Renderer.SkiaSharp.Nodes
+namespace Core2D.Modules.Renderer.SkiaSharp.Nodes;
+
+internal class PathDrawNode : DrawNode, IPathDrawNode
 {
-    internal class PathDrawNode : DrawNode, IPathDrawNode
+    public PathShapeViewModel Path { get; set; }
+    public SKPath Geometry { get; set; }
+
+    public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style)
     {
-        public PathShapeViewModel Path { get; set; }
-        public SKPath Geometry { get; set; }
+        Style = style;
+        Path = path;
+        UpdateGeometry();
+    }
 
-        public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style)
+    public sealed override void UpdateGeometry()
+    {
+        ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
+        ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
+        Geometry = PathGeometryConverter.ToSKPath(Path);
+        Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
+    }
+
+    public override void OnDraw(object dc, double zoom)
+    {
+        var canvas = dc as SKCanvas;
+
+        if (Path.IsFilled)
         {
-            Style = style;
-            Path = path;
-            UpdateGeometry();
+            canvas.DrawPath(Geometry, Fill);
         }
 
-        public sealed override void UpdateGeometry()
+        if (Path.IsStroked)
         {
-            ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
-            ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
-            Geometry = PathGeometryConverter.ToSKPath(Path);
-            Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
-        }
-
-        public override void OnDraw(object dc, double zoom)
-        {
-            var canvas = dc as SKCanvas;
-
-            if (Path.IsFilled)
-            {
-                canvas.DrawPath(Geometry, Fill);
-            }
-
-            if (Path.IsStroked)
-            {
-                canvas.DrawPath(Geometry, Stroke);
-            }
+            canvas.DrawPath(Geometry, Stroke);
         }
     }
 }

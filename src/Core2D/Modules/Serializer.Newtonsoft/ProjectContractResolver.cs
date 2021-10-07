@@ -9,57 +9,56 @@ using Autofac.Core.Activators.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Core2D.Modules.Serializer.Newtonsoft
+namespace Core2D.Modules.Serializer.Newtonsoft;
+
+internal class ProjectContractResolver : DefaultContractResolver
 {
-    internal class ProjectContractResolver : DefaultContractResolver
+    private readonly ILifetimeScope _lifetimeScope;
+    private readonly Type _listType;
+
+    public ProjectContractResolver(ILifetimeScope lifetimeScope, Type listType)
     {
-        private readonly ILifetimeScope _lifetimeScope;
-        private readonly Type _listType;
+        _lifetimeScope = lifetimeScope;
+        _listType = listType;
+    }
 
-        public ProjectContractResolver(ILifetimeScope lifetimeScope, Type listType)
+    protected override JsonObjectContract CreateObjectContract(Type objectType)
+    {
+        if (_lifetimeScope.IsRegistered(objectType))
         {
-            _lifetimeScope = lifetimeScope;
-            _listType = listType;
+            var contract = ResolveContractUsingLifetimeScope(objectType);
+            contract.DefaultCreator = () => _lifetimeScope.Resolve(objectType);
+            return contract;
         }
 
-        protected override JsonObjectContract CreateObjectContract(Type objectType)
-        {
-            if (_lifetimeScope.IsRegistered(objectType))
-            {
-                var contract = ResolveContractUsingLifetimeScope(objectType);
-                contract.DefaultCreator = () => _lifetimeScope.Resolve(objectType);
-                return contract;
-            }
+        return base.CreateObjectContract(objectType);
+    }
 
-            return base.CreateObjectContract(objectType);
+    private JsonObjectContract ResolveContractUsingLifetimeScope(Type objectType)
+    {
+        if (_lifetimeScope.ComponentRegistry.TryGetRegistration(new TypedService(objectType), out var registration))
+        {
+            var viewType = (registration.Activator as ReflectionActivator)?.LimitType;
+            if (viewType is { })
+            {
+                return base.CreateObjectContract(viewType);
+            }
         }
-
-        private JsonObjectContract ResolveContractUsingLifetimeScope(Type objectType)
-        {
-            if (_lifetimeScope.ComponentRegistry.TryGetRegistration(new TypedService(objectType), out var registration))
-            {
-                var viewType = (registration.Activator as ReflectionActivator)?.LimitType;
-                if (viewType is { })
-                {
-                    return base.CreateObjectContract(viewType);
-                }
-            }
             
-            return base.CreateObjectContract(objectType);
-        }
+        return base.CreateObjectContract(objectType);
+    }
 
-        public override JsonContract ResolveContract(Type type)
+    public override JsonContract ResolveContract(Type type)
+    {
+        if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
         {
-            if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
-            {
-                return base.ResolveContract(_listType.MakeGenericType(type.GenericTypeArguments[0]));
-            }
-            return base.ResolveContract(type);
+            return base.ResolveContract(_listType.MakeGenericType(type.GenericTypeArguments[0]));
         }
+        return base.ResolveContract(type);
+    }
         
-        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-        {
-            return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();
-        }
+    protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+    {
+        return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();
     }
 }
