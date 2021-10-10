@@ -205,7 +205,7 @@ public class DockFactory : Factory
             VisibleDockables = CreateList<IDockable>
             (
                 leftTopToolDock,
-                new SplitterDockable(),
+                new ProportionalDockSplitter(),
                 leftBottomToolDock
             )
         };
@@ -218,7 +218,7 @@ public class DockFactory : Factory
             VisibleDockables = CreateList<IDockable>
             (
                 rightTopToolDock,
-                new SplitterDockable(),
+                new ProportionalDockSplitter(),
                 rightBottomToolDock
             )
         };
@@ -241,9 +241,9 @@ public class DockFactory : Factory
             VisibleDockables = CreateList<IDockable>
             (
                 leftDock,
-                new SplitterDockable(),
+                new ProportionalDockSplitter(),
                 documentDock,
-                new SplitterDockable(),
+                new ProportionalDockSplitter(),
                 rightDock
             ),
             IsCollapsable = false
