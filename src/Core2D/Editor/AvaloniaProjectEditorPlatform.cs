@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
@@ -296,7 +298,10 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
     public void OnExit()
     {
-        GetWindow().Close();
+    	if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+    	{
+    		desktopLifetime.Shutdown();
+    	}
     }
 
     public void OnCopyAsSvg(object? item)
