@@ -212,6 +212,8 @@ public class App : Application
             log.Dispose();
             container.Dispose();
         };
+
+        DataContext = editor;
     }
 
     private void InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime)
@@ -240,6 +242,8 @@ public class App : Application
         };
 
         singleViewLifetime.MainView = mainView;
+
+        DataContext = editor;
     }
 
     public void SetTheme(string themeName)
