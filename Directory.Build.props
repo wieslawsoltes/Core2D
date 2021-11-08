@@ -4,7 +4,7 @@
     <LangVersion>latest</LangVersion>
  </PropertyGroup>
   <PropertyGroup>
-    <VersionPrefix>0.10.8</VersionPrefix>
+    <VersionPrefix>0.10.10</VersionPrefix>
     <VersionSuffix>beta1</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
@@ -28,11 +28,11 @@
     <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
     <SystemCommandLineVersion>2.0.0-beta1.21308.1</SystemCommandLineVersion>
     <SvgSkiaVersion>0.5.8</SvgSkiaVersion>
-    <AvaloniaVersion>0.10.8</AvaloniaVersion>
+    <AvaloniaVersion>0.10.10</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.4</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>0.10.8</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>4.2.0</AvaloniaControlsPanAndZoomVersion>
+    <AvaloniaXamlBehaviorsVersion>0.10.10</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>4.3.0</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>0.10.8</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>0.10.8</DockAvaloniaVersion>
+    <DockAvaloniaVersion>0.10.10</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
