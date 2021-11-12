@@ -143,7 +143,7 @@
                 </ContextMenu>
               </paz:ZoomBorder.ContextMenu>
               <i:Interaction.Behaviors>
-                <behaviors:EnableContextMenuBehavior IsEnabled="{Binding $parent[TopLevel].DataContext.IsToolIdle}"
+                <behaviors:EnableContextMenuBehavior IsEnabled="{Binding $parent[UserControl].DataContext.Context.IsToolIdle}"
                                                      ContextMenu="{Binding #TemplateContextMenu}"/>
               <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}">
                 <idd:ContextDropBehavior.Handler>
@@ -162,23 +162,23 @@
                        Height="{Binding Template.Height, TargetNullValue={Binding Height}}"
                        ClipToBounds="False">
                   <renderer:RenderView x:Name="RenderViewData"
-                                       Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
-                                       Selection="{Binding $parent[TopLevel].DataContext.Project}"
-                                       DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
+                                       Renderer="{Binding $parent[UserControl].DataContext.Context.Renderer}"
+                                       Selection="{Binding $parent[UserControl].DataContext.Context.Project}"
+                                       DataFlow="{Binding $parent[UserControl].DataContext.Context.DataFlow}"
                                        Container="{Binding}"
                                        RenderType="Data"
                                        ClipToBounds="False" />
                   <renderer:RenderView x:Name="RenderViewTemplate"
-                                       Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
-                                       Selection="{Binding $parent[TopLevel].DataContext.Project}"
-                                       DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
+                                       Renderer="{Binding $parent[UserControl].DataContext.Context.Renderer}"
+                                       Selection="{Binding $parent[UserControl].DataContext.Context.Project}"
+                                       DataFlow="{Binding $parent[UserControl].DataContext.Context.DataFlow}"
                                        Container="{Binding}"
                                        RenderType="Template"
                                        ClipToBounds="False" />
                   <renderer:RenderView x:Name="RenderViewEditor"
-                                       Renderer="{Binding $parent[TopLevel].DataContext.Renderer}"
-                                       Selection="{Binding $parent[TopLevel].DataContext.Project}"
-                                       DataFlow="{Binding $parent[TopLevel].DataContext.DataFlow}"
+                                       Renderer="{Binding $parent[UserControl].DataContext.Context.Renderer}"
+                                       Selection="{Binding $parent[UserControl].DataContext.Context.Project}"
+                                       DataFlow="{Binding $parent[UserControl].DataContext.Context.DataFlow}"
                                        Container="{Binding}"
                                        RenderType="Editor"
                                        ClipToBounds="False" />
