@@ -232,6 +232,8 @@ public class App : Application
 
         var editor = serviceProvider.GetService<ProjectEditorViewModel>();
 
+        editor.CreateLayout();
+
         editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
         editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
         editor.IsToolIdle = true;
