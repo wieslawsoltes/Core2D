@@ -9,7 +9,9 @@ using Core2D.Model.Renderer;
 using Core2D.Modules.FileSystem.DotNet;
 using Core2D.Modules.FileWriter.Dxf;
 using Core2D.Modules.FileWriter.Emf;
+#if USE_PDFSHARP
 using Core2D.Modules.FileWriter.PdfSharp;
+#endif
 using Core2D.Modules.FileWriter.SkiaSharp;
 using Core2D.Modules.FileWriter.Svg;
 using Core2D.Modules.FileWriter.Xaml;
@@ -121,7 +123,9 @@ public class AppModule : Autofac.Module
         builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
         builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
         builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
+#if USE_PDFSHARP
         builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+#endif
         builder.RegisterType<SvgSvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<DrawingGroupXamlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();

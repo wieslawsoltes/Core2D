@@ -1,4 +1,5 @@
 ﻿#nullable enable
+#if USE_PDFSHARP
 using System;
 using System.IO;
 using Core2D.Model;
@@ -138,3 +139,4 @@ public partial class PdfSharpRenderer : IProjectExporter
         return pdfPage;
     }
 }
+#endif

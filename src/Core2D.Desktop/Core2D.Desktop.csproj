@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;net6.0</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>WinExe</OutputType>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
@@ -30,14 +30,6 @@
     <PackageReference Include="Avalonia.Headless" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Headless.Vnc" Version="$(AvaloniaVersion)" />
   </ItemGroup>
-  
-  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
-    <PackageReference Include="Avalonia.Direct2D1" Version="$(AvaloniaVersion)" />
-  </ItemGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
-    <DefineConstants>$(DefineConstants);ENABLE_DIRECT2D1</DefineConstants>
-  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core2D\Core2D.csproj" />

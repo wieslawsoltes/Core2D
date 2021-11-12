@@ -1,4 +1,5 @@
 ﻿#nullable enable
+#if USE_PDFSHARP
 using System;
 using Core2D.Model.Path;
 using Core2D.ViewModels.Path;
@@ -112,3 +113,4 @@ public static class PathGeometryConverter
         return gp;
     }
 }
+#endif

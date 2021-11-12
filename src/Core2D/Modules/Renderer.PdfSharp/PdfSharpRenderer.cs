@@ -1,4 +1,5 @@
 ﻿#nullable enable
+#if USE_PDFSHARP
 using System;
 using System.Collections.Generic;
 using Core2D.Model;
@@ -727,3 +728,4 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
     }
 }
+#endif
