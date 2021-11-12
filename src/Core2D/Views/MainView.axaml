@@ -24,6 +24,6 @@
     <Panel>
       <idc:DockControl Layout="{Binding RootDock}" />
     </Panel>
-    <views:DialogPresenterView />
+    <views:DialogPresenterView IsVisible="{Binding !!Dialogs.Count}" />
   </Panel>
 </UserControl>
