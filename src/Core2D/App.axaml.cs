@@ -53,7 +53,7 @@ public class App : Application
         }
     }
 
-    public AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider, RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
+    public static AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider, RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
     {
         return new AboutInfoViewModel(serviceProvider)
         {
@@ -98,7 +98,7 @@ public class App : Application
         }
     }
         
-    private void InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime desktopLifetime)
+    public static MainWindow InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime? desktopLifetime, out ProjectEditorViewModel editor)
     {
         var jsonSettings = new JsonSerializerSettings()
         {
@@ -138,7 +138,7 @@ public class App : Application
             }
         }
 
-        var editor = serviceProvider.GetService<ProjectEditorViewModel>();
+        editor = serviceProvider.GetService<ProjectEditorViewModel>();
 
         var recentPath = System.IO.Path.Combine(fileSystem.GetBaseDirectory(), "Core2D.recent");
         if (fileSystem.Exists(recentPath))
@@ -189,6 +189,8 @@ public class App : Application
 
         mainWindow.Closing += (sender, e) =>
         {
+            var editor = serviceProvider.GetService<ProjectEditorViewModel>();
+
             editor.OnSaveRecent(recentPath);
 
             windowSettings = WindowConfigurationFactory.Save(mainWindow);
@@ -205,18 +207,21 @@ public class App : Application
             }
         };
 
-        desktopLifetime.MainWindow = mainWindow;
-
-        desktopLifetime.Exit += (sennder, e) =>
+        if (desktopLifetime is { })
         {
-            log.Dispose();
-            container.Dispose();
-        };
+            desktopLifetime.MainWindow = mainWindow;
 
-        DataContext = editor;
+            desktopLifetime.Exit += (sennder, e) =>
+            {
+                log?.Dispose();
+                container.Dispose();
+            }; 
+        }
+
+        return mainWindow;
     }
 
-    private void InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime)
+    public static MainView InitializeSingleView(ISingleViewApplicationLifetime? singleViewLifetime, out ProjectEditorViewModel editor)
     {
         var builder = new ContainerBuilder();
 
@@ -231,7 +236,7 @@ public class App : Application
 
         log?.Initialize(System.IO.Path.Combine(fileSystem?.GetBaseDirectory(), "Core2D.log"));
 
-        var editor = serviceProvider.GetService<ProjectEditorViewModel>();
+        editor = serviceProvider.GetService<ProjectEditorViewModel>();
 
         editor.CreateLayout();
 
@@ -244,9 +249,12 @@ public class App : Application
             DataContext = editor
         };
 
-        singleViewLifetime.MainView = mainView;
+        if (singleViewLifetime is { })
+        {
+            singleViewLifetime.MainView = mainView;
+        }
 
-        DataContext = editor;
+        return mainView;
     }
 
     public void SetTheme(string themeName)
@@ -269,11 +277,21 @@ public class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
         {
-            InitializationClassicDesktopStyle(desktopLifetime);
+            InitializationClassicDesktopStyle(desktopLifetime, out var editor);
+
+            if (editor is { })
+            {
+                DataContext = editor;
+            }
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewLifetime)
         {
-            InitializeSingleView(singleViewLifetime);
+            InitializeSingleView(singleViewLifetime, out var editor);
+
+            if (editor is { })
+            {
+                DataContext = editor;
+            }
         }
 
         base.OnFrameworkInitializationCompleted();
