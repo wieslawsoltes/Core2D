@@ -223,6 +223,7 @@ public class App : Application
         builder.RegisterModule<AppModule>();
 
         var container = builder.Build(); // TODO: Dispose()
+
         var serviceProvider = container.Resolve<IServiceProvider>();
 
         var log = serviceProvider.GetService<ILog>(); // TODO: Dispose()
