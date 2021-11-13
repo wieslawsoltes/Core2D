@@ -26,6 +26,7 @@ You can automate drawing and processing by using C# scripting.
 * `Windows 7 SP1 or higher`
 * `Linux`
 * `macOS`
+* Android, iOS, wasm are in the works
 
 ## Usage
 
