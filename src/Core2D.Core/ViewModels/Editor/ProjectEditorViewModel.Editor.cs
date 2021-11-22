@@ -261,7 +261,7 @@ public partial class ProjectEditorViewModel
         OnLoad(project, string.Empty);
         CanvasPlatform?.ResetZoom?.Invoke();
         CanvasPlatform?.InvalidateControl?.Invoke();
-        NavigateTo("Home");
+        NavigateTo?.Invoke("Home");
     }
 
     public void OnOpenProject(string path)
@@ -302,7 +302,7 @@ public partial class ProjectEditorViewModel
             OnAddRecent(path, project.Name);
             CanvasPlatform?.ResetZoom?.Invoke();
             CanvasPlatform?.InvalidateControl?.Invoke();
-            NavigateTo("Home");
+            NavigateTo?.Invoke("Home");
         }
         catch (Exception ex)
         {
@@ -314,7 +314,7 @@ public partial class ProjectEditorViewModel
     {
         Project?.History?.Reset();
         OnUnload();
-        NavigateTo("Dashboard");
+        NavigateTo?.Invoke("Dashboard");
     }
 
     public void OnSaveProject(string path)
