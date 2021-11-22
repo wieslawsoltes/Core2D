@@ -68,9 +68,5 @@
     <ProjectReference Include="..\Core2D.Modules.TextFieldWriter.OpenXml\Core2D.Modules.TextFieldWriter.OpenXml.csproj" />
     <ProjectReference Include="..\Core2D.Modules.XamlExporter.Avalonia\Core2D.Modules.XamlExporter.Avalonia.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="ViewModels" />
-  </ItemGroup>
 
 </Project>
