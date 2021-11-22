@@ -28,12 +28,14 @@ namespace Demo
             var serviceProvider = container.Resolve<IServiceProvider>();
 
             var editor = serviceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is { })
+            {
+                editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
+                editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+                editor.IsToolIdle = true;
 
-            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
-            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
-            editor.IsToolIdle = true;
-
-            editor.OnNewProject();
+                editor.OnNewProject();
+            }
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
