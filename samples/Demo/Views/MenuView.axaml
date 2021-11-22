@@ -10,6 +10,12 @@
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="32"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
+  <UserControl.Styles>
+    <Style Selector="MenuItem /template/ ContentPresenter#PART_IconPresenter">
+      <Setter Property="Width" Value="20" />
+      <Setter Property="Height" Value="20" />
+    </Style>
+  </UserControl.Styles>
   <Menu d:DataContext="{x:Static vmd:DesignerContext.Editor}" 
         DockPanel.Dock="Left"
         x:DataType="vme:ProjectEditorViewModel"
