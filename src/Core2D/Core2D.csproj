@@ -40,7 +40,7 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
     <DefineConstants>$(DefineConstants);USE_PDFSHARP</DefineConstants>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Screenshot\Core2D.Screenshot.csproj" />
     <ProjectReference Include="..\Core2D.Core\Core2D.Core.csproj" />
