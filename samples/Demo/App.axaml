@@ -2,11 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:Demo"
              x:Class="Demo.App">
-    <Application.DataTemplates>
-        <local:ViewLocator/>
-    </Application.DataTemplates>
-
-    <Application.Styles>
-        <FluentTheme Mode="Light"/>
-    </Application.Styles>
+  <Application.DataTemplates>
+    <local:ViewLocator />
+  </Application.DataTemplates>
+  <Application.Styles>
+    <FluentTheme Mode="Light" />
+    <StyleInclude Source="avares://Core2D/Icons.axaml" />
+  </Application.Styles>
+  <Application.Resources>
+    <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
+    <SolidColorBrush x:Key="IconAccentBrush1" Color="#FF424242" />
+    <SolidColorBrush x:Key="IconAccentBrush2" Color="#80424242" />
+  </Application.Resources>
 </Application>

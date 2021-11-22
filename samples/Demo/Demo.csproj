@@ -5,13 +5,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\"/>
-    <AvaloniaResource Include="Assets\**"/>
+    <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.10"/>
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.10"/>
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.10"/>
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.10"/>
+    <PackageReference Include="Avalonia" Version="0.10.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.10" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.10" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Core2D.Core\Core2D.Core.csproj" />
+    <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
   </ItemGroup>
 </Project>

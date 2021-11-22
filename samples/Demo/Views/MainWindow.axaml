@@ -3,15 +3,19 @@
         xmlns:vm="using:Demo.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:views="clr-namespace:Demo.Views"
+        mc:Ignorable="d" d:DesignWidth="1150" d:DesignHeight="680"
         x:Class="Demo.Views.MainWindow"
+        WindowStartupLocation="CenterScreen"
+        Width="1150" Height="680"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Demo">
-
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+        Title="Demo"
+        x:DataType="vm:MainWindowViewModel" x:CompileBindings="True">
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+  <DockPanel>
+    <views:ToolsView DataContext="{Binding Editor}" DockPanel.Dock="Top" />
+    <views:PageView DataContext="{Binding Editor}" />
+  </DockPanel>
 </Window>

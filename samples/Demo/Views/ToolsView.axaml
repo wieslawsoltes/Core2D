@@ -1,0 +1,764 @@
+﻿<UserControl x:Class="Demo.Views.ToolsView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:app="using:Core2D"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
+             mc:Ignorable="d"
+             d:DesignWidth="800" d:DesignHeight="32"
+             x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
+  <UserControl.Resources>
+    <!-- Menu-Shape -->
+    <Image x:Key="DifferenceIcon" Source="{StaticResource Difference}" Width="16" Height="16" />
+    <Image x:Key="IntersectIcon" Source="{StaticResource Intersect}" Width="16" Height="16" />
+    <Image x:Key="UnionIcon" Source="{StaticResource Union}" Width="16" Height="16" />
+    <Image x:Key="XorIcon" Source="{StaticResource Xor}" Width="16" Height="16" />
+    <Image x:Key="ReverseDifferenceIcon" Source="{StaticResource ReverseDifference}" Width="16" Height="16" />
+    <!-- Menu-Tool -->
+    <Image x:Key="NoneIcon" Source="{StaticResource None}" Width="16" Height="16" />
+    <Image x:Key="SelectionIcon" Source="{StaticResource Selection}" Width="16" Height="16" />
+    <Image x:Key="PointIcon" Source="{StaticResource Point}" Width="16" Height="16" />
+    <Image x:Key="LineIcon" Source="{StaticResource Line}" Width="16" Height="16" />
+    <Image x:Key="ArcIcon" Source="{StaticResource Arc}" Width="16" Height="16" />
+    <Image x:Key="CubicBezierIcon" Source="{StaticResource CubicBezier}" Width="16" Height="16" />
+    <Image x:Key="QuadraticBezierIcon" Source="{StaticResource QuadraticBezier}" Width="16" Height="16" />
+    <Image x:Key="PathIcon" Source="{StaticResource Path}" Width="16" Height="16" />
+    <Image x:Key="PathLineIcon" Source="{StaticResource Line}" Width="16" Height="16" />
+    <Image x:Key="PathArcIcon" Source="{StaticResource Arc}" Width="16" Height="16" />
+    <Image x:Key="PathCubicBezierIcon" Source="{StaticResource CubicBezier}" Width="16" Height="16" />
+    <Image x:Key="PathQuadraticBezierIcon" Source="{StaticResource QuadraticBezier}" Width="16" Height="16" />
+    <Image x:Key="PathMoveIcon" Source="{StaticResource Move}" Width="16" Height="16" />
+    <Image x:Key="RectangleIcon" Source="{StaticResource Rectangle}" Width="16" Height="16" />
+    <Image x:Key="EllipseIcon" Source="{StaticResource Ellipse}" Width="16" Height="16" />
+    <Image x:Key="TextIcon" Source="{StaticResource Text}" Width="16" Height="16" />
+    <Image x:Key="ImageIcon" Source="{StaticResource Image}" Width="16" Height="16" />
+  </UserControl.Resources>
+  <UserControl.Styles>
+    <Style Selector="Separator.vertical">
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Margin" Value="2,0,2,0" />
+      <Setter Property="Background" Value="{DynamicResource SystemChromeAltLowColor}" />
+      <Setter Property="Opacity" Value="0.3" />
+      <Setter Property="Width" Value="1" />
+      <Setter Property="Height" Value="24" />
+    </Style>
+    <Style Selector="RadioButton.tool">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="RadioButton">
+            <Panel Name="PART_Panel" Width="24" Height="24" Margin="2,0,2,0">
+              <Image Source="{TemplateBinding Tag}" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Panel>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style Selector="RadioButton.tool /template/ Panel#PART_Panel">
+      <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackground}" />
+    </Style>
+    <Style Selector="RadioButton.tool:checked /template/ Panel#PART_Panel">
+      <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
+    </Style>
+    <Style Selector="RadioButton.tool:pressed /template/ Panel#PART_Panel">
+      <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPressed}" />
+    </Style>
+    <Style Selector="RadioButton.tool:pointerover /template/ Panel#PART_Panel">
+      <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPressed}" />
+    </Style>
+    <Style Selector="RadioButton.tool:disabled /template/ Panel#PART_Panel">
+      <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundDisabled}" />
+    </Style>
+  </UserControl.Styles>
+  <DockPanel LastChildFill="False"
+             HorizontalAlignment="Left">
+    <Menu d:DataContext="{x:Static vmd:DesignerContext.Editor}" 
+          DockPanel.Dock="Left"
+          x:DataType="vme:ProjectEditorViewModel"
+          x:CompileBindings="False">
+      <MenuItem Header="_File">
+        <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}" InputGesture="Ctrl+N" />
+        <Separator />
+        <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen, FallbackValue={x:Null}}" InputGesture="Ctrl+O" />
+        <Separator />
+        <MenuItem Header="_Close" Command="{Binding OnCloseProject}" InputGesture="Ctrl+F4" />
+        <Separator />
+        <MenuItem Header="_Save" Command="{Binding Platform.OnSave, FallbackValue={x:Null}}" InputGesture="Ctrl+S" />
+        <MenuItem Header="Save _As..." Command="{Binding Platform.OnSaveAs, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+S" />
+        <Separator />
+        <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile, FallbackValue={x:Null}}" />
+        <Separator />
+        <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson, FallbackValue={x:Null}}" />
+        <Separator />
+        <MenuItem Header="Import Sv_g..." Command="{Binding Platform.OnImportSvg, FallbackValue={x:Null}}" />
+        <Separator />
+        <MenuItem Header="_Export..." Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" InputGesture="Ctrl+E" />
+        <Separator />
+        <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
+          <MenuItem.Styles>
+            <Style Selector="MenuItem">
+              <Setter Property="Header" Value="{Binding Name}" />
+              <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.Platform.OnOpen, FallbackValue={x:Null}}" />
+              <Setter Property="CommandParameter" Value="{Binding Path}" />
+            </Style>
+          </MenuItem.Styles>
+        </MenuItem>
+        <Separator />
+        <MenuItem Header="E_xit" Command="{Binding Platform.OnExit, FallbackValue={x:Null}}" InputGesture="Alt+F4" />
+      </MenuItem>
+      <MenuItem Header="_Edit">
+        <MenuItem Header="_Undo" Command="{Binding OnUndo}" InputGesture="Ctrl+Z" />
+        <MenuItem Header="_Redo" Command="{Binding OnRedo}" InputGesture="Ctrl+Y" />
+        <Separator />
+        <MenuItem Header="Cu_t" Command="{Binding ClipboardService.OnCut, FallbackValue={x:Null}}" InputGesture="Ctrl+X" />
+        <MenuItem Header="_Copy" Command="{Binding ClipboardService.OnCopy, FallbackValue={x:Null}}" InputGesture="Ctrl+C" />
+        <MenuItem Header="_Paste" Command="{Binding ClipboardService.OnPaste, FallbackValue={x:Null}}" InputGesture="Ctrl+V" />
+        <MenuItem Header="_Delete" Command="{Binding ClipboardService.OnDelete, FallbackValue={x:Null}}" InputGesture="Delete" />
+        <Separator />
+        <MenuItem Header="Copy As _Xaml" Command="{Binding Platform.OnCopyAsXaml, FallbackValue={x:Null}}" />
+        <Separator />
+        <MenuItem Header="Copy As _Svg" Command="{Binding Platform.OnCopyAsSvg, FallbackValue={x:Null}}" />
+        <MenuItem Header="Paste Sv_g" Command="{Binding Platform.OnPasteSvg, FallbackValue={x:Null}}" />
+        <Separator />
+        <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf, FallbackValue={x:Null}}" />
+        <Separator />
+        <MenuItem Header="Copy As Svg Path Data" Command="{Binding Platform.OnCopyAsPathData, FallbackValue={x:Null}}" />
+        <MenuItem Header="Paste Stroked Svg Path Data" Command="{Binding Platform.OnPastePathDataStroked, FallbackValue={x:Null}}" />
+        <MenuItem Header="Paste Filled Svg Path Data" Command="{Binding Platform.OnPastePathDataFilled, FallbackValue={x:Null}}" />
+        <Separator />
+        <MenuItem Header="Select _All" Command="{Binding SelectionService.OnSelectAll, FallbackValue={x:Null}}" InputGesture="Ctrl+A" />
+        <MenuItem Header="De_select All" Command="{Binding SelectionService.OnDeselectAll, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+A" />
+        <Separator />
+        <MenuItem Header="Cl_ear All" Command="{Binding SelectionService.OnClearAll, FallbackValue={x:Null}}" />
+        <Separator />
+        <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape" />
+      </MenuItem>
+      <MenuItem Header="_View">
+        <MenuItem Header="_Tool Windows">
+          <MenuItem Header="Project _Explorer" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ProjectExplorer" />
+          <Separator />
+          <MenuItem Header="Page Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="PageProperties" />
+          <MenuItem Header="Shape Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ShapeProperties" />
+          <MenuItem Header="Style Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StyleProperties" />
+          <MenuItem Header="Data Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="DataProperties" />
+          <MenuItem Header="State Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StateProperties" />
+          <Separator />
+          <MenuItem Header="Style Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StyleLibrary" />
+          <MenuItem Header="Group Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="GroupLibrary" />
+          <MenuItem Header="Database Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="DatabaseLibrary" />
+          <MenuItem Header="Template Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="TemplateLibrary" />
+          <MenuItem Header="Script Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ScriptLibrary" />
+          <Separator />
+          <MenuItem Header="Project Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ProjectOptions" />
+          <MenuItem Header="Renderer Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="RendererOptions" />
+          <MenuItem Header="Zoom Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ZoomOptions" />
+          <MenuItem Header="Image Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ImageOptions" />
+          <Separator />
+          <MenuItem Header="Object Browser" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ObjectBrowser" />
+        </MenuItem>
+        <MenuItem Header="_Appearance">
+          <MenuItem Header="_Main Menu" Command="{Binding OnToggleDockableVisibility}" CommandParameter="HomeMenuView" />
+          <MenuItem Header="_Status Bar" Command="{Binding OnToggleDockableVisibility}" CommandParameter="HomeStatusBarView" />
+        </MenuItem>
+        <MenuItem Header="_Zoom">
+          <MenuItem Header="_Actual Size" Command="{Binding Platform.OnZoomReset, FallbackValue={x:Null}}" InputGesture="Ctrl+D0" />
+          <MenuItem Header="Fit _Page" Command="{Binding Platform.OnZoomUniform, FallbackValue={x:Null}}" InputGesture="Ctrl+D1" />
+          <MenuItem Header="Fit To Fi_ll" Command="{Binding Platform.OnZoomUniformToFill, FallbackValue={x:Null}}" InputGesture="Ctrl+D2" />
+          <MenuItem Header="_Fill Page" Command="{Binding Platform.OnZoomFill, FallbackValue={x:Null}}" InputGesture="Ctrl+D3" />
+          <MenuItem Header="A_uto Fit Page" Command="{Binding Platform.OnZoomAutoFit, FallbackValue={x:Null}}" InputGesture="Ctrl+D4" />
+          <Separator />
+          <MenuItem Header="Zoom _In" Command="{Binding Platform.OnZoomIn, FallbackValue={x:Null}}" InputGesture="Ctrl+Add" />
+          <MenuItem Header="Zoom _Out" Command="{Binding Platform.OnZoomOut, FallbackValue={x:Null}}" InputGesture="Ctrl+Subtract" />
+        </MenuItem>
+        <MenuItem Header="T_heme">
+          <MenuItem Header="Fluent _Light" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentLight" />
+          <MenuItem Header="Fluent _Dark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentDark" />
+          <Separator />
+          <MenuItem Header="Default L_ight" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultLight" />
+          <MenuItem Header="Default D_ark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultDark" />
+        </MenuItem>
+      </MenuItem>
+      <MenuItem Header="_Project">
+        <MenuItem Header="_Document">
+          <MenuItem Header="_Add Document" Command="{Binding Project.OnAddDocument, FallbackValue={x:Null}}" CommandParameter="{Binding Mode=OneWay}" />
+          <Separator />
+          <MenuItem Header="Insert Document Bef_ore" Command="{Binding Project.OnInsertDocumentBefore, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}" />
+          <MenuItem Header="Insert Document Aft_er" Command="{Binding Project.OnInsertDocumentAfter, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}" />
+          <Separator />
+          <MenuItem Header="Cu_t Document" Command="{Binding ClipboardService.OnCut, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}" />
+          <MenuItem Header="_Copy Document" Command="{Binding ClipboardService.OnCopy, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}" />
+          <MenuItem Header="_Paste Document" Command="{Binding ClipboardService.OnPaste, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}" />
+          <Separator />
+          <MenuItem Header="_Delete Document" Command="{Binding ClipboardService.OnDelete, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}" />
+          <Separator />
+          <MenuItem Header="E_xport Document" Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}" />
+        </MenuItem>
+        <MenuItem Header="P_age">
+          <MenuItem Header="_Add Page" Command="{Binding Project.OnAddPage, FallbackValue={x:Null}}" CommandParameter="{Binding Mode=OneWay}" />
+          <Separator />
+          <MenuItem Header="Insert Page Bef_ore" Command="{Binding Project.OnInsertPageBefore, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}" />
+          <MenuItem Header="Insert Page Aft_er"  Command="{Binding Project.OnInsertPageAfter, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}" />
+          <Separator />
+          <MenuItem Header="Cu_t Page" Command="{Binding ClipboardService.OnCut, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}" />
+          <MenuItem Header="_Copy Page" Command="{Binding ClipboardService.OnCopy, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}" />
+          <MenuItem Header="_Paste Page" Command="{Binding ClipboardService.OnPaste, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}" />
+          <Separator />
+          <MenuItem Header="_Delete Page" Command="{Binding ClipboardService.OnDelete, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}" />
+          <Separator />
+          <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}" />
+        </MenuItem>
+        <MenuItem Header="_Layer">
+          <MenuItem Header="_Add Layer" Command="{Binding Project.AddLayer, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}" />
+          <Separator />
+          <MenuItem Header="_Delete Layer" Command="{Binding Project.RemoveLayer, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer.CurrentLayer, FallbackValue={x:Null}}" />
+        </MenuItem>
+        <MenuItem Header="D_ata">
+          <MenuItem Header="_Import Database..." 
+                    Command="{Binding Platform.OnImportData, FallbackValue={x:Null}}" 
+                    CommandParameter="{Binding Project}" />
+          <Separator />
+          <MenuItem Header="_Export Database..." 
+                    Command="{Binding Platform.OnExportData, FallbackValue={x:Null}}"
+                    CommandParameter="{Binding Project.CurrentDatabase, FallbackValue={x:Null}}" />
+          <Separator />
+          <MenuItem Header="_Update Database..." 
+                    Command="{Binding Platform.OnUpdateData, FallbackValue={x:Null}}" 
+                    CommandParameter="{Binding Project.CurrentDatabase, FallbackValue={x:Null}}" />
+        </MenuItem>
+        <MenuItem Header="O_ptions">
+          <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K">
+            <MenuItem.Icon>
+              <CheckBox IsChecked="{Binding Project.Options.DefaultIsStroked, FallbackValue={x:Null}}" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Header="Default is _Filled" Command="{Binding OnToggleDefaultIsFilled}" InputGesture="F">
+            <MenuItem.Icon>
+              <CheckBox IsChecked="{Binding Project.Options.DefaultIsFilled, FallbackValue={x:Null}}" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator />
+          <MenuItem Header="Default is Close_d" Command="{Binding OnToggleDefaultIsClosed}" InputGesture="D">
+            <MenuItem.Icon>
+              <CheckBox IsChecked="{Binding Project.Options.DefaultIsClosed, FallbackValue={x:Null}}" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator />
+          <MenuItem Header="Snap to _Grid" Command="{Binding OnToggleSnapToGrid}" InputGesture="G">
+            <MenuItem.Icon>
+              <CheckBox IsChecked="{Binding Project.Options.SnapToGrid, FallbackValue={x:Null}}" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator />
+          <MenuItem Header="Try To _Connect" Command="{Binding OnToggleTryToConnect}" InputGesture="C">
+            <MenuItem.Icon>
+              <CheckBox IsChecked="{Binding Project.Options.TryToConnect, FallbackValue={x:Null}}" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </MenuItem>
+        <Separator />
+        <MenuItem Header="E_xport Project" Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" CommandParameter="{Binding Project}" />
+      </MenuItem>
+      <MenuItem Header="_Shape">
+        <MenuItem Header="Du_plicate" Command="{Binding ShapeService.OnDuplicateSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+D" />
+        <Separator />
+        <MenuItem Header="_Group">
+          <MenuItem Header="_Group" Command="{Binding ShapeService.OnGroupSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+G" />
+          <MenuItem Header="U_ngroup" Command="{Binding ShapeService.OnUngroupSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+U" />
+        </MenuItem>
+        <MenuItem Header="Rotat_e">
+          <MenuItem Header="Rotate _Right 90°" Command="{Binding ShapeService.OnRotateSelected, FallbackValue={x:Null}}" CommandParameter="90" InputGesture="Ctrl+R" />
+          <MenuItem Header="Rotate _Left 90°" Command="{Binding ShapeService.OnRotateSelected, FallbackValue={x:Null}}" CommandParameter="-90" InputGesture="Ctrl+L" />
+          <MenuItem Header="Flip _Horizontal" Command="{Binding ShapeService.OnFlipHorizontalSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+H" />
+          <MenuItem Header="Flip _Vertical" Command="{Binding ShapeService.OnFlipVerticalSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+J" />
+        </MenuItem>
+        <MenuItem Header="_Move">
+          <MenuItem Header="_Up" Command="{Binding ShapeService.OnMoveUpSelected, FallbackValue={x:Null}}" InputGesture="Up" />
+          <MenuItem Header="_Down" Command="{Binding ShapeService.OnMoveDownSelected, FallbackValue={x:Null}}" InputGesture="Down" />
+          <MenuItem Header="_Left" Command="{Binding ShapeService.OnMoveLeftSelected, FallbackValue={x:Null}}" InputGesture="Left" />
+          <MenuItem Header="_Right" Command="{Binding ShapeService.OnMoveRightSelected, FallbackValue={x:Null}}" InputGesture="Right" />
+        </MenuItem>
+        <MenuItem Header="Stac_k">
+          <MenuItem Header="_Horizontally" Command="{Binding ShapeService.OnStackHorizontallySelected, FallbackValue={x:Null}}" InputGesture="Shift+H" />
+          <MenuItem Header="_Vertically" Command="{Binding ShapeService.OnStackVerticallySelected, FallbackValue={x:Null}}" InputGesture="Shift+Y" />
+        </MenuItem>
+        <MenuItem Header="Dis_tribute">
+          <MenuItem Header="_Horizontally" Command="{Binding ShapeService.OnDistributeHorizontallySelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+H" />
+          <MenuItem Header="_Vertically" Command="{Binding ShapeService.OnDistributeVerticallySelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+Y" />
+        </MenuItem>
+        <MenuItem Header="Alig_n">
+          <MenuItem Header="_Left" Command="{Binding ShapeService.OnAlignLeftSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+Left" />
+          <MenuItem Header="_Centered" Command="{Binding ShapeService.OnAlignCenteredSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+Subtract" />
+          <MenuItem Header="_Right" Command="{Binding ShapeService.OnAlignRightSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+Right" />
+          <Separator />
+          <MenuItem Header="_Top" Command="{Binding ShapeService.OnAlignTopSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+Up" />
+          <MenuItem Header="C_enter" Command="{Binding ShapeService.OnAlignCenterSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+OemPipe" />
+          <MenuItem Header="_Bottom" Command="{Binding ShapeService.OnAlignBottomSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+Down" />
+        </MenuItem>
+        <MenuItem Header="_Arange">
+          <MenuItem Header="_Bring to Front" Command="{Binding ShapeService.OnBringToFrontSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+OemCloseBrackets" />
+          <MenuItem Header="Bring _Forward" Command="{Binding ShapeService.OnBringForwardSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+OemCloseBrackets" />
+          <Separator />
+          <MenuItem Header="Send Back_ward" Command="{Binding ShapeService.OnSendBackwardSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+OemOpenBrackets" />
+          <MenuItem Header="_Send to Back" Command="{Binding ShapeService.OnSendToBackSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+OemOpenBrackets" />
+        </MenuItem>
+        <Separator />
+        <MenuItem Header="Create Pat_h" Command="{Binding ShapeService.OnCreatePath, FallbackValue={x:Null}}" />
+        <MenuItem Header="Create Str_oke Path" Command="{Binding ShapeService.OnCreateStrokePath, FallbackValue={x:Null}}" />
+        <MenuItem Header="Create _Fill Path" Command="{Binding ShapeService.OnCreateFillPath, FallbackValue={x:Null}}" />
+        <MenuItem Header="Create _Winding Path" Command="{Binding ShapeService.OnCreateWindingPath, FallbackValue={x:Null}}" />
+        <MenuItem Header="_Simplify Path" Command="{Binding ShapeService.OnPathSimplify, FallbackValue={x:Null}}" />
+        <MenuItem Header="_Break Path" Command="{Binding ShapeService.OnPathBreak, FallbackValue={x:Null}}" InputGesture="Ctrl+B" />
+        <Separator />
+        <MenuItem Header="_Difference" 
+                  Icon="{StaticResource DifferenceIcon}" 
+                  ToolTip.Tip="Subtract the op path from the current path." 
+                  Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" 
+                  CommandParameter="Difference" 
+                  InputGesture="Ctrl+Shift+D" />
+        <MenuItem Header="_Intersect" 
+                  Icon="{StaticResource IntersectIcon}" 
+                  ToolTip.Tip="Intersect the two paths."
+                  Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" 
+                  CommandParameter="Intersect" 
+                  InputGesture="Ctrl+Shift+I" />
+        <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}"
+                  ToolTip.Tip="Union (inclusive-or) the two paths."
+                  Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" 
+                  CommandParameter="Union" 
+                  InputGesture="Ctrl+Shift+U" />
+        <MenuItem Header="_Xor"
+                  Icon="{StaticResource XorIcon}"
+                  ToolTip.Tip="Exclusive-or the two paths."
+                  Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}"
+                  CommandParameter="Xor"
+                  InputGesture="Ctrl+Shift+X" />
+        <MenuItem Header="_Reverse Difference" 
+                  Icon="{StaticResource ReverseDifferenceIcon}"
+                  ToolTip.Tip="Subtract the current path from the op path."
+                  Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" 
+                  CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
+      </MenuItem>
+      <MenuItem Header="F_ormat">
+        <MenuItem Header="_Copy">
+          <MenuItem Header="_Style" Command="{Binding StyleEditor.OnCopyStyle, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+C" />
+          <MenuItem Header="St_roke" Command="{Binding StyleEditor.OnCopyStroke, FallbackValue={x:Null}}" />
+          <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnCopyFill, FallbackValue={x:Null}}" />
+          <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnCopyTextStyle, FallbackValue={x:Null}}" />
+          <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnCopyStartArrowStyle, FallbackValue={x:Null}}" />
+          <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnCopyEndArrowStyle, FallbackValue={x:Null}}" />
+        </MenuItem>
+        <MenuItem Header="_Paste">
+          <MenuItem Header="_Style" Command="{Binding StyleEditor.OnPasteStyle, FallbackValue={x:Null}}" InputGesture="Ctrl+Shift+V" />
+          <MenuItem Header="St_roke" Command="{Binding StyleEditor.OnPasteStroke, FallbackValue={x:Null}}" />
+          <MenuItem Header="_Fill" Command="{Binding StyleEditor.OnPasteFill, FallbackValue={x:Null}}" />
+          <MenuItem Header="_Text Style" Command="{Binding StyleEditor.OnPasteTextStyle, FallbackValue={x:Null}}" />
+          <MenuItem Header="St_art Arrow Style" Command="{Binding StyleEditor.OnPasteStartArrowStyle, FallbackValue={x:Null}}" />
+          <MenuItem Header="_End Arrow Style" Command="{Binding StyleEditor.OnPasteEndArrowStyle, FallbackValue={x:Null}}" />
+        </MenuItem>
+        <MenuItem Header="_Stroke">
+          <MenuItem Header="_Thickness">
+            <MenuItem Header="0.25" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="0.25" />
+            <MenuItem Header="0.5" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="0.5" />
+            <MenuItem Header="0.75" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="0.75" />
+            <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="1" />
+            <MenuItem Header="1.5" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="1.5" />
+            <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="2" />
+            <MenuItem Header="2.25" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="2.25" />
+            <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="3" />
+            <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="4" />
+            <MenuItem Header="4.5" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="4.5" />
+            <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="5" />
+            <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="6" />
+            <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="7" />
+            <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="8" />
+            <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="9" />
+            <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetThickness, FallbackValue={x:Null}}" CommandParameter="10" />
+          </MenuItem>
+          <MenuItem Header="_Color">
+            <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetStroke, FallbackValue={x:Null}}" CommandParameter="Black" />
+            <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetStroke, FallbackValue={x:Null}}" CommandParameter="Red" />
+            <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetStroke, FallbackValue={x:Null}}" CommandParameter="Green" />
+            <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetStroke, FallbackValue={x:Null}}" CommandParameter="Blue" />
+            <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetStroke, FallbackValue={x:Null}}" CommandParameter="Cyan" />
+            <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetStroke, FallbackValue={x:Null}}" CommandParameter="Magenta" />
+            <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetStroke, FallbackValue={x:Null}}" CommandParameter="Yellow" />
+            <MenuItem Header="_White" Command="{Binding StyleEditor.OnStyleSetStroke, FallbackValue={x:Null}}" CommandParameter="White" />
+          </MenuItem>
+          <MenuItem Header="Trans_parency">
+            <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="0" />
+            <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="25" />
+            <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="51" />
+            <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="76" />
+            <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="102" />
+            <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="127" />
+            <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="153" />
+            <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="178" />
+            <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="204" />
+            <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="229" />
+            <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetStrokeTransparency, FallbackValue={x:Null}}" CommandParameter="255" />
+          </MenuItem>
+          <MenuItem Header="Line _Cap">
+            <MenuItem Header="Flat" Command="{Binding StyleEditor.OnStyleSetLineCap, FallbackValue={x:Null}}" CommandParameter="Flat" />
+            <MenuItem Header="Square" Command="{Binding StyleEditor.OnStyleSetLineCap, FallbackValue={x:Null}}" CommandParameter="Square" />
+            <MenuItem Header="Round" Command="{Binding StyleEditor.OnStyleSetLineCap, FallbackValue={x:Null}}" CommandParameter="Round, FallbackValue={x:Null}" />
+          </MenuItem>
+          <MenuItem Header="_Dashes">
+            <MenuItem Header="_Solid" Command="{Binding StyleEditor.OnStyleSetDashes, FallbackValue={x:Null}}" CommandParameter="" />
+            <MenuItem Header="_Dash" Command="{Binding StyleEditor.OnStyleSetDashes, FallbackValue={x:Null}}" CommandParameter="2 2" />
+            <MenuItem Header="D_ot" Command="{Binding StyleEditor.OnStyleSetDashes, FallbackValue={x:Null}}" CommandParameter="0 2" />
+            <MenuItem Header="DashDo_t" Command="{Binding StyleEditor.OnStyleSetDashes, FallbackValue={x:Null}}" CommandParameter="2 2 0 2" />
+            <MenuItem Header="Das_hDotDot" Command="{Binding StyleEditor.OnStyleSetDashes, FallbackValue={x:Null}}" CommandParameter="2 2 0 2 0 2" />
+          </MenuItem>
+          <MenuItem Header="Dash _Offset">
+            <MenuItem Header="-5" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="-5" />
+            <MenuItem Header="-4" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="-4" />
+            <MenuItem Header="-3" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="-3" />
+            <MenuItem Header="-2" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="-2" />
+            <MenuItem Header="-1" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="-1" />
+            <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="0" />
+            <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="1" />
+            <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="2" />
+            <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="3" />
+            <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="4" />
+            <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetDashOffset, FallbackValue={x:Null}}" CommandParameter="5" />
+          </MenuItem>
+          <MenuItem Header="_Start Arrow">
+            <MenuItem Header="_Type">
+              <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetStartArrowType, FallbackValue={x:Null}}" CommandParameter="None" />
+              <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetStartArrowType, FallbackValue={x:Null}}" CommandParameter="Rectangle" />
+              <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetStartArrowType, FallbackValue={x:Null}}" CommandParameter="Ellipse" />
+              <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetStartArrowType, FallbackValue={x:Null}}" CommandParameter="Arrow" />
+            </MenuItem>
+            <MenuItem Header="Radius_X">
+              <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="0" />
+              <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="1" />
+              <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="2" />
+              <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="3" />
+              <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="4" />
+              <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="5" />
+              <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="6" />
+              <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="7" />
+              <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="8" />
+              <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="9" />
+              <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="10" />
+            </MenuItem>
+            <MenuItem Header="Radius_Y">
+              <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="0" />
+              <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="1" />
+              <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="2" />
+              <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="3" />
+              <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="4" />
+              <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="5" />
+              <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="6" />
+              <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="7" />
+              <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="8" />
+              <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="9" />
+              <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetStartArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="10" />
+            </MenuItem>
+          </MenuItem>
+          <MenuItem Header="_End Arrow">
+            <MenuItem Header="_Type">
+              <MenuItem Header="_None" Command="{Binding StyleEditor.OnStyleSetEndArrowType, FallbackValue={x:Null}}" CommandParameter="None" />
+              <MenuItem Header="_Rectangle" Command="{Binding StyleEditor.OnStyleSetEndArrowType, FallbackValue={x:Null}}" CommandParameter="Rectangle" />
+              <MenuItem Header="_Ellipse" Command="{Binding StyleEditor.OnStyleSetEndArrowType, FallbackValue={x:Null}}" CommandParameter="Ellipse" />
+              <MenuItem Header="_Arrow" Command="{Binding StyleEditor.OnStyleSetEndArrowType, FallbackValue={x:Null}}" CommandParameter="Arrow" />
+            </MenuItem>
+            <MenuItem Header="Radius_X">
+              <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="0" />
+              <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="1" />
+              <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="2" />
+              <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="3" />
+              <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="4" />
+              <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="5" />
+              <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="6" />
+              <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="7" />
+              <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="8" />
+              <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="9" />
+              <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusX, FallbackValue={x:Null}}" CommandParameter="10" />
+            </MenuItem>
+            <MenuItem Header="Radius_Y">
+              <MenuItem Header="0" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="0" />
+              <MenuItem Header="1" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="1" />
+              <MenuItem Header="2" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="2" />
+              <MenuItem Header="3" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="3" />
+              <MenuItem Header="4" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="4" />
+              <MenuItem Header="5" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="5" />
+              <MenuItem Header="6" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="6" />
+              <MenuItem Header="7" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="7" />
+              <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="8" />
+              <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="9" />
+              <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetEndArrowRadiusY, FallbackValue={x:Null}}" CommandParameter="10" />
+            </MenuItem>
+          </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_Fill">
+          <MenuItem Header="_Color">
+            <MenuItem Header="Blac_k" Command="{Binding StyleEditor.OnStyleSetFill, FallbackValue={x:Null}}" CommandParameter="Black" />
+            <MenuItem Header="_Red" Command="{Binding StyleEditor.OnStyleSetFill, FallbackValue={x:Null}}" CommandParameter="Red" />
+            <MenuItem Header="_Green" Command="{Binding StyleEditor.OnStyleSetFill, FallbackValue={x:Null}}" CommandParameter="Green" />
+            <MenuItem Header="_Blue" Command="{Binding StyleEditor.OnStyleSetFill, FallbackValue={x:Null}}" CommandParameter="Blue" />
+            <MenuItem Header="_Cyan" Command="{Binding StyleEditor.OnStyleSetFill, FallbackValue={x:Null}}" CommandParameter="Cyan" />
+            <MenuItem Header="_Magenta" Command="{Binding StyleEditor.OnStyleSetFill, FallbackValue={x:Null}}" CommandParameter="Magenta" />
+            <MenuItem Header="_Yellow" Command="{Binding StyleEditor.OnStyleSetFill, FallbackValue={x:Null}}" CommandParameter="Yellow" />
+            <MenuItem Header="_White" Command="{Binding StyleEditor.OnStyleSetFill, FallbackValue={x:Null}}" CommandParameter="White" />
+          </MenuItem>
+          <MenuItem Header="Trans_parency">
+            <MenuItem Header="0%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="0" />
+            <MenuItem Header="10%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="25" />
+            <MenuItem Header="20%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="51" />
+            <MenuItem Header="30%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="76" />
+            <MenuItem Header="40%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="102" />
+            <MenuItem Header="50%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="127" />
+            <MenuItem Header="60%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="153" />
+            <MenuItem Header="70%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="178" />
+            <MenuItem Header="80%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="204" />
+            <MenuItem Header="90%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="229" />
+            <MenuItem Header="100%" Command="{Binding StyleEditor.OnStyleSetFillTransparency, FallbackValue={x:Null}}" CommandParameter="255" />
+          </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_Text">
+          <MenuItem Header="Font _Name">
+            <MenuItem Header="_System" Command="{Binding StyleEditor.OnStyleSetFontName, FallbackValue={x:Null}}" CommandParameter="System" />
+            <MenuItem Header="_Arial" Command="{Binding StyleEditor.OnStyleSetFontName, FallbackValue={x:Null}}" CommandParameter="Arial" />
+            <MenuItem Header="_Calibri" Command="{Binding StyleEditor.OnStyleSetFontName, FallbackValue={x:Null}}" CommandParameter="Calibri" />
+            <MenuItem Header="_Consolas" Command="{Binding StyleEditor.OnStyleSetFontName, FallbackValue={x:Null}}" CommandParameter="Consolas" />
+          </MenuItem>
+          <MenuItem Header="Font _Size">
+            <MenuItem Header="8" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="8" />
+            <MenuItem Header="9" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="9" />
+            <MenuItem Header="10" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="10" />
+            <MenuItem Header="10.5" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="10.5" />
+            <MenuItem Header="11" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="11" />
+            <MenuItem Header="12" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="12" />
+            <MenuItem Header="14" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="14" />
+            <MenuItem Header="16" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="16" />
+            <MenuItem Header="18" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="18" />
+            <MenuItem Header="20" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="20" />
+            <MenuItem Header="24" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="24" />
+            <MenuItem Header="28" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="28" />
+            <MenuItem Header="32" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="32" />
+            <MenuItem Header="36" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="36" />
+            <MenuItem Header="40" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="40" />
+            <MenuItem Header="44" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="44" />
+            <MenuItem Header="48" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="48" />
+            <MenuItem Header="54" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="54" />
+            <MenuItem Header="60" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="60" />
+            <MenuItem Header="66" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="66" />
+            <MenuItem Header="72" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="72" />
+            <MenuItem Header="80" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="80" />
+            <MenuItem Header="88" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="88" />
+            <MenuItem Header="96" Command="{Binding StyleEditor.OnStyleSetFontSize, FallbackValue={x:Null}}" CommandParameter="96" />
+          </MenuItem>
+          <MenuItem Header="Font S_tyle">
+            <MenuItem Header="Toggle _Regular" Command="{Binding StyleEditor.OnStyleSetFontStyle, FallbackValue={x:Null}}" CommandParameter="Regular" />
+            <MenuItem Header="Toggle _Bold" Command="{Binding StyleEditor.OnStyleSetFontStyle, FallbackValue={x:Null}}" CommandParameter="Bold" />
+            <MenuItem Header="Toggle _Italic" Command="{Binding StyleEditor.OnStyleSetFontStyle, FallbackValue={x:Null}}" CommandParameter="Italic" />
+          </MenuItem>
+          <MenuItem Header="_Horizontal Alignment">
+            <MenuItem Header="Left" Command="{Binding StyleEditor.OnStyleSetTextHAlignment, FallbackValue={x:Null}}" CommandParameter="Left" />
+            <MenuItem Header="_Center" Command="{Binding StyleEditor.OnStyleSetTextHAlignment, FallbackValue={x:Null}}" CommandParameter="Center" />
+            <MenuItem Header="_Right" Command="{Binding StyleEditor.OnStyleSetTextHAlignment, FallbackValue={x:Null}}" CommandParameter="Right" />
+          </MenuItem>
+          <MenuItem Header="_Vertical Alignment">
+            <MenuItem Header="_Top" Command="{Binding StyleEditor.OnStyleSetTextVAlignment, FallbackValue={x:Null}}" CommandParameter="Top" />
+            <MenuItem Header="_Center" Command="{Binding StyleEditor.OnStyleSetTextVAlignment, FallbackValue={x:Null}}" CommandParameter="Center" />
+            <MenuItem Header="_Bottom" Command="{Binding StyleEditor.OnStyleSetTextVAlignment, FallbackValue={x:Null}}" CommandParameter="Bottom" />
+          </MenuItem>
+        </MenuItem>
+      </MenuItem>
+      <MenuItem Header="_Tool">
+        <MenuItem Header="_None" Icon="{StaticResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N" />
+        <Separator />
+        <MenuItem Header="_Selection" Icon="{StaticResource SelectionIcon}" Command="{Binding OnToolSelection}" InputGesture="S" />
+        <Separator />
+        <MenuItem Header="_Point" Icon="{StaticResource PointIcon}" Command="{Binding OnToolPoint}" InputGesture="P" />
+        <Separator />
+        <MenuItem Header="_Line" Icon="{StaticResource LineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
+        <MenuItem Header="_Arc" Icon="{StaticResource ArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
+        <MenuItem Header="Cubic _Bezier" Icon="{StaticResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
+        <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
+        <Separator />
+        <MenuItem Header="Pat_h" Icon="{StaticResource PathIcon}" Command="{Binding OnToolPath}" InputGesture="H" />
+        <MenuItem Header="Path Tool">
+          <MenuItem.IsVisible>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="CurrentTool.Title" FallbackValue="{x:Null}" />
+              <Binding Path="" Source="Path" />
+            </MultiBinding>
+          </MenuItem.IsVisible>
+          <MenuItem Header="_Line" Icon="{StaticResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
+          <MenuItem Header="_Arc" Icon="{StaticResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
+          <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
+          <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
+          <Separator />
+          <MenuItem Header="_Move" Icon="{StaticResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M" />
+        </MenuItem>
+        <Separator />
+        <MenuItem Header="_Rectangle" Icon="{StaticResource RectangleIcon}" Command="{Binding OnToolRectangle}" InputGesture="R" />
+        <MenuItem Header="_Ellipse" Icon="{StaticResource EllipseIcon}" Command="{Binding OnToolEllipse}" InputGesture="E" />
+        <Separator />
+        <MenuItem Header="_Text" Icon="{StaticResource TextIcon}" Command="{Binding OnToolText}" InputGesture="T" />
+        <Separator />
+        <MenuItem Header="_Image" Icon="{StaticResource ImageIcon}" Command="{Binding OnToolImage}" InputGesture="I" />
+        <Separator />
+        <MenuItem Header="Reset" Command="{Binding OnResetTool}" />
+      </MenuItem>
+    </Menu>
+    <WrapPanel DockPanel.Dock="Left" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Center"
+               d:DataContext="{x:Static vmd:DesignerContext.Editor}" 
+               x:DataType="vme:ProjectEditorViewModel"
+               x:CompileBindings="False">
+      <!-- Tool -->
+      <RadioButton Tag="{StaticResource Selection}" 
+                   Command="{Binding OnToolSelection}" 
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Selection}"
+                   ToolTip.Tip="Selection Tool"
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <Separator Classes="vertical" />
+      <RadioButton Tag="{StaticResource Point}" 
+                   Command="{Binding OnToolPoint}"
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Point}"
+                   ToolTip.Tip="Point Tool" 
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <Separator Classes="vertical" />
+      <RadioButton Tag="{StaticResource Line}" 
+                   Command="{Binding OnToolLine}" 
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Line}"
+                   ToolTip.Tip="Line Tool" 
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <RadioButton Tag="{StaticResource Arc}" 
+                   Command="{Binding OnToolArc}" 
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Arc}"
+                   ToolTip.Tip="Arc" 
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <RadioButton Tag="{StaticResource CubicBezier}" 
+                   Command="{Binding OnToolCubicBezier}"
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=CubicBezier}"
+                   ToolTip.Tip="Cubic Bezier Tool" 
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <RadioButton Tag="{StaticResource QuadraticBezier}"
+                   Command="{Binding OnToolQuadraticBezier}"
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=QuadraticBezier}"
+                   ToolTip.Tip="Quadratic Bezier Tool" 
+                   GroupName="Tool"
+                   Classes="tool" />
+      <Separator Classes="vertical" />
+      <RadioButton Tag="{StaticResource Path}" 
+                   Command="{Binding OnToolPath}"
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Path}"
+                   ToolTip.Tip="Path Tool" 
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <Separator Classes="vertical" />
+      <RadioButton Tag="{StaticResource Rectangle}" 
+                   Command="{Binding OnToolRectangle}"
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Rectangle}"
+                   ToolTip.Tip="Rectangle Tool" 
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <RadioButton Tag="{StaticResource Ellipse}" 
+                   Command="{Binding OnToolEllipse}"
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Ellipse}"
+                   ToolTip.Tip="Ellipse Tool"
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <Separator Classes="vertical" />
+      <RadioButton Tag="{StaticResource Text}" 
+                   Command="{Binding OnToolText}"
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Text}"
+                   ToolTip.Tip="Text Tool" 
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <Separator Classes="vertical" />
+      <RadioButton Tag="{StaticResource Image}" 
+                   Command="{Binding OnToolImage}"
+                   IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Image}"
+                   ToolTip.Tip="Image Tool" 
+                   GroupName="Tool" 
+                   Classes="tool" />
+      <!-- Path Tool -->
+      <Separator Classes="vertical">
+        <Separator.IsVisible>
+          <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+            <Binding Path="CurrentTool.Title" FallbackValue="{x:Null}" />
+            <Binding Path="" Source="Path" />
+          </MultiBinding>
+        </Separator.IsVisible>
+      </Separator>
+      <RadioButton Tag="{StaticResource Line}" 
+                   Command="{Binding OnToolLine}"
+                   IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Line}"
+                   ToolTip.Tip="Path Line Tool" 
+                   GroupName="PathTool" 
+                   Classes="tool">
+        <RadioButton.IsVisible>
+          <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+            <Binding Path="CurrentTool.Title" FallbackValue="{x:Null}" />
+            <Binding Path="" Source="Path" />
+          </MultiBinding>
+        </RadioButton.IsVisible>
+      </RadioButton>
+      <RadioButton Tag="{StaticResource Arc}" 
+                   Command="{Binding OnToolArc}"
+                   IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Arc}"
+                   ToolTip.Tip="Path Arc Tool" 
+                   GroupName="PathTool" 
+                   Classes="tool">
+        <RadioButton.IsVisible>
+          <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+            <Binding Path="CurrentTool.Title" FallbackValue="{x:Null}" />
+            <Binding Path="" Source="Path" />
+          </MultiBinding>
+        </RadioButton.IsVisible>
+      </RadioButton>
+      <RadioButton Tag="{StaticResource CubicBezier}" 
+                   Command="{Binding OnToolCubicBezier}"
+                   IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=CubicBezier}"
+                   ToolTip.Tip="Path Cubic Bezier Tool" 
+                   GroupName="PathTool" 
+                   Classes="tool">
+        <RadioButton.IsVisible>
+          <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+            <Binding Path="CurrentTool.Title" FallbackValue="{x:Null}" />
+            <Binding Path="" Source="Path" />
+          </MultiBinding>
+        </RadioButton.IsVisible>
+      </RadioButton>
+      <RadioButton Tag="{StaticResource QuadraticBezier}" 
+                   Command="{Binding OnToolQuadraticBezier}"
+                   IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=QuadraticBezier}"
+                   ToolTip.Tip="Path Quadratic Bezier Tool" 
+                   GroupName="PathTool" 
+                   Classes="tool">
+        <RadioButton.IsVisible>
+          <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+            <Binding Path="CurrentTool.Title" FallbackValue="{x:Null}" />
+            <Binding Path="" Source="Path" />
+          </MultiBinding>
+        </RadioButton.IsVisible>
+      </RadioButton>
+      <RadioButton Tag="{StaticResource Move}" 
+                   Command="{Binding OnToolMove}"
+                   IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Move}"
+                   ToolTip.Tip="Path Move Tool" 
+                   GroupName="PathTool" 
+                   Classes="tool">
+        <RadioButton.IsVisible>
+          <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+            <Binding Path="CurrentTool.Title" FallbackValue="{x:Null}" />
+            <Binding Path="" Source="Path" />
+          </MultiBinding>
+        </RadioButton.IsVisible>
+      </RadioButton>
+    </WrapPanel>
+  </DockPanel>
+</UserControl>

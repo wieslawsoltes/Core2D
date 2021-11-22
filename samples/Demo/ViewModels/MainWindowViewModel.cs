@@ -1,11 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Core2D.ViewModels.Editor;
+using ReactiveUI;
 
 namespace Demo.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public string Greeting => "Welcome to Avalonia!";
+        private ProjectEditorViewModel? _editor;
+        
+        public ProjectEditorViewModel? Editor
+        {
+            get => _editor;
+            set => this.RaiseAndSetIfChanged(ref _editor, value);
+        }
     }
 }
