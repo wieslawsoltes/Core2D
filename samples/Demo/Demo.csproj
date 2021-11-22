@@ -18,4 +18,10 @@
     <ProjectReference Include="..\..\src\Core2D.Core\Core2D.Core.csproj" />
     <ProjectReference Include="..\..\src\Core2D\Core2D.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\MenuView.axaml.cs">
+      <DependentUpon>MenuView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

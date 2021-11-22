@@ -14,8 +14,9 @@
   <Design.DataContext>
     <vm:MainWindowViewModel />
   </Design.DataContext>
-  <DockPanel>
-    <views:ToolsView DataContext="{Binding Editor}" DockPanel.Dock="Top" />
-    <views:PageView DataContext="{Binding Editor}" />
-  </DockPanel>
+  <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*">
+    <views:MenuView DataContext="{Binding Editor}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+    <views:ToolsView DataContext="{Binding Editor}" Grid.Row="1" Grid.Column="0" />
+    <views:PageView DataContext="{Binding Editor}" Grid.Row="1" Grid.Column="1" />
+  </Grid>
 </Window>
