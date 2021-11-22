@@ -136,7 +136,7 @@ public class App : Application
         }
     }
 
-    public static MainWindow InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime? desktopLifetime, out ProjectEditorViewModel editor)
+    public static Window InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime? desktopLifetime, out ProjectEditorViewModel editor)
     {
         var jsonSettings = new JsonSerializerSettings()
         {
@@ -218,7 +218,7 @@ public class App : Application
         var aboutInfo = CreateAboutInfo(serviceProvider, runtimeInfo, windowingSubsystemName, renderingSubsystemName);
         editor.AboutInfo = aboutInfo;
 
-        var mainWindow = serviceProvider.GetService<MainWindow>();
+        var mainWindow = serviceProvider.GetService<Window>();
 
         if (windowSettings is { })
         {
