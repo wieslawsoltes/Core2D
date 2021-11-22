@@ -19,9 +19,9 @@ public class AvaloniaImageImporter : IImageImporter
         _serviceProvider = serviceProvider;
     }
 
-    private MainWindow? GetWindow()
+    private Window? GetWindow()
     {
-        return _serviceProvider?.GetService<MainWindow>();
+        return _serviceProvider?.GetService<Window>();
     }
 
     public async Task<string> GetImageKeyAsync()
