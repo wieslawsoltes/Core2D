@@ -9,6 +9,7 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
     <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
+    <RootNamespace>Core2D</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
