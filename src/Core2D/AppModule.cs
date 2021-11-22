@@ -2,6 +2,7 @@
 using System;
 using System.Reflection;
 using Autofac;
+using Avalonia.Controls;
 using Core2D.Editor;
 using Core2D.Model;
 using Core2D.Model.Editor;
@@ -151,6 +152,6 @@ public class AppModule : Autofac.Module
 
         // Views
 
-        builder.RegisterType<MainWindow>().As<MainWindow>().InstancePerLifetimeScope();
+        builder.RegisterType<MainWindow>().As<Window>().InstancePerLifetimeScope();
     }
 }
