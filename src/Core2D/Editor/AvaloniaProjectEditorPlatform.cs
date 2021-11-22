@@ -34,9 +34,9 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         throw new NotImplementedException();
     }
 
-    private MainWindow? GetWindow()
+    private Window? GetWindow()
     {
-        return ServiceProvider.GetService<MainWindow>();
+        return ServiceProvider.GetService<Window>();
     }
 
     public async void OnOpen(string? path)
