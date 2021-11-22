@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.Screenshot;
+using Core2D.Screenshot;
 
 namespace Core2D.Views;
 

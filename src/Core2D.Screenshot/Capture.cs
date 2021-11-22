@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Avalonia;
 using SkiaSharp;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -10,7 +11,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Skia.Helpers;
 
-namespace Avalonia.Screenshot;
+namespace Core2D.Screenshot;
 
 public static class CanvasRenderer
 {
@@ -130,13 +131,15 @@ public static class Capture
 
     public static void AttachCapture(this TopLevel root, KeyGesture gesture)
     {
-        root.AddHandler(InputElement.KeyDownEvent, async (sender, args) =>
+        async void Handler(object? sender, KeyEventArgs args)
         {
             if (args.Key == Key.F6)
             {
                 await Save(root);
             }
-        }, RoutingStrategies.Tunnel);
+        }
+
+        root.AddHandler(InputElement.KeyDownEvent, Handler, RoutingStrategies.Tunnel);
     }
 
     public static async Task Save(TopLevel root)
@@ -150,7 +153,11 @@ public static class Capture
         dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
         dlg.InitialFileName = "screenshot";
         dlg.DefaultExtension = "png";
-        var result = await dlg.ShowAsync(root as Window);
+        if (root is not Window window)
+        {
+            return;
+        }
+        var result = await dlg.ShowAsync(window);
         if (result is { } path)
         {
             Save(root, root.Bounds.Size, path);
@@ -172,25 +179,25 @@ public static class Capture
         if (path.EndsWith("skp", StringComparison.OrdinalIgnoreCase))
         {
             using var stream = File.Create(path);
-            SkpRenderer.Render(control, size, stream, 96, false);
+            SkpRenderer.Render(control, size, stream);
         }
 
         if (path.EndsWith("svg", StringComparison.OrdinalIgnoreCase))
         {
             using var stream = File.Create(path);
-            SvgRenderer.Render(control, size, stream, 96, false);
+            SvgRenderer.Render(control, size, stream);
         }
 
         if (path.EndsWith("pdf", StringComparison.OrdinalIgnoreCase))
         {
             using var stream = File.Create(path);
-            PdfRenderer.Render(control, size, stream, 96, false);
+            PdfRenderer.Render(control, size, stream, 96);
         }
             
         if (path.EndsWith("xps", StringComparison.OrdinalIgnoreCase))
         {
             using var stream = File.Create(path);
-            XpsRenderer.Render(control, size, stream, 96, false);
+            XpsRenderer.Render(control, size, stream, 96);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Screenshot;
+using Core2D.Screenshot;
 using Core2D.ViewModels.Editor;
 
 namespace Core2D.Util;

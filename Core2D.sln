@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{205489
 		omnisharp.json = omnisharp.json
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Screenshot", "src\Avalonia.Screenshot\Avalonia.Screenshot.csproj", "{3EC50678-8D3B-4CC5-91CF-84A4BF2727BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core2D.Screenshot", "src\Core2D.Screenshot\Core2D.Screenshot.csproj", "{3EC50678-8D3B-4CC5-91CF-84A4BF2727BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.Modules.FileSystem.DotNet", "src\Core2D.Modules.FileSystem.DotNet\Core2D.Modules.FileSystem.DotNet.csproj", "{EFAE5DEF-FE6C-4EAA-8BFA-FF292AD963D5}"
 EndProject
