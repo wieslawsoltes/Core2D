@@ -17,8 +17,11 @@ using Core2D.Configuration.Windows;
 using Core2D.Model;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Designer;
+using Core2D.ViewModels.Docking;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
+using Dock.Model.Controls;
+using Dock.Model.Core;
 using Dock.Model.ReactiveUI.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -97,7 +100,42 @@ public class App : Application
             return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();
         }
     }
-        
+
+    private  static void CreateLayout(ProjectEditorViewModel editor)
+    {
+        if (editor.DockFactory is IFactory dockFactory)
+        {
+            editor.RootDock = dockFactory.CreateLayout();
+
+            if (editor.RootDock is IDock dock)
+            {
+                dockFactory.InitLayout(dock);
+                dockFactory.GetDockable<IDocumentDock>("Pages")?.CreateDocument?.Execute(null);
+
+                editor.NavigateTo = id => dock.Navigate.Execute(id);
+
+                dock.Navigate.Execute("Dashboard");
+            }
+        }
+    }
+
+    private static void LoadLayout(ProjectEditorViewModel editor, IRootDock layout)
+    {
+        if (editor.DockFactory is IFactory dockFactory)
+        {
+            editor.RootDock = layout;
+
+            if (editor.RootDock is IDock dock)
+            {
+                dockFactory.InitLayout(dock);
+
+                editor.NavigateTo = id => dock.Navigate.Execute(id);
+
+                dock.Navigate.Execute("Dashboard");
+            }
+        }
+    }
+
     public static MainWindow InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime? desktopLifetime, out ProjectEditorViewModel editor)
     {
         var jsonSettings = new JsonSerializerSettings()
@@ -140,6 +178,8 @@ public class App : Application
 
         editor = serviceProvider.GetService<ProjectEditorViewModel>();
 
+        editor.DockFactory = new DockFactory(editor);
+
         var recentPath = System.IO.Path.Combine(fileSystem.GetBaseDirectory(), "Core2D.recent");
         if (fileSystem.Exists(recentPath))
         {
@@ -156,14 +196,14 @@ public class App : Application
                 rootDock = JsonConvert.DeserializeObject<RootDock>(jsonRootDock, jsonSettings);
                 if (rootDock is { })
                 {
-                    editor.LoadLayout(rootDock);
+                    LoadLayout(editor, rootDock);
                 }
             }
         }
 
         if (rootDock is null)
         {
-            editor.CreateLayout();
+            CreateLayout(editor);
         }
 
         editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
@@ -238,7 +278,9 @@ public class App : Application
 
         editor = serviceProvider.GetService<ProjectEditorViewModel>();
 
-        editor.CreateLayout();
+        editor.DockFactory = new DockFactory(editor);
+
+        CreateLayout(editor);
 
         editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
         editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");

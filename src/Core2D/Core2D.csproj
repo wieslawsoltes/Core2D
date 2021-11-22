@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
@@ -9,6 +9,7 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
     <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
+    <RootNamespace>Core2D</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,21 +18,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)" PrivateAssets="All" />
-    <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
     <PackageReference Include="System.Text.Json" Version="$(SystemTextJsonVersion)" />
-    <PackageReference Include="Autofac" Version="$(AutofacVersion)" />
-    <PackageReference Include="CsvHelper" Version="$(CsvHelperVersion)" />
-    <PackageReference Include="DocumentFormat.OpenXml" Version="$(DocumentFormatOpenXmlVersion)" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="$(MicrosoftCodeAnalysisCSharpScriptingVersion)" />
-    <PackageReference Include="netDXF.netstandard" Version="$(netDXFnetstandardVersion)" />
-    <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
-    <PackageReference Include="PDFsharp" Version="$(PDFsharpVersion)" Condition="'$(TargetFramework)'=='net6.0'" />
     <PackageReference Include="SkiaSharp" Version="$(SkiaSharpVersion)" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="$(SkiaSharpVersion)" />
-    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
     <PackageReference Include="System.IO.Compression" Version="$(SystemIOCompressionVersion)" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="$(SystemTextEncodingCodePagesVersion)" />
-    <PackageReference Include="Svg.Skia" Version="$(SvgSkiaVersion)" />
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
@@ -51,8 +42,35 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Avalonia.Screenshot\Avalonia.Screenshot.csproj" />
+    <ProjectReference Include="..\Core2D.Screenshot\Core2D.Screenshot.csproj" />
+    <ProjectReference Include="..\Core2D.Core\Core2D.Core.csproj" />
     <ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Core2D.Modules.FileSystem.DotNet\Core2D.Modules.FileSystem.DotNet.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.FileWriter.Dxf\Core2D.Modules.FileWriter.Dxf.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.FileWriter.Emf\Core2D.Modules.FileWriter.Emf.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.FileWriter.PdfSharp\Core2D.Modules.FileWriter.PdfSharp.csproj" Condition="'$(TargetFramework)'=='net6.0'" />
+    <ProjectReference Include="..\Core2D.Modules.FileWriter.SkiaSharp\Core2D.Modules.FileWriter.SkiaSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.FileWriter.Svg\Core2D.Modules.FileWriter.Svg.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.FileWriter.Xaml\Core2D.Modules.FileWriter.Xaml.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Log.Trace\Core2D.Modules.Log.Trace.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.Avalonia\Core2D.Modules.Renderer.Avalonia.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.Dxf\Core2D.Modules.Renderer.Dxf.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.PdfSharp\Core2D.Modules.Renderer.PdfSharp.csproj"  Condition="'$(TargetFramework)'=='net6.0'" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.SkiaSharp\Core2D.Modules.Renderer.SkiaSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.WinForms\Core2D.Modules.Renderer.WinForms.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.ScriptRunner.Roslyn\Core2D.Modules.ScriptRunner.Roslyn.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Serializer.Newtonsoft\Core2D.Modules.Serializer.Newtonsoft.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.ServiceProvider.Autofac\Core2D.Modules.ServiceProvider.Autofac.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.SvgExporter.Svg\Core2D.Modules.SvgExporter.Svg.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.TextFieldReader.CsvHelper\Core2D.Modules.TextFieldReader.CsvHelper.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.TextFieldReader.OpenXml\Core2D.Modules.TextFieldReader.OpenXml.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.TextFieldWriter.CsvHelper\Core2D.Modules.TextFieldWriter.CsvHelper.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.TextFieldWriter.OpenXml\Core2D.Modules.TextFieldWriter.OpenXml.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.XamlExporter.Avalonia\Core2D.Modules.XamlExporter.Avalonia.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="ViewModels" />
   </ItemGroup>
 
 </Project>
