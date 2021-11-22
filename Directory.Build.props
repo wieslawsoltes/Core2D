@@ -24,6 +24,7 @@
     <PDFsharpVersion>1.51.5185-beta</PDFsharpVersion>
     <SkiaSharpVersion>2.88.0-preview.140</SkiaSharpVersion>
     <SystemCollectionsImmutableVersion>5.0.0</SystemCollectionsImmutableVersion>
+    <SystemReactiveVersion>5.0.0</SystemReactiveVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
     <SystemCommandLineVersion>2.0.0-beta1.21308.1</SystemCommandLineVersion>
