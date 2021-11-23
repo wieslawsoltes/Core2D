@@ -27,9 +27,10 @@
         <MenuItem Header="Execu_te Script..." 
                   Command="{Binding Platform.OnExecuteScriptFile}"
                   x:CompileBindings="False" />
-        <Separator />
+        <Separator IsVisible="{Binding !!RecentProjects.Length}"/>
         <MenuItem Header="_Recent" 
-                  Items="{Binding RecentProjects}">
+                  Items="{Binding RecentProjects}"
+                  IsVisible="{Binding !!RecentProjects.Length}">
           <MenuItem.Styles>
             <Style Selector="MenuItem">
               <Setter Property="Header" Value="{Binding Name}" />
