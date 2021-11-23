@@ -17,7 +17,6 @@ using Core2D.Modules.FileWriter.SkiaSharp;
 using Core2D.Modules.FileWriter.Svg;
 using Core2D.Modules.FileWriter.Xaml;
 using Core2D.Modules.Log.Trace;
-using Core2D.Modules.Renderer;
 using Core2D.Modules.Renderer.Avalonia;
 using Core2D.Modules.Renderer.SkiaSharp;
 using Core2D.Modules.ScriptRunner.Roslyn;
@@ -42,8 +41,8 @@ public class AppModule : Autofac.Module
     {
         // Container
 
-        ILifetimeScope lifetimeScope = null;
-        builder.Register(x => lifetimeScope).AsSelf().SingleInstance();
+        ILifetimeScope lifetimeScope = null!;
+        builder.Register(_ => lifetimeScope).AsSelf().SingleInstance();
         builder.RegisterBuildCallback(x => lifetimeScope = x);
 
         // Locator
@@ -56,6 +55,10 @@ public class AppModule : Autofac.Module
             .PublicOnly()
             .Where(t =>
             {
+                if (t.Namespace is null)
+                {
+                    return false;
+                }
                 if ((
                         t.Namespace.StartsWith("Core2D.ViewModels.Containers")
                         || t.Namespace.StartsWith("Core2D.ViewModels.Data")
@@ -93,14 +96,14 @@ public class AppModule : Autofac.Module
 
         builder.RegisterAssemblyTypes(typeof(IEditorTool).GetTypeInfo().Assembly)
             .PublicOnly()
-            .Where(t => t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools"))
+            .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools"))
             .As<IEditorTool>()
             .AsSelf()
             .InstancePerLifetimeScope();
             
         builder.RegisterAssemblyTypes(typeof(IPathTool).GetTypeInfo().Assembly)
             .PublicOnly()
-            .Where(t => t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools.Path"))
+            .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools.Path"))
             .As<IPathTool>()
             .AsSelf()
             .InstancePerLifetimeScope();
@@ -109,7 +112,7 @@ public class AppModule : Autofac.Module
             
         builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly)
             .PublicOnly()
-            .Where(t => t.Namespace.StartsWith("Core2D.ViewModels.Editor.Bounds.Shapes"))
+            .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Bounds.Shapes"))
             .As<IBounds>()
             .AsSelf()
             .InstancePerLifetimeScope();

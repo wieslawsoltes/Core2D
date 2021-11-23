@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Reflection;
 using Autofac;
 using Avalonia.Controls;
@@ -9,6 +10,9 @@ using Core2D.Model.Renderer;
 using Core2D.Modules.FileSystem.DotNet;
 using Core2D.Modules.FileWriter.Dxf;
 using Core2D.Modules.FileWriter.Emf;
+#if USE_PDFSHARP
+using Core2D.Modules.FileWriter.PdfSharp;
+#endif
 using Core2D.Modules.FileWriter.SkiaSharp;
 using Core2D.Modules.FileWriter.Svg;
 using Core2D.Modules.FileWriter.Xaml;
@@ -37,8 +41,8 @@ namespace Demo
         {
             // Container
 
-            ILifetimeScope lifetimeScope = null;
-            builder.Register(x => lifetimeScope).AsSelf().SingleInstance();
+            ILifetimeScope lifetimeScope = null!;
+            builder.Register(_ => lifetimeScope).AsSelf().SingleInstance();
             builder.RegisterBuildCallback(x => lifetimeScope = x);
 
             // Locator
@@ -51,6 +55,10 @@ namespace Demo
                 .PublicOnly()
                 .Where(t =>
                 {
+                    if (t.Namespace is null)
+                    {
+                        return false;
+                    }
                     if ((
                             t.Namespace.StartsWith("Core2D.ViewModels.Containers")
                             || t.Namespace.StartsWith("Core2D.ViewModels.Data")
@@ -89,14 +97,14 @@ namespace Demo
 
             builder.RegisterAssemblyTypes(typeof(IEditorTool).GetTypeInfo().Assembly)
                 .PublicOnly()
-                .Where(t => t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools"))
+                .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools"))
                 .As<IEditorTool>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(typeof(IPathTool).GetTypeInfo().Assembly)
                 .PublicOnly()
-                .Where(t => t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools.Path"))
+                .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools.Path"))
                 .As<IPathTool>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
@@ -105,7 +113,7 @@ namespace Demo
 
             builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly)
                 .PublicOnly()
-                .Where(t => t.Namespace.StartsWith("Core2D.ViewModels.Editor.Bounds.Shapes"))
+                .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Bounds.Shapes"))
                 .As<IBounds>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
