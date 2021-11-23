@@ -9,6 +9,9 @@
 [![Github All Releases](https://img.shields.io/github/downloads/wieslawsoltes/Core2D/total.svg)](https://github.com/wieslawsoltes/Core2D/releases)
 [![Github Releases](https://img.shields.io/github/downloads/wieslawsoltes/Core2D/latest/total.svg)](https://github.com/wieslawsoltes/Core2D/releases)
 
+[![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D)
+[![NuGet](https://img.shields.io/nuget/dt/Core2D.svg)](https://www.nuget.org/packages/Core2D)
+
 A multi-platform data driven 2D diagram editor.
 
 ## About
