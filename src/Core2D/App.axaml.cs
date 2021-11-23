@@ -56,7 +56,7 @@ public class App : Application
         }
     }
 
-    public static AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider, RuntimePlatformInfo runtimeInfo, string windowingSubsystem, string renderingSubsystem)
+    public static AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider, RuntimePlatformInfo runtimeInfo, string? windowingSubsystem, string? renderingSubsystem)
     {
         return new AboutInfoViewModel(serviceProvider)
         {
