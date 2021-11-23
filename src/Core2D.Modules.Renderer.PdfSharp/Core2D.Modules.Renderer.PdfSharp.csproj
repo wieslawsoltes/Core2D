@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
     <Nullable>enable</Nullable>
@@ -13,11 +13,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)" PrivateAssets="All" />
-    <PackageReference Include="PDFsharp" Version="$(PDFsharpVersion)" Condition="'$(TargetFramework)'=='net6.0'" />
+    <PackageReference Include="PDFsharp" Version="$(PDFsharpVersion)" Condition="'$(TargetFramework)'=='net5.0' Or '$(TargetFramework)'=='net6.0'" />
     <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0' Or '$(TargetFramework)'=='net6.0'">
     <DefineConstants>$(DefineConstants);USE_PDFSHARP</DefineConstants>
   </PropertyGroup>
 
