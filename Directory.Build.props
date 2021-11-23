@@ -35,5 +35,8 @@
     <AvaloniaControlsPanAndZoomVersion>4.3.0</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>0.10.8</ThemeEditorControlsColorPickerVersion>
     <DockAvaloniaVersion>0.10.10</DockAvaloniaVersion>
+    <XUnitVersion>2.4.1</XUnitVersion>
+    <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
+    <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
   </PropertyGroup>
 </Project>
