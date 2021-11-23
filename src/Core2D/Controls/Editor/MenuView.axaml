@@ -36,8 +36,8 @@
       <MenuItem Header="Import Sv_g..." Command="{Binding Platform.OnImportSvg, FallbackValue={x:Null}}" />
       <Separator />
       <MenuItem Header="_Export..." Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" InputGesture="Ctrl+E" />
-      <Separator />
-      <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
+      <Separator IsVisible="{Binding !!RecentProjects.Length}" />
+      <MenuItem Header="_Recent" Items="{Binding RecentProjects}" IsVisible="{Binding !!RecentProjects.Length}">
         <MenuItem.Styles>
           <Style Selector="MenuItem">
             <Setter Property="Header" Value="{Binding Name}" />
@@ -46,8 +46,8 @@
           </Style>
         </MenuItem.Styles>
       </MenuItem>
-      <Separator />
-      <MenuItem Header="E_xit" Command="{Binding Platform.OnExit, FallbackValue={x:Null}}" InputGesture="Alt+F4" />
+      <Separator IsVisible="{Binding !!RootDock}" />
+      <MenuItem Header="E_xit" Command="{Binding Platform.OnExit, FallbackValue={x:Null}}" InputGesture="Alt+F4"  IsVisible="{Binding !!RootDock}"/>
     </MenuItem>
     <MenuItem Header="_Edit">
       <MenuItem Header="_Undo" Command="{Binding OnUndo}" InputGesture="Ctrl+Z" />
@@ -77,7 +77,7 @@
       <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape" />
     </MenuItem>
     <MenuItem Header="_View">
-      <MenuItem Header="_Tool Windows">
+      <MenuItem Header="_Tool Windows" IsVisible="{Binding !!RootDock}">
         <MenuItem Header="Project _Explorer" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ProjectExplorer" />
         <Separator />
         <MenuItem Header="Page Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="PageProperties" />
@@ -99,7 +99,7 @@
         <Separator />
         <MenuItem Header="Object Browser" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ObjectBrowser" />
       </MenuItem>
-      <MenuItem Header="_Appearance">
+      <MenuItem Header="_Appearance" IsVisible="{Binding !!RootDock}">
         <MenuItem Header="_Main Menu" Command="{Binding OnToggleDockableVisibility}" CommandParameter="HomeMenuView" />
         <MenuItem Header="_Status Bar" Command="{Binding OnToggleDockableVisibility}" CommandParameter="HomeStatusBarView" />
       </MenuItem>
@@ -113,7 +113,7 @@
         <MenuItem Header="Zoom _In" Command="{Binding Platform.OnZoomIn, FallbackValue={x:Null}}" InputGesture="Ctrl+Add" />
         <MenuItem Header="Zoom _Out" Command="{Binding Platform.OnZoomOut, FallbackValue={x:Null}}" InputGesture="Ctrl+Subtract" />
       </MenuItem>
-      <MenuItem Header="T_heme">
+      <MenuItem Header="T_heme" IsVisible="{Binding !!RootDock}">
         <MenuItem Header="Fluent _Light" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentLight" />
         <MenuItem Header="Fluent _Dark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentDark" />
         <Separator />
@@ -546,7 +546,7 @@
       <Separator />
       <MenuItem Header="Reset" Command="{Binding OnResetTool}" />
     </MenuItem>
-    <MenuItem Header="_Help">
+    <MenuItem Header="_Help" IsVisible="{Binding !!AboutInfo}">
       <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog, FallbackValue={x:Null}}" />
     </MenuItem>
   </Menu>
