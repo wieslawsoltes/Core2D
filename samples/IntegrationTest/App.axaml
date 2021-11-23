@@ -1,0 +1,14 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:IntegrationTest"
+             x:Class="IntegrationTest.App">
+  <Application.DataTemplates>
+    <local:ViewLocator />
+  </Application.DataTemplates>
+  <Application.Styles>
+    <FluentTheme Mode="Light" />
+    <StyleInclude Source="avares://Core2D/Styles/Geometry.axaml" />
+    <StyleInclude Source="avares://Core2D/Styles/Icons.axaml" />
+    <StyleInclude Source="avares://Core2D/Styles/Icons-Light.axaml" />
+  </Application.Styles>
+</Application>
