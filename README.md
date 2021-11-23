@@ -2,7 +2,7 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/wieslawsoltes/core2d/badge)](https://www.codefactor.io/repository/github/wieslawsoltes/core2d)
 
-[![Build status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/Sources/Core2D)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=54)
+[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/wieslawsoltes.Core2D?repoName=wieslawsoltes%2FCore2D&branchName=master)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=105&repoName=wieslawsoltes%2FCore2D&branchName=master)
 [![CI](https://github.com/wieslawsoltes/Core2D/actions/workflows/build.yml/badge.svg)](https://github.com/wieslawsoltes/Core2D/actions/workflows/build.yml)
 
 [![GitHub release](https://img.shields.io/github/release/wieslawsoltes/Core2D.svg)](https://github.com/wieslawsoltes/Core2D/releases)
