@@ -11,15 +11,11 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
-using Core2D.Modules.FileWriter.Emf;
-using Core2D.Modules.SvgExporter.Svg;
-using Core2D.Modules.XamlExporter.Avalonia;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
-using Core2D.Views;
 
 namespace Core2D.Editor;
 
@@ -312,7 +308,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             {
                 var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var textClipboard = ServiceProvider.GetService<ITextClipboard>();
-                var exporter = new SvgSvgExporter(ServiceProvider);
+                var exporter = ServiceProvider.GetService<ISvgExporter>();
                 var container = editor.Project.CurrentContainer;
 
                 var width = 0.0;
@@ -390,7 +386,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             {
                 var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var textClipboard = ServiceProvider.GetService<ITextClipboard>();
-                var exporter = new DrawingGroupXamlExporter(ServiceProvider);
+                var exporter = ServiceProvider.GetService<IXamlExporter>();
                 var container = editor.Project.CurrentContainer;
 
                 var sources = editor.Project?.SelectedShapes;
@@ -507,7 +503,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             var imageChache = editor.Project as IImageCache;
             var container = editor.Project.CurrentContainer;
             var shapes = editor.Project.SelectedShapes;
-            var writer = editor.FileWriters.FirstOrDefault(x => x.GetType() == typeof(EmfWriter)) as EmfWriter;
+            var exporter = ServiceProvider.GetService<IMetafileExporter>();
 
             var db = (object)container.Properties;
             var record = (object)container.Record;
@@ -533,13 +529,13 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
             if (shapes is { } && shapes.Count > 0)
             {
-                using var ms = writer.MakeMetafileStream(bitmap, shapes, imageChache);
+                using var ms = exporter.MakeMetafileStream(bitmap, shapes, imageChache);
                 ms.Position = 0;
                 SetClipboardMetafile(ms);
             }
             else
             {
-                using var ms = writer.MakeMetafileStream(bitmap, container, imageChache);
+                using var ms = exporter.MakeMetafileStream(bitmap, container, imageChache);
                 ms.Position = 0;
                 SetClipboardMetafile(ms);
             }

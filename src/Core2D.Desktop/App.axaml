@@ -1,7 +1,7 @@
-<Application x:Class="Core2D.App"
+<Application x:Class="Core2D.Desktop.App"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:Core2D"
+             xmlns:local="clr-namespace:Core2D;assembly=Core2D"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
 

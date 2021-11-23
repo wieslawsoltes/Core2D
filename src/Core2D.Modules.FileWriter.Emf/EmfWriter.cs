@@ -17,7 +17,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Modules.FileWriter.Emf;
 
-public sealed class EmfWriter : IFileWriter
+public sealed class EmfWriter : IFileWriter, IMetafileExporter
 {
     private readonly IServiceProvider? _serviceProvider;
 
@@ -30,15 +30,20 @@ public sealed class EmfWriter : IFileWriter
 
     public string Extension { get; } = "emf";
 
-    public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShapeViewModel> shapes, IImageCache ic)
+    public MemoryStream? MakeMetafileStream(object bitmap, IEnumerable<BaseShapeViewModel> shapes, IImageCache ic)
     {
         var g = default(Graphics);
         var mf = default(Metafile);
         var ms = new MemoryStream();
 
+        if (bitmap is not Bitmap image)
+        {
+            return null;
+        }
+
         try
         {
-            using (g = Graphics.FromImage(bitmap))
+            using (g = Graphics.FromImage(image))
             {
                 var hdc = g.GetHdc();
                 mf = new Metafile(ms, hdc);
@@ -76,15 +81,20 @@ public sealed class EmfWriter : IFileWriter
         return ms;
     }
 
-    public MemoryStream MakeMetafileStream(Bitmap bitmap, FrameContainerViewModel container, IImageCache ic)
+    public MemoryStream? MakeMetafileStream(object bitmap, FrameContainerViewModel container, IImageCache ic)
     {
         var g = default(Graphics);
         var mf = default(Metafile);
         var ms = new MemoryStream();
 
+        if (bitmap is not Bitmap image)
+        {
+            return null;
+        }
+
         try
         {
-            using (g = Graphics.FromImage(bitmap))
+            using (g = Graphics.FromImage(image))
             {
                 var hdc = g.GetHdc();
                 mf = new Metafile(ms, hdc);

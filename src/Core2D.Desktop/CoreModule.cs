@@ -10,9 +10,6 @@ using Core2D.Model.Renderer;
 using Core2D.Modules.FileSystem.DotNet;
 using Core2D.Modules.FileWriter.Dxf;
 using Core2D.Modules.FileWriter.Emf;
-#if USE_PDFSHARP
-using Core2D.Modules.FileWriter.PdfSharp;
-#endif
 using Core2D.Modules.FileWriter.SkiaSharp;
 using Core2D.Modules.FileWriter.Svg;
 using Core2D.Modules.FileWriter.Xaml;
@@ -32,8 +29,11 @@ using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Editor.Bounds;
 using Core2D.ViewModels.Editor.Factories;
 using Core2D.Views;
+#if USE_PDFSHARP
+using Core2D.Modules.FileWriter.PdfSharp;
+#endif
 
-namespace Core2D;
+namespace Core2D.Desktop;
 
 public class AppModule : Autofac.Module
 {
@@ -138,6 +138,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<PngSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<SkpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+        builder.RegisterType<EmfWriter>().As<IMetafileExporter>().InstancePerLifetimeScope();
         builder.RegisterType<JpegSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<OpenXmlReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
