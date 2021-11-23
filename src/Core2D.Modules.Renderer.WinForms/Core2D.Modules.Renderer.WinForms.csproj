@@ -11,6 +11,10 @@
     <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Core2D.Modules.Renderer.WinForms</PackageId>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)" PrivateAssets="All" />
     <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />

@@ -8,6 +8,10 @@
     <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Core2D.Screenshot</PackageId>
+  </PropertyGroup>
+
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>

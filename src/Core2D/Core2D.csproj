@@ -12,6 +12,10 @@
     <RootNamespace>Core2D</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Core2D</PackageId>
+  </PropertyGroup>
+
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>

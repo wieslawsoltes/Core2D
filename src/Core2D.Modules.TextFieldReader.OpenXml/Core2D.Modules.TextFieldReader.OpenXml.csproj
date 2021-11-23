@@ -11,6 +11,10 @@
     <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Core2D.Modules.TextFieldReader.OpenXml</PackageId>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="$(MicrosoftNETFrameworkReferenceAssembliesVersion)" PrivateAssets="All" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="$(DocumentFormatOpenXmlVersion)" />
