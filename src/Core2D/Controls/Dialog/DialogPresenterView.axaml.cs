@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Core2D.Views;
+namespace Core2D.Controls.Dialog;
 
-public class DialogView : UserControl
+public class DialogPresenterView : UserControl
 {
-    public DialogView()
+    public DialogPresenterView()
     {
         InitializeComponent();
     }

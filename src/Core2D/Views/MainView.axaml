@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:views="using:Core2D.Views"
              xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:cd="clr-namespace:Core2D.Controls.Dialog"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
@@ -24,6 +24,6 @@
     <Panel>
       <idc:DockControl Layout="{Binding RootDock}" />
     </Panel>
-    <views:DialogPresenterView IsVisible="{Binding !!Dialogs.Count}" />
+    <cd:DialogPresenterView IsVisible="{Binding !!Dialogs.Count}" />
   </Panel>
 </UserControl>

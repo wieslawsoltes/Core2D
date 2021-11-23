@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.Views.DialogView"
+﻿<UserControl x:Class="Core2D.Controls.Dialog.DialogView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
