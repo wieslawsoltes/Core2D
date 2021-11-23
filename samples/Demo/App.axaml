@@ -8,34 +8,6 @@
   <Application.Styles>
     <FluentTheme Mode="Light" />
     <StyleInclude Source="avares://Core2D/Icons.axaml" />
+    <StyleInclude Source="avares://Demo/Icons.axaml" />
   </Application.Styles>
-  <Application.Resources>
-    <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
-    <SolidColorBrush x:Key="IconAccentBrush1" Color="#FF424242" />
-    <SolidColorBrush x:Key="IconAccentBrush2" Color="#80424242" />
-    <!-- Menu-Shape -->
-    <Image x:Key="DifferenceIcon" Source="{StaticResource Difference}" Width="16" Height="16" />
-    <Image x:Key="IntersectIcon" Source="{StaticResource Intersect}" Width="16" Height="16" />
-    <Image x:Key="UnionIcon" Source="{StaticResource Union}" Width="16" Height="16" />
-    <Image x:Key="XorIcon" Source="{StaticResource Xor}" Width="16" Height="16" />
-    <Image x:Key="ReverseDifferenceIcon" Source="{StaticResource ReverseDifference}" Width="16" Height="16" />
-    <!-- Menu-Tool -->
-    <Image x:Key="NoneIcon" Source="{StaticResource None}" Width="16" Height="16" />
-    <Image x:Key="SelectionIcon" Source="{StaticResource Selection}" Width="16" Height="16" />
-    <Image x:Key="PointIcon" Source="{StaticResource Point}" Width="16" Height="16" />
-    <Image x:Key="LineIcon" Source="{StaticResource Line}" Width="16" Height="16" />
-    <Image x:Key="ArcIcon" Source="{StaticResource Arc}" Width="16" Height="16" />
-    <Image x:Key="CubicBezierIcon" Source="{StaticResource CubicBezier}" Width="16" Height="16" />
-    <Image x:Key="QuadraticBezierIcon" Source="{StaticResource QuadraticBezier}" Width="16" Height="16" />
-    <Image x:Key="PathIcon" Source="{StaticResource Path}" Width="16" Height="16" />
-    <Image x:Key="PathLineIcon" Source="{StaticResource Line}" Width="16" Height="16" />
-    <Image x:Key="PathArcIcon" Source="{StaticResource Arc}" Width="16" Height="16" />
-    <Image x:Key="PathCubicBezierIcon" Source="{StaticResource CubicBezier}" Width="16" Height="16" />
-    <Image x:Key="PathQuadraticBezierIcon" Source="{StaticResource QuadraticBezier}" Width="16" Height="16" />
-    <Image x:Key="PathMoveIcon" Source="{StaticResource Move}" Width="16" Height="16" />
-    <Image x:Key="RectangleIcon" Source="{StaticResource Rectangle}" Width="16" Height="16" />
-    <Image x:Key="EllipseIcon" Source="{StaticResource Ellipse}" Width="16" Height="16" />
-    <Image x:Key="TextIcon" Source="{StaticResource Text}" Width="16" Height="16" />
-    <Image x:Key="ImageIcon" Source="{StaticResource Image}" Width="16" Height="16" />
-  </Application.Resources>
 </Application>
