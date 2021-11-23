@@ -1,11 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Demo.Views
+namespace Core2D.Controls.Editor
 {
-    public class ToolsView : UserControl
+    public class PageView : UserControl
     {
-        public ToolsView()
+        public PageView()
         {
             InitializeComponent();
         }

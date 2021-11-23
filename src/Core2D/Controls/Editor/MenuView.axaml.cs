@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Demo.Views
+namespace Core2D.Controls.Editor
 {
     public class MenuView : UserControl
     {

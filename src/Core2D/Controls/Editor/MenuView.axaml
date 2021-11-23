@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Demo.Views.MenuView"
+﻿<UserControl x:Class="Core2D.Controls.Editor.MenuView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -17,7 +17,6 @@
     </Style>
   </UserControl.Styles>
   <Menu d:DataContext="{x:Static vmd:DesignerContext.Editor}" 
-        DockPanel.Dock="Left"
         x:DataType="vme:ProjectEditorViewModel"
         x:CompileBindings="False">
     <MenuItem Header="_File">
@@ -546,6 +545,9 @@
       <MenuItem Header="_Image" Icon="{StaticResource ImageIcon}" Command="{Binding OnToolImage}" InputGesture="I" />
       <Separator />
       <MenuItem Header="Reset" Command="{Binding OnResetTool}" />
+    </MenuItem>
+    <MenuItem Header="_Help">
+      <MenuItem Header="_About Core2D" Command="{Binding Platform.OnAboutDialog, FallbackValue={x:Null}}" />
     </MenuItem>
   </Menu>
 </UserControl>

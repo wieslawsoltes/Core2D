@@ -3,7 +3,7 @@
         xmlns:vm="using:Demo.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:Demo.Views"
+        xmlns:ce="clr-namespace:Core2D.Controls.Editor;assembly=Core2D"
         mc:Ignorable="d" d:DesignWidth="1150" d:DesignHeight="680"
         x:Class="Demo.Views.MainWindow"
         WindowStartupLocation="CenterScreen"
@@ -15,8 +15,8 @@
     <vm:MainWindowViewModel />
   </Design.DataContext>
   <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*">
-    <views:MenuView DataContext="{Binding Editor}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
-    <views:ToolsView DataContext="{Binding Editor}" Grid.Row="1" Grid.Column="0" />
-    <views:PageView DataContext="{Binding Editor}" Grid.Row="1" Grid.Column="1" />
+    <ce:MenuView DataContext="{Binding Editor}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+    <ce:ToolsView DataContext="{Binding Editor}" Grid.Row="1" Grid.Column="0" />
+    <ce:PageView DataContext="{Binding Editor}" Grid.Row="1" Grid.Column="1" />
   </Grid>
 </Window>

@@ -1,0 +1,8 @@
+<Style xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style.Resources>
+    <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
+    <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
+    <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />
+  </Style.Resources>
+</Style>

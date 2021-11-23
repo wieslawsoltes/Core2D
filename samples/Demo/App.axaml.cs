@@ -21,7 +21,7 @@ namespace Demo
         public override void OnFrameworkInitializationCompleted()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<AppModule>();
+            builder.RegisterModule<CoreModule>();
 
             var container = builder.Build();
 

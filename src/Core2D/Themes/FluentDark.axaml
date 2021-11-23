@@ -20,6 +20,8 @@
   <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
     <Setter Property="Background" Value="{DynamicResource DockThemeBackgroundBrush}" />
   </Style>
+  <!-- Icons -->
+  <StyleInclude Source="avares://Core2D/Styles/Icons-Dark.axaml" />
   <!-- Other -->
   <Style>
     <Style.Resources>
@@ -29,9 +31,6 @@
       <SolidColorBrush x:Key="SystemControlBackgroundAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}" />
       <StaticResource x:Key="TextControlBackground" ResourceKey="SystemControlBackgroundAltMediumLowBrush" />
       <SolidColorBrush x:Key="AcrylicFallbackColor">#1F1F1F</SolidColorBrush>
-      <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
-      <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
-      <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />
       <GridLength x:Key="SliderPreContentMargin">3</GridLength>
       <GridLength x:Key="SliderPostContentMargin">3</GridLength>
       <SolidColorBrush x:Key="DialogOverlayColor">#7F2E2E2E</SolidColorBrush>

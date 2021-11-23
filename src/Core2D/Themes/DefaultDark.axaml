@@ -20,13 +20,12 @@
   <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
     <Setter Property="Background" Value="{DynamicResource DockThemeBackgroundBrush}" />
   </Style>
+  <!-- Icons -->
+  <StyleInclude Source="avares://Core2D/Styles/Icons-Dark.axaml" />
   <!-- Other -->
   <Style>
     <Style.Resources>
       <SolidColorBrush x:Key="AcrylicFallbackColor">#1F1F1F</SolidColorBrush>
-      <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
-      <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
-      <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />
       <SolidColorBrush x:Key="DialogOverlayColor">#7F2E2E2E</SolidColorBrush>
       <SolidColorBrush x:Key="DialogBackground">#323232</SolidColorBrush>
       <BoxShadows x:Key="DialogBoxShadow">4 11 30 1 #3F000000</BoxShadows>

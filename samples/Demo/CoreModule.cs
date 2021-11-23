@@ -31,7 +31,7 @@ using Demo.Views;
 
 namespace Demo
 {
-    public class AppModule : Autofac.Module
+    public class CoreModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -121,7 +121,7 @@ namespace Demo
             builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
             builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
 #if USE_PDFSHARP
-        builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+            builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
 #endif
             builder.RegisterType<SvgSvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<DrawingGroupXamlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
@@ -134,19 +134,16 @@ namespace Demo
             builder.RegisterType<JpegSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
             builder.RegisterType<OpenXmlReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
-            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<DatabaseViewModel>>()
-                .InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
             builder.RegisterType<OpenXmlWriter>().As<ITextFieldWriter<DatabaseViewModel>>().InstancePerLifetimeScope();
-            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<DatabaseViewModel>>()
-                .InstancePerLifetimeScope();
+            builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<DatabaseViewModel>>().InstancePerLifetimeScope();
             builder.RegisterType<SkiaSharpPathConverter>().As<IPathConverter>().InstancePerLifetimeScope();
             builder.RegisterType<SkiaSharpSvgConverter>().As<ISvgConverter>().InstancePerLifetimeScope();
 
             // Avalonia
 
             builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
-            builder.RegisterType<AvaloniaProjectEditorPlatform>().As<IProjectEditorPlatform>()
-                .InstancePerLifetimeScope();
+            builder.RegisterType<AvaloniaProjectEditorPlatform>().As<IProjectEditorPlatform>().InstancePerLifetimeScope();
             builder.RegisterType<AvaloniaEditorCanvasPlatform>().As<IEditorCanvasPlatform>().InstancePerLifetimeScope();
 
             // Views
