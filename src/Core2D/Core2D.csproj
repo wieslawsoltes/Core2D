@@ -69,19 +69,4 @@
     <ProjectReference Include="..\Core2D.Modules.XamlExporter.Avalonia\Core2D.Modules.XamlExporter.Avalonia.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Controls\Editor\MenuView.axaml.cs">
-      <DependentUpon>MenuView.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Controls\Editor\PageView.axaml.cs">
-      <DependentUpon>PageView.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Controls\Editor\ToolsView.axaml.cs">
-      <DependentUpon>ToolsView.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
 </Project>
