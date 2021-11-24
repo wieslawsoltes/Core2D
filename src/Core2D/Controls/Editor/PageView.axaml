@@ -125,7 +125,7 @@
                         VerticalScrollBarVisibility="Auto">
             <paz:ZoomBorder x:Name="PageZoomBorder"
                             Stretch="None"
-                            ZoomSpeed="1.2" 
+                            ZoomSpeed="1.5" 
                             PanButton="Middle" 
                             EnablePan="True" 
                             EnableZoom="True"
@@ -154,6 +154,11 @@
                      VerticalAlignment="Stretch"
                      HorizontalAlignment="Stretch"
                      ClipToBounds="False">
+                <Panel.Transitions>
+                  <Transitions>
+                    <paz:TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+                  </Transitions>
+                </Panel.Transitions>
                 <Panel x:Name="ContainerPanel"
                        Background="Transparent"
                        HorizontalAlignment="Center" VerticalAlignment="Center"
