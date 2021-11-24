@@ -4,8 +4,8 @@
     <LangVersion>latest</LangVersion>
  </PropertyGroup>
   <PropertyGroup>
-    <VersionPrefix>0.10.10</VersionPrefix>
-    <VersionSuffix>beta2</VersionSuffix>
+    <VersionPrefix>0.10.11</VersionPrefix>
+    <VersionSuffix>rc.1</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
@@ -22,19 +22,19 @@
     <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
     <NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
     <PDFsharpVersion>1.51.5185-beta</PDFsharpVersion>
-    <SkiaSharpVersion>2.88.0-preview.171</SkiaSharpVersion>
+    <SkiaSharpVersion>2.88.0-preview.155</SkiaSharpVersion>
     <SystemCollectionsImmutableVersion>5.0.0</SystemCollectionsImmutableVersion>
     <SystemReactiveVersion>5.0.0</SystemReactiveVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
     <SystemCommandLineVersion>2.0.0-beta1.21308.1</SystemCommandLineVersion>
-    <SvgSkiaVersion>0.5.10</SvgSkiaVersion>
-    <AvaloniaVersion>0.10.10</AvaloniaVersion>
+    <SvgSkiaVersion>0.5.11-rc.1</SvgSkiaVersion>
+    <AvaloniaVersion>0.10.11-rc.1</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.9</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>0.10.10.3</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>4.3.0</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>0.10.8</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>0.10.10</DockAvaloniaVersion>
+    <AvaloniaXamlBehaviorsVersion>0.10.11-rc.1</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>10.11.0-rc.1</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>0.10.11-rc.1</ThemeEditorControlsColorPickerVersion>
+    <DockAvaloniaVersion>0.10.11-rc.1</DockAvaloniaVersion>
     <XUnitVersion>2.4.1</XUnitVersion>
     <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
