@@ -16,7 +16,7 @@
     <SystemDrawingCommonVersion>5.0.2</SystemDrawingCommonVersion>
     <SystemTextJsonVersion>5.0.2</SystemTextJsonVersion>
     <AutofacVersion>6.3.0</AutofacVersion>
-    <CsvHelperVersion>27.2.0</CsvHelperVersion>
+    <CsvHelperVersion>27.2.1</CsvHelperVersion>
     <DocumentFormatOpenXmlVersion>2.14.0</DocumentFormatOpenXmlVersion>
     <MicrosoftCodeAnalysisCSharpScriptingVersion>4.0.0-4.final</MicrosoftCodeAnalysisCSharpScriptingVersion>
     <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
