@@ -32,7 +32,7 @@
     <AvaloniaVersion>0.10.11-rc.1</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.9</AvaloniaAvaloniaEditVersion>
     <AvaloniaXamlBehaviorsVersion>0.10.11-rc.1</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>10.11.0-rc.1</AvaloniaControlsPanAndZoomVersion>
+    <AvaloniaControlsPanAndZoomVersion>10.11.1-rc.1</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>0.10.11-rc.1</ThemeEditorControlsColorPickerVersion>
     <DockAvaloniaVersion>0.10.11-rc.1</DockAvaloniaVersion>
     <XUnitVersion>2.4.1</XUnitVersion>

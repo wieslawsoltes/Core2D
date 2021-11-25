@@ -156,7 +156,7 @@
                      ClipToBounds="False">
                 <Panel.Transitions>
                   <Transitions>
-                    <paz:TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
                   </Transitions>
                 </Panel.Transitions>
                 <Panel x:Name="ContainerPanel"
