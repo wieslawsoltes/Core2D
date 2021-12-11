@@ -10,17 +10,17 @@ namespace Core2D.Behaviors.DragAndDrop;
 
 public abstract class DefaultDropHandler : AvaloniaObject, IDropHandler
 {
-    public static Point GetPosition(object? sender, DragEventArgs e)
+    public static Point GetPosition(IControl? relativeTo, DragEventArgs e)
     {
-        var relativeTo = e.Source as IControl;
-        var point = e.GetPosition(relativeTo);
+        relativeTo ??= e.Source as IControl;
+        var point = relativeTo is { } ? e.GetPosition(relativeTo) : new Point();
         return point;
     }
 
-    public static Point GetPositionScreen(object? sender, DragEventArgs e)
+    public static Point GetPositionScreen(IControl? relativeTo, DragEventArgs e)
     {
-        var relativeTo = e.Source as IControl;
-        var point = e.GetPosition(relativeTo);
+        relativeTo ??= e.Source as IControl;
+        var point = relativeTo is { } ? e.GetPosition(relativeTo) : new Point();
         var visual = relativeTo as IVisual;
         var screenPoint = visual.PointToScreen(point).ToPoint(1.0);
         return screenPoint;
