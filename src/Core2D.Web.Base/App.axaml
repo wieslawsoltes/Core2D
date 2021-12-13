@@ -1,0 +1,29 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D;assembly=Core2D"
+             x:Class="Core2D.Web.Base.App"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
+             x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
+
+  <Application.Resources>
+    <FontFamily x:Key="UiFontFamily">Segoe UI, SF Pro Display, Noto Sans, Cantarel</FontFamily>
+    <FontFamily x:Key="CodeFontFamily">Consolas, Menlo, Monaco, Courier, Courier New, Andale Mono, DejaVu Sans Mono</FontFamily>
+    <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
+  </Application.Resources>
+
+  <Application.Styles>
+    <StyleInclude Source="avares://Core2D/Themes/FluentDark.axaml" />
+    <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
+    <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
+    <StyleInclude Source="avares://Core2D/Styles/Geometry.axaml" />
+    <StyleInclude Source="avares://Core2D/Styles/Icons.axaml" />
+    <StyleInclude Source="avares://Core2D/Styles/Dock.axaml" />
+    <StyleInclude Source="avares://Core2D/Controls/EditableItem.axaml" />
+    <StyleInclude Source="avares://Core2D/Controls/ToggleItem.axaml" />
+  </Application.Styles>
+
+  <Application.DataTemplates>
+    <local:ViewLocator />
+  </Application.DataTemplates>
+
+</Application>

@@ -61,7 +61,7 @@ public class App : Application
         return new AboutInfoViewModel(serviceProvider)
         {
             Title = "Core2D",
-            Version = $"{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}",
+            Version = $"{Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}",
             Description = "A multi-platform data driven 2D diagram editor.",
             Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
             License = "Licensed under the MIT License. See LICENSE file in the project root for full license information.",
