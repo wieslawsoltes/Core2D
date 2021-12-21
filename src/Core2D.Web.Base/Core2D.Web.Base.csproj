@@ -3,8 +3,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <AvaloniaVersion>0.10.11-rc.2</AvaloniaVersion>
-    <Core2DVersion>0.10.11-rc.2</Core2DVersion>
+    <AvaloniaVersion>0.10.11</AvaloniaVersion>
+    <Core2DVersion>0.10.11</Core2DVersion>
     <RootNamespace>Core2D.Web.Base</RootNamespace>
   </PropertyGroup>
   <ItemGroup>    
