@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Threading;
 using Core2D.Screenshot;
+using Core2D.Screenshot.Renderers;
 using Core2D.ViewModels.Editor;
 
 namespace Core2D.Util;
