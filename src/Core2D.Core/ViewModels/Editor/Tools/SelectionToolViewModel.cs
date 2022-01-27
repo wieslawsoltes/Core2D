@@ -16,10 +16,10 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
     public enum State { None, Selected }
     private State _currentState = State.None;
     private RectangleShapeViewModel? _rectangleShape;
-    private decimal _startX;
-    private decimal _startY;
-    private decimal _historyX;
-    private decimal _historyY;
+    private double _startX;
+    private double _startY;
+    private double _historyX;
+    private double _historyY;
     private IEnumerable<PointShapeViewModel>? _pointsCache;
     private IEnumerable<BaseShapeViewModel>? _shapesCache;
 
@@ -108,9 +108,9 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
-        decimal dx = sx - _startX;
-        decimal dy = sy - _startY;
+        var (sx, sy) = selection.TryToSnap(args);
+        double dx = sx - _startX;
+        double dy = sy - _startY;
 
         _startX = sx;
         _startY = sy;
@@ -168,7 +168,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         }
 
         (double x, double y) = args;
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.None:
@@ -350,11 +350,11 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
                 if (IsSelectionAvailable() && !isControl)
                 {
-                    (decimal sx, decimal sy) = selection.TryToSnap(args);
+                    var (sx, sy) = selection.TryToSnap(args);
                     if (_historyX != sx || _historyY != sy)
                     {
-                        decimal dx = sx - _historyX;
-                        decimal dy = sy - _historyY;
+                        double dx = sx - _historyX;
+                        double dy = sy - _historyY;
 
                         var previous = new
                         {

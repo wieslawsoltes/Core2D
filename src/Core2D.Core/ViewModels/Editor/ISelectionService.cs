@@ -9,7 +9,7 @@ namespace Core2D.ViewModels.Editor;
 
 public interface ISelectionService
 {
-    (decimal sx, decimal sy) TryToSnap(InputArgs args);
+    (double dx, double sy) TryToSnap(InputArgs args);
     void OnShowDecorator();
     void OnUpdateDecorator();
     void OnHideDecorator();

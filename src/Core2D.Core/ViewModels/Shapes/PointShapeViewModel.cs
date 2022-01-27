@@ -75,10 +75,10 @@ public partial class PointShapeViewModel : BaseShapeViewModel
     {
     }
 
-    public override void Move(ISelection? selection, decimal dx, decimal dy)
+    public override void Move(ISelection? selection, double dx, double dy)
     {
-        X = (double)((decimal)_x + dx);
-        Y = (double)((decimal)_y + dy);
+        X = (double)(_x + dx);
+        Y = (double)(_y + dy);
     }
 
     public override void GetPoints(IList<PointShapeViewModel> points)

@@ -57,7 +57,7 @@ public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
         }
     }
 
-    public override void Move(ISelection? selection, decimal dx, decimal dy)
+    public override void Move(ISelection? selection, double dx, double dy)
     {
         foreach (var connector in _connectors)
         {

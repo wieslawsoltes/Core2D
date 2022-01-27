@@ -9,14 +9,14 @@ namespace Core2D.ViewModels.Layout;
 
 public struct GroupBox
 {
-    public static void TransformPoint(ref MatrixD matrix, PointShapeViewModel point)
+    public static void TransformPoint(ref Matrix2 matrix, PointShapeViewModel point)
     {
-        var transformed = MatrixD.TransformPoint(matrix, new PointD((decimal)point.X, (decimal)point.Y));
-        point.X = (double)transformed.X;
-        point.Y = (double)transformed.Y;
+        var transformed = Matrix2.TransformPoint(matrix, new Point2(point.X, point.Y));
+        point.X = transformed.X;
+        point.Y = transformed.Y;
     }
 
-    public static void TransformPoints(ref MatrixD matrix, IList<PointShapeViewModel>? points)
+    public static void TransformPoints(ref Matrix2 matrix, IList<PointShapeViewModel>? points)
     {
         if (points is null || points.Count == 0)
         {
@@ -87,8 +87,8 @@ public struct GroupBox
             }
         }
 
-        Bounds.CenterX = (Bounds.Left + Bounds.Right) / 2m;
-        Bounds.CenterY = (Bounds.Top + Bounds.Bottom) / 2m;
+        Bounds.CenterX = (Bounds.Left + Bounds.Right) / 2.0;
+        Bounds.CenterY = (Bounds.Top + Bounds.Bottom) / 2.0;
         Bounds.Width = Math.Abs(Bounds.Right - Bounds.Left);
         Bounds.Height = Math.Abs(Bounds.Bottom - Bounds.Top);
     }
@@ -111,98 +111,98 @@ public struct GroupBox
         return new List<PointShapeViewModel>(points);
     }
 
-    public void Rotate(decimal sx, decimal sy, List<PointShapeViewModel> points, ref decimal rotateAngle)
+    public void Rotate(double sx, double sy, List<PointShapeViewModel> points, ref double rotateAngle)
     {
         var centerX = Bounds.CenterX;
         var centerY = Bounds.CenterY;
-        var p0 = new PointD(centerX, centerY);
-        var p1 = new PointD(sx, sy);
-        var angle = p0.AngleBetween(p1) - 270m;
+        var p0 = new Point2(centerX, centerY);
+        var p1 = new Point2(sx, sy);
+        var angle = p0.AngleBetween(p1) - 270.0;
         var delta = angle - rotateAngle;
-        var radians = delta * ((decimal)Math.PI / 180m);
-        var matrix = MatrixD.Rotation(radians, centerX, centerY);
+        var radians = delta * (Math.PI / 180.0);
+        var matrix = Matrix2.Rotation(radians, centerX, centerY);
         TransformPoints(ref matrix, points);
         rotateAngle = angle;
         Update();
     }
 
-    public void Translate(decimal dx, decimal dy, List<PointShapeViewModel> points)
+    public void Translate(double dx, double dy, List<PointShapeViewModel> points)
     {
-        decimal offsetX = dx;
-        decimal offsetY = dy;
-        var matrix = MatrixD.Translate(offsetX, offsetY);
+        double offsetX = dx;
+        double offsetY = dy;
+        var matrix = Matrix2.Translate(offsetX, offsetY);
         TransformPoints(ref matrix, points);
         Update();
     }
 
-    public void ScaleTop(decimal dy, List<PointShapeViewModel> points)
+    public void ScaleTop(double dy, List<PointShapeViewModel> points)
     {
         var oldSize = Bounds.Height;
         var newSize = oldSize - dy;
-        if (newSize <= 0m || oldSize <= 0m)
+        if (newSize <= 0.0 || oldSize <= 0.0)
         {
-            // TODO: Translate(0m, dy, points);
+            // TODO: Translate(0.0, dy, points);
             return;
         }
-        var scaleX = 1m;
+        var scaleX = 1.0;
         var scaleY = newSize / oldSize;
         var centerX = Bounds.CenterX;
         var centerY = Bounds.Bottom;
-        var matrix = MatrixD.ScaleAt(scaleX, scaleY, centerX, centerY);
+        var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
         TransformPoints(ref matrix, points);
         Update();
     }
 
-    public void ScaleBottom(decimal dy, List<PointShapeViewModel> points)
+    public void ScaleBottom(double dy, List<PointShapeViewModel> points)
     {
         var oldSize = Bounds.Height;
         var newSize = oldSize + dy;
-        if (newSize <= 0m || oldSize <= 0m)
+        if (newSize <= 0.0 || oldSize <= 0.0)
         {
-            // TODO: Translate(0m, dy, points);
+            // TODO: Translate(0.0, dy, points);
             return;
         }
-        var scaleX = 1m;
+        var scaleX = 1.0;
         var scaleY = newSize / oldSize;
         var centerX = Bounds.CenterX;
         var centerY = Bounds.Top;
-        var matrix = MatrixD.ScaleAt(scaleX, scaleY, centerX, centerY);
+        var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
         TransformPoints(ref matrix, points);
         Update();
     }
 
-    public void ScaleLeft(decimal dx, List<PointShapeViewModel> points)
+    public void ScaleLeft(double dx, List<PointShapeViewModel> points)
     {
         var oldSize = Bounds.Width;
         var newSize = oldSize - dx;
-        if (newSize <= 0m || oldSize <= 0m)
+        if (newSize <= 0.0 || oldSize <= 0.0)
         {
-            // TODO: Translate(dx, 0m, points);
+            // TODO: Translate(dx, 0.0, points);
             return;
         }
         var scaleX = newSize / oldSize;
-        var scaleY = 1m;
+        var scaleY = 1.0;
         var centerX = Bounds.Right;
         var centerY = Bounds.CenterY;
-        var matrix = MatrixD.ScaleAt(scaleX, scaleY, centerX, centerY);
+        var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
         TransformPoints(ref matrix, points);
         Update();
     }
 
-    public void ScaleRight(decimal dx, List<PointShapeViewModel> points)
+    public void ScaleRight(double dx, List<PointShapeViewModel> points)
     {
         var oldSize = Bounds.Width;
         var newSize = oldSize + dx;
-        if (newSize <= 0m || oldSize <= 0m)
+        if (newSize <= 0.0 || oldSize <= 0.0)
         {
-            // TODO: Translate(dx, 0m, points);
+            // TODO: Translate(dx, 0.0, points);
             return;
         }
         var scaleX = newSize / oldSize;
-        var scaleY = 1m;
+        var scaleY = 1.0;
         var centerX = Bounds.Left;
         var centerY = Bounds.CenterY;
-        var matrix = MatrixD.ScaleAt(scaleX, scaleY, centerX, centerY);
+        var matrix = Matrix2.ScaleAt(scaleX, scaleY, centerX, centerY);
         TransformPoints(ref matrix, points);
         Update();
     }

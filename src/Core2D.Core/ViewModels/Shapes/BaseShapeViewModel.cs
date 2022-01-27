@@ -115,7 +115,7 @@ public abstract partial class BaseShapeViewModel : ViewModelBase, IDataObject, I
         return null;
     }
 
-    public virtual void Move(ISelection? selection, decimal dx, decimal dy)
+    public virtual void Move(ISelection? selection, double dx, double dy)
     {
         throw new NotImplementedException();
     }

@@ -41,7 +41,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
         }
 
         (double x, double y) = args;
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:
@@ -131,7 +131,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:

@@ -1108,19 +1108,19 @@ public partial class ProjectEditorViewModel
         var style = (ShapeStyleViewModel?)selected?.Copy(null);
         var layer = Project.CurrentContainer?.CurrentLayer;
         var sx = Project.Options is not null && Project.Options.SnapToGrid 
-            ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) 
-            : (decimal)x;
+            ? PointUtil.Snap((double)x, (double)Project.Options.SnapX) 
+            : (double)x;
         var sy = Project.Options is not null && Project.Options.SnapToGrid 
-            ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) 
-            : (decimal)y;
+            ? PointUtil.Snap((double)y, (double)Project.Options.SnapY) 
+            : (double)y;
 
         var image = viewModelFactory?.CreateImageShape((double)sx, (double)sy, style, key);
         if (image is { })
         {
             if (image.BottomRight is { })
             {
-                image.BottomRight.X = (double)(sx + 320m);
-                image.BottomRight.Y = (double)(sy + 180m);
+                image.BottomRight.X = (double)(sx + 320.0);
+                image.BottomRight.Y = (double)(sy + 180.0);
             }
 
             Project.AddShape(layer, image);
@@ -1165,8 +1165,8 @@ public partial class ProjectEditorViewModel
             return;
         }
 
-        var sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
-        var sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
+        var sx = Project.Options.SnapToGrid ? PointUtil.Snap((double)x, (double)Project.Options.SnapX) : (double)x;
+        var sy = Project.Options.SnapToGrid ? PointUtil.Snap((double)y, (double)Project.Options.SnapY) : (double)y;
 
         try
         {
@@ -1274,8 +1274,8 @@ public partial class ProjectEditorViewModel
         var selected = Project.CurrentStyleLibrary?.Selected ?? viewModelFactory?.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var style = (ShapeStyleViewModel?)selected?.Copy(null);
         var layer = Project.CurrentContainer?.CurrentLayer;
-        var sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
-        var sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
+        var sx = Project.Options.SnapToGrid ? PointUtil.Snap((double)x, (double)Project.Options.SnapX) : (double)x;
+        var sy = Project.Options.SnapToGrid ? PointUtil.Snap((double)y, (double)Project.Options.SnapY) : (double)y;
         var g = viewModelFactory?.CreateGroupShape(ProjectEditorConfiguration.DefaultGroupName);
         if (g is null)
         {

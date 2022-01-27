@@ -40,7 +40,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:
@@ -162,7 +162,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:

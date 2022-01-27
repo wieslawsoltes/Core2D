@@ -44,7 +44,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:
@@ -186,7 +186,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:

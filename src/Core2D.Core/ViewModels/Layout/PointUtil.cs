@@ -6,14 +6,14 @@ namespace Core2D.ViewModels.Layout;
 
 public static class PointUtil
 {
-    public static decimal Snap(decimal value, decimal snap)
+    public static double Snap(double value, double snap)
     {
-        if (snap == 0m)
+        if (snap == 0.0)
         {
             return value;
         }
-        decimal c = value % snap;
-        decimal r = c >= snap / 2m ? value + snap - c : value - c;
+        var c = value % snap;
+        var r = c >= snap / 2.0 ? value + snap - c : value - c;
         return r;
     }
 
@@ -27,9 +27,9 @@ public static class PointUtil
         return (point1.Y > point2.Y) ? 1 : ((point1.Y < point2.Y) ? -1 : 0);
     }
 
-    public static void Rotate(PointShapeViewModel point, decimal radians, decimal centerX, decimal centerY, out decimal x, out decimal y)
+    public static void Rotate(PointShapeViewModel point, double radians, double centerX, double centerY, out double x, out double y)
     {
-        x = ((decimal)point.X - centerX) * (decimal)Math.Cos((double)radians) - ((decimal)point.Y - centerY) * (decimal)Math.Sin((double)radians) + centerX;
-        y = ((decimal)point.X - centerX) * (decimal)Math.Sin((double)radians) + ((decimal)point.Y - centerY) * (decimal)Math.Cos((double)radians) + centerY;
+        x = (point.X - centerX) * Math.Cos(radians) - (point.Y - centerY) * Math.Sin(radians) + centerX;
+        y = (point.X - centerX) * Math.Sin(radians) + (point.Y - centerY) * Math.Cos(radians) + centerY;
     }
 }

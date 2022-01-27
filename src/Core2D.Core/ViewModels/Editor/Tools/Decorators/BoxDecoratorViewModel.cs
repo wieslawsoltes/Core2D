@@ -37,9 +37,9 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
     [AutoNotify] private bool _isFilled;
     [AutoNotify] private LayerContainerViewModel? _layer;
     [AutoNotify] private IList<BaseShapeViewModel>? _shapes;
-    private readonly decimal _sizeLarge;
-    private readonly decimal _sizeSmall;
-    private readonly decimal _rotateDistance;
+    private readonly double _sizeLarge;
+    private readonly double _sizeSmall;
+    private readonly double _rotateDistance;
     private GroupBox _groupBox;
     private readonly ShapeStyleViewModel? _handleStyle;
     private readonly ShapeStyleViewModel? _boundsStyle;
@@ -60,9 +60,9 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
     private BaseShapeViewModel? _currentHandle;
     private List<PointShapeViewModel>? _points;
     private Mode _mode = Mode.None;
-    private decimal _startX;
-    private decimal _startY;
-    private decimal _rotateAngle = 270m;
+    private double _startX;
+    private double _startY;
+    private double _rotateAngle = 270.0;
     private bool _previousDrawPoints = true;
 
     public bool IsVisible => _isVisible;
@@ -71,10 +71,10 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
     {
         var viewModelFactory = serviceProvider.GetService<IViewModelFactory>();
 
-        _sizeLarge = 4m;
-        _sizeSmall = 4m;
-        _rotateDistance = -16.875m;
-            
+        _sizeLarge = 4.0;
+        _sizeSmall = 4.0;
+        _rotateDistance = -16.875;
+
         if (viewModelFactory is not null)
         {
             _handleStyle = viewModelFactory.CreateShapeStyle("Handle", 255, 0, 191, 255, 255, 255, 255, 255);
@@ -327,7 +327,7 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
             _rightHandle.BottomRight.Y = (double)(_groupBox.Bounds.CenterY + _sizeSmall);
         }
 
-        if (_groupBox.Bounds.Height <= 0m || _groupBox.Bounds.Width <= 0m)
+        if (_groupBox.Bounds.Height <= 0.0 || _groupBox.Bounds.Width <= 0.0)
         {
             if (_leftHandle != null) _leftHandle.State &= ~ShapeStateFlags.Visible;
             if (_rightHandle != null) _rightHandle.State &= ~ShapeStateFlags.Visible;
@@ -374,7 +374,7 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
             _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
             _currentHandle = null;
             _points = null;
-            _rotateAngle = 0m;
+            _rotateAngle = 0.0;
         }
         _isVisible = true;
 
@@ -417,7 +417,7 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
             _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
             _currentHandle = null;
             _points = null;
-            _rotateAngle = 0m;
+            _rotateAngle = 0.0;
         }
         _isVisible = false;
 
@@ -453,7 +453,7 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
         }
             
         (double x, double y) = args;
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        (double sx, double sy) = selection.TryToSnap(args);
 
         _mode = Mode.None;
         if (_currentHandle is { })
@@ -461,7 +461,7 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
             _currentHandle.Style = _currentHandle == _boundsHandle ? _boundsStyle : _handleStyle;
             _currentHandle = null;
             _points = null;
-            _rotateAngle = 0m;
+            _rotateAngle = 0.0;
             _layer?.RaiseInvalidateLayer();
         }
 
@@ -524,7 +524,7 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
                 _startX = sx;
                 _startY = sy;
                 _points = null;
-                _rotateAngle = 0m;
+                _rotateAngle = 0.0;
                 _layer?.RaiseInvalidateLayer();
                 return true;
             }
@@ -552,9 +552,9 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
 
         bool isProportionalResize = args.Modifier.HasFlag(ModifierFlags.Shift);
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
-        decimal dx = sx - _startX;
-        decimal dy = sy - _startY;
+        (double sx, double sy) = selection.TryToSnap(args);
+        double dx = sx - _startX;
+        double dy = sy - _startY;
         _startX = sx;
         _startY = sy;
 
@@ -591,8 +591,8 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
 
                     dx = (width * ratioHeight) - width;
 
-                    _groupBox.ScaleLeft(dx / 2m, _points);
-                    _groupBox.ScaleRight(-dx / 2m, _points);
+                    _groupBox.ScaleLeft(dx / 2.0, _points);
+                    _groupBox.ScaleRight(-dx / 2.0, _points);
 
                     _groupBox.ScaleTop(dy, _points);
                 }
@@ -612,8 +612,8 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
 
                     dx = (width * ratioHeight) - width;
 
-                    _groupBox.ScaleLeft(-dx / 2m, _points);
-                    _groupBox.ScaleRight(dx / 2m, _points);
+                    _groupBox.ScaleLeft(-dx / 2.0, _points);
+                    _groupBox.ScaleRight(dx / 2.0, _points);
 
                     _groupBox.ScaleBottom(dy, _points);
                 }
@@ -633,8 +633,8 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
 
                     dy = (height * ratioWidth) - height;
 
-                    _groupBox.ScaleTop(dy / 2m, _points);
-                    _groupBox.ScaleBottom(-dy / 2m, _points);
+                    _groupBox.ScaleTop(dy / 2.0, _points);
+                    _groupBox.ScaleBottom(-dy / 2.0, _points);
 
                     _groupBox.ScaleLeft(dx, _points);
                 }
@@ -654,8 +654,8 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
 
                     dy = (height * ratioWidth) - height;
 
-                    _groupBox.ScaleTop(-dy / 2m, _points);
-                    _groupBox.ScaleBottom(dy / 2m, _points);
+                    _groupBox.ScaleTop(-dy / 2.0, _points);
+                    _groupBox.ScaleBottom(dy / 2.0, _points);
 
                     _groupBox.ScaleRight(dx, _points);
                 }

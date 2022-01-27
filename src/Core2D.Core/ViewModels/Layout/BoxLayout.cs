@@ -24,12 +24,12 @@ public static class BoxLayout
             case StackMode.Horizontal:
             {
                 boxes.Sort(ShapeBox.CompareLeft);
-                decimal offset = boxes[0].Bounds.Left + boxes[0].Bounds.Width;
+                var offset = boxes[0].Bounds.Left + boxes[0].Bounds.Width;
                 for (int i = 1; i <= boxes.Count - 1; i++)
                 {
                     var box = boxes[i];
-                    decimal dx = offset - box.Bounds.Left;
-                    decimal dy = 0m;
+                    var dx = offset - box.Bounds.Left;
+                    var dy = 0.0;
                     box.MoveByWithHistory(dx, dy, history);
                     offset += box.Bounds.Width;
                 }
@@ -38,12 +38,12 @@ public static class BoxLayout
             case StackMode.Vertical:
             {
                 boxes.Sort(ShapeBox.CompareTop);
-                decimal offset = boxes[0].Bounds.Top + boxes[0].Bounds.Height;
+                var offset = boxes[0].Bounds.Top + boxes[0].Bounds.Height;
                 for (int i = 1; i <= boxes.Count - 1; i++)
                 {
                     var box = boxes[i];
-                    decimal dx = 0m;
-                    decimal dy = offset - box.Bounds.Top;
+                    var dx = 0.0;
+                    var dy = offset - box.Bounds.Top;
                     box.MoveByWithHistory(dx, dy, history);
                     offset += box.Bounds.Height;
                 }
@@ -62,8 +62,8 @@ public static class BoxLayout
 
         var boxes = groupBox.Boxes.ToList();
 
-        decimal sw = 0m;
-        decimal sh = 0m;
+        var sw = 0.0;
+        var sh = 0.0;
 
         foreach (var box in boxes)
         {
@@ -71,20 +71,20 @@ public static class BoxLayout
             sh += box.Bounds.Height;
         }
 
-        decimal gaph = (groupBox.Bounds.Width - sw) / (groupBox.Boxes.Length - 1);
-        decimal gapv = (groupBox.Bounds.Height - sh) / (groupBox.Boxes.Length - 1);
+        var gaph = (groupBox.Bounds.Width - sw) / (groupBox.Boxes.Length - 1);
+        var gapv = (groupBox.Bounds.Height - sh) / (groupBox.Boxes.Length - 1);
 
         switch (mode)
         {
             case DistributeMode.Horizontal:
             {
                 boxes.Sort(ShapeBox.CompareLeft);
-                decimal offset = boxes[0].Bounds.Left + boxes[0].Bounds.Width + gaph;
+                var offset = boxes[0].Bounds.Left + boxes[0].Bounds.Width + gaph;
                 for (int i = 1; i <= boxes.Count - 2; i++)
                 {
                     var box = boxes[i];
-                    decimal dx = offset - box.Bounds.Left;
-                    decimal dy = 0m;
+                    var dx = offset - box.Bounds.Left;
+                    var dy = 0.0;
                     box.MoveByWithHistory(dx, dy, history);
                     offset += box.Bounds.Width + gaph;
                 }
@@ -93,12 +93,12 @@ public static class BoxLayout
             case DistributeMode.Vertical:
             {
                 boxes.Sort(ShapeBox.CompareTop);
-                decimal offset = boxes[0].Bounds.Top + boxes[0].Bounds.Height + gapv;
+                var offset = boxes[0].Bounds.Top + boxes[0].Bounds.Height + gapv;
                 for (int i = 1; i <= boxes.Count - 2; i++)
                 {
                     var box = boxes[i];
-                    decimal dx = 0m;
-                    decimal dy = offset - box.Bounds.Top;
+                    var dx = 0.0;
+                    var dy = offset - box.Bounds.Top;
                     box.MoveByWithHistory(dx, dy, history);
                     offset += box.Bounds.Height + gapv;
                 }
@@ -117,8 +117,8 @@ public static class BoxLayout
 
         foreach (var box in groupBox.Boxes)
         {
-            decimal dx = 0m;
-            decimal dy = 0m;
+            var dx = 0.0;
+            var dy = 0.0;
 
             switch (mode)
             {
@@ -126,7 +126,7 @@ public static class BoxLayout
                     dx = groupBox.Bounds.Left - box.Bounds.Left;
                     break;
                 case AlignMode.Centered:
-                    dx = groupBox.Bounds.CenterX - ((box.Bounds.Left + box.Bounds.Right) / 2m);
+                    dx = groupBox.Bounds.CenterX - ((box.Bounds.Left + box.Bounds.Right) / 2.0);
                     break;
                 case AlignMode.Right:
                     dx = groupBox.Bounds.Right - box.Bounds.Right;
@@ -135,14 +135,14 @@ public static class BoxLayout
                     dy = groupBox.Bounds.Top - box.Bounds.Top;
                     break;
                 case AlignMode.Center:
-                    dy = groupBox.Bounds.CenterY - ((box.Bounds.Top + box.Bounds.Bottom) / 2m);
+                    dy = groupBox.Bounds.CenterY - ((box.Bounds.Top + box.Bounds.Bottom) / 2.0);
                     break;
                 case AlignMode.Bottom:
                     dy = groupBox.Bounds.Bottom - box.Bounds.Bottom;
                     break;
             }
 
-            if (dx != 0m || dy != 0m)
+            if (dx != 0.0 || dy != 0.0)
             {
                 box.MoveByWithHistory(dx, dy, history);
             }
@@ -163,13 +163,13 @@ public static class BoxLayout
         {
             case FlipMode.Horizontal:
             {
-                var previous = new List<(PointShapeViewModel point, decimal x)>();
-                var next = new List<(PointShapeViewModel point, decimal x)>();
+                var previous = new List<(PointShapeViewModel point, double x)>();
+                var next = new List<(PointShapeViewModel point, double x)>();
 
                 foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
                 {
-                    decimal x = groupBox.Bounds.Left + (groupBox.Bounds.Width + groupBox.Bounds.Left) - (decimal)point.X;
-                    previous.Add((point, (decimal)point.X));
+                    double x = groupBox.Bounds.Left + (groupBox.Bounds.Width + groupBox.Bounds.Left) - (double)point.X;
+                    previous.Add((point, (double)point.X));
                     next.Add((point, x));
                     point.X = (double)x;
                 }
@@ -179,13 +179,13 @@ public static class BoxLayout
                 break;
             case FlipMode.Vertical:
             {
-                var previous = new List<(PointShapeViewModel point, decimal y)>();
-                var next = new List<(PointShapeViewModel point, decimal y)>();
+                var previous = new List<(PointShapeViewModel point, double y)>();
+                var next = new List<(PointShapeViewModel point, double y)>();
 
                 foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
                 {
-                    decimal y = groupBox.Bounds.Top + (groupBox.Bounds.Height + groupBox.Bounds.Top) - (decimal)point.Y;
-                    previous.Add((point, (decimal)point.Y));
+                    double y = groupBox.Bounds.Top + (groupBox.Bounds.Height + groupBox.Bounds.Top) - (double)point.Y;
+                    previous.Add((point, (double)point.Y));
                     next.Add((point, y));
                     point.Y = (double)y;
                 }
@@ -196,7 +196,7 @@ public static class BoxLayout
         }
     }
 
-    public static void Rotate(IEnumerable<BaseShapeViewModel> shapes, decimal angle, IHistory? history)
+    public static void Rotate(IEnumerable<BaseShapeViewModel> shapes, double angle, IHistory? history)
     {
         var groupBox = new GroupBox(shapes.ToList());
         if (groupBox.Boxes.Length <= 0)
@@ -206,17 +206,17 @@ public static class BoxLayout
 
         var boxes = groupBox.Boxes.ToList();
 
-        var previous = new List<(PointShapeViewModel point, decimal x, decimal y)>();
-        var next = new List<(PointShapeViewModel point, decimal x, decimal y)>();
+        var previous = new List<(PointShapeViewModel point, double x, double y)>();
+        var next = new List<(PointShapeViewModel point, double x, double y)>();
 
-        var radians = angle * (decimal)Math.PI / 180m;
+        var radians = angle * (double)Math.PI / 180.0;
         var centerX = groupBox.Bounds.CenterX;
         var centerY = groupBox.Bounds.CenterY;
 
         foreach (var point in boxes.SelectMany(box => box.Points).Distinct())
         {
             PointUtil.Rotate(point, radians, centerX, centerY, out var x, out var y);
-            previous.Add((point, (decimal)point.X, (decimal)point.Y));
+            previous.Add((point, (double)point.X, (double)point.Y));
             next.Add((point, x, y));
             point.X = (double)x;
             point.Y = (double)y;

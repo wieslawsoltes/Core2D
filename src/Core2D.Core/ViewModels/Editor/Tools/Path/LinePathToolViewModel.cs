@@ -37,7 +37,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:
@@ -112,7 +112,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:

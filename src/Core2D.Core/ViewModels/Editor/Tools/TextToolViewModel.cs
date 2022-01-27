@@ -40,7 +40,7 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:
@@ -123,7 +123,7 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:

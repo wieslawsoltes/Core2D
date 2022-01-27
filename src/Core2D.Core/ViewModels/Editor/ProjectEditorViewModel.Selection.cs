@@ -29,18 +29,18 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         throw new NotImplementedException();
     }
 
-    public (decimal sx, decimal sy) TryToSnap(InputArgs args)
+    public (double dx, double sy) TryToSnap(InputArgs args)
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is { Options: { SnapToGrid: true } })
         {
             return (
-                PointUtil.Snap((decimal)args.X, (decimal)project.Options.SnapX),
-                PointUtil.Snap((decimal)args.Y, (decimal)project.Options.SnapY));
+                PointUtil.Snap((double)args.X, (double)project.Options.SnapX),
+                PointUtil.Snap((double)args.Y, (double)project.Options.SnapY));
         }
         else
         {
-            return ((decimal)args.X, (decimal)args.Y);
+            return ((double)args.X, (double)args.Y);
         }
     }
 

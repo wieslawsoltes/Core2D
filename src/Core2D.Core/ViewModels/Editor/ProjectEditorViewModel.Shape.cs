@@ -97,7 +97,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         var sources = project.SelectedShapes;
         if (sources is { })
         {
-            BoxLayout.Rotate(sources, (decimal)value, project.History);
+            BoxLayout.Rotate(sources, (double)value, project.History);
             ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
         }
     }
@@ -148,8 +148,8 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         }
         MoveBy(
             project.SelectedShapes,
-            0m,
-            project.Options.SnapToGrid ? (decimal)-project.Options.SnapY : -1m);
+            0,
+            project.Options.SnapToGrid ? (double)-project.Options.SnapY : -1);
     }
 
     public void OnMoveDownSelected()
@@ -166,8 +166,8 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         }
         MoveBy(
             project.SelectedShapes,
-            0m,
-            project.Options.SnapToGrid ? (decimal)project.Options.SnapY : 1m);
+            0,
+            project.Options.SnapToGrid ? (double)project.Options.SnapY : 1);
     }
 
     public void OnMoveLeftSelected()
@@ -184,8 +184,8 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         }
         MoveBy(
             project.SelectedShapes,
-            project.Options.SnapToGrid ? (decimal)-project.Options.SnapX : -1m,
-            0m);
+            project.Options.SnapToGrid ? (double)-project.Options.SnapX : -1,
+            0);
     }
 
     public void OnMoveRightSelected()
@@ -202,8 +202,8 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         }
         MoveBy(
             project.SelectedShapes,
-            project.Options.SnapToGrid ? (decimal)project.Options.SnapX : 1m,
-            0m);
+            project.Options.SnapToGrid ? (double)project.Options.SnapX : 1,
+            0);
     }
 
     public void OnStackHorizontallySelected()
@@ -1287,7 +1287,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         }
     }
 
-    public void MoveShapesBy(IEnumerable<BaseShapeViewModel> shapes, decimal dx, decimal dy)
+    public void MoveShapesBy(IEnumerable<BaseShapeViewModel> shapes, double dx, double dy)
     {
         foreach (var shape in shapes)
         {
@@ -1299,7 +1299,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         ServiceProvider.GetService<ISelectionService>()?.OnUpdateDecorator();
     }
 
-    private void MoveShapesByWithHistory(List<BaseShapeViewModel>? shapes, decimal dx, decimal dy)
+    private void MoveShapesByWithHistory(List<BaseShapeViewModel>? shapes, double dx, double dy)
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
@@ -1326,7 +1326,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         });
     }
 
-    public void MoveBy(ISet<BaseShapeViewModel>? shapes, decimal dx, decimal dy)
+    public void MoveBy(ISet<BaseShapeViewModel>? shapes, double dx, double dy)
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)

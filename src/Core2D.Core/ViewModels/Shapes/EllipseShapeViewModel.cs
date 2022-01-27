@@ -85,7 +85,7 @@ public partial class EllipseShapeViewModel : BaseShapeViewModel
         _bottomRight?.Bind(dataFlow, db, record);
     }
 
-    public override void Move(ISelection? selection, decimal dx, decimal dy)
+    public override void Move(ISelection? selection, double dx, double dy)
     {
         if (_topLeft is null || _bottomRight is null)
         {

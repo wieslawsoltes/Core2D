@@ -85,7 +85,7 @@ public partial class LineShapeViewModel : BaseShapeViewModel
         _end?.Bind(dataFlow, db, record);
     }
 
-    public override void Move(ISelection? selection, decimal dx, decimal dy)
+    public override void Move(ISelection? selection, double dx, double dy)
     {
         if (_start is null || _end is null)
         {

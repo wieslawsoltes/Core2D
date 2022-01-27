@@ -19,8 +19,8 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
     private Mode _currentMode = Mode.Rectangle;
     private EllipseShapeViewModel? _ellipse;
     private EllipseSelection? _selection;
-    private decimal _centerX;
-    private decimal _centerY;
+    private double _centerX;
+    private double _centerY;
 
     public string Title => "Ellipse";
 
@@ -33,9 +33,9 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    private static void CircleConstrain(PointShapeViewModel tl, PointShapeViewModel br, decimal cx, decimal cy, decimal px, decimal py)
+    private static void CircleConstrain(PointShapeViewModel tl, PointShapeViewModel br, double cx, double cy, double px, double py)
     {
-        decimal r = Max(Abs(cx - px), Abs(cy - py));
+        double r = Max(Abs(cx - px), Abs(cy - py));
         tl.X = (double)(cx - r);
         tl.Y = (double)(cy - r);
         br.X = (double)(cx + r);
@@ -54,7 +54,7 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:
@@ -145,7 +145,7 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:

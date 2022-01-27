@@ -3,7 +3,7 @@ namespace Core2D.Model;
 
 public interface ISelectable
 {
-    void Move(ISelection? selection, decimal dx, decimal dy);
+    void Move(ISelection? selection, double dx, double dy);
 
     void Select(ISelection? selection);
 

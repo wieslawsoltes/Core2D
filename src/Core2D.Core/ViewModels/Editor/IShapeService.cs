@@ -44,8 +44,8 @@ public interface IShapeService
     void BringForward(BaseShapeViewModel source);
     void SendBackward(BaseShapeViewModel source);
     void SendToBack(BaseShapeViewModel source);
-    void MoveShapesBy(IEnumerable<BaseShapeViewModel> shapes, decimal dx, decimal dy);
-    void MoveBy(ISet<BaseShapeViewModel>? shapes, decimal dx, decimal dy);
+    void MoveShapesBy(IEnumerable<BaseShapeViewModel> shapes, double dx, double dy);
+    void MoveBy(ISet<BaseShapeViewModel>? shapes, double dx, double dy);
     void MoveItem(LibraryViewModel libraryViewModel, int sourceIndex, int targetIndex);
     void SwapItem(LibraryViewModel libraryViewModel, int sourceIndex, int targetIndex);
     void InsertItem(LibraryViewModel libraryViewModel, ViewModelBase item, int index);

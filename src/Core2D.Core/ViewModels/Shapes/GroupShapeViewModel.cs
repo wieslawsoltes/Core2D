@@ -74,7 +74,7 @@ public partial class GroupShapeViewModel : ConnectableShapeViewModel
         base.Bind(dataFlow, db, record);
     }
 
-    public override void Move(ISelection? selection, decimal dx, decimal dy)
+    public override void Move(ISelection? selection, double dx, double dy)
     {
         foreach (var shape in _shapes)
         {
