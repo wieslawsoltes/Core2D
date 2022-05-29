@@ -15,9 +15,9 @@
     <MicrosoftNETFrameworkReferenceAssembliesVersion>1.0.2</MicrosoftNETFrameworkReferenceAssembliesVersion>
     <SystemDrawingCommonVersion>5.0.2</SystemDrawingCommonVersion>
     <SystemTextJsonVersion>5.0.2</SystemTextJsonVersion>
-    <AutofacVersion>6.3.0</AutofacVersion>
+    <AutofacVersion>6.4.0</AutofacVersion>
     <CsvHelperVersion>27.2.1</CsvHelperVersion>
-    <DocumentFormatOpenXmlVersion>2.14.0</DocumentFormatOpenXmlVersion>
+    <DocumentFormatOpenXmlVersion>2.16.0</DocumentFormatOpenXmlVersion>
     <MicrosoftCodeAnalysisCSharpScriptingVersion>4.0.0-4.final</MicrosoftCodeAnalysisCSharpScriptingVersion>
     <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
     <NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
