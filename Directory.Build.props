@@ -30,13 +30,13 @@
     <XUnitVersion>2.4.1</XUnitVersion>
     <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
-    <SkiaSharpVersion>2.88.0-preview.178</SkiaSharpVersion>
-    <SvgSkiaVersion>0.5.13</SvgSkiaVersion>
-    <AvaloniaVersion>0.10.13</AvaloniaVersion>
+    <SkiaSharpVersion>2.88.0</SkiaSharpVersion>
+    <SvgSkiaVersion>0.5.14</SvgSkiaVersion>
+    <AvaloniaVersion>0.10.14</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>0.10.9</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>0.10.13.3</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>10.13.0</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>0.10.13</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>0.10.13</DockAvaloniaVersion>
+    <AvaloniaXamlBehaviorsVersion>0.10.14</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>10.14.0</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>0.10.14</ThemeEditorControlsColorPickerVersion>
+    <DockAvaloniaVersion>0.10.14</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
