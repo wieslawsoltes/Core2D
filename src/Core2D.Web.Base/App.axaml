@@ -3,6 +3,7 @@
              xmlns:local="clr-namespace:Core2D;assembly=Core2D"
              x:Class="Core2D.Web.Base.App"
              xmlns:vme="using:Core2D.ViewModels.Editor"
+             Name="Core2D"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
 
   <Application.Resources>
