@@ -25,7 +25,7 @@
     </TabItem>
     <TabItem Header="Segments">
       <ListBox Items="{Binding Segments}">
-        <ListBox.DataTemplates>
+        <ListBox.ItemTemplate>
           <DataTemplate>
             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                        Background="Transparent">
@@ -34,7 +34,7 @@
               </i:Interaction.Behaviors>
             </TextBlock>
           </DataTemplate>
-        </ListBox.DataTemplates>
+        </ListBox.ItemTemplate>
       </ListBox>
     </TabItem>
   </TabControl>
