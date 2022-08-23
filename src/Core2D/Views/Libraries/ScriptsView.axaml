@@ -6,7 +6,6 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
-             xmlns:scripting="using:Core2D.Views.Scripting"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Scripting"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
@@ -112,7 +111,9 @@
                   Background="Transparent" 
                   Height="6"
                   Grid.Row="1" />
+    <!--
     <scripting:ScriptView DataContext="{Binding CurrentScript}"
                           Grid.Row="2" />
+    -->
   </Grid>
 </UserControl>

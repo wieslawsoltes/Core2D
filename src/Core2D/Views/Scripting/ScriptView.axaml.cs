@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿#if false
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using AvaloniaEdit;
 using AvaloniaEdit.Indentation.CSharp;
@@ -22,3 +23,4 @@ public class ScriptView : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 }
+#endif

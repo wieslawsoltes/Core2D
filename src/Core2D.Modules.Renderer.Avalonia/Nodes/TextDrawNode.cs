@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System.Globalization;
 using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using Core2D.Model.Style;
@@ -17,7 +18,8 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
     public A.Rect Rect { get; set; }
     public A.Point Origin { get; set; }
     public AM.Typeface Typeface { get; set; }
-    public AM.FormattedText FormattedText { get; set; }
+    public AM.FormattedText? FormattedText { get; set; }
+    public AM.Geometry? Geometry { get; set; }
     public string BoundText { get; set; }
 
     public TextDrawNode()
@@ -81,17 +83,27 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
             _ => AM.TextAlignment.Left,
         };
 
-        FormattedText = new AM.FormattedText()
+        if (Stroke is null)
         {
-            Typeface = Typeface,
-            Text = BoundText,
-            TextAlignment = textAlignment,
-            TextWrapping = AM.TextWrapping.NoWrap,
-            FontSize = Style.TextStyle.FontSize,
-            Constraint = Rect.Size
-        };
+            UpdateStyle();
+        }
+        
+        FormattedText = new AM.FormattedText(
+            BoundText,
+            CultureInfo.GetCultureInfo("en-us"),
+            AM.FlowDirection.LeftToRight,
+            Typeface,
+            Style.TextStyle.FontSize,
+            Stroke.Brush
+        );
 
-        var size = FormattedText.Bounds.Size;
+        //FormattedText.MaxTextWidth = Rect.Size.Width;
+        //FormattedText.MaxTextHeight = Rect.Size.Height;
+        FormattedText.TextAlignment = textAlignment;
+        FormattedText.Trimming = AM.TextTrimming.None;
+        // TODO: AM.TextWrapping.NoWrap
+
+        var size = new A.Size(FormattedText.Width, FormattedText.Height);
         var rect = Rect;
 
         // NOTE: Using AM.TextAlignment
@@ -111,14 +123,17 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         };
 
         Origin = new A.Point(originX, originY);
+
+        Geometry = FormattedText.BuildGeometry(Origin);
     }
 
     public override void OnDraw(object dc, double zoom)
     {
         var context = dc as AP.IDrawingContextImpl;
-        if (FormattedText is { })
+        if (context is { } && Geometry is { })
         {
-            context.DrawText(Stroke.Brush, Origin, FormattedText.PlatformImpl);
+            // context.DrawGeometry(Text.IsFilled ? Fill : null, Text.IsStroked ? Stroke : null, Geometry.PlatformImpl);
+            context.DrawGeometry(Stroke.Brush, null, Geometry.PlatformImpl);
         }
     }
 }

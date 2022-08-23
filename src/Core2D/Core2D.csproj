@@ -32,7 +32,7 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" Condition="'$(Configuration)' == 'Debug'" />
     <PackageReference Include="Avalonia.Skia" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaAvaloniaEditVersion)" />
+    <!--<PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaAvaloniaEditVersion)" />-->
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="$(AvaloniaXamlBehaviorsVersion)" />
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="$(AvaloniaControlsPanAndZoomVersion)" />
     <PackageReference Include="ThemeEditor.Controls.ColorPicker" Version="$(ThemeEditorControlsColorPickerVersion)" />
@@ -44,6 +44,12 @@
     <ProjectReference Include="..\Core2D.Screenshot\Core2D.Screenshot.csproj" />
     <ProjectReference Include="..\Core2D.Core\Core2D.Core.csproj" />
     <ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Scripting" />
+    <AvaloniaXaml Remove="Views\Scripting\ScriptView.axaml" />
+    <Compile Remove="Views\Scripting\ScriptView.axaml.cs" />
   </ItemGroup>
 
 </Project>
