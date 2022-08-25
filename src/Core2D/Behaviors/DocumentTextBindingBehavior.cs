@@ -1,5 +1,4 @@
-﻿#if false
-#nullable enable
+﻿#nullable enable
 using System;
 using Avalonia;
 using Avalonia.Xaml.Interactivity;
@@ -60,4 +59,3 @@ public class DocumentTextBindingBehavior : Behavior<TextEditor>
         }
     }
 }
-#endif
