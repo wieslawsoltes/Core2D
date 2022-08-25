@@ -33,7 +33,7 @@
     <SkiaSharpVersion>2.88.1-preview.108</SkiaSharpVersion>
     <SvgSkiaVersion>0.6.0-preview1</SvgSkiaVersion>
     <AvaloniaVersion>11.0.0-preview1</AvaloniaVersion>
-    <AvaloniaAvaloniaEditVersion>0.10.12.2</AvaloniaAvaloniaEditVersion>
+    <AvaloniaAvaloniaEditVersion>11.0.0-preview1</AvaloniaAvaloniaEditVersion>
     <AvaloniaXamlBehaviorsVersion>11.0.0-preview1</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>11.0.0-preview1</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>11.0.0-preview1</ThemeEditorControlsColorPickerVersion>
