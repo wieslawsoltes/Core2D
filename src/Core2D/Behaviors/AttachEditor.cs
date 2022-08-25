@@ -13,9 +13,9 @@ namespace Core2D.Behaviors;
 public class AttachEditor
 {
     private readonly Control _control;
-    private AvaloniaInputSource _inputSource;
-    private ProjectEditorInputTarget _inputTarget;
-    private InputProcessor _inputProcessor;
+    private AvaloniaInputSource? _inputSource;
+    private ProjectEditorInputTarget? _inputTarget;
+    private InputProcessor? _inputProcessor;
 
     public AttachEditor(Control control)
     {
@@ -58,7 +58,7 @@ public class AttachEditor
         var presenterViewEditor = _control.FindControl<Control>("RenderViewEditor");
         var zoomBorder = _control.FindControl<ZoomBorder>("PageZoomBorder");
 
-        if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
+        if (projectEditor.CanvasPlatform is { } canvasPlatform)
         {
             canvasPlatform.InvalidateControl = () =>
             {

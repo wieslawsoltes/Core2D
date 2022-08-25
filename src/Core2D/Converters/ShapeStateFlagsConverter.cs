@@ -11,7 +11,7 @@ public class ShapeStateFlagsConverter : IValueConverter
 {
     public static ShapeStateFlagsConverter Instance = new();
 
-    public object? Convert(object value, Type targetType, object? parameter, CultureInfo culture)
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is ShapeStateFlags flags && parameter is ShapeStateFlags flag)
         {

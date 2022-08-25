@@ -24,7 +24,7 @@ public class AvaloniaImageImporter : IImageImporter
         return _serviceProvider?.GetService<Window>();
     }
 
-    public async Task<string> GetImageKeyAsync()
+    public async Task<string?> GetImageKeyAsync()
     {
         try
         {

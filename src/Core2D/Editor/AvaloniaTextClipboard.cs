@@ -7,17 +7,20 @@ namespace Core2D.Editor;
 
 public sealed class AvaloniaTextClipboard : ITextClipboard
 {
-    Task ITextClipboard.SetText(string text)
+    async Task ITextClipboard.SetText(string? text)
     {
-        return Application.Current.Clipboard.SetTextAsync(text);
+        if (text is { })
+        {
+            await Application.Current?.Clipboard?.SetTextAsync(text);
+        }
     }
 
-    private async Task<string> GetTextAsync()
+    private async Task<string?> GetTextAsync()
     {
-        return await Application.Current.Clipboard.GetTextAsync();
+        return await Application.Current?.Clipboard?.GetTextAsync();
     }
 
-    Task<string> ITextClipboard.GetText()
+    Task<string?> ITextClipboard.GetText()
     {
         return GetTextAsync();
     }

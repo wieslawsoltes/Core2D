@@ -40,8 +40,8 @@ public class EditableItem : TemplatedControl
     {
         base.OnApplyTemplate(e);
 
-        var textBox = e.NameScope.Find<TextBox?>("PART_TextBox");
-        var textBlock = e.NameScope.Find<TextBlock?>("PART_TextBlock");
+        var textBox = e.NameScope.Find<TextBox>("PART_TextBox");
+        var textBlock = e.NameScope.Find<TextBlock>("PART_TextBlock");
 
         if (textBox is { })
         {
