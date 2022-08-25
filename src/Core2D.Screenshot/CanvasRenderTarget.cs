@@ -17,7 +17,7 @@ public class CanvasRenderTarget : IRenderTarget
         _dpi = dpi;
     }
 
-    public IDrawingContextImpl CreateDrawingContext(IVisualBrushRenderer visualBrushRenderer)
+    public IDrawingContextImpl CreateDrawingContext(IVisualBrushRenderer? visualBrushRenderer)
     {
         return DrawingContextHelper.WrapSkiaCanvas(_canvas, new Vector(_dpi, _dpi), visualBrushRenderer);
     }
