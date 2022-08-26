@@ -12,7 +12,7 @@ public class ContainerToTypeStringConverter : IMultiValueConverter
 {
     public static ContainerToTypeStringConverter Instance = new();
 
-    public object? Convert(IList<object>? values, Type targetType, object? parameter, CultureInfo culture)
+    public object? Convert(IList<object?>? values, Type targetType, object? parameter, CultureInfo culture)
     {
         if (values?.Count == 2 && values[0] is string name && values[1] is BaseContainerViewModel container)
         {

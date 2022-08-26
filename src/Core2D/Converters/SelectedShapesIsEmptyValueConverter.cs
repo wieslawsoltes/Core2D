@@ -17,7 +17,7 @@ public class SelectedShapesIsEmptyValueConverter : IValueConverter
         return value is null || (value is ISet<BaseShapeViewModel> items && items.Count == 0);
     }
 
-    public object? ConvertBack(object value, Type targetType, object? parameter, CultureInfo culture)
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

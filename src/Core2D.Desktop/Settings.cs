@@ -12,7 +12,6 @@ public class Settings
 #if ENABLE_DIRECT2D1
     public bool UseDirect2D1 { get; set; }
 #endif
-    public bool EnableMultiTouch { get; set; } = true;
     public bool UseGpu { get; set; } = true;
     public bool AllowEglInitialization { get; set; } = true;
     public bool UseWgl { get; set; }

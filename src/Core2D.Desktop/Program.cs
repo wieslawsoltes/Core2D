@@ -172,14 +172,12 @@ internal static class Program
 
             builder.With(new X11PlatformOptions
             {
-                EnableMultiTouch = settings.EnableMultiTouch,
                 UseGpu = settings.UseGpu,
                 UseDeferredRendering = settings.UseDeferredRendering
             });
 
             builder.With(new Win32PlatformOptions
             {
-                EnableMultitouch = settings.EnableMultiTouch,
                 AllowEglInitialization = settings.AllowEglInitialization,
                 UseWgl = settings.UseWgl,
                 UseDeferredRendering = settings.UseDeferredRendering,
@@ -208,7 +206,7 @@ internal static class Program
 
             if (settings.CreateHeadlessScreenshots)
             {
-                builder.UseHeadless(false)
+                builder.UseHeadless(new AvaloniaHeadlessPlatformOptions { UseCompositor = true, UseHeadlessDrawing = false})
                     .AfterSetup(async _ => await CreateScreenshots(settings.ScreenshotExtension, settings.ScreenshotWidth, settings.ScreenshotHeight))
                     .StartWithClassicDesktopLifetime(args);
                 return;
@@ -216,7 +214,7 @@ internal static class Program
 
             if (settings.UseHeadless)
             {
-                builder.UseHeadless(settings.UseHeadlessDrawing);
+                builder.UseHeadless(new AvaloniaHeadlessPlatformOptions { UseCompositor = true, UseHeadlessDrawing = settings.UseHeadlessDrawing});
             }
 
             if (settings.UseHeadlessVnc)

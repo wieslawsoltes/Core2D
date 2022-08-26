@@ -52,11 +52,11 @@
               HorizontalAlignment="Stretch"
               Margin="{DynamicResource ContentMargin}"
               Grid.Row="1">
-      <ComboBox.DataTemplates>
+      <ComboBox.ItemTemplate>
         <DataTemplate>
           <TextBlock Text="{Binding Name}" />
         </DataTemplate>
-      </ComboBox.DataTemplates>
+      </ComboBox.ItemTemplate>
     </ComboBox>
     <StackPanel Grid.Row="2" 
                 Orientation="Horizontal" 
