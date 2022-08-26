@@ -111,9 +111,7 @@
                   Background="Transparent" 
                   Height="6"
                   Grid.Row="1" />
-    <!--
     <scripting:ScriptView DataContext="{Binding CurrentScript}"
                           Grid.Row="2" />
-    -->
   </Grid>
 </UserControl>
