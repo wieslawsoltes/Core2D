@@ -20,7 +20,7 @@ public static class Capture
     {
         async void Handler(object? sender, KeyEventArgs args)
         {
-            if (args.Key == Key.F6)
+            if (gesture.Matches(args))
             {
                 await Save(root);
             }
