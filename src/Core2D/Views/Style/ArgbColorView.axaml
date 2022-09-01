@@ -38,7 +38,7 @@
         <Border Background="{DynamicResource SystemChromeMediumColor}" 
                 CornerRadius="0">
           <cp:ColorPicker x:Name="ArgbColorPicker"
-                          Color="{Binding Value, Mode=TwoWay, Converter={x:Static converters:HexToColorConverter.Instance}}" 
+                          Color="{Binding Value, Mode=TwoWay, Converter={x:Static converters:UInt32ToColorConverter.Instance}}" 
                           Margin="8">
             <cp:ColorPicker.Styles>
               <Style Selector="cp|ColorPicker /template/ Grid#PART_PickerGrid">
