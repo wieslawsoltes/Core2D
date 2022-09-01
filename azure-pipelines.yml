@@ -11,7 +11,7 @@ resources:
 variables:
   BuildConfiguration: 'Release'
   BuildPlatform: 'Any CPU'
-  PublishFramework: 'net6.0'
+  PublishFramework: 'net7.0'
   PublishProject: 'Core2D.Desktop'
   PublishRuntime: ''
 
