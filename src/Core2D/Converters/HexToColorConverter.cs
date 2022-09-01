@@ -13,7 +13,7 @@ public class HexToColorConverter : IValueConverter
 
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is string s && targetType == typeof(Color))
+        if (value is string s && (targetType == typeof(Color?) || targetType == typeof(Color)))
         {
             try
             {
@@ -27,38 +27,16 @@ public class HexToColorConverter : IValueConverter
                 return AvaloniaProperty.UnsetValue;
             }
         }
-        if (value is uint n && targetType == typeof(Color))
-        {
-            try
-            {
-                return Color.FromUInt32(n);
-            }
-            catch (Exception)
-            {
-                return AvaloniaProperty.UnsetValue;
-            }
-        }
         return AvaloniaProperty.UnsetValue;
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is Color c1 && targetType == typeof(string))
+        if (value is Color c && targetType == typeof(string))
         {
             try
             {
-                return $"#{c1.ToUint32():x8}";
-            }
-            catch (Exception)
-            {
-                return AvaloniaProperty.UnsetValue;
-            }
-        }
-        if (value is Color c2 && targetType == typeof(uint))
-        {
-            try
-            {
-                return c2.ToUint32();
+                return $"#{c.ToUint32():x8}";
             }
             catch (Exception)
             {
