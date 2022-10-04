@@ -30,9 +30,9 @@
     <XUnitVersion>2.4.1</XUnitVersion>
     <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
-    <SkiaSharpVersion>2.88.1-preview.108</SkiaSharpVersion>
+    <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
     <SvgSkiaVersion>0.6.0-preview1</SvgSkiaVersion>
-    <AvaloniaVersion>11.0.0-preview1</AvaloniaVersion>
+    <AvaloniaVersion>11.0.999-cibuild0024273-beta</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>11.0.0-preview1</AvaloniaAvaloniaEditVersion>
     <AvaloniaXamlBehaviorsVersion>11.0.0-preview1</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>11.0.0-preview1</AvaloniaControlsPanAndZoomVersion>
