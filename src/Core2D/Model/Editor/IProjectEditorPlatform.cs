@@ -28,6 +28,8 @@ public interface IProjectEditorPlatform
 
     void OnExecuteScriptFile(string? path);
 
+    void OnExecuteScriptFile();
+
     void OnExit();
 
     void OnCopyAsXaml(object? item);

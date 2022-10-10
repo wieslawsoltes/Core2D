@@ -282,17 +282,26 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
     {
         if (path is null)
         {
-            var dlg = new OpenFileDialog() { Title = "Open" };
-            dlg.Filters.Add(new FileDialogFilter() { Name = "Script", Extensions = { "csx", "cs" } });
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.AllowMultiple = true;
-            var result = await dlg.ShowAsync(GetWindow());
-            if (result is { })
+            OnExecuteScriptFile();
+        }
+        else
+        {
+            await ServiceProvider.GetService<ProjectEditorViewModel>().OnExecuteScriptFile(path);
+        }
+    }
+
+    public async void OnExecuteScriptFile()
+    {
+        var dlg = new OpenFileDialog() { Title = "Open" };
+        dlg.Filters.Add(new FileDialogFilter() { Name = "Script", Extensions = { "csx", "cs" } });
+        dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+        dlg.AllowMultiple = true;
+        var result = await dlg.ShowAsync(GetWindow());
+        if (result is { })
+        {
+            if (result.All(r => r is { }))
             {
-                if (result.All(r => r is { }))
-                {
-                    await ServiceProvider.GetService<ProjectEditorViewModel>().OnExecuteScriptFile(result);
-                }
+                await ServiceProvider.GetService<ProjectEditorViewModel>().OnExecuteScriptFile(result);
             }
         }
     }
