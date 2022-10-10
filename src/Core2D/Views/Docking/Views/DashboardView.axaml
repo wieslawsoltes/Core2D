@@ -48,6 +48,7 @@
         </Button>
         <Button Content="Open Project"
                 Command="{Binding Platform.OnOpen}"
+                CommandParameter=""
                 FontSize="14" 
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Stretch"

@@ -8,6 +8,8 @@ public interface IProjectEditorPlatform
 {
     void OnOpen(string? path);
 
+    void OnOpen();
+
     void OnSave();
 
     void OnSaveAs();

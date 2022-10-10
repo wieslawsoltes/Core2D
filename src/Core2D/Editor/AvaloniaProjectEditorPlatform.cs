@@ -39,20 +39,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
     {
         if (path is null)
         {
-            var dlg = new OpenFileDialog() { Title = "Open" };
-            dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(GetWindow());
-            var item = result?.FirstOrDefault();
-            if (item is { })
-            {
-                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-                if (editor is { })
-                {
-                    editor.OnOpenProject(item);
-                    editor.CanvasPlatform?.InvalidateControl?.Invoke();
-                }
-            }
+            OnOpen();
         }
         else
         {
@@ -63,6 +50,24 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
+    public async void OnOpen()
+    {
+        var dlg = new OpenFileDialog() { Title = "Open" };
+        dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
+        dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+        var result = await dlg.ShowAsync(GetWindow());
+        var item = result?.FirstOrDefault();
+        if (item is { })
+        {
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is { })
+            {
+                editor.OnOpenProject(item);
+                editor.CanvasPlatform?.InvalidateControl?.Invoke();
+            }
+        }
+    }
+    
     public void OnSave()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
