@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
  <PropertyGroup>
     <Deterministic>true</Deterministic>
     <LangVersion>latest</LangVersion>
@@ -32,7 +32,7 @@
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
     <SvgSkiaVersion>0.6.0-preview2</SvgSkiaVersion>
-    <AvaloniaVersion>11.0.preview2</AvaloniaVersion>
+    <AvaloniaVersion>11.0.0-preview2</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>11.0.999-cibuild0024401-beta</AvaloniaAvaloniaEditVersion>
     <AvaloniaXamlBehaviorsVersion>11.0.0-preview2</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>11.0.0-preview2</AvaloniaControlsPanAndZoomVersion>
