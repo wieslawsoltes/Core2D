@@ -18,7 +18,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp;
 
 public class SkiaSharpSvgConverter : ISvgConverter
 {
-    private static readonly Svg.Model.IAssetLoader s_assetLoader = new SkiaAssetLoader();
+    private static readonly Svg.Model.IAssetLoader s_assetLoader = new SkiaAssetLoader(new SkiaModel(new SKSvgSettings()));
     private readonly IServiceProvider? _serviceProvider;
 
     public SkiaSharpSvgConverter(IServiceProvider? serviceProvider)
@@ -158,7 +158,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
                 style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Bold;
             }
 
-            if (paint.Typeface.Style == SP.SKFontStyleSlant.Italic)
+            if (paint.Typeface.FontSlant == SP.SKFontStyleSlant.Italic)
             {
                 style.TextStyle.FontStyle = style.TextStyle.FontStyle | FontStyleFlags.Italic;
             }
