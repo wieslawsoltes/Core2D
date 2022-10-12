@@ -13,10 +13,6 @@
     <RootNamespace>Core2D.Web</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <EmccInitialHeapSize>16777216</EmccInitialHeapSize>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <RunAOTCompilation>true</RunAOTCompilation>
     <PublishTrimmed>true</PublishTrimmed>
