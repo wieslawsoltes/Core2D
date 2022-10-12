@@ -7,13 +7,13 @@
   -->
   <!-- Avalonia Themes -->
 
-  <!--<assembly fullname="Avalonia.Themes.Fluent" preserve="All" />-->
+  <assembly fullname="Avalonia.Themes.Fluent" preserve="All" />
 
   <!-- Avalonia Core -->
-  <!--
+
   <assembly fullname="Avalonia" preserve="All" />
   <assembly fullname="Avalonia.Base" preserve="All" />
-  <assembly fullname="Avalonia.Controls" preserve="All" />
+  <!--<assembly fullname="Avalonia.Controls" preserve="All" />
   <assembly fullname="Avalonia.Dialogs" preserve="All" />
   <assembly fullname="Avalonia.Markup" preserve="All" />
   <assembly fullname="Avalonia.Markup.Xaml" preserve="All" />
