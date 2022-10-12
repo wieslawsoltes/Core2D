@@ -43,7 +43,7 @@ public class App : Application
         };
     }
 
-    private  static void CreateLayout(ProjectEditorViewModel editor)
+    private static void CreateLayout(ProjectEditorViewModel editor)
     {
         if (editor.DockFactory is IFactory dockFactory)
         {
