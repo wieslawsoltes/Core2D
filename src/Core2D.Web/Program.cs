@@ -1,26 +1,17 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Runtime.Versioning;
+using Avalonia;
+using Avalonia.Web;
+using Core2D.Web.Base;
+
+[assembly:SupportedOSPlatform("browser")]
 
 namespace Core2D.Web;
 
-public class Program
+internal partial class Program
 {
-    public static async Task  Main(string[] args)
-    {
-        await CreateHostBuilder(args).Build().RunAsync();
-    }
+    private static void Main(string[] args)
+        => BuildAvaloniaApp().SetupBrowserApp("out");
 
-    public static WebAssemblyHostBuilder CreateHostBuilder(string[] args)
-    {
-        var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            
-        builder.RootComponents.Add<App>("#app");
-
-        builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-        return builder;
-    }
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>();
 }

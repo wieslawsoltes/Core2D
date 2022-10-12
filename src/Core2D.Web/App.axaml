@@ -7,8 +7,8 @@
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
 
   <Application.Resources>
-    <FontFamily x:Key="UiFontFamily">Segoe UI, SF Pro Display, Noto Sans, Cantarel</FontFamily>
-    <FontFamily x:Key="CodeFontFamily">Consolas, Menlo, Monaco, Courier, Courier New, Andale Mono, DejaVu Sans Mono</FontFamily>
+    <FontFamily x:Key="UiFontFamily">avares://Avalonia.Themes.Fluent/Assets#Inter</FontFamily>
+    <FontFamily x:Key="CodeFontFamily">avares://XamlPlayground/Assets/Fonts#Roboto Mono</FontFamily>
     <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
   </Application.Resources>
 
@@ -21,6 +21,14 @@
     <StyleInclude Source="avares://Core2D/Styles/Dock.axaml" />
     <StyleInclude Source="avares://Core2D/Controls/EditableItem.axaml" />
     <StyleInclude Source="avares://Core2D/Controls/ToggleItem.axaml" />
+
+    <Style Selector="AccessText">
+      <Setter Property="(TextElement.Foreground)" Value="{DynamicResource ButtonForeground}" />
+    </Style>
+    <Style Selector="TextBlock">
+      <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+    </Style>
+
   </Application.Styles>
 
   <Application.DataTemplates>

@@ -89,8 +89,6 @@ public class App : Application
             var renderingSubsystemName = platformRenderInterface.GetType().Assembly.GetName().Name;
             var aboutInfo = CreateAboutInfo(serviceProvider, runtimeInfo, windowingSubsystemName, renderingSubsystemName);
             editor.AboutInfo = aboutInfo;
-
-            
         }
 
         if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)

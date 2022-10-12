@@ -7,6 +7,8 @@
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              xmlns:cd="clr-namespace:Core2D.Controls.Dialog"
+             FontFamily="{DynamicResource UiFontFamily}"
+             Background="{DynamicResource AcrylicFallbackColor}"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
