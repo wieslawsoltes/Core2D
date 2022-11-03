@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
@@ -6,26 +7,15 @@
     <OutputType>Exe</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <MSBuildEnableWorkloadResolver>true</MSBuildEnableWorkloadResolver>
-    <WasmBuildNative>true</WasmBuildNative>
-    <EmccFlags>-sVERBOSE -sERROR_ON_UNDEFINED_SYMBOLS=0</EmccFlags>
     <IsPackable>False</IsPackable>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Core2D.Web</RootNamespace>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <RunAOTCompilation>true</RunAOTCompilation>
-    <PublishTrimmed>true</PublishTrimmed>
-    <TrimMode>full</TrimMode>
-    <WasmBuildNative>true</WasmBuildNative>
-    <InvariantGlobalization>true</InvariantGlobalization>
-    <WasmEnableSIMD>true</WasmEnableSIMD>
-    <EmccCompileOptimizationFlag>-O3</EmccCompileOptimizationFlag>
-    <EmccLinkOptimizationFlag>-O3</EmccLinkOptimizationFlag>
   </PropertyGroup>
 
   <ItemGroup>
     <TrimmerRootDescriptor Include="Roots.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +24,7 @@
     <WasmExtraFilesToDeploy Include="AppBundle\index.html" />
     <WasmExtraFilesToDeploy Include="AppBundle\Logo.svg" />
     <WasmExtraFilesToDeploy Include="AppBundle\main.js" />
+    <WasmExtraFilesToDeploy Include="AppBundle\staticwebapp.config.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,10 +35,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
 </Project>
