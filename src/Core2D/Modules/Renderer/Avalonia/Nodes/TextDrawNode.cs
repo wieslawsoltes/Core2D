@@ -90,7 +90,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         
         FormattedText = new AM.FormattedText(
             BoundText,
-            CultureInfo.GetCultureInfo("en-us"),
+            CultureInfo.InvariantCulture,
             AM.FlowDirection.LeftToRight,
             Typeface,
             Style.TextStyle.FontSize,
