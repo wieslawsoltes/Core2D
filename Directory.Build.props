@@ -36,7 +36,7 @@
     <AvaloniaAvaloniaEditVersion>11.0.0-preview1</AvaloniaAvaloniaEditVersion>
     <AvaloniaXamlBehaviorsVersion>11.0.0-preview3</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>11.0.0-preview2</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>11.0.0-preview3</ThemeEditorControlsColorPickerVersion>
+    <ThemeEditorControlsColorPickerVersion>11.0.0-build20221104-02</ThemeEditorControlsColorPickerVersion>
     <DockAvaloniaVersion>11.0.0-preview3</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
