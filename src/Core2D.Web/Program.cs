@@ -2,7 +2,6 @@
 using System.Runtime.Versioning;
 using Avalonia;
 using Avalonia.Web;
-using Core2D.Web.Base;
 
 [assembly:SupportedOSPlatform("browser")]
 

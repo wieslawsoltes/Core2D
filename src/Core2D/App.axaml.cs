@@ -27,7 +27,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace Core2D.Desktop;
+namespace Core2D;
 
 public class App : Application
 {

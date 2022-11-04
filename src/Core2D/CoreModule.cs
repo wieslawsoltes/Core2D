@@ -1,6 +1,8 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Reflection;
 using Autofac;
+using Avalonia.Controls;
 using Core2D.Editor;
 using Core2D.Model;
 using Core2D.Model.Editor;
@@ -26,10 +28,14 @@ using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Editor.Bounds;
 using Core2D.ViewModels.Editor.Factories;
+using Core2D.Views;
+#if USE_PDFSHARP
+using Core2D.Modules.FileWriter.PdfSharp;
+#endif
 
-namespace Core2D.Web.Base;
+namespace Core2D;
 
-public class CoreModule : Autofac.Module
+public class AppModule : Autofac.Module
 {
     protected override void Load(ContainerBuilder builder)
     {
@@ -66,7 +72,6 @@ public class CoreModule : Autofac.Module
                 {
                     return true;
                 }
-
                 return false;
             })
             .AsSelf()
@@ -95,7 +100,7 @@ public class CoreModule : Autofac.Module
             .As<IEditorTool>()
             .AsSelf()
             .InstancePerLifetimeScope();
-
+            
         builder.RegisterAssemblyTypes(typeof(IPathTool).GetTypeInfo().Assembly)
             .PublicOnly()
             .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools.Path"))
@@ -104,7 +109,7 @@ public class CoreModule : Autofac.Module
             .InstancePerLifetimeScope();
 
         builder.RegisterType<HitTest>().As<IHitTest>().InstancePerLifetimeScope();
-
+            
         builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly)
             .PublicOnly()
             .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Bounds.Shapes"))
@@ -122,6 +127,9 @@ public class CoreModule : Autofac.Module
         builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
         builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
         builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
+#if USE_PDFSHARP
+        builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+#endif
         builder.RegisterType<SvgSvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<DrawingGroupXamlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
@@ -145,5 +153,9 @@ public class CoreModule : Autofac.Module
         builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
         builder.RegisterType<AvaloniaProjectEditorPlatform>().As<IProjectEditorPlatform>().InstancePerLifetimeScope();
         builder.RegisterType<AvaloniaEditorCanvasPlatform>().As<IEditorCanvasPlatform>().InstancePerLifetimeScope();
+
+        // Views
+
+        builder.RegisterType<MainWindow>().As<Window>().InstancePerLifetimeScope();
     }
 }
