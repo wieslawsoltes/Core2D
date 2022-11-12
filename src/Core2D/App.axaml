@@ -8,7 +8,7 @@
 
   <Application.Resources>
     <FontFamily x:Key="UiFontFamily">avares://Avalonia.Themes.Fluent/Assets#Inter</FontFamily>
-    <FontFamily x:Key="CodeFontFamily">avares://Core2D.Web/Assets/Fonts#Roboto Mono</FontFamily>
+    <FontFamily x:Key="CodeFontFamily">avares://Core2D/Assets/Fonts#Roboto Mono</FontFamily>
     <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
   </Application.Resources>
 
