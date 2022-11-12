@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AvaloniaResource Include="Assets\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <WasmExtraFilesToDeploy Include="AppBundle\app.css" />
     <WasmExtraFilesToDeploy Include="AppBundle\favicon.ico" />
     <WasmExtraFilesToDeploy Include="AppBundle\index.html" />
