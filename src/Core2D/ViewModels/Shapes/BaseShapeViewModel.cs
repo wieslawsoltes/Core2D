@@ -10,6 +10,7 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
+using Core2D.ViewModels.Renderer;
 using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes;
@@ -26,6 +27,7 @@ public abstract partial class BaseShapeViewModel : ViewModelBase, IDataObject, I
     [AutoNotify] protected bool _isFilled;
     [AutoNotify] protected ImmutableArray<PropertyViewModel> _properties;
     [AutoNotify] protected RecordViewModel? _record;
+    [AutoNotify] protected MatrixViewModel? _transform;
     [AutoNotify(SetterModifier = AccessModifier.None)] protected readonly Type _targetType;
     // ReSharper restore MemberCanBePrivate.Global
     // ReSharper restore InconsistentNaming
@@ -64,6 +66,11 @@ public abstract partial class BaseShapeViewModel : ViewModelBase, IDataObject, I
         if (Record is { })
         {
             isDirty |= Record.IsDirty();
+        }
+
+        if (Transform is { })
+        {
+            isDirty |= Transform.IsDirty();
         }
 
         return isDirty;
