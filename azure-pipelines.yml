@@ -14,7 +14,7 @@ variables:
   PublishFramework: 'net7.0'
   PublishProject: 'Core2D.Desktop'
   PublishRuntime: ''
-  Workloads: 'wasm-tools wasm-experimental'
+  Workloads: 'wasm-tools wasm-experimental android'
 
 jobs:
   - template: Test-PowerShell.yml@templates
