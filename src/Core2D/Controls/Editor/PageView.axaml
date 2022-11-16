@@ -151,8 +151,8 @@
               </idd:ContextDropBehavior>
               </i:Interaction.Behaviors>
               <Panel DataContext="{Binding Project.CurrentContainer}" 
-                     VerticalAlignment="Stretch"
-                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
                      ClipToBounds="False">
                 <Panel.Transitions>
                   <Transitions>
