@@ -121,8 +121,8 @@
       <Panel>
         <Panel ClipToBounds="True">
           <ScrollViewer x:Name="PageScrollViewer" 
-                        HorizontalScrollBarVisibility="Auto"
-                        VerticalScrollBarVisibility="Auto">
+                        HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Disabled">
             <paz:ZoomBorder x:Name="PageZoomBorder"
                             Stretch="None"
                             ZoomSpeed="1.5" 
