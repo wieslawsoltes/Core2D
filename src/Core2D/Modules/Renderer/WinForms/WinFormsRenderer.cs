@@ -17,16 +17,16 @@ namespace Core2D.Modules.Renderer.WinForms;
 
 public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 {
-    private ICache<string, Image> _biCache;
+    private readonly ICache<string, Image>? _biCache;
     private readonly Func<double, float> _scaleToPage;
     private readonly double _textScaleFactor;
 
-    [AutoNotify] private ShapeRendererStateViewModel _state;
+    [AutoNotify] private ShapeRendererStateViewModel? _state;
 
     public WinFormsRenderer(IServiceProvider? serviceProvider, double textScaleFactor = 1.0) : base(serviceProvider)
     {
-        _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
-        _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, Image>(bi => bi.Dispose());
+        _state = serviceProvider.GetService<IViewModelFactory>()?.CreateShapeRendererState();
+        _biCache = serviceProvider.GetService<IViewModelFactory>()?.CreateCache<string, Image>(bi => bi.Dispose());
         _textScaleFactor = textScaleFactor;
         _scaleToPage = (value) => (float)(value);
     }
@@ -302,11 +302,15 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         _biCache.Reset();
     }
 
-    public void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel colorViewModel)
+    public void Fill(object? dc, double x, double y, double width, double height, BaseColorViewModel? colorViewModel)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
+
         var brush = ToBrush(colorViewModel);
-        _gfx.FillRectangle(
+        gfx.FillRectangle(
             brush,
             (float)x,
             (float)y,
@@ -317,7 +321,10 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
     public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
 
         var pen = ToPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage);
 
@@ -331,7 +338,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         if (grid.IsGridEnabled)
         {
             DrawGridInternal(
-                _gfx,
+                gfx,
                 grid,
                 pen,
                 ref rect);
@@ -339,7 +346,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
         if (grid.IsBorderEnabled)
         {
-            _gfx.DrawRectangle(
+            gfx.DrawRectangle(
                 pen,
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -350,24 +357,30 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         pen.Dispose();
     }
 
-    public void DrawPoint(object dc, PointShapeViewModel point, ShapeStyleViewModel style)
+    public void DrawPoint(object? dc, PointShapeViewModel point, ShapeStyleViewModel? style)
     {
         // TODO:
     }
 
-    public void DrawLine(object dc, LineShapeViewModel line, ShapeStyleViewModel style)
+    public void DrawLine(object? dc, LineShapeViewModel line, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
 
         var strokeLine = ToPen(style, _scaleToPage);
-        DrawLineArrowsInternal(line, style, _gfx, out var pt1, out var pt2);
-        DrawLineInternal(_gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
+        DrawLineArrowsInternal(line, style, gfx, out var pt1, out var pt2);
+        DrawLineInternal(gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
         strokeLine.Dispose();
     }
 
-    public void DrawRectangle(object dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
+    public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
 
         var brush = ToBrush(style.Fill.Color);
         var pen = ToPen(style, _scaleToPage);
@@ -379,7 +392,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
         if (rectangle.IsFilled)
         {
-            _gfx.FillRectangle(
+            gfx.FillRectangle(
                 brush,
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -389,7 +402,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
         if (rectangle.IsStroked)
         {
-            _gfx.DrawRectangle(
+            gfx.DrawRectangle(
                 pen,
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -401,9 +414,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         pen.Dispose();
     }
 
-    public void DrawEllipse(object dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
+    public void DrawEllipse(object? dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
 
         var brush = ToBrush(style.Fill.Color);
         var pen = ToPen(style, _scaleToPage);
@@ -415,7 +431,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
         if (ellipse.IsFilled)
         {
-            _gfx.FillEllipse(
+            gfx.FillEllipse(
                 brush,
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -425,7 +441,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
         if (ellipse.IsStroked)
         {
-            _gfx.DrawEllipse(
+            gfx.DrawEllipse(
                 pen,
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -437,8 +453,13 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         pen.Dispose();
     }
 
-    public void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style)
+    public void DrawArc(object? dc, ArcShapeViewModel arc, ShapeStyleViewModel? style)
     {
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
+
         var a = new GdiArc(
             Point2.FromXY(arc.Point1.X, arc.Point1.Y),
             Point2.FromXY(arc.Point2.X, arc.Point2.Y),
@@ -447,8 +468,6 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
         if (a.Width > 0.0 && a.Height > 0.0)
         {
-            var _gfx = dc as Graphics;
-
             var brush = ToBrush(style.Fill.Color);
             var pen = ToPen(style, _scaleToPage);
 
@@ -462,12 +481,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
                     _scaleToPage(a.Height),
                     (float)a.StartAngle,
                     (float)a.SweepAngle);
-                _gfx.FillPath(brush, path);
+                gfx.FillPath(brush, path);
             }
 
             if (arc.IsStroked)
             {
-                _gfx.DrawArc(
+                gfx.DrawArc(
                     pen,
                     _scaleToPage(a.X),
                     _scaleToPage(a.Y),
@@ -482,9 +501,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
+    public void DrawCubicBezier(object? dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
 
         var brush = ToBrush(style.Fill.Color);
         var pen = ToPen(style, _scaleToPage);
@@ -501,12 +523,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
                 _scaleToPage(cubicBezier.Point3.Y),
                 _scaleToPage(cubicBezier.Point4.X),
                 _scaleToPage(cubicBezier.Point4.Y));
-            _gfx.FillPath(brush, path);
+            gfx.FillPath(brush, path);
         }
 
         if (cubicBezier.IsStroked)
         {
-            _gfx.DrawBezier(
+            gfx.DrawBezier(
                 pen,
                 _scaleToPage(cubicBezier.Point1.X),
                 _scaleToPage(cubicBezier.Point1.Y),
@@ -522,9 +544,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         pen.Dispose();
     }
 
-    public void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
+    public void DrawQuadraticBezier(object? dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
 
         var brush = ToBrush(style.Fill.Color);
         var pen = ToPen(style, _scaleToPage);
@@ -550,12 +575,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
                 _scaleToPage(y3),
                 _scaleToPage(x4),
                 _scaleToPage(y4));
-            _gfx.FillPath(brush, path);
+            gfx.FillPath(brush, path);
         }
 
         if (quadraticBezier.IsStroked)
         {
-            _gfx.DrawBezier(
+            gfx.DrawBezier(
                 pen,
                 _scaleToPage(x1),
                 _scaleToPage(y1),
@@ -571,9 +596,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         pen.Dispose();
     }
 
-    public void DrawText(object dc, TextShapeViewModel text, ShapeStyleViewModel style)
+    public void DrawText(object? dc, TextShapeViewModel text, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
 
         if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string tbind))
         {
@@ -649,7 +677,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         format.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.NoClip;
         format.Trimming = StringTrimming.None;
 
-        _gfx.DrawString(
+        gfx.DrawString(
             tbind,
             font,
             ToBrush(style.Stroke.Color),
@@ -660,9 +688,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         font.Dispose();
     }
 
-    public void DrawImage(object dc, ImageShapeViewModel image, ShapeStyleViewModel style)
+    public void DrawImage(object? dc, ImageShapeViewModel image, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
 
         var brush = ToBrush(style.Stroke.Color);
 
@@ -679,14 +710,14 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
         if (image.IsFilled)
         {
-            _gfx.FillRectangle(
+            gfx.FillRectangle(
                 ToBrush(style.Fill.Color),
                 srect);
         }
 
         if (image.IsStroked)
         {
-            _gfx.DrawRectangle(
+            gfx.DrawRectangle(
                 ToPen(style, _scaleToPage),
                 srect.X,
                 srect.Y,
@@ -697,7 +728,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         var imageCached = _biCache.Get(image.Key);
         if (imageCached is { })
         {
-            _gfx.DrawImage(imageCached, srect);
+            gfx.DrawImage(imageCached, srect);
         }
         else
         {
@@ -712,7 +743,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
                     _biCache.Set(image.Key, bi);
 
-                    _gfx.DrawImage(bi, srect);
+                    gfx.DrawImage(bi, srect);
                 }
             }
         }
@@ -720,9 +751,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         brush.Dispose();
     }
 
-    public void DrawPath(object dc, PathShapeViewModel path, ShapeStyleViewModel style)
+    public void DrawPath(object? dc, PathShapeViewModel path, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as Graphics;
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
 
         var gp = path.ToGraphicsPath(_scaleToPage);
 
@@ -730,10 +764,10 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         {
             var brush = ToBrush(style.Fill.Color);
             var pen = ToPen(style, _scaleToPage);
-            _gfx.FillPath(
+            gfx.FillPath(
                 brush,
                 gp);
-            _gfx.DrawPath(
+            gfx.DrawPath(
                 pen,
                 gp);
             brush.Dispose();
@@ -742,7 +776,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         else if (path.IsFilled && !path.IsStroked)
         {
             var brush = ToBrush(style.Fill.Color);
-            _gfx.FillPath(
+            gfx.FillPath(
                 brush,
                 gp);
             brush.Dispose();
@@ -750,7 +784,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         else if (!path.IsFilled && path.IsStroked)
         {
             var pen = ToPen(style, _scaleToPage);
-            _gfx.DrawPath(
+            gfx.DrawPath(
                 pen,
                 gp);
             pen.Dispose();
