@@ -31,9 +31,13 @@ internal class PointDrawNode : DrawNode, IPointDrawNode
         Center = Rect.Center;
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
         context.DrawRectangle(Fill, null, Rect);
         context.DrawRectangle(null, Stroke, Rect);
     }

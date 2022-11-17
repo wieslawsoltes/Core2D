@@ -5,7 +5,7 @@ namespace Core2D.Model.Renderer.Nodes;
 
 public interface IPointDrawNode : IDrawNode
 {
-    PointShapeViewModel? Point { get; set; }
+    PointShapeViewModel Point { get; set; }
 
     double PointSize { get; set; }
 }
