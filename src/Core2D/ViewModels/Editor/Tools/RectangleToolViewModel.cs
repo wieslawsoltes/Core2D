@@ -65,7 +65,7 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 
                 ToStateBottomRight();
@@ -157,7 +157,7 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
                     
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                        editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     }
                     
                     Move(_rectangle);
@@ -205,7 +205,7 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 break;
             }

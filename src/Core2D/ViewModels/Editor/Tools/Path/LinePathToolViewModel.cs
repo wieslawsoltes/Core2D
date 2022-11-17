@@ -58,8 +58,8 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 }
 
                 _line.End = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.LineTo(_line.End);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                pathTool.GeometryContext?.LineTo(_line.End);
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStateEnd();
                 Move(null);
                 _currentState = State.End;
@@ -82,8 +82,8 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
 
                 _line.Start = _line.End;
                 _line.End = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.LineTo(_line.End);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                pathTool.GeometryContext?.LineTo(_line.End);
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
                 _currentState = State.End;
             }
@@ -139,7 +139,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 }
                 _line.End.X = (double)sx;
                 _line.End.Y = (double)sy;
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
             }
                 break;

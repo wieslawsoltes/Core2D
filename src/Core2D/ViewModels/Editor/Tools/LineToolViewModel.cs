@@ -71,7 +71,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 
                 ToStateEnd();
@@ -167,7 +167,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                     }
                     _line.End.X = (double)sx;
                     _line.End.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_line);
                 }
             }
@@ -213,7 +213,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 break;
             }

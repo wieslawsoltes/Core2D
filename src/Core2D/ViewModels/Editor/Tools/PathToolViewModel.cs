@@ -193,7 +193,7 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
             if (editor.Project.CurrentContainer?.WorkingLayer is { })
             {
                 editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
             }
 
             if (Path.Figures.Length != 1 || !(Path.Figures[0].Segments.Length <= 1))

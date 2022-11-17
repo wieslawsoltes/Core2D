@@ -65,7 +65,7 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 }
 
                 _arc.End = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.ArcTo(
+                pathTool.GeometryContext?.ArcTo(
                     _arc.End,
                     factory.CreatePathSize(
                         Abs(_arc.Start.X - _arc.End.X),
@@ -73,7 +73,7 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                     DefaultRotationAngle,
                     DefaultIsLargeArc,
                     DefaultSweepDirection);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStateEnd();
                 Move(null);
                 _currentState = State.End;
@@ -94,7 +94,7 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 }
                 _arc.Start = _arc.End;
                 _arc.End = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.ArcTo(
+                pathTool.GeometryContext?.ArcTo(
                     _arc.End,
                     factory.CreatePathSize(
                         Abs(_arc.Start.X - _arc.End.X),
@@ -102,7 +102,7 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                     DefaultRotationAngle,
                     DefaultIsLargeArc,
                     DefaultSweepDirection);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
                 _currentState = State.End;
             }
@@ -166,7 +166,7 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 arc.Point = _arc.End;
                 arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
                 arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
             }
                 break;

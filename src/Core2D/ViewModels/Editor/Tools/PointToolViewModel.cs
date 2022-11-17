@@ -49,15 +49,21 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (!selection.TryToSplitLine(args.X, args.Y, _point, true))
                     {
-                        editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
+                        if (editor.Project.CurrentContainer?.CurrentLayer is { })
+                        {
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
+                        }
                     }
                 }
                 else
                 {
-                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
+                    if (editor.Project.CurrentContainer?.CurrentLayer is { })
+                    {
+                        editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
+                    }
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -90,8 +96,8 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
         }
     }
 

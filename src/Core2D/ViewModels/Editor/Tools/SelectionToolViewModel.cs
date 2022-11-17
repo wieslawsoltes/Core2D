@@ -302,7 +302,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 
                 _currentState = State.Selected;
@@ -318,7 +318,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
-                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                        editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     }
                     
                     _currentState = State.None;
@@ -355,7 +355,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
-                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                        editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     }
                 }
 
@@ -499,7 +499,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 {
                     _rectangleShape.BottomRight.X = args.X;
                     _rectangleShape.BottomRight.Y = args.Y;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 break;
             }

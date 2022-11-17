@@ -64,7 +64,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_quadraticBezier);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 
                 ToStatePoint3();
@@ -87,7 +87,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                         _quadraticBezier.Point3 = result;
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     ToStatePoint2();
                     Move(_quadraticBezier);
                     _currentState = State.Point2;
@@ -178,7 +178,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                     _quadraticBezier.Point2.Y = (double)sy;
                     _quadraticBezier.Point3.X = (double)sx;
                     _quadraticBezier.Point3.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_quadraticBezier);
                 }
             }
@@ -193,7 +193,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                     }
                     _quadraticBezier.Point2.X = (double)sx;
                     _quadraticBezier.Point2.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_quadraticBezier);
                 }
             }
@@ -245,7 +245,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_quadraticBezier);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 break;
             }

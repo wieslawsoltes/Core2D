@@ -64,7 +64,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_cubicBezier);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 ToStatePoint4();
                 Move(_cubicBezier);
@@ -88,7 +88,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
 
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                        editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     }
 
                     ToStatePoint2();
@@ -110,7 +110,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                         _cubicBezier.Point2 = result;
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     ToStatePoint3();
                     Move(_cubicBezier);
                     _currentState = State.Point3;
@@ -196,7 +196,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     _cubicBezier.Point3.Y = (double)sy;
                     _cubicBezier.Point4.X = (double)sx;
                     _cubicBezier.Point4.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_cubicBezier);
                 }
             }
@@ -211,7 +211,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     }
                     _cubicBezier.Point2.X = (double)sx;
                     _cubicBezier.Point2.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_cubicBezier);
                 }
             }
@@ -226,7 +226,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     }
                     _cubicBezier.Point3.X = (double)sx;
                     _cubicBezier.Point3.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_cubicBezier);
                 }
             }
@@ -268,8 +268,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
     public void Reset()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            
-        if (editor is null)
+        if (editor?.Project is null)
         {
             return;
         }
@@ -282,8 +281,11 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
             case State.Point2:
             case State.Point3:
             {
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_cubicBezier);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_cubicBezier);
+                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                }
             }
                 break;
         }

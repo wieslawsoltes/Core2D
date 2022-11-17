@@ -59,10 +59,10 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
 
                 _quadraticBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
                 _quadraticBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.QuadraticBezierTo(
+                pathTool.GeometryContext?.QuadraticBezierTo(
                     _quadraticBezier.Point2,
                     _quadraticBezier.Point3);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint3();
                 Move(null);
                 _currentState = State.Point3;
@@ -83,7 +83,7 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
                         _quadraticBezier.Point3 = point2;
                     }
                 }
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint2();
                 Move(null);
                 _currentState = State.Point2;
@@ -108,10 +108,10 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
                 _quadraticBezier.Point1 = _quadraticBezier.Point3;
                 _quadraticBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
                 _quadraticBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.QuadraticBezierTo(
+                pathTool.GeometryContext?.QuadraticBezierTo(
                     _quadraticBezier.Point2,
                     _quadraticBezier.Point3);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint3();
                 Move(null);
                 _currentState = State.Point3;
@@ -171,7 +171,7 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
                 _quadraticBezier.Point2.Y = (double)sy;
                 _quadraticBezier.Point3.X = (double)sx;
                 _quadraticBezier.Point3.Y = (double)sy;
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
             }
                 break;
@@ -183,7 +183,7 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
                 }
                 _quadraticBezier.Point2.X = (double)sx;
                 _quadraticBezier.Point2.Y = (double)sy;
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
             }
                 break;

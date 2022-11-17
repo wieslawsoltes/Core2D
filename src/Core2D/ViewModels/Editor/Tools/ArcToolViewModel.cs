@@ -67,7 +67,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     _arc.Point1 = result;
                 }
 
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint2();
                 Move(_arc);
                 _currentState = State.Point2;
@@ -88,7 +88,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                         _arc.Point2 = result;
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     ToStatePoint3();
                     Move(_arc);
                     _currentState = State.Point3;
@@ -118,7 +118,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_arc);
-                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                        editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     }
                     ToStatePoint4();
                     Move(_arc);
@@ -214,7 +214,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     }
                     _arc.Point2.X = (double)sx;
                     _arc.Point2.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
             }
@@ -229,7 +229,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     }
                     _arc.Point3.X = (double)sx;
                     _arc.Point3.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
             }
@@ -244,7 +244,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     }
                     _arc.Point4.X = (double)sx;
                     _arc.Point4.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
             }
@@ -331,7 +331,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
             }
                 break;

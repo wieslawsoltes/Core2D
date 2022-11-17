@@ -43,7 +43,7 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
                 editor.CurrentPathTool = pathTool.PreviousPathTool;
 
                 var start = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.BeginFigure(
+                pathTool.GeometryContext?.BeginFigure(
                     start,
                     editor.Project.Options.DefaultIsClosed);
 

@@ -60,11 +60,11 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 _cubicBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
                 _cubicBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
                 _cubicBezier.Point4 = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.CubicBezierTo(
+                pathTool.GeometryContext?.CubicBezierTo(
                     _cubicBezier.Point2,
                     _cubicBezier.Point3,
                     _cubicBezier.Point4);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint4();
                 Move(null);
                 _currentState = State.Point4;
@@ -85,7 +85,7 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                         _cubicBezier.Point4 = point3;
                     }
                 }
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint2();
                 Move(null);
                 _currentState = State.Point2;
@@ -106,7 +106,7 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                         _cubicBezier.Point2 = point1;
                     }
                 }
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStateThree();
                 Move(null);
                 _currentState = State.Point3;
@@ -132,11 +132,11 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 _cubicBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
                 _cubicBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
                 _cubicBezier.Point4 = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.CubicBezierTo(
+                pathTool.GeometryContext?.CubicBezierTo(
                     _cubicBezier.Point2,
                     _cubicBezier.Point3,
                     _cubicBezier.Point4);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint4();
                 Move(null);
                 _currentState = State.Point4;
@@ -199,7 +199,7 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 _cubicBezier.Point3.Y = (double)sy;
                 _cubicBezier.Point4.X = (double)sx;
                 _cubicBezier.Point4.Y = (double)sy;
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
             }
                 break;
@@ -211,7 +211,7 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 }
                 _cubicBezier.Point2.X = (double)sx;
                 _cubicBezier.Point2.Y = (double)sy;
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
             }
                 break;
@@ -223,7 +223,7 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 }
                 _cubicBezier.Point3.X = (double)sx;
                 _cubicBezier.Point3.Y = (double)sy;
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
             }
                 break;
@@ -239,17 +239,17 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
             editor.Project.CurrentContainer.HelperLayer,
             _cubicBezier,
             editor.PageState.HelperStyle);
-        _selectionSelection.ToStatePoint4();
+        _selectionSelection?.ToStatePoint4();
     }
 
     public void ToStatePoint2()
     {
-        _selectionSelection.ToStatePoint2();
+        _selectionSelection?.ToStatePoint2();
     }
 
     public void ToStateThree()
     {
-        _selectionSelection.ToStatePoint3();
+        _selectionSelection?.ToStatePoint3();
     }
 
     public void Move(BaseShapeViewModel? shape)
