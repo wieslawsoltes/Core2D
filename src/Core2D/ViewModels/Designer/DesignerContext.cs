@@ -9,7 +9,6 @@ using Core2D.Model.Style;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
-using Core2D.ViewModels.Editor.Recent;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
 using Core2D.ViewModels.Renderer;
@@ -114,14 +113,7 @@ public class DesignerContext
             Editor.CurrentTool = Editor.Tools.FirstOrDefault(x => x.Title == "Selection");
             Editor.CurrentPathTool = Editor.PathTools.FirstOrDefault(x => x.Title == "Line");
         }
-
-        // Recent Projects
-
-        if (Editor is { })
-        {
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create(serviceProvider, "Test1", "Test1.project"));
-            Editor.RecentProjects = Editor.RecentProjects.Add(RecentFileViewModel.Create(serviceProvider, "Test2", "Test2.project"));
-        }
+        
         // New Project
 
         Editor?.OnNewProject();

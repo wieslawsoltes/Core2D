@@ -8,9 +8,11 @@ using System.Text;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
+using Core2D.Services;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
@@ -21,6 +23,17 @@ namespace Core2D.Editor;
 
 public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatform
 {
+    private static List<FilePickerFileType> GetProjectFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.Project,
+            StorageService.All
+        };
+    }
+
+    private IStorageFile? _openProjectFile;
+
     public AvaloniaProjectEditorPlatform(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
     }
@@ -35,45 +48,52 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         return ServiceProvider.GetService<Window>();
     }
 
-    public async void OnOpen(string? path)
-    {
-        if (path is null)
-        {
-            OnOpen();
-        }
-        else
-        {
-            if (ServiceProvider.GetService<IFileSystem>().Exists(path))
-            {
-                ServiceProvider.GetService<ProjectEditorViewModel>().OnOpenProject(path);
-            }
-        }
-    }
-
     public async void OnOpen()
     {
-        var dlg = new OpenFileDialog() { Title = "Open" };
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
-        dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-        var result = await dlg.ShowAsync(GetWindow());
-        var item = result?.FirstOrDefault();
-        if (item is { })
+        var storageProvider = StorageService.GetStorageProvider();
+        if (storageProvider is null)
         {
-            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            if (editor is { })
+            return;
+        }
+
+        var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = "Open project",
+            FileTypeFilter = GetProjectFileTypes(),
+            AllowMultiple = false
+        });
+
+        var file = result.FirstOrDefault();
+        if (file is not null)
+        {
+            if (file.CanOpenRead)
             {
-                editor.OnOpenProject(item);
-                editor.CanvasPlatform?.InvalidateControl?.Invoke();
+                try
+                {
+                    _openProjectFile = file;
+                    await using var stream = await _openProjectFile.OpenReadAsync();
+                    var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+                    if (editor is { })
+                    {
+                        editor.OnOpenProject(stream, _openProjectFile.Name);
+                        editor.CanvasPlatform?.InvalidateControl?.Invoke();
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                }
             }
         }
     }
     
-    public void OnSave()
+    public async void OnSave()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        if (!string.IsNullOrEmpty(editor.ProjectPath))
+        if (editor is { } && !string.IsNullOrEmpty(editor.ProjectName) && _openProjectFile is { })
         {
-            editor.OnSaveProject(editor.ProjectPath);
+            await using var stream = await _openProjectFile.OpenWriteAsync();
+            editor.OnSaveProject(stream, editor.ProjectName);
         }
         else
         {
@@ -83,16 +103,40 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
     public async void OnSaveAs()
     {
-        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        var dlg = new SaveFileDialog() { Title = "Save" };
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
-        dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-        dlg.InitialFileName = editor.Project?.Name;
-        dlg.DefaultExtension = "project";
-        var result = await dlg.ShowAsync(GetWindow());
-        if (result is { })
+        var storageProvider = StorageService.GetStorageProvider();
+        if (storageProvider is null)
         {
-            editor.OnSaveProject(result);
+            return;
+        }
+
+        var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+        {
+            Title = "Save project",
+            FileTypeChoices = GetProjectFileTypes(),
+            SuggestedFileName = Path.GetFileNameWithoutExtension("Project"),
+            DefaultExtension = "project",
+            ShowOverwritePrompt = true
+        });
+
+        if (file is not null)
+        {
+            if (file.CanOpenWrite)
+            {
+                try
+                {
+                    _openProjectFile = file;
+                    await using var stream = await _openProjectFile.OpenWriteAsync();
+                    var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+                    if (editor is { })
+                    {
+                        editor.OnSaveProject(stream, _openProjectFile.Name);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                }
+            }
         }
     }
 

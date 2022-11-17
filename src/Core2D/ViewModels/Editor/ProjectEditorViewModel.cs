@@ -7,7 +7,6 @@ using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
-using Core2D.ViewModels.Editor.Recent;
 using Core2D.ViewModels.Editors;
 using Core2D.ViewModels.Shapes;
 
@@ -17,8 +16,6 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
 {
     public ProjectEditorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        _recentProjects = ImmutableArray.Create<RecentFileViewModel>();
-        _currentRecentProject = default;
         _dialogs = new ObservableCollection<DialogViewModel>();
         _tools = serviceProvider is null 
             ? new Lazy<ImmutableArray<IEditorTool>>(() => new ImmutableArray<IEditorTool>()) 

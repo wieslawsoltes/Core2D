@@ -6,8 +6,6 @@ namespace Core2D.Model.Editor;
 
 public interface IProjectEditorPlatform
 {
-    void OnOpen(string? path);
-
     void OnOpen();
 
     void OnSave();

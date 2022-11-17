@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
@@ -12,7 +13,6 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor.History;
-using Core2D.ViewModels.Editor.Recent;
 using Core2D.ViewModels.Layout;
 using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
@@ -264,7 +264,7 @@ public partial class ProjectEditorViewModel
         NavigateTo?.Invoke("Home");
     }
 
-    public void OnOpenProject(string path)
+    public void OnOpenProject(Stream stream, string name)
     {
         try
         {
@@ -276,11 +276,10 @@ public partial class ProjectEditorViewModel
                 return;
             }
 
-            if (string.IsNullOrEmpty(path) || !fileSystem.Exists(path)) return;
-            var project = viewModelFactory.OpenProjectContainer(path, fileSystem, jsonSerializer);
+            var project = viewModelFactory.OpenProjectContainer(stream, fileSystem, jsonSerializer);
             if (project is { })
             {
-                OnOpenProjectImpl(project, path);
+                OnOpenProjectImpl(project, name);
             }
         }
         catch (Exception ex)
@@ -289,7 +288,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    private void OnOpenProjectImpl(ProjectContainerViewModel? project, string path)
+    private void OnOpenProjectImpl(ProjectContainerViewModel? project, string name)
     {
         if (project is null)
         {
@@ -298,8 +297,7 @@ public partial class ProjectEditorViewModel
         try
         {
             OnUnload();
-            OnLoad(project, path);
-            OnAddRecent(path, project.Name);
+            OnLoad(project, name);
             CanvasPlatform?.ResetZoom?.Invoke();
             CanvasPlatform?.InvalidateControl?.Invoke();
             NavigateTo?.Invoke("Home");
@@ -317,13 +315,13 @@ public partial class ProjectEditorViewModel
         NavigateTo?.Invoke("Dashboard");
     }
 
-    public void OnSaveProject(string path)
+    public void OnSaveProject(Stream stream, string name)
     {
         if (Project is null)
         {
             return;
         }
-            
+
         try
         {
             var isDecoratorVisible = PageState?.Decorator?.IsVisible == true;
@@ -337,13 +335,11 @@ public partial class ProjectEditorViewModel
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
             if (fileSystem is { } && jsonSerializer is { } && viewModelFactory is { })
             {
-                viewModelFactory.SaveProjectContainer(Project, path, fileSystem, jsonSerializer);
+                viewModelFactory.SaveProjectContainer(Project, Project, stream, fileSystem, jsonSerializer);
 
-                OnAddRecent(path, Project.Name);
-
-                if (string.IsNullOrEmpty(ProjectPath))
+                if (string.IsNullOrEmpty(ProjectName))
                 {
-                    ProjectPath = path;
+                    ProjectName = name;
                 }
 
                 IsProjectDirty = false;
@@ -802,7 +798,7 @@ public partial class ProjectEditorViewModel
         Renderer.State.ImageCache = cache;
     }
 
-    public void OnLoad(ProjectContainerViewModel? project, string? path = null)
+    public void OnLoad(ProjectContainerViewModel? project, string? name = null)
     {
         if (project is null)
         {
@@ -818,7 +814,7 @@ public partial class ProjectEditorViewModel
             
         Project = project;
         Project.History = new StackHistory();
-        ProjectPath = path;
+        ProjectName = name;
         IsProjectDirty = false;
 
         var propertyChangedSubject = new Subject<(object? sender, PropertyChangedEventArgs e)>();
@@ -863,7 +859,7 @@ public partial class ProjectEditorViewModel
         ServiceProvider.GetService<ISelectionService>()?.Deselect();
         SetRenderersImageCache(null);
         Project = null;
-        ProjectPath = string.Empty;
+        ProjectName = string.Empty;
         IsProjectDirty = false;
         GC.Collect();
     }
@@ -873,101 +869,6 @@ public partial class ProjectEditorViewModel
         try
         {
             Renderer?.ClearCache();
-        }
-        catch (Exception ex)
-        {
-            ServiceProvider.GetService<ILog>()?.LogException(ex);
-        }
-    }
-
-    public void OnAddRecent(string path, string name)
-    {
-        var q = _recentProjects.Where(x => x.Path?.ToLower() == path.ToLower()).ToList();
-        var builder = _recentProjects.ToBuilder();
-        if (q.Count > 0)
-        {
-            foreach (var r in q)
-            {
-                builder.Remove(r);
-            }
-        }
-
-        builder.Insert(0, RecentFileViewModel.Create(ServiceProvider, name, path));
-
-        RecentProjects = builder.ToImmutable();
-        CurrentRecentProject = _recentProjects.FirstOrDefault();
-    }
-
-    public void OnLoadRecent(string path)
-    {
-        var fileSystem = ServiceProvider.GetService<IFileSystem>();
-        if (fileSystem is null)
-        {
-            return;
-        }
-
-        var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
-        if (jsonSerializer is null)
-        {
-            return;
-        }
-
-        try
-        {
-            var json = fileSystem.ReadUtf8Text(path);
-            if (json is null)
-            {
-                return;
-            }
-            var recent = jsonSerializer.Deserialize<RecentsViewModel>(json);
-            if (recent is null)
-            {
-                return;
-            }
-            var remove = recent.Files.Where(x => x.Path is null || fileSystem.Exists(x.Path) == false).ToList();
-            var builder = recent.Files.ToBuilder();
-
-            foreach (var file in remove)
-            {
-                builder.Remove(file);
-            }
-
-            RecentProjects = builder.ToImmutable();
-
-            if (recent.Current?.Path is { } && fileSystem.Exists(recent.Current.Path))
-            {
-                CurrentRecentProject = recent.Current;
-            }
-            else
-            {
-                CurrentRecentProject = _recentProjects.FirstOrDefault();
-            }
-        }
-        catch (Exception ex)
-        {
-            ServiceProvider.GetService<ILog>()?.LogException(ex);
-        }
-    }
-
-    public void OnSaveRecent(string path)
-    {
-        var fileSystem = ServiceProvider.GetService<IFileSystem>();
-        if (fileSystem is null)
-        {
-            return;
-        }
-
-        var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
-        if (jsonSerializer is null)
-        {
-            return;
-        }
-
-        try
-        {
-            var recent = RecentsViewModel.Create(ServiceProvider, _recentProjects, _currentRecentProject);
-            var json = jsonSerializer.Serialize(recent);
-            fileSystem.WriteUtf8Text(path, json);
         }
         catch (Exception ex)
         {
@@ -1039,8 +940,13 @@ public partial class ProjectEditorViewModel
 
                 if (string.Compare(ext, ProjectEditorConfiguration.DefaultProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    OnOpenProject(path);
-                    result = true;
+                    var name = System.IO.Path.GetFileNameWithoutExtension(path);
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        OnOpenProject(stream, name);
+                        result = true;
+                    }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultCsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
@@ -1176,7 +1082,7 @@ public partial class ProjectEditorViewModel
                 ServiceProvider.GetService<ISelectionService>()?.Deselect(Project.CurrentContainer?.CurrentLayer);
                 clone.Move(null, sx, sy);
 
-                Project.AddShape(Project?.CurrentContainer?.CurrentLayer, clone);
+                Project.AddShape(Project.CurrentContainer?.CurrentLayer, clone);
 
                 // Select(Project?.CurrentContainer?.CurrentLayer, clone);
 

@@ -40,8 +40,6 @@ public class AppState : IDisposable
 
     public string LogPath { get; }
 
-    public string RecentPath { get; }
-
     public string LayoutPath { get; }
 
     public string WindowConfigurationPath { get; }
@@ -61,8 +59,6 @@ public class AppState : IDisposable
     public AppState()
     {
         LogPath = "Core2D.log";
-        
-        RecentPath = "Core2D.recent";
 
         LayoutPath = "Core2D.layout";
 
@@ -98,15 +94,6 @@ public class AppState : IDisposable
         }
         
         Editor.DockFactory = new DockFactory(Editor);
-
-        if (FileSystem is { })
-        {
-            var recentPath = System.IO.Path.Combine(BaseDirectory, RecentPath);
-            if (FileSystem.Exists(recentPath))
-            {
-                Editor.OnLoadRecent(recentPath);
-            }
-        }
 
         var rootDock = default(RootDock);
 
@@ -178,8 +165,6 @@ public class AppState : IDisposable
         {
             return;
         }
-
-        Editor.OnSaveRecent(RecentPath);
 
         var jsonWindowSettings = JsonConvert.SerializeObject(WindowConfiguration, s_jsonSettings);
         if (!string.IsNullOrEmpty(jsonWindowSettings))

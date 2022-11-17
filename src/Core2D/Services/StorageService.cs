@@ -111,6 +111,15 @@ internal static class StorageService
         MimeTypes = new[] { "application/oxps", "application/vnd.ms-xpsdocument" }
     };
 
+    public static FilePickerFileType Project { get; } = new("Project")
+    {
+        Patterns = new[] { "*.project" },
+        // TODO:
+        AppleUniformTypeIdentifiers = new[] { "public.project" },
+        // TODO:
+        MimeTypes = new[] { "application/project" }
+    };
+
     public static IStorageProvider? GetStorageProvider()
     {
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime { MainWindow: { } window })

@@ -4,13 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:vm="using:Core2D.ViewModels.Docking.Views"
              xmlns:vme="using:Core2D.ViewModels.Editor"
-             xmlns:vmer="using:Core2D.ViewModels.Editor.Recent"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
@@ -26,13 +24,13 @@
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" 
                                  Handler="{StaticResource EditorDropHandler}" />
       </i:Interaction.Behaviors>
-      <Grid RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" 
-            ColumnDefinitions="5*,50*,30,40*,5*" 
-            MaxWidth="800" MaxHeight="600">
+      <Grid RowDefinitions="0.2*,50,30,1*,30,1*,30" 
+            ColumnDefinitions="5*,50*,30" 
+            MaxWidth="400" MaxHeight="400" ShowGridLines="True">
         <Label Content="Core2D" 
                FontSize="20" 
                FontWeight="SemiBold" 
-               Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" />
+               Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" />
         <Button Content="New Project" 
                 Command="{Binding OnNewProject}" 
                 FontSize="14" 
@@ -60,45 +58,6 @@
             <iac:FocusOnPointerMovedBehavior />
           </i:Interaction.Behaviors>
         </Button>
-        <Button Content="Open Recent"
-                Command="{Binding OnOpenProject}"
-                CommandParameter="{Binding CurrentRecentProject.Path}" 
-                FontSize="14" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Stretch"
-                HorizontalContentAlignment="Center" 
-                VerticalContentAlignment="Center" 
-                Grid.Column="1" Grid.Row="7"
-                x:CompileBindings="False">
-          <i:Interaction.Behaviors>
-            <iac:FocusOnPointerMovedBehavior />
-          </i:Interaction.Behaviors>
-        </Button>
-        <Label Content="recent" Grid.Column="3" Grid.Row="2" />
-        <ListBox x:Name="RecentListBox" 
-                 Items="{Binding RecentProjects}"
-                 SelectedItem="{Binding CurrentRecentProject, Mode=TwoWay}" 
-                 Grid.Column="3" Grid.Row="3" Grid.RowSpan="5">
-          <ListBox.DataTemplates>
-            <DataTemplate DataType="vmer:RecentFileViewModel">
-              <Panel x:Name="NamePanel" 
-                     Background="Transparent" 
-                     Cursor="Hand" 
-                     ToolTip.Tip="{Binding Path}">
-                <i:Interaction.Behaviors>
-                  <ia:EventTriggerBehavior EventName="DoubleTapped"
-                                           SourceObject="{Binding #NamePanel}"
-                                           x:CompileBindings="False">
-                    <ia:InvokeCommandAction Command="{Binding #RecentListBox.DataContext.OnOpenProject}"
-                                            CommandParameter="{Binding #NamePanel.DataContext.Path}"
-                                            x:CompileBindings="False" />
-                  </ia:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <TextBlock Text="{Binding Name}" />
-              </Panel>
-            </DataTemplate>
-          </ListBox.DataTemplates>
-        </ListBox>
       </Grid>
     </Panel>
   </Panel>

@@ -14,6 +14,7 @@ using Avalonia.Headless;
 using Avalonia.OpenGL;
 using Avalonia.ReactiveUI;
 using Avalonia.Threading;
+using Core2D.Model;
 using Core2D.Screenshot;
 using Core2D.Util;
 using Core2D.ViewModels.Editor;
@@ -83,7 +84,7 @@ internal static class Program
     {
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
-            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime?)Application.Current?.ApplicationLifetime;
             var mainWindow = applicationLifetime?.MainWindow;
             var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
 
@@ -117,7 +118,7 @@ internal static class Program
     {
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
-            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime?)Application.Current?.ApplicationLifetime;
             var mainWindow = applicationLifetime?.MainWindow;
             var mainView = mainWindow?.Content as MainView;
             var editor = mainView?.DataContext as ProjectEditorViewModel;
@@ -135,7 +136,9 @@ internal static class Program
 
                 if (settings.Project is { })
                 {
-                    editor?.OnOpenProject(settings.Project.FullName);
+                    var name = Path.GetFileNameWithoutExtension(settings.Project.FullName); 
+                    using var stream = File.OpenRead(settings.Project.FullName);
+                    editor?.OnOpenProject(stream, name);
                     Dispatcher.UIThread.RunJobs();
                 }
             }

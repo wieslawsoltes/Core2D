@@ -36,16 +36,6 @@
       <MenuItem Header="Import Sv_g..." Command="{Binding Platform.OnImportSvg, FallbackValue={x:Null}}" />
       <Separator />
       <MenuItem Header="_Export..." Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" InputGesture="Ctrl+E" />
-      <Separator IsVisible="{Binding !!RecentProjects.Length}" />
-      <MenuItem Header="_Recent" Items="{Binding RecentProjects}" IsVisible="{Binding !!RecentProjects.Length}">
-        <MenuItem.Styles>
-          <Style Selector="MenuItem">
-            <Setter Property="Header" Value="{Binding Name}" />
-            <Setter Property="Command" Value="{Binding $parent[UserControl].DataContext.Platform.OnOpen, FallbackValue={x:Null}}" />
-            <Setter Property="CommandParameter" Value="{Binding Path}" />
-          </Style>
-        </MenuItem.Styles>
-      </MenuItem>
       <Separator IsVisible="{Binding !!RootDock}" />
       <MenuItem Header="E_xit" Command="{Binding Platform.OnExit, FallbackValue={x:Null}}" InputGesture="Alt+F4"  IsVisible="{Binding !!RootDock}"/>
     </MenuItem>

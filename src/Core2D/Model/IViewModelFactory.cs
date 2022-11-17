@@ -152,10 +152,6 @@ public interface IViewModelFactory
 
     ProjectContainerViewModel CreateProjectContainer(string name = "Project");
 
-    ProjectContainerViewModel? OpenProjectContainer(string path, IFileSystem fileSystem, IJsonSerializer serializer);
-
-    void SaveProjectContainer(ProjectContainerViewModel project, string path, IFileSystem fileSystem, IJsonSerializer serializer);
-
     ProjectContainerViewModel? OpenProjectContainer(Stream stream, IFileSystem fileSystem, IJsonSerializer serializer);
 
     void SaveProjectContainer(ProjectContainerViewModel project, IImageCache imageCache, Stream stream, IFileSystem fileSystem, IJsonSerializer serializer);

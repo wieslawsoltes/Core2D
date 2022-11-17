@@ -7,7 +7,6 @@ using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
-using Core2D.ViewModels.Editor.Recent;
 using Core2D.ViewModels.Renderer;
 
 namespace Core2D.ViewModels.Editor;
@@ -17,14 +16,12 @@ public partial class ProjectEditorViewModel
     [AutoNotify] private object? _rootDock;
     [AutoNotify] private object? _dockFactory;
     [AutoNotify] private ProjectContainerViewModel? _project;
-    [AutoNotify] private string? _projectPath;
+    [AutoNotify] private string? _projectName;
     [AutoNotify] private bool _isProjectDirty;
     [AutoNotify] private IDisposable? _observer;
     [AutoNotify] private bool _isToolIdle;
     [AutoNotify] private IEditorTool? _currentTool;
     [AutoNotify] private IPathTool? _currentPathTool;
-    [AutoNotify] private ImmutableArray<RecentFileViewModel> _recentProjects;
-    [AutoNotify] private RecentFileViewModel? _currentRecentProject;
     [AutoNotify] private AboutInfoViewModel? _aboutInfo;
     [AutoNotify] private IList<DialogViewModel>? _dialogs;
     private readonly Lazy<ImmutableArray<IEditorTool>> _tools;

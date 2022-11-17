@@ -1012,24 +1012,6 @@ public class ViewModelFactory : IViewModelFactory
         }
     }
 
-    public ProjectContainerViewModel? OpenProjectContainer(string path, IFileSystem fileSystem, IJsonSerializer serializer)
-    {
-        using var stream = fileSystem.Open(path);
-        return stream is null ? null : OpenProjectContainer(stream, fileSystem, serializer);
-    }
-
-    public void SaveProjectContainer(ProjectContainerViewModel project, string path, IFileSystem fileSystem, IJsonSerializer serializer)
-    {
-        if (project is IImageCache imageCache)
-        {
-            using var stream = fileSystem.Create(path);
-            if (stream is { })
-            {
-                SaveProjectContainer(project, imageCache, stream, fileSystem, serializer);
-            }
-        }
-    }
-
     public ProjectContainerViewModel? OpenProjectContainer(Stream stream, IFileSystem fileSystem, IJsonSerializer serializer)
     {
         using var archive = new ZipArchive(stream, ZipArchiveMode.Read);
