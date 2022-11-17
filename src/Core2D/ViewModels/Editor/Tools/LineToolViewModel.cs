@@ -34,14 +34,12 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-
         if (factory is null || editor?.Project?.Options is null || selection is null || viewModelFactory is null)
         {
             return;
         }
-
-        (double x, double y) = args;
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (x, y) = args;
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:
@@ -69,8 +67,13 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                         selection.TryToSplitLine(x, y, _line.Start);
                     }
                 }
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+
+                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
+                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                }
+                
                 ToStateEnd();
                 Move(_line);
                 _currentState = State.End;
@@ -96,9 +99,17 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                         }
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                    }
+                    
                     Finalize(_line);
-                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _line);
+                    
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _line);
+                    }
 
                     Reset();
                 }
@@ -131,7 +142,11 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        if (editor?.Project?.Options is null || selection is null)
+        {
+            return;
+        }
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:
@@ -184,8 +199,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
     public void Reset()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-
-        if (editor is null)
+        if (editor?.Project is null)
         {
             return;
         }
@@ -196,10 +210,13 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.End:
             {
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-            }
+                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                }
                 break;
+            }
         }
 
         _currentState = State.Start;

@@ -30,13 +30,11 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-
         if (factory is null || editor?.Project?.Options is null || selection is null)
         {
             return;
         }
-
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point:
@@ -79,13 +77,11 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-
-        if (editor is null || selection is null)
+        if (editor?.Project?.Options is null || selection is null)
         {
             return;
-        }
-            
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        } 
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point:

@@ -451,9 +451,9 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
         {
             return false;
         }
-            
-        (double x, double y) = args;
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+
+        var (x, y) = args;
+        var (sx, sy) = selection.TryToSnap(args);
 
         _mode = Mode.None;
         if (_currentHandle is { })
@@ -552,7 +552,7 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
 
         bool isProportionalResize = args.Modifier.HasFlag(ModifierFlags.Shift);
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         decimal dx = sx - _startX;
         decimal dy = sy - _startY;
         _startX = sx;

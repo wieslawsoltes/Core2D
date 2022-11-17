@@ -126,7 +126,10 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
 
         editor.SetShapeName(Path);
 
-        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(Path);
+        if (editor.Project.CurrentContainer?.WorkingLayer is { })
+        {
+            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(Path);
+        }
 
         PreviousPathTool = editor.CurrentPathTool;
         IsInitialized = true;
@@ -180,20 +183,25 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
         ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Reset();
 
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-
-        if (editor is null)
+        if (editor?.Project is null)
         {
             return;
         }
 
         if (Path is { })
         {
-            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
-            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-
-            if (!(Path.Figures.Length == 1) || !(Path.Figures[0].Segments.Length <= 1))
+            if (editor.Project.CurrentContainer?.WorkingLayer is { })
             {
-                editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, Path);
+                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
+                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+            }
+
+            if (Path.Figures.Length != 1 || !(Path.Figures[0].Segments.Length <= 1))
+            {
+                if (editor.Project.CurrentContainer is { })
+                {
+                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, Path);
+                }
             }
         }
 

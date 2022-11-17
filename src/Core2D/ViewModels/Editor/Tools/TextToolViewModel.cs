@@ -34,13 +34,11 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-
         if (factory is null || editor?.Project?.Options is null || selection is null || viewModelFactory is null)
         {
             return;
         }
-
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:
@@ -63,8 +61,12 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
                     _text.TopLeft = result;
                 }
 
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_text);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_text);
+                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                }
+                
                 ToStateBottomRight();
                 Move(_text);
                 _currentState = State.BottomRight;
@@ -83,9 +85,17 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
                         _text.BottomRight = result;
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
+                    }
+                    
                     Finalize(_text);
-                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _text);
+                    
+                    if (editor.Project.CurrentContainer?.CurrentLayer is { })
+                    {
+                        editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _text);
+                    }
 
                     Reset();
                 }
@@ -122,8 +132,7 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
         {
             return;
         }
-
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:
@@ -145,8 +154,8 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                     Move(_text);
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -179,8 +188,7 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
     public void Reset()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-
-        if (editor is null)
+        if (editor?.Project is null)
         {
             return;
         }
@@ -191,10 +199,13 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.BottomRight:
             {
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-            }
+                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
+                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                }
                 break;
+            }
         }
 
         _currentState = State.TopLeft;

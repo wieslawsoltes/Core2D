@@ -108,7 +108,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         decimal dx = sx - _startX;
         decimal dy = sy - _startY;
 
@@ -161,14 +161,12 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var hitTest = ServiceProvider.GetService<IHitTest>();
-
         if (factory is null || editor?.Project is null || selection is null || hitTest is null)
         {
             return;
         }
-
-        (double x, double y) = args;
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (x, y) = args;
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.None:
@@ -300,8 +298,13 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     editor.PageState.SelectionStyle,
                     true, true);
                 _rectangleShape.State |= ShapeStateFlags.Thickness;
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                
+                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
+                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                }
+                
                 _currentState = State.Selected;
             }
                 break;
@@ -311,8 +314,13 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 {
                     _rectangleShape.BottomRight.X = x;
                     _rectangleShape.BottomRight.Y = y;
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    }
+                    
                     _currentState = State.None;
                     editor.IsToolIdle = true;
                 }
@@ -326,8 +334,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var shapeService = ServiceProvider.GetService<IShapeService>();
-
-        if (editor is null || selection is null || shapeService is null)
+        if (editor?.Project is null || selection is null || shapeService is null)
         {
             return;
         }
@@ -344,13 +351,17 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 {
                     _rectangleShape.BottomRight.X = args.X;
                     _rectangleShape.BottomRight.Y = args.Y;
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
+                        editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    }
                 }
 
                 if (IsSelectionAvailable() && !isControl)
                 {
-                    (decimal sx, decimal sy) = selection.TryToSnap(args);
+                    var (sx, sy) = selection.TryToSnap(args);
                     if (_historyX != sx || _historyY != sy)
                     {
                         decimal dx = sx - _historyX;
@@ -401,8 +412,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     selection.OnShowOrHideDecorator();
                     editor.IsToolIdle = true;
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -421,15 +432,15 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
             case State.None:
             {
                 selection.DeHover(editor.Project.CurrentContainer.CurrentLayer);
-            }
                 break;
+            }
             case State.Selected:
             {
                 DisposeMoveSelectionCache();
                 selection.OnHideDecorator();
                 editor.IsToolIdle = true;
-            }
                 break;
+            }
         }
     }
 
@@ -441,12 +452,10 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-
-        if (editor is null || selection is null)
+        if (editor?.Project?.Options is null || selection is null)
         {
             return;
         }
-
         switch (_currentState)
         {
             case State.None:
@@ -463,8 +472,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     selection.TryToHoverShape(args.X, args.Y);
                     HitTestDecorator(args, isControl, true);
                 }
-            }
                 break;
+            }
             case State.Selected:
             {
                 bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
@@ -492,8 +501,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     _rectangleShape.BottomRight.Y = args.Y;
                     editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                 }
-            }
                 break;
+            }
         }
     }
 

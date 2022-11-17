@@ -37,7 +37,11 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        if (factory is null || editor?.Project?.Options is null || selection is null || pathTool is null)
+        {
+            return;
+        }
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:
@@ -168,7 +172,11 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        if (editor?.Project?.Options is null || selection is null)
+        {
+            return;
+        }
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:

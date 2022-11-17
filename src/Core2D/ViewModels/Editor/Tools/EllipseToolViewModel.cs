@@ -48,13 +48,11 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-
         if (factory is null || editor?.Project?.Options is null || selection is null || viewModelFactory is null)
         {
             return;
         }
-
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:
@@ -83,8 +81,12 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
                     _ellipse.TopLeft = result;
                 }
 
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_ellipse);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_ellipse);
+                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                }
+
                 ToStateBottomRight();
                 Move(_ellipse);
                 _currentState = State.BottomRight;
@@ -92,7 +94,7 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.BottomRight:
             {
-                if (_ellipse is { })
+                if (_ellipse?.TopLeft is { } && _ellipse?.BottomRight is { })
                 {
                     if (_currentMode == Mode.Circle)
                     {
@@ -110,9 +112,17 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
                         _ellipse.BottomRight = result;
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
+                    }
+
                     Finalize(_ellipse);
-                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _ellipse);
+                    
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _ellipse);
+                    }
 
                     Reset();
                 }
@@ -145,7 +155,11 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        if (editor?.Project?.Options is null || selection is null)
+        {
+            return;
+        }
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:
@@ -211,8 +225,7 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
     public void Reset()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            
-        if (editor is null)
+        if (editor?.Project is null)
         {
             return;
         }
@@ -223,8 +236,11 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.BottomRight:
             {
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
+                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                }
             }
                 break;
         }
