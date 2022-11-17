@@ -10,9 +10,9 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes;
 internal class PathDrawNode : DrawNode, IPathDrawNode
 {
     public PathShapeViewModel Path { get; set; }
-    public SKPath Geometry { get; set; }
+    public SKPath? Geometry { get; set; }
 
-    public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style)
+    public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel? style)
     {
         Style = style;
         Path = path;
@@ -27,9 +27,12 @@ internal class PathDrawNode : DrawNode, IPathDrawNode
         Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (Path.IsFilled)
         {

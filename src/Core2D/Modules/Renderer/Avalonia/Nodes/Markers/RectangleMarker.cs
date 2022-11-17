@@ -9,9 +9,13 @@ internal class RectangleMarker : MarkerBase
 {
     public A.Rect Rect { get; set; }
 
-    public override void Draw(object dc)
+    public override void Draw(object? dc)
     {
-        var context = dc as AP.IDrawingContextImpl;
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
         using var rotationDisposable = context.PushPreTransform(Rotation);
 
         if (ShapeViewModel.IsFilled)

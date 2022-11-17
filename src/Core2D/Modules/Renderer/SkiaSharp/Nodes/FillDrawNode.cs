@@ -42,10 +42,16 @@ internal class FillDrawNode : DrawNode, IFillDrawNode
         OnDraw(dc, zoom);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
-        canvas.DrawRect(Rect, Fill);
+        if (!Rect.IsEmpty)
+        {
+            canvas.DrawRect(Rect, Fill);
+        }
     }
 }

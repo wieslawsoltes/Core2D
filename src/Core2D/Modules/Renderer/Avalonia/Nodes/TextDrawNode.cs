@@ -17,16 +17,12 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
     public TextShapeViewModel Text { get; set; }
     public A.Rect Rect { get; set; }
     public A.Point Origin { get; set; }
-    public AM.Typeface Typeface { get; set; }
+    public AM.Typeface? Typeface { get; set; }
     public AM.FormattedText? FormattedText { get; set; }
     public AM.Geometry? Geometry { get; set; }
-    public string BoundText { get; set; }
+    public string? BoundText { get; set; }
 
-    public TextDrawNode()
-    {
-    }
-
-    public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style)
+    public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel? style)
     {
         Style = style;
         Text = text;
@@ -44,7 +40,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         UpdateTextGeometry();
     }
 
-    protected void UpdateTextGeometry()
+    private void UpdateTextGeometry()
     {
         BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
 
@@ -75,6 +71,10 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         // TODO: Cache FormattedText
 
         Typeface = new AM.Typeface(Style.TextStyle.FontName, fontStyle, fontWeight);
+        if (Typeface is null)
+        {
+            Typeface = AM.Typeface.Default;
+        }
 
         var textAlignment = Style.TextStyle.TextHAlignment switch
         {
@@ -92,7 +92,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
             BoundText,
             CultureInfo.InvariantCulture,
             AM.FlowDirection.LeftToRight,
-            Typeface,
+            Typeface.Value,
             Style.TextStyle.FontSize,
             Stroke.Brush
         );
@@ -127,10 +127,14 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         Geometry = FormattedText.BuildGeometry(Origin);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
-        if (context is { } && Geometry is { })
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
+        if (Geometry is { })
         {
             // context.DrawGeometry(Text.IsFilled ? Fill : null, Text.IsStroked ? Stroke : null, Geometry.PlatformImpl);
             context.DrawGeometry(Stroke.Brush, null, Geometry.PlatformImpl);

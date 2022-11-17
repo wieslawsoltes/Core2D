@@ -13,15 +13,11 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
     public TextShapeViewModel Text { get; set; }
     public SKRect Rect { get; set; }
     public SKPoint Origin { get; set; }
-    public SKTypeface Typeface { get; set; }
-    public SKPaint FormattedText { get; set; }
-    public string BoundText { get; set; }
+    public SKTypeface? Typeface { get; set; }
+    public SKPaint? FormattedText { get; set; }
+    public string? BoundText { get; set; }
 
-    public TextDrawNode()
-    {
-    }
-
-    public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style)
+    public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel? style)
     {
         Style = style;
         Text = text;
@@ -39,7 +35,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         UpdateTextGeometry();
     }
 
-    protected void UpdateTextGeometry()
+    private void UpdateTextGeometry()
     {
         BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
 
@@ -58,9 +54,12 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         Origin = origin;
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (FormattedText is { })
         {

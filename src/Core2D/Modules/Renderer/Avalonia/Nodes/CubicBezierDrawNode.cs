@@ -10,16 +10,16 @@ namespace Core2D.Modules.Renderer.Avalonia.Nodes;
 internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
 {
     public CubicBezierShapeViewModel CubicBezier { get; set; }
-    public AP.IGeometryImpl Geometry { get; set; }
+    public AP.IGeometryImpl? Geometry { get; set; }
 
-    public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
+    public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel? style)
     {
         Style = style;
         CubicBezier = cubicBezier;
         UpdateGeometry();
     }
 
-    public override void UpdateGeometry()
+    public sealed override void UpdateGeometry()
     {
         ScaleThickness = CubicBezier.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = CubicBezier.State.HasFlag(ShapeStateFlags.Size);
@@ -27,9 +27,16 @@ internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
         Center = Geometry.Bounds.Center;
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
-        context.DrawGeometry(CubicBezier.IsFilled ? Fill : null, CubicBezier.IsStroked ? Stroke : null, Geometry);
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
+        if (Geometry is { })
+        {
+            context.DrawGeometry(CubicBezier.IsFilled ? Fill : null, CubicBezier.IsStroked ? Stroke : null, Geometry);
+        }
     }
 }

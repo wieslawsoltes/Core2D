@@ -13,7 +13,7 @@ internal class PointDrawNode : DrawNode, IPointDrawNode
     public double PointSize { get; set; }
     public SKRect Rect { get; set; }
 
-    public PointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize)
+    public PointDrawNode(PointShapeViewModel point, ShapeStyleViewModel? pointStyleViewModel, double pointSize)
     {
         Style = pointStyleViewModel;
         Point = point;

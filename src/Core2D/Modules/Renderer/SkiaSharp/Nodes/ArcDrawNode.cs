@@ -10,7 +10,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes;
 internal class ArcDrawNode : DrawNode, IArcDrawNode
 {
     public ArcShapeViewModel Arc { get; set; }
-    public SKPath Geometry { get; set; }
+    public SKPath? Geometry { get; set; }
 
     public ArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel style)
     {
@@ -27,9 +27,12 @@ internal class ArcDrawNode : DrawNode, IArcDrawNode
         Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (Arc.IsFilled)
         {

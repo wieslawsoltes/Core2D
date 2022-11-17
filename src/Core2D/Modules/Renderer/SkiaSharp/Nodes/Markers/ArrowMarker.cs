@@ -10,9 +10,12 @@ internal class ArrowMarker : MarkerBase
     public SKPoint P12;
     public SKPoint P22;
 
-    public override void Draw(object dc)
+    public override void Draw(object? dc)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (ShapeViewModel.IsStroked)
         {

@@ -16,14 +16,13 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
 {
     public ImageShapeViewModel Image { get; set; }
     public A.Rect Rect { get; set; }
-    public IImageCache ImageCache { get; set; }
-    public ICache<string, IDisposable> BitmapCache { get; set; }
-    public AMI.Bitmap ImageCached { get; set; }
+    public IImageCache? ImageCache { get; set; }
+    public ICache<string, IDisposable>? BitmapCache { get; set; }
+    public AMI.Bitmap? ImageCached { get; set; }
     public A.Rect SourceRect { get; set; }
     public A.Rect DestRect { get; set; }
 
-    public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
-        : base()
+    public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel? style, IImageCache? imageCache, ICache<string, IDisposable>? bitmapCache)
     {
         Style = style;
         Image = image;
@@ -74,9 +73,13 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
         Center = DestRect.Center;
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
         if (Image.IsFilled)
         {
             context.DrawRectangle(Fill, null, DestRect);

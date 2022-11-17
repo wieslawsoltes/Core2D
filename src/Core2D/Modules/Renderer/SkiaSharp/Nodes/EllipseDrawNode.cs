@@ -30,9 +30,12 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
         Center = new SKPoint(Rect.MidX, Rect.MidY);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (Ellipse.IsFilled)
         {

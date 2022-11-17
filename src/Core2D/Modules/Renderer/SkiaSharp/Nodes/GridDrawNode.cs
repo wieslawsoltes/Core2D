@@ -48,7 +48,7 @@ internal class GridDrawNode : DrawNode, IGridDrawNode
         }
     }
 
-    public override void Draw(object dc, double zoom)
+    public override void Draw(object? dc, double zoom)
     {
         var scale = ScaleSize ? 1.0 / zoom : 1.0;
 
@@ -72,29 +72,32 @@ internal class GridDrawNode : DrawNode, IGridDrawNode
         OnDraw(dc, zoom);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (Grid.GridStrokeColor is { })
         {
             if (Grid.IsGridEnabled)
             {
-                float ox = Rect.Left;
-                float ex = Rect.Left + Rect.Width;
-                float oy = Rect.Top;
-                float ey = Rect.Top + Rect.Height;
-                float cw = (float)Grid.GridCellWidth;
-                float ch = (float)Grid.GridCellHeight;
+                var ox = Rect.Left;
+                var ex = Rect.Left + Rect.Width;
+                var oy = Rect.Top;
+                var ey = Rect.Top + Rect.Height;
+                var cw = (float)Grid.GridCellWidth;
+                var ch = (float)Grid.GridCellHeight;
 
-                for (float x = ox + cw; x < ex; x += cw)
+                for (var x = ox + cw; x < ex; x += cw)
                 {
                     var p0 = new SKPoint(x, oy);
                     var p1 = new SKPoint(x, ey);
                     canvas.DrawLine(p0, p1, Stroke);
                 }
 
-                for (float y = oy + ch; y < ey; y += ch)
+                for (var y = oy + ch; y < ey; y += ch)
                 {
                     var p0 = new SKPoint(ox, y);
                     var p1 = new SKPoint(ex, y);

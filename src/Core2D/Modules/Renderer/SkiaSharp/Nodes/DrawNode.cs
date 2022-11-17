@@ -7,14 +7,14 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes;
 
 internal abstract class DrawNode : IDrawNode
 {
-    public ShapeStyleViewModel Style { get; set; }
+    public ShapeStyleViewModel? Style { get; set; }
     public bool ScaleThickness { get; set; }
     public bool ScaleSize { get; set; }
-    public SKPaint Fill { get; set; }
-    public SKPaint Stroke { get; set; }
+    public SKPaint? Fill { get; set; }
+    public SKPaint? Stroke { get; set; }
     public SKPoint Center { get; set; }
 
-    public DrawNode()
+    protected DrawNode()
     {
     }
 
@@ -22,17 +22,29 @@ internal abstract class DrawNode : IDrawNode
 
     public virtual void UpdateStyle()
     {
-        Fill = SkiaSharpDrawUtil.ToSKPaintBrush(Style.Fill.Color);
-        Stroke = SkiaSharpDrawUtil.ToSKPaintPen(Style, Style.Stroke.Thickness);
+        if (Style?.Fill?.Color is { })
+        {
+            Fill = SkiaSharpDrawUtil.ToSKPaintBrush(Style.Fill.Color);
+        }
+
+        if (Style?.Stroke is { })
+        {
+            Stroke = SkiaSharpDrawUtil.ToSKPaintPen(Style, Style.Stroke.Thickness);
+        }
     }
 
-    public virtual void Draw(object dc, double zoom)
+    public virtual void Draw(object? dc, double zoom)
     {
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
+
         var scale = ScaleSize ? 1.0 / zoom : 1.0;
         var translateX = 0.0 - (Center.X * scale) + Center.X;
         var translateY = 0.0 - (Center.Y * scale) + Center.Y;
 
-        double thickness = Style.Stroke.Thickness;
+        var thickness = Style.Stroke.Thickness;
 
         if (ScaleThickness)
         {
@@ -49,9 +61,7 @@ internal abstract class DrawNode : IDrawNode
             Stroke.StrokeWidth = (float)thickness;
         }
 
-        var canvas = dc as SKCanvas;
-
-        int count = int.MinValue;
+        var count = int.MinValue;
 
         if (scale != 1.0)
         {
@@ -68,7 +78,7 @@ internal abstract class DrawNode : IDrawNode
         }
     }
 
-    public abstract void OnDraw(object dc, double zoom);
+    public abstract void OnDraw(object? dc, double zoom);
 
     public virtual void Dispose()
     {

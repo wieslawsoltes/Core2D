@@ -49,7 +49,7 @@ internal class GridDrawNode : DrawNode, IGridDrawNode
         }
     }
 
-    public override void Draw(object dc, double zoom)
+    public override void Draw(object? dc, double zoom)
     {
         var scale = ScaleSize ? 1.0 / zoom : 1.0;
 
@@ -73,28 +73,37 @@ internal class GridDrawNode : DrawNode, IGridDrawNode
         OnDraw(dc, zoom);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
+        if (Stroke is null)
+        {
+            return;
+        }
+        
         if (Grid.GridStrokeColor is { })
         {
             if (Grid.IsGridEnabled)
             {
-                double ox = Rect.X;
-                double ex = Rect.X + Rect.Width;
-                double oy = Rect.Y;
-                double ey = Rect.Y + Rect.Height;
-                double cw = Grid.GridCellWidth;
-                double ch = Grid.GridCellHeight;
+                var ox = Rect.X;
+                var ex = Rect.X + Rect.Width;
+                var oy = Rect.Y;
+                var ey = Rect.Y + Rect.Height;
+                var cw = Grid.GridCellWidth;
+                var ch = Grid.GridCellHeight;
 
-                for (double x = ox + cw; x < ex; x += cw)
+                for (var x = ox + cw; x < ex; x += cw)
                 {
                     var p0 = new A.Point(x, oy);
                     var p1 = new A.Point(x, ey);
                     context.DrawLine(Stroke, p0, p1);
                 }
 
-                for (double y = oy + ch; y < ey; y += ch)
+                for (var y = oy + ch; y < ey; y += ch)
                 {
                     var p0 = new A.Point(ox, y);
                     var p1 = new A.Point(ex, y);

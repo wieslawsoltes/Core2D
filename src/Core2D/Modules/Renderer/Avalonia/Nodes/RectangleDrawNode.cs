@@ -14,8 +14,7 @@ internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
     public RectangleShapeViewModel Rectangle { get; set; }
     public A.Rect Rect { get; set; }
 
-    public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
-        : base()
+    public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
         Style = style;
         Rectangle = rectangle;
@@ -31,9 +30,13 @@ internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
         Center = Rect.Center;
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
         if (Rectangle.IsFilled)
         {
             context.DrawRectangle(Fill, null, Rect);

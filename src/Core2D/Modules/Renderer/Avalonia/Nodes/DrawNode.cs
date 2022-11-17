@@ -11,14 +11,14 @@ namespace Core2D.Modules.Renderer.Avalonia.Nodes;
 
 internal abstract class DrawNode : IDrawNode
 {
-    public ShapeStyleViewModel Style { get; set; }
+    public ShapeStyleViewModel? Style { get; set; }
     public bool ScaleThickness { get; set; }
     public bool ScaleSize { get; set; }
-    public AM.IBrush Fill { get; set; }
-    public AM.IPen Stroke { get; set; }
+    public AM.IBrush? Fill { get; set; }
+    public AM.IPen? Stroke { get; set; }
     public A.Point Center { get; set; }
 
-    public DrawNode()
+    protected DrawNode()
     {
     }
 
@@ -26,12 +26,24 @@ internal abstract class DrawNode : IDrawNode
 
     public virtual void UpdateStyle()
     {
-        Fill = AvaloniaDrawUtil.ToBrush(Style.Fill.Color);
-        Stroke = AvaloniaDrawUtil.ToPen(Style, Style.Stroke.Thickness);
+        if (Style?.Fill?.Color is { })
+        {
+            Fill = AvaloniaDrawUtil.ToBrush(Style.Fill.Color);
+        }
+
+        if (Style?.Stroke is { })
+        {
+            Stroke = AvaloniaDrawUtil.ToPen(Style, Style.Stroke.Thickness);
+        }
     }
 
-    public virtual void Draw(object dc, double zoom)
+    public virtual void Draw(object? dc, double zoom)
     {
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
         var scale = ScaleSize ? 1.0 / zoom : 1.0;
         var translateX = 0.0 - (Center.X * scale) + Center.X;
         var translateY = 0.0 - (Center.Y * scale) + Center.Y;
@@ -53,7 +65,6 @@ internal abstract class DrawNode : IDrawNode
             Stroke = AvaloniaDrawUtil.ToPen(Style, thickness);
         }
 
-        var context = dc as AP.IDrawingContextImpl;
         if (scale != 1.0)
         {
             using var translateDisposable = context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY));
@@ -66,7 +77,7 @@ internal abstract class DrawNode : IDrawNode
         }
     }
 
-    public abstract void OnDraw(object dc, double zoom);
+    public abstract void OnDraw(object? dc, double zoom);
 
     public virtual void Dispose()
     {

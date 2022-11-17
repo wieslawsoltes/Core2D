@@ -10,9 +10,9 @@ namespace Core2D.Modules.Renderer.Avalonia.Nodes;
 internal class ArcDrawNode : DrawNode, IArcDrawNode
 {
     public ArcShapeViewModel Arc { get; set; }
-    public AP.IGeometryImpl Geometry { get; set; }
+    public AP.IGeometryImpl? Geometry { get; set; }
 
-    public ArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel style)
+    public ArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel? style)
     {
         Style = style;
         Arc = arc;
@@ -27,9 +27,16 @@ internal class ArcDrawNode : DrawNode, IArcDrawNode
         Center = Geometry.Bounds.Center;
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
-        context.DrawGeometry(Arc.IsFilled ? Fill : null, Arc.IsStroked ? Stroke : null, Geometry);
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
+        if (Geometry is { })
+        {
+            context.DrawGeometry(Arc.IsFilled ? Fill : null, Arc.IsStroked ? Stroke : null, Geometry);
+        }
     }
 }

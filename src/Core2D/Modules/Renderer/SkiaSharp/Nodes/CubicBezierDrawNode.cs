@@ -10,7 +10,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes;
 internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
 {
     public CubicBezierShapeViewModel CubicBezier { get; set; }
-    public SKPath Geometry { get; set; }
+    public SKPath? Geometry { get; set; }
 
     public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
     {
@@ -27,9 +27,12 @@ internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
         Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (CubicBezier.IsFilled)
         {

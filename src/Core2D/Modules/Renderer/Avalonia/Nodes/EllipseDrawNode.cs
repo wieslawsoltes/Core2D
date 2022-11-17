@@ -13,10 +13,9 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
 {
     public EllipseShapeViewModel Ellipse { get; set; }
     public A.Rect Rect { get; set; }
-    public AP.IGeometryImpl Geometry { get; set; }
+    public AP.IGeometryImpl? Geometry { get; set; }
 
-    public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
-        : base()
+    public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
         Style = style;
         Ellipse = ellipse;

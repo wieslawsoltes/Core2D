@@ -10,9 +10,9 @@ namespace Core2D.Modules.Renderer.Avalonia.Nodes;
 internal class PathDrawNode : DrawNode, IPathDrawNode
 {
     public PathShapeViewModel Path { get; set; }
-    public AP.IGeometryImpl Geometry { get; set; }
+    public AP.IGeometryImpl? Geometry { get; set; }
 
-    public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style)
+    public PathDrawNode(PathShapeViewModel path, ShapeStyleViewModel? style)
     {
         Style = style;
         Path = path;
@@ -27,9 +27,16 @@ internal class PathDrawNode : DrawNode, IPathDrawNode
         Center = Geometry.Bounds.Center;
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
-        context.DrawGeometry(Path.IsFilled ? Fill : null, Path.IsStroked ? Stroke : null, Geometry);
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
+        if (Geometry is { })
+        {
+            context.DrawGeometry(Path.IsFilled ? Fill : null, Path.IsStroked ? Stroke : null, Geometry);
+        }
     }
 }

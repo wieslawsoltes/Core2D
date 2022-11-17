@@ -14,14 +14,13 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
 {
     public ImageShapeViewModel Image { get; set; }
     public SKRect Rect { get; set; }
-    public IImageCache ImageCache { get; set; }
-    public ICache<string, IDisposable> BitmapCache { get; set; }
-    public SKBitmap ImageCached { get; set; }
+    public IImageCache? ImageCache { get; set; }
+    public ICache<string, IDisposable>? BitmapCache { get; set; }
+    public SKBitmap? ImageCached { get; set; }
     public SKRect SourceRect { get; set; }
     public SKRect DestRect { get; set; }
 
-    public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
-        : base()
+    public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel? style, IImageCache? imageCache, ICache<string, IDisposable>? bitmapCache)
     {
         Style = style;
         Image = image;
@@ -71,9 +70,12 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
         Center = new SKPoint(DestRect.MidX, DestRect.MidY);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (Image.IsFilled)
         {

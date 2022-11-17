@@ -7,7 +7,7 @@ public interface IMarker
 {
     ArrowStyleViewModel? Style { get; set; }
 
-    void Draw(object dc);
+    void Draw(object? dc);
 
     void UpdateStyle();
 }

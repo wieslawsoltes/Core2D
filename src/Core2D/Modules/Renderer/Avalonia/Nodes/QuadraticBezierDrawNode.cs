@@ -10,9 +10,9 @@ namespace Core2D.Modules.Renderer.Avalonia.Nodes;
 internal class QuadraticBezierDrawNode : DrawNode, IQuadraticBezierDrawNode
 {
     public QuadraticBezierShapeViewModel QuadraticBezier { get; set; }
-    public AP.IGeometryImpl Geometry { get; set; }
+    public AP.IGeometryImpl? Geometry { get; set; }
 
-    public QuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
+    public QuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel? style)
     {
         Style = style;
         QuadraticBezier = quadraticBezier;
@@ -27,9 +27,16 @@ internal class QuadraticBezierDrawNode : DrawNode, IQuadraticBezierDrawNode
         Center = Geometry.Bounds.Center;
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
-        context.DrawGeometry(QuadraticBezier.IsFilled ? Fill : null, QuadraticBezier.IsStroked ? Stroke : null, Geometry);
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
+        if (Geometry is { })
+        {
+            context.DrawGeometry(QuadraticBezier.IsFilled ? Fill : null, QuadraticBezier.IsStroked ? Stroke : null, Geometry);
+        }
     }
 }
