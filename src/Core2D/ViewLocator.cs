@@ -18,14 +18,12 @@ public partial class ViewLocator : IDataTemplate
         {
             return (Control)Activator.CreateInstance(type)!;
         }
-        else
-        {
-            return new TextBlock { Text = "Not Found: " + name };
-        }
+
+        return new TextBlock { Text = "Not Found: " + name };
     }
 
     public bool Match(object? data)
     {
-        return data is ViewModelBase || data is DockableBase;
+        return data is ViewModelBase or DockableBase;
     }
 }

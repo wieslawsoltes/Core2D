@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable enable
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +7,7 @@ using Autofac;
 using Avalonia;
 using Avalonia.Platform;
 using Core2D.Configuration.Windows;
+using Core2D.Json;
 using Core2D.Model;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Docking;
@@ -16,36 +17,11 @@ using Dock.Model.Core;
 using Dock.Model.ReactiveUI.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 
 namespace Core2D;
 
 public class AppState : IDisposable
 {
-    private class ListContractResolver : DefaultContractResolver
-    {
-        private readonly Type _type;
-
-        public ListContractResolver(Type type)
-        {
-            _type = type;
-        }
-
-        public override JsonContract ResolveContract(Type type)
-        {
-            if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
-            {
-                return base.ResolveContract(_type.MakeGenericType(type.GenericTypeArguments[0]));
-            }
-            return base.ResolveContract(type);
-        }
-
-        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-        {
-            return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();
-        }
-    }
-
     private static readonly JsonSerializerSettings s_jsonSettings = new ()
     {
         Formatting = Formatting.Indented,
@@ -60,6 +36,8 @@ public class AppState : IDisposable
         }
     };
 
+    public string BaseDirectory { get; }
+
     public string LogPath { get; }
 
     public string RecentPath { get; }
@@ -68,15 +46,15 @@ public class AppState : IDisposable
 
     public string WindowConfigurationPath { get; }
 
-    public IContainer Container { get; }
+    public IContainer? Container { get; }
 
-    public IServiceProvider ServiceProvider { get; }
+    public IServiceProvider? ServiceProvider { get; }
     
-    public ILog Log { get; }
+    public ILog? Log { get; }
     
-    public IFileSystem FileSystem { get; }
+    public IFileSystem? FileSystem { get; }
     
-    public ProjectEditorViewModel Editor { get; }
+    public ProjectEditorViewModel? Editor { get; }
 
     public WindowConfiguration? WindowConfiguration { get; set; }
 
@@ -101,29 +79,50 @@ public class AppState : IDisposable
         Log = ServiceProvider.GetService<ILog>();
         FileSystem = ServiceProvider.GetService<IFileSystem>();
 
-        Log?.Initialize(System.IO.Path.Combine(FileSystem?.GetBaseDirectory(), LogPath));
+        BaseDirectory = FileSystem?.GetBaseDirectory() ?? "";
+        
+        Log?.Initialize(System.IO.Path.Combine(BaseDirectory, LogPath));
 
         Editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
+        InitializeEditor();
+
+        WindowConfiguration = LoadWindowSettings();
+    }
+
+    private void InitializeEditor()
+    {
+        if (Editor is null)
+        {
+            return;
+        }
+        
         Editor.DockFactory = new DockFactory(Editor);
 
-        var recentPath = System.IO.Path.Combine(FileSystem.GetBaseDirectory(), RecentPath);
-        if (FileSystem.Exists(recentPath))
+        if (FileSystem is { })
         {
-            Editor.OnLoadRecent(recentPath);
+            var recentPath = System.IO.Path.Combine(BaseDirectory, RecentPath);
+            if (FileSystem.Exists(recentPath))
+            {
+                Editor.OnLoadRecent(recentPath);
+            }
         }
 
         var rootDock = default(RootDock);
-        var rootDockPath = System.IO.Path.Combine(FileSystem?.GetBaseDirectory(), LayoutPath);
-        if (FileSystem.Exists(rootDockPath))
+
+        if (FileSystem is { })
         {
-            var jsonRootDock = FileSystem?.ReadUtf8Text(rootDockPath);
-            if (!string.IsNullOrEmpty(jsonRootDock))
+            var rootDockPath = System.IO.Path.Combine(BaseDirectory, LayoutPath);
+            if (FileSystem.Exists(rootDockPath))
             {
-                rootDock = JsonConvert.DeserializeObject<RootDock>(jsonRootDock, s_jsonSettings);
-                if (rootDock is { })
+                var jsonRootDock = FileSystem?.ReadUtf8Text(rootDockPath);
+                if (!string.IsNullOrEmpty(jsonRootDock))
                 {
-                    LoadLayout(Editor, rootDock);
+                    rootDock = JsonConvert.DeserializeObject<RootDock>(jsonRootDock, s_jsonSettings);
+                    if (rootDock is { })
+                    {
+                        LoadLayout(Editor, rootDock);
+                    }
                 }
             }
         }
@@ -137,16 +136,19 @@ public class AppState : IDisposable
         Editor.CurrentPathTool = Editor.PathTools.FirstOrDefault(t => t.Title == "Line");
         Editor.IsToolIdle = true;
 
-        var runtimeInfo = AvaloniaLocator.Current.GetService<IRuntimePlatform>().GetRuntimeInfo();
+        var runtimePlatform = AvaloniaLocator.Current.GetService<IRuntimePlatform>();
         var windowingPlatform = AvaloniaLocator.Current.GetService<IWindowingPlatform>();
         var platformRenderInterface = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>();
-        var windowingSubsystemName = windowingPlatform.GetType().Assembly.GetName().Name;
-        var renderingSubsystemName = platformRenderInterface.GetType().Assembly.GetName().Name;
-        var aboutInfo = CreateAboutInfo(ServiceProvider, runtimeInfo, windowingSubsystemName, renderingSubsystemName);
+        if (windowingPlatform is { } && platformRenderInterface is { } && runtimePlatform is { })
+        {
+            var windowingSubsystemName = windowingPlatform.GetType().Assembly.GetName().Name;
+            var renderingSubsystemName = platformRenderInterface.GetType().Assembly.GetName().Name;
+            var runtimeInfo = runtimePlatform.GetRuntimeInfo();
+            var aboutInfo = CreateAboutInfo(ServiceProvider, runtimeInfo, windowingSubsystemName,
+                renderingSubsystemName);
 
-        Editor.AboutInfo = aboutInfo;
-        
-        WindowConfiguration = LoadWindowSettings();
+            Editor.AboutInfo = aboutInfo;
+        }
     }
 
     private AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider, RuntimePlatformInfo runtimeInfo, string? windowingSubsystem, string? renderingSubsystem)
@@ -154,7 +156,7 @@ public class AppState : IDisposable
         return new AboutInfoViewModel(serviceProvider)
         {
             Title = "Core2D",
-            Version = $"{Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}",
+            Version = $"{Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion}",
             Description = "A multi-platform data driven 2D diagram editor.",
             Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
             License = "Licensed under the MIT License. See LICENSE file in the project root for full license information.",
@@ -172,6 +174,11 @@ public class AppState : IDisposable
 
     public void Save()
     {
+        if (Editor is null)
+        {
+            return;
+        }
+
         Editor.OnSaveRecent(RecentPath);
 
         var jsonWindowSettings = JsonConvert.SerializeObject(WindowConfiguration, s_jsonSettings);
@@ -189,11 +196,16 @@ public class AppState : IDisposable
 
     private WindowConfiguration? LoadWindowSettings()
     {
+        if (FileSystem is null)
+        {
+            return null;
+        }
+
         var windowSettings = default(WindowConfiguration);
-        var windowSettingsPath = System.IO.Path.Combine(FileSystem?.GetBaseDirectory(), WindowConfigurationPath);
+        var windowSettingsPath = System.IO.Path.Combine(BaseDirectory, WindowConfigurationPath);
         if (FileSystem.Exists(windowSettingsPath))
         {
-            var jsonWindowSettings = FileSystem?.ReadUtf8Text(windowSettingsPath);
+            var jsonWindowSettings = FileSystem.ReadUtf8Text(windowSettingsPath);
             if (!string.IsNullOrEmpty(jsonWindowSettings))
             {
                 windowSettings = JsonConvert.DeserializeObject<WindowConfiguration>(jsonWindowSettings, s_jsonSettings);
@@ -240,7 +252,7 @@ public class AppState : IDisposable
 
     public void Dispose()
     {
-        Container.Dispose();
-        Log.Dispose();
+        Container?.Dispose();
+        Log?.Dispose();
     }
 }

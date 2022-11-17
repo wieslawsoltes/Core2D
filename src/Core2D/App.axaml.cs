@@ -14,7 +14,6 @@ using Core2D.ViewModels;
 using Core2D.ViewModels.Designer;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
-using Newtonsoft.Json;
 
 namespace Core2D;
 
@@ -22,11 +21,13 @@ public class App : Application
 {
     public static string DefaultTheme { get; set; }
 
-    public static ICommand ChangeTheme { get; private set; }
+    public static ICommand? ChangeTheme { get; }
 
     static App()
     {
         DefaultTheme = "FluentDark";
+
+        ChangeTheme = new Command<string>(SetTheme);
 
         InitializeDesigner();
     }
@@ -45,11 +46,16 @@ public class App : Application
         }
     }
 
-    public static Window InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime desktopLifetime, out ProjectEditorViewModel editor)
+    public static void InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime desktopLifetime, out ProjectEditorViewModel? editor)
     {
         var appState = new AppState();
 
         var mainWindow = appState.ServiceProvider.GetService<Window>();
+        if (mainWindow is null)
+        {
+            editor = null;
+            return;
+        }
 
         if (appState.WindowConfiguration is { })
         {
@@ -58,7 +64,7 @@ public class App : Application
 
         mainWindow.DataContext = appState.Editor;
 
-        mainWindow.Closing += (sender, e) =>
+        mainWindow.Closing += (_, _) =>
         {
             appState.WindowConfiguration = WindowConfigurationFactory.Save(mainWindow);
             appState.Save();
@@ -68,11 +74,9 @@ public class App : Application
         desktopLifetime.Exit += (_, _) => appState.Dispose();
 
         editor = appState.Editor;
-
-        return mainWindow;
     }
 
-    public static MainView InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime, out ProjectEditorViewModel editor)
+    public static void InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime, out ProjectEditorViewModel? editor)
     {
         var appState = new AppState();
 
@@ -85,12 +89,15 @@ public class App : Application
         singleViewLifetime.MainView.Unloaded += (_, _) => appState.Dispose();
 
         editor = appState.Editor;
-
-        return mainView;
     }
 
-    public void SetTheme(string themeName)
+    public static void SetTheme(string? themeName)
     {
+        if (Current is null || themeName is null)
+        {
+            return;
+        }
+
         var theme = Current.Styles.Select(x => (StyleInclude)x).FirstOrDefault(x => x.Source is { } && x.Source.AbsolutePath.Contains("Themes"));
         if (theme is { })
         {
@@ -126,7 +133,5 @@ public class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
-
-        ChangeTheme = new Command<string>(SetTheme);
     }
 }
