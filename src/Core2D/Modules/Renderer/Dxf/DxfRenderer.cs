@@ -20,20 +20,20 @@ namespace Core2D.Modules.Renderer.Dxf;
 
 public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 {
-    private ICache<string, DXFO.ImageDefinition> _biCache;
-    private double _sourceDpi = 96.0;
-    private double _targetDpi = 72.0;
+    private readonly ICache<string, DXFO.ImageDefinition>? _biCache;
+    private readonly double _sourceDpi = 96.0;
+    private readonly double _targetDpi = 72.0;
     private double _pageWidth;
     private double _pageHeight;
-    private string _outputPath;
-    internal DXFT.Layer _currentLayer;
+    private string? _outputPath;
+    internal DXFT.Layer? _currentLayer;
 
-    [AutoNotify] private ShapeRendererStateViewModel _state;
+    [AutoNotify] private ShapeRendererStateViewModel? _state;
 
     public DxfRenderer(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
-        _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, DXFO.ImageDefinition>();
+        _state = serviceProvider.GetService<IViewModelFactory>()?.CreateShapeRendererState();
+        _biCache = serviceProvider.GetService<IViewModelFactory>()?.CreateCache<string, DXFO.ImageDefinition>();
     }
 
     public override object Copy(IDictionary<object, object>? shared)
@@ -41,9 +41,9 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         throw new NotImplementedException();
     }
 
-    private static double s_lineweightFactor = 96.0 / 2540.0;
+    private static readonly double s_lineweightFactor = 96.0 / 2540.0;
 
-    private static short[] s_lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };
+    private static readonly short[] s_lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };
 
     private static DXF.Lineweight ToLineweight(double thickness)
     {
@@ -420,15 +420,22 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         _biCache.Reset();
     }
 
-    public void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel colorViewModel)
+    public void Fill(object? dc, double x, double y, double width, double height, BaseColorViewModel? colorViewModel)
     {
-        var dxf = dc as DXF.DxfDocument;
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
         FillRectangle(dxf, _currentLayer, x, y, width, height, colorViewModel);
     }
 
-    public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
+    public void Grid(object? dc, IGrid grid, double x, double y, double width, double height)
     {
-        var dxf = dc as DXF.DxfDocument;
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
 
         var rect = Spatial.Rect2.FromPoints(
             x + grid.GridOffsetLeft,
@@ -452,17 +459,20 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawPoint(object dc, PointShapeViewModel point, ShapeStyleViewModel style)
+    public void DrawPoint(object? dc, PointShapeViewModel point, ShapeStyleViewModel? style)
     {
         // TODO:
     }
 
-    public void DrawLine(object dc, LineShapeViewModel line, ShapeStyleViewModel style)
+    public void DrawLine(object? dc, LineShapeViewModel line, ShapeStyleViewModel? style)
     {
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
         if (line.IsStroked)
         {
-            var dxf = dc as DXF.DxfDocument;
-
             double _x1 = line.Start.X;
             double _y1 = line.Start.Y;
             double _x2 = line.End.X;
@@ -476,11 +486,15 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawRectangle(object dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
+    public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
         if (rectangle.IsStroked || rectangle.IsFilled)
         {
-            var dxf = dc as DXF.DxfDocument;
             var rect = Spatial.Rect2.FromPoints(
                 rectangle.TopLeft.X,
                 rectangle.TopLeft.Y,
@@ -492,7 +506,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawEllipse(object dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
+    public void DrawEllipse(object? dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
         if (ellipse.IsStroked || ellipse.IsFilled)
         {
@@ -508,9 +522,12 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style)
+    public void DrawArc(object? dc, ArcShapeViewModel arc, ShapeStyleViewModel? style)
     {
-        var dxf = dc as DXF.DxfDocument;
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
 
         var dxfEllipse = CreateEllipticalArc(arc);
 
@@ -555,12 +572,15 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
+    public void DrawCubicBezier(object? dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel? style)
     {
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
         if (cubicBezier.IsStroked || cubicBezier.IsFilled)
         {
-            var dxf = dc as DXF.DxfDocument;
-
             var dxfSpline = CreateCubicSpline(
                 cubicBezier.Point1.X,
                 cubicBezier.Point1.Y,
@@ -612,12 +632,15 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
+    public void DrawQuadraticBezier(object? dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel? style)
     {
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
         if (quadraticBezier.IsStroked || quadraticBezier.IsFilled)
         {
-            var dxf = dc as DXF.DxfDocument;
-
             var dxfSpline = CreateQuadraticSpline(
                 quadraticBezier.Point1.X,
                 quadraticBezier.Point1.Y,
@@ -667,9 +690,12 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawText(object dc, TextShapeViewModel text, ShapeStyleViewModel style)
+    public void DrawText(object? dc, TextShapeViewModel text, ShapeStyleViewModel? style)
     {
-        var dxf = dc as DXF.DxfDocument;
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
 
         if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string tbind))
         {
@@ -750,9 +776,12 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         dxf.AddEntity(dxfMText);
     }
 
-    public void DrawImage(object dc, ImageShapeViewModel image, ShapeStyleViewModel style)
+    public void DrawImage(object? dc, ImageShapeViewModel image, ShapeStyleViewModel? style)
     {
-        var dxf = dc as DXF.DxfDocument;
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
 
         var bytes = State.ImageCache.GetImage(image.Key);
         if (bytes is { })
@@ -795,12 +824,15 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawPath(object dc, PathShapeViewModel path, ShapeStyleViewModel style)
+    public void DrawPath(object? dc, PathShapeViewModel path, ShapeStyleViewModel? style)
     {
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
         if (path.IsStroked || path.IsFilled)
         {
-            var dxf = dc as DXF.DxfDocument;
-
             CreateHatchBoundsAndEntities(path, out var bounds, out var entities);
             if (entities is null || bounds is null)
             {
