@@ -12,31 +12,31 @@
     <Copyright>Copyright © Wiesław Šoltés 2022</Copyright>
   </PropertyGroup>
   <PropertyGroup>
-    <MicrosoftNETFrameworkReferenceAssembliesVersion>1.0.2</MicrosoftNETFrameworkReferenceAssembliesVersion>
+    <MicrosoftNETFrameworkReferenceAssembliesVersion>1.0.3</MicrosoftNETFrameworkReferenceAssembliesVersion>
     <SystemDrawingCommonVersion>5.0.2</SystemDrawingCommonVersion>
-    <SystemTextJsonVersion>5.0.2</SystemTextJsonVersion>
-    <AutofacVersion>6.4.0</AutofacVersion>
-    <CsvHelperVersion>27.2.1</CsvHelperVersion>
-    <DocumentFormatOpenXmlVersion>2.16.0</DocumentFormatOpenXmlVersion>
-    <MicrosoftCodeAnalysisCSharpScriptingVersion>4.0.0-4.final</MicrosoftCodeAnalysisCSharpScriptingVersion>
+    <SystemTextJsonVersion>7.0.0</SystemTextJsonVersion>
+    <AutofacVersion>6.5.0</AutofacVersion>
+    <CsvHelperVersion>30.0.1</CsvHelperVersion>
+    <DocumentFormatOpenXmlVersion>2.18.0</DocumentFormatOpenXmlVersion>
+    <MicrosoftCodeAnalysisCSharpScriptingVersion>4.4.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
     <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
     <NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
     <PDFsharpVersion>1.51.5185-beta</PDFsharpVersion>
-    <SystemCollectionsImmutableVersion>5.0.0</SystemCollectionsImmutableVersion>
+    <SystemCollectionsImmutableVersion>7.0.0</SystemCollectionsImmutableVersion>
     <SystemReactiveVersion>5.0.0</SystemReactiveVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
-    <SystemTextEncodingCodePagesVersion>5.0.0</SystemTextEncodingCodePagesVersion>
+    <SystemTextEncodingCodePagesVersion>7.0.0</SystemTextEncodingCodePagesVersion>
     <SystemCommandLineVersion>2.0.0-beta1.21308.1</SystemCommandLineVersion>
     <XUnitVersion>2.4.1</XUnitVersion>
     <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
-    <SvgSkiaVersion>0.6.0-preview3</SvgSkiaVersion>
-    <AvaloniaVersion>11.0.0-preview3</AvaloniaVersion>
+    <SvgSkiaVersion>0.6.0-preview4</SvgSkiaVersion>
+    <AvaloniaVersion>11.0.0-preview4</AvaloniaVersion>
     <AvaloniaAvaloniaEditVersion>11.0.0-preview1</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>11.0.0-preview3</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>11.0.0-preview2</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>11.0.0-build20221104-02</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.0.0-preview3</DockAvaloniaVersion>
+    <AvaloniaXamlBehaviorsVersion>11.0.0-preview4</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>11.0.0-preview4</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>11.0.0-preview4</ThemeEditorControlsColorPickerVersion>
+    <DockAvaloniaVersion>11.0.0-preview4</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
