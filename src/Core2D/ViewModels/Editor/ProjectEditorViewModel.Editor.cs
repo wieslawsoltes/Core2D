@@ -310,6 +310,7 @@ public partial class ProjectEditorViewModel
 
     public void OnCloseProject()
     {
+        Platform?.OnClose();
         Project?.History?.Reset();
         OnUnload();
         NavigateTo?.Invoke("Dashboard");

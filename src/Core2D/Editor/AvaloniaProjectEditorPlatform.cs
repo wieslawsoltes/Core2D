@@ -140,6 +140,12 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
+    public void OnClose()
+    {
+        _openProjectFile?.Dispose();
+        _openProjectFile = null;
+    }
+    
     public async void OnImportJson(string? path)
     {
         if (path is null)

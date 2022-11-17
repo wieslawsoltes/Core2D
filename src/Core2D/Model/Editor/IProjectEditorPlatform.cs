@@ -12,6 +12,8 @@ public interface IProjectEditorPlatform
 
     void OnSaveAs();
 
+    void OnClose();
+    
     void OnImportJson(string? path);
 
     void OnImportSvg(string? path);
