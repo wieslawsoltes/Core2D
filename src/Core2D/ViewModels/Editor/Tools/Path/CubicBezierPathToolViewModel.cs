@@ -252,12 +252,12 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
         _selectionSelection.ToStatePoint3();
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         _selectionSelection?.Move();
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 

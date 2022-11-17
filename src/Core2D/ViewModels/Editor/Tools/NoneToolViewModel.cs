@@ -40,11 +40,11 @@ public partial class NoneToolViewModel : ViewModelBase, IEditorTool
     {
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 

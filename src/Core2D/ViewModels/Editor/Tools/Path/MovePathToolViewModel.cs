@@ -87,11 +87,11 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
         }
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 

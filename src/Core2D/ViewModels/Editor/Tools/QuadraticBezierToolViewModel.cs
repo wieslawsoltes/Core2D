@@ -218,12 +218,12 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
         _selection?.ToStatePoint2();
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         _selection?.Move();
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 

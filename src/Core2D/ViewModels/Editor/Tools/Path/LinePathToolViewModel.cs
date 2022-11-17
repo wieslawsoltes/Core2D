@@ -158,12 +158,12 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
         _selection.ToStateEnd();
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         _selection?.Move();
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 

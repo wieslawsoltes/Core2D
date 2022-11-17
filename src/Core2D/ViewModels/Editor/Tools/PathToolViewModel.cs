@@ -168,12 +168,12 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
         ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Move(args);
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Move(shape);
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
         ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Finalize(shape);
     }

@@ -280,12 +280,12 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
         _selection?.ToStatePoint4();
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         _selection?.Move();
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
         var arc = shape as ArcShapeViewModel;
         if (arc?.Point1 is null || arc.Point2 is null || arc.Point3 is null || arc.Point4 is null)

@@ -256,12 +256,12 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
         _selectionSelection?.ToStatePoint3();
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         _selectionSelection?.Move();
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 

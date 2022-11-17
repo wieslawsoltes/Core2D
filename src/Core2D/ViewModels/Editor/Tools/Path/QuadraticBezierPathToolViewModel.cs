@@ -207,12 +207,12 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
         _selection.ToStatePoint2();
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         _selection?.Move();
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 
