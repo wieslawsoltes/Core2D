@@ -29,9 +29,7 @@ using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Editor.Bounds;
 using Core2D.ViewModels.Editor.Factories;
 using Core2D.Views;
-#if USE_PDFSHARP
 using Core2D.Modules.FileWriter.PdfSharp;
-#endif
 
 namespace Core2D;
 
@@ -127,9 +125,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
         builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
         builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
-#if USE_PDFSHARP
         builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-#endif
         builder.RegisterType<SvgSvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<DrawingGroupXamlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();

@@ -16,10 +16,6 @@
     <PackageId>Core2D</PackageId>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <DefineConstants>$(DefineConstants);USE_PDFSHARP</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
