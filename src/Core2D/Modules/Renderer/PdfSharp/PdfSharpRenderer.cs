@@ -15,17 +15,17 @@ namespace Core2D.Modules.Renderer.PdfSharp;
 
 public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 {
-    private ICache<string, XImage> _biCache;
+    private readonly ICache<string, XImage>? _biCache;
     private Func<double, double> _scaleToPage;
-    private double _sourceDpi = 96.0;
-    private double _targetDpi = 72.0;
+    private readonly double _sourceDpi = 96.0;
+    private readonly double _targetDpi = 72.0;
 
-    [AutoNotify] private ShapeRendererStateViewModel _state;
+    [AutoNotify] private ShapeRendererStateViewModel? _state;
 
     public PdfSharpRenderer(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
-        _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, XImage>(bi => bi.Dispose());
+        _state = serviceProvider.GetService<IViewModelFactory>()?.CreateShapeRendererState();
+        _biCache = serviceProvider.GetService<IViewModelFactory>()?.CreateCache<string, XImage>(bi => bi.Dispose());
         _scaleToPage = (value) => (float)(value * 1.0);
     }
 
@@ -223,14 +223,14 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
     private void DrawGridInternal(XGraphics gfx, IGrid grid, XPen stroke, ref Spatial.Rect2 rect)
     {
-        double ox = rect.X;
-        double ex = rect.X + rect.Width;
-        double oy = rect.Y;
-        double ey = rect.Y + rect.Height;
-        double cw = grid.GridCellWidth;
-        double ch = grid.GridCellHeight;
+        var ox = rect.X;
+        var ex = rect.X + rect.Width;
+        var oy = rect.Y;
+        var ey = rect.Y + rect.Height;
+        var cw = grid.GridCellWidth;
+        var ch = grid.GridCellHeight;
 
-        for (double x = ox + cw; x < ex; x += cw)
+        for (var x = ox + cw; x < ex; x += cw)
         {
             var p0 = new XPoint(
                 _scaleToPage(x),
@@ -241,7 +241,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             DrawLineInternal(gfx, stroke, true, ref p0, ref p1);
         }
 
-        for (double y = oy + ch; y < ey; y += ch)
+        for (var y = oy + ch; y < ey; y += ch)
         {
             var p0 = new XPoint(
                 _scaleToPage(ox),
@@ -258,10 +258,14 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         _biCache.Reset();
     }
 
-    public void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel colorViewModel)
+    public void Fill(object? dc, double x, double y, double width, double height, BaseColorViewModel? colorViewModel)
     {
-        var _gfx = dc as XGraphics;
-        _gfx.DrawRectangle(
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
+
+        gfx.DrawRectangle(
             ToXBrush(colorViewModel),
             _scaleToPage(x),
             _scaleToPage(y),
@@ -269,9 +273,12 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             _scaleToPage(height));
     }
 
-    public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
+    public void Grid(object? dc, IGrid grid, double x, double y, double width, double height)
     {
-        var _gfx = dc as XGraphics;
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
 
         var strokeLine = ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi);
 
@@ -285,7 +292,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         if (grid.IsGridEnabled)
         {
             DrawGridInternal(
-                _gfx,
+                gfx,
                 grid,
                 ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi),
                 ref rect);
@@ -293,7 +300,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
         if (grid.IsBorderEnabled)
         {
-            _gfx.DrawRectangle(
+            gfx.DrawRectangle(
                 ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi),
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -302,28 +309,34 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawPoint(object dc, PointShapeViewModel point, ShapeStyleViewModel style)
+    public void DrawPoint(object? dc, PointShapeViewModel point, ShapeStyleViewModel? style)
     {
         // TODO:
     }
 
-    public void DrawLine(object dc, LineShapeViewModel line, ShapeStyleViewModel style)
+    public void DrawLine(object? dc, LineShapeViewModel line, ShapeStyleViewModel? style)
     {
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
+
         if (!line.IsStroked)
         {
             return;
         }
 
-        var _gfx = dc as XGraphics;
-
         var strokeLine = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
-        DrawLineArrowsInternal(_gfx, line, style, out var pt1, out var pt2);
-        DrawLineInternal(_gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
+        DrawLineArrowsInternal(gfx, line, style, out var pt1, out var pt2);
+        DrawLineInternal(gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
     }
 
-    public void DrawRectangle(object dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
+    public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as XGraphics;
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
 
         var rect = Spatial.Rect2.FromPoints(
             rectangle.TopLeft.X,
@@ -334,7 +347,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
         if (rectangle.IsStroked && rectangle.IsFilled)
         {
-            _gfx.DrawRectangle(
+            gfx.DrawRectangle(
                 ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                 ToXBrush(style.Fill.Color),
                 _scaleToPage(rect.X),
@@ -344,7 +357,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
         else if (rectangle.IsStroked && !rectangle.IsFilled)
         {
-            _gfx.DrawRectangle(
+            gfx.DrawRectangle(
                 ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -353,7 +366,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
         else if (!rectangle.IsStroked && rectangle.IsFilled)
         {
-            _gfx.DrawRectangle(
+            gfx.DrawRectangle(
                 ToXBrush(style.Fill.Color),
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -362,9 +375,12 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawEllipse(object dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
+    public void DrawEllipse(object? dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as XGraphics;
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
 
         var rect = Spatial.Rect2.FromPoints(
             ellipse.TopLeft.X,
@@ -375,7 +391,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
         if (ellipse.IsStroked && ellipse.IsFilled)
         {
-            _gfx.DrawEllipse(
+            gfx.DrawEllipse(
                 ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                 ToXBrush(style.Fill.Color),
                 _scaleToPage(rect.X),
@@ -385,7 +401,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
         else if (ellipse.IsStroked && !ellipse.IsFilled)
         {
-            _gfx.DrawEllipse(
+            gfx.DrawEllipse(
                 ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -394,7 +410,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
         else if (!ellipse.IsStroked && ellipse.IsFilled)
         {
-            _gfx.DrawEllipse(
+            gfx.DrawEllipse(
                 ToXBrush(style.Fill.Color),
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
@@ -403,9 +419,12 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style)
+    public void DrawArc(object? dc, ArcShapeViewModel arc, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as XGraphics;
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
 
         var a = new Spatial.Arc.GdiArc(
             Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -427,14 +446,14 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
             if (arc.IsStroked)
             {
-                _gfx.DrawPath(
+                gfx.DrawPath(
                     ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                     ToXBrush(style.Fill.Color),
                     path);
             }
             else
             {
-                _gfx.DrawPath(
+                gfx.DrawPath(
                     ToXBrush(style.Fill.Color),
                     path);
             }
@@ -443,7 +462,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         {
             if (arc.IsStroked)
             {
-                _gfx.DrawArc(
+                gfx.DrawArc(
                     ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                     _scaleToPage(a.X),
                     _scaleToPage(a.Y),
@@ -455,9 +474,12 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
+    public void DrawCubicBezier(object? dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as XGraphics;
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
 
         if (cubicBezier.IsFilled)
         {
@@ -474,14 +496,14 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
             if (cubicBezier.IsStroked)
             {
-                _gfx.DrawPath(
+                gfx.DrawPath(
                     ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                     ToXBrush(style.Fill.Color),
                     path);
             }
             else
             {
-                _gfx.DrawPath(
+                gfx.DrawPath(
                     ToXBrush(style.Fill.Color),
                     path);
             }
@@ -490,7 +512,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         {
             if (cubicBezier.IsStroked)
             {
-                _gfx.DrawBezier(
+                gfx.DrawBezier(
                     ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                     _scaleToPage(cubicBezier.Point1.X),
                     _scaleToPage(cubicBezier.Point1.Y),
@@ -504,9 +526,12 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
+    public void DrawQuadraticBezier(object? dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as XGraphics;
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
 
         double x1 = quadraticBezier.Point1.X;
         double y1 = quadraticBezier.Point1.Y;
@@ -532,14 +557,14 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
             if (quadraticBezier.IsStroked)
             {
-                _gfx.DrawPath(
+                gfx.DrawPath(
                     ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                     ToXBrush(style.Fill.Color),
                     path);
             }
             else
             {
-                _gfx.DrawPath(
+                gfx.DrawPath(
                     ToXBrush(style.Fill.Color),
                     path);
             }
@@ -548,7 +573,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         {
             if (quadraticBezier.IsStroked)
             {
-                _gfx.DrawBezier(
+                gfx.DrawBezier(
                     ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                     _scaleToPage(x1),
                     _scaleToPage(y1),
@@ -562,9 +587,12 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawText(object dc, TextShapeViewModel text, ShapeStyleViewModel style)
+    public void DrawText(object? dc, TextShapeViewModel text, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as XGraphics;
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
 
         if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string tbind))
         {
@@ -640,7 +668,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
                 break;
         }
 
-        _gfx.DrawString(
+        gfx.DrawString(
             tbind,
             font,
             ToXBrush(style.Stroke.Color),
@@ -648,9 +676,12 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             format);
     }
 
-    public void DrawImage(object dc, ImageShapeViewModel image, ShapeStyleViewModel style)
+    public void DrawImage(object? dc, ImageShapeViewModel image, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as XGraphics;
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
 
         var rect = Spatial.Rect2.FromPoints(
             image.TopLeft.X,
@@ -668,7 +699,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         if (image.IsStroked || image.IsFilled)
         {
             DrawRectangleInternal(
-                _gfx,
+                gfx,
                 ToXBrush(style.Fill.Color),
                 ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                 image.IsStroked,
@@ -679,7 +710,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         var imageCached = _biCache.Get(image.Key);
         if (imageCached is { })
         {
-            _gfx.DrawImage(imageCached, srect);
+            gfx.DrawImage(imageCached, srect);
         }
         else
         {
@@ -694,34 +725,37 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
                     _biCache.Set(image.Key, bi);
 
-                    _gfx.DrawImage(bi, srect);
+                    gfx.DrawImage(bi, srect);
                 }
             }
         }
     }
 
-    public void DrawPath(object dc, PathShapeViewModel path, ShapeStyleViewModel style)
+    public void DrawPath(object? dc, PathShapeViewModel path, ShapeStyleViewModel? style)
     {
-        var _gfx = dc as XGraphics;
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
 
         var gp = path.ToXGraphicsPath(_scaleToPage);
 
         if (path.IsFilled && path.IsStroked)
         {
-            _gfx.DrawPath(
+            gfx.DrawPath(
                 ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                 ToXBrush(style.Fill.Color),
                 gp);
         }
         else if (path.IsFilled && !path.IsStroked)
         {
-            _gfx.DrawPath(
+            gfx.DrawPath(
                 ToXBrush(style.Fill.Color),
                 gp);
         }
         else if (!path.IsFilled && path.IsStroked)
         {
-            _gfx.DrawPath(
+            gfx.DrawPath(
                 ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
                 gp);
         }
