@@ -103,14 +103,10 @@
         <MenuItem Header="Zoom _In" Command="{Binding Platform.OnZoomIn, FallbackValue={x:Null}}" InputGesture="Ctrl+Add" />
         <MenuItem Header="Zoom _Out" Command="{Binding Platform.OnZoomOut, FallbackValue={x:Null}}" InputGesture="Ctrl+Subtract" />
       </MenuItem>
-      <!-- TODO: Fix theme change -->
-      <!--<MenuItem Header="T_heme" IsVisible="{Binding !!RootDock}">
+      <MenuItem Header="T_heme" IsVisible="{Binding !!RootDock}">
         <MenuItem Header="Fluent _Light" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentLight" />
         <MenuItem Header="Fluent _Dark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentDark" />
-        <Separator />
-        <MenuItem Header="Default L_ight" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultLight" />
-        <MenuItem Header="Default D_ark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="DefaultDark" />
-      </MenuItem>-->
+      </MenuItem>
     </MenuItem>
     <MenuItem Header="_Project">
       <MenuItem Header="_Document">

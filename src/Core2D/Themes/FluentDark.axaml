@@ -1,30 +1,11 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Avalonia -->
-  <StyleInclude Source="avares://Avalonia.Themes.Fluent/FluentDark.xaml" />
-  <StyleInclude Source="avares://Avalonia.Themes.Fluent/DensityStyles/Compact.xaml" />
-  <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
-  <!-- Dock -->
-  <StyleInclude Source="avares://Dock.Avalonia/Themes/DockFluentTheme.axaml" />
   <Style>
     <Style.Resources>
       <SolidColorBrush x:Key="DockThemeBackgroundBrush">#292929</SolidColorBrush>
-    </Style.Resources>
-  </Style>
-  <Style Selector="ToolControl /template/ DockPanel#PART_DockPanel">
-    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
-  </Style>
-  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem">
-    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
-  </Style>
-  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
-    <Setter Property="Background" Value="{DynamicResource DockThemeBackgroundBrush}" />
-  </Style>
-  <!-- Icons -->
-  <StyleInclude Source="avares://Core2D/Styles/Icons-Dark.axaml" />
-  <!-- Other -->
-  <Style>
-    <Style.Resources>
+      <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
+      <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
+      <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />
       <Color x:Key="SystemChromeMediumLowColor">Transparent</Color>
       <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush" Color="{StaticResource SystemChromeMediumLowColor}" />
       <Color x:Key="SystemAltMediumLowColor">Transparent</Color>
@@ -42,36 +23,5 @@
       <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
       <Thickness x:Key="ContentMargin">6,0,6,0</Thickness>
     </Style.Resources>
-  </Style>
-  <Style Selector="Label">
-    <Setter Property="Margin" Value="0,0,0,0" />
-    <Setter Property="Padding" Value="0,6,0,6" />
-  </Style>
-  <Style Selector="ListBoxItem">
-    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-    <Setter Property="Padding" Value="0,0,0,0" />
-  </Style>
-  <Style Selector="ListBoxItem TextBlock">
-    <Setter Property="Padding" Value="12,9,12,12" />
-  </Style>
-  <Style Selector="TabControl">
-    <Setter Property="Margin" Value="0,0,0,0" />
-    <Setter Property="Padding" Value="0,0,0,0" />
-  </Style>
-  <Style Selector="TabControl /template/ ContentPresenter#PART_SelectedContentHost">
-    <Setter Property="Padding" Value="0" />
-  </Style>
-  <Style Selector="TabItem">
-    <Setter Property="FontWeight" Value="Normal" />
-    <Setter Property="Padding" Value="6,0,6,0" />
-  </Style>
-  <Style Selector="TreeView">
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
-  </Style>
-  <Style Selector="DataGridColumnHeader">
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
-  </Style>
-  <Style Selector="ToolTip">
-    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
   </Style>
 </Styles>
