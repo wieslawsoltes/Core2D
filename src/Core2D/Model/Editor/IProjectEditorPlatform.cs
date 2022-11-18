@@ -1,6 +1,4 @@
 ﻿#nullable enable
-using Core2D.ViewModels.Containers;
-using Core2D.ViewModels.Data;
 
 namespace Core2D.Model.Editor;
 
