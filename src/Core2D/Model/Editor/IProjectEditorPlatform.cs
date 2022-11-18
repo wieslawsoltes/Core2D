@@ -14,43 +14,43 @@ public interface IProjectEditorPlatform
 
     void OnClose();
     
-    void OnImportJson(string? path);
+    void OnImportJson(object? param);
 
-    void OnImportSvg(string? path);
+    void OnImportSvg(object? param);
 
-    void OnImportObject(string? path);
+    void OnImportObject(object? param);
 
-    void OnExportJson(object? item);
+    void OnExportJson(object? param);
 
-    void OnExportObject(object? item);
+    void OnExportObject(object? param);
 
-    void OnExport(object? item);
+    void OnExport(object? param);
 
-    void OnExecuteScriptFile(string? path);
+    void OnExecuteScriptFile(object? param);
 
     void OnExecuteScriptFile();
 
     void OnExit();
 
-    void OnCopyAsXaml(object? item);
+    void OnCopyAsXaml(object? param);
 
-    void OnCopyAsSvg(object? item);
+    void OnCopyAsSvg(object? param);
 
     void OnPasteSvg();
 
-    void OnCopyAsEmf(object? item);
+    void OnCopyAsEmf(object? param);
 
-    void OnCopyAsPathData(object? item);
+    void OnCopyAsPathData(object? param);
 
     void OnPastePathDataStroked();
 
     void OnPastePathDataFilled();
 
-    void OnImportData(ProjectContainerViewModel? project);
+    void OnImportData(object? param);
 
-    void OnExportData(DatabaseViewModel? db);
+    void OnExportData(object? param);
 
-    void OnUpdateData(DatabaseViewModel? db);
+    void OnUpdateData(object? param);
 
     void OnAboutDialog();
 

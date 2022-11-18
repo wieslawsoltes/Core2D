@@ -557,8 +557,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetThickness(string thickness)
+    public void OnStyleSetThickness(object param)
     {
+        if (param is not string thickness)
+        {
+            return;
+        }
+
         if (!double.TryParse(thickness, NumberStyles, CultureInfo.InvariantCulture, out var value))
         {
             return;
@@ -580,8 +585,13 @@ public class StyleEditorViewModel : ViewModelBase
         editor.Project?.CurrentContainer?.InvalidateLayer();
     }
 
-    public void OnStyleSetLineCap(string lineCap)
+    public void OnStyleSetLineCap(object param)
     {
+        if (param is not string lineCap)
+        {
+            return;
+        }
+
         if (!Enum.TryParse<LineCap>(lineCap, true, out var value))
         {
             return;
@@ -603,8 +613,13 @@ public class StyleEditorViewModel : ViewModelBase
         editor.Project?.CurrentContainer?.InvalidateLayer();
     }
 
-    public void OnStyleSetDashes(string dashes)
+    public void OnStyleSetDashes(object param)
     {
+        if (param is not string dashes)
+        {
+            return;
+        }
+
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         if (editor is null)
         {
@@ -621,8 +636,13 @@ public class StyleEditorViewModel : ViewModelBase
         editor.Project?.CurrentContainer?.InvalidateLayer();
     }
 
-    public void OnStyleSetDashOffset(string dashOffset)
+    public void OnStyleSetDashOffset(object param)
     {
+        if (param is not string dashOffset)
+        {
+            return;
+        }
+
         if (!double.TryParse(dashOffset, NumberStyles, CultureInfo.InvariantCulture, out var value))
         {
             return;
@@ -644,8 +664,13 @@ public class StyleEditorViewModel : ViewModelBase
         editor.Project?.CurrentContainer?.InvalidateLayer();
     }
 
-    public void OnStyleSetStroke(string color)
+    public void OnStyleSetStroke(object param)
     {
+        if (param is not string color)
+        {
+            return;
+        }
+
         BaseColorViewModel value;
         try
         {
@@ -676,8 +701,13 @@ public class StyleEditorViewModel : ViewModelBase
         editor.Project?.CurrentContainer?.InvalidateLayer();
     }
 
-    public void OnStyleSetStrokeTransparency(string alpha)
+    public void OnStyleSetStrokeTransparency(object param)
     {
+        if (param is not string alpha)
+        {
+            return;
+        }
+
         if (!byte.TryParse(alpha, NumberStyles, CultureInfo.InvariantCulture, out var value))
         {
             return;
@@ -699,8 +729,13 @@ public class StyleEditorViewModel : ViewModelBase
         editor.Project?.CurrentContainer?.InvalidateLayer();
     }
 
-    public void OnStyleSetFill(string color)
+    public void OnStyleSetFill(object param)
     {
+        if (param is not string color)
+        {
+            return;
+        }
+
         BaseColorViewModel value;
         try
         {
@@ -729,8 +764,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetFillTransparency(string alpha)
+    public void OnStyleSetFillTransparency(object param)
     {
+        if (param is not string alpha)
+        {
+            return;
+        }
+
         if (!byte.TryParse(alpha, NumberStyles, CultureInfo.InvariantCulture, out var value))
         {
             return;
@@ -752,8 +792,13 @@ public class StyleEditorViewModel : ViewModelBase
         editor.Project?.CurrentContainer?.InvalidateLayer();
     }
 
-    public void OnStyleSetFontName(string fontName)
+    public void OnStyleSetFontName(object param)
     {
+        if (param is not string fontName)
+        {
+            return;
+        }
+
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         if (editor is null)
         {
@@ -768,8 +813,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetFontSize(string fontSize)
+    public void OnStyleSetFontSize(object param)
     {
+        if (param is not string fontSize)
+        {
+            return;
+        }
+
         if (!double.TryParse(fontSize, NumberStyles, CultureInfo.InvariantCulture, out var value))
         {
             return;
@@ -789,8 +839,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetFontStyle(string fontStyle)
+    public void OnStyleSetFontStyle(object param)
     {
+        if (param is not string fontStyle)
+        {
+            return;
+        }
+
         if (!Enum.TryParse<FontStyleFlags>(fontStyle, true, out var value))
         {
             return;
@@ -810,8 +865,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetTextHAlignment(string alignment)
+    public void OnStyleSetTextHAlignment(object param)
     {
+        if (param is not string alignment)
+        {
+            return;
+        }
+
         if (!Enum.TryParse<TextHAlignment>(alignment, true, out var value))
         {
             return;
@@ -831,8 +891,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetTextVAlignment(string alignment)
+    public void OnStyleSetTextVAlignment(object param)
     {
+        if (param is not string alignment)
+        {
+            return;
+        }
+
         if (!Enum.TryParse<TextVAlignment>(alignment, true, out var value))
         {
             return;
@@ -851,8 +916,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetStartArrowType(string type)
+    public void OnStyleSetStartArrowType(object param)
     {
+        if (param is not string type)
+        {
+            return;
+        }
+
         if (!Enum.TryParse<ArrowType>(type, true, out var value))
         {
             return;
@@ -871,8 +941,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetStartArrowRadiusX(string radius)
+    public void OnStyleSetStartArrowRadiusX(object param)
     {
+        if (param is not string radius)
+        {
+            return;
+        }
+
         if (!double.TryParse(radius, NumberStyles, CultureInfo.InvariantCulture, out var value))
         {
             return;
@@ -891,8 +966,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetStartArrowRadiusY(string radius)
+    public void OnStyleSetStartArrowRadiusY(object param)
     {
+        if (param is not string radius)
+        {
+            return;
+        }
+
         if (!double.TryParse(radius, NumberStyles, CultureInfo.InvariantCulture, out var value))
         {
             return;
@@ -911,8 +991,13 @@ public class StyleEditorViewModel : ViewModelBase
         }
     }
 
-    public void OnStyleSetEndArrowType(string type)
+    public void OnStyleSetEndArrowType(object param)
     {
+        if (param is not string type)
+        {
+            return;
+        }
+
         if (!Enum.TryParse<ArrowType>(type, true, out var value))
         {
             return;
@@ -933,8 +1018,13 @@ public class StyleEditorViewModel : ViewModelBase
         editor.Project?.CurrentContainer?.InvalidateLayer();
     }
 
-    public void OnStyleSetEndArrowRadiusX(string radius)
+    public void OnStyleSetEndArrowRadiusX(object param)
     {
+        if (param is not string radius)
+        {
+            return;
+        }
+
         if (!double.TryParse(radius, NumberStyles, CultureInfo.InvariantCulture, out var value))
         {
             return;
@@ -955,8 +1045,13 @@ public class StyleEditorViewModel : ViewModelBase
         editor.Project?.CurrentContainer?.InvalidateLayer();
     }
 
-    public void OnStyleSetEndArrowRadiusY(string radius)
+    public void OnStyleSetEndArrowRadiusY(object param)
     {
+        if (param is not string radius)
+        {
+            return;
+        }
+
         if (!double.TryParse(radius, NumberStyles, CultureInfo.InvariantCulture, out var value))
         {
             return;

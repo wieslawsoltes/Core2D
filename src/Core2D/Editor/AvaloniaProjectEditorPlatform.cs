@@ -146,9 +146,9 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         _openProjectFile = null;
     }
     
-    public async void OnImportJson(string? path)
+    public async void OnImportJson(object? param)
     {
-        if (path is null)
+        if (param is null)
         {
             var dlg = new OpenFileDialog() { Title = "Open" };
             dlg.AllowMultiple = true;
@@ -169,6 +169,11 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
         else
         {
+            if (param is not string path)
+            {
+                return;
+            }
+
             if (ServiceProvider.GetService<IFileSystem>().Exists(path))
             {
                 ServiceProvider.GetService<ProjectEditorViewModel>().OnImportJson(path);
@@ -176,9 +181,9 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
-    public async void OnImportSvg(string? path)
+    public async void OnImportSvg(object? param)
     {
-        if (path is null)
+        if (param is null)
         {
             var dlg = new OpenFileDialog() { Title = "Open" };
             dlg.AllowMultiple = true;
@@ -199,6 +204,11 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
         else
         {
+            if (param is not string path)
+            {
+                return;
+            }
+
             if (ServiceProvider.GetService<IFileSystem>().Exists(path))
             {
                 ServiceProvider.GetService<ProjectEditorViewModel>().OnImportJson(path);
@@ -206,9 +216,9 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
-    public async void OnImportObject(string? path)
+    public async void OnImportObject(object? param)
     {
-        if (path is null)
+        if (param is null)
         {
             var dlg = new OpenFileDialog() { Title = "Open" };
             dlg.AllowMultiple = true;
@@ -231,6 +241,11 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
         else
         {
+            if (param is not string path)
+            {
+                return;
+            }
+
             if (ServiceProvider.GetService<IFileSystem>().Exists(path))
             {
                 string resultExtension = Path.GetExtension(path);
@@ -242,29 +257,29 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
-    public async void OnExportJson(object? item)
+    public async void OnExportJson(object? param)
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var dlg = new SaveFileDialog() { Title = "Save" };
         dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
         dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-        dlg.InitialFileName = editor?.GetName(item);
+        dlg.InitialFileName = editor?.GetName(param);
         dlg.DefaultExtension = "json";
         var result = await dlg.ShowAsync(GetWindow());
         if (result is { })
         {
-            editor.OnExportJson(result, item);
+            editor.OnExportJson(result, param);
         }
     }
 
-    public async void OnExportObject(object? item)
+    public async void OnExportObject(object? param)
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        if (item is { })
+        if (editor is { } && param is { })
         {
             var dlg = new SaveFileDialog() { Title = "Save" };
             dlg.Filters.Add(new FileDialogFilter() { Name = "Json", Extensions = { "json" } });
-            dlg.InitialFileName = editor?.GetName(item);
+            dlg.InitialFileName = editor.GetName(param);
             dlg.DefaultExtension = "json";
             var result = await dlg.ShowAsync(GetWindow());
             if (result is { })
@@ -272,19 +287,19 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                 string resultExtension = Path.GetExtension(result);
                 if (string.Compare(resultExtension, ".json", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    editor.OnExportJson(result, item);
+                    editor.OnExportJson(result, param);
                 }
             }
         }
     }
 
-    public async void OnExport(object? item)
+    public async void OnExport(object? param)
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
 
         string name = string.Empty;
 
-        if (item is null || item is ProjectEditorViewModel)
+        if (param is null || param is ProjectEditorViewModel)
         {
             if (editor.Project is null)
             {
@@ -292,17 +307,17 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             }
 
             name = editor.Project.Name;
-            item = editor.Project;
+            param = editor.Project;
         }
-        else if (item is ProjectContainerViewModel project)
+        else if (param is ProjectContainerViewModel project)
         {
             name = project.Name;
         }
-        else if (item is DocumentContainerViewModel document)
+        else if (param is DocumentContainerViewModel document)
         {
             name = document.Name;
         }
-        else if (item is FrameContainerViewModel container)
+        else if (param is FrameContainerViewModel container)
         {
             name = container.Name;
         }
@@ -323,19 +338,24 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             var writer = editor.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
             if (writer is { })
             {
-                editor.OnExport(result, item, writer);
+                editor.OnExport(result, param, writer);
             }
         }
     }
 
-    public async void OnExecuteScriptFile(string? path)
+    public async void OnExecuteScriptFile(object? param)
     {
-        if (path is null)
+        if (param is null)
         {
             OnExecuteScriptFile();
         }
         else
         {
+            if (param is not string path)
+            {
+                return;
+            }
+
             await ServiceProvider.GetService<ProjectEditorViewModel>().OnExecuteScriptFile(path);
         }
     }
@@ -364,11 +384,11 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
     	}
     }
 
-    public void OnCopyAsSvg(object? item)
+    public void OnCopyAsSvg(object? param)
     {
         try
         {
-            if (item is null)
+            if (param is null)
             {
                 var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var textClipboard = ServiceProvider.GetService<ITextClipboard>();
@@ -442,11 +462,11 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
-    public void OnCopyAsXaml(object? item)
+    public void OnCopyAsXaml(object? param)
     {
         try
         {
-            if (item is null)
+            if (param is null)
             {
                 var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var textClipboard = ServiceProvider.GetService<ITextClipboard>();
@@ -554,7 +574,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
-    public void OnCopyAsEmf(object? item)
+    public void OnCopyAsEmf(object? param)
     {
         if (Environment.OSVersion.Platform != PlatformID.Win32NT)
         {
@@ -610,11 +630,11 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
-    public async void OnCopyAsPathData(object? item)
+    public async void OnCopyAsPathData(object? param)
     {
         try
         {
-            if (item is null)
+            if (param is null)
             {
                 var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var textClipboard = ServiceProvider.GetService<ITextClipboard>();
@@ -699,8 +719,13 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
-    public async void OnImportData(ProjectContainerViewModel? project)
+    public async void OnImportData(object? param)
     {
+        if (param is not ProjectContainerViewModel project)
+        {
+            return;
+        }
+
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var dlg = new OpenFileDialog() { Title = "Open" };
         foreach (var reader in editor?.TextFieldReaders)
@@ -726,61 +751,65 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         }
     }
 
-    public async void OnExportData(DatabaseViewModel? db)
+    public async void OnExportData(object? param)
     {
-        if (db is { })
+        if (param is not DatabaseViewModel db)
         {
-            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            var dlg = new SaveFileDialog() { Title = "Save" };
-            foreach (var writer in editor?.TextFieldWriters)
+            return;
+        }
+
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        var dlg = new SaveFileDialog() { Title = "Save" };
+        foreach (var writer in editor?.TextFieldWriters)
+        {
+            dlg.Filters.Add(new FileDialogFilter() { Name = writer.Name, Extensions = { writer.Extension } });
+        }
+        dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+        dlg.InitialFileName = db.Name;
+        dlg.DefaultExtension = editor?.TextFieldWriters.FirstOrDefault()?.Extension;
+        var result = await dlg.ShowAsync(GetWindow());
+        if (result is { })
+        {
+            string ext = Path.GetExtension(result).ToLower().TrimStart('.');
+            var writer = editor.TextFieldWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+            if (writer is { })
             {
-                dlg.Filters.Add(new FileDialogFilter() { Name = writer.Name, Extensions = { writer.Extension } });
-            }
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.InitialFileName = db.Name;
-            dlg.DefaultExtension = editor?.TextFieldWriters.FirstOrDefault()?.Extension;
-            var result = await dlg.ShowAsync(GetWindow());
-            if (result is { })
-            {
-                string ext = Path.GetExtension(result).ToLower().TrimStart('.');
-                var writer = editor.TextFieldWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
-                if (writer is { })
-                {
-                    editor.OnExportData(result, db, writer);
-                }
+                editor.OnExportData(result, db, writer);
             }
         }
     }
 
-    public async void OnUpdateData(DatabaseViewModel? db)
+    public async void OnUpdateData(object? param)
     {
-        if (db is { })
+        if (param is not DatabaseViewModel db)
         {
-            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            if (editor is null)
+            return;
+        }
+
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor is null)
+        {
+            return;
+        }
+        var dlg = new OpenFileDialog() { Title = "Open" };
+        foreach (var reader in editor.TextFieldReaders)
+        {
+            dlg.Filters.Add(new FileDialogFilter() { Name = reader.Name, Extensions = { reader.Extension } });
+        }
+        dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+        var result = await dlg.ShowAsync(GetWindow());
+        if (result is { })
+        {
+            var path = result.FirstOrDefault();
+            if (path is null)
             {
                 return;
             }
-            var dlg = new OpenFileDialog() { Title = "Open" };
-            foreach (var reader in editor.TextFieldReaders)
+            string ext = Path.GetExtension(path).ToLower().TrimStart('.');
+            var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+            if (reader is { })
             {
-                dlg.Filters.Add(new FileDialogFilter() { Name = reader.Name, Extensions = { reader.Extension } });
-            }
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(GetWindow());
-            if (result is { })
-            {
-                var path = result.FirstOrDefault();
-                if (path is null)
-                {
-                    return;
-                }
-                string ext = Path.GetExtension(path).ToLower().TrimStart('.');
-                var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
-                if (reader is { })
-                {
-                    editor.OnUpdateData(path, db, reader);
-                }
+                editor.OnUpdateData(path, db, reader);
             }
         }
     }

@@ -81,8 +81,13 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         }
     }
 
-    public void OnRotateSelected(string degrees)
+    public void OnRotateSelected(object param)
     {
+        if (param is not string degrees)
+        {
+            return;
+        }
+
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
         {
@@ -1038,8 +1043,13 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(result));
     }
 
-    public void OnPathOp(string op)
+    public void OnPathOp(object param)
     {
+        if (param is not string op)
+        {
+            return;
+        }
+
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
         {

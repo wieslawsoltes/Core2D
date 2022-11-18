@@ -82,8 +82,13 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
         throw new NotImplementedException();
     }
 
-    public void OnToggleDockableVisibility(string id)
+    public void OnToggleDockableVisibility(object? param)
     {
+        if (param is not string id)
+        {
+            return;
+        }
+
         // TODO:
     }
 
