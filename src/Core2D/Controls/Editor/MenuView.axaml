@@ -240,30 +240,30 @@
       <MenuItem Header="_Break Path" Command="{Binding ShapeService.OnPathBreak, FallbackValue={x:Null}}" InputGesture="Ctrl+B" />
       <Separator />
       <MenuItem Header="_Difference" 
-                Icon="{StaticResource DifferenceIcon}" 
+                Icon="{DynamicResource DifferenceIcon}" 
                 ToolTip.Tip="Subtract the op path from the current path." 
                 Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" 
                 CommandParameter="Difference" 
                 InputGesture="Ctrl+Shift+D" />
       <MenuItem Header="_Intersect" 
-                Icon="{StaticResource IntersectIcon}" 
+                Icon="{DynamicResource IntersectIcon}" 
                 ToolTip.Tip="Intersect the two paths."
                 Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" 
                 CommandParameter="Intersect" 
                 InputGesture="Ctrl+Shift+I" />
-      <MenuItem Header="_Union" Icon="{StaticResource UnionIcon}"
+      <MenuItem Header="_Union" Icon="{DynamicResource UnionIcon}"
                 ToolTip.Tip="Union (inclusive-or) the two paths."
                 Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" 
                 CommandParameter="Union" 
                 InputGesture="Ctrl+Shift+U" />
       <MenuItem Header="_Xor"
-                Icon="{StaticResource XorIcon}"
+                Icon="{DynamicResource XorIcon}"
                 ToolTip.Tip="Exclusive-or the two paths."
                 Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}"
                 CommandParameter="Xor"
                 InputGesture="Ctrl+Shift+X" />
       <MenuItem Header="_Reverse Difference" 
-                Icon="{StaticResource ReverseDifferenceIcon}"
+                Icon="{DynamicResource ReverseDifferenceIcon}"
                 ToolTip.Tip="Subtract the current path from the op path."
                 Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" 
                 CommandParameter="ReverseDifference" InputGesture="Ctrl+Shift+R" />
@@ -497,18 +497,18 @@
       </MenuItem>
     </MenuItem>
     <MenuItem Header="_Tool">
-      <MenuItem Header="_None" Icon="{StaticResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N" />
+      <MenuItem Header="_None" Icon="{DynamicResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N" />
       <Separator />
-      <MenuItem Header="_Selection" Icon="{StaticResource SelectionIcon}" Command="{Binding OnToolSelection}" InputGesture="S" />
+      <MenuItem Header="_Selection" Icon="{DynamicResource SelectionIcon}" Command="{Binding OnToolSelection}" InputGesture="S" />
       <Separator />
-      <MenuItem Header="_Point" Icon="{StaticResource PointIcon}" Command="{Binding OnToolPoint}" InputGesture="P" />
+      <MenuItem Header="_Point" Icon="{DynamicResource PointIcon}" Command="{Binding OnToolPoint}" InputGesture="P" />
       <Separator />
-      <MenuItem Header="_Line" Icon="{StaticResource LineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
-      <MenuItem Header="_Arc" Icon="{StaticResource ArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
-      <MenuItem Header="Cubic _Bezier" Icon="{StaticResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
-      <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
+      <MenuItem Header="_Line" Icon="{DynamicResource LineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
+      <MenuItem Header="_Arc" Icon="{DynamicResource ArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
+      <MenuItem Header="Cubic _Bezier" Icon="{DynamicResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
+      <MenuItem Header="_Quadratic Bezier" Icon="{DynamicResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
       <Separator />
-      <MenuItem Header="Pat_h" Icon="{StaticResource PathIcon}" Command="{Binding OnToolPath}" InputGesture="H" />
+      <MenuItem Header="Pat_h" Icon="{DynamicResource PathIcon}" Command="{Binding OnToolPath}" InputGesture="H" />
       <MenuItem Header="Path Tool">
         <MenuItem.IsVisible>
           <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
@@ -516,20 +516,20 @@
             <Binding Path="" Source="Path" />
           </MultiBinding>
         </MenuItem.IsVisible>
-        <MenuItem Header="_Line" Icon="{StaticResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
-        <MenuItem Header="_Arc" Icon="{StaticResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
-        <MenuItem Header="Cubic _Bezier" Icon="{StaticResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
-        <MenuItem Header="_Quadratic Bezier" Icon="{StaticResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
+        <MenuItem Header="_Line" Icon="{DynamicResource PathLineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
+        <MenuItem Header="_Arc" Icon="{DynamicResource PathArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
+        <MenuItem Header="Cubic _Bezier" Icon="{DynamicResource PathCubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
+        <MenuItem Header="_Quadratic Bezier" Icon="{DynamicResource PathQuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />
         <Separator />
-        <MenuItem Header="_Move" Icon="{StaticResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M" />
+        <MenuItem Header="_Move" Icon="{DynamicResource PathMoveIcon}" Command="{Binding OnToolMove}" InputGesture="M" />
       </MenuItem>
       <Separator />
-      <MenuItem Header="_Rectangle" Icon="{StaticResource RectangleIcon}" Command="{Binding OnToolRectangle}" InputGesture="R" />
-      <MenuItem Header="_Ellipse" Icon="{StaticResource EllipseIcon}" Command="{Binding OnToolEllipse}" InputGesture="E" />
+      <MenuItem Header="_Rectangle" Icon="{DynamicResource RectangleIcon}" Command="{Binding OnToolRectangle}" InputGesture="R" />
+      <MenuItem Header="_Ellipse" Icon="{DynamicResource EllipseIcon}" Command="{Binding OnToolEllipse}" InputGesture="E" />
       <Separator />
-      <MenuItem Header="_Text" Icon="{StaticResource TextIcon}" Command="{Binding OnToolText}" InputGesture="T" />
+      <MenuItem Header="_Text" Icon="{DynamicResource TextIcon}" Command="{Binding OnToolText}" InputGesture="T" />
       <Separator />
-      <MenuItem Header="_Image" Icon="{StaticResource ImageIcon}" Command="{Binding OnToolImage}" InputGesture="I" />
+      <MenuItem Header="_Image" Icon="{DynamicResource ImageIcon}" Command="{Binding OnToolImage}" InputGesture="I" />
       <Separator />
       <MenuItem Header="Reset" Command="{Binding OnResetTool}" />
     </MenuItem>
