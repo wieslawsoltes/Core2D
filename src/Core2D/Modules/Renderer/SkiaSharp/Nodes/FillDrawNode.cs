@@ -37,7 +37,7 @@ internal class FillDrawNode : DrawNode, IFillDrawNode
         Fill = SkiaSharpDrawUtil.ToSKPaintBrush(Color);
     }
 
-    public override void Draw(object dc, double zoom)
+    public override void Draw(object? dc, double zoom)
     {
         OnDraw(dc, zoom);
     }
