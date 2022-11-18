@@ -35,6 +35,7 @@
       <Panel.KeyBindings>
         <!-- Edit -->
         <KeyBinding Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding}" Gesture="Delete" />
+        <KeyBinding Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding}" Gesture="Back" />
         <KeyBinding Command="{Binding OnCancel}" Gesture="Escape" />
         <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z" />
         <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y" />
