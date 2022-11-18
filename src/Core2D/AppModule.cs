@@ -30,6 +30,8 @@ using Core2D.ViewModels.Editor.Bounds;
 using Core2D.ViewModels.Editor.Factories;
 using Core2D.Views;
 using Core2D.Modules.FileWriter.PdfSharp;
+using Core2D.Modules.SvgExporter.Svg;
+using Core2D.Modules.XamlExporter.Avalonia;
 
 namespace Core2D;
 
@@ -143,6 +145,9 @@ public class AppModule : Autofac.Module
         builder.RegisterType<SkiaSharpPathConverter>().As<IPathConverter>().InstancePerLifetimeScope();
         builder.RegisterType<SkiaSharpSvgConverter>().As<ISvgConverter>().InstancePerLifetimeScope();
 
+        builder.RegisterType<DrawingGroupXamlExporter>().As<IXamlExporter>().InstancePerLifetimeScope();
+        builder.RegisterType<SvgSvgExporter>().As<ISvgExporter>().InstancePerLifetimeScope();
+        
         // Avalonia
 
         builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
