@@ -610,9 +610,9 @@ public class SkiaSharpSvgConverter : ISvgConverter
         return Enumerable.Repeat<BaseShapeViewModel>(group, 1).ToList();
     }
 
-    public IList<BaseShapeViewModel>? Convert(string path, out double width, out double height)
+    public IList<BaseShapeViewModel>? Convert(Stream stream, out double width, out double height)
     {
-        var document = Svg.Model.SvgExtensions.Open(path);
+        var document = Svg.Model.SvgExtensions.Open(stream);
         if (document is null)
         {
             width = double.NaN;

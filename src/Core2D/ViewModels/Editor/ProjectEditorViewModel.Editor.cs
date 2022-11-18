@@ -583,7 +583,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnImportJson(string path)
+    public void OnImportJson(Stream stream)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -599,7 +599,7 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            var json = fileSystem.ReadUtf8Text(path);
+            var json = fileSystem.ReadUtf8Text(stream);
             if (json is not null && !string.IsNullOrWhiteSpace(json))
             {
                 var item = jsonSerializer.Deserialize<object>(json);
@@ -615,21 +615,21 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnImportSvg(string path)
+    public void OnImportSvg(Stream stream)
     {
         var svgConverter = ServiceProvider.GetService<ISvgConverter>();
         if (svgConverter is null)
         {
             return;
         }
-        var shapes = svgConverter.Convert(path, out _, out _);
+        var shapes = svgConverter.Convert(stream, out _, out _);
         if (shapes is { })
         {
             ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(shapes);
         }
     }
 
-    public void OnExportJson(string path, object item)
+    public void OnExportJson(Stream stream, object item)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -648,7 +648,7 @@ public partial class ProjectEditorViewModel
             var json = jsonSerializer.Serialize(item);
             if (!string.IsNullOrWhiteSpace(json))
             {
-                fileSystem.WriteUtf8Text(path, json);
+                fileSystem.WriteUtf8Text(stream, json);
             }
         }
         catch (Exception ex)
@@ -969,8 +969,12 @@ public partial class ProjectEditorViewModel
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultJsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    OnImportJson(path);
-                    result = true;
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        OnImportJson(stream);
+                        result = true;
+                    }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
@@ -979,8 +983,12 @@ public partial class ProjectEditorViewModel
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultSvgExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    OnImportSvg(path);
-                    result = true;
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        OnImportSvg(stream);
+                        result = true;
+                    }
                 }
                 else if (ProjectEditorConfiguration.DefaultImageExtensions.Any(r => string.Compare(ext, r, StringComparison.OrdinalIgnoreCase) == 0))
                 {
@@ -988,8 +996,8 @@ public partial class ProjectEditorViewModel
                     if (key is { } && !string.IsNullOrEmpty(key))
                     {
                         OnDropImageKey(key, x, y);
+                        result = true;
                     }
-                    result = true;
                 }
             }
 
