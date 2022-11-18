@@ -12,7 +12,7 @@ public class TextBounds : IBounds
 {
     public Type TargetType => typeof(TextShapeViewModel);
 
-    public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+    public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
         if (shape is not TextShapeViewModel text)
         {
@@ -21,12 +21,12 @@ public class TextBounds : IBounds
 
         var pointHitTest = registered[typeof(PointShapeViewModel)];
 
-        if (pointHitTest.TryToGetPoint(text.TopLeft, target, radius, scale, registered) is { })
+        if (text.TopLeft is { } && pointHitTest.TryToGetPoint(text.TopLeft, target, radius, scale, registered) is { })
         {
             return text.TopLeft;
         }
 
-        if (pointHitTest.TryToGetPoint(text.BottomRight, target, radius, scale, registered) is { })
+        if (text.BottomRight is { } && pointHitTest.TryToGetPoint(text.BottomRight, target, radius, scale, registered) is { })
         {
             return text.BottomRight;
         }
@@ -39,6 +39,11 @@ public class TextBounds : IBounds
         if (shape is not TextShapeViewModel text)
         {
             throw new ArgumentNullException(nameof(shape));
+        }
+
+        if (text.TopLeft is null || text.BottomRight is null)
+        {
+            return false;
         }
 
         var rect = Rect2.FromPoints(
@@ -63,6 +68,11 @@ public class TextBounds : IBounds
         if (shape is not TextShapeViewModel text)
         {
             throw new ArgumentNullException(nameof(shape));
+        }
+
+        if (text.TopLeft is null || text.BottomRight is null)
+        {
+            return false;
         }
 
         var rect = Rect2.FromPoints(

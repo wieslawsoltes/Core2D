@@ -12,7 +12,7 @@ public class EllipseBounds : IBounds
 {
     public Type TargetType => typeof(EllipseShapeViewModel);
 
-    public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+    public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
         if (shape is not EllipseShapeViewModel ellipse)
         {
@@ -21,12 +21,12 @@ public class EllipseBounds : IBounds
 
         var pointHitTest = registered[typeof(PointShapeViewModel)];
 
-        if (pointHitTest.TryToGetPoint(ellipse.TopLeft, target, radius, scale, registered) is { })
+        if (ellipse.TopLeft is { } && pointHitTest.TryToGetPoint(ellipse.TopLeft, target, radius, scale, registered) is { })
         {
             return ellipse.TopLeft;
         }
 
-        if (pointHitTest.TryToGetPoint(ellipse.BottomRight, target, radius, scale, registered) is { })
+        if (ellipse.BottomRight is { } && pointHitTest.TryToGetPoint(ellipse.BottomRight, target, radius, scale, registered) is { })
         {
             return ellipse.BottomRight;
         }
@@ -39,6 +39,11 @@ public class EllipseBounds : IBounds
         if (shape is not EllipseShapeViewModel ellipse)
         {
             throw new ArgumentNullException(nameof(shape));
+        }
+
+        if (ellipse.TopLeft is null || ellipse.BottomRight is null)
+        {
+            return false;
         }
 
         var rect = Rect2.FromPoints(
@@ -63,6 +68,11 @@ public class EllipseBounds : IBounds
         if (shape is not EllipseShapeViewModel ellipse)
         {
             throw new ArgumentNullException(nameof(shape));
+        }
+
+        if (ellipse.TopLeft is null || ellipse.BottomRight is null)
+        {
+            return false;
         }
 
         var rect = Rect2.FromPoints(

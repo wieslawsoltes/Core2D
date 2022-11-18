@@ -13,7 +13,7 @@ public class GroupBounds : IBounds
 {
     public Type TargetType => typeof(GroupShapeViewModel);
 
-    public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+    public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
         if (shape is not GroupShapeViewModel group)
         {

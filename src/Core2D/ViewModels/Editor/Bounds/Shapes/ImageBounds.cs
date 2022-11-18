@@ -12,7 +12,7 @@ public class ImageBounds : IBounds
 {
     public Type TargetType => typeof(ImageShapeViewModel);
 
-    public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+    public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
         if (shape is not ImageShapeViewModel image)
         {
@@ -21,12 +21,12 @@ public class ImageBounds : IBounds
 
         var pointHitTest = registered[typeof(PointShapeViewModel)];
 
-        if (pointHitTest.TryToGetPoint(image.TopLeft, target, radius, scale, registered) is { })
+        if (image.TopLeft is { } && pointHitTest.TryToGetPoint(image.TopLeft, target, radius, scale, registered) is { })
         {
             return image.TopLeft;
         }
 
-        if (pointHitTest.TryToGetPoint(image.BottomRight, target, radius, scale, registered) is { })
+        if (image.BottomRight is { } && pointHitTest.TryToGetPoint(image.BottomRight, target, radius, scale, registered) is { })
         {
             return image.BottomRight;
         }
@@ -39,6 +39,11 @@ public class ImageBounds : IBounds
         if (shape is not ImageShapeViewModel image)
         {
             throw new ArgumentNullException(nameof(shape));
+        }
+
+        if (image.TopLeft is null || image.BottomRight is null)
+        {
+            return false;
         }
 
         var rect = Rect2.FromPoints(
@@ -63,6 +68,11 @@ public class ImageBounds : IBounds
         if (shape is not ImageShapeViewModel image)
         {
             throw new ArgumentNullException(nameof(shape));
+        }
+
+        if (image.TopLeft is null || image.BottomRight is null)
+        {
+            return false;
         }
 
         var rect = Rect2.FromPoints(

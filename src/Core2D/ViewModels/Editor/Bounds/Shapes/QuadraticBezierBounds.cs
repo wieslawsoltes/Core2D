@@ -14,7 +14,7 @@ public class QuadraticBezierBounds : IBounds
 
     public Type TargetType => typeof(QuadraticBezierShapeViewModel);
 
-    public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+    public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
         if (shape is not QuadraticBezierShapeViewModel quadratic)
         {
@@ -23,17 +23,17 @@ public class QuadraticBezierBounds : IBounds
 
         var pointHitTest = registered[typeof(PointShapeViewModel)];
 
-        if (pointHitTest.TryToGetPoint(quadratic.Point1, target, radius, scale, registered) is { })
+        if (quadratic.Point1 is { } && pointHitTest.TryToGetPoint(quadratic.Point1, target, radius, scale, registered) is { })
         {
             return quadratic.Point1;
         }
 
-        if (pointHitTest.TryToGetPoint(quadratic.Point2, target, radius, scale, registered) is { })
+        if (quadratic.Point2 is { } && pointHitTest.TryToGetPoint(quadratic.Point2, target, radius, scale, registered) is { })
         {
             return quadratic.Point2;
         }
 
-        if (pointHitTest.TryToGetPoint(quadratic.Point3, target, radius, scale, registered) is { })
+        if (quadratic.Point3 is { } && pointHitTest.TryToGetPoint(quadratic.Point3, target, radius, scale, registered) is { })
         {
             return quadratic.Point3;
         }

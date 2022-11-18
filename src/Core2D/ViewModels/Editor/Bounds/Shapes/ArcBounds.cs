@@ -12,7 +12,7 @@ public class ArcBounds : IBounds
 {
     public Type TargetType => typeof(ArcShapeViewModel);
 
-    public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+    public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
         if (shape is not ArcShapeViewModel arc)
         {
@@ -21,22 +21,22 @@ public class ArcBounds : IBounds
 
         var pointHitTest = registered[typeof(PointShapeViewModel)];
 
-        if (pointHitTest.TryToGetPoint(arc.Point1, target, radius, scale, registered) is { })
+        if (arc.Point1 is { } && pointHitTest.TryToGetPoint(arc.Point1, target, radius, scale, registered) is { })
         {
             return arc.Point1;
         }
 
-        if (pointHitTest.TryToGetPoint(arc.Point2, target, radius, scale, registered) is { })
+        if (arc.Point2 is { } && pointHitTest.TryToGetPoint(arc.Point2, target, radius, scale, registered) is { })
         {
             return arc.Point2;
         }
 
-        if (pointHitTest.TryToGetPoint(arc.Point3, target, radius, scale, registered) is { })
+        if (arc.Point3 is { } && pointHitTest.TryToGetPoint(arc.Point3, target, radius, scale, registered) is { })
         {
             return arc.Point3;
         }
 
-        if (pointHitTest.TryToGetPoint(arc.Point4, target, radius, scale, registered) is { })
+        if (arc.Point4 is { } && pointHitTest.TryToGetPoint(arc.Point4, target, radius, scale, registered) is { })
         {
             return arc.Point4;
         }
@@ -86,6 +86,11 @@ public class ArcBounds : IBounds
 
     private static Rect2 GetArcBounds(ArcShapeViewModel arc)
     {
+        if (arc.Point1 is null || arc.Point2 is null)
+        {
+            return new Rect2();
+        }
+
         double x1 = arc.Point1.X;
         double y1 = arc.Point1.Y;
         double x2 = arc.Point2.X;

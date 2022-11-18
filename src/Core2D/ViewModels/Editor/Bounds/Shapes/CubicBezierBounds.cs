@@ -14,7 +14,7 @@ public class CubicBezierBounds : IBounds
 
     public Type TargetType => typeof(CubicBezierShapeViewModel);
 
-    public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+    public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
         if (shape is not CubicBezierShapeViewModel cubic)
         {
@@ -23,22 +23,22 @@ public class CubicBezierBounds : IBounds
 
         var pointHitTest = registered[typeof(PointShapeViewModel)];
 
-        if (pointHitTest.TryToGetPoint(cubic.Point1, target, radius, scale, registered) is { })
+        if (cubic.Point1 is { } && pointHitTest.TryToGetPoint(cubic.Point1, target, radius, scale, registered) is { })
         {
             return cubic.Point1;
         }
 
-        if (pointHitTest.TryToGetPoint(cubic.Point2, target, radius, scale, registered) is { })
+        if (cubic.Point2 is { } && pointHitTest.TryToGetPoint(cubic.Point2, target, radius, scale, registered) is { })
         {
             return cubic.Point2;
         }
 
-        if (pointHitTest.TryToGetPoint(cubic.Point3, target, radius, scale, registered) is { })
+        if (cubic.Point3 is { } && pointHitTest.TryToGetPoint(cubic.Point3, target, radius, scale, registered) is { })
         {
             return cubic.Point3;
         }
 
-        if (pointHitTest.TryToGetPoint(cubic.Point4, target, radius, scale, registered) is { })
+        if (cubic.Point4 is { } && pointHitTest.TryToGetPoint(cubic.Point4, target, radius, scale, registered) is { })
         {
             return cubic.Point4;
         }
