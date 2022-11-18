@@ -319,7 +319,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         brush.Dispose();
     }
 
-    public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
+    public void Grid(object? dc, IGrid grid, double x, double y, double width, double height)
     {
         if (dc is not Graphics gfx)
         {
