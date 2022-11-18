@@ -32,6 +32,25 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         };
     }
 
+    private static List<FilePickerFileType> GetJsonFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.Json,
+            StorageService.All
+        };
+    }
+
+    private static List<FilePickerFileType> GetSvgFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.ImageSvg,
+            StorageService.ImageSvgz,
+            StorageService.All
+        };
+    }
+
     private IStorageFile? _openProjectFile;
 
     public AvaloniaProjectEditorPlatform(IServiceProvider? serviceProvider) : base(serviceProvider)
