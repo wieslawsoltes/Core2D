@@ -633,22 +633,34 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         try
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            var imageChache = editor.Project as IImageCache;
-            var container = editor.Project.CurrentContainer;
-            var shapes = editor.Project.SelectedShapes;
             var exporter = ServiceProvider.GetService<IMetafileExporter>();
+            if (editor?.Project is null || editor.DataFlow is null || exporter is null)
+            {
+                return;
+            }
 
-            var db = (object)container.Properties;
-            var record = (object)container.Record;
+            var imageCache = editor.Project as IImageCache;
+            var container = editor.Project.CurrentContainer;
+            if (container is null)
+            {
+                return;
+            }
+            
+            var shapes = editor.Project.SelectedShapes;
+            var db = (object?)container.Properties;
+            var record = (object?)container.Record;
 
             var width = 0.0;
-            var height = .0;
+            var height = 0.0;
 
             if (container is PageContainerViewModel page)
             {
                 editor.DataFlow.Bind(page.Template, db, record);
-                width = page.Template.Width;
-                height = page.Template.Height;
+                if (page.Template is { })
+                {
+                    width = page.Template.Width;
+                    height = page.Template.Height;
+                }
             }
             else if (container is TemplateContainerViewModel template)
             {
@@ -662,15 +674,21 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
             if (shapes is { } && shapes.Count > 0)
             {
-                using var ms = exporter.MakeMetafileStream(bitmap, shapes, imageChache);
-                ms.Position = 0;
-                SetClipboardMetafile(ms);
+                using var ms = exporter.MakeMetafileStream(bitmap, shapes, imageCache);
+                if (ms is { })
+                {
+                    ms.Position = 0;
+                    SetClipboardMetafile(ms);
+                }
             }
             else
             {
-                using var ms = exporter.MakeMetafileStream(bitmap, container, imageChache);
-                ms.Position = 0;
-                SetClipboardMetafile(ms);
+                using var ms = exporter.MakeMetafileStream(bitmap, container, imageCache);
+                if (ms is { })
+                {
+                    ms.Position = 0;
+                    SetClipboardMetafile(ms);
+                }
             }
         }
         catch (Exception ex)
@@ -691,9 +709,13 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
             var textClipboard = ServiceProvider.GetService<ITextClipboard>();
             var converter = ServiceProvider.GetService<IPathConverter>();
-            var container = editor.Project.CurrentContainer;
+            if (editor?.Project is null || textClipboard is null || converter is null)
+            {
+                return;
+            }
 
-            var shapes = editor.Project?.SelectedShapes ?? container?.Layers.SelectMany(x => x.Shapes);
+            var container = editor.Project.CurrentContainer;
+            var shapes = editor.Project.SelectedShapes ?? container?.Layers.SelectMany(x => x.Shapes);
             if (shapes is null)
             {
                 return;
@@ -713,7 +735,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             var result = sb.ToString();
             if (!string.IsNullOrEmpty(result))
             {
-                await textClipboard?.SetText(result);
+                await textClipboard.SetText(result);
             }
         }
         catch (Exception ex)
@@ -729,8 +751,12 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             var textClipboard = ServiceProvider.GetService<ITextClipboard>();
             var clipboard = ServiceProvider.GetService<IClipboardService>();
             var converter = ServiceProvider.GetService<IPathConverter>();
+            if (textClipboard is null || clipboard is null || converter is null)
+            {
+                return;
+            }
 
-            var svgPath = await textClipboard?.GetText();
+            var svgPath = await textClipboard.GetText();
             if (!string.IsNullOrEmpty(svgPath))
             {
                 var pathShape = converter.FromSvgPathData(svgPath, isStroked: true, isFilled: false);
@@ -753,8 +779,12 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             var textClipboard = ServiceProvider.GetService<ITextClipboard>();
             var clipboard = ServiceProvider.GetService<IClipboardService>();
             var converter = ServiceProvider.GetService<IPathConverter>();
+            if (textClipboard is null || clipboard is null || converter is null)
+            {
+                return;
+            }
 
-            var svgPath = await textClipboard?.GetText();
+            var svgPath = await textClipboard.GetText();
             if (!string.IsNullOrEmpty(svgPath))
             {
                 var pathShape = converter.FromSvgPathData(svgPath, isStroked: false, isFilled: true);
