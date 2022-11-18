@@ -9,15 +9,20 @@ public sealed class AvaloniaTextClipboard : ITextClipboard
 {
     async Task ITextClipboard.SetText(string? text)
     {
-        if (text is { })
+        if (text is { } && Application.Current?.Clipboard is { } clipboard)
         {
-            await Application.Current?.Clipboard?.SetTextAsync(text);
+            await clipboard.SetTextAsync(text);
         }
     }
 
     private async Task<string?> GetTextAsync()
     {
-        return await Application.Current?.Clipboard?.GetTextAsync();
+        if (Application.Current?.Clipboard is { } clipboard)
+        {
+            return await clipboard.GetTextAsync();
+        }
+
+        return default;
     }
 
     Task<string?> ITextClipboard.GetText()
