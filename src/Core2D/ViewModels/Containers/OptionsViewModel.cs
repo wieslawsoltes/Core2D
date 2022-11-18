@@ -20,6 +20,7 @@ public partial class OptionsViewModel : ViewModelBase
     [AutoNotify] private bool _defaultIsClosed = true;
     [AutoNotify] private FillRule _defaultFillRule = FillRule.EvenOdd;
     [AutoNotify] private bool _tryToConnect;
+    [AutoNotify] private bool _singlePressMode;
 
     public OptionsViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
@@ -38,7 +39,8 @@ public partial class OptionsViewModel : ViewModelBase
             DefaultIsFilled = DefaultIsFilled,
             DefaultIsClosed = DefaultIsClosed,
             DefaultFillRule = DefaultFillRule,
-            TryToConnect = TryToConnect
+            TryToConnect = TryToConnect,
+            SinglePressMode = SinglePressMode
         };
 
         return copy;

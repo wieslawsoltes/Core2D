@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
@@ -28,7 +29,7 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public async void BeginDown(InputArgs args)
+    private async Task NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -61,19 +62,19 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
                     return;
                 }
 
-                var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
-                    editor.Project.CurrentStyleLibrary.Selected :
-                    viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+                var style = editor.Project.CurrentStyleLibrary?.Selected is { }
+                    ? editor.Project.CurrentStyleLibrary.Selected
+                    : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
                 _image = factory.CreateImageShape(
-                    (double)sx, (double)sy,
-                    (ShapeStyleViewModel)style.Copy(null),
+                    (double) sx, (double) sy,
+                    (ShapeStyleViewModel) style.Copy(null),
                     key,
                     false,
                     false);
 
                 editor.SetShapeName(_image);
 
-                var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                 if (result is { })
                 {
                     _image.TopLeft = result;
@@ -81,10 +82,11 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
 
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_image);
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_image);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
-                
+
                 ToStateBottomRight();
                 Move(_image);
                 _currentState = State.BottomRight;
@@ -94,22 +96,23 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_image is { })
                 {
-                    _image.BottomRight.X = (double)sx;
-                    _image.BottomRight.Y = (double)sy;
+                    _image.BottomRight.X = (double) sx;
+                    _image.BottomRight.Y = (double) sy;
 
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _image.BottomRight = result;
                     }
-                    
+
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_image);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_image);
                     }
-                    
+
                     Finalize(_image);
-                    
+
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
                         editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _image);
@@ -117,13 +120,32 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
+
                 break;
             }
         }
     }
 
-    public void BeginUp(InputArgs args)
+    public async void BeginDown(InputArgs args)
     {
+        await NextPoint(args);
+    }
+
+    public async void BeginUp(InputArgs args)
+    {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.TopLeft)
+            {
+                await NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)

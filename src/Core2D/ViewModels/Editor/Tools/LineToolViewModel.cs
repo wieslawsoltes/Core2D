@@ -28,7 +28,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -38,6 +38,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
         {
             return;
         }
+
         var (x, y) = args;
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
@@ -45,19 +46,19 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
             case State.Start:
             {
                 editor.IsToolIdle = false;
-                var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
-                    editor.Project.CurrentStyleLibrary.Selected :
-                    viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+                var style = editor.Project.CurrentStyleLibrary?.Selected is { }
+                    ? editor.Project.CurrentStyleLibrary.Selected
+                    : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
                 _line = factory.CreateLineShape(
-                    (double)sx, (double)sy,
-                    (ShapeStyleViewModel)style.Copy(null),
+                    (double) sx, (double) sy,
+                    (ShapeStyleViewModel) style.Copy(null),
                     editor.Project.Options.DefaultIsStroked);
 
                 editor.SetShapeName(_line);
 
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _line.Start = result;
@@ -73,10 +74,11 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
 
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
-                
+
                 ToStateEnd();
                 Move(_line);
                 _currentState = State.End;
@@ -88,13 +90,13 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (_line.End is { })
                     {
-                        _line.End.X = (double)sx;
-                        _line.End.Y = (double)sy;
+                        _line.End.X = (double) sx;
+                        _line.End.Y = (double) sy;
                     }
 
                     if (editor.Project.Options.TryToConnect)
                     {
-                        var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                        var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                         if (result is { })
                         {
                             _line.End = result;
@@ -110,11 +112,12 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
 
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
                     }
-                    
+
                     Finalize(_line);
-                    
+
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
                         editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _line);
@@ -122,13 +125,32 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
+
                 break;
             }
         }
     }
 
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
+    }
+
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.Start)
+            {
+                NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)

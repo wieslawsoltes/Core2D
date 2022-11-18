@@ -753,6 +753,14 @@ public partial class ProjectEditorViewModel
             Project.Options.TryToConnect = !Project.Options.TryToConnect;
         }
     }
+    
+    public void OnToggleSinglePressMode()
+    {
+        if (Project?.Options is { })
+        {
+            Project.Options.SinglePressMode = !Project.Options.SinglePressMode;
+        }
+    }
 
     public string? OnGetImageKey(string path)
     {

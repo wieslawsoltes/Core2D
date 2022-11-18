@@ -28,7 +28,7 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -38,25 +38,26 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
         {
             return;
         }
+
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:
             {
                 editor.IsToolIdle = false;
-                var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
-                    editor.Project.CurrentStyleLibrary.Selected :
-                    viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+                var style = editor.Project.CurrentStyleLibrary?.Selected is { }
+                    ? editor.Project.CurrentStyleLibrary.Selected
+                    : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
 
                 _rectangle = factory.CreateRectangleShape(
-                    (double)sx, (double)sy,
-                    (ShapeStyleViewModel)style.Copy(null),
+                    (double) sx, (double) sy,
+                    (ShapeStyleViewModel) style.Copy(null),
                     editor.Project.Options.DefaultIsStroked,
                     editor.Project.Options.DefaultIsFilled);
 
                 editor.SetShapeName(_rectangle);
 
-                var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                 if (result is { })
                 {
                     _rectangle.TopLeft = result;
@@ -64,10 +65,11 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
 
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangle);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
-                
+
                 ToStateBottomRight();
                 Move(_rectangle);
                 _currentState = State.BottomRight;
@@ -77,10 +79,10 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_rectangle is { })
                 {
-                    _rectangle.BottomRight.X = (double)sx;
-                    _rectangle.BottomRight.Y = (double)sy;
+                    _rectangle.BottomRight.X = (double) sx;
+                    _rectangle.BottomRight.Y = (double) sy;
 
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _rectangle.BottomRight = result;
@@ -88,9 +90,10 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
 
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
                     }
-                    
+
                     Finalize(_rectangle);
 
                     if (editor.Project.CurrentContainer?.CurrentLayer is { })
@@ -100,13 +103,32 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
+
                 break;
             }
         }
     }
 
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
+    }
+
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.TopLeft)
+            {
+                NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)

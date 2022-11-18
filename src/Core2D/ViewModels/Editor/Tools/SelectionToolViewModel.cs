@@ -155,7 +155,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         return false;
     }
 
-    public void BeginDown(InputArgs args)
+    private void Start(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -165,6 +165,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         {
             return;
         }
+
         var (x, y) = args;
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
@@ -180,7 +181,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
                 selection.DeHover(editor.Project.CurrentContainer.CurrentLayer);
 
-                if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible == true)
+                if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } &&
+                    editor.PageState.Decorator.IsVisible == true)
                 {
                     if (HitTestDecorator(args, isControl, false) == true)
                     {
@@ -192,7 +194,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 {
                     var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
                     double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-                    BaseShapeViewModel result = hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
+                    BaseShapeViewModel result =
+                        hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                     if (result is null)
                     {
                         result = hitTest.TryToGetShape(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
@@ -202,7 +205,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     {
                         if (editor.Project.SelectedShapes is null)
                         {
-                            editor.Project.SelectedShapes = new HashSet<BaseShapeViewModel>() { result };
+                            editor.Project.SelectedShapes = new HashSet<BaseShapeViewModel>() {result};
                             editor.Project.CurrentContainer.CurrentLayer.RaiseInvalidateLayer();
                             selection.OnShowOrHideDecorator();
                             HitTestDecorator(args, isControl, false);
@@ -226,6 +229,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                                     selection.OnShowOrHideDecorator();
                                     HitTestDecorator(args, isControl, false);
                                 }
+
                                 editor.Project.CurrentContainer.CurrentLayer.RaiseInvalidateLayer();
                                 break;
                             }
@@ -245,7 +249,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     }
                 }
 
-                if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible == true)
+                if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } &&
+                    editor.PageState.Decorator.IsVisible == true)
                 {
                     selection.OnHideDecorator();
                 }
@@ -255,7 +260,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
 
                     double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-                    BaseShapeViewModel result = hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
+                    BaseShapeViewModel result =
+                        hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                     if (result is null)
                     {
                         result = hitTest.TryToGetShape(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
@@ -298,13 +304,14 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     editor.PageState.SelectionStyle,
                     true, true);
                 _rectangleShape.State |= ShapeStateFlags.Thickness;
-                
+
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_rectangleShape);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
-                
+
                 _currentState = State.Selected;
                 break;
             }
@@ -314,22 +321,24 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 {
                     _rectangleShape.BottomRight.X = x;
                     _rectangleShape.BottomRight.Y = y;
-                    
+
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
                         editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     }
-                    
+
                     _currentState = State.None;
                     editor.IsToolIdle = true;
                 }
+
                 break;
             }
         }
     }
 
-    public void BeginUp(InputArgs args)
+    private void End(InputArgs args)
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
@@ -351,10 +360,11 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 {
                     _rectangleShape.BottomRight.X = args.X;
                     _rectangleShape.BottomRight.Y = args.Y;
-                    
+
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangleShape);
                         editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     }
                 }
@@ -408,13 +418,25 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 if (_rectangleShape is { })
                 {
                     _currentState = State.None;
-                    selection.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangleShape, deselect, includeSelected);
+                    selection.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangleShape, deselect,
+                        includeSelected);
                     selection.OnShowOrHideDecorator();
                     editor.IsToolIdle = true;
                 }
+
                 break;
             }
         }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        Start(args);
+    }
+
+    public void BeginUp(InputArgs args)
+    {
+        End(args);
     }
 
     public void EndDown(InputArgs args)

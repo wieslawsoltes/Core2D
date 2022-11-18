@@ -25,7 +25,7 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -34,14 +34,15 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
         {
             return;
         }
+
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point:
             {
                 _point = factory.CreatePointShape(
-                    (double)sx,
-                    (double)sy);
+                    (double) sx,
+                    (double) sy);
 
                 editor.SetShapeName(_point);
 
@@ -62,9 +63,15 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
                         editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
                     }
                 }
+
                 break;
             }
         }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
     }
 
     public void BeginUp(InputArgs args)

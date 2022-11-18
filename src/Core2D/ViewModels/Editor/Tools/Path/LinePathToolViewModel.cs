@@ -31,7 +31,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -41,13 +41,15 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
         {
             return;
         }
+
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:
             {
                 editor.IsToolIdle = false;
-                _line.Start = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
+                _line.Start = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
+                              factory.CreatePointShape((double) sx, (double) sy);
                 if (!pathTool.IsInitialized)
                 {
                     pathTool.InitializeWorkingPath(_line.Start);
@@ -57,7 +59,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                     _line.Start = pathTool.GetLastPathPoint();
                 }
 
-                _line.End = factory.CreatePointShape((double)sx, (double)sy);
+                _line.End = factory.CreatePointShape((double) sx, (double) sy);
                 pathTool.GeometryContext?.LineTo(_line.End);
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStateEnd();
@@ -67,11 +69,11 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
             }
             case State.End:
             {
-                _line.End.X = (double)sx;
-                _line.End.Y = (double)sy;
+                _line.End.X = (double) sx;
+                _line.End.Y = (double) sy;
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var end = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var end = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (end is { })
                     {
                         var figure = pathTool.Path.Figures.LastOrDefault();
@@ -81,7 +83,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 }
 
                 _line.Start = _line.End;
-                _line.End = factory.CreatePointShape((double)sx, (double)sy);
+                _line.End = factory.CreatePointShape((double) sx, (double) sy);
                 pathTool.GeometryContext?.LineTo(_line.End);
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
@@ -91,8 +93,26 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
         }
     }
 
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
+    }
+
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.Start)
+            {
+                NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)

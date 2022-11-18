@@ -28,7 +28,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -38,24 +38,25 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
         {
             return;
         }
+
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:
             {
                 editor.IsToolIdle = false;
-                var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
-                    editor.Project.CurrentStyleLibrary.Selected :
-                    viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+                var style = editor.Project.CurrentStyleLibrary?.Selected is { }
+                    ? editor.Project.CurrentStyleLibrary.Selected
+                    : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
                 _quadraticBezier = factory.CreateQuadraticBezierShape(
-                    (double)sx, (double)sy,
-                    (ShapeStyleViewModel)style.Copy(null),
+                    (double) sx, (double) sy,
+                    (ShapeStyleViewModel) style.Copy(null),
                     editor.Project.Options.DefaultIsStroked,
                     editor.Project.Options.DefaultIsFilled);
 
                 editor.SetShapeName(_quadraticBezier);
 
-                var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                 if (result is { })
                 {
                     _quadraticBezier.Point1 = result;
@@ -63,10 +64,11 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
 
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_quadraticBezier);
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_quadraticBezier);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
-                
+
                 ToStatePoint3();
                 Move(_quadraticBezier);
                 _currentState = State.Point3;
@@ -76,12 +78,12 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_quadraticBezier is { })
                 {
-                    _quadraticBezier.Point2.X = (double)sx;
-                    _quadraticBezier.Point2.Y = (double)sy;
-                    _quadraticBezier.Point3.X = (double)sx;
-                    _quadraticBezier.Point3.Y = (double)sy;
+                    _quadraticBezier.Point2.X = (double) sx;
+                    _quadraticBezier.Point2.Y = (double) sy;
+                    _quadraticBezier.Point3.X = (double) sx;
+                    _quadraticBezier.Point3.Y = (double) sy;
 
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _quadraticBezier.Point3 = result;
@@ -92,16 +94,17 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                     Move(_quadraticBezier);
                     _currentState = State.Point2;
                 }
+
                 break;
             }
             case State.Point2:
             {
                 if (_quadraticBezier is { })
                 {
-                    _quadraticBezier.Point2.X = (double)sx;
-                    _quadraticBezier.Point2.Y = (double)sy;
+                    _quadraticBezier.Point2.X = (double) sx;
+                    _quadraticBezier.Point2.Y = (double) sy;
 
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _quadraticBezier.Point2 = result;
@@ -109,9 +112,10 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
 
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_quadraticBezier);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_quadraticBezier);
                     }
-                    
+
                     Finalize(_quadraticBezier);
 
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
@@ -121,13 +125,32 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
+
                 break;
             }
         }
     }
 
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
+    }
+
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.Point1)
+            {
+                NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)

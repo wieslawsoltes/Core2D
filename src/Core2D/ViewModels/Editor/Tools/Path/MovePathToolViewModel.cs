@@ -25,7 +25,7 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -34,6 +34,7 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
         {
             return;
         }
+
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
@@ -42,7 +43,8 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
                 var pathTool = ServiceProvider.GetService<PathToolViewModel>();
                 editor.CurrentPathTool = pathTool.PreviousPathTool;
 
-                var start = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
+                var start = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
+                            factory.CreatePointShape((double) sx, (double) sy);
                 pathTool.GeometryContext?.BeginFigure(
                     start,
                     editor.Project.Options.DefaultIsClosed);
@@ -51,6 +53,11 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
                 break;
             }
         }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
     }
 
     public void BeginUp(InputArgs args)

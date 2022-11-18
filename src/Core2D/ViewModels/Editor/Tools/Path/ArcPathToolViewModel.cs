@@ -38,7 +38,7 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -48,13 +48,15 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
         {
             return;
         }
+
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:
             {
                 editor.IsToolIdle = false;
-                _arc.Start = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
+                _arc.Start = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
+                             factory.CreatePointShape((double) sx, (double) sy);
                 if (!pathTool.IsInitialized)
                 {
                     pathTool.InitializeWorkingPath(_arc.Start);
@@ -64,7 +66,7 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                     _arc.Start = pathTool.GetLastPathPoint();
                 }
 
-                _arc.End = factory.CreatePointShape((double)sx, (double)sy);
+                _arc.End = factory.CreatePointShape((double) sx, (double) sy);
                 pathTool.GeometryContext?.ArcTo(
                     _arc.End,
                     factory.CreatePathSize(
@@ -81,18 +83,19 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
             }
             case State.End:
             {
-                _arc.End.X = (double)sx;
-                _arc.End.Y = (double)sy;
+                _arc.End.X = (double) sx;
+                _arc.End.Y = (double) sy;
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var end = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var end = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (end is { })
                     {
                         _arc.End = end;
                     }
                 }
+
                 _arc.Start = _arc.End;
-                _arc.End = factory.CreatePointShape((double)sx, (double)sy);
+                _arc.End = factory.CreatePointShape((double) sx, (double) sy);
                 pathTool.GeometryContext?.ArcTo(
                     _arc.End,
                     factory.CreatePathSize(
@@ -109,8 +112,26 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
         }
     }
 
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
+    }
+
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.Start)
+            {
+                NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)

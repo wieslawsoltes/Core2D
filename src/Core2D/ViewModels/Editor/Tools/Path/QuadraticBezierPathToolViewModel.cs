@@ -31,7 +31,7 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -41,13 +41,15 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
         {
             return;
         }
+
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:
             {
                 editor.IsToolIdle = false;
-                _quadraticBezier.Point1 = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
+                _quadraticBezier.Point1 = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
+                                          factory.CreatePointShape((double) sx, (double) sy);
                 if (!pathTool.IsInitialized)
                 {
                     pathTool.InitializeWorkingPath(_quadraticBezier.Point1);
@@ -57,8 +59,8 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
                     _quadraticBezier.Point1 = pathTool.GetLastPathPoint();
                 }
 
-                _quadraticBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
-                _quadraticBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
+                _quadraticBezier.Point2 = factory.CreatePointShape((double) sx, (double) sy);
+                _quadraticBezier.Point3 = factory.CreatePointShape((double) sx, (double) sy);
                 pathTool.GeometryContext?.QuadraticBezierTo(
                     _quadraticBezier.Point2,
                     _quadraticBezier.Point3);
@@ -70,11 +72,11 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
             }
             case State.Point3:
             {
-                _quadraticBezier.Point3.X = (double)sx;
-                _quadraticBezier.Point3.Y = (double)sy;
+                _quadraticBezier.Point3.X = (double) sx;
+                _quadraticBezier.Point3.Y = (double) sy;
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var point2 = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var point2 = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (point2 is { })
                     {
                         var figure = pathTool.Path.Figures.LastOrDefault();
@@ -83,6 +85,7 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
                         _quadraticBezier.Point3 = point2;
                     }
                 }
+
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint2();
                 Move(null);
@@ -91,11 +94,11 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
             }
             case State.Point2:
             {
-                _quadraticBezier.Point2.X = (double)sx;
-                _quadraticBezier.Point2.Y = (double)sy;
+                _quadraticBezier.Point2.X = (double) sx;
+                _quadraticBezier.Point2.Y = (double) sy;
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var point1 = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var point1 = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (point1 is { })
                     {
                         var figure = pathTool.Path.Figures.LastOrDefault();
@@ -106,8 +109,8 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
                 }
 
                 _quadraticBezier.Point1 = _quadraticBezier.Point3;
-                _quadraticBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
-                _quadraticBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
+                _quadraticBezier.Point2 = factory.CreatePointShape((double) sx, (double) sy);
+                _quadraticBezier.Point3 = factory.CreatePointShape((double) sx, (double) sy);
                 pathTool.GeometryContext?.QuadraticBezierTo(
                     _quadraticBezier.Point2,
                     _quadraticBezier.Point3);
@@ -122,6 +125,24 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
 
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.Point1)
+            {
+                NextPoint(args);
+            }
+        }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
     }
 
     public void EndDown(InputArgs args)

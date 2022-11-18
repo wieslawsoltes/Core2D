@@ -28,9 +28,9 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
-        var factory = ServiceProvider.GetService<IViewModelFactory>();
+                var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
@@ -140,9 +140,27 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
             }
         }
     }
+    
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
+    }
 
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.Point1)
+            {
+                NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)

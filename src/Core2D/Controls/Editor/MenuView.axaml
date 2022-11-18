@@ -184,6 +184,12 @@
             <CheckBox IsChecked="{Binding Project.Options.TryToConnect, FallbackValue={x:Null}}" />
           </MenuItem.Icon>
         </MenuItem>
+        <Separator />
+        <MenuItem Header="_Single Press Mode" Command="{Binding OnToggleSinglePressMode}">
+          <MenuItem.Icon>
+            <CheckBox IsChecked="{Binding Project.Options.SinglePressMode, FallbackValue={x:Null}}" />
+          </MenuItem.Icon>
+        </MenuItem>
       </MenuItem>
       <Separator />
       <MenuItem Header="E_xport Project" Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" CommandParameter="{Binding Project}" />

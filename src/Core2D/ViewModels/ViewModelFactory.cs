@@ -857,7 +857,8 @@ public class ViewModelFactory : IViewModelFactory
             DefaultIsFilled = false,
             DefaultIsClosed = true,
             DefaultFillRule = FillRule.EvenOdd,
-            TryToConnect = false
+            TryToConnect = false,
+            SinglePressMode = true
         };
     }
 

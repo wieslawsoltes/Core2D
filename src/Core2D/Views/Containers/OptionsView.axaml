@@ -33,6 +33,9 @@
         <CheckBox Content="TryToConnect" 
                   IsChecked="{Binding TryToConnect, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
+        <CheckBox Content="SinglePressMode" 
+                  IsChecked="{Binding SinglePressMode, Mode=TwoWay}" 
+                  HorizontalAlignment="Stretch" />
       </StackPanel>
     </TabItem>
     <TabItem Header="Defaults">

@@ -28,7 +28,7 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -38,24 +38,25 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
         {
             return;
         }
+
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.TopLeft:
             {
                 editor.IsToolIdle = false;
-                var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
-                    editor.Project.CurrentStyleLibrary.Selected :
-                    viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+                var style = editor.Project.CurrentStyleLibrary?.Selected is { }
+                    ? editor.Project.CurrentStyleLibrary.Selected
+                    : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
                 _text = factory.CreateTextShape(
-                    (double)sx, (double)sy,
-                    (ShapeStyleViewModel)style.Copy(null),
+                    (double) sx, (double) sy,
+                    (ShapeStyleViewModel) style.Copy(null),
                     "Text",
                     editor.Project.Options.DefaultIsStroked);
 
                 editor.SetShapeName(_text);
 
-                var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                 if (result is { })
                 {
                     _text.TopLeft = result;
@@ -63,10 +64,11 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
 
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_text);
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_text);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
-                
+
                 ToStateBottomRight();
                 Move(_text);
                 _currentState = State.BottomRight;
@@ -76,10 +78,10 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_text is { })
                 {
-                    _text.BottomRight.X = (double)sx;
-                    _text.BottomRight.Y = (double)sy;
+                    _text.BottomRight.X = (double) sx;
+                    _text.BottomRight.Y = (double) sy;
 
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _text.BottomRight = result;
@@ -87,11 +89,12 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
 
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
                     }
-                    
+
                     Finalize(_text);
-                    
+
                     if (editor.Project.CurrentContainer?.CurrentLayer is { })
                     {
                         editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _text);
@@ -99,6 +102,7 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
+
                 break;
             }
         }
@@ -106,6 +110,24 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
 
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.TopLeft)
+            {
+                NextPoint(args);
+            }
+        }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
     }
 
     public void EndDown(InputArgs args)
