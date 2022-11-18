@@ -70,8 +70,8 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
                 ToStateBottomRight();
                 Move(_text);
                 _currentState = State.BottomRight;
-            }
                 break;
+            }
             case State.BottomRight:
             {
                 if (_text is { })
@@ -99,8 +99,8 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
-            }
                 break;
+            }
         }
     }
 

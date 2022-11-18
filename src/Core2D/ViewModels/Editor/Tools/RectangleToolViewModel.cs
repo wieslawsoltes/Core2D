@@ -71,8 +71,8 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
                 ToStateBottomRight();
                 Move(_rectangle);
                 _currentState = State.BottomRight;
-            }
                 break;
+            }
             case State.BottomRight:
             {
                 if (_rectangle is { })
@@ -142,8 +142,8 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.BottomRight:
             {
                 if (_rectangle is { })
@@ -162,8 +162,8 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
                     
                     Move(_rectangle);
                 }
-            }
                 break;
+            }
         }
     }
 

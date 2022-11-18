@@ -63,8 +63,8 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 ToStateEnd();
                 Move(null);
                 _currentState = State.End;
-            }
                 break;
+            }
             case State.End:
             {
                 _line.End.X = (double)sx;
@@ -86,8 +86,8 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
                 _currentState = State.End;
-            }
                 break;
+            }
         }
     }
 
@@ -129,8 +129,8 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.End:
             {
                 if (editor.Project.Options.TryToConnect)
@@ -141,8 +141,8 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 _line.End.Y = (double)sy;
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
-            }
                 break;
+            }
         }
     }
 
@@ -179,8 +179,8 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
             case State.End:
             {
                 pathTool.RemoveLastSegment<LineSegmentViewModel>();
-            }
                 break;
+            }
         }
 
         _currentState = State.Start;

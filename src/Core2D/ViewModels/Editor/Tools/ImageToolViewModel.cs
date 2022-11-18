@@ -88,8 +88,8 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
                 ToStateBottomRight();
                 Move(_image);
                 _currentState = State.BottomRight;
-            }
                 break;
+            }
             case State.BottomRight:
             {
                 if (_image is { })
@@ -117,8 +117,8 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -154,11 +154,13 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
         switch (_currentState)
         {
             case State.TopLeft:
+            {
                 if (editor.Project.Options.TryToConnect)
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
                 break;
+            }
             case State.BottomRight:
             {
                 if (_image is { })
@@ -172,8 +174,8 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_image);
                 }
-            }
                 break;
+            }
         }
     }
 

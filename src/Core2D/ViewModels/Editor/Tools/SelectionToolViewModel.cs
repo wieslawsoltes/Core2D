@@ -80,13 +80,13 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 case MoveMode.Point:
                 {
                     _pointsCache = GetMovePoints(shapes).ToList();
-                }
                     break;
+                }
                 case MoveMode.Shape:
                 {
                     _shapesCache = shapes.ToList();
-                }
                     break;
+                }
             }
         }
     }
@@ -306,8 +306,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 }
                 
                 _currentState = State.Selected;
-            }
                 break;
+            }
             case State.Selected:
             {
                 if (_rectangleShape is { })
@@ -324,8 +324,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     _currentState = State.None;
                     editor.IsToolIdle = true;
                 }
-            }
                 break;
+            }
         }
     }
 

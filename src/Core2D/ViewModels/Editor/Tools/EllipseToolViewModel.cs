@@ -35,7 +35,7 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
 
     private static void CircleConstrain(PointShapeViewModel tl, PointShapeViewModel br, decimal cx, decimal cy, decimal px, decimal py)
     {
-        decimal r = Max(Abs(cx - px), Abs(cy - py));
+        var r = Max(Abs(cx - px), Abs(cy - py));
         tl.X = (double)(cx - r);
         tl.Y = (double)(cy - r);
         br.X = (double)(cx + r);
@@ -90,8 +90,8 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
                 ToStateBottomRight();
                 Move(_ellipse);
                 _currentState = State.BottomRight;
-            }
                 break;
+            }
             case State.BottomRight:
             {
                 if (_ellipse?.TopLeft is { } && _ellipse?.BottomRight is { })
@@ -126,8 +126,8 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -168,8 +168,8 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.BottomRight:
             {
                 if (_ellipse is { })
@@ -181,36 +181,43 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
 
                     if (_currentMode == Mode.Circle)
                     {
-                        CircleConstrain(_ellipse.TopLeft, _ellipse.BottomRight, _centerX, _centerY, sx, sy);
+                        if (_ellipse.TopLeft is {} && _ellipse.BottomRight is { })
+                        {
+                            CircleConstrain(_ellipse.TopLeft, _ellipse.BottomRight, _centerX, _centerY, sx, sy);
+                        }
                     }
                     else
                     {
-                        _ellipse.BottomRight.X = (double)sx;
-                        _ellipse.BottomRight.Y = (double)sy;
+                        if (_ellipse.BottomRight is { })
+                        {
+                            _ellipse.BottomRight.X = (double)sx;
+                            _ellipse.BottomRight.Y = (double)sy;
+                        }
                     }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_ellipse);
                 }
-            }
                 break;
+            }
         }
     }
 
     public void ToStateBottomRight()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        if (editor is null)
+        if (editor is { } 
+            && editor.Project?.CurrentContainer?.HelperLayer is { } 
+            && _ellipse is { } 
+            && editor.PageState?.HelperStyle is { })
         {
-            return;
+            _selection = new EllipseSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _ellipse,
+                editor.PageState.HelperStyle);
+
+            _selection?.ToStateBottomRight();
         }
-
-        _selection = new EllipseSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _ellipse,
-            editor.PageState.HelperStyle);
-
-        _selection?.ToStateBottomRight();
     }
 
     public void Move(BaseShapeViewModel? shape)
@@ -236,13 +243,13 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.BottomRight:
             {
-                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                if (editor.Project.CurrentContainer?.WorkingLayer is { } && _ellipse is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_ellipse);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
-            }
                 break;
+            }
         }
 
         _currentState = State.TopLeft;

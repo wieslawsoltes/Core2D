@@ -70,8 +70,8 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                 ToStatePoint3();
                 Move(_quadraticBezier);
                 _currentState = State.Point3;
-            }
                 break;
+            }
             case State.Point3:
             {
                 if (_quadraticBezier is { })
@@ -92,8 +92,8 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                     Move(_quadraticBezier);
                     _currentState = State.Point2;
                 }
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (_quadraticBezier is { })
@@ -121,8 +121,8 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -164,8 +164,8 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.Point3:
             {
                 if (_quadraticBezier is { })
@@ -181,8 +181,8 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_quadraticBezier);
                 }
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (_quadraticBezier is { })
@@ -196,8 +196,8 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_quadraticBezier);
                 }
-            }
                 break;
+            }
         }
     }
 

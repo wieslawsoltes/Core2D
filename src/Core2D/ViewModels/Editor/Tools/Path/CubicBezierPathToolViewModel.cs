@@ -68,8 +68,8 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 ToStatePoint4();
                 Move(null);
                 _currentState = State.Point4;
-            }
                 break;
+            }
             case State.Point4:
             {
                 _cubicBezier.Point4.X = (double)sx;
@@ -89,8 +89,8 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 ToStatePoint2();
                 Move(null);
                 _currentState = State.Point2;
-            }
                 break;
+            }
             case State.Point2:
             {
                 _cubicBezier.Point2.X = (double)sx;
@@ -110,8 +110,8 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 ToStateThree();
                 Move(null);
                 _currentState = State.Point3;
-            }
                 break;
+            }
             case State.Point3:
             {
                 _cubicBezier.Point3.X = (double)sx;
@@ -140,8 +140,8 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 ToStatePoint4();
                 Move(null);
                 _currentState = State.Point4;
-            }
                 break;
+            }
         }
     }
 
@@ -185,8 +185,8 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.Point4:
             {
                 if (editor.Project.Options.TryToConnect)
@@ -201,8 +201,8 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 _cubicBezier.Point4.Y = (double)sy;
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (editor.Project.Options.TryToConnect)
@@ -213,8 +213,8 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 _cubicBezier.Point2.Y = (double)sy;
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
-            }
                 break;
+            }
             case State.Point3:
             {
                 if (editor.Project.Options.TryToConnect)
@@ -225,8 +225,8 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 _cubicBezier.Point3.Y = (double)sy;
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
-            }
                 break;
+            }
         }
     }
 
@@ -275,8 +275,8 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
             case State.Point3:
             {
                 pathTool.RemoveLastSegment<CubicBezierSegmentViewModel>();
-            }
                 break;
+            }
         }
 
         _currentState = State.Point1;

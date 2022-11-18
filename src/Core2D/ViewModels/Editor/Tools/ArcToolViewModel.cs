@@ -71,8 +71,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                 ToStatePoint2();
                 Move(_arc);
                 _currentState = State.Point2;
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (_arc is { })
@@ -93,8 +93,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     Move(_arc);
                     _currentState = State.Point3;
                 }
-            }
                 break;
+            }
             case State.Point3:
             {
                 if (_arc is { })
@@ -124,8 +124,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     Move(_arc);
                     _currentState = State.Point4;
                 }
-            }
                 break;
+            }
             case State.Point4:
             {
                 if (_arc is { })
@@ -158,8 +158,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -202,8 +202,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (_arc is { })
@@ -217,8 +217,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
-            }
                 break;
+            }
             case State.Point3:
             {
                 if (_arc is { })
@@ -232,8 +232,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
-            }
                 break;
+            }
             case State.Point4:
             {
                 if (_arc is { })
@@ -247,8 +247,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -333,8 +333,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
-            }
                 break;
+            }
         }
 
         _currentState = State.Point1;

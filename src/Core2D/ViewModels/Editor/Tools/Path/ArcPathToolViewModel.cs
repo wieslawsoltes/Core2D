@@ -77,9 +77,8 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 ToStateEnd();
                 Move(null);
                 _currentState = State.End;
-            }
                 break;
-
+            }
             case State.End:
             {
                 _arc.End.X = (double)sx;
@@ -105,8 +104,8 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
                 _currentState = State.End;
-            }
                 break;
+            }
         }
     }
 
@@ -150,9 +149,8 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
-
+            }
             case State.End:
             {
                 if (editor.Project.Options.TryToConnect)
@@ -168,8 +166,8 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
-            }
                 break;
+            }
         }
     }
 
@@ -204,12 +202,11 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
         {
             case State.Start:
                 break;
-
             case State.End:
             {
                 pathTool.RemoveLastSegment<ArcSegmentViewModel>();
-            }
                 break;
+            }
         }
 
         _currentState = State.Start;

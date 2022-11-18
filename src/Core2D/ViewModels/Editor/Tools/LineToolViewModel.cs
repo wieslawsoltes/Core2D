@@ -64,7 +64,10 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                     }
                     else
                     {
-                        selection.TryToSplitLine(x, y, _line.Start);
+                        if (_line.Start is { })
+                        {
+                            selection.TryToSplitLine(x, y, _line.Start);
+                        }
                     }
                 }
 
@@ -77,14 +80,17 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 ToStateEnd();
                 Move(_line);
                 _currentState = State.End;
-            }
                 break;
+            }
             case State.End:
             {
                 if (_line is { })
                 {
-                    _line.End.X = (double)sx;
-                    _line.End.Y = (double)sy;
+                    if (_line.End is { })
+                    {
+                        _line.End.X = (double)sx;
+                        _line.End.Y = (double)sy;
+                    }
 
                     if (editor.Project.Options.TryToConnect)
                     {
@@ -95,7 +101,10 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                         }
                         else
                         {
-                            selection.TryToSplitLine(x, y, _line.End);
+                            if (_line.End is { })
+                            {
+                                selection.TryToSplitLine(x, y, _line.End);
+                            }
                         }
                     }
 
@@ -113,8 +122,8 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -155,8 +164,8 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.End:
             {
                 if (_line is { })
@@ -165,26 +174,37 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _line.End.X = (double)sx;
-                    _line.End.Y = (double)sy;
+
+                    if (_line.End is { })
+                    {
+                        _line.End.X = (double)sx;
+                        _line.End.Y = (double)sy;
+                    }
+
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_line);
                 }
-            }
                 break;
+            }
         }
     }
 
     public void ToStateEnd()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        _selection = new LineSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _line,
-            editor.PageState.HelperStyle);
+        if (editor is { } 
+            && editor.Project?.CurrentContainer?.HelperLayer is { } 
+            && _line is { } 
+            && editor.PageState?.HelperStyle is { })
+        {
+            _selection = new LineSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _line,
+                editor.PageState.HelperStyle);
 
-        _selection.ToStateEnd();
+            _selection.ToStateEnd();
+        }
     }
 
     public void Move(BaseShapeViewModel? shape)
@@ -210,7 +230,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.End:
             {
-                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                if (editor.Project.CurrentContainer?.WorkingLayer is { } && _line is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();

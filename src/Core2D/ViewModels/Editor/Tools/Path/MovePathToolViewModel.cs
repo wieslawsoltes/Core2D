@@ -48,8 +48,8 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
                     editor.Project.Options.DefaultIsClosed);
 
                 editor.CurrentPathTool.BeginDown(args);
-            }
                 break;
+            }
         }
     }
 
@@ -82,8 +82,8 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
         }
     }
 

@@ -69,8 +69,8 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                 ToStatePoint4();
                 Move(_cubicBezier);
                 _currentState = State.Point4;
-            }
                 break;
+            }
             case State.Point4:
             {
                 if (_cubicBezier?.Point3 is { } && _cubicBezier?.Point4 is { })
@@ -95,8 +95,8 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     Move(_cubicBezier);
                     _currentState = State.Point2;
                 }
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (_cubicBezier is { })
@@ -115,8 +115,8 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     Move(_cubicBezier);
                     _currentState = State.Point3;
                 }
-            }
                 break;
+            }
             case State.Point3:
             {
                 if (_cubicBezier is { })
@@ -136,8 +136,8 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
 
                     Reset();
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -180,8 +180,8 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.Point4:
             {
                 if (_cubicBezier is { })
@@ -199,8 +199,8 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_cubicBezier);
                 }
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (_cubicBezier is { })
@@ -214,8 +214,8 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_cubicBezier);
                 }
-            }
                 break;
+            }
             case State.Point3:
             {
                 if (_cubicBezier is { })
@@ -229,8 +229,8 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_cubicBezier);
                 }
-            }
                 break;
+            }
         }
     }
 
@@ -286,8 +286,8 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_cubicBezier);
                     editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
                 }
-            }
                 break;
+            }
         }
 
         _currentState = State.Point1;
