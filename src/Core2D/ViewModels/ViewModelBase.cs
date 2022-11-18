@@ -28,7 +28,7 @@ public abstract partial class ViewModelBase : INotifyPropertyChanged
 
         DeleteCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnDelete(x));
 
-        ExportCommand = new Command<object?>(x => ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportJson(x));
+        ExportCommand = new Command<object?>(x => ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExport(x));
     }
 
     [IgnoreDataMember]
