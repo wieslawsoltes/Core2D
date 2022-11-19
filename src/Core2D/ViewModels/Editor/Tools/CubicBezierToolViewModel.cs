@@ -30,7 +30,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
 
     private void NextPoint(InputArgs args)
     {
-                var factory = ServiceProvider.GetService<IViewModelFactory>();
+        var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
@@ -143,7 +143,23 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
     
     public void BeginDown(InputArgs args)
     {
-        NextPoint(args);
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState == State.Point1 || _currentState == State.Point4 || _currentState == State.Point2)
+            {
+                NextPoint(args);
+            }
+        }
+        else
+        {
+            NextPoint(args);
+        }
     }
 
     public void BeginUp(InputArgs args)
@@ -156,7 +172,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
 
         if (editor.Project.Options?.SinglePressMode ?? true)
         {
-            if (_currentState != State.Point1)
+            if (_currentState == State.Point4 || _currentState == State.Point2 || _currentState == State.Point3)
             {
                 NextPoint(args);
             }
