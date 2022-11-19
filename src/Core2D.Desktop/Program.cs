@@ -12,9 +12,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
 using Avalonia.OpenGL;
-using Avalonia.ReactiveUI;
 using Avalonia.Threading;
-using Core2D.Model;
 using Core2D.Screenshot;
 using Core2D.Util;
 using Core2D.ViewModels.Editor;
@@ -47,7 +45,7 @@ internal static class Program
         {
             IsBackground = true
         };
-        s_replThread?.Start();
+        s_replThread.Start();
     }
 
     private static async void ReplThread()
@@ -305,6 +303,5 @@ internal static class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .UseReactiveUI()
             .LogToTrace();
 }

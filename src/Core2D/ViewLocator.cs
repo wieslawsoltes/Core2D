@@ -3,7 +3,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Core2D.ViewModels;
-using Dock.Model.ReactiveUI.Core;
+using Dock.Model.Mvvm.Core;
 
 namespace Core2D;
 

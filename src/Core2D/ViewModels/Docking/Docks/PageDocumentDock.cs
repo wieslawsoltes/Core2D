@@ -1,7 +1,8 @@
 ﻿#nullable enable
+using System;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.ViewModels.Docking.Documents;
-using Dock.Model.ReactiveUI.Controls;
-using ReactiveUI;
+using Dock.Model.Mvvm.Controls;
 
 namespace Core2D.ViewModels.Docking.Docks;
 
@@ -9,7 +10,7 @@ public class PageDocumentDock : DocumentDock
 {
     public PageDocumentDock()
     {
-        CreateDocument = ReactiveCommand.Create(CreatePage);
+        CreateDocument = new RelayCommand(CreatePage);
     }
 
     private void CreatePage()

@@ -1,6 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.ReactiveUI;
-using Core2D;
 
 namespace Demo
 {
@@ -12,7 +10,6 @@ namespace Demo
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                .LogToTrace()
-                .UseReactiveUI();
+                .LogToTrace();
     }
 }

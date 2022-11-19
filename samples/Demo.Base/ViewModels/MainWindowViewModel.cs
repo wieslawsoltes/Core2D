@@ -1,16 +1,10 @@
-﻿using Core2D.ViewModels.Editor;
-using ReactiveUI;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Core2D.ViewModels.Editor;
 
 namespace Demo.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public partial class MainWindowViewModel : ViewModelBase
     {
-        private ProjectEditorViewModel? _editor;
-        
-        public ProjectEditorViewModel? Editor
-        {
-            get => _editor;
-            set => this.RaiseAndSetIfChanged(ref _editor, value);
-        }
+        [ObservableProperty] private ProjectEditorViewModel? _editor;
     }
 }

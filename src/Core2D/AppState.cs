@@ -14,7 +14,7 @@ using Core2D.ViewModels.Docking;
 using Core2D.ViewModels.Editor;
 using Dock.Model.Controls;
 using Dock.Model.Core;
-using Dock.Model.ReactiveUI.Controls;
+using Dock.Model.Mvvm.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -208,11 +208,16 @@ public class AppState : IDisposable
             if (editor.RootDock is IDock dock)
             {
                 dockFactory.InitLayout(dock);
-                dockFactory.GetDockable<IDocumentDock>("Pages")?.CreateDocument?.Execute(null);
 
                 editor.NavigateTo = id => dock.Navigate.Execute(id);
 
                 dock.Navigate.Execute("Dashboard");
+ 
+                var pages = dockFactory.GetDockable<IDocumentDock>("Pages");
+                if (pages is { })
+                {
+                    pages.CreateDocument?.Execute(null);
+                }
             }
         }
     }

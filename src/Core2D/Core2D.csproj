@@ -32,7 +32,6 @@
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" Condition="'$(Configuration)' == 'Debug'" />
     <PackageReference Include="Avalonia.Skia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.AvaloniaEdit" Version="$(AvaloniaAvaloniaEditVersion)" />
@@ -40,7 +39,8 @@
     <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="$(AvaloniaControlsPanAndZoomVersion)" />
     <PackageReference Include="ThemeEditor.Controls.ColorPicker" Version="$(ThemeEditorControlsColorPickerVersion)" />
     <PackageReference Include="Dock.Avalonia" Version="$(DockAvaloniaVersion)" />
-    <PackageReference Include="Dock.Model.ReactiveUI" Version="$(DockAvaloniaVersion)" />
+    <PackageReference Include="Dock.Model.MVVM" Version="$(DockAvaloniaVersion)" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="$(CommunityToolkitMvvmVersion)" />
     <PackageReference Include="netDXF.netstandard" Version="$(netDXFnetstandardVersion)" />
     <PackageReference Include="PDFsharp" Version="$(PDFsharpVersion)" />
     <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
