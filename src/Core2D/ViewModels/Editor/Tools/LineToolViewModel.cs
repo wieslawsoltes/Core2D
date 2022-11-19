@@ -74,8 +74,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
 
                 if (editor.Project.CurrentContainer?.WorkingLayer is { })
                 {
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes =
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
 
@@ -112,8 +111,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
 
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
-                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
-                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
                     }
 
                     Finalize(_line);
