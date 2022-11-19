@@ -131,8 +131,7 @@ public class AppState : IDisposable
             var windowingSubsystemName = windowingPlatform.GetType().Assembly.GetName().Name;
             var renderingSubsystemName = platformRenderInterface.GetType().Assembly.GetName().Name;
             var runtimeInfo = runtimePlatform.GetRuntimeInfo();
-            var aboutInfo = CreateAboutInfo(ServiceProvider, runtimeInfo, windowingSubsystemName,
-                renderingSubsystemName);
+            var aboutInfo = CreateAboutInfo(ServiceProvider, runtimeInfo, windowingSubsystemName, renderingSubsystemName);
 
             Editor.AboutInfo = aboutInfo;
         }
