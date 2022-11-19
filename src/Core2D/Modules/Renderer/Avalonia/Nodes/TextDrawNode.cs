@@ -59,12 +59,12 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
 
         if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
         {
-            fontStyle |= AM.FontStyle.Italic;
+            fontStyle = AM.FontStyle.Italic;
         }
 
         if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
         {
-            fontWeight |= AM.FontWeight.Bold;
+            fontWeight = AM.FontWeight.Bold;
         }
 
         // TODO: Cache Typeface
@@ -99,21 +99,19 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
 
         //FormattedText.MaxTextWidth = Rect.Size.Width;
         //FormattedText.MaxTextHeight = Rect.Size.Height;
-        FormattedText.TextAlignment = textAlignment;
+        //FormattedText.TextAlignment = textAlignment;
         FormattedText.Trimming = AM.TextTrimming.None;
         // TODO: AM.TextWrapping.NoWrap
 
         var size = new A.Size(FormattedText.Width, FormattedText.Height);
         var rect = Rect;
 
-        // NOTE: Using AM.TextAlignment
-        var originX = rect.X;
-        //var originX = Style.TextStyle.TextHAlignment switch
-        //{
-        //    TextHAlignment.Left => rect.X,
-        //    TextHAlignment.Right => rect.Right - size.Width,
-        //    _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0)
-        //};
+        var originX = Style.TextStyle.TextHAlignment switch
+        {
+            TextHAlignment.Left => rect.X,
+            TextHAlignment.Right => rect.Right - size.Width,
+            _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0)
+        };
 
         var originY = Style.TextStyle.TextVAlignment switch
         {
