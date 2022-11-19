@@ -151,7 +151,23 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
 
     public void BeginDown(InputArgs args)
     {
-        NextPoint(args);
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState == State.Point1 || _currentState == State.Point4 || _currentState == State.Point2)
+            {
+                NextPoint(args);
+            }
+        }
+        else
+        {
+            NextPoint(args);
+        }
     }
 
     public void BeginUp(InputArgs args)
@@ -164,7 +180,7 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
 
         if (editor.Project.Options?.SinglePressMode ?? true)
         {
-            if (_currentState != State.Point1)
+            if (_currentState == State.Point4 || _currentState == State.Point2 || _currentState == State.Point3)
             {
                 NextPoint(args);
             }
