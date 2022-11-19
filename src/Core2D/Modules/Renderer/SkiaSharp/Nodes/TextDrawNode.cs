@@ -28,9 +28,13 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
     {
         ScaleThickness = Text.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Text.State.HasFlag(ShapeStateFlags.Size);
-        var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
-        Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
-        Center = new SKPoint(Rect.MidX, Rect.MidY);
+        
+        if (Text.TopLeft is { } && Text.BottomRight is { })
+        {
+            var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
+            Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
+            Center = new SKPoint(Rect.MidX, Rect.MidY);
+        }
 
         UpdateTextGeometry();
     }
