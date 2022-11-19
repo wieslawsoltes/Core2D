@@ -133,7 +133,23 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
 
     public void BeginDown(InputArgs args)
     {
-        NextPoint(args);
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState == State.Point1 || _currentState == State.Point3)
+            {
+                NextPoint(args);
+            }
+        }
+        else
+        {
+            NextPoint(args);
+        }
     }
 
     public void BeginUp(InputArgs args)
@@ -146,7 +162,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
 
         if (editor.Project.Options?.SinglePressMode ?? true)
         {
-            if (_currentState != State.Point1)
+            if (_currentState == State.Point3 || _currentState == State.Point2)
             {
                 NextPoint(args);
             }
