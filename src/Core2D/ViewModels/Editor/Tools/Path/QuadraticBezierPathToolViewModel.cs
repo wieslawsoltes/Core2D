@@ -123,6 +123,27 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
         }
     }
 
+    public void BeginDown(InputArgs args)
+    {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState == State.Point1 || _currentState == State.Point3)
+            {
+                NextPoint(args);
+            }
+        }
+        else
+        {
+            NextPoint(args);
+        }
+    }
+
     public void BeginUp(InputArgs args)
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -133,16 +154,11 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
 
         if (editor.Project.Options?.SinglePressMode ?? true)
         {
-            if (_currentState != State.Point1)
+            if (_currentState != State.Point1 || _currentState != State.Point2)
             {
                 NextPoint(args);
             }
         }
-    }
-
-    public void BeginDown(InputArgs args)
-    {
-        NextPoint(args);
     }
 
     public void EndDown(InputArgs args)
