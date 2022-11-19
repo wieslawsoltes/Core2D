@@ -13,10 +13,20 @@ public partial class ViewLocator : IDataTemplate
     {
         var name = data?.GetType().FullName?.Replace("ViewModel", "View");
         var type = name is null ? null : Type.GetType(name);
-
         if (type != null)
         {
-            return (Control)Activator.CreateInstance(type)!;
+            try
+            {
+                var instance = Activator.CreateInstance(type);
+                if (instance is Control control)
+                {
+                    return control;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         return new TextBlock { Text = "Not Found: " + name };
