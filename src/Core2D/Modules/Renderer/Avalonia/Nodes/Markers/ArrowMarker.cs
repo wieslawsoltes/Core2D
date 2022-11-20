@@ -18,7 +18,7 @@ internal class ArrowMarker : MarkerBase
             return;
         }
 
-        if (ShapeViewModel.IsStroked)
+        if (ShapeViewModel is { } && ShapeViewModel.IsStroked && Pen is { })
         {
             context.DrawLine(Pen, P11, P21);
             context.DrawLine(Pen, P12, P22);
