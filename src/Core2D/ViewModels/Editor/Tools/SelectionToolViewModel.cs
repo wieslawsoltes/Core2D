@@ -58,7 +58,16 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
             shape.GetPoints(points);
         }
 
-        return points.Where(p => IsPointMovable(p.Owner as BaseShapeViewModel, p)).Distinct();
+        return points.Where(p =>
+        {
+            if (p.Owner is BaseShapeViewModel baseShapeViewModel)
+            {
+                
+                return IsPointMovable(baseShapeViewModel, p);
+            }
+
+            return false;
+        }).Distinct();
     }
 
     private void GenerateMoveSelectionCache()
@@ -144,7 +153,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         if (isControl == false && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible)
         {
             bool decoratorResult = editor.PageState.Decorator.HitTest(args);
-            if (decoratorResult == true && isHover == false)
+            if (decoratorResult && isHover == false)
             {
                 editor.IsToolIdle = false;
                 _currentState = State.Selected;
@@ -181,16 +190,16 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
                 selection.DeHover(editor.Project.CurrentContainer.CurrentLayer);
 
-                if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } &&
-                    editor.PageState.Decorator.IsVisible == true)
+                if (isControl == false && editor.PageState.DrawDecorators && editor.PageState.Decorator is { } &&
+                    editor.PageState.Decorator.IsVisible)
                 {
-                    if (HitTestDecorator(args, isControl, false) == true)
+                    if (HitTestDecorator(args, isControl, false))
                     {
                         return;
                     }
                 }
 
-                if (isControl == true)
+                if (isControl)
                 {
                     var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
                     double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
@@ -249,8 +258,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     }
                 }
 
-                if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } &&
-                    editor.PageState.Decorator.IsVisible == true)
+                if (isControl == false && editor.PageState.DrawDecorators && editor.PageState.Decorator is { } &&
+                    editor.PageState.Decorator.IsVisible)
                 {
                     selection.OnHideDecorator();
                 }
@@ -500,7 +509,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
             {
                 bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
-                if (isControl == false && editor.PageState.DrawDecorators == true && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible == true)
+                if (isControl == false && editor.PageState.DrawDecorators && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible)
                 {
                     editor.PageState.Decorator.Move(args);
                     editor.PageState.Decorator.Update(false);
