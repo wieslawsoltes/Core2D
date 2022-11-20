@@ -14,7 +14,6 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
     public SKRect Rect { get; set; }
 
     public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
-        : base()
     {
         Style = style;
         Ellipse = ellipse;
