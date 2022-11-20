@@ -22,10 +22,18 @@ internal abstract class DrawNode : IDrawNode
         {
             Fill = SkiaSharpDrawUtil.ToSKPaintBrush(Style.Fill.Color);
         }
+        else
+        {
+            Fill = null;
+        }
 
         if (Style?.Stroke is { })
         {
             Stroke = SkiaSharpDrawUtil.ToSKPaintPen(Style, Style.Stroke.Thickness);
+        }
+        else
+        {
+            Stroke = null;
         }
     }
 
