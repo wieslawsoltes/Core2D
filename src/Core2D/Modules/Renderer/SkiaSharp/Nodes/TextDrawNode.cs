@@ -31,7 +31,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         
         if (Text.TopLeft is { } && Text.BottomRight is { })
         {
-            var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
+            var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y);
             Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
             Center = new SKPoint(Rect.MidX, Rect.MidY);
         }
@@ -46,21 +46,32 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
 
     private void UpdateTextGeometry()
     {
-        BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
+        BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) as string ?? Text.Text;
 
-        if (BoundText is null)
+        if (BoundText is null || Style?.TextStyle is null)
         {
+            FormattedText = null;
+            Origin = new SKPoint();
             return;
         }
 
         if (Style.TextStyle.FontSize < 0.0)
         {
+            FormattedText = null;
+            Origin = new SKPoint();
             return;
         }
 
-        FormattedText = SkiaSharpDrawUtil.GetSKPaint(BoundText, Style, Text.TopLeft, Text.BottomRight, out var origin);
-
-        Origin = origin;
+        if (Text.TopLeft is { } && Text.BottomRight is { })
+        {
+            FormattedText = SkiaSharpDrawUtil.GetSKPaint(BoundText, Style, Text.TopLeft, Text.BottomRight, out var origin);
+            Origin = origin;
+        }
+        else
+        {
+            FormattedText = null;
+            Origin = new SKPoint();
+        }
     }
 
     public override void OnDraw(object? dc, double zoom)
