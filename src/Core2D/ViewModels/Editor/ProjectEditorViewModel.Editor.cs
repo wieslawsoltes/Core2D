@@ -728,7 +728,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public string? OnGetImageKey(string path)
+    public string? OnGetImageKey(Stream stream, string name)
     {
         if (Project is null)
         {
@@ -740,12 +740,7 @@ public partial class ProjectEditorViewModel
         {
             return default;
         }
- 
-        using var stream = fileSystem.Open(path);
-        if (stream is null)
-        {
-            return default;
-        }
+
         var bytes = fileSystem.ReadBinary(stream);
         if (bytes is null)
         {
@@ -753,7 +748,7 @@ public partial class ProjectEditorViewModel
         }
         if (Project is IImageCache imageCache)
         {
-            var key = imageCache.AddImageFromFile(path, bytes);
+            var key = imageCache.AddImageFromFile(name, bytes);
             return key;
         }
         return default;
@@ -978,11 +973,15 @@ public partial class ProjectEditorViewModel
                 }
                 else if (ProjectEditorConfiguration.DefaultImageExtensions.Any(r => string.Compare(ext, r, StringComparison.OrdinalIgnoreCase) == 0))
                 {
-                    var key = OnGetImageKey(path);
-                    if (key is { } && !string.IsNullOrEmpty(key))
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
                     {
-                        OnDropImageKey(key, x, y);
-                        result = true;
+                        var key = OnGetImageKey(stream, path);
+                        if (key is { } && !string.IsNullOrEmpty(key))
+                        {
+                            OnDropImageKey(key, x, y);
+                            result = true;
+                        }
                     }
                 }
             }
