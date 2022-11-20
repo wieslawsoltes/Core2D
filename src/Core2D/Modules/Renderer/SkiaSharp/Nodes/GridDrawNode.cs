@@ -59,11 +59,13 @@ internal class GridDrawNode : DrawNode, IGridDrawNode
             thickness /= zoom;
         }
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (scale != 1.0)
         {
             thickness /= scale;
         }
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (Stroke is { } && Stroke.StrokeWidth != thickness)
         {
             Stroke.StrokeWidth = (float)thickness;
