@@ -98,13 +98,15 @@ internal static class Program
                 var pathDashboard = $"Core2D-Dashboard-{App.DefaultTheme}.{extension}";
                 var pathEditor = $"Core2D-Editor-{App.DefaultTheme}.{extension}";
 
-                Capture.Save(contentPanel, size, pathDashboard);
+                var streamDashboard = File.Create(pathDashboard);
+                Capture.Save(contentPanel, size, streamDashboard, pathDashboard);
                 Dispatcher.UIThread.RunJobs();
 
                 editor?.OnNew(null);
                 Dispatcher.UIThread.RunJobs();
 
-                Capture.Save(contentPanel, size, pathEditor);
+                var streamEditor = File.Create(pathEditor);
+                Capture.Save(contentPanel, size, streamEditor, pathEditor);
                 Dispatcher.UIThread.RunJobs();
             }
 
