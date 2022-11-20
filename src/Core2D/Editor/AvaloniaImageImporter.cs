@@ -1,12 +1,13 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using Core2D.Model;
+using Core2D.Services;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Editor;
-using Core2D.Views;
 
 namespace Core2D.Editor;
 
@@ -19,22 +20,44 @@ public class AvaloniaImageImporter : IImageImporter
         _serviceProvider = serviceProvider;
     }
 
-    private Window? GetWindow()
+    private static List<FilePickerFileType> GetImageFileTypes()
     {
-        return _serviceProvider?.GetService<Window>();
+        return new List<FilePickerFileType>
+        {
+            StorageService.ImageAll,
+            StorageService.ImagePng,
+            StorageService.ImageJpg,
+            StorageService.All
+        };
     }
 
     public async Task<string?> GetImageKeyAsync()
     {
         try
         {
-            var dlg = new OpenFileDialog() { Title = "Open" };
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(GetWindow());
-            var path = result?.FirstOrDefault();
-            if (path is { })
+            var storageProvider = StorageService.GetStorageProvider();
+            if (storageProvider is null)
             {
-                return _serviceProvider.GetService<ProjectEditorViewModel>().OnGetImageKey(path);
+                return null;
+            }
+
+            var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Open image",
+                FileTypeFilter = GetImageFileTypes(),
+                AllowMultiple = false
+            });
+
+            var file = result.FirstOrDefault();
+            if (file is not null && file.CanOpenRead)
+            {
+                await using var stream = await file.OpenReadAsync();
+
+                var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
+                if (editor is { })
+                {
+                    return editor.OnGetImageKey(stream, file.Name);
+                }
             }
         }
         catch (Exception ex)
