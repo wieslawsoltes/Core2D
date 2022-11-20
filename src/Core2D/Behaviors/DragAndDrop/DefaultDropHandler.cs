@@ -3,7 +3,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactions.DragAndDrop;
 
 namespace Core2D.Behaviors.DragAndDrop;
@@ -15,15 +14,6 @@ public abstract class DefaultDropHandler : AvaloniaObject, IDropHandler
         relativeTo ??= e.Source as IControl;
         var point = relativeTo is { } ? e.GetPosition(relativeTo) : new Point();
         return point;
-    }
-
-    public static Point GetPositionScreen(IControl? relativeTo, DragEventArgs e)
-    {
-        relativeTo ??= e.Source as IControl;
-        var point = relativeTo is { } ? e.GetPosition(relativeTo) : new Point();
-        var visual = relativeTo as IVisual;
-        var screenPoint = visual.PointToScreen(point).ToPoint(1.0);
-        return screenPoint;
     }
 
     public virtual void Enter(object? sender, DragEventArgs e, object? sourceContext, object? targetContext)
