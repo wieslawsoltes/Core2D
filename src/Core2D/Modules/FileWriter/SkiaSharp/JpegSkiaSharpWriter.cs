@@ -38,8 +38,11 @@ public sealed class JpegSkiaSharpWriter : IFileWriter
         }
 
         var renderer = new SkiaSharpRendererViewModel(_serviceProvider);
-        renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-        renderer.State.ImageCache = ic;
+        if (renderer.State is { })
+        {
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.State.ImageCache = ic;
+        }
 
         var presenter = new ExportPresenter();
 
@@ -49,18 +52,21 @@ public sealed class JpegSkiaSharpWriter : IFileWriter
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
             var db = (object)page.Properties;
-            var record = (object)page.Record;
+            var record = (object?)page.Record;
 
-            dataFlow.Bind(page.Template, db, record);
-            dataFlow.Bind(page, db, record);
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(page.Template, db, record);
+                dataFlow.Bind(page, db, record);
+            }
 
             exporter.Save(stream, page);
         }
-        else if (item is DocumentContainerViewModel document)
+        else if (item is DocumentContainerViewModel _)
         {
             throw new NotSupportedException("Saving documents as jpeg drawing is not supported.");
         }
-        else if (item is ProjectContainerViewModel project)
+        else if (item is ProjectContainerViewModel _)
         {
             throw new NotSupportedException("Saving projects as jpeg drawing is not supported.");
         }

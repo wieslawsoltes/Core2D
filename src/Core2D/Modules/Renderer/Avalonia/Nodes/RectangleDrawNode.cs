@@ -25,9 +25,18 @@ internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
     {
         ScaleThickness = Rectangle.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Rectangle.State.HasFlag(ShapeStateFlags.Size);
-        var rect2 = Rect2.FromPoints(Rectangle.TopLeft.X, Rectangle.TopLeft.Y, Rectangle.BottomRight.X, Rectangle.BottomRight.Y, 0, 0);
-        Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
-        Center = Rect.Center;
+        
+        if (Rectangle.TopLeft is { } && Rectangle.BottomRight is { })
+        {
+            var rect2 = Rect2.FromPoints(Rectangle.TopLeft.X, Rectangle.TopLeft.Y, Rectangle.BottomRight.X, Rectangle.BottomRight.Y);
+            Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
+            Center = Rect.Center;
+        }
+        else
+        {
+            Rect = A.Rect.Empty;
+            Center = new A.Point();
+        }
     }
 
     public override void OnDraw(object? dc, double zoom)

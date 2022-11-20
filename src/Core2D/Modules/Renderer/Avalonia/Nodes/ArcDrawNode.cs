@@ -3,6 +3,7 @@ using Core2D.Model.Renderer;
 using Core2D.Model.Renderer.Nodes;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
+using A = Avalonia;
 using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Avalonia.Nodes;
@@ -24,7 +25,7 @@ internal class ArcDrawNode : DrawNode, IArcDrawNode
         ScaleThickness = Arc.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Arc.State.HasFlag(ShapeStateFlags.Size);
         Geometry = PathGeometryConverter.ToGeometryImpl(Arc);
-        Center = Geometry.Bounds.Center;
+        Center = Geometry is { } ? Geometry.Bounds.Center : new A.Point();
     }
 
     public override void OnDraw(object? dc, double zoom)

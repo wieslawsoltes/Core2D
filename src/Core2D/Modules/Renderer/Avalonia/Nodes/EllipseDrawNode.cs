@@ -27,8 +27,17 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
         ScaleThickness = Ellipse.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Ellipse.State.HasFlag(ShapeStateFlags.Size);
         Geometry = PathGeometryConverter.ToGeometryImpl(Ellipse);
-        Rect = Geometry.Bounds;
-        Center = Geometry.Bounds.Center;
+
+        if (Geometry is { })
+        {
+            Rect = Geometry.Bounds;
+            Center = Geometry.Bounds.Center;
+        }
+        else
+        {
+            Rect = A.Rect.Empty;
+            Center = new A.Point();
+        }
     }
 
     public override void OnDraw(object? dc, double zoom)

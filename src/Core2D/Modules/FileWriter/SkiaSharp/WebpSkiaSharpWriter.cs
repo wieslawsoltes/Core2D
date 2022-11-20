@@ -20,9 +20,9 @@ public sealed class WebpSkiaSharpWriter : IFileWriter
         _serviceProvider = serviceProvider;
     }
 
-    public string Name { get; } = "Webp (SkiaSharp)";
+    public string Name => "Webp (SkiaSharp)";
 
-    public string Extension { get; } = "webp";
+    public string Extension => "webp";
 
     public void Save(Stream stream, object? item, object? options)
     {
@@ -52,18 +52,21 @@ public sealed class WebpSkiaSharpWriter : IFileWriter
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
             var db = (object)page.Properties;
-            var record = (object)page.Record;
+            var record = (object?)page.Record;
 
-            dataFlow.Bind(page.Template, db, record);
-            dataFlow.Bind(page, db, record);
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(page.Template, db, record);
+                dataFlow.Bind(page, db, record);
+            }
 
             exporter.Save(stream, page);
         }
-        else if (item is DocumentContainerViewModel document)
+        else if (item is DocumentContainerViewModel _)
         {
             throw new NotSupportedException("Saving documents as webp drawing is not supported.");
         }
-        else if (item is ProjectContainerViewModel project)
+        else if (item is ProjectContainerViewModel _)
         {
             throw new NotSupportedException("Saving projects as webp drawing is not supported.");
         }
