@@ -16,6 +16,11 @@ internal class RectangleMarker : MarkerBase
             return;
         }
 
+        if (ShapeViewModel is null)
+        {
+            return;
+        }
+        
         using var rotationDisposable = context.PushPreTransform(Rotation);
 
         if (ShapeViewModel.IsFilled)
