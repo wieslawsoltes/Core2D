@@ -78,10 +78,17 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_arc is { })
                 {
-                    _arc.Point2.X = (double) sx;
-                    _arc.Point2.Y = (double) sy;
-                    _arc.Point3.X = (double) sx;
-                    _arc.Point3.Y = (double) sy;
+                    if (_arc.Point2 is { })
+                    {
+                        _arc.Point2.X = (double)sx;
+                        _arc.Point2.Y = (double)sy;
+                    }
+                    
+                    if (_arc.Point3 is { })
+                    {
+                        _arc.Point3.X = (double)sx;
+                        _arc.Point3.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
@@ -101,10 +108,17 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_arc is { })
                 {
-                    _arc.Point3.X = (double) sx;
-                    _arc.Point3.Y = (double) sy;
-                    _arc.Point4.X = (double) sx;
-                    _arc.Point4.Y = (double) sy;
+                    if (_arc.Point3 is { })
+                    {
+                        _arc.Point3.X = (double)sx;
+                        _arc.Point3.Y = (double)sy;
+                    }
+                    
+                    if (_arc.Point4 is { })
+                    {
+                        _arc.Point4.X = (double)sx;
+                        _arc.Point4.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
@@ -135,8 +149,11 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_arc is { })
                 {
-                    _arc.Point4.X = (double) sx;
-                    _arc.Point4.Y = (double) sy;
+                    if (_arc.Point4 is { })
+                    {
+                        _arc.Point4.X = (double)sx;
+                        _arc.Point4.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
@@ -237,8 +254,11 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _arc.Point2.X = (double)sx;
-                    _arc.Point2.Y = (double)sy;
+                    if (_arc.Point2 is { })
+                    {
+                        _arc.Point2.X = (double)sx;
+                        _arc.Point2.Y = (double)sy;
+                    }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
@@ -252,8 +272,11 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _arc.Point3.X = (double)sx;
-                    _arc.Point3.Y = (double)sy;
+                    if (_arc.Point3 is { })
+                    {
+                        _arc.Point3.X = (double)sx;
+                        _arc.Point3.Y = (double)sy;
+                    }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
@@ -267,8 +290,11 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _arc.Point4.X = (double)sx;
-                    _arc.Point4.Y = (double)sy;
+                    if (_arc.Point4 is { })
+                    {
+                        _arc.Point4.X = (double)sx;
+                        _arc.Point4.Y = (double)sy;
+                    }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
@@ -353,7 +379,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
             case State.Point3:
             case State.Point4:
             {
-                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                if (editor.Project.CurrentContainer?.WorkingLayer is { } && _arc is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
