@@ -24,10 +24,16 @@ public class DatabaseView : UserControl
         InitializeComponent();
 
         _filterRecordsText = this.FindControl<TextBox>("FilterRecordsTextBox");
-        _filterRecordsText.GetObservable(TextBox.TextProperty).Subscribe(_ => OnFilterRecordsTextChanged());
+        if (_filterRecordsText is { })
+        {
+            _filterRecordsText.GetObservable(TextBox.TextProperty).Subscribe(_ => OnFilterRecordsTextChanged());
+        }
 
         _rowsDataGrid = this.FindControl<DataGrid>("RowsDataGrid");
-        _rowsDataGrid.DataContextChanged += RowsDataGrid_DataContextChanged;
+        if (_rowsDataGrid is { })
+        {
+            _rowsDataGrid.DataContextChanged += RowsDataGrid_DataContextChanged;
+        }
     }
 
     private void InitializeComponent()
@@ -50,7 +56,7 @@ public class DatabaseView : UserControl
         {
             foreach (var value in record.Values)
             {
-                if (value is { } && !string.IsNullOrWhiteSpace(value.Content))
+                if (!string.IsNullOrWhiteSpace(value.Content))
                 {
                     if (value.Content?.IndexOf(_recordsFilter, StringComparison.OrdinalIgnoreCase) != -1)
                     {
