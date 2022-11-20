@@ -26,10 +26,18 @@ internal abstract class DrawNode : IDrawNode
         {
             Fill = AvaloniaDrawUtil.ToBrush(Style.Fill.Color);
         }
+        else
+        {
+            Fill = null;
+        }
 
         if (Style?.Stroke is { })
         {
             Stroke = AvaloniaDrawUtil.ToPen(Style, Style.Stroke.Thickness);
+        }
+        else
+        {
+            Stroke = null;
         }
     }
 
