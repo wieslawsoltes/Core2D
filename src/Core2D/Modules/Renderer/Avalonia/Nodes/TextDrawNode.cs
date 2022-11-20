@@ -36,7 +36,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
 
         if (Text.TopLeft is { } && Text.BottomRight is { })
         {
-            var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
+            var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y);
             Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
             Center = Rect.Center;
         }
@@ -51,15 +51,21 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
 
     private void UpdateTextGeometry()
     {
-        BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
+        BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) as string ?? Text.Text;
 
-        if (BoundText is null)
+        if (BoundText is null || Style?.TextStyle is null)
         {
+            Origin = new A.Point();
+            FormattedText = null;
+            Geometry = null;
             return;
         }
 
         if (Style.TextStyle.FontSize < 0.0)
         {
+            Origin = new A.Point();
+            FormattedText = null;
+            Geometry = null;
             return;
         }
 
@@ -79,24 +85,30 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         // TODO: Cache Typeface
         // TODO: Cache FormattedText
 
-        Typeface = new AM.Typeface(Style.TextStyle.FontName, fontStyle, fontWeight);
-        if (Typeface is null)
+        if (string.IsNullOrEmpty(Style.TextStyle.FontName))
         {
-            Typeface = AM.Typeface.Default;
+            Typeface = null;
+        }
+        else
+        {
+            Typeface = new AM.Typeface(Style.TextStyle.FontName, fontStyle, fontWeight);
         }
 
-        var textAlignment = Style.TextStyle.TextHAlignment switch
-        {
-            TextHAlignment.Right => AM.TextAlignment.Right,
-            TextHAlignment.Center => AM.TextAlignment.Center,
-            _ => AM.TextAlignment.Left,
-        };
+        Typeface ??= AM.Typeface.Default;
 
         if (Stroke is null)
         {
             UpdateStyle();
         }
-        
+
+        if (Stroke?.Brush is null)
+        {
+            Origin = new A.Point();
+            FormattedText = null;
+            Geometry = null;
+            return;
+        }
+
         FormattedText = new AM.FormattedText(
             BoundText,
             CultureInfo.InvariantCulture,
@@ -141,7 +153,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
             return;
         }
 
-        if (Geometry is { })
+        if (Stroke?.Brush is { } && Geometry?.PlatformImpl is { })
         {
             // context.DrawGeometry(Text.IsFilled ? Fill : null, Text.IsStroked ? Stroke : null, Geometry.PlatformImpl);
             context.DrawGeometry(Stroke.Brush, null, Geometry.PlatformImpl);
