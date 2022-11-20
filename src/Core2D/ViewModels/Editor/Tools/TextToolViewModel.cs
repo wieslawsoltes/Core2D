@@ -78,8 +78,11 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_text is { })
                 {
-                    _text.BottomRight.X = (double) sx;
-                    _text.BottomRight.Y = (double) sy;
+                    if (_text.BottomRight is { })
+                    {
+                        _text.BottomRight.X = (double)sx;
+                        _text.BottomRight.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
