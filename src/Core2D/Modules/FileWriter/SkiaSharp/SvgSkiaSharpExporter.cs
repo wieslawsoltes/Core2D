@@ -21,8 +21,14 @@ public sealed class SvgSkiaSharpExporter : IProjectExporter
 
     public void Save(Stream stream, PageContainerViewModel container)
     {
+        if (container.Template is null)
+        {
+            return;
+        }
+        var width = (int)container.Template.Width;
+        var height = (int)container.Template.Height;
         using var wstream = new SKManagedWStream(stream);
-        using var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, (int)container.Template.Width, (int)container.Template.Height), stream);
+        using var canvas = SKSvgCanvas.Create(SKRect.Create(0, 0, width, height), stream);
         _presenter.Render(canvas, _renderer, null, container, 0, 0);
     }
 

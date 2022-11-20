@@ -35,6 +35,11 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
             Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
             Center = new SKPoint(Rect.MidX, Rect.MidY);
         }
+        else
+        {
+            Rect = SKRect.Empty;
+            Center = SKPoint.Empty;
+        }
 
         UpdateTextGeometry();
     }

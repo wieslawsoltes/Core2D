@@ -38,8 +38,11 @@ public sealed class WebpSkiaSharpWriter : IFileWriter
         }
 
         var renderer = new SkiaSharpRendererViewModel(_serviceProvider);
-        renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-        renderer.State.ImageCache = ic;
+        if (renderer.State is { })
+        {
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.State.ImageCache = ic;
+        }
 
         var presenter = new ExportPresenter();
 

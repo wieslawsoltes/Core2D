@@ -38,9 +38,12 @@ public sealed class PdfSharpWriter : IFileWriter
 
         IProjectExporter exporter = new PdfSharpRenderer(_serviceProvider);
 
-        IShapeRenderer renderer = (IShapeRenderer)exporter;
-        renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-        renderer.State.ImageCache = ic;
+        var renderer = (IShapeRenderer)exporter;
+        if (renderer.State is { })
+        {
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.State.ImageCache = ic;
+        }
 
         if (item is PageContainerViewModel page)
         {

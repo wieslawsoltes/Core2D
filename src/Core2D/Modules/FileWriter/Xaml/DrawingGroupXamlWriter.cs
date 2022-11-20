@@ -34,7 +34,7 @@ public sealed class DrawingGroupXamlWriter : IFileWriter
             return;
         }
 
-        var ic = options as IImageCache;
+        var _ = options as IImageCache;
         if (options is null)
         {
             return;
@@ -46,10 +46,13 @@ public sealed class DrawingGroupXamlWriter : IFileWriter
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
             var db = (object)page.Properties;
-            var record = (object)page.Record;
+            var record = (object?)page.Record;
 
-            dataFlow.Bind(page.Template, db, record);
-            dataFlow.Bind(page, db, record);
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(page.Template, db, record);
+                dataFlow.Bind(page, db, record);
+            }
 
             var shapes = new List<BaseShapeViewModel>();
             if (page.Template is { } template)
@@ -59,7 +62,7 @@ public sealed class DrawingGroupXamlWriter : IFileWriter
             shapes.AddRange(page.Layers.SelectMany(x => x.Shapes));
 
             {
-                var key = page?.Name;
+                var key = page.Name;
                 var xaml = exporter.Create(shapes, key);
                 if (!string.IsNullOrEmpty(xaml))
                 {
@@ -68,11 +71,11 @@ public sealed class DrawingGroupXamlWriter : IFileWriter
                 }
             }
         }
-        else if (item is DocumentContainerViewModel document)
+        else if (item is DocumentContainerViewModel _)
         {
             throw new NotSupportedException("Saving documents as xaml drawing is not supported.");
         }
-        else if (item is ProjectContainerViewModel project)
+        else if (item is ProjectContainerViewModel _)
         {
             throw new NotSupportedException("Saving projects as xaml drawing is not supported.");
         }

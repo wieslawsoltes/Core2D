@@ -53,8 +53,11 @@ public sealed class EmfWriter : IFileWriter, IMetafileExporter
             using (g = Graphics.FromImage(mf))
             {
                 var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                r.State.DrawShapeState = ShapeStateFlags.Printable;
-                r.State.ImageCache = ic;
+                if (r.State is { })
+                {
+                    r.State.DrawShapeState = ShapeStateFlags.Printable;
+                    r.State.ImageCache = ic;
+                }
 
                 g.SmoothingMode = SmoothingMode.HighQuality;
                 g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -81,7 +84,7 @@ public sealed class EmfWriter : IFileWriter, IMetafileExporter
         return ms;
     }
 
-    public MemoryStream? MakeMetafileStream(object bitmap, FrameContainerViewModel container, IImageCache ic)
+    public MemoryStream? MakeMetafileStream(object bitmap, FrameContainerViewModel container, IImageCache? ic)
     {
         var g = default(Graphics);
         var mf = default(Metafile);
@@ -105,8 +108,11 @@ public sealed class EmfWriter : IFileWriter, IMetafileExporter
             {
                 var p = new ExportPresenter();
                 var r = new WinFormsRenderer(_serviceProvider, 72.0 / 96.0);
-                r.State.DrawShapeState = ShapeStateFlags.Printable;
-                r.State.ImageCache = ic;
+                if (r.State is { })
+                {
+                    r.State.DrawShapeState = ShapeStateFlags.Printable;
+                    r.State.ImageCache = ic;
+                }
 
                 g.SmoothingMode = SmoothingMode.HighQuality;
                 g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -134,13 +140,18 @@ public sealed class EmfWriter : IFileWriter, IMetafileExporter
         return ms;
     }
 
-    public void Save(Stream stream, PageContainerViewModel container, IImageCache ic)
+    public void Save(Stream stream, PageContainerViewModel container, IImageCache? ic)
     {
-        if (container?.Template is { })
+        if (container.Template is { })
         {
-            using var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height);
+            var width = (int)container.Template.Width;
+            var height = (int)container.Template.Height;
+            using var bitmap = new Bitmap(width, height);
             using var ms = MakeMetafileStream(bitmap, container, ic);
-            ms.WriteTo(stream);
+            if (ms is { })
+            {
+                ms.WriteTo(stream);
+            }
         }
     }
 
@@ -161,18 +172,21 @@ public sealed class EmfWriter : IFileWriter, IMetafileExporter
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
             var db = (object)page.Properties;
-            var record = (object)page.Record;
+            var record = (object?)page.Record;
 
-            dataFlow.Bind(page.Template, db, record);
-            dataFlow.Bind(page, db, record);
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(page.Template, db, record);
+                dataFlow.Bind(page, db, record);
+            }
 
             Save(stream, page, ic);
         }
-        else if (item is DocumentContainerViewModel document)
+        else if (item is DocumentContainerViewModel _)
         {
             throw new NotSupportedException("Saving documents as emf drawing is not supported.");
         }
-        else if (item is ProjectContainerViewModel project)
+        else if (item is ProjectContainerViewModel _)
         {
             throw new NotSupportedException("Saving projects as emf drawing is not supported.");
         }

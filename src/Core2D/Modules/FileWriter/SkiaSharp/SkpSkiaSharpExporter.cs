@@ -21,8 +21,14 @@ public sealed class SkpSkiaSharpExporter : IProjectExporter
 
     public void Save(Stream stream, PageContainerViewModel container)
     {
+        if (container.Template is null)
+        {
+            return;
+        }
+        var width = (int)container.Template.Width;
+        var height = (int)container.Template.Height;
         using var pictureRecorder = new SKPictureRecorder();
-        using var canvas = pictureRecorder.BeginRecording(SKRect.Create(0, 0, (int)container.Template.Width, (int)container.Template.Height));
+        using var canvas = pictureRecorder.BeginRecording(SKRect.Create(0, 0, width, height));
         _presenter.Render(canvas, _renderer, null, container, 0, 0);
         using var picture = pictureRecorder.EndRecording();
         picture.Serialize(stream);

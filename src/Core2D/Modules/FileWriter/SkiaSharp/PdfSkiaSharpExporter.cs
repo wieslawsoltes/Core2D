@@ -22,7 +22,13 @@ public sealed class PdfSkiaSharpExporter : IProjectExporter
 
     private void Add(SKDocument pdf, PageContainerViewModel container)
     {
-        using var canvas = pdf.BeginPage((float)container.Template.Width, (float)container.Template.Height);
+        if (container.Template is null)
+        {
+            return;
+        }
+        var width = (float)container.Template.Width;
+        var height = (float)container.Template.Height;
+        using var canvas = pdf.BeginPage(width, height);
         _presenter.Render(canvas, _renderer, null, container, 0, 0);
     }
 

@@ -171,8 +171,11 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _text.BottomRight.X = (double)sx;
-                    _text.BottomRight.Y = (double)sy;
+                    if (_text.BottomRight is { })
+                    {
+                        _text.BottomRight.X = (double)sx;
+                        _text.BottomRight.Y = (double)sy;
+                    }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_text);
                 }
