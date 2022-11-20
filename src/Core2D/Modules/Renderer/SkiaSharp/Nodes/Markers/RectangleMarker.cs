@@ -14,6 +14,11 @@ internal class RectangleMarker : MarkerBase
             return;
         }
 
+        if (ShapeViewModel is null)
+        {
+            return;
+        }
+
         var count = canvas.Save();
         canvas.SetMatrix(MatrixHelper.Multiply(Rotation, canvas.TotalMatrix));
 
