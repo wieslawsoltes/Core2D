@@ -4,7 +4,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Core2D.Editor;
-using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.ViewModels.Editor;
 
@@ -40,7 +39,7 @@ public class AttachEditor
         }
     }
 
-    public void Changed(object context)
+    private void Changed(object? context)
     {
         Detach();
         Attach();
@@ -81,10 +80,13 @@ public class AttachEditor
             zoomBorder.ZoomChanged += ZoomBorder_ZoomChanged;
         }
 
-        _inputSource = new AvaloniaInputSource(zoomBorder, presenterViewEditor, p => p);
-        _inputTarget = new ProjectEditorInputTarget(projectEditor);
-        _inputProcessor = new InputProcessor();
-        _inputProcessor.Connect(_inputSource, _inputTarget);
+        if (zoomBorder is { } && presenterViewEditor is { })
+        {
+            _inputSource = new AvaloniaInputSource(zoomBorder, presenterViewEditor, p => p);
+            _inputTarget = new ProjectEditorInputTarget(projectEditor);
+            _inputProcessor = new InputProcessor();
+            _inputProcessor.Connect(_inputSource, _inputTarget);
+        }
     }
 
     public void Detach()
@@ -94,7 +96,7 @@ public class AttachEditor
             return;
         }
 
-        if (projectEditor.CanvasPlatform is IEditorCanvasPlatform canvasPlatform)
+        if (projectEditor.CanvasPlatform is { } canvasPlatform)
         {
             canvasPlatform.InvalidateControl = null;
             canvasPlatform.ResetZoom = null;
