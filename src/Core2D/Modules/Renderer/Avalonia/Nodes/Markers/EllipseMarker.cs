@@ -16,7 +16,7 @@ internal class EllipseMarker : MarkerBase
             return;
         }
 
-        if (EllipseGeometry is { })
+        if (ShapeViewModel is { } && EllipseGeometry?.PlatformImpl is { })
         {
             using var rotationDisposable = context.PushPreTransform(Rotation);
             context.DrawGeometry(ShapeViewModel.IsFilled ? Brush : null, ShapeViewModel.IsStroked ? Pen : null, EllipseGeometry.PlatformImpl);
