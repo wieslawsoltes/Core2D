@@ -17,9 +17,12 @@ public class ToolIconConverter : IValueConverter
         {
             var key = $"{tool.Title}";
 
-            if (Application.Current.Styles.TryGetResource(key, out var resource))
+            if (Application.Current is { } application)
             {
-                return resource;
+                if (application.Styles.TryGetResource(key, out var resource))
+                {
+                    return resource;
+                }
             }
         }
         return AvaloniaProperty.UnsetValue;
