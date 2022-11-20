@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
 
@@ -36,9 +37,9 @@ public partial class LayerContainerViewModel : BaseContainerViewModel
     {
         _invalidateLayerEventArgs = new InvalidateLayerEventArgs(this);
 
-        AddLayer = new Command<FrameContainerViewModel?>(x => GetProject()?.OnAddLayer(x));
+        AddLayer = new RelayCommand<FrameContainerViewModel?>(x => GetProject()?.OnAddLayer(x));
 
-        RemoveLayer = new Command<LayerContainerViewModel?>(x => GetProject()?.OnRemoveLayer(x));
+        RemoveLayer = new RelayCommand<LayerContainerViewModel?>(x => GetProject()?.OnRemoveLayer(x));
 
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }

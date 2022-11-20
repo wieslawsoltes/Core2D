@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
@@ -15,7 +16,7 @@ public partial class ImageKeyViewModel : ViewModelBase, IImageKey
 
     public ImageKeyViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        RemoveImageKey = new Command<string?>(x => GetProject()?.OnRemoveImageKey(x));
+        RemoveImageKey = new RelayCommand<string?>(x => GetProject()?.OnRemoveImageKey(x));
 
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }

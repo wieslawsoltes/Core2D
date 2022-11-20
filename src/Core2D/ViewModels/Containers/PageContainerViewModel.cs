@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.ViewModels.Editor;
 
 namespace Core2D.ViewModels.Containers;
@@ -15,9 +16,9 @@ public partial class PageContainerViewModel : FrameContainerViewModel
 
     public PageContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        InsertPageBefore = new Command<object?>(x => GetProject()?.OnInsertPageBefore(x));
+        InsertPageBefore = new RelayCommand<object?>(x => GetProject()?.OnInsertPageBefore(x));
             
-        InsertPageAfter = new Command<object?>(x => GetProject()?.OnInsertPageAfter(x));
+        InsertPageAfter = new RelayCommand<object?>(x => GetProject()?.OnInsertPageAfter(x));
             
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }

@@ -10,6 +10,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Themes.Fluent;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.Configuration.Windows;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Designer;
@@ -32,7 +33,7 @@ public class App : Application
     {
         DefaultTheme = "FluentDark";
 
-        ChangeTheme = new Command<string>(SetTheme);
+        ChangeTheme = new RelayCommand<string>(SetTheme);
 
         InitializeDesigner();
     }

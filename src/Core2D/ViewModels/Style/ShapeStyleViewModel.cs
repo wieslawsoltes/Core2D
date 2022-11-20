@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
 
@@ -18,9 +19,9 @@ public partial class ShapeStyleViewModel : ViewModelBase
 
     public ShapeStyleViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        RemoveStyle = new Command<ShapeStyleViewModel?>(x => GetProject()?.OnRemoveStyle(x));
+        RemoveStyle = new RelayCommand<ShapeStyleViewModel?>(x => GetProject()?.OnRemoveStyle(x));
 
-        ExportStyle = new Command<ShapeStyleViewModel?>(x => GetProject()?.OnExportStyle(x));
+        ExportStyle = new RelayCommand<ShapeStyleViewModel?>(x => GetProject()?.OnExportStyle(x));
 
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }

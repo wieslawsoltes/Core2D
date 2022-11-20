@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.Model.Editor;
 using Core2D.ViewModels.Editor;
 
@@ -20,15 +21,15 @@ public abstract partial class ViewModelBase : INotifyPropertyChanged
     {
         ServiceProvider = serviceProvider;
 
-        CutCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
+        CutCommand = new RelayCommand<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
 
-        CopyCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
+        CopyCommand = new RelayCommand<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
 
-        PasteCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
+        PasteCommand = new RelayCommand<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnCut(x));
 
-        DeleteCommand = new Command<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnDelete(x));
+        DeleteCommand = new RelayCommand<object?>(x => ServiceProvider.GetService<IClipboardService>()?.OnDelete(x));
 
-        ExportCommand = new Command<object?>(x => ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExport(x));
+        ExportCommand = new RelayCommand<object?>(x => ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExport(x));
     }
 
     [IgnoreDataMember]

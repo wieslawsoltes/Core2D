@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Style;
@@ -29,13 +30,13 @@ public partial class TemplateContainerViewModel : FrameContainerViewModel, IGrid
 
     public TemplateContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        ApplyTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnApplyTemplate(x));
+        ApplyTemplate = new RelayCommand<TemplateContainerViewModel?>(x => GetProject()?.OnApplyTemplate(x));
 
-        EditTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnEditTemplate(x));
+        EditTemplate = new RelayCommand<TemplateContainerViewModel?>(x => GetProject()?.OnEditTemplate(x));
 
-        RemoveTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnRemoveTemplate(x));
+        RemoveTemplate = new RelayCommand<TemplateContainerViewModel?>(x => GetProject()?.OnRemoveTemplate(x));
 
-        ExportTemplate = new Command<TemplateContainerViewModel?>(x => GetProject()?.OnExportTemplate(x));
+        ExportTemplate = new RelayCommand<TemplateContainerViewModel?>(x => GetProject()?.OnExportTemplate(x));
 
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }
