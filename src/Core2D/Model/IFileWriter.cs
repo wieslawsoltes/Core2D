@@ -3,11 +3,7 @@ using System.IO;
 
 namespace Core2D.Model;
 
-public interface IFileWriter
+public interface IFileWriter: IPickerItem
 {
-    string Name { get; }
-
-    string Extension { get; }
-
     void Save(Stream stream, object item, object? options);
 }

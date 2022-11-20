@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using Core2D.Model;
@@ -51,6 +50,99 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         };
     }
 
+    private static List<FilePickerFileType> GetScriptFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.CSharpScript,
+            StorageService.All
+        };
+    }
+
+    private static List<FilePickerFileType> GetPickerItemFileTypes(IEnumerable<IPickerItem> items, bool includeAllFilter)
+    {
+        var result = new List<FilePickerFileType>();
+        
+        foreach (var item in items)
+        {
+            switch (item.Extension.ToLower())
+            {
+                case "json":
+                    result.Add(StorageService.Json);
+                    break;
+                case "cs":
+                    result.Add(StorageService.CSharp);
+                    break;
+                case "csx":
+                    result.Add(StorageService.CSharpScript);
+                    break;
+                case "png":
+                    result.Add(StorageService.ImagePng);
+                    break;
+                case "jpg":
+                case "jpeg":
+                    result.Add(StorageService.ImageJpg);
+                    break;
+                case "skp":
+                    result.Add(StorageService.ImageSkp);
+                    break;
+                case "bmp":
+                    result.Add(StorageService.ImageBmp);
+                    break;
+                case "svg":
+                    result.Add(StorageService.ImageSvg);
+                    break;
+                case "svgz":
+                    result.Add(StorageService.ImageSvgz);
+                    break;
+                case "xml":
+                    result.Add(StorageService.Xml);
+                    break;
+                case "xaml":
+                    result.Add(StorageService.Xaml);
+                    break;
+                case "axaml":
+                    result.Add(StorageService.Axaml);
+                    break;
+                case "pdf":
+                    result.Add(StorageService.Pdf);
+                    break;
+                case "xps":
+                    result.Add(StorageService.Xps);
+                    break;
+                case "xlsx":
+                    result.Add(StorageService.Xlsx);
+                    break;
+                case "csv":
+                    result.Add(StorageService.Csv);
+                    break;
+                case "project":
+                    result.Add(StorageService.Project);
+                    break;
+                default:
+                {
+                    var filePickerFileType = new FilePickerFileType(item.Name)
+                    {
+                        Patterns = new[] {$"*.{item.Extension}"},
+                        // TODO:
+                        AppleUniformTypeIdentifiers = new[] {$"public.{item.Extension}"},
+                        // TODO:
+                        MimeTypes = new[] {$"application/{item.Extension}"}
+                    };
+                    result.Add(filePickerFileType);
+                    break;
+                }
+            }
+        }
+
+        if (includeAllFilter)
+        {
+            result.Add(StorageService.All);
+        }
+
+        return result;
+    }
+
     private IStorageFile? _openProjectFile;
 
     public AvaloniaProjectEditorPlatform(IServiceProvider? serviceProvider) : base(serviceProvider)
@@ -62,15 +154,16 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         throw new NotImplementedException();
     }
 
-    private Window? GetWindow()
-    {
-        return ServiceProvider.GetService<Window>();
-    }
-
     public async void OnOpen()
     {
         try
         {
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+
             var storageProvider = StorageService.GetStorageProvider();
             if (storageProvider is null)
             {
@@ -89,12 +182,8 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             {
                 _openProjectFile = file;
                 await using var stream = await _openProjectFile.OpenReadAsync();
-                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-                if (editor is { })
-                {
-                    editor.OnOpenProject(stream, _openProjectFile.Name);
-                    editor.CanvasPlatform?.InvalidateControl?.Invoke();
-                }
+                editor.OnOpenProject(stream, _openProjectFile.Name);
+                editor.CanvasPlatform?.InvalidateControl?.Invoke();
             }
         }
         catch (Exception ex)
@@ -133,6 +222,12 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
     {
         try
         {
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+
             var storageProvider = StorageService.GetStorageProvider();
             if (storageProvider is null)
             {
@@ -152,11 +247,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             {
                 _openProjectFile = file;
                 await using var stream = await _openProjectFile.OpenWriteAsync();
-                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-                if (editor is { })
-                {
-                    editor.OnSaveProject(stream, _openProjectFile.Name);
-                }
+                editor.OnSaveProject(stream, _openProjectFile.Name);
             }
         }
         catch (Exception ex)
@@ -284,14 +375,14 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
         try
         {
-            var storageProvider = StorageService.GetStorageProvider();
-            if (storageProvider is null)
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
             {
                 return;
             }
 
-            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            if (editor is null)
+            var storageProvider = StorageService.GetStorageProvider();
+            if (storageProvider is null)
             {
                 return;
             }
@@ -322,20 +413,15 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         try
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            if (editor is null)
+            if (editor?.Project is null)
             {
                 return;
             }
 
-            string name = string.Empty;
+            var name = string.Empty;
 
             if (param is null || param is ProjectEditorViewModel)
             {
-                if (editor.Project is null)
-                {
-                    return;
-                }
-
                 name = editor.Project.Name;
                 param = editor.Project;
             }
@@ -352,23 +438,29 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                 name = container.Name;
             }
 
-            var dlg = new SaveFileDialog() { Title = "Save" };
-            foreach (var writer in editor.FileWriters)
+            var storageProvider = StorageService.GetStorageProvider();
+            if (storageProvider is null)
             {
-                dlg.Filters.Add(new FileDialogFilter() { Name = writer.Name, Extensions = { writer.Extension } });
+                return;
             }
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.InitialFileName = name;
-            dlg.DefaultExtension = editor.FileWriters.FirstOrDefault()?.Extension;
 
-            var result = await dlg.ShowAsync(GetWindow());
-            if (result is { })
+            var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
             {
-                string ext = Path.GetExtension(result).ToLower().TrimStart('.');
-                var writer = editor.FileWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                Title = "Export",
+                FileTypeChoices = GetPickerItemFileTypes(editor.FileWriters, true),
+                SuggestedFileName = name,
+                DefaultExtension = editor.FileWriters.FirstOrDefault()?.Extension,
+                ShowOverwritePrompt = true
+            });
+
+            if (file is not null && file.CanOpenWrite)
+            {
+                var ext = Path.GetExtension(file.Name).ToLower().TrimStart('.');
+                var writer = editor.FileWriters.FirstOrDefault(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0);
                 if (writer is { })
                 {
-                    editor.OnExport(result, param, writer);
+                    await using var stream = await file.OpenWriteAsync();
+                    editor.OnExport(stream, param, writer);
                 }
             }
         }
@@ -380,42 +472,47 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
     public async void OnExecuteScriptFile(object? param)
     {
-        if (param is null)
-        {
-            OnExecuteScriptFile();
-        }
-        else
-        {
-            if (param is not string path)
-            {
-                return;
-            }
-
-            try
-            {
-                await ServiceProvider.GetService<ProjectEditorViewModel>()?.OnExecuteScriptFile(path);
-            }
-            catch (Exception ex)
-            {
-                ServiceProvider.GetService<ILog>()?.LogException(ex);
-            }
-        }
-    }
-
-    public async void OnExecuteScriptFile()
-    {
         try
         {
-            var dlg = new OpenFileDialog() { Title = "Open" };
-            dlg.Filters.Add(new FileDialogFilter() { Name = "Script", Extensions = { "csx", "cs" } });
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.AllowMultiple = true;
-            var result = await dlg.ShowAsync(GetWindow());
-            if (result is { })
+            if (param is null)
             {
-                if (result.All(r => r is { }))
+                var storageProvider = StorageService.GetStorageProvider();
+                if (storageProvider is null)
                 {
-                    await ServiceProvider.GetService<ProjectEditorViewModel>().OnExecuteScriptFile(result);
+                    return;
+                }
+
+                var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                {
+                    Title = "Open script", 
+                    FileTypeFilter = GetScriptFileTypes(), 
+                    AllowMultiple = true
+                });
+
+                foreach (var file in result)
+                {
+                    if (file.CanOpenRead)
+                    {
+                        await using var stream = await file.OpenReadAsync();
+                        var editorViewModel = ServiceProvider.GetService<ProjectEditorViewModel>();
+                        if (editorViewModel is { })
+                        {
+                            await editorViewModel.OnExecuteScript(stream);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (param is not Stream stream)
+                {
+                    return;
+                }
+
+                var editorViewModel = ServiceProvider.GetService<ProjectEditorViewModel>();
+                if (editorViewModel is { })
+                {
+                    await editorViewModel.OnExecuteScript(stream);
                 }
             }
         }
@@ -442,8 +539,18 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                 var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
                 var textClipboard = ServiceProvider.GetService<ITextClipboard>();
                 var exporter = ServiceProvider.GetService<ISvgExporter>();
-                var container = editor.Project.CurrentContainer;
 
+                if (editor?.Project is null || textClipboard is null || exporter is null)
+                {
+                    return;
+                }
+
+                var container = editor.Project.CurrentContainer;
+                if (container is null)
+                {
+                    return;
+                }
+                
                 var width = 0.0;
                 var height = 0.0;
                 switch (container)
@@ -453,31 +560,34 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                         height = template.Height;
                         break;
                     case PageContainerViewModel page:
-                        width = page.Template.Width;
-                        height = page.Template.Height;
+                    {
+                        if (page.Template is { })
+                        {
+                            width = page.Template.Width;
+                            height = page.Template.Height;
+                        }
                         break;
+                    }
                 }
 
-                var sources = editor.Project?.SelectedShapes;
+                var sources = editor.Project.SelectedShapes;
                 if (sources is { })
                 {
                     var xaml = exporter.Create(sources, width, height);
                     if (!string.IsNullOrEmpty(xaml))
                     {
-                        textClipboard?.SetText(xaml);
+                        textClipboard.SetText(xaml);
                     }
                     return;
                 }
 
-                var shapes = container.Layers.SelectMany(x => x.Shapes);
-                if (shapes is { })
                 {
+                    var shapes = container.Layers.SelectMany(x => x.Shapes);
                     var xaml = exporter.Create(shapes, width, height);
                     if (!string.IsNullOrEmpty(xaml))
                     {
-                        textClipboard?.SetText(xaml);
+                        textClipboard.SetText(xaml);
                     }
-                    return;
                 }
             }
         }
@@ -495,7 +605,12 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             var clipboard = ServiceProvider.GetService<IClipboardService>();
             var converter = ServiceProvider.GetService<ISvgConverter>();
 
-            var svgText = await textClipboard?.GetText();
+            if (textClipboard is null || clipboard is null || converter is null)
+            {
+                return;
+            }
+
+            var svgText = await textClipboard.GetText();
             if (!string.IsNullOrEmpty(svgText))
             {
                 var shapes = converter.FromString(svgText, out _, out _);
@@ -515,49 +630,58 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
     {
         try
         {
-            if (param is null)
+            if (param is not null)
             {
-                var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-                var textClipboard = ServiceProvider.GetService<ITextClipboard>();
-                var exporter = ServiceProvider.GetService<IXamlExporter>();
-                var container = editor.Project.CurrentContainer;
+                return;
+            }
 
-                var sources = editor.Project?.SelectedShapes;
-                if (sources is { })
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            var textClipboard = ServiceProvider.GetService<ITextClipboard>();
+            var exporter = ServiceProvider.GetService<IXamlExporter>();
+
+            if (editor?.Project is null || textClipboard is null || exporter is null)
+            {
+                return;
+            }
+
+            var container = editor.Project.CurrentContainer;
+            if (container is null)
+            {
+                return;
+            }
+
+            var sources = editor.Project.SelectedShapes;
+            if (sources is { })
+            {
+                var xaml = exporter.Create(sources, null);
+                if (!string.IsNullOrEmpty(xaml))
                 {
-                    var xaml = exporter.Create(sources, null);
-                    if (!string.IsNullOrEmpty(xaml))
-                    {
-                        textClipboard?.SetText(xaml);
-                    }
-                    return;
+                    textClipboard.SetText(xaml);
                 }
+                return;
+            }
 
-                var shapes = new List<BaseShapeViewModel>();
+            var shapes = new List<BaseShapeViewModel>();
 
-                if (container is PageContainerViewModel page)
+            if (container is PageContainerViewModel page)
+            {
+                if (page.Template is { } template)
                 {
-                    if (page.Template is { } template)
-                    {
-                        shapes.AddRange(template.Layers.SelectMany(x => x.Shapes));
-                    }
-                    shapes.AddRange(page.Layers.SelectMany(x => x.Shapes));
+                    shapes.AddRange(template.Layers.SelectMany(x => x.Shapes));
                 }
-                else
-                {
-                    if (container is { })
-                    {
-                        shapes.AddRange(container.Layers.SelectMany(x => x.Shapes));
-                    }
-                }
+                shapes.AddRange(page.Layers.SelectMany(x => x.Shapes));
+            }
+            else
+            {
+                shapes.AddRange(container.Layers.SelectMany(x => x.Shapes));
+            }
 
+            {
+                var key = container.Name;
+                var xaml = exporter.Create(shapes, key);
+                if (!string.IsNullOrEmpty(xaml))
                 {
-                    var key = container?.Name;
-                    var xaml = exporter.Create(shapes, key);
-                    if (!string.IsNullOrEmpty(xaml))
-                    {
-                        textClipboard?.SetText(xaml);
-                    }
+                    textClipboard.SetText(xaml);
                 }
             }
         }
@@ -810,26 +934,33 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         try
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            var dlg = new OpenFileDialog() { Title = "Open" };
-            foreach (var reader in editor?.TextFieldReaders)
+            if (editor is null)
             {
-                dlg.Filters.Add(new FileDialogFilter() { Name = reader.Name, Extensions = { reader.Extension } });
+                return;
             }
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(GetWindow());
-
-            if (result is { })
+            
+            var storageProvider = StorageService.GetStorageProvider();
+            if (storageProvider is null)
             {
-                var path = result.FirstOrDefault();
-                if (path is null)
-                {
-                    return;
-                }
-                string ext = Path.GetExtension(path).ToLower().TrimStart('.');
-                var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                return;
+            }
+
+            var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Import data",
+                FileTypeFilter = GetPickerItemFileTypes(editor.TextFieldReaders, true),
+                AllowMultiple = false
+            });
+
+            var file = result.FirstOrDefault();
+            if (file is not null && file.CanOpenRead)
+            {
+                string ext = Path.GetExtension(file.Name).ToLower().TrimStart('.');
+                var reader = editor.TextFieldReaders.FirstOrDefault(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0);
                 if (reader is { })
                 {
-                    editor.OnImportData(project, path, reader);
+                    await using var stream = await file.OpenReadAsync();
+                    editor.OnImportData(project, stream, reader);
                 }
             }
         }
@@ -849,22 +980,34 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         try
         {
             var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            var dlg = new SaveFileDialog() { Title = "Save" };
-            foreach (var writer in editor?.TextFieldWriters)
+            if (editor is null)
             {
-                dlg.Filters.Add(new FileDialogFilter() { Name = writer.Name, Extensions = { writer.Extension } });
+                return;
             }
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.InitialFileName = db.Name;
-            dlg.DefaultExtension = editor?.TextFieldWriters.FirstOrDefault()?.Extension;
-            var result = await dlg.ShowAsync(GetWindow());
-            if (result is { })
+
+            var storageProvider = StorageService.GetStorageProvider();
+            if (storageProvider is null)
             {
-                string ext = Path.GetExtension(result).ToLower().TrimStart('.');
-                var writer = editor.TextFieldWriters.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                return;
+            }
+
+            var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+            {
+                Title = "Export data",
+                FileTypeChoices = GetPickerItemFileTypes(editor.TextFieldWriters, true),
+                SuggestedFileName = db.Name,
+                DefaultExtension = editor.TextFieldWriters.FirstOrDefault()?.Extension,
+                ShowOverwritePrompt = true
+            });
+
+            if (file is not null && file.CanOpenWrite)
+            {
+                await using var stream = await file.OpenWriteAsync();
+                var ext = Path.GetExtension(file.Name).ToLower().TrimStart('.');
+                var writer = editor.TextFieldWriters.FirstOrDefault(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0);
                 if (writer is { })
                 {
-                    editor.OnExportData(result, db, writer);
+                    editor.OnExportData(stream, db, writer);
                 }
             }
         }
@@ -888,25 +1031,29 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             {
                 return;
             }
-            var dlg = new OpenFileDialog() { Title = "Open" };
-            foreach (var reader in editor.TextFieldReaders)
+            
+            var storageProvider = StorageService.GetStorageProvider();
+            if (storageProvider is null)
             {
-                dlg.Filters.Add(new FileDialogFilter() { Name = reader.Name, Extensions = { reader.Extension } });
+                return;
             }
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(GetWindow());
-            if (result is { })
+
+            var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
-                var path = result.FirstOrDefault();
-                if (path is null)
-                {
-                    return;
-                }
-                string ext = Path.GetExtension(path).ToLower().TrimStart('.');
-                var reader = editor.TextFieldReaders.Where(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+                Title = "Update data",
+                FileTypeFilter = GetPickerItemFileTypes(editor.TextFieldReaders, true),
+                AllowMultiple = false
+            });
+
+            var file = result.FirstOrDefault();
+            if (file is not null && file.CanOpenRead)
+            {
+                await using var stream = await file.OpenWriteAsync();
+                var ext = Path.GetExtension(file.Name).ToLower().TrimStart('.');
+                var reader = editor.TextFieldReaders.FirstOrDefault(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0);
                 if (reader is { })
                 {
-                    editor.OnUpdateData(path, db, reader);
+                    editor.OnUpdateData(stream, db, reader);
                 }
             }
         }

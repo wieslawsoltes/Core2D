@@ -28,6 +28,13 @@ internal static class StorageService
         MimeTypes = new[] { "text/plain" }
     };
 
+    public static FilePickerFileType CSharpScript { get; } = new("C#")
+    {
+        Patterns = new[] { "*.cs", "*.csx" },
+        AppleUniformTypeIdentifiers = new[] { "public.csharp-source" },
+        MimeTypes = new[] { "text/plain" }
+    };
+
     public static FilePickerFileType ImagePng { get; } = new("PNG image")
     {
         Patterns = new[] { "*.png" },
@@ -47,6 +54,13 @@ internal static class StorageService
         Patterns = new[] { "*.skp" },
         AppleUniformTypeIdentifiers = new[] { "com.google.skp" },
         MimeTypes = new[] { "image/skp" }
+    };
+
+    public static FilePickerFileType ImageBmp { get; } = new("BMP image")
+    {
+        Patterns = new[] { "*.bmp" },
+        AppleUniformTypeIdentifiers = new[] { "public.bmp" },
+        MimeTypes = new[] { "image/bmp" }
     };
 
     public static FilePickerFileType ImageAll { get; } = new("All Images")
@@ -109,6 +123,26 @@ internal static class StorageService
         Patterns = new[] { "*.xps" },
         AppleUniformTypeIdentifiers = new[] { "com.microsoft.xps" },
         MimeTypes = new[] { "application/oxps", "application/vnd.ms-xpsdocument" }
+    };
+
+    // TODO: xlsx
+    
+    public static FilePickerFileType Xlsx { get; } = new("XLSX document")
+    {
+        Patterns = new[] { "*.xlsx" },
+        // TODO:
+        AppleUniformTypeIdentifiers = new[] { "public.xlsx" },
+        // TODO:
+        MimeTypes = new[] { "application/xlsx" }
+    };
+    
+    public static FilePickerFileType Csv { get; } = new("CSV document")
+    {
+        Patterns = new[] { "*.csv" },
+        // TODO:
+        AppleUniformTypeIdentifiers = new[] { "public.csv" },
+        // TODO:
+        MimeTypes = new[] { "application/csv" }
     };
 
     public static FilePickerFileType Project { get; } = new("Project")

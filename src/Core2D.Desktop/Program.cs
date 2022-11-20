@@ -127,7 +127,8 @@ internal static class Program
                 {
                     foreach (var script in settings.Scripts)
                     {
-                        editor?.OnExecuteScriptFile(script.FullName);
+                        var stream = File.OpenRead(script.FullName);
+                        editor?.OnExecuteScript(stream);
                         Dispatcher.UIThread.RunJobs();
                     }
                 }

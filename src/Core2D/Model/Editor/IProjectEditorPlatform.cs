@@ -22,8 +22,6 @@ public interface IProjectEditorPlatform
 
     void OnExecuteScriptFile(object? param);
 
-    void OnExecuteScriptFile();
-
     void OnExit();
 
     void OnCopyAsXaml(object? param);

@@ -357,7 +357,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnImportData(ProjectContainerViewModel? project, string path, ITextFieldReader<DatabaseViewModel>? reader)
+    public void OnImportData(ProjectContainerViewModel? project, Stream stream, ITextFieldReader<DatabaseViewModel>? reader)
     {
         if (project is null)
         {
@@ -372,11 +372,6 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            using var stream = fileSystem.Open(path);
-            if (stream is null)
-            {
-                return;
-            }
             var db = reader?.Read(stream);
             if (db is { })
             {
@@ -390,7 +385,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnExportData(string path, DatabaseViewModel? database, ITextFieldWriter<DatabaseViewModel>? writer)
+    public void OnExportData(Stream stream, DatabaseViewModel? database, ITextFieldWriter<DatabaseViewModel>? writer)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -400,11 +395,6 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            using var stream = fileSystem.Create(path);
-            if (stream is null)
-            {
-                return;
-            }
             writer?.Write(stream, database);
         }
         catch (Exception ex)
@@ -413,7 +403,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnUpdateData(string path, DatabaseViewModel database, ITextFieldReader<DatabaseViewModel> reader)
+    public void OnUpdateData(Stream stream, DatabaseViewModel database, ITextFieldReader<DatabaseViewModel> reader)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -423,11 +413,6 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            using var stream = fileSystem.Open(path);
-            if (stream is null)
-            {
-                return;
-            }
             var db = reader.Read(stream);
             if (db is { })
             {
@@ -657,21 +642,10 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnExport(string path, object item, IFileWriter writer)
+    public void OnExport(Stream stream, object item, IFileWriter writer)
     {
-        var fileSystem = ServiceProvider.GetService<IFileSystem>();
-        if (fileSystem is null)
-        {
-            return;
-        }
-
         try
         {
-            using var stream = fileSystem.Create(path);
-            if (stream is null)
-            {
-                return;
-            }
             writer.Save(stream, item, Project);
         }
         catch (Exception ex)
@@ -680,7 +654,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public async Task OnExecuteScriptFile(string path)
+    public async Task OnExecuteScript(Stream stream)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -690,7 +664,7 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            var csharp = fileSystem.ReadUtf8Text(path);
+            var csharp = fileSystem.ReadUtf8Text(stream);
             if (!string.IsNullOrWhiteSpace(csharp))
             {
                 if (Project is null)
@@ -703,14 +677,6 @@ public partial class ProjectEditorViewModel
         catch (Exception ex)
         {
             ServiceProvider.GetService<ILog>()?.LogException(ex);
-        }
-    }
-
-    public async Task OnExecuteScriptFile(string[] paths)
-    {
-        foreach (var path in paths)
-        {
-            await OnExecuteScriptFile(path);
         }
     }
 
@@ -962,8 +928,12 @@ public partial class ProjectEditorViewModel
                     var reader = TextFieldReaders.FirstOrDefault(r => r.Extension == "csv");
                     if (reader is { })
                     {
-                        OnImportData(Project, path, reader);
-                        result = true;
+                        await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                        if (stream is { })
+                        {
+                            OnImportData(Project, stream, reader);
+                            result = true;
+                        }
                     }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultXlsxExtension, StringComparison.OrdinalIgnoreCase) == 0)
@@ -971,8 +941,12 @@ public partial class ProjectEditorViewModel
                     var reader = TextFieldReaders.FirstOrDefault(r => r.Extension == "xlsx");
                     if (reader is { })
                     {
-                        OnImportData(Project, path, reader);
-                        result = true;
+                        await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                        if (stream is { })
+                        {
+                            OnImportData(Project, stream, reader);
+                            result = true;
+                        }
                     }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultJsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
@@ -986,8 +960,12 @@ public partial class ProjectEditorViewModel
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    await OnExecuteScriptFile(path);
-                    result = true;
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        await OnExecuteScript(stream);
+                        result = true;
+                    }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultSvgExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
