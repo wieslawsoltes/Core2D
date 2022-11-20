@@ -18,10 +18,6 @@ internal abstract class DrawNode : IDrawNode
     public AM.IPen? Stroke { get; set; }
     public A.Point Center { get; set; }
 
-    protected DrawNode()
-    {
-    }
-
     public abstract void UpdateGeometry();
 
     public virtual void UpdateStyle()
@@ -47,28 +43,33 @@ internal abstract class DrawNode : IDrawNode
         var scale = ScaleSize ? 1.0 / zoom : 1.0;
         var translateX = 0.0 - (Center.X * scale) + Center.X;
         var translateY = 0.0 - (Center.Y * scale) + Center.Y;
-
-        double thickness = Style.Stroke.Thickness;
+        var thickness = Style?.Stroke?.Thickness ?? 1d;
 
         if (ScaleThickness)
         {
             thickness /= zoom;
         }
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (scale != 1.0)
         {
             thickness /= scale;
         }
 
-        if (Stroke.Thickness != thickness)
+        if (Style?.Stroke is { } && Stroke is { })
         {
-            Stroke = AvaloniaDrawUtil.ToPen(Style, thickness);
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (Stroke.Thickness != thickness)
+            {
+                Stroke = AvaloniaDrawUtil.ToPen(Style, thickness);
+            }
         }
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (scale != 1.0)
         {
             using var translateDisposable = context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY));
-            using var scaleDisposable =  context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale));
+            using var scaleDisposable = context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale));
             OnDraw(dc, zoom);
         }
         else
