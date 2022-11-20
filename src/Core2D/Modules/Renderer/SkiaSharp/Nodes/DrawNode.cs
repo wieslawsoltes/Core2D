@@ -14,10 +14,6 @@ internal abstract class DrawNode : IDrawNode
     public SKPaint? Stroke { get; set; }
     public SKPoint Center { get; set; }
 
-    protected DrawNode()
-    {
-    }
-
     public abstract void UpdateGeometry();
 
     public virtual void UpdateStyle()
@@ -43,38 +39,40 @@ internal abstract class DrawNode : IDrawNode
         var scale = ScaleSize ? 1.0 / zoom : 1.0;
         var translateX = 0.0 - (Center.X * scale) + Center.X;
         var translateY = 0.0 - (Center.Y * scale) + Center.Y;
-
-        var thickness = Style.Stroke.Thickness;
+        var thickness = Style?.Stroke?.Thickness ?? 1d;
 
         if (ScaleThickness)
         {
             thickness /= zoom;
         }
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (scale != 1.0)
         {
             thickness /= scale;
         }
 
-        if (Stroke.StrokeWidth != thickness)
+        if (Style?.Stroke is { } && Stroke is { })
         {
-            Stroke.StrokeWidth = (float)thickness;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (Stroke.StrokeWidth != thickness)
+            {
+                Stroke.StrokeWidth = (float)thickness;
+            }
         }
 
-        var count = int.MinValue;
-
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (scale != 1.0)
         {
-            count = canvas.Save();
+            var count = canvas.Save();
             canvas.Translate((float)translateX, (float)translateY);
             canvas.Scale((float)scale, (float)scale);
-        }
-
-        OnDraw(dc, zoom);
-
-        if (scale != 1.0)
-        {
+            OnDraw(dc, zoom);
             canvas.RestoreToCount(count);
+        }
+        else
+        {
+            OnDraw(dc, zoom);
         }
     }
 
