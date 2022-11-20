@@ -15,7 +15,11 @@ public class HitTest : IHitTest
     {
         Registered = new Dictionary<Type, IBounds>();
 
-        Register(serviceProvider.GetService<IBounds[]>());
+        var bounds = serviceProvider.GetService<IBounds[]>();
+        if (bounds is { })
+        {
+            Register(bounds);
+        }
     }
 
     public void Register(IBounds hitTest)
