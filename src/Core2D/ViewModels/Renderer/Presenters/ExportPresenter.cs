@@ -5,10 +5,20 @@ using Core2D.ViewModels.Containers;
 
 namespace Core2D.ViewModels.Renderer.Presenters;
 
-public partial class ExportPresenter : IContainerPresenter
+public class ExportPresenter : IContainerPresenter
 {
-    public void Render(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container, double dx, double dy)
+    public void Render(object? dc, IShapeRenderer? renderer, ISelection? selection, FrameContainerViewModel? container, double dx, double dy)
     {
+        if (dc is null || renderer is null || container is null)
+        {
+            return;
+        }
+
+        if (renderer.State is null)
+        {
+            return;
+        }
+
         var flags = renderer.State.DrawShapeState;
 
         renderer.State.DrawShapeState = ShapeStateFlags.Printable;
@@ -20,10 +30,11 @@ public partial class ExportPresenter : IContainerPresenter
         }
 
         DrawContainer(dc, renderer, selection, container);
+
         renderer.State.DrawShapeState = flags;
     }
 
-    private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container)
+    private void DrawContainer(object dc, IShapeRenderer renderer, ISelection? selection, FrameContainerViewModel container)
     {
         foreach (var layer in container.Layers)
         {
@@ -34,8 +45,13 @@ public partial class ExportPresenter : IContainerPresenter
         }
     }
 
-    private void DrawLayer(object dc, IShapeRenderer renderer, ISelection selection, LayerContainerViewModel layer)
+    private void DrawLayer(object dc, IShapeRenderer renderer, ISelection? selection, LayerContainerViewModel layer)
     {
+        if (renderer.State is null)
+        {
+            return;
+        }
+
         foreach (var shape in layer.Shapes)
         {
             if (shape.State.HasFlag(renderer.State.DrawShapeState))

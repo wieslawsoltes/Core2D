@@ -5,10 +5,15 @@ using Core2D.ViewModels.Containers;
 
 namespace Core2D.ViewModels.Renderer.Presenters;
 
-public partial class TemplatePresenter : IContainerPresenter
+public class TemplatePresenter : IContainerPresenter
 {
-    public void Render(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container, double dx, double dy)
+    public void Render(object? dc, IShapeRenderer? renderer, ISelection? selection, FrameContainerViewModel? container, double dx, double dy)
     {
+        if (dc is null || renderer is null || container is null)
+        {
+            return;
+        }
+
         if (container is PageContainerViewModel page && page.Template is { })
         {
             renderer.Fill(dc, dx, dy, page.Template.Width, page.Template.Height, page.Template.Background);
@@ -17,7 +22,7 @@ public partial class TemplatePresenter : IContainerPresenter
         }
     }
 
-    private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container)
+    private void DrawContainer(object dc, IShapeRenderer renderer, ISelection? selection, FrameContainerViewModel container)
     {
         foreach (var layer in container.Layers)
         {
@@ -28,8 +33,13 @@ public partial class TemplatePresenter : IContainerPresenter
         }
     }
 
-    private void DrawLayer(object dc, IShapeRenderer renderer, ISelection selection, LayerContainerViewModel layer)
+    private void DrawLayer(object dc, IShapeRenderer renderer, ISelection? selection, LayerContainerViewModel layer)
     {
+        if (renderer.State is null)
+        {
+            return;
+        }
+
         foreach (var shape in layer.Shapes)
         {
             if (shape.State.HasFlag(renderer.State.DrawShapeState))
