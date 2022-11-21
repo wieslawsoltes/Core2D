@@ -28,7 +28,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         _state = serviceProvider.GetService<IViewModelFactory>()?.CreateShapeRendererState();
         _biCache = serviceProvider.GetService<IViewModelFactory>()?.CreateCache<string, Image>(bi => bi.Dispose());
         _textScaleFactor = textScaleFactor;
-        _scaleToPage = (value) => (float)(value);
+        _scaleToPage = value => (float)value;
     }
 
     public override object Copy(IDictionary<object, object>? shared)
@@ -147,20 +147,20 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
             return;  
         }
 
-        double sx1 = line.Start.X;
-        double sy1 = line.Start.Y;
-        double ex2 = line.End.X;
-        double ey2 = line.End.Y;
+        var sx1 = line.Start.X;
+        var sy1 = line.Start.Y;
+        var ex2 = line.End.X;
+        var ey2 = line.End.Y;
 
-        float x1 = _scaleToPage(sx1);
-        float y1 = _scaleToPage(sy1);
-        float x2 = _scaleToPage(ex2);
-        float y2 = _scaleToPage(ey2);
+        var x1 = _scaleToPage(sx1);
+        var y1 = _scaleToPage(sy1);
+        var x2 = _scaleToPage(ex2);
+        var y2 = _scaleToPage(ey2);
 
         var sas = style.Stroke.StartArrow;
         var eas = style.Stroke.EndArrow;
-        float a1 = (float)(Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI);
-        float a2 = (float)(Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI);
+        var a1 = (float)(Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI);
+        var a2 = (float)(Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI);
 
         // Draw start arrow.
         pt1 = DrawLineArrowInternal(gfx, strokeStartArrow, fillStartArrow, x1, y1, a1, sas, line);
@@ -180,10 +180,10 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         PointF pt;
         var rt = new Matrix();
         rt.RotateAt(angle, new PointF(x, y));
-        double rx = style.RadiusX;
-        double ry = style.RadiusY;
-        double sx = 2.0 * rx;
-        double sy = 2.0 * ry;
+        var rx = style.RadiusX;
+        var ry = style.RadiusY;
+        var sx = 2.0 * rx;
+        var sy = 2.0 * ry;
 
         switch (style.ArrowType)
         {
@@ -191,9 +191,8 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
             case ArrowType.None:
             {
                 pt = new PointF(x, y);
-            }
                 break;
-
+            }
             case ArrowType.Rectangle:
             {
                 var pts = new[] { new PointF(x - (float)sx, y) };
@@ -204,9 +203,8 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
                 gfx.MultiplyTransform(rt);
                 DrawRectangleInternal(gfx, brush, pen, shape.IsStroked, shape.IsFilled, ref rect);
                 gfx.Restore(gs);
-            }
                 break;
-
+            }
             case ArrowType.Ellipse:
             {
                 var pts = new[] { new PointF(x - (float)sx, y) };
@@ -217,9 +215,8 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
                 var rect = new Rect2(x - sx, y - ry, sx, sy);
                 DrawEllipseInternal(gfx, brush, pen, shape.IsStroked, shape.IsFilled, ref rect);
                 gfx.Restore(gs);
-            }
                 break;
-
+            }
             case ArrowType.Arrow:
             {
                 var pts = new[]
@@ -238,8 +235,8 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
                 var p22 = pts[4];
                 DrawLineInternal(gfx, pen, shape.IsStroked, ref p11, ref p21);
                 DrawLineInternal(gfx, pen, shape.IsStroked, ref p12, ref p22);
-            }
                 break;
+            }
         }
 
         return pt;
@@ -364,7 +361,12 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         {
             return;
         }
-        
+
+        if (!grid.IsGridEnabled && !grid.IsBorderEnabled)
+        {
+            return;
+        }
+
         var pen = ToPen(grid.GridStrokeColor, grid.GridStrokeThickness);
 
         var rect = Rect2.FromPoints(
@@ -643,8 +645,8 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
 
         var x1 = quadraticBezier.Point1.X;
         var y1 = quadraticBezier.Point1.Y;
-        var x2 = quadraticBezier.Point1.X + (2.0 * (quadraticBezier.Point2.X - quadraticBezier.Point1.X)) / 3.0;
-        var y2 = quadraticBezier.Point1.Y + (2.0 * (quadraticBezier.Point2.Y - quadraticBezier.Point1.Y)) / 3.0;
+        var x2 = quadraticBezier.Point1.X + 2.0 * (quadraticBezier.Point2.X - quadraticBezier.Point1.X) / 3.0;
+        var y2 = quadraticBezier.Point1.Y + 2.0 * (quadraticBezier.Point2.Y - quadraticBezier.Point1.Y) / 3.0;
         var x3 = x2 + (quadraticBezier.Point3.X - quadraticBezier.Point1.X) / 3.0;
         var y3 = y2 + (quadraticBezier.Point3.Y - quadraticBezier.Point1.Y) / 3.0;
         var x4 = quadraticBezier.Point3.X;
@@ -712,9 +714,9 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string tbind))
+        if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText))
         {
-            tbind = text.Text ?? string.Empty;
+            boundText = text.Text ?? string.Empty;
         }
 
         var brush = ToBrush(style.Stroke.Color);
@@ -745,47 +747,34 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
             text.BottomRight,
             0, 0);
 
-        var srect = new RectangleF(
+        var scaledRect = new RectangleF(
             _scaleToPage(rect.X),
             _scaleToPage(rect.Y),
             _scaleToPage(rect.Width),
             _scaleToPage(rect.Height));
 
         var format = new StringFormat();
-        switch (style.TextStyle.TextHAlignment)
+
+        format.Alignment = style.TextStyle.TextHAlignment switch
         {
-            case TextHAlignment.Left:
-                format.Alignment = StringAlignment.Near;
-                break;
+            TextHAlignment.Left => StringAlignment.Near,
+            TextHAlignment.Center => StringAlignment.Center,
+            TextHAlignment.Right => StringAlignment.Far,
+            _ => format.Alignment
+        };
 
-            case TextHAlignment.Center:
-                format.Alignment = StringAlignment.Center;
-                break;
-
-            case TextHAlignment.Right:
-                format.Alignment = StringAlignment.Far;
-                break;
-        }
-
-        switch (style.TextStyle.TextVAlignment)
+        format.LineAlignment = style.TextStyle.TextVAlignment switch
         {
-            case TextVAlignment.Top:
-                format.LineAlignment = StringAlignment.Near;
-                break;
-
-            case TextVAlignment.Center:
-                format.LineAlignment = StringAlignment.Center;
-                break;
-
-            case TextVAlignment.Bottom:
-                format.LineAlignment = StringAlignment.Far;
-                break;
-        }
+            TextVAlignment.Top => StringAlignment.Near,
+            TextVAlignment.Center => StringAlignment.Center,
+            TextVAlignment.Bottom => StringAlignment.Far,
+            _ => format.LineAlignment
+        };
 
         format.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.NoClip;
         format.Trimming = StringTrimming.None;
 
-        gfx.DrawString(tbind, font, brush, srect, format);
+        gfx.DrawString(boundText, font, brush, scaledRect, format);
 
         brush.Dispose();
         font.Dispose();
@@ -875,7 +864,11 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        var gp = path.ToGraphicsPath(_scaleToPage);
+        var graphicsPath = path.ToGraphicsPath(_scaleToPage);
+        if (graphicsPath is null)
+        {
+            return;
+        }
 
         if (path.IsFilled && path.IsStroked)
         {
@@ -889,8 +882,8 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
             {
                 return;
             }
-            gfx.FillPath(brush, gp);
-            gfx.DrawPath(pen, gp);
+            gfx.FillPath(brush, graphicsPath);
+            gfx.DrawPath(pen, graphicsPath);
             brush.Dispose();
             pen.Dispose();
         }
@@ -905,7 +898,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
             {
                 return;
             }
-            gfx.FillPath(brush, gp);
+            gfx.FillPath(brush, graphicsPath);
             brush.Dispose();
         }
         else if (!path.IsFilled && path.IsStroked)
@@ -919,7 +912,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
             {
                 return;
             }
-            gfx.DrawPath(pen, gp);
+            gfx.DrawPath(pen, graphicsPath);
             pen.Dispose();
         }
     }
