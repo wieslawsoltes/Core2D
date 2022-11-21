@@ -586,7 +586,7 @@ public static class PathGeometryConverter
         haveResult = builder.Resolve(result);
     }
 
-    public static void Op(IList<SKPath> paths, SKPathOp op, out SKPath result, out bool haveResult)
+    public static void Op(IList<SKPath> paths, SKPathOp op, out SKPath? result, out bool haveResult)
     {
         haveResult = false;
         result = new SKPath(paths[0]) { FillType = paths[0].FillType };
