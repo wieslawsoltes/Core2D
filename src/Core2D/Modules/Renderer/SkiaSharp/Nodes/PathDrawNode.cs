@@ -24,7 +24,14 @@ internal class PathDrawNode : DrawNode, IPathDrawNode
         ScaleThickness = Path.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Path.State.HasFlag(ShapeStateFlags.Size);
         Geometry = PathGeometryConverter.ToSKPath(Path);
-        Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
+        if (Geometry is { })
+        {
+            Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
+        }
+        else
+        {
+            Center = SKPoint.Empty;
+        }
     }
 
     public override void OnDraw(object? dc, double zoom)
