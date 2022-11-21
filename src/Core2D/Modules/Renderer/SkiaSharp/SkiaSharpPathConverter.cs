@@ -7,7 +7,6 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
-using Core2D.ViewModels.Style;
 using SkiaSharp;
 
 namespace Core2D.Modules.Renderer.SkiaSharp;
@@ -33,12 +32,16 @@ public class SkiaSharpPathConverter : IPathConverter
             return null;
         }
         var factory = _serviceProvider.GetService<IViewModelFactory>();
+        if (factory is null)
+        {
+            return null;
+        }
         var first = shapes.FirstOrDefault();
         if (first is null)
         {
             return null;
         }
-        var style = first?.Style is { } ?
+        var style = first.Style is { } ?
             first.Style?.CopyShared(null) :
             factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
@@ -61,6 +64,10 @@ public class SkiaSharpPathConverter : IPathConverter
             return null;
         }
         var factory = _serviceProvider.GetService<IViewModelFactory>();
+        if (factory is null)
+        {
+            return null;
+        }
         var style = shape.Style is { } ?
             shape.Style?.CopyShared(null) :
             factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
@@ -84,14 +91,28 @@ public class SkiaSharpPathConverter : IPathConverter
             return null;
         }
         var factory = _serviceProvider.GetService<IViewModelFactory>();
+        if (factory is null)
+        {
+            return null;
+        }
         var style = shape.Style is { } ?
             shape.Style?.CopyShared(null) :
             factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
-        var stroke = style?.Stroke?.Color.CopyShared(null);
-        var fill = style?.Fill?.Color.CopyShared(null);
-        style.Stroke.Color = fill;
-        style.Fill.Color = stroke;
-        using var pen = SkiaSharpDrawUtil.ToSKPaintPen(style, style.Stroke.Thickness);
+        if (style is null)
+        {
+            return null;
+        }
+        var stroke = style.Stroke?.Color.CopyShared(null);
+        var fill = style.Fill?.Color.CopyShared(null);
+        if (style.Stroke is { })
+        {
+            style.Stroke.Color = fill;
+        }
+        if (style.Fill is { })
+        {
+            style.Fill.Color = stroke;
+        }
+        using var pen = SkiaSharpDrawUtil.ToSKPaintPen(style, style.Stroke?.Thickness ?? 1d);
         var result = pen.GetFillPath(path, 1.0f);
         if (result is { })
         {
@@ -123,9 +144,17 @@ public class SkiaSharpPathConverter : IPathConverter
             return null;
         }
         var factory = _serviceProvider.GetService<IViewModelFactory>();
+        if (factory is null)
+        {
+            return null;
+        }
         var style = shape.Style is { } ?
             shape.Style?.CopyShared(null) :
             factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (style?.Fill?.Color is null)
+        {
+            return null;
+        }
         using var brush = SkiaSharpDrawUtil.ToSKPaintBrush(style.Fill.Color);
         var result = brush.GetFillPath(path, 1.0f);
         if (result is { })
@@ -159,6 +188,10 @@ public class SkiaSharpPathConverter : IPathConverter
         }
         var result = path.ToWinding();
         var factory = _serviceProvider.GetService<IViewModelFactory>();
+        if (factory is null)
+        {
+            return null;
+        }
         var style = shape.Style is { } ?
             shape.Style?.CopyShared(null) :
             factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
@@ -183,6 +216,10 @@ public class SkiaSharpPathConverter : IPathConverter
             return null;
         }
         var factory = _serviceProvider.GetService<IViewModelFactory>();
+        if (factory is null)
+        {
+            return null;
+        }
         var style = shape.Style is { } ?
             shape.Style?.CopyShared(null) :
             factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
@@ -196,7 +233,7 @@ public class SkiaSharpPathConverter : IPathConverter
 
     public PathShapeViewModel? Op(IEnumerable<BaseShapeViewModel>? shapes, PathOp op)
     {
-        if (shapes is null || shapes.Count() <= 0)
+        if (shapes is null || !shapes.Any())
         {
             return null;
         }
@@ -224,6 +261,10 @@ public class SkiaSharpPathConverter : IPathConverter
         }
 
         var factory = _serviceProvider.GetService<IViewModelFactory>();
+        if (factory is null)
+        {
+            return null;
+        }
         var shape = shapes.FirstOrDefault();
         var style = shape.Style is { } ?
             shape.Style?.CopyShared(null) :
@@ -249,6 +290,10 @@ public class SkiaSharpPathConverter : IPathConverter
             return null;
         }
         var factory = _serviceProvider.GetService<IViewModelFactory>();
+        if (factory is null)
+        {
+            return null;
+        }
         var style = factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var pathShape = PathGeometryConverter.ToPathGeometry(path, factory);
         pathShape.Name = "Path";
