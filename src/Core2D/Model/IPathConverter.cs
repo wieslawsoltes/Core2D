@@ -7,7 +7,7 @@ namespace Core2D.Model;
 
 public interface IPathConverter
 {
-    PathShapeViewModel? ToPathShape(IEnumerable<BaseShapeViewModel>? shapes);
+    PathShapeViewModel? ToPathShape(ISet<BaseShapeViewModel>? shapes);
 
     PathShapeViewModel? ToPathShape(BaseShapeViewModel? shape);
 
@@ -19,7 +19,7 @@ public interface IPathConverter
 
     PathShapeViewModel? Simplify(BaseShapeViewModel? shape);
 
-    PathShapeViewModel? Op(IEnumerable<BaseShapeViewModel>? shapes, PathOp op);
+    PathShapeViewModel? Op(ISet<BaseShapeViewModel>? shapes, PathOp op);
 
     public PathShapeViewModel? FromSvgPathData(string? svgPath, bool isStroked, bool isFilled);
 
