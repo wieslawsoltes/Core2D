@@ -33,15 +33,12 @@ public partial class PdfSharpRenderer : IProjectExporter
         {
             var page = Add(pdf, container, presenter);
 
-            if (documentOutline is null)
-            {
-                documentOutline = pdf.Outlines.Add(
-                    document.Name,
-                    page,
-                    true,
-                    PdfOutlineStyle.Regular,
-                    XColors.Black);
-            }
+            documentOutline ??= pdf.Outlines.Add(
+                document.Name,
+                page,
+                true,
+                PdfOutlineStyle.Regular,
+                XColors.Black);
 
             documentOutline.Outlines.Add(
                 container.Name,
@@ -69,25 +66,19 @@ public partial class PdfSharpRenderer : IProjectExporter
             {
                 var page = Add(pdf, container, presenter);
 
-                if (projectOutline is null)
-                {
-                    projectOutline = pdf.Outlines.Add(
-                        project.Name,
-                        page,
-                        true,
-                        PdfOutlineStyle.Regular,
-                        XColors.Black);
-                }
+                projectOutline ??= pdf.Outlines.Add(
+                    project.Name,
+                    page,
+                    true,
+                    PdfOutlineStyle.Regular,
+                    XColors.Black);
 
-                if (documentOutline is null)
-                {
-                    documentOutline = projectOutline.Outlines.Add(
-                        document.Name,
-                        page,
-                        true,
-                        PdfOutlineStyle.Regular,
-                        XColors.Black);
-                }
+                documentOutline ??= projectOutline.Outlines.Add(
+                    document.Name,
+                    page,
+                    true,
+                    PdfOutlineStyle.Regular,
+                    XColors.Black);
 
                 documentOutline.Outlines.Add(
                     container.Name,
@@ -111,23 +102,28 @@ public partial class PdfSharpRenderer : IProjectExporter
 
         var dataFlow = ServiceProvider.GetService<DataFlow>();
         var db = (object)container.Properties;
-        var record = (object)container.Record;
+        var record = (object?)container.Record;
 
-        dataFlow.Bind(container.Template, db, record);
-        dataFlow.Bind(container, db, record);
+        if (dataFlow is { })
+        {
+            dataFlow.Bind(container.Template, db, record);
+            dataFlow.Bind(container, db, record);
+        }
 
-        using XGraphics gfx = XGraphics.FromPdfPage(pdfPage);
+        using var gfx = XGraphics.FromPdfPage(pdfPage);
         // Calculate x and y page scale factors.
-        double scaleX = pdfPage.Width.Value / container.Template.Width;
-        double scaleY = pdfPage.Height.Value / container.Template.Height;
+        double scaleX = pdfPage.Width.Value / (container.Template?.Width ?? 1d);
+        double scaleY = pdfPage.Height.Value / (container.Template?.Height ?? 1d);
         double scale = Math.Min(scaleX, scaleY);
 
         // Set scaling function.
         _scaleToPage = (value) => value * scale;
 
         // Draw container template contents to pdf graphics.
-        Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
-
+        if (container.Template?.Background is { })
+        {
+            Fill(gfx, 0, 0, pdfPage.Width.Value / scale, pdfPage.Height.Value / scale, container.Template.Background);
+        }
 
         // Draw template contents to pdf graphics.
         presenter.Render(gfx, this, null, container.Template, 0, 0);
