@@ -70,14 +70,14 @@ public static class PathGeometryConverter
                         var p1 = startPoint;
                         var p2 = quadraticBezierSegment.Point1;
                         var p3 = quadraticBezierSegment.Point2;
-                        double x1 = p1.X;
-                        double y1 = p1.Y;
-                        double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
-                        double y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
-                        double x3 = x2 + (p3.X - p1.X) / 3.0;
-                        double y3 = y2 + (p3.Y - p1.Y) / 3.0;
-                        double x4 = p3.X;
-                        double y4 = p3.Y;
+                        var x1 = p1.X;
+                        var y1 = p1.Y;
+                        var x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
+                        var y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
+                        var x3 = x2 + (p3.X - p1.X) / 3.0;
+                        var y3 = y2 + (p3.Y - p1.Y) / 3.0;
+                        var x4 = p3.X;
+                        var y4 = p3.Y;
                         graphicsPath.AddBezier(
                             scale(x1),
                             scale(y1),
