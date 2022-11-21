@@ -197,11 +197,11 @@ public class SkiaSharpSvgConverter : ISvgConverter
                     {
                         return null;
                     }
-                    if (haveFigure == true)
+                    if (haveFigure)
                     {
                         context.SetClosedState(false);
                     }
-                    if (isLast == true)
+                    if (isLast)
                     {
                         return geometry;
                     }
