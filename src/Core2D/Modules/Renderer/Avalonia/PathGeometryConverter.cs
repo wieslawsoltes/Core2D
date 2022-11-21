@@ -49,20 +49,14 @@ public static class PathGeometryConverter
             {
                 switch (pathSegment)
                 {
-                    case ArcSegmentViewModel arcSegment:
+                    case LineSegmentViewModel lineSegment:
                     {
-                        if (arcSegment.Point is null || arcSegment.Size is null)
+                        if (lineSegment.Point is null)
                         {
                             return null;
                         }
-                        context.ArcTo(
-                            arcSegment.Point.ToPoint(),
-                            arcSegment.Size.ToSize(),
-                            arcSegment.RotationAngle,
-                            arcSegment.IsLargeArc,
-                            arcSegment.SweepDirection == SweepDirection.Clockwise
-                                ? AM.SweepDirection.Clockwise
-                                : AM.SweepDirection.CounterClockwise);
+                        context.LineTo(
+                            lineSegment.Point.ToPoint());
                         break;
                     }
                     case CubicBezierSegmentViewModel cubicBezierSegment:
@@ -77,16 +71,6 @@ public static class PathGeometryConverter
                             cubicBezierSegment.Point3.ToPoint());
                         break;
                     }
-                    case LineSegmentViewModel lineSegment:
-                    {
-                        if (lineSegment.Point is null)
-                        {
-                            return null;
-                        }
-                        context.LineTo(
-                            lineSegment.Point.ToPoint());
-                        break;
-                    }
                     case QuadraticBezierSegmentViewModel quadraticBezierSegment:
                     {
                         if (quadraticBezierSegment.Point1 is null || quadraticBezierSegment.Point2 is null)
@@ -96,6 +80,22 @@ public static class PathGeometryConverter
                         context.QuadraticBezierTo(
                             quadraticBezierSegment.Point1.ToPoint(),
                             quadraticBezierSegment.Point2.ToPoint());
+                        break;
+                    }
+                    case ArcSegmentViewModel arcSegment:
+                    {
+                        if (arcSegment.Point is null || arcSegment.Size is null)
+                        {
+                            return null;
+                        }
+                        context.ArcTo(
+                            arcSegment.Point.ToPoint(),
+                            arcSegment.Size.ToSize(),
+                            arcSegment.RotationAngle,
+                            arcSegment.IsLargeArc,
+                            arcSegment.SweepDirection == SweepDirection.Clockwise
+                                ? AM.SweepDirection.Clockwise
+                                : AM.SweepDirection.CounterClockwise);
                         break;
                     }
                     default:
