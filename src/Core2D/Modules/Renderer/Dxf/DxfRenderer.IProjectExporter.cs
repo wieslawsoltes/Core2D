@@ -33,7 +33,10 @@ internal class DxfExportPresenter : IContainerPresenter
 
     private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container)
     {
-        var dxf = dc as DXF.DxfDocument;
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
 
         foreach (var layer in container.Layers)
         {
@@ -44,7 +47,10 @@ internal class DxfExportPresenter : IContainerPresenter
 
             dxf.Layers.Add(dxfLayer);
 
-            (renderer as DxfRenderer)._currentLayer = dxfLayer;
+            if (renderer is DxfRenderer dxfRenderer)
+            {
+                dxfRenderer._currentLayer = dxfLayer;
+            }
 
             DrawLayer(dc, renderer, selection, layer);
         }
