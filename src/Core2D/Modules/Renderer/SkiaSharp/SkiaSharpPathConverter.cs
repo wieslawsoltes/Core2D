@@ -20,7 +20,7 @@ public class SkiaSharpPathConverter : IPathConverter
         _serviceProvider = serviceProvider;
     }
 
-    public PathShapeViewModel? ToPathShape(IEnumerable<BaseShapeViewModel>? shapes)
+    public PathShapeViewModel? ToPathShape(ISet<BaseShapeViewModel>? shapes)
     {
         if (shapes is null)
         {
@@ -231,7 +231,7 @@ public class SkiaSharpPathConverter : IPathConverter
         return pathShape;
     }
 
-    public PathShapeViewModel? Op(IEnumerable<BaseShapeViewModel>? shapes, PathOp op)
+    public PathShapeViewModel? Op(ISet<BaseShapeViewModel>? shapes, PathOp op)
     {
         if (shapes is null || !shapes.Any())
         {
@@ -266,14 +266,14 @@ public class SkiaSharpPathConverter : IPathConverter
             return null;
         }
         var shape = shapes.FirstOrDefault();
-        var style = shape.Style is { } ?
+        var style = shape?.Style is { } ?
             shape.Style?.CopyShared(null) :
             factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var pathShape = PathGeometryConverter.ToPathGeometry(result, factory);
         pathShape.Name = "Path";
         pathShape.Style = style;
-        pathShape.IsStroked = shape.IsStroked;
-        pathShape.IsFilled = shape.IsFilled;
+        pathShape.IsStroked = shape?.IsStroked ?? true;
+        pathShape.IsFilled = shape?.IsFilled ?? true;
         result.Dispose();
         return pathShape;
     }
