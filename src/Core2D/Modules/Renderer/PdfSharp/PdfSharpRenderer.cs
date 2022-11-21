@@ -26,7 +26,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
     {
         _state = serviceProvider.GetService<IViewModelFactory>()?.CreateShapeRendererState();
         _biCache = serviceProvider.GetService<IViewModelFactory>()?.CreateCache<string, XImage>(bi => bi.Dispose());
-        _scaleToPage = (value) => (float)(value * 1.0);
+        _scaleToPage = value => (float)(value * 1.0);
     }
 
     public override object Copy(IDictionary<object, object>? shared)
@@ -39,12 +39,17 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         return colorViewModel switch
         {
             ArgbColorViewModel argbColor => XColor.FromArgb(argbColor.A, argbColor.R, argbColor.G, argbColor.B),
-            _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
+            _ => new XColor(),
         };
     }
 
-    private static XPen ToXPen(ShapeStyleViewModel style, Func<double, double> scale, double sourceDpi, double targetDpi)
+    private static XPen? ToXPen(ShapeStyleViewModel style, Func<double, double> scale, double sourceDpi, double targetDpi)
     {
+        if (style.Stroke?.Color is null)
+        {
+            return null;
+        }
+
         var strokeWidth = scale(style.Stroke.Thickness * targetDpi / sourceDpi);
         var pen = new XPen(ToXColor(style.Stroke.Color), strokeWidth);
         switch (style.Stroke.LineCap)
@@ -79,17 +84,18 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
     private static XPen ToXPen(BaseColorViewModel colorViewModel, double thickness, Func<double, double> scale, double sourceDpi, double targetDpi)
     {
         var strokeWidth = scale(thickness * targetDpi / sourceDpi);
-        var pen = new XPen(ToXColor(colorViewModel), strokeWidth);
-        pen.LineCap = XLineCap.Flat;
-        return pen;
+        return new XPen(ToXColor(colorViewModel), strokeWidth)
+        {
+            LineCap = XLineCap.Flat
+        };
     }
 
-    private static XBrush ToXBrush(BaseColorViewModel colorViewModel)
+    private static XBrush? ToXBrush(BaseColorViewModel colorViewModel)
     {
         return colorViewModel switch
         {
             ArgbColorViewModel argbColor => new XSolidBrush(ToXColor(argbColor)),
-            _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported."),
+            _ => null,
         };
     }
 
@@ -103,26 +109,45 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
     private void DrawLineArrowsInternal(XGraphics gfx, LineShapeViewModel line, ShapeStyleViewModel style, out XPoint pt1, out XPoint pt2)
     {
+        if (line.Start is null || line.End is null || style.Fill?.Color is null || style.Stroke?.StartArrow is null || style.Stroke?.EndArrow is null)
+        {
+            pt1 = new XPoint();
+            pt2 = new XPoint();
+            return;
+        }
+        
         var fillStartArrow = ToXBrush(style.Fill.Color);
         var strokeStartArrow = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+        if (fillStartArrow is null || strokeStartArrow is null)
+        {
+            pt1 = new XPoint();
+            pt2 = new XPoint();
+            return;  
+        }
 
         var fillEndArrow = ToXBrush(style.Fill.Color);
         var strokeEndArrow = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+        if (fillEndArrow is null || strokeEndArrow is null)
+        {
+            pt1 = new XPoint();
+            pt2 = new XPoint();
+            return;  
+        }
 
-        double _x1 = line.Start.X;
-        double _y1 = line.Start.Y;
-        double _x2 = line.End.X;
-        double _y2 = line.End.Y;
+        var sx1 = line.Start.X;
+        var sy1 = line.Start.Y;
+        var ex2 = line.End.X;
+        var ey2 = line.End.Y;
 
-        double x1 = _scaleToPage(_x1);
-        double y1 = _scaleToPage(_y1);
-        double x2 = _scaleToPage(_x2);
-        double y2 = _scaleToPage(_y2);
+        var x1 = _scaleToPage(sx1);
+        var y1 = _scaleToPage(sy1);
+        var x2 = _scaleToPage(ex2);
+        var y2 = _scaleToPage(ey2);
 
         var sas = style.Stroke.StartArrow;
         var eas = style.Stroke.EndArrow;
-        double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
-        double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
+        var a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
+        var a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
 
         // Draw start arrow.
         pt1 = DrawLineArrowInternal(gfx, strokeStartArrow, fillStartArrow, x1, y1, a1, sas, line);
@@ -137,10 +162,10 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         var rt = new XMatrix();
         var c = new XPoint(x, y);
         rt.RotateAtPrepend(angle, c);
-        double rx = style.RadiusX;
-        double ry = style.RadiusY;
-        double sx = 2.0 * rx;
-        double sy = 2.0 * ry;
+        var rx = style.RadiusX;
+        var ry = style.RadiusY;
+        var sx = 2.0 * rx;
+        var sy = 2.0 * ry;
 
         switch (style.ArrowType)
         {
@@ -148,9 +173,8 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             case ArrowType.None:
             {
                 pt = new XPoint(x, y);
-            }
                 break;
-
+            }
             case ArrowType.Rectangle:
             {
                 pt = rt.Transform(new XPoint(x - sx, y));
@@ -159,9 +183,8 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
                 gfx.RotateAtTransform(angle, c);
                 DrawRectangleInternal(gfx, brush, pen, shape.IsStroked, shape.IsFilled, ref rect);
                 gfx.Restore();
-            }
                 break;
-
+            }
             case ArrowType.Ellipse:
             {
                 pt = rt.Transform(new XPoint(x - sx, y));
@@ -170,9 +193,8 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
                 var rect = new XRect(x - sx, y - ry, sx, sy);
                 DrawEllipseInternal(gfx, brush, pen, shape.IsStroked, shape.IsFilled, ref rect);
                 gfx.Restore();
-            }
                 break;
-
+            }
             case ArrowType.Arrow:
             {
                 pt = rt.Transform(new XPoint(x, y));
@@ -182,8 +204,8 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
                 var p22 = rt.Transform(new XPoint(x, y));
                 DrawLineInternal(gfx, pen, shape.IsStroked, ref p11, ref p21);
                 DrawLineInternal(gfx, pen, shape.IsStroked, ref p12, ref p22);
-            }
                 break;
+            }
         }
 
         return pt;
@@ -255,7 +277,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
     public void ClearCache()
     {
-        _biCache.Reset();
+        _biCache?.Reset();
     }
 
     public void Fill(object? dc, double x, double y, double width, double height, BaseColorViewModel? colorViewModel)
@@ -265,12 +287,21 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        gfx.DrawRectangle(
-            ToXBrush(colorViewModel),
-            _scaleToPage(x),
-            _scaleToPage(y),
-            _scaleToPage(width),
-            _scaleToPage(height));
+        if (colorViewModel is null)
+        {
+            return;
+        }
+
+        var brush = ToXBrush(colorViewModel);
+        if (brush is { })
+        {
+            gfx.DrawRectangle(
+                brush,
+                _scaleToPage(x),
+                _scaleToPage(y),
+                _scaleToPage(width),
+                _scaleToPage(height));
+        }
     }
 
     public void Grid(object? dc, IGrid grid, double x, double y, double width, double height)
@@ -280,28 +311,37 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        var strokeLine = ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi);
+        if (grid.GridStrokeColor is null)
+        {
+            return;
+        }
+
+        if (!grid.IsGridEnabled && !grid.IsBorderEnabled)
+        {
+            return;
+        }
+
+        var pen = ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi);
 
         var rect = Spatial.Rect2.FromPoints(
             x + grid.GridOffsetLeft,
             y + grid.GridOffsetTop,
             x + width - grid.GridOffsetLeft + grid.GridOffsetRight,
-            y + height - grid.GridOffsetTop + grid.GridOffsetBottom,
-            0, 0);
+            y + height - grid.GridOffsetTop + grid.GridOffsetBottom);
 
         if (grid.IsGridEnabled)
         {
             DrawGridInternal(
                 gfx,
                 grid,
-                ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi),
+                pen,
                 ref rect);
         }
 
         if (grid.IsBorderEnabled)
         {
             gfx.DrawRectangle(
-                ToXPen(grid.GridStrokeColor, grid.GridStrokeThickness, _scaleToPage, _sourceDpi, _targetDpi),
+                pen,
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
                 _scaleToPage(rect.Width),
@@ -321,14 +361,18 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        if (!line.IsStroked)
+        if (style is null)
         {
             return;
         }
 
-        var strokeLine = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
         DrawLineArrowsInternal(gfx, line, style, out var pt1, out var pt2);
-        DrawLineInternal(gfx, strokeLine, line.IsStroked, ref pt1, ref pt2);
+
+        var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+        if (pen is { })
+        {
+            DrawLineInternal(gfx, pen, line.IsStroked, ref pt1, ref pt2);
+        }
     }
 
     public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
@@ -338,40 +382,66 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (rectangle.TopLeft is null || rectangle.BottomRight is null)
+        {
+            return;
+        }
+
         var rect = Spatial.Rect2.FromPoints(
             rectangle.TopLeft.X,
             rectangle.TopLeft.Y,
             rectangle.BottomRight.X,
-            rectangle.BottomRight.Y,
-            0, 0);
+            rectangle.BottomRight.Y);
 
         if (rectangle.IsStroked && rectangle.IsFilled)
         {
-            gfx.DrawRectangle(
-                ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                ToXBrush(style.Fill.Color),
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (style?.Fill?.Color is { })
+            {
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                var brush = ToXBrush(style.Fill.Color);
+                if (pen is { } && brush is { })
+                {
+                    gfx.DrawRectangle(
+                        pen,
+                        brush,
+                        _scaleToPage(rect.X),
+                        _scaleToPage(rect.Y),
+                        _scaleToPage(rect.Width),
+                        _scaleToPage(rect.Height));
+                }
+            }
         }
         else if (rectangle.IsStroked && !rectangle.IsFilled)
         {
-            gfx.DrawRectangle(
-                ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (style is { })
+            {
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                if (pen is { })
+                {
+                    gfx.DrawRectangle(
+                        pen,
+                        _scaleToPage(rect.X),
+                        _scaleToPage(rect.Y),
+                        _scaleToPage(rect.Width),
+                        _scaleToPage(rect.Height));
+                }
+            }
         }
         else if (!rectangle.IsStroked && rectangle.IsFilled)
         {
-            gfx.DrawRectangle(
-                ToXBrush(style.Fill.Color),
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (style?.Fill?.Color is { })
+            {
+                var brush = ToXBrush(style.Fill.Color);
+                if (brush is { })
+                {
+                    gfx.DrawRectangle(
+                        brush,
+                        _scaleToPage(rect.X),
+                        _scaleToPage(rect.Y),
+                        _scaleToPage(rect.Width),
+                        _scaleToPage(rect.Height));
+                }
+            }
         }
     }
 
@@ -382,40 +452,66 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (ellipse.TopLeft is null || ellipse.BottomRight is null)
+        {
+            return;
+        }
+
         var rect = Spatial.Rect2.FromPoints(
             ellipse.TopLeft.X,
             ellipse.TopLeft.Y,
             ellipse.BottomRight.X,
-            ellipse.BottomRight.Y,
-            0, 0);
+            ellipse.BottomRight.Y);
 
         if (ellipse.IsStroked && ellipse.IsFilled)
         {
-            gfx.DrawEllipse(
-                ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                ToXBrush(style.Fill.Color),
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (style?.Fill?.Color is { })
+            {
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                var brush = ToXBrush(style.Fill.Color);
+                if (pen is { } && brush is { })
+                {
+                    gfx.DrawEllipse(
+                        pen,
+                        brush,
+                        _scaleToPage(rect.X),
+                        _scaleToPage(rect.Y),
+                        _scaleToPage(rect.Width),
+                        _scaleToPage(rect.Height));
+                }
+            }
         }
         else if (ellipse.IsStroked && !ellipse.IsFilled)
         {
-            gfx.DrawEllipse(
-                ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (style is { })
+            {
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                if (pen is { })
+                {
+                    gfx.DrawEllipse(
+                        pen,
+                        _scaleToPage(rect.X),
+                        _scaleToPage(rect.Y),
+                        _scaleToPage(rect.Width),
+                        _scaleToPage(rect.Height));
+                }
+            }
         }
         else if (!ellipse.IsStroked && ellipse.IsFilled)
         {
-            gfx.DrawEllipse(
-                ToXBrush(style.Fill.Color),
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (style?.Fill?.Color is { })
+            {
+                var brush = ToXBrush(style.Fill.Color);
+                if (brush is { })
+                {
+                    gfx.DrawEllipse(
+                        brush,
+                        _scaleToPage(rect.X),
+                        _scaleToPage(rect.Y),
+                        _scaleToPage(rect.Width),
+                        _scaleToPage(rect.Height));
+                }
+            }
         }
     }
 
@@ -426,16 +522,25 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (arc.Point1 is null || arc.Point2 is null || arc.Point3 is null || arc.Point4 is null)
+        {
+            return;
+        }
+
         var a = new Spatial.Arc.GdiArc(
             Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
             Spatial.Point2.FromXY(arc.Point2.X, arc.Point2.Y),
             Spatial.Point2.FromXY(arc.Point3.X, arc.Point3.Y),
             Spatial.Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
-        if (arc.IsFilled)
+        if (!(a.Width > 0.0) || !(a.Height > 0.0))
+        {
+            return;
+        }
+
+        if (arc.IsFilled && style?.Fill?.Color is { })
         {
             var path = new XGraphicsPath();
-            // NOTE: Not implemented in PdfSharp Core version.
             path.AddArc(
                 _scaleToPage(a.X),
                 _scaleToPage(a.Y),
@@ -446,30 +551,38 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
             if (arc.IsStroked)
             {
-                gfx.DrawPath(
-                    ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                    ToXBrush(style.Fill.Color),
-                    path);
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                var brush = ToXBrush(style.Fill.Color);
+                if (pen is { } && brush is { })
+                {
+                    gfx.DrawPath(pen, brush, path);
+                }
             }
             else
             {
-                gfx.DrawPath(
-                    ToXBrush(style.Fill.Color),
-                    path);
+                var brush = ToXBrush(style.Fill.Color);
+                if (brush is { })
+                {
+                    gfx.DrawPath(brush, path);
+                }
             }
         }
         else
         {
-            if (arc.IsStroked)
+            if (arc.IsStroked && style is { })
             {
-                gfx.DrawArc(
-                    ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                    _scaleToPage(a.X),
-                    _scaleToPage(a.Y),
-                    _scaleToPage(a.Width),
-                    _scaleToPage(a.Height),
-                    a.StartAngle,
-                    a.SweepAngle);
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                if (pen is { })
+                {
+                    gfx.DrawArc(
+                        pen,
+                        _scaleToPage(a.X),
+                        _scaleToPage(a.Y),
+                        _scaleToPage(a.Width),
+                        _scaleToPage(a.Height),
+                        a.StartAngle,
+                        a.SweepAngle);
+                }
             }
         }
     }
@@ -481,7 +594,12 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        if (cubicBezier.IsFilled)
+        if (cubicBezier.Point1 is null || cubicBezier.Point2 is null || cubicBezier.Point3 is null || cubicBezier.Point4 is null)
+        {
+            return;
+        }
+
+        if (cubicBezier.IsFilled && style?.Fill?.Color is { })
         {
             var path = new XGraphicsPath();
             path.AddBezier(
@@ -496,32 +614,40 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
             if (cubicBezier.IsStroked)
             {
-                gfx.DrawPath(
-                    ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                    ToXBrush(style.Fill.Color),
-                    path);
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                var brush = ToXBrush(style.Fill.Color);
+                if (pen is { } && brush is { })
+                {
+                    gfx.DrawPath(pen, brush, path);
+                }
             }
             else
             {
-                gfx.DrawPath(
-                    ToXBrush(style.Fill.Color),
-                    path);
+                var brush = ToXBrush(style.Fill.Color);
+                if (brush is { })
+                {
+                    gfx.DrawPath(brush, path);
+                }
             }
         }
         else
         {
-            if (cubicBezier.IsStroked)
+            if (cubicBezier.IsStroked && style is { })
             {
-                gfx.DrawBezier(
-                    ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                    _scaleToPage(cubicBezier.Point1.X),
-                    _scaleToPage(cubicBezier.Point1.Y),
-                    _scaleToPage(cubicBezier.Point2.X),
-                    _scaleToPage(cubicBezier.Point2.Y),
-                    _scaleToPage(cubicBezier.Point3.X),
-                    _scaleToPage(cubicBezier.Point3.Y),
-                    _scaleToPage(cubicBezier.Point4.X),
-                    _scaleToPage(cubicBezier.Point4.Y));
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                if (pen is { })
+                {
+                    gfx.DrawBezier(
+                        pen,
+                        _scaleToPage(cubicBezier.Point1.X),
+                        _scaleToPage(cubicBezier.Point1.Y),
+                        _scaleToPage(cubicBezier.Point2.X),
+                        _scaleToPage(cubicBezier.Point2.Y),
+                        _scaleToPage(cubicBezier.Point3.X),
+                        _scaleToPage(cubicBezier.Point3.Y),
+                        _scaleToPage(cubicBezier.Point4.X),
+                        _scaleToPage(cubicBezier.Point4.Y));
+                }
             }
         }
     }
@@ -533,16 +659,21 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        double x1 = quadraticBezier.Point1.X;
-        double y1 = quadraticBezier.Point1.Y;
-        double x2 = quadraticBezier.Point1.X + (2.0 * (quadraticBezier.Point2.X - quadraticBezier.Point1.X)) / 3.0;
-        double y2 = quadraticBezier.Point1.Y + (2.0 * (quadraticBezier.Point2.Y - quadraticBezier.Point1.Y)) / 3.0;
-        double x3 = x2 + (quadraticBezier.Point3.X - quadraticBezier.Point1.X) / 3.0;
-        double y3 = y2 + (quadraticBezier.Point3.Y - quadraticBezier.Point1.Y) / 3.0;
-        double x4 = quadraticBezier.Point3.X;
-        double y4 = quadraticBezier.Point3.Y;
+        if (quadraticBezier.Point1 is null || quadraticBezier.Point2 is null || quadraticBezier.Point3 is null)
+        {
+            return;
+        }
 
-        if (quadraticBezier.IsFilled)
+        var x1 = quadraticBezier.Point1.X;
+        var y1 = quadraticBezier.Point1.Y;
+        var x2 = quadraticBezier.Point1.X + (2.0 * (quadraticBezier.Point2.X - quadraticBezier.Point1.X)) / 3.0;
+        var y2 = quadraticBezier.Point1.Y + (2.0 * (quadraticBezier.Point2.Y - quadraticBezier.Point1.Y)) / 3.0;
+        var x3 = x2 + (quadraticBezier.Point3.X - quadraticBezier.Point1.X) / 3.0;
+        var y3 = y2 + (quadraticBezier.Point3.Y - quadraticBezier.Point1.Y) / 3.0;
+        var x4 = quadraticBezier.Point3.X;
+        var y4 = quadraticBezier.Point3.Y;
+
+        if (quadraticBezier.IsFilled && style?.Fill?.Color is { })
         {
             var path = new XGraphicsPath();
             path.AddBezier(
@@ -557,32 +688,40 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
             if (quadraticBezier.IsStroked)
             {
-                gfx.DrawPath(
-                    ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                    ToXBrush(style.Fill.Color),
-                    path);
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                var brush = ToXBrush(style.Fill.Color);
+                if (pen is { } && brush is { })
+                {
+                    gfx.DrawPath(pen, brush, path);
+                }
             }
             else
             {
-                gfx.DrawPath(
-                    ToXBrush(style.Fill.Color),
-                    path);
+                var brush = ToXBrush(style.Fill.Color);
+                if (brush is { })
+                {
+                    gfx.DrawPath(brush, path);
+                }
             }
         }
         else
         {
-            if (quadraticBezier.IsStroked)
+            if (quadraticBezier.IsStroked && style is { })
             {
-                gfx.DrawBezier(
-                    ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                    _scaleToPage(x1),
-                    _scaleToPage(y1),
-                    _scaleToPage(x2),
-                    _scaleToPage(y2),
-                    _scaleToPage(x3),
-                    _scaleToPage(y3),
-                    _scaleToPage(x4),
-                    _scaleToPage(y4));
+                var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+                if (pen is { })
+                {
+                    gfx.DrawBezier(
+                        pen,
+                        _scaleToPage(x1),
+                        _scaleToPage(y1),
+                        _scaleToPage(x2),
+                        _scaleToPage(y2),
+                        _scaleToPage(x3),
+                        _scaleToPage(y3),
+                        _scaleToPage(x4),
+                        _scaleToPage(y4));
+                }
             }
         }
     }
@@ -594,16 +733,32 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string tbind))
+        if (text.TopLeft is null || text.BottomRight is null)
         {
-            tbind = text.Text;
+            return;
         }
-
-        if (tbind is null)
+        
+        if (style?.Stroke?.Color is null)
         {
             return;
         }
 
+        if (style.TextStyle is null || style.TextStyle.FontName is null)
+        {
+            return;
+        }
+
+        if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText))
+        {
+            boundText = text.Text ?? string.Empty;
+        }
+
+        var brush = ToXBrush(style.Stroke.Color);
+        if (brush is null)
+        {
+            return;
+        }
+        
         var options = new XPdfFontOptions(PdfFontEncoding.Unicode);
 
         var fontStyle = XFontStyle.Regular;
@@ -628,51 +783,37 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             text.TopLeft.X,
             text.TopLeft.Y,
             text.BottomRight.X,
-            text.BottomRight.Y,
-            0, 0);
+            text.BottomRight.Y);
 
-        var srect = new XRect(
+        var scaledRect = new XRect(
             _scaleToPage(rect.X),
             _scaleToPage(rect.Y),
             _scaleToPage(rect.Width),
             _scaleToPage(rect.Height));
 
         var format = new XStringFormat();
-        switch (style.TextStyle.TextHAlignment)
+
+        format.Alignment = style.TextStyle.TextHAlignment switch
         {
-            case TextHAlignment.Left:
-                format.Alignment = XStringAlignment.Near;
-                break;
+            TextHAlignment.Left => XStringAlignment.Near,
+            TextHAlignment.Center => XStringAlignment.Center,
+            TextHAlignment.Right => XStringAlignment.Far,
+            _ => format.Alignment
+        };
 
-            case TextHAlignment.Center:
-                format.Alignment = XStringAlignment.Center;
-                break;
-
-            case TextHAlignment.Right:
-                format.Alignment = XStringAlignment.Far;
-                break;
-        }
-
-        switch (style.TextStyle.TextVAlignment)
+        format.LineAlignment = style.TextStyle.TextVAlignment switch
         {
-            case TextVAlignment.Top:
-                format.LineAlignment = XLineAlignment.Near;
-                break;
-
-            case TextVAlignment.Center:
-                format.LineAlignment = XLineAlignment.Center;
-                break;
-
-            case TextVAlignment.Bottom:
-                format.LineAlignment = XLineAlignment.Far;
-                break;
-        }
+            TextVAlignment.Top => XLineAlignment.Near,
+            TextVAlignment.Center => XLineAlignment.Center,
+            TextVAlignment.Bottom => XLineAlignment.Far,
+            _ => format.LineAlignment
+        };
 
         gfx.DrawString(
-            tbind,
+            boundText,
             font,
-            ToXBrush(style.Stroke.Color),
-            srect,
+            brush,
+            scaledRect,
             format);
     }
 
@@ -683,12 +824,16 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (image.TopLeft is null || image.BottomRight is null)
+        {
+            return;
+        }
+
         var rect = Spatial.Rect2.FromPoints(
             image.TopLeft.X,
             image.TopLeft.Y,
             image.BottomRight.X,
-            image.BottomRight.Y,
-            0, 0);
+            image.BottomRight.Y);
 
         var srect = new XRect(
             _scaleToPage(rect.X),
@@ -696,25 +841,36 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             _scaleToPage(rect.Width),
             _scaleToPage(rect.Height));
 
-        if (image.IsStroked || image.IsFilled)
+        if ((image.IsStroked || image.IsFilled) && style?.Fill?.Color is { })
         {
+            var brush = ToXBrush(style.Fill.Color);
+            var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+            if (brush is null || pen is null)
+            {
+                return;
+            }
             DrawRectangleInternal(
                 gfx,
-                ToXBrush(style.Fill.Color),
-                ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
+                brush,
+                pen,
                 image.IsStroked,
                 image.IsFilled,
                 ref srect);
         }
 
-        var imageCached = _biCache.Get(image.Key);
+        if (image.Key is null)
+        {
+            return;
+        }
+
+        var imageCached = _biCache?.Get(image.Key);
         if (imageCached is { })
         {
             gfx.DrawImage(imageCached, srect);
         }
         else
         {
-            if (State.ImageCache is { } && !string.IsNullOrEmpty(image.Key))
+            if (State?.ImageCache is { } && !string.IsNullOrEmpty(image.Key))
             {
                 var bytes = State.ImageCache.GetImage(image.Key);
                 if (bytes is { })
@@ -723,7 +879,7 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
 
                     var bi = XImage.FromStream(ms);
 
-                    _biCache.Set(image.Key, bi);
+                    _biCache?.Set(image.Key, bi);
 
                     gfx.DrawImage(bi, srect);
                 }
@@ -738,26 +894,51 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        var gp = path.ToXGraphicsPath(_scaleToPage);
+        var graphicsPath = path.ToXGraphicsPath(_scaleToPage);
+        if (graphicsPath is null)
+        {
+            return;
+        }
 
         if (path.IsFilled && path.IsStroked)
         {
-            gfx.DrawPath(
-                ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                ToXBrush(style.Fill.Color),
-                gp);
+            if (style?.Fill?.Color is null)
+            {
+                return;
+            }
+            var brush = ToXBrush(style.Fill.Color);
+            var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+            if (brush is null || pen is null)
+            {
+                return;
+            }
+            gfx.DrawPath(pen, brush, graphicsPath);
         }
         else if (path.IsFilled && !path.IsStroked)
         {
-            gfx.DrawPath(
-                ToXBrush(style.Fill.Color),
-                gp);
+            if (style?.Fill?.Color is null)
+            {
+                return;
+            }
+            var brush = ToXBrush(style.Fill.Color);
+            if (brush is null)
+            {
+                return;
+            }
+            gfx.DrawPath(brush, graphicsPath);
         }
         else if (!path.IsFilled && path.IsStroked)
         {
-            gfx.DrawPath(
-                ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi),
-                gp);
+            if (style is null)
+            {
+                return;
+            }
+            var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+            if (pen is null)
+            {
+                return;
+            }
+            gfx.DrawPath(pen, graphicsPath);
         }
     }
 }
