@@ -457,6 +457,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void Fill(object? dc, double x, double y, double width, double height, BaseColorViewModel? colorViewModel)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
         {
             return;
@@ -472,6 +477,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void Grid(object? dc, IGrid grid, double x, double y, double width, double height)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
         {
             return;
@@ -516,7 +526,16 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawLine(object? dc, LineShapeViewModel line, ShapeStyleViewModel? style)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+        if (line.Start is null || line.End is null)
         {
             return;
         }
@@ -543,6 +562,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
         {
             return;
@@ -568,6 +592,16 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawEllipse(object? dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
         if (ellipse.TopLeft is null || ellipse.BottomRight is null)
         {
             return;
@@ -575,7 +609,6 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
         if (ellipse.IsStroked || ellipse.IsFilled)
         {
-            var dxf = dc as DXF.DxfDocument;
             var rect = Spatial.Rect2.FromPoints(
                 ellipse.TopLeft.X,
                 ellipse.TopLeft.Y,
@@ -589,6 +622,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawArc(object? dc, ArcShapeViewModel arc, ShapeStyleViewModel? style)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
         {
             return;
@@ -644,6 +682,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawCubicBezier(object? dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel? style)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
         {
             return;
@@ -709,6 +752,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawQuadraticBezier(object? dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel? style)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
         {
             return;
@@ -772,6 +820,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawText(object? dc, TextShapeViewModel text, ShapeStyleViewModel? style)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
         {
             return;
@@ -867,6 +920,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawImage(object? dc, ImageShapeViewModel image, ShapeStyleViewModel? style)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
         {
             return;
@@ -925,6 +983,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawPath(object? dc, PathShapeViewModel path, ShapeStyleViewModel? style)
     {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
         if (dc is not DXF.DxfDocument dxf)
         {
             return;
