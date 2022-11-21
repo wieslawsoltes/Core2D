@@ -24,7 +24,14 @@ internal class ArcDrawNode : DrawNode, IArcDrawNode
         ScaleThickness = Arc.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Arc.State.HasFlag(ShapeStateFlags.Size);
         Geometry = PathGeometryConverter.ToSKPath(Arc);
-        Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
+        if (Geometry is { })
+        {
+            Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
+        }
+        else
+        {
+            Center = SKPoint.Empty;
+        }
     }
 
     public override void OnDraw(object? dc, double zoom)
