@@ -24,7 +24,14 @@ internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
         ScaleThickness = CubicBezier.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = CubicBezier.State.HasFlag(ShapeStateFlags.Size);
         Geometry = PathGeometryConverter.ToSKPath(CubicBezier);
-        Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
+        if (Geometry is { })
+        {
+            Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
+        }
+        else
+        {
+            Center = SKPoint.Empty;
+        }
     }
 
     public override void OnDraw(object? dc, double zoom)
