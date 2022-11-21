@@ -6,7 +6,6 @@ using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.Model.Style;
 using Core2D.ViewModels;
-using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
 using Core2D.ViewModels.Renderer;
 using Core2D.ViewModels.Shapes;
@@ -66,7 +65,6 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         {
             case ArgbColorViewModel argbColor:
                 return (short)(90.0 - argbColor.A * 90.0 / 255.0);
-                ;
             default:
                 throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported.");
         }
@@ -92,7 +90,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         double minor = Math.Min(height, width);
         double major = Math.Max(height, width);
 
-        return new DXFE.Ellipse()
+        return new DXFE.Ellipse
         {
             Center = new DXF.Vector3(_cx, _cy, 0),
             MajorAxis = major,
@@ -103,21 +101,26 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         };
     }
 
-    private DXFE.Ellipse CreateEllipticalArc(ArcShapeViewModel arc)
+    private DXFE.Ellipse? CreateEllipticalArc(ArcShapeViewModel arc)
     {
+        if (arc.Point1 is null || arc.Point2 is null || arc.Point3 is null || arc.Point4 is null)
+        {
+            return null;
+        }
+
         var a = new Spatial.Arc.GdiArc(
             Spatial.Point2.FromXY(arc.Point1.X, arc.Point1.Y),
             Spatial.Point2.FromXY(arc.Point2.X, arc.Point2.Y),
             Spatial.Point2.FromXY(arc.Point3.X, arc.Point3.Y),
             Spatial.Point2.FromXY(arc.Point4.X, arc.Point4.Y));
 
-        double _cx = ToDxfX(a.X + a.Width / 2.0);
-        double _cy = ToDxfY(a.Y + a.Height / 2.0);
-        double minor = Math.Min(a.Height, a.Width);
-        double major = Math.Max(a.Height, a.Width);
-        double startAngle = -a.EndAngle;
-        double endAngle = -a.StartAngle;
-        double rotation = 0;
+        var cx = ToDxfX(a.X + a.Width / 2.0);
+        var cy = ToDxfY(a.Y + a.Height / 2.0);
+        var minor = Math.Min(a.Height, a.Width);
+        var major = Math.Max(a.Height, a.Width);
+        var startAngle = -a.EndAngle;
+        var endAngle = -a.StartAngle;
+        var rotation = 0;
 
         if (a.Height > a.Width)
         {
@@ -126,9 +129,9 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             rotation = -90;
         }
 
-        return new DXFE.Ellipse()
+        return new DXFE.Ellipse
         {
-            Center = new DXF.Vector3(_cx, _cy, 0),
+            Center = new DXF.Vector3(cx, cy, 0),
             MajorAxis = major,
             MinorAxis = minor,
             StartAngle = startAngle,
@@ -139,56 +142,56 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     private DXFE.Spline CreateQuadraticSpline(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y)
     {
-        double _p1x = ToDxfX(p1x);
-        double _p1y = ToDxfY(p1y);
-        double _p2x = ToDxfX(p2x);
-        double _p2y = ToDxfY(p2y);
-        double _p3x = ToDxfX(p3x);
-        double _p3y = ToDxfY(p3y);
+        var sp1x = ToDxfX(p1x);
+        var sp1y = ToDxfY(p1y);
+        var sp2x = ToDxfX(p2x);
+        var sp2y = ToDxfY(p2y);
+        var sp3x = ToDxfX(p3x);
+        var sp3y = ToDxfY(p3y);
 
         return new DXFE.Spline(
             new List<DXFE.SplineVertex>
             {
-                new DXFE.SplineVertex(_p1x, _p1y, 0.0),
-                new DXFE.SplineVertex(_p2x, _p2y, 0.0),
-                new DXFE.SplineVertex(_p3x, _p3y, 0.0)
+                new(sp1x, sp1y, 0.0),
+                new(sp2x, sp2y, 0.0),
+                new(sp3x, sp3y, 0.0)
             }, 2);
     }
 
     private DXFE.Spline CreateCubicSpline(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y, double p4x, double p4y)
     {
-        double _p1x = ToDxfX(p1x);
-        double _p1y = ToDxfY(p1y);
-        double _p2x = ToDxfX(p2x);
-        double _p2y = ToDxfY(p2y);
-        double _p3x = ToDxfX(p3x);
-        double _p3y = ToDxfY(p3y);
-        double _p4x = ToDxfX(p4x);
-        double _p4y = ToDxfY(p4y);
+        var sp1x = ToDxfX(p1x);
+        var sp1y = ToDxfY(p1y);
+        var sp2x = ToDxfX(p2x);
+        var sp2y = ToDxfY(p2y);
+        var sp3x = ToDxfX(p3x);
+        var sp3y = ToDxfY(p3y);
+        var sp4x = ToDxfX(p4x);
+        var sp4y = ToDxfY(p4y);
 
         return new DXFE.Spline(
             new List<DXFE.SplineVertex>
             {
-                new DXFE.SplineVertex(_p1x, _p1y, 0.0),
-                new DXFE.SplineVertex(_p2x, _p2y, 0.0),
-                new DXFE.SplineVertex(_p3x, _p3y, 0.0),
-                new DXFE.SplineVertex(_p4x, _p4y, 0.0)
+                new(sp1x, sp1y, 0.0),
+                new(sp2x, sp2y, 0.0),
+                new(sp3x, sp3y, 0.0),
+                new(sp4x, sp4y, 0.0)
             }, 3);
     }
 
     private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, ShapeStyleViewModel style, bool isStroked, double x1, double y1, double x2, double y2)
     {
-        if (isStroked)
+        if (isStroked && style.Stroke?.Color is { })
         {
             var stroke = ToColor(style.Stroke.Color);
-            var strokeTansparency = ToTransparency(style.Stroke.Color);
+            var strokeTransparency = ToTransparency(style.Stroke.Color);
             var lineweight = ToLineweight(style.Stroke.Thickness);
 
             var dxfLine = CreateLine(x1, y1, x2, y2);
 
             dxfLine.Layer = layer;
             dxfLine.Color = stroke;
-            dxfLine.Transparency.Value = strokeTansparency;
+            dxfLine.Transparency.Value = strokeTransparency;
             dxfLine.Lineweight = lineweight;
 
             dxf.AddEntity(dxfLine);
@@ -198,14 +201,14 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
     private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, BaseColorViewModel colorViewModel, double thickness, double x1, double y1, double x2, double y2)
     {
         var stroke = ToColor(colorViewModel);
-        var strokeTansparency = ToTransparency(colorViewModel);
+        var strokeTransparency = ToTransparency(colorViewModel);
         var lineweight = ToLineweight(thickness);
 
         var dxfLine = CreateLine(x1, y1, x2, y2);
 
         dxfLine.Layer = layer;
         dxfLine.Color = stroke;
-        dxfLine.Transparency.Value = strokeTansparency;
+        dxfLine.Transparency.Value = strokeTransparency;
         dxfLine.Lineweight = lineweight;
 
         dxf.AddEntity(dxfLine);
@@ -232,7 +235,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         var bounds =
             new List<DXFE.HatchBoundaryPath>
             {
-                new DXFE.HatchBoundaryPath(
+                new(
                     new List<DXFE.EntityObject>
                     {
                         CreateLine(x, y, x + width, y),
@@ -306,7 +309,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         var bounds =
             new List<DXFE.HatchBoundaryPath>
             {
-                new DXFE.HatchBoundaryPath(
+                new(
                     new List<DXFE.EntityObject>
                     {
                         (DXFE.Ellipse)dxfEllipse.Clone()
@@ -325,12 +328,17 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     private void DrawGridInternal(DXF.DxfDocument dxf, DXFT.Layer layer, IGrid grid, ref Spatial.Rect2 rect)
     {
-        double ox = rect.X;
-        double ex = rect.X + rect.Width;
-        double oy = rect.Y;
-        double ey = rect.Y + rect.Height;
-        double cw = grid.GridCellWidth;
-        double ch = grid.GridCellHeight;
+        if (grid.GridStrokeColor is null)
+        {
+            return;
+        }
+
+        var ox = rect.X;
+        var ex = rect.X + rect.Width;
+        var oy = rect.Y;
+        var ey = rect.Y + rect.Height;
+        var cw = grid.GridCellWidth;
+        var ch = grid.GridCellHeight;
 
         for (double gx = ox + cw; gx < ex; gx += cw)
         {
@@ -343,68 +351,93 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
-    private void CreateHatchBoundsAndEntities(PathShapeViewModel pg, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
+    private bool CreateHatchBoundsAndEntities(PathShapeViewModel pg, out IList<DXFE.HatchBoundaryPath> bounds, out ICollection<DXFE.EntityObject> entities)
     {
         bounds = new List<DXFE.HatchBoundaryPath>();
         entities = new List<DXFE.EntityObject>();
 
         // TODO: FillMode = pg.FillRule == FillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
 
-        foreach (var pf in pg.Figures)
+        foreach (var figure in pg.Figures)
         {
-            var edges = new List<DXFE.EntityObject>();
-            var startPoint = pf.StartPoint;
-
-            foreach (var segment in pf.Segments)
+            if (figure.StartPoint is null)
             {
-                if (segment is ArcSegmentViewModel arcSegment)
+                return false;
+            }
+
+            var edges = new List<DXFE.EntityObject>();
+            var startPoint = figure.StartPoint;
+
+            foreach (var segment in figure.Segments)
+            {
+                switch (segment)
                 {
-                    throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                    // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
-                    //startPoint = arcSegment.Point;
-                }
-                else if (segment is CubicBezierSegmentViewModel cubicBezierSegment)
-                {
-                    var dxfSpline = CreateCubicSpline(
-                        startPoint.X,
-                        startPoint.Y,
-                        cubicBezierSegment.Point1.X,
-                        cubicBezierSegment.Point1.Y,
-                        cubicBezierSegment.Point2.X,
-                        cubicBezierSegment.Point2.Y,
-                        cubicBezierSegment.Point3.X,
-                        cubicBezierSegment.Point3.Y);
-                    edges.Add(dxfSpline);
-                    entities.Add((DXFE.Spline)dxfSpline.Clone());
-                    startPoint = cubicBezierSegment.Point3;
-                }
-                else if (segment is LineSegmentViewModel lineSegment)
-                {
-                    var dxfLine = CreateLine(
-                        startPoint.X,
-                        startPoint.Y,
-                        lineSegment.Point.X,
-                        lineSegment.Point.Y);
-                    edges.Add(dxfLine);
-                    entities.Add((DXFE.Line)dxfLine.Clone());
-                    startPoint = lineSegment.Point;
-                }
-                else if (segment is QuadraticBezierSegmentViewModel quadraticBezierSegment)
-                {
-                    var dxfSpline = CreateQuadraticSpline(
-                        startPoint.X,
-                        startPoint.Y,
-                        quadraticBezierSegment.Point1.X,
-                        quadraticBezierSegment.Point1.Y,
-                        quadraticBezierSegment.Point2.X,
-                        quadraticBezierSegment.Point2.Y);
-                    edges.Add(dxfSpline);
-                    entities.Add((DXFE.Spline)dxfSpline.Clone());
-                    startPoint = quadraticBezierSegment.Point2;
-                }
-                else
-                {
-                    throw new NotSupportedException("Not supported segment type: " + segment.GetType());
+                    case LineSegmentViewModel lineSegment:
+                    {
+                        if (lineSegment.Point is null)
+                        {
+                            return false;
+                        }
+                        var dxfLine = CreateLine(
+                            startPoint.X,
+                            startPoint.Y,
+                            lineSegment.Point.X,
+                            lineSegment.Point.Y);
+                        edges.Add(dxfLine);
+                        entities.Add((DXFE.Line)dxfLine.Clone());
+                        startPoint = lineSegment.Point;
+                        break;
+                    }
+                    case CubicBezierSegmentViewModel cubicBezierSegment:
+                    {
+                        if (cubicBezierSegment.Point1 is null || cubicBezierSegment.Point2 is null || cubicBezierSegment.Point3 is null)
+                        {
+                            return false;
+                        }
+                        var dxfSpline = CreateCubicSpline(
+                            startPoint.X,
+                            startPoint.Y,
+                            cubicBezierSegment.Point1.X,
+                            cubicBezierSegment.Point1.Y,
+                            cubicBezierSegment.Point2.X,
+                            cubicBezierSegment.Point2.Y,
+                            cubicBezierSegment.Point3.X,
+                            cubicBezierSegment.Point3.Y);
+                        edges.Add(dxfSpline);
+                        entities.Add((DXFE.Spline)dxfSpline.Clone());
+                        startPoint = cubicBezierSegment.Point3;
+                        break;
+                    }
+                    case QuadraticBezierSegmentViewModel quadraticBezierSegment:
+                    {
+                        if (quadraticBezierSegment.Point1 is null || quadraticBezierSegment.Point2 is null)
+                        {
+                            return false;
+                        }
+                        var dxfSpline = CreateQuadraticSpline(
+                            startPoint.X,
+                            startPoint.Y,
+                            quadraticBezierSegment.Point1.X,
+                            quadraticBezierSegment.Point1.Y,
+                            quadraticBezierSegment.Point2.X,
+                            quadraticBezierSegment.Point2.Y);
+                        edges.Add(dxfSpline);
+                        entities.Add((DXFE.Spline)dxfSpline.Clone());
+                        startPoint = quadraticBezierSegment.Point2;
+                        break;
+                    }
+                    case ArcSegmentViewModel arcSegment:
+                    {
+                        if (arcSegment.Point is null || arcSegment.Size is null)
+                        {
+                            return false;
+                        }
+                        // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
+                        startPoint = arcSegment.Point;
+                        break;
+                    }
+                    default:
+                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
                 }
             }
 
@@ -413,16 +446,23 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             var path = new DXFE.HatchBoundaryPath(edges);
             bounds.Add(path);
         }
+
+        return true;
     }
 
     public void ClearCache()
     {
-        _biCache.Reset();
+        _biCache?.Reset();
     }
 
     public void Fill(object? dc, double x, double y, double width, double height, BaseColorViewModel? colorViewModel)
     {
         if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
+        if (colorViewModel is null)
         {
             return;
         }
@@ -433,6 +473,16 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
     public void Grid(object? dc, IGrid grid, double x, double y, double width, double height)
     {
         if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
+        if (grid.GridStrokeColor is null)
+        {
+            return;
+        }
+
+        if (!grid.IsGridEnabled && !grid.IsBorderEnabled)
         {
             return;
         }
@@ -471,24 +521,34 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (style is null)
+        {
+            return;
+        }
+
         if (line.IsStroked)
         {
-            double _x1 = line.Start.X;
-            double _y1 = line.Start.Y;
-            double _x2 = line.End.X;
-            double _y2 = line.End.Y;
+            var sx1 = line.Start.X;
+            var sy1 = line.Start.Y;
+            var sx2 = line.End.X;
+            var sy2 = line.End.Y;
 
             // TODO: Draw line start arrow.
 
             // TODO: Draw line end arrow.
 
-            DrawLineInternal(dxf, _currentLayer, style, line.IsStroked, _x1, _y1, _x2, _y2);
+            DrawLineInternal(dxf, _currentLayer, style, line.IsStroked, sx1, sy1, sx2, sy2);
         }
     }
 
     public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
         if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
+        if (rectangle.TopLeft is null || rectangle.BottomRight is null)
         {
             return;
         }
@@ -508,6 +568,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     public void DrawEllipse(object? dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
+        if (ellipse.TopLeft is null || ellipse.BottomRight is null)
+        {
+            return;
+        }
+
         if (ellipse.IsStroked || ellipse.IsFilled)
         {
             var dxf = dc as DXF.DxfDocument;
@@ -529,6 +594,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (arc.Point1 is null || arc.Point2 is null || arc.Point3 is null || arc.Point4 is null)
+        {
+            return;
+        }
+
         var dxfEllipse = CreateEllipticalArc(arc);
 
         if (arc.IsFilled)
@@ -540,7 +610,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             var bounds =
                 new List<DXFE.HatchBoundaryPath>
                 {
-                    new DXFE.HatchBoundaryPath(
+                    new(
                         new List<DXFE.EntityObject>
                         {
                             (DXFE.Ellipse)dxfEllipse.Clone()
@@ -579,6 +649,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (cubicBezier.Point1 is null || cubicBezier.Point2 is null || cubicBezier.Point3 is null || cubicBezier.Point4 is null)
+        {
+            return;
+        }
+
         if (cubicBezier.IsStroked || cubicBezier.IsFilled)
         {
             var dxfSpline = CreateCubicSpline(
@@ -599,7 +674,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
                 var bounds =
                     new List<DXFE.HatchBoundaryPath>
                     {
-                        new DXFE.HatchBoundaryPath(
+                        new(
                             new List<DXFE.EntityObject>
                             {
                                 (DXFE.Spline)dxfSpline.Clone()
@@ -639,6 +714,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (quadraticBezier.Point1 is null || quadraticBezier.Point2 is null || quadraticBezier.Point3 is null)
+        {
+            return;
+        }
+
         if (quadraticBezier.IsStroked || quadraticBezier.IsFilled)
         {
             var dxfSpline = CreateQuadraticSpline(
@@ -657,7 +737,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
                 var bounds =
                     new List<DXFE.HatchBoundaryPath>
                     {
-                        new DXFE.HatchBoundaryPath(
+                        new(
                             new List<DXFE.EntityObject>
                             {
                                 (DXFE.Spline)dxfSpline.Clone()
@@ -697,14 +777,24 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string tbind))
-        {
-            tbind = text.Text;
-        }
-
-        if (tbind is null)
+        if (text.TopLeft is null || text.BottomRight is null)
         {
             return;
+        }
+        
+        if (style?.Stroke?.Color is null)
+        {
+            return;
+        }
+
+        if (style.TextStyle is null || style.TextStyle.FontName is null)
+        {
+            return;
+        }
+
+        if (!(text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText))
+        {
+            boundText = text.Text ?? string.Empty;
         }
 
         var stroke = ToColor(style.Stroke.Color);
@@ -715,8 +805,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             text.TopLeft.X,
             text.TopLeft.Y,
             text.BottomRight.X,
-            text.BottomRight.Y,
-            0, 0);
+            text.BottomRight.Y);
         var x = style.TextStyle.TextHAlignment switch
         {
             TextHAlignment.Center => rect.X + rect.Width / 2.0,
@@ -767,7 +856,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         options.Italic = fs.HasFlag(FontStyleFlags.Italic);
 
         options.Color = null;
-        dxfMText.Write(tbind, options);
+        dxfMText.Write(boundText, options);
 
         dxfMText.Layer = _currentLayer;
         dxfMText.Transparency.Value = strokeTansparency;
@@ -783,7 +872,17 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        var bytes = State.ImageCache.GetImage(image.Key);
+        if (image.TopLeft is null || image.BottomRight is null)
+        {
+            return;
+        }
+
+        if (image.Key is null)
+        {
+            return;
+        }
+
+        var bytes = State?.ImageCache?.GetImage(image.Key);
         if (bytes is { })
         {
             var rect = Spatial.Rect2.FromPoints(
@@ -793,7 +892,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
                 image.BottomRight.Y,
                 0, 0);
 
-            var dxfImageDefinitionCached = _biCache.Get(image.Key);
+            var dxfImageDefinitionCached = _biCache?.Get(image.Key);
             if (dxfImageDefinitionCached is { })
             {
                 var dxfImage = new DXFE.Image(
@@ -805,13 +904,13 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             }
             else
             {
-                if (State.ImageCache is { } && !string.IsNullOrEmpty(image.Key) && !string.IsNullOrEmpty(_outputPath))
+                if (State?.ImageCache is { } && !string.IsNullOrEmpty(image.Key) && !string.IsNullOrEmpty(_outputPath))
                 {
                     var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
                     System.IO.File.WriteAllBytes(path, bytes);
                     var dxfImageDefinition = new DXFO.ImageDefinition(path);
 
-                    _biCache.Set(image.Key, dxfImageDefinition);
+                    _biCache?.Set(image.Key, dxfImageDefinition);
 
                     var dxfImage = new DXFE.Image(
                         dxfImageDefinition,
@@ -833,7 +932,10 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
         if (path.IsStroked || path.IsFilled)
         {
-            CreateHatchBoundsAndEntities(path, out var bounds, out var entities);
+            if (!CreateHatchBoundsAndEntities(path, out var bounds, out var entities))
+            {
+                return;
+            }
             if (entities is null || bounds is null)
             {
                 return;
