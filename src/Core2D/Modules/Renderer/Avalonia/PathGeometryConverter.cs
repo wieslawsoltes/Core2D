@@ -24,7 +24,7 @@ public static class PathGeometryConverter
 
     private static AM.FillRule ToFillRule(this FillRule fillRule) => fillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd;
 
-    public static AP.IGeometryImpl? ToGeometryImpl(PathShapeViewModel path, bool isFilled)
+    public static AP.IGeometryImpl? ToGeometryImpl(PathShapeViewModel pathShape, bool isFilled)
     {
         var factory = Factory;
         if (factory is null)
@@ -34,9 +34,9 @@ public static class PathGeometryConverter
         var geometry = factory.CreateStreamGeometry();
         using var context = geometry.Open();
 
-        context.SetFillRule(path.FillRule.ToFillRule());
+        context.SetFillRule(pathShape.FillRule.ToFillRule());
 
-        foreach (var figure in path.Figures)
+        foreach (var figure in pathShape.Figures)
         {
             if (figure.StartPoint is null)
             {
