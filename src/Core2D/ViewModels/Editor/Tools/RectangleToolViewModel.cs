@@ -79,8 +79,11 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_rectangle is { })
                 {
-                    _rectangle.BottomRight.X = (double) sx;
-                    _rectangle.BottomRight.Y = (double) sy;
+                    if (_rectangle.BottomRight is { })
+                    {
+                        _rectangle.BottomRight.X = (double)sx;
+                        _rectangle.BottomRight.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
@@ -174,8 +177,12 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _rectangle.BottomRight.X = (double)sx;
-                    _rectangle.BottomRight.Y = (double)sy;
+
+                    if (_rectangle.BottomRight is { })
+                    {
+                        _rectangle.BottomRight.X = (double)sx;
+                        _rectangle.BottomRight.Y = (double)sy;
+                    }
                     
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
@@ -192,13 +199,19 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
     public void ToStateBottomRight()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        _selection = new RectangleSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _rectangle,
-            editor.PageState.HelperStyle);
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { }
+            && _rectangle is { })
+        {
+            _selection = new RectangleSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _rectangle,
+                editor.PageState.HelperStyle);
 
-        _selection.ToStateBottomRight();
+            _selection.ToStateBottomRight();
+        }
     }
 
     public void Move(BaseShapeViewModel? shape)
@@ -224,7 +237,7 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.BottomRight:
             {
-                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                if (editor.Project.CurrentContainer?.WorkingLayer is { } && _rectangle is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_rectangle);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
