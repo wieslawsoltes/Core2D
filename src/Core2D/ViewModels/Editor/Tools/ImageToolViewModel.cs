@@ -68,9 +68,7 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
                 _image = factory.CreateImageShape(
                     (double) sx, (double) sy,
                     (ShapeStyleViewModel) style.Copy(null),
-                    key,
-                    false,
-                    false);
+                    key);
 
                 editor.SetShapeName(_image);
 
@@ -96,8 +94,11 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_image is { })
                 {
-                    _image.BottomRight.X = (double) sx;
-                    _image.BottomRight.Y = (double) sy;
+                    if (_image.BottomRight is { })
+                    {
+                        _image.BottomRight.X = (double)sx;
+                        _image.BottomRight.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
@@ -191,8 +192,11 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _image.BottomRight.X = (double)sx;
-                    _image.BottomRight.Y = (double)sy;
+                    if (_image.BottomRight is { })
+                    {
+                        _image.BottomRight.X = (double)sx;
+                        _image.BottomRight.Y = (double)sy;
+                    }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_image);
                 }
@@ -204,13 +208,19 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
     public void ToStateBottomRight()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        _selection = new ImageSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _image,
-            editor.PageState.HelperStyle);
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { }
+            && _image is { })
+        {
+            _selection = new ImageSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _image,
+                editor.PageState.HelperStyle);
 
-        _selection.ToStateBottomRight();
+            _selection.ToStateBottomRight();
+        }
     }
 
     public void Move(BaseShapeViewModel? shape)
@@ -236,7 +246,7 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.BottomRight:
             {
-                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                if (editor.Project.CurrentContainer?.WorkingLayer is { } && _image is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_image);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
