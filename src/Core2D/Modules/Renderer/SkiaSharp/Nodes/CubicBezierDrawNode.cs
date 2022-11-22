@@ -12,7 +12,7 @@ internal class CubicBezierDrawNode : DrawNode, ICubicBezierDrawNode
     public CubicBezierShapeViewModel CubicBezier { get; set; }
     public SKPath? Geometry { get; set; }
 
-    public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
+    public CubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel? style)
     {
         Style = style;
         CubicBezier = cubicBezier;
