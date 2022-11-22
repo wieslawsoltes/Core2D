@@ -12,7 +12,7 @@ internal class ArcDrawNode : DrawNode, IArcDrawNode
     public ArcShapeViewModel Arc { get; set; }
     public SKPath? Geometry { get; set; }
 
-    public ArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel style)
+    public ArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel? style)
     {
         Style = style;
         Arc = arc;
