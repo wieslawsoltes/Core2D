@@ -52,7 +52,7 @@ internal static class SkiaSharpDrawUtil
 
     public static SKStrokeCap ToStrokeCap(ShapeStyleViewModel style)
     {
-        return style.Stroke.LineCap switch
+        return style.Stroke?.LineCap switch
         {
             LineCap.Square => SKStrokeCap.Square,
             LineCap.Round => SKStrokeCap.Round,
@@ -65,7 +65,7 @@ internal static class SkiaSharpDrawUtil
         var pen = new SKPaint();
 
         var pathEffect = default(SKPathEffect);
-        if (style.Stroke.Dashes is { })
+        if (style.Stroke?.Dashes is { })
         {
             var intervals = StyleHelper.ConvertDashesToFloatArray(style.Stroke.Dashes, strokeWidth);
             var phase = (float)(style.Stroke.DashOffset * strokeWidth);
@@ -79,7 +79,7 @@ internal static class SkiaSharpDrawUtil
         pen.IsAntialias = true;
         pen.IsStroke = true;
         pen.StrokeWidth = (float)strokeWidth;
-        pen.Color = ToSKColor(style.Stroke.Color);
+        pen.Color = style.Stroke?.Color is { } ? ToSKColor(style.Stroke.Color) : SKColor.Empty;
         pen.StrokeCap = ToStrokeCap(style);
         pen.PathEffect = pathEffect;
 
@@ -105,47 +105,55 @@ internal static class SkiaSharpDrawUtil
 
     public static SKPoint GetTextOrigin(ShapeStyleViewModel style, ref SKRect rect, ref SKRect size)
     {
-        double rwidth = Math.Abs(rect.Right - rect.Left);
-        double rheight = Math.Abs(rect.Bottom - rect.Top);
-        double swidth = Math.Abs(size.Right - size.Left);
-        double sheight = Math.Abs(size.Bottom - size.Top);
-        var ox = style.TextStyle.TextHAlignment switch
+        var rectWidth = Math.Abs(rect.Right - rect.Left);
+        var rectHeight = Math.Abs(rect.Bottom - rect.Top);
+        var sizeWidth = Math.Abs(size.Right - size.Left);
+        var sizeHeight = Math.Abs(size.Bottom - size.Top);
+        var ox = style.TextStyle?.TextHAlignment switch
         {
             TextHAlignment.Left => rect.Left,
-            TextHAlignment.Right => rect.Right - swidth,
-            _ => (rect.Left + rwidth / 2f) - (swidth / 2f),
+            TextHAlignment.Right => rect.Right - sizeWidth,
+            _ => rect.Left + rectWidth / 2f - sizeWidth / 2f,
         };
-        var oy = style.TextStyle.TextVAlignment switch
+        var oy = style.TextStyle?.TextVAlignment switch
         {
             TextVAlignment.Top => rect.Top,
-            TextVAlignment.Bottom => rect.Bottom - sheight,
-            _ => (rect.Bottom - rheight / 2f) - (sheight / 2f),
+            TextVAlignment.Bottom => rect.Bottom - sizeHeight,
+            _ => rect.Bottom - rectHeight / 2f - sizeHeight / 2f,
         };
-        return new SKPoint((float)ox, (float)oy);
+        return new SKPoint(ox, oy);
     }
 
-    public static SKPaint GetSKPaint(string text, ShapeStyleViewModel shapeStyleViewModel, PointShapeViewModel topLeft, PointShapeViewModel bottomRight, out SKPoint origin)
+    public static SKPaint? GetSKPaint(string text, ShapeStyleViewModel shapeStyleViewModel, PointShapeViewModel topLeft, PointShapeViewModel bottomRight, out SKPoint origin)
     {
+        if (shapeStyleViewModel.Stroke?.Color is null || shapeStyleViewModel.TextStyle is null)
+        {
+            origin = SKPoint.Empty;
+            return null;
+        }
+        
         var pen = ToSKPaintBrush(shapeStyleViewModel.Stroke.Color);
 
         var weight = SKFontStyleWeight.Normal;
 
         if (shapeStyleViewModel.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
         {
-            weight |= SKFontStyleWeight.Bold;
+            weight = SKFontStyleWeight.Bold;
         }
 
         var style = SKFontStyleSlant.Upright;
 
         if (shapeStyleViewModel.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
         {
-            style |= SKFontStyleSlant.Italic;
+            style = SKFontStyleSlant.Italic;
         }
 
-        var tf = SKTypeface.FromFamilyName(shapeStyleViewModel.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style);
+        var tf = shapeStyleViewModel.TextStyle.FontName is{ }
+            ? SKTypeface.FromFamilyName(shapeStyleViewModel.TextStyle.FontName, weight, SKFontStyleWidth.Normal, style)
+            : SKTypeface.Default;
         pen.Typeface = tf;
         pen.TextEncoding = SKTextEncoding.Utf16;
-        pen.TextSize = (float)(shapeStyleViewModel.TextStyle.FontSize);
+        pen.TextSize = (float)shapeStyleViewModel.TextStyle.FontSize;
 
         pen.TextAlign = shapeStyleViewModel.TextStyle.TextHAlignment switch
         {
@@ -158,41 +166,42 @@ internal static class SkiaSharpDrawUtil
         var mAscent = metrics.Ascent;
         var mDescent = metrics.Descent;
         var rect = CreateRect(topLeft, bottomRight);
-        float x = rect.Left;
-        float y = rect.Top;
-        float width = rect.Width;
-        float height = rect.Height;
+        var x = rect.Left;
+        var y = rect.Top;
+        var width = rect.Width;
+        var height = rect.Height;
 
         switch (shapeStyleViewModel.TextStyle.TextVAlignment)
         {
             default:
-            case TextVAlignment.Top:
+            {
                 y -= mAscent;
                 break;
-
+            }
             case TextVAlignment.Center:
-                y += (height / 2.0f) - (mAscent / 2.0f) - mDescent / 2.0f;
+            {
+                y += height / 2.0f - mAscent / 2.0f - mDescent / 2.0f;
                 break;
-
+            }
             case TextVAlignment.Bottom:
+            {
                 y += height - mDescent;
                 break;
+            }
         }
 
         switch (shapeStyleViewModel.TextStyle.TextHAlignment)
         {
-            default:
-            case TextHAlignment.Left:
-                // x = x;
-                break;
-
             case TextHAlignment.Center:
+            {
                 x += width / 2.0f;
                 break;
-
+            }
             case TextHAlignment.Right:
+            {
                 x += width;
                 break;
+            }
         }
 
         origin = new SKPoint(x, y);
