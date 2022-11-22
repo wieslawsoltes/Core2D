@@ -194,15 +194,21 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
 
     public void ToStateEnd()
     {
-        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         _selection?.Reset();
-        _selection = new LineSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _arc,
-            editor.PageState.HelperStyle);
+        
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { })
+        {
+            _selection = new LineSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _arc,
+                editor.PageState.HelperStyle);
 
-        _selection.ToStateEnd();
+            _selection.ToStateEnd();
+        }
     }
 
     public void Move(BaseShapeViewModel? shape)
