@@ -161,8 +161,11 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-                _line.End.X = (double)sx;
-                _line.End.Y = (double)sy;
+                if (_line.End is { })
+                {
+                    _line.End.X = (double)sx;
+                    _line.End.Y = (double)sy;
+                }
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
                 break;
@@ -201,6 +204,10 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var pathTool = ServiceProvider.GetService<PathToolViewModel>();
+        if (editor is null || pathTool is null)
+        {
+            return;
+        }
 
         switch (_currentState)
         {
