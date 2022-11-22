@@ -46,8 +46,8 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     private static DXF.Lineweight ToLineweight(double thickness)
     {
-        short lineweight = (short)(thickness / s_lineweightFactor);
-        return (DXF.Lineweight)s_lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
+        var lineweight = (short)(thickness / s_lineweightFactor);
+        return (DXF.Lineweight)s_lineweights.MinBy(x => Math.Abs((long)x - lineweight));
     }
 
     private static DXF.AciColor ToColor(BaseColorViewModel colorViewModel)
@@ -76,23 +76,23 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     private DXFE.Line CreateLine(double x1, double y1, double x2, double y2)
     {
-        double _x1 = ToDxfX(x1);
-        double _y1 = ToDxfY(y1);
-        double _x2 = ToDxfX(x2);
-        double _y2 = ToDxfY(y2);
-        return new DXFE.Line(new DXF.Vector3(_x1, _y1, 0), new DXF.Vector3(_x2, _y2, 0));
+        var vx1 = ToDxfX(x1);
+        var vy1 = ToDxfY(y1);
+        var vx2 = ToDxfX(x2);
+        var vy2 = ToDxfY(y2);
+        return new DXFE.Line(new DXF.Vector3(vx1, vy1, 0), new DXF.Vector3(vx2, vy2, 0));
     }
 
     private DXFE.Ellipse CreateEllipse(double x, double y, double width, double height)
     {
-        double _cx = ToDxfX(x + width / 2.0);
-        double _cy = ToDxfY(y + height / 2.0);
-        double minor = Math.Min(height, width);
-        double major = Math.Max(height, width);
+        var cx = ToDxfX(x + width / 2.0);
+        var cy = ToDxfY(y + height / 2.0);
+        var minor = Math.Min(height, width);
+        var major = Math.Max(height, width);
 
         return new DXFE.Ellipse
         {
-            Center = new DXF.Vector3(_cx, _cy, 0),
+            Center = new DXF.Vector3(cx, cy, 0),
             MajorAxis = major,
             MinorAxis = minor,
             StartAngle = 0.0,
@@ -181,21 +181,23 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, ShapeStyleViewModel style, bool isStroked, double x1, double y1, double x2, double y2)
     {
-        if (isStroked && style.Stroke?.Color is { })
+        if (!isStroked || style.Stroke?.Color is null)
         {
-            var stroke = ToColor(style.Stroke.Color);
-            var strokeTransparency = ToTransparency(style.Stroke.Color);
-            var lineweight = ToLineweight(style.Stroke.Thickness);
-
-            var dxfLine = CreateLine(x1, y1, x2, y2);
-
-            dxfLine.Layer = layer;
-            dxfLine.Color = stroke;
-            dxfLine.Transparency.Value = strokeTransparency;
-            dxfLine.Lineweight = lineweight;
-
-            dxf.AddEntity(dxfLine);
+            return;
         }
+
+        var stroke = ToColor(style.Stroke.Color);
+        var strokeTransparency = ToTransparency(style.Stroke.Color);
+        var lineweight = ToLineweight(style.Stroke.Thickness);
+
+        var dxfLine = CreateLine(x1, y1, x2, y2);
+
+        dxfLine.Layer = layer;
+        dxfLine.Color = stroke;
+        dxfLine.Transparency.Value = strokeTransparency;
+        dxfLine.Lineweight = lineweight;
+
+        dxf.AddEntity(dxfLine);
     }
 
     private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, BaseColorViewModel colorViewModel, double thickness, double x1, double y1, double x2, double y2)
@@ -216,7 +218,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
 
     private void DrawRectangleInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, ShapeStyleViewModel style, ref Spatial.Rect2 rect)
     {
-        if (isFilled)
+        if (isFilled && style.Fill?.Color is {})
         {
             FillRectangle(dxf, layer, rect.X, rect.Y, rect.Width, rect.Height, style.Fill.Color);
         }
@@ -275,12 +277,12 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
     {
         var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
 
-        if (isFilled)
+        if (isFilled && style.Fill?.Color is {})
         {
             FillEllipse(dxf, layer, dxfEllipse, style.Fill.Color);
         }
 
-        if (isStroked)
+        if (isStroked && style.Stroke?.Color is {})
         {
             StrokeEllipse(dxf, layer, dxfEllipse, style.Stroke.Color, style.Stroke.Thickness);
         }
@@ -340,12 +342,12 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         var cw = grid.GridCellWidth;
         var ch = grid.GridCellHeight;
 
-        for (double gx = ox + cw; gx < ex; gx += cw)
+        for (var gx = ox + cw; gx < ex; gx += cw)
         {
             DrawLineInternal(dxf, layer, grid.GridStrokeColor, grid.GridStrokeThickness, gx, oy, gx, ey);
         }
 
-        for (double gy = oy + ch; gy < ey; gy += ch)
+        for (var gy = oy + ch; gy < ey; gy += ch)
         {
             DrawLineInternal(dxf, layer, grid.GridStrokeColor, grid.GridStrokeThickness, ox, gy, ex, gy);
         }
@@ -501,8 +503,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             x + grid.GridOffsetLeft,
             y + grid.GridOffsetTop,
             x + width - grid.GridOffsetLeft + grid.GridOffsetRight,
-            y + height - grid.GridOffsetTop + grid.GridOffsetBottom,
-            0, 0);
+            y + height - grid.GridOffsetTop + grid.GridOffsetBottom);
 
         if (grid.IsGridEnabled)
         {
@@ -577,14 +578,18 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (style is null)
+        {
+            return;
+        }
+        
         if (rectangle.IsStroked || rectangle.IsFilled)
         {
             var rect = Spatial.Rect2.FromPoints(
                 rectangle.TopLeft.X,
                 rectangle.TopLeft.Y,
                 rectangle.BottomRight.X,
-                rectangle.BottomRight.Y,
-                0, 0);
+                rectangle.BottomRight.Y);
 
             DrawRectangleInternal(dxf, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
         }
@@ -607,14 +612,18 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (style is null)
+        {
+            return;
+        }
+
         if (ellipse.IsStroked || ellipse.IsFilled)
         {
             var rect = Spatial.Rect2.FromPoints(
                 ellipse.TopLeft.X,
                 ellipse.TopLeft.Y,
                 ellipse.BottomRight.X,
-                ellipse.BottomRight.Y,
-                0, 0);
+                ellipse.BottomRight.Y);
 
             DrawEllipseInternal(dxf, _currentLayer, ellipse.IsFilled, ellipse.IsStroked, style, ref rect);
         }
@@ -637,9 +646,18 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        var dxfEllipse = CreateEllipticalArc(arc);
+        if (style is null)
+        {
+            return;
+        }
 
-        if (arc.IsFilled)
+        var dxfEllipse = CreateEllipticalArc(arc);
+        if (dxfEllipse is null)
+        {
+            return;
+        }
+
+        if (arc.IsFilled && style.Fill?.Color is { })
         {
             var fill = ToColor(style.Fill.Color);
             var fillTransparency = ToTransparency(style.Fill.Color);
@@ -665,7 +683,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             dxf.AddEntity(hatch);
         }
 
-        if (arc.IsStroked)
+        if (arc.IsStroked && style.Stroke?.Color is { })
         {
             var stroke = ToColor(style.Stroke.Color);
             var strokeTansparency = ToTransparency(style.Stroke.Color);
@@ -697,56 +715,63 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        if (cubicBezier.IsStroked || cubicBezier.IsFilled)
+        if (style is null)
         {
-            var dxfSpline = CreateCubicSpline(
-                cubicBezier.Point1.X,
-                cubicBezier.Point1.Y,
-                cubicBezier.Point2.X,
-                cubicBezier.Point2.Y,
-                cubicBezier.Point3.X,
-                cubicBezier.Point3.Y,
-                cubicBezier.Point4.X,
-                cubicBezier.Point4.Y);
+            return;
+        }
 
-            if (cubicBezier.IsFilled)
-            {
-                var fill = ToColor(style.Fill.Color);
-                var fillTransparency = ToTransparency(style.Fill.Color);
+        if (!cubicBezier.IsStroked && !cubicBezier.IsFilled)
+        {
+            return;
+        }
 
-                var bounds =
-                    new List<DXFE.HatchBoundaryPath>
-                    {
-                        new(
-                            new List<DXFE.EntityObject>
-                            {
-                                (DXFE.Spline)dxfSpline.Clone()
-                            })
-                    };
+        var dxfSpline = CreateCubicSpline(
+            cubicBezier.Point1.X,
+            cubicBezier.Point1.Y,
+            cubicBezier.Point2.X,
+            cubicBezier.Point2.Y,
+            cubicBezier.Point3.X,
+            cubicBezier.Point3.Y,
+            cubicBezier.Point4.X,
+            cubicBezier.Point4.Y);
 
-                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
+        if (cubicBezier.IsFilled && style.Fill?.Color is { })
+        {
+            var fill = ToColor(style.Fill.Color);
+            var fillTransparency = ToTransparency(style.Fill.Color);
+
+            var bounds =
+                new List<DXFE.HatchBoundaryPath>
                 {
-                    Layer = _currentLayer,
-                    Color = fill
+                    new(
+                        new List<DXFE.EntityObject>
+                        {
+                            (DXFE.Spline)dxfSpline.Clone()
+                        })
                 };
-                hatch.Transparency.Value = fillTransparency;
 
-                dxf.AddEntity(hatch);
-            }
-
-            if (cubicBezier.IsStroked)
+            var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
             {
-                var stroke = ToColor(style.Stroke.Color);
-                var strokeTansparency = ToTransparency(style.Stroke.Color);
-                var lineweight = ToLineweight(style.Stroke.Thickness);
+                Layer = _currentLayer,
+                Color = fill
+            };
+            hatch.Transparency.Value = fillTransparency;
 
-                dxfSpline.Layer = _currentLayer;
-                dxfSpline.Color = stroke;
-                dxfSpline.Transparency.Value = strokeTansparency;
-                dxfSpline.Lineweight = lineweight;
+            dxf.AddEntity(hatch);
+        }
 
-                dxf.AddEntity(dxfSpline);
-            }
+        if (cubicBezier.IsStroked && style.Stroke?.Color is { })
+        {
+            var stroke = ToColor(style.Stroke.Color);
+            var strokeTransparency = ToTransparency(style.Stroke.Color);
+            var lineweight = ToLineweight(style.Stroke.Thickness);
+
+            dxfSpline.Layer = _currentLayer;
+            dxfSpline.Color = stroke;
+            dxfSpline.Transparency.Value = strokeTransparency;
+            dxfSpline.Lineweight = lineweight;
+
+            dxf.AddEntity(dxfSpline);
         }
     }
 
@@ -767,54 +792,61 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        if (quadraticBezier.IsStroked || quadraticBezier.IsFilled)
+        if (style is null)
         {
-            var dxfSpline = CreateQuadraticSpline(
-                quadraticBezier.Point1.X,
-                quadraticBezier.Point1.Y,
-                quadraticBezier.Point2.X,
-                quadraticBezier.Point2.Y,
-                quadraticBezier.Point3.X,
-                quadraticBezier.Point3.Y);
+            return;
+        }
 
-            if (quadraticBezier.IsFilled)
-            {
-                var fill = ToColor(style.Fill.Color);
-                var fillTransparency = ToTransparency(style.Fill.Color);
+        if (!quadraticBezier.IsStroked && !quadraticBezier.IsFilled)
+        {
+            return;
+        }
 
-                var bounds =
-                    new List<DXFE.HatchBoundaryPath>
-                    {
-                        new(
-                            new List<DXFE.EntityObject>
-                            {
-                                (DXFE.Spline)dxfSpline.Clone()
-                            })
-                    };
+        var dxfSpline = CreateQuadraticSpline(
+            quadraticBezier.Point1.X,
+            quadraticBezier.Point1.Y,
+            quadraticBezier.Point2.X,
+            quadraticBezier.Point2.Y,
+            quadraticBezier.Point3.X,
+            quadraticBezier.Point3.Y);
 
-                var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
+        if (quadraticBezier.IsFilled && style.Fill?.Color is { })
+        {
+            var fill = ToColor(style.Fill.Color);
+            var fillTransparency = ToTransparency(style.Fill.Color);
+
+            var bounds =
+                new List<DXFE.HatchBoundaryPath>
                 {
-                    Layer = _currentLayer,
-                    Color = fill
+                    new(
+                        new List<DXFE.EntityObject>
+                        {
+                            (DXFE.Spline)dxfSpline.Clone()
+                        })
                 };
-                hatch.Transparency.Value = fillTransparency;
 
-                dxf.AddEntity(hatch);
-            }
-
-            if (quadraticBezier.IsStroked)
+            var hatch = new DXFE.Hatch(DXFE.HatchPattern.Solid, bounds, false)
             {
-                var stroke = ToColor(style.Stroke.Color);
-                var strokeTansparency = ToTransparency(style.Stroke.Color);
-                var lineweight = ToLineweight(style.Stroke.Thickness);
+                Layer = _currentLayer,
+                Color = fill
+            };
+            hatch.Transparency.Value = fillTransparency;
 
-                dxfSpline.Layer = _currentLayer;
-                dxfSpline.Color = stroke;
-                dxfSpline.Transparency.Value = strokeTansparency;
-                dxfSpline.Lineweight = lineweight;
+            dxf.AddEntity(hatch);
+        }
 
-                dxf.AddEntity(dxfSpline);
-            }
+        if (quadraticBezier.IsStroked && style.Stroke?.Color is { })
+        {
+            var stroke = ToColor(style.Stroke.Color);
+            var strokeTansparency = ToTransparency(style.Stroke.Color);
+            var lineweight = ToLineweight(style.Stroke.Thickness);
+
+            dxfSpline.Layer = _currentLayer;
+            dxfSpline.Color = stroke;
+            dxfSpline.Transparency.Value = strokeTansparency;
+            dxfSpline.Lineweight = lineweight;
+
+            dxf.AddEntity(dxfSpline);
         }
     }
 
@@ -851,9 +883,8 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
 
         var stroke = ToColor(style.Stroke.Color);
-        var strokeTansparency = ToTransparency(style.Stroke.Color);
+        var strokeTransparency = ToTransparency(style.Stroke.Color);
 
-        var attachmentPoint = default(DXFE.MTextAttachmentPoint);
         var rect = Spatial.Rect2.FromPoints(
             text.TopLeft.X,
             text.TopLeft.Y,
@@ -871,7 +902,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             TextVAlignment.Bottom => rect.Y + rect.Height,
             _ => rect.Y,
         };
-        attachmentPoint = style.TextStyle.TextVAlignment switch
+        var attachmentPoint = style.TextStyle.TextVAlignment switch
         {
             TextVAlignment.Center => style.TextStyle.TextHAlignment switch
             {
@@ -912,7 +943,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         dxfMText.Write(boundText, options);
 
         dxfMText.Layer = _currentLayer;
-        dxfMText.Transparency.Value = strokeTansparency;
+        dxfMText.Transparency.Value = strokeTransparency;
         dxfMText.Color = stroke;
 
         dxf.AddEntity(dxfMText);
@@ -941,42 +972,43 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         }
 
         var bytes = State?.ImageCache?.GetImage(image.Key);
-        if (bytes is { })
+        if (bytes is null)
         {
-            var rect = Spatial.Rect2.FromPoints(
-                image.TopLeft.X,
-                image.TopLeft.Y,
-                image.BottomRight.X,
-                image.BottomRight.Y,
-                0, 0);
+            return;
+        }
 
-            var dxfImageDefinitionCached = _biCache?.Get(image.Key);
-            if (dxfImageDefinitionCached is { })
+        var rect = Spatial.Rect2.FromPoints(
+            image.TopLeft.X,
+            image.TopLeft.Y,
+            image.BottomRight.X,
+            image.BottomRight.Y);
+
+        var dxfImageDefinitionCached = _biCache?.Get(image.Key);
+        if (dxfImageDefinitionCached is { })
+        {
+            var dxfImage = new DXFE.Image(
+                dxfImageDefinitionCached,
+                new DXF.Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
+                rect.Width,
+                rect.Height);
+            dxf.AddEntity(dxfImage);
+        }
+        else
+        {
+            if (State?.ImageCache is { } && !string.IsNullOrEmpty(image.Key) && !string.IsNullOrEmpty(_outputPath))
             {
+                var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
+                System.IO.File.WriteAllBytes(path, bytes);
+                var dxfImageDefinition = new DXFO.ImageDefinition(path);
+
+                _biCache?.Set(image.Key, dxfImageDefinition);
+
                 var dxfImage = new DXFE.Image(
-                    dxfImageDefinitionCached,
+                    dxfImageDefinition,
                     new DXF.Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
                     rect.Width,
                     rect.Height);
                 dxf.AddEntity(dxfImage);
-            }
-            else
-            {
-                if (State?.ImageCache is { } && !string.IsNullOrEmpty(image.Key) && !string.IsNullOrEmpty(_outputPath))
-                {
-                    var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
-                    System.IO.File.WriteAllBytes(path, bytes);
-                    var dxfImageDefinition = new DXFO.ImageDefinition(path);
-
-                    _biCache?.Set(image.Key, dxfImageDefinition);
-
-                    var dxfImage = new DXFE.Image(
-                        dxfImageDefinition,
-                        new DXF.Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
-                        rect.Width,
-                        rect.Height);
-                    dxf.AddEntity(dxfImage);
-                }
             }
         }
     }
@@ -993,18 +1025,23 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
+        if (style is null)
+        {
+            return;
+        }
+        
         if (path.IsStroked || path.IsFilled)
         {
             if (!CreateHatchBoundsAndEntities(path, out var bounds, out var entities))
             {
                 return;
             }
-            if (entities is null || bounds is null)
+            if (entities.Count == 0 || bounds.Count == 0)
             {
                 return;
             }
 
-            if (path.IsFilled)
+            if (path.IsFilled && style.Fill?.Color is { })
             {
                 var fill = ToColor(style.Fill.Color);
                 var fillTransparency = ToTransparency(style.Fill.Color);
@@ -1019,19 +1056,19 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
                 dxf.AddEntity(hatch);
             }
 
-            if (path.IsStroked)
+            if (path.IsStroked && style.Stroke?.Color is { })
             {
                 // TODO: Add support for Closed paths.
 
                 var stroke = ToColor(style.Stroke.Color);
-                var strokeTansparency = ToTransparency(style.Stroke.Color);
+                var strokeTransparency = ToTransparency(style.Stroke.Color);
                 var lineweight = ToLineweight(style.Stroke.Thickness);
 
                 foreach (var entity in entities)
                 {
                     entity.Layer = _currentLayer;
                     entity.Color = stroke;
-                    entity.Transparency.Value = strokeTansparency;
+                    entity.Transparency.Value = strokeTransparency;
                     entity.Lineweight = lineweight;
                     dxf.AddEntity(entity);
                 }
