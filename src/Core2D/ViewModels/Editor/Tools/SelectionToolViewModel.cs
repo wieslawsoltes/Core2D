@@ -118,8 +118,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         }
 
         var (sx, sy) = selection.TryToSnap(args);
-        decimal dx = sx - _startX;
-        decimal dy = sy - _startY;
+        var dx = sx - _startX;
+        var dy = sy - _startY;
 
         _startX = sx;
         _startY = sy;
@@ -152,7 +152,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
         if (isControl == false && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible)
         {
-            bool decoratorResult = editor.PageState.Decorator.HitTest(args);
+            var decoratorResult = editor.PageState.Decorator.HitTest(args);
             if (decoratorResult && isHover == false)
             {
                 editor.IsToolIdle = false;
@@ -328,8 +328,11 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_rectangleShape is { })
                 {
-                    _rectangleShape.BottomRight.X = x;
-                    _rectangleShape.BottomRight.Y = y;
+                    if (_rectangleShape.BottomRight is { })
+                    {
+                        _rectangleShape.BottomRight.X = x;
+                        _rectangleShape.BottomRight.Y = y;
+                    }
 
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
