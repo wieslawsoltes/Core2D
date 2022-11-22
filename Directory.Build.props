@@ -38,6 +38,6 @@
     <AvaloniaXamlBehaviorsVersion>11.0.0-preview4</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>11.0.0-preview4</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>11.0.0-preview4</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.0.0-preview4</DockAvaloniaVersion>
+    <DockAvaloniaVersion>11.0.0-build20221122-05</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
