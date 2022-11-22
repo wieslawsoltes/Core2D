@@ -101,8 +101,11 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_cubicBezier is { })
                 {
-                    _cubicBezier.Point2.X = (double)sx;
-                    _cubicBezier.Point2.Y = (double)sy;
+                    if (_cubicBezier.Point2 is { })
+                    {
+                        _cubicBezier.Point2.X = (double)sx;
+                        _cubicBezier.Point2.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                     if (result is { })
@@ -121,8 +124,11 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_cubicBezier is { })
                 {
-                    _cubicBezier.Point3.X = (double)sx;
-                    _cubicBezier.Point3.Y = (double)sy;
+                    if (_cubicBezier.Point2 is { })
+                    {
+                        _cubicBezier.Point3.X = (double)sx;
+                        _cubicBezier.Point3.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
                     if (result is { })
