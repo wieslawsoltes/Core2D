@@ -136,7 +136,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                         _cubicBezier.Point3 = result;
                     }
 
-                    if (_cubicBezier is { })
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { } && _cubicBezier is { })
                     {
                         editor.Project.CurrentContainer.WorkingLayer.Shapes =
                             editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_cubicBezier);
