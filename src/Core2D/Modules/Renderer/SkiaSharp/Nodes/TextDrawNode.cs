@@ -51,14 +51,14 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         if (BoundText is null || Style?.TextStyle is null)
         {
             FormattedText = null;
-            Origin = new SKPoint();
+            Origin = SKPoint.Empty;
             return;
         }
 
         if (Style.TextStyle.FontSize < 0.0)
         {
             FormattedText = null;
-            Origin = new SKPoint();
+            Origin = SKPoint.Empty;
             return;
         }
 
@@ -70,7 +70,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         else
         {
             FormattedText = null;
-            Origin = new SKPoint();
+            Origin = SKPoint.Empty;
         }
     }
 
