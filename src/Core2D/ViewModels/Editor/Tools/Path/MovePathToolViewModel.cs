@@ -41,15 +41,22 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
             case State.Move:
             {
                 var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-                editor.CurrentPathTool = pathTool.PreviousPathTool;
+                if (pathTool is { })
+                {
+                    editor.CurrentPathTool = pathTool.PreviousPathTool;
+                    if (editor.CurrentPathTool is { })
+                    {
+                        var start = 
+                            selection.TryToGetConnectionPoint((double)sx, (double)sy) 
+                            ?? factory.CreatePointShape((double)sx, (double)sy);
 
-                var start = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
-                            factory.CreatePointShape((double) sx, (double) sy);
-                pathTool.GeometryContext?.BeginFigure(
-                    start,
-                    editor.Project.Options.DefaultIsClosed);
+                        pathTool.GeometryContext?.BeginFigure(
+                            start,
+                            editor.Project.Options.DefaultIsClosed);
 
-                editor.CurrentPathTool.BeginDown(args);
+                        editor.CurrentPathTool.BeginDown(args);
+                    }
+                }
                 break;
             }
         }
