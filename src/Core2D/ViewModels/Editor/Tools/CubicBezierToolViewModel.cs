@@ -224,12 +224,15 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _cubicBezier.Point2.X = (double)sx;
-                    _cubicBezier.Point2.Y = (double)sy;
-                    _cubicBezier.Point3.X = (double)sx;
-                    _cubicBezier.Point3.Y = (double)sy;
-                    _cubicBezier.Point4.X = (double)sx;
-                    _cubicBezier.Point4.Y = (double)sy;
+                    if (_cubicBezier.Point2 is { } && _cubicBezier.Point3 is { } && _cubicBezier.Point4 is { })
+                    {
+                        _cubicBezier.Point2.X = (double)sx;
+                        _cubicBezier.Point2.Y = (double)sy;
+                        _cubicBezier.Point3.X = (double)sx;
+                        _cubicBezier.Point3.Y = (double)sy;
+                        _cubicBezier.Point4.X = (double)sx;
+                        _cubicBezier.Point4.Y = (double)sy;
+                    }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_cubicBezier);
                 }
@@ -243,8 +246,11 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _cubicBezier.Point2.X = (double)sx;
-                    _cubicBezier.Point2.Y = (double)sy;
+                    if (_cubicBezier.Point2 is { })
+                    {
+                        _cubicBezier.Point2.X = (double)sx;
+                        _cubicBezier.Point2.Y = (double)sy;
+                    }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_cubicBezier);
                 }
@@ -258,8 +264,11 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _cubicBezier.Point3.X = (double)sx;
-                    _cubicBezier.Point3.Y = (double)sy;
+                    if (_cubicBezier.Point3 is { })
+                    {
+                        _cubicBezier.Point3.X = (double)sx;
+                        _cubicBezier.Point3.Y = (double)sy;
+                    }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_cubicBezier);
                 }
@@ -271,13 +280,19 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
     public void ToStatePoint4()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        _selectionSelection = new BezierSelectionSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _cubicBezier,
-            editor.PageState.HelperStyle);
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { }
+            && _cubicBezier is { })
+        {
+            _selectionSelection = new BezierSelectionSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _cubicBezier,
+                editor.PageState.HelperStyle);
 
-        _selectionSelection.ToStatePoint4();
+            _selectionSelection.ToStatePoint4();
+        }
     }
 
     public void ToStatePoint2()
@@ -315,7 +330,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
             case State.Point2:
             case State.Point3:
             {
-                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                if (editor.Project.CurrentContainer?.WorkingLayer is { } && _cubicBezier is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_cubicBezier);
                     editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
