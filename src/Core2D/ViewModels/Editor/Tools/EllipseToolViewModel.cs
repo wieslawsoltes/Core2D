@@ -229,8 +229,8 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         if (editor is { } 
             && editor.Project?.CurrentContainer?.HelperLayer is { } 
-            && _ellipse is { } 
-            && editor.PageState?.HelperStyle is { })
+            && editor.PageState?.HelperStyle is { }
+            && _ellipse is { } )
         {
             _selection = new EllipseSelection(
                 ServiceProvider,
@@ -238,7 +238,7 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
                 _ellipse,
                 editor.PageState.HelperStyle);
 
-            _selection?.ToStateBottomRight();
+            _selection.ToStateBottomRight();
         }
     }
 
