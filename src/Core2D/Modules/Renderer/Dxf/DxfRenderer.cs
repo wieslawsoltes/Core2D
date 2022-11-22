@@ -22,7 +22,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
     private readonly ICache<string, DXFO.ImageDefinition>? _biCache;
     private readonly double _sourceDpi = 96.0;
     private readonly double _targetDpi = 72.0;
-    private double _pageWidth;
+    // private double _pageWidth;
     private double _pageHeight;
     private string? _outputPath;
     internal DXFT.Layer? _currentLayer;
