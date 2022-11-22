@@ -401,8 +401,8 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     var (sx, sy) = selection.TryToSnap(args);
                     if (_historyX != sx || _historyY != sy)
                     {
-                        decimal dx = sx - _historyX;
-                        decimal dy = sy - _historyY;
+                        var dx = sx - _historyX;
+                        var dy = sy - _historyY;
 
                         var previous = new
                         {
