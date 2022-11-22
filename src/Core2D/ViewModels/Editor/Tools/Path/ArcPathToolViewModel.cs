@@ -5,7 +5,6 @@ using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
-using Core2D.Model.Path;
 using Core2D.ViewModels.Editor.Tools.Selection;
 using Core2D.ViewModels.Path.Segments;
 using Core2D.ViewModels.Shapes;
@@ -16,11 +15,6 @@ namespace Core2D.ViewModels.Editor.Tools.Path;
 public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
 {
     public enum State { Start, End }
-
-    private const double DefaultRotationAngle = 0.0;
-    private const bool DefaultIsLargeArc = false;
-    private const SweepDirection DefaultSweepDirection = SweepDirection.Clockwise;
-
     private State _currentState;
     private readonly LineShapeViewModel _arc;
     private LineSelection? _selection;
@@ -67,14 +61,15 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 }
 
                 _arc.End = factory.CreatePointShape((double) sx, (double) sy);
-                pathTool.GeometryContext?.ArcTo(
-                    _arc.End,
-                    factory.CreatePathSize(
-                        Abs(_arc.Start.X - _arc.End.X),
-                        Abs(_arc.Start.Y - _arc.End.Y)),
-                    DefaultRotationAngle,
-                    DefaultIsLargeArc,
-                    DefaultSweepDirection);
+                if (_arc.Start is { } && _arc.End is { })
+                {
+                    pathTool.GeometryContext?.ArcTo(
+                        _arc.End,
+                        factory.CreatePathSize(
+                            Abs(_arc.Start.X - _arc.End.X),
+                            Abs(_arc.Start.Y - _arc.End.Y)));
+                }
+
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStateEnd();
                 Move(null);
@@ -83,8 +78,11 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
             }
             case State.End:
             {
-                _arc.End.X = (double) sx;
-                _arc.End.Y = (double) sy;
+                if (_arc.End is { })
+                {
+                    _arc.End.X = (double)sx;
+                    _arc.End.Y = (double)sy;
+                }
                 if (editor.Project.Options.TryToConnect)
                 {
                     var end = selection.TryToGetConnectionPoint((double) sx, (double) sy);
@@ -96,14 +94,14 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
 
                 _arc.Start = _arc.End;
                 _arc.End = factory.CreatePointShape((double) sx, (double) sy);
-                pathTool.GeometryContext?.ArcTo(
-                    _arc.End,
-                    factory.CreatePathSize(
-                        Abs(_arc.Start.X - _arc.End.X),
-                        Abs(_arc.Start.Y - _arc.End.Y)),
-                    DefaultRotationAngle,
-                    DefaultIsLargeArc,
-                    DefaultSweepDirection);
+                if (_arc.Start is { } && _arc.End is { })
+                {
+                    pathTool.GeometryContext?.ArcTo(
+                        _arc.End,
+                        factory.CreatePathSize(
+                            Abs(_arc.Start.X - _arc.End.X),
+                            Abs(_arc.Start.Y - _arc.End.Y)));
+                }
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
                 _currentState = State.End;
@@ -139,12 +137,15 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
         switch (_currentState)
         {
             case State.Start:
+            {
                 break;
-
+            }
             case State.End:
+            {
                 Reset();
                 Finalize(null);
                 break;
+            }
         }
     }
 
@@ -178,14 +179,23 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-                _arc.End.X = (double)sx;
-                _arc.End.Y = (double)sy;
-                var figure = pathTool.Path.Figures.LastOrDefault();
-                var arc = figure.Segments.LastOrDefault() as ArcSegmentViewModel;
-                arc.Point = _arc.End;
-                arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
-                arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
-                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
+                if (_arc.End is { })
+                {
+                    _arc.End.X = (double)sx;
+                    _arc.End.Y = (double)sy;
+                }
+                var figure = pathTool?.Path?.Figures.LastOrDefault();
+                if (figure is { })
+                {
+                    var arc = figure.Segments.LastOrDefault() as ArcSegmentViewModel;
+                    if (arc is { } && arc.Size is { } && _arc.Start is { } && _arc.End is { })
+                    {
+                        arc.Point = _arc.End;
+                        arc.Size.Width = Abs(_arc.Start.X - _arc.End.X);
+                        arc.Size.Height = Abs(_arc.Start.Y - _arc.End.Y);
+                        editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
+                    }
+                }
                 Move(null);
                 break;
             }
@@ -224,6 +234,10 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var pathTool = ServiceProvider.GetService<PathToolViewModel>();
+        if (editor is null)
+        {
+            return;
+        }
 
         switch (_currentState)
         {
@@ -231,7 +245,7 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
                 break;
             case State.End:
             {
-                pathTool.RemoveLastSegment<ArcSegmentViewModel>();
+                pathTool?.RemoveLastSegment<ArcSegmentViewModel>();
                 break;
             }
         }
