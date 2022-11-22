@@ -190,18 +190,20 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
     public void ToStateBottomRight()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        if (editor is null)
+
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { }
+            && _text is { })
         {
-            return;
+            _selection = new TextSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _text,
+                editor.PageState.HelperStyle);
+
+            _selection.ToStateBottomRight();
         }
-
-        _selection = new TextSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _text,
-            editor.PageState.HelperStyle);
-
-        _selection.ToStateBottomRight();
     }
 
     public void Move(BaseShapeViewModel? shape)
@@ -227,7 +229,7 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.BottomRight:
             {
-                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                if (editor.Project.CurrentContainer?.WorkingLayer is { } && _text is { })
                 {
                     editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_text);
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
