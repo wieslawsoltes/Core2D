@@ -69,8 +69,12 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
             }
             case State.End:
             {
-                _line.End.X = (double) sx;
-                _line.End.Y = (double) sy;
+                if (_line.End is { })
+                {
+                    _line.End.X = (double)sx;
+                    _line.End.Y = (double)sy;
+                }
+                
                 if (editor.Project.Options.TryToConnect)
                 {
                     var end = selection.TryToGetConnectionPoint((double) sx, (double) sy);
@@ -168,14 +172,20 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
 
     public void ToStateEnd()
     {
-        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         _selection?.Reset();
-        _selection = new LineSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _line,
-            editor.PageState.HelperStyle);
-        _selection.ToStateEnd();
+        
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { })
+        {
+            _selection = new LineSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _line,
+                editor.PageState.HelperStyle);
+            _selection.ToStateEnd();
+        }
     }
 
     public void Move(BaseShapeViewModel? shape)
