@@ -13,7 +13,7 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
     public EllipseShapeViewModel Ellipse { get; set; }
     public SKRect Rect { get; set; }
 
-    public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
+    public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
         Style = style;
         Ellipse = ellipse;
