@@ -229,14 +229,20 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
 
     public void ToStatePoint3()
     {
-        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         _selection?.Reset();
-        _selection = new QuadraticBezierSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _quadraticBezier,
-            editor.PageState.HelperStyle);
-        _selection.ToStatePoint3();
+
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { })
+        {
+            _selection = new QuadraticBezierSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _quadraticBezier,
+                editor.PageState.HelperStyle);
+            _selection.ToStatePoint3();
+        }
     }
 
     public void ToStatePoint2()
