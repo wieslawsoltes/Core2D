@@ -175,6 +175,12 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
             return;
         }
 
+        if (editor.Project.CurrentContainer?.CurrentLayer is null ||
+            editor.Project.CurrentContainer?.WorkingLayer is null)
+        {
+            return;
+        }
+
         var (x, y) = args;
         var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
@@ -356,6 +362,12 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         var selection = ServiceProvider.GetService<ISelectionService>();
         var shapeService = ServiceProvider.GetService<IShapeService>();
         if (editor?.Project is null || selection is null || shapeService is null)
+        {
+            return;
+        }
+
+        if (editor.Project.CurrentContainer?.CurrentLayer is null ||
+            editor.Project.CurrentContainer?.WorkingLayer is null)
         {
             return;
         }
