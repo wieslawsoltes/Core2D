@@ -207,9 +207,10 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
                 if (isControl)
                 {
-                    var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
-                    double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-                    BaseShapeViewModel result =
+                    var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse().ToList();
+                    var hitThreshold = editor.Project.Options?.HitThreshold ?? 7d;
+                    var radius = hitThreshold / editor.PageState.ZoomX;
+                    BaseShapeViewModel? result =
                         hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                     if (result is null)
                     {
@@ -272,10 +273,10 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
                 if (editor.Project.SelectedShapes is { })
                 {
-                    var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse();
-
-                    double radius = editor.Project.Options.HitThreshold / editor.PageState.ZoomX;
-                    BaseShapeViewModel result =
+                    var shapes = editor.Project.CurrentContainer.CurrentLayer.Shapes.Reverse().ToList();
+                    var hitThreshold = editor.Project.Options?.HitThreshold ?? 7d;
+                    var radius = hitThreshold / editor.PageState.ZoomX;
+                    BaseShapeViewModel? result =
                         hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, editor.PageState.ZoomX);
                     if (result is null)
                     {
@@ -442,7 +443,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 var deselect = !isControl;
                 var includeSelected = isControl;
 
-                if (_rectangleShape is { })
+                if (editor.Project.CurrentContainer?.CurrentLayer is { } && _rectangleShape is { })
                 {
                     _currentState = State.None;
                     selection.TryToSelectShapes(editor.Project.CurrentContainer.CurrentLayer, _rectangleShape, deselect,
@@ -480,7 +481,10 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         {
             case State.None:
             {
-                selection.DeHover(editor.Project.CurrentContainer.CurrentLayer);
+                if (editor.Project.CurrentContainer?.CurrentLayer is { })
+                {
+                    selection.DeHover(editor.Project.CurrentContainer.CurrentLayer);
+                }
                 break;
             }
             case State.Selected:
@@ -527,7 +531,11 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
             {
                 bool isControl = args.Modifier.HasFlag(ModifierFlags.Control);
 
-                if (isControl == false && editor.PageState.DrawDecorators && editor.PageState.Decorator is { } && editor.PageState.Decorator.IsVisible)
+                if (isControl == false 
+                    && editor.PageState is { } 
+                    && editor.PageState.DrawDecorators 
+                    && editor.PageState.Decorator is { } 
+                    && editor.PageState.Decorator.IsVisible)
                 {
                     editor.PageState.Decorator.Move(args);
                     editor.PageState.Decorator.Update(false);
@@ -540,7 +548,10 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 {
                     MoveSelectionCacheTo(args);
                     selection.OnUpdateDecorator();
-                    editor.Project.CurrentContainer.CurrentLayer.RaiseInvalidateLayer();
+                    if (editor.Project.CurrentContainer?.CurrentLayer is { })
+                    {
+                        editor.Project.CurrentContainer.CurrentLayer.RaiseInvalidateLayer();
+                    }
                     break;
                 }
 
