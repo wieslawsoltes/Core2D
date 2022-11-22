@@ -80,9 +80,15 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                     var end = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (end is { })
                     {
-                        var figure = pathTool.Path.Figures.LastOrDefault();
-                        var line = figure.Segments.LastOrDefault() as LineSegmentViewModel;
-                        line.Point = end;
+                        var figure = pathTool.Path?.Figures.LastOrDefault();
+                        if (figure is { })
+                        {
+                            var line = figure.Segments.LastOrDefault() as LineSegmentViewModel;
+                            if (line is { })
+                            {
+                                line.Point = end;
+                            }
+                        }
                     }
                 }
 
@@ -204,7 +210,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-        if (editor is null || pathTool is null)
+        if (editor is null)
         {
             return;
         }
@@ -215,7 +221,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 break;
             case State.End:
             {
-                pathTool.RemoveLastSegment<LineSegmentViewModel>();
+                pathTool?.RemoveLastSegment<LineSegmentViewModel>();
                 break;
             }
         }
