@@ -124,7 +124,7 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_cubicBezier is { })
                 {
-                    if (_cubicBezier.Point2 is { })
+                    if (_cubicBezier.Point3 is { })
                     {
                         _cubicBezier.Point3.X = (double)sx;
                         _cubicBezier.Point3.Y = (double)sy;
