@@ -419,7 +419,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                             Shapes = _shapesCache
                         };
                         editor.Project?.History?.Snapshot(previous, next,
-                            (state) =>
+                            state =>
                             {
                                 if (state.Points is { })
                                 {
