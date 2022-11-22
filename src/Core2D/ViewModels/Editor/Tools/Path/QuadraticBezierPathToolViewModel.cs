@@ -72,16 +72,25 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
             }
             case State.Point3:
             {
-                _quadraticBezier.Point3.X = (double) sx;
-                _quadraticBezier.Point3.Y = (double) sy;
+                if (_quadraticBezier.Point3 is { })
+                {
+                    _quadraticBezier.Point3.X = (double)sx;
+                    _quadraticBezier.Point3.Y = (double)sy;
+                }
                 if (editor.Project.Options.TryToConnect)
                 {
                     var point2 = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (point2 is { })
                     {
-                        var figure = pathTool.Path.Figures.LastOrDefault();
-                        var quadraticBezier = figure.Segments.LastOrDefault() as QuadraticBezierSegmentViewModel;
-                        quadraticBezier.Point2 = point2;
+                        var figure = pathTool.Path?.Figures.LastOrDefault();
+                        if (figure is { })
+                        {
+                            var quadraticBezier = figure.Segments.LastOrDefault() as QuadraticBezierSegmentViewModel;
+                            if (quadraticBezier is { })
+                            {
+                                quadraticBezier.Point2 = point2;
+                            }
+                        }
                         _quadraticBezier.Point3 = point2;
                     }
                 }
@@ -94,16 +103,25 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
             }
             case State.Point2:
             {
-                _quadraticBezier.Point2.X = (double) sx;
-                _quadraticBezier.Point2.Y = (double) sy;
+                if (_quadraticBezier.Point2 is { })
+                {
+                    _quadraticBezier.Point2.X = (double)sx;
+                    _quadraticBezier.Point2.Y = (double)sy;
+                }
                 if (editor.Project.Options.TryToConnect)
                 {
                     var point1 = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (point1 is { })
                     {
-                        var figure = pathTool.Path.Figures.LastOrDefault();
-                        var quadraticBezier = figure.Segments.LastOrDefault() as QuadraticBezierSegmentViewModel;
-                        quadraticBezier.Point1 = point1;
+                        var figure = pathTool.Path?.Figures.LastOrDefault();
+                        if (figure is { })
+                        {
+                            var quadraticBezier = figure.Segments.LastOrDefault() as QuadraticBezierSegmentViewModel;
+                            if (quadraticBezier is { })
+                            {
+                                quadraticBezier.Point1 = point1;
+                            }
+                        }
                         _quadraticBezier.Point2 = point1;
                     }
                 }
@@ -204,10 +222,13 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-                _quadraticBezier.Point2.X = (double)sx;
-                _quadraticBezier.Point2.Y = (double)sy;
-                _quadraticBezier.Point3.X = (double)sx;
-                _quadraticBezier.Point3.Y = (double)sy;
+                if (_quadraticBezier.Point2 is { } && _quadraticBezier.Point3 is { })
+                {
+                    _quadraticBezier.Point2.X = (double)sx;
+                    _quadraticBezier.Point2.Y = (double)sy;
+                    _quadraticBezier.Point3.X = (double)sx;
+                    _quadraticBezier.Point3.Y = (double)sy;
+                }
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
                 break;
@@ -218,8 +239,11 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-                _quadraticBezier.Point2.X = (double)sx;
-                _quadraticBezier.Point2.Y = (double)sy;
+                if (_quadraticBezier.Point2 is { })
+                {
+                    _quadraticBezier.Point2.X = (double)sx;
+                    _quadraticBezier.Point2.Y = (double)sy;
+                }
                 editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
                 break;
@@ -247,7 +271,7 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
 
     public void ToStatePoint2()
     {
-        _selection.ToStatePoint2();
+        _selection?.ToStatePoint2();
     }
 
     public void Move(BaseShapeViewModel? shape)
@@ -263,6 +287,10 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var pathTool = ServiceProvider.GetService<PathToolViewModel>();
+        if (editor is null)
+        {
+            return;
+        }
 
         switch (_currentState)
         {
@@ -271,7 +299,7 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
             case State.Point3:
             case State.Point2:
             {
-                pathTool.RemoveLastSegment<QuadraticBezierSegmentViewModel>();
+                pathTool?.RemoveLastSegment<QuadraticBezierSegmentViewModel>();
                 break;
             }
         }
