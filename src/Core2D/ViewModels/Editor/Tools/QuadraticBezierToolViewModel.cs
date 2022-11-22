@@ -78,10 +78,13 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_quadraticBezier is { })
                 {
-                    _quadraticBezier.Point2.X = (double) sx;
-                    _quadraticBezier.Point2.Y = (double) sy;
-                    _quadraticBezier.Point3.X = (double) sx;
-                    _quadraticBezier.Point3.Y = (double) sy;
+                    if (_quadraticBezier.Point2 is { } && _quadraticBezier.Point3 is { })
+                    {
+                        _quadraticBezier.Point2.X = (double)sx;
+                        _quadraticBezier.Point2.Y = (double)sy;
+                        _quadraticBezier.Point3.X = (double)sx;
+                        _quadraticBezier.Point3.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
@@ -101,8 +104,11 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
             {
                 if (_quadraticBezier is { })
                 {
-                    _quadraticBezier.Point2.X = (double) sx;
-                    _quadraticBezier.Point2.Y = (double) sy;
+                    if (_quadraticBezier.Point2 is { })
+                    {
+                        _quadraticBezier.Point2.X = (double)sx;
+                        _quadraticBezier.Point2.Y = (double)sy;
+                    }
 
                     var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
