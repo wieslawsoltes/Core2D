@@ -413,7 +413,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
 
                 case SP.DrawPathCanvasCommand drawPathCanvasCommand:
                 {
-                    if (drawPathCanvasCommand.Path.Commands?.Count == 1)
+                    if (drawPathCanvasCommand.Path?.Commands?.Count == 1)
                     {
                         var pathCommand = drawPathCanvasCommand.Path.Commands[0];
                         var success = false;
@@ -510,7 +510,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
                         }
                     }
 
-                    if (drawPathCanvasCommand.Path.Commands?.Count == 2)
+                    if (drawPathCanvasCommand.Path?.Commands?.Count == 2)
                     {
                         var pathCommand1 = drawPathCanvasCommand.Path.Commands[0];
                         var pathCommand2 = drawPathCanvasCommand.Path.Commands[1];
@@ -529,8 +529,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
                         }
                     }
 
-                    var path = ToPathGeometry(drawPathCanvasCommand.Path, IsFilled(drawPathCanvasCommand.Paint),
-                        viewModelFactory);
+                    var path = ToPathGeometry(drawPathCanvasCommand.Path, IsFilled(drawPathCanvasCommand.Paint), viewModelFactory);
                     if (path is { })
                     {
                         path.Name = "Path";
