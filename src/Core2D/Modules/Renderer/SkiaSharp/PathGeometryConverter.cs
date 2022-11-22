@@ -520,6 +520,11 @@ public static class PathGeometryConverter
             textShape.BottomRight, 
             out var origin);
 
+        if (pen is null)
+        {
+            return null;
+        }
+
         using var outlinePath = pen.GetTextPath(boundText, origin.X, origin.Y);
         using var fillPath = pen.GetFillPath(outlinePath);
 
