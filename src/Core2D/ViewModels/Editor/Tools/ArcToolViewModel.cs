@@ -306,19 +306,20 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
     public void ToStatePoint2()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            
-        if (editor?.Project?.Options is null)
-        {
-            return;
-        }
-            
-        _selection = new ArcSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _arc,
-            editor.PageState.HelperStyle);
 
-        _selection.ToStatePoint2();
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { }
+            && _arc is { })
+        {
+            _selection = new ArcSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _arc,
+                editor.PageState.HelperStyle);
+
+            _selection.ToStatePoint2();
+        }
     }
 
     public void ToStatePoint3()
