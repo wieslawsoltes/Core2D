@@ -29,9 +29,9 @@ using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Editor.Bounds;
 using Core2D.ViewModels.Editor.Factories;
 using Core2D.Views;
-#if USE_PDFSHARP
 using Core2D.Modules.FileWriter.PdfSharp;
-#endif
+using Core2D.Modules.SvgExporter.Svg;
+using Core2D.Modules.XamlExporter.Avalonia;
 
 namespace Core2D;
 
@@ -66,7 +66,6 @@ public class AppModule : Autofac.Module
                         || t.Namespace.StartsWith("Core2D.ViewModels.Scripting")
                         || t.Namespace.StartsWith("Core2D.ViewModels.Shapes")
                         || t.Namespace.StartsWith("Core2D.ViewModels.Style")
-                        || t.Namespace.StartsWith("Core2D.ViewModels.Editor.Recent")
                     )
                     && t.Name.EndsWith("ViewModel"))
                 {
@@ -127,9 +126,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
         builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
         builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
-#if USE_PDFSHARP
         builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-#endif
         builder.RegisterType<SvgSvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<DrawingGroupXamlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
@@ -148,6 +145,9 @@ public class AppModule : Autofac.Module
         builder.RegisterType<SkiaSharpPathConverter>().As<IPathConverter>().InstancePerLifetimeScope();
         builder.RegisterType<SkiaSharpSvgConverter>().As<ISvgConverter>().InstancePerLifetimeScope();
 
+        builder.RegisterType<DrawingGroupXamlExporter>().As<IXamlExporter>().InstancePerLifetimeScope();
+        builder.RegisterType<SvgSvgExporter>().As<ISvgExporter>().InstancePerLifetimeScope();
+        
         // Avalonia
 
         builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();

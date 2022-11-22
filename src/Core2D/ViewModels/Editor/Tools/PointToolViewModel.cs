@@ -25,25 +25,24 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-
         if (factory is null || editor?.Project?.Options is null || selection is null)
         {
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point:
             {
                 _point = factory.CreatePointShape(
-                    (double)sx,
-                    (double)sy);
+                    (double) sx,
+                    (double) sy);
 
                 editor.SetShapeName(_point);
 
@@ -51,16 +50,28 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (!selection.TryToSplitLine(args.X, args.Y, _point, true))
                     {
-                        editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
+                        if (editor.Project.CurrentContainer?.CurrentLayer is { })
+                        {
+                            editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
+                        }
                     }
                 }
                 else
                 {
-                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
+                    if (editor.Project.CurrentContainer?.CurrentLayer is { })
+                    {
+                        editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _point);
+                    }
                 }
-            }
+
                 break;
+            }
         }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
     }
 
     public void BeginUp(InputArgs args)
@@ -79,13 +90,11 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-
-        if (editor is null || selection is null)
+        if (editor?.Project?.Options is null || selection is null)
         {
             return;
-        }
-            
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        } 
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point:
@@ -94,16 +103,16 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
         }
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 

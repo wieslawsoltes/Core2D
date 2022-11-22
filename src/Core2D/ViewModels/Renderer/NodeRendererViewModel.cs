@@ -11,17 +11,17 @@ namespace Core2D.ViewModels.Renderer;
 
 public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
 {
-    private readonly ICache<string, IDisposable> _biCache;
-    private readonly ICache<object, IDrawNode> _drawNodeCache;
+    private readonly ICache<string, IDisposable>? _biCache;
+    private readonly ICache<object, IDrawNode>? _drawNodeCache;
     private readonly IDrawNodeFactory _drawNodeFactory;
 
-    [AutoNotify] private ShapeRendererStateViewModel _state;
+    [AutoNotify] private ShapeRendererStateViewModel? _state;
 
     protected NodeRendererViewModel(IServiceProvider? serviceProvider, IDrawNodeFactory drawNodeFactory) : base(serviceProvider)
     {
-        _state = serviceProvider.GetService<IViewModelFactory>().CreateShapeRendererState();
-        _biCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<string, IDisposable>(x => x.Dispose());
-        _drawNodeCache = serviceProvider.GetService<IViewModelFactory>().CreateCache<object, IDrawNode>(x => x.Dispose());
+        _state = serviceProvider.GetService<IViewModelFactory>()?.CreateShapeRendererState();
+        _biCache = serviceProvider.GetService<IViewModelFactory>()?.CreateCache<string, IDisposable>(x => x.Dispose());
+        _drawNodeCache = serviceProvider.GetService<IViewModelFactory>()?.CreateCache<object, IDrawNode>(x => x.Dispose());
         _drawNodeFactory = drawNodeFactory;
     }
 
@@ -32,12 +32,17 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
 
     public void ClearCache()
     {
-        _biCache.Reset();
-        _drawNodeCache.Reset();
+        _biCache?.Reset();
+        _drawNodeCache?.Reset();
     }
 
-    public void Fill(object dc, double x, double y, double width, double height, BaseColorViewModel color)
+    public void Fill(object? dc, double x, double y, double width, double height, BaseColorViewModel? color)
     {
+        if (color is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(color);
         if (drawNodeCached is { })
         {
@@ -69,8 +74,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void Grid(object dc, IGrid grid, double x, double y, double width, double height)
+    public void Grid(object? dc, IGrid grid, double x, double y, double width, double height)
     {
+        if (_drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(grid);
         if (drawNodeCached is { })
         {
@@ -101,8 +111,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawPoint(object dc, PointShapeViewModel point, ShapeStyleViewModel style)
+    public void DrawPoint(object? dc, PointShapeViewModel point, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(point);
         if (drawNodeCached is { })
         {
@@ -117,7 +132,7 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
                 drawNodeCached.UpdateGeometry();
             }
 
-            if (_state.DrawPoints == true)
+            if (_state.DrawPoints)
             {
                 drawNodeCached.Draw(dc, _state.ZoomX);
             }
@@ -130,15 +145,20 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
 
             _drawNodeCache.Set(point, drawNode);
 
-            if (_state.DrawPoints == true)
+            if (_state.DrawPoints)
             {
                 drawNode.Draw(dc, _state.ZoomX);
             }
         }
     }
 
-    public void DrawLine(object dc, LineShapeViewModel line, ShapeStyleViewModel style)
+    public void DrawLine(object? dc, LineShapeViewModel line, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(line);
         if (drawNodeCached is { })
         {
@@ -169,8 +189,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawRectangle(object dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
+    public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(rectangle);
         if (drawNodeCached is { })
         {
@@ -200,8 +225,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawEllipse(object dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
+    public void DrawEllipse(object? dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(ellipse);
         if (drawNodeCached is { })
         {
@@ -231,8 +261,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawArc(object dc, ArcShapeViewModel arc, ShapeStyleViewModel style)
+    public void DrawArc(object? dc, ArcShapeViewModel arc, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(arc);
         if (drawNodeCached is { })
         {
@@ -262,8 +297,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawCubicBezier(object dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
+    public void DrawCubicBezier(object? dc, CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(cubicBezier);
         if (drawNodeCached is { })
         {
@@ -293,8 +333,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawQuadraticBezier(object dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
+    public void DrawQuadraticBezier(object? dc, QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(quadraticBezier);
         if (drawNodeCached is { })
         {
@@ -324,8 +369,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawText(object dc, TextShapeViewModel text, ShapeStyleViewModel style)
+    public void DrawText(object? dc, TextShapeViewModel text, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(text);
         if (drawNodeCached is { })
         {
@@ -363,8 +413,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawImage(object dc, ImageShapeViewModel image, ShapeStyleViewModel style)
+    public void DrawImage(object? dc, ImageShapeViewModel image, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(image);
         if (drawNodeCached is { })
         {
@@ -394,8 +449,13 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
-    public void DrawPath(object dc, PathShapeViewModel path, ShapeStyleViewModel style)
+    public void DrawPath(object? dc, PathShapeViewModel path, ShapeStyleViewModel? style)
     {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
         var drawNodeCached = _drawNodeCache.Get(path);
         if (drawNodeCached is { })
         {

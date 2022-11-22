@@ -17,16 +17,12 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
     public TextShapeViewModel Text { get; set; }
     public A.Rect Rect { get; set; }
     public A.Point Origin { get; set; }
-    public AM.Typeface Typeface { get; set; }
+    public AM.Typeface? Typeface { get; set; }
     public AM.FormattedText? FormattedText { get; set; }
     public AM.Geometry? Geometry { get; set; }
-    public string BoundText { get; set; }
+    public string? BoundText { get; set; }
 
-    public TextDrawNode()
-    {
-    }
-
-    public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style)
+    public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel? style)
     {
         Style = style;
         Text = text;
@@ -37,24 +33,39 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
     {
         ScaleThickness = Text.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Text.State.HasFlag(ShapeStateFlags.Size);
-        var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
-        Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
-        Center = Rect.Center;
+
+        if (Text.TopLeft is { } && Text.BottomRight is { })
+        {
+            var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y);
+            Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
+            Center = Rect.Center;
+        }
+        else
+        {
+            Rect = A.Rect.Empty;
+            Center = new A.Point();
+        }
 
         UpdateTextGeometry();
     }
 
-    protected void UpdateTextGeometry()
+    private void UpdateTextGeometry()
     {
-        BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
+        BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) as string ?? Text.Text;
 
-        if (BoundText is null)
+        if (BoundText is null || Style?.TextStyle is null)
         {
+            Origin = new A.Point();
+            FormattedText = null;
+            Geometry = null;
             return;
         }
 
         if (Style.TextStyle.FontSize < 0.0)
         {
+            Origin = new A.Point();
+            FormattedText = null;
+            Geometry = null;
             return;
         }
 
@@ -63,57 +74,65 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
 
         if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
         {
-            fontStyle |= AM.FontStyle.Italic;
+            fontStyle = AM.FontStyle.Italic;
         }
 
         if (Style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
         {
-            fontWeight |= AM.FontWeight.Bold;
+            fontWeight = AM.FontWeight.Bold;
         }
 
         // TODO: Cache Typeface
         // TODO: Cache FormattedText
 
-        Typeface = new AM.Typeface(Style.TextStyle.FontName, fontStyle, fontWeight);
-
-        var textAlignment = Style.TextStyle.TextHAlignment switch
+        if (string.IsNullOrEmpty(Style.TextStyle.FontName))
         {
-            TextHAlignment.Right => AM.TextAlignment.Right,
-            TextHAlignment.Center => AM.TextAlignment.Center,
-            _ => AM.TextAlignment.Left,
-        };
+            Typeface = null;
+        }
+        else
+        {
+            Typeface = new AM.Typeface(Style.TextStyle.FontName, fontStyle, fontWeight);
+        }
+
+        Typeface ??= AM.Typeface.Default;
 
         if (Stroke is null)
         {
             UpdateStyle();
         }
-        
+
+        if (Stroke?.Brush is null)
+        {
+            Origin = new A.Point();
+            FormattedText = null;
+            Geometry = null;
+            return;
+        }
+
         FormattedText = new AM.FormattedText(
             BoundText,
             CultureInfo.InvariantCulture,
             AM.FlowDirection.LeftToRight,
-            Typeface,
+            Typeface.Value,
             Style.TextStyle.FontSize,
             Stroke.Brush
         );
 
         //FormattedText.MaxTextWidth = Rect.Size.Width;
         //FormattedText.MaxTextHeight = Rect.Size.Height;
-        FormattedText.TextAlignment = textAlignment;
+        //FormattedText.TextAlignment = textAlignment;
         FormattedText.Trimming = AM.TextTrimming.None;
         // TODO: AM.TextWrapping.NoWrap
 
         var size = new A.Size(FormattedText.Width, FormattedText.Height);
         var rect = Rect;
 
-        // NOTE: Using AM.TextAlignment
-        var originX = rect.X;
-        //var originX = Style.TextStyle.TextHAlignment switch
-        //{
-        //    TextHAlignment.Left => rect.X,
-        //    TextHAlignment.Right => rect.Right - size.Width,
-        //    _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0)
-        //};
+        var originX = Style.TextStyle.TextHAlignment switch
+        {
+            TextHAlignment.Left => rect.X,
+            TextHAlignment.Right => rect.Right - size.Width,
+            _ => (rect.Left + rect.Width / 2.0) - (size.Width / 2.0)
+        };
 
         var originY = Style.TextStyle.TextVAlignment switch
         {
@@ -127,10 +146,14 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         Geometry = FormattedText.BuildGeometry(Origin);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
-        if (context is { } && Geometry is { })
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
+        if (Stroke?.Brush is { } && Geometry?.PlatformImpl is { })
         {
             // context.DrawGeometry(Text.IsFilled ? Fill : null, Text.IsStroked ? Stroke : null, Geometry.PlatformImpl);
             context.DrawGeometry(Stroke.Brush, null, Geometry.PlatformImpl);

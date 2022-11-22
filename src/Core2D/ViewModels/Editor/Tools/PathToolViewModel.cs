@@ -6,6 +6,7 @@ using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
+using Core2D.Model.Path;
 using Core2D.ViewModels.Editor.Tools.Path;
 using Core2D.ViewModels.Path;
 using Core2D.ViewModels.Path.Segments;
@@ -20,7 +21,6 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
     private readonly ArcPathToolViewModel? _arcPathTool;
     private readonly CubicBezierPathToolViewModel? _cubicBezierPathTool;
     private readonly QuadraticBezierPathToolViewModel? _quadraticBezierPathTool;
-    private readonly MovePathToolViewModel? _movePathTool;
 
     internal bool IsInitialized { get; set; }
 
@@ -38,7 +38,6 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
         _arcPathTool = serviceProvider.GetService<ArcPathToolViewModel>();
         _cubicBezierPathTool = serviceProvider.GetService<CubicBezierPathToolViewModel>();
         _quadraticBezierPathTool = serviceProvider.GetService<QuadraticBezierPathToolViewModel>();
-        _movePathTool = serviceProvider.GetService<MovePathToolViewModel>();
         IsInitialized = false;
     }
 
@@ -84,12 +83,12 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
         editor?.Project?.CurrentContainer?.HelperLayer?.RaiseInvalidateLayer();
     }
 
-    public PointShapeViewModel GetLastPathPoint()
+    public PointShapeViewModel? GetLastPathPoint()
     {
         var figure = Path?.Figures.LastOrDefault();
         if (figure is { })
         {
-            return (figure.Segments.LastOrDefault()) switch
+            return figure.Segments.LastOrDefault() switch
             {
                 LineSegmentViewModel line => line.Point,
                 ArcSegmentViewModel arc => arc.Point,
@@ -98,14 +97,20 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
                 _ => figure.StartPoint,
             };
         }
-        throw new Exception("Can not find valid last point from path.");
+
+        // Can not find valid last point from path.
+        return default;
     }
 
-    public void InitializeWorkingPath(PointShapeViewModel start)
+    internal void InitializeWorkingPath(PointShapeViewModel start)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+        if (factory is null || editor?.Project is null || viewModelFactory is null)
+        {
+            return;
+        }
 
         var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
             editor.Project.CurrentStyleLibrary.Selected :
@@ -114,25 +119,28 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
             "",
             (ShapeStyleViewModel)style.Copy(null),
             ImmutableArray.Create<PathFigureViewModel>(),
-            editor.Project.Options.DefaultFillRule,
-            editor.Project.Options.DefaultIsStroked,
-            editor.Project.Options.DefaultIsFilled);
+            editor.Project.Options?.DefaultFillRule ?? FillRule.EvenOdd,
+            editor.Project.Options?.DefaultIsStroked ?? true,
+            editor.Project.Options?.DefaultIsFilled ?? false);
 
         GeometryContext = factory.CreateGeometryContext(Path);
 
         GeometryContext.BeginFigure(
             start,
-            editor.Project.Options.DefaultIsClosed);
+            editor.Project.Options?.DefaultIsClosed ?? true);
 
         editor.SetShapeName(Path);
 
-        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(Path);
+        if (editor.Project.CurrentContainer?.WorkingLayer is { })
+        {
+            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(Path);
+        }
 
         PreviousPathTool = editor.CurrentPathTool;
         IsInitialized = true;
     }
 
-    public void DeInitializeWorkingPath()
+    private void DeInitializeWorkingPath()
     {
         IsInitialized = false;
         GeometryContext = null;
@@ -165,12 +173,12 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
         ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Move(args);
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Move(shape);
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
         ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Finalize(shape);
     }
@@ -180,20 +188,25 @@ public partial class PathToolViewModel : ViewModelBase, IEditorTool
         ServiceProvider.GetService<ProjectEditorViewModel>()?.CurrentPathTool?.Reset();
 
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-
-        if (editor is null)
+        if (editor?.Project is null)
         {
             return;
         }
 
         if (Path is { })
         {
-            editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
-            editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-
-            if (!(Path.Figures.Length == 1) || !(Path.Figures[0].Segments.Length <= 1))
+            if (editor.Project.CurrentContainer?.WorkingLayer is { })
             {
-                editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, Path);
+                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(Path);
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
+            }
+
+            if (Path.Figures.Length != 1 || !(Path.Figures[0].Segments.Length <= 1))
+            {
+                if (editor.Project.CurrentContainer is { })
+                {
+                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, Path);
+                }
             }
         }
 

@@ -13,8 +13,7 @@ internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
     public RectangleShapeViewModel Rectangle { get; set; }
     public SKRect Rect { get; set; }
 
-    public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
-        : base()
+    public RectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
         Style = style;
         Rectangle = rectangle;
@@ -25,14 +24,26 @@ internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
     {
         ScaleThickness = Rectangle.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Rectangle.State.HasFlag(ShapeStateFlags.Size);
-        var rect2 = Rect2.FromPoints(Rectangle.TopLeft.X, Rectangle.TopLeft.Y, Rectangle.BottomRight.X, Rectangle.BottomRight.Y, 0, 0);
-        Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
-        Center = new SKPoint(Rect.MidX, Rect.MidY);
+
+        if (Rectangle.TopLeft is { } && Rectangle.BottomRight is { })
+        {
+            var rect2 = Rect2.FromPoints(Rectangle.TopLeft.X, Rectangle.TopLeft.Y, Rectangle.BottomRight.X, Rectangle.BottomRight.Y);
+            Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
+            Center = new SKPoint(Rect.MidX, Rect.MidY);
+        }
+        else
+        {
+            Rect = SKRect.Empty;
+            Center = SKPoint.Empty;
+        }
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (Rectangle.IsFilled)
         {

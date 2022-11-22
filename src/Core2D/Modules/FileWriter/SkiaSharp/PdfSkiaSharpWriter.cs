@@ -38,21 +38,27 @@ public sealed class PdfSkiaSharpWriter : IFileWriter
         }
 
         IShapeRenderer renderer = new SkiaSharpRendererViewModel(_serviceProvider);
-        renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-        renderer.State.ImageCache = ic;
+        if (renderer.State is { })
+        {
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.State.ImageCache = ic;
+        }
 
         var presenter = new ExportPresenter();
 
-        IProjectExporter exporter = new PdfSkiaSharpExporter(renderer, presenter, 72.0f);
+        IProjectExporter exporter = new PdfSkiaSharpExporter(renderer, presenter);
 
         if (item is PageContainerViewModel page)
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
             var db = (object)page.Properties;
-            var record = (object)page.Record;
+            var record = (object?)page.Record;
 
-            dataFlow.Bind(page.Template, db, record);
-            dataFlow.Bind(page, db, record);
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(page.Template, db, record);
+                dataFlow.Bind(page, db, record);
+            }
 
             exporter.Save(stream, page);
         }
@@ -60,7 +66,10 @@ public sealed class PdfSkiaSharpWriter : IFileWriter
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
 
-            dataFlow.Bind(document);
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(document);
+            }
 
             exporter.Save(stream, document);
         }
@@ -68,7 +77,10 @@ public sealed class PdfSkiaSharpWriter : IFileWriter
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
 
-            dataFlow.Bind(project);
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(project);
+            }
 
             exporter.Save(stream, project);
         }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
@@ -12,7 +13,6 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor.History;
-using Core2D.ViewModels.Editor.Recent;
 using Core2D.ViewModels.Layout;
 using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
@@ -264,7 +264,7 @@ public partial class ProjectEditorViewModel
         NavigateTo?.Invoke("Home");
     }
 
-    public void OnOpenProject(string path)
+    public void OnOpenProject(Stream stream, string name)
     {
         try
         {
@@ -276,11 +276,10 @@ public partial class ProjectEditorViewModel
                 return;
             }
 
-            if (string.IsNullOrEmpty(path) || !fileSystem.Exists(path)) return;
-            var project = viewModelFactory.OpenProjectContainer(path, fileSystem, jsonSerializer);
+            var project = viewModelFactory.OpenProjectContainer(stream, fileSystem, jsonSerializer);
             if (project is { })
             {
-                OnOpenProjectImpl(project, path);
+                OnOpenProjectImpl(project, name);
             }
         }
         catch (Exception ex)
@@ -289,7 +288,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    private void OnOpenProjectImpl(ProjectContainerViewModel? project, string path)
+    private void OnOpenProjectImpl(ProjectContainerViewModel? project, string name)
     {
         if (project is null)
         {
@@ -298,8 +297,7 @@ public partial class ProjectEditorViewModel
         try
         {
             OnUnload();
-            OnLoad(project, path);
-            OnAddRecent(path, project.Name);
+            OnLoad(project, name);
             CanvasPlatform?.ResetZoom?.Invoke();
             CanvasPlatform?.InvalidateControl?.Invoke();
             NavigateTo?.Invoke("Home");
@@ -312,18 +310,19 @@ public partial class ProjectEditorViewModel
 
     public void OnCloseProject()
     {
+        Platform?.OnClose();
         Project?.History?.Reset();
         OnUnload();
         NavigateTo?.Invoke("Dashboard");
     }
 
-    public void OnSaveProject(string path)
+    public void OnSaveProject(Stream stream, string name)
     {
         if (Project is null)
         {
             return;
         }
-            
+
         try
         {
             var isDecoratorVisible = PageState?.Decorator?.IsVisible == true;
@@ -337,13 +336,11 @@ public partial class ProjectEditorViewModel
             var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
             if (fileSystem is { } && jsonSerializer is { } && viewModelFactory is { })
             {
-                viewModelFactory.SaveProjectContainer(Project, path, fileSystem, jsonSerializer);
+                viewModelFactory.SaveProjectContainer(Project, Project, stream, fileSystem, jsonSerializer);
 
-                OnAddRecent(path, Project.Name);
-
-                if (string.IsNullOrEmpty(ProjectPath))
+                if (string.IsNullOrEmpty(ProjectName))
                 {
-                    ProjectPath = path;
+                    ProjectName = name;
                 }
 
                 IsProjectDirty = false;
@@ -360,7 +357,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnImportData(ProjectContainerViewModel? project, string path, ITextFieldReader<DatabaseViewModel>? reader)
+    public void OnImportData(ProjectContainerViewModel? project, Stream stream, ITextFieldReader<DatabaseViewModel>? reader)
     {
         if (project is null)
         {
@@ -375,11 +372,6 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            using var stream = fileSystem.Open(path);
-            if (stream is null)
-            {
-                return;
-            }
             var db = reader?.Read(stream);
             if (db is { })
             {
@@ -393,7 +385,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnExportData(string path, DatabaseViewModel? database, ITextFieldWriter<DatabaseViewModel>? writer)
+    public void OnExportData(Stream stream, DatabaseViewModel? database, ITextFieldWriter<DatabaseViewModel>? writer)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -403,11 +395,6 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            using var stream = fileSystem.Create(path);
-            if (stream is null)
-            {
-                return;
-            }
             writer?.Write(stream, database);
         }
         catch (Exception ex)
@@ -416,7 +403,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnUpdateData(string path, DatabaseViewModel database, ITextFieldReader<DatabaseViewModel> reader)
+    public void OnUpdateData(Stream stream, DatabaseViewModel database, ITextFieldReader<DatabaseViewModel> reader)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -426,11 +413,6 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            using var stream = fileSystem.Open(path);
-            if (stream is null)
-            {
-                return;
-            }
             var db = reader.Read(stream);
             if (db is { })
             {
@@ -586,7 +568,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnImportJson(string path)
+    public void OnImportJson(Stream stream)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -602,7 +584,7 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            var json = fileSystem.ReadUtf8Text(path);
+            var json = fileSystem.ReadUtf8Text(stream);
             if (json is not null && !string.IsNullOrWhiteSpace(json))
             {
                 var item = jsonSerializer.Deserialize<object>(json);
@@ -618,21 +600,21 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnImportSvg(string path)
+    public void OnImportSvg(Stream stream)
     {
         var svgConverter = ServiceProvider.GetService<ISvgConverter>();
         if (svgConverter is null)
         {
             return;
         }
-        var shapes = svgConverter.Convert(path, out _, out _);
+        var shapes = svgConverter.Convert(stream, out _, out _);
         if (shapes is { })
         {
             ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(shapes);
         }
     }
 
-    public void OnExportJson(string path, object item)
+    public void OnExportJson(Stream stream, object item)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -651,7 +633,7 @@ public partial class ProjectEditorViewModel
             var json = jsonSerializer.Serialize(item);
             if (!string.IsNullOrWhiteSpace(json))
             {
-                fileSystem.WriteUtf8Text(path, json);
+                fileSystem.WriteUtf8Text(stream, json);
             }
         }
         catch (Exception ex)
@@ -660,21 +642,10 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public void OnExport(string path, object item, IFileWriter writer)
+    public void OnExport(Stream stream, object item, IFileWriter writer)
     {
-        var fileSystem = ServiceProvider.GetService<IFileSystem>();
-        if (fileSystem is null)
-        {
-            return;
-        }
-
         try
         {
-            using var stream = fileSystem.Create(path);
-            if (stream is null)
-            {
-                return;
-            }
             writer.Save(stream, item, Project);
         }
         catch (Exception ex)
@@ -683,7 +654,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public async Task OnExecuteScriptFile(string path)
+    public async Task OnExecuteScript(Stream stream)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
         if (fileSystem is null)
@@ -693,7 +664,7 @@ public partial class ProjectEditorViewModel
 
         try
         {
-            var csharp = fileSystem.ReadUtf8Text(path);
+            var csharp = fileSystem.ReadUtf8Text(stream);
             if (!string.IsNullOrWhiteSpace(csharp))
             {
                 if (Project is null)
@@ -706,14 +677,6 @@ public partial class ProjectEditorViewModel
         catch (Exception ex)
         {
             ServiceProvider.GetService<ILog>()?.LogException(ex);
-        }
-    }
-
-    public async Task OnExecuteScriptFile(string[] paths)
-    {
-        foreach (var path in paths)
-        {
-            await OnExecuteScriptFile(path);
         }
     }
 
@@ -756,8 +719,16 @@ public partial class ProjectEditorViewModel
             Project.Options.TryToConnect = !Project.Options.TryToConnect;
         }
     }
+    
+    public void OnToggleSinglePressMode()
+    {
+        if (Project?.Options is { })
+        {
+            Project.Options.SinglePressMode = !Project.Options.SinglePressMode;
+        }
+    }
 
-    public string? OnGetImageKey(string path)
+    public string? OnGetImageKey(Stream stream, string name)
     {
         if (Project is null)
         {
@@ -769,12 +740,7 @@ public partial class ProjectEditorViewModel
         {
             return default;
         }
- 
-        using var stream = fileSystem.Open(path);
-        if (stream is null)
-        {
-            return default;
-        }
+
         var bytes = fileSystem.ReadBinary(stream);
         if (bytes is null)
         {
@@ -782,7 +748,7 @@ public partial class ProjectEditorViewModel
         }
         if (Project is IImageCache imageCache)
         {
-            var key = imageCache.AddImageFromFile(path, bytes);
+            var key = imageCache.AddImageFromFile(name, bytes);
             return key;
         }
         return default;
@@ -802,7 +768,7 @@ public partial class ProjectEditorViewModel
         Renderer.State.ImageCache = cache;
     }
 
-    public void OnLoad(ProjectContainerViewModel? project, string? path = null)
+    public void OnLoad(ProjectContainerViewModel? project, string? name = null)
     {
         if (project is null)
         {
@@ -818,7 +784,7 @@ public partial class ProjectEditorViewModel
             
         Project = project;
         Project.History = new StackHistory();
-        ProjectPath = path;
+        ProjectName = name;
         IsProjectDirty = false;
 
         var propertyChangedSubject = new Subject<(object? sender, PropertyChangedEventArgs e)>();
@@ -863,7 +829,7 @@ public partial class ProjectEditorViewModel
         ServiceProvider.GetService<ISelectionService>()?.Deselect();
         SetRenderersImageCache(null);
         Project = null;
-        ProjectPath = string.Empty;
+        ProjectName = string.Empty;
         IsProjectDirty = false;
         GC.Collect();
     }
@@ -873,101 +839,6 @@ public partial class ProjectEditorViewModel
         try
         {
             Renderer?.ClearCache();
-        }
-        catch (Exception ex)
-        {
-            ServiceProvider.GetService<ILog>()?.LogException(ex);
-        }
-    }
-
-    public void OnAddRecent(string path, string name)
-    {
-        var q = _recentProjects.Where(x => x.Path?.ToLower() == path.ToLower()).ToList();
-        var builder = _recentProjects.ToBuilder();
-        if (q.Count > 0)
-        {
-            foreach (var r in q)
-            {
-                builder.Remove(r);
-            }
-        }
-
-        builder.Insert(0, RecentFileViewModel.Create(ServiceProvider, name, path));
-
-        RecentProjects = builder.ToImmutable();
-        CurrentRecentProject = _recentProjects.FirstOrDefault();
-    }
-
-    public void OnLoadRecent(string path)
-    {
-        var fileSystem = ServiceProvider.GetService<IFileSystem>();
-        if (fileSystem is null)
-        {
-            return;
-        }
-
-        var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
-        if (jsonSerializer is null)
-        {
-            return;
-        }
-
-        try
-        {
-            var json = fileSystem.ReadUtf8Text(path);
-            if (json is null)
-            {
-                return;
-            }
-            var recent = jsonSerializer.Deserialize<RecentsViewModel>(json);
-            if (recent is null)
-            {
-                return;
-            }
-            var remove = recent.Files.Where(x => x.Path is null || fileSystem.Exists(x.Path) == false).ToList();
-            var builder = recent.Files.ToBuilder();
-
-            foreach (var file in remove)
-            {
-                builder.Remove(file);
-            }
-
-            RecentProjects = builder.ToImmutable();
-
-            if (recent.Current?.Path is { } && fileSystem.Exists(recent.Current.Path))
-            {
-                CurrentRecentProject = recent.Current;
-            }
-            else
-            {
-                CurrentRecentProject = _recentProjects.FirstOrDefault();
-            }
-        }
-        catch (Exception ex)
-        {
-            ServiceProvider.GetService<ILog>()?.LogException(ex);
-        }
-    }
-
-    public void OnSaveRecent(string path)
-    {
-        var fileSystem = ServiceProvider.GetService<IFileSystem>();
-        if (fileSystem is null)
-        {
-            return;
-        }
-
-        var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
-        if (jsonSerializer is null)
-        {
-            return;
-        }
-
-        try
-        {
-            var recent = RecentsViewModel.Create(ServiceProvider, _recentProjects, _currentRecentProject);
-            var json = jsonSerializer.Serialize(recent);
-            fileSystem.WriteUtf8Text(path, json);
         }
         catch (Exception ex)
         {
@@ -1039,16 +910,25 @@ public partial class ProjectEditorViewModel
 
                 if (string.Compare(ext, ProjectEditorConfiguration.DefaultProjectExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    OnOpenProject(path);
-                    result = true;
+                    var name = System.IO.Path.GetFileNameWithoutExtension(path);
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        OnOpenProject(stream, name);
+                        result = true;
+                    }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultCsvExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     var reader = TextFieldReaders.FirstOrDefault(r => r.Extension == "csv");
                     if (reader is { })
                     {
-                        OnImportData(Project, path, reader);
-                        result = true;
+                        await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                        if (stream is { })
+                        {
+                            OnImportData(Project, stream, reader);
+                            result = true;
+                        }
                     }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultXlsxExtension, StringComparison.OrdinalIgnoreCase) == 0)
@@ -1056,33 +936,53 @@ public partial class ProjectEditorViewModel
                     var reader = TextFieldReaders.FirstOrDefault(r => r.Extension == "xlsx");
                     if (reader is { })
                     {
-                        OnImportData(Project, path, reader);
-                        result = true;
+                        await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                        if (stream is { })
+                        {
+                            OnImportData(Project, stream, reader);
+                            result = true;
+                        }
                     }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultJsonExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    OnImportJson(path);
-                    result = true;
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        OnImportJson(stream);
+                        result = true;
+                    }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultScriptExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    await OnExecuteScriptFile(path);
-                    result = true;
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        await OnExecuteScript(stream);
+                        result = true;
+                    }
                 }
                 else if (string.Compare(ext, ProjectEditorConfiguration.DefaultSvgExtension, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    OnImportSvg(path);
-                    result = true;
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        OnImportSvg(stream);
+                        result = true;
+                    }
                 }
                 else if (ProjectEditorConfiguration.DefaultImageExtensions.Any(r => string.Compare(ext, r, StringComparison.OrdinalIgnoreCase) == 0))
                 {
-                    var key = OnGetImageKey(path);
-                    if (key is { } && !string.IsNullOrEmpty(key))
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
                     {
-                        OnDropImageKey(key, x, y);
+                        var key = OnGetImageKey(stream, path);
+                        if (key is { } && !string.IsNullOrEmpty(key))
+                        {
+                            OnDropImageKey(key, x, y);
+                            result = true;
+                        }
                     }
-                    result = true;
                 }
             }
 
@@ -1176,7 +1076,7 @@ public partial class ProjectEditorViewModel
                 ServiceProvider.GetService<ISelectionService>()?.Deselect(Project.CurrentContainer?.CurrentLayer);
                 clone.Move(null, sx, sy);
 
-                Project.AddShape(Project?.CurrentContainer?.CurrentLayer, clone);
+                Project.AddShape(Project.CurrentContainer?.CurrentLayer, clone);
 
                 // Select(Project?.CurrentContainer?.CurrentLayer, clone);
 

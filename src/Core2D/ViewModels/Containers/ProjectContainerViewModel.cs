@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.Model;
 using Core2D.Model.History;
 using Core2D.ViewModels.Data;
@@ -37,70 +38,70 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
 
     public ProjectContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        New = new Command<object?>(OnNew);
+        New = new RelayCommand<object?>(OnNew);
 
-        AddStyleLibrary = new Command(OnAddStyleLibrary);
-        RemoveStyleLibrary = new Command<LibraryViewModel?>(OnRemoveStyleLibrary);
-        ApplyStyle = new Command<ShapeStyleViewModel?>(OnApplyStyle);
-        AddStyle = new Command(OnAddStyle);
-        ExportStyle = new Command<ShapeStyleViewModel?>(OnExportStyle);
-        RemoveStyle = new Command<ShapeStyleViewModel?>(OnRemoveStyle);
+        AddStyleLibrary = new RelayCommand(OnAddStyleLibrary);
+        RemoveStyleLibrary = new RelayCommand<LibraryViewModel?>(OnRemoveStyleLibrary);
+        ApplyStyle = new RelayCommand<ShapeStyleViewModel?>(OnApplyStyle);
+        AddStyle = new RelayCommand(OnAddStyle);
+        ExportStyle = new RelayCommand<ShapeStyleViewModel?>(OnExportStyle);
+        RemoveStyle = new RelayCommand<ShapeStyleViewModel?>(OnRemoveStyle);
 
-        ApplyTemplate = new Command<TemplateContainerViewModel?>(OnApplyTemplate);
-        EditTemplate = new Command<TemplateContainerViewModel?>(OnEditTemplate);
-        AddTemplate = new Command(OnAddTemplate);
-        RemoveTemplate = new Command<TemplateContainerViewModel?>(OnRemoveTemplate);
-        ExportTemplate = new Command<TemplateContainerViewModel?>(OnExportTemplate);
+        ApplyTemplate = new RelayCommand<TemplateContainerViewModel?>(OnApplyTemplate);
+        EditTemplate = new RelayCommand<TemplateContainerViewModel?>(OnEditTemplate);
+        AddTemplate = new RelayCommand(OnAddTemplate);
+        RemoveTemplate = new RelayCommand<TemplateContainerViewModel?>(OnRemoveTemplate);
+        ExportTemplate = new RelayCommand<TemplateContainerViewModel?>(OnExportTemplate);
 
-        AddGroupLibrary = new Command(OnAddGroupLibrary);
-        RemoveGroupLibrary = new Command<LibraryViewModel?>(OnRemoveGroupLibrary);
-        AddGroup = new Command(OnAddGroup);
-        RemoveGroup = new Command<GroupShapeViewModel?>(OnRemoveGroup);
-        InsertGroup = new Command<GroupShapeViewModel?>(OnInsertGroup);
-        ExportGroup = new Command<GroupShapeViewModel?>(OnExportGroup);
+        AddGroupLibrary = new RelayCommand(OnAddGroupLibrary);
+        RemoveGroupLibrary = new RelayCommand<LibraryViewModel?>(OnRemoveGroupLibrary);
+        AddGroup = new RelayCommand(OnAddGroup);
+        RemoveGroup = new RelayCommand<GroupShapeViewModel?>(OnRemoveGroup);
+        InsertGroup = new RelayCommand<GroupShapeViewModel?>(OnInsertGroup);
+        ExportGroup = new RelayCommand<GroupShapeViewModel?>(OnExportGroup);
 
-        AddShape = new Command<BaseShapeViewModel?>(OnAddShape);
-        RemoveShape = new Command<BaseShapeViewModel?>(OnRemoveShape);
+        AddShape = new RelayCommand<BaseShapeViewModel?>(OnAddShape);
+        RemoveShape = new RelayCommand<BaseShapeViewModel?>(OnRemoveShape);
 
-        AddLayer = new Command<FrameContainerViewModel?>(OnAddLayer);
-        RemoveLayer = new Command<LayerContainerViewModel?>(OnRemoveLayer);
+        AddLayer = new RelayCommand<FrameContainerViewModel?>(OnAddLayer);
+        RemoveLayer = new RelayCommand<LayerContainerViewModel?>(OnRemoveLayer);
 
-        AddPage = new Command<object?>(OnAddPage);
-        InsertPageBefore = new Command<object?>(OnInsertPageBefore);
-        InsertPageAfter = new Command<object?>(OnInsertPageAfter);
+        AddPage = new RelayCommand<object?>(OnAddPage);
+        InsertPageBefore = new RelayCommand<object?>(OnInsertPageBefore);
+        InsertPageAfter = new RelayCommand<object?>(OnInsertPageAfter);
 
-        AddDocument = new Command<object?>(OnAddDocument);
-        InsertDocumentBefore = new Command<object?>(OnInsertDocumentBefore);
-        InsertDocumentAfter = new Command<object?>(OnInsertDocumentAfter);
+        AddDocument = new RelayCommand<object?>(OnAddDocument);
+        InsertDocumentBefore = new RelayCommand<object?>(OnInsertDocumentBefore);
+        InsertDocumentAfter = new RelayCommand<object?>(OnInsertDocumentAfter);
 
-        AddDatabase = new Command(OnAddDatabase);
-        RemoveDatabase = new Command<DatabaseViewModel?>(OnRemoveDatabase);
+        AddDatabase = new RelayCommand(OnAddDatabase);
+        RemoveDatabase = new RelayCommand<DatabaseViewModel?>(OnRemoveDatabase);
 
-        AddColumn = new Command<DatabaseViewModel?>(OnAddColumn);
-        RemoveColumn = new Command<ColumnViewModel?>(OnRemoveColumn);
+        AddColumn = new RelayCommand<DatabaseViewModel?>(OnAddColumn);
+        RemoveColumn = new RelayCommand<ColumnViewModel?>(OnRemoveColumn);
 
-        AddRecord = new Command<DatabaseViewModel?>(OnAddRecord);
-        RemoveRecord = new Command<RecordViewModel?>(OnRemoveRecord);
-        ApplyRecord = new Command<RecordViewModel?>(OnApplyRecord);
-        ResetRecord = new Command<IDataObject?>(OnResetRecord);
+        AddRecord = new RelayCommand<DatabaseViewModel?>(OnAddRecord);
+        RemoveRecord = new RelayCommand<RecordViewModel?>(OnRemoveRecord);
+        ApplyRecord = new RelayCommand<RecordViewModel?>(OnApplyRecord);
+        ResetRecord = new RelayCommand<IDataObject?>(OnResetRecord);
 
-        AddProperty = new Command<ViewModelBase?>(OnAddProperty);
-        RemoveProperty = new Command<PropertyViewModel?>(OnRemoveProperty);
+        AddProperty = new RelayCommand<ViewModelBase?>(OnAddProperty);
+        RemoveProperty = new RelayCommand<PropertyViewModel?>(OnRemoveProperty);
 
         // ReSharper disable once AsyncVoidLambda
-        AddImageKey = new Command<string?>(async path => await OnAddImageKey(path));
-        RemoveImageKey = new Command<string?>(OnRemoveImageKey);
+        AddImageKey = new RelayCommand<string?>(async path => await OnAddImageKey(path));
+        RemoveImageKey = new RelayCommand<string?>(OnRemoveImageKey);
 
-        ResetRepl = new Command(OnResetRepl);
+        ResetRepl = new RelayCommand(OnResetRepl);
         // ReSharper disable once AsyncVoidLambda
-        ExecuteRepl = new Command<string?>(async code => await OnExecuteRepl(code));
+        ExecuteRepl = new RelayCommand<string?>(async code => await OnExecuteRepl(code));
         // ReSharper disable once AsyncVoidLambda
-        ExecuteCode = new Command<string?>(async code => await OnExecuteCode(code));
+        ExecuteCode = new RelayCommand<string?>(async code => await OnExecuteCode(code));
         // ReSharper disable once AsyncVoidLambda
-        ExecuteScript = new Command<ScriptViewModel?>(async script => await OnExecuteScript(script));
-        AddScript = new Command(OnAddScript);
-        RemoveScript = new Command<ScriptViewModel?>(OnRemoveScript);
-        ExportScript = new Command<ScriptViewModel?>(OnExportScript);
+        ExecuteScript = new RelayCommand<ScriptViewModel?>(async script => await OnExecuteScript(script));
+        AddScript = new RelayCommand(OnAddScript);
+        RemoveScript = new RelayCommand<ScriptViewModel?>(OnRemoveScript);
+        ExportScript = new RelayCommand<ScriptViewModel?>(OnExportScript);
 
         PropertyChanged += (_, e) =>
         {

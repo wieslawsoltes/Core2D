@@ -43,12 +43,12 @@ public class EditableItem : TemplatedControl
         var textBox = e.NameScope.Find<TextBox>("PART_TextBox");
         var textBlock = e.NameScope.Find<TextBlock>("PART_TextBlock");
 
-        if (textBox is { })
+        if (textBox is { } && TextBinding is { })
         {
             textBox.Bind(TextBox.TextProperty, TextBinding);
         }
 
-        if (textBlock is { })
+        if (textBlock is { } && TextBinding is { })
         {
             textBlock.Bind(TextBlock.TextProperty, TextBinding);
         }

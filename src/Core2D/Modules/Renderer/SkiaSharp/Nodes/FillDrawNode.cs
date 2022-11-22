@@ -8,7 +8,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes;
 internal class FillDrawNode : DrawNode, IFillDrawNode
 {
     public SKRect Rect { get; set; }
-    public BaseColorViewModel Color { get; set; }
+    public BaseColorViewModel? Color { get; set; }
     public double X { get; set; }
     public double Y { get; set; }
     public double Width { get; set; }
@@ -34,18 +34,27 @@ internal class FillDrawNode : DrawNode, IFillDrawNode
 
     public override void UpdateStyle()
     {
-        Fill = SkiaSharpDrawUtil.ToSKPaintBrush(Color);
+        if (Color is { })
+        {
+            Fill = SkiaSharpDrawUtil.ToSKPaintBrush(Color);
+        }
     }
 
-    public override void Draw(object dc, double zoom)
+    public override void Draw(object? dc, double zoom)
     {
         OnDraw(dc, zoom);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
-        canvas.DrawRect(Rect, Fill);
+        if (!Rect.IsEmpty)
+        {
+            canvas.DrawRect(Rect, Fill);
+        }
     }
 }

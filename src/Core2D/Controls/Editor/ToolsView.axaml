@@ -53,73 +53,73 @@
              x:DataType="vme:ProjectEditorViewModel"
              x:CompileBindings="False">
     <!-- Tool -->
-    <RadioButton Tag="{StaticResource Selection}" 
+    <RadioButton Tag="{DynamicResource Selection}" 
                  Command="{Binding OnToolSelection}" 
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Selection}"
                  ToolTip.Tip="Selection Tool"
                  GroupName="Tool" 
                  Classes="tool" />
     <Separator Classes="horizontal" />
-    <RadioButton Tag="{StaticResource Point}" 
+    <RadioButton Tag="{DynamicResource Point}" 
                  Command="{Binding OnToolPoint}"
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Point}"
                  ToolTip.Tip="Point Tool" 
                  GroupName="Tool" 
                  Classes="tool" />
     <Separator Classes="horizontal" />
-    <RadioButton Tag="{StaticResource Line}" 
+    <RadioButton Tag="{DynamicResource Line}" 
                  Command="{Binding OnToolLine}" 
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Line}"
                  ToolTip.Tip="Line Tool" 
                  GroupName="Tool" 
                  Classes="tool" />
-    <RadioButton Tag="{StaticResource Arc}" 
+    <RadioButton Tag="{DynamicResource Arc}" 
                  Command="{Binding OnToolArc}" 
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Arc}"
                  ToolTip.Tip="Arc" 
                  GroupName="Tool" 
                  Classes="tool" />
-    <RadioButton Tag="{StaticResource CubicBezier}" 
+    <RadioButton Tag="{DynamicResource CubicBezier}" 
                  Command="{Binding OnToolCubicBezier}"
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=CubicBezier}"
                  ToolTip.Tip="Cubic Bezier Tool" 
                  GroupName="Tool" 
                  Classes="tool" />
-    <RadioButton Tag="{StaticResource QuadraticBezier}"
+    <RadioButton Tag="{DynamicResource QuadraticBezier}"
                  Command="{Binding OnToolQuadraticBezier}"
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=QuadraticBezier}"
                  ToolTip.Tip="Quadratic Bezier Tool" 
                  GroupName="Tool"
                  Classes="tool" />
     <Separator Classes="horizontal" />
-    <RadioButton Tag="{StaticResource Path}" 
+    <RadioButton Tag="{DynamicResource Path}" 
                  Command="{Binding OnToolPath}"
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Path}"
                  ToolTip.Tip="Path Tool" 
                  GroupName="Tool" 
                  Classes="tool" />
     <Separator Classes="horizontal" />
-    <RadioButton Tag="{StaticResource Rectangle}" 
+    <RadioButton Tag="{DynamicResource Rectangle}" 
                  Command="{Binding OnToolRectangle}"
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Rectangle}"
                  ToolTip.Tip="Rectangle Tool" 
                  GroupName="Tool" 
                  Classes="tool" />
-    <RadioButton Tag="{StaticResource Ellipse}" 
+    <RadioButton Tag="{DynamicResource Ellipse}" 
                  Command="{Binding OnToolEllipse}"
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Ellipse}"
                  ToolTip.Tip="Ellipse Tool"
                  GroupName="Tool" 
                  Classes="tool" />
     <Separator Classes="horizontal" />
-    <RadioButton Tag="{StaticResource Text}" 
+    <RadioButton Tag="{DynamicResource Text}" 
                  Command="{Binding OnToolText}"
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Text}"
                  ToolTip.Tip="Text Tool" 
                  GroupName="Tool" 
                  Classes="tool" />
     <Separator Classes="horizontal" />
-    <RadioButton Tag="{StaticResource Image}" 
+    <RadioButton Tag="{DynamicResource Image}" 
                  Command="{Binding OnToolImage}"
                  IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Image}"
                  ToolTip.Tip="Image Tool" 
@@ -134,7 +134,7 @@
         </MultiBinding>
       </Separator.IsVisible>
     </Separator>
-    <RadioButton Tag="{StaticResource Line}" 
+    <RadioButton Tag="{DynamicResource Line}" 
                  Command="{Binding OnToolLine}"
                  IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Line}"
                  ToolTip.Tip="Path Line Tool" 
@@ -147,7 +147,7 @@
         </MultiBinding>
       </RadioButton.IsVisible>
     </RadioButton>
-    <RadioButton Tag="{StaticResource Arc}" 
+    <RadioButton Tag="{DynamicResource Arc}" 
                  Command="{Binding OnToolArc}"
                  IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Arc}"
                  ToolTip.Tip="Path Arc Tool" 
@@ -160,7 +160,7 @@
         </MultiBinding>
       </RadioButton.IsVisible>
     </RadioButton>
-    <RadioButton Tag="{StaticResource CubicBezier}" 
+    <RadioButton Tag="{DynamicResource CubicBezier}" 
                  Command="{Binding OnToolCubicBezier}"
                  IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=CubicBezier}"
                  ToolTip.Tip="Path Cubic Bezier Tool" 
@@ -173,7 +173,7 @@
         </MultiBinding>
       </RadioButton.IsVisible>
     </RadioButton>
-    <RadioButton Tag="{StaticResource QuadraticBezier}" 
+    <RadioButton Tag="{DynamicResource QuadraticBezier}" 
                  Command="{Binding OnToolQuadraticBezier}"
                  IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=QuadraticBezier}"
                  ToolTip.Tip="Path Quadratic Bezier Tool" 
@@ -186,7 +186,7 @@
         </MultiBinding>
       </RadioButton.IsVisible>
     </RadioButton>
-    <RadioButton Tag="{StaticResource Move}" 
+    <RadioButton Tag="{DynamicResource Move}" 
                  Command="{Binding OnToolMove}"
                  IsChecked="{Binding CurrentPathTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Move}"
                  ToolTip.Tip="Path Move Tool" 

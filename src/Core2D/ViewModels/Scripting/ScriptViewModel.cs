@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
 
@@ -14,17 +15,17 @@ public partial class ScriptViewModel : ViewModelBase
 
     public ScriptViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        ResetRepl = new Command(() => GetProject()?.OnResetRepl());
+        ResetRepl = new RelayCommand(() => GetProject()?.OnResetRepl());
 
-        ExecuteRepl = new Command<string?>(x => GetProject()?.OnExecuteRepl(x));
+        ExecuteRepl = new RelayCommand<string?>(x => GetProject()?.OnExecuteRepl(x));
 
-        ExecuteCode = new Command<string?>(x => GetProject()?.OnExecuteCode(x));
+        ExecuteCode = new RelayCommand<string?>(x => GetProject()?.OnExecuteCode(x));
 
-        AddScript = new Command(() => GetProject()?.OnAddScript());
+        AddScript = new RelayCommand(() => GetProject()?.OnAddScript());
 
-        RemoveScript = new Command<ScriptViewModel?>(x => GetProject()?.OnRemoveScript(x));
+        RemoveScript = new RelayCommand<ScriptViewModel?>(x => GetProject()?.OnRemoveScript(x));
 
-        ExportScript = new Command<ScriptViewModel?>(x => GetProject()?.OnExportScript(x));
+        ExportScript = new RelayCommand<ScriptViewModel?>(x => GetProject()?.OnExportScript(x));
 
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }

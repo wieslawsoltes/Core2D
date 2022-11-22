@@ -18,7 +18,7 @@ public class DrawingGroupXamlExporter : IXamlExporter
         _serviceProvider = serviceProvider;
     }
 
-    public string Create(object item, string key)
+    public string Create(object item, string? key)
     {
         var converter = _serviceProvider.GetService<IPathConverter>();
 

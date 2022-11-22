@@ -11,11 +11,14 @@ internal class ArrowMarker : MarkerBase
     public A.Point P12;
     public A.Point P22;
 
-    public override void Draw(object dc)
+    public override void Draw(object? dc)
     {
-        var context = dc as AP.IDrawingContextImpl;
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
 
-        if (ShapeViewModel.IsStroked)
+        if (ShapeViewModel is { } && ShapeViewModel.IsStroked && Pen is { })
         {
             context.DrawLine(Pen, P11, P21);
             context.DrawLine(Pen, P12, P22);

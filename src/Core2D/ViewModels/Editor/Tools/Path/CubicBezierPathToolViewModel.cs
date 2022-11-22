@@ -31,19 +31,25 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        if (factory is null || editor?.Project?.Options is null || selection is null || pathTool is null)
+        {
+            return;
+        }
+
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:
             {
                 editor.IsToolIdle = false;
-                _cubicBezier.Point1 = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
+                _cubicBezier.Point1 = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
+                                      factory.CreatePointShape((double) sx, (double) sy);
                 if (!pathTool.IsInitialized)
                 {
                     pathTool.InitializeWorkingPath(_cubicBezier.Point1);
@@ -53,96 +59,159 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                     _cubicBezier.Point1 = pathTool.GetLastPathPoint();
                 }
 
-                _cubicBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
-                _cubicBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
-                _cubicBezier.Point4 = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.CubicBezierTo(
+                _cubicBezier.Point2 = factory.CreatePointShape((double) sx, (double) sy);
+                _cubicBezier.Point3 = factory.CreatePointShape((double) sx, (double) sy);
+                _cubicBezier.Point4 = factory.CreatePointShape((double) sx, (double) sy);
+                pathTool.GeometryContext?.CubicBezierTo(
                     _cubicBezier.Point2,
                     _cubicBezier.Point3,
                     _cubicBezier.Point4);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint4();
                 Move(null);
                 _currentState = State.Point4;
-            }
                 break;
+            }
             case State.Point4:
             {
-                _cubicBezier.Point4.X = (double)sx;
-                _cubicBezier.Point4.Y = (double)sy;
+                if (_cubicBezier.Point4 is { })
+                {
+                    _cubicBezier.Point4.X = (double)sx;
+                    _cubicBezier.Point4.Y = (double)sy;
+                }
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var point3 = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var point3 = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (point3 is { })
                     {
-                        var figure = pathTool.Path.Figures.LastOrDefault();
-                        var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
-                        cubicBezier.Point3 = point3;
+                        var figure = pathTool.Path?.Figures.LastOrDefault();
+                        if (figure is { })
+                        {
+                            var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
+                            if (cubicBezier is { })
+                            {
+                                cubicBezier.Point3 = point3;
+                            }
+                        }
                         _cubicBezier.Point4 = point3;
                     }
                 }
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint2();
                 Move(null);
                 _currentState = State.Point2;
-            }
                 break;
+            }
             case State.Point2:
             {
-                _cubicBezier.Point2.X = (double)sx;
-                _cubicBezier.Point2.Y = (double)sy;
+                if (_cubicBezier.Point2 is { })
+                {
+                    _cubicBezier.Point2.X = (double)sx;
+                    _cubicBezier.Point2.Y = (double)sy;
+                }
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var point1 = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var point1 = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (point1 is { })
                     {
-                        var figure = pathTool.Path.Figures.LastOrDefault();
-                        var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
-                        cubicBezier.Point1 = point1;
+                        var figure = pathTool.Path?.Figures.LastOrDefault();
+                        if (figure is { })
+                        {
+                            var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
+                            if (cubicBezier is { })
+                            {
+                                cubicBezier.Point1 = point1;
+                            }
+                        }
                         _cubicBezier.Point2 = point1;
                     }
                 }
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStateThree();
                 Move(null);
                 _currentState = State.Point3;
-            }
                 break;
+            }
             case State.Point3:
             {
-                _cubicBezier.Point3.X = (double)sx;
-                _cubicBezier.Point3.Y = (double)sy;
+                if (_cubicBezier.Point3 is { })
+                {
+                    _cubicBezier.Point3.X = (double)sx;
+                    _cubicBezier.Point3.Y = (double)sy;
+                }
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var point2 = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var point2 = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (point2 is { })
                     {
-                        var figure = pathTool.Path.Figures.LastOrDefault();
-                        var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
-                        cubicBezier.Point2 = point2;
+                        var figure = pathTool.Path?.Figures.LastOrDefault();
+                        if (figure is { })
+                        {
+                            var cubicBezier = figure.Segments.LastOrDefault() as CubicBezierSegmentViewModel;
+                            if (cubicBezier is { })
+                            {
+                                cubicBezier.Point2 = point2;
+                            }
+                        }
                         _cubicBezier.Point3 = point2;
                     }
                 }
 
                 _cubicBezier.Point1 = _cubicBezier.Point4;
-                _cubicBezier.Point2 = factory.CreatePointShape((double)sx, (double)sy);
-                _cubicBezier.Point3 = factory.CreatePointShape((double)sx, (double)sy);
-                _cubicBezier.Point4 = factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.CubicBezierTo(
+                _cubicBezier.Point2 = factory.CreatePointShape((double) sx, (double) sy);
+                _cubicBezier.Point3 = factory.CreatePointShape((double) sx, (double) sy);
+                _cubicBezier.Point4 = factory.CreatePointShape((double) sx, (double) sy);
+                pathTool.GeometryContext?.CubicBezierTo(
                     _cubicBezier.Point2,
                     _cubicBezier.Point3,
                     _cubicBezier.Point4);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint4();
                 Move(null);
                 _currentState = State.Point4;
-            }
                 break;
+            }
+        }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState == State.Point1 || _currentState == State.Point4 || _currentState == State.Point2)
+            {
+                NextPoint(args);
+            }
+        }
+        else
+        {
+            NextPoint(args);
         }
     }
 
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState == State.Point4 || _currentState == State.Point2 || _currentState == State.Point3)
+            {
+                NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)
@@ -168,7 +237,11 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        if (editor?.Project?.Options is null || selection is null)
+        {
+            return;
+        }
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:
@@ -177,79 +250,94 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.Point4:
             {
                 if (editor.Project.Options.TryToConnect)
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-                _cubicBezier.Point2.X = (double)sx;
-                _cubicBezier.Point2.Y = (double)sy;
-                _cubicBezier.Point3.X = (double)sx;
-                _cubicBezier.Point3.Y = (double)sy;
-                _cubicBezier.Point4.X = (double)sx;
-                _cubicBezier.Point4.Y = (double)sy;
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                if (_cubicBezier.Point2 is { } && _cubicBezier.Point3 is { } && _cubicBezier.Point4 is { })
+                {
+                    _cubicBezier.Point2.X = (double)sx;
+                    _cubicBezier.Point2.Y = (double)sy;
+                    _cubicBezier.Point3.X = (double)sx;
+                    _cubicBezier.Point3.Y = (double)sy;
+                    _cubicBezier.Point4.X = (double)sx;
+                    _cubicBezier.Point4.Y = (double)sy;
+                }
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (editor.Project.Options.TryToConnect)
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-                _cubicBezier.Point2.X = (double)sx;
-                _cubicBezier.Point2.Y = (double)sy;
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                if (_cubicBezier.Point2 is { })
+                {
+                    _cubicBezier.Point2.X = (double)sx;
+                    _cubicBezier.Point2.Y = (double)sy;
+                }
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
-            }
                 break;
+            }
             case State.Point3:
             {
                 if (editor.Project.Options.TryToConnect)
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-                _cubicBezier.Point3.X = (double)sx;
-                _cubicBezier.Point3.Y = (double)sy;
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                if (_cubicBezier.Point3 is { })
+                {
+                    _cubicBezier.Point3.X = (double)sx;
+                    _cubicBezier.Point3.Y = (double)sy;
+                }
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 Move(null);
-            }
                 break;
+            }
         }
     }
 
     public void ToStatePoint4()
     {
-        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         _selectionSelection?.Reset();
-        _selectionSelection = new BezierSelectionSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _cubicBezier,
-            editor.PageState.HelperStyle);
-        _selectionSelection.ToStatePoint4();
+
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { })
+        {
+            _selectionSelection = new BezierSelectionSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _cubicBezier,
+                editor.PageState.HelperStyle);
+            _selectionSelection?.ToStatePoint4();
+        }
     }
 
     public void ToStatePoint2()
     {
-        _selectionSelection.ToStatePoint2();
+        _selectionSelection?.ToStatePoint2();
     }
 
     public void ToStateThree()
     {
-        _selectionSelection.ToStatePoint3();
+        _selectionSelection?.ToStatePoint3();
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         _selectionSelection?.Move();
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 
@@ -257,6 +345,10 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var pathTool = ServiceProvider.GetService<PathToolViewModel>();
+        if (editor is null)
+        {
+            return;
+        }
 
         switch (_currentState)
         {
@@ -266,9 +358,9 @@ public partial class CubicBezierPathToolViewModel : ViewModelBase, IPathTool
             case State.Point2:
             case State.Point3:
             {
-                pathTool.RemoveLastSegment<CubicBezierSegmentViewModel>();
-            }
+                pathTool?.RemoveLastSegment<CubicBezierSegmentViewModel>();
                 break;
+            }
         }
 
         _currentState = State.Point1;

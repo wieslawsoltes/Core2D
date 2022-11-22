@@ -8,12 +8,12 @@ namespace Core2D.Behaviors;
 
 public class DocumentTextBindingBehavior : Behavior<TextEditor>
 {
-    private TextEditor _textEditor;
+    private TextEditor? _textEditor;
 
-    public static readonly StyledProperty<string> TextProperty =
-        AvaloniaProperty.Register<DocumentTextBindingBehavior, string>(nameof(Text));
+    public static readonly StyledProperty<string?> TextProperty =
+        AvaloniaProperty.Register<DocumentTextBindingBehavior, string?>(nameof(Text));
 
-    public string Text
+    public string? Text
     {
         get => GetValue(TextProperty);
         set => SetValue(TextProperty, value);
@@ -23,7 +23,7 @@ public class DocumentTextBindingBehavior : Behavior<TextEditor>
     {
         base.OnAttached();
 
-        if (AssociatedObject is TextEditor textEditor)
+        if (AssociatedObject is { } textEditor)
         {
             _textEditor = textEditor;
             _textEditor.TextChanged += TextChanged;
@@ -49,7 +49,7 @@ public class DocumentTextBindingBehavior : Behavior<TextEditor>
         }
     }
 
-    private void TextPropertyChanged(string text)
+    private void TextPropertyChanged(string? text)
     {
         if (_textEditor?.Document is { } && text is { })
         {

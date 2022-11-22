@@ -12,7 +12,7 @@ public class RectangleBounds : IBounds
 {
     public Type TargetType => typeof(RectangleShapeViewModel);
 
-    public PointShapeViewModel TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
+    public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
         if (shape is not RectangleShapeViewModel rectangle)
         {
@@ -21,12 +21,12 @@ public class RectangleBounds : IBounds
 
         var pointHitTest = registered[typeof(PointShapeViewModel)];
 
-        if (pointHitTest.TryToGetPoint(rectangle.TopLeft, target, radius, scale, registered) is { })
+        if (rectangle.TopLeft is { } && pointHitTest.TryToGetPoint(rectangle.TopLeft, target, radius, scale, registered) is { })
         {
             return rectangle.TopLeft;
         }
 
-        if (pointHitTest.TryToGetPoint(rectangle.BottomRight, target, radius, scale, registered) is { })
+        if (rectangle.BottomRight is { } && pointHitTest.TryToGetPoint(rectangle.BottomRight, target, radius, scale, registered) is { })
         {
             return rectangle.BottomRight;
         }
@@ -39,6 +39,11 @@ public class RectangleBounds : IBounds
         if (shape is not RectangleShapeViewModel rectangle)
         {
             throw new ArgumentNullException(nameof(shape));
+        }
+
+        if (rectangle.TopLeft is null || rectangle.BottomRight is null)
+        {
+            return false;
         }
 
         var rect = Rect2.FromPoints(
@@ -63,6 +68,11 @@ public class RectangleBounds : IBounds
         if (shape is not RectangleShapeViewModel rectangle)
         {
             throw new ArgumentNullException(nameof(shape));
+        }
+
+        if (rectangle.TopLeft is null || rectangle.BottomRight is null)
+        {
+            return false;
         }
 
         var rect = Rect2.FromPoints(

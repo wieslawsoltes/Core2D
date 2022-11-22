@@ -19,7 +19,7 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
     public IMarker? StartMarker { get; set; }
     public IMarker? EndMarker { get; set; }
 
-    public LineDrawNode(LineShapeViewModel line, ShapeStyleViewModel style)
+    public LineDrawNode(LineShapeViewModel line, ShapeStyleViewModel? style)
     {
         Style = style;
         Line = line;
@@ -43,10 +43,10 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
             }
             case ArrowType.Rectangle:
             {
-                double rx = style.RadiusX;
-                double ry = style.RadiusY;
-                double sx = 2.0 * rx;
-                double sy = 2.0 * ry;
+                var rx = style.RadiusX;
+                var ry = style.RadiusY;
+                var sx = 2.0 * rx;
+                var sy = 2.0 * ry;
 
                 var marker = new RectangleMarker();
 
@@ -63,10 +63,10 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
             }
             case ArrowType.Ellipse:
             {
-                double rx = style.RadiusX;
-                double ry = style.RadiusY;
-                double sx = 2.0 * rx;
-                double sy = 2.0 * ry;
+                var rx = style.RadiusX;
+                var ry = style.RadiusY;
+                var sx = 2.0 * rx;
+                var sy = 2.0 * ry;
 
                 var marker = new EllipseMarker();
 
@@ -83,10 +83,10 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
             }
             case ArrowType.Arrow:
             {
-                double rx = style.RadiusX;
-                double ry = style.RadiusY;
-                double sx = 2.0 * rx;
-                double sy = 2.0 * ry;
+                var rx = style.RadiusX;
+                var ry = style.RadiusY;
+                var sx = 2.0 * rx;
+                var sy = 2.0 * ry;
 
                 var marker = new ArrowMarker();
 
@@ -118,14 +118,14 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
         }
         else
         {
-            double x1 = Line.Start.X;
-            double y1 = Line.Start.Y;
-            double x2 = Line.End.X;
-            double y2 = Line.End.Y;
+            var x1 = Line.Start.X;
+            var y1 = Line.Start.Y;
+            var x2 = Line.End.X;
+            var y2 = Line.End.Y;
 
             if (Style?.Stroke?.StartArrow is not null && Style.Stroke.StartArrow.ArrowType != ArrowType.None)
             {
-                double a1 = Math.Atan2(y1 - y2, x1 - x2);
+                var a1 = Math.Atan2(y1 - y2, x1 - x2);
                 var marker = CreateArrowMarker(x1, y1, a1, Style, Style.Stroke.StartArrow);
                 StartMarker = marker;
                 marker.UpdateStyle();
@@ -139,7 +139,7 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
 
             if (Style?.Stroke?.EndArrow is not null && Style.Stroke.EndArrow.ArrowType != ArrowType.None)
             {
-                double a2 = Math.Atan2(y2 - y1, x2 - x1);
+                var a2 = Math.Atan2(y2 - y1, x2 - x1);
                 var marker = CreateArrowMarker(x2, y2, a2, Style, Style.Stroke.EndArrow);
                 marker.UpdateStyle();
                 EndMarker = marker;

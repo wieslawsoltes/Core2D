@@ -10,9 +10,9 @@ namespace Core2D.Modules.Renderer.SkiaSharp.Nodes;
 internal class QuadraticBezierDrawNode : DrawNode, IQuadraticBezierDrawNode
 {
     public QuadraticBezierShapeViewModel QuadraticBezier { get; set; }
-    public SKPath Geometry { get; set; }
+    public SKPath? Geometry { get; set; }
 
-    public QuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
+    public QuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel? style)
     {
         Style = style;
         QuadraticBezier = quadraticBezier;
@@ -24,12 +24,22 @@ internal class QuadraticBezierDrawNode : DrawNode, IQuadraticBezierDrawNode
         ScaleThickness = QuadraticBezier.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = QuadraticBezier.State.HasFlag(ShapeStateFlags.Size);
         Geometry = PathGeometryConverter.ToSKPath(QuadraticBezier);
-        Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
+        if (Geometry is { })
+        {
+            Center = new SKPoint(Geometry.Bounds.MidX, Geometry.Bounds.MidY);
+        }
+        else
+        {
+            Center = SKPoint.Empty;
+        }
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (QuadraticBezier.IsFilled)
         {

@@ -19,23 +19,31 @@ public class ShapeFactory : IShapeFactory
         _serviceProvider = serviceProvider;
     }
 
-    PointShapeViewModel IShapeFactory.Point(double x, double y, bool isStandalone)
+    PointShapeViewModel? IShapeFactory.Point(double x, double y, bool isStandalone)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
+        if (factory is null || project is null)
+        {
+            return default;
+        }
         var point = factory.CreatePointShape(x, y);
-        if (isStandalone && project is { })
+        if (isStandalone)
         {
             project.AddShape(project.CurrentContainer?.CurrentLayer, point);
         }
         return point;
     }
 
-    LineShapeViewModel IShapeFactory.Line(double x1, double y1, double x2, double y2, bool isStroked)
+    LineShapeViewModel? IShapeFactory.Line(double x1, double y1, double x2, double y2, bool isStroked)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = project?.CurrentStyleLibrary?.Selected is { } ?
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = project.CurrentStyleLibrary?.Selected is { } ?
             (ShapeStyleViewModel)project.CurrentStyleLibrary.Selected :
             factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var line = factory.CreateLineShape(
@@ -43,29 +51,37 @@ public class ShapeFactory : IShapeFactory
             x2, y2,
             style.CopyShared(null),
             isStroked);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, line);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, line);
         return line;
     }
 
-    LineShapeViewModel IShapeFactory.Line(PointShapeViewModel? start, PointShapeViewModel? end, bool isStroked)
+    LineShapeViewModel? IShapeFactory.Line(PointShapeViewModel? start, PointShapeViewModel? end, bool isStroked)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var line = factory.CreateLineShape(
             start,
             end,
             style.CopyShared(null),
             isStroked);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, line);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, line);
         return line;
     }
 
-    ArcShapeViewModel IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
+    ArcShapeViewModel? IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var arc = factory.CreateArcShape(
             x1, y1,
             x2, y2,
@@ -74,15 +90,19 @@ public class ShapeFactory : IShapeFactory
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, arc);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, arc);
         return arc;
     }
 
-    ArcShapeViewModel IShapeFactory.Arc(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, PointShapeViewModel? point4, bool isStroked, bool isFilled)
+    ArcShapeViewModel? IShapeFactory.Arc(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, PointShapeViewModel? point4, bool isStroked, bool isFilled)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var arc = factory.CreateArcShape(
             point1,
             point2,
@@ -91,15 +111,19 @@ public class ShapeFactory : IShapeFactory
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, arc);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, arc);
         return arc;
     }
 
-    CubicBezierShapeViewModel IShapeFactory.CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
+    CubicBezierShapeViewModel? IShapeFactory.CubicBezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var cubicBezier = factory.CreateCubicBezierShape(
             x1, y1,
             x2, y2,
@@ -108,15 +132,19 @@ public class ShapeFactory : IShapeFactory
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, cubicBezier);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, cubicBezier);
         return cubicBezier;
     }
 
-    CubicBezierShapeViewModel IShapeFactory.CubicBezier(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, PointShapeViewModel? point4, bool isStroked, bool isFilled)
+    CubicBezierShapeViewModel? IShapeFactory.CubicBezier(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, PointShapeViewModel? point4, bool isStroked, bool isFilled)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var cubicBezier = factory.CreateCubicBezierShape(
             point1,
             point2,
@@ -125,15 +153,19 @@ public class ShapeFactory : IShapeFactory
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, cubicBezier);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, cubicBezier);
         return cubicBezier;
     }
 
-    QuadraticBezierShapeViewModel IShapeFactory.QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled)
+    QuadraticBezierShapeViewModel? IShapeFactory.QuadraticBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var quadraticBezier = factory.CreateQuadraticBezierShape(
             x1, y1,
             x2, y2,
@@ -141,15 +173,19 @@ public class ShapeFactory : IShapeFactory
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, quadraticBezier);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, quadraticBezier);
         return quadraticBezier;
     }
 
-    QuadraticBezierShapeViewModel IShapeFactory.QuadraticBezier(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, bool isStroked, bool isFilled)
+    QuadraticBezierShapeViewModel? IShapeFactory.QuadraticBezier(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, bool isStroked, bool isFilled)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var quadraticBezier = factory.CreateQuadraticBezierShape(
             point1,
             point2,
@@ -157,15 +193,19 @@ public class ShapeFactory : IShapeFactory
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, quadraticBezier);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, quadraticBezier);
         return quadraticBezier;
     }
 
-    PathShapeViewModel IShapeFactory.Path(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule, bool isStroked, bool isFilled)
+    PathShapeViewModel? IShapeFactory.Path(ImmutableArray<PathFigureViewModel> figures, FillRule fillRule, bool isStroked, bool isFilled)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var path = factory.CreatePathShape(
             "",
             style.CopyShared(null),
@@ -173,98 +213,121 @@ public class ShapeFactory : IShapeFactory
             fillRule,
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, path);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, path);
         return path;
     }
 
-    RectangleShapeViewModel IShapeFactory.Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string? text)
+    RectangleShapeViewModel? IShapeFactory.Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string? text)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
-        var editor = _serviceProvider.GetService<ProjectEditorViewModel>();
-        var project = editor.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var rectangle = factory.CreateRectangleShape(
             x1, y1,
             x2, y2,
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, rectangle);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, rectangle);
         return rectangle;
     }
 
-    RectangleShapeViewModel IShapeFactory.Rectangle(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, bool isStroked, bool isFilled, string? text)
+    RectangleShapeViewModel? IShapeFactory.Rectangle(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, bool isStroked, bool isFilled, string? text)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var rectangle = factory.CreateRectangleShape(
             topLeft,
             bottomRight,
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, rectangle);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, rectangle);
         return rectangle;
     }
 
-    EllipseShapeViewModel IShapeFactory.Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string? text)
+    EllipseShapeViewModel? IShapeFactory.Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string? text)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var ellipse = factory.CreateEllipseShape(
             x1, y1,
             x2, y2,
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, ellipse);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, ellipse);
         return ellipse;
     }
 
-    EllipseShapeViewModel IShapeFactory.Ellipse(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, bool isStroked, bool isFilled, string? text)
+    EllipseShapeViewModel? IShapeFactory.Ellipse(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, bool isStroked, bool isFilled, string? text)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var ellipse = factory.CreateEllipseShape(
             topLeft,
             bottomRight,
             style.CopyShared(null),
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, ellipse);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, ellipse);
         return ellipse;
     }
 
-    TextShapeViewModel IShapeFactory.Text(double x1, double y1, double x2, double y2, string? text, bool isStroked)
+    TextShapeViewModel? IShapeFactory.Text(double x1, double y1, double x2, double y2, string? text, bool isStroked)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var txt = factory.CreateTextShape(
             x1, y1,
             x2, y2,
             style.CopyShared(null),
             text,
             isStroked);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, txt);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, txt);
         return txt;
     }
 
-    TextShapeViewModel IShapeFactory.Text(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, string? text, bool isStroked)
+    TextShapeViewModel? IShapeFactory.Text(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, string? text, bool isStroked)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var txt = factory.CreateTextShape(
             topLeft,
             bottomRight,
             style.CopyShared(null),
             text,
             isStroked);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, txt);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, txt);
         return txt;
     }
 
@@ -276,7 +339,11 @@ public class ShapeFactory : IShapeFactory
         }
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
-        var style = (ShapeStyleViewModel?)project?.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
         var image = factory.CreateImageShape(
             x1, y1,
             x2, y2,
@@ -284,7 +351,7 @@ public class ShapeFactory : IShapeFactory
             path,
             isStroked,
             isFilled);
-        project?.AddShape(project.CurrentContainer?.CurrentLayer, image);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, image);
         return image;
     }
 
@@ -296,6 +363,10 @@ public class ShapeFactory : IShapeFactory
         }
         var factory = _serviceProvider.GetService<IViewModelFactory>();
         var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
+        if (factory is null || project is null)
+        {
+            return default;
+        }
         var fileSystem = _serviceProvider.GetService<IFileSystem>();
         byte[]? bytes = null;
         if (fileSystem is null)

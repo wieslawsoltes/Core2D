@@ -16,14 +16,13 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
 {
     public ImageShapeViewModel Image { get; set; }
     public A.Rect Rect { get; set; }
-    public IImageCache ImageCache { get; set; }
-    public ICache<string, IDisposable> BitmapCache { get; set; }
-    public AMI.Bitmap ImageCached { get; set; }
+    public IImageCache? ImageCache { get; set; }
+    public ICache<string, IDisposable>? BitmapCache { get; set; }
+    public AMI.Bitmap? ImageCached { get; set; }
     public A.Rect SourceRect { get; set; }
     public A.Rect DestRect { get; set; }
 
-    public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
-        : base()
+    public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel? style, IImageCache? imageCache, ICache<string, IDisposable>? bitmapCache)
     {
         Style = style;
         Image = image;
@@ -39,7 +38,7 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
 
         if (!string.IsNullOrEmpty(Image.Key))
         {
-            ImageCached = BitmapCache.Get(Image.Key) as AMI.Bitmap;
+            ImageCached = BitmapCache?.Get(Image.Key) as AMI.Bitmap;
             if (ImageCached is null && ImageCache is { })
             {
                 try
@@ -49,7 +48,7 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
                     {
                         using var ms = new System.IO.MemoryStream(bytes);
                         ImageCached = new AMI.Bitmap(ms);
-                        BitmapCache.Set(Image.Key, ImageCached);
+                        BitmapCache?.Set(Image.Key, ImageCached);
                     }
                 }
                 catch (Exception ex)
@@ -69,14 +68,26 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
             ImageCached = null;
         }
 
-        var rect2 = Rect2.FromPoints(Image.TopLeft.X, Image.TopLeft.Y, Image.BottomRight.X, Image.BottomRight.Y, 0, 0);
-        DestRect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
-        Center = DestRect.Center;
+        if (Image.TopLeft is { } && Image.BottomRight is { })
+        {
+            var rect2 = Rect2.FromPoints(Image.TopLeft.X, Image.TopLeft.Y, Image.BottomRight.X, Image.BottomRight.Y);
+            DestRect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
+            Center = DestRect.Center;
+        }
+        else
+        {
+            Rect = A.Rect.Empty;
+            Center = new A.Point();
+        }
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
         if (Image.IsFilled)
         {
             context.DrawRectangle(Fill, null, DestRect);

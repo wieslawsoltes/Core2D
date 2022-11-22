@@ -857,7 +857,8 @@ public class ViewModelFactory : IViewModelFactory
             DefaultIsFilled = false,
             DefaultIsClosed = true,
             DefaultFillRule = FillRule.EvenOdd,
-            TryToConnect = false
+            TryToConnect = false,
+            SinglePressMode = true
         };
     }
 
@@ -1009,24 +1010,6 @@ public class ViewModelFactory : IViewModelFactory
             var imageEntry = archive.CreateEntry(key);
             using var imageStream = imageEntry.Open();
             fileSystem.WriteBinary(imageStream, cache.GetImage(key));
-        }
-    }
-
-    public ProjectContainerViewModel? OpenProjectContainer(string path, IFileSystem fileSystem, IJsonSerializer serializer)
-    {
-        using var stream = fileSystem.Open(path);
-        return stream is null ? null : OpenProjectContainer(stream, fileSystem, serializer);
-    }
-
-    public void SaveProjectContainer(ProjectContainerViewModel project, string path, IFileSystem fileSystem, IJsonSerializer serializer)
-    {
-        if (project is IImageCache imageCache)
-        {
-            using var stream = fileSystem.Create(path);
-            if (stream is { })
-            {
-                SaveProjectContainer(project, imageCache, stream, fileSystem, serializer);
-            }
         }
     }
 

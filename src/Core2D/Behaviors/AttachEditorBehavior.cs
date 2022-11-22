@@ -6,7 +6,7 @@ namespace Core2D.Behaviors;
 
 public class AttachEditorBehavior : Behavior<Control>
 {
-    private AttachEditor _input;
+    private AttachEditor? _input;
 
     protected override void OnAttached()
     {

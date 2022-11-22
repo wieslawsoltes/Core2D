@@ -28,21 +28,30 @@
                     IsChecked="{Binding Project.Options.DefaultIsStroked, Mode=TwoWay}" 
                     MinWidth="0"
                     Margin="12,0,0,0" 
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center"
+                    ToolTip.Tip="Default style is stroked." />
           <CheckBox Content="Filled"
                     IsChecked="{Binding Project.Options.DefaultIsFilled, Mode=TwoWay}" 
                     MinWidth="0"
                     Margin="12,0,0,0" 
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center"
+                    ToolTip.Tip="Default style is filled." />
           <CheckBox Content="Snap"
                     IsChecked="{Binding Project.Options.SnapToGrid, Mode=TwoWay}" 
                     MinWidth="0"
                     Margin="12,0,0,0" 
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center"
+                    ToolTip.Tip="Snap to grid." />
           <CheckBox Content="Connect" IsChecked="{Binding Project.Options.TryToConnect, Mode=TwoWay}" 
                     MinWidth="0"
+                    Margin="12,0,0,0" 
+                    VerticalAlignment="Center"
+                    ToolTip.Tip="Try to connect points." />
+          <CheckBox Content="Single" IsChecked="{Binding Project.Options.SinglePressMode, Mode=TwoWay}" 
+                    MinWidth="0"
                     Margin="12,0,6,0" 
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center"
+                    ToolTip.Tip="Single press mode." />
         </StackPanel>
         <StackPanel DataContext="{Binding PageState}" 
                     Orientation="Horizontal" 

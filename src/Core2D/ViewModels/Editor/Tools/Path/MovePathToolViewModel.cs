@@ -25,28 +25,46 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        if (factory is null || editor?.Project?.Options is null || selection is null)
+        {
+            return;
+        }
+
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Move:
             {
                 var pathTool = ServiceProvider.GetService<PathToolViewModel>();
-                editor.CurrentPathTool = pathTool.PreviousPathTool;
+                if (pathTool is { })
+                {
+                    editor.CurrentPathTool = pathTool.PreviousPathTool;
+                    if (editor.CurrentPathTool is { })
+                    {
+                        var start = 
+                            selection.TryToGetConnectionPoint((double)sx, (double)sy) 
+                            ?? factory.CreatePointShape((double)sx, (double)sy);
 
-                var start = selection.TryToGetConnectionPoint((double)sx, (double)sy) ?? factory.CreatePointShape((double)sx, (double)sy);
-                pathTool.GeometryContext.BeginFigure(
-                    start,
-                    editor.Project.Options.DefaultIsClosed);
+                        pathTool.GeometryContext?.BeginFigure(
+                            start,
+                            editor.Project.Options.DefaultIsClosed);
 
-                editor.CurrentPathTool.BeginDown(args);
-            }
+                        editor.CurrentPathTool.BeginDown(args);
+                    }
+                }
                 break;
+            }
         }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
     }
 
     public void BeginUp(InputArgs args)
@@ -65,7 +83,11 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        if (editor?.Project?.Options is null || selection is null)
+        {
+            return;
+        }
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Move:
@@ -74,16 +96,16 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
         }
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 

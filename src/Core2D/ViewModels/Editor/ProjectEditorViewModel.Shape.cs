@@ -81,8 +81,13 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         }
     }
 
-    public void OnRotateSelected(string degrees)
+    public void OnRotateSelected(object param)
     {
+        if (param is not string degrees)
+        {
+            return;
+        }
+
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
         {
@@ -503,7 +508,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -534,7 +539,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -598,7 +603,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -645,7 +650,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -709,7 +714,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -756,7 +761,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -820,7 +825,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -867,7 +872,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -928,7 +933,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -972,7 +977,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(paths));
@@ -1032,14 +1037,19 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, new HashSet<BaseShapeViewModel>(result));
     }
 
-    public void OnPathOp(string op)
+    public void OnPathOp(object param)
     {
+        if (param is not string op)
+        {
+            return;
+        }
+
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
         {
@@ -1084,7 +1094,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = shapesBuilder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
@@ -1108,7 +1118,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = source.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
 
         return group;
@@ -1139,7 +1149,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = layer.Shapes;
         var next = source.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => layer.Shapes = p);
+        project.History?.Snapshot(previous, next, p => layer.Shapes = p);
         layer.Shapes = next;
     }
 
@@ -1316,12 +1326,8 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
         var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
-        project.History?.Snapshot(previous, next, (s) =>
+        project.History?.Snapshot(previous, next, s =>
         {
-            if (s is null)
-            {
-                return;
-            }
             MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY);
         });
     }
@@ -1383,7 +1389,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
             var previous = libraryViewModel.Items;
             var next = builder.ToImmutable();
-            project.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+            project.History?.Snapshot(previous, next, p => libraryViewModel.Items = p);
             libraryViewModel.Items = next;
         }
         else
@@ -1398,7 +1404,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
                 var previous = libraryViewModel.Items;
                 var next = builder.ToImmutable();
-                project.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+                project.History?.Snapshot(previous, next, p => libraryViewModel.Items = p);
                 libraryViewModel.Items = next;
             }
         }
@@ -1420,7 +1426,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = libraryViewModel.Items;
         var next = builder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+        project.History?.Snapshot(previous, next, p => libraryViewModel.Items = p);
         libraryViewModel.Items = next;
     }
 
@@ -1437,7 +1443,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         var previous = libraryViewModel.Items;
         var next = builder.ToImmutable();
-        project.History?.Snapshot(previous, next, (p) => libraryViewModel.Items = p);
+        project.History?.Snapshot(previous, next, p => libraryViewModel.Items = p);
         libraryViewModel.Items = next;
     }
 }

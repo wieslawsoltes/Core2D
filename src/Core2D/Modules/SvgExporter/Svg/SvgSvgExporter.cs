@@ -71,7 +71,7 @@ public class SvgSvgExporter : ISvgExporter
             var path = converter.ToFillPathShape(shape);
             if (path is { })
             {
-                if (shape.Style.Fill.Color is ArgbColorViewModel argbColor)
+                if (shape.Style?.Fill?.Color is ArgbColorViewModel argbColor)
                 {
                     var geometry = path.ToSvgString();
                     var fill = argbColor.ToSvgString();
@@ -86,7 +86,7 @@ public class SvgSvgExporter : ISvgExporter
             var path = converter.ToStrokePathShape(shape);
             if (path is { })
             {
-                if (shape.Style.Stroke.Color is ArgbColorViewModel argbColor)
+                if (shape.Style?.Stroke?.Color is ArgbColorViewModel argbColor)
                 {
                     var geometry = path.ToSvgString();
                     var fill = argbColor.ToSvgString();

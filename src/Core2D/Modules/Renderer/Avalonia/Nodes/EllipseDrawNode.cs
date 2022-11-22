@@ -13,10 +13,9 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
 {
     public EllipseShapeViewModel Ellipse { get; set; }
     public A.Rect Rect { get; set; }
-    public AP.IGeometryImpl Geometry { get; set; }
+    public AP.IGeometryImpl? Geometry { get; set; }
 
-    public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
-        : base()
+    public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
         Style = style;
         Ellipse = ellipse;
@@ -28,13 +27,29 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
         ScaleThickness = Ellipse.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Ellipse.State.HasFlag(ShapeStateFlags.Size);
         Geometry = PathGeometryConverter.ToGeometryImpl(Ellipse);
-        Rect = Geometry.Bounds;
-        Center = Geometry.Bounds.Center;
+
+        if (Geometry is { })
+        {
+            Rect = Geometry.Bounds;
+            Center = Geometry.Bounds.Center;
+        }
+        else
+        {
+            Rect = A.Rect.Empty;
+            Center = new A.Point();
+        }
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
-        context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
+        if (Geometry is { })
+        {
+            context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
+        }
     }
 }

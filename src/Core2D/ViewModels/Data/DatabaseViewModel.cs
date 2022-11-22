@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
 
@@ -20,15 +21,15 @@ public partial class DatabaseViewModel : ViewModelBase
 
     public DatabaseViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        AddColumn = new Command<DatabaseViewModel?>(x => GetProject()?.OnAddColumn(x));
+        AddColumn = new RelayCommand<DatabaseViewModel?>(x => GetProject()?.OnAddColumn(x));
             
-        RemoveColumn = new Command<ColumnViewModel?>(x => GetProject()?.OnRemoveColumn(x));
+        RemoveColumn = new RelayCommand<ColumnViewModel?>(x => GetProject()?.OnRemoveColumn(x));
             
-        AddRecord = new Command<DatabaseViewModel?>(x => GetProject()?.OnAddRecord(x));
+        AddRecord = new RelayCommand<DatabaseViewModel?>(x => GetProject()?.OnAddRecord(x));
             
-        RemoveRecord = new Command<RecordViewModel?>(x => GetProject()?.OnRemoveRecord(x));
+        RemoveRecord = new RelayCommand<RecordViewModel?>(x => GetProject()?.OnRemoveRecord(x));
 
-        ApplyRecord = new Command<RecordViewModel?>(x => GetProject()?.OnApplyRecord(x));
+        ApplyRecord = new RelayCommand<RecordViewModel?>(x => GetProject()?.OnApplyRecord(x));
 
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }

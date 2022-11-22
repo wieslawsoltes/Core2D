@@ -1,0 +1,63 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Style Selector="Label">
+    <Setter Property="Margin" Value="0,0,0,0" />
+    <Setter Property="Padding" Value="0,6,0,6" />
+  </Style>
+  <Style Selector="ListBoxItem">
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Padding" Value="0,0,0,0" />
+  </Style>
+  <Style Selector="ListBoxItem TextBlock">
+    <Setter Property="Padding" Value="12,9,12,12" />
+  </Style>
+  <Style Selector="TabControl">
+    <Setter Property="Margin" Value="0,0,0,0" />
+    <Setter Property="Padding" Value="0,0,0,0" />
+  </Style>
+  <Style Selector="TabControl /template/ ContentPresenter#PART_SelectedContentHost">
+    <Setter Property="Padding" Value="0" />
+  </Style>
+  <Style Selector="TabItem">
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="Padding" Value="6,0,6,0" />
+  </Style>
+  <Style Selector="TreeView">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
+  </Style>
+  <Style Selector="DataGridColumnHeader">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
+  </Style>
+  <Style Selector="ToolTip">
+    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
+  </Style>
+
+  <Style Selector="ToolControl /template/ DockPanel#PART_DockPanel">
+    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
+  </Style>
+  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem">
+    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}" />
+  </Style>
+  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
+    <Setter Property="Background" Value="{DynamicResource DockThemeBackgroundBrush}" />
+  </Style>
+
+  <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
+  <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
+  <StyleInclude Source="avares://Dock.Avalonia/Themes/DockFluentTheme.axaml" />
+  <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+  <StyleInclude Source="avares://Core2D/Styles/Geometry.axaml" />
+  <StyleInclude Source="avares://Core2D/Styles/Icons.axaml" />
+  <StyleInclude Source="avares://Core2D/Styles/Dock.axaml" />
+  <StyleInclude Source="avares://Core2D/Controls/EditableItem.axaml" />
+  <StyleInclude Source="avares://Core2D/Controls/ToggleItem.axaml" />
+
+  <Style Selector="AccessText">
+    <Setter Property="(TextElement.Foreground)" Value="{DynamicResource ButtonForeground}" />
+  </Style>
+  <Style Selector="TextBlock">
+    <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+  </Style>
+
+</Styles>

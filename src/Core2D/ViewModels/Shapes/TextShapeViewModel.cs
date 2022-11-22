@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
@@ -21,7 +22,7 @@ public partial class TextShapeViewModel : BaseShapeViewModel
     public TextShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(TextShapeViewModel))
     {
             
-        EditTextBinding = new Command<TextShapeViewModel?>(shape =>
+        EditTextBinding = new RelayCommand<TextShapeViewModel?>(shape =>
         {
             if (shape is { } && GetProjectEditor() is { } editor)
             {

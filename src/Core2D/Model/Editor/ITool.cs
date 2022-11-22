@@ -18,9 +18,9 @@ public interface ITool
 
     void Move(InputArgs args);
 
-    void Move(BaseShapeViewModel shape);
+    void Move(BaseShapeViewModel? shape);
 
-    void Finalize(BaseShapeViewModel shape);
+    void Finalize(BaseShapeViewModel? shape);
 
     void Reset();
 }

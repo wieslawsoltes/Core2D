@@ -9,13 +9,13 @@ namespace Core2D.Modules.Renderer.Avalonia.Nodes;
 internal class FillDrawNode : DrawNode, IFillDrawNode
 {
     public A.Rect Rect { get; set; }
-    public BaseColorViewModel Color { get; set; }
+    public BaseColorViewModel? Color { get; set; }
     public double X { get; set; }
     public double Y { get; set; }
     public double Width { get; set; }
     public double Height { get; set; }
 
-    public FillDrawNode(double x, double y, double width, double height, BaseColorViewModel color)
+    public FillDrawNode(double x, double y, double width, double height, BaseColorViewModel? color)
     {
         X = x;
         Y = y;
@@ -35,17 +35,27 @@ internal class FillDrawNode : DrawNode, IFillDrawNode
 
     public override void UpdateStyle()
     {
-        Fill = AvaloniaDrawUtil.ToBrush(Color);
+        if (Color is { })
+        {
+            Fill = AvaloniaDrawUtil.ToBrush(Color);
+        }
     }
 
-    public override void Draw(object dc, double zoom)
+    public override void Draw(object? dc, double zoom)
     {
         OnDraw(dc, zoom);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
-        context.DrawRectangle(Fill, null, Rect);
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
+        if (!Rect.IsEmpty)
+        {
+            context.DrawRectangle(Fill, null, Rect);
+        }
     }
 }

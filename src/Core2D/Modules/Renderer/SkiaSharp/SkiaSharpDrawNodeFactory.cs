@@ -20,52 +20,52 @@ internal class SkiaSharpDrawNodeFactory : IDrawNodeFactory
         return new GridDrawNode(grid, x, y, width, height);
     }
 
-    public IPointDrawNode CreatePointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize)
+    public IPointDrawNode CreatePointDrawNode(PointShapeViewModel point, ShapeStyleViewModel? pointStyleViewModel, double pointSize)
     {
         return new PointDrawNode(point, pointStyleViewModel, pointSize);
     }
 
-    public ILineDrawNode CreateLineDrawNode(LineShapeViewModel line, ShapeStyleViewModel style)
+    public ILineDrawNode CreateLineDrawNode(LineShapeViewModel line, ShapeStyleViewModel? style)
     {
         return new LineDrawNode(line, style);
     }
 
-    public IRectangleDrawNode CreateRectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel style)
+    public IRectangleDrawNode CreateRectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
         return new RectangleDrawNode(rectangle, style);
     }
 
-    public IEllipseDrawNode CreateEllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel style)
+    public IEllipseDrawNode CreateEllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
         return new EllipseDrawNode(ellipse, style);
     }
 
-    public IArcDrawNode CreateArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel style)
+    public IArcDrawNode CreateArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel? style)
     {
         return new ArcDrawNode(arc, style);
     }
 
-    public ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel style)
+    public ICubicBezierDrawNode CreateCubicBezierDrawNode(CubicBezierShapeViewModel cubicBezier, ShapeStyleViewModel? style)
     {
         return new CubicBezierDrawNode(cubicBezier, style);
     }
 
-    public IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel style)
+    public IQuadraticBezierDrawNode CreateQuadraticBezierDrawNode(QuadraticBezierShapeViewModel quadraticBezier, ShapeStyleViewModel? style)
     {
         return new QuadraticBezierDrawNode(quadraticBezier, style);
     }
 
-    public ITextDrawNode CreateTextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style)
+    public ITextDrawNode CreateTextDrawNode(TextShapeViewModel text, ShapeStyleViewModel? style)
     {
         return new TextDrawNode(text, style);
     }
 
-    public IImageDrawNode CreateImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
+    public IImageDrawNode CreateImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel? style, IImageCache? imageCache, ICache<string, IDisposable>? bitmapCache)
     {
         return new ImageDrawNode(image, style, imageCache, bitmapCache);
     }
 
-    public IPathDrawNode CreatePathDrawNode(PathShapeViewModel path, ShapeStyleViewModel style)
+    public IPathDrawNode CreatePathDrawNode(PathShapeViewModel path, ShapeStyleViewModel? style)
     {
         return new PathDrawNode(path, style);
     }

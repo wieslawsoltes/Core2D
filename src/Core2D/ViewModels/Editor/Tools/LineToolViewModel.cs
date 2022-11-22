@@ -28,87 +28,127 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-
         if (factory is null || editor?.Project?.Options is null || selection is null || viewModelFactory is null)
         {
             return;
         }
 
-        (double x, double y) = args;
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (x, y) = args;
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:
             {
                 editor.IsToolIdle = false;
-                var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
-                    editor.Project.CurrentStyleLibrary.Selected :
-                    viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+                var style = editor.Project.CurrentStyleLibrary?.Selected is { }
+                    ? editor.Project.CurrentStyleLibrary.Selected
+                    : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
                 _line = factory.CreateLineShape(
-                    (double)sx, (double)sy,
-                    (ShapeStyleViewModel)style.Copy(null),
+                    (double) sx, (double) sy,
+                    (ShapeStyleViewModel) style.Copy(null),
                     editor.Project.Options.DefaultIsStroked);
 
                 editor.SetShapeName(_line);
 
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _line.Start = result;
                     }
                     else
                     {
-                        selection.TryToSplitLine(x, y, _line.Start);
+                        if (_line.Start is { })
+                        {
+                            selection.TryToSplitLine(x, y, _line.Start);
+                        }
                     }
                 }
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+
+                if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_line);
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
+                }
+
                 ToStateEnd();
                 Move(_line);
                 _currentState = State.End;
-            }
                 break;
+            }
             case State.End:
             {
                 if (_line is { })
                 {
-                    _line.End.X = (double)sx;
-                    _line.End.Y = (double)sy;
+                    if (_line.End is { })
+                    {
+                        _line.End.X = (double) sx;
+                        _line.End.Y = (double) sy;
+                    }
 
                     if (editor.Project.Options.TryToConnect)
                     {
-                        var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                        var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                         if (result is { })
                         {
                             _line.End = result;
                         }
                         else
                         {
-                            selection.TryToSplitLine(x, y, _line.End);
+                            if (_line.End is { })
+                            {
+                                selection.TryToSplitLine(x, y, _line.End);
+                            }
                         }
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                    }
+
                     Finalize(_line);
-                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _line);
+
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _line);
+                    }
 
                     Reset();
                 }
-            }
+
                 break;
+            }
         }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
     }
 
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.Start)
+            {
+                NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)
@@ -131,7 +171,11 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        if (editor?.Project?.Options is null || selection is null)
+        {
+            return;
+        }
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Start:
@@ -140,8 +184,8 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.End:
             {
                 if (_line is { })
@@ -150,42 +194,52 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _line.End.X = (double)sx;
-                    _line.End.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+
+                    if (_line.End is { })
+                    {
+                        _line.End.X = (double)sx;
+                        _line.End.Y = (double)sy;
+                    }
+
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_line);
                 }
-            }
                 break;
+            }
         }
     }
 
     public void ToStateEnd()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-        _selection = new LineSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _line,
-            editor.PageState.HelperStyle);
+        if (editor is { } 
+            && editor.Project?.CurrentContainer?.HelperLayer is { } 
+            && _line is { } 
+            && editor.PageState?.HelperStyle is { })
+        {
+            _selection = new LineSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _line,
+                editor.PageState.HelperStyle);
 
-        _selection.ToStateEnd();
+            _selection.ToStateEnd();
+        }
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         _selection?.Move();
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
     }
 
     public void Reset()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-
-        if (editor is null)
+        if (editor?.Project is null)
         {
             return;
         }
@@ -196,10 +250,13 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 break;
             case State.End:
             {
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-            }
+                if (editor.Project.CurrentContainer?.WorkingLayer is { } && _line is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_line);
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
+                }
                 break;
+            }
         }
 
         _currentState = State.Start;

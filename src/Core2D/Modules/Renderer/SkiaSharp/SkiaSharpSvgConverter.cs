@@ -197,11 +197,11 @@ public class SkiaSharpSvgConverter : ISvgConverter
                     {
                         return null;
                     }
-                    if (haveFigure == true)
+                    if (haveFigure)
                     {
                         context.SetClosedState(false);
                     }
-                    if (isLast == true)
+                    if (isLast)
                     {
                         return geometry;
                     }
@@ -413,7 +413,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
 
                 case SP.DrawPathCanvasCommand drawPathCanvasCommand:
                 {
-                    if (drawPathCanvasCommand.Path.Commands?.Count == 1)
+                    if (drawPathCanvasCommand.Path?.Commands?.Count == 1)
                     {
                         var pathCommand = drawPathCanvasCommand.Path.Commands[0];
                         var success = false;
@@ -510,7 +510,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
                         }
                     }
 
-                    if (drawPathCanvasCommand.Path.Commands?.Count == 2)
+                    if (drawPathCanvasCommand.Path?.Commands?.Count == 2)
                     {
                         var pathCommand1 = drawPathCanvasCommand.Path.Commands[0];
                         var pathCommand2 = drawPathCanvasCommand.Path.Commands[1];
@@ -529,8 +529,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
                         }
                     }
 
-                    var path = ToPathGeometry(drawPathCanvasCommand.Path, IsFilled(drawPathCanvasCommand.Paint),
-                        viewModelFactory);
+                    var path = ToPathGeometry(drawPathCanvasCommand.Path, IsFilled(drawPathCanvasCommand.Paint), viewModelFactory);
                     if (path is { })
                     {
                         path.Name = "Path";
@@ -610,9 +609,9 @@ public class SkiaSharpSvgConverter : ISvgConverter
         return Enumerable.Repeat<BaseShapeViewModel>(group, 1).ToList();
     }
 
-    public IList<BaseShapeViewModel>? Convert(string path, out double width, out double height)
+    public IList<BaseShapeViewModel>? Convert(Stream stream, out double width, out double height)
     {
-        var document = Svg.Model.SvgExtensions.Open(path);
+        var document = Svg.Model.SvgExtensions.Open(stream);
         if (document is null)
         {
             width = double.NaN;

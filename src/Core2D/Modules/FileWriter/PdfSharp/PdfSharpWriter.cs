@@ -19,9 +19,9 @@ public sealed class PdfSharpWriter : IFileWriter
         _serviceProvider = serviceProvider;
     }
 
-    public string Name { get; } = "Pdf (PdfSharp)";
+    public string Name => "Pdf (PdfSharp)";
 
-    public string Extension { get; } = "pdf";
+    public string Extension => "pdf";
 
     public void Save(Stream stream, object? item, object? options)
     {
@@ -38,35 +38,43 @@ public sealed class PdfSharpWriter : IFileWriter
 
         IProjectExporter exporter = new PdfSharpRenderer(_serviceProvider);
 
-        IShapeRenderer renderer = (IShapeRenderer)exporter;
-        renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-        renderer.State.ImageCache = ic;
+        var renderer = (IShapeRenderer)exporter;
+        if (renderer.State is { })
+        {
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.State.ImageCache = ic;
+        }
 
         if (item is PageContainerViewModel page)
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
             var db = (object)page.Properties;
-            var record = (object)page.Record;
+            var record = (object?)page.Record;
 
-            dataFlow.Bind(page.Template, db, record);
-            dataFlow.Bind(page, db, record);
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(page.Template, db, record);
+                dataFlow.Bind(page, db, record);
+            }
 
             exporter.Save(stream, page);
         }
         else if (item is DocumentContainerViewModel document)
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
-
-            dataFlow.Bind(document);
-
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(document);
+            }
             exporter.Save(stream, document);
         }
         else if (item is ProjectContainerViewModel project)
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
-
-            dataFlow.Bind(project);
-
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(project);
+            }
             exporter.Save(stream, project);
         }
     }

@@ -4,6 +4,7 @@ using Autofac;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Core2D;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Editor;
 using Demo.ViewModels;
@@ -21,7 +22,7 @@ namespace Demo
         public override void OnFrameworkInitializationCompleted()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<CoreModule>();
+            builder.RegisterModule<AppModule>();
 
             var container = builder.Build();
 
@@ -40,6 +41,17 @@ namespace Demo
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new MainWindow
+                {
+                    DataContext = new MainWindowViewModel()
+                    {
+                        Editor = editor
+                    }
+                };
+            }
+
+            if (ApplicationLifetime is ISingleViewApplicationLifetime single)
+            {
+                single.MainView = new MainView()
                 {
                     DataContext = new MainWindowViewModel()
                     {

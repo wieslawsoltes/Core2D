@@ -11,8 +11,8 @@ using Core2D.ViewModels.Editor;
 using Dock.Avalonia.Controls;
 using Dock.Model.Controls;
 using Dock.Model.Core;
-using Dock.Model.ReactiveUI;
-using Dock.Model.ReactiveUI.Controls;
+using Dock.Model.Mvvm;
+using Dock.Model.Mvvm.Controls;
 
 namespace Core2D.ViewModels.Docking;
 

@@ -15,8 +15,13 @@ namespace Core2D.Modules.Renderer.Dxf;
 
 internal class DxfExportPresenter : IContainerPresenter
 {
-    public void Render(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container, double dx, double dy)
+    public void Render(object? dc, IShapeRenderer? renderer, ISelection? selection, FrameContainerViewModel? container, double dx, double dy)
     {
+        if (dc is null || renderer?.State is null || container is null)
+        {
+            return;
+        }
+
         var flags = renderer.State.DrawShapeState;
 
         renderer.State.DrawShapeState = ShapeStateFlags.Printable;
@@ -28,12 +33,16 @@ internal class DxfExportPresenter : IContainerPresenter
         }
 
         DrawContainer(dc, renderer, selection, container);
+
         renderer.State.DrawShapeState = flags;
     }
 
-    private void DrawContainer(object dc, IShapeRenderer renderer, ISelection selection, FrameContainerViewModel container)
+    private void DrawContainer(object dc, IShapeRenderer renderer, ISelection? selection, FrameContainerViewModel container)
     {
-        var dxf = dc as DXF.DxfDocument;
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
 
         foreach (var layer in container.Layers)
         {
@@ -44,14 +53,22 @@ internal class DxfExportPresenter : IContainerPresenter
 
             dxf.Layers.Add(dxfLayer);
 
-            (renderer as DxfRenderer)._currentLayer = dxfLayer;
+            if (renderer is DxfRenderer dxfRenderer)
+            {
+                dxfRenderer._currentLayer = dxfLayer;
+            }
 
             DrawLayer(dc, renderer, selection, layer);
         }
     }
 
-    private void DrawLayer(object dc, IShapeRenderer renderer, ISelection selection, LayerContainerViewModel layer)
+    private void DrawLayer(object dc, IShapeRenderer renderer, ISelection? selection, LayerContainerViewModel layer)
     {
+        if (renderer.State is null)
+        {
+            return;
+        }
+
         foreach (var shape in layer.Shapes)
         {
             if (shape.State.HasFlag(renderer.State.DrawShapeState))
@@ -139,14 +156,17 @@ public partial class DxfRenderer : IProjectExporter
     {
         var dataFlow = ServiceProvider.GetService<DataFlow>();
         var db = (object)container.Properties;
-        var record = (object)container.Record;
+        var record = (object?)container.Record;
 
-        dataFlow.Bind(container.Template, db, record);
-        dataFlow.Bind(container, db, record);
+        if (dataFlow is { })
+        {
+            dataFlow.Bind(container.Template, db, record);
+            dataFlow.Bind(container, db, record);
+        }
 
         if (container.Template is { })
         {
-            _pageWidth = container.Template.Width;
+            // _pageWidth = container.Template.Width;
             _pageHeight = container.Template.Height;
             presenter.Render(dxf, this, null, container.Template, 0, 0);
         }
@@ -162,18 +182,29 @@ public partial class DxfRenderer : IProjectExporter
     {
         foreach (var page in document.Pages)
         {
+            if (page.Template is null)
+            {
+                continue;
+            }
+            
+            var name = page.Template.Name;
+            var width = page.Template.Width;
+            var height = page.Template.Height;
+ 
             var layout = new DXFO.Layout(page.Name)
             {
-                PlotSettings = new DXFO.PlotSettings()
+                
+                PlotSettings = new DXFO.PlotSettings
                 {
-                    PaperSizeName = $"{page.Template.Name}_({page.Template.Width}_x_{page.Template.Height}_MM)",
+                    PaperSizeName = $"{name}_({width}_x_{height}_MM)",
                     PaperMargin = new DXFO.PaperMargin(0, 0, 0, 0),
-                    PaperSize = new DXF.Vector2(page.Template.Width, page.Template.Height),
+                    PaperSize = new DXF.Vector2(width, height),
                     Origin = new DXF.Vector2(0.0, 0.0),
                     PaperUnits = DXFO.PlotPaperUnits.Milimeters,
                     PaperRotation = DXFO.PlotRotation.NoRotation
                 }
             };
+
             dxf.Layouts.Add(layout);
             dxf.ActiveLayout = layout.Name;
 

@@ -1,6 +1,5 @@
 #nullable enable
 using System;
-using System.Collections.Generic;
 
 namespace Core2D.ViewModels.Containers;
 

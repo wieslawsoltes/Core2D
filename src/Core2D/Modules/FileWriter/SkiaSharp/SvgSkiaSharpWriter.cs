@@ -38,8 +38,11 @@ public sealed class SvgSkiaSharpWriter : IFileWriter
         }
 
         var renderer = new SkiaSharpRendererViewModel(_serviceProvider);
-        renderer.State.DrawShapeState = ShapeStateFlags.Printable;
-        renderer.State.ImageCache = ic;
+        if (renderer.State is { })
+        {
+            renderer.State.DrawShapeState = ShapeStateFlags.Printable;
+            renderer.State.ImageCache = ic;
+        }
 
         var presenter = new ExportPresenter();
 
@@ -49,10 +52,13 @@ public sealed class SvgSkiaSharpWriter : IFileWriter
         {
             var dataFlow = _serviceProvider.GetService<DataFlow>();
             var db = (object)page.Properties;
-            var record = (object)page.Record;
+            var record = (object?)page.Record;
 
-            dataFlow.Bind(page.Template, db, record);
-            dataFlow.Bind(page, db, record);
+            if (dataFlow is { })
+            {
+                dataFlow.Bind(page.Template, db, record);
+                dataFlow.Bind(page, db, record);
+            }
 
             exporter.Save(stream, page);
         }

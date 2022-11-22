@@ -3,6 +3,7 @@ using System;
 using System.Collections.Immutable;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.Model;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
@@ -26,11 +27,11 @@ public abstract partial class FrameContainerViewModel : BaseContainerViewModel, 
 
     protected FrameContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        AddProperty = new Command<ViewModelBase?>(x => GetProject()?.OnAddProperty(x));
+        AddProperty = new RelayCommand<ViewModelBase?>(x => GetProject()?.OnAddProperty(x));
             
-        RemoveProperty = new Command<PropertyViewModel?>(x => GetProject()?.OnRemoveProperty(x));
+        RemoveProperty = new RelayCommand<PropertyViewModel?>(x => GetProject()?.OnRemoveProperty(x));
 
-        ResetRecord = new Command<IDataObject?>(x => GetProject()?.OnResetRecord(x));
+        ResetRecord = new RelayCommand<IDataObject?>(x => GetProject()?.OnResetRecord(x));
 
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }

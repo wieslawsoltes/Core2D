@@ -21,7 +21,13 @@ public sealed class WebpSkiaSharpExporter : IProjectExporter
 
     public void Save(Stream stream, PageContainerViewModel container)
     {
-        var info = new SKImageInfo((int)container.Template.Width, (int)container.Template.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+        if (container.Template is null)
+        {
+            return;
+        }
+        var width = (int)container.Template.Width;
+        var height = (int)container.Template.Height;
+        var info = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
         using var bitmap = new SKBitmap(info);
         using (var canvas = new SKCanvas(bitmap))
         {

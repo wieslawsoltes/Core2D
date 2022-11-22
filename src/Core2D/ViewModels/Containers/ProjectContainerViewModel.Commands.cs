@@ -240,7 +240,7 @@ public partial class ProjectContainerViewModel
             return;
         }
 
-        ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(style);
+        ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportJson(style);
     }
 
     public void OnApplyTemplate(TemplateContainerViewModel? template)
@@ -293,7 +293,7 @@ public partial class ProjectContainerViewModel
             return;
         }
             
-        ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(template);
+        ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportJson(template);
     }
 
     public void OnAddGroupLibrary()
@@ -358,7 +358,7 @@ public partial class ProjectContainerViewModel
             return;
         }
 
-        ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(group);
+        ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportJson(group);
     }
 
     public void OnAddShape(BaseShapeViewModel? shape)
@@ -776,6 +776,6 @@ public partial class ProjectContainerViewModel
             return;
         }
 
-        ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportObject(script);
+        ServiceProvider.GetService<IProjectEditorPlatform>()?.OnExportJson(script);
     }
 }

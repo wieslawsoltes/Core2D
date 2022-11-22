@@ -1,5 +1,5 @@
 #nullable enable
-using Dock.Model.ReactiveUI.Core;
+using Dock.Model.Mvvm.Core;
 
 namespace Core2D.ViewModels.Docking.Views;
 

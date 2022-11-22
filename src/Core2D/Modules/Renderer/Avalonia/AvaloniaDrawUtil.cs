@@ -19,9 +19,15 @@ internal static class AvaloniaDrawUtil
         _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported.")
     };
 
-    public static AM.IPen ToPen(ShapeStyleViewModel style, double thickness)
+    public static AM.IPen? ToPen(ShapeStyleViewModel style, double thickness)
     {
+        if (style.Stroke?.Color is null)
+        {
+            return null;
+        }
+        
         var dashStyle = default(AM.Immutable.ImmutableDashStyle);
+
         if (style.Stroke.Dashes is { })
         {
             var dashes = StyleHelper.ConvertDashesToDoubleArray(style.Stroke.Dashes, 1.0);

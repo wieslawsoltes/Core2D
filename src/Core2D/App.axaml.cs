@@ -9,24 +9,31 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Themes.Fluent;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.Configuration.Windows;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Designer;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
-using Newtonsoft.Json;
 
 namespace Core2D;
 
 public class App : Application
 {
+    private static StyleInclude? s_fluentDark;
+
+    private static StyleInclude? s_fluentLight;
+
     public static string DefaultTheme { get; set; }
 
-    public static ICommand ChangeTheme { get; private set; }
+    public static ICommand? ChangeTheme { get; }
 
     static App()
     {
         DefaultTheme = "FluentDark";
+
+        ChangeTheme = new RelayCommand<string>(SetTheme);
 
         InitializeDesigner();
     }
@@ -45,11 +52,16 @@ public class App : Application
         }
     }
 
-    public static Window InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime desktopLifetime, out ProjectEditorViewModel editor)
+    public static void InitializationClassicDesktopStyle(IClassicDesktopStyleApplicationLifetime desktopLifetime, out ProjectEditorViewModel? editor)
     {
         var appState = new AppState();
 
         var mainWindow = appState.ServiceProvider.GetService<Window>();
+        if (mainWindow is null)
+        {
+            editor = null;
+            return;
+        }
 
         if (appState.WindowConfiguration is { })
         {
@@ -58,7 +70,7 @@ public class App : Application
 
         mainWindow.DataContext = appState.Editor;
 
-        mainWindow.Closing += (sender, e) =>
+        mainWindow.Closing += (_, _) =>
         {
             appState.WindowConfiguration = WindowConfigurationFactory.Save(mainWindow);
             appState.Save();
@@ -68,11 +80,9 @@ public class App : Application
         desktopLifetime.Exit += (_, _) => appState.Dispose();
 
         editor = appState.Editor;
-
-        return mainWindow;
     }
 
-    public static MainView InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime, out ProjectEditorViewModel editor)
+    public static void InitializeSingleView(ISingleViewApplicationLifetime singleViewLifetime, out ProjectEditorViewModel? editor)
     {
         var appState = new AppState();
 
@@ -85,21 +95,45 @@ public class App : Application
         singleViewLifetime.MainView.Unloaded += (_, _) => appState.Dispose();
 
         editor = appState.Editor;
-
-        return mainView;
     }
 
-    public void SetTheme(string themeName)
+    public static void SetTheme(string? themeName)
     {
-        var theme = Current.Styles.Select(x => (StyleInclude)x).FirstOrDefault(x => x.Source is { } && x.Source.AbsolutePath.Contains("Themes"));
-        if (theme is { })
+        if (Current is null || themeName is null)
         {
-            var index = Current.Styles.IndexOf(theme);
+            return;
+        }
 
-            Current.Styles[index] = new StyleInclude(new Uri("avares://Core2D/App.axaml"))
+        s_fluentDark ??= new StyleInclude(new Uri("avares://Core2D/App.axaml"))
+        {
+            Source = new Uri("avares://Core2D/Themes/FluentDark.axaml")
+        };
+
+        s_fluentLight ??= new StyleInclude(new Uri("avares://Core2D/App.axaml"))
+        {
+            Source = new Uri("avares://Core2D/Themes/FluentLight.axaml")
+        };
+
+        switch (themeName)
+        {
+            case "FluentLight":
             {
-                Source = new Uri($"avares://Core2D/Themes/{themeName}.axaml")
-            };
+                if (Current.Styles[0] is FluentTheme fluentTheme)
+                {
+                    fluentTheme.Mode = FluentThemeMode.Light;
+                }
+                Current.Styles[1] = s_fluentLight;
+                break;
+            }
+            case "FluentDark":
+            {
+                if (Current.Styles[0] is FluentTheme fluentTheme)
+                {
+                    fluentTheme.Mode = FluentThemeMode.Dark;
+                }
+                Current.Styles[1] = s_fluentDark;
+                break;
+            }
         }
     }
 
@@ -126,7 +160,5 @@ public class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
-
-        ChangeTheme = new Command<string>(SetTheme);
     }
 }

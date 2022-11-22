@@ -13,7 +13,7 @@ internal class PointDrawNode : DrawNode, IPointDrawNode
     public double PointSize { get; set; }
     public SKRect Rect { get; set; }
 
-    public PointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize)
+    public PointDrawNode(PointShapeViewModel point, ShapeStyleViewModel? pointStyleViewModel, double pointSize)
     {
         Style = pointStyleViewModel;
         Point = point;
@@ -25,14 +25,17 @@ internal class PointDrawNode : DrawNode, IPointDrawNode
     {
         ScaleThickness = true; // Point.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = true; // Point.State.HasFlag(ShapeStateFlags.Size);
-        var rect2 = Rect2.FromPoints(Point.X - PointSize, Point.Y - PointSize, Point.X + PointSize, Point.Y + PointSize, 0, 0);
+        var rect2 = Rect2.FromPoints(Point.X - PointSize, Point.Y - PointSize, Point.X + PointSize, Point.Y + PointSize);
         Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
         Center = new SKPoint(Rect.MidX, Rect.MidY);
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         canvas.DrawRect(Rect, Fill);
         canvas.DrawRect(Rect, Stroke);

@@ -12,7 +12,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
 using Avalonia.OpenGL;
-using Avalonia.ReactiveUI;
 using Avalonia.Threading;
 using Core2D.Screenshot;
 using Core2D.Util;
@@ -46,7 +45,7 @@ internal static class Program
         {
             IsBackground = true
         };
-        s_replThread?.Start();
+        s_replThread.Start();
     }
 
     private static async void ReplThread()
@@ -83,7 +82,7 @@ internal static class Program
     {
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
-            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime?)Application.Current?.ApplicationLifetime;
             var mainWindow = applicationLifetime?.MainWindow;
             var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
 
@@ -99,13 +98,15 @@ internal static class Program
                 var pathDashboard = $"Core2D-Dashboard-{App.DefaultTheme}.{extension}";
                 var pathEditor = $"Core2D-Editor-{App.DefaultTheme}.{extension}";
 
-                Capture.Save(contentPanel, size, pathDashboard);
+                var streamDashboard = File.Create(pathDashboard);
+                Capture.Save(contentPanel, size, streamDashboard, pathDashboard);
                 Dispatcher.UIThread.RunJobs();
 
                 editor?.OnNew(null);
                 Dispatcher.UIThread.RunJobs();
 
-                Capture.Save(contentPanel, size, pathEditor);
+                var streamEditor = File.Create(pathEditor);
+                Capture.Save(contentPanel, size, streamEditor, pathEditor);
                 Dispatcher.UIThread.RunJobs();
             }
 
@@ -117,7 +118,7 @@ internal static class Program
     {
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
-            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime?)Application.Current?.ApplicationLifetime;
             var mainWindow = applicationLifetime?.MainWindow;
             var mainView = mainWindow?.Content as MainView;
             var editor = mainView?.DataContext as ProjectEditorViewModel;
@@ -128,14 +129,17 @@ internal static class Program
                 {
                     foreach (var script in settings.Scripts)
                     {
-                        editor?.OnExecuteScriptFile(script.FullName);
+                        var stream = File.OpenRead(script.FullName);
+                        editor?.OnExecuteScript(stream);
                         Dispatcher.UIThread.RunJobs();
                     }
                 }
 
                 if (settings.Project is { })
                 {
-                    editor?.OnOpenProject(settings.Project.FullName);
+                    var name = Path.GetFileNameWithoutExtension(settings.Project.FullName); 
+                    using var stream = File.OpenRead(settings.Project.FullName);
+                    editor?.OnOpenProject(stream, name);
                     Dispatcher.UIThread.RunJobs();
                 }
             }
@@ -302,6 +306,5 @@ internal static class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .UseReactiveUI()
             .LogToTrace();
 }

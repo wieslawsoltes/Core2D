@@ -7,5 +7,5 @@ public interface ITextDrawNode : IDrawNode
 {
     TextShapeViewModel Text { get; set; }
 
-    string BoundText { get; set; }
+    string? BoundText { get; set; }
 }

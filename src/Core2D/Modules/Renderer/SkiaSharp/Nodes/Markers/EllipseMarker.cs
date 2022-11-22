@@ -7,10 +7,18 @@ internal class EllipseMarker : MarkerBase
 {
     public SKRect Rect { get; set; }
 
-    public override void Draw(object dc)
+    public override void Draw(object? dc)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
+        if (ShapeViewModel is null)
+        {
+            return;
+        }
+        
         var count = canvas.Save();
         canvas.SetMatrix(MatrixHelper.Multiply(Rotation, canvas.TotalMatrix));
 

@@ -13,15 +13,11 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
     public TextShapeViewModel Text { get; set; }
     public SKRect Rect { get; set; }
     public SKPoint Origin { get; set; }
-    public SKTypeface Typeface { get; set; }
-    public SKPaint FormattedText { get; set; }
-    public string BoundText { get; set; }
+    public SKTypeface? Typeface { get; set; }
+    public SKPaint? FormattedText { get; set; }
+    public string? BoundText { get; set; }
 
-    public TextDrawNode()
-    {
-    }
-
-    public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel style)
+    public TextDrawNode(TextShapeViewModel text, ShapeStyleViewModel? style)
     {
         Style = style;
         Text = text;
@@ -32,35 +28,58 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
     {
         ScaleThickness = Text.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Text.State.HasFlag(ShapeStateFlags.Size);
-        var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y, 0, 0);
-        Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
-        Center = new SKPoint(Rect.MidX, Rect.MidY);
+        
+        if (Text.TopLeft is { } && Text.BottomRight is { })
+        {
+            var rect2 = Rect2.FromPoints(Text.TopLeft.X, Text.TopLeft.Y, Text.BottomRight.X, Text.BottomRight.Y);
+            Rect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
+            Center = new SKPoint(Rect.MidX, Rect.MidY);
+        }
+        else
+        {
+            Rect = SKRect.Empty;
+            Center = SKPoint.Empty;
+        }
 
         UpdateTextGeometry();
     }
 
-    protected void UpdateTextGeometry()
+    private void UpdateTextGeometry()
     {
-        BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) is string boundText ? boundText : Text.Text;
+        BoundText = Text.GetProperty(nameof(TextShapeViewModel.Text)) as string ?? Text.Text;
 
-        if (BoundText is null)
+        if (BoundText is null || Style?.TextStyle is null)
         {
+            FormattedText = null;
+            Origin = SKPoint.Empty;
             return;
         }
 
         if (Style.TextStyle.FontSize < 0.0)
         {
+            FormattedText = null;
+            Origin = SKPoint.Empty;
             return;
         }
 
-        FormattedText = SkiaSharpDrawUtil.GetSKPaint(BoundText, Style, Text.TopLeft, Text.BottomRight, out var origin);
-
-        Origin = origin;
+        if (Text.TopLeft is { } && Text.BottomRight is { })
+        {
+            FormattedText = SkiaSharpDrawUtil.GetSKPaint(BoundText, Style, Text.TopLeft, Text.BottomRight, out var origin);
+            Origin = origin;
+        }
+        else
+        {
+            FormattedText = null;
+            Origin = SKPoint.Empty;
+        }
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (FormattedText is { })
         {

@@ -32,81 +32,95 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
         throw new NotImplementedException();
     }
 
-    public void BeginDown(InputArgs args)
+    private void NextPoint(InputArgs args)
     {
         var factory = ServiceProvider.GetService<IViewModelFactory>();
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
         var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
-
         if (factory is null || editor?.Project?.Options is null || selection is null || viewModelFactory is null)
         {
             return;
         }
 
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:
             {
                 editor.IsToolIdle = false;
-                var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
-                    editor.Project.CurrentStyleLibrary.Selected :
-                    viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+                var style = editor.Project.CurrentStyleLibrary?.Selected is { }
+                    ? editor.Project.CurrentStyleLibrary.Selected
+                    : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
                 _connectedPoint3 = false;
                 _connectedPoint4 = false;
                 _arc = factory.CreateArcShape(
-                    (double)sx, (double)sy,
-                    (ShapeStyleViewModel)style.Copy(null),
+                    (double) sx, (double) sy,
+                    (ShapeStyleViewModel) style.Copy(null),
                     editor.Project.Options.DefaultIsStroked,
                     editor.Project.Options.DefaultIsFilled);
 
                 editor.SetShapeName(_arc);
 
-                var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                 if (result is { })
                 {
                     _arc.Point1 = result;
                 }
 
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 ToStatePoint2();
                 Move(_arc);
                 _currentState = State.Point2;
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (_arc is { })
                 {
-                    _arc.Point2.X = (double)sx;
-                    _arc.Point2.Y = (double)sy;
-                    _arc.Point3.X = (double)sx;
-                    _arc.Point3.Y = (double)sy;
+                    if (_arc.Point2 is { })
+                    {
+                        _arc.Point2.X = (double)sx;
+                        _arc.Point2.Y = (double)sy;
+                    }
+                    
+                    if (_arc.Point3 is { })
+                    {
+                        _arc.Point3.X = (double)sx;
+                        _arc.Point3.Y = (double)sy;
+                    }
 
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _arc.Point2 = result;
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     ToStatePoint3();
                     Move(_arc);
                     _currentState = State.Point3;
                 }
-            }
+
                 break;
+            }
             case State.Point3:
             {
                 if (_arc is { })
                 {
-                    _arc.Point3.X = (double)sx;
-                    _arc.Point3.Y = (double)sy;
-                    _arc.Point4.X = (double)sx;
-                    _arc.Point4.Y = (double)sy;
+                    if (_arc.Point3 is { })
+                    {
+                        _arc.Point3.X = (double)sx;
+                        _arc.Point3.Y = (double)sy;
+                    }
+                    
+                    if (_arc.Point4 is { })
+                    {
+                        _arc.Point4.X = (double)sx;
+                        _arc.Point4.Y = (double)sy;
+                    }
 
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _arc.Point3 = result;
@@ -117,22 +131,31 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                         _connectedPoint3 = false;
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_arc);
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_arc);
+                        editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
+                    }
+
                     ToStatePoint4();
                     Move(_arc);
                     _currentState = State.Point4;
                 }
-            }
+
                 break;
+            }
             case State.Point4:
             {
                 if (_arc is { })
                 {
-                    _arc.Point4.X = (double)sx;
-                    _arc.Point4.Y = (double)sy;
+                    if (_arc.Point4 is { })
+                    {
+                        _arc.Point4.X = (double)sx;
+                        _arc.Point4.Y = (double)sy;
+                    }
 
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
                     if (result is { })
                     {
                         _arc.Point4 = result;
@@ -143,19 +166,47 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                         _connectedPoint4 = false;
                     }
 
-                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.CurrentContainer.WorkingLayer.Shapes =
+                            editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
+                    }
+
                     Finalize(_arc);
-                    editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _arc);
+
+                    if (editor.Project.CurrentContainer?.WorkingLayer is { })
+                    {
+                        editor.Project.AddShape(editor.Project.CurrentContainer.CurrentLayer, _arc);
+                    }
 
                     Reset();
                 }
-            }
+
                 break;
+            }
         }
+    }
+
+    public void BeginDown(InputArgs args)
+    {
+        NextPoint(args);
     }
 
     public void BeginUp(InputArgs args)
     {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor?.Project is null)
+        {
+            return;
+        }
+
+        if (editor.Project.Options?.SinglePressMode ?? true)
+        {
+            if (_currentState != State.Point1)
+            {
+                NextPoint(args);
+            }
+        }
     }
 
     public void EndDown(InputArgs args)
@@ -180,13 +231,11 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
-            
         if (editor?.Project?.Options is null || selection is null)
         {
             return;
         }
-
-        (decimal sx, decimal sy) = selection.TryToSnap(args);
+        var (sx, sy) = selection.TryToSnap(args);
         switch (_currentState)
         {
             case State.Point1:
@@ -195,8 +244,8 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                 {
                     selection.TryToHoverShape((double)sx, (double)sy);
                 }
-            }
                 break;
+            }
             case State.Point2:
             {
                 if (_arc is { })
@@ -205,13 +254,16 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _arc.Point2.X = (double)sx;
-                    _arc.Point2.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    if (_arc.Point2 is { })
+                    {
+                        _arc.Point2.X = (double)sx;
+                        _arc.Point2.Y = (double)sy;
+                    }
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
-            }
                 break;
+            }
             case State.Point3:
             {
                 if (_arc is { })
@@ -220,13 +272,16 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _arc.Point3.X = (double)sx;
-                    _arc.Point3.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    if (_arc.Point3 is { })
+                    {
+                        _arc.Point3.X = (double)sx;
+                        _arc.Point3.Y = (double)sy;
+                    }
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
-            }
                 break;
+            }
             case State.Point4:
             {
                 if (_arc is { })
@@ -235,32 +290,36 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     {
                         selection.TryToHoverShape((double)sx, (double)sy);
                     }
-                    _arc.Point4.X = (double)sx;
-                    _arc.Point4.Y = (double)sy;
-                    editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
+                    if (_arc.Point4 is { })
+                    {
+                        _arc.Point4.X = (double)sx;
+                        _arc.Point4.Y = (double)sy;
+                    }
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                     Move(_arc);
                 }
-            }
                 break;
+            }
         }
     }
 
     public void ToStatePoint2()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-            
-        if (editor?.Project?.Options is null)
-        {
-            return;
-        }
-            
-        _selection = new ArcSelection(
-            ServiceProvider,
-            editor.Project.CurrentContainer.HelperLayer,
-            _arc,
-            editor.PageState.HelperStyle);
 
-        _selection.ToStatePoint2();
+        if (editor is { }
+            && editor.Project?.CurrentContainer?.HelperLayer is { }
+            && editor.PageState?.HelperStyle is { }
+            && _arc is { })
+        {
+            _selection = new ArcSelection(
+                ServiceProvider,
+                editor.Project.CurrentContainer.HelperLayer,
+                _arc,
+                editor.PageState.HelperStyle);
+
+            _selection.ToStatePoint2();
+        }
     }
 
     public void ToStatePoint3()
@@ -273,14 +332,19 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
         _selection?.ToStatePoint4();
     }
 
-    public void Move(BaseShapeViewModel shape)
+    public void Move(BaseShapeViewModel? shape)
     {
         _selection?.Move();
     }
 
-    public void Finalize(BaseShapeViewModel shape)
+    public void Finalize(BaseShapeViewModel? shape)
     {
         var arc = shape as ArcShapeViewModel;
+        if (arc?.Point1 is null || arc.Point2 is null || arc.Point3 is null || arc.Point4 is null)
+        {
+            return;
+        }
+        
         var a = new WpfArc(
             Point2.FromXY(arc.Point1.X, arc.Point1.Y),
             Point2.FromXY(arc.Point2.X, arc.Point2.Y),
@@ -303,8 +367,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
     public void Reset()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
-
-        if (editor is null)
+        if (editor?.Project is null)
         {
             return;
         }
@@ -317,10 +380,13 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
             case State.Point3:
             case State.Point4:
             {
-                editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
-                editor.Project.CurrentContainer.WorkingLayer.RaiseInvalidateLayer();
-            }
+                if (editor.Project.CurrentContainer?.WorkingLayer is { } && _arc is { })
+                {
+                    editor.Project.CurrentContainer.WorkingLayer.Shapes = editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_arc);
+                    editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
+                }
                 break;
+            }
         }
 
         _currentState = State.Point1;

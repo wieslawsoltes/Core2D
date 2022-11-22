@@ -14,7 +14,7 @@ internal class PointDrawNode : DrawNode, IPointDrawNode
     public double PointSize { get; set; }
     public A.Rect Rect { get; set; }
 
-    public PointDrawNode(PointShapeViewModel point, ShapeStyleViewModel pointStyleViewModel, double pointSize)
+    public PointDrawNode(PointShapeViewModel point, ShapeStyleViewModel? pointStyleViewModel, double pointSize)
     {
         Style = pointStyleViewModel;
         Point = point;
@@ -26,14 +26,18 @@ internal class PointDrawNode : DrawNode, IPointDrawNode
     {
         ScaleThickness = true; // Point.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = true; // Point.State.HasFlag(ShapeStateFlags.Size);
-        var rect2 = Rect2.FromPoints(Point.X - PointSize, Point.Y - PointSize, Point.X + PointSize, Point.Y + PointSize, 0, 0);
+        var rect2 = Rect2.FromPoints(Point.X - PointSize, Point.Y - PointSize, Point.X + PointSize, Point.Y + PointSize);
         Rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
         Center = Rect.Center;
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var context = dc as AP.IDrawingContextImpl;
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
         context.DrawRectangle(Fill, null, Rect);
         context.DrawRectangle(null, Stroke, Rect);
     }

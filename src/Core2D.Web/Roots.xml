@@ -13,6 +13,7 @@
   <assembly fullname="Dock.Avalonia" preserve="All" />
   <assembly fullname="Dock.ProportionalStackPanel" preserve="All" />
   <assembly fullname="Avalonia.Controls.DataGrid" preserve="All" />
+  <assembly fullname="Avalonia.Controls.ColorPicker" preserve="All" />
 
   <!-- Avalonia Behaviors -->
 

@@ -1,56 +1,48 @@
 ﻿#nullable enable
-using Core2D.ViewModels.Containers;
-using Core2D.ViewModels.Data;
 
 namespace Core2D.Model.Editor;
 
 public interface IProjectEditorPlatform
 {
-    void OnOpen(string? path);
-
     void OnOpen();
 
     void OnSave();
 
     void OnSaveAs();
 
-    void OnImportJson(string? path);
+    void OnClose();
+    
+    void OnImportJson(object? param);
 
-    void OnImportSvg(string? path);
+    void OnImportSvg(object? param);
 
-    void OnImportObject(string? path);
+    void OnExportJson(object? param);
 
-    void OnExportJson(object? item);
+    void OnExport(object? param);
 
-    void OnExportObject(object? item);
-
-    void OnExport(object? item);
-
-    void OnExecuteScriptFile(string? path);
-
-    void OnExecuteScriptFile();
+    void OnExecuteScriptFile(object? param);
 
     void OnExit();
 
-    void OnCopyAsXaml(object? item);
+    void OnCopyAsXaml(object? param);
 
-    void OnCopyAsSvg(object? item);
+    void OnCopyAsSvg(object? param);
 
     void OnPasteSvg();
 
-    void OnCopyAsEmf(object? item);
+    void OnCopyAsEmf(object? param);
 
-    void OnCopyAsPathData(object? item);
+    void OnCopyAsPathData(object? param);
 
     void OnPastePathDataStroked();
 
     void OnPastePathDataFilled();
 
-    void OnImportData(ProjectContainerViewModel? project);
+    void OnImportData(object? param);
 
-    void OnExportData(DatabaseViewModel? db);
+    void OnExportData(object? param);
 
-    void OnUpdateData(DatabaseViewModel? db);
+    void OnUpdateData(object? param);
 
     void OnAboutDialog();
 

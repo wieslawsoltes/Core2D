@@ -1,16 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Platform.Storage;
 using Core2D.Screenshot.Renderers;
+using Core2D.Services;
 
 namespace Core2D.Screenshot;
 
 public static class Capture
 {
+    private static List<FilePickerFileType> GetJsonFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.ImagePng,
+            StorageService.ImageSvg,
+            StorageService.Pdf,
+            StorageService.Xps,
+            StorageService.ImageSkp,
+            StorageService.All
+        };
+    }
+
     public static void AttachCapture(this TopLevel root)
     {
         AttachCapture(root, new KeyGesture(Key.F6));
@@ -31,59 +48,64 @@ public static class Capture
 
     public static async Task Save(TopLevel root)
     {
-        var dlg = new SaveFileDialog() { Title = "Save" };
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Png", Extensions = { "png" } });
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Svg", Extensions = { "svg" } });
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Xps", Extensions = { "xps" } });
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Skp", Extensions = { "skp" } });
-        dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-        dlg.InitialFileName = "screenshot";
-        dlg.DefaultExtension = "png";
-        if (root is not Window window)
+        try
         {
-            return;
+            var storageProvider = StorageService.GetStorageProvider();
+            if (storageProvider is null)
+            {
+                return;
+            }
+
+            var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+            {
+                Title = "Save",
+                FileTypeChoices = GetJsonFileTypes(),
+                SuggestedFileName = "screenshot",
+                DefaultExtension = "png",
+                ShowOverwritePrompt = true
+            });
+
+            if (file is not null && file.CanOpenWrite)
+            {
+                await using var stream = await file.OpenWriteAsync();
+                Save(root, root.Bounds.Size, stream, file.Name);
+            }
         }
-        var result = await dlg.ShowAsync(window);
-        if (result is { } path)
+        catch (Exception ex)
         {
-            Save(root, root.Bounds.Size, path);
+            Debug.WriteLine(ex);
         }
     }
 
-    public static void Save(Control? control, Size size, string path)
+    public static void Save(Control? control, Size size, Stream stream, string name)
     {
         if (control is null)
         {
             return;
         }
 
-        if (path.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+        if (name.EndsWith("png", StringComparison.OrdinalIgnoreCase))
         {
-            PngRenderer.Render(control, size, path);
+            PngRenderer.Render(control, size, stream);
         }
 
-        if (path.EndsWith("svg", StringComparison.OrdinalIgnoreCase))
+        if (name.EndsWith("svg", StringComparison.OrdinalIgnoreCase))
         {
-            using var stream = File.Create(path);
             SvgRenderer.Render(control, size, stream);
         }
 
-        if (path.EndsWith("pdf", StringComparison.OrdinalIgnoreCase))
+        if (name.EndsWith("pdf", StringComparison.OrdinalIgnoreCase))
         {
-            using var stream = File.Create(path);
             PdfRenderer.Render(control, size, stream, 96);
         }
 
-        if (path.EndsWith("xps", StringComparison.OrdinalIgnoreCase))
+        if (name.EndsWith("xps", StringComparison.OrdinalIgnoreCase))
         {
-            using var stream = File.Create(path);
             XpsRenderer.Render(control, size, stream, 96);
         }
 
-        if (path.EndsWith("skp", StringComparison.OrdinalIgnoreCase))
+        if (name.EndsWith("skp", StringComparison.OrdinalIgnoreCase))
         {
-            using var stream = File.Create(path);
             SkpRenderer.Render(control, size, stream);
         }
     }

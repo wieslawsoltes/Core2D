@@ -49,7 +49,7 @@ public sealed class OpenXmlWriter : ITextFieldWriter<DatabaseViewModel>
         {
             var record = database.Records[i];
 
-            values[i + 1, 0] = record.Id.ToString();
+            values[i + 1, 0] = record.Id;
 
             for (var j = 0; j < record.Values.Length; j++)
             {
@@ -64,14 +64,18 @@ public sealed class OpenXmlWriter : ITextFieldWriter<DatabaseViewModel>
         for (var r = 0; r < nRows; r++)
         {
             var row = new Row();
-            sheetData.Append(new OpenXmlElement[] { row });
+            sheetData.Append(row);
 
             Cell? previous = null;
-            for (int c = 0; c < nColumns; c++)
+            for (var c = 0; c < nColumns; c++)
             {
-                Cell cell = new Cell();
+                var cell = new Cell();
                 row.InsertAfter(cell, previous);
-                cell.CellValue = new CellValue(values[r, c].ToString());
+                var text = values[r, c].ToString();
+                if (text is { })
+                {
+                    cell.CellValue = new CellValue(text);
+                }
                 cell.DataType = new EnumValue<CellValues>(CellValues.String);
                 previous = cell;
             }
@@ -160,7 +164,7 @@ public sealed class OpenXmlWriter : ITextFieldWriter<DatabaseViewModel>
         {
             return;
         }
-        var sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
+        var sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
 
         Sheet sheet = new ()
         {
@@ -171,7 +175,10 @@ public sealed class OpenXmlWriter : ITextFieldWriter<DatabaseViewModel>
         sheets.Append(sheet);
 
         var sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
-        WriteValues(sheetData, values, nRows, nColumns);
+        if (sheetData is { })
+        {
+            WriteValues(sheetData, values, nRows, nColumns);
+        }
         WriteTable(worksheetPart, 1U, values, nRows, nColumns);
 
         workbookPart.Workbook.Save();

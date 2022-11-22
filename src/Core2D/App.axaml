@@ -5,35 +5,17 @@
              xmlns:vme="using:Core2D.ViewModels.Editor"
              Name="Core2D"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
-
   <Application.Resources>
     <FontFamily x:Key="UiFontFamily">avares://Avalonia.Themes.Fluent/Assets#Inter</FontFamily>
     <FontFamily x:Key="CodeFontFamily">avares://Core2D/Assets/Fonts#Roboto Mono</FontFamily>
     <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
   </Application.Resources>
-
   <Application.Styles>
-
+    <FluentTheme Mode="Dark" DensityStyle="Compact" />
     <StyleInclude Source="avares://Core2D/Themes/FluentDark.axaml" />
-    <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
-    <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
-    <StyleInclude Source="avares://Core2D/Styles/Geometry.axaml" />
-    <StyleInclude Source="avares://Core2D/Styles/Icons.axaml" />
-    <StyleInclude Source="avares://Core2D/Styles/Dock.axaml" />
-    <StyleInclude Source="avares://Core2D/Controls/EditableItem.axaml" />
-    <StyleInclude Source="avares://Core2D/Controls/ToggleItem.axaml" />
-
-    <Style Selector="AccessText">
-      <Setter Property="(TextElement.Foreground)" Value="{DynamicResource ButtonForeground}" />
-    </Style>
-    <Style Selector="TextBlock">
-      <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
-    </Style>
-
+    <StyleInclude Source="avares://Core2D/Styles/Common.axaml" />
   </Application.Styles>
-
   <Application.DataTemplates>
     <local:ViewLocator />
   </Application.DataTemplates>
-
 </Application>

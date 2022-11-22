@@ -14,14 +14,13 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
 {
     public ImageShapeViewModel Image { get; set; }
     public SKRect Rect { get; set; }
-    public IImageCache ImageCache { get; set; }
-    public ICache<string, IDisposable> BitmapCache { get; set; }
-    public SKBitmap ImageCached { get; set; }
+    public IImageCache? ImageCache { get; set; }
+    public ICache<string, IDisposable>? BitmapCache { get; set; }
+    public SKBitmap? ImageCached { get; set; }
     public SKRect SourceRect { get; set; }
     public SKRect DestRect { get; set; }
 
-    public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel style, IImageCache imageCache, ICache<string, IDisposable> bitmapCache)
-        : base()
+    public ImageDrawNode(ImageShapeViewModel image, ShapeStyleViewModel? style, IImageCache? imageCache, ICache<string, IDisposable>? bitmapCache)
     {
         Style = style;
         Image = image;
@@ -37,7 +36,7 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
 
         if (!string.IsNullOrEmpty(Image.Key))
         {
-            ImageCached = BitmapCache.Get(Image.Key) as SKBitmap;
+            ImageCached = BitmapCache?.Get(Image.Key) as SKBitmap;
             if (ImageCached is null && ImageCache is { })
             {
                 try
@@ -46,7 +45,7 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
                     if (bytes is { })
                     {
                         ImageCached = SKBitmap.Decode(bytes);
-                        BitmapCache.Set(Image.Key, ImageCached);
+                        BitmapCache?.Set(Image.Key, ImageCached);
                     }
                 }
                 catch (Exception ex)
@@ -66,14 +65,25 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
             ImageCached = null;
         }
 
-        var rect2 = Rect2.FromPoints(Image.TopLeft.X, Image.TopLeft.Y, Image.BottomRight.X, Image.BottomRight.Y, 0, 0);
-        DestRect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
-        Center = new SKPoint(DestRect.MidX, DestRect.MidY);
+        if (Image.TopLeft is { } && Image.BottomRight is { })
+        {
+            var rect2 = Rect2.FromPoints(Image.TopLeft.X, Image.TopLeft.Y, Image.BottomRight.X, Image.BottomRight.Y);
+            DestRect = SKRect.Create((float)rect2.X, (float)rect2.Y, (float)rect2.Width, (float)rect2.Height);
+            Center = new SKPoint(DestRect.MidX, DestRect.MidY);
+        }
+        else
+        {
+            DestRect = SKRect.Empty;
+            Center = SKPoint.Empty;
+        }
     }
 
-    public override void OnDraw(object dc, double zoom)
+    public override void OnDraw(object? dc, double zoom)
     {
-        var canvas = dc as SKCanvas;
+        if (dc is not SKCanvas canvas)
+        {
+            return;
+        }
 
         if (Image.IsFilled)
         {

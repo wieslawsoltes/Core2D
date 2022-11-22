@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor;
 
@@ -14,9 +15,9 @@ public partial class PropertyViewModel : ViewModelBase
 
     public PropertyViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
-        AddProperty = new Command<ViewModelBase?>(x => GetProject()?.OnAddProperty(x));
+        AddProperty = new RelayCommand<ViewModelBase?>(x => GetProject()?.OnAddProperty(x));
             
-        RemoveProperty = new Command<PropertyViewModel?>(x => GetProject()?.OnRemoveProperty(x));
+        RemoveProperty = new RelayCommand<PropertyViewModel?>(x => GetProject()?.OnRemoveProperty(x));
 
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }

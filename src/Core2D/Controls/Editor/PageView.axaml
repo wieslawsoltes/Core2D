@@ -35,6 +35,7 @@
       <Panel.KeyBindings>
         <!-- Edit -->
         <KeyBinding Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding}" Gesture="Delete" />
+        <KeyBinding Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding}" Gesture="Back" />
         <KeyBinding Command="{Binding OnCancel}" Gesture="Escape" />
         <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z" />
         <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y" />
@@ -121,8 +122,8 @@
       <Panel>
         <Panel ClipToBounds="True">
           <ScrollViewer x:Name="PageScrollViewer" 
-                        HorizontalScrollBarVisibility="Auto"
-                        VerticalScrollBarVisibility="Auto">
+                        HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Disabled">
             <paz:ZoomBorder x:Name="PageZoomBorder"
                             Stretch="None"
                             ZoomSpeed="1.5" 
@@ -151,8 +152,8 @@
               </idd:ContextDropBehavior>
               </i:Interaction.Behaviors>
               <Panel DataContext="{Binding Project.CurrentContainer}" 
-                     VerticalAlignment="Stretch"
-                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
                      ClipToBounds="False">
                 <Panel.Transitions>
                   <Transitions>

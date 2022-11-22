@@ -11,53 +11,73 @@ namespace Core2D.Modules.Renderer.Avalonia.Nodes;
 
 internal abstract class DrawNode : IDrawNode
 {
-    public ShapeStyleViewModel Style { get; set; }
+    public ShapeStyleViewModel? Style { get; set; }
     public bool ScaleThickness { get; set; }
     public bool ScaleSize { get; set; }
-    public AM.IBrush Fill { get; set; }
-    public AM.IPen Stroke { get; set; }
+    public AM.IBrush? Fill { get; set; }
+    public AM.IPen? Stroke { get; set; }
     public A.Point Center { get; set; }
-
-    public DrawNode()
-    {
-    }
 
     public abstract void UpdateGeometry();
 
     public virtual void UpdateStyle()
     {
-        Fill = AvaloniaDrawUtil.ToBrush(Style.Fill.Color);
-        Stroke = AvaloniaDrawUtil.ToPen(Style, Style.Stroke.Thickness);
+        if (Style?.Fill?.Color is { })
+        {
+            Fill = AvaloniaDrawUtil.ToBrush(Style.Fill.Color);
+        }
+        else
+        {
+            Fill = null;
+        }
+
+        if (Style?.Stroke is { })
+        {
+            Stroke = AvaloniaDrawUtil.ToPen(Style, Style.Stroke.Thickness);
+        }
+        else
+        {
+            Stroke = null;
+        }
     }
 
-    public virtual void Draw(object dc, double zoom)
+    public virtual void Draw(object? dc, double zoom)
     {
+        if (dc is not AP.IDrawingContextImpl context)
+        {
+            return;
+        }
+
         var scale = ScaleSize ? 1.0 / zoom : 1.0;
         var translateX = 0.0 - (Center.X * scale) + Center.X;
         var translateY = 0.0 - (Center.Y * scale) + Center.Y;
-
-        double thickness = Style.Stroke.Thickness;
+        var thickness = Style?.Stroke?.Thickness ?? 1d;
 
         if (ScaleThickness)
         {
             thickness /= zoom;
         }
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (scale != 1.0)
         {
             thickness /= scale;
         }
 
-        if (Stroke.Thickness != thickness)
+        if (Style?.Stroke is { } && Stroke is { })
         {
-            Stroke = AvaloniaDrawUtil.ToPen(Style, thickness);
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (Stroke.Thickness != thickness)
+            {
+                Stroke = AvaloniaDrawUtil.ToPen(Style, thickness);
+            }
         }
 
-        var context = dc as AP.IDrawingContextImpl;
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (scale != 1.0)
         {
             using var translateDisposable = context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY));
-            using var scaleDisposable =  context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale));
+            using var scaleDisposable = context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale));
             OnDraw(dc, zoom);
         }
         else
@@ -66,7 +86,7 @@ internal abstract class DrawNode : IDrawNode
         }
     }
 
-    public abstract void OnDraw(object dc, double zoom);
+    public abstract void OnDraw(object? dc, double zoom);
 
     public virtual void Dispose()
     {
