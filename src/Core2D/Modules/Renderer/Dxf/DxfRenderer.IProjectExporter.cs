@@ -166,7 +166,7 @@ public partial class DxfRenderer : IProjectExporter
 
         if (container.Template is { })
         {
-            _pageWidth = container.Template.Width;
+            // _pageWidth = container.Template.Width;
             _pageHeight = container.Template.Height;
             presenter.Render(dxf, this, null, container.Template, 0, 0);
         }
