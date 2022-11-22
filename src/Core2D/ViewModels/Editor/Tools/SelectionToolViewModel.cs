@@ -370,8 +370,11 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
                 if (_rectangleShape is { })
                 {
-                    _rectangleShape.BottomRight.X = args.X;
-                    _rectangleShape.BottomRight.Y = args.Y;
+                    if (_rectangleShape.BottomRight is { })
+                    {
+                        _rectangleShape.BottomRight.X = args.X;
+                        _rectangleShape.BottomRight.Y = args.Y;
+                    }
 
                     if (editor.Project.CurrentContainer?.WorkingLayer is { })
                     {
@@ -456,7 +459,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
         var selection = ServiceProvider.GetService<ISelectionService>();
 
-        if (editor is null || selection is null)
+        if (editor?.Project is null || selection is null)
         {
             return;
         }
@@ -531,8 +534,11 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
                 if (_rectangleShape is { })
                 {
-                    _rectangleShape.BottomRight.X = args.X;
-                    _rectangleShape.BottomRight.Y = args.Y;
+                    if (_rectangleShape.BottomRight is { })
+                    {
+                        _rectangleShape.BottomRight.X = args.X;
+                        _rectangleShape.BottomRight.Y = args.Y;
+                    }
                     editor.Project.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
                 }
                 break;
