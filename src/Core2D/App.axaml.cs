@@ -9,6 +9,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Styling;
 using Avalonia.Themes.Fluent;
 using CommunityToolkit.Mvvm.Input;
 using Core2D.Configuration.Windows;
@@ -104,34 +105,16 @@ public class App : Application
             return;
         }
 
-        s_fluentDark ??= new StyleInclude(new Uri("avares://Core2D/App.axaml"))
-        {
-            Source = new Uri("avares://Core2D/Themes/FluentDark.axaml")
-        };
-
-        s_fluentLight ??= new StyleInclude(new Uri("avares://Core2D/App.axaml"))
-        {
-            Source = new Uri("avares://Core2D/Themes/FluentLight.axaml")
-        };
-
         switch (themeName)
         {
             case "FluentLight":
             {
-                if (Current.Styles[0] is FluentTheme fluentTheme)
-                {
-                    fluentTheme.Mode = FluentThemeMode.Light;
-                }
-                Current.Styles[1] = s_fluentLight;
+                Current.RequestedThemeVariant = ThemeVariant.Light;
                 break;
             }
             case "FluentDark":
             {
-                if (Current.Styles[0] is FluentTheme fluentTheme)
-                {
-                    fluentTheme.Mode = FluentThemeMode.Dark;
-                }
-                Current.Styles[1] = s_fluentDark;
+                Current.RequestedThemeVariant = ThemeVariant.Dark;
                 break;
             }
         }

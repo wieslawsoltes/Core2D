@@ -146,13 +146,8 @@ public class AppState : IDisposable
             Description = "A multi-platform data driven 2D diagram editor.",
             Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
             License = "Licensed under the MIT License. See LICENSE file in the project root for full license information.",
-            OperatingSystem = $"{runtimeInfo.OperatingSystem}",
             IsDesktop = runtimeInfo.IsDesktop,
             IsMobile = runtimeInfo.IsMobile,
-            IsCoreClr = runtimeInfo.IsCoreClr,
-            IsMono = runtimeInfo.IsMono,
-            IsDotNetFramework = runtimeInfo.IsDotNetFramework,
-            IsUnix = runtimeInfo.IsUnix,
             WindowingSubsystemName = windowingSubsystem,
             RenderingSubsystemName = renderingSubsystem
         };

@@ -13,7 +13,7 @@ internal static class AvaloniaDrawUtil
         return AM.Color.FromArgb(argbColorViewModelViewModel.A, argbColorViewModelViewModel.R, argbColorViewModelViewModel.G, argbColorViewModelViewModel.B);
     }
 
-    public static AM.IBrush ToBrush(BaseColorViewModel colorViewModel) => colorViewModel switch
+    public static AM.IImmutableBrush ToBrush(BaseColorViewModel colorViewModel) => colorViewModel switch
     {
         ArgbColorViewModel argbColor => new AM.Immutable.ImmutableSolidColorBrush(ToColor(argbColor)),
         _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported.")

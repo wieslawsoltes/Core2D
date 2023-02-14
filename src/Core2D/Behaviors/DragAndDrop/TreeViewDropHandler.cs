@@ -24,7 +24,7 @@ public class ProjectTreeViewDropHandler : DefaultDropHandler
         };
     }
 
-    private static bool ValidateShape(DragEventArgs e, bool bExecute, IControl targetControl, ProjectEditorViewModel editor, BaseShapeViewModel sourceShape)
+    private static bool ValidateShape(DragEventArgs e, bool bExecute, Control targetControl, ProjectEditorViewModel editor, BaseShapeViewModel sourceShape)
     {
         switch (targetControl.DataContext)
         {
@@ -80,7 +80,7 @@ public class ProjectTreeViewDropHandler : DefaultDropHandler
         return false;
     }
 
-    private static bool ValidateLayer(DragEventArgs e, bool bExecute, IControl targetControl, ProjectEditorViewModel editor, LayerContainerViewModel sourceLayer)
+    private static bool ValidateLayer(DragEventArgs e, bool bExecute, Control targetControl, ProjectEditorViewModel editor, LayerContainerViewModel sourceLayer)
     {
         switch (targetControl.DataContext)
         {
@@ -132,7 +132,7 @@ public class ProjectTreeViewDropHandler : DefaultDropHandler
         return false;
     }
 
-    private static bool ValidatePage(DragEventArgs e, bool bExecute, IControl targetControl, ProjectEditorViewModel editor, PageContainerViewModel sourceContainer)
+    private static bool ValidatePage(DragEventArgs e, bool bExecute, Control targetControl, ProjectEditorViewModel editor, PageContainerViewModel sourceContainer)
     {
         switch (targetControl.DataContext)
         {
@@ -186,7 +186,7 @@ public class ProjectTreeViewDropHandler : DefaultDropHandler
         return false;
     }
 
-    private static bool ValidateDocument(bool bExecute, IControl targetControl, ProjectEditorViewModel editor, DocumentContainerViewModel sourceDocument)
+    private static bool ValidateDocument(bool bExecute, Control targetControl, ProjectEditorViewModel editor, DocumentContainerViewModel sourceDocument)
     {
         switch (targetControl.DataContext)
         {
@@ -214,8 +214,8 @@ public class ProjectTreeViewDropHandler : DefaultDropHandler
     {
         if ((!IsContainer(sourceContext) && !(sourceContext is BaseShapeViewModel))
             || !(targetContext is ProjectContainerViewModel)
-            || !(treeView.GetVisualAt(e.GetPosition(treeView)) is IControl targetControl)
-            || !(treeView.GetVisualRoot() is IControl rootControl)
+            || !(treeView.GetVisualAt(e.GetPosition(treeView)) is Control targetControl)
+            || !(treeView.GetVisualRoot() is Control rootControl)
             || !(rootControl.DataContext is ProjectEditorViewModel editor)
             || !(IsContainer(targetControl.DataContext)))
         {
@@ -249,7 +249,7 @@ public class ProjectTreeViewDropHandler : DefaultDropHandler
 
     public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is TreeView treeView)
+        if (e.Source is Control && sender is TreeView treeView)
         {
             return ValidateContainer(treeView, e, sourceContext, targetContext, false);
         }
@@ -258,7 +258,7 @@ public class ProjectTreeViewDropHandler : DefaultDropHandler
 
     public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is TreeView treeView)
+        if (e.Source is Control && sender is TreeView treeView)
         {
             return ValidateContainer(treeView, e, sourceContext, targetContext, true);
         }

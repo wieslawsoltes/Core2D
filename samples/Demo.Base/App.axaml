@@ -2,13 +2,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:Demo"
              Name="Core2D"
+             RequestedThemeVariant="Dark"
              x:Class="Demo.App">
   <Application.DataTemplates>
     <local:ViewLocator />
   </Application.DataTemplates>
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <MergeResourceInclude Source="avares://Demo.Base/Themes/Themes.axaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
   <Application.Styles>
-    <FluentTheme Mode="Dark" DensityStyle="Compact" />
-    <StyleInclude Source="avares://Core2D/Themes/FluentDark.axaml" />
+    <FluentTheme DensityStyle="Compact" />
     <StyleInclude Source="avares://Core2D/Styles/Common.axaml" />
   </Application.Styles>
 </Application>

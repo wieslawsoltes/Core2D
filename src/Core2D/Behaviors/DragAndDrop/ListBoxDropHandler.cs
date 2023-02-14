@@ -16,8 +16,8 @@ public abstract class ListBoxDropHandler : DefaultDropHandler
         if (!(sourceContext is T sourceItem)
             || !(targetContext is LibraryViewModel library)
             || !(library.Items.All(x => x is T))
-            || !(listBox.GetVisualAt(e.GetPosition(listBox)) is IControl targetControl)
-            || !(listBox.GetVisualRoot() is IControl rootControl)
+            || !(listBox.GetVisualAt(e.GetPosition(listBox)) is Control targetControl)
+            || !(listBox.GetVisualRoot() is Control rootControl)
             || !(rootControl.DataContext is ProjectEditorViewModel editor)
             || !(targetControl.DataContext is T targetItem))
         {

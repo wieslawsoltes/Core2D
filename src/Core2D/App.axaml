@@ -6,13 +6,17 @@
              Name="Core2D"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
   <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <MergeResourceInclude Source="avares://Core2D/Themes/Themes.axaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
     <FontFamily x:Key="UiFontFamily">avares://Avalonia.Themes.Fluent/Assets#Inter</FontFamily>
     <FontFamily x:Key="CodeFontFamily">avares://Core2D/Assets/Fonts#Roboto Mono</FontFamily>
     <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
   </Application.Resources>
   <Application.Styles>
-    <FluentTheme Mode="Dark" DensityStyle="Compact" />
-    <StyleInclude Source="avares://Core2D/Themes/FluentDark.axaml" />
+    <FluentTheme DensityStyle="Compact" />
     <StyleInclude Source="avares://Core2D/Styles/Common.axaml" />
   </Application.Styles>
   <Application.DataTemplates>

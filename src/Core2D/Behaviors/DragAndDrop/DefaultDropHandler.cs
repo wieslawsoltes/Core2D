@@ -9,9 +9,9 @@ namespace Core2D.Behaviors.DragAndDrop;
 
 public abstract class DefaultDropHandler : AvaloniaObject, IDropHandler
 {
-    public static Point GetPosition(IControl? relativeTo, DragEventArgs e)
+    public static Point GetPosition(Control? relativeTo, DragEventArgs e)
     {
-        relativeTo ??= e.Source as IControl;
+        relativeTo ??= e.Source as Control;
         var point = relativeTo is { } ? e.GetPosition(relativeTo) : new Point();
         return point;
     }

@@ -9,7 +9,7 @@ public class StylesListBoxDropHandler : ListBoxDropHandler
 {
     public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is ListBox listBox)
+        if (e.Source is Control && sender is ListBox listBox)
         {
             return ValidateLibrary<ShapeStyleViewModel>(listBox, e, sourceContext, targetContext, false);
         }
@@ -18,7 +18,7 @@ public class StylesListBoxDropHandler : ListBoxDropHandler
 
     public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is ListBox listBox)
+        if (e.Source is Control && sender is ListBox listBox)
         {
             return ValidateLibrary<ShapeStyleViewModel>(listBox, e, sourceContext, targetContext, true);
         }

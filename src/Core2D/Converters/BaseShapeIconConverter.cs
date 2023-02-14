@@ -19,7 +19,7 @@ public class BaseShapeIconConverter : IValueConverter
 
             if (Application.Current is { } application)
             {
-                if (application.Styles.TryGetResource(key, out var resource))
+                if (application.Styles.TryGetResource(key, null, out var resource))
                 {
                     return resource;
                 }

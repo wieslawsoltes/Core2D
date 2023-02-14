@@ -13,10 +13,10 @@ namespace Core2D.Behaviors.DragAndDrop;
 
 public class EditorDropHandler : DefaultDropHandler
 {
-    public static readonly StyledProperty<IControl?> RelativeToProperty = 
-        AvaloniaProperty.Register<EditorDropHandler, IControl?>(nameof(RelativeTo));
+    public static readonly StyledProperty<Control?> RelativeToProperty = 
+        AvaloniaProperty.Register<EditorDropHandler, Control?>(nameof(RelativeTo));
 
-    public IControl? RelativeTo
+    public Control? RelativeTo
     {
         get => GetValue(RelativeToProperty);
         set => SetValue(RelativeToProperty, value);
@@ -24,7 +24,7 @@ public class EditorDropHandler : DefaultDropHandler
 
     private bool Validate(ProjectEditorViewModel editor, object? sender, DragEventArgs e, bool bExecute)
     {
-        var relativeTo = RelativeTo ?? sender as IControl;
+        var relativeTo = RelativeTo ?? sender as Control;
         if (relativeTo is null)
         {
             return false;

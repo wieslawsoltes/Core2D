@@ -5,7 +5,7 @@
  </PropertyGroup>
   <PropertyGroup>
     <VersionPrefix>11.0.0</VersionPrefix>
-    <VersionSuffix>preview3</VersionSuffix>
+    <VersionSuffix>preview5</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
@@ -16,7 +16,7 @@
     <SystemDrawingCommonVersion>5.0.2</SystemDrawingCommonVersion>
     <SystemTextJsonVersion>7.0.0</SystemTextJsonVersion>
     <AutofacVersion>6.5.0</AutofacVersion>
-    <CommunityToolkitMvvmVersion>8.0.0</CommunityToolkitMvvmVersion>
+    <CommunityToolkitMvvmVersion>8.1.0</CommunityToolkitMvvmVersion>
     <CsvHelperVersion>30.0.1</CsvHelperVersion>
     <DocumentFormatOpenXmlVersion>2.18.0</DocumentFormatOpenXmlVersion>
     <MicrosoftCodeAnalysisCSharpScriptingVersion>4.4.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
@@ -32,12 +32,12 @@
     <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
-    <SvgSkiaVersion>0.6.0-preview4</SvgSkiaVersion>
-    <AvaloniaVersion>11.0.0-preview4</AvaloniaVersion>
-    <AvaloniaAvaloniaEditVersion>11.0.0-preview1</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>11.0.0-preview4</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>11.0.0-preview4</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>11.0.0-preview4</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.0.0-build20221122-05</DockAvaloniaVersion>
+    <SvgSkiaVersion>0.6.0-preview5</SvgSkiaVersion>
+    <AvaloniaVersion>11.0.0-preview5</AvaloniaVersion>
+    <AvaloniaAvaloniaEditVersion>11.0.0-preview5</AvaloniaAvaloniaEditVersion>
+    <AvaloniaXamlBehaviorsVersion>11.0.0-preview5</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>11.0.0-preview5</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>11.0.0-preview5</ThemeEditorControlsColorPickerVersion>
+    <DockAvaloniaVersion>11.0.0-preview5</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>

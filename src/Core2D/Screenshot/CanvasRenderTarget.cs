@@ -22,6 +22,8 @@ public class CanvasRenderTarget : IRenderTarget
         return DrawingContextHelper.WrapSkiaCanvas(_canvas, new Vector(_dpi, _dpi), visualBrushRenderer);
     }
 
+    public bool IsCorrupted => false;
+
     public void Dispose()
     {
     }

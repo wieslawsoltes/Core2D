@@ -4,7 +4,6 @@ using System.Globalization;
 using Avalonia;
 using Avalonia.Data.Converters;
 using Core2D.ViewModels;
-using JetBrains.Annotations;
 
 namespace Core2D.Converters;
 

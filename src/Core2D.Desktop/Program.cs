@@ -13,6 +13,7 @@ using Avalonia.Dialogs;
 using Avalonia.Headless;
 using Avalonia.OpenGL;
 using Avalonia.Threading;
+using Avalonia.Win32;
 using Core2D.Screenshot;
 using Core2D.Util;
 using Core2D.ViewModels.Editor;
@@ -177,14 +178,12 @@ internal static class Program
             builder.With(new X11PlatformOptions
             {
                 UseGpu = settings.UseGpu,
-                UseDeferredRendering = settings.UseDeferredRendering
             });
 
             builder.With(new Win32PlatformOptions
             {
                 AllowEglInitialization = settings.AllowEglInitialization,
                 UseWgl = settings.UseWgl,
-                UseDeferredRendering = settings.UseDeferredRendering,
 #if ENABLE_DIRECT2D1
                 UseWindowsUIComposition = !settings.UseDirect2D1 && settings.UseWindowsUIComposition
 #else
@@ -210,7 +209,7 @@ internal static class Program
 
             if (settings.CreateHeadlessScreenshots)
             {
-                builder.UseHeadless(new AvaloniaHeadlessPlatformOptions { UseCompositor = true, UseHeadlessDrawing = false})
+                builder.UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false})
                     .AfterSetup(async _ => await CreateScreenshots(settings.ScreenshotExtension, settings.ScreenshotWidth, settings.ScreenshotHeight))
                     .StartWithClassicDesktopLifetime(args);
                 return;
@@ -218,7 +217,7 @@ internal static class Program
 
             if (settings.UseHeadless)
             {
-                builder.UseHeadless(new AvaloniaHeadlessPlatformOptions { UseCompositor = true, UseHeadlessDrawing = settings.UseHeadlessDrawing});
+                builder.UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = settings.UseHeadlessDrawing});
             }
 
             if (settings.UseHeadlessVnc)

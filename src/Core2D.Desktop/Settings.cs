@@ -15,7 +15,6 @@ public class Settings
     public bool UseGpu { get; set; } = true;
     public bool AllowEglInitialization { get; set; } = true;
     public bool UseWgl { get; set; }
-    public bool UseDeferredRendering { get; set; } = true;
     public bool UseWindowsUIComposition { get; set; } = true;
     public bool UseDirectX11 { get; set; }
     public bool UseManagedSystemDialogs { get; set; }

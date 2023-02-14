@@ -9,6 +9,8 @@ public static class CanvasRenderer
 {
     public static void Render(Control target, SKCanvas canvas, double dpi = 96, bool useDeferredRenderer = false)
     {
+        // TODO:
+        /*
         var renderTarget = new CanvasRenderTarget(canvas, dpi);
         if (useDeferredRenderer)
         {
@@ -22,5 +24,6 @@ public static class CanvasRenderer
         {
             ImmediateRenderer.Render(target, renderTarget);
         }
+        */
     }
 }

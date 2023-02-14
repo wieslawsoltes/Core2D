@@ -8,7 +8,7 @@ public class ScriptsListBoxDropHandler : ListBoxDropHandler
 {
     public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is ListBox listBox)
+        if (e.Source is Control && sender is ListBox listBox)
         {
             // TODO:
         }
@@ -17,7 +17,7 @@ public class ScriptsListBoxDropHandler : ListBoxDropHandler
 
     public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is IControl && sender is ListBox listBox)
+        if (e.Source is Control && sender is ListBox listBox)
         {
             // TODO:
         }
