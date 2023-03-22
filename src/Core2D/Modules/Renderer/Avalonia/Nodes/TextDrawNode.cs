@@ -42,7 +42,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         }
         else
         {
-            Rect = A.Rect.Empty;
+            Rect = new A.Rect();
             Center = new A.Point();
         }
 

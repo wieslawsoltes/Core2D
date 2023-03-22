@@ -1,18 +1,11 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 
-namespace Core2D.Controls.Editor
+namespace Core2D.Controls.Editor;
+
+public partial class MenuView : UserControl
 {
-    public class MenuView : UserControl
+    public MenuView()
     {
-        public MenuView()
-        {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+        InitializeComponent();
     }
 }

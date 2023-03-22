@@ -7,7 +7,7 @@
         xmlns:views="using:Core2D.Views"
         xmlns:vme="using:Core2D.ViewModels.Editor"
         xmlns:vmd="using:Core2D.ViewModels.Designer"
-        x:Name="MainWindow"
+        x:Name="MainWindowView"
         Width="1324" Height="690" MinWidth="900" MinHeight="420"
         WindowState="Maximized" WindowStartupLocation="Manual"
         FontFamily="{DynamicResource UiFontFamily}"

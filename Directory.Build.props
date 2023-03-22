@@ -5,7 +5,7 @@
  </PropertyGroup>
   <PropertyGroup>
     <VersionPrefix>11.0.0</VersionPrefix>
-    <VersionSuffix>preview5</VersionSuffix>
+    <VersionSuffix>preview6</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
@@ -32,12 +32,11 @@
     <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
     <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
-    <SvgSkiaVersion>0.6.0-preview5</SvgSkiaVersion>
-    <AvaloniaVersion>11.0.0-preview5</AvaloniaVersion>
-    <AvaloniaAvaloniaEditVersion>11.0.0-preview5</AvaloniaAvaloniaEditVersion>
-    <AvaloniaXamlBehaviorsVersion>11.0.0-preview5</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>11.0.0-preview5</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>11.0.0-preview5</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.0.0-preview5</DockAvaloniaVersion>
+    <SvgSkiaVersion>0.6.0-preview6</SvgSkiaVersion>
+    <AvaloniaVersion>11.0.0-preview6</AvaloniaVersion>
+    <AvaloniaXamlBehaviorsVersion>11.0.0-preview6</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>11.0.0-preview6</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>11.0.0-preview6</ThemeEditorControlsColorPickerVersion>
+    <DockAvaloniaVersion>11.0.0-preview6</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>

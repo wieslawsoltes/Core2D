@@ -178,7 +178,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             });
 
             var file = result.FirstOrDefault();
-            if (file is not null && file.CanOpenRead)
+            if (file is not null)
             {
                 _openProjectFile = file;
                 await using var stream = await _openProjectFile.OpenReadAsync();
@@ -243,7 +243,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                 ShowOverwritePrompt = true
             });
 
-            if (file is not null && file.CanOpenWrite)
+            if (file is not null)
             {
                 _openProjectFile = file;
                 await using var stream = await _openProjectFile.OpenWriteAsync();
@@ -283,11 +283,8 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
                 foreach (var file in result)
                 {
-                    if (file.CanOpenRead)
-                    {
-                        await using var stream = await file.OpenReadAsync();
-                        ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportJson(stream);
-                    }
+                    await using var stream = await file.OpenReadAsync();
+                    ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportJson(stream);
                 }
             }
             else
@@ -335,11 +332,8 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
                 foreach (var file in result)
                 {
-                    if (file.CanOpenRead)
-                    {
-                        await using var stream = await file.OpenReadAsync();
-                        ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportSvg(stream);
-                    }
+                    await using var stream = await file.OpenReadAsync();
+                    ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportSvg(stream);
                 }
             }
             else
@@ -396,7 +390,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                 ShowOverwritePrompt = true
             });
 
-            if (file is not null && file.CanOpenWrite)
+            if (file is not null)
             {
                 await using var stream = await file.OpenWriteAsync();
                 editor.OnExportJson(stream, param);
@@ -453,7 +447,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                 ShowOverwritePrompt = true
             });
 
-            if (file is not null && file.CanOpenWrite)
+            if (file is not null)
             {
                 var ext = Path.GetExtension(file.Name).ToLower().TrimStart('.');
                 var writer = editor.FileWriters.FirstOrDefault(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0);
@@ -491,14 +485,11 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
                 foreach (var file in result)
                 {
-                    if (file.CanOpenRead)
+                    await using var stream = await file.OpenReadAsync();
+                    var editorViewModel = ServiceProvider.GetService<ProjectEditorViewModel>();
+                    if (editorViewModel is { })
                     {
-                        await using var stream = await file.OpenReadAsync();
-                        var editorViewModel = ServiceProvider.GetService<ProjectEditorViewModel>();
-                        if (editorViewModel is { })
-                        {
-                            await editorViewModel.OnExecuteScript(stream);
-                        }
+                        await editorViewModel.OnExecuteScript(stream);
                     }
                 }
             }
@@ -953,7 +944,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             });
 
             var file = result.FirstOrDefault();
-            if (file is not null && file.CanOpenRead)
+            if (file is not null)
             {
                 string ext = Path.GetExtension(file.Name).ToLower().TrimStart('.');
                 var reader = editor.TextFieldReaders.FirstOrDefault(w => string.Compare(w.Extension, ext, StringComparison.OrdinalIgnoreCase) == 0);
@@ -1000,7 +991,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                 ShowOverwritePrompt = true
             });
 
-            if (file is not null && file.CanOpenWrite)
+            if (file is not null)
             {
                 await using var stream = await file.OpenWriteAsync();
                 var ext = Path.GetExtension(file.Name).ToLower().TrimStart('.');
@@ -1046,7 +1037,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             });
 
             var file = result.FirstOrDefault();
-            if (file is not null && file.CanOpenRead)
+            if (file is not null)
             {
                 await using var stream = await file.OpenWriteAsync();
                 var ext = Path.GetExtension(file.Name).ToLower().TrimStart('.');

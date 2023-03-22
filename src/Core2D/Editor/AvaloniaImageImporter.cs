@@ -49,7 +49,7 @@ public class AvaloniaImageImporter : IImageImporter
             });
 
             var file = result.FirstOrDefault();
-            if (file is not null && file.CanOpenRead)
+            if (file is not null)
             {
                 await using var stream = await file.OpenReadAsync();
 

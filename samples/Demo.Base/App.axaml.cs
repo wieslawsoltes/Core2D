@@ -10,57 +10,56 @@ using Core2D.ViewModels.Editor;
 using Demo.ViewModels;
 using Demo.Views;
 
-namespace Demo
+namespace Demo;
+
+public class App : Application
 {
-    public class App : Application
+    public override void Initialize()
     {
-        public override void Initialize()
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    public override void OnFrameworkInitializationCompleted()
+    {
+        var builder = new ContainerBuilder();
+        builder.RegisterModule<AppModule>();
+
+        var container = builder.Build();
+
+        var serviceProvider = container.Resolve<IServiceProvider>();
+
+        var editor = serviceProvider.GetService<ProjectEditorViewModel>();
+        if (editor is { })
         {
-            AvaloniaXamlLoader.Load(this);
+            editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
+            editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
+            editor.IsToolIdle = true;
+
+            editor.OnNewProject();
         }
 
-        public override void OnFrameworkInitializationCompleted()
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule<AppModule>();
-
-            var container = builder.Build();
-
-            var serviceProvider = container.Resolve<IServiceProvider>();
-
-            var editor = serviceProvider.GetService<ProjectEditorViewModel>();
-            if (editor is { })
+            desktop.MainWindow = new MainWindow
             {
-                editor.CurrentTool = editor.Tools.FirstOrDefault(t => t.Title == "Selection");
-                editor.CurrentPathTool = editor.PathTools.FirstOrDefault(t => t.Title == "Line");
-                editor.IsToolIdle = true;
-
-                editor.OnNewProject();
-            }
-
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                desktop.MainWindow = new MainWindow
+                DataContext = new MainWindowViewModel()
                 {
-                    DataContext = new MainWindowViewModel()
-                    {
-                        Editor = editor
-                    }
-                };
-            }
-
-            if (ApplicationLifetime is ISingleViewApplicationLifetime single)
-            {
-                single.MainView = new MainView()
-                {
-                    DataContext = new MainWindowViewModel()
-                    {
-                        Editor = editor
-                    }
-                };
-            }
-
-            base.OnFrameworkInitializationCompleted();
+                    Editor = editor
+                }
+            };
         }
+
+        if (ApplicationLifetime is ISingleViewApplicationLifetime single)
+        {
+            single.MainView = new MainView()
+            {
+                DataContext = new MainWindowViewModel()
+                {
+                    Editor = editor
+                }
+            };
+        }
+
+        base.OnFrameworkInitializationCompleted();
     }
 }

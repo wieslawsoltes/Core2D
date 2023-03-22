@@ -22,10 +22,6 @@ namespace Core2D;
 
 public class App : Application
 {
-    private static StyleInclude? s_fluentDark;
-
-    private static StyleInclude? s_fluentLight;
-
     public static string DefaultTheme { get; set; }
 
     public static ICommand? ChangeTheme { get; }

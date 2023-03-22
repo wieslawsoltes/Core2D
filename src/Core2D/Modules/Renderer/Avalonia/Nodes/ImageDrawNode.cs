@@ -76,7 +76,7 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
         }
         else
         {
-            Rect = A.Rect.Empty;
+            Rect = new A.Rect();
             Center = new A.Point();
         }
     }

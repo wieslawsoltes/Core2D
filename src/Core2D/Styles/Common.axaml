@@ -43,7 +43,6 @@
     <Setter Property="Background" Value="{DynamicResource DockThemeBackgroundBrush}" />
   </Style>
 
-  <StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml" />
   <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
   <StyleInclude Source="avares://Dock.Avalonia/Themes/DockFluentTheme.axaml" />
   <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />

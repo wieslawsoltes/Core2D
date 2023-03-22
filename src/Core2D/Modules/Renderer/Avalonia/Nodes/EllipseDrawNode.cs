@@ -35,7 +35,7 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
         }
         else
         {
-            Rect = A.Rect.Empty;
+            Rect = new A.Rect();
             Center = new A.Point();
         }
     }

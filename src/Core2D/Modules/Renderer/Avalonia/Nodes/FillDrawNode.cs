@@ -53,7 +53,7 @@ internal class FillDrawNode : DrawNode, IFillDrawNode
             return;
         }
 
-        if (!Rect.IsEmpty)
+        if (Rect != default)
         {
             context.DrawRectangle(Fill, null, Rect);
         }

@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Core2D.Model.Renderer;
 using Core2D.Model;
@@ -10,7 +9,7 @@ using Core2D.ViewModels.Data;
 
 namespace Core2D.Views.Renderer;
 
-public class RenderView : UserControl
+public partial class RenderView : UserControl
 {
     public static readonly StyledProperty<FrameContainerViewModel?> ContainerProperty =
         AvaloniaProperty.Register<RenderView, FrameContainerViewModel?>(nameof(Container));
@@ -62,16 +61,11 @@ public class RenderView : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
-
     public override void Render(DrawingContext context)
     {
         base.Render(context);
 
-        var drawState = new RenderState()
+        var drawState = new RenderState
         {
             Container = Container,
             Renderer = Renderer ?? GetValue(RendererOptions.RendererProperty),
@@ -86,8 +80,6 @@ public class RenderView : UserControl
             Bounds = Bounds
         };
 
-        // TODO: context.Custom(customDrawOperation);
-
-        customDrawOperation.Render(context.PlatformImpl);
+        context.Custom(customDrawOperation);
     }
 }

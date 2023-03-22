@@ -63,7 +63,7 @@ public class PageDropHandler : DefaultDropHandler
             }
         }
 
-        if (e.Data.Contains(DataFormats.FileNames))
+        if (e.Data.Contains(DataFormats.Files))
         {
             var files = e.Data.GetFileNames()?.ToArray();
             if (bExecute)

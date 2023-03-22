@@ -3,9 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:behaviors="using:Core2D.Behaviors"
-             xmlns:ae="using:AvaloniaEdit"
              xmlns:vms="using:Core2D.ViewModels.Scripting"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
@@ -17,21 +14,16 @@
                 CommandParameter="{Binding #ScriptTextEditor.Text}" 
                 Gesture="Ctrl+Enter" />
   </UserControl.KeyBindings>
-  <Panel>
-    <ae:TextEditor x:Name="ScriptTextEditor"
-                   Margin="0"
-                   Background="White"
-                   Foreground="Black"
-                   SyntaxHighlighting="C#"
-                   HorizontalScrollBarVisibility="Auto"
-                   VerticalScrollBarVisibility="Auto"
-                   FontFamily="{DynamicResource CodeFontFamily}"
-                   FontWeight="Normal"
-                   FontSize="14"
-                   WordWrap="False">
-      <i:Interaction.Behaviors>
-        <behaviors:DocumentTextBindingBehavior Text="{Binding Code, Mode=TwoWay}" />
-      </i:Interaction.Behaviors>
-    </ae:TextEditor>
-  </Panel>
+  <TextBox Name="ScriptTextEditor"
+           Margin="0"
+           Background="White"
+           Foreground="Black"
+           AcceptsReturn="True"
+           AcceptsTab="True"
+           FontFamily="{DynamicResource CodeFontFamily}"
+           FontWeight="Normal"
+           FontSize="14"
+           TextWrapping="NoWrap"
+           Text="{Binding Code, Mode=TwoWay}">
+    </TextBox>
 </UserControl>

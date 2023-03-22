@@ -1,21 +1,15 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Core2D.Screenshot;
 
 namespace Core2D.Views;
 
-public class MainWindow : Window
+public partial class MainWindow : Window
 {
     public MainWindow()
     {
         InitializeComponent();
+#if DEBUG
         this.AttachDevTools();
-        this.AttachCapture();
-    }
-
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
+#endif
     }
 }

@@ -34,7 +34,7 @@ internal class RectangleDrawNode : DrawNode, IRectangleDrawNode
         }
         else
         {
-            Rect = A.Rect.Empty;
+            Rect = new A.Rect();
             Center = new A.Point();
         }
     }

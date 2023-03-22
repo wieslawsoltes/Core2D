@@ -3,33 +3,21 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Dialogs;
 using Avalonia.Headless;
-using Avalonia.OpenGL;
 using Avalonia.Threading;
 using Avalonia.Win32;
-using Core2D.Screenshot;
-using Core2D.Util;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
-using Microsoft.CodeAnalysis.Scripting;
 
 namespace Core2D.Desktop;
 
 internal static class Program
 {
-    [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
-    private static extern bool AttachConsole(int processId);
-
-    private static Thread? s_replThread;
-
     private static void Log(Exception ex)
     {
         Console.WriteLine(ex.Message);
@@ -38,81 +26,6 @@ internal static class Program
         {
             Log(ex.InnerException);
         }
-    }
-
-    private static void RunRepl()
-    {
-        s_replThread = new Thread(ReplThread)
-        {
-            IsBackground = true
-        };
-        s_replThread.Start();
-    }
-
-    private static async void ReplThread()
-    {
-        ScriptState<object>? state = null;
-
-        while (true)
-        {
-            try
-            {
-                var code = Console.ReadLine();
-
-                if (state is { } previous)
-                {
-                    await Utilities.RunUiJob(async () => { state = await previous.ContinueWithAsync(code); });
-                }
-                else
-                {
-                    await Utilities.RunUiJob(async () =>
-                    {
-                        var options = ScriptOptions.Default.WithImports("System");
-                        state = await CSharpScript.RunAsync(code, options, new Repl());
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                Log(ex);
-            }
-        }
-    }
-
-    private static async Task CreateScreenshots(string extension, double with, double height)
-    {
-        await Dispatcher.UIThread.InvokeAsync(() =>
-        {
-            var applicationLifetime = (IClassicDesktopStyleApplicationLifetime?)Application.Current?.ApplicationLifetime;
-            var mainWindow = applicationLifetime?.MainWindow;
-            var headlessWindow = mainWindow?.PlatformImpl as IHeadlessWindow;
-
-            if (mainWindow?.FindControl<Panel>("ContentPanel") is { } contentPanel)
-            {
-                var editor = contentPanel.DataContext as ProjectEditorViewModel;
-
-                var pt = new Point(-1, -1);
-                headlessWindow?.MouseMove(pt);
-                Dispatcher.UIThread.RunJobs();
-
-                var size = new Size(with, height);
-                var pathDashboard = $"Core2D-Dashboard-{App.DefaultTheme}.{extension}";
-                var pathEditor = $"Core2D-Editor-{App.DefaultTheme}.{extension}";
-
-                var streamDashboard = File.Create(pathDashboard);
-                Capture.Save(contentPanel, size, streamDashboard, pathDashboard);
-                Dispatcher.UIThread.RunJobs();
-
-                editor?.OnNew(null);
-                Dispatcher.UIThread.RunJobs();
-
-                var streamEditor = File.Create(pathEditor);
-                Capture.Save(contentPanel, size, streamEditor, pathEditor);
-                Dispatcher.UIThread.RunJobs();
-            }
-
-            applicationLifetime?.Shutdown();
-        });
     }
 
     private static async Task ProcessSettings(Settings settings)
@@ -158,11 +71,6 @@ internal static class Program
                 App.DefaultTheme = settings.Theme;
             }
 
-            if (settings.Repl)
-            {
-                RunRepl();
-            }
-
 #if ENABLE_DIRECT2D1
             if (settings.UseDirect2D1)
             {
@@ -187,7 +95,7 @@ internal static class Program
 #if ENABLE_DIRECT2D1
                 UseWindowsUIComposition = !settings.UseDirect2D1 && settings.UseWindowsUIComposition
 #else
-                    UseWindowsUIComposition = settings.UseWindowsUIComposition
+                UseWindowsUIComposition = settings.UseWindowsUIComposition
 #endif
             });
 
@@ -207,14 +115,6 @@ internal static class Program
                 builder.UseManagedSystemDialogs();
             }
 
-            if (settings.CreateHeadlessScreenshots)
-            {
-                builder.UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false})
-                    .AfterSetup(async _ => await CreateScreenshots(settings.ScreenshotExtension, settings.ScreenshotWidth, settings.ScreenshotHeight))
-                    .StartWithClassicDesktopLifetime(args);
-                return;
-            }
-
             if (settings.UseHeadless)
             {
                 builder.UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = settings.UseHeadlessDrawing});
@@ -225,11 +125,6 @@ internal static class Program
                 builder.AfterSetup(async _ => await ProcessSettings(settings))
                     .StartWithHeadlessVncPlatform(settings.VncHost, settings.VncPort, args, ShutdownMode.OnMainWindowClose);
                 return;
-            }
-
-            if (settings.HttpServer)
-            {
-                Task.Run(Server.Run);
             }
 
             builder.AfterSetup(async _ => await ProcessSettings(settings))
@@ -281,11 +176,6 @@ internal static class Program
     [STAThread]
     internal static void Main(string[] args)
     {
-        if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-        {
-            AttachConsole(-1);
-        }
-
         var rootCommand = CreateRootCommand();
         var rootSettings = default(Settings?);
 

@@ -1,9 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Demo.ViewModels
+namespace Demo.ViewModels;
+
+[ObservableObject]
+public partial class ViewModelBase
 {
-    [ObservableObject]
-    public partial class ViewModelBase
-    {
-    }
 }

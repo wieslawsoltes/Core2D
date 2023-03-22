@@ -348,7 +348,7 @@ public class DockFactory : Factory
 
     public override void InitLayout(IDockable layout)
     {
-        ContextLocator = new Dictionary<string, Func<object>>
+        ContextLocator = new Dictionary<string, Func<object?>>
         {
             // Documents
             ["PageDocument"] = () => _projectEditor,
@@ -397,7 +397,7 @@ public class DockFactory : Factory
             ["Home"] = () => _homeDock,
         };
 
-        HostWindowLocator = new Dictionary<string, Func<IHostWindow>>
+        HostWindowLocator = new Dictionary<string, Func<IHostWindow?>>
         {
             [nameof(IDockWindow)] = () => new HostWindow()
         };

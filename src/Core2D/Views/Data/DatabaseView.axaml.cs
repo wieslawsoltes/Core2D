@@ -5,13 +5,12 @@ using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Data;
-using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using Core2D.ViewModels.Data;
 
 namespace Core2D.Views.Data;
 
-public class DatabaseView : UserControl
+public partial class DatabaseView : UserControl
 {
     private readonly TextBox? _filterRecordsText;
     private readonly DataGrid? _rowsDataGrid;
@@ -34,11 +33,6 @@ public class DatabaseView : UserControl
         {
             _rowsDataGrid.DataContextChanged += RowsDataGrid_DataContextChanged;
         }
-    }
-
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
     }
 
     private void OnFilterRecordsTextChanged()
