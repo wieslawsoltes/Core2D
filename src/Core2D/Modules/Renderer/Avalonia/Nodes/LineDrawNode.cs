@@ -192,7 +192,7 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
 
     public override void OnDraw(object? dc, double zoom)
     {
-        if (dc is not AP.IDrawingContextImpl context)
+        if (dc is not AM.DrawingContext context)
         {
             return;
         }

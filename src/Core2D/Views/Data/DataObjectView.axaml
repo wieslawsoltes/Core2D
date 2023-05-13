@@ -48,7 +48,7 @@
                  VerticalAlignment="Center"
                  Grid.Column="0" 
                  Grid.Row="0" />
-          <ItemsControl Items="{Binding Properties}"
+          <ItemsControl ItemsSource="{Binding Properties}"
                         VerticalAlignment="Stretch" 
                         Grid.Column="0" 
                         Grid.Row="1">
@@ -72,7 +72,7 @@
                         Width="6"
                         Grid.Column="1" Grid.Row="1" />
           <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-          <ItemsControl Items="{Binding Properties}" 
+          <ItemsControl ItemsSource="{Binding Properties}" 
                         VerticalAlignment="Stretch" 
                         Grid.Column="2" Grid.Row="1">
             <ItemsControl.DataTemplates>

@@ -21,7 +21,7 @@
       </StackPanel>
     </TabItem>
     <TabItem Header="Shapes">
-      <ListBox x:Name="ShapesListBox" Items="{Binding Shapes}">
+      <ListBox x:Name="ShapesListBox" ItemsSource="{Binding Shapes}">
         <ListBox.DataTemplates>
           <DataTemplate DataType="vms:BaseShapeViewModel">
             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"

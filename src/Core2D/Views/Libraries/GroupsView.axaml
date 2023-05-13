@@ -48,7 +48,7 @@
                 Padding="12,4,12,4" />
       </StackPanel>
     </Grid>
-    <ComboBox Items="{Binding GroupLibraries}" 
+    <ComboBox ItemsSource="{Binding GroupLibraries}" 
               SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" 
               IsVisible="{Binding !!CurrentGroupLibrary}" 
               HorizontalAlignment="Stretch"
@@ -89,7 +89,7 @@
               Padding="12,4,12,4" />
     </StackPanel>
     <ListBox x:Name="GroupsListBox" 
-             Items="{Binding CurrentGroupLibrary.Items, FallbackValue={x:Null}}"
+             ItemsSource="{Binding CurrentGroupLibrary.Items, FallbackValue={x:Null}}"
              SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay, FallbackValue={x:Null}}"
              Grid.Row="3">
       <i:Interaction.Behaviors>

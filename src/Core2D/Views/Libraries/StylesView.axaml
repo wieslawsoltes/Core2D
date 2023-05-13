@@ -46,7 +46,7 @@
                 Background="Transparent" Padding="12,4,12,4" />
       </StackPanel>
     </Grid>
-    <ComboBox Items="{Binding StyleLibraries}" 
+    <ComboBox ItemsSource="{Binding StyleLibraries}" 
               SelectedItem="{Binding CurrentStyleLibrary, Mode=TwoWay}" 
               IsVisible="{Binding !!CurrentStyleLibrary}" 
               HorizontalAlignment="Stretch"
@@ -85,7 +85,7 @@
               Padding="12,4,12,4" />
     </StackPanel>
     <ListBox x:Name="StylesListBox" 
-             Items="{Binding CurrentStyleLibrary.Items, FallbackValue={x:Null}}"
+             ItemsSource="{Binding CurrentStyleLibrary.Items, FallbackValue={x:Null}}"
              SelectedItem="{Binding CurrentStyleLibrary.Selected, Mode=TwoWay, FallbackValue={x:Null}}" 
              Grid.Row="3">
       <i:Interaction.Behaviors>

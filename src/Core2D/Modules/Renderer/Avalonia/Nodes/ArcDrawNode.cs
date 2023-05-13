@@ -4,6 +4,7 @@ using Core2D.Model.Renderer.Nodes;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using A = Avalonia;
+using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Avalonia.Nodes;
@@ -11,7 +12,7 @@ namespace Core2D.Modules.Renderer.Avalonia.Nodes;
 internal class ArcDrawNode : DrawNode, IArcDrawNode
 {
     public ArcShapeViewModel Arc { get; set; }
-    public AP.IGeometryImpl? Geometry { get; set; }
+    public AM.Geometry? Geometry { get; set; }
 
     public ArcDrawNode(ArcShapeViewModel arc, ShapeStyleViewModel? style)
     {
@@ -30,7 +31,7 @@ internal class ArcDrawNode : DrawNode, IArcDrawNode
 
     public override void OnDraw(object? dc, double zoom)
     {
-        if (dc is not AP.IDrawingContextImpl context)
+        if (dc is not AM.DrawingContext context)
         {
             return;
         }

@@ -12,7 +12,7 @@
     <Label Content="Columns" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="0" />
     <DockPanel Margin="6" Grid.Row="1" Grid.Column="0">
       <ComboBox x:Name="DatabasesComboBox" 
-                Items="{Binding Editor.Project.Databases}"
+                ItemsSource="{Binding Editor.Project.Databases}"
                 SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" 
                 HorizontalAlignment="Stretch"
                 DockPanel.Dock="Top">
@@ -23,7 +23,7 @@
         </ComboBox.DataTemplates>
       </ComboBox>
       <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <ItemsControl Items="{Binding #DatabasesComboBox.SelectedItem.Columns}" 
+        <ItemsControl ItemsSource="{Binding #DatabasesComboBox.SelectedItem.Columns}" 
                       VerticalAlignment="Stretch">
           <ItemsControl.DataTemplates>
             <DataTemplate DataType="vmdt:ColumnViewModel">
@@ -60,7 +60,7 @@
                   Grid.Row="1" Grid.Column="1">
       <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
         <Label Content="Name" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" />
-        <ItemsControl Items="{Binding Editor.Project.CurrentContainer.Properties}"
+        <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Properties}"
                       VerticalAlignment="Stretch" 
                       Grid.Column="0" Grid.Row="1">
           <ItemsControl.DataTemplates>
@@ -83,7 +83,7 @@
         <Label Content="Value" 
                VerticalAlignment="Center" 
                Grid.Column="2" Grid.Row="0" />
-        <ItemsControl Items="{Binding Editor.Project.CurrentContainer.Properties}"
+        <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Properties}"
                       VerticalAlignment="Stretch" 
                       Grid.Column="2" Grid.Row="1">
           <ItemsControl.DataTemplates>
@@ -124,7 +124,7 @@
         <Label Content="Name" 
                VerticalAlignment="Center" 
                Grid.Column="0" Grid.Row="0" />
-        <ItemsControl Items="{Binding Text.Properties}"
+        <ItemsControl ItemsSource="{Binding Text.Properties}"
                       VerticalAlignment="Stretch"
                       Grid.Column="0" Grid.Row="1">
           <ItemsControl.DataTemplates>
@@ -147,7 +147,7 @@
         <Label Content="Value" 
                VerticalAlignment="Center" 
                Grid.Column="2" Grid.Row="0" />
-        <ItemsControl Items="{Binding Text.Properties}"
+        <ItemsControl ItemsSource="{Binding Text.Properties}"
                       VerticalAlignment="Stretch"
                       Grid.Column="2" Grid.Row="1">
           <ItemsControl.DataTemplates>

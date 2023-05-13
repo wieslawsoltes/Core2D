@@ -32,7 +32,7 @@
                Grid.Row="1" />
     <ItemsControl VerticalAlignment="Stretch"
                   Margin="{DynamicResource ContentMargin}"
-                  Items="{Binding Keys}"
+                  ItemsSource="{Binding Keys}"
                   Grid.Column="0" 
                   Grid.Row="2" >
       <ItemsControl.DataTemplates>

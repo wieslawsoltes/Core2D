@@ -25,14 +25,14 @@
                   HorizontalAlignment="Stretch" />
         <Label Content="FillRule" 
                Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox Items="{x:Static vms:PathShapeViewModel.FillRuleValues}"
+        <ComboBox ItemsSource="{x:Static vms:PathShapeViewModel.FillRuleValues}"
                   SelectedItem="{Binding FillRule, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
       </StackPanel>
     </TabItem>
     <TabItem Header="Figures">
       <TreeView x:Name="FiguresTreeView" 
-                Items="{Binding Figures}">
+                ItemsSource="{Binding Figures}">
         <TreeView.Styles>
           <Style Selector="TreeViewItem">
             <Setter Property="IsExpanded" Value="False" />

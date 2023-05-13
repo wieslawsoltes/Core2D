@@ -98,7 +98,7 @@
                     Padding="12,4,12,4" />
           </StackPanel>
           <DataGrid x:Name="ColumnsDataGrid" 
-                    Items="{Binding Columns}" 
+                    ItemsSource="{Binding Columns}" 
                     SelectionMode="Single"
                     AutoGenerateColumns="False" 
                     IsReadOnly="False" 

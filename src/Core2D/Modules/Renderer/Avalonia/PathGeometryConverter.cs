@@ -24,14 +24,14 @@ public static class PathGeometryConverter
 
     private static AM.FillRule ToFillRule(this FillRule fillRule) => fillRule == FillRule.Nonzero ? AM.FillRule.NonZero : AM.FillRule.EvenOdd;
 
-    public static AP.IGeometryImpl? ToGeometryImpl(PathShapeViewModel pathShape, bool isFilled)
+    public static AM.Geometry? ToGeometryImpl(PathShapeViewModel pathShape, bool isFilled)
     {
         var factory = Factory;
         if (factory is null)
         {
             return null;
         }
-        var geometry = factory.CreateStreamGeometry();
+        var geometry = new AM.StreamGeometry();
         using var context = geometry.Open();
 
         context.SetFillRule(pathShape.FillRule.ToFillRule());
@@ -108,7 +108,7 @@ public static class PathGeometryConverter
 
         return geometry;
     }
-    public static AP.IGeometryImpl? ToGeometryImpl(EllipseShapeViewModel ellipse)
+    public static AM.Geometry? ToGeometryImpl(EllipseShapeViewModel ellipse)
     {
         var factory = Factory;
         if (factory is null)
@@ -125,10 +125,10 @@ public static class PathGeometryConverter
             ellipse.BottomRight.X,
             ellipse.BottomRight.Y);
         var rect = new A.Rect(rect2.X, rect2.Y, rect2.Width, rect2.Height);
-        return factory.CreateEllipseGeometry(rect);
+        return new AM.EllipseGeometry(rect);
     }
 
-    public static AP.IGeometryImpl? ToGeometryImpl(ArcShapeViewModel arc)
+    public static AM.Geometry? ToGeometryImpl(ArcShapeViewModel arc)
     {
         var factory = Factory;
         if (factory is null)
@@ -139,7 +139,7 @@ public static class PathGeometryConverter
         {
             return null;
         }
-        var geometry = factory.CreateStreamGeometry();
+        var geometry = new AM.StreamGeometry();
         using var context = geometry.Open();
         var wpfArc = new WpfArc(
             Point2.FromXY(arc.Point1.X, arc.Point1.Y),
@@ -159,7 +159,7 @@ public static class PathGeometryConverter
         return geometry;
     }
 
-    public static AP.IGeometryImpl? ToGeometryImpl(CubicBezierShapeViewModel cubicBezier)
+    public static AM.Geometry? ToGeometryImpl(CubicBezierShapeViewModel cubicBezier)
     {
         var factory = Factory;
         if (factory is null)
@@ -170,7 +170,7 @@ public static class PathGeometryConverter
         {
             return null;
         }
-        var geometry = factory.CreateStreamGeometry();
+        var geometry = new AM.StreamGeometry();
         using var context = geometry.Open();
         context.BeginFigure(
             cubicBezier.Point1.ToPoint(),
@@ -183,7 +183,7 @@ public static class PathGeometryConverter
         return geometry;
     }
 
-    public static AP.IGeometryImpl? ToGeometryImpl(QuadraticBezierShapeViewModel quadraticBezier)
+    public static AM.Geometry? ToGeometryImpl(QuadraticBezierShapeViewModel quadraticBezier)
     {
         var factory = Factory;
         if (factory is null)
@@ -194,7 +194,7 @@ public static class PathGeometryConverter
         {
             return null;
         }
-        var geometry = factory.CreateStreamGeometry();
+        var geometry = new AM.StreamGeometry();
         using var context = geometry.Open();
         context.BeginFigure(
             quadraticBezier.Point1.ToPoint(),

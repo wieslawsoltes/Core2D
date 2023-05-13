@@ -20,7 +20,7 @@
                   HorizontalAlignment="Stretch" />
         <Label Content="SweepDirection"
                Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox Items="{x:Static vmps:ArcSegmentViewModel.SweepDirectionValues}"
+        <ComboBox ItemsSource="{x:Static vmps:ArcSegmentViewModel.SweepDirectionValues}"
                   SelectedItem="{Binding SweepDirection, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
       </StackPanel>

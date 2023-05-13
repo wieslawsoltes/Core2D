@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using Core2D.Modules.Renderer.Avalonia.Media;
 using AP = Avalonia.Platform;
 using AM = Avalonia.Media;
 
@@ -11,15 +10,15 @@ internal class EllipseMarker : MarkerBase
 
     public override void Draw(object? dc)
     {
-        if (dc is not AP.IDrawingContextImpl context)
+        if (dc is not AM.DrawingContext context)
         {
             return;
         }
 
-        if (ShapeViewModel is { } && EllipseGeometry?.PlatformImpl is { })
+        if (ShapeViewModel is { } && EllipseGeometry is { })
         {
-            using var rotationDisposable = context.PushPreTransform(Rotation);
-            context.DrawGeometry(ShapeViewModel.IsFilled ? Brush : null, ShapeViewModel.IsStroked ? Pen : null, EllipseGeometry.PlatformImpl);
+            using var rotationDisposable = context.PushTransform(Rotation);
+            context.DrawGeometry(ShapeViewModel.IsFilled ? Brush : null, ShapeViewModel.IsStroked ? Pen : null, EllipseGeometry);
         }
     }
 }

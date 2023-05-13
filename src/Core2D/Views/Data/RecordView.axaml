@@ -16,7 +16,7 @@
                Text="Name" 
                Grid.Column="0" Grid.Row="0" />
     <ItemsControl DataContext="{Binding Owner}"
-                  Items="{Binding Columns}" 
+                  ItemsSource="{Binding Columns}" 
                   VerticalAlignment="Stretch" 
                   Grid.Column="0" Grid.Row="1" 
                   x:DataType="vmdt:DatabaseViewModel">
@@ -42,7 +42,7 @@
                   Width="6"
                   Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
     <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" />
-    <ItemsControl Items="{Binding Values}"
+    <ItemsControl ItemsSource="{Binding Values}"
                   VerticalAlignment="Stretch" 
                   Grid.Column="2" Grid.Row="1">
       <ItemsControl.DataTemplates>

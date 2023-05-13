@@ -111,27 +111,27 @@
           <TreeViewItem Header="Styles" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding StyleLibraries}" 
-                        Items="{Binding}"/>
+                        ItemsSource="{Binding}"/>
           <TreeViewItem Header="Groups" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding GroupLibraries}" 
-                        Items="{Binding}"/>
+                        ItemsSource="{Binding}"/>
           <TreeViewItem Header="Databases" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding Databases}" 
-                        Items="{Binding}"/>
+                        ItemsSource="{Binding}"/>
           <TreeViewItem Header="Templates" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding Templates}" 
-                        Items="{Binding}"/>
+                        ItemsSource="{Binding}"/>
           <TreeViewItem Header="Scripts" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding Scripts}" 
-                        Items="{Binding}"/>
+                        ItemsSource="{Binding}"/>
           <TreeViewItem Header="Documents" 
                         ContextMenu="{StaticResource ExportContextMenu}"
                         DataContext="{Binding Documents}" 
-                        Items="{Binding}"/>
+                        ItemsSource="{Binding}"/>
         </TreeViewItem>
       </TreeView>
     </Panel>

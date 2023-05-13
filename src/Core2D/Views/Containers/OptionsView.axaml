@@ -27,7 +27,7 @@
         <TextBox Text="{Binding HitThreshold, Mode=TwoWay}" />
         <Label Content="MoveMode" 
                Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox Items="{x:Static vmc:OptionsViewModel.MoveModeValues}" 
+        <ComboBox ItemsSource="{x:Static vmc:OptionsViewModel.MoveModeValues}" 
                   SelectedItem="{Binding MoveMode, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
         <CheckBox Content="TryToConnect" 
@@ -50,7 +50,7 @@
                     IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" 
                     HorizontalAlignment="Stretch" />
           <Label Content="FillRule" Margin="{DynamicResource TextControlThemePadding}" />
-          <ComboBox Items="{x:Static vms:PathShapeViewModel.FillRuleValues}"
+          <ComboBox ItemsSource="{x:Static vms:PathShapeViewModel.FillRuleValues}"
                     SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" 
                     HorizontalAlignment="Stretch" />
         </StackPanel>

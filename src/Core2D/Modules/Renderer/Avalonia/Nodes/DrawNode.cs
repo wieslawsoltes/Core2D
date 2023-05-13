@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using Core2D.Model.Renderer.Nodes;
-using Core2D.Modules.Renderer.Avalonia.Media;
 using Core2D.ViewModels.Style;
 using A = Avalonia;
 using ACP = Avalonia.Controls.PanAndZoom;
@@ -43,7 +42,7 @@ internal abstract class DrawNode : IDrawNode
 
     public virtual void Draw(object? dc, double zoom)
     {
-        if (dc is not AP.IDrawingContextImpl context)
+        if (dc is not AM.DrawingContext context)
         {
             return;
         }
@@ -76,8 +75,8 @@ internal abstract class DrawNode : IDrawNode
         // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (scale != 1.0)
         {
-            using var translateDisposable = context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY));
-            using var scaleDisposable = context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale));
+            using var translateDisposable = context.PushTransform(ACP.MatrixHelper.Translate(translateX, translateY));
+            using var scaleDisposable = context.PushTransform(ACP.MatrixHelper.Scale(scale, scale));
             OnDraw(dc, zoom);
         }
         else

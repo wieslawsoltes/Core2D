@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using A = Avalonia;
+using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Avalonia.Nodes.Markers;
@@ -13,7 +14,7 @@ internal class ArrowMarker : MarkerBase
 
     public override void Draw(object? dc)
     {
-        if (dc is not AP.IDrawingContextImpl context)
+        if (dc is not AM.DrawingContext context)
         {
             return;
         }

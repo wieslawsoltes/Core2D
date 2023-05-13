@@ -123,7 +123,7 @@ public partial class DatabaseView : UserControl
         {
             _recordsView = new DataGridCollectionView(_databaseViewModel.Records);
             _recordsView.Filter = FilterRecords;
-            _rowsDataGrid.Items = _recordsView;
+            _rowsDataGrid.ItemsSource = _recordsView;
 
             _recordsFilter = _filterRecordsText?.Text;
             _recordsView?.Refresh();
@@ -134,7 +134,7 @@ public partial class DatabaseView : UserControl
     {
         if (_rowsDataGrid is { })
         {
-            _rowsDataGrid.Items = null;
+            _rowsDataGrid.ItemsSource = null;
         }
         _recordsView = null;
     }

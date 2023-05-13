@@ -32,7 +32,7 @@ public class UInt32ToColorConverter : IValueConverter
         {
             try
             {
-                return c2.ToUint32();
+                return c2.ToUInt32();
             }
             catch (Exception)
             {

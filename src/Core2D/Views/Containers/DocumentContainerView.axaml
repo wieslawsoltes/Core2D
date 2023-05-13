@@ -18,7 +18,7 @@
       </StackPanel>
     </TabItem>
     <TabItem Header="Pages">
-      <ListBox x:Name="PagesListBox" Items="{Binding Pages}">
+      <ListBox x:Name="PagesListBox" ItemsSource="{Binding Pages}">
         <ListBox.DataTemplates>
           <DataTemplate DataType="vmc:PageContainerViewModel">
             <TextBlock Text="{Binding Name}" Background="Transparent">

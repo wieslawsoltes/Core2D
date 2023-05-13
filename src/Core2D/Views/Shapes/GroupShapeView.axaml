@@ -22,7 +22,7 @@
       </StackPanel>
     </TabItem>
     <TabItem Header="Properties">
-      <ItemsControl Items="{Binding Shapes}">
+      <ItemsControl ItemsSource="{Binding Shapes}">
         <ItemsControl.DataTemplates>
           <DataTemplate DataType="vms:BaseShapeViewModel">
             <Grid RowDefinitions="Auto,*" 
@@ -31,7 +31,7 @@
               <Label Content="Name"  
                      VerticalAlignment="Center"
                      Grid.Column="0" Grid.Row="0" />
-              <ItemsControl Items="{Binding Properties}"
+              <ItemsControl ItemsSource="{Binding Properties}"
                             VerticalAlignment="Stretch"
                             Grid.Column="0" Grid.Row="1">
                 <ItemsControl.DataTemplates>
@@ -58,7 +58,7 @@
               <Label Content="Value" 
                      VerticalAlignment="Center"
                      Grid.Column="2" Grid.Row="0" />
-              <ItemsControl Items="{Binding Properties}"
+              <ItemsControl ItemsSource="{Binding Properties}"
                             VerticalAlignment="Stretch" 
                             Grid.Column="2" Grid.Row="1" >
                 <ItemsControl.DataTemplates>
@@ -85,7 +85,7 @@
     <TabItem Header="Shapes">
       <Grid RowDefinitions="50*,6,50*">
         <ListBox x:Name="ShapesListBox" 
-                 Items="{Binding Shapes}" 
+                 ItemsSource="{Binding Shapes}" 
                  Grid.Row="0">
           <ListBox.DataTemplates>
             <DataTemplate DataType="vms:BaseShapeViewModel">
@@ -115,7 +115,7 @@
     <TabItem Header="Connectors">
       <Grid RowDefinitions="50*,6,50*">
         <ListBox x:Name="ConnectorsListBox" 
-                 Items="{Binding Connectors}" 
+                 ItemsSource="{Binding Connectors}" 
                  Grid.Row="0">
           <ListBox.DataTemplates>
             <DataTemplate DataType="vms:PointShapeViewModel">

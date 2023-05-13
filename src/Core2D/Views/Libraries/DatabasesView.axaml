@@ -37,7 +37,7 @@
                 Padding="12,4,12,4" />
       </StackPanel>
     </Grid>
-    <ComboBox Items="{Binding Databases}" 
+    <ComboBox ItemsSource="{Binding Databases}" 
               SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" 
               IsVisible="{Binding !!CurrentDatabase}" 
               HorizontalAlignment="Stretch"

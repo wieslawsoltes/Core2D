@@ -7,6 +7,7 @@ using Core2D.Spatial;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using A = Avalonia;
+using AM = Avalonia.Media;
 using AMI = Avalonia.Media.Imaging;
 using AP = Avalonia.Platform;
 
@@ -83,7 +84,7 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
 
     public override void OnDraw(object? dc, double zoom)
     {
-        if (dc is not AP.IDrawingContextImpl context)
+        if (dc is not AM.DrawingContext context)
         {
             return;
         }
@@ -98,11 +99,11 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
             context.DrawRectangle(null, Stroke, DestRect);
         }
 
-        if (ImageCached is { })
+        if (ImageCached is AM.IImage image)
         {
             try
             {
-                context.DrawBitmap(ImageCached.PlatformImpl, 1.0, SourceRect, DestRect);
+                image.Draw(context, SourceRect, DestRect);
             }
             catch (Exception ex)
             {

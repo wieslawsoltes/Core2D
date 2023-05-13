@@ -16,7 +16,7 @@
     <TextBox Text="{Binding Thickness, Mode=TwoWay}" />
     <Label Content="Line Cap" 
            Margin="{DynamicResource TextControlThemePadding}" />
-    <ComboBox Items="{x:Static vms:StrokeStyleViewModel.LineCapValues}" 
+    <ComboBox ItemsSource="{x:Static vms:StrokeStyleViewModel.LineCapValues}" 
               SelectedItem="{Binding LineCap, Mode=TwoWay}"
               HorizontalAlignment="Stretch" />
     <Label Content="Dash Offset" 
@@ -30,7 +30,7 @@
         <StackPanel Grid.Column="0">
           <Label Content="Start Arrow" 
                  Margin="{DynamicResource TextControlThemePadding}" />
-          <ComboBox Items="{x:Static vms:StrokeStyleViewModel.ArrowTypeValues}" 
+          <ComboBox ItemsSource="{x:Static vms:StrokeStyleViewModel.ArrowTypeValues}" 
                     SelectedItem="{Binding ArrowType, Mode=TwoWay}" 
                     Padding="3"
                     HorizontalAlignment="Stretch" />
@@ -62,7 +62,7 @@
         <StackPanel Grid.Column="0">
           <Label Content="End Arrow" 
                  Margin="{DynamicResource TextControlThemePadding}" />
-          <ComboBox Items="{x:Static vms:StrokeStyleViewModel.ArrowTypeValues}" 
+          <ComboBox ItemsSource="{x:Static vms:StrokeStyleViewModel.ArrowTypeValues}" 
                     SelectedItem="{Binding ArrowType, Mode=TwoWay}"
                     Padding="3" HorizontalAlignment="Stretch" />
         </StackPanel>

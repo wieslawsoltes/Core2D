@@ -156,7 +156,7 @@
       </StackPanel>
     </Grid>
     <TreeView x:Name="DocumentsTreeView" SelectionMode="Multiple" 
-              Items="{Binding Documents}"
+              ItemsSource="{Binding Documents}"
               SelectedItem="{Binding Selected, Mode=TwoWay}" 
               ContextMenu="{StaticResource ProjectContainerContextMenu}">
       <i:Interaction.Behaviors>

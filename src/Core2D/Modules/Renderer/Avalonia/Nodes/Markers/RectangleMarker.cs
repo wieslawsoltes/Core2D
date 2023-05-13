@@ -1,6 +1,6 @@
 ﻿#nullable enable
-using Core2D.Modules.Renderer.Avalonia.Media;
 using A = Avalonia;
+using AM = Avalonia.Media;
 using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Avalonia.Nodes.Markers;
@@ -11,7 +11,7 @@ internal class RectangleMarker : MarkerBase
 
     public override void Draw(object? dc)
     {
-        if (dc is not AP.IDrawingContextImpl context)
+        if (dc is not AM.DrawingContext context)
         {
             return;
         }
@@ -21,7 +21,7 @@ internal class RectangleMarker : MarkerBase
             return;
         }
         
-        using var rotationDisposable = context.PushPreTransform(Rotation);
+        using var rotationDisposable = context.PushTransform(Rotation);
 
         if (ShapeViewModel.IsFilled)
         {

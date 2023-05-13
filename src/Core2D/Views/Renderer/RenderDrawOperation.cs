@@ -1,6 +1,6 @@
 ﻿#nullable enable
 using Avalonia;
-using Avalonia.Platform;
+using Avalonia.Media;
 using Avalonia.Rendering.SceneGraph;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
@@ -74,7 +74,7 @@ public class RenderDrawOperation : ICustomDrawOperation
         s_exportPresenter.Render(context, renderState.Renderer, renderState.Selection, renderState.Container, 0.0, 0.0);
     }
 
-    private static void Draw(RenderState? renderState, object context)
+    public static void Draw(RenderState? renderState, object context)
     {
         switch (renderState?.RenderType)
         {
@@ -107,7 +107,7 @@ public class RenderDrawOperation : ICustomDrawOperation
 
     public bool Equals(ICustomDrawOperation? other) => false;
 
-    public void Render(IDrawingContextImpl context)
+    public void Render(ImmediateDrawingContext context)
     {
         Draw(RenderState, context);
     }

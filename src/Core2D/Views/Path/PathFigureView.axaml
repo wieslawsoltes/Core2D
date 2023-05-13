@@ -24,7 +24,7 @@
       <ContentControl Content="{Binding StartPoint}" />
     </TabItem>
     <TabItem Header="Segments">
-      <ListBox Items="{Binding Segments}">
+      <ListBox ItemsSource="{Binding Segments}">
         <ListBox.ItemTemplate>
           <DataTemplate>
             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"

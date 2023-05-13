@@ -43,12 +43,12 @@
     </StackPanel>
     <Label Content="HAlignment" 
            Margin="{DynamicResource TextControlThemePadding}" />
-    <ComboBox Items="{x:Static vms:TextStyleViewModel.TextHAlignmentValues}"
+    <ComboBox ItemsSource="{x:Static vms:TextStyleViewModel.TextHAlignmentValues}"
               SelectedItem="{Binding TextHAlignment, Mode=TwoWay}" 
               HorizontalAlignment="Stretch" />
     <Label Content="VAlignment"
            Margin="{DynamicResource TextControlThemePadding}" />
-    <ComboBox Items="{x:Static vms:TextStyleViewModel.TextVAlignmentValues}"
+    <ComboBox ItemsSource="{x:Static vms:TextStyleViewModel.TextVAlignmentValues}"
               SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" 
               HorizontalAlignment="Stretch" />
   </StackPanel>

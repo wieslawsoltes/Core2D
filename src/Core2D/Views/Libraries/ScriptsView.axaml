@@ -56,7 +56,7 @@
                 Padding="12,4,12,4" />
       </StackPanel>
       <ListBox x:Name="ScriptsListBox" 
-               Items="{Binding Scripts}" 
+               ItemsSource="{Binding Scripts}" 
                SelectedItem="{Binding CurrentScript, Mode=TwoWay}"
                Grid.Row="1">
         <i:Interaction.Behaviors>

@@ -13,7 +13,7 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
 {
     public EllipseShapeViewModel Ellipse { get; set; }
     public A.Rect Rect { get; set; }
-    public AP.IGeometryImpl? Geometry { get; set; }
+    public AM.Geometry? Geometry { get; set; }
 
     public EllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel? style)
     {
@@ -42,7 +42,7 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
 
     public override void OnDraw(object? dc, double zoom)
     {
-        if (dc is not AP.IDrawingContextImpl context)
+        if (dc is not AM.DrawingContext context)
         {
             return;
         }

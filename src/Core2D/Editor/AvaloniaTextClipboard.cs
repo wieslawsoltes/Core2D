@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Core2D.Model;
 
 namespace Core2D.Editor;
@@ -9,19 +10,29 @@ public sealed class AvaloniaTextClipboard : ITextClipboard
 {
     async Task ITextClipboard.SetText(string? text)
     {
-        if (text is { } && Application.Current?.Clipboard is { } clipboard)
+        if (text is null)
         {
-            await clipboard.SetTextAsync(text);
+            return;
+        }
+
+        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime lifetime)
+        {
+            if (lifetime.MainWindow?.Clipboard is {} clipboard)
+            {
+                await clipboard.SetTextAsync(text);
+            }
         }
     }
 
     private async Task<string?> GetTextAsync()
     {
-        if (Application.Current?.Clipboard is { } clipboard)
+        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime lifetime)
         {
-            return await clipboard.GetTextAsync();
+            if (lifetime.MainWindow?.Clipboard is {} clipboard)
+            {
+                return await clipboard.GetTextAsync();
+            }
         }
-
         return default;
     }
 

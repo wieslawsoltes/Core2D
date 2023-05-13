@@ -67,12 +67,12 @@
           <TabItem Header="Options">
             <StackPanel Margin="{DynamicResource ContentMargin}">
               <Label Content="PanButton" Margin="{DynamicResource TextControlThemePadding}" />
-              <ComboBox Items="{x:Static paz:ZoomBorder.ButtonNames}" 
+              <ComboBox ItemsSource="{x:Static paz:ZoomBorder.ButtonNames}" 
                         SelectedItem="{Binding PanButton, Mode=TwoWay}"
                         HorizontalAlignment="Stretch" />
               <Label Content="Stretch" 
                      Margin="{DynamicResource TextControlThemePadding}" />
-              <ComboBox Items="{x:Static paz:ZoomBorder.StretchModes}" 
+              <ComboBox ItemsSource="{x:Static paz:ZoomBorder.StretchModes}" 
                         SelectedItem="{Binding Stretch, Mode=TwoWay}"
                         HorizontalAlignment="Stretch" />
               <Label Content="ZoomSpeed" 

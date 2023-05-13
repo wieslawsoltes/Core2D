@@ -49,7 +49,7 @@
               Background="Transparent" Padding="12,4,12,4" />
     </StackPanel>
     <ListBox x:Name="TemplatesListBox" 
-             Items="{Binding Templates}"
+             ItemsSource="{Binding Templates}"
              SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" 
              Grid.Row="1">
       <i:Interaction.Behaviors>

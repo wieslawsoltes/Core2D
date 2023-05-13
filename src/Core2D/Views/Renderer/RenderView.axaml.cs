@@ -74,12 +74,14 @@ public partial class RenderView : UserControl
             RenderType = RenderType,
         };
 
-        var customDrawOperation = new RenderDrawOperation
-        {
-            RenderState = drawState,
-            Bounds = Bounds
-        };
+        // TODO:
+        // var customDrawOperation = new RenderDrawOperation
+        // {
+        //     RenderState = drawState,
+        //     Bounds = Bounds
+        // };
+        // context.Custom(customDrawOperation);
 
-        context.Custom(customDrawOperation);
+        RenderDrawOperation.Draw(drawState, context);
     }
 }
