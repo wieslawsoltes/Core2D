@@ -65,7 +65,7 @@ public class PageDropHandler : DefaultDropHandler
 
         if (e.Data.Contains(DataFormats.Files))
         {
-            var files = e.Data.GetFileNames()?.ToArray();
+            var files = e.Data.GetFiles()?.ToArray();
             if (bExecute)
             {
                 editor?.OnDropFiles(files, point.X, point.Y);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using Avalonia.Platform.Storage;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
@@ -888,7 +889,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    public async Task<bool> OnDropFiles(string[]? files, double x, double y)
+    public async Task<bool> OnDropFiles(IStorageItem[]? files, double x, double y)
     {
         try
         {
@@ -899,8 +900,9 @@ public partial class ProjectEditorViewModel
 
             var result = false;
 
-            foreach (var path in files)
+            foreach (var file in files)
             {
+                var path = file.TryGetLocalPath();
                 if (string.IsNullOrEmpty(path))
                 {
                     continue;
