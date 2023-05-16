@@ -5,7 +5,7 @@
  </PropertyGroup>
   <PropertyGroup>
     <VersionPrefix>11.0.0</VersionPrefix>
-    <VersionSuffix>preview8</VersionSuffix>
+    <VersionSuffix>preview8.1</VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
@@ -37,6 +37,6 @@
     <AvaloniaXamlBehaviorsVersion>11.0.0-preview8</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>11.0.0-preview8</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>11.0.0-preview8</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.0.0-preview8</DockAvaloniaVersion>
+    <DockAvaloniaVersion>11.0.0-preview8.1</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
