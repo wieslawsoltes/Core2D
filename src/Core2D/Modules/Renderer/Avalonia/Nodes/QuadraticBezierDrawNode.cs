@@ -31,14 +31,14 @@ internal class QuadraticBezierDrawNode : DrawNode, IQuadraticBezierDrawNode
 
     public override void OnDraw(object? dc, double zoom)
     {
-        if (dc is not AM.DrawingContext context)
+        if (dc is not AM.ImmediateDrawingContext context)
         {
             return;
         }
 
         if (Geometry is { })
         {
-            context.DrawGeometry(QuadraticBezier.IsFilled ? Fill : null, QuadraticBezier.IsStroked ? Stroke : null, Geometry);
+            // TODO: context.DrawGeometry(QuadraticBezier.IsFilled ? Fill : null, QuadraticBezier.IsStroked ? Stroke : null, Geometry);
         }
     }
 }

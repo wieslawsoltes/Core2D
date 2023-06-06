@@ -31,14 +31,14 @@ internal class ArcDrawNode : DrawNode, IArcDrawNode
 
     public override void OnDraw(object? dc, double zoom)
     {
-        if (dc is not AM.DrawingContext context)
+        if (dc is not AM.ImmediateDrawingContext context)
         {
             return;
         }
 
         if (Geometry is { })
         {
-            context.DrawGeometry(Arc.IsFilled ? Fill : null, Arc.IsStroked ? Stroke : null, Geometry);
+            // TODO: context.DrawGeometry(Arc.IsFilled ? Fill : null, Arc.IsStroked ? Stroke : null, Geometry);
         }
     }
 }

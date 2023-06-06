@@ -148,7 +148,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
 
     public override void OnDraw(object? dc, double zoom)
     {
-        if (dc is not AM.DrawingContext context)
+        if (dc is not AM.ImmediateDrawingContext context)
         {
             return;
         }
@@ -156,7 +156,7 @@ internal class TextDrawNode : DrawNode, ITextDrawNode
         if (Stroke?.Brush is { } && Geometry is { })
         {
             // context.DrawGeometry(Text.IsFilled ? Fill : null, Text.IsStroked ? Stroke : null, Geometry);
-            context.DrawGeometry(Stroke.Brush, null, Geometry);
+            // TODO: context.DrawGeometry(Stroke.Brush, null, Geometry);
         }
     }
 }

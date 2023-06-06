@@ -6,6 +6,7 @@ using Avalonia.Controls.PanAndZoom;
 using Core2D.Editor;
 using Core2D.Model.Input;
 using Core2D.ViewModels.Editor;
+using Core2D.Views.Renderer;
 
 namespace Core2D.Behaviors;
 
@@ -52,18 +53,18 @@ public class AttachEditor
             return;
         }
 
-        var presenterViewData = _control.FindControl<Control>("RenderViewData");
-        var presenterViewTemplate = _control.FindControl<Control>("RenderViewTemplate");
-        var presenterViewEditor = _control.FindControl<Control>("RenderViewEditor");
+        var presenterViewData = _control.FindControl<RenderView>("RenderViewData");
+        var presenterViewTemplate = _control.FindControl<RenderView>("RenderViewTemplate");
+        var presenterViewEditor = _control.FindControl<RenderView>("RenderViewEditor");
         var zoomBorder = _control.FindControl<ZoomBorder>("PageZoomBorder");
 
         if (projectEditor.CanvasPlatform is { } canvasPlatform)
         {
             canvasPlatform.InvalidateControl = () =>
             {
-                presenterViewData?.InvalidateVisual();
-                presenterViewTemplate?.InvalidateVisual();
-                presenterViewEditor?.InvalidateVisual();
+                presenterViewData?.Invalidate();
+                presenterViewTemplate?.Invalidate();
+                presenterViewEditor?.Invalidate();
             };
             canvasPlatform.ResetZoom = () => zoomBorder?.ResetMatrix();
             canvasPlatform.FillZoom = () => zoomBorder?.Fill();

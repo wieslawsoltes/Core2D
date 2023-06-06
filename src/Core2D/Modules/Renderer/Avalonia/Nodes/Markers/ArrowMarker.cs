@@ -14,7 +14,7 @@ internal class ArrowMarker : MarkerBase
 
     public override void Draw(object? dc)
     {
-        if (dc is not AM.DrawingContext context)
+        if (dc is not AM.ImmediateDrawingContext context)
         {
             return;
         }

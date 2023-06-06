@@ -3,6 +3,7 @@ using System;
 using Core2D.Model.Style;
 using Core2D.ViewModels.Style;
 using AM = Avalonia.Media;
+using AMI = Avalonia.Media.Immutable;
 
 namespace Core2D.Modules.Renderer.Avalonia;
 
@@ -19,7 +20,7 @@ internal static class AvaloniaDrawUtil
         _ => throw new NotSupportedException($"The {colorViewModel.GetType()} color type is not supported.")
     };
 
-    public static AM.IPen? ToPen(ShapeStyleViewModel style, double thickness)
+    public static AMI.ImmutablePen? ToPen(ShapeStyleViewModel style, double thickness)
     {
         if (style.Stroke?.Color is null)
         {
@@ -52,7 +53,7 @@ internal static class AvaloniaDrawUtil
         return pen;
     }
 
-    public static AM.IPen ToPen(BaseColorViewModel colorViewModel, double thickness)
+    public static AMI.ImmutablePen ToPen(BaseColorViewModel colorViewModel, double thickness)
     {
         var dashStyle = default(AM.Immutable.ImmutableDashStyle);
         var lineCap = AM.PenLineCap.Flat;

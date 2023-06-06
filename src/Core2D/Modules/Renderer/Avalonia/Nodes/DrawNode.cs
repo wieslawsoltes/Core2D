@@ -4,6 +4,7 @@ using Core2D.ViewModels.Style;
 using A = Avalonia;
 using ACP = Avalonia.Controls.PanAndZoom;
 using AM = Avalonia.Media;
+using AMI = Avalonia.Media.Immutable;
 using AP = Avalonia.Platform;
 
 namespace Core2D.Modules.Renderer.Avalonia.Nodes;
@@ -13,8 +14,8 @@ internal abstract class DrawNode : IDrawNode
     public ShapeStyleViewModel? Style { get; set; }
     public bool ScaleThickness { get; set; }
     public bool ScaleSize { get; set; }
-    public AM.IBrush? Fill { get; set; }
-    public AM.IPen? Stroke { get; set; }
+    public AM.IImmutableBrush? Fill { get; set; }
+    public AMI.ImmutablePen? Stroke { get; set; }
     public A.Point Center { get; set; }
 
     public abstract void UpdateGeometry();
@@ -42,7 +43,7 @@ internal abstract class DrawNode : IDrawNode
 
     public virtual void Draw(object? dc, double zoom)
     {
-        if (dc is not AM.DrawingContext context)
+        if (dc is not AM.ImmediateDrawingContext context)
         {
             return;
         }
@@ -75,8 +76,8 @@ internal abstract class DrawNode : IDrawNode
         // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (scale != 1.0)
         {
-            using var translateDisposable = context.PushTransform(ACP.MatrixHelper.Translate(translateX, translateY));
-            using var scaleDisposable = context.PushTransform(ACP.MatrixHelper.Scale(scale, scale));
+            using var translateDisposable = context.PushPreTransform(ACP.MatrixHelper.Translate(translateX, translateY));
+            using var scaleDisposable = context.PushPreTransform(ACP.MatrixHelper.Scale(scale, scale));
             OnDraw(dc, zoom);
         }
         else

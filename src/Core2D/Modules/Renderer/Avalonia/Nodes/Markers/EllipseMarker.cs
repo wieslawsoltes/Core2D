@@ -10,15 +10,15 @@ internal class EllipseMarker : MarkerBase
 
     public override void Draw(object? dc)
     {
-        if (dc is not AM.DrawingContext context)
+        if (dc is not AM.ImmediateDrawingContext context)
         {
             return;
         }
 
         if (ShapeViewModel is { } && EllipseGeometry is { })
         {
-            using var rotationDisposable = context.PushTransform(Rotation);
-            context.DrawGeometry(ShapeViewModel.IsFilled ? Brush : null, ShapeViewModel.IsStroked ? Pen : null, EllipseGeometry);
+            using var rotationDisposable = context.PushPreTransform(Rotation);
+            // TODO: context.DrawGeometry(ShapeViewModel.IsFilled ? Brush : null, ShapeViewModel.IsStroked ? Pen : null, EllipseGeometry);
         }
     }
 }

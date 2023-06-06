@@ -84,7 +84,7 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
 
     public override void OnDraw(object? dc, double zoom)
     {
-        if (dc is not AM.DrawingContext context)
+        if (dc is not AM.ImmediateDrawingContext context)
         {
             return;
         }
@@ -103,7 +103,8 @@ internal class ImageDrawNode : DrawNode, IImageDrawNode
         {
             try
             {
-                image.Draw(context, SourceRect, DestRect);
+                context.DrawBitmap(ImageCached, SourceRect, DestRect);
+                // TODO: image.Draw(context, SourceRect, DestRect);
             }
             catch (Exception ex)
             {

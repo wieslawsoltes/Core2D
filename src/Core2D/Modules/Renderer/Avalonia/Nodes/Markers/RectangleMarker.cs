@@ -11,7 +11,7 @@ internal class RectangleMarker : MarkerBase
 
     public override void Draw(object? dc)
     {
-        if (dc is not AM.DrawingContext context)
+        if (dc is not AM.ImmediateDrawingContext context)
         {
             return;
         }
@@ -21,7 +21,7 @@ internal class RectangleMarker : MarkerBase
             return;
         }
         
-        using var rotationDisposable = context.PushTransform(Rotation);
+        using var rotationDisposable = context.PushPreTransform(Rotation);
 
         if (ShapeViewModel.IsFilled)
         {

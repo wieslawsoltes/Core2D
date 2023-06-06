@@ -42,14 +42,14 @@ internal class EllipseDrawNode : DrawNode, IEllipseDrawNode
 
     public override void OnDraw(object? dc, double zoom)
     {
-        if (dc is not AM.DrawingContext context)
+        if (dc is not AM.ImmediateDrawingContext context)
         {
             return;
         }
 
         if (Geometry is { })
         {
-            context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
+            // TODO: context.DrawGeometry(Ellipse.IsFilled ? Fill : null, Ellipse.IsStroked ? Stroke : null, Geometry);
         }
     }
 }

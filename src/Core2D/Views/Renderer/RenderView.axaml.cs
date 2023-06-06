@@ -1,7 +1,10 @@
 ﻿#nullable enable
+using System;
+using System.Numerics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Rendering.Composition;
 using Core2D.Model.Renderer;
 using Core2D.Model;
 using Core2D.ViewModels.Containers;
@@ -11,6 +14,8 @@ namespace Core2D.Views.Renderer;
 
 public partial class RenderView : UserControl
 {
+    private CompositionCustomVisual? _customVisual;
+
     public static readonly StyledProperty<FrameContainerViewModel?> ContainerProperty =
         AvaloniaProperty.Register<RenderView, FrameContainerViewModel?>(nameof(Container));
 
@@ -61,11 +66,61 @@ public partial class RenderView : UserControl
         InitializeComponent();
     }
 
+    protected override void OnLoaded()
+    {
+        base.OnLoaded();
+        
+        var elemVisual = ElementComposition.GetElementVisual(this);
+        var compositor = elemVisual?.Compositor;
+        if (compositor is null)
+        {
+            return;
+        }
+        
+        _customVisual = compositor.CreateCustomVisual(new RenderCompositionCustomVisualHandler());
+        ElementComposition.SetElementChildVisual(this, _customVisual);
+
+        _customVisual.Size = new Vector2((float)Bounds.Size.Width, (float)Bounds.Size.Height);
+        _customVisual.SendHandlerMessage(GetRenderState());
+
+        LayoutUpdated += OnLayoutUpdated;
+    }
+
+    protected override void OnUnloaded()
+    {
+        base.OnUnloaded();
+
+        LayoutUpdated -= OnLayoutUpdated;
+    }
+
+    private void OnLayoutUpdated(object? sender, EventArgs e)
+    {
+        if (_customVisual is { })
+        {
+            _customVisual.Size = new Vector2((float)Bounds.Size.Width, (float)Bounds.Size.Height);
+            _customVisual.SendHandlerMessage(GetRenderState());
+        }
+    }
+
     public override void Render(DrawingContext context)
     {
         base.Render(context);
 
-        var drawState = new RenderState
+        // var customDrawOperation = new RenderDrawOperation
+        // {
+        //     RenderState = GetRenderState(),
+        //     Bounds = Bounds
+        // };
+        // context.Custom(customDrawOperation);
+
+        // RenderDrawOperation.Draw(GetRenderState(), context);
+
+        // _customVisual?.SendHandlerMessage(GetRenderState());
+    }
+
+    private RenderState GetRenderState()
+    {
+        return new RenderState
         {
             Container = Container,
             Renderer = Renderer ?? GetValue(RendererOptions.RendererProperty),
@@ -73,15 +128,11 @@ public partial class RenderView : UserControl
             DataFlow = DataFlow ?? GetValue(RendererOptions.DataFlowProperty),
             RenderType = RenderType,
         };
+    }
 
-        // TODO:
-        // var customDrawOperation = new RenderDrawOperation
-        // {
-        //     RenderState = drawState,
-        //     Bounds = Bounds
-        // };
-        // context.Custom(customDrawOperation);
-
-        RenderDrawOperation.Draw(drawState, context);
+    public void Invalidate()
+    {
+        // InvalidateVisual();
+        _customVisual?.SendHandlerMessage(GetRenderState());
     }
 }
