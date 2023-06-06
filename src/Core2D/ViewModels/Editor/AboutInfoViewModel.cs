@@ -16,14 +16,6 @@ public class AboutInfoViewModel : ViewModelBase
 
     public string? License { get; set; }
 
-    public bool IsDesktop { get; set; }
-
-    public bool IsMobile { get; set; }
-
-    public string? WindowingSubsystemName { get; set; }
-
-    public string? RenderingSubsystemName { get; set; }
-
     public AboutInfoViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
     }
@@ -38,9 +30,5 @@ public class AboutInfoViewModel : ViewModelBase
         $"{nameof(Version)}: {Version}{Environment.NewLine}" +
         $"{nameof(Description)}: {Description}{Environment.NewLine}" +
         $"{nameof(Copyright)}: {Copyright}{Environment.NewLine}" +
-        $"{nameof(License)}: {License}{Environment.NewLine}" +
-        $"{nameof(IsDesktop)}: {IsDesktop}{Environment.NewLine}" +
-        $"{nameof(IsMobile)}: {IsMobile}{Environment.NewLine}" +
-        $"{nameof(WindowingSubsystemName)}: {WindowingSubsystemName}{Environment.NewLine}" +
-        $"{nameof(RenderingSubsystemName)}: {RenderingSubsystemName}{Environment.NewLine}";
+        $"{nameof(License)}: {License}{Environment.NewLine}";
 }

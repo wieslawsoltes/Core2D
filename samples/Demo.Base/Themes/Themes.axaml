@@ -10,7 +10,7 @@
       <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush" Color="{StaticResource SystemChromeMediumLowColor}" />
       <Color x:Key="SystemAltMediumLowColor">Transparent</Color>
       <SolidColorBrush x:Key="SystemControlBackgroundAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}" />
-      <StaticResource x:Key="TextControlBackground" ResourceKey="SystemControlBackgroundAltMediumLowBrush" />
+      <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource SystemAltMediumLowColor}" />
       <SolidColorBrush x:Key="AcrylicFallbackColor">#E2E2E2</SolidColorBrush>
       <GridLength x:Key="SliderPreContentMargin">3</GridLength>
       <GridLength x:Key="SliderPostContentMargin">3</GridLength>
@@ -32,7 +32,7 @@
       <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush" Color="{StaticResource SystemChromeMediumLowColor}" />
       <Color x:Key="SystemAltMediumLowColor">Transparent</Color>
       <SolidColorBrush x:Key="SystemControlBackgroundAltMediumLowBrush" Color="{StaticResource SystemAltMediumLowColor}" />
-      <StaticResource x:Key="TextControlBackground" ResourceKey="SystemControlBackgroundAltMediumLowBrush" />
+      <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource SystemAltMediumLowColor}" />
       <SolidColorBrush x:Key="AcrylicFallbackColor">#1F1F1F</SolidColorBrush>
       <GridLength x:Key="SliderPreContentMargin">3</GridLength>
       <GridLength x:Key="SliderPostContentMargin">3</GridLength>

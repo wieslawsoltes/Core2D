@@ -13,7 +13,7 @@
     </Style>
   </UserControl.Styles>
   <Grid ColumnDefinitions="Auto,4,*"
-        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
+        RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
         Margin="10">
     <Label Content="{Binding Title}" 
            FontSize="18"
@@ -23,17 +23,9 @@
     <Label Content="Description" Grid.Column="0" Grid.Row="2" />
     <Label Content="Copyright" Grid.Column="0" Grid.Row="3" />
     <Label Content="License" Grid.Column="0" Grid.Row="4" />
-    <Label Content="IsDesktop" Grid.Column="0" Grid.Row="6" />
-    <Label Content="IsMobile" Grid.Column="0" Grid.Row="7" />
-    <Label Content="WindowingSubsystem" Grid.Column="0" Grid.Row="12" />
-    <Label Content="RenderingSubsystem" Grid.Column="0" Grid.Row="13" />
     <Label Content="{Binding Version}" Grid.Column="2" Grid.Row="1" />
     <Label Content="{Binding Description}" Grid.Column="2" Grid.Row="2" />
     <Label Content="{Binding Copyright}" Grid.Column="2" Grid.Row="3" />
     <Label Content="{Binding License}" Grid.Column="2" Grid.Row="4" />
-    <Label Content="{Binding IsDesktop}" Grid.Column="2" Grid.Row="6" />
-    <Label Content="{Binding IsMobile}" Grid.Column="2" Grid.Row="7" />
-    <Label Content="{Binding WindowingSubsystemName}" Grid.Column="2" Grid.Row="12" />
-    <Label Content="{Binding RenderingSubsystemName}" Grid.Column="2" Grid.Row="13" />
   </Grid>
 </UserControl>

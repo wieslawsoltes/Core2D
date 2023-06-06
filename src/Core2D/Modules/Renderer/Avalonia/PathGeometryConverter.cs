@@ -14,10 +14,6 @@ namespace Core2D.Modules.Renderer.Avalonia;
 
 public static class PathGeometryConverter
 {
-    private static T? GetService<T>(this A.IAvaloniaDependencyResolver resolver) => (T?) resolver.GetService(typeof (T));
-
-    private static AP.IPlatformRenderInterface? Factory => A.AvaloniaLocator.Current.GetService<AP.IPlatformRenderInterface>();
-
     private static A.Point ToPoint(this PointShapeViewModel point) => new(point.X, point.Y);
 
     private static A.Size ToSize(this PathSizeViewModel size) => new( size.Width, size.Height);
@@ -26,11 +22,6 @@ public static class PathGeometryConverter
 
     public static AM.Geometry? ToGeometryImpl(PathShapeViewModel pathShape, bool isFilled)
     {
-        var factory = Factory;
-        if (factory is null)
-        {
-            return null;
-        }
         var geometry = new AM.StreamGeometry();
         using var context = geometry.Open();
 
@@ -110,11 +101,6 @@ public static class PathGeometryConverter
     }
     public static AM.Geometry? ToGeometryImpl(EllipseShapeViewModel ellipse)
     {
-        var factory = Factory;
-        if (factory is null)
-        {
-            return null;
-        }
         if (ellipse.TopLeft is null || ellipse.BottomRight is null)
         {
             return null;
@@ -130,11 +116,6 @@ public static class PathGeometryConverter
 
     public static AM.Geometry? ToGeometryImpl(ArcShapeViewModel arc)
     {
-        var factory = Factory;
-        if (factory is null)
-        {
-            return null;
-        }
         if (arc.Point1 is null || arc.Point2 is null || arc.Point3 is null || arc.Point4 is null)
         {
             return null;
@@ -161,11 +142,6 @@ public static class PathGeometryConverter
 
     public static AM.Geometry? ToGeometryImpl(CubicBezierShapeViewModel cubicBezier)
     {
-        var factory = Factory;
-        if (factory is null)
-        {
-            return null;
-        }
         if (cubicBezier.Point1 is null || cubicBezier.Point2 is null || cubicBezier.Point3 is null || cubicBezier.Point4 is null)
         {
             return null;
@@ -185,11 +161,6 @@ public static class PathGeometryConverter
 
     public static AM.Geometry? ToGeometryImpl(QuadraticBezierShapeViewModel quadraticBezier)
     {
-        var factory = Factory;
-        if (factory is null)
-        {
-            return null;
-        }
         if (quadraticBezier.Point1 is null || quadraticBezier.Point2 is null || quadraticBezier.Point3 is null)
         {
             return null;

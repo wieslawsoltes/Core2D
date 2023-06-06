@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using Avalonia;
-using Avalonia.Platform;
 using Core2D.Configuration.Windows;
 using Core2D.Json;
 using Core2D.Model;
@@ -123,21 +121,11 @@ public class AppState : IDisposable
         Editor.CurrentPathTool = Editor.PathTools.FirstOrDefault(t => t.Title == "Line");
         Editor.IsToolIdle = true;
 
-        var runtimePlatform = AvaloniaLocator.Current.GetService<IRuntimePlatform>();
-        var windowingPlatform = AvaloniaLocator.Current.GetService<IWindowingPlatform>();
-        var platformRenderInterface = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>();
-        if (windowingPlatform is { } && platformRenderInterface is { } && runtimePlatform is { })
-        {
-            var windowingSubsystemName = windowingPlatform.GetType().Assembly.GetName().Name;
-            var renderingSubsystemName = platformRenderInterface.GetType().Assembly.GetName().Name;
-            var runtimeInfo = runtimePlatform.GetRuntimeInfo();
-            var aboutInfo = CreateAboutInfo(ServiceProvider, runtimeInfo, windowingSubsystemName, renderingSubsystemName);
+        Editor.AboutInfo = CreateAboutInfo(ServiceProvider);
 
-            Editor.AboutInfo = aboutInfo;
-        }
     }
 
-    private AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider, RuntimePlatformInfo runtimeInfo, string? windowingSubsystem, string? renderingSubsystem)
+    private AboutInfoViewModel CreateAboutInfo(IServiceProvider? serviceProvider)
     {
         return new AboutInfoViewModel(serviceProvider)
         {
@@ -146,10 +134,6 @@ public class AppState : IDisposable
             Description = "A multi-platform data driven 2D diagram editor.",
             Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
             License = "Licensed under the MIT License. See LICENSE file in the project root for full license information.",
-            IsDesktop = runtimeInfo.IsDesktop,
-            IsMobile = runtimeInfo.IsMobile,
-            WindowingSubsystemName = windowingSubsystem,
-            RenderingSubsystemName = renderingSubsystem
         };
     }
 

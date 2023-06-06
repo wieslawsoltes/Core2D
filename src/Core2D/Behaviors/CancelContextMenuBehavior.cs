@@ -32,7 +32,7 @@ public sealed class EnableContextMenuBehavior : Behavior<Control>
 
         if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
         {
-            contextMenu.ContextMenuOpening += ContextMenu_ContextMenuOpening;
+            contextMenu.Opening += ContextMenu_ContextMenuOpening;
         }
     }
 
@@ -42,7 +42,7 @@ public sealed class EnableContextMenuBehavior : Behavior<Control>
 
         if ((ContextMenu ?? AssociatedObject?.ContextMenu) is { } contextMenu)
         {
-            contextMenu.ContextMenuOpening -= ContextMenu_ContextMenuOpening;
+            contextMenu.Opening -= ContextMenu_ContextMenuOpening;
         }
     }
 
