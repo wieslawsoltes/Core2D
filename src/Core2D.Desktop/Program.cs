@@ -85,23 +85,43 @@ internal static class Program
 
             builder.With(new X11PlatformOptions
             {
-                UseGpu = settings.UseGpu,
+                RenderingMode = settings.UseGpu
+                    ? new[] {X11RenderingMode.Glx, X11RenderingMode.Software}
+                    : new[] {X11RenderingMode.Software},
             });
+
+            builder.With(new AvaloniaNativePlatformOptions
+            {
+                RenderingMode = settings.UseGpu
+                    ? new[] {AvaloniaNativeRenderingMode.OpenGl, AvaloniaNativeRenderingMode.Software}
+                    : new[] {AvaloniaNativeRenderingMode.Software},
+            });
+
+            var renderingModeWin32 = settings.AllowEglInitialization
+                ? settings.UseWgl 
+                    ? new[] {Win32RenderingMode.AngleEgl, Win32RenderingMode.Wgl, Win32RenderingMode.Software}
+                    : new[] {Win32RenderingMode.AngleEgl, Win32RenderingMode.Software}
+                : new[] {Win32RenderingMode.Software};
+
+#if ENABLE_DIRECT2D1
+                var compositionModeWin32 = !settings.UseDirect2D1 && settings.UseWindowsUIComposition
+                ? new[] {Win32CompositionMode.WinUIComposition, Win32CompositionMode.RedirectionSurface}
+                : new[] {Win32CompositionMode.RedirectionSurface};
+#else
+            var compositionModeWin32 = settings.UseWindowsUIComposition
+                ? new[] {Win32CompositionMode.WinUIComposition, Win32CompositionMode.RedirectionSurface}
+                : new[] {Win32CompositionMode.RedirectionSurface};
+#endif
 
             builder.With(new Win32PlatformOptions
             {
-                AllowEglInitialization = settings.AllowEglInitialization,
-                UseWgl = settings.UseWgl,
-#if ENABLE_DIRECT2D1
-                UseWindowsUIComposition = !settings.UseDirect2D1 && settings.UseWindowsUIComposition
-#else
-                UseWindowsUIComposition = settings.UseWindowsUIComposition
-#endif
+                RenderingMode = renderingModeWin32,
+                CompositionMode = compositionModeWin32
             });
 
             if (settings.UseDirectX11)
             {
-                builder.With(new AngleOptions()
+                builder.With(new AngleOptions
                 {
                     AllowedPlatformApis = new List<AngleOptions.PlatformApi>
                     {
