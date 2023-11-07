@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Core2D.Desktop;
+namespace Core2D;
 
 public class Settings
 {
@@ -8,9 +8,6 @@ public class Settings
     public FileInfo[]? Scripts { get; set; }
     public FileInfo? Project { get; set; }
     public bool UseSkia { get; set; }
-#if ENABLE_DIRECT2D1
-    public bool UseDirect2D1 { get; set; }
-#endif
     public bool UseGpu { get; set; } = true;
     public bool AllowEglInitialization { get; set; } = true;
     public bool UseWgl { get; set; }
