@@ -1,16 +1,6 @@
 # Core2D
 
-[![CodeFactor](https://www.codefactor.io/repository/github/wieslawsoltes/core2d/badge)](https://www.codefactor.io/repository/github/wieslawsoltes/core2d)
-
-[![Build Status](https://dev.azure.com/wieslawsoltes/GitHub/_apis/build/status/wieslawsoltes.Core2D?repoName=wieslawsoltes%2FCore2D&branchName=master)](https://dev.azure.com/wieslawsoltes/GitHub/_build/latest?definitionId=105&repoName=wieslawsoltes%2FCore2D&branchName=master)
 [![CI](https://github.com/wieslawsoltes/Core2D/actions/workflows/build.yml/badge.svg)](https://github.com/wieslawsoltes/Core2D/actions/workflows/build.yml)
-
-[![GitHub release](https://img.shields.io/github/release/wieslawsoltes/Core2D.svg)](https://github.com/wieslawsoltes/Core2D/releases)
-[![Github All Releases](https://img.shields.io/github/downloads/wieslawsoltes/Core2D/total.svg)](https://github.com/wieslawsoltes/Core2D/releases)
-[![Github Releases](https://img.shields.io/github/downloads/wieslawsoltes/Core2D/latest/total.svg)](https://github.com/wieslawsoltes/Core2D/releases)
-
-[![NuGet](https://img.shields.io/nuget/v/Core2D.svg)](https://www.nuget.org/packages/Core2D)
-[![NuGet](https://img.shields.io/nuget/dt/Core2D.svg)](https://www.nuget.org/packages/Core2D)
 
 A multi-platform data driven 2D diagram editor.
 
