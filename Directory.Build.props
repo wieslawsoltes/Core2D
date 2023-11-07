@@ -13,7 +13,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <MicrosoftNETFrameworkReferenceAssembliesVersion>1.0.3</MicrosoftNETFrameworkReferenceAssembliesVersion>
-    <SystemDrawingCommonVersion>5.0.2</SystemDrawingCommonVersion>
+    <SystemDrawingCommonVersion>6.0.0</SystemDrawingCommonVersion>
     <SystemTextJsonVersion>7.0.0</SystemTextJsonVersion>
     <AutofacVersion>7.1.0</AutofacVersion>
     <CommunityToolkitMvvmVersion>8.1.0</CommunityToolkitMvvmVersion>

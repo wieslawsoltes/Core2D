@@ -12,9 +12,9 @@ variables:
   BuildConfiguration: 'Release'
   BuildPlatform: 'Any CPU'
   PublishFramework: 'net7.0'
-  PublishProject: 'Core2D.Desktop'
+  PublishProject: 'Core2D'
   PublishRuntime: ''
-  Workloads: 'wasm-tools wasm-experimental android'
+  Workloads: ''
 
 jobs:
   - template: Test-PowerShell.yml@templates
