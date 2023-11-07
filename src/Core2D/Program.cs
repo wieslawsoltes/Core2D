@@ -14,7 +14,7 @@ using Avalonia.Win32;
 using Core2D.ViewModels.Editor;
 using Core2D.Views;
 
-namespace Core2D.Desktop;
+namespace Core2D;
 
 internal static class Program
 {
@@ -71,13 +71,6 @@ internal static class Program
                 App.DefaultTheme = settings.Theme;
             }
 
-#if ENABLE_DIRECT2D1
-            if (settings.UseDirect2D1)
-            {
-                builder.UseDirect2D1();
-            }
-#endif
-
             if (settings.UseSkia)
             {
                 builder.UseSkia();
@@ -103,15 +96,9 @@ internal static class Program
                     : new[] {Win32RenderingMode.AngleEgl, Win32RenderingMode.Software}
                 : new[] {Win32RenderingMode.Software};
 
-#if ENABLE_DIRECT2D1
-                var compositionModeWin32 = !settings.UseDirect2D1 && settings.UseWindowsUIComposition
-                ? new[] {Win32CompositionMode.WinUIComposition, Win32CompositionMode.RedirectionSurface}
-                : new[] {Win32CompositionMode.RedirectionSurface};
-#else
             var compositionModeWin32 = settings.UseWindowsUIComposition
                 ? new[] {Win32CompositionMode.WinUIComposition, Win32CompositionMode.RedirectionSurface}
                 : new[] {Win32CompositionMode.RedirectionSurface};
-#endif
 
             builder.With(new Win32PlatformOptions
             {
@@ -168,9 +155,6 @@ internal static class Program
         rootCommand.AddOption(new Option(new[] { "--project", "-p" }, "The relative or absolute path to the project file", typeof(FileInfo)));
         rootCommand.AddOption(new Option(new[] { "--repl" }, "Run scripting repl", typeof(bool)));
         rootCommand.AddOption(new Option(new[] { "--useManagedSystemDialogs" }, "Use managed system dialogs", typeof(bool)));
-#if ENABLE_DIRECT2D1
-        rootCommand.AddOption(new Option(new[] { "--useDirect2D1" }, "Use Direct2D1 renderer", typeof(bool)));
-#endif
         rootCommand.AddOption(new Option(new[] { "--useSkia" }, "Use Skia renderer", typeof(bool)));
         rootCommand.AddOption(new Option(new[] { "--enableMultiTouch" }, "Enable multi-touch", typeof(bool), () => true));
         rootCommand.AddOption(new Option(new[] { "--useGpu" }, "Use Gpu", typeof(bool), () => true));
