@@ -34,11 +34,11 @@ You can automate drawing and processing by using C# scripting.
 ## Usage
 
 ```
-Core2D.Desktop:
+Core2D:
   A multi-platform data driven 2D diagram editor.
 
 Usage:
-  Core2D.Desktop [options]
+  Core2D [options]
 
 Options:
   -t, --theme <DefaultDark|DefaultLight|FluentDark|FluentLight>    Set application theme
