@@ -761,16 +761,16 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
         
         var options = new XPdfFontOptions(PdfFontEncoding.Unicode);
 
-        var fontStyle = XFontStyle.Regular;
+        var fontStyle = XFontStyleEx.Regular;
 
         if (style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Bold))
         {
-            fontStyle |= XFontStyle.Bold;
+            fontStyle |= XFontStyleEx.Bold;
         }
 
         if (style.TextStyle.FontStyle.HasFlag(FontStyleFlags.Italic))
         {
-            fontStyle |= XFontStyle.Italic;
+            fontStyle |= XFontStyleEx.Italic;
         }
 
         var font = new XFont(

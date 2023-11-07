@@ -16,27 +16,27 @@
     <SystemDrawingCommonVersion>6.0.0</SystemDrawingCommonVersion>
     <SystemTextJsonVersion>7.0.0</SystemTextJsonVersion>
     <AutofacVersion>7.1.0</AutofacVersion>
-    <CommunityToolkitMvvmVersion>8.1.0</CommunityToolkitMvvmVersion>
+    <CommunityToolkitMvvmVersion>8.2.2</CommunityToolkitMvvmVersion>
     <CsvHelperVersion>30.0.1</CsvHelperVersion>
-    <DocumentFormatOpenXmlVersion>2.18.0</DocumentFormatOpenXmlVersion>
-    <MicrosoftCodeAnalysisCSharpScriptingVersion>4.4.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
+    <DocumentFormatOpenXmlVersion>2.20.0</DocumentFormatOpenXmlVersion>
+    <MicrosoftCodeAnalysisCSharpScriptingVersion>4.7.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
     <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
-    <NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
-    <PDFsharpVersion>1.51.5185-beta</PDFsharpVersion>
+    <NewtonsoftJsonVersion>13.0.3</NewtonsoftJsonVersion>
+    <PDFsharpVersion>6.0.0</PDFsharpVersion>
     <SystemCollectionsImmutableVersion>7.0.0</SystemCollectionsImmutableVersion>
-    <SystemReactiveVersion>5.0.0</SystemReactiveVersion>
+    <SystemReactiveVersion>6.0.0</SystemReactiveVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>7.0.0</SystemTextEncodingCodePagesVersion>
     <SystemCommandLineVersion>2.0.0-beta1.21308.1</SystemCommandLineVersion>
     <XUnitVersion>2.4.1</XUnitVersion>
     <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
-    <SkiaSharpVersion>2.88.3</SkiaSharpVersion>
-    <SvgSkiaVersion>1.0.0</SvgSkiaVersion>
-    <AvaloniaVersion>11.0.4</AvaloniaVersion>
+    <SkiaSharpVersion>2.88.6</SkiaSharpVersion>
+    <SvgSkiaVersion>1.0.0.3</SvgSkiaVersion>
+    <AvaloniaVersion>11.0.5</AvaloniaVersion>
     <AvaloniaXamlBehaviorsVersion>11.0.2</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>11.0.0</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>11.0.0</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.0.0.1</DockAvaloniaVersion>
+    <DockAvaloniaVersion>11.0.0.2</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
