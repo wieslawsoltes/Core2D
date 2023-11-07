@@ -1,6 +1,12 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+  <Styles.Resources>
+    <FontFamily x:Key="UiFontFamily">avares://Avalonia.Fonts.Inter/Assets#Inter</FontFamily>
+    <FontFamily x:Key="CodeFontFamily">avares://Core2D/Assets/Fonts#Roboto Mono</FontFamily>
+    <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
+  </Styles.Resources>
+
   <Style Selector="Label">
     <Setter Property="Margin" Value="0,0,0,0" />
     <Setter Property="Padding" Value="0,6,0,6" />

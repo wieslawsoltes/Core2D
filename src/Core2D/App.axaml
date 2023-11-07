@@ -11,9 +11,6 @@
         <MergeResourceInclude Source="avares://Core2D/Themes/Themes.axaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
-    <FontFamily x:Key="UiFontFamily">avares://Avalonia.Fonts.Inter/Assets#Inter</FontFamily>
-    <FontFamily x:Key="CodeFontFamily">avares://Core2D/Assets/Fonts#Roboto Mono</FontFamily>
-    <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily" />
   </Application.Resources>
   <Application.Styles>
     <FluentTheme DensityStyle="Compact" />
