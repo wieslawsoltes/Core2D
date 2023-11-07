@@ -20,6 +20,7 @@
     <Setter Property="Padding" Value="0" />
   </Style>
   <Style Selector="TabItem">
+    <Setter Property="FontSize" Value="12" />
     <Setter Property="FontWeight" Value="Normal" />
     <Setter Property="Padding" Value="6,0,6,0" />
   </Style>
