@@ -31,37 +31,31 @@ public sealed class OpenXmlReader : ITextFieldReader<DatabaseViewModel>
             return c.CellValue?.Text;
         }
 
-        switch (c.DataType.Value)
+        if (c.DataType.Value == CellValues.SharedString)
         {
-            case CellValues.SharedString:
+            if (stringTable is not null)
             {
-                if (stringTable is { })
-                {
-                    int index = int.Parse(c.InnerText);
-                    var value = stringTable.SharedStringTable.ElementAt(index).InnerText;
-                    return value;
-                }
+                int index = int.Parse(c.InnerText);
+                var value = stringTable.SharedStringTable.ElementAt(index).InnerText;
+                return value;
             }
-                break;
-            case CellValues.Boolean:
-            {
-                return c.InnerText switch
-                {
-                    "0" => "FALSE",
-                    _ => "TRUE",
-                };
-            }
-            case CellValues.Number:
-                return c.InnerText;
-            case CellValues.Error:
-                return c.InnerText;
-            case CellValues.String:
-                return c.InnerText;
-            case CellValues.InlineString:
-                return c.InnerText;
-            case CellValues.Date:
-                return c.InnerText;
         }
+        else if (c.DataType.Value == CellValues.Boolean)
+            return c.InnerText switch
+            {
+                "0" => "FALSE",
+                _ => "TRUE",
+            };
+        else if (c.DataType.Value == CellValues.Number)
+            return c.InnerText;
+        else if (c.DataType.Value == CellValues.Error)
+            return c.InnerText;
+        else if (c.DataType.Value == CellValues.String)
+            return c.InnerText;
+        else if (c.DataType.Value == CellValues.InlineString)
+            return c.InnerText;
+        else if (c.DataType.Value == CellValues.Date) 
+            return c.InnerText;
 
         return null;
     }
@@ -88,7 +82,7 @@ public sealed class OpenXmlReader : ITextFieldReader<DatabaseViewModel>
             yield return fields;
         }
 
-        spreadsheetDocument.Close();
+        spreadsheetDocument.Dispose();
     }
 
     public DatabaseViewModel? Read(Stream stream)

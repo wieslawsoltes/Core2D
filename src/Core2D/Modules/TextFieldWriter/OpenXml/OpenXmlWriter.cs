@@ -182,7 +182,7 @@ public sealed class OpenXmlWriter : ITextFieldWriter<DatabaseViewModel>
         WriteTable(worksheetPart, 1U, values, nRows, nColumns);
 
         workbookPart.Workbook.Save();
-        spreadsheetDocument.Close();
+        spreadsheetDocument.Dispose();
     }
 
     public void Write(Stream stream, DatabaseViewModel? database)
