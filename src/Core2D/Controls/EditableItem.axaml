@@ -14,7 +14,7 @@
         <Panel Background="Transparent">
           <i:Interaction.Behaviors>
             <iac:ShowOnDoubleTappedBehavior TargetControl="{Binding #PART_TextBox}" />
-            <iac:ShowOnKeyDownTappedBehavior TargetControl="{Binding #PART_TextBox}" />
+            <iac:ShowOnKeyDownBehavior TargetControl="{Binding #PART_TextBox}" />
           </i:Interaction.Behaviors>
           <TextBox x:Name="PART_TextBox"
                    IsVisible="False"
