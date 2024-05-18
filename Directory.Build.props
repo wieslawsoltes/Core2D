@@ -17,8 +17,8 @@
     <SystemTextJsonVersion>7.0.3</SystemTextJsonVersion>
     <AutofacVersion>8.0.0</AutofacVersion>
     <CommunityToolkitMvvmVersion>8.2.2</CommunityToolkitMvvmVersion>
-    <CsvHelperVersion>31.0.2</CsvHelperVersion>
-    <DocumentFormatOpenXmlVersion>3.0.1</DocumentFormatOpenXmlVersion>
+    <CsvHelperVersion>32.0.3</CsvHelperVersion>
+    <DocumentFormatOpenXmlVersion>3.0.2</DocumentFormatOpenXmlVersion>
     <MicrosoftCodeAnalysisCSharpScriptingVersion>4.7.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
     <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
     <NewtonsoftJsonVersion>13.0.3</NewtonsoftJsonVersion>
@@ -31,12 +31,12 @@
     <XUnitVersion>2.4.1</XUnitVersion>
     <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
-    <SkiaSharpVersion>2.88.7</SkiaSharpVersion>
-    <SvgSkiaVersion>1.0.0.14</SvgSkiaVersion>
+    <SkiaSharpVersion>2.88.8</SkiaSharpVersion>
+    <SvgSkiaVersion>1.0.0.18</SvgSkiaVersion>
     <AvaloniaVersion>11.0.10</AvaloniaVersion>
-    <AvaloniaXamlBehaviorsVersion>11.0.10</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaXamlBehaviorsVersion>11.0.10.9</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>11.0.0.3</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>11.0.0.1</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.0.0.6</DockAvaloniaVersion>
+    <DockAvaloniaVersion>11.0.0.7</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
