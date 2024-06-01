@@ -206,7 +206,7 @@ public partial class DxfRenderer : IProjectExporter
             };
 
             dxf.Layouts.Add(layout);
-            dxf.ActiveLayout = layout.Name;
+            // TODO: dxf.ActiveLayout = layout.Name;
 
             Add(dxf, page, presenter);
         }

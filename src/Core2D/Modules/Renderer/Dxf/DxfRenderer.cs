@@ -10,6 +10,8 @@ using Core2D.ViewModels.Path.Segments;
 using Core2D.ViewModels.Renderer;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
+using netDxf.Units;
+using SkiaSharp;
 using DXF = netDxf;
 using DXFE = netDxf.Entities;
 using DXFO = netDxf.Objects;
@@ -90,11 +92,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         var minor = Math.Min(height, width);
         var major = Math.Max(height, width);
 
-        return new DXFE.Ellipse
+        return new DXFE.Ellipse(
+            center: new DXF.Vector3(cx, cy, 0),
+            majorAxis: major,
+            minorAxis: minor)
         {
-            Center = new DXF.Vector3(cx, cy, 0),
-            MajorAxis = major,
-            MinorAxis = minor,
             StartAngle = 0.0,
             EndAngle = 360.0,
             Rotation = height > width ? 90.0 : 0.0
@@ -129,11 +131,11 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             rotation = -90;
         }
 
-        return new DXFE.Ellipse
+        return new DXFE.Ellipse(
+            center: new DXF.Vector3(cx, cy, 0),
+            majorAxis: major,
+            minorAxis: minor)
         {
-            Center = new DXF.Vector3(cx, cy, 0),
-            MajorAxis = major,
-            MinorAxis = minor,
             StartAngle = startAngle,
             EndAngle = endAngle,
             Rotation = rotation
@@ -150,12 +152,13 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         var sp3y = ToDxfY(p3y);
 
         return new DXFE.Spline(
-            new List<DXFE.SplineVertex>
+            new List<DXF.BezierCurveQuadratic>
             {
-                new(sp1x, sp1y, 0.0),
-                new(sp2x, sp2y, 0.0),
-                new(sp3x, sp3y, 0.0)
-            }, 2);
+                new DXF.BezierCurveQuadratic(
+                    new DXF.Vector3(sp1x, sp1y, 0.0),
+                    new DXF.Vector3(sp2x, sp2y, 0.0),
+                    new DXF.Vector3(sp3x, sp3y, 0.0))
+            });
     }
 
     private DXFE.Spline CreateCubicSpline(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y, double p4x, double p4y)
@@ -170,13 +173,14 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         var sp4y = ToDxfY(p4y);
 
         return new DXFE.Spline(
-            new List<DXFE.SplineVertex>
+            new List<DXF.BezierCurveCubic>
             {
+                new DXF.BezierCurveCubic(
                 new(sp1x, sp1y, 0.0),
                 new(sp2x, sp2y, 0.0),
                 new(sp3x, sp3y, 0.0),
-                new(sp4x, sp4y, 0.0)
-            }, 3);
+                new(sp4x, sp4y, 0.0))
+            });
     }
 
     private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, ShapeStyleViewModel style, bool isStroked, double x1, double y1, double x2, double y2)
@@ -197,7 +201,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         dxfLine.Transparency.Value = strokeTransparency;
         dxfLine.Lineweight = lineweight;
 
-        dxf.AddEntity(dxfLine);
+        dxf.Entities.Add(dxfLine);
     }
 
     private void DrawLineInternal(DXF.DxfDocument dxf, DXFT.Layer layer, BaseColorViewModel colorViewModel, double thickness, double x1, double y1, double x2, double y2)
@@ -213,7 +217,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         dxfLine.Transparency.Value = strokeTransparency;
         dxfLine.Lineweight = lineweight;
 
-        dxf.AddEntity(dxfLine);
+        dxf.Entities.Add(dxfLine);
     }
 
     private void DrawRectangleInternal(DXF.DxfDocument dxf, DXFT.Layer layer, bool isFilled, bool isStroked, ShapeStyleViewModel style, ref Spatial.Rect2 rect)
@@ -254,7 +258,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         };
         hatch.Transparency.Value = fillTransparency;
 
-        dxf.AddEntity(hatch);
+        dxf.Entities.Add(hatch);
     }
 
     private void StrokeRectangle(DXF.DxfDocument dxf, DXFT.Layer layer, ShapeStyleViewModel style, double x, double y, double width, double height)
@@ -299,7 +303,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         dxfEllipse.Transparency.Value = strokeTansparency;
         dxfEllipse.Lineweight = lineweight;
 
-        dxf.AddEntity(dxfEllipse);
+        dxf.Entities.Add(dxfEllipse);
     }
 
     private void FillEllipse(DXF.DxfDocument dxf, DXFT.Layer layer, DXFE.Ellipse dxfEllipse, BaseColorViewModel colorViewModel)
@@ -325,7 +329,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         };
         hatch.Transparency.Value = fillTransparency;
 
-        dxf.AddEntity(hatch);
+        dxf.Entities.Add(hatch);
     }
 
     private void DrawGridInternal(DXF.DxfDocument dxf, DXFT.Layer layer, IGrid grid, ref Spatial.Rect2 rect)
@@ -680,7 +684,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             };
             hatch.Transparency.Value = fillTransparency;
 
-            dxf.AddEntity(hatch);
+            dxf.Entities.Add(hatch);
         }
 
         if (arc.IsStroked && style.Stroke?.Color is { })
@@ -694,7 +698,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             dxfEllipse.Transparency.Value = strokeTansparency;
             dxfEllipse.Lineweight = lineweight;
 
-            dxf.AddEntity(dxfEllipse);
+            dxf.Entities.Add(dxfEllipse);
         }
     }
 
@@ -757,7 +761,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             };
             hatch.Transparency.Value = fillTransparency;
 
-            dxf.AddEntity(hatch);
+            dxf.Entities.Add(hatch);
         }
 
         if (cubicBezier.IsStroked && style.Stroke?.Color is { })
@@ -771,7 +775,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             dxfSpline.Transparency.Value = strokeTransparency;
             dxfSpline.Lineweight = lineweight;
 
-            dxf.AddEntity(dxfSpline);
+            dxf.Entities.Add(dxfSpline);
         }
     }
 
@@ -832,7 +836,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             };
             hatch.Transparency.Value = fillTransparency;
 
-            dxf.AddEntity(hatch);
+            dxf.Entities.Add(hatch);
         }
 
         if (quadraticBezier.IsStroked && style.Stroke?.Color is { })
@@ -846,7 +850,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             dxfSpline.Transparency.Value = strokeTansparency;
             dxfSpline.Lineweight = lineweight;
 
-            dxf.AddEntity(dxfSpline);
+            dxf.Entities.Add(dxfSpline);
         }
     }
 
@@ -946,7 +950,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         dxfMText.Transparency.Value = strokeTransparency;
         dxfMText.Color = stroke;
 
-        dxf.AddEntity(dxfMText);
+        dxf.Entities.Add(dxfMText);
     }
 
     public void DrawImage(object? dc, ImageShapeViewModel image, ShapeStyleViewModel? style)
@@ -991,7 +995,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
                 new DXF.Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
                 rect.Width,
                 rect.Height);
-            dxf.AddEntity(dxfImage);
+            dxf.Entities.Add(dxfImage);
         }
         else
         {
@@ -999,7 +1003,13 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             {
                 var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
                 System.IO.File.WriteAllBytes(path, bytes);
-                var dxfImageDefinition = new DXFO.ImageDefinition(path);
+                var dxfImageDefinition = new DXFO.ImageDefinition(
+                    path,
+                    (int)rect.Width,
+                    1d,
+                    (int)rect.Height,
+                    1d,
+                    ImageResolutionUnits.Unitless);
 
                 _biCache?.Set(image.Key, dxfImageDefinition);
 
@@ -1008,7 +1018,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
                     new DXF.Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
                     rect.Width,
                     rect.Height);
-                dxf.AddEntity(dxfImage);
+                dxf.Entities.Add(dxfImage);
             }
         }
     }
@@ -1053,7 +1063,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
                 };
                 hatch.Transparency.Value = fillTransparency;
 
-                dxf.AddEntity(hatch);
+                dxf.Entities.Add(hatch);
             }
 
             if (path.IsStroked && style.Stroke?.Color is { })
@@ -1070,7 +1080,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
                     entity.Color = stroke;
                     entity.Transparency.Value = strokeTransparency;
                     entity.Lineweight = lineweight;
-                    dxf.AddEntity(entity);
+                    dxf.Entities.Add(entity);
                 }
             }
         }
