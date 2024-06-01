@@ -438,12 +438,15 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                 return;
             }
 
+            var pickerItemFileTypes = GetPickerItemFileTypes(editor.FileWriters, true);
+            var defaultExtension = editor.FileWriters.FirstOrDefault()?.Extension;
+
             var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
             {
                 Title = "Export",
-                FileTypeChoices = GetPickerItemFileTypes(editor.FileWriters, true),
+                FileTypeChoices = pickerItemFileTypes,
                 SuggestedFileName = name,
-                DefaultExtension = editor.FileWriters.FirstOrDefault()?.Extension,
+                DefaultExtension = defaultExtension,
                 ShowOverwritePrompt = true
             });
 
