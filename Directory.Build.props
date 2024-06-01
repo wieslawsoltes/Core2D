@@ -9,7 +9,7 @@
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
     <Description>A multi-platform data driven 2D diagram editor.</Description>
-    <Copyright>Copyright © Wiesław Šoltés 2023</Copyright>
+    <Copyright>Copyright © Wiesław Šoltés 2024</Copyright>
   </PropertyGroup>
   <PropertyGroup>
     <MicrosoftNETFrameworkReferenceAssembliesVersion>1.0.3</MicrosoftNETFrameworkReferenceAssembliesVersion>
@@ -20,11 +20,11 @@
     <CsvHelperVersion>32.0.3</CsvHelperVersion>
     <DocumentFormatOpenXmlVersion>3.0.2</DocumentFormatOpenXmlVersion>
     <MicrosoftCodeAnalysisCSharpScriptingVersion>4.7.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
-    <netDXFnetstandardVersion>2.4.0</netDXFnetstandardVersion>
+    <netDXFnetstandardVersion>3.0.1</netDXFnetstandardVersion>
     <NewtonsoftJsonVersion>13.0.3</NewtonsoftJsonVersion>
-    <PDFsharpVersion>6.0.0</PDFsharpVersion>
+    <PDFsharpVersion>6.1.0</PDFsharpVersion>
     <SystemCollectionsImmutableVersion>7.0.0</SystemCollectionsImmutableVersion>
-    <SystemReactiveVersion>6.0.0</SystemReactiveVersion>
+    <SystemReactiveVersion>6.0.1</SystemReactiveVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemTextEncodingCodePagesVersion>7.0.0</SystemTextEncodingCodePagesVersion>
     <SystemCommandLineVersion>2.0.0-beta1.21308.1</SystemCommandLineVersion>
@@ -37,6 +37,6 @@
     <AvaloniaXamlBehaviorsVersion>11.0.10.9</AvaloniaXamlBehaviorsVersion>
     <AvaloniaControlsPanAndZoomVersion>11.0.0.3</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>11.0.0.1</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.0.0.7</DockAvaloniaVersion>
+    <DockAvaloniaVersion>11.0.10</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
