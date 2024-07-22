@@ -4,7 +4,7 @@
     <LangVersion>latest</LangVersion>
  </PropertyGroup>
   <PropertyGroup>
-    <VersionPrefix>11.0.0</VersionPrefix>
+    <VersionPrefix>11.1.0</VersionPrefix>
     <VersionSuffix></VersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
@@ -32,11 +32,11 @@
     <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
     <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
     <SkiaSharpVersion>2.88.8</SkiaSharpVersion>
-    <SvgSkiaVersion>2.0.0-rc1</SvgSkiaVersion>
-    <AvaloniaVersion>11.1.0-rc1</AvaloniaVersion>
-    <AvaloniaXamlBehaviorsVersion>11.1.0-rc1</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>11.1.0-rc1</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>11.1.0-rc1</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.1.0-rc1</DockAvaloniaVersion>
+    <SvgSkiaVersion>2.0.0</SvgSkiaVersion>
+    <AvaloniaVersion>11.1.0</AvaloniaVersion>
+    <AvaloniaXamlBehaviorsVersion>11.1.0</AvaloniaXamlBehaviorsVersion>
+    <AvaloniaControlsPanAndZoomVersion>11.1.0</AvaloniaControlsPanAndZoomVersion>
+    <ThemeEditorControlsColorPickerVersion>11.1.0</ThemeEditorControlsColorPickerVersion>
+    <DockAvaloniaVersion>11.1.0</DockAvaloniaVersion>
   </PropertyGroup>
 </Project>
