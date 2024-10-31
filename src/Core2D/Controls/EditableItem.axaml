@@ -27,7 +27,7 @@
               <iac:HideOnKeyPressedBehavior TargetControl="{Binding #PART_TextBox}" Key="Escape" />
               <iac:HideOnKeyPressedBehavior TargetControl="{Binding #PART_TextBox}" Key="Enter" />
               <iac:HideOnLostFocusBehavior TargetControl="{Binding #PART_TextBox}" />
-              <iac:SelectAllOnGotFocusBehavior />
+              <iac:TextBoxSelectAllOnGotFocusBehavior />
             </i:Interaction.Behaviors>
           </TextBox>
           <StackPanel x:Name="PART_StackPanel"
