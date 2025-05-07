@@ -38,5 +38,6 @@
     <AvaloniaControlsPanAndZoomVersion>11.2.0</AvaloniaControlsPanAndZoomVersion>
     <ThemeEditorControlsColorPickerVersion>11.2.0</ThemeEditorControlsColorPickerVersion>
     <DockAvaloniaVersion>11.2.0</DockAvaloniaVersion>
+    <StaticViewLocatorVersion>0.0.1</StaticViewLocatorVersion>
   </PropertyGroup>
 </Project>
