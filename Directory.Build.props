@@ -11,33 +11,4 @@
     <Description>A multi-platform data driven 2D diagram editor.</Description>
     <Copyright>Copyright © Wiesław Šoltés 2024</Copyright>
   </PropertyGroup>
-  <PropertyGroup>
-    <MicrosoftNETFrameworkReferenceAssembliesVersion>1.0.3</MicrosoftNETFrameworkReferenceAssembliesVersion>
-    <SystemDrawingCommonVersion>7.0.0</SystemDrawingCommonVersion>
-    <SystemTextJsonVersion>8.0.5</SystemTextJsonVersion>
-    <AutofacVersion>8.1.1</AutofacVersion>
-    <CommunityToolkitMvvmVersion>8.3.2</CommunityToolkitMvvmVersion>
-    <CsvHelperVersion>33.0.1</CsvHelperVersion>
-    <DocumentFormatOpenXmlVersion>3.1.1</DocumentFormatOpenXmlVersion>
-    <MicrosoftCodeAnalysisCSharpScriptingVersion>4.7.0</MicrosoftCodeAnalysisCSharpScriptingVersion>
-    <netDXFnetstandardVersion>3.0.1</netDXFnetstandardVersion>
-    <NewtonsoftJsonVersion>13.0.3</NewtonsoftJsonVersion>
-    <PDFsharpVersion>6.1.1</PDFsharpVersion>
-    <SystemCollectionsImmutableVersion>8.0.0</SystemCollectionsImmutableVersion>
-    <SystemReactiveVersion>6.0.1</SystemReactiveVersion>
-    <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
-    <SystemTextEncodingCodePagesVersion>8.0.0</SystemTextEncodingCodePagesVersion>
-    <SystemCommandLineVersion>2.0.0-beta1.21308.1</SystemCommandLineVersion>
-    <XUnitVersion>2.4.1</XUnitVersion>
-    <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
-    <MicrosoftNETTestSdkVersion>16.2.0</MicrosoftNETTestSdkVersion>
-    <SkiaSharpVersion>2.88.9</SkiaSharpVersion>
-    <SvgSkiaVersion>2.0.0.2</SvgSkiaVersion>
-    <AvaloniaVersion>11.2.7</AvaloniaVersion>
-    <AvaloniaXamlBehaviorsVersion>11.2.7</AvaloniaXamlBehaviorsVersion>
-    <AvaloniaControlsPanAndZoomVersion>11.2.0</AvaloniaControlsPanAndZoomVersion>
-    <ThemeEditorControlsColorPickerVersion>11.2.0</ThemeEditorControlsColorPickerVersion>
-    <DockAvaloniaVersion>11.2.0</DockAvaloniaVersion>
-    <StaticViewLocatorVersion>0.0.1</StaticViewLocatorVersion>
-  </PropertyGroup>
 </Project>
