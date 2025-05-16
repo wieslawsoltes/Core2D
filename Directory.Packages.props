@@ -1,17 +1,17 @@
 ﻿<Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <AvaloniaVersion>11.2.7</AvaloniaVersion>
+    <AvaloniaVersion>11.3.0</AvaloniaVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
-    <PackageVersion Include="System.Collections.Immutable" Version="8.0.0" />
+    <PackageVersion Include="System.Collections.Immutable" Version="9.0.5" />
     <PackageVersion Include="System.IO.Compression" Version="4.3.0" />
     <PackageVersion Include="System.Reactive" Version="6.0.1" />
-    <PackageVersion Include="System.Text.Json" Version="8.0.5" />
-    <PackageVersion Include="SkiaSharp" Version="2.88.9" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="2.88.9" />
-    <PackageVersion Include="System.Text.Encoding.CodePages" Version="8.0.0" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.5" />
+    <PackageVersion Include="SkiaSharp" Version="3.119.0" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="3.119.0" />
+    <PackageVersion Include="System.Text.Encoding.CodePages" Version="9.0.5" />
     <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
@@ -21,21 +21,21 @@
     <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Headless" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Headless.Vnc" Version="$(AvaloniaVersion)" />
-    <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.2.7" />
-    <PackageVersion Include="Avalonia.Controls.PanAndZoom" Version="11.2.0" />
-    <PackageVersion Include="ThemeEditor.Controls.ColorPicker" Version="11.2.0" />
-    <PackageVersion Include="Dock.Avalonia" Version="11.2.0" />
-    <PackageVersion Include="Dock.Model.MVVM" Version="11.2.0" />
-    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.3.0" />
+    <PackageVersion Include="Avalonia.Controls.PanAndZoom" Version="11.3.0" />
+    <PackageVersion Include="ThemeEditor.Controls.ColorPicker" Version="11.3.0" />
+    <PackageVersion Include="Dock.Avalonia" Version="11.3.0.1" />
+    <PackageVersion Include="Dock.Model.MVVM" Version="11.3.0.1" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageVersion Include="netDXF.netstandard" Version="3.0.1" />
     <PackageVersion Include="PDFsharp" Version="6.1.1" />
     <PackageVersion Include="System.Drawing.Common" Version="7.0.0" />
-    <PackageVersion Include="Svg.Skia" Version="2.0.0.2" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.7.0" />
+    <PackageVersion Include="Svg.Skia" Version="3.0.2" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageVersion Include="Autofac" Version="8.1.1" />
+    <PackageVersion Include="Autofac" Version="8.3.0" />
     <PackageVersion Include="CsvHelper" Version="33.0.1" />
-    <PackageVersion Include="DocumentFormat.OpenXml" Version="3.1.1" />
+    <PackageVersion Include="DocumentFormat.OpenXml" Version="3.3.0" />
     <PackageVersion Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
     <PackageVersion Include="StaticViewLocator" Version="0.0.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0-1.final" />
