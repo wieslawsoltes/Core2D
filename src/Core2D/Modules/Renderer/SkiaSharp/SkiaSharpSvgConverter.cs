@@ -18,7 +18,7 @@ namespace Core2D.Modules.Renderer.SkiaSharp;
 
 public class SkiaSharpSvgConverter : ISvgConverter
 {
-    private static readonly Svg.Model.IAssetLoader s_assetLoader = new SkiaAssetLoader(new SkiaModel(new SKSvgSettings()));
+    private static readonly Svg.Model.ISvgAssetLoader s_assetLoader = new SkiaSvgAssetLoader(new SkiaModel(new SKSvgSettings()));
     private readonly IServiceProvider? _serviceProvider;
 
     public SkiaSharpSvgConverter(IServiceProvider? serviceProvider)
@@ -581,7 +581,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
 
     private IList<BaseShapeViewModel>? Convert(Svg.SvgDocument document, out double width, out double height)
     {
-        var picture = Svg.Model.SvgExtensions.ToModel(document, s_assetLoader, out _, out _);
+        var picture = Svg.Model.Services.SvgService.ToModel(document, s_assetLoader, out _, out _);
         if (picture is null)
         {
             width = double.NaN;
@@ -611,7 +611,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
 
     public IList<BaseShapeViewModel>? Convert(Stream stream, out double width, out double height)
     {
-        var document = Svg.Model.SvgExtensions.Open(stream);
+        var document = Svg.Model.Services.SvgService.Open(stream);
         if (document is null)
         {
             width = double.NaN;
@@ -625,7 +625,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
     public IList<BaseShapeViewModel>? FromString(string text, out double width, out double height)
     {
         using var stream = ToStream(text);
-        var document = Svg.Model.SvgExtensions.Open(stream);
+        var document = Svg.Model.Services.SvgService.Open(stream);
         if (document is null)
         {
             width = double.NaN;
