@@ -45,8 +45,8 @@
     <PackageReference Include="Avalonia.Desktop" />
     <PackageReference Include="Avalonia.Headless" />
     <PackageReference Include="Avalonia.Headless.Vnc"  />
-    <PackageReference Include="Avalonia.Xaml.Behaviors" />
-    <PackageReference Include="Avalonia.Controls.PanAndZoom" />
+    <PackageReference Include="Xaml.Behaviors.Avalonia" />
+    <PackageReference Include="PanAndZoom" />
     <PackageReference Include="ThemeEditor.Controls.ColorPicker" />
     <PackageReference Include="Dock.Avalonia" />
     <PackageReference Include="Dock.Model.MVVM" />

@@ -21,16 +21,16 @@
     <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Headless" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Headless.Vnc" Version="$(AvaloniaVersion)" />
-    <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.3.0" />
-    <PackageVersion Include="Avalonia.Controls.PanAndZoom" Version="11.3.0" />
+    <PackageVersion Include="Xaml.Behaviors.Avalonia" Version="11.3.0.7" />
+    <PackageVersion Include="PanAndZoom" Version="11.3.0.1" />
     <PackageVersion Include="ThemeEditor.Controls.ColorPicker" Version="11.3.0" />
-    <PackageVersion Include="Dock.Avalonia" Version="11.3.0.1" />
-    <PackageVersion Include="Dock.Model.MVVM" Version="11.3.0.1" />
+    <PackageVersion Include="Dock.Avalonia" Version="11.3.0.2" />
+    <PackageVersion Include="Dock.Model.MVVM" Version="11.3.0.2" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageVersion Include="netDXF.netstandard" Version="3.0.1" />
-    <PackageVersion Include="PDFsharp" Version="6.1.1" />
+    <PackageVersion Include="PDFsharp" Version="6.2.0" />
     <PackageVersion Include="System.Drawing.Common" Version="7.0.0" />
-    <PackageVersion Include="Svg.Skia" Version="3.0.2" />
+    <PackageVersion Include="Svg.Skia" Version="3.0.3" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="Autofac" Version="8.3.0" />
