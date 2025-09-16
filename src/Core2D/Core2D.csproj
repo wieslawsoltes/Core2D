@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dock.Avalonia.Themes.Fluent" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" />
     <PackageReference Include="System.Collections.Immutable" />
     <PackageReference Include="System.IO.Compression" />

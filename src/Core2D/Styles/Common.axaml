@@ -51,7 +51,7 @@
   </Style>
 
   <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
-  <StyleInclude Source="avares://Dock.Avalonia/Themes/DockFluentTheme.axaml" />
+  <StyleInclude Source="avares://Dock.Avalonia.Themes.Fluent/DockFluentTheme.axaml" />
   <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
   <StyleInclude Source="avares://Core2D/Styles/Geometry.axaml" />
   <StyleInclude Source="avares://Core2D/Styles/Icons.axaml" />
