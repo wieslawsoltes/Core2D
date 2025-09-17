@@ -79,6 +79,8 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
         _platform = serviceProvider.GetServiceLazily<IProjectEditorPlatform>();
         _canvasPlatform = serviceProvider.GetServiceLazily<IEditorCanvasPlatform>();
         _styleEditor = serviceProvider.GetServiceLazily<StyleEditorViewModel>();
+
+        PropertyChanged += OnEditorPropertyChanged;
     }
 
     public override object Copy(IDictionary<object, object>? shared)

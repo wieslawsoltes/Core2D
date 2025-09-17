@@ -10,6 +10,7 @@ using CommunityToolkit.Mvvm.Input;
 using Core2D.Model;
 using Core2D.Model.History;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
@@ -236,6 +237,11 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
                     CurrentContainer = container;
                     CurrentContainer.InvalidateLayer();
                 }
+
+                if (container is PageContainerViewModel pageContainer)
+                {
+                    ServiceProvider.GetService<ProjectEditorViewModel>()?.OpenPage(pageContainer);
+                }
             }
         }
         else if (value is DocumentContainerViewModel document)
@@ -254,6 +260,11 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
                         CurrentContainer?.InvalidateLayer();
                     }
                 }
+            }
+
+            if (CurrentContainer is PageContainerViewModel page)
+            {
+                ServiceProvider.GetService<ProjectEditorViewModel>()?.OpenPage(page);
             }
         }
     }

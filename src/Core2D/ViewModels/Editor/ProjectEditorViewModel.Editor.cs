@@ -796,8 +796,7 @@ public partial class ProjectEditorViewModel
 
         void ProjectChanged((object? sender, PropertyChangedEventArgs e) arg)
         {
-            // Debug.WriteLine($"[Changed] {arg.sender}.{arg.e.PropertyName}");
-            // _project?.CurrentContainer?.InvalidateLayer();
+            HandleProjectPropertyChanged(arg.sender, arg.e);
             CanvasPlatform?.InvalidateControl?.Invoke();
             IsProjectDirty = true;
         }
