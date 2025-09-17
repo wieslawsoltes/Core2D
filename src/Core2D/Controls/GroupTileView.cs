@@ -146,7 +146,32 @@ public class GroupTileView : Control
         using var scaleTransform = context.PushTransform(Matrix.CreateScale(scale, scale));
         using var translateToOrigin = context.PushTransform(Matrix.CreateTranslation(-minX, -minY));
 
-        group.DrawShape(context, renderer, null);
+        var state = renderer.State;
+        var restoreZoom = false;
+        var zoomX = 1.0;
+        var zoomY = 1.0;
+
+        if (state is { })
+        {
+            restoreZoom = true;
+            zoomX = state.ZoomX;
+            zoomY = state.ZoomY;
+            state.ZoomX = scale;
+            state.ZoomY = scale;
+        }
+
+        try
+        {
+            group.DrawShape(context, renderer, null);
+        }
+        finally
+        {
+            if (restoreZoom && state is { })
+            {
+                state.ZoomX = zoomX;
+                state.ZoomY = zoomY;
+            }
+        }
     }
 
     private sealed class InvalidateObserver : IObserver<(object? sender, System.ComponentModel.PropertyChangedEventArgs e)>
