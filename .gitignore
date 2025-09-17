@@ -289,3 +289,5 @@ tools/**
 
 # macOS
 .DS_Store
+*.layout
+*.window
