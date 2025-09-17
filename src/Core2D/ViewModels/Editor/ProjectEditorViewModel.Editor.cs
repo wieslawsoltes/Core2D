@@ -757,16 +757,25 @@ public partial class ProjectEditorViewModel
 
     private void SetRenderersImageCache(IImageCache? cache)
     {
-        if (Renderer is null)
+        void ConfigureRenderer(IShapeRenderer? renderer)
         {
-            return;
+            if (renderer is null)
+            {
+                return;
+            }
+
+            renderer.ClearCache();
+
+            if (renderer.State is null)
+            {
+                return;
+            }
+
+            renderer.State.ImageCache = cache;
         }
-        Renderer.ClearCache();
-        if (Renderer.State is null)
-        {
-            return;
-        }
-        Renderer.State.ImageCache = cache;
+
+        ConfigureRenderer(Renderer);
+        ConfigureRenderer(LibraryRenderer);
     }
 
     public void OnLoad(ProjectContainerViewModel? project, string? name = null)

@@ -13,7 +13,7 @@
              x:DataType="vm:GroupLibraryViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}"
          x:DataType="vme:ProjectEditorViewModel"
-         renderer:RendererOptions.Renderer="{Binding Renderer}"
+         renderer:RendererOptions.Renderer="{Binding LibraryRenderer}"
          renderer:RendererOptions.Selection="{Binding Project}"
          renderer:RendererOptions.DataFlow="{Binding DataFlow}">
     <libraries:GroupsView DataContext="{Binding Project}"
