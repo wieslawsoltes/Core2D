@@ -46,6 +46,8 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
                     editor.CurrentPathTool = pathTool.PreviousPathTool;
                     if (editor.CurrentPathTool is { })
                     {
+                        selection.ClearConnectionPoints();
+
                         var start = 
                             selection.TryToGetConnectionPoint((double)sx, (double)sy) 
                             ?? factory.CreatePointShape((double)sx, (double)sy);

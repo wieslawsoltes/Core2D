@@ -1,9 +1,11 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Reactive.Disposables;
 using Core2D.Model.Renderer;
+using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Renderer;
@@ -29,6 +31,7 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
     [AutoNotify] private ShapeStyleViewModel? _connectorHoverStyle;
     [AutoNotify] private ShapeStyleViewModel? _connectorSelectedStyle;
     [AutoNotify] private IDecorator? _decorator;
+    [AutoNotify] private ImmutableHashSet<PointShapeViewModel> _activeConnectionPoints = ImmutableHashSet<PointShapeViewModel>.Empty;
 
     public ShapeRendererStateViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {

@@ -68,8 +68,23 @@ public partial class PointShapeViewModel : BaseShapeViewModel
     private ShapeStyleViewModel? ResolveStyle(ShapeRendererStateViewModel state, ISelection? selection)
     {
         var selectedShapes = selection?.SelectedShapes;
+        var hoveredShape = selection?.HoveredShape;
+        var isConnectionHighlight = state.ActiveConnectionPoints.Contains(this);
         var isSelected = selectedShapes is { Count: > 0 } && selectedShapes.Contains(this);
-        var isHovered = selection?.HoveredShape is { } && ReferenceEquals(selection.HoveredShape, this);
+        var isHovered = ReferenceEquals(hoveredShape, this);
+
+        if (isConnectionHighlight)
+        {
+            if (state.ConnectorHoverStyle is { })
+            {
+                return state.ConnectorHoverStyle;
+            }
+
+            if (state.ConnectorSelectedStyle is { })
+            {
+                return state.ConnectorSelectedStyle;
+            }
+        }
 
         if (State.HasFlag(ShapeStateFlags.Connector))
         {
@@ -82,6 +97,23 @@ public partial class PointShapeViewModel : BaseShapeViewModel
         else if (isHovered && state.SelectedPointStyle is { })
         {
             return state.SelectedPointStyle;
+        }
+
+        if (!State.HasFlag(ShapeStateFlags.Connector)
+            && hoveredShape is PointShapeViewModel hoveredPoint
+            && !ReferenceEquals(hoveredPoint, this)
+            && hoveredPoint.State.HasFlag(ShapeStateFlags.Connector)
+            && IsCloseTo(hoveredPoint))
+        {
+            if (state.ConnectorHoverStyle is { })
+            {
+                return state.ConnectorHoverStyle;
+            }
+
+            if (state.ConnectorSelectedStyle is { })
+            {
+                return state.ConnectorSelectedStyle;
+            }
         }
 
         if (isSelected && state.SelectedPointStyle is { })
@@ -128,6 +160,12 @@ public partial class PointShapeViewModel : BaseShapeViewModel
         }
 
         return state.PointStyle;
+    }
+
+    private bool IsCloseTo(PointShapeViewModel other)
+    {
+        const double tolerance = 1e-6;
+        return Math.Abs(other.X - X) <= tolerance && Math.Abs(other.Y - Y) <= tolerance;
     }
 
     public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)

@@ -48,6 +48,9 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
             case State.Start:
             {
                 editor.IsToolIdle = false;
+
+                selection.ClearConnectionPoints();
+
                 _line.Start = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
                               factory.CreatePointShape((double) sx, (double) sy);
                 if (!pathTool.IsInitialized)
@@ -233,6 +236,9 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
             _selection.Reset();
             _selection = null;
         }
+
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        selection?.ClearConnectionPoints();
 
         editor.IsToolIdle = true;
     }

@@ -29,6 +29,8 @@ public interface ISelectionService
     void DeHover(LayerContainerViewModel? layer);
     bool TryToHoverShape(double x, double y);
     PointShapeViewModel? TryToGetConnectionPoint(double x, double y);
+    void RememberConnectionPoint(PointShapeViewModel point);
+    void ClearConnectionPoints();
     bool TryToSplitLine(double x, double y, PointShapeViewModel point, bool select = false);
     bool TryToSplitLine(LineShapeViewModel line, PointShapeViewModel p0, PointShapeViewModel p1);
     bool TryToConnectLines(IList<LineShapeViewModel> lines, ImmutableArray<PointShapeViewModel> connectors);

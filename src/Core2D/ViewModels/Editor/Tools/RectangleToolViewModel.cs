@@ -49,6 +49,8 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
                     ? editor.Project.CurrentStyleLibrary.Selected
                     : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
 
+                selection.ClearConnectionPoints();
+
                 _rectangle = factory.CreateRectangleShape(
                     (double) sx, (double) sy,
                     (ShapeStyleViewModel) style.Copy(null),
@@ -253,6 +255,9 @@ public partial class RectangleToolViewModel : ViewModelBase, IEditorTool
             _selection.Reset();
             _selection = null;
         }
+
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        selection?.ClearConnectionPoints();
 
         editor.IsToolIdle = true;
     }

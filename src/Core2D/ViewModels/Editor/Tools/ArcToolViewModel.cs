@@ -54,6 +54,9 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                     : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
                 _connectedPoint3 = false;
                 _connectedPoint4 = false;
+
+                selection.ClearConnectionPoints();
+
                 _arc = factory.CreateArcShape(
                     (double) sx, (double) sy,
                     (ShapeStyleViewModel) style.Copy(null),
@@ -396,6 +399,9 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
             _selection.Reset();
             _selection = null;
         }
+
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        selection?.ClearConnectionPoints();
 
         editor.IsToolIdle = true;
     }

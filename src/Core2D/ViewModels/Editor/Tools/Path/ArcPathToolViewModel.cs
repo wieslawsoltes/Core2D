@@ -49,6 +49,9 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
             case State.Start:
             {
                 editor.IsToolIdle = false;
+
+                selection.ClearConnectionPoints();
+
                 _arc.Start = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
                              factory.CreatePointShape((double) sx, (double) sy);
                 if (!pathTool.IsInitialized)
@@ -257,6 +260,9 @@ public partial class ArcPathToolViewModel : ViewModelBase, IPathTool
             _selection.Reset();
             _selection = null;
         }
+
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        selection?.ClearConnectionPoints();
 
         editor.IsToolIdle = true;
     }

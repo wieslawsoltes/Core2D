@@ -44,9 +44,12 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
             case State.Point1:
             {
                 editor.IsToolIdle = false;
-                var style = editor.Project.CurrentStyleLibrary?.Selected is { } ?
-                    editor.Project.CurrentStyleLibrary.Selected :
-                    viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+                var style = editor.Project.CurrentStyleLibrary?.Selected is { }
+                    ? editor.Project.CurrentStyleLibrary.Selected
+                    : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+
+                selection.ClearConnectionPoints();
+
                 _cubicBezier = factory.CreateCubicBezierShape(
                     (double)sx, (double)sy,
                     (ShapeStyleViewModel)style.Copy(null),
@@ -356,6 +359,9 @@ public partial class CubicBezierToolViewModel : ViewModelBase, IEditorTool
             _selectionSelection.Reset();
             _selectionSelection = null;
         }
+
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        selection?.ClearConnectionPoints();
 
         editor.IsToolIdle = true;
     }

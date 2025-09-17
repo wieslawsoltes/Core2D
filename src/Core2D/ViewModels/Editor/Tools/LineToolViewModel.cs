@@ -49,6 +49,9 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 var style = editor.Project.CurrentStyleLibrary?.Selected is { }
                     ? editor.Project.CurrentStyleLibrary.Selected
                     : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+
+                selection.ClearConnectionPoints();
+
                 _line = factory.CreateLineShape(
                     (double) sx, (double) sy,
                     (ShapeStyleViewModel) style.Copy(null),
@@ -62,6 +65,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                     if (result is { })
                     {
                         _line.Start = result;
+                        selection.RememberConnectionPoint(result);
                     }
                     else
                     {
@@ -99,6 +103,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                         if (result is { })
                         {
                             _line.End = result;
+                            selection.RememberConnectionPoint(result);
                         }
                         else
                         {
@@ -266,6 +271,9 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
             _selection.Reset();
             _selection = null;
         }
+
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        selection?.ClearConnectionPoints();
 
         editor.IsToolIdle = true;
     }

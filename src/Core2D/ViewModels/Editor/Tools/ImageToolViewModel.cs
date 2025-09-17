@@ -65,6 +65,9 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
                 var style = editor.Project.CurrentStyleLibrary?.Selected is { }
                     ? editor.Project.CurrentStyleLibrary.Selected
                     : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+
+                selection.ClearConnectionPoints();
+
                 _image = factory.CreateImageShape(
                     (double) sx, (double) sy,
                     (ShapeStyleViewModel) style.Copy(null),
@@ -262,6 +265,9 @@ public partial class ImageToolViewModel : ViewModelBase, IEditorTool
             _selection.Reset();
             _selection = null;
         }
+
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        selection?.ClearConnectionPoints();
 
         editor.IsToolIdle = true;
     }

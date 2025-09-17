@@ -22,6 +22,35 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
     {
     }
 
+    private void AddConnectionHighlight(PointShapeViewModel point)
+    {
+        var state = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+        if (state is null)
+        {
+            return;
+        }
+
+        var next = state.ActiveConnectionPoints.Add(point);
+        if (!ReferenceEquals(next, state.ActiveConnectionPoints))
+        {
+            state.ActiveConnectionPoints = next;
+        }
+    }
+
+    private void ClearConnectionHighlights()
+    {
+        var state = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+        if (state is null)
+        {
+            return;
+        }
+
+        if (!state.ActiveConnectionPoints.IsEmpty)
+        {
+            state.ActiveConnectionPoints = state.ActiveConnectionPoints.Clear();
+        }
+    }
+
     public override object Copy(IDictionary<object, object>? shared)
     {
         throw new NotImplementedException();
@@ -698,7 +727,28 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
 
         var shapes = project.CurrentContainer.CurrentLayer.Shapes.Reverse().ToList();
         var radius = project.Options.HitThreshold / pageState.ZoomX;
-        return hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, pageState.ZoomX);
+        var result = hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, pageState.ZoomX);
+        if (result is { })
+        {
+            AddConnectionHighlight(result);
+        }
+
+        return result;
+    }
+
+    public void RememberConnectionPoint(PointShapeViewModel point)
+    {
+        if (point is null)
+        {
+            return;
+        }
+
+        AddConnectionHighlight(point);
+    }
+
+    public void ClearConnectionPoints()
+    {
+        ClearConnectionHighlights();
     }
 
     private void SwapLineStart(LineShapeViewModel? line, PointShapeViewModel? point)

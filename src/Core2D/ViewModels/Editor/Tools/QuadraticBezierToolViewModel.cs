@@ -48,6 +48,9 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                 var style = editor.Project.CurrentStyleLibrary?.Selected is { }
                     ? editor.Project.CurrentStyleLibrary.Selected
                     : viewModelFactory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+
+                selection.ClearConnectionPoints();
+
                 _quadraticBezier = factory.CreateQuadraticBezierShape(
                     (double) sx, (double) sy,
                     (ShapeStyleViewModel) style.Copy(null),
@@ -315,6 +318,9 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
             _selection.Reset();
             _selection = null;
         }
+
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        selection?.ClearConnectionPoints();
 
         editor.IsToolIdle = true;
     }

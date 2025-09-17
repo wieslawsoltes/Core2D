@@ -48,6 +48,9 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
             case State.Point1:
             {
                 editor.IsToolIdle = false;
+
+                selection.ClearConnectionPoints();
+
                 _quadraticBezier.Point1 = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
                                           factory.CreatePointShape((double) sx, (double) sy);
                 if (!pathTool.IsInitialized)
@@ -311,6 +314,9 @@ public partial class QuadraticBezierPathToolViewModel : ViewModelBase, IPathTool
             _selection.Reset();
             _selection = null;
         }
+
+        var selection = ServiceProvider.GetService<ISelectionService>();
+        selection?.ClearConnectionPoints();
 
         editor.IsToolIdle = true;
     }
