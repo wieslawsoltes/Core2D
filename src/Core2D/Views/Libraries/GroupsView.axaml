@@ -73,6 +73,13 @@
               BorderBrush="Transparent" 
               Background="Transparent"
               Padding="12,4,12,4" />
+      <Button Content="edit"
+              Command="{Binding EditGroup}"
+              CommandParameter="{Binding CurrentGroupLibrary.Selected, FallbackValue={x:Null}}"
+              IsVisible="{Binding !!CurrentGroupLibrary.Selected}"
+              BorderBrush="Transparent"
+              Background="Transparent"
+              Padding="12,4,12,4" />
       <Button Content="&#727;" 
               Command="{Binding RemoveGroup}"
               CommandParameter="{Binding CurrentGroupLibrary.Selected, FallbackValue={x:Null}}"
@@ -135,6 +142,10 @@
       </ListBox.Styles>
       <ListBox.Resources>
         <ContextMenu x:Key="GroupShapeContextMenu">
+          <MenuItem Header="_Edit"
+                    Command="{Binding EditGroup}"
+                    CommandParameter="{Binding Mode=OneWay}" />
+          <Separator />
           <MenuItem Header="_Delete"
                     Command="{Binding RemoveGroup}"
                     CommandParameter="{Binding Mode=OneWay}" />

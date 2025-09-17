@@ -4,9 +4,14 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Reactive.Disposables;
+using System.Runtime.Serialization;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Core2D.Model;
 using Core2D.Model.Renderer;
+using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Editor;
 
 namespace Core2D.ViewModels.Shapes;
 
@@ -16,7 +21,13 @@ public partial class GroupShapeViewModel : ConnectableShapeViewModel
 
     public GroupShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(GroupShapeViewModel))
     {
+        EditGroup = new RelayCommand<GroupShapeViewModel?>(x => GetProject()?.OnEditGroup(x));
+
+        ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }
+
+    [IgnoreDataMember]
+    public ICommand EditGroup { get; }
 
     public override object Copy(IDictionary<object, object>? shared)
     {

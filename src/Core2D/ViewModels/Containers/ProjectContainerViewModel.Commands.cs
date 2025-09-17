@@ -69,6 +69,9 @@ public partial class ProjectContainerViewModel
     public ICommand RemoveGroup { get; }
 
     [IgnoreDataMember]
+    public ICommand EditGroup { get; }
+
+    [IgnoreDataMember]
     public ICommand InsertGroup { get; }
 
     [IgnoreDataMember]
@@ -253,15 +256,25 @@ public partial class ProjectContainerViewModel
         }
     }
 
-    public void OnEditTemplate(FrameContainerViewModel? template)
+    public void OnEditTemplate(TemplateContainerViewModel? template)
     {
         if (template is null)
         {
             return;
         }
 
-        SetCurrentContainer(template);
-        CurrentContainer?.InvalidateLayer();
+        SetCurrentTemplate(template);
+
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor is { })
+        {
+            editor.OpenTemplate(template);
+        }
+        else
+        {
+            SetCurrentContainer(template);
+            CurrentContainer?.InvalidateLayer();
+        }
     }
 
     public void OnAddTemplate()
@@ -336,6 +349,24 @@ public partial class ProjectContainerViewModel
             
         var library = this.RemoveGroup(@group);
         library?.SetSelected(library.Items.FirstOrDefault());
+    }
+
+    public void OnEditGroup(GroupShapeViewModel? group)
+    {
+        if (group is null)
+        {
+            return;
+        }
+
+        var library = GroupLibraries.FirstOrDefault(l => l.Items.Contains(group));
+        if (library is { })
+        {
+            SetCurrentGroupLibrary(library);
+            library.SetSelected(group);
+        }
+
+        Selected = group;
+        ServiceProvider.GetService<ProjectEditorViewModel>()?.OpenGroup(group);
     }
 
     public void OnInsertGroup(GroupShapeViewModel? group)
