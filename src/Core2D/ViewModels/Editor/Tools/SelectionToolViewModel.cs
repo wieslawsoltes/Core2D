@@ -6,8 +6,9 @@ using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
 using Core2D.Model.Renderer;
-using Core2D.ViewModels.Shapes;
 using Core2D.Spatial;
+using Core2D.ViewModels.Containers;
+using Core2D.ViewModels.Shapes;
 
 namespace Core2D.ViewModels.Editor.Tools;
 
@@ -133,6 +134,244 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         {
             shapeService.MoveShapesBy(_shapesCache, dx, dy);
         }
+    }
+
+    private bool TryConnectMovedPoints()
+    {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        var hitTest = ServiceProvider.GetService<IHitTest>();
+
+        if (editor?.Project is null || hitTest is null || _pointsCache is null)
+        {
+            return false;
+        }
+
+        var project = editor.Project;
+        var options = project.Options;
+        if (options is null || !options.TryToConnect)
+        {
+            return false;
+        }
+
+        var layer = project.CurrentContainer?.CurrentLayer;
+        var pageState = editor.Renderer?.State;
+        if (layer is null || pageState is null)
+        {
+            return false;
+        }
+
+        var movingPoints = _pointsCache.ToList();
+        if (movingPoints.Count == 0)
+        {
+            return false;
+        }
+
+        var shapes = layer.Shapes.Reverse().ToList();
+        var movingSet = new HashSet<PointShapeViewModel>(movingPoints);
+        var radius = options.HitThreshold / pageState.ZoomX;
+        var scale = pageState.ZoomX;
+
+        var connected = false;
+
+        foreach (var point in movingPoints)
+        {
+            var target = FindConnectionTarget(point, movingSet, shapes, hitTest, radius, scale);
+            if (target is null)
+            {
+                continue;
+            }
+
+            if (TryConnectPoint(project, point, target))
+            {
+                UpdateSelectionAfterConnect(project, point, target);
+                connected = true;
+            }
+        }
+
+        if (connected)
+        {
+            layer.RaiseInvalidateLayer();
+        }
+
+        return connected;
+    }
+
+    private static PointShapeViewModel? FindConnectionTarget(
+        PointShapeViewModel point,
+        ISet<PointShapeViewModel> movingPoints,
+        IList<BaseShapeViewModel> shapes,
+        IHitTest hitTest,
+        double radius,
+        double scale)
+    {
+        var location = new Point2(point.X, point.Y);
+
+        foreach (var shape in shapes)
+        {
+            var candidate = hitTest.TryToGetPoint(shape, location, radius, scale);
+            if (candidate is null)
+            {
+                continue;
+            }
+
+            if (ReferenceEquals(candidate, point))
+            {
+                continue;
+            }
+
+            if (movingPoints.Contains(candidate))
+            {
+                continue;
+            }
+
+            return candidate;
+        }
+
+        return null;
+    }
+
+    private static bool TryConnectPoint(ProjectContainerViewModel project, PointShapeViewModel movingPoint, PointShapeViewModel target)
+    {
+        if (ReferenceEquals(movingPoint, target))
+        {
+            return false;
+        }
+
+        switch (movingPoint.Owner)
+        {
+            case LineShapeViewModel line:
+                if (ReplacePoint(project, movingPoint, target, line.Start, p => line.Start = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, line.End, p => line.End = p))
+                {
+                    return true;
+                }
+                break;
+            case ArcShapeViewModel arc:
+                if (ReplacePoint(project, movingPoint, target, arc.Point1, p => arc.Point1 = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, arc.Point2, p => arc.Point2 = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, arc.Point3, p => arc.Point3 = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, arc.Point4, p => arc.Point4 = p))
+                {
+                    return true;
+                }
+                break;
+            case QuadraticBezierShapeViewModel quadratic:
+                if (ReplacePoint(project, movingPoint, target, quadratic.Point1, p => quadratic.Point1 = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, quadratic.Point2, p => quadratic.Point2 = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, quadratic.Point3, p => quadratic.Point3 = p))
+                {
+                    return true;
+                }
+                break;
+            case CubicBezierShapeViewModel cubic:
+                if (ReplacePoint(project, movingPoint, target, cubic.Point1, p => cubic.Point1 = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, cubic.Point2, p => cubic.Point2 = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, cubic.Point3, p => cubic.Point3 = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, cubic.Point4, p => cubic.Point4 = p))
+                {
+                    return true;
+                }
+                break;
+            case RectangleShapeViewModel rectangle:
+                if (ReplacePoint(project, movingPoint, target, rectangle.TopLeft, p => rectangle.TopLeft = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, rectangle.BottomRight, p => rectangle.BottomRight = p))
+                {
+                    return true;
+                }
+                break;
+            case EllipseShapeViewModel ellipse:
+                if (ReplacePoint(project, movingPoint, target, ellipse.TopLeft, p => ellipse.TopLeft = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, ellipse.BottomRight, p => ellipse.BottomRight = p))
+                {
+                    return true;
+                }
+                break;
+            case TextShapeViewModel text:
+                if (ReplacePoint(project, movingPoint, target, text.TopLeft, p => text.TopLeft = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, text.BottomRight, p => text.BottomRight = p))
+                {
+                    return true;
+                }
+                break;
+            case ImageShapeViewModel image:
+                if (ReplacePoint(project, movingPoint, target, image.TopLeft, p => image.TopLeft = p))
+                {
+                    return true;
+                }
+                if (ReplacePoint(project, movingPoint, target, image.BottomRight, p => image.BottomRight = p))
+                {
+                    return true;
+                }
+                break;
+        }
+
+        return false;
+    }
+
+    private static bool ReplacePoint(
+        ProjectContainerViewModel project,
+        PointShapeViewModel movingPoint,
+        PointShapeViewModel target,
+        PointShapeViewModel? ownerPoint,
+        Action<PointShapeViewModel?> setter)
+    {
+        if (ownerPoint is null || !ReferenceEquals(ownerPoint, movingPoint) || ReferenceEquals(ownerPoint, target))
+        {
+            return false;
+        }
+
+        project.History?.Snapshot(ownerPoint, target, setter);
+        setter(target);
+        return true;
+    }
+
+    private static void UpdateSelectionAfterConnect(ProjectContainerViewModel project, PointShapeViewModel movingPoint, PointShapeViewModel target)
+    {
+        if (project.SelectedShapes is not { } selected || !selected.Contains(movingPoint))
+        {
+            return;
+        }
+
+        var updated = new HashSet<BaseShapeViewModel>(selected);
+        updated.Remove(movingPoint);
+        updated.Add(target);
+        project.SelectedShapes = updated;
     }
 
     private bool IsSelectionAvailable()
@@ -434,9 +673,16 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                             });
                     }
 
+                    var didConnect = TryConnectMovedPoints();
                     DisposeMoveSelectionCache();
                     _currentState = State.None;
                     editor.IsToolIdle = true;
+
+                    if (didConnect)
+                    {
+                        selection.OnUpdateDecorator();
+                    }
+
                     break;
                 }
 
