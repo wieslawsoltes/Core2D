@@ -3,12 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editors;
 using Core2D.ViewModels.Shapes;
+using Dock.Model;
+using Dock.Model.Controls;
+using Dock.Model.Core;
 
 namespace Core2D.ViewModels.Editor;
 
@@ -89,7 +93,55 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
             return;
         }
 
-        // TODO:
+        if (DockFactory is not FactoryBase dockFactory)
+        {
+            return;
+        }
+
+        if (RootDock is not IRootDock rootDock)
+        {
+            return;
+        }
+
+        void ActivateDockable(IDockable dockable)
+        {
+            dockFactory.SetActiveDockable(dockable);
+            if (dockable.Owner is IDock owner)
+            {
+                dockFactory.SetFocusedDockable(owner, dockable);
+            }
+            dockFactory.ActivateWindow(dockable);
+        }
+
+        var hiddenDockable = rootDock.HiddenDockables?.FirstOrDefault(x => x.Id == id);
+        if (hiddenDockable is { })
+        {
+            dockFactory.RestoreDockable(hiddenDockable);
+            ActivateDockable(hiddenDockable);
+            return;
+        }
+
+        var dockable = dockFactory.FindDockable(rootDock, x => x.Id == id);
+        if (dockable is { })
+        {
+            if (dockable.Owner is IDock owner && owner.VisibleDockables?.Contains(dockable) == true)
+            {
+                dockFactory.HideDockable(dockable);
+            }
+            else
+            {
+                dockFactory.RestoreDockable(dockable);
+                ActivateDockable(dockable);
+            }
+
+            return;
+        }
+
+        var restored = dockFactory.RestoreDockable(id);
+        if (restored is { })
+        {
+            ActivateDockable(restored);
+        }
     }
 
     public void ShowDialog(DialogViewModel? dialog)

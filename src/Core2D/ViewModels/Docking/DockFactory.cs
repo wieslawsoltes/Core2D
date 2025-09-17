@@ -32,6 +32,7 @@ public class DockFactory : Factory
     public DockFactory(ProjectEditorViewModel projectEditor)
     {
         _projectEditor = projectEditor;
+        HideToolsOnClose = true;
     }
 
     public override IDocumentDock CreateDocumentDock()
