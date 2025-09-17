@@ -18,8 +18,28 @@ public abstract class ListBoxDropHandler : DefaultDropHandler
             || !(library.Items.All(x => x is T))
             || !(listBox.GetVisualAt(e.GetPosition(listBox)) is Control targetControl)
             || !(listBox.GetVisualRoot() is Control rootControl)
-            || !(rootControl.DataContext is ProjectEditorViewModel editor)
-            || !(targetControl.DataContext is T targetItem))
+            || !(rootControl.DataContext is ProjectEditorViewModel editor))
+        {
+            return false;
+        }
+
+        var current = targetControl;
+        var targetItem = default(T);
+
+        while (current is not null)
+        {
+            if (current.DataContext is T matched)
+            {
+                targetItem = matched;
+                break;
+            }
+
+            current = current.GetVisualParent() as Control;
+        }
+
+        targetItem ??= library.Selected as T;
+
+        if (targetItem is null)
         {
             return false;
         }
