@@ -91,6 +91,7 @@
     <ListBox x:Name="GroupsListBox" 
              ItemsSource="{Binding CurrentGroupLibrary.Items, FallbackValue={x:Null}}"
              SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay, FallbackValue={x:Null}}"
+             Padding="{DynamicResource ContentMargin}"
              Grid.Row="3">
       <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding CurrentGroupLibrary, FallbackValue={x:Null}}"
@@ -107,6 +108,31 @@
                     CommandParameter="{Binding #GroupsListBox.SelectedItem}" 
                     Gesture="Ctrl+E" />
       </ListBox.KeyBindings>
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <WrapPanel Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+      <ListBox.Styles>
+        <Style Selector="ListBoxItem">
+          <Setter Property="Margin" Value="0" />
+          <Setter Property="Padding" Value="0" />
+          <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style Selector="ListBoxItem > Border#TileBorder">
+          <Setter Property="Margin" Value="0,0,4,4" />
+          <Setter Property="Background" Value="{DynamicResource ThemeControlLowBrush}" />
+          <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+          <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="ListBoxItem:pointerover > Border#TileBorder">
+          <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlHighBrush}" />
+        </Style>
+        <Style Selector="ListBoxItem:selected > Border#TileBorder">
+          <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+          <Setter Property="BorderThickness" Value="2" />
+        </Style>
+      </ListBox.Styles>
       <ListBox.Resources>
         <ContextMenu x:Key="GroupShapeContextMenu">
           <MenuItem Header="_Delete"
@@ -120,9 +146,27 @@
       </ListBox.Resources>
       <ListBox.DataTemplates>
         <DataTemplate DataType="vms:GroupShapeViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                          ContextMenu="{StaticResource GroupShapeContextMenu}"
-                          Padding="0"/>
+          <Border x:Name="TileBorder"
+                  Background="Transparent"
+                  Padding="2">
+            <StackPanel HorizontalAlignment="Stretch">
+              <Border Height="60"
+                      Padding="2"
+                      Background="{DynamicResource ThemeControlMidBrush}">
+                <c:GroupTileView Group="{Binding}"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  IsHitTestVisible="False" />
+              </Border>
+              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+                              ContextMenu="{StaticResource GroupShapeContextMenu}"
+                              Margin="0"
+                              HorizontalAlignment="Center" />
+            </StackPanel>
+            <i:Interaction.Behaviors>
+              <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+            </i:Interaction.Behaviors>
+          </Border>
         </DataTemplate>
       </ListBox.DataTemplates>
     </ListBox>
