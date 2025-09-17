@@ -6,6 +6,8 @@ using System.Globalization;
 using Core2D.Model;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Renderer;
+using Core2D.ViewModels.Style;
 
 namespace Core2D.ViewModels.Shapes;
 
@@ -43,16 +45,12 @@ public partial class PointShapeViewModel : BaseShapeViewModel
             return;
         }
 
-        var isSelected = selection?.SelectedShapes is not null 
-                         && selection.SelectedShapes.Count > 0 
-                         && selection.SelectedShapes.Contains(this);
-
         if (renderer?.State is not { } state)
         {
             return;
         }
 
-        var style = isSelected ? state.SelectedPointStyle : state.PointStyle;
+        var style = ResolveStyle(state, selection);
         if (style is null)
         {
             return;
@@ -63,8 +61,73 @@ public partial class PointShapeViewModel : BaseShapeViewModel
         {
             return;
         }
-                
+
         renderer.DrawPoint(dc, this, style);
+    }
+
+    private ShapeStyleViewModel? ResolveStyle(ShapeRendererStateViewModel state, ISelection? selection)
+    {
+        var selectedShapes = selection?.SelectedShapes;
+        var isSelected = selectedShapes is { Count: > 0 } && selectedShapes.Contains(this);
+        var isHovered = selection?.HoveredShape is { } && ReferenceEquals(selection.HoveredShape, this);
+
+        if (State.HasFlag(ShapeStateFlags.Connector))
+        {
+            var connectorStyle = ResolveConnectorStyle(state, isSelected, isHovered);
+            if (connectorStyle is { })
+            {
+                return connectorStyle;
+            }
+        }
+        else if (isHovered && state.SelectedPointStyle is { })
+        {
+            return state.SelectedPointStyle;
+        }
+
+        if (isSelected && state.SelectedPointStyle is { })
+        {
+            return state.SelectedPointStyle;
+        }
+
+        return state.PointStyle;
+    }
+
+    private ShapeStyleViewModel? ResolveConnectorStyle(ShapeRendererStateViewModel state, bool isSelected, bool isHovered)
+    {
+        if (isHovered)
+        {
+            if (state.ConnectorHoverStyle is { })
+            {
+                return state.ConnectorHoverStyle;
+            }
+
+            if (state.ConnectorSelectedStyle is { })
+            {
+                return state.ConnectorSelectedStyle;
+            }
+        }
+
+        if (isSelected && state.ConnectorSelectedStyle is { })
+        {
+            return state.ConnectorSelectedStyle;
+        }
+
+        if (State.HasFlag(ShapeStateFlags.Input) && state.ConnectorInputStyle is { })
+        {
+            return state.ConnectorInputStyle;
+        }
+
+        if (State.HasFlag(ShapeStateFlags.Output) && state.ConnectorOutputStyle is { })
+        {
+            return state.ConnectorOutputStyle;
+        }
+
+        if (state.ConnectorNoneStyle is { })
+        {
+            return state.ConnectorNoneStyle;
+        }
+
+        return state.PointStyle;
     }
 
     public override void DrawPoints(object? dc, IShapeRenderer? renderer, ISelection? selection)

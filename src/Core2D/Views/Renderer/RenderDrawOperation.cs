@@ -62,6 +62,11 @@ public class RenderDrawOperation : ICustomDrawOperation
         renderState.Container?.Invalidate();
         renderState.Renderer.State?.PointStyle?.Invalidate();
         renderState.Renderer.State?.SelectedPointStyle?.Invalidate();
+        renderState.Renderer.State?.ConnectorNoneStyle?.Invalidate();
+        renderState.Renderer.State?.ConnectorInputStyle?.Invalidate();
+        renderState.Renderer.State?.ConnectorOutputStyle?.Invalidate();
+        renderState.Renderer.State?.ConnectorHoverStyle?.Invalidate();
+        renderState.Renderer.State?.ConnectorSelectedStyle?.Invalidate();
     }
 
     private static void DrawExport(RenderState renderState, object context)

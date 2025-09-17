@@ -231,6 +231,31 @@ public class ViewModelFactory : IViewModelFactory
                 "SelectionPoint",
                 0xFF, 0x00, 0xBF, 0xFF,
                 0xFF, 0x00, 0xBF, 0xFF),
+            ConnectorNoneStyle = CreateShapeStyle(
+                "ConnectorNone",
+                0xFF, 0x55, 0x55, 0x55,
+                0xFF, 0xDD, 0xDD, 0xDD,
+                1.0),
+            ConnectorInputStyle = CreateShapeStyle(
+                "ConnectorInput",
+                0xFF, 0x00, 0x88, 0x44,
+                0xFF, 0xAA, 0xF2, 0xC3,
+                1.0),
+            ConnectorOutputStyle = CreateShapeStyle(
+                "ConnectorOutput",
+                0xFF, 0xC4, 0x28, 0x28,
+                0xFF, 0xFF, 0xBC, 0xB0,
+                1.0),
+            ConnectorHoverStyle = CreateShapeStyle(
+                "ConnectorHover",
+                0xFF, 0xFF, 0xA5, 0x00,
+                0xFF, 0xFF, 0xEC, 0xB3,
+                1.0),
+            ConnectorSelectedStyle = CreateShapeStyle(
+                "ConnectorSelected",
+                0xFF, 0x00, 0xBF, 0xFF,
+                0xFF, 0x00, 0xBF, 0xFF,
+                1.0),
             PointSize = 4.0
         };
 

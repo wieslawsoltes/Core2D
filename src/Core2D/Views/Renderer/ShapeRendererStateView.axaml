@@ -30,6 +30,21 @@
     <TabItem Header="Selected Style">
       <ContentControl Content="{Binding SelectedPointStyle}" />
     </TabItem>
+    <TabItem Header="Connector Default">
+      <ContentControl Content="{Binding ConnectorNoneStyle}" />
+    </TabItem>
+    <TabItem Header="Connector Input">
+      <ContentControl Content="{Binding ConnectorInputStyle}" />
+    </TabItem>
+    <TabItem Header="Connector Output">
+      <ContentControl Content="{Binding ConnectorOutputStyle}" />
+    </TabItem>
+    <TabItem Header="Connector Hover">
+      <ContentControl Content="{Binding ConnectorHoverStyle}" />
+    </TabItem>
+    <TabItem Header="Connector Selected">
+      <ContentControl Content="{Binding ConnectorSelectedStyle}" />
+    </TabItem>
     <TabItem Header="Zoom">
       <StackPanel Margin="{DynamicResource ContentMargin}">
         <Label Content="PanX" 

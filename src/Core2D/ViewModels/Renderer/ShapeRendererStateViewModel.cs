@@ -23,6 +23,11 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
     [AutoNotify] private double _pointSize;
     [AutoNotify] private ShapeStyleViewModel? _selectionStyle;
     [AutoNotify] private ShapeStyleViewModel? _helperStyle;
+    [AutoNotify] private ShapeStyleViewModel? _connectorNoneStyle;
+    [AutoNotify] private ShapeStyleViewModel? _connectorInputStyle;
+    [AutoNotify] private ShapeStyleViewModel? _connectorOutputStyle;
+    [AutoNotify] private ShapeStyleViewModel? _connectorHoverStyle;
+    [AutoNotify] private ShapeStyleViewModel? _connectorSelectedStyle;
     [AutoNotify] private IDecorator? _decorator;
 
     public ShapeRendererStateViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
@@ -58,6 +63,31 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
             isDirty |= _helperStyle.IsDirty();
         }
 
+        if (_connectorNoneStyle != null)
+        {
+            isDirty |= _connectorNoneStyle.IsDirty();
+        }
+
+        if (_connectorInputStyle != null)
+        {
+            isDirty |= _connectorInputStyle.IsDirty();
+        }
+
+        if (_connectorOutputStyle != null)
+        {
+            isDirty |= _connectorOutputStyle.IsDirty();
+        }
+
+        if (_connectorHoverStyle != null)
+        {
+            isDirty |= _connectorHoverStyle.IsDirty();
+        }
+
+        if (_connectorSelectedStyle != null)
+        {
+            isDirty |= _connectorSelectedStyle.IsDirty();
+        }
+
         return isDirty;
     }
 
@@ -69,6 +99,11 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
         _selectedPointStyle?.Invalidate();
         _selectionStyle?.Invalidate();
         _helperStyle?.Invalidate();
+        _connectorNoneStyle?.Invalidate();
+        _connectorInputStyle?.Invalidate();
+        _connectorOutputStyle?.Invalidate();
+        _connectorHoverStyle?.Invalidate();
+        _connectorSelectedStyle?.Invalidate();
     }
 
     public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
@@ -79,12 +114,22 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
         var disposableSelectedPointStyle = default(IDisposable);
         var disposableSelectionStyle = default(IDisposable);
         var disposableHelperStyle = default(IDisposable);
+        var disposableConnectorNoneStyle = default(IDisposable);
+        var disposableConnectorInputStyle = default(IDisposable);
+        var disposableConnectorOutputStyle = default(IDisposable);
+        var disposableConnectorHoverStyle = default(IDisposable);
+        var disposableConnectorSelectedStyle = default(IDisposable);
 
         ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
         ObserveObject(_pointStyle, ref disposablePointStyle, mainDisposable, observer);
         ObserveObject(_selectedPointStyle, ref disposableSelectedPointStyle, mainDisposable, observer);
         ObserveObject(_selectionStyle, ref disposableSelectionStyle, mainDisposable, observer);
         ObserveObject(_helperStyle, ref disposableHelperStyle, mainDisposable, observer);
+        ObserveObject(_connectorNoneStyle, ref disposableConnectorNoneStyle, mainDisposable, observer);
+        ObserveObject(_connectorInputStyle, ref disposableConnectorInputStyle, mainDisposable, observer);
+        ObserveObject(_connectorOutputStyle, ref disposableConnectorOutputStyle, mainDisposable, observer);
+        ObserveObject(_connectorHoverStyle, ref disposableConnectorHoverStyle, mainDisposable, observer);
+        ObserveObject(_connectorSelectedStyle, ref disposableConnectorSelectedStyle, mainDisposable, observer);
 
         void Handler(object? sender, PropertyChangedEventArgs e)
         {
@@ -106,6 +151,31 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
             if (e.PropertyName == nameof(HelperStyle))
             {
                 ObserveObject(_helperStyle, ref disposableHelperStyle, mainDisposable, observer);
+            }
+
+            if (e.PropertyName == nameof(ConnectorNoneStyle))
+            {
+                ObserveObject(_connectorNoneStyle, ref disposableConnectorNoneStyle, mainDisposable, observer);
+            }
+
+            if (e.PropertyName == nameof(ConnectorInputStyle))
+            {
+                ObserveObject(_connectorInputStyle, ref disposableConnectorInputStyle, mainDisposable, observer);
+            }
+
+            if (e.PropertyName == nameof(ConnectorOutputStyle))
+            {
+                ObserveObject(_connectorOutputStyle, ref disposableConnectorOutputStyle, mainDisposable, observer);
+            }
+
+            if (e.PropertyName == nameof(ConnectorHoverStyle))
+            {
+                ObserveObject(_connectorHoverStyle, ref disposableConnectorHoverStyle, mainDisposable, observer);
+            }
+
+            if (e.PropertyName == nameof(ConnectorSelectedStyle))
+            {
+                ObserveObject(_connectorSelectedStyle, ref disposableConnectorSelectedStyle, mainDisposable, observer);
             }
 
             observer.OnNext((sender, e));

@@ -36,6 +36,7 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
     [AutoNotify] private FrameContainerViewModel? _currentContainer;
     [AutoNotify] private ViewModelBase? _selected;
     [AutoNotify(IgnoreDataMember = true)] private ISet<BaseShapeViewModel>? _selectedShapes;
+    [AutoNotify(IgnoreDataMember = true)] private BaseShapeViewModel? _hoveredShape;
 
     public ProjectContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {

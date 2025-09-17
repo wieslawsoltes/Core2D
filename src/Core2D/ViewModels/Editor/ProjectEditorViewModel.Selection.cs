@@ -22,8 +22,6 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
     {
     }
 
-    private BaseShapeViewModel? HoveredShapeViewModel { get; set; }
-
     public override object Copy(IDictionary<object, object>? shared)
     {
         throw new NotImplementedException();
@@ -218,6 +216,8 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
                 container.HelperLayer.Shapes = ImmutableArray.Create<BaseShapeViewModel>();
             }
 
+            project.HoveredShape = null;
+
             project.CurrentContainer?.InvalidateLayer();
             OnHideDecorator();
         }
@@ -284,6 +284,7 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         layer.Shapes = next;
 
         project.SelectedShapes = default;
+        project.HoveredShape = null;
         layer.RaiseInvalidateLayer();
 
         OnHideDecorator();
@@ -302,6 +303,8 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
             project.SelectedShapes = default;
         }
 
+        project.HoveredShape = null;
+
         OnHideDecorator();
     }
 
@@ -309,6 +312,11 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+
+        if (project is { })
+        {
+            project.HoveredShape = null;
+        }
 
         if (pageState is { })
         {
@@ -353,6 +361,11 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+
+        if (project is { })
+        {
+            project.HoveredShape = null;
+        }
 
         if (pageState is { })
         {
@@ -563,19 +576,29 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         {
             return;
         }
-            
+
+        var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+
         Select(layer, shape);
-        HoveredShapeViewModel = shape;
+
+        if (project is { })
+        {
+            project.HoveredShape = shape;
+        }
     }
 
     public void DeHover(LayerContainerViewModel? layer)
     {
-        if (layer is null || HoveredShapeViewModel is null)
+        if (layer is null)
         {
             return;
         }
-            
-        HoveredShapeViewModel = default;
+
+        var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
+        if (project is { })
+        {
+            project.HoveredShape = null;
+        }
         Deselect(layer);
     }
 
@@ -603,7 +626,7 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
             return false;
         }
 
-        if (project.SelectedShapes?.Count == 1 && HoveredShapeViewModel != project.SelectedShapes?.FirstOrDefault())
+        if (project.SelectedShapes?.Count == 1 && project.HoveredShape != project.SelectedShapes?.FirstOrDefault())
         {
             return false;
         }
@@ -635,7 +658,7 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
             }
         }
 
-        if (project.SelectedShapes?.Count == 1 && HoveredShapeViewModel == project.SelectedShapes?.FirstOrDefault())
+        if (project.SelectedShapes?.Count == 1 && project.HoveredShape == project.SelectedShapes?.FirstOrDefault())
         {
             DeHover(project.CurrentContainer?.CurrentLayer);
         }
