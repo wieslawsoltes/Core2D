@@ -349,6 +349,8 @@ public class DockFactory : Factory
 
     public override void InitLayout(IDockable layout)
     {
+        UpdateDockReferences(layout);
+
         ContextLocator = new Dictionary<string, Func<object?>>
         {
             // Documents
@@ -404,5 +406,26 @@ public class DockFactory : Factory
         };
 
         base.InitLayout(layout);
+    }
+
+    private void UpdateDockReferences(IDockable layout)
+    {
+        if (layout is not IRootDock rootDock)
+        {
+            _rootDock = null;
+            _pagesDock = null;
+            _homeDock = null;
+            return;
+        }
+
+        _rootDock = rootDock;
+
+        var pagesDock = FindDockable(rootDock, d => d is IDocumentDock doc && doc.Id == "PageDocumentDock");
+        _pagesDock = pagesDock as IDocumentDock
+                     ?? FindDockable(rootDock, d => d is IDocumentDock) as IDocumentDock;
+
+        var homeDock = FindDockable(rootDock, d => d is IProportionalDock proportional && proportional.Id == "HomeDock");
+        _homeDock = homeDock as IProportionalDock
+                    ?? FindDockable(rootDock, d => d is IProportionalDock) as IProportionalDock;
     }
 }
