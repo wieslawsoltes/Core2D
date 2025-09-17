@@ -37,6 +37,8 @@ public class AttachEditor
             state.PanX = offsetX;
             state.PanY = offsetY;
         }
+
+        projectEditor.CanvasPlatform?.InvalidateControl?.Invoke();
     }
 
     private void Changed(object? context)
