@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -13,14 +12,15 @@ namespace Core2D.Generators;
 [Generator]
 public class AutoNotifyGenerator : IIncrementalGenerator
 {
+    private const string DefaultAttributeNamespace = "Core2D.ViewModels";
+
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        // Inject attribute + enum early so semantic model can bind attributes
+        // Inject attribute + enum early so the semantic model can bind attributes
         context.RegisterPostInitializationOutput(ctx =>
         {
-            const string defaultNamespace = "Core2D.ViewModels";
-            ctx.AddSource("AccessModifier", SourceText.From(CreateModifierSource(defaultNamespace), Encoding.UTF8));
-            ctx.AddSource("AutoNotifyAttribute", SourceText.From(CreateAttributeSource(defaultNamespace), Encoding.UTF8));
+            ctx.AddSource("AccessModifier", SourceText.From(CreateModifierSource(DefaultAttributeNamespace), Encoding.UTF8));
+            ctx.AddSource("AutoNotifyAttribute", SourceText.From(CreateAttributeSource(DefaultAttributeNamespace), Encoding.UTF8));
         });
 
         var configurationProvider = context.AnalyzerConfigOptionsProvider
@@ -29,8 +29,7 @@ public class AutoNotifyGenerator : IIncrementalGenerator
         // If a custom namespace is configured, also emit attribute + enum there
         context.RegisterSourceOutput(configurationProvider, static (spc, config) =>
         {
-            const string defaultNamespace = "Core2D.ViewModels";
-            if (!string.IsNullOrWhiteSpace(config.Namespace) && config.Namespace != defaultNamespace)
+            if (!string.IsNullOrWhiteSpace(config.Namespace) && config.Namespace != DefaultAttributeNamespace)
             {
                 var nsHint = config.Namespace.Replace('.', '_');
                 spc.AddSource($"AccessModifier_{nsHint}", SourceText.From(CreateModifierSource(config.Namespace), Encoding.UTF8));
@@ -39,7 +38,7 @@ public class AutoNotifyGenerator : IIncrementalGenerator
         });
 
         var fieldDeclarations = context.SyntaxProvider.CreateSyntaxProvider(
-            static (node, _) => node is FieldDeclarationSyntax f && f.AttributeLists.Count > 0,
+            static (node, _) => node is FieldDeclarationSyntax { AttributeLists.Count: > 0 },
             static (ctx, ct) =>
             {
                 var fieldSyntax = (FieldDeclarationSyntax)ctx.Node;
@@ -204,45 +203,35 @@ public class AutoNotifyGenerator : IIncrementalGenerator
         var overridenIgnoreDataMemberOpt = attributeData.NamedArguments.SingleOrDefault(kvp => kvp.Key == "IgnoreDataMember").Value;
         var ignoreDataMember = false;
 
-        if (!overridenIgnoreDataMemberOpt.IsNull && overridenIgnoreDataMemberOpt.Value is not null)
+        if (overridenIgnoreDataMemberOpt is { IsNull: false, Value: not null })
         {
             ignoreDataMember = (bool)overridenIgnoreDataMemberOpt.Value;
         }
 
-        if (ignoreDataMember)
-        {
-            source.Append($@"
-		[IgnoreDataMember]");
-        }
-        else
-        {
-            source.Append($@"
+        source.Append(ignoreDataMember
+            ? $@"
+		[IgnoreDataMember]"
+            : $@"
 		[DataMember(IsRequired = false, EmitDefaultValue = true)]");
-        }
 
         var overridenSetterModifierOpt = attributeData.NamedArguments.SingleOrDefault(kvp => kvp.Key == "SetterModifier").Value;
         var setterModifier = ChooseSetterModifier(overridenSetterModifierOpt);
-        if (setterModifier is null)
-        {
-            source.Append($@"
+        source.Append(setterModifier is null
+            ? $@"
         public {fieldType} {propertyName}
         {{
             get => {fieldName};
-        }}");
-        }
-        else
-        {
-            source.Append($@"
+        }}"
+            : $@"
         public {fieldType} {propertyName}
         {{
             get => {fieldName};
             {setterModifier}set => RaiseAndSetIfChanged(ref {fieldName}, value, {fieldName}PropertyChangedEventArgs);
         }}");
-        }
 
         static string? ChooseSetterModifier(TypedConstant overridenSetterModifierOpt)
         {
-            if (!overridenSetterModifierOpt.IsNull && overridenSetterModifierOpt.Value is not null)
+            if (overridenSetterModifierOpt is { IsNull: false, Value: not null })
             {
                 var value = (int)overridenSetterModifierOpt.Value;
                 return value switch
@@ -291,42 +280,28 @@ public class AutoNotifyGenerator : IIncrementalGenerator
         }
     }
 
-    private class SyntaxReceiver : ISyntaxReceiver
-    {
-        public List<FieldDeclarationSyntax> CandidateFields { get; } = new List<FieldDeclarationSyntax>();
-
-        public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
-        {
-            if (syntaxNode is FieldDeclarationSyntax fieldDeclarationSyntax
-                && fieldDeclarationSyntax.AttributeLists.Count > 0)
-            {
-                CandidateFields.Add(fieldDeclarationSyntax);
-            }
-        }
-    }
-
     private static string CreateAttributeSource(string namespaceName) => $$"""
-// <auto-generated />
-#nullable enable
-using System;
+                                                                           // <auto-generated />
+                                                                           #nullable enable
+                                                                           using System;
 
-namespace {{namespaceName}}
-{
-    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-    sealed class AutoNotifyAttribute : Attribute
-    {
-        public AutoNotifyAttribute()
-        {
-        }
+                                                                           namespace {{namespaceName}}
+                                                                           {
+                                                                               [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+                                                                               sealed class AutoNotifyAttribute : Attribute
+                                                                               {
+                                                                                   public AutoNotifyAttribute()
+                                                                                   {
+                                                                                   }
 
-        public string? PropertyName { get; set; }
+                                                                                   public string? PropertyName { get; set; }
 
-        public AccessModifier SetterModifier { get; set; } = AccessModifier.Public;
+                                                                                   public AccessModifier SetterModifier { get; set; } = AccessModifier.Public;
 
-        public bool IgnoreDataMember { get; set; } = false;
-    }
-}
-""";
+                                                                                   public bool IgnoreDataMember { get; set; } = false;
+                                                                               }
+                                                                           }
+                                                                           """;
 
     private static string CreateModifierSource(string namespaceName) => $$"""
 // <auto-generated />
@@ -357,10 +332,6 @@ namespace {{namespaceName}}
         }
 
         public string Namespace { get; }
-
-        public string AttributeFullName => string.IsNullOrWhiteSpace(Namespace)
-            ? "AutoNotifyAttribute"
-            : $"{Namespace}.AutoNotifyAttribute";
 
         public string BaseType { get; }
 
