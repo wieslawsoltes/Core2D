@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -10,85 +11,97 @@ using Microsoft.CodeAnalysis.Text;
 namespace Core2D.Generators;
 
 [Generator]
-public class AutoNotifyGenerator : ISourceGenerator
+public class AutoNotifyGenerator : IIncrementalGenerator
 {
-    public void Initialize(GeneratorInitializationContext context)
+    public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        // System.Diagnostics.Debugger.Launch();
-        context.RegisterForSyntaxNotifications(() => new SyntaxReceiver());
-    }
-
-    public void Execute(GeneratorExecutionContext context)
-    {
-        var configuration = GeneratorConfiguration.From(context.AnalyzerConfigOptions.GlobalOptions);
-
-        var modifierText = CreateModifierSource(configuration.Namespace);
-        var attributeText = CreateAttributeSource(configuration.Namespace);
-
-        context.AddSource("AccessModifier", SourceText.From(modifierText, Encoding.UTF8));
-        context.AddSource("AutoNotifyAttribute", SourceText.From(attributeText, Encoding.UTF8));
-
-        if (!(context.SyntaxReceiver is SyntaxReceiver receiver))
+        // Inject attribute + enum early so semantic model can bind attributes
+        context.RegisterPostInitializationOutput(ctx =>
         {
-            return;
-        }
+            const string defaultNamespace = "Core2D.ViewModels";
+            ctx.AddSource("AccessModifier", SourceText.From(CreateModifierSource(defaultNamespace), Encoding.UTF8));
+            ctx.AddSource("AutoNotifyAttribute", SourceText.From(CreateAttributeSource(defaultNamespace), Encoding.UTF8));
+        });
 
-        var options = (context.Compilation as CSharpCompilation)?.SyntaxTrees[0].Options as CSharpParseOptions;
-        var compilation = context.Compilation.AddSyntaxTrees(
-            CSharpSyntaxTree.ParseText(SourceText.From(modifierText, Encoding.UTF8), options),
-            CSharpSyntaxTree.ParseText(SourceText.From(attributeText, Encoding.UTF8), options));
+        var configurationProvider = context.AnalyzerConfigOptionsProvider
+            .Select(static (provider, _) => GeneratorConfiguration.From(provider.GlobalOptions));
 
-        var attributeSymbol = compilation.GetTypeByMetadataName(configuration.AttributeFullName);
-        if (attributeSymbol is null)
+        // If a custom namespace is configured, also emit attribute + enum there
+        context.RegisterSourceOutput(configurationProvider, static (spc, config) =>
         {
-            return;
-        }
-
-        var notifySymbol = compilation.GetTypeByMetadataName(configuration.BaseType);
-        if (notifySymbol is null)
-        {
-            return;
-        }
-
-        List<IFieldSymbol> fieldSymbols = new();
-
-        foreach (var field in receiver.CandidateFields)
-        {
-            var semanticModel = compilation.GetSemanticModel(field.SyntaxTree);
-
-            foreach (var variable in field.Declaration.Variables)
+            const string defaultNamespace = "Core2D.ViewModels";
+            if (!string.IsNullOrWhiteSpace(config.Namespace) && config.Namespace != defaultNamespace)
             {
-                var fieldSymbol = semanticModel.GetDeclaredSymbol(variable) as IFieldSymbol;
-                if (fieldSymbol is null)
+                var nsHint = config.Namespace.Replace('.', '_');
+                spc.AddSource($"AccessModifier_{nsHint}", SourceText.From(CreateModifierSource(config.Namespace), Encoding.UTF8));
+                spc.AddSource($"AutoNotifyAttribute_{nsHint}", SourceText.From(CreateAttributeSource(config.Namespace), Encoding.UTF8));
+            }
+        });
+
+        var fieldDeclarations = context.SyntaxProvider.CreateSyntaxProvider(
+            static (node, _) => node is FieldDeclarationSyntax f && f.AttributeLists.Count > 0,
+            static (ctx, ct) =>
+            {
+                var fieldSyntax = (FieldDeclarationSyntax)ctx.Node;
+                var list = new List<IFieldSymbol>();
+                foreach (var variable in fieldSyntax.Declaration.Variables)
+                {
+                    if (ctx.SemanticModel.GetDeclaredSymbol(variable, ct) is IFieldSymbol fs)
+                    {
+                        list.Add(fs);
+                    }
+                }
+                return list;
+            })
+            .Where(static list => list is { Count: > 0 });
+
+        var combined = context.CompilationProvider
+            .Combine(configurationProvider)
+            .Combine(fieldDeclarations.Collect());
+
+        context.RegisterSourceOutput(combined, static (spc, data) =>
+        {
+            var compilation = data.Left.Left;
+            var configuration = data.Left.Right;
+            var collectedLists = data.Right; // ImmutableArray<List<IFieldSymbol>>
+
+            var notifySymbol = compilation.GetTypeByMetadataName(configuration.BaseType);
+            if (notifySymbol is null)
+            {
+                return;
+            }
+
+            var fieldSymbols = new List<IFieldSymbol>();
+            foreach (var list in collectedLists)
+            {
+                foreach (var fieldSymbol in list)
+                {
+                    var attributes = fieldSymbol.GetAttributes();
+                    if (attributes.Any(ad => ad?.AttributeClass?.Name == "AutoNotifyAttribute"))
+                    {
+                        fieldSymbols.Add(fieldSymbol);
+                    }
+                }
+            }
+
+            // TODO: https://github.com/dotnet/roslyn/issues/49385
+            #pragma warning disable RS1024
+            var groupedFields = fieldSymbols.GroupBy(f => f.ContainingType);
+            #pragma warning restore RS1024
+
+            foreach (var group in groupedFields)
+            {
+                var classSource = ProcessClass(group.Key, group.ToList(), notifySymbol, configuration);
+                if (classSource is null)
                 {
                     continue;
                 }
-
-                var attributes = fieldSymbol.GetAttributes();
-                if (attributes.Any(ad => ad?.AttributeClass?.Equals(attributeSymbol, SymbolEqualityComparer.Default) ?? false))
-                {
-                    fieldSymbols.Add(fieldSymbol);
-                }
+                spc.AddSource($"{group.Key.Name}_AutoNotify.cs", SourceText.From(classSource, Encoding.UTF8));
             }
-        }
-
-        // TODO: https://github.com/dotnet/roslyn/issues/49385
-#pragma warning disable RS1024
-        var groupedFields = fieldSymbols.GroupBy(f => f.ContainingType);
-#pragma warning restore RS1024
-
-        foreach (var group in groupedFields)
-        {
-            var classSource = ProcessClass(group.Key, group.ToList(), attributeSymbol, notifySymbol, configuration);
-            if (classSource is null)
-            {
-                continue;
-            }
-            context.AddSource($"{group.Key.Name}_AutoNotify.cs", SourceText.From(classSource, Encoding.UTF8));
-        }
+        });
     }
 
-    private string? ProcessClass(INamedTypeSymbol classSymbol, List<IFieldSymbol> fields, ISymbol attributeSymbol, INamedTypeSymbol notifySymbol, GeneratorConfiguration configuration)
+    private static string? ProcessClass(INamedTypeSymbol classSymbol, List<IFieldSymbol> fields, INamedTypeSymbol notifySymbol, GeneratorConfiguration configuration)
     {
         if (!classSymbol.ContainingSymbol.Equals(classSymbol.ContainingNamespace, SymbolEqualityComparer.Default))
         {
@@ -163,7 +176,7 @@ public class AutoNotifyGenerator : ISourceGenerator
 
         foreach (var fieldSymbol in fields)
         {
-            ProcessField(source, fieldSymbol, attributeSymbol);
+            ProcessField(source, fieldSymbol);
         }
 
         source.Append("\n    }\n}\n");
@@ -171,11 +184,11 @@ public class AutoNotifyGenerator : ISourceGenerator
         return source.ToString();
     }
 
-    private void ProcessField(StringBuilder source, IFieldSymbol fieldSymbol, ISymbol attributeSymbol)
+    private static void ProcessField(StringBuilder source, IFieldSymbol fieldSymbol)
     {
         var fieldName = fieldSymbol.Name;
         var fieldType = fieldSymbol.Type;
-        var attributeData = fieldSymbol.GetAttributes().Single(ad => ad?.AttributeClass?.Equals(attributeSymbol, SymbolEqualityComparer.Default) ?? false);
+        var attributeData = fieldSymbol.GetAttributes().First(ad => ad?.AttributeClass?.Name == "AutoNotifyAttribute");
         var overridenNameOpt = attributeData.NamedArguments.SingleOrDefault(kvp => kvp.Key == "PropertyName").Value;
         var propertyName = ChooseName(fieldName, overridenNameOpt);
 
