@@ -39,7 +39,7 @@
     <PackageVersion Include="DocumentFormat.OpenXml" Version="3.3.0" />
     <PackageVersion Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
     <PackageVersion Include="StaticViewLocator" Version="0.1.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0-1.final" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4-beta1.22362.3" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" />
   </ItemGroup>
 </Project>
