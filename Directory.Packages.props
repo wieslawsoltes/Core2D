@@ -4,7 +4,7 @@
     <AvaloniaVersion>11.3.6</AvaloniaVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Dock.Avalonia.Themes.Fluent" Version="11.3.2.2" />
+    <PackageVersion Include="Dock.Avalonia.Themes.Fluent" Version="11.3.6" />
     <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
     <PackageVersion Include="System.Collections.Immutable" Version="9.0.9" />
     <PackageVersion Include="System.IO.Compression" Version="4.3.0" />
@@ -22,23 +22,23 @@
     <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Headless" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Headless.Vnc" Version="$(AvaloniaVersion)" />
-    <PackageVersion Include="Xaml.Behaviors.Avalonia" Version="11.3.2" />
-    <PackageVersion Include="PanAndZoom" Version="11.3.0.5" />
+    <PackageVersion Include="Xaml.Behaviors.Avalonia" Version="11.3.6.1" />
+    <PackageVersion Include="PanAndZoom" Version="11.3.6" />
     <PackageVersion Include="ThemeEditor.Controls.ColorPicker" Version="11.3.0" />
-    <PackageVersion Include="Dock.Avalonia" Version="11.3.2.2" />
-    <PackageVersion Include="Dock.Model.MVVM" Version="11.3.2.2" />
+    <PackageVersion Include="Dock.Avalonia" Version="11.3.6" />
+    <PackageVersion Include="Dock.Model.MVVM" Version="11.3.6" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageVersion Include="netDXF.netstandard" Version="3.0.1" />
     <PackageVersion Include="PDFsharp" Version="6.2.1" />
     <PackageVersion Include="System.Drawing.Common" Version="7.0.0" />
-    <PackageVersion Include="Svg.Skia" Version="3.0.6" />
+    <PackageVersion Include="Svg.Skia" Version="3.2.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="Autofac" Version="8.4.0" />
     <PackageVersion Include="CsvHelper" Version="33.1.0" />
     <PackageVersion Include="DocumentFormat.OpenXml" Version="3.3.0" />
     <PackageVersion Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
-    <PackageVersion Include="StaticViewLocator" Version="0.0.1" />
+    <PackageVersion Include="StaticViewLocator" Version="0.1.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0-1.final" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4-beta1.22362.3" />
   </ItemGroup>
