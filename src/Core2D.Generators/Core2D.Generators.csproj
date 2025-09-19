@@ -12,6 +12,7 @@
     <NoPackageAnalysis>True</NoPackageAnalysis>
     <IsRoslynComponent>true</IsRoslynComponent>
     <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
 
   <PropertyGroup>
