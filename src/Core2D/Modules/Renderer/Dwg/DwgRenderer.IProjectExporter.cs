@@ -105,6 +105,11 @@ public partial class DwgRenderer : IProjectExporter
         }
 
         var doc = new CadDocument();
+        // Use millimeters as drawing insertion units for Core2D pages
+        doc.Header.InsUnits = ACadSharp.Types.Units.UnitsType.Millimeters;
+
+        // Single page export: route to model space
+        _targetBlock = null;
 
         Add(doc, container, presenter);
 
@@ -127,6 +132,8 @@ public partial class DwgRenderer : IProjectExporter
         }
 
         var doc = new CadDocument();
+        // Use millimeters as drawing insertion units for Core2D pages
+        doc.Header.InsUnits = ACadSharp.Types.Units.UnitsType.Millimeters;
 
         Add(doc, document, presenter);
 
@@ -149,6 +156,8 @@ public partial class DwgRenderer : IProjectExporter
         }
 
         var doc = new CadDocument();
+        // Use millimeters as drawing insertion units for Core2D pages
+        doc.Header.InsUnits = ACadSharp.Types.Units.UnitsType.Millimeters;
 
         Add(doc, project, presenter);
 
@@ -206,9 +215,10 @@ public partial class DwgRenderer : IProjectExporter
             };
 
             doc.Layouts.Add(layout);
-            // TODO: set active layout if necessary
-
+            // Route subsequent entities to this layout's paper space block
+            _targetBlock = layout.AssociatedBlock;
             Add(doc, page, presenter);
+            _targetBlock = null;
         }
     }
 
@@ -220,4 +230,3 @@ public partial class DwgRenderer : IProjectExporter
         }
     }
 }
-
