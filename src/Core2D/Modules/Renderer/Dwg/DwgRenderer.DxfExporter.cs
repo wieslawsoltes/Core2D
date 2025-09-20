@@ -36,7 +36,7 @@ public partial class DwgRenderer
 
         Add(doc, container, presenter);
 
-        using var writer = new ACadSharp.IO.DXF.DxfWriter(stream, doc, binary: false);
+        using var writer = new ACadSharp.IO.DxfWriter(stream, doc, binary: false);
         writer.Write();
         ClearCache();
     }
@@ -60,7 +60,7 @@ public partial class DwgRenderer
 
         Add(doc, document, presenter);
 
-        using var writer = new ACadSharp.IO.DXF.DxfWriter(stream, doc, binary: false);
+        using var writer = new ACadSharp.IO.DxfWriter(stream, doc, binary: false);
         writer.Write();
         ClearCache();
     }
@@ -84,9 +84,8 @@ public partial class DwgRenderer
 
         Add(doc, project, presenter);
 
-        using var writer = new ACadSharp.IO.DXF.DxfWriter(stream, doc, binary: false);
+        using var writer = new ACadSharp.IO.DxfWriter(stream, doc, binary: false);
         writer.Write();
         ClearCache();
     }
 }
-
