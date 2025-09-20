@@ -14,6 +14,52 @@ public class AutoNotifyGenerator : IIncrementalGenerator
 {
     private const string DefaultAttributeNamespace = "Core2D.ViewModels";
 
+    // Diagnostics
+    private static readonly DiagnosticDescriptor MissingBaseTypeDescriptor = new(
+        id: "C2DGEN001",
+        title: "AutoNotify base type not found",
+        messageFormat: "Configured AutoNotify base type '{0}' was not found in the compilation",
+        category: "AutoNotifyGenerator",
+        defaultSeverity: DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        description: "The generator could not resolve the configured base type. Ensure the type exists and is referenced.");
+
+    private static readonly DiagnosticDescriptor NestedTypeNotSupportedDescriptor = new(
+        id: "C2DGEN002",
+        title: "AutoNotify does not support nested types",
+        messageFormat: "Type '{0}' is nested; AutoNotify only supports top-level partial classes",
+        category: "AutoNotifyGenerator",
+        defaultSeverity: DiagnosticSeverity.Info,
+        isEnabledByDefault: true,
+        description: "Fields inside nested types are ignored. Move the type to the namespace scope or implement properties manually.");
+
+    private static readonly DiagnosticDescriptor InvalidPropertyNameDescriptor = new(
+        id: "C2DGEN003",
+        title: "Invalid property name for field",
+        messageFormat: "Could not derive a valid property name for field '{0}'; specify PropertyName or rename the field",
+        category: "AutoNotifyGenerator",
+        defaultSeverity: DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        description: "The generator could not compute a valid property name from the field. Consider using the PropertyName argument or updating the field name.");
+
+    private static readonly DiagnosticDescriptor UnexpectedExceptionDescriptor = new(
+        id: "C2DGEN999",
+        title: "Unexpected generator exception",
+        messageFormat: "AutoNotify encountered an unexpected error: {0}",
+        category: "AutoNotifyGenerator",
+        defaultSeverity: DiagnosticSeverity.Error,
+        isEnabledByDefault: true,
+        description: "The source generator threw an exception while processing. Check inner diagnostics and configuration.");
+
+    private static readonly DiagnosticDescriptor TypeMustBePartialDescriptor = new(
+        id: "C2DGEN004",
+        title: "Type must be partial",
+        messageFormat: "Type '{0}' must be 'partial' to use [AutoNotify]",
+        category: "AutoNotifyGenerator",
+        defaultSeverity: DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        description: "Mark the class as partial to allow the generator to add the generated members.");
+
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         // Inject attribute + enum early so the semantic model can bind attributes
@@ -60,53 +106,116 @@ public class AutoNotifyGenerator : IIncrementalGenerator
 
         context.RegisterSourceOutput(combined, static (spc, data) =>
         {
-            var compilation = data.Left.Left;
-            var configuration = data.Left.Right;
-            var collectedLists = data.Right; // ImmutableArray<List<IFieldSymbol>>
-
-            var notifySymbol = compilation.GetTypeByMetadataName(configuration.BaseType);
-            if (notifySymbol is null)
+            try
             {
-                return;
-            }
+                var compilation = data.Left.Left;
+                var configuration = data.Left.Right;
+                var collectedLists = data.Right; // ImmutableArray<List<IFieldSymbol>>
 
-            var fieldSymbols = new List<IFieldSymbol>();
-            foreach (var list in collectedLists)
-            {
-                foreach (var fieldSymbol in list)
+                var notifySymbol = compilation.GetTypeByMetadataName(configuration.BaseType);
+                if (notifySymbol is null)
                 {
-                    var attributes = fieldSymbol.GetAttributes();
-                    if (attributes.Any(ad => ad?.AttributeClass?.Name == "AutoNotifyAttribute"))
+                    spc.ReportDiagnostic(Diagnostic.Create(MissingBaseTypeDescriptor, Location.None, configuration.BaseType));
+                    return;
+                }
+
+                var fieldSymbols = new List<IFieldSymbol>();
+                foreach (var list in collectedLists)
+                {
+                    foreach (var fieldSymbol in list)
                     {
-                        fieldSymbols.Add(fieldSymbol);
+                        var attributes = fieldSymbol.GetAttributes();
+                        if (attributes.Any(ad => ad?.AttributeClass?.Name == "AutoNotifyAttribute"))
+                        {
+                            fieldSymbols.Add(fieldSymbol);
+                        }
                     }
                 }
-            }
 
-            // TODO: https://github.com/dotnet/roslyn/issues/49385
-            #pragma warning disable RS1024
-            var groupedFields = fieldSymbols.GroupBy(f => f.ContainingType);
-            #pragma warning restore RS1024
+                // TODO: https://github.com/dotnet/roslyn/issues/49385
+                #pragma warning disable RS1024
+                var groupedFields = fieldSymbols.GroupBy(f => f.ContainingType);
+                #pragma warning restore RS1024
 
-            foreach (var group in groupedFields)
-            {
-                var classSource = ProcessClass(group.Key, group.ToList(), notifySymbol, configuration);
-                if (classSource is null)
+                foreach (var group in groupedFields)
                 {
-                    continue;
+                    var classSymbol = group.Key;
+                    // Only support top-level types; report otherwise
+                    if (!classSymbol.ContainingSymbol.Equals(classSymbol.ContainingNamespace, SymbolEqualityComparer.Default))
+                    {
+                        var location = classSymbol.Locations.FirstOrDefault() ?? Location.None;
+                        spc.ReportDiagnostic(Diagnostic.Create(NestedTypeNotSupportedDescriptor, location, classSymbol.ToDisplayString()));
+                        continue;
+                    }
+
+                    // Ensure the type is partial
+                    try
+                    {
+                        var isPartial = false;
+                        foreach (var decl in classSymbol.DeclaringSyntaxReferences)
+                        {
+                            if (decl.GetSyntax() is TypeDeclarationSyntax tds)
+                            {
+                                if (tds.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
+                                {
+                                    isPartial = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!isPartial)
+                        {
+                            var location = classSymbol.Locations.FirstOrDefault() ?? Location.None;
+                            spc.ReportDiagnostic(Diagnostic.Create(TypeMustBePartialDescriptor, location, classSymbol.ToDisplayString()));
+                            continue;
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        var location = classSymbol.Locations.FirstOrDefault() ?? Location.None;
+                        spc.ReportDiagnostic(Diagnostic.Create(UnexpectedExceptionDescriptor, location, ex.Message));
+                        continue;
+                    }
+
+                    string? classSource = null;
+                    try
+                    {
+                        classSource = ProcessClass(
+                            classSymbol,
+                            group.ToList(),
+                            notifySymbol,
+                            configuration,
+                            diag => spc.ReportDiagnostic(diag));
+                    }
+                    catch (System.Exception ex)
+                    {
+                        var location = classSymbol.Locations.FirstOrDefault() ?? Location.None;
+                        spc.ReportDiagnostic(Diagnostic.Create(UnexpectedExceptionDescriptor, location, ex.Message));
+                        continue;
+                    }
+
+                    if (classSource is null)
+                    {
+                        continue;
+                    }
+
+                    spc.AddSource($"{classSymbol.Name}_AutoNotify.cs", SourceText.From(classSource, Encoding.UTF8));
                 }
-                spc.AddSource($"{group.Key.Name}_AutoNotify.cs", SourceText.From(classSource, Encoding.UTF8));
+            }
+            catch (System.Exception ex)
+            {
+                spc.ReportDiagnostic(Diagnostic.Create(UnexpectedExceptionDescriptor, Location.None, ex.Message));
             }
         });
     }
 
-    private static string? ProcessClass(INamedTypeSymbol classSymbol, List<IFieldSymbol> fields, INamedTypeSymbol notifySymbol, GeneratorConfiguration configuration)
+    private static string? ProcessClass(
+        INamedTypeSymbol classSymbol,
+        List<IFieldSymbol> fields,
+        INamedTypeSymbol notifySymbol,
+        GeneratorConfiguration configuration,
+        System.Action<Diagnostic> reportDiagnostic)
     {
-        if (!classSymbol.ContainingSymbol.Equals(classSymbol.ContainingNamespace, SymbolEqualityComparer.Default))
-        {
-            return null;
-        }
-
         var namespaceName = classSymbol.ContainingNamespace.ToDisplayString();
 
         var addNotifyInterface = !classSymbol.Interfaces.Contains(notifySymbol);
@@ -175,7 +284,7 @@ public class AutoNotifyGenerator : IIncrementalGenerator
 
         foreach (var fieldSymbol in fields)
         {
-            ProcessField(source, fieldSymbol);
+            ProcessField(source, fieldSymbol, reportDiagnostic);
         }
 
         source.Append("\n    }\n}\n");
@@ -183,7 +292,7 @@ public class AutoNotifyGenerator : IIncrementalGenerator
         return source.ToString();
     }
 
-    private static void ProcessField(StringBuilder source, IFieldSymbol fieldSymbol)
+    private static void ProcessField(StringBuilder source, IFieldSymbol fieldSymbol, System.Action<Diagnostic> reportDiagnostic)
     {
         var fieldName = fieldSymbol.Name;
         var fieldType = fieldSymbol.Type;
@@ -193,7 +302,9 @@ public class AutoNotifyGenerator : IIncrementalGenerator
 
         if (propertyName is null || propertyName.Length == 0 || propertyName == fieldName)
         {
-            // Issue a diagnostic that we can't process this field.
+            // Report a diagnostic that we can't process this field.
+            var location = fieldSymbol.Locations.FirstOrDefault() ?? Location.None;
+            reportDiagnostic(Diagnostic.Create(InvalidPropertyNameDescriptor, location, fieldName));
             return;
         }
 
