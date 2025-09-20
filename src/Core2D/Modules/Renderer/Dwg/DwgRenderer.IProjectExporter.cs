@@ -48,12 +48,11 @@ internal class DwgExportPresenter : IContainerPresenter
 
         foreach (var layer in container.Layers)
         {
-            var acadLayer = new Layer(layer.Name)
-            {
-                IsOn = layer.IsVisible
-            };
-
-            doc.Layers.Add(acadLayer);
+            // Reuse existing layer if already present to avoid duplicate key exceptions
+            var candidate = new Layer(layer.Name) { IsOn = layer.IsVisible };
+            var acadLayer = doc.Layers.TryAdd(candidate);
+            // Ensure visibility reflects the current container's layer setting
+            acadLayer.IsOn = layer.IsVisible;
 
             if (renderer is DwgRenderer dwgRenderer)
             {
