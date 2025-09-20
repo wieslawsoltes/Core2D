@@ -1,0 +1,3 @@
+[submodule "external/ACadSharp"]
+	path = external/ACadSharp
+	url = https://github.com/wieslawsoltes/ACadSharp.git
