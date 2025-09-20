@@ -411,42 +411,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         doc.Entities.Add(hatch);
     }
 
-    private LwPolyline CreatePolyline(IEnumerable<(double x, double y)> points, bool isClosed)
-    {
-        var pl = new LwPolyline
-        {
-            IsClosed = isClosed
-        };
-        foreach (var (x, y) in points)
-        {
-            pl.Vertices.Add(new LwPolyline.Vertex(new CSMath.XY(ToDwgX(x), ToDwgY(y))));
-        }
-        return pl;
-    }
-
-    private IEnumerable<(double x, double y)> SampleQuadratic(double x0, double y0, double x1, double y1, double x2, double y2, int steps = 24)
-    {
-        for (int i = 1; i <= steps; i++)
-        {
-            double t = i / (double)steps;
-            double mt = 1 - t;
-            double x = mt * mt * x0 + 2 * mt * t * x1 + t * t * x2;
-            double y = mt * mt * y0 + 2 * mt * t * y1 + t * t * y2;
-            yield return (x, y);
-        }
-    }
-
-    private IEnumerable<(double x, double y)> SampleCubic(double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3, int steps = 24)
-    {
-        for (int i = 1; i <= steps; i++)
-        {
-            double t = i / (double)steps;
-            double mt = 1 - t;
-            double x = mt * mt * mt * x0 + 3 * mt * mt * t * x1 + 3 * mt * t * t * x2 + t * t * t * x3;
-            double y = mt * mt * mt * y0 + 3 * mt * mt * t * y1 + 3 * mt * t * t * y2 + t * t * t * y3;
-            yield return (x, y);
-        }
-    }
+    
 
     private Hatch.BoundaryPath.Spline CreateHatchSplineCubic(double p1x, double p1y, double c1x, double c1y, double c2x, double c2y, double p4x, double p4y)
     {
@@ -898,17 +863,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        var pts = new List<(double x, double y)>();
-        pts.Add((cubicBezier.Point1.X, cubicBezier.Point1.Y));
-        pts.AddRange(SampleCubic(
-            cubicBezier.Point1.X,
-            cubicBezier.Point1.Y,
-            cubicBezier.Point2.X,
-            cubicBezier.Point2.Y,
-            cubicBezier.Point3.X,
-            cubicBezier.Point3.Y,
-            cubicBezier.Point4.X,
-            cubicBezier.Point4.Y));
+        
 
         if (cubicBezier.IsFilled && style.Fill?.Color is { })
         {
@@ -968,15 +923,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             return;
         }
 
-        var pts = new List<(double x, double y)>();
-        pts.Add((quadraticBezier.Point1.X, quadraticBezier.Point1.Y));
-        pts.AddRange(SampleQuadratic(
-            quadraticBezier.Point1.X,
-            quadraticBezier.Point1.Y,
-            quadraticBezier.Point2.X,
-            quadraticBezier.Point2.Y,
-            quadraticBezier.Point3.X,
-            quadraticBezier.Point3.Y));
+        
 
         if (quadraticBezier.IsFilled && style.Fill?.Color is { })
         {
