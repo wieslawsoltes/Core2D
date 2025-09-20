@@ -114,12 +114,33 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             {
                 var rx2 = 2.0 * arrowStyle.RadiusX;
                 var ry2 = 2.0 * arrowStyle.RadiusY;
-                var (x11, y11) = RotatePoint(x - rx2, y + ry2, x, y, angle);
-                var (x21, y21) = RotatePoint(x, y, x, y, angle);
-                var (x12, y12) = RotatePoint(x - rx2, y - ry2, x, y, angle);
-                var (x22, y22) = RotatePoint(x, y, x, y, angle);
-                DrawLineInternal(doc, layer, color, thickness, x11, y11, x21, y21);
-                DrawLineInternal(doc, layer, color, thickness, x12, y12, x22, y22);
+                var apex = (x, y);
+                var b1 = RotatePoint(x - rx2, y + ry2, x, y, angle);
+                var b2 = RotatePoint(x - rx2, y - ry2, x, y, angle);
+                if (hasFill && fillColor is { })
+                {
+                    var solid = new Solid
+                    {
+                        FirstCorner = new CSMath.XYZ(ToDwgX(apex.Item1), ToDwgY(apex.Item2), 0),
+                        SecondCorner = new CSMath.XYZ(ToDwgX(b1.x), ToDwgY(b1.y), 0),
+                        ThirdCorner = new CSMath.XYZ(ToDwgX(b2.x), ToDwgY(b2.y), 0),
+                        FourthCorner = new CSMath.XYZ(ToDwgX(b2.x), ToDwgY(b2.y), 0)
+                    };
+                    solid.Layer = layer;
+                    solid.Color = ToColor(color);
+                    solid.Transparency = new Transparency(ToTransparency(color));
+                    doc.Entities.Add(solid);
+                }
+                else
+                {
+                    // Outline V-tip only
+                    var (x11, y11) = b1;
+                    var (x21, y21) = apex;
+                    var (x12, y12) = b2;
+                    var (x22, y22) = apex;
+                    DrawLineInternal(doc, layer, color, thickness, x11, y11, x21, y21);
+                    DrawLineInternal(doc, layer, color, thickness, x12, y12, x22, y22);
+                }
                 break;
             }
             case Core2D.Model.Style.ArrowType.Rectangle:
@@ -310,6 +331,10 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             doc.LineTypes.Add(lt);
         }
         entity.LineType = lt;
+        if (style.Stroke?.DashScale > 0)
+        {
+            entity.LineTypeScale = style.Stroke.DashScale;
+        }
     }
 
     private void FillRectangle(CadDocument doc, Layer layer, double x, double y, double width, double height, BaseColorViewModel colorViewModel)
@@ -534,28 +559,40 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             x + width - grid.GridOffsetLeft + grid.GridOffsetRight,
             y + height - grid.GridOffsetTop + grid.GridOffsetBottom);
 
-        if (grid.IsGridEnabled)
+        if (grid.IsGridEnabled && grid.GridCellWidth > 0 && grid.GridCellHeight > 0)
         {
-            // vertical lines
-            if (grid.GridCellWidth > 0)
+            var pattern = new HatchPattern("GRID");
+            // Horizontal lines
+            pattern.Lines.Add(new HatchPattern.Line
             {
-                var xStart = rect.X;
-                var xEnd = rect.X + rect.Width;
-                for (double gx = xStart; gx <= xEnd; gx += grid.GridCellWidth)
-                {
-                    DrawLineInternal(doc, _currentLayer, grid.GridStrokeColor, grid.GridStrokeThickness, gx, rect.Y, gx, rect.Y + rect.Height);
-                }
-            }
-            // horizontal lines
-            if (grid.GridCellHeight > 0)
+                Angle = 0.0,
+                BasePoint = new CSMath.XY(0, 0),
+                Offset = new CSMath.XY(0, grid.GridCellHeight)
+            });
+            // Vertical lines (90 degrees)
+            pattern.Lines.Add(new HatchPattern.Line
             {
-                var yStart = rect.Y;
-                var yEnd = rect.Y + rect.Height;
-                for (double gy = yStart; gy <= yEnd; gy += grid.GridCellHeight)
-                {
-                    DrawLineInternal(doc, _currentLayer, grid.GridStrokeColor, grid.GridStrokeThickness, rect.X, gy, rect.X + rect.Width, gy);
-                }
-            }
+                Angle = Math.PI / 2.0,
+                BasePoint = new CSMath.XY(0, 0),
+                Offset = new CSMath.XY(grid.GridCellWidth, 0)
+            });
+
+            var hatch = new Hatch
+            {
+                Pattern = pattern,
+                PatternType = HatchPatternType.PatternFill
+            };
+
+            var bp = new Hatch.BoundaryPath();
+            bp.Edges.Add(new Hatch.BoundaryPath.Line { Start = new CSMath.XY(ToDwgX(rect.X), ToDwgY(rect.Y)), End = new CSMath.XY(ToDwgX(rect.X + rect.Width), ToDwgY(rect.Y)) });
+            bp.Edges.Add(new Hatch.BoundaryPath.Line { Start = new CSMath.XY(ToDwgX(rect.X + rect.Width), ToDwgY(rect.Y)), End = new CSMath.XY(ToDwgX(rect.X + rect.Width), ToDwgY(rect.Y + rect.Height)) });
+            bp.Edges.Add(new Hatch.BoundaryPath.Line { Start = new CSMath.XY(ToDwgX(rect.X + rect.Width), ToDwgY(rect.Y + rect.Height)), End = new CSMath.XY(ToDwgX(rect.X), ToDwgY(rect.Y + rect.Height)) });
+            bp.Edges.Add(new Hatch.BoundaryPath.Line { Start = new CSMath.XY(ToDwgX(rect.X), ToDwgY(rect.Y + rect.Height)), End = new CSMath.XY(ToDwgX(rect.X), ToDwgY(rect.Y)) });
+            hatch.Paths.Add(bp);
+            hatch.Layer = _currentLayer;
+            hatch.Color = ToColor(grid.GridStrokeColor);
+            hatch.Transparency = new Transparency(ToTransparency(grid.GridStrokeColor));
+            doc.Entities.Add(hatch);
         }
 
         if (grid.IsBorderEnabled)
@@ -1090,6 +1127,17 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             Value = inlineValue
         };
 
+        bool useBg = getBooleanFlag(style.TextStyle, "UseTextBackground") || getBooleanFlag(style.TextStyle, "TextBackground");
+        if (useBg)
+        {
+            mtext.BackgroundFillFlags = BackgroundFillFlags.UseBackgroundFillColor;
+            if (style.Fill?.Color is { })
+            {
+                mtext.BackgroundColor = ToColor(style.Fill.Color);
+            }
+            mtext.BackgroundScale = 1.5;
+        }
+
         mtext.Layer = _currentLayer;
         mtext.Color = stroke;
         mtext.Transparency = new Transparency(strokeTransparency);
@@ -1201,6 +1249,8 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             var current = pf.StartPoint;
             var bp = new Hatch.BoundaryPath();
             var strokeSegs = new List<Entity>();
+            var lwVertices = new List<(double x, double y)> { (pf.StartPoint.X, pf.StartPoint.Y) };
+            bool onlyLines = true;
             foreach (var segment in pf.Segments)
             {
                 switch (segment)
@@ -1211,7 +1261,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                             Start = new CSMath.XY(ToDwgX(current.X), ToDwgY(current.Y)),
                             End = new CSMath.XY(ToDwgX(lineSegment.Point.X), ToDwgY(lineSegment.Point.Y))
                         });
-                        strokeSegs.Add(CreateLine(current.X, current.Y, lineSegment.Point.X, lineSegment.Point.Y));
+                        lwVertices.Add((lineSegment.Point.X, lineSegment.Point.Y));
                         current = lineSegment.Point;
                         break;
                     case CubicBezierSegmentViewModel cubic when cubic.Point1 is { } && cubic.Point2 is { } && cubic.Point3 is { }:
@@ -1225,6 +1275,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                             cubic.Point1.X, cubic.Point1.Y,
                             cubic.Point2.X, cubic.Point2.Y,
                             cubic.Point3.X, cubic.Point3.Y));
+                        onlyLines = false;
                         current = cubic.Point3;
                         break;
                     case QuadraticBezierSegmentViewModel quad when quad.Point1 is { } && quad.Point2 is { }:
@@ -1236,6 +1287,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                             current.X, current.Y,
                             quad.Point1.X, quad.Point1.Y,
                             quad.Point2.X, quad.Point2.Y));
+                        onlyLines = false;
                         current = quad.Point2;
                         break;
                     case ArcSegmentViewModel arcSeg when arcSeg.Point is { } && arcSeg.Size is { }:
@@ -1251,7 +1303,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                                 Start = new CSMath.XY(ToDwgX(x1), ToDwgY(y1)),
                                 End = new CSMath.XY(ToDwgX(x2), ToDwgY(y2))
                             });
-                            strokeSegs.Add(CreateLine(x1, y1, x2, y2));
+                            lwVertices.Add((x2, y2));
                             current = arcSeg.Point;
                             break;
                         }
@@ -1288,27 +1340,58 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                         if (arcSeg.SweepDirection == Core2D.Model.Path.SweepDirection.Clockwise && dtheta > 0) dtheta -= 2 * Math.PI;
                         if (arcSeg.SweepDirection == Core2D.Model.Path.SweepDirection.Counterclockwise && dtheta < 0) dtheta += 2 * Math.PI;
 
-                        var edgeArc = new Hatch.BoundaryPath.Ellipse
+                        if (Math.Abs(rx - ry) < 1e-6)
                         {
-                            Center = new CSMath.XY(ToDwgX(cx), ToDwgY(cy)),
-                            MajorAxisEndPoint = new CSMath.XY(rx * Math.Cos(phi), -rx * Math.Sin(phi)),
-                            MinorToMajorRatio = rx != 0 ? (ry / rx) : 1.0,
-                            StartAngle = theta1,
-                            EndAngle = theta1 + dtheta,
-                            IsCounterclockwise = arcSeg.SweepDirection == Core2D.Model.Path.SweepDirection.Counterclockwise,
-                            CounterClockWise = arcSeg.SweepDirection == Core2D.Model.Path.SweepDirection.Counterclockwise
-                        };
-                        bp.Edges.Add(edgeArc);
+                            var edgeArcCirc = new Hatch.BoundaryPath.Arc
+                            {
+                                Center = new CSMath.XY(ToDwgX(cx), ToDwgY(cy)),
+                                Radius = rx,
+                                StartAngle = theta1,
+                                EndAngle = theta1 + dtheta,
+                                CounterClockWise = arcSeg.SweepDirection == Core2D.Model.Path.SweepDirection.Counterclockwise
+                            };
+                            bp.Edges.Add(edgeArcCirc);
+                        }
+                        else
+                        {
+                            var edgeArc = new Hatch.BoundaryPath.Ellipse
+                            {
+                                Center = new CSMath.XY(ToDwgX(cx), ToDwgY(cy)),
+                                MajorAxisEndPoint = new CSMath.XY(rx * Math.Cos(phi), -rx * Math.Sin(phi)),
+                                MinorToMajorRatio = rx != 0 ? (ry / rx) : 1.0,
+                                StartAngle = theta1,
+                                EndAngle = theta1 + dtheta,
+                                IsCounterclockwise = arcSeg.SweepDirection == Core2D.Model.Path.SweepDirection.Counterclockwise,
+                                CounterClockWise = arcSeg.SweepDirection == Core2D.Model.Path.SweepDirection.Counterclockwise
+                            };
+                            bp.Edges.Add(edgeArc);
+                        }
 
-                        var elSeg = new Ellipse
+                        if (Math.Abs(rx - ry) < 1e-6)
                         {
-                            Center = new CSMath.XYZ(ToDwgX(cx), ToDwgY(cy), 0),
-                            MajorAxisEndPoint = new CSMath.XYZ(rx * Math.Cos(phi), -rx * Math.Sin(phi), 0),
-                            RadiusRatio = rx != 0 ? (ry / rx) : 1.0,
-                            StartParameter = theta1,
-                            EndParameter = theta1 + dtheta
-                        };
-                        strokeSegs.Add(elSeg);
+                            // circular arc
+                            var arcEnt = new Arc
+                            {
+                                Center = new CSMath.XYZ(ToDwgX(cx), ToDwgY(cy), 0),
+                                Radius = rx,
+                                StartAngle = theta1 + 0.0,
+                                EndAngle = theta1 + dtheta
+                            };
+                            strokeSegs.Add(arcEnt);
+                        }
+                        else
+                        {
+                            var elSeg = new Ellipse
+                            {
+                                Center = new CSMath.XYZ(ToDwgX(cx), ToDwgY(cy), 0),
+                                MajorAxisEndPoint = new CSMath.XYZ(rx * Math.Cos(phi), -rx * Math.Sin(phi), 0),
+                                RadiusRatio = rx != 0 ? (ry / rx) : 1.0,
+                                StartParameter = theta1,
+                                EndParameter = theta1 + dtheta
+                            };
+                            strokeSegs.Add(elSeg);
+                        }
+                        onlyLines = false;
                         current = arcSeg.Point;
                         break;
                     default:
@@ -1326,14 +1409,50 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                         Start = new CSMath.XY(ToDwgX(current.X), ToDwgY(current.Y)),
                         End = new CSMath.XY(ToDwgX(sx), ToDwgY(sy))
                     });
-                    strokeSegs.Add(CreateLine(current.X, current.Y, sx, sy));
+                    lwVertices.Add((sx, sy));
                 }
             }
-            if (bp.Edges.Count > 0)
+            if (onlyLines && lwVertices.Count >= 2)
             {
-                allBounds.Add(bp);
+                var polyBp = new Hatch.BoundaryPath();
+                var polyEdge = new Hatch.BoundaryPath.Polyline { IsClosed = pf.IsClosed };
+                foreach (var v in lwVertices)
+                {
+                    polyEdge.Vertices.Add(new CSMath.XYZ(ToDwgX(v.x), ToDwgY(v.y), 0));
+                }
+                polyBp.Edges.Add(polyEdge);
+                allBounds.Add(polyBp);
             }
-            allEntities.AddRange(strokeSegs);
+            else
+            {
+                if (bp.Edges.Count > 0)
+                {
+                    allBounds.Add(bp);
+                }
+            }
+            if (onlyLines && pf.IsClosed && lwVertices.Count >= 3)
+            {
+                var lw = new LwPolyline { IsClosed = true };
+                foreach (var v in lwVertices)
+                {
+                    lw.Vertices.Add(new LwPolyline.Vertex(new CSMath.XY(ToDwgX(v.x), ToDwgY(v.y))));
+                }
+                allEntities.Add(lw);
+            }
+            else
+            {
+                // fallback to explicit segments
+                if (onlyLines)
+                {
+                    for (int i = 1; i < lwVertices.Count; i++)
+                    {
+                        var a = lwVertices[i - 1];
+                        var b = lwVertices[i];
+                        allEntities.Add(CreateLine(a.x, a.y, b.x, b.y));
+                    }
+                }
+                allEntities.AddRange(strokeSegs);
+            }
         }
 
         if (path.IsFilled && style.Fill?.Color is { } && allBounds.Count > 0)
@@ -1348,6 +1467,15 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             hatch.Layer = _currentLayer;
             hatch.Color = fill;
             hatch.Transparency = new Transparency(fillTransparency);
+            // Map FillRule to Hatch.Style (EvenOdd -> Normal; NonZero -> Ignore)
+            if (path.FillRule == Core2D.Model.Path.FillRule.Nonzero)
+            {
+                hatch.Style = HatchStyleType.Ignore;
+            }
+            else
+            {
+                hatch.Style = HatchStyleType.Normal;
+            }
             doc.Entities.Add(hatch);
         }
 
@@ -1363,6 +1491,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                 e.Color = stroke;
                 e.Transparency = new Transparency(strokeTransparency);
                 e.LineWeight = lineweight;
+                ApplyLineType(doc, e, style);
                 doc.Entities.Add(e);
             }
         }
