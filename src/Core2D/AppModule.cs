@@ -135,6 +135,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<DrawingGroupXamlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+        builder.RegisterType<DxfACadSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<DwgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<PngSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
