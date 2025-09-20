@@ -756,9 +756,9 @@ public class ViewModelFactory : IViewModelFactory
         return imageShape;
     }
 
-    public GroupShapeViewModel CreateGroupShape(string name = "g")
+    public BlockShapeViewModel CreateBlockShape(string name = "g")
     {
-        return new GroupShapeViewModel(_serviceProvider)
+        return new BlockShapeViewModel(_serviceProvider)
         {
             Name = name,
             State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,

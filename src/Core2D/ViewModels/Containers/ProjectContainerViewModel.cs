@@ -61,10 +61,10 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
         AddGroupLibrary = new RelayCommand(OnAddGroupLibrary);
         RemoveGroupLibrary = new RelayCommand<LibraryViewModel?>(OnRemoveGroupLibrary);
         AddGroup = new RelayCommand(OnAddGroup);
-        RemoveGroup = new RelayCommand<GroupShapeViewModel?>(OnRemoveGroup);
-        EditGroup = new RelayCommand<GroupShapeViewModel?>(OnEditGroup);
-        InsertGroup = new RelayCommand<GroupShapeViewModel?>(OnInsertGroup);
-        ExportGroup = new RelayCommand<GroupShapeViewModel?>(OnExportGroup);
+        RemoveGroup = new RelayCommand<BlockShapeViewModel?>(OnRemoveGroup);
+        EditGroup = new RelayCommand<BlockShapeViewModel?>(OnEditGroup);
+        InsertGroup = new RelayCommand<BlockShapeViewModel?>(OnInsertGroup);
+        ExportGroup = new RelayCommand<BlockShapeViewModel?>(OnExportGroup);
 
         AddShape = new RelayCommand<BaseShapeViewModel?>(OnAddShape);
         RemoveShape = new RelayCommand<BaseShapeViewModel?>(OnRemoveShape);

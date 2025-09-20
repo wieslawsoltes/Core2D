@@ -25,10 +25,10 @@ public partial class ProjectEditorViewModel
     private readonly Dictionary<PageViewModel, PageContainerViewModel> _documentToPage = new();
     private readonly Dictionary<TemplateContainerViewModel, TemplateViewModel> _templateDocuments = new();
     private readonly Dictionary<TemplateViewModel, TemplateContainerViewModel> _documentToTemplate = new();
-    private readonly Dictionary<GroupShapeViewModel, GroupDocumentViewModel> _groupDocuments = new();
-    private readonly Dictionary<GroupDocumentViewModel, GroupShapeViewModel> _documentToGroup = new();
-    private readonly Dictionary<PageContainerViewModel, GroupDocumentViewModel> _containerToGroupDocument = new();
-    private readonly Dictionary<GroupDocumentViewModel, GroupDocumentTracker> _groupDocumentTrackers = new();
+    private readonly Dictionary<BlockShapeViewModel, BlockDocumentViewModel> _groupDocuments = new();
+    private readonly Dictionary<BlockDocumentViewModel, BlockShapeViewModel> _documentToGroup = new();
+    private readonly Dictionary<PageContainerViewModel, BlockDocumentViewModel> _containerToGroupDocument = new();
+    private readonly Dictionary<BlockDocumentViewModel, GroupDocumentTracker> _groupDocumentTrackers = new();
     private IDocumentDock? _pagesDock;
     private bool _suppressPageActivation;
     private int _suppressDocumentDockCreate;
@@ -110,7 +110,7 @@ public partial class ProjectEditorViewModel
             {
                 SyncProjectSelection(template);
             }
-            else if (dock.ActiveDockable is GroupDocumentViewModel groupDocument &&
+            else if (dock.ActiveDockable is BlockDocumentViewModel groupDocument &&
                      _documentToGroup.TryGetValue(groupDocument, out var group))
             {
                 if (groupDocument.Container is { } container)
@@ -262,7 +262,7 @@ public partial class ProjectEditorViewModel
         template.InvalidateLayer();
     }
 
-    public void OpenGroup(GroupShapeViewModel? group)
+    public void OpenGroup(BlockShapeViewModel? group)
     {
         if (group is null)
         {
@@ -378,7 +378,7 @@ public partial class ProjectEditorViewModel
         return document;
     }
 
-    private GroupDocumentViewModel? EnsureGroupDocument(GroupShapeViewModel group, FactoryBase factory)
+    private BlockDocumentViewModel? EnsureGroupDocument(BlockShapeViewModel group, FactoryBase factory)
     {
         if (_groupDocuments.TryGetValue(group, out var existing))
         {
@@ -421,9 +421,9 @@ public partial class ProjectEditorViewModel
         baseLayer.Shapes = shapesBuilder.ToImmutable();
         container.CurrentLayer = baseLayer;
 
-        var document = new GroupDocumentViewModel
+        var document = new BlockDocumentViewModel
         {
-            Id = $"Group::{Guid.NewGuid():N}",
+            Id = $"Block::{Guid.NewGuid():N}",
             Title = group.Name,
             Context = this,
             Group = group,
@@ -471,7 +471,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    private void UpdateGroupDocument(GroupDocumentViewModel document, GroupShapeViewModel group)
+    private void UpdateGroupDocument(BlockDocumentViewModel document, BlockShapeViewModel group)
     {
         if (!ReferenceEquals(document.Group, group))
         {
@@ -523,7 +523,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    private void DetachGroupDocument(GroupDocumentViewModel document, bool collapse)
+    private void DetachGroupDocument(BlockDocumentViewModel document, bool collapse)
     {
         if (_documentToGroup.TryGetValue(document, out var group))
         {
@@ -567,7 +567,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    private void AttachGroupDocument(GroupDocumentViewModel document)
+    private void AttachGroupDocument(BlockDocumentViewModel document)
     {
         if (!_documentToGroup.ContainsKey(document))
         {
@@ -598,7 +598,7 @@ public partial class ProjectEditorViewModel
         SyncGroupDocument(document);
     }
 
-    private void SubscribeGroupLayers(GroupDocumentViewModel document, GroupDocumentTracker tracker)
+    private void SubscribeGroupLayers(BlockDocumentViewModel document, GroupDocumentTracker tracker)
     {
         foreach (var subscription in tracker.LayerSubscriptions)
         {
@@ -621,7 +621,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    private void DetachGroupDocumentSubscriptions(GroupDocumentViewModel document)
+    private void DetachGroupDocumentSubscriptions(BlockDocumentViewModel document)
     {
         if (_groupDocumentTrackers.TryGetValue(document, out var tracker))
         {
@@ -630,7 +630,7 @@ public partial class ProjectEditorViewModel
         }
     }
 
-    private void SyncGroupDocument(GroupDocumentViewModel document)
+    private void SyncGroupDocument(BlockDocumentViewModel document)
     {
         if (!_documentToGroup.TryGetValue(document, out var group))
         {
@@ -750,7 +750,7 @@ public partial class ProjectEditorViewModel
         }
 
         var groups = Project.GroupLibraries
-            .SelectMany(l => l.Items.OfType<GroupShapeViewModel>())
+            .SelectMany(l => l.Items.OfType<BlockShapeViewModel>())
             .ToHashSet();
 
         foreach (var pair in _groupDocuments.ToArray())
@@ -869,7 +869,7 @@ public partial class ProjectEditorViewModel
             }
         }
 
-        var visibleGroups = visibleDockables.OfType<GroupDocumentViewModel>().ToHashSet();
+        var visibleGroups = visibleDockables.OfType<BlockDocumentViewModel>().ToHashSet();
 
         foreach (var document in _documentToGroup.Keys.ToArray())
         {
@@ -912,7 +912,7 @@ public partial class ProjectEditorViewModel
             DetachTemplateDocument(document, collapse: true);
         }
 
-        foreach (var document in visibleDockables.OfType<GroupDocumentViewModel>().ToArray())
+        foreach (var document in visibleDockables.OfType<BlockDocumentViewModel>().ToArray())
         {
             if (_documentToGroup.ContainsKey(document))
             {
@@ -958,7 +958,7 @@ public partial class ProjectEditorViewModel
                         case TemplateContainerViewModel selectedTemplate:
                             OpenTemplate(selectedTemplate);
                             break;
-                        case GroupShapeViewModel selectedGroup:
+                        case BlockShapeViewModel selectedGroup:
                             OpenGroup(selectedGroup);
                             break;
                     }
@@ -991,7 +991,7 @@ public partial class ProjectEditorViewModel
                 break;
 
             case LibraryViewModel library when e.PropertyName == nameof(LibraryViewModel.Selected):
-                if (library.Selected is GroupShapeViewModel librarySelectedGroup)
+                if (library.Selected is BlockShapeViewModel librarySelectedGroup)
                 {
                     OpenGroup(librarySelectedGroup);
                 }

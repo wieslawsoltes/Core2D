@@ -603,7 +603,7 @@ public class SkiaSharpSvgConverter : ISvgConverter
 
         ToShape(picture, shapes, factory);
 
-        var group = factory.CreateGroupShape("svg");
+        var group = factory.CreateBlockShape("svg");
 
         group.Shapes = group.Shapes.AddRange(shapes);
 

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.Views.Shapes.GroupShapeView"
+﻿<UserControl x:Class="Core2D.Views.Shapes.BlockShapeView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -12,9 +12,9 @@
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.Group}"
              d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:GroupShapeViewModel" x:CompileBindings="True">
+             x:DataType="vms:BlockShapeViewModel" x:CompileBindings="True">
   <TabControl>
-    <TabItem Header="Group">
+    <TabItem Header="Block">
       <StackPanel Margin="{DynamicResource ContentMargin}">
         <Label Content="Name" 
                Margin="{DynamicResource TextControlThemePadding}" />

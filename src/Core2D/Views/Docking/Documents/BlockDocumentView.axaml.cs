@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the GNU Affero General Public License v3.0. See LICENSE.TXT file in the project root for details.
 
+#nullable enable
 using Avalonia.Controls;
 
-namespace Core2D.Views.Docking.Tools.Libraries;
+namespace Core2D.Views.Docking.Documents;
 
-public partial class GroupLibraryView : UserControl
+public partial class BlockDocumentView : UserControl
 {
-    public GroupLibraryView()
+    public BlockDocumentView()
     {
         InitializeComponent();
     }

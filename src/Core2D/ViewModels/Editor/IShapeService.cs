@@ -12,7 +12,7 @@ public interface IShapeService
 {
     void OnDuplicateSelected();
     void OnGroupSelected();
-    void OnUngroupSelected();
+    void OnExplodeSelected();
     void OnRotateSelected(object param);
     void OnFlipHorizontalSelected();
     void OnFlipVerticalSelected();
@@ -41,8 +41,8 @@ public interface IShapeService
     void OnPathSimplify();
     void OnPathBreak();
     void OnPathOp(object param);
-    GroupShapeViewModel? Group(ISet<BaseShapeViewModel>? shapes, string name);
-    bool Ungroup(ISet<BaseShapeViewModel>? shapes);
+    BlockShapeViewModel? Group(ISet<BaseShapeViewModel>? shapes, string name);
+    bool Explode(ISet<BaseShapeViewModel>? shapes);
     void BringToFront(BaseShapeViewModel source);
     void BringForward(BaseShapeViewModel source);
     void SendBackward(BaseShapeViewModel source);

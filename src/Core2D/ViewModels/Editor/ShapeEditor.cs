@@ -194,13 +194,13 @@ public class ShapeEditor : IShapeEditor
             }
                 break;
 
-            case GroupShapeViewModel groupShape:
+            case BlockShapeViewModel groupShape:
             {
                 if (groupShape.Shapes.Length > 0)
                 {
                     var groupShapes = new List<BaseShapeViewModel>();
 
-                    GroupShapeExtensions.Ungroup(groupShape.Shapes, groupShapes);
+                    BlockShapeExtensions.Explode(groupShape.Shapes, groupShapes);
 
                     foreach (var brokenGroupShape in groupShapes)
                     {

@@ -24,9 +24,9 @@ public class ProjectEditorConfiguration
 
     public static string DefaultValue = "<empty>";
 
-    public static string DefaultGroupLibraryName = "Groups";
+    public static string DefaultGroupLibraryName = "Blocks";
 
-    public static string DefaultGroupName = "Group";
+    public static string DefaultGroupName = "Block";
 
     public static string DefaultStyleLibraryName = "Styles";
 

@@ -13,13 +13,13 @@ using Core2D.Views.Renderer;
 
 namespace Core2D.Controls;
 
-public class GroupTileView : Control
+public class BlockTileView : Control
 {
-    public static readonly StyledProperty<GroupShapeViewModel?> GroupProperty =
-        AvaloniaProperty.Register<GroupTileView, GroupShapeViewModel?>(nameof(Group));
+    public static readonly StyledProperty<BlockShapeViewModel?> BlockProperty =
+        AvaloniaProperty.Register<BlockTileView, BlockShapeViewModel?>(nameof(Block));
 
     public static readonly StyledProperty<IShapeRenderer?> RendererProperty =
-        AvaloniaProperty.Register<GroupTileView, IShapeRenderer?>(nameof(Renderer));
+        AvaloniaProperty.Register<BlockTileView, IShapeRenderer?>(nameof(Renderer));
 
     private const double PreviewPadding = 4.0;
 
@@ -27,21 +27,21 @@ public class GroupTileView : Control
     private readonly IObserver<(object? sender, System.ComponentModel.PropertyChangedEventArgs e)> _groupObserver;
     private readonly List<PointShapeViewModel> _points = new();
 
-    static GroupTileView()
+    static BlockTileView()
     {
-        AffectsRender<GroupTileView>(GroupProperty, RendererProperty, BoundsProperty);
+        AffectsRender<BlockTileView>(BlockProperty, RendererProperty, BoundsProperty);
     }
 
-    public GroupTileView()
+    public BlockTileView()
     {
         _groupObserver = new InvalidateObserver(this);
-        this.GetObservable(GroupProperty).Subscribe(OnGroupChanged);
+        this.GetObservable(BlockProperty).Subscribe(OnBlockChanged);
     }
 
-    public GroupShapeViewModel? Group
+    public BlockShapeViewModel? Block
     {
-        get => GetValue(GroupProperty);
-        set => SetValue(GroupProperty, value);
+        get => GetValue(BlockProperty);
+        set => SetValue(BlockProperty, value);
     }
 
     public IShapeRenderer? Renderer
@@ -50,10 +50,10 @@ public class GroupTileView : Control
         set => SetValue(RendererProperty, value);
     }
 
-    private void OnGroupChanged(GroupShapeViewModel? group)
+    private void OnBlockChanged(BlockShapeViewModel? block)
     {
         _groupSubscription?.Dispose();
-        _groupSubscription = group?.Subscribe(_groupObserver);
+        _groupSubscription = block?.Subscribe(_groupObserver);
         InvalidateVisual();
     }
 
@@ -68,8 +68,8 @@ public class GroupTileView : Control
     {
         base.Render(context);
 
-        var group = Group;
-        if (group is null)
+        var block = Block;
+        if (block is null)
         {
             return;
         }
@@ -86,7 +86,7 @@ public class GroupTileView : Control
         }
 
         _points.Clear();
-        group.GetPoints(_points);
+        block.GetPoints(_points);
 
         if (_points.Count == 0)
         {
@@ -165,7 +165,7 @@ public class GroupTileView : Control
 
         try
         {
-            group.DrawShape(context, renderer, null);
+            block.DrawShape(context, renderer, null);
         }
         finally
         {
@@ -179,9 +179,9 @@ public class GroupTileView : Control
 
     private sealed class InvalidateObserver : IObserver<(object? sender, System.ComponentModel.PropertyChangedEventArgs e)>
     {
-        private readonly GroupTileView _owner;
+        private readonly BlockTileView _owner;
 
-        public InvalidateObserver(GroupTileView owner)
+        public InvalidateObserver(BlockTileView owner)
         {
             _owner = owner;
         }

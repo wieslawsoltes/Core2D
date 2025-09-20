@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.Views.Docking.Tools.Libraries.GroupLibraryView"
+﻿<UserControl x:Class="Core2D.Views.Docking.Tools.Libraries.BlockLibraryView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,13 +10,13 @@
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
-             x:DataType="vm:GroupLibraryViewModel" x:CompileBindings="True">
+             x:DataType="vm:BlockLibraryViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}"
          x:DataType="vme:ProjectEditorViewModel"
          renderer:RendererOptions.Renderer="{Binding LibraryRenderer}"
          renderer:RendererOptions.Selection="{Binding Project}"
          renderer:RendererOptions.DataFlow="{Binding DataFlow}">
-    <libraries:GroupsView DataContext="{Binding Project}"
+    <libraries:BlocksView DataContext="{Binding Project}"
                           d:DataContext="{x:Static vmd:DesignerContext.Project}" />
   </Panel>
 </UserControl>

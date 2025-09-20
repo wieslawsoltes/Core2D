@@ -3,11 +3,11 @@
 
 using Avalonia.Controls;
 
-namespace Core2D.Views.Shapes;
+namespace Core2D.Views.Libraries;
 
-public partial class GroupShapeView : UserControl
+public partial class BlocksView : UserControl
 {
-    public GroupShapeView()
+    public BlocksView()
     {
         InitializeComponent();
     }

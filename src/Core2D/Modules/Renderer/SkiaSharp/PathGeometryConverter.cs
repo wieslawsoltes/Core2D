@@ -318,7 +318,7 @@ public static class PathGeometryConverter
                     }
                     break;
                 }
-                case GroupShapeViewModel groupShape:
+                case BlockShapeViewModel groupShape:
                 {
                     var resultPath = ToSKPath(groupShape.Shapes);
                     if (resultPath is { })
@@ -352,7 +352,7 @@ public static class PathGeometryConverter
             QuadraticBezierShapeViewModel quadraticBezierShape => ToSKPath(quadraticBezierShape),
             TextShapeViewModel textShape => ToSKPath(textShape),
             PathShapeViewModel pathShape => ToSKPath(pathShape),
-            GroupShapeViewModel groupShape => ToSKPath(groupShape.Shapes),
+            BlockShapeViewModel groupShape => ToSKPath(groupShape.Shapes),
             _ => null,
         };
     }

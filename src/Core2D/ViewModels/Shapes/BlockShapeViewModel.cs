@@ -18,13 +18,13 @@ using Core2D.ViewModels.Editor;
 
 namespace Core2D.ViewModels.Shapes;
 
-public partial class GroupShapeViewModel : ConnectableShapeViewModel
+public partial class BlockShapeViewModel : ConnectableShapeViewModel
 {
     [AutoNotify] private ImmutableArray<BaseShapeViewModel> _shapes;
 
-    public GroupShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(GroupShapeViewModel))
+    public BlockShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(BlockShapeViewModel))
     {
-        EditGroup = new RelayCommand<GroupShapeViewModel?>(x => GetProject()?.OnEditGroup(x));
+        EditGroup = new RelayCommand<BlockShapeViewModel?>(x => GetProject()?.OnEditGroup(x));
 
         ProjectContainerViewModel? GetProject() => ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
     }
@@ -34,7 +34,7 @@ public partial class GroupShapeViewModel : ConnectableShapeViewModel
 
     public override object Copy(IDictionary<object, object>? shared)
     {
-        var copy = new GroupShapeViewModel(ServiceProvider)
+        var copy = new BlockShapeViewModel(ServiceProvider)
         {
             Name = Name,
             State = State,

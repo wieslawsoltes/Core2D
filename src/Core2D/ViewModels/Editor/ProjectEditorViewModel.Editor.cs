@@ -444,7 +444,7 @@ public partial class ProjectEditorViewModel
         {
             Project.AddItems(Project?.CurrentStyleLibrary, styleList);
         }
-        else if (item is GroupShapeViewModel group)
+        else if (item is BlockShapeViewModel group)
         {
             if (restore)
             {
@@ -458,7 +458,7 @@ public partial class ProjectEditorViewModel
         {
             Project?.AddShape(Project?.CurrentContainer?.CurrentLayer, model);
         }
-        else if (item is IList<GroupShapeViewModel> groups)
+        else if (item is IList<BlockShapeViewModel> groups)
         {
             if (restore)
             {
@@ -475,15 +475,15 @@ public partial class ProjectEditorViewModel
         {
             Project.AddStyleLibraries(sll);
         }
-        else if (item is LibraryViewModel gl && gl.Items.All(x => x is GroupShapeViewModel))
+        else if (item is LibraryViewModel gl && gl.Items.All(x => x is BlockShapeViewModel))
         {
-            TryToRestoreRecords(gl.Items.Cast<GroupShapeViewModel>());
+            TryToRestoreRecords(gl.Items.Cast<BlockShapeViewModel>());
             Project.AddGroupLibrary(gl);
         }
-        else if (item is IList<LibraryViewModel> gll && gll.All(x => x.Items.All(_ => _ is GroupShapeViewModel)))
+        else if (item is IList<LibraryViewModel> gll && gll.All(x => x.Items.All(_ => _ is BlockShapeViewModel)))
         {
             var shapes = gll.SelectMany(x => x.Items);
-            TryToRestoreRecords(shapes.Cast<GroupShapeViewModel>());
+            TryToRestoreRecords(shapes.Cast<BlockShapeViewModel>());
             Project.AddGroupLibraries(gll);
         }
         else if (item is DatabaseViewModel db)
@@ -1095,7 +1095,7 @@ public partial class ProjectEditorViewModel
 
                 if (Project.Options.TryToConnect)
                 {
-                    if (clone is GroupShapeViewModel group)
+                    if (clone is BlockShapeViewModel group)
                     {
                         var shapes = Project?.CurrentContainer?.CurrentLayer?.Shapes.GetAllShapes<LineShapeViewModel>().ToList();
                         if (shapes is not null)
@@ -1189,7 +1189,7 @@ public partial class ProjectEditorViewModel
         var layer = Project.CurrentContainer?.CurrentLayer;
         var sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
         var sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
-        var g = viewModelFactory?.CreateGroupShape(ProjectEditorConfiguration.DefaultGroupName);
+        var g = viewModelFactory?.CreateBlockShape(ProjectEditorConfiguration.DefaultGroupName);
         if (g is null)
         {
             return;

@@ -12,13 +12,13 @@ using Core2D.Spatial;
 
 namespace Core2D.ViewModels.Editor.Bounds.Shapes;
 
-public class GroupBounds : IBounds
+public class BlockBounds : IBounds
 {
-    public Type TargetType => typeof(GroupShapeViewModel);
+    public Type TargetType => typeof(BlockShapeViewModel);
 
     public PointShapeViewModel? TryToGetPoint(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
-        if (shape is not GroupShapeViewModel group)
+        if (shape is not BlockShapeViewModel group)
         {
             throw new ArgumentNullException(nameof(shape));
         }
@@ -38,7 +38,7 @@ public class GroupBounds : IBounds
 
     public bool Contains(BaseShapeViewModel shape, Point2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
-        if (shape is not GroupShapeViewModel group)
+        if (shape is not BlockShapeViewModel group)
         {
             throw new ArgumentNullException(nameof(shape));
         }
@@ -59,7 +59,7 @@ public class GroupBounds : IBounds
 
     public bool Overlaps(BaseShapeViewModel shape, Rect2 target, double radius, double scale, IDictionary<Type, IBounds> registered)
     {
-        if (shape is not GroupShapeViewModel group)
+        if (shape is not BlockShapeViewModel group)
         {
             throw new ArgumentNullException(nameof(shape));
         }

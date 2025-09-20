@@ -60,7 +60,7 @@ public class SvgSvgExporter : ISvgExporter
 
     private void ToGeometryDrawing(BaseShapeViewModel shape, StringBuilder sb, IPathConverter converter)
     {
-        if (shape is GroupShapeViewModel group)
+        if (shape is BlockShapeViewModel group)
         {
             foreach (var child in group.Shapes)
             {

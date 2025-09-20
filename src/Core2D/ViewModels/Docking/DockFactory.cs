@@ -53,10 +53,10 @@ public class DockFactory : Factory
             Title = "Styles"
         };
 
-        var groupLibraryViewModel = new GroupLibraryViewModel()
+        var groupLibraryViewModel = new BlockLibraryViewModel()
         {
-            Id = "GroupLibrary",
-            Title = "Groups"
+            Id = "BlockLibrary",
+            Title = "Blocks"
         };
 
         var databaseLibraryViewModel = new DatabaseLibraryViewModel()
@@ -370,7 +370,7 @@ public class DockFactory : Factory
             ["StateProperties"] = () => _projectEditor,
             // Libraries
             ["StyleLibrary"] = () => _projectEditor,
-            ["GroupLibrary"] = () => _projectEditor,
+            ["BlockLibrary"] = () => _projectEditor,
             ["DatabaseLibrary"] = () => _projectEditor,
             ["TemplateLibrary"] = () => _projectEditor,
             ["ScriptLibrary"] = () => _projectEditor,
