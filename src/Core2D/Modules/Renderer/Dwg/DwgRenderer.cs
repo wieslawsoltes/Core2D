@@ -28,6 +28,8 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
     private double _pageHeight;
     private string? _outputPath;
     internal Layer? _currentLayer;
+    // Target block to route entities (paper space layout) when exporting documents.
+    private BlockRecord? _targetBlock;
 
     [AutoNotify] private ShapeRendererStateViewModel? _state;
 
@@ -76,6 +78,18 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
     private double ToDwgX(double x) => x;
 
     private double ToDwgY(double y) => _pageHeight - y;
+
+    private void AddEntity(CadDocument doc, Entity entity)
+    {
+        if (_targetBlock is { })
+        {
+            _targetBlock.Entities.Add(entity);
+        }
+        else
+        {
+            doc.Entities.Add(entity);
+        }
+    }
 
     private Line CreateLine(double x1, double y1, double x2, double y2)
     {
@@ -129,7 +143,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                     solid.Layer = layer;
                     solid.Color = ToColor(color);
                     solid.Transparency = new Transparency(ToTransparency(color));
-                    doc.Entities.Add(solid);
+                    AddEntity(doc, solid);
                 }
                 else
                 {
@@ -174,7 +188,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                     hatch.Layer = layer;
                     hatch.Color = ToColor(fillColor);
                     hatch.Transparency = new Transparency(ToTransparency(fillColor));
-                    doc.Entities.Add(hatch);
+                    AddEntity(doc, hatch);
                 }
                 break;
             }
@@ -202,7 +216,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                 el.Color = ToColor(color);
                 el.Transparency = new Transparency(ToTransparency(color));
                 el.LineWeight = ToLineweight(thickness);
-                doc.Entities.Add(el);
+                AddEntity(doc, el);
                 if (hasFill && fillColor is { })
                 {
                     var bp = new Hatch.BoundaryPath();
@@ -222,7 +236,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                     hatch.Layer = layer;
                     hatch.Color = ToColor(fillColor);
                     hatch.Transparency = new Transparency(ToTransparency(fillColor));
-                    doc.Entities.Add(hatch);
+                    AddEntity(doc, hatch);
                 }
                 break;
             }
@@ -269,7 +283,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         ln.Transparency = new Transparency(strokeTransparency);
         ln.LineWeight = lineweight;
         ApplyLineType(doc, ln, style);
-        doc.Entities.Add(ln);
+        AddEntity(doc, ln);
     }
 
     private void DrawLineInternal(CadDocument doc, Layer layer, BaseColorViewModel colorViewModel, double thickness, double x1, double y1, double x2, double y2)
@@ -283,7 +297,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         ln.Color = stroke;
         ln.Transparency = new Transparency(strokeTransparency);
         ln.LineWeight = lineweight;
-        doc.Entities.Add(ln);
+        AddEntity(doc, ln);
     }
 
     private static IEnumerable<double> ParseDashArray(string? dashes)
@@ -312,21 +326,106 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         {
             return;
         }
-        var pattern = ParseDashArray(dashString).ToList();
-        if (pattern.Count == 0)
+
+        var raw = ParseDashArray(dashString).ToList();
+        if (raw.Count == 0)
         {
             return;
         }
-        var name = BuildLineTypeName(pattern, style.Stroke?.DashOffset ?? 0.0);
+
+        // Ensure even-length pattern by repeating if necessary
+        if (raw.Count % 2 != 0)
+        {
+            raw.AddRange(raw);
+        }
+
+        // Scale pattern by stroke thickness to match other renderers’ parity
+        var thickness = Math.Max(0.0, style.Stroke?.Thickness ?? 0.0);
+        var scaled = raw.Select(v => v * (thickness > 0 ? thickness : 1.0)).ToList();
+
+        if (scaled.All(v => v <= 0))
+        {
+            // Invalid pattern; bail out
+            return;
+        }
+
+        // Alternate sign per segment: +dash, -gap, +dash, -gap, ...
+        var signed = new List<double>(scaled.Count);
+        for (int i = 0; i < scaled.Count; i++)
+        {
+            var len = Math.Abs(scaled[i]);
+            if (len == 0)
+            {
+                signed.Add(0.0); // dot
+            }
+            else
+            {
+                signed.Add((i % 2 == 0) ? len : -len);
+            }
+        }
+
+        // Normalize dash offset to pattern length and rotate/trim the first segment accordingly
+        double cycle = signed.Sum(s => Math.Abs(s));
+        double dashOffset = style.Stroke?.DashOffset ?? 0.0;
+        // Use the same scale as pattern
+        double effectiveOffset = (thickness > 0 ? dashOffset * thickness : dashOffset);
+        if (cycle > 0 && effectiveOffset != 0)
+        {
+            double s = effectiveOffset % cycle;
+            if (s < 0) s += cycle; // keep positive
+
+            if (s > 0)
+            {
+                int i = 0;
+                var abs = signed.Select(Math.Abs).ToArray();
+                while (s > 0 && abs.Length > 0)
+                {
+                    double seg = abs[i];
+                    if (s >= seg)
+                    {
+                        s -= seg;
+                        i = (i + 1) % abs.Length;
+                        if (Math.Abs(s - 0) < 1e-9)
+                            break;
+                        // If we consumed a full cycle, break
+                        if (i == 0 && s > 0)
+                        {
+                            // Remaining offset beyond full cycles is already modded; exit
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        // Trim the first segment
+                        double trimmed = seg - s;
+                        s = 0;
+                        // Build rotated + trimmed list
+                        var rotated = new List<double>(signed.Count);
+                        double sign = Math.Sign(signed[i]);
+                        rotated.Add(sign * trimmed);
+                        for (int k = 1; k < signed.Count; k++)
+                        {
+                            int idx = (i + k) % signed.Count;
+                            rotated.Add(signed[idx]);
+                        }
+                        signed = rotated;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Build or reuse the linetype
+        var name = BuildLineTypeName(signed.Select(Math.Abs), effectiveOffset);
         if (!doc.LineTypes.TryGetValue(name, out var lt))
         {
             lt = new LineType(name)
             {
-                Description = $"Core2D pattern {dashString}"
+                Description = $"Core2D pattern {dashString} (th={thickness:0.###}, off={effectiveOffset:0.###})"
             };
-            foreach (var len in pattern)
+            foreach (var seg in signed)
             {
-                lt.AddSegment(new ACadSharp.Tables.LineType.Segment { Length = len });
+                lt.AddSegment(new ACadSharp.Tables.LineType.Segment { Length = seg });
             }
             doc.LineTypes.Add(lt);
         }
@@ -356,7 +455,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         hatch.Layer = layer;
         hatch.Color = fill;
         hatch.Transparency = new Transparency(fillTransparency);
-        doc.Entities.Add(hatch);
+        AddEntity(doc, hatch);
     }
 
     private void StrokeRectangle(CadDocument doc, Layer layer, ShapeStyleViewModel style, double x, double y, double width, double height)
@@ -408,7 +507,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         hatch.Layer = layer;
         hatch.Color = fill;
         hatch.Transparency = new Transparency(fillTransparency);
-        doc.Entities.Add(hatch);
+        AddEntity(doc, hatch);
     }
 
     
@@ -557,7 +656,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             hatch.Layer = _currentLayer;
             hatch.Color = ToColor(grid.GridStrokeColor);
             hatch.Transparency = new Transparency(ToTransparency(grid.GridStrokeColor));
-            doc.Entities.Add(hatch);
+            AddEntity(doc, hatch);
         }
 
         if (grid.IsBorderEnabled)
@@ -711,7 +810,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             e.Transparency = new Transparency(ToTransparency(style.Stroke.Color));
             e.LineWeight = ToLineweight(style.Stroke.Thickness);
             ApplyLineType(doc, e, style);
-            doc.Entities.Add(e);
+            AddEntity(doc, e);
         }
     }
 
@@ -801,7 +900,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             hatch.Layer = _currentLayer;
             hatch.Color = fill;
             hatch.Transparency = new Transparency(fillTransparency);
-            doc.Entities.Add(hatch);
+            AddEntity(doc, hatch);
         }
 
         if (arc.IsStroked && style.Stroke?.Color is { })
@@ -836,7 +935,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             el.Transparency = new Transparency(ToTransparency(style.Stroke.Color));
             el.LineWeight = ToLineweight(style.Stroke.Thickness);
             ApplyLineType(doc, el, style);
-            doc.Entities.Add(el);
+            AddEntity(doc, el);
         }
     }
 
@@ -881,7 +980,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             hatch.Layer = _currentLayer;
             hatch.Color = fill;
             hatch.Transparency = new Transparency(fillTransparency);
-            doc.Entities.Add(hatch);
+            AddEntity(doc, hatch);
         }
 
         if (cubicBezier.IsStroked && style.Stroke?.Color is { })
@@ -896,7 +995,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             sp.Transparency = new Transparency(ToTransparency(style.Stroke.Color));
             sp.LineWeight = ToLineweight(style.Stroke.Thickness);
             ApplyLineType(doc, sp, style);
-            doc.Entities.Add(sp);
+            AddEntity(doc, sp);
         }
     }
 
@@ -940,7 +1039,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             hatch.Layer = _currentLayer;
             hatch.Color = fill;
             hatch.Transparency = new Transparency(fillTransparency);
-            doc.Entities.Add(hatch);
+            AddEntity(doc, hatch);
         }
 
         if (quadraticBezier.IsStroked && style.Stroke?.Color is { })
@@ -954,7 +1053,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             sp.Transparency = new Transparency(ToTransparency(style.Stroke.Color));
             sp.LineWeight = ToLineweight(style.Stroke.Thickness);
             ApplyLineType(doc, sp, style);
-            doc.Entities.Add(sp);
+            AddEntity(doc, sp);
         }
     }
 
@@ -1064,10 +1163,13 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         inlineValue = WrapIf(underline, "\\L", "\\l", inlineValue);
         inlineValue = WrapIf(overline, "\\O", "\\o", inlineValue);
 
+        // Convert CSS px font size to drawing units (mm) using 96 DPI
+        var mmPerPx = 25.4 / _sourceDpi;
+        var textHeight = style.TextStyle.FontSize * mmPerPx;
         var mtext = new MText
         {
             InsertPoint = new CSMath.XYZ(ToDwgX(x), ToDwgY(y), 0),
-            Height = style.TextStyle.FontSize * _targetDpi / _sourceDpi,
+            Height = textHeight,
             RectangleWidth = rect.Width,
             Style = ts,
             AttachmentPoint = attachmentPoint,
@@ -1088,7 +1190,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         mtext.Layer = _currentLayer;
         mtext.Color = stroke;
         mtext.Transparency = new Transparency(strokeTransparency);
-        doc.Entities.Add(mtext);
+        AddEntity(doc, mtext);
     }
 
     public void DrawImage(object? dc, ImageShapeViewModel image, ShapeStyleViewModel? style)
@@ -1132,7 +1234,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                 ShowImage = true
             };
             raster.Layer = _currentLayer;
-            doc.Entities.Add(raster);
+            AddEntity(doc, raster);
         }
         else
         {
@@ -1158,7 +1260,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                     ShowImage = true
                 };
                 raster.Layer = _currentLayer;
-                doc.Entities.Add(raster);
+                AddEntity(doc, raster);
             }
         }
     }
@@ -1423,7 +1525,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             {
                 hatch.Style = HatchStyleType.Normal;
             }
-            doc.Entities.Add(hatch);
+            AddEntity(doc, hatch);
         }
 
         if (path.IsStroked && style.Stroke?.Color is { })
@@ -1439,7 +1541,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
                 e.Transparency = new Transparency(strokeTransparency);
                 e.LineWeight = lineweight;
                 ApplyLineType(doc, e, style);
-                doc.Entities.Add(e);
+                AddEntity(doc, e);
             }
         }
     }
