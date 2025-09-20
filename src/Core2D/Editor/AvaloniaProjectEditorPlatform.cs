@@ -442,14 +442,16 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
             }
 
             var pickerItemFileTypes = GetPickerItemFileTypes(editor.FileWriters, true);
-            var defaultExtension = editor.FileWriters.FirstOrDefault()?.Extension;
 
             var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
             {
                 Title = "Export",
                 FileTypeChoices = pickerItemFileTypes,
                 SuggestedFileName = name,
-                DefaultExtension = defaultExtension,
+                // Do not force a default extension here; let the user's
+                // selected filter determine the extension to avoid mismatches
+                // (e.g., choosing DWG but getting .pdf).
+                DefaultExtension = null,
                 ShowOverwritePrompt = true
             });
 
