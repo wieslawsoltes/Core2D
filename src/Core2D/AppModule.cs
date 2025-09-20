@@ -13,6 +13,7 @@ using Core2D.Model.Renderer;
 using Core2D.Modules.FileSystem.DotNet;
 using Core2D.Modules.FileWriter.Dxf;
 using Core2D.Modules.FileWriter.Emf;
+using Core2D.Modules.FileWriter.Dwg;
 using Core2D.Modules.FileWriter.SkiaSharp;
 using Core2D.Modules.FileWriter.Svg;
 using Core2D.Modules.FileWriter.Xaml;
@@ -134,6 +135,8 @@ public class AppModule : Autofac.Module
         builder.RegisterType<DrawingGroupXamlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+        builder.RegisterType<DxfACadSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+        builder.RegisterType<DwgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<PngSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<SkpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();

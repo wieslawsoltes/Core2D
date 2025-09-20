@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <!-- Disable NuGet Central Package Management in ./external subtree -->
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>
+

@@ -21,6 +21,7 @@ public partial class StrokeStyleViewModel : ViewModelBase
     [AutoNotify] private LineCap _lineCap;
     [AutoNotify] private string? _dashes;
     [AutoNotify] private double _dashOffset;
+    [AutoNotify] private double _dashScale;
     [AutoNotify] private ArrowStyleViewModel? _startArrow;
     [AutoNotify] private ArrowStyleViewModel ?_endArrow;
 
@@ -38,6 +39,7 @@ public partial class StrokeStyleViewModel : ViewModelBase
             LineCap = _lineCap,
             Dashes = _dashes,
             DashOffset = _dashOffset,
+            DashScale = _dashScale,
             StartArrow = _startArrow?.CopyShared(shared),
             EndArrow = _endArrow?.CopyShared(shared)
         };
