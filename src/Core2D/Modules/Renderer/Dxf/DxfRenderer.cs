@@ -975,6 +975,21 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         {
             boundText = text.Text ?? string.Empty;
         }
+        // Prepare inline mtext with optional underline/overline, no reflection
+        string EscapeMText(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return string.Empty;
+            s = s.Replace("\\", "\\\\");
+            s = s.Replace("{", "\\{").Replace("}", "\\}");
+            s = s.Replace("\r\n", "\\P").Replace("\n", "\\P").Replace("\r", "\\P");
+            return s;
+        }
+        string WrapIf(bool flag, string prefix, string suffix, string s) => flag ? prefix + s + suffix : s;
+        var underline = style.TextStyle.Underline;
+        var overline = style.TextStyle.Overline;
+        var inlineValue = EscapeMText(boundText);
+        inlineValue = WrapIf(underline, "\\L", "\\l", inlineValue);
+        inlineValue = WrapIf(overline, "\\O", "\\o", inlineValue);
 
         var stroke = ToColor(style.Stroke.Color);
         var strokeTransparency = ToTransparency(style.Stroke.Color);
@@ -1034,7 +1049,7 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
         options.Italic = fs.HasFlag(FontStyleFlags.Italic);
 
         options.Color = null;
-        dxfMText.Write(boundText, options);
+        dxfMText.Write(inlineValue, options);
 
         dxfMText.Layer = _currentLayer;
         dxfMText.Transparency.Value = strokeTransparency;
