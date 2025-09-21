@@ -30,6 +30,8 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
     internal Layer? _currentLayer;
     // Target block to route entities (paper space layout) when exporting documents.
     private BlockRecord? _targetBlock;
+    // Cache of built block definitions for Insert shapes
+    private readonly Dictionary<BlockShapeViewModel, BlockRecord> _blockCache = new();
 
     [AutoNotify] private ShapeRendererStateViewModel? _state;
 
@@ -89,6 +91,75 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         {
             doc.Entities.Add(entity);
         }
+    }
+
+    private static string SanitizeName(string? name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return "Block";
+        // Replace spaces and illegal characters with underscore
+        var safe = new string(name.Select(ch => char.IsLetterOrDigit(ch) ? ch : '_').ToArray());
+        return string.IsNullOrWhiteSpace(safe) ? "Block" : safe;
+    }
+
+    private BlockRecord BuildBlock(CadDocument doc, BlockShapeViewModel group)
+    {
+        if (_blockCache.TryGetValue(group, out var existing))
+        {
+            return existing;
+        }
+
+        // Ensure layer "0" exists so block geometry can inherit Insert layer
+        var zeroLayer = doc.Layers.TryAdd(new Layer("0"));
+
+        var uniqueName = $"C2D_{SanitizeName(group.Name)}_{Math.Abs(group.GetHashCode())}";
+        var record = new BlockRecord(uniqueName);
+        doc.BlockRecords.Add(record);
+
+        var savedLayer = _currentLayer;
+        var savedTarget = _targetBlock;
+        try
+        {
+            _currentLayer = zeroLayer;
+            _targetBlock = record;
+
+            // Draw only block shapes, connectors are not rendered
+            foreach (var shape in group.Shapes)
+            {
+                shape.DrawShape(doc, this, null);
+            }
+        }
+        finally
+        {
+            _targetBlock = savedTarget;
+            _currentLayer = savedLayer;
+        }
+
+        _blockCache[group] = record;
+        return record;
+    }
+
+    public void DrawInsert(object? dc, InsertShapeViewModel insert)
+    {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+        if (dc is not CadDocument doc)
+        {
+            return;
+        }
+        if (insert.Block is null || insert.Point is null)
+        {
+            return;
+        }
+
+        var record = BuildBlock(doc, insert.Block);
+        var ins = new Insert(record)
+        {
+            InsertPoint = new CSMath.XYZ(ToDwgX(insert.Point.X), ToDwgY(insert.Point.Y), 0)
+        };
+        ins.Layer = _currentLayer;
+        AddEntity(doc, ins);
     }
 
     private Line CreateLine(double x1, double y1, double x2, double y2)
@@ -573,6 +644,8 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
     public void ClearCache()
     {
         _biCache?.Reset();
+        _blockCache.Clear();
+        _targetBlock = null;
     }
 
     public void Fill(object? dc, double x, double y, double width, double height, BaseColorViewModel? colorViewModel)
@@ -1142,22 +1215,8 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         var inlinePrefix = $"\\f{fontName}|b{bold}|i{italic};";
         string WrapIf(bool flag, string prefix, string suffix, string s) => flag ? prefix + s + suffix : s;
 
-        bool getBooleanFlag(object obj, string name)
-        {
-            try
-            {
-                var prop = obj.GetType().GetProperty(name);
-                if (prop is { } && prop.PropertyType == typeof(bool))
-                {
-                    return (bool)(prop.GetValue(obj) ?? false);
-                }
-            }
-            catch { }
-            return false;
-        }
-
-        var underline = getBooleanFlag(style.TextStyle, "Underline") || getBooleanFlag(style.TextStyle, "IsUnderline");
-        var overline = getBooleanFlag(style.TextStyle, "Overline") || getBooleanFlag(style.TextStyle, "IsOverline");
+        var underline = style.TextStyle.Underline;
+        var overline = style.TextStyle.Overline;
 
         var inlineValue = $"{{{inlinePrefix}{escaped}}}";
         inlineValue = WrapIf(underline, "\\L", "\\l", inlineValue);
@@ -1176,7 +1235,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             Value = inlineValue
         };
 
-        bool useBg = getBooleanFlag(style.TextStyle, "UseTextBackground") || getBooleanFlag(style.TextStyle, "TextBackground");
+        bool useBg = style.TextStyle.UseTextBackground;
         if (useBg)
         {
             mtext.BackgroundFillFlags = BackgroundFillFlags.UseBackgroundFillColor;

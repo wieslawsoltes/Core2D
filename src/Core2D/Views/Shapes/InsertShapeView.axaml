@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="Core2D.Views.Shapes.InsertShapeView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
+             xmlns:converters="using:Core2D.Converters"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:vms="using:Core2D.ViewModels.Shapes"
+             xmlns:vme="using:Core2D.ViewModels.Editor"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static vmd:DesignerContext.Point}"
+             d:DesignWidth="250" d:DesignHeight="400"
+             x:DataType="vms:InsertShapeViewModel" x:CompileBindings="True">
+  <UserControl.Resources>
+    <dd:InsertBlockDropHandler x:Key="InsertBlockDropHandler" />
+  </UserControl.Resources>
+  <TabControl>
+    <TabItem Header="Insert">
+      <StackPanel Margin="{DynamicResource ContentMargin}">
+        <Label Content="Name"
+               Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding Name, Mode=TwoWay}" />
+
+        <Label Content="Block"
+               Margin="{DynamicResource TextControlThemePadding}" />
+        <ComboBox ItemsSource="{Binding AvailableBlocks}"
+                  SelectedItem="{Binding Block, Mode=TwoWay}"
+                  HorizontalAlignment="Stretch">
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Name}" />
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+          <Button Content="Edit Block"
+                  Command="{Binding Block.EditGroup}"
+                  CommandParameter="{Binding Block}"
+                  IsEnabled="{Binding !!Block}" />
+        </StackPanel>
+        <i:Interaction.Behaviors>
+          <idd:ContextDropBehavior Context="{Binding}"
+                                   Handler="{StaticResource InsertBlockDropHandler}" />
+        </i:Interaction.Behaviors>
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="Point">
+      <ContentControl Content="{Binding Point}" />
+    </TabItem>
+    <TabItem Header="Connectors">
+      <Grid RowDefinitions="50*,6,50*">
+        <ListBox x:Name="ConnectorsListBox"
+                 ItemsSource="{Binding Connectors}" 
+                 Grid.Row="0">
+          <ListBox.DataTemplates>
+            <DataTemplate DataType="vms:PointShapeViewModel">
+              <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
+                         Background="Transparent"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch">
+                <i:Interaction.Behaviors>
+                  <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+                </i:Interaction.Behaviors>
+              </TextBlock>
+            </DataTemplate>
+          </ListBox.DataTemplates>
+        </ListBox>
+        <GridSplitter ResizeDirection="Rows"
+                      ResizeBehavior="PreviousAndNext"
+                      Background="Transparent"
+                      Height="6"
+                      Grid.Row="1" />
+        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto"
+                      Grid.Row="2">
+          <ContentControl Content="{Binding #ConnectorsListBox.SelectedItem}" />
+        </ScrollViewer>
+      </Grid>
+    </TabItem>
+  </TabControl>
+</UserControl>

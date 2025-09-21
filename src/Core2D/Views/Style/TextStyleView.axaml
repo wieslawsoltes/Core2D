@@ -51,5 +51,16 @@
     <ComboBox ItemsSource="{x:Static vms:TextStyleViewModel.TextVAlignmentValues}"
               SelectedItem="{Binding TextVAlignment, Mode=TwoWay}" 
               HorizontalAlignment="Stretch" />
+
+    <Label Content="Decoration"
+           Margin="{DynamicResource TextControlThemePadding}" />
+    <StackPanel>
+      <CheckBox Content="Underline"
+                IsChecked="{Binding Underline, Mode=TwoWay}" />
+      <CheckBox Content="Overline"
+                IsChecked="{Binding Overline, Mode=TwoWay}" />
+      <CheckBox Content="Use Background"
+                IsChecked="{Binding UseTextBackground, Mode=TwoWay}" />
+    </StackPanel>
   </StackPanel>
 </UserControl>

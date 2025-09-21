@@ -381,7 +381,7 @@ public partial class ProjectContainerViewModel
 
         if (CurrentContainer is { })
         {
-            ServiceProvider.GetService<ProjectEditorViewModel>()?.OnDropShapeAsClone(group, 0.0, 0.0);
+            ServiceProvider.GetService<ProjectEditorViewModel>()?.OnDropBlockAsInsert(group, 0.0, 0.0);
         }
     }
 

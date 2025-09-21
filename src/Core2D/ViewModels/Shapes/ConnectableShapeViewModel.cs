@@ -31,6 +31,11 @@ public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
             return;
         }
 
+        if (_connectors.IsDefault)
+        {
+            return;
+        }
+
         if (selection.SelectedShapes.Contains(this))
         {
             foreach (var connector in _connectors)
@@ -54,6 +59,7 @@ public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
     {
         var record = Record ?? r;
 
+        if (_connectors.IsDefault) return;
         foreach (var connector in _connectors)
         {
             connector.Bind(dataFlow, db, record);
@@ -62,6 +68,7 @@ public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
 
     public override void Move(ISelection? selection, decimal dx, decimal dy)
     {
+        if (_connectors.IsDefault) return;
         foreach (var connector in _connectors)
         {
             connector.Move(selection, dx, dy);
@@ -72,6 +79,7 @@ public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
     {
         base.Select(selection);
 
+        if (_connectors.IsDefault) return;
         foreach (var connector in _connectors)
         {
             connector.Select(selection);
@@ -82,6 +90,7 @@ public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
     {
         base.Deselect(selection);
 
+        if (_connectors.IsDefault) return;
         foreach (var connector in _connectors)
         {
             connector.Deselect(selection);
@@ -90,6 +99,7 @@ public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
 
     public override void GetPoints(IList<PointShapeViewModel> points)
     {
+        if (_connectors.IsDefault) return;
         foreach (var connector in _connectors)
         {
             points.Add(connector);
@@ -100,6 +110,7 @@ public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
     {
         var isDirty = base.IsDirty();
 
+        if (_connectors.IsDefault) return isDirty;
         foreach (var connector in _connectors)
         {
             isDirty |= connector.IsDirty();
@@ -112,6 +123,7 @@ public abstract partial class ConnectableShapeViewModel : BaseShapeViewModel
     {
         base.Invalidate();
 
+        if (_connectors.IsDefault) return;
         foreach (var connector in _connectors)
         {
             connector.Invalidate();

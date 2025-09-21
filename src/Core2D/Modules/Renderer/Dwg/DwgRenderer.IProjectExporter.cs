@@ -74,7 +74,14 @@ internal class DwgExportPresenter : IContainerPresenter
         {
             if (shape.State.HasFlag(renderer.State.DrawShapeState))
             {
-                shape.DrawShape(dc, renderer, selection);
+                if (renderer is DwgRenderer dwgRenderer && shape is Core2D.ViewModels.Shapes.InsertShapeViewModel insert)
+                {
+                    dwgRenderer.DrawInsert(dc, insert);
+                }
+                else
+                {
+                    shape.DrawShape(dc, renderer, selection);
+                }
             }
         }
 
