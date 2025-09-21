@@ -1215,22 +1215,8 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         var inlinePrefix = $"\\f{fontName}|b{bold}|i{italic};";
         string WrapIf(bool flag, string prefix, string suffix, string s) => flag ? prefix + s + suffix : s;
 
-        bool getBooleanFlag(object obj, string name)
-        {
-            try
-            {
-                var prop = obj.GetType().GetProperty(name);
-                if (prop is { } && prop.PropertyType == typeof(bool))
-                {
-                    return (bool)(prop.GetValue(obj) ?? false);
-                }
-            }
-            catch { }
-            return false;
-        }
-
-        var underline = getBooleanFlag(style.TextStyle, "Underline") || getBooleanFlag(style.TextStyle, "IsUnderline");
-        var overline = getBooleanFlag(style.TextStyle, "Overline") || getBooleanFlag(style.TextStyle, "IsOverline");
+        var underline = style.TextStyle.Underline;
+        var overline = style.TextStyle.Overline;
 
         var inlineValue = $"{{{inlinePrefix}{escaped}}}";
         inlineValue = WrapIf(underline, "\\L", "\\l", inlineValue);
@@ -1249,7 +1235,7 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             Value = inlineValue
         };
 
-        bool useBg = getBooleanFlag(style.TextStyle, "UseTextBackground") || getBooleanFlag(style.TextStyle, "TextBackground");
+        bool useBg = style.TextStyle.UseTextBackground;
         if (useBg)
         {
             mtext.BackgroundFillFlags = BackgroundFillFlags.UseBackgroundFillColor;
