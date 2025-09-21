@@ -139,13 +139,16 @@ public partial class InsertShapeViewModel : ConnectableShapeViewModel
 
     /// <summary>
     /// Rebuild or update virtual connectors based on the referenced block connectors.
-    /// Existing connector instances are preserved by name when possible to keep connections intact.
+    /// Smartly preserves existing connector instances (by name or index) and remaps
+    /// any external line endpoints that referenced replaced connector instances.
     /// </summary>
     public void UpdateConnectorsFromBlock()
     {
         var dx = _point?.X ?? 0.0;
         var dy = _point?.Y ?? 0.0;
 
+        // Snapshot current connectors (potentially referenced by line endpoints)
+        var oldConnectors = !_connectors.IsDefault ? _connectors : ImmutableArray<PointShapeViewModel>.Empty;
         var dst = !_connectors.IsDefault ? _connectors.ToList() : new List<PointShapeViewModel>();
         var srcArr = _block is { } && !_block.Connectors.IsDefault
             ? _block.Connectors
@@ -155,9 +158,11 @@ public partial class InsertShapeViewModel : ConnectableShapeViewModel
         // First, try to align by name for stability when names are present
         var srcByName = src.Where(c => !string.IsNullOrWhiteSpace(c.Name)).ToDictionary(c => c.Name);
         var dstByName = dst.Where(c => !string.IsNullOrWhiteSpace(c.Name)).ToDictionary(c => c.Name);
+        var oldByName = oldConnectors.Where(c => !string.IsNullOrWhiteSpace(c.Name)).ToDictionary(c => c.Name);
 
         var usedDst = new HashSet<PointShapeViewModel>();
         var result = new List<PointShapeViewModel>(src.Count);
+        var remap = new Dictionary<PointShapeViewModel, PointShapeViewModel>(); // old -> new
 
         for (int i = 0; i < src.Count; i++)
         {
@@ -193,6 +198,16 @@ public partial class InsertShapeViewModel : ConnectableShapeViewModel
                 vc.State |= ShapeStateFlags.Locked;
                 if (!ReferenceEquals(vc.Owner, this)) vc.Owner = this;
                 result.Add(vc);
+
+                // If there was a connector with the same name/index in the old list, record remap for stability
+                if (!string.IsNullOrWhiteSpace(bc.Name) && oldByName.TryGetValue(bc.Name, out var oldByNameMatch))
+                {
+                    remap[oldByNameMatch] = vc;
+                }
+                else if (i < oldConnectors.Length)
+                {
+                    remap[oldConnectors[i]] = vc;
+                }
             }
             else
             {
@@ -214,13 +229,60 @@ public partial class InsertShapeViewModel : ConnectableShapeViewModel
                 // Make insert connectors non-movable
                 clone.State |= ShapeStateFlags.Locked;
                 result.Add(clone);
+
+                 // Map old-by-name or old-by-index to the newly created instance
+                 if (!string.IsNullOrWhiteSpace(bc.Name) && oldByName.TryGetValue(bc.Name, out var oldByNameMatch2))
+                 {
+                     remap[oldByNameMatch2] = clone;
+                 }
+                 else if (i < oldConnectors.Length)
+                 {
+                     remap[oldConnectors[i]] = clone;
+                 }
             }
         }
 
-        Connectors = result.ToImmutableArray();
+        // Apply the new connectors list
+        var newConnectors = result.ToImmutableArray();
+        Connectors = newConnectors;
 
         // Update bounding box proxy points to match the current block geometry + insertion offset
         UpdateBboxProxies(dx, dy);
+
+        // Remap existing line endpoints that referenced old connector instances to the new ones
+        if (!oldConnectors.IsDefaultOrEmpty && ServiceProvider.GetService<ProjectEditorViewModel>()?.Project is { } project)
+        {
+            var lines = project.GetAllShapes<LineShapeViewModel>().ToList();
+            foreach (var kv in remap)
+            {
+                var oldPt = kv.Key;
+                var newPt = kv.Value;
+
+                if (ReferenceEquals(oldPt, newPt))
+                {
+                    continue; // unchanged
+                }
+
+                foreach (var line in lines)
+                {
+                    if (ReferenceEquals(line.Start, oldPt))
+                    {
+                        var prev = line.Start;
+                        var next = newPt;
+                        project.History?.Snapshot(prev, next, p => line.Start = p);
+                        line.Start = next;
+                    }
+
+                    if (ReferenceEquals(line.End, oldPt))
+                    {
+                        var prev = line.End;
+                        var next = newPt;
+                        project.History?.Snapshot(prev, next, p => line.End = p);
+                        line.End = next;
+                    }
+                }
+            }
+        }
     }
 
     private void UpdateBboxProxies(double dx, double dy)

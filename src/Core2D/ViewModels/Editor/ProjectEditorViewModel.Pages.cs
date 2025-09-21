@@ -12,6 +12,7 @@ using Core2D.Model.Renderer;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Docking.Documents;
+using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Shapes;
 using Dock.Model;
 using Dock.Model.Controls;
@@ -643,8 +644,9 @@ public partial class ProjectEditorViewModel
             return;
         }
 
+        // Capture existing connectors to stabilize identity across edits
+        var oldConnectors = group.Connectors;
         group.Shapes = ImmutableArray<BaseShapeViewModel>.Empty;
-        group.Connectors = ImmutableArray<PointShapeViewModel>.Empty;
 
         var shared = new Dictionary<object, object>();
         var shapes = new List<BaseShapeViewModel>();
@@ -676,21 +678,61 @@ public partial class ProjectEditorViewModel
             group.AddShape(shape);
         }
 
-        foreach (var connector in connectors)
+        // Reuse existing connector instances by name, else by index; update in place.
+        var result = new List<PointShapeViewModel>(connectors.Count);
+        var used = new HashSet<PointShapeViewModel>();
+        var oldByName = oldConnectors.Where(c => !string.IsNullOrWhiteSpace(c.Name))
+            .ToDictionary(c => c.Name);
+
+        for (int i = 0; i < connectors.Count; i++)
         {
-            if (connector.State.HasFlag(ShapeStateFlags.Input))
+            var desired = connectors[i];
+            PointShapeViewModel? existing = null;
+
+            if (!string.IsNullOrWhiteSpace(desired.Name) && oldByName.TryGetValue(desired.Name, out var byName))
             {
-                group.AddConnectorAsInput(connector);
+                existing = byName;
             }
-            else if (connector.State.HasFlag(ShapeStateFlags.Output))
+            else if (!oldConnectors.IsDefaultOrEmpty && i < oldConnectors.Length)
             {
-                group.AddConnectorAsOutput(connector);
+                var candidate = oldConnectors[i];
+                if (!used.Contains(candidate))
+                {
+                    existing = candidate;
+                }
             }
-            else
+
+            if (existing is null)
             {
-                group.AddConnectorAsNone(connector);
+                existing = new PointShapeViewModel(ServiceProvider)
+                {
+                    Name = desired.Name,
+                    Properties = ImmutableArray.Create<PropertyViewModel>(),
+                    X = desired.X,
+                    Y = desired.Y
+                };
             }
+
+            used.Add(existing);
+
+            // Update fields to match desired connector
+            existing.Name = desired.Name;
+            existing.X = desired.X;
+            existing.Y = desired.Y;
+            existing.Owner = group;
+
+            // Normalize state flags: Connector + role, clear Standalone; keep general visibility/printable
+            existing.State |= ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Connector;
+            existing.State &= ~ShapeStateFlags.Standalone;
+            existing.State &= ~(ShapeStateFlags.Input | ShapeStateFlags.Output | ShapeStateFlags.None);
+            if (desired.State.HasFlag(ShapeStateFlags.Input)) existing.State |= ShapeStateFlags.Input;
+            if (desired.State.HasFlag(ShapeStateFlags.Output)) existing.State |= ShapeStateFlags.Output;
+            if (desired.State.HasFlag(ShapeStateFlags.None)) existing.State |= ShapeStateFlags.None;
+
+            result.Add(existing);
         }
+
+        group.Connectors = result.ToImmutableArray();
 
         group.Invalidate();
     }
