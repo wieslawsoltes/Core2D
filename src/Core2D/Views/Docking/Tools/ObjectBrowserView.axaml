@@ -69,9 +69,9 @@
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
-          <TreeDataTemplate DataType="vms:GroupShapeViewModel" 
+          <TreeDataTemplate DataType="vms:BlockShapeViewModel" 
                             ItemsSource="{Binding Shapes}"
-                            x:DataType="vms:GroupShapeViewModel">
+                            x:DataType="vms:BlockShapeViewModel">
             <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
                             ContextMenu="{StaticResource ExportContextMenu}"/>
           </TreeDataTemplate>
@@ -112,7 +112,7 @@
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding StyleLibraries}" 
                         ItemsSource="{Binding}"/>
-          <TreeViewItem Header="Groups" 
+          <TreeViewItem Header="Blocks" 
                         ContextMenu="{StaticResource ExportContextMenu}" 
                         DataContext="{Binding GroupLibraries}" 
                         ItemsSource="{Binding}"/>

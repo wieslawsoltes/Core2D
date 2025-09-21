@@ -69,7 +69,7 @@ public class DesignerContext
 
     public static EllipseShapeViewModel? Ellipse { get; private set; }
 
-    public static GroupShapeViewModel? Group { get; private set; }
+    public static BlockShapeViewModel? Group { get; private set; }
 
     public static ImageShapeViewModel? Image { get; private set; }
 
@@ -186,7 +186,7 @@ public class DesignerContext
         Arc = factory.CreateArcShape(0, 0, ShapeStyle);
         CubicBezier = factory.CreateCubicBezierShape(0, 0, ShapeStyle);
         Ellipse = factory.CreateEllipseShape(0, 0, ShapeStyle);
-        Group = factory.CreateGroupShape("Group");
+        Group = factory.CreateBlockShape("Block");
         Image = factory.CreateImageShape(0, 0, ShapeStyle, "key");
         Line = factory.CreateLineShape(0, 0, ShapeStyle);
         Path = factory.CreatePathShape(ShapeStyle, ImmutableArray.Create<PathFigureViewModel>(), FillRule.EvenOdd);

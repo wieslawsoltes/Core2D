@@ -8,13 +8,13 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Behaviors.DragAndDrop;
 
-public class GroupsListBoxDropHandler : ListBoxDropHandler
+public class BlocksListBoxDropHandler : ListBoxDropHandler
 {
     public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
         if (e.Source is Control && sender is ListBox listBox)
         {
-            return ValidateLibrary<GroupShapeViewModel>(listBox, e, sourceContext, targetContext, false);
+            return ValidateLibrary<BlockShapeViewModel>(listBox, e, sourceContext, targetContext, false);
         }
         return false;
     }
@@ -23,7 +23,7 @@ public class GroupsListBoxDropHandler : ListBoxDropHandler
     {
         if (e.Source is Control && sender is ListBox listBox)
         {
-            return ValidateLibrary<GroupShapeViewModel>(listBox, e, sourceContext, targetContext, true);
+            return ValidateLibrary<BlockShapeViewModel>(listBox, e, sourceContext, targetContext, true);
         }
         return false;
     }

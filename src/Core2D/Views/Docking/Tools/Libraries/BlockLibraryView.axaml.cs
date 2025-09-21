@@ -3,11 +3,11 @@
 
 using Avalonia.Controls;
 
-namespace Core2D.Views.Libraries;
+namespace Core2D.Views.Docking.Tools.Libraries;
 
-public partial class GroupsView : UserControl
+public partial class BlockLibraryView : UserControl
 {
-    public GroupsView()
+    public BlockLibraryView()
     {
         InitializeComponent();
     }

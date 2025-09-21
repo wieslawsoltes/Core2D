@@ -333,7 +333,7 @@ public partial class ProjectContainerViewModel
 
     public void OnAddGroup()
     {
-        if (SelectedShapes?.Count == 1 && SelectedShapes?.FirstOrDefault() is GroupShapeViewModel group)
+        if (SelectedShapes?.Count == 1 && SelectedShapes?.FirstOrDefault() is BlockShapeViewModel group)
         {
             var clone = group.CopyShared(new Dictionary<object, object>());
             if (clone is { })
@@ -343,7 +343,7 @@ public partial class ProjectContainerViewModel
         }
     }
 
-    public void OnRemoveGroup(GroupShapeViewModel? group)
+    public void OnRemoveGroup(BlockShapeViewModel? group)
     {
         if (group is null)
         {
@@ -354,7 +354,7 @@ public partial class ProjectContainerViewModel
         library?.SetSelected(library.Items.FirstOrDefault());
     }
 
-    public void OnEditGroup(GroupShapeViewModel? group)
+    public void OnEditGroup(BlockShapeViewModel? group)
     {
         if (group is null)
         {
@@ -372,7 +372,7 @@ public partial class ProjectContainerViewModel
         ServiceProvider.GetService<ProjectEditorViewModel>()?.OpenGroup(group);
     }
 
-    public void OnInsertGroup(GroupShapeViewModel? group)
+    public void OnInsertGroup(BlockShapeViewModel? group)
     {
         if (group is null)
         {
@@ -385,7 +385,7 @@ public partial class ProjectContainerViewModel
         }
     }
 
-    public void OnExportGroup(GroupShapeViewModel? group)
+    public void OnExportGroup(BlockShapeViewModel? group)
     {
         if (group is null)
         {

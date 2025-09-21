@@ -7,16 +7,16 @@ using Core2D.Model.Renderer;
 
 namespace Core2D.ViewModels.Shapes;
 
-public static class GroupShapeExtensions
+public static class BlockShapeExtensions
 {
-    public static void AddShape(this GroupShapeViewModel group, BaseShapeViewModel shape)
+    public static void AddShape(this BlockShapeViewModel group, BaseShapeViewModel shape)
     {
         shape.Owner = group;
         shape.State &= ~ShapeStateFlags.Standalone;
         group.Shapes = group.Shapes.Add(shape);
     }
 
-    public static void Group(this GroupShapeViewModel group, IEnumerable<BaseShapeViewModel>? shapes, IList<BaseShapeViewModel>? source = null)
+    public static void Group(this BlockShapeViewModel group, IEnumerable<BaseShapeViewModel>? shapes, IList<BaseShapeViewModel>? source = null)
     {
         if (shapes is not null)
         {
@@ -38,7 +38,7 @@ public static class GroupShapeExtensions
         source?.Add(@group);
     }
 
-    public static void Ungroup(IEnumerable<BaseShapeViewModel>? shapes, IList<BaseShapeViewModel>? source)
+    public static void Explode(IEnumerable<BaseShapeViewModel>? shapes, IList<BaseShapeViewModel>? source)
     {
         if (shapes is null || source is null)
         {
@@ -62,10 +62,10 @@ public static class GroupShapeExtensions
         }
     }
 
-    public static void Ungroup(this GroupShapeViewModel group, IList<BaseShapeViewModel>? source)
+    public static void Explode(this BlockShapeViewModel group, IList<BaseShapeViewModel>? source)
     {
-        Ungroup(group.Shapes, source);
-        Ungroup(group.Connectors, source);
+        Explode(group.Shapes, source);
+        Explode(group.Connectors, source);
 
         source?.Remove(@group);
     }

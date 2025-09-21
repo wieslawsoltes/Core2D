@@ -77,7 +77,7 @@
         <MenuItem Header="State Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StateProperties" />
         <Separator />
         <MenuItem Header="Style Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StyleLibrary" />
-        <MenuItem Header="Group Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="GroupLibrary" />
+        <MenuItem Header="Block Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="BlockLibrary" />
         <MenuItem Header="Database Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="DatabaseLibrary" />
         <MenuItem Header="Template Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="TemplateLibrary" />
         <MenuItem Header="Script Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ScriptLibrary" />
@@ -197,9 +197,9 @@
     <MenuItem Header="_Shape">
       <MenuItem Header="Du_plicate" Command="{Binding ShapeService.OnDuplicateSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+D" />
       <Separator />
-      <MenuItem Header="_Group">
-        <MenuItem Header="_Group" Command="{Binding ShapeService.OnGroupSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+G" />
-        <MenuItem Header="U_ngroup" Command="{Binding ShapeService.OnUngroupSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+U" />
+      <MenuItem Header="_Block">
+        <MenuItem Header="_Block" Command="{Binding ShapeService.OnGroupSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+G" />
+        <MenuItem Header="E_xplode" Command="{Binding ShapeService.OnExplodeSelected, FallbackValue={x:Null}}" InputGesture="Ctrl+U" />
       </MenuItem>
       <MenuItem Header="Rotat_e">
         <MenuItem Header="Rotate _Right 90°" Command="{Binding ShapeService.OnRotateSelected, FallbackValue={x:Null}}" CommandParameter="90" InputGesture="Ctrl+R" />

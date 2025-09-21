@@ -68,7 +68,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         }
     }
 
-    public void OnUngroupSelected()
+    public void OnExplodeSelected()
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
@@ -76,7 +76,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
             return;
         }
 
-        var result = Ungroup(project.SelectedShapes);
+        var result = Explode(project.SelectedShapes);
         if (result)
         {
             project.SelectedShapes = null;
@@ -1103,7 +1103,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         ServiceProvider.GetService<ISelectionService>()?.Select(layer, path);
     }
 
-    private GroupShapeViewModel? Group(LayerContainerViewModel? layer, ISet<BaseShapeViewModel>? shapes, string name)
+    private BlockShapeViewModel? Group(LayerContainerViewModel? layer, ISet<BaseShapeViewModel>? shapes, string name)
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
@@ -1116,7 +1116,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
             return null;
         }
         var source = layer.Shapes.ToBuilder();
-        var group = ServiceProvider.GetService<IViewModelFactory>()?.CreateGroupShape(name);
+        var group = ServiceProvider.GetService<IViewModelFactory>()?.CreateBlockShape(name);
         group?.Group(shapes, source);
 
         var previous = layer.Shapes;
@@ -1128,7 +1128,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
     }
 
-    private void Ungroup(LayerContainerViewModel? layer, ISet<BaseShapeViewModel>? shapes)
+    private void Explode(LayerContainerViewModel? layer, ISet<BaseShapeViewModel>? shapes)
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
@@ -1144,9 +1144,9 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
 
         foreach (var shape in shapes)
         {
-            if (shape is GroupShapeViewModel group)
+            if (shape is BlockShapeViewModel group)
             {
-                group.Ungroup(source);
+                group.Explode(source);
             }
         }
 
@@ -1156,7 +1156,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         layer.Shapes = next;
     }
 
-    public GroupShapeViewModel? Group(ISet<BaseShapeViewModel>? shapes, string name)
+    public BlockShapeViewModel? Group(ISet<BaseShapeViewModel>? shapes, string name)
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
@@ -1168,7 +1168,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         return layer is { } ? Group(layer, shapes, name) : null;
     }
 
-    public bool Ungroup(ISet<BaseShapeViewModel>? shapes)
+    public bool Explode(ISet<BaseShapeViewModel>? shapes)
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
@@ -1181,7 +1181,7 @@ public class ShapeServiceViewModel : ViewModelBase, IShapeService
         {
             return false;
         }
-        Ungroup(layer, shapes);
+        Explode(layer, shapes);
         return true;
 
     }

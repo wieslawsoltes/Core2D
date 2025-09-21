@@ -552,7 +552,7 @@ public static class ProjectExtensions
     {
         if (shape is { } && style is { })
         {
-            if (shape is GroupShapeViewModel group)
+            if (shape is BlockShapeViewModel group)
             {
                 var shapes = group.Shapes.GetAllShapes();
                 foreach (var child in shapes)
@@ -573,12 +573,12 @@ public static class ProjectExtensions
         }
     }
 
-    public static void AddGroup(this ProjectContainerViewModel project, LibraryViewModel? library, GroupShapeViewModel? group)
+    public static void AddGroup(this ProjectContainerViewModel project, LibraryViewModel? library, BlockShapeViewModel? group)
     {
         AddItem(project, library, group);
     }
 
-    public static LibraryViewModel? RemoveGroup(this ProjectContainerViewModel project, GroupShapeViewModel? group)
+    public static LibraryViewModel? RemoveGroup(this ProjectContainerViewModel project, BlockShapeViewModel? group)
     {
         if (@group is { })
         {

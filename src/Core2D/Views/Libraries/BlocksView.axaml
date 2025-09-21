@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.Views.Libraries.GroupsView"
+﻿<UserControl x:Class="Core2D.Views.Libraries.BlocksView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -16,7 +16,7 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <UserControl.Resources>
-    <dd:GroupsListBoxDropHandler x:Key="GroupsListBoxDropHandler" />
+    <dd:BlocksListBoxDropHandler x:Key="BlocksListBoxDropHandler" />
   </UserControl.Resources>
   <Grid RowDefinitions="Auto,Auto,Auto,*">
     <Grid RowDefinitions="*" 
@@ -90,7 +90,7 @@
       <Button Content="+" 
               Command="{Binding AddGroup}"
               CommandParameter="{Binding CurrentGroupLibrary}"
-              IsVisible="{Binding CurrentContainer.CurrentShape, Converter={x:Static converters:IsGroupConverter.Instance}, FallbackValue={x:Null}}"
+              IsVisible="{Binding CurrentContainer.CurrentShape, Converter={x:Static converters:IsBlockConverter.Instance}, FallbackValue={x:Null}}"
               BorderBrush="Transparent" 
               Background="Transparent" 
               Padding="12,4,12,4" />
@@ -102,7 +102,7 @@
              Grid.Row="3">
       <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding CurrentGroupLibrary, FallbackValue={x:Null}}"
-                                 Handler="{StaticResource GroupsListBoxDropHandler}" />
+                                 Handler="{StaticResource BlocksListBoxDropHandler}" />
       </i:Interaction.Behaviors>
       <ListBox.KeyBindings>
         <KeyBinding Command="{Binding AddGroup}"
@@ -156,7 +156,7 @@
         </ContextMenu>
       </ListBox.Resources>
       <ListBox.DataTemplates>
-        <DataTemplate DataType="vms:GroupShapeViewModel">
+        <DataTemplate DataType="vms:BlockShapeViewModel">
           <Border x:Name="TileBorder"
                   Background="Transparent"
                   Padding="2">
@@ -164,7 +164,7 @@
               <Border Height="60"
                       Padding="2"
                       Background="{DynamicResource ThemeControlMidBrush}">
-                <c:GroupTileView Group="{Binding}"
+                <c:BlockTileView Block="{Binding}"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch"
                                   IsHitTestVisible="False" />

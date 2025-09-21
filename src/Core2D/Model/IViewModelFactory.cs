@@ -121,7 +121,7 @@ public interface IViewModelFactory
 
     ImageShapeViewModel CreateImageShape(PointShapeViewModel? topLeft, PointShapeViewModel? bottomRight, ShapeStyleViewModel? style, string key, bool isStroked = false, bool isFilled = false, string name = "");
 
-    GroupShapeViewModel CreateGroupShape(string name = "g");
+    BlockShapeViewModel CreateBlockShape(string name = "g");
 
     ArgbColorViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
 

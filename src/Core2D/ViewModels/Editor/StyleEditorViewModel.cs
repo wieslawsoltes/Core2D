@@ -544,7 +544,7 @@ public class StyleEditorViewModel : ViewModelBase
         {
             foreach (var shape in editorViewModel.Project.SelectedShapes)
             {
-                if (shape is GroupShapeViewModel group)
+                if (shape is BlockShapeViewModel group)
                 {
                     var groupShapes = group.Shapes.GetAllShapes();
                     foreach (var child in groupShapes)

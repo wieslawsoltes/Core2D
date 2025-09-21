@@ -8,12 +8,12 @@ using Dock.Model.Mvvm.Controls;
 
 namespace Core2D.ViewModels.Docking.Documents;
 
-public class GroupDocumentViewModel : Document
+public class BlockDocumentViewModel : Document
 {
-    private GroupShapeViewModel? _group;
+    private BlockShapeViewModel? _group;
     private PageContainerViewModel? _container;
 
-    public GroupShapeViewModel? Group
+    public BlockShapeViewModel? Group
     {
         get => _group;
         set => SetProperty(ref _group, value);

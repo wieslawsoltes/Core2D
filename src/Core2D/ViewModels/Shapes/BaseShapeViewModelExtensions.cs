@@ -18,7 +18,7 @@ public static class BaseShapeViewModelExtensions
 
         foreach (var shape in shapes)
         {
-            if (shape is GroupShapeViewModel groupShape)
+            if (shape is BlockShapeViewModel groupShape)
             {
                 foreach (var s in GetAllShapes(groupShape.Shapes))
                 {

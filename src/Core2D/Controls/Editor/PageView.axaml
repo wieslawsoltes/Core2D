@@ -69,7 +69,7 @@
         <!-- Shape -->
         <KeyBinding Command="{Binding ShapeService.OnDuplicateSelected}" Gesture="Ctrl+D" />
         <KeyBinding Command="{Binding ShapeService.OnGroupSelected}" Gesture="Ctrl+G" />
-        <KeyBinding Command="{Binding ShapeService.OnUngroupSelected}" Gesture="Ctrl+U" />
+        <KeyBinding Command="{Binding ShapeService.OnExplodeSelected}" Gesture="Ctrl+U" />
         <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="90" Gesture="Ctrl+R" />
         <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="-90" Gesture="Ctrl+L" />
         <KeyBinding Command="{Binding ShapeService.OnFlipHorizontalSelected}" Gesture="Ctrl+H" />
