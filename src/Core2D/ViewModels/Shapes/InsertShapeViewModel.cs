@@ -36,6 +36,8 @@ public partial class InsertShapeViewModel : ConnectableShapeViewModel
 
     public override object Copy(IDictionary<object, object>? shared)
     {
+        var sourceConnectors = !_connectors.IsDefault ? _connectors : ImmutableArray<PointShapeViewModel>.Empty;
+
         var copy = new InsertShapeViewModel(ServiceProvider)
         {
             Name = Name,
@@ -56,6 +58,58 @@ public partial class InsertShapeViewModel : ConnectableShapeViewModel
 
         // Initialize connectors snapshot for the copy
         copy.UpdateConnectorsFromBlock();
+
+        if (shared is { }
+            && !sourceConnectors.IsDefaultOrEmpty
+            && !copy._connectors.IsDefaultOrEmpty)
+        {
+            var targetList = copy._connectors.ToList();
+            var remaining = new List<PointShapeViewModel>(targetList);
+            var targetByName = targetList
+                .Where(c => !string.IsNullOrWhiteSpace(c.Name))
+                .GroupBy(c => c.Name!, StringComparer.Ordinal)
+                .ToDictionary(g => g.Key, g => new Queue<PointShapeViewModel>(g), StringComparer.Ordinal);
+
+            for (var i = 0; i < sourceConnectors.Length; i++)
+            {
+                var source = sourceConnectors[i];
+                PointShapeViewModel? target = null;
+
+                if (!string.IsNullOrWhiteSpace(source.Name)
+                    && targetByName.TryGetValue(source.Name, out var queue)
+                    && queue.Count > 0)
+                {
+                    var candidate = queue.Dequeue();
+                    if (remaining.Remove(candidate))
+                    {
+                        target = candidate;
+                    }
+                }
+
+                if (target is null && i < targetList.Count)
+                {
+                    var candidate = targetList[i];
+                    if (remaining.Remove(candidate))
+                    {
+                        target = candidate;
+                    }
+                }
+
+                if (target is null && remaining.Count > 0)
+                {
+                    target = remaining[0];
+                    remaining.RemoveAt(0);
+                }
+
+                if (target is null)
+                {
+                    continue;
+                }
+
+                shared[source] = target;
+                shared[target] = source;
+            }
+        }
 
         return copy;
     }

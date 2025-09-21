@@ -109,6 +109,11 @@ public class ClipboardServiceViewModel : ViewModelBase, IClipboardService
             var shapesToCopy = new List<BaseShapeViewModel>(shapes.Count);
             var shared = new Dictionary<object, object>();
 
+            foreach (var connectable in shapes.OfType<ConnectableShapeViewModel>())
+            {
+                connectable.CopyShared(shared);
+            }
+
             foreach (var shape in shapes)
             {
                 var copy = shape.CopyShared(shared);
