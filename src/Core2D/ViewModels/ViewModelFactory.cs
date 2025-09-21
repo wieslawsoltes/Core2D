@@ -768,6 +768,27 @@ public class ViewModelFactory : IViewModelFactory
         };
     }
 
+    public InsertShapeViewModel CreateInsertShape(BlockShapeViewModel block, double x = 0.0, double y = 0.0, string name = "Insert")
+    {
+        var insert = new InsertShapeViewModel(_serviceProvider)
+        {
+            Name = name,
+            State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+            Properties = ImmutableArray.Create<PropertyViewModel>(),
+            Block = block,
+            Point = CreatePointShape(x, y)
+        };
+
+        if (insert.Point is { })
+        {
+            insert.Point.Owner = insert;
+        }
+
+        insert.UpdateConnectorsFromBlock();
+
+        return insert;
+    }
+
     public ArgbColorViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00)
     {
         return new ArgbColorViewModel(_serviceProvider)

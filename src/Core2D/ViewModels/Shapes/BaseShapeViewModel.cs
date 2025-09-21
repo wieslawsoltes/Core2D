@@ -60,9 +60,12 @@ public abstract partial class BaseShapeViewModel : ViewModelBase, IDataObject, I
     {
         var isDirty = base.IsDirty();
 
-        foreach (var property in _properties)
+        if (!_properties.IsDefault)
         {
-            isDirty |= property.IsDirty();
+            foreach (var property in _properties)
+            {
+                isDirty |= property.IsDirty();
+            }
         }
 
         if (Record is { })
@@ -77,9 +80,12 @@ public abstract partial class BaseShapeViewModel : ViewModelBase, IDataObject, I
     {
         base.Invalidate();
 
-        foreach (var property in _properties)
+        if (!_properties.IsDefault)
         {
-            property.Invalidate();
+            foreach (var property in _properties)
+            {
+                property.Invalidate();
+            }
         }
 
         Record?.Invalidate();

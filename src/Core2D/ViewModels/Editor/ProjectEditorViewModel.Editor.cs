@@ -1054,7 +1054,23 @@ public partial class ProjectEditorViewModel
             {
                 if (bExecute)
                 {
-                    OnDropShapeAsClone(shape, x, y);
+                    if (shape is BlockShapeViewModel group)
+                    {
+                        // If a single Insert is selected, switch its block reference instead of adding a new insert
+                        if (Project?.SelectedShapes is { Count: 1 } sel && sel.FirstOrDefault() is InsertShapeViewModel ins)
+                        {
+                            ins.Block = group;
+                            ins.UpdateConnectorsFromBlock();
+                        }
+                        else
+                        {
+                            OnDropBlockAsInsert(group, x, y);
+                        }
+                    }
+                    else
+                    {
+                        OnDropShapeAsClone(shape, x, y);
+                    }
                 }
                 return true;
             }
@@ -1064,6 +1080,42 @@ public partial class ProjectEditorViewModel
             ServiceProvider.GetService<ILog>()?.LogException(ex);
         }
         return false;
+    }
+
+    public void OnDropBlockAsInsert(BlockShapeViewModel group, double x, double y)
+    {
+        if (Project is null || Project.Options is null)
+        {
+            return;
+        }
+
+        var sx = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)x, (decimal)Project.Options.SnapX) : (decimal)x;
+        var sy = Project.Options.SnapToGrid ? PointUtil.Snap((decimal)y, (decimal)Project.Options.SnapY) : (decimal)y;
+
+        try
+        {
+            var vmf = ServiceProvider.GetService<IViewModelFactory>();
+            var insert = vmf?.CreateInsertShape(group, (double)sx, (double)sy);
+            if (insert is { })
+            {
+                ServiceProvider.GetService<ISelectionService>()?.Deselect(Project.CurrentContainer?.CurrentLayer);
+
+                Project.AddShape(Project.CurrentContainer?.CurrentLayer, insert);
+
+                if (Project.Options.TryToConnect)
+                {
+                    var shapes = Project?.CurrentContainer?.CurrentLayer?.Shapes.GetAllShapes<LineShapeViewModel>().ToList();
+                    if (shapes is not null)
+                    {
+                        ServiceProvider.GetService<ISelectionService>()?.TryToConnectLines(shapes, insert.Connectors);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ServiceProvider.GetService<ILog>()?.LogException(ex);
+        }
     }
 
     public void OnDropShapeAsClone<T>(T shape, double x, double y) where T : BaseShapeViewModel

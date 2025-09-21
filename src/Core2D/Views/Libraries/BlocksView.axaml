@@ -159,7 +159,8 @@
         <DataTemplate DataType="vms:BlockShapeViewModel">
           <Border x:Name="TileBorder"
                   Background="Transparent"
-                  Padding="2">
+                  Padding="2"
+                  DoubleTapped="OnGroupDoubleTapped">
             <StackPanel HorizontalAlignment="Stretch">
               <Border Height="60"
                       Padding="2"

@@ -123,6 +123,8 @@ public interface IViewModelFactory
 
     BlockShapeViewModel CreateBlockShape(string name = "g");
 
+    InsertShapeViewModel CreateInsertShape(BlockShapeViewModel block, double x = 0.0, double y = 0.0, string name = "Insert");
+
     ArgbColorViewModel CreateArgbColor(byte a = 0xFF, byte r = 0x00, byte g = 0x00, byte b = 0x00);
 
     ArrowStyleViewModel CreateArrowStyle(ArrowType arrowType = ArrowType.None, double radiusX = 5.0, double radiusY = 3.0);

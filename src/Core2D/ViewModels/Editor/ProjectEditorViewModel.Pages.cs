@@ -991,11 +991,8 @@ public partial class ProjectEditorViewModel
                 break;
 
             case LibraryViewModel library when e.PropertyName == nameof(LibraryViewModel.Selected):
-                if (library.Selected is BlockShapeViewModel librarySelectedGroup)
-                {
-                    OpenGroup(librarySelectedGroup);
-                }
-
+                // Do not auto-open block documents on single selection change.
+                // Double-click in the BlocksView triggers editing explicitly.
                 break;
 
             case LibraryViewModel library when e.PropertyName == nameof(LibraryViewModel.Items):
