@@ -69,6 +69,7 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
     private bool _previousDrawPoints = true;
 
     public bool IsVisible => _isVisible;
+    public bool IsActionActive => _mode != Mode.None;
 
     public BoxDecoratorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
@@ -524,6 +525,29 @@ public partial class BoxDecoratorViewModel : ViewModelBase, IDecorator
             {
                 _currentHandle = result;
                 _currentHandle.Style = _currentHandle == _boundsHandle ? _selectedBoundsStyle : _selectedHandleStyle;
+                _startX = sx;
+                _startY = sy;
+                _points = null;
+                _rotateAngle = 0m;
+                _layer?.RaiseInvalidateLayer();
+                return true;
+            }
+        }
+
+        // If no handle path was hit, but the pointer is inside
+        // the bounds rectangle interior, treat it as Move, too.
+        if (_boundsHandle?.TopLeft is { } tl && _boundsHandle.BottomRight is { } br)
+        {
+            var left = Math.Min(tl.X, br.X);
+            var right = Math.Max(tl.X, br.X);
+            var top = Math.Min(tl.Y, br.Y);
+            var bottom = Math.Max(tl.Y, br.Y);
+
+            if (x >= left && x <= right && y >= top && y <= bottom)
+            {
+                _mode = Mode.Move;
+                _currentHandle = _boundsHandle;
+                _currentHandle.Style = _selectedBoundsStyle;
                 _startX = sx;
                 _startY = sy;
                 _points = null;
