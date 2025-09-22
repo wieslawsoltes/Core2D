@@ -416,7 +416,7 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         {
             return;
         }
-        
+
         DrawLineArrowsInternal(line, style, gfx, out var pt1, out var pt2);
 
         var pen = ToPen(style);
@@ -424,6 +424,19 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
         {
             DrawLineInternal(gfx, pen, line.IsStroked, ref pt1, ref pt2);
             pen.Dispose();
+        }
+    }
+
+    public void DrawWire(object? dc, WireShapeViewModel wire, ShapeStyleViewModel? style)
+    {
+        switch (wire.RendererKey)
+        {
+            default:
+                DrawLine(dc, wire, style);
+                break;
+            case WireRendererKeys.Line:
+                DrawLine(dc, wire, style);
+                break;
         }
     }
 

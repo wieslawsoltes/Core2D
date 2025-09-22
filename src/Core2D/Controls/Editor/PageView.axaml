@@ -107,6 +107,7 @@
         <KeyBinding Command="{Binding OnToolSelection}" Gesture="S" />
         <KeyBinding Command="{Binding OnToolPoint}" Gesture="P" />
         <KeyBinding Command="{Binding OnToolLine}" Gesture="L" />
+        <KeyBinding Command="{Binding OnToolWire}" Gesture="W" />
         <KeyBinding Command="{Binding OnToolArc}" Gesture="A" />
         <KeyBinding Command="{Binding OnToolCubicBezier}" Gesture="B" />
         <KeyBinding Command="{Binding OnToolQuadraticBezier}" Gesture="Q" />

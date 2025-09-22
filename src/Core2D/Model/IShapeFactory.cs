@@ -17,6 +17,10 @@ public interface IShapeFactory
 
     LineShapeViewModel? Line(PointShapeViewModel? start, PointShapeViewModel? end, bool isStroked);
 
+    WireShapeViewModel? Wire(double x1, double y1, double x2, double y2, bool isStroked, string rendererKey = WireRendererKeys.Line);
+
+    WireShapeViewModel? Wire(PointShapeViewModel? start, PointShapeViewModel? end, bool isStroked, string rendererKey = WireRendererKeys.Line);
+
     ArcShapeViewModel? Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
 
     ArcShapeViewModel? Arc(PointShapeViewModel? point1, PointShapeViewModel? point2, PointShapeViewModel? point3, PointShapeViewModel? point4, bool isStroked, bool isFilled);

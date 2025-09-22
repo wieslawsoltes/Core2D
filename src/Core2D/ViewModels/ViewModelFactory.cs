@@ -394,6 +394,50 @@ public class ViewModelFactory : IViewModelFactory
         return CreateLineShape(x, y, x, y, style, isStroked, name);
     }
 
+    public WireShapeViewModel CreateWireShape(PointShapeViewModel? start, PointShapeViewModel? end, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Line)
+    {
+        var wireShape = new WireShapeViewModel(_serviceProvider)
+        {
+            Name = name,
+            State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+            Properties = ImmutableArray.Create<PropertyViewModel>(),
+            Style = style,
+            IsStroked = isStroked,
+            IsFilled = false,
+            RendererKey = rendererKey,
+            Start = start,
+            End = end
+        };
+
+        return wireShape;
+    }
+
+    public WireShapeViewModel CreateWireShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Line)
+    {
+        var wireShape = new WireShapeViewModel(_serviceProvider)
+        {
+            Name = name,
+            State = ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone,
+            Properties = ImmutableArray.Create<PropertyViewModel>(),
+            Style = style,
+            IsStroked = isStroked,
+            IsFilled = false,
+            RendererKey = rendererKey,
+            Start = CreatePointShape(x1, y1),
+            End = CreatePointShape(x2, y2)
+        };
+
+        wireShape.Start.Owner = wireShape;
+        wireShape.End.Owner = wireShape;
+
+        return wireShape;
+    }
+
+    public WireShapeViewModel CreateWireShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Line)
+    {
+        return CreateWireShape(x, y, x, y, style, isStroked, name, rendererKey);
+    }
+
     public ArcShapeViewModel CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "")
     {
         var arcShape = new ArcShapeViewModel(_serviceProvider)

@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Core2D.Views.Shapes.WireShapeView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vms="using:Core2D.ViewModels.Shapes"
+             xmlns:vmd="using:Core2D.ViewModels.Designer"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static vmd:DesignerContext.Wire}"
+             d:DesignWidth="250" d:DesignHeight="420"
+             x:DataType="vms:WireShapeViewModel" x:CompileBindings="True">
+  <TabControl>
+    <TabItem Header="Wire">
+      <StackPanel Margin="{DynamicResource ContentMargin}">
+        <Label Content="Name"
+               Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding Name, Mode=TwoWay}" />
+        <Label Content="Renderer Key"
+               Margin="{DynamicResource TextControlThemePadding}" />
+        <TextBox Text="{Binding RendererKey, Mode=TwoWay}" />
+        <CheckBox Content="IsStroked"
+                  IsChecked="{Binding IsStroked, Mode=TwoWay}"
+                  HorizontalAlignment="Stretch" />
+        <CheckBox Content="IsFilled"
+                  IsChecked="{Binding IsFilled, Mode=TwoWay}"
+                  HorizontalAlignment="Stretch" />
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="Start">
+      <ContentControl Content="{Binding Start}" />
+    </TabItem>
+    <TabItem Header="End">
+      <ContentControl Content="{Binding End}" />
+    </TabItem>
+  </TabControl>
+</UserControl>

@@ -22,6 +22,8 @@ public interface IShapeRenderer
 
     void DrawLine(object? dc, LineShapeViewModel line, ShapeStyleViewModel? style);
 
+    void DrawWire(object? dc, WireShapeViewModel wire, ShapeStyleViewModel? style);
+
     void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style);
 
     void DrawEllipse(object? dc, EllipseShapeViewModel ellipse, ShapeStyleViewModel? style);

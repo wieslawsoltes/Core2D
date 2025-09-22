@@ -18,6 +18,8 @@ public interface IDrawNodeFactory
 
     ILineDrawNode CreateLineDrawNode(LineShapeViewModel line, ShapeStyleViewModel? style);
 
+    IWireDrawNode CreateWireDrawNode(WireShapeViewModel wire, ShapeStyleViewModel? style);
+
     IRectangleDrawNode CreateRectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel? style);
 
     IEllipseDrawNode CreateEllipseDrawNode(EllipseShapeViewModel ellipse, ShapeStyleViewModel? style);

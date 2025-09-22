@@ -192,6 +192,52 @@ public partial class NodeRendererViewModel : ViewModelBase, IShapeRenderer
         }
     }
 
+    public void DrawWire(object? dc, WireShapeViewModel wire, ShapeStyleViewModel? style)
+    {
+        if (style is null || _drawNodeCache is null || _state is null)
+        {
+            return;
+        }
+
+        var drawNodeCached = _drawNodeCache.Get(wire);
+        if (drawNodeCached is { })
+        {
+            if (style.IsDirty() || drawNodeCached.Style != style)
+            {
+                drawNodeCached.Style = wire.Style;
+                drawNodeCached.UpdateStyle();
+                drawNodeCached.UpdateGeometry();
+                style.Invalidate();
+            }
+
+            if (wire.IsDirty())
+            {
+                drawNodeCached.UpdateGeometry();
+            }
+
+            drawNodeCached.Draw(dc, _state.ZoomX);
+        }
+        else
+        {
+            var drawNode = CreateWireDrawNode(wire, style);
+
+            drawNode.UpdateStyle();
+
+            _drawNodeCache.Set(wire, drawNode);
+
+            drawNode.Draw(dc, _state.ZoomX);
+        }
+    }
+
+    private IDrawNode CreateWireDrawNode(WireShapeViewModel wire, ShapeStyleViewModel style)
+    {
+        return wire.RendererKey switch
+        {
+            WireRendererKeys.Line => _drawNodeFactory.CreateWireDrawNode(wire, style),
+            _ => _drawNodeFactory.CreateWireDrawNode(wire, style)
+        };
+    }
+
     public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
         if (style is null || _drawNodeCache is null || _state is null)

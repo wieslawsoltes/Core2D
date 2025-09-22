@@ -125,6 +125,14 @@
                  ToolTip.Tip="Image Tool" 
                  GroupName="Tool" 
                  Classes="tool" />
+    <Separator Classes="horizontal" />
+    <RadioButton Tag="{DynamicResource Wire}"
+                 Margin="0,4,0,4"
+                 Command="{Binding OnToolWire}"
+                 IsChecked="{Binding CurrentTool, Mode=OneWay, Converter={x:Static converters:IsCurrentToolConverter.Instance}, ConverterParameter=Wire}"
+                 ToolTip.Tip="Wire Tool"
+                 GroupName="Tool"
+                 Classes="tool" />
     <!-- Path Tool -->
     <Separator Classes="horizontal">
       <Separator.IsVisible>

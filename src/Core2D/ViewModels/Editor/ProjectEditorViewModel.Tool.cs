@@ -46,6 +46,12 @@ public partial class ProjectEditorViewModel
         }
     }
 
+    public void OnToolWire()
+    {
+        OnResetTool();
+        CurrentTool = Tools.FirstOrDefault(t => t.Title == "Wire");
+    }
+
     public void OnToolArc()
     {
         if (CurrentTool?.Title == "Path" && CurrentPathTool?.Title != "Arc")
