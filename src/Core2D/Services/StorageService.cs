@@ -89,6 +89,20 @@ internal static class StorageService
         MimeTypes = new[] { "image/svg+xml" }
     };
 
+    public static FilePickerFileType CadDwg { get; } = new("DWG")
+    {
+        Patterns = new[] { "*.dwg" },
+        AppleUniformTypeIdentifiers = new[] { "com.autodesk.dwg" },
+        MimeTypes = new[] { "image/vnd.dwg", "application/acad" }
+    };
+
+    public static FilePickerFileType CadDxf { get; } = new("DXF")
+    {
+        Patterns = new[] { "*.dxf" },
+        AppleUniformTypeIdentifiers = new[] { "com.autodesk.dxf" },
+        MimeTypes = new[] { "image/vnd.dxf", "application/dxf" }
+    };
+
     public static FilePickerFileType Xml { get; } = new("Xml")
     {
         Patterns = new[] { "*.xml" },

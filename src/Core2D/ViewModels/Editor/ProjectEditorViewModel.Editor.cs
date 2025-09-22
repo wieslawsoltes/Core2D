@@ -618,6 +618,67 @@ public partial class ProjectEditorViewModel
         }
     }
 
+    public void OnImportDwg(Stream stream)
+    {
+        var importer = ServiceProvider.GetService<IDwgImporter>();
+        if (importer is null)
+        {
+            return;
+        }
+
+        try
+        {
+            var result = importer.Import(stream);
+            if (result is null)
+            {
+                return;
+            }
+
+            if (Project is { } project && result.Blocks.Count > 0)
+            {
+                foreach (var block in result.Blocks)
+                {
+                    project.AddGroup(project.CurrentGroupLibrary, block);
+                }
+            }
+
+            if (Project is { } projectForStyles && result.Styles.Count > 0)
+            {
+                var styleLibrary = projectForStyles.CurrentStyleLibrary ?? projectForStyles.StyleLibraries.FirstOrDefault();
+                if (styleLibrary is null)
+                {
+                    var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+                    styleLibrary = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaultStyleLibraryName);
+                    if (styleLibrary is { })
+                    {
+                        projectForStyles.AddStyleLibrary(styleLibrary);
+                        projectForStyles.SetCurrentStyleLibrary(styleLibrary);
+                    }
+                }
+
+                if (styleLibrary is { })
+                {
+                    foreach (var style in result.Styles)
+                    {
+                        if (!styleLibrary.Items.Contains(style))
+                        {
+                            projectForStyles.AddStyle(styleLibrary, style);
+                        }
+                    }
+                }
+            }
+
+            if (result.Shapes.Count > 0)
+            {
+                ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(result.Shapes);
+            }
+        }
+        catch (Exception ex)
+        {
+            ServiceProvider.GetService<ILog>()?.LogException(ex);
+        }
+    }
+
     public void OnExportJson(Stream stream, object item)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
@@ -981,6 +1042,16 @@ public partial class ProjectEditorViewModel
                     if (stream is { })
                     {
                         OnImportSvg(stream);
+                        result = true;
+                    }
+                }
+                else if (string.Compare(ext, ProjectEditorConfiguration.DefaultDwgExtension, StringComparison.OrdinalIgnoreCase) == 0
+                    || string.Compare(ext, ProjectEditorConfiguration.DefaultDxfExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        OnImportDwg(stream);
                         result = true;
                     }
                 }
