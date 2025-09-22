@@ -20,6 +20,7 @@ using Core2D.Modules.FileWriter.Xaml;
 using Core2D.Modules.Log.Trace;
 using Core2D.Modules.Renderer.Avalonia;
 using Core2D.Modules.Renderer.Dwg;
+using Core2D.Modules.Renderer.PdfSharp;
 using Core2D.Modules.Renderer.SkiaSharp;
 using Core2D.Modules.ScriptRunner.Roslyn;
 using Core2D.Modules.Serializer.Newtonsoft;
@@ -152,6 +153,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<SkiaSharpPathConverter>().As<IPathConverter>().InstancePerLifetimeScope();
         builder.RegisterType<SkiaSharpSvgConverter>().As<ISvgConverter>().InstancePerLifetimeScope();
         builder.RegisterType<DwgImporter>().As<IDwgImporter>().InstancePerLifetimeScope();
+        builder.RegisterType<PdfImporter>().As<IPdfImporter>().InstancePerLifetimeScope();
 
         builder.RegisterType<DrawingGroupXamlExporter>().As<IXamlExporter>().InstancePerLifetimeScope();
         builder.RegisterType<SvgSvgExporter>().As<ISvgExporter>().InstancePerLifetimeScope();
