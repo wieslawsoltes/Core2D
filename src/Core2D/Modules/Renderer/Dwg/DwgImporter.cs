@@ -51,7 +51,7 @@ internal sealed class DwgImporter : IDwgImporter
         var buffer = ReadAllBytes(stream);
         if (buffer.Length == 0)
         {
-            return new DwgImportResult(new List<BaseShapeViewModel>(), new List<BlockShapeViewModel>());
+            return new DwgImportResult(new List<BaseShapeViewModel>(), new List<BlockShapeViewModel>(), new List<ShapeStyleViewModel>());
         }
 
         var document = TryLoadDocument(buffer);
@@ -91,7 +91,9 @@ internal sealed class DwgImporter : IDwgImporter
             shapes = new List<BaseShapeViewModel>();
         }
 
-        return new DwgImportResult(shapes, blocks);
+        var styles = context.CollectStyles();
+
+        return new DwgImportResult(shapes, blocks, styles);
     }
 
     private static byte[] ReadAllBytes(Stream stream)
@@ -180,6 +182,11 @@ internal sealed class DwgImporter : IDwgImporter
             }
 
             return _blockCache.Values.ToList();
+        }
+
+        public IList<ShapeStyleViewModel> CollectStyles()
+        {
+            return _styleCache.Values.ToList();
         }
 
         private static bool ShouldSkip(BlockRecord record)

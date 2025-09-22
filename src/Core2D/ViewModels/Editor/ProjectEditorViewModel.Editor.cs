@@ -642,6 +642,32 @@ public partial class ProjectEditorViewModel
                 }
             }
 
+            if (Project is { } projectForStyles && result.Styles.Count > 0)
+            {
+                var styleLibrary = projectForStyles.CurrentStyleLibrary ?? projectForStyles.StyleLibraries.FirstOrDefault();
+                if (styleLibrary is null)
+                {
+                    var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+                    styleLibrary = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaultStyleLibraryName);
+                    if (styleLibrary is { })
+                    {
+                        projectForStyles.AddStyleLibrary(styleLibrary);
+                        projectForStyles.SetCurrentStyleLibrary(styleLibrary);
+                    }
+                }
+
+                if (styleLibrary is { })
+                {
+                    foreach (var style in result.Styles)
+                    {
+                        if (!styleLibrary.Items.Contains(style))
+                        {
+                            projectForStyles.AddStyle(styleLibrary, style);
+                        }
+                    }
+                }
+            }
+
             if (result.Shapes.Count > 0)
             {
                 ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(result.Shapes);
