@@ -12,6 +12,7 @@
     <Image x:Key="SelectionIcon" Source="{StaticResource Selection}" Width="16" Height="16" />
     <Image x:Key="PointIcon" Source="{StaticResource Point}" Width="16" Height="16" />
     <Image x:Key="LineIcon" Source="{StaticResource Line}" Width="16" Height="16" />
+    <Image x:Key="WireIcon" Source="{StaticResource Wire}" Width="16" Height="16" />
     <Image x:Key="ArcIcon" Source="{StaticResource Arc}" Width="16" Height="16" />
     <Image x:Key="CubicBezierIcon" Source="{StaticResource CubicBezier}" Width="16" Height="16" />
     <Image x:Key="QuadraticBezierIcon" Source="{StaticResource QuadraticBezier}" Width="16" Height="16" />

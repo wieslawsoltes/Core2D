@@ -75,6 +75,8 @@ public class DesignerContext
 
     public static LineShapeViewModel? Line { get; private set; }
 
+    public static WireShapeViewModel? Wire { get; private set; }
+
     public static PathShapeViewModel? Path { get; private set; }
 
     public static PointShapeViewModel? Point { get; private set; }
@@ -189,6 +191,7 @@ public class DesignerContext
         Group = factory.CreateBlockShape("Block");
         Image = factory.CreateImageShape(0, 0, ShapeStyle, "key");
         Line = factory.CreateLineShape(0, 0, ShapeStyle);
+        Wire = factory.CreateWireShape(0, 0, ShapeStyle);
         Path = factory.CreatePathShape(ShapeStyle, ImmutableArray.Create<PathFigureViewModel>(), FillRule.EvenOdd);
         Point = factory.CreatePointShape();
         QuadraticBezier = factory.CreateQuadraticBezierShape(0, 0, ShapeStyle);

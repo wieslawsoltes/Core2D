@@ -17,7 +17,13 @@ public partial class LineShapeViewModel : BaseShapeViewModel
     [AutoNotify] private PointShapeViewModel? _start;
     [AutoNotify] private PointShapeViewModel? _end;
 
-    public LineShapeViewModel(IServiceProvider? serviceProvider) : base(serviceProvider, typeof(LineShapeViewModel))
+    protected LineShapeViewModel(IServiceProvider? serviceProvider, Type targetType)
+        : base(serviceProvider, targetType)
+    {
+    }
+
+    public LineShapeViewModel(IServiceProvider? serviceProvider)
+        : this(serviceProvider, typeof(LineShapeViewModel))
     {
     }
 

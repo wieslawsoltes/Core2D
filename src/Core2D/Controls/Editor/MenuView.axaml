@@ -510,6 +510,9 @@
       <MenuItem Header="_Point" Icon="{DynamicResource PointIcon}" Command="{Binding OnToolPoint}" InputGesture="P" />
       <Separator />
       <MenuItem Header="_Line" Icon="{DynamicResource LineIcon}" Command="{Binding OnToolLine}" InputGesture="L" />
+      <Separator />
+      <MenuItem Header="_Wire" Icon="{DynamicResource WireIcon}" Command="{Binding OnToolWire}" InputGesture="W" />
+      <Separator />
       <MenuItem Header="_Arc" Icon="{DynamicResource ArcIcon}" Command="{Binding OnToolArc}" InputGesture="A" />
       <MenuItem Header="Cubic _Bezier" Icon="{DynamicResource CubicBezierIcon}" Command="{Binding OnToolCubicBezier}" InputGesture="B" />
       <MenuItem Header="_Quadratic Bezier" Icon="{DynamicResource QuadraticBezierIcon}" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q" />

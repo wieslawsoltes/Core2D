@@ -91,6 +91,21 @@
                          Geometry="F1M1.853553295135498,1.146446704864502L14.853553771972656,14.146446228027344L14.146446228027344,14.853553771972656L1.146446704864502,1.853553295135498L1.853553295135498,1.146446704864502z" />
       </DrawingGroup>
     </DrawingImage>
+    <DrawingImage x:Key="Wire">
+      <DrawingGroup>
+        <GeometryDrawing Brush="{DynamicResource IconTransparentBrush}" Geometry="F1M0,0L16,0L16,16L0,16z" />
+        <GeometryDrawing Brush="{DynamicResource IconAccentBrush1}"
+                         Geometry="F1M2.2,11.8L3.0,12.6L7.8,7.8L7.0,7.0z" />
+        <GeometryDrawing Brush="{DynamicResource IconAccentBrush1}"
+                         Geometry="F1M6.6,8.4L8.2,10.0L13.0,5.2L11.4,3.6z" />
+        <GeometryDrawing Brush="{DynamicResource IconAccentBrush2}"
+                         Geometry="M3.4,12.4A1.4,1.4 0 1 1 0.6,12.4A1.4,1.4 0 1 1 3.4,12.4z" />
+        <GeometryDrawing Brush="{DynamicResource IconAccentBrush2}"
+                         Geometry="M7.9,8.4A1.2,1.2 0 1 1 5.5,8.4A1.2,1.2 0 1 1 7.9,8.4z" />
+        <GeometryDrawing Brush="{DynamicResource IconAccentBrush2}"
+                         Geometry="M12.8,3.8A1.5,1.5 0 1 1 9.8,3.8A1.5,1.5 0 1 1 12.8,3.8z" />
+      </DrawingGroup>
+    </DrawingImage>
     <DrawingImage x:Key="Arc">
       <DrawingGroup>
         <GeometryDrawing Brush="{DynamicResource IconTransparentBrush}" Geometry="F1M0,0L16,0L16,16L0,16z" />

@@ -33,6 +33,11 @@ internal class AvaloniaDrawNodeFactory : IDrawNodeFactory
         return new LineDrawNode(line, style);
     }
 
+    public IWireDrawNode CreateWireDrawNode(WireShapeViewModel wire, ShapeStyleViewModel? style)
+    {
+        return new WireDrawNode(wire, style);
+    }
+
     public IRectangleDrawNode CreateRectangleDrawNode(RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
         return new RectangleDrawNode(rectangle, style);

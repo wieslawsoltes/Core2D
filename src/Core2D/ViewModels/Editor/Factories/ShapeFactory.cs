@@ -76,6 +76,46 @@ public class ShapeFactory : IShapeFactory
         return line;
     }
 
+    WireShapeViewModel? IShapeFactory.Wire(double x1, double y1, double x2, double y2, bool isStroked, string rendererKey)
+    {
+        var factory = _serviceProvider.GetService<IViewModelFactory>();
+        var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = project.CurrentStyleLibrary?.Selected is { }
+            ? (ShapeStyleViewModel)project.CurrentStyleLibrary.Selected
+            : factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        var wire = factory.CreateWireShape(
+            x1, y1,
+            x2, y2,
+            style.CopyShared(null),
+            isStroked,
+            rendererKey: rendererKey);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, wire);
+        return wire;
+    }
+
+    WireShapeViewModel? IShapeFactory.Wire(PointShapeViewModel? start, PointShapeViewModel? end, bool isStroked, string rendererKey)
+    {
+        var factory = _serviceProvider.GetService<IViewModelFactory>();
+        var project = _serviceProvider.GetService<ProjectEditorViewModel>()?.Project;
+        if (factory is null || project is null)
+        {
+            return default;
+        }
+        var style = (ShapeStyleViewModel?)project.CurrentStyleLibrary?.Selected ?? factory.CreateShapeStyle(ProjectEditorConfiguration.DefaultStyleName);
+        var wire = factory.CreateWireShape(
+            start,
+            end,
+            style.CopyShared(null),
+            isStroked,
+            rendererKey: rendererKey);
+        project.AddShape(project.CurrentContainer?.CurrentLayer, wire);
+        return wire;
+    }
+
     ArcShapeViewModel? IShapeFactory.Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled)
     {
         var factory = _serviceProvider.GetService<IViewModelFactory>();

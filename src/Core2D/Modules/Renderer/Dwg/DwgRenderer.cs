@@ -802,6 +802,19 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
         }
     }
 
+    public void DrawWire(object? dc, WireShapeViewModel wire, ShapeStyleViewModel? style)
+    {
+        switch (wire.RendererKey)
+        {
+            default:
+                DrawLine(dc, wire, style);
+                break;
+            case WireRendererKeys.Line:
+                DrawLine(dc, wire, style);
+                break;
+        }
+    }
+
     public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)
     {
         if (_currentLayer is null)
