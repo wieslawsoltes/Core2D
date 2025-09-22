@@ -812,6 +812,75 @@ public partial class DwgRenderer : ViewModelBase, IShapeRenderer
             case WireRendererKeys.Line:
                 DrawLine(dc, wire, style);
                 break;
+            case WireRendererKeys.Bezier:
+                DrawBezierWire(dc, wire, style);
+                break;
+        }
+    }
+
+    private void DrawBezierWire(object? dc, WireShapeViewModel wire, ShapeStyleViewModel? style)
+    {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
+        if (dc is not CadDocument doc)
+        {
+            return;
+        }
+
+        if (style is null)
+        {
+            return;
+        }
+
+        if (!wire.IsStroked)
+        {
+            return;
+        }
+
+        if (!WireGeometryHelper.TryCreateGeometry(wire, out var geometry))
+        {
+            return;
+        }
+
+        if (!geometry.IsBezier)
+        {
+            DrawLine(dc, wire, style);
+            return;
+        }
+
+        var spline = CreateEntitySplineCubic(
+            geometry.Start.X,
+            geometry.Start.Y,
+            geometry.Control1.X,
+            geometry.Control1.Y,
+            geometry.Control2.X,
+            geometry.Control2.Y,
+            geometry.End.X,
+            geometry.End.Y);
+
+        spline.Layer = _currentLayer;
+        if (style.Stroke?.Color is { } strokeColor)
+        {
+            spline.Color = ToColor(strokeColor);
+            spline.Transparency = new Transparency(ToTransparency(strokeColor));
+        }
+        spline.LineWeight = ToLineweight(style.Stroke?.Thickness ?? 0.0);
+        ApplyLineType(doc, spline, style);
+        AddEntity(doc, spline);
+
+        if (style.Stroke?.StartArrow is { } startArrow && startArrow.ArrowType != Core2D.Model.Style.ArrowType.None)
+        {
+            var angle = Math.Atan2(geometry.Start.Y - geometry.Control1.Y, geometry.Start.X - geometry.Control1.X);
+            DrawArrowHead(doc, _currentLayer, geometry.Start.X, geometry.Start.Y, angle, style, startArrow, wire.IsFilled);
+        }
+
+        if (style.Stroke?.EndArrow is { } endArrow && endArrow.ArrowType != Core2D.Model.Style.ArrowType.None)
+        {
+            var angle = Math.Atan2(geometry.End.Y - geometry.Control2.Y, geometry.End.X - geometry.Control2.X);
+            DrawArrowHead(doc, _currentLayer, geometry.End.X, geometry.End.Y, angle, style, endArrow, wire.IsFilled);
         }
     }
 

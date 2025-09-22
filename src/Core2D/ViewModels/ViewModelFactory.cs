@@ -394,7 +394,7 @@ public class ViewModelFactory : IViewModelFactory
         return CreateLineShape(x, y, x, y, style, isStroked, name);
     }
 
-    public WireShapeViewModel CreateWireShape(PointShapeViewModel? start, PointShapeViewModel? end, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Line)
+    public WireShapeViewModel CreateWireShape(PointShapeViewModel? start, PointShapeViewModel? end, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Bezier)
     {
         var wireShape = new WireShapeViewModel(_serviceProvider)
         {
@@ -412,7 +412,7 @@ public class ViewModelFactory : IViewModelFactory
         return wireShape;
     }
 
-    public WireShapeViewModel CreateWireShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Line)
+    public WireShapeViewModel CreateWireShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Bezier)
     {
         var wireShape = new WireShapeViewModel(_serviceProvider)
         {
@@ -433,7 +433,7 @@ public class ViewModelFactory : IViewModelFactory
         return wireShape;
     }
 
-    public WireShapeViewModel CreateWireShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Line)
+    public WireShapeViewModel CreateWireShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Bezier)
     {
         return CreateWireShape(x, y, x, y, style, isStroked, name, rendererKey);
     }

@@ -32,7 +32,7 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
         UpdateGeometry();
     }
 
-    private MarkerBase CreateArrowMarker(double x, double y, double angle, ShapeStyleViewModel shapeStyleViewModel, ArrowStyleViewModel style)
+    protected MarkerBase CreateArrowMarker(double x, double y, double angle, ShapeStyleViewModel shapeStyleViewModel, ArrowStyleViewModel style)
     {
         switch (style.ArrowType)
         {
@@ -113,7 +113,7 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
         }
     }
 
-    private void UpdateMarkers()
+    protected virtual void UpdateMarkers()
     {
         if (Line.Start is null || Line.End is null)
         {
@@ -160,7 +160,7 @@ internal class LineDrawNode : DrawNode, ILineDrawNode
         }
     }
 
-    public sealed override void UpdateGeometry()
+    public override void UpdateGeometry()
     {
         ScaleThickness = Line.State.HasFlag(ShapeStateFlags.Thickness);
         ScaleSize = Line.State.HasFlag(ShapeStateFlags.Size);

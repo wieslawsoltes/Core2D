@@ -437,6 +437,89 @@ public partial class WinFormsRenderer : ViewModelBase, IShapeRenderer
             case WireRendererKeys.Line:
                 DrawLine(dc, wire, style);
                 break;
+            case WireRendererKeys.Bezier:
+                DrawBezierWire(dc, wire, style);
+                break;
+        }
+    }
+
+    private void DrawBezierWire(object? dc, WireShapeViewModel wire, ShapeStyleViewModel? style)
+    {
+        if (dc is not Graphics gfx)
+        {
+            return;
+        }
+
+        if (style is null)
+        {
+            return;
+        }
+
+        if (!WireGeometryHelper.TryCreateGeometry(wire, out var geometry))
+        {
+            return;
+        }
+
+        if (!geometry.IsBezier)
+        {
+            DrawLine(dc, wire, style);
+            return;
+        }
+
+        var p1 = new PointF(_scaleToPage(geometry.Start.X), _scaleToPage(geometry.Start.Y));
+        var c1 = new PointF(_scaleToPage(geometry.Control1.X), _scaleToPage(geometry.Control1.Y));
+        var c2 = new PointF(_scaleToPage(geometry.Control2.X), _scaleToPage(geometry.Control2.Y));
+        var p2 = new PointF(_scaleToPage(geometry.End.X), _scaleToPage(geometry.End.Y));
+
+        using var path = new GraphicsPath();
+        path.AddBezier(p1, c1, c2, p2);
+
+        var pen = ToPen(style);
+        if (pen is { })
+        {
+            if (wire.IsStroked)
+            {
+                gfx.DrawPath(pen, path);
+            }
+            pen.Dispose();
+        }
+
+        DrawBezierWireArrows(gfx, wire, style, geometry);
+    }
+
+    private void DrawBezierWireArrows(Graphics gfx, WireShapeViewModel wire, ShapeStyleViewModel style, WireGeometry geometry)
+    {
+        var startArrow = style.Stroke?.StartArrow;
+        var endArrow = style.Stroke?.EndArrow;
+
+        if (startArrow is { ArrowType: not ArrowType.None } && style.Fill?.Color is { })
+        {
+            var fill = ToBrush(style.Fill.Color);
+            var pen = ToPen(style);
+            if (fill is { } && pen is { })
+            {
+                var start = new PointF(_scaleToPage(geometry.Start.X), _scaleToPage(geometry.Start.Y));
+                var ctrl = new PointF(_scaleToPage(geometry.Control1.X), _scaleToPage(geometry.Control1.Y));
+                var angle = (float)(Math.Atan2(start.Y - ctrl.Y, start.X - ctrl.X) * 180.0 / Math.PI);
+                DrawLineArrowInternal(gfx, pen, fill, start.X, start.Y, angle, startArrow, wire);
+            }
+            fill?.Dispose();
+            pen?.Dispose();
+        }
+
+        if (endArrow is { ArrowType: not ArrowType.None } && style.Fill?.Color is { })
+        {
+            var fill = ToBrush(style.Fill.Color);
+            var pen = ToPen(style);
+            if (fill is { } && pen is { })
+            {
+                var end = new PointF(_scaleToPage(geometry.End.X), _scaleToPage(geometry.End.Y));
+                var ctrl = new PointF(_scaleToPage(geometry.Control2.X), _scaleToPage(geometry.Control2.Y));
+                var angle = (float)(Math.Atan2(end.Y - ctrl.Y, end.X - ctrl.X) * 180.0 / Math.PI);
+                DrawLineArrowInternal(gfx, pen, fill, end.X, end.Y, angle, endArrow, wire);
+            }
+            fill?.Dispose();
+            pen?.Dispose();
         }
     }
 

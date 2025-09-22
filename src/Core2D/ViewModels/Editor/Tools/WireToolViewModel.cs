@@ -20,7 +20,7 @@ public partial class WireToolViewModel : ViewModelBase, IEditorTool
     private WireShapeViewModel? _wire;
     private WireSelection? _selection;
 
-    [AutoNotify] private string _rendererKey = WireRendererKeys.Line;
+    [AutoNotify] private string _rendererKey = WireRendererKeys.Bezier;
 
     public string Title => "Wire";
 
