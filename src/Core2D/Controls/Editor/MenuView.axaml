@@ -34,6 +34,7 @@
       <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson, FallbackValue={x:Null}}" />
       <Separator />
       <MenuItem Header="Import Sv_g..." Command="{Binding Platform.OnImportSvg, FallbackValue={x:Null}}" />
+      <MenuItem Header="Import DW_G/DXF..." Command="{Binding Platform.OnImportDwg, FallbackValue={x:Null}}" />
       <Separator />
       <MenuItem Header="_Export..." Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" InputGesture="Ctrl+E" />
       <Separator IsVisible="{Binding !!RootDock}" />

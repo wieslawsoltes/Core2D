@@ -19,6 +19,8 @@ public interface IProjectEditorPlatform
 
     void OnImportSvg(object? param);
 
+    void OnImportDwg(object? param);
+
     void OnExportJson(object? param);
 
     void OnExport(object? param);

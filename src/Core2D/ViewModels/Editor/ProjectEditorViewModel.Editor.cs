@@ -618,6 +618,41 @@ public partial class ProjectEditorViewModel
         }
     }
 
+    public void OnImportDwg(Stream stream)
+    {
+        var importer = ServiceProvider.GetService<IDwgImporter>();
+        if (importer is null)
+        {
+            return;
+        }
+
+        try
+        {
+            var result = importer.Import(stream);
+            if (result is null)
+            {
+                return;
+            }
+
+            if (Project is { } project && result.Blocks.Count > 0)
+            {
+                foreach (var block in result.Blocks)
+                {
+                    project.AddGroup(project.CurrentGroupLibrary, block);
+                }
+            }
+
+            if (result.Shapes.Count > 0)
+            {
+                ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(result.Shapes);
+            }
+        }
+        catch (Exception ex)
+        {
+            ServiceProvider.GetService<ILog>()?.LogException(ex);
+        }
+    }
+
     public void OnExportJson(Stream stream, object item)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();

@@ -53,6 +53,16 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         };
     }
 
+    private static List<FilePickerFileType> GetCadFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.CadDwg,
+            StorageService.CadDxf,
+            StorageService.All
+        };
+    }
+
     private static List<FilePickerFileType> GetScriptFileTypes()
     {
         return new List<FilePickerFileType>
@@ -353,6 +363,55 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                     if (stream is { })
                     {
                         ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportSvg(stream);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ServiceProvider.GetService<ILog>()?.LogException(ex);
+        }
+    }
+
+    public async void OnImportDwg(object? param)
+    {
+        try
+        {
+            if (param is null)
+            {
+                var storageProvider = StorageService.GetStorageProvider();
+                if (storageProvider is null)
+                {
+                    return;
+                }
+
+                var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                {
+                    Title = "Import DWG/DXF",
+                    FileTypeFilter = GetCadFileTypes(),
+                    AllowMultiple = true
+                });
+
+                foreach (var file in result)
+                {
+                    await using var stream = await file.OpenReadAsync();
+                    ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportDwg(stream);
+                }
+            }
+            else
+            {
+                if (param is not string path)
+                {
+                    return;
+                }
+
+                var fileSystem = ServiceProvider.GetService<IFileSystem>();
+                if (fileSystem is { } && fileSystem.Exists(path))
+                {
+                    await using var stream = fileSystem.Open(path);
+                    if (stream is { })
+                    {
+                        ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportDwg(stream);
                     }
                 }
             }
