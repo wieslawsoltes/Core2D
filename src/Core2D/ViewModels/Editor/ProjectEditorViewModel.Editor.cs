@@ -1019,6 +1019,16 @@ public partial class ProjectEditorViewModel
                         result = true;
                     }
                 }
+                else if (string.Compare(ext, ProjectEditorConfiguration.DefaultDwgExtension, StringComparison.OrdinalIgnoreCase) == 0
+                    || string.Compare(ext, ProjectEditorConfiguration.DefaultDxfExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        OnImportDwg(stream);
+                        result = true;
+                    }
+                }
                 else if (ProjectEditorConfiguration.DefaultImageExtensions.Any(r => string.Compare(ext, r, StringComparison.OrdinalIgnoreCase) == 0))
                 {
                     await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
