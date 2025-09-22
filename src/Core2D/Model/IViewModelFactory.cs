@@ -75,11 +75,11 @@ public interface IViewModelFactory
 
     LineShapeViewModel CreateLineShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, string name = "");
 
-    WireShapeViewModel CreateWireShape(PointShapeViewModel? start, PointShapeViewModel? end, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Line);
+    WireShapeViewModel CreateWireShape(PointShapeViewModel? start, PointShapeViewModel? end, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Bezier);
 
-    WireShapeViewModel CreateWireShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Line);
+    WireShapeViewModel CreateWireShape(double x1, double y1, double x2, double y2, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Bezier);
 
-    WireShapeViewModel CreateWireShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Line);
+    WireShapeViewModel CreateWireShape(double x, double y, ShapeStyleViewModel? style, bool isStroked = true, string name = "", string rendererKey = WireRendererKeys.Bezier);
 
     ArcShapeViewModel CreateArcShape(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, ShapeStyleViewModel? style, bool isStroked = true, bool isFilled = false, string name = "");
 

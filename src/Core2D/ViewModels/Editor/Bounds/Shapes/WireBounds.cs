@@ -4,8 +4,8 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
-using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
+using Core2D.Model.Editor;
 using Core2D.Spatial;
 using Core2D.ViewModels.Shapes;
 
@@ -49,26 +49,17 @@ public class WireBounds : IBounds
             throw new ArgumentNullException(nameof(shape));
         }
 
-        if (wire.Start is null || wire.End is null)
+        if (!WireGeometryHelper.TryCreateGeometry(wire, out var geometry))
         {
             return false;
         }
 
-        Point2 a;
-        Point2 b;
         if (wire.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
         {
-            a = new Point2(wire.Start.X * scale, wire.Start.Y * scale);
-            b = new Point2(wire.End.X * scale, wire.End.Y * scale);
-        }
-        else
-        {
-            a = new Point2(wire.Start.X, wire.Start.Y);
-            b = new Point2(wire.End.X, wire.End.Y);
+            geometry = ScaleGeometry(geometry, scale);
         }
 
-        var nearest = target.NearestOnLine(a, b);
-        var distance = target.DistanceTo(nearest);
+        var distance = WireGeometryHelper.DistanceToPoint(geometry, target);
         return distance < radius;
     }
 
@@ -79,24 +70,33 @@ public class WireBounds : IBounds
             throw new ArgumentNullException(nameof(shape));
         }
 
-        if (wire.Start is null || wire.End is null)
+        if (!WireGeometryHelper.TryCreateGeometry(wire, out var geometry))
         {
             return false;
         }
 
-        Point2 a;
-        Point2 b;
         if (wire.State.HasFlag(ShapeStateFlags.Size) && scale != 1.0)
         {
-            a = new Point2(wire.Start.X * scale, wire.Start.Y * scale);
-            b = new Point2(wire.End.X * scale, wire.End.Y * scale);
-        }
-        else
-        {
-            a = new Point2(wire.Start.X, wire.Start.Y);
-            b = new Point2(wire.End.X, wire.End.Y);
+            geometry = ScaleGeometry(geometry, scale);
         }
 
-        return Line2.LineIntersectsWithRect(a, b, target, out _, out _, out _, out _);
+        if (!geometry.IsBezier)
+        {
+            return Line2.LineIntersectsWithRect(geometry.Start, geometry.End, target, out _, out _, out _, out _);
+        }
+
+        return WireGeometryHelper.IntersectsRect(geometry, target);
+    }
+
+    private static WireGeometry ScaleGeometry(WireGeometry geometry, double scale)
+    {
+        static Point2 ScalePoint(Point2 point, double factor) => new(point.X * factor, point.Y * factor);
+
+        return new WireGeometry(
+            ScalePoint(geometry.Start, scale),
+            ScalePoint(geometry.Control1, scale),
+            ScalePoint(geometry.Control2, scale),
+            ScalePoint(geometry.End, scale),
+            geometry.IsBezier);
     }
 }

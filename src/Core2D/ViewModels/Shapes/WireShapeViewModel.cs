@@ -14,11 +14,15 @@ namespace Core2D.ViewModels.Shapes;
 public static class WireRendererKeys
 {
     public const string Line = "Line";
+    public const string Bezier = "Bezier";
 }
 
 public partial class WireShapeViewModel : LineShapeViewModel
 {
-    [AutoNotify] private string _rendererKey = WireRendererKeys.Line;
+    public const string BezierControl1Property = "Wire.BezierControl1";
+    public const string BezierControl2Property = "Wire.BezierControl2";
+
+    [AutoNotify] private string _rendererKey = WireRendererKeys.Bezier;
 
     public WireShapeViewModel(IServiceProvider? serviceProvider)
         : base(serviceProvider, typeof(WireShapeViewModel))

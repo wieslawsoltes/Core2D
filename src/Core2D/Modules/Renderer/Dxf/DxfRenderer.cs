@@ -665,7 +665,68 @@ public partial class DxfRenderer : ViewModelBase, IShapeRenderer
             case WireRendererKeys.Line:
                 DrawLine(dc, wire, style);
                 break;
+            case WireRendererKeys.Bezier:
+                DrawBezierWire(dc, wire, style);
+                break;
         }
+    }
+
+    private void DrawBezierWire(object? dc, WireShapeViewModel wire, ShapeStyleViewModel? style)
+    {
+        if (_currentLayer is null)
+        {
+            return;
+        }
+
+        if (dc is not DXF.DxfDocument dxf)
+        {
+            return;
+        }
+
+        if (style is null)
+        {
+            return;
+        }
+
+        if (!wire.IsStroked)
+        {
+            return;
+        }
+
+        if (!WireGeometryHelper.TryCreateGeometry(wire, out var geometry))
+        {
+            return;
+        }
+
+        if (!geometry.IsBezier)
+        {
+            DrawLine(dc, wire, style);
+            return;
+        }
+
+        var dxfSpline = CreateCubicSpline(
+            geometry.Start.X,
+            geometry.Start.Y,
+            geometry.Control1.X,
+            geometry.Control1.Y,
+            geometry.Control2.X,
+            geometry.Control2.Y,
+            geometry.End.X,
+            geometry.End.Y);
+
+        if (style.Stroke?.Color is { })
+        {
+            var stroke = ToColor(style.Stroke.Color);
+            var strokeTransparency = ToTransparency(style.Stroke.Color);
+            var lineweight = ToLineweight(style.Stroke.Thickness);
+
+            dxfSpline.Layer = _currentLayer;
+            dxfSpline.Color = stroke;
+            dxfSpline.Transparency.Value = strokeTransparency;
+            dxfSpline.Lineweight = lineweight;
+        }
+
+        AddEntity(dxf, dxfSpline);
     }
 
     public void DrawRectangle(object? dc, RectangleShapeViewModel rectangle, ShapeStyleViewModel? style)

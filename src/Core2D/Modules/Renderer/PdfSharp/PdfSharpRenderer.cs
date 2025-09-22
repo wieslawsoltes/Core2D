@@ -388,6 +388,93 @@ public partial class PdfSharpRenderer : ViewModelBase, IShapeRenderer
             case WireRendererKeys.Line:
                 DrawLine(dc, wire, style);
                 break;
+            case WireRendererKeys.Bezier:
+                DrawBezierWire(dc, wire, style);
+                break;
+        }
+    }
+
+    private void DrawBezierWire(object? dc, WireShapeViewModel wire, ShapeStyleViewModel? style)
+    {
+        if (dc is not XGraphics gfx)
+        {
+            return;
+        }
+
+        if (style is null)
+        {
+            return;
+        }
+
+        if (!WireGeometryHelper.TryCreateGeometry(wire, out var geometry))
+        {
+            return;
+        }
+
+        if (!geometry.IsBezier)
+        {
+            DrawLine(dc, wire, style);
+            return;
+        }
+
+        var path = new XGraphicsPath();
+        path.AddBezier(
+            _scaleToPage(geometry.Start.X),
+            _scaleToPage(geometry.Start.Y),
+            _scaleToPage(geometry.Control1.X),
+            _scaleToPage(geometry.Control1.Y),
+            _scaleToPage(geometry.Control2.X),
+            _scaleToPage(geometry.Control2.Y),
+            _scaleToPage(geometry.End.X),
+            _scaleToPage(geometry.End.Y));
+
+        var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+        if (pen is { })
+        {
+            if (wire.IsStroked)
+            {
+                gfx.DrawPath(pen, path);
+            }
+        }
+
+        DrawBezierWireArrows(gfx, wire, style, geometry);
+    }
+
+    private void DrawBezierWireArrows(XGraphics gfx, WireShapeViewModel wire, ShapeStyleViewModel style, WireGeometry geometry)
+    {
+        if (style.Fill?.Color is null)
+        {
+            return;
+        }
+
+        if (style.Stroke?.StartArrow is { ArrowType: not ArrowType.None } startArrow)
+        {
+            var fill = ToXBrush(style.Fill.Color);
+            var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+            if (fill is { } && pen is { })
+            {
+                var x = _scaleToPage(geometry.Start.X);
+                var y = _scaleToPage(geometry.Start.Y);
+                var cx = _scaleToPage(geometry.Control1.X);
+                var cy = _scaleToPage(geometry.Control1.Y);
+                var angle = Math.Atan2(y - cy, x - cx) * 180.0 / Math.PI;
+                DrawLineArrowInternal(gfx, pen, fill, x, y, angle, startArrow, wire);
+            }
+        }
+
+        if (style.Stroke?.EndArrow is { ArrowType: not ArrowType.None } endArrow)
+        {
+            var fill = ToXBrush(style.Fill.Color);
+            var pen = ToXPen(style, _scaleToPage, _sourceDpi, _targetDpi);
+            if (fill is { } && pen is { })
+            {
+                var x = _scaleToPage(geometry.End.X);
+                var y = _scaleToPage(geometry.End.Y);
+                var cx = _scaleToPage(geometry.Control2.X);
+                var cy = _scaleToPage(geometry.Control2.Y);
+                var angle = Math.Atan2(y - cy, x - cx) * 180.0 / Math.PI;
+                DrawLineArrowInternal(gfx, pen, fill, x, y, angle, endArrow, wire);
+            }
         }
     }
 
