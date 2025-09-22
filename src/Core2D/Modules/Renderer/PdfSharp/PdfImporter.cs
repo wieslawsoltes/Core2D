@@ -183,7 +183,7 @@ internal sealed class PdfImporter : IPdfImporter
             _pageTransform = Matrix3x2.CreateScale((float)_scale, (float)-_scale) * Matrix3x2.CreateTranslation(0f, (float)(PageHeight + _pageOffsetY));
             _pageVectorTransform = Matrix3x2.CreateScale((float)_scale, (float)-_scale);
             _styleBuilder = new StyleBuilder(_factory, _styleCache, _pageVectorTransform, _scale);
-            _textInterpreter = new TextInterpreter(_factory, _styleBuilder, _log, this);
+            _textInterpreter = new TextInterpreter(_factory, _styleBuilder, _log, this, page);
         }
 
         public IReadOnlyList<BaseShapeViewModel> Shapes => _shapes;
@@ -203,9 +203,6 @@ internal sealed class PdfImporter : IPdfImporter
             {
                 ProcessObject(element, graphicsState, stateStack, pathBuilder);
             }
-
-            // flush pending text state
-            _textInterpreter.Flush(_shapes);
         }
 
         private void ProcessObject(CObject element, GraphicsState state, Stack<GraphicsState> stack, PathBuilder pathBuilder)
@@ -1132,70 +1129,27 @@ internal sealed class PdfImporter : IPdfImporter
             private readonly StyleBuilder _styleBuilder;
             private readonly ILog? _log;
             private readonly PageInterpreter _owner;
+            private readonly PdfPage _page;
             private readonly TextState _state = new();
+            private readonly Dictionary<string, FontMetrics> _fontCache = new(StringComparer.Ordinal);
 
-            public TextInterpreter(IViewModelFactory factory, StyleBuilder styleBuilder, ILog? log, PageInterpreter owner)
+            public TextInterpreter(IViewModelFactory factory, StyleBuilder styleBuilder, ILog? log, PageInterpreter owner, PdfPage page)
             {
                 _factory = factory;
                 _styleBuilder = styleBuilder;
                 _log = log;
                 _owner = owner;
+                _page = page;
             }
 
             public void BeginText(GraphicsState graphicsState)
             {
-                _state.Reset();
-                _state.BaseGraphicsState = graphicsState.Clone();
+                _state.Reset(graphicsState.Clone());
             }
 
             public void EndText(ICollection<BaseShapeViewModel> shapes)
             {
-                Flush(shapes);
-                _state.Reset();
-            }
-
-            public void Flush(ICollection<BaseShapeViewModel> shapes)
-            {
-                if (_state.PendingText is null || _state.BaseGraphicsState is null)
-                {
-                    return;
-                }
-
-                try
-                {
-                    var style = _styleBuilder.GetOrCreateTextStyle(_state.BaseGraphicsState, _state.FontSize, _state.FontName);
-                    var position = GetTextPosition();
-                    var fontSize = Math.Max(_state.FontSize * _owner._scale, 0.1);
-                    var width = Math.Max(fontSize * 0.6 * _state.PendingText.Length, fontSize);
-                    var height = fontSize;
-
-                    var x1 = position.X;
-                    var y1 = position.Y - height;
-                    var x2 = position.X + width;
-                    var y2 = position.Y;
-
-                    if (!IntersectsClip(_state.BaseGraphicsState, x1, y1, x2, y2))
-                    {
-                        return;
-                    }
-
-                    var topLeft = _factory.CreatePointShape(x1, y1);
-                    var bottomRight = _factory.CreatePointShape(x2, y2);
-
-                    var text = _factory.CreateTextShape(topLeft, bottomRight, style, _state.PendingText, isStroked: true);
-                    text.Text = _state.PendingText;
-                    text.IsStroked = true;
-                    _state.AdvanceText(_state.PendingText);
-                    shapes.Add(text);
-                }
-                catch (Exception ex)
-                {
-                    _log?.LogWarning($"PDF importer skipped text: {ex.Message}");
-                }
-                finally
-                {
-                    _state.PendingText = null;
-                }
+                _state.Reset(null);
             }
 
             public bool TryHandle(COperator op, ICollection<BaseShapeViewModel> shapes)
@@ -1208,86 +1162,152 @@ internal sealed class PdfImporter : IPdfImporter
                 switch (op.OpCode.OpCodeName)
                 {
                     case OpCodeName.Tf:
-                        ApplyFont(op);
+                        HandleTf(op);
+                        return true;
+                    case OpCodeName.Tc:
+                        HandleTc(op);
+                        return true;
+                    case OpCodeName.Tw:
+                        HandleTw(op);
+                        return true;
+                    case OpCodeName.Tz:
+                        HandleTz(op);
+                        return true;
+                    case OpCodeName.TL:
+                        HandleTl(op);
+                        return true;
+                    case OpCodeName.Tr:
+                        HandleTr(op);
+                        return true;
+                    case OpCodeName.Ts:
+                        HandleTs(op);
                         return true;
                     case OpCodeName.Td:
-                        ApplyTranslation(op);
+                        HandleTd(op);
                         return true;
                     case OpCodeName.TD:
-                        ApplyTranslation(op);
-                        _state.Leading = -GetNumber(op, 1);
+                        HandleTd(op);
+                        HandleTlFromTd(op);
                         return true;
                     case OpCodeName.Tm:
-                        ApplyTextMatrix(op);
+                        HandleTm(op);
                         return true;
-                case OpCodeName.Tx:
-                    _state.MoveToNextLine();
-                    return true;
+                    case OpCodeName.Tx: // T*
+                        MoveToNextLine();
+                        return true;
                     case OpCodeName.Tj:
-                        AppendText(op, shapes);
+                        ShowTextOperand(op, shapes);
                         return true;
                     case OpCodeName.TJ:
-                        AppendTextArray(op, shapes);
+                        ShowTextArray(op, shapes);
+                        return true;
+                    case OpCodeName.QuoteSingle:
+                        MoveToNextLine();
+                        ShowTextOperand(op, shapes, operandIndex: 0);
+                        return true;
+                    case OpCodeName.QuoteDouble:
+                        HandleQuoteDouble(op, shapes);
                         return true;
                     default:
                         return false;
                 }
             }
 
-            private void AppendText(COperator op, ICollection<BaseShapeViewModel> shapes)
+            private void HandleTf(COperator op)
             {
-                if (op.Operands.Count == 0 || op.Operands[0] is not CString str)
+                if (op.Operands.Count < 2 || op.Operands[0] is not CName name)
                 {
                     return;
                 }
 
-                _state.PendingText = DecodeText(str) ?? string.Empty;
-                Flush(shapes);
+                var metrics = ResolveFont(name.Name);
+                if (metrics is null)
+                {
+                    _log?.LogWarning($"PDF importer could not resolve font '{name.Name}'.");
+                }
+
+                _state.Font = metrics;
+
+                var size = Math.Abs(GetNumber(op, 1));
+                _state.FontSize = size > 0.0 ? size : 12.0;
             }
 
-            private void AppendTextArray(COperator op, ICollection<BaseShapeViewModel> shapes)
+            private void HandleTc(COperator op)
             {
-                if (op.Operands.Count == 0 || op.Operands[0] is not CArray array)
+                if (op.Operands.Count == 0)
                 {
                     return;
                 }
 
-                foreach (var item in array)
-                {
-                    if (item is CString str)
-                    {
-                        _state.PendingText = DecodeText(str) ?? string.Empty;
-                        Flush(shapes);
-                    }
-                }
+                _state.CharSpacing = GetNumber(op, 0);
             }
 
-            private static string? DecodeText(CString str)
+            private void HandleTw(COperator op)
             {
-                var value = str.Value;
-                return string.IsNullOrEmpty(value) ? null : value;
-            }
-
-            private void ApplyFont(COperator op)
-            {
-                if (op.Operands.Count < 2)
+                if (op.Operands.Count == 0)
                 {
                     return;
                 }
 
-                if (op.Operands[0] is CName name)
+                _state.WordSpacing = GetNumber(op, 0);
+            }
+
+            private void HandleTz(COperator op)
+            {
+                if (op.Operands.Count == 0)
                 {
-                    _state.FontName = name.Name.TrimStart('/');
+                    return;
                 }
 
-                _state.FontSize = Math.Abs(GetNumber(op, 1));
-                if (_state.FontSize <= 0.0)
+                var scaling = GetNumber(op, 0);
+                _state.HorizontalScaling = scaling / 100.0;
+                if (Math.Abs(_state.HorizontalScaling) < double.Epsilon)
                 {
-                    _state.FontSize = 12.0;
+                    _state.HorizontalScaling = 1.0;
                 }
             }
 
-            private void ApplyTranslation(COperator op)
+            private void HandleTl(COperator op)
+            {
+                if (op.Operands.Count == 0)
+                {
+                    return;
+                }
+
+                _state.Leading = GetNumber(op, 0);
+            }
+
+            private void HandleTr(COperator op)
+            {
+                if (op.Operands.Count == 0)
+                {
+                    return;
+                }
+
+                var mode = (int)Math.Round(GetNumber(op, 0));
+                if (mode < 0)
+                {
+                    mode = 0;
+                }
+                else if (mode > 7)
+                {
+                    mode = 7;
+                }
+
+                _state.RenderingMode = (TextRenderingMode)mode;
+            }
+
+            private void HandleTs(COperator op)
+            {
+                if (op.Operands.Count == 0)
+                {
+                    return;
+                }
+
+                _state.TextRise = GetNumber(op, 0);
+            }
+
+            private void HandleTd(COperator op)
             {
                 if (op.Operands.Count < 2)
                 {
@@ -1296,12 +1316,29 @@ internal sealed class PdfImporter : IPdfImporter
 
                 var tx = GetNumber(op, 0);
                 var ty = GetNumber(op, 1);
-                _state.TextMatrix = _state.TextMatrix * Matrix3x2.CreateTranslation((float)tx, (float)ty);
-                _state.LineMatrix = _state.TextMatrix;
+
+                var translation = Matrix3x2.CreateTranslation((float)(tx * _state.HorizontalScaling), (float)ty);
+                _state.LineMatrix = Matrix3x2.Multiply(_state.LineMatrix, translation);
+                _state.TextMatrix = _state.LineMatrix;
             }
 
-            private void ApplyTextMatrix(COperator op)
+            private void HandleTlFromTd(COperator op)
             {
+                if (op.Operands.Count < 2)
+                {
+                    return;
+                }
+
+                _state.Leading = -GetNumber(op, 1);
+            }
+
+            private void HandleTm(COperator op)
+            {
+                if (op.Operands.Count < 6)
+                {
+                    return;
+                }
+
                 _state.TextMatrix = new Matrix3x2(
                     (float)GetNumber(op, 0),
                     (float)GetNumber(op, 1),
@@ -1312,53 +1349,449 @@ internal sealed class PdfImporter : IPdfImporter
                 _state.LineMatrix = _state.TextMatrix;
             }
 
-            private Vector2 GetTextPosition()
+            private void HandleQuoteDouble(COperator op, ICollection<BaseShapeViewModel> shapes)
             {
-                var vector = Vector2.Transform(Vector2.Zero, _state.TextMatrix);
-                if (_state.BaseGraphicsState is null)
+                if (op.Operands.Count < 3)
                 {
-                    return vector;
+                    return;
                 }
 
-                vector = Vector2.Transform(vector, _state.BaseGraphicsState.Transform);
+                _state.WordSpacing = GetNumber(op, 0);
+                _state.CharSpacing = GetNumber(op, 1);
+
+                MoveToNextLine();
+
+                if (op.Operands[2] is CString text)
+                {
+                    ShowText(text.Value, shapes);
+                }
+            }
+
+            private void MoveToNextLine()
+            {
+                var dy = _state.Leading != 0.0 ? -_state.Leading : -_state.FontSize;
+                var translation = Matrix3x2.CreateTranslation(0f, (float)dy);
+                _state.LineMatrix = Matrix3x2.Multiply(_state.LineMatrix, translation);
+                _state.TextMatrix = _state.LineMatrix;
+            }
+
+            private void ShowTextOperand(COperator op, ICollection<BaseShapeViewModel> shapes, int operandIndex = 0)
+            {
+                if (op.Operands.Count <= operandIndex || op.Operands[operandIndex] is not CString str)
+                {
+                    return;
+                }
+
+                ShowText(str.Value, shapes);
+            }
+
+            private void ShowText(string? text, ICollection<BaseShapeViewModel> shapes)
+            {
+                if (string.IsNullOrEmpty(text))
+                {
+                    return;
+                }
+
+                if (_state.RenderingMode == TextRenderingMode.Invisible)
+                {
+                    AdvanceText(text);
+                    return;
+                }
+
+                if (_state.Font is null)
+                {
+                    _log?.LogWarning("PDF importer encountered text with no active font.");
+                    AdvanceText(text);
+                    return;
+                }
+
+                var glyphs = EnumerateGlyphs(text, _state.Font).ToList();
+                if (glyphs.Count == 0)
+                {
+                    return;
+                }
+
+                var glyphMatrix = _state.TextMatrix;
+                var minX = double.PositiveInfinity;
+                var minY = double.PositiveInfinity;
+                var maxX = double.NegativeInfinity;
+                var maxY = double.NegativeInfinity;
+
+                foreach (var glyph in glyphs)
+                {
+                    var origin = GetBaselinePosition(glyphMatrix);
+                    if (_state.TextRise != 0.0)
+                    {
+                        origin += TransformVector(glyphMatrix, new Vector2(0f, (float)_state.TextRise));
+                    }
+
+                    var advance = ComputeGlyphAdvance(glyph);
+                    var advanceVector = TransformVector(glyphMatrix, new Vector2((float)(advance * _state.HorizontalScaling), 0f));
+                    var heightVector = TransformVector(glyphMatrix, new Vector2(0f, (float)_state.FontSize));
+
+                    var p0 = origin;
+                    var p1 = origin + advanceVector;
+                    var p2 = origin + heightVector;
+                    var p3 = origin + advanceVector + heightVector;
+
+                    minX = Math.Min(Math.Min(minX, p0.X), Math.Min(p1.X, Math.Min(p2.X, p3.X)));
+                    maxX = Math.Max(Math.Max(maxX, p0.X), Math.Max(p1.X, Math.Max(p2.X, p3.X)));
+                    minY = Math.Min(Math.Min(minY, p0.Y), Math.Min(p1.Y, Math.Min(p2.Y, p3.Y)));
+                    maxY = Math.Max(Math.Max(maxY, p0.Y), Math.Max(p1.Y, Math.Max(p2.Y, p3.Y)));
+
+                    glyphMatrix = Matrix3x2.Multiply(glyphMatrix, Matrix3x2.CreateTranslation((float)(advance * _state.HorizontalScaling), 0f));
+                }
+
+                if (double.IsPositiveInfinity(minX) || double.IsPositiveInfinity(minY))
+                {
+                    return;
+                }
+
+                if (_state.BaseGraphicsState is { } gs && !IntersectsClip(gs, minX, minY, maxX, maxY))
+                {
+                    _state.TextMatrix = glyphMatrix;
+                    _state.LineMatrix = glyphMatrix;
+                    return;
+                }
+
+                var style = _styleBuilder.GetOrCreateTextStyle(_state.BaseGraphicsState, _state.FontSize, _state.Font.ResourceName);
+                var topLeft = _factory.CreatePointShape(minX, minY);
+                var bottomRight = _factory.CreatePointShape(maxX, maxY);
+
+                var textShape = _factory.CreateTextShape(topLeft, bottomRight, style, text, isStroked: RendersStroke(_state.RenderingMode));
+                textShape.Text = text;
+                textShape.IsStroked = RendersStroke(_state.RenderingMode);
+                textShape.IsFilled = RendersFill(_state.RenderingMode);
+                shapes.Add(textShape);
+
+                _state.TextMatrix = glyphMatrix;
+                _state.LineMatrix = glyphMatrix;
+            }
+
+            private void AdjustTextMatrix(double value)
+            {
+                var adjustment = -value / 1000.0 * _state.FontSize * _state.HorizontalScaling;
+                _state.TextMatrix = _state.TextMatrix * Matrix3x2.CreateTranslation((float)adjustment, 0f);
+                _state.LineMatrix = _state.TextMatrix;
+            }
+
+            private Vector2 GetBaselinePosition(Matrix3x2 matrix)
+            {
+                var vector = Vector2.Transform(Vector2.Zero, matrix);
+                if (_state.BaseGraphicsState is { } graphicsState)
+                {
+                    vector = Vector2.Transform(vector, graphicsState.Transform);
+                }
+
                 vector = Vector2.Transform(vector, _owner._pageTransform);
                 return vector;
             }
-        }
 
-        private sealed class TextState
-        {
-            public GraphicsState? BaseGraphicsState { get; set; }
-            public Matrix3x2 TextMatrix { get; set; } = Matrix3x2.Identity;
-            public Matrix3x2 LineMatrix { get; set; } = Matrix3x2.Identity;
-            public double FontSize { get; set; } = 12.0;
-            public double Leading { get; set; } = 0.0;
-            public string? FontName { get; set; }
-            public string? PendingText { get; set; }
-
-            public void Reset()
+            private Vector2 TransformVector(Matrix3x2 matrix, Vector2 vector)
             {
-                BaseGraphicsState = null;
-                TextMatrix = Matrix3x2.Identity;
-                LineMatrix = Matrix3x2.Identity;
-                FontSize = 12.0;
-                Leading = 0.0;
-                FontName = null;
-                PendingText = null;
+                var transformed = new Vector2(
+                    matrix.M11 * vector.X + matrix.M21 * vector.Y,
+                    matrix.M12 * vector.X + matrix.M22 * vector.Y);
+
+                if (_state.BaseGraphicsState is { } graphicsState)
+                {
+                    transformed = Vector2.Transform(transformed, graphicsState.GetTransformWithoutTranslation());
+                }
+
+                transformed = Vector2.Transform(transformed, _owner._pageVectorTransform);
+                return transformed;
             }
 
-            public void MoveToNextLine()
+            private void AdvanceText(string text)
             {
-                var dy = Leading != 0.0 ? -Leading : -FontSize;
-                TextMatrix = LineMatrix * Matrix3x2.CreateTranslation(0f, (float)dy);
-                LineMatrix = TextMatrix;
+                if (string.IsNullOrEmpty(text))
+                {
+                    return;
+                }
+
+                double total = 0.0;
+                if (_state.Font is { } font)
+                {
+                    foreach (var glyph in EnumerateGlyphs(text, font))
+                    {
+                        total += ComputeGlyphAdvance(glyph);
+                    }
+                }
+                else
+                {
+                    total = text.Length * (_state.FontSize + _state.CharSpacing);
+                }
+
+                var translation = total * _state.HorizontalScaling;
+                _state.TextMatrix = _state.TextMatrix * Matrix3x2.CreateTranslation((float)translation, 0f);
+                _state.LineMatrix = _state.TextMatrix;
             }
 
-            public void AdvanceText(string text)
+            private FontMetrics? ResolveFont(string resourceName)
             {
-                var advance = (float)(FontSize * 0.6 * text.Length);
-                TextMatrix = TextMatrix * Matrix3x2.CreateTranslation(advance, 0f);
-                LineMatrix = TextMatrix;
+                var key = resourceName.StartsWith('/') ? resourceName[1..] : resourceName;
+
+                if (_fontCache.TryGetValue(key, out var metrics))
+                {
+                    return metrics;
+                }
+
+                var fonts = _page.Resources?.Elements.GetDictionary("/Font");
+                if (fonts is null)
+                {
+                    return null;
+                }
+
+                if (!TryGetDictionaryValue(fonts.Elements, resourceName, out var fontItem))
+                {
+                    if (!TryGetDictionaryValue(fonts.Elements, key, out fontItem))
+                    {
+                        return null;
+                    }
+                }
+
+                if (ResolveObject(fontItem) is not PdfDictionary fontDictionary)
+                {
+                    return null;
+                }
+
+                metrics = ParseFontMetrics(key, fontDictionary);
+                _fontCache[key] = metrics;
+                return metrics;
+            }
+
+            private FontMetrics ParseFontMetrics(string resourceName, PdfDictionary fontDictionary)
+            {
+                var metrics = new FontMetrics(resourceName);
+                var subtype = fontDictionary.Elements.GetName("/Subtype");
+                if (string.Equals(subtype, "/Type0", StringComparison.Ordinal))
+                {
+                    ParseType0Font(metrics, fontDictionary);
+                }
+                else
+                {
+                    ParseSimpleFont(metrics, fontDictionary);
+                }
+
+                return metrics;
+            }
+
+            private void ParseSimpleFont(FontMetrics metrics, PdfDictionary fontDictionary)
+            {
+                var firstChar = fontDictionary.Elements.GetInteger("/FirstChar");
+                var widths = fontDictionary.Elements.GetArray("/Widths");
+                if (widths is not null)
+                {
+                    for (int i = 0; i < widths.Elements.Count; i++)
+                    {
+                        var glyphWidth = GetDouble(widths.Elements[i]) / 1000.0;
+                        metrics.Widths[firstChar + i] = glyphWidth;
+                    }
+                }
+
+                var descriptor = fontDictionary.Elements.GetDictionary("/FontDescriptor");
+                if (descriptor is not null)
+                {
+                    var missingWidth = descriptor.Elements.GetInteger("/MissingWidth");
+                    if (missingWidth > 0)
+                    {
+                        metrics.DefaultWidth = missingWidth / 1000.0;
+                    }
+                }
+            }
+
+            private void ParseType0Font(FontMetrics metrics, PdfDictionary fontDictionary)
+            {
+                var descendants = fontDictionary.Elements.GetArray("/DescendantFonts");
+                if (descendants is null || descendants.Elements.Count == 0)
+                {
+                    return;
+                }
+
+                if (ResolveObject(descendants.Elements[0]) is not PdfDictionary cidFont)
+                {
+                    return;
+                }
+
+                metrics.IsCidFont = true;
+
+                var defaultWidth = cidFont.Elements.GetInteger("/DW");
+                if (defaultWidth > 0)
+                {
+                    metrics.DefaultWidth = defaultWidth / 1000.0;
+                }
+
+                var wArray = cidFont.Elements.GetArray("/W");
+                if (wArray is null)
+                {
+                    return;
+                }
+
+                var elements = wArray.Elements;
+                int idx = 0;
+                while (idx < elements.Count)
+                {
+                    var startCid = (int)Math.Round(GetDouble(elements[idx++]));
+                    if (idx >= elements.Count)
+                    {
+                        break;
+                    }
+
+                    var next = elements[idx++];
+                    if (next is PdfArray rangeArray)
+                    {
+                        for (int i = 0; i < rangeArray.Elements.Count; i++)
+                        {
+                            var width = GetDouble(rangeArray.Elements[i]) / 1000.0;
+                            metrics.Widths[startCid + i] = width;
+                        }
+                    }
+                    else
+                    {
+                        if (idx >= elements.Count)
+                        {
+                            break;
+                        }
+
+                        var endCid = (int)Math.Round(GetDouble(next));
+                        var width = GetDouble(elements[idx++]) / 1000.0;
+                        for (int cid = startCid; cid <= endCid; cid++)
+                        {
+                            metrics.Widths[cid] = width;
+                        }
+                    }
+                }
+            }
+
+            private void ShowTextArray(COperator op, ICollection<BaseShapeViewModel> shapes)
+            {
+                if (op.Operands.Count == 0 || op.Operands[0] is not CArray array)
+                {
+                    return;
+                }
+
+                foreach (var element in array)
+                {
+                    switch (element)
+                    {
+                        case CString str:
+                            ShowText(str.Value, shapes);
+                            break;
+                        case CReal real:
+                            AdjustTextMatrix(real.Value);
+                            break;
+                        case CInteger integer:
+                            AdjustTextMatrix(integer.Value);
+                            break;
+                    }
+                }
+            }
+
+            private IEnumerable<GlyphInfo> EnumerateGlyphs(string text, FontMetrics font)
+            {
+                foreach (var ch in text)
+                {
+                    var code = (int)ch;
+                    yield return new GlyphInfo(code, ch == ' ', font.GetWidth(code));
+                }
+            }
+
+            private double ComputeGlyphAdvance(GlyphInfo glyph)
+            {
+                var advance = glyph.Width * _state.FontSize + _state.CharSpacing;
+                if (glyph.IsSpace)
+                {
+                    advance += _state.WordSpacing;
+                }
+
+                return advance;
+            }
+
+            private sealed class FontMetrics
+            {
+                public FontMetrics(string resourceName)
+                {
+                    ResourceName = resourceName;
+                }
+
+                public string ResourceName { get; }
+                public Dictionary<int, double> Widths { get; } = new();
+                public double DefaultWidth { get; set; } = 0.5;
+                public bool IsCidFont { get; set; }
+
+                public double GetWidth(int codePoint)
+                {
+                    if (Widths.TryGetValue(codePoint, out var width))
+                    {
+                        return width;
+                    }
+
+                    if (IsCidFont)
+                    {
+                        // Fallback for CID fonts: use high byte as CID.
+                        var cid = codePoint & 0xFFFF;
+                        if (Widths.TryGetValue(cid, out width))
+                        {
+                            return width;
+                        }
+                    }
+
+                    return DefaultWidth;
+                }
+            }
+
+            private readonly record struct GlyphInfo(int Code, bool IsSpace, double Width);
+
+            private enum TextRenderingMode
+            {
+                Fill = 0,
+                Stroke = 1,
+                FillStroke = 2,
+                Invisible = 3,
+                FillClip = 4,
+                StrokeClip = 5,
+                FillStrokeClip = 6,
+                Clip = 7
+            }
+
+            private sealed class TextState
+            {
+                public GraphicsState? BaseGraphicsState { get; private set; }
+                public Matrix3x2 TextMatrix { get; set; } = Matrix3x2.Identity;
+                public Matrix3x2 LineMatrix { get; set; } = Matrix3x2.Identity;
+                public double FontSize { get; set; } = 12.0;
+                public double Leading { get; set; } = 0.0;
+                public double CharSpacing { get; set; } = 0.0;
+                public double WordSpacing { get; set; } = 0.0;
+                public double HorizontalScaling { get; set; } = 1.0;
+                public double TextRise { get; set; } = 0.0;
+                public TextRenderingMode RenderingMode { get; set; } = TextRenderingMode.Fill;
+                public FontMetrics? Font { get; set; }
+
+                public void Reset(GraphicsState? baseState)
+                {
+                    BaseGraphicsState = baseState;
+                    TextMatrix = Matrix3x2.Identity;
+                    LineMatrix = Matrix3x2.Identity;
+                    FontSize = 12.0;
+                    Leading = 0.0;
+                    CharSpacing = 0.0;
+                    WordSpacing = 0.0;
+                    HorizontalScaling = 1.0;
+                    TextRise = 0.0;
+                    RenderingMode = TextRenderingMode.Fill;
+                    Font = null;
+                }
+            }
+
+            private static bool RendersFill(TextRenderingMode mode)
+            {
+                return mode is TextRenderingMode.Fill or TextRenderingMode.FillStroke or TextRenderingMode.FillClip or TextRenderingMode.FillStrokeClip;
+            }
+
+            private static bool RendersStroke(TextRenderingMode mode)
+            {
+                return mode is TextRenderingMode.Stroke or TextRenderingMode.FillStroke or TextRenderingMode.StrokeClip or TextRenderingMode.FillStrokeClip;
             }
         }
     }
@@ -1449,7 +1882,7 @@ internal sealed class PdfImporter : IPdfImporter
 
         public void ConcatenateMatrix(Matrix3x2 matrix)
         {
-            Transform = Matrix3x2.Multiply(matrix, Transform);
+            Transform = Matrix3x2.Multiply(Transform, matrix);
         }
 
         public void SetDashPattern(double[]? dashArray, double dashPhase)
