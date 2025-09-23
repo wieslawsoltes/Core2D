@@ -679,6 +679,67 @@ public partial class ProjectEditorViewModel
         }
     }
 
+    public void OnImportPdf(Stream stream)
+    {
+        var importer = ServiceProvider.GetService<IPdfImporter>();
+        if (importer is null)
+        {
+            return;
+        }
+
+        try
+        {
+            var result = importer.Import(stream);
+            if (result is null)
+            {
+                return;
+            }
+
+            if (Project is { } project && result.Styles.Count > 0)
+            {
+                var styleLibrary = project.CurrentStyleLibrary ?? project.StyleLibraries.FirstOrDefault();
+                if (styleLibrary is null)
+                {
+                    var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+                    styleLibrary = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaultStyleLibraryName);
+                    if (styleLibrary is { })
+                    {
+                        project.AddStyleLibrary(styleLibrary);
+                        project.SetCurrentStyleLibrary(styleLibrary);
+                    }
+                }
+
+                if (styleLibrary is { })
+                {
+                    foreach (var style in result.Styles)
+                    {
+                        if (!styleLibrary.Items.Contains(style))
+                        {
+                            project.AddStyle(styleLibrary, style);
+                        }
+                    }
+                }
+            }
+
+            if (Project is IImageCache imageCache && result.Images.Count > 0)
+            {
+                foreach (var image in result.Images)
+                {
+                    imageCache.AddImage(image.Key, image.Data);
+                }
+            }
+
+            if (result.Shapes.Count > 0)
+            {
+                ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(result.Shapes);
+            }
+        }
+        catch (Exception ex)
+        {
+            ServiceProvider.GetService<ILog>()?.LogException(ex);
+        }
+    }
+
     public void OnExportJson(Stream stream, object item)
     {
         var fileSystem = ServiceProvider.GetService<IFileSystem>();
@@ -1042,6 +1103,15 @@ public partial class ProjectEditorViewModel
                     if (stream is { })
                     {
                         OnImportSvg(stream);
+                        result = true;
+                    }
+                }
+                else if (string.Compare(ext, ProjectEditorConfiguration.DefaultPdfExtension, StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    await using var stream = ServiceProvider.GetService<IFileSystem>()?.Open(path);
+                    if (stream is { })
+                    {
+                        OnImportPdf(stream);
                         result = true;
                     }
                 }

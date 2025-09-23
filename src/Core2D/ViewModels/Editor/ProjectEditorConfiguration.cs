@@ -46,6 +46,8 @@ public class ProjectEditorConfiguration
 
     public static string DefaultSvgExtension = ".svg";
 
+    public static string DefaultPdfExtension = ".pdf";
+
     public static string DefaultDwgExtension = ".dwg";
 
     public static string DefaultDxfExtension = ".dxf";

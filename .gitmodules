@@ -1,3 +1,6 @@
 [submodule "external/ACadSharp"]
 	path = external/ACadSharp
 	url = https://github.com/wieslawsoltes/ACadSharp.git
+[submodule "external/PdfPig.Rendering.Skia"]
+	path = external/PdfPig.Rendering.Skia
+	url = https://github.com/wieslawsoltes/PdfPig.Rendering.Skia.git

@@ -53,6 +53,15 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         };
     }
 
+    private static List<FilePickerFileType> GetPdfFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.Pdf,
+            StorageService.All
+        };
+    }
+
     private static List<FilePickerFileType> GetCadFileTypes()
     {
         return new List<FilePickerFileType>
@@ -412,6 +421,55 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                     if (stream is { })
                     {
                         ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportDwg(stream);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ServiceProvider.GetService<ILog>()?.LogException(ex);
+        }
+    }
+
+    public async void OnImportPdf(object? param)
+    {
+        try
+        {
+            if (param is null)
+            {
+                var storageProvider = StorageService.GetStorageProvider();
+                if (storageProvider is null)
+                {
+                    return;
+                }
+
+                var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                {
+                    Title = "Import PDF",
+                    FileTypeFilter = GetPdfFileTypes(),
+                    AllowMultiple = true
+                });
+
+                foreach (var file in result)
+                {
+                    await using var stream = await file.OpenReadAsync();
+                    ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportPdf(stream);
+                }
+            }
+            else
+            {
+                if (param is not string path)
+                {
+                    return;
+                }
+
+                var fileSystem = ServiceProvider.GetService<IFileSystem>();
+                if (fileSystem is { } && fileSystem.Exists(path))
+                {
+                    await using var stream = fileSystem.Open(path);
+                    if (stream is { })
+                    {
+                        ServiceProvider.GetService<ProjectEditorViewModel>()?.OnImportPdf(stream);
                     }
                 }
             }

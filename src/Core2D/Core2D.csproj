@@ -72,6 +72,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\..\external\ACadSharp\src\ACadSharp\ACadSharp.csproj" />
+    <ProjectReference Include="..\..\external\PdfPig.Rendering.Skia\UglyToad.PdfPig.Rendering.Skia\UglyToad.PdfPig.Rendering.Skia.csproj" />
   </ItemGroup>
 
 </Project>
