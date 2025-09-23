@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Core2D.Model;
+using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
@@ -25,6 +26,9 @@ public abstract partial class FrameContainerViewModel : BaseContainerViewModel, 
     [AutoNotify] protected BaseShapeViewModel? _currentShape;
     [AutoNotify] protected ImmutableArray<PropertyViewModel> _properties;
     [AutoNotify] protected RecordViewModel? _record;
+    [AutoNotify]
+    [IgnoreDataMember]
+    protected IShapeRenderer? _renderer;
     // ReSharper restore MemberCanBePrivate.Global
     // ReSharper restore InconsistentNaming
 

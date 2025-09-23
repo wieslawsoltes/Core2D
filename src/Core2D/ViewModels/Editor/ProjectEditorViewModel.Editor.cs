@@ -882,25 +882,15 @@ public partial class ProjectEditorViewModel
 
     private void SetRenderersImageCache(IImageCache? cache)
     {
-        void ConfigureRenderer(IShapeRenderer? renderer)
+        _currentImageCache = cache;
+
+        ApplyImageCache(Renderer, cache);
+        ApplyImageCache(LibraryRenderer, cache);
+
+        foreach (var renderer in _containerRenderers.Values)
         {
-            if (renderer is null)
-            {
-                return;
-            }
-
-            renderer.ClearCache();
-
-            if (renderer.State is null)
-            {
-                return;
-            }
-
-            renderer.State.ImageCache = cache;
+            ApplyImageCache(renderer, cache);
         }
-
-        ConfigureRenderer(Renderer);
-        ConfigureRenderer(LibraryRenderer);
     }
 
     public void OnLoad(ProjectContainerViewModel? project, string? name = null)
@@ -909,9 +899,11 @@ public partial class ProjectEditorViewModel
         {
             return;
         }
-            
+
+        ReleaseAllRenderers();
+
         ServiceProvider.GetService<ISelectionService>()?.Deselect();
-            
+
         if (project is IImageCache imageCache)
         {
             SetRenderersImageCache(imageCache);
@@ -962,6 +954,7 @@ public partial class ProjectEditorViewModel
             
         ServiceProvider.GetService<ISelectionService>()?.Deselect();
         SetRenderersImageCache(null);
+        ReleaseAllRenderers();
         Project = null;
         ProjectName = string.Empty;
         IsProjectDirty = false;

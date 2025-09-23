@@ -45,7 +45,6 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
                 return pathTools.ToImmutableArray();
             });
         _dataFlow = serviceProvider.GetServiceLazily<DataFlow>();
-        _renderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
         _libraryRenderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
         _selectionService = serviceProvider.GetServiceLazily<ISelectionService>();
         _shapeService = serviceProvider.GetServiceLazily<IShapeService>();

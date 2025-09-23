@@ -343,6 +343,8 @@ public partial class ProjectEditorViewModel
             factory.AddDockable(_pagesDock, document);
         }
 
+        EnsureRenderer(page);
+
         return document;
     }
 
@@ -375,6 +377,8 @@ public partial class ProjectEditorViewModel
         {
             factory.AddDockable(_pagesDock, document);
         }
+
+        EnsureRenderer(template);
 
         return document;
     }
@@ -436,6 +440,8 @@ public partial class ProjectEditorViewModel
         _documentToGroup[document] = group;
         _containerToGroupDocument[container] = document;
 
+        EnsureRenderer(container);
+
         AttachGroupDocument(document);
 
         if (_pagesDock.VisibleDockables?.Contains(document) != true)
@@ -496,6 +502,8 @@ public partial class ProjectEditorViewModel
         {
             _documentToPage.Remove(document);
             _pageDocuments.Remove(page);
+
+            ReleaseRenderer(page);
         }
 
         if (collapse && document.Owner is IDock && DockFactory is FactoryBase factory)
@@ -513,6 +521,8 @@ public partial class ProjectEditorViewModel
         {
             _documentToTemplate.Remove(document);
             _templateDocuments.Remove(template);
+
+            ReleaseRenderer(template);
         }
 
         if (collapse && document.Owner is IDock && DockFactory is FactoryBase factory)
@@ -535,6 +545,8 @@ public partial class ProjectEditorViewModel
         if (document.Container is { } container)
         {
             _containerToGroupDocument.Remove(container);
+
+            ReleaseRenderer(container);
 
             if (Project is { } project && ReferenceEquals(project.CurrentContainer, container))
             {
@@ -863,6 +875,8 @@ public partial class ProjectEditorViewModel
         if (Project is null)
         {
             ClearPageDocuments();
+            RaisePropertyChanged(new PropertyChangedEventArgs(nameof(Renderer)));
+            RaisePropertyChanged(new PropertyChangedEventArgs(nameof(PageState)));
             return;
         }
 
@@ -882,6 +896,14 @@ public partial class ProjectEditorViewModel
                 OpenTemplate(template);
                 break;
         }
+
+        if (Project.CurrentContainer is { } currentContainer)
+        {
+            EnsureRenderer(currentContainer);
+        }
+
+        RaisePropertyChanged(new PropertyChangedEventArgs(nameof(Renderer)));
+        RaisePropertyChanged(new PropertyChangedEventArgs(nameof(PageState)));
     }
 
     private void SynchronizeDocumentsWithDock()
@@ -985,6 +1007,14 @@ public partial class ProjectEditorViewModel
                             OpenTemplate(currentTemplate);
                             break;
                     }
+
+                    if (project.CurrentContainer is { } currentContainer)
+                    {
+                        EnsureRenderer(currentContainer);
+                    }
+
+                    RaisePropertyChanged(new PropertyChangedEventArgs(nameof(Renderer)));
+                    RaisePropertyChanged(new PropertyChangedEventArgs(nameof(PageState)));
                 }
                 else if (e.PropertyName == nameof(ProjectContainerViewModel.Selected))
                 {
