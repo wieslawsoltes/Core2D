@@ -30,7 +30,6 @@ public partial class ProjectEditorViewModel
     private readonly Lazy<ImmutableArray<IEditorTool>> _tools;
     private readonly Lazy<ImmutableArray<IPathTool>> _pathTools;
     private readonly Lazy<DataFlow?>? _dataFlow;
-    private readonly Lazy<IShapeRenderer?>? _renderer;
     private readonly Lazy<IShapeRenderer?>? _libraryRenderer;
     private readonly Lazy<ISelectionService?>? _selectionService;
     private readonly Lazy<IShapeService?>? _shapeService;
@@ -48,11 +47,11 @@ public partial class ProjectEditorViewModel
 
     public DataFlow? DataFlow => _dataFlow?.Value;
 
-    public IShapeRenderer? Renderer => _renderer?.Value;
+    public IShapeRenderer? Renderer => EnsureRenderer(Project?.CurrentContainer);
 
     public IShapeRenderer? LibraryRenderer => _libraryRenderer?.Value;
 
-    public ShapeRendererStateViewModel? PageState => _renderer?.Value?.State;
+    public ShapeRendererStateViewModel? PageState => Renderer?.State;
 
     public ISelectionService? SelectionService => _selectionService?.Value;
 
