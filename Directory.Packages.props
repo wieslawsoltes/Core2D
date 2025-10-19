@@ -1,7 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <AvaloniaVersion>11.3.6</AvaloniaVersion>
+    <AvaloniaVersion>11.3.7</AvaloniaVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Dock.Avalonia.Themes.Fluent" Version="11.3.6" />
