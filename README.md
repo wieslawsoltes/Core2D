@@ -64,4 +64,4 @@ Core2D is developed using [JetBrains Rider](https://www.jetbrains.com/rider/).
 
 ## License
 
-Core2D is licensed under the [GNU Affero General Public License v3.0](LICENSE.TXT).
+Core2D is licensed under the [MIT](LICENSE.TXT).

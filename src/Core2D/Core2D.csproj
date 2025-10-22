@@ -14,7 +14,7 @@
 
   <PropertyGroup>
     <PackageId>Core2D</PackageId>
-    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup>

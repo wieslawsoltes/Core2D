@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
-// Licensed under the GNU Affero General Public License v3.0. See LICENSE.TXT file in the project root for details.
+// Licensed under the MIT. See LICENSE.TXT file in the project root for details.
 
 #nullable enable
 using System;
@@ -136,7 +136,7 @@ public class AppState : IDisposable
             Version = $"{Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion}",
             Description = "A multi-platform data driven 2D diagram editor.",
             Copyright = "Copyright (c) Wiesław Šoltés. All rights reserved.",
-            License = "Licensed under the GNU Affero General Public License v3.0. See LICENSE.TXT file in the project root for full license information.",
+            License = "Licensed under the MIT. See LICENSE.TXT file in the project root for full license information.",
         };
     }
 

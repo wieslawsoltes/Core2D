@@ -17,7 +17,7 @@
 
   <PropertyGroup>
     <PackageId>Core2D.Generators</PackageId>
-    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
