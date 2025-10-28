@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="Core2D.Controls.Editor.PageView"
+             x:Name="PageViewControl"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -152,7 +153,7 @@
                 </idd:ContextDropBehavior.Handler>
               </idd:ContextDropBehavior>
               </i:Interaction.Behaviors>
-              <Panel DataContext="{Binding Project.CurrentContainer}" 
+              <Panel DataContext="{Binding Container, ElementName=PageViewControl}" 
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
                      ClipToBounds="False">
@@ -168,21 +169,21 @@
                        Height="{Binding Template.Height, TargetNullValue={Binding Height}}"
                        ClipToBounds="False">
                   <renderer:RenderView x:Name="RenderViewData"
-                                       Renderer="{Binding $parent[UserControl].DataContext.Renderer}"
+                                       Renderer="{Binding Renderer}"
                                        Selection="{Binding $parent[UserControl].DataContext.Project}"
                                        DataFlow="{Binding $parent[UserControl].DataContext.DataFlow}"
                                        Container="{Binding}"
                                        RenderType="Data"
                                        ClipToBounds="False" />
                   <renderer:RenderView x:Name="RenderViewTemplate"
-                                       Renderer="{Binding $parent[UserControl].DataContext.Renderer}"
+                                       Renderer="{Binding Renderer}"
                                        Selection="{Binding $parent[UserControl].DataContext.Project}"
                                        DataFlow="{Binding $parent[UserControl].DataContext.DataFlow}"
                                        Container="{Binding}"
                                        RenderType="Template"
                                        ClipToBounds="False" />
                   <renderer:RenderView x:Name="RenderViewEditor"
-                                       Renderer="{Binding $parent[UserControl].DataContext.Renderer}"
+                                       Renderer="{Binding Renderer}"
                                        Selection="{Binding $parent[UserControl].DataContext.Project}"
                                        DataFlow="{Binding $parent[UserControl].DataContext.DataFlow}"
                                        Container="{Binding}"
