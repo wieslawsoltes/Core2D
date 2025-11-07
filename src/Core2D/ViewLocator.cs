@@ -28,6 +28,21 @@ public partial class ViewLocator : IDataTemplate
             return func.Invoke();
         }
 
+        // Fallback to convention-based lookup when generator did not produce a mapping
+        var viewName = type.FullName?
+            .Replace(".ViewModels.", ".Views.")
+            .Replace("ViewModel", "View");
+
+        if (!string.IsNullOrWhiteSpace(viewName))
+        {
+            var viewType = typeof(ViewLocator).Assembly.GetType(viewName!);
+            if (viewType is not null &&
+                Activator.CreateInstance(viewType) is Control control)
+            {
+                return control;
+            }
+        }
+
         throw new Exception($"Unable to create view for type: {type}");
     }
 

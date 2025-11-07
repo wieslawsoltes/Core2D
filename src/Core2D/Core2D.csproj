@@ -29,14 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\**\*.cs" />
+    <Compile Remove="ViewModels\**\*.cs" />
+    <Compile Remove="Spatial\**\*.cs" />
+    <Compile Remove="Modules\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dock.Avalonia.Themes.Fluent" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" />
-    <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="System.IO.Compression" />
     <PackageReference Include="System.Reactive" />
-    <PackageReference Include="System.Text.Json" />
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
     <PackageReference Include="System.Text.Encoding.CodePages" />
     <PackageReference Include="Avalonia" />
     <PackageReference Include="Avalonia.Themes.Fluent" />
@@ -46,22 +48,16 @@
     <PackageReference Include="Avalonia.Skia" />
     <PackageReference Include="Avalonia.Desktop" />
     <PackageReference Include="Avalonia.Headless" />
-    <PackageReference Include="Avalonia.Headless.Vnc"  />
+    <PackageReference Include="Avalonia.Headless.Vnc" />
     <PackageReference Include="Xaml.Behaviors.Avalonia" />
     <PackageReference Include="PanAndZoom" />
     <PackageReference Include="ThemeEditor.Controls.ColorPicker" />
     <PackageReference Include="Dock.Avalonia" />
     <PackageReference Include="Dock.Model.MVVM" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
-    <PackageReference Include="netDXF.netstandard" />
-    <PackageReference Include="PDFsharp" />
     <PackageReference Include="System.Drawing.Common" />
-    <PackageReference Include="Svg.Skia" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="Autofac" />
-    <PackageReference Include="CsvHelper" />
-    <PackageReference Include="DocumentFormat.OpenXml" />
     <PackageReference Include="StaticViewLocator">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -71,8 +67,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\..\external\ACadSharp\src\ACadSharp\ACadSharp.csproj" />
-    <ProjectReference Include="..\..\external\PdfPig.Rendering.Skia\UglyToad.PdfPig.Rendering.Skia\UglyToad.PdfPig.Rendering.Skia.csproj" />
+    <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj" />
+    <ProjectReference Include="..\Core2D.ViewModels\Core2D.ViewModels.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.FileSystem\Core2D.Modules.FileSystem.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.FileWriter\Core2D.Modules.FileWriter.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Log\Core2D.Modules.Log.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer\Core2D.Modules.Renderer.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.ScriptRunner\Core2D.Modules.ScriptRunner.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Serializer\Core2D.Modules.Serializer.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.ServiceProvider\Core2D.Modules.ServiceProvider.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.SvgExporter\Core2D.Modules.SvgExporter.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.TextFieldReader\Core2D.Modules.TextFieldReader.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.TextFieldWriter\Core2D.Modules.TextFieldWriter.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.XamlExporter\Core2D.Modules.XamlExporter.csproj" />
   </ItemGroup>
 
 </Project>

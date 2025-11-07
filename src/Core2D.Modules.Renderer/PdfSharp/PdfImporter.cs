@@ -24,7 +24,7 @@ using UglyToad.PdfPig.Rendering.Skia.Helpers;
 
 namespace Core2D.Modules.Renderer.PdfSharp;
 
-internal sealed class PdfImporter : IPdfImporter
+public sealed class PdfImporter : IPdfImporter
 {
     private const double Scale = 96.0 / 72.0;
 

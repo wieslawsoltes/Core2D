@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>False</IsPackable>
+    <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
+    <RootNamespace>Core2D</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core2D.ViewModels\Core2D.ViewModels.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer\Core2D.Modules.Renderer.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.SvgExporter\Core2D.Modules.SvgExporter.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.XamlExporter\Core2D.Modules.XamlExporter.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
+    <PackageReference Include="System.Drawing.Common" />
+  </ItemGroup>
+</Project>

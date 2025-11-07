@@ -23,7 +23,7 @@ using CSUtilities.Extensions;
 
 namespace Core2D.Modules.Renderer.Dwg;
 
-internal sealed class DwgImporter : IDwgImporter
+public sealed class DwgImporter : IDwgImporter
 {
     private readonly IServiceProvider? _serviceProvider;
     private readonly IViewModelFactory? _viewModelFactory;
