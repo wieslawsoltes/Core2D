@@ -22,6 +22,10 @@
     <PackageReference Include="System.Drawing.Common" />
     <PackageReference Include="netDXF.netstandard" />
     <PackageReference Include="PanAndZoom" />
+    <PackageReference Include="Vello" />
+    <PackageReference Include="VelloSharp" />
+    <PackageReference Include="VelloSharp.Core" />
+    <PackageReference Include="VelloSharp.Rendering" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
