@@ -52,5 +52,7 @@ public class ProjectEditorConfiguration
 
     public static string DefaultDxfExtension = ".dxf";
 
+    public static string DefaultWmfExtension = ".wmf";
+
     public static string[] DefaultImageExtensions = { ".jpg", ".jpeg", ".png", "webp" };
 }

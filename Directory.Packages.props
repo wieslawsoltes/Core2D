@@ -45,5 +45,6 @@
     <PackageVersion Include="VelloSharp" Version="0.5.0-alpha.3" />
     <PackageVersion Include="VelloSharp.Core" Version="0.5.0-alpha.3" />
     <PackageVersion Include="VelloSharp.Rendering" Version="0.5.0-alpha.3" />
+    <PackageVersion Include="Oxage.Wmf" Version="0.6.1" />
   </ItemGroup>
 </Project>

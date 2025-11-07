@@ -17,11 +17,13 @@ using Core2D.Modules.FileWriter.Dwg;
 using Core2D.Modules.FileWriter.SkiaSharp;
 using Core2D.Modules.FileWriter.Svg;
 using Core2D.Modules.FileWriter.Xaml;
+using Core2D.Modules.FileWriter.Wmf;
 using Core2D.Modules.Log.Trace;
 using Core2D.Modules.Renderer.Avalonia;
 using Core2D.Modules.Renderer.Dwg;
 using Core2D.Modules.Renderer.PdfSharp;
 using Core2D.Modules.Renderer.SkiaSharp;
+using Core2D.Modules.Renderer.Wmf;
 using Core2D.Modules.ScriptRunner.Roslyn;
 using Core2D.Modules.Serializer.Newtonsoft;
 using Core2D.Modules.ServiceProvider.Autofac;
@@ -144,6 +146,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<SkpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<EmfWriter>().As<IMetafileExporter>().InstancePerLifetimeScope();
+        builder.RegisterType<WmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<JpegSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<OpenXmlReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
@@ -154,6 +157,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<SkiaSharpSvgConverter>().As<ISvgConverter>().InstancePerLifetimeScope();
         builder.RegisterType<DwgImporter>().As<IDwgImporter>().InstancePerLifetimeScope();
         builder.RegisterType<PdfImporter>().As<IPdfImporter>().InstancePerLifetimeScope();
+        builder.RegisterType<WmfImporter>().As<IWmfImporter>().InstancePerLifetimeScope();
 
         builder.RegisterType<DrawingGroupXamlExporter>().As<IXamlExporter>().InstancePerLifetimeScope();
         builder.RegisterType<SvgSvgExporter>().As<ISvgExporter>().InstancePerLifetimeScope();

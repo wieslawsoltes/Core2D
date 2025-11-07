@@ -26,6 +26,7 @@
     <PackageReference Include="VelloSharp" />
     <PackageReference Include="VelloSharp.Core" />
     <PackageReference Include="VelloSharp.Rendering" />
+    <PackageReference Include="Oxage.Wmf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
