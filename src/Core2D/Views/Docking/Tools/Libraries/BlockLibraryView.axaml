@@ -11,12 +11,13 @@
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:BlockLibraryViewModel" x:CompileBindings="True">
-  <Panel DataContext="{Binding Context}"
-         x:DataType="vme:ProjectEditorViewModel"
-         renderer:RendererOptions.Renderer="{Binding LibraryRenderer}"
-         renderer:RendererOptions.Selection="{Binding Project}"
-         renderer:RendererOptions.DataFlow="{Binding DataFlow}">
-    <libraries:BlocksView DataContext="{Binding Project}"
-                          d:DataContext="{x:Static vmd:DesignerContext.Project}" />
+  <Panel DataContext="{Binding Context}">
+    <Panel x:DataType="vme:ProjectEditorViewModel"
+           renderer:RendererOptions.Renderer="{Binding LibraryRenderer}"
+           renderer:RendererOptions.Selection="{Binding Project}"
+           renderer:RendererOptions.DataFlow="{Binding DataFlow}">
+      <libraries:BlocksView DataContext="{Binding Project}"
+                            d:DataContext="{x:Static vmd:DesignerContext.Project}" />
+    </Panel>
   </Panel>
 </UserControl>
