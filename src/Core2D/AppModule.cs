@@ -38,6 +38,7 @@ using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Editor.Bounds;
 using Core2D.ViewModels.Editor.Factories;
 using Core2D.Views;
+using Core2D.Rendering;
 using Core2D.Modules.FileWriter.PdfSharp;
 using Core2D.Modules.SvgExporter.Svg;
 using Core2D.Modules.XamlExporter.Avalonia;
@@ -45,6 +46,7 @@ using Core2D.ViewModels.Export;
 using Core2D.ViewModels.Wizard.Export;
 using Core2D.ViewModels.Wizard.Export.Steps;
 using Core2D.ViewModels.Wizard.Export.Execution;
+using Core2D.Services;
 
 namespace Core2D;
 
@@ -100,6 +102,9 @@ public class AppModule : Autofac.Module
         builder.RegisterType<ClipboardServiceViewModel>().As<IClipboardService>().InstancePerLifetimeScope();
         builder.RegisterType<ShapeServiceViewModel>().As<IShapeService>().InstancePerLifetimeScope();
         builder.RegisterType<GraphLayoutServiceViewModel>().As<IGraphLayoutService>().InstancePerLifetimeScope();
+        builder.RegisterType<WaveFunctionCollapseServiceViewModel>().As<IWaveFunctionCollapseService>().InstancePerLifetimeScope();
+        builder.RegisterType<RendererProvider>().As<IRendererProvider>().SingleInstance();
+        builder.RegisterType<RendererSelectionService>().As<IRendererSelectionService>().InstancePerLifetimeScope();
 
         builder.RegisterType<ProjectEditorViewModel>().As<ProjectEditorViewModel>().InstancePerLifetimeScope();
 

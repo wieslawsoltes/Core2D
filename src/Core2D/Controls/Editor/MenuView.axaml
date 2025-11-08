@@ -8,6 +8,8 @@
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              xmlns:vml="using:Core2D.ViewModels.Layout"
+             xmlns:vmr="using:Core2D.ViewModels.Renderer"
+             xmlns:wfc="using:Core2D.Procedural.WaveFunctionCollapse"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="32"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
@@ -647,6 +649,89 @@
       </MenuItem>
       <Separator />
       <MenuItem Header="_Reset Options" Command="{Binding OnResetLayoutOptions}" />
+    </MenuItem>
+    <MenuItem Header="_Renderer"
+              IsVisible="{Binding !!RendererSelectionService}"
+              ItemsSource="{Binding RendererSelectionService.Options}">
+      <MenuItem.ItemTemplate>
+        <DataTemplate DataType="vmr:RendererOption">
+          <MenuItem Header="{Binding Title}"
+                    Command="{Binding DataContext.RendererSelectionService.SelectRendererCommand, RelativeSource={RelativeSource AncestorType=MenuItem, AncestorLevel=2}}"
+                    CommandParameter="{Binding}"
+                    ToggleType="Radio">
+            <MenuItem.IsChecked>
+              <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+                <Binding Path="DataContext.RendererSelectionService.SelectedOption" RelativeSource="{RelativeSource AncestorType=MenuItem, AncestorLevel=2}" />
+                <Binding />
+              </MultiBinding>
+            </MenuItem.IsChecked>
+            <ToolTip.Tip>
+              <TextBlock Text="{Binding Description}" MaxWidth="320" TextWrapping="Wrap" />
+            </ToolTip.Tip>
+          </MenuItem>
+        </DataTemplate>
+      </MenuItem.ItemTemplate>
+    </MenuItem>
+    <MenuItem Header="_Procedural" IsVisible="{Binding !!WaveFunctionCollapseService}">
+      <MenuItem.DataContext>
+        <Binding Path="WaveFunctionCollapseService" />
+      </MenuItem.DataContext>
+      <MenuItem Header="_Generate Shapes" Command="{Binding OnGenerate}" />
+      <MenuItem Header="_Regenerate" Command="{Binding OnRegenerate}" />
+      <MenuItem Header="_Randomize Seed" Command="{Binding OnRandomizeSeed}" />
+      <Separator />
+      <MenuItem Header="_Presets" ItemsSource="{Binding Presets}">
+        <MenuItem.ItemTemplate>
+          <DataTemplate DataType="wfc:WaveFunctionPreset">
+            <MenuItem Header="{Binding Name}"
+                      Command="{Binding DataContext.OnSelectPreset, RelativeSource={RelativeSource AncestorType=MenuItem, AncestorLevel=2}}"
+                      CommandParameter="{Binding}"
+                      ToggleType="CheckBox">
+              <MenuItem.IsChecked>
+                <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+                  <Binding Path="DataContext.SelectedPreset" RelativeSource="{RelativeSource AncestorType=MenuItem, AncestorLevel=2}" />
+                  <Binding />
+                </MultiBinding>
+              </MenuItem.IsChecked>
+              <ToolTip.Tip>
+                <TextBlock Text="{Binding Description}" MaxWidth="280" TextWrapping="Wrap" />
+              </ToolTip.Tip>
+            </MenuItem>
+          </DataTemplate>
+        </MenuItem.ItemTemplate>
+      </MenuItem>
+      <Separator />
+      <MenuItem Header="{Binding GridColumns, StringFormat='Grid Width ({0})'}">
+        <MenuItem Header="Increase" Command="{Binding OnIncreaseColumns}" />
+        <MenuItem Header="Decrease" Command="{Binding OnDecreaseColumns}" />
+      </MenuItem>
+      <MenuItem Header="{Binding GridRows, StringFormat='Grid Height ({0})'}">
+        <MenuItem Header="Increase" Command="{Binding OnIncreaseRows}" />
+        <MenuItem Header="Decrease" Command="{Binding OnDecreaseRows}" />
+      </MenuItem>
+      <MenuItem Header="{Binding CellSize, StringFormat='Cell Size ({0:F0})'}">
+        <MenuItem Header="Increase" Command="{Binding OnIncreaseCellSize}" />
+        <MenuItem Header="Decrease" Command="{Binding OnDecreaseCellSize}" />
+      </MenuItem>
+      <MenuItem Header="{Binding Padding, StringFormat='Padding ({0:F0})'}">
+        <MenuItem Header="Increase" Command="{Binding OnIncreasePadding}" />
+        <MenuItem Header="Decrease" Command="{Binding OnDecreasePadding}" />
+      </MenuItem>
+      <MenuItem Header="{Binding MaxAttempts, StringFormat='Max Attempts ({0})'}">
+        <MenuItem Header="Increase" Command="{Binding OnIncreaseAttempts}" />
+        <MenuItem Header="Decrease" Command="{Binding OnDecreaseAttempts}" />
+      </MenuItem>
+      <Separator />
+      <MenuItem Header="Clear Layer Before Generate" Command="{Binding OnToggleClearLayer}" ToggleType="CheckBox">
+        <MenuItem.IsChecked>
+          <Binding Path="ClearLayerBeforeGenerate" Mode="OneWay" />
+        </MenuItem.IsChecked>
+      </MenuItem>
+      <MenuItem Header="Auto Increment Seed" Command="{Binding OnToggleAutoIncrement}" ToggleType="CheckBox">
+        <MenuItem.IsChecked>
+          <Binding Path="AutoIncrementSeed" Mode="OneWay" />
+        </MenuItem.IsChecked>
+      </MenuItem>
     </MenuItem>
     <MenuItem Header="_Tool">
       <MenuItem Header="_None" Icon="{DynamicResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N" />

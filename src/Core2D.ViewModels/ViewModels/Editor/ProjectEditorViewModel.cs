@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Editor;
@@ -47,9 +48,11 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
         _dataFlow = serviceProvider.GetServiceLazily<DataFlow>();
         _renderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
         _libraryRenderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
+        _rendererSelectionService = serviceProvider.GetServiceLazily<IRendererSelectionService>(HookRendererSelection);
         _selectionService = serviceProvider.GetServiceLazily<ISelectionService>();
         _shapeService = serviceProvider.GetServiceLazily<IShapeService>();
         _graphLayoutService = serviceProvider.GetServiceLazily<IGraphLayoutService>();
+        _waveFunctionCollapseService = serviceProvider.GetServiceLazily<IWaveFunctionCollapseService>();
         _clipboardService = serviceProvider.GetServiceLazily<IClipboardService>();
         _fileWriters = serviceProvider is null 
             ? new Lazy<ImmutableArray<IFileWriter>>(() => new ImmutableArray<IFileWriter>()) 
@@ -183,5 +186,27 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
             IsCloseButtonVisible = true,
             ViewModel = textBindingEditor
         };
+    }
+}
+
+public partial class ProjectEditorViewModel
+{
+    private void HookRendererSelection(IRendererSelectionService service)
+    {
+        if (service is INotifyPropertyChanged inpc)
+        {
+            inpc.PropertyChanged += OnRendererSelectionChanged;
+        }
+    }
+
+    private void OnRendererSelectionChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(e.PropertyName)
+            || e.PropertyName == nameof(IRendererSelectionService.Renderer))
+        {
+            RaisePropertyChanged(new PropertyChangedEventArgs(nameof(Renderer)));
+            RaisePropertyChanged(new PropertyChangedEventArgs(nameof(LibraryRenderer)));
+            RaisePropertyChanged(new PropertyChangedEventArgs(nameof(PageState)));
+        }
     }
 }

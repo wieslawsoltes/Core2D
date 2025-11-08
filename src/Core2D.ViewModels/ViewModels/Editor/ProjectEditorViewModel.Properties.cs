@@ -32,9 +32,11 @@ public partial class ProjectEditorViewModel
     private readonly Lazy<DataFlow?>? _dataFlow;
     private readonly Lazy<IShapeRenderer?>? _renderer;
     private readonly Lazy<IShapeRenderer?>? _libraryRenderer;
+    private readonly Lazy<IRendererSelectionService?>? _rendererSelectionService;
     private readonly Lazy<ISelectionService?>? _selectionService;
     private readonly Lazy<IShapeService?>? _shapeService;
     private readonly Lazy<IGraphLayoutService?>? _graphLayoutService;
+    private readonly Lazy<IWaveFunctionCollapseService?>? _waveFunctionCollapseService;
     private readonly Lazy<IClipboardService?>? _clipboardService;
     private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
     private readonly Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>> _textFieldReaders;
@@ -49,17 +51,21 @@ public partial class ProjectEditorViewModel
 
     public DataFlow? DataFlow => _dataFlow?.Value;
 
-    public IShapeRenderer? Renderer => _renderer?.Value;
+    public IRendererSelectionService? RendererSelectionService => _rendererSelectionService?.Value;
 
-    public IShapeRenderer? LibraryRenderer => _libraryRenderer?.Value;
+    public IShapeRenderer? Renderer => RendererSelectionService?.Renderer ?? _renderer?.Value;
 
-    public ShapeRendererStateViewModel? PageState => _renderer?.Value?.State;
+    public IShapeRenderer? LibraryRenderer => RendererSelectionService?.Renderer ?? _libraryRenderer?.Value;
+
+    public ShapeRendererStateViewModel? PageState => Renderer?.State;
 
     public ISelectionService? SelectionService => _selectionService?.Value;
 
     public IShapeService? ShapeService => _shapeService?.Value;
 
     public IGraphLayoutService? GraphLayoutService => _graphLayoutService?.Value;
+
+    public IWaveFunctionCollapseService? WaveFunctionCollapseService => _waveFunctionCollapseService?.Value;
         
     public IClipboardService? ClipboardService => _clipboardService?.Value;
 
