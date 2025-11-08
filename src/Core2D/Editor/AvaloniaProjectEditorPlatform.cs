@@ -21,6 +21,7 @@ using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Wizard.Export;
 
 namespace Core2D.Editor;
 
@@ -641,6 +642,34 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         {
             ServiceProvider.GetService<ILog>()?.LogException(ex);
         }
+    }
+
+    public void OnOpenExportWizard(object? param)
+    {
+        var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        if (editor is null)
+        {
+            return;
+        }
+
+        var wizard = ServiceProvider.GetService<ExportWizardViewModel>();
+        if (wizard is null)
+        {
+            return;
+        }
+
+        wizard.Context.Project = editor.Project;
+
+        var dialog = new DialogViewModel(ServiceProvider, editor)
+        {
+            Title = "Export Wizard",
+            IsOverlayVisible = true,
+            IsTitleBarVisible = true,
+            IsCloseButtonVisible = true,
+            ViewModel = wizard
+        };
+
+        editor.ShowDialog(dialog);
     }
 
     public async void OnExecuteScriptFile(object? param)

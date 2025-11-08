@@ -43,6 +43,7 @@
       <MenuItem Header="Import DW_G/DXF..." Command="{Binding Platform.OnImportDwg, FallbackValue={x:Null}}" />
       <Separator />
       <MenuItem Header="_Export..." Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" InputGesture="Ctrl+E" />
+      <MenuItem Header="Export _Wizard..." Command="{Binding Platform.OnOpenExportWizard, FallbackValue={x:Null}}" />
       <Separator IsVisible="{Binding !!RootDock}" />
       <MenuItem Header="E_xit" Command="{Binding Platform.OnExit, FallbackValue={x:Null}}" InputGesture="Alt+F4"  IsVisible="{Binding !!RootDock}"/>
     </MenuItem>

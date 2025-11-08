@@ -1,0 +1,665 @@
+﻿<UserControl x:Class="Core2D.Views.Wizard.Export.ExportWizardView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Core2D.ViewModels.Wizard.Export"
+             xmlns:steps="using:Core2D.ViewModels.Wizard.Export.Steps"
+             xmlns:exporters="using:Core2D.ViewModels.Wizard.Export.Exporters"
+             xmlns:scopes="using:Core2D.ViewModels.Wizard.Export.Scopes"
+             xmlns:exp="using:Core2D.ViewModels.Export"
+             xmlns:opts="using:Core2D.ViewModels.Export.Options"
+             xmlns:dest="using:Core2D.ViewModels.Wizard.Export.Destination"
+             xmlns:exec="using:Core2D.ViewModels.Wizard.Export.Execution"
+             mc:Ignorable="d"
+             d:DesignWidth="900"
+             d:DesignHeight="600"
+             x:DataType="vm:ExportWizardViewModel"
+             x:CompileBindings="True">
+  <UserControl.DataTemplates>
+    <DataTemplate DataType="steps:ScopeWizardStepViewModel">
+      <Border Padding="12">
+        <TreeView ItemsSource="{Binding Nodes}">
+          <TreeView.ItemTemplate>
+            <TreeDataTemplate ItemsSource="{Binding Children}"
+                              x:DataType="scopes:ExportScopeNodeViewModel">
+              <StackPanel Orientation="Horizontal" Spacing="6">
+                <CheckBox IsChecked="{Binding IsSelected}" />
+                <TextBlock Text="{Binding Title}" />
+              </StackPanel>
+            </TreeDataTemplate>
+          </TreeView.ItemTemplate>
+        </TreeView>
+      </Border>
+    </DataTemplate>
+    <DataTemplate DataType="steps:ExporterWizardStepViewModel">
+      <Grid ColumnDefinitions="2*,*"
+            ColumnSpacing="12">
+          <StackPanel>
+            <TextBox Margin="0,0,0,8"
+                   Watermark="Search exporters"
+                   Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+          <ScrollViewer Height="360">
+            <ItemsControl ItemsSource="{Binding Categories}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="exporters:ExporterCategoryViewModel">
+                  <StackPanel Margin="0,0,0,12">
+                    <TextBlock Text="{Binding Title}"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,4" />
+                    <ItemsControl ItemsSource="{Binding Entries}">
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="exporters:ExporterEntryViewModel">
+                          <Border Margin="0,4,0,4"
+                                  Padding="8"
+                                  Background="{DynamicResource SystemBaseLowColor}"
+                                  CornerRadius="4"
+                                  IsVisible="{Binding IsVisible}">
+                            <StackPanel Spacing="4">
+                              <TextBlock Text="{Binding Title}"
+                                         FontWeight="SemiBold" />
+                              <TextBlock Text="{Binding Description}"
+                                         FontSize="12"
+                                         TextWrapping="Wrap"
+                                         Opacity="0.8" />
+                              <ItemsControl ItemsSource="{Binding Capabilities}" Margin="0,2,0,2">
+                                <ItemsControl.ItemsPanel>
+                                  <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                  </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                  <DataTemplate>
+                                    <Border Margin="0,2,4,0"
+                                            Padding="2,0"
+                                            Background="{DynamicResource SystemAccentColor}"
+                                            CornerRadius="2">
+                                      <TextBlock Text="{Binding .}"
+                                                 FontSize="10"
+                                                 Foreground="White" />
+                                    </Border>
+                                  </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                              </ItemsControl>
+                              <Button Content="Add"
+                                      HorizontalAlignment="Left"
+                                      Command="{Binding AddCommand}" />
+                            </StackPanel>
+                          </Border>
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+          <TextBlock Text="Selected exporters"
+                     FontWeight="SemiBold"
+                     Margin="0,0,0,8" />
+          <ScrollViewer Height="360">
+            <ItemsControl ItemsSource="{Binding Context.SelectedExporters}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="exporters:ExporterSelectionViewModel">
+                  <Border Margin="0,4,0,4"
+                          Padding="8"
+                          Background="{DynamicResource SystemBaseLowColor}"
+                          CornerRadius="4">
+                    <StackPanel Spacing="4">
+                      <TextBlock Text="{Binding DisplayName}"
+                                 FontWeight="SemiBold" />
+                      <TextBlock Text="{Binding Description}"
+                                 FontSize="12"
+                                 TextWrapping="Wrap"
+                                 Opacity="0.8" />
+                      <StackPanel Orientation="Horizontal"
+                                  Spacing="8">
+                        <Button Content="Duplicate"
+                                Command="{Binding DuplicateCommand}" />
+                        <Button Content="Remove"
+                                Command="{Binding RemoveCommand}" />
+                      </StackPanel>
+                    </StackPanel>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+        </StackPanel>
+      </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="steps:SettingsWizardStepViewModel">
+      <Grid ColumnDefinitions="220,*"
+            ColumnSpacing="12">
+        <ListBox ItemsSource="{Binding Context.SelectedExporters}"
+                 SelectedItem="{Binding ActiveSelection}"
+                 Height="360">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding DisplayName}" />
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <Border Grid.Column="1"
+                Background="{DynamicResource SystemBaseLowColor}"
+                CornerRadius="4"
+                Padding="12">
+          <StackPanel>
+              <TextBlock Text="Select an exporter to edit its options."
+                         FontStyle="Italic"
+                         IsVisible="{Binding ActiveSelection, Converter={x:Static ObjectConverters.IsNull}}" />
+            <StackPanel IsVisible="{Binding ActiveSelection, Converter={x:Static ObjectConverters.IsNotNull}}" Spacing="8">
+              <ContentControl Content="{Binding ActiveSelection.Options}" />
+              <ItemsControl ItemsSource="{Binding ActiveSelection.Options.ValidationErrors}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="⚠️ {Binding .}" Foreground="OrangeRed" />
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+      </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="steps:DestinationWizardStepViewModel">
+      <Grid RowDefinitions="Auto,Auto,*"
+            RowSpacing="12">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Output folder" VerticalAlignment="Center" />
+          <TextBox Width="300"
+                   Text="{Binding Context.DestinationFolder, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        <StackPanel Spacing="8">
+          <TextBlock Text="Subfolder template" />
+          <TextBox Text="{Binding Context.SubfolderTemplate, UpdateSourceTrigger=PropertyChanged}" />
+          <TextBlock Text="File name template" />
+          <TextBox Text="{Binding Context.FileNameTemplate, UpdateSourceTrigger=PropertyChanged}" />
+          <CheckBox Content="Overwrite existing files"
+                    IsChecked="{Binding Context.OverwriteExisting}" />
+          <TextBlock Text="Tokens: {ProjectName}, {DocumentName}, {PageName}, {Exporter}, {ExporterExtension}"
+                     FontSize="12"
+                     Opacity="0.7" />
+        </StackPanel>
+        <Border Grid.Row="2"
+                Background="{DynamicResource SystemBaseLowColor}"
+                CornerRadius="4"
+                Padding="12">
+          <StackPanel>
+            <TextBlock Text="Preview"
+                       FontWeight="SemiBold"
+                       Margin="0,0,0,8" />
+            <ItemsControl ItemsSource="{Binding PreviewItems}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="dest:DestinationPreviewItem">
+                  <StackPanel Margin="0,4,0,4">
+                    <TextBlock Text="{Binding Scope}" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding Exporter}" FontSize="12" Opacity="0.8" />
+                    <TextBlock Text="{Binding Path}" FontFamily="Consolas" FontSize="12" />
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+      </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="steps:SummaryWizardStepViewModel">
+      <Grid RowDefinitions="Auto,Auto,Auto,*"
+            RowSpacing="12">
+        <Grid ColumnDefinitions="*,*"
+              ColumnSpacing="12">
+          <Border Background="{DynamicResource SystemBaseLowColor}"
+                  CornerRadius="4"
+                  Padding="12">
+            <StackPanel>
+              <TextBlock Text="Scopes"
+                         FontWeight="SemiBold"
+                         Margin="0,0,0,4" />
+              <TextBlock Text="No scopes selected."
+                         FontStyle="Italic"
+                         Classes.has-scopes="{Binding HasScopes}">
+                <TextBlock.Styles>
+                  <Style Selector="TextBlock">
+                    <Setter Property="IsVisible"
+                            Value="True" />
+                  </Style>
+                  <Style Selector="TextBlock:has-scopes">
+                    <Setter Property="IsVisible"
+                            Value="False" />
+                  </Style>
+                </TextBlock.Styles>
+              </TextBlock>
+              <ItemsControl ItemsSource="{Binding ScopeSummaries}"
+                            IsVisible="{Binding HasScopes}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding .}" />
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+          </Border>
+          <Border Grid.Column="1"
+                  Background="{DynamicResource SystemBaseLowColor}"
+                  CornerRadius="4"
+                  Padding="12">
+            <StackPanel>
+              <TextBlock Text="Exporters"
+                         FontWeight="SemiBold"
+                         Margin="0,0,0,4" />
+              <TextBlock Text="No exporters selected."
+                         FontStyle="Italic"
+                         Classes.has-exporters="{Binding HasExporters}">
+                <TextBlock.Styles>
+                  <Style Selector="TextBlock">
+                    <Setter Property="IsVisible"
+                            Value="True" />
+                  </Style>
+                  <Style Selector="TextBlock:has-exporters">
+                    <Setter Property="IsVisible"
+                            Value="False" />
+                  </Style>
+                </TextBlock.Styles>
+              </TextBlock>
+              <ItemsControl ItemsSource="{Binding ExporterSummaries}"
+                            IsVisible="{Binding HasExporters}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding .}" />
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+          </Border>
+        </Grid>
+        <Border Grid.Row="1"
+                Background="{DynamicResource SystemBaseLowColor}"
+                CornerRadius="4"
+                Padding="12">
+          <StackPanel>
+            <TextBlock Text="Destination"
+                       FontWeight="SemiBold"
+                       Margin="0,0,0,4" />
+            <TextBlock>
+              <Run Text="Folder: "
+                   FontWeight="SemiBold" />
+              <Run Text="{Binding Context.DestinationFolder}" />
+            </TextBlock>
+            <TextBlock>
+              <Run Text="Subfolder template: "
+                   FontWeight="SemiBold" />
+              <Run Text="{Binding Context.SubfolderTemplate}" />
+            </TextBlock>
+            <TextBlock>
+              <Run Text="File name template: "
+                   FontWeight="SemiBold" />
+              <Run Text="{Binding Context.FileNameTemplate}" />
+            </TextBlock>
+            <TextBlock>
+              <Run Text="Overwrite existing: "
+                   FontWeight="SemiBold" />
+              <Run Text="{Binding Context.OverwriteExisting}" />
+            </TextBlock>
+            <TextBlock Text="{Binding EstimatedJobCount, StringFormat='Estimated files: {0}'}"
+                       Margin="0,8,0,0" />
+          </StackPanel>
+        </Border>
+        <Border Grid.Row="2"
+                Background="{DynamicResource SystemBaseLowColor}"
+                CornerRadius="4"
+                Padding="12">
+          <StackPanel>
+            <TextBlock Text="Preview"
+                       FontWeight="SemiBold"
+                       Margin="0,0,0,4" />
+            <TextBlock Text="Preview limited to five combinations."
+                       FontSize="12"
+                       Opacity="0.7" />
+            <ItemsControl ItemsSource="{Binding PreviewItems}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="dest:DestinationPreviewItem">
+                  <StackPanel Margin="0,4">
+                    <TextBlock Text="{Binding Scope}"
+                               FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding Exporter}"
+                               FontSize="12"
+                               Opacity="0.8" />
+                    <TextBlock Text="{Binding Path}"
+                               FontFamily="Consolas"
+                               FontSize="12" />
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+        <Border Grid.Row="3"
+                Background="{DynamicResource SystemBaseLowColor}"
+                CornerRadius="4"
+                Padding="12">
+          <StackPanel>
+            <TextBlock Text="Checks"
+                       FontWeight="SemiBold"
+                       Margin="0,0,0,4" />
+            <TextBlock Text="All checks passed."
+                       FontStyle="Italic"
+                       Classes.has-issues="{Binding HasIssues}">
+              <TextBlock.Styles>
+                <Style Selector="TextBlock">
+                  <Setter Property="IsVisible"
+                          Value="True" />
+                </Style>
+                <Style Selector="TextBlock:has-issues">
+                  <Setter Property="IsVisible"
+                          Value="False" />
+                </Style>
+              </TextBlock.Styles>
+            </TextBlock>
+            <ItemsControl ItemsSource="{Binding Issues}"
+                          IsVisible="{Binding HasIssues}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="steps:SummaryIssueViewModel">
+                  <StackPanel Orientation="Horizontal"
+                              Spacing="8">
+                    <TextBlock Text="{Binding Icon}"
+                               Classes.is-error="{Binding IsError}">
+                      <TextBlock.Styles>
+                        <Style Selector="TextBlock">
+                          <Setter Property="Foreground"
+                                  Value="#E0A800" />
+                        </Style>
+                        <Style Selector="TextBlock:is-error">
+                          <Setter Property="Foreground"
+                                  Value="OrangeRed" />
+                        </Style>
+                      </TextBlock.Styles>
+                    </TextBlock>
+                    <TextBlock Text="{Binding Message}"
+                               Classes.is-error="{Binding IsError}">
+                      <TextBlock.Styles>
+                        <Style Selector="TextBlock">
+                          <Setter Property="Foreground"
+                                  Value="#E0A800" />
+                        </Style>
+                        <Style Selector="TextBlock:is-error">
+                          <Setter Property="Foreground"
+                                  Value="OrangeRed" />
+                        </Style>
+                      </TextBlock.Styles>
+                    </TextBlock>
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+      </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="steps:ExecutionWizardStepViewModel">
+      <Grid RowDefinitions="Auto,Auto,*"
+            RowSpacing="12">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Content="Start Export" Command="{Binding StartCommand}" />
+          <Button Content="Cancel" Command="{Binding CancelCommand}" />
+          <TextBlock Text="{Binding StatusMessage}"
+                     VerticalAlignment="Center" />
+        </StackPanel>
+        <ProgressBar Minimum="0"
+                     Maximum="1"
+                     Value="{Binding Progress}"
+                     Height="8"
+                     IsVisible="{Binding IsRunning}" />
+        <ItemsControl Grid.Row="2"
+                      ItemsSource="{Binding Jobs}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="exec:ExportJobItemViewModel">
+              <Border Margin="0,4"
+                      Padding="8"
+                      Background="{DynamicResource SystemBaseLowColor}"
+                      CornerRadius="4">
+                <StackPanel>
+                  <TextBlock Text="{Binding ScopeLabel}"
+                             FontWeight="SemiBold" />
+                  <TextBlock Text="{Binding ExporterName}"
+                             FontSize="12"
+                             Opacity="0.8" />
+                  <TextBlock Text="{Binding TargetPath}"
+                             FontFamily="Consolas"
+                             FontSize="12" />
+                  <TextBlock Text="{Binding Status}"
+                             FontWeight="SemiBold" />
+                  <TextBlock Text="{Binding Message}"
+                             Foreground="OrangeRed"
+                             IsVisible="{Binding Message, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                </StackPanel>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="exp:ExportOptionsBase">
+      <TextBlock Text="No editor available for this exporter."
+                 FontStyle="Italic" />
+    </DataTemplate>
+    <DataTemplate DataType="opts:PdfSharpExportOptionsViewModel">
+      <StackPanel Spacing="8">
+        <CheckBox Content="Use template page size"
+                  IsChecked="{Binding UseTemplatePageSize}" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="DPI"
+                     VerticalAlignment="Center" />
+          <TextBox Width="80"
+                   Text="{Binding Dpi}" />
+        </StackPanel>
+        <CheckBox Content="Landscape"
+                  IsChecked="{Binding Landscape}" />
+        <CheckBox Content="Embed fonts"
+                  IsChecked="{Binding EmbedFonts}" />
+        <TextBox Watermark="Title"
+                 Text="{Binding Title}" />
+        <TextBox Watermark="Author"
+                 Text="{Binding Author}" />
+      </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="opts:SkiaPdfExportOptionsViewModel">
+      <StackPanel Spacing="8">
+        <CheckBox Content="Vector only"
+                  IsChecked="{Binding VectorOnly}" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Compression"
+                     VerticalAlignment="Center" />
+          <Slider Minimum="0"
+                  Maximum="100"
+                  Value="{Binding CompressionLevel}"
+                  Width="200" />
+          <TextBlock Text="{Binding CompressionLevel,StringFormat='{}{0:F0}%'}"
+                     VerticalAlignment="Center" />
+        </StackPanel>
+        <TextBox Watermark="Color profile"
+                 Text="{Binding ColorProfile}" />
+      </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="opts:RasterExportOptionsViewModel">
+      <StackPanel Spacing="8">
+        <CheckBox Content="Use page bounds"
+                  IsChecked="{Binding UsePageBounds}" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Width" />
+          <TextBox Width="80"
+                   Text="{Binding Width}" />
+          <TextBlock Text="Height" />
+          <TextBox Width="80"
+                   Text="{Binding Height}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Scale" />
+          <TextBox Width="80"
+                   Text="{Binding Scale}" />
+        </StackPanel>
+        <CheckBox Content="Preserve aspect ratio"
+                  IsChecked="{Binding PreserveAspectRatio}" />
+        <CheckBox Content="Transparent background"
+                  IsChecked="{Binding TransparentBackground}" />
+        <TextBox Watermark="Background color (#AARRGGBB)"
+                 Text="{Binding Background}" />
+      </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="opts:SvgExportOptionsViewModel">
+      <StackPanel Spacing="8">
+        <ComboBox SelectedItem="{Binding ViewBox}">
+          <ComboBox.Items>
+            <x:Static Member="opts:SvgViewBoxMode.TemplateBounds" />
+            <x:Static Member="opts:SvgViewBoxMode.PageBounds" />
+          </ComboBox.Items>
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding}" />
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="Precision" />
+          <TextBox Width="60"
+                   Text="{Binding DecimalPrecision}" />
+        </StackPanel>
+        <CheckBox Content="Embed fonts"
+                  IsChecked="{Binding EmbedFonts}" />
+        <CheckBox Content="Emit CSS"
+                  IsChecked="{Binding EmitCss}" />
+      </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="opts:OpenXmlExportOptionsViewModel">
+      <StackPanel Spacing="8">
+        <TextBox Watermark="Naming template"
+                 Text="{Binding NamingTemplate}" />
+        <CheckBox Content="Prefer vector content"
+                  IsChecked="{Binding PreferVectorContent}" />
+        <CheckBox Content="Include payload data"
+                  IsChecked="{Binding IncludePayload}" />
+        <CheckBox Content="Use page size"
+                  IsChecked="{Binding UsePageSize}" />
+      </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="opts:CadExportOptionsViewModel">
+      <StackPanel Spacing="8">
+        <ComboBox SelectedItem="{Binding Units}">
+          <ComboBox.Items>
+            <x:Static Member="opts:CadExportUnits.ModelUnits" />
+            <x:Static Member="opts:CadExportUnits.Millimeters" />
+            <x:Static Member="opts:CadExportUnits.Inches" />
+          </ComboBox.Items>
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding}" />
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+        <CheckBox Content="Include template layers"
+                  IsChecked="{Binding IncludeTemplateLayers}" />
+        <CheckBox Content="Merge layers"
+                  IsChecked="{Binding MergeLayers}" />
+        <CheckBox Content="Explode groups"
+                  IsChecked="{Binding ExplodeGroups}" />
+      </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="opts:DefaultExportOptionsViewModel">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Additional notes" />
+        <TextBox AcceptsReturn="True"
+                 Height="120"
+                 Text="{Binding Notes}" />
+      </StackPanel>
+    </DataTemplate>
+  </UserControl.DataTemplates>
+
+  <Grid RowDefinitions="Auto,* ,Auto"
+        ColumnDefinitions="220,*">
+    <Border Grid.RowSpan="3"
+            Background="{DynamicResource SystemChromeLowColor}" />
+
+    <StackPanel Grid.Column="0"
+                Margin="8"
+                Spacing="8">
+      <ItemsControl ItemsSource="{Binding Steps}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:IWizardStepViewModel">
+            <Border Padding="8">
+              <StackPanel Spacing="2">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="6">
+                  <TextBlock Text="{Binding Title}"
+                             FontWeight="SemiBold" />
+                  <TextBlock Text="{Binding State}"
+                             FontSize="11"
+                             Classes.ready="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter=Ready}"
+                             Classes.warning="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter=Warning}"
+                             Classes.error="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter=Error}">
+                    <TextBlock.Styles>
+                      <Style Selector="TextBlock">
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource SystemChromeHighColor}" />
+                      </Style>
+                      <Style Selector="TextBlock:ready">
+                        <Setter Property="Foreground"
+                                Value="{DynamicResource SystemAccentColor}" />
+                      </Style>
+                      <Style Selector="TextBlock:warning">
+                        <Setter Property="Foreground"
+                                Value="#E0A800" />
+                      </Style>
+                      <Style Selector="TextBlock:error">
+                        <Setter Property="Foreground"
+                                Value="OrangeRed" />
+                      </Style>
+                    </TextBlock.Styles>
+                  </TextBlock>
+                </StackPanel>
+                <TextBlock Text="{Binding Description}"
+                           FontSize="12"
+                           Opacity="0.8"
+                           TextWrapping="Wrap" />
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </StackPanel>
+
+    <Border Grid.Column="1"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Margin="12"
+            Background="{DynamicResource SystemBaseLowColor}"
+            CornerRadius="6">
+      <ContentControl Content="{Binding CurrentStep}"
+                      Margin="12" />
+    </Border>
+
+    <Border Grid.Column="1"
+            Grid.Row="2"
+            Background="{DynamicResource SystemBaseLowColor}"
+            Padding="12">
+      <Grid ColumnDefinitions="*,Auto,Auto,Auto"
+            ColumnSpacing="12">
+        <StackPanel Orientation="Horizontal"
+                    Spacing="8">
+          <TextBlock Text="{Binding CurrentStep.Title}"
+                     FontWeight="SemiBold" />
+        </StackPanel>
+        <Button Grid.Column="1"
+                Content="Back"
+                Command="{Binding BackCommand}" />
+        <Button Grid.Column="2"
+                Content="Next"
+                Command="{Binding NextCommand}" />
+        <Button Grid.Column="3"
+                Content="Close"
+                Command="{Binding CancelCommand}" />
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

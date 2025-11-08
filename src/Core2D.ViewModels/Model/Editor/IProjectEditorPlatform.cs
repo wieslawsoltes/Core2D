@@ -29,6 +29,7 @@ public interface IProjectEditorPlatform
     void OnExportJson(object? param);
 
     void OnExport(object? param);
+    void OnOpenExportWizard(object? param);
 
     void OnExecuteScriptFile(object? param);
 

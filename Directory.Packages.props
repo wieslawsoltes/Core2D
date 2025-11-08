@@ -48,5 +48,9 @@
     <PackageVersion Include="VelloSharp.Core" Version="0.5.0-alpha.3" />
     <PackageVersion Include="VelloSharp.Rendering" Version="0.5.0-alpha.3" />
     <PackageVersion Include="Oxage.Wmf" Version="0.6.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageVersion Include="xunit" Version="2.7.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.8" PrivateAssets="all" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.0" PrivateAssets="all" />
   </ItemGroup>
 </Project>

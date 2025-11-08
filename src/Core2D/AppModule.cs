@@ -41,6 +41,10 @@ using Core2D.Views;
 using Core2D.Modules.FileWriter.PdfSharp;
 using Core2D.Modules.SvgExporter.Svg;
 using Core2D.Modules.XamlExporter.Avalonia;
+using Core2D.ViewModels.Export;
+using Core2D.ViewModels.Wizard.Export;
+using Core2D.ViewModels.Wizard.Export.Steps;
+using Core2D.ViewModels.Wizard.Export.Execution;
 
 namespace Core2D;
 
@@ -166,6 +170,25 @@ public class AppModule : Autofac.Module
 
         builder.RegisterType<DrawingGroupXamlExporter>().As<IXamlExporter>().InstancePerLifetimeScope();
         builder.RegisterType<SvgSvgExporter>().As<ISvgExporter>().InstancePerLifetimeScope();
+
+        builder.RegisterType<ExportOptionsCatalog>()
+            .As<IExportOptionsCatalog>()
+            .SingleInstance();
+
+        builder.RegisterType<ExportWizardTelemetry>()
+            .As<IExportWizardTelemetry>()
+            .SingleInstance();
+
+        builder.RegisterType<ExportWizardContext>().AsSelf().InstancePerLifetimeScope();
+        builder.RegisterType<WizardNavigationService>().AsSelf().InstancePerLifetimeScope();
+        builder.RegisterType<ScopeWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
+        builder.RegisterType<ExporterWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
+        builder.RegisterType<SettingsWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
+        builder.RegisterType<DestinationWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
+        builder.RegisterType<ExecutionWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
+        builder.RegisterType<SummaryWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
+        builder.RegisterType<ExportWizardViewModel>().AsSelf().InstancePerDependency();
+        builder.RegisterType<ExportJobRunner>().AsSelf().InstancePerDependency();
         
         // Avalonia
 
