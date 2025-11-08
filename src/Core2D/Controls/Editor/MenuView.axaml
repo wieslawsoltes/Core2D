@@ -7,6 +7,7 @@
              xmlns:app="using:Core2D"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:vml="using:Core2D.ViewModels.Layout"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="32"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
@@ -503,6 +504,144 @@
           <MenuItem Header="_Bottom" Command="{Binding StyleEditor.OnStyleSetTextVAlignment, FallbackValue={x:Null}}" CommandParameter="Bottom" />
         </MenuItem>
       </MenuItem>
+    </MenuItem>
+    <MenuItem Header="_Graph Layout" IsVisible="{Binding !!GraphLayoutService}">
+      <MenuItem.DataContext>
+        <Binding Path="GraphLayoutService" />
+      </MenuItem.DataContext>
+      <MenuItem Header="Apply to _Selection" Command="{Binding OnApplyLayoutToSelection}" />
+      <MenuItem Header="Apply to _Page" Command="{Binding OnApplyLayoutToPage}" />
+      <Separator />
+      <MenuItem Header="_Algorithm">
+        <MenuItem Header="_Layered" Command="{Binding OnSelectAlgorithm}" CommandParameter="Layered" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.Algorithm" />
+              <Binding Source="{x:Static vml:GraphLayoutAlgorithm.Layered}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+        <MenuItem Header="_Fast Incremental" Command="{Binding OnSelectAlgorithm}" CommandParameter="FastIncremental" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.Algorithm" />
+              <Binding Source="{x:Static vml:GraphLayoutAlgorithm.FastIncremental}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+        <MenuItem Header="_MDS" Command="{Binding OnSelectAlgorithm}" CommandParameter="MultiDimensionalScaling" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.Algorithm" />
+              <Binding Source="{x:Static vml:GraphLayoutAlgorithm.MultiDimensionalScaling}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+      </MenuItem>
+      <MenuItem Header="_Direction">
+        <MenuItem.IsEnabled>
+          <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+            <Binding Path="Options.Algorithm" />
+            <Binding Source="{x:Static vml:GraphLayoutAlgorithm.Layered}" />
+          </MultiBinding>
+        </MenuItem.IsEnabled>
+        <MenuItem Header="_Top to Bottom" Command="{Binding OnSelectDirection}" CommandParameter="TopToBottom" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.Direction" />
+              <Binding Source="{x:Static vml:GraphLayoutDirection.TopToBottom}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+        <MenuItem Header="_Bottom to Top" Command="{Binding OnSelectDirection}" CommandParameter="BottomToTop" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.Direction" />
+              <Binding Source="{x:Static vml:GraphLayoutDirection.BottomToTop}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+        <MenuItem Header="Left to _Right" Command="{Binding OnSelectDirection}" CommandParameter="LeftToRight" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.Direction" />
+              <Binding Source="{x:Static vml:GraphLayoutDirection.LeftToRight}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+        <MenuItem Header="Right to _Left" Command="{Binding OnSelectDirection}" CommandParameter="RightToLeft" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.Direction" />
+              <Binding Source="{x:Static vml:GraphLayoutDirection.RightToLeft}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+      </MenuItem>
+      <MenuItem Header="Edge _Routing">
+        <MenuItem Header="_Straight" Command="{Binding OnSelectEdgeRouting}" CommandParameter="Straight" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.EdgeRouting" />
+              <Binding Source="{x:Static vml:GraphLayoutEdgeRouting.Straight}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+        <MenuItem Header="_Spline" Command="{Binding OnSelectEdgeRouting}" CommandParameter="Spline" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.EdgeRouting" />
+              <Binding Source="{x:Static vml:GraphLayoutEdgeRouting.Spline}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+        <MenuItem Header="_Bundled" Command="{Binding OnSelectEdgeRouting}" CommandParameter="Bundled" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.EdgeRouting" />
+              <Binding Source="{x:Static vml:GraphLayoutEdgeRouting.Bundled}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+        <MenuItem Header="_Rectilinear" Command="{Binding OnSelectEdgeRouting}" CommandParameter="Rectilinear" ToggleType="CheckBox">
+          <MenuItem.IsChecked>
+            <MultiBinding Mode="OneWay" Converter="{x:Static converters:ObjectEqualityMultiConverter.Instance}">
+              <Binding Path="Options.EdgeRouting" />
+              <Binding Source="{x:Static vml:GraphLayoutEdgeRouting.Rectilinear}" />
+            </MultiBinding>
+          </MenuItem.IsChecked>
+        </MenuItem>
+      </MenuItem>
+      <MenuItem Header="_Spacing">
+        <MenuItem Header="Increase Node Separation" Command="{Binding OnIncreaseNodeSeparation}" />
+        <MenuItem Header="Decrease Node Separation" Command="{Binding OnDecreaseNodeSeparation}" />
+        <Separator />
+        <MenuItem Header="Increase Layer Separation" Command="{Binding OnIncreaseLayerSeparation}" />
+        <MenuItem Header="Decrease Layer Separation" Command="{Binding OnDecreaseLayerSeparation}" />
+      </MenuItem>
+      <Separator />
+      <MenuItem Header="Avoid Node Overlap" Command="{Binding OnToggleAvoidNodeOverlap}" ToggleType="CheckBox">
+        <MenuItem.IsChecked>
+          <Binding Path="Options.AvoidNodeOverlap" Mode="OneWay" />
+        </MenuItem.IsChecked>
+      </MenuItem>
+      <MenuItem Header="Route Edges" Command="{Binding OnToggleRouteEdges}" ToggleType="CheckBox">
+        <MenuItem.IsChecked>
+          <Binding Path="Options.RouteEdges" Mode="OneWay" />
+        </MenuItem.IsChecked>
+      </MenuItem>
+      <MenuItem Header="Keep Locked Nodes Fixed" Command="{Binding OnToggleKeepLockedNodesFixed}" ToggleType="CheckBox">
+        <MenuItem.IsChecked>
+          <Binding Path="Options.KeepLockedNodesFixed" Mode="OneWay" />
+        </MenuItem.IsChecked>
+      </MenuItem>
+      <MenuItem Header="Align To Grid" Command="{Binding OnToggleAlignToGrid}" ToggleType="CheckBox">
+        <MenuItem.IsChecked>
+          <Binding Path="Options.AlignToGrid" Mode="OneWay" />
+        </MenuItem.IsChecked>
+      </MenuItem>
+      <Separator />
+      <MenuItem Header="_Reset Options" Command="{Binding OnResetLayoutOptions}" />
     </MenuItem>
     <MenuItem Header="_Tool">
       <MenuItem Header="_None" Icon="{DynamicResource NoneIcon}" Command="{Binding OnToolNone}" InputGesture="N" />

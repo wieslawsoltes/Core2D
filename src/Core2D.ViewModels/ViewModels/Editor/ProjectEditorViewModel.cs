@@ -49,6 +49,7 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
         _libraryRenderer = serviceProvider.GetServiceLazily<IShapeRenderer>();
         _selectionService = serviceProvider.GetServiceLazily<ISelectionService>();
         _shapeService = serviceProvider.GetServiceLazily<IShapeService>();
+        _graphLayoutService = serviceProvider.GetServiceLazily<IGraphLayoutService>();
         _clipboardService = serviceProvider.GetServiceLazily<IClipboardService>();
         _fileWriters = serviceProvider is null 
             ? new Lazy<ImmutableArray<IFileWriter>>(() => new ImmutableArray<IFileWriter>()) 

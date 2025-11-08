@@ -94,6 +94,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<SelectionServiceViewModel>().As<ISelectionService>().InstancePerLifetimeScope();
         builder.RegisterType<ClipboardServiceViewModel>().As<IClipboardService>().InstancePerLifetimeScope();
         builder.RegisterType<ShapeServiceViewModel>().As<IShapeService>().InstancePerLifetimeScope();
+        builder.RegisterType<GraphLayoutServiceViewModel>().As<IGraphLayoutService>().InstancePerLifetimeScope();
 
         builder.RegisterType<ProjectEditorViewModel>().As<ProjectEditorViewModel>().InstancePerLifetimeScope();
 

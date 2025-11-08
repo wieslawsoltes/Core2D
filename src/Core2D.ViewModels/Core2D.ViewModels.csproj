@@ -16,6 +16,7 @@
     <PackageReference Include="System.Collections.Immutable" />
     <PackageReference Include="System.IO.Compression" />
     <PackageReference Include="System.Reactive" />
+    <PackageReference Include="AutomaticGraphLayout" />
     <PackageReference Include="Dock.Avalonia" />
     <PackageReference Include="Dock.Model.MVVM" />
     <PackageReference Include="Avalonia" />

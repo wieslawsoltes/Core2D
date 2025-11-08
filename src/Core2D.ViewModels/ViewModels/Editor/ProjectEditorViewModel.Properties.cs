@@ -34,6 +34,7 @@ public partial class ProjectEditorViewModel
     private readonly Lazy<IShapeRenderer?>? _libraryRenderer;
     private readonly Lazy<ISelectionService?>? _selectionService;
     private readonly Lazy<IShapeService?>? _shapeService;
+    private readonly Lazy<IGraphLayoutService?>? _graphLayoutService;
     private readonly Lazy<IClipboardService?>? _clipboardService;
     private readonly Lazy<ImmutableArray<IFileWriter>> _fileWriters;
     private readonly Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>> _textFieldReaders;
@@ -57,6 +58,8 @@ public partial class ProjectEditorViewModel
     public ISelectionService? SelectionService => _selectionService?.Value;
 
     public IShapeService? ShapeService => _shapeService?.Value;
+
+    public IGraphLayoutService? GraphLayoutService => _graphLayoutService?.Value;
         
     public IClipboardService? ClipboardService => _clipboardService?.Value;
 

@@ -35,6 +35,7 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="Autofac" Version="8.4.0" />
+    <PackageVersion Include="AutomaticGraphLayout" Version="1.1.12" />
     <PackageVersion Include="CsvHelper" Version="33.1.0" />
     <PackageVersion Include="DocumentFormat.OpenXml" Version="3.3.0" />
     <PackageVersion Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
