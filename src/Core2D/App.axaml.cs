@@ -14,6 +14,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Styling;
 using Avalonia.Themes.Fluent;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using Core2D.Configuration.Windows;
 using Core2D.ViewModels;
@@ -29,6 +30,8 @@ public class App : Application
 
     public static ICommand? ChangeTheme { get; }
 
+    private static bool _globalExceptionHandlersRegistered;
+
     static App()
     {
         DefaultTheme = "FluentDark";
@@ -36,6 +39,7 @@ public class App : Application
         ChangeTheme = new RelayCommand<string>(SetTheme);
 
         InitializeDesigner();
+        RegisterGlobalExceptionHandlers();
     }
 
     public static void InitializeDesigner()
@@ -145,5 +149,47 @@ public class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+    }
+
+    private static void RegisterGlobalExceptionHandlers()
+    {
+        if (_globalExceptionHandlersRegistered)
+        {
+            return;
+        }
+
+        _globalExceptionHandlersRegistered = true;
+
+        AppDomain.CurrentDomain.UnhandledException += (_, args) =>
+        {
+            if (args.ExceptionObject is Exception ex)
+            {
+                LogUnhandledException("AppDomain.CurrentDomain.UnhandledException", ex);
+            }
+        };
+
+        System.Threading.Tasks.TaskScheduler.UnobservedTaskException += (_, args) =>
+        {
+            LogUnhandledException("TaskScheduler.UnobservedTaskException", args.Exception);
+            args.SetObserved();
+        };
+
+        Dispatcher.UIThread.UnhandledException += (_, args) =>
+        {
+            LogUnhandledException("Dispatcher.UIThread.UnhandledException", args.Exception);
+            args.Handled = true;
+        };
+    }
+
+    private static void LogUnhandledException(string source, Exception exception)
+    {
+        try
+        {
+            Console.Error.WriteLine($"[Unhandled:{source}] {exception}");
+        }
+        catch
+        {
+            // Swallow logging failures to avoid recursive crashes.
+        }
     }
 }

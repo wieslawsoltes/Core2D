@@ -65,10 +65,10 @@ internal static class Program
 
     private static void StartAvaloniaApp(Settings settings, string[] args)
     {
-        var builder = BuildAvaloniaApp();
-
         try
         {
+            var builder = BuildAvaloniaApp();
+
             if (settings.Theme is { })
             {
                 App.DefaultTheme = settings.Theme;
