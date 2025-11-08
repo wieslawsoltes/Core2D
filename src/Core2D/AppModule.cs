@@ -18,6 +18,7 @@ using Core2D.Modules.FileWriter.SkiaSharp;
 using Core2D.Modules.FileWriter.Svg;
 using Core2D.Modules.FileWriter.Xaml;
 using Core2D.Modules.FileWriter.Wmf;
+using Core2D.Modules.FileWriter.OpenXml;
 using Core2D.Modules.Log.Trace;
 using Core2D.Modules.Renderer.Avalonia;
 using Core2D.Modules.Renderer.Dwg;
@@ -150,6 +151,9 @@ public class AppModule : Autofac.Module
         builder.RegisterType<WmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<JpegSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+        builder.RegisterType<ExcelOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+        builder.RegisterType<WordOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+        builder.RegisterType<PowerPointOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<OpenXmlReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
         builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
         builder.RegisterType<OpenXmlWriter>().As<ITextFieldWriter<DatabaseViewModel>>().InstancePerLifetimeScope();

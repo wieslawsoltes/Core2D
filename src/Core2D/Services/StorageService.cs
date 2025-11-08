@@ -135,6 +135,20 @@ internal static class StorageService
         MimeTypes = new[] { "application/pdf" }
     };
 
+    public static FilePickerFileType Docx { get; } = new("Word document")
+    {
+        Patterns = new[] { "*.docx" },
+        AppleUniformTypeIdentifiers = new[] { "org.openxmlformats.wordprocessingml.document" },
+        MimeTypes = new[] { "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }
+    };
+
+    public static FilePickerFileType Pptx { get; } = new("PowerPoint presentation")
+    {
+        Patterns = new[] { "*.pptx" },
+        AppleUniformTypeIdentifiers = new[] { "org.openxmlformats.presentationml.presentation" },
+        MimeTypes = new[] { "application/vnd.openxmlformats-officedocument.presentationml.presentation" }
+    };
+
     public static FilePickerFileType Xps { get; } = new("XPS document")
     {
         Patterns = new[] { "*.xps" },

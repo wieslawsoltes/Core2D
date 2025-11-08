@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
@@ -58,6 +59,33 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         return new List<FilePickerFileType>
         {
             StorageService.Pdf,
+            StorageService.All
+        };
+    }
+
+    private static List<FilePickerFileType> GetExcelFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.Xlsx,
+            StorageService.All
+        };
+    }
+
+    private static List<FilePickerFileType> GetWordFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.Docx,
+            StorageService.All
+        };
+    }
+
+    private static List<FilePickerFileType> GetPowerPointFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.Pptx,
             StorageService.All
         };
     }
@@ -128,6 +156,14 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                     break;
                 case "pdf":
                     result.Add(StorageService.Pdf);
+                    break;
+                case "doc":
+                case "docx":
+                    result.Add(StorageService.Docx);
+                    break;
+                case "ppt":
+                case "pptx":
+                    result.Add(StorageService.Pptx);
                     break;
                 case "xps":
                     result.Add(StorageService.Xps);
@@ -478,6 +514,24 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         {
             ServiceProvider.GetService<ILog>()?.LogException(ex);
         }
+    }
+
+    public async void OnImportExcel(object? param)
+    {
+        await ImportOpenXmlAsync("Import Excel", GetExcelFileTypes(),
+            (editor, stream) => editor.OnImportExcel(stream));
+    }
+
+    public async void OnImportWord(object? param)
+    {
+        await ImportOpenXmlAsync("Import Word", GetWordFileTypes(),
+            (editor, stream) => editor.OnImportWord(stream));
+    }
+
+    public async void OnImportPowerPoint(object? param)
+    {
+        await ImportOpenXmlAsync("Import PowerPoint", GetPowerPointFileTypes(),
+            (editor, stream) => editor.OnImportPowerPoint(stream));
     }
 
     public async void OnExportJson(object? param)
@@ -1126,6 +1180,44 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                     editor.OnExportData(stream, db, writer);
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            ServiceProvider.GetService<ILog>()?.LogException(ex);
+        }
+    }
+
+    private async Task ImportOpenXmlAsync(string title, List<FilePickerFileType> fileTypes, Action<ProjectEditorViewModel, Stream> handler)
+    {
+        try
+        {
+            var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+            if (editor is null)
+            {
+                return;
+            }
+
+            var storageProvider = StorageService.GetStorageProvider();
+            if (storageProvider is null)
+            {
+                return;
+            }
+
+            var result = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = title,
+                FileTypeFilter = fileTypes,
+                AllowMultiple = false
+            });
+
+            var file = result.FirstOrDefault();
+            if (file is null)
+            {
+                return;
+            }
+
+            await using var stream = await file.OpenReadAsync();
+            handler(editor, stream);
         }
         catch (Exception ex)
         {

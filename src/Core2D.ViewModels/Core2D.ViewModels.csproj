@@ -17,6 +17,8 @@
     <PackageReference Include="System.IO.Compression" />
     <PackageReference Include="System.Reactive" />
     <PackageReference Include="AutomaticGraphLayout" />
+    <PackageReference Include="DocumentFormat.OpenXml" />
+    <PackageReference Include="System.IO.Packaging" />
     <PackageReference Include="Dock.Avalonia" />
     <PackageReference Include="Dock.Model.MVVM" />
     <PackageReference Include="Avalonia" />

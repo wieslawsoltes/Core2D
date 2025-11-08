@@ -16,5 +16,7 @@
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
     <PackageReference Include="System.Drawing.Common" />
+    <PackageReference Include="DocumentFormat.OpenXml" />
+    <PackageReference Include="System.IO.Packaging" />
   </ItemGroup>
 </Project>

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
 using Core2D.Model;
 using Core2D.Model.Editor;
+using Core2D.Model.OpenXml;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
@@ -22,6 +23,10 @@ using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.ViewModels.Style;
 using Core2D.Spatial;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Presentation;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Core2D.ViewModels.Editor;
 
@@ -785,6 +790,50 @@ public partial class ProjectEditorViewModel
             if (result.Shapes.Count > 0)
             {
                 ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(result.Shapes);
+            }
+        }
+        catch (Exception ex)
+        {
+            ServiceProvider.GetService<ILog>()?.LogException(ex);
+        }
+    }
+
+    public void OnImportExcel(Stream stream)
+        => ImportOpenXml(stream, s => SpreadsheetDocument.Open(s, false), package => ((SpreadsheetDocument)package).WorkbookPart);
+
+    public void OnImportWord(Stream stream)
+        => ImportOpenXml(stream, s => WordprocessingDocument.Open(s, false), package => ((WordprocessingDocument)package).MainDocumentPart);
+
+    public void OnImportPowerPoint(Stream stream)
+        => ImportOpenXml(stream, s => PresentationDocument.Open(s, false), package => ((PresentationDocument)package).PresentationPart);
+
+    private void ImportOpenXml(Stream stream, Func<Stream, OpenXmlPackage> openPackage, Func<OpenXmlPackage, OpenXmlPartContainer?> partSelector)
+    {
+        var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
+        if (jsonSerializer is null)
+        {
+            return;
+        }
+
+        try
+        {
+            using var package = openPackage(stream);
+            var container = partSelector(package);
+            if (container is null)
+            {
+                throw new NotSupportedException("The selected document is missing required content.");
+            }
+
+            var payloadJson = OpenXmlPackagePartHelper.ReadPayload(container);
+            if (string.IsNullOrWhiteSpace(payloadJson))
+            {
+                throw new NotSupportedException("The selected document does not contain embedded Core2D data.");
+            }
+
+            var imported = OpenXmlPayloadSerializer.Deserialize(jsonSerializer, payloadJson);
+            if (imported is { })
+            {
+                OnImportObject(imported, true);
             }
         }
         catch (Exception ex)
