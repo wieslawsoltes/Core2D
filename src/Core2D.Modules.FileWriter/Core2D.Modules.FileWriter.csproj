@@ -8,7 +8,13 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core2D.ViewModels\Core2D.ViewModels.csproj" />
-    <ProjectReference Include="..\Core2D.Modules.Renderer\Core2D.Modules.Renderer.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.Dwg\Core2D.Modules.Renderer.Dwg.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.Dxf\Core2D.Modules.Renderer.Dxf.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.OpenXml\Core2D.Modules.Renderer.OpenXml.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.PdfSharp\Core2D.Modules.Renderer.PdfSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.SkiaSharp\Core2D.Modules.Renderer.SkiaSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.WinForms\Core2D.Modules.Renderer.WinForms.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.Wmf\Core2D.Modules.Renderer.Wmf.csproj" />
     <ProjectReference Include="..\Core2D.Modules.SvgExporter\Core2D.Modules.SvgExporter.csproj" />
     <ProjectReference Include="..\Core2D.Modules.XamlExporter\Core2D.Modules.XamlExporter.csproj" />
   </ItemGroup>

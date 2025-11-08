@@ -73,7 +73,13 @@
     <ProjectReference Include="..\Core2D.Modules.FileSystem\Core2D.Modules.FileSystem.csproj" />
     <ProjectReference Include="..\Core2D.Modules.FileWriter\Core2D.Modules.FileWriter.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Log\Core2D.Modules.Log.csproj" />
-    <ProjectReference Include="..\Core2D.Modules.Renderer\Core2D.Modules.Renderer.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.Avalonia\Core2D.Modules.Renderer.Avalonia.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.Dwg\Core2D.Modules.Renderer.Dwg.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.PdfSharp\Core2D.Modules.Renderer.PdfSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.SkiaSharp\Core2D.Modules.Renderer.SkiaSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.SparseStrips\Core2D.Modules.Renderer.SparseStrips.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.VelloSharp\Core2D.Modules.Renderer.VelloSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.Wmf\Core2D.Modules.Renderer.Wmf.csproj" />
     <ProjectReference Include="..\Core2D.Modules.ScriptRunner\Core2D.Modules.ScriptRunner.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Serializer\Core2D.Modules.Serializer.csproj" />
     <ProjectReference Include="..\Core2D.Modules.ServiceProvider\Core2D.Modules.ServiceProvider.csproj" />

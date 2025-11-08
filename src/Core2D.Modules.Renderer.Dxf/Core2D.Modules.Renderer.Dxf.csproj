@@ -10,23 +10,11 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core2D.ViewModels\Core2D.ViewModels.csproj" />
-    <ProjectReference Include="..\..\external\ACadSharp\src\ACadSharp\ACadSharp.csproj" />
-    <ProjectReference Include="..\..\external\PdfPig.Rendering.Skia\UglyToad.PdfPig.Rendering.Skia\UglyToad.PdfPig.Rendering.Skia.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" />
+    <PackageReference Include="netDXF.netstandard" />
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
-    <PackageReference Include="PDFsharp" />
-    <PackageReference Include="Svg.Skia" />
-    <PackageReference Include="System.Drawing.Common" />
-    <PackageReference Include="netDXF.netstandard" />
-    <PackageReference Include="PanAndZoom" />
-    <PackageReference Include="Vello" />
-    <PackageReference Include="VelloSharp" />
-    <PackageReference Include="VelloSharp.Core" />
-    <PackageReference Include="VelloSharp.Rendering" />
-    <PackageReference Include="Oxage.Wmf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />

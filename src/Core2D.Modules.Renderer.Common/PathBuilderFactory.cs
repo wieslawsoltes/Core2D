@@ -11,9 +11,9 @@ using PathFillRule = Core2D.Model.Path.FillRule;
 
 namespace Core2D.Modules.Renderer.Common;
 
-internal readonly record struct PathGeometryData(PathBuilder Builder, PathFillRule FillRule);
+public readonly record struct PathGeometryData(PathBuilder Builder, PathFillRule FillRule);
 
-internal static class PathBuilderFactory
+public static class PathBuilderFactory
 {
     public static PathGeometryData? Create(BaseShapeViewModel shape)
     {
