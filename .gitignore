@@ -23,6 +23,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+!src/Core2D.Modules.Log/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -66,6 +67,7 @@ artifacts/
 *.tmp
 *.tmp_proj
 *.log
+!src/Core2D.Modules.Log/
 *.vspscc
 *.vssscc
 .builds
