@@ -99,7 +99,7 @@ public partial class MovePathToolViewModel : ViewModelBase, IPathTool
             {
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true);
                 }
                 break;
             }

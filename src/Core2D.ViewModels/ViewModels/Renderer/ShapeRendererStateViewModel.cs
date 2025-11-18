@@ -33,8 +33,12 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
     [AutoNotify] private ShapeStyleViewModel? _connectorOutputStyle;
     [AutoNotify] private ShapeStyleViewModel? _connectorHoverStyle;
     [AutoNotify] private ShapeStyleViewModel? _connectorSelectedStyle;
+    [AutoNotify] private ShapeStyleViewModel? _connectorToolHoverStyle;
+    [AutoNotify] private ShapeStyleViewModel? _connectorToolHoverInvalidStyle;
     [AutoNotify] private IDecorator? _decorator;
     [AutoNotify] private ImmutableHashSet<PointShapeViewModel> _activeConnectionPoints = ImmutableHashSet<PointShapeViewModel>.Empty;
+    [AutoNotify] private PointShapeViewModel? _connectionHoverPoint;
+    [AutoNotify] private bool _connectionHoverCanConnect;
 
     public ShapeRendererStateViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
@@ -94,6 +98,16 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
             isDirty |= _connectorSelectedStyle.IsDirty();
         }
 
+        if (_connectorToolHoverStyle != null)
+        {
+            isDirty |= _connectorToolHoverStyle.IsDirty();
+        }
+
+        if (_connectorToolHoverInvalidStyle != null)
+        {
+            isDirty |= _connectorToolHoverInvalidStyle.IsDirty();
+        }
+
         return isDirty;
     }
 
@@ -110,6 +124,8 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
         _connectorOutputStyle?.Invalidate();
         _connectorHoverStyle?.Invalidate();
         _connectorSelectedStyle?.Invalidate();
+        _connectorToolHoverStyle?.Invalidate();
+        _connectorToolHoverInvalidStyle?.Invalidate();
     }
 
     public override IDisposable Subscribe(IObserver<(object? sender, PropertyChangedEventArgs e)> observer)
@@ -125,6 +141,8 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
         var disposableConnectorOutputStyle = default(IDisposable);
         var disposableConnectorHoverStyle = default(IDisposable);
         var disposableConnectorSelectedStyle = default(IDisposable);
+        var disposableConnectorToolHoverStyle = default(IDisposable);
+        var disposableConnectorToolHoverInvalidStyle = default(IDisposable);
 
         ObserveSelf(Handler, ref disposablePropertyChanged, mainDisposable);
         ObserveObject(_pointStyle, ref disposablePointStyle, mainDisposable, observer);
@@ -136,6 +154,8 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
         ObserveObject(_connectorOutputStyle, ref disposableConnectorOutputStyle, mainDisposable, observer);
         ObserveObject(_connectorHoverStyle, ref disposableConnectorHoverStyle, mainDisposable, observer);
         ObserveObject(_connectorSelectedStyle, ref disposableConnectorSelectedStyle, mainDisposable, observer);
+        ObserveObject(_connectorToolHoverStyle, ref disposableConnectorToolHoverStyle, mainDisposable, observer);
+        ObserveObject(_connectorToolHoverInvalidStyle, ref disposableConnectorToolHoverInvalidStyle, mainDisposable, observer);
 
         void Handler(object? sender, PropertyChangedEventArgs e)
         {
@@ -182,6 +202,16 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
             if (e.PropertyName == nameof(ConnectorSelectedStyle))
             {
                 ObserveObject(_connectorSelectedStyle, ref disposableConnectorSelectedStyle, mainDisposable, observer);
+            }
+
+            if (e.PropertyName == nameof(ConnectorToolHoverStyle))
+            {
+                ObserveObject(_connectorToolHoverStyle, ref disposableConnectorToolHoverStyle, mainDisposable, observer);
+            }
+
+            if (e.PropertyName == nameof(ConnectorToolHoverInvalidStyle))
+            {
+                ObserveObject(_connectorToolHoverInvalidStyle, ref disposableConnectorToolHoverInvalidStyle, mainDisposable, observer);
             }
 
             observer.OnNext((sender, e));

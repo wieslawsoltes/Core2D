@@ -54,7 +54,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
 
                 selection.ClearConnectionPoints();
 
-                _line.Start = selection.TryToGetConnectionPoint((double) sx, (double) sy) ??
+                _line.Start = selection.TryToGetConnectionPoint((double) sx, (double) sy, _line.Start) ??
                               factory.CreatePointShape((double) sx, (double) sy);
                 if (!pathTool.IsInitialized)
                 {
@@ -83,7 +83,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
                 
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var end = selection.TryToGetConnectionPoint((double) sx, (double) sy);
+                    var end = selection.TryToGetConnectionPoint((double) sx, (double) sy, _line.Start);
                     if (end is { })
                     {
                         var figure = pathTool.Path?.Figures.LastOrDefault();
@@ -163,7 +163,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
             {
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true);
                 }
                 break;
             }
@@ -171,7 +171,7 @@ public partial class LinePathToolViewModel : ViewModelBase, IPathTool
             {
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true, _line.Start);
                 }
                 if (_line.End is { })
                 {

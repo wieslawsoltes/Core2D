@@ -69,7 +69,7 @@ public partial class WireToolViewModel : ViewModelBase, IEditorTool
 
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                    var result = selection.TryToGetConnectionPoint((double)sx, (double)sy, _wire?.Start);
                     if (result is { })
                     {
                         _wire.Start = result;
@@ -112,7 +112,7 @@ public partial class WireToolViewModel : ViewModelBase, IEditorTool
 
                     if (editor.Project.Options.TryToConnect)
                     {
-                        var result = selection.TryToGetConnectionPoint((double)sx, (double)sy);
+                        var result = selection.TryToGetConnectionPoint((double)sx, (double)sy, _wire?.Start);
                         if (result is { })
                         {
                             _wire.End = result;
@@ -200,7 +200,7 @@ public partial class WireToolViewModel : ViewModelBase, IEditorTool
             {
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true);
                 }
                 break;
             }
@@ -210,7 +210,7 @@ public partial class WireToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (editor.Project.Options.TryToConnect)
                     {
-                        selection.TryToHoverShape((double)sx, (double)sy);
+                        selection.TryToHoverShape((double)sx, (double)sy, true, _wire?.Start);
                     }
 
                     if (_wire.End is { })

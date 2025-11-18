@@ -254,6 +254,16 @@ public class ViewModelFactory : IViewModelFactory
                 0xFF, 0xFF, 0xA5, 0x00,
                 0xFF, 0xFF, 0xEC, 0xB3,
                 1.0),
+            ConnectorToolHoverStyle = CreateShapeStyle(
+                "ConnectorToolHover",
+                0xFF, 0x00, 0x99, 0x00,
+                0xFF, 0xCC, 0xFF, 0xCC,
+                1.0),
+            ConnectorToolHoverInvalidStyle = CreateShapeStyle(
+                "ConnectorToolHoverInvalid",
+                0xFF, 0xCC, 0x00, 0x00,
+                0xFF, 0xFF, 0xCC, 0xCC,
+                1.0),
             ConnectorSelectedStyle = CreateShapeStyle(
                 "ConnectorSelected",
                 0xFF, 0x00, 0xBF, 0xFF,

@@ -42,6 +42,12 @@
     <TabItem Header="Connector Hover">
       <ContentControl Content="{Binding ConnectorHoverStyle}" />
     </TabItem>
+    <TabItem Header="Connector Tool Hover">
+      <ContentControl Content="{Binding ConnectorToolHoverStyle}" />
+    </TabItem>
+    <TabItem Header="Connector Tool Hover Invalid">
+      <ContentControl Content="{Binding ConnectorToolHoverInvalidStyle}" />
+    </TabItem>
     <TabItem Header="Connector Selected">
       <ContentControl Content="{Binding ConnectorSelectedStyle}" />
     </TabItem>

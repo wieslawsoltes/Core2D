@@ -194,7 +194,7 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
             {
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true);
                 }
                 break;
             }
@@ -204,7 +204,7 @@ public partial class EllipseToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (editor.Project.Options.TryToConnect)
                     {
-                        selection.TryToHoverShape((double)sx, (double)sy);
+                        selection.TryToHoverShape((double)sx, (double)sy, true);
                     }
 
                     if (_currentMode == Mode.Circle)

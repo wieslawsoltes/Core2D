@@ -70,6 +70,8 @@ public class RenderDrawOperation : ICustomDrawOperation
         renderState.Renderer.State?.ConnectorOutputStyle?.Invalidate();
         renderState.Renderer.State?.ConnectorHoverStyle?.Invalidate();
         renderState.Renderer.State?.ConnectorSelectedStyle?.Invalidate();
+        renderState.Renderer.State?.ConnectorToolHoverStyle?.Invalidate();
+        renderState.Renderer.State?.ConnectorToolHoverInvalidStyle?.Invalidate();
     }
 
     private static void DrawExport(RenderState renderState, object context)

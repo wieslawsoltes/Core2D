@@ -30,8 +30,8 @@ public interface ISelectionService
     bool TryToSelectShapes(LayerContainerViewModel? layer, RectangleShapeViewModel? rectangle, bool deselect = true, bool includeSelected = false);
     void Hover(LayerContainerViewModel? layer, BaseShapeViewModel shape);
     void DeHover(LayerContainerViewModel? layer);
-    bool TryToHoverShape(double x, double y);
-    PointShapeViewModel? TryToGetConnectionPoint(double x, double y);
+    bool TryToHoverShape(double x, double y, bool isConnectionMode = false, PointShapeViewModel? connectionSource = null);
+    PointShapeViewModel? TryToGetConnectionPoint(double x, double y, PointShapeViewModel? connectionSource = null);
     void RememberConnectionPoint(PointShapeViewModel point);
     void ClearConnectionPoints();
     bool TryToSplitLine(double x, double y, PointShapeViewModel point, bool select = false);

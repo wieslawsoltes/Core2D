@@ -104,7 +104,7 @@ public partial class PointToolViewModel : ViewModelBase, IEditorTool
             {
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true);
                 }
                 break;
             }

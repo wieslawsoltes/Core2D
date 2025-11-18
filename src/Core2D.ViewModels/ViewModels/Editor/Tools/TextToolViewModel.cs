@@ -169,7 +169,7 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
             case State.TopLeft:
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true);
                 }
                 break;
             case State.BottomRight:
@@ -178,7 +178,7 @@ public partial class TextToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (editor.Project.Options.TryToConnect)
                     {
-                        selection.TryToHoverShape((double)sx, (double)sy);
+                        selection.TryToHoverShape((double)sx, (double)sy, true);
                     }
                     if (_text.BottomRight is { })
                     {

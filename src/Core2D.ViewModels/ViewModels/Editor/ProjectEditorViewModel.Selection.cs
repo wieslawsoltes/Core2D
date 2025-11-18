@@ -9,6 +9,7 @@ using System.Linq;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Input;
+using Core2D.Model.Renderer;
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Editor.Tools.Decorators;
 using Core2D.ViewModels.Shapes;
@@ -21,6 +22,14 @@ namespace Core2D.ViewModels.Editor;
 
 public class SelectionServiceViewModel : ViewModelBase, ISelectionService
 {
+    private enum ConnectorRole
+    {
+        NotConnector,
+        None,
+        Input,
+        Output
+    }
+
     public SelectionServiceViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
     }
@@ -52,6 +61,102 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         {
             state.ActiveConnectionPoints = state.ActiveConnectionPoints.Clear();
         }
+    }
+
+    private void SetConnectionHoverState(PointShapeViewModel? point, bool canConnect)
+    {
+        var state = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+        if (state is null)
+        {
+            return;
+        }
+
+        if (!ReferenceEquals(state.ConnectionHoverPoint, point))
+        {
+            state.ConnectionHoverPoint = point;
+        }
+
+        if (state.ConnectionHoverCanConnect != canConnect)
+        {
+            state.ConnectionHoverCanConnect = canConnect;
+        }
+    }
+
+    private void ClearConnectionHoverState()
+    {
+        var state = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+        if (state is null)
+        {
+            return;
+        }
+
+        if (state.ConnectionHoverPoint is not null)
+        {
+            state.ConnectionHoverPoint = null;
+        }
+
+        if (state.ConnectionHoverCanConnect)
+        {
+            state.ConnectionHoverCanConnect = false;
+        }
+    }
+
+    private static ConnectorRole GetConnectorRole(PointShapeViewModel? point)
+    {
+        if (point is null)
+        {
+            return ConnectorRole.NotConnector;
+        }
+
+        if (!point.State.HasFlag(ShapeStateFlags.Connector))
+        {
+            return ConnectorRole.NotConnector;
+        }
+
+        if (point.State.HasFlag(ShapeStateFlags.Input))
+        {
+            return ConnectorRole.Input;
+        }
+
+        if (point.State.HasFlag(ShapeStateFlags.Output))
+        {
+            return ConnectorRole.Output;
+        }
+
+        return ConnectorRole.None;
+    }
+
+    private static bool CanConnect(PointShapeViewModel? source, PointShapeViewModel target)
+    {
+        if (ReferenceEquals(source, target))
+        {
+            return false;
+        }
+
+        var sourceRole = GetConnectorRole(source);
+        var targetRole = GetConnectorRole(target);
+
+        if (targetRole == ConnectorRole.NotConnector)
+        {
+            return true;
+        }
+
+        if (sourceRole == ConnectorRole.NotConnector)
+        {
+            return true;
+        }
+
+        if (sourceRole == ConnectorRole.Input && targetRole == ConnectorRole.Input)
+        {
+            return false;
+        }
+
+        if (sourceRole == ConnectorRole.Output && targetRole == ConnectorRole.Output)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public override object Copy(IDictionary<object, object>? shared)
@@ -634,39 +739,68 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         Deselect(layer);
     }
 
-    public bool TryToHoverShape(double x, double y)
+    public bool TryToHoverShape(double x, double y, bool isConnectionMode = false, PointShapeViewModel? connectionSource = null)
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project is null)
         {
+            if (isConnectionMode)
+            {
+                ClearConnectionHoverState();
+            }
             return false;
         }
 
         var pageState = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
         if (pageState is null)
         {
+            if (isConnectionMode)
+            {
+                ClearConnectionHoverState();
+            }
             return false;
         }
 
         if (project.CurrentContainer?.CurrentLayer is null)
         {
+            if (isConnectionMode)
+            {
+                ClearConnectionHoverState();
+            }
             return false;
         }
 
         if (project.SelectedShapes?.Count > 1)
         {
+            if (isConnectionMode)
+            {
+                ClearConnectionHoverState();
+            }
             return false;
         }
 
         if (project.SelectedShapes?.Count == 1 && project.HoveredShape != project.SelectedShapes?.FirstOrDefault())
         {
+            if (isConnectionMode)
+            {
+                ClearConnectionHoverState();
+            }
             return false;
         }
             
         var hitTest = ServiceProvider.GetService<IHitTest>();
         if (hitTest is null)
         {
+            if (isConnectionMode)
+            {
+                ClearConnectionHoverState();
+            }
             return false;
+        }
+
+        if (!isConnectionMode)
+        {
+            ClearConnectionHoverState();
         }
 
         var shapes = project.CurrentContainer?.CurrentLayer?.Shapes.Reverse().ToList();
@@ -678,6 +812,18 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
             var point = hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, pageState.ZoomX);
             if (point is { })
             {
+                if (isConnectionMode)
+                {
+                    if (point.State.HasFlag(ShapeStateFlags.Connector))
+                    {
+                        SetConnectionHoverState(point, CanConnect(connectionSource, point));
+                    }
+                    else
+                    {
+                        ClearConnectionHoverState();
+                    }
+                }
+
                 Hover(project.CurrentContainer?.CurrentLayer, point);
                 return true;
             }
@@ -685,6 +831,11 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
             var shape = hitTest.TryToGetShape(shapes, new Point2(x, y), radius, pageState.ZoomX);
             if (shape is { })
             {
+                if (isConnectionMode)
+                {
+                    ClearConnectionHoverState();
+                }
+
                 Hover(project.CurrentContainer?.CurrentLayer, shape);
                 return true;
             }
@@ -695,10 +846,15 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
             DeHover(project.CurrentContainer?.CurrentLayer);
         }
 
+        if (isConnectionMode)
+        {
+            ClearConnectionHoverState();
+        }
+
         return false;
     }
 
-    public PointShapeViewModel? TryToGetConnectionPoint(double x, double y)
+    public PointShapeViewModel? TryToGetConnectionPoint(double x, double y, PointShapeViewModel? connectionSource = null)
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
         if (project?.CurrentContainer?.CurrentLayer?.Shapes is null)
@@ -733,6 +889,11 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         var result = hitTest.TryToGetPoint(shapes, new Point2(x, y), radius, pageState.ZoomX);
         if (result is { })
         {
+            if (!CanConnect(connectionSource, result))
+            {
+                return null;
+            }
+
             AddConnectionHighlight(result);
         }
 
@@ -752,6 +913,7 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
     public void ClearConnectionPoints()
     {
         ClearConnectionHighlights();
+        ClearConnectionHoverState();
     }
 
     private void SwapLineStart(LineShapeViewModel? line, PointShapeViewModel? point)

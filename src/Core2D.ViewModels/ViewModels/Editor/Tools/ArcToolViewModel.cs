@@ -248,7 +248,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
             {
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true);
                 }
                 break;
             }
@@ -258,7 +258,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (editor.Project.Options.TryToConnect)
                     {
-                        selection.TryToHoverShape((double)sx, (double)sy);
+                        selection.TryToHoverShape((double)sx, (double)sy, true);
                     }
                     if (_arc.Point2 is { })
                     {
@@ -276,7 +276,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (editor.Project.Options.TryToConnect)
                     {
-                        selection.TryToHoverShape((double)sx, (double)sy);
+                        selection.TryToHoverShape((double)sx, (double)sy, true);
                     }
                     if (_arc.Point3 is { })
                     {
@@ -294,7 +294,7 @@ public partial class ArcToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (editor.Project.Options.TryToConnect)
                     {
-                        selection.TryToHoverShape((double)sx, (double)sy);
+                        selection.TryToHoverShape((double)sx, (double)sy, true);
                     }
                     if (_arc.Point4 is { })
                     {

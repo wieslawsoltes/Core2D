@@ -73,8 +73,42 @@ public partial class PointShapeViewModel : BaseShapeViewModel
         var selectedShapes = selection?.SelectedShapes;
         var hoveredShape = selection?.HoveredShape;
         var isConnectionHighlight = state.ActiveConnectionPoints.Contains(this);
+        var isToolConnectionHover = ReferenceEquals(state.ConnectionHoverPoint, this);
         var isSelected = selectedShapes is { Count: > 0 } && selectedShapes.Contains(this);
         var isHovered = ReferenceEquals(hoveredShape, this);
+
+        if (isToolConnectionHover)
+        {
+            if (state.ConnectionHoverCanConnect)
+            {
+                if (state.ConnectorToolHoverStyle is { })
+                {
+                    return state.ConnectorToolHoverStyle;
+                }
+
+                if (state.ConnectorHoverStyle is { })
+                {
+                    return state.ConnectorHoverStyle;
+                }
+            }
+            else
+            {
+                if (state.ConnectorToolHoverInvalidStyle is { })
+                {
+                    return state.ConnectorToolHoverInvalidStyle;
+                }
+
+                if (state.ConnectorHoverStyle is { })
+                {
+                    return state.ConnectorHoverStyle;
+                }
+
+                if (state.ConnectorSelectedStyle is { })
+                {
+                    return state.ConnectorSelectedStyle;
+                }
+            }
+        }
 
         if (isConnectionHighlight)
         {

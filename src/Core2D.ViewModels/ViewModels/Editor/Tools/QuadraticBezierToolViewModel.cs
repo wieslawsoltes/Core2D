@@ -213,7 +213,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
             {
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true);
                 }
                 break;
             }
@@ -223,7 +223,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (editor.Project.Options.TryToConnect)
                     {
-                        selection.TryToHoverShape((double)sx, (double)sy);
+                        selection.TryToHoverShape((double)sx, (double)sy, true);
                     }
                     if (_quadraticBezier.Point2 is { } && _quadraticBezier.Point3 is { })
                     {
@@ -243,7 +243,7 @@ public partial class QuadraticBezierToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (editor.Project.Options.TryToConnect)
                     {
-                        selection.TryToHoverShape((double)sx, (double)sy);
+                        selection.TryToHoverShape((double)sx, (double)sy, true);
                     }
                     if (_quadraticBezier.Point2 is { })
                     {

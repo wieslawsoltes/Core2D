@@ -64,7 +64,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
 
                 if (editor.Project.Options.TryToConnect)
                 {
-                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
+                    var result = selection.TryToGetConnectionPoint((double) sx, (double) sy, _line?.Start);
                     if (result is { })
                     {
                         _line.Start = result;
@@ -102,7 +102,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
 
                     if (editor.Project.Options.TryToConnect)
                     {
-                        var result = selection.TryToGetConnectionPoint((double) sx, (double) sy);
+                        var result = selection.TryToGetConnectionPoint((double) sx, (double) sy, _line?.Start);
                         if (result is { })
                         {
                             _line.End = result;
@@ -190,7 +190,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
             {
                 if (editor.Project.Options.TryToConnect)
                 {
-                    selection.TryToHoverShape((double)sx, (double)sy);
+                    selection.TryToHoverShape((double)sx, (double)sy, true);
                 }
                 break;
             }
@@ -200,7 +200,7 @@ public partial class LineToolViewModel : ViewModelBase, IEditorTool
                 {
                     if (editor.Project.Options.TryToConnect)
                     {
-                        selection.TryToHoverShape((double)sx, (double)sy);
+                        selection.TryToHoverShape((double)sx, (double)sy, true, _line?.Start);
                     }
 
                     if (_line.End is { })
