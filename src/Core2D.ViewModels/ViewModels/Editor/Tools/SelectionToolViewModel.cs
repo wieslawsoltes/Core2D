@@ -27,6 +27,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
     private decimal _historyY;
     private IEnumerable<PointShapeViewModel>? _pointsCache;
     private IEnumerable<BaseShapeViewModel>? _shapesCache;
+    private bool _hasDetachedOnControlMove;
 
     public string Title => "Selection";
 
@@ -243,126 +244,121 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
         var selectionService = ServiceProvider.GetService<ISelectionService>();
 
-        switch (movingPoint.Owner)
+        if (ReplaceShapePoint(project, movingPoint.Owner as BaseShapeViewModel, movingPoint, target))
+        {
+            selectionService?.RememberConnectionPoint(target);
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool ReplaceShapePoint(ProjectContainerViewModel project, BaseShapeViewModel? shape, PointShapeViewModel movingPoint, PointShapeViewModel target)
+    {
+        if (shape is null)
+        {
+            return false;
+        }
+
+        switch (shape)
         {
             case LineShapeViewModel line:
                 if (ReplacePoint(project, movingPoint, target, line.Start, p => line.Start = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, line.End, p => line.End = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 break;
             case ArcShapeViewModel arc:
                 if (ReplacePoint(project, movingPoint, target, arc.Point1, p => arc.Point1 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, arc.Point2, p => arc.Point2 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, arc.Point3, p => arc.Point3 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, arc.Point4, p => arc.Point4 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 break;
             case QuadraticBezierShapeViewModel quadratic:
                 if (ReplacePoint(project, movingPoint, target, quadratic.Point1, p => quadratic.Point1 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, quadratic.Point2, p => quadratic.Point2 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, quadratic.Point3, p => quadratic.Point3 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 break;
             case CubicBezierShapeViewModel cubic:
                 if (ReplacePoint(project, movingPoint, target, cubic.Point1, p => cubic.Point1 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, cubic.Point2, p => cubic.Point2 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, cubic.Point3, p => cubic.Point3 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, cubic.Point4, p => cubic.Point4 = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 break;
             case RectangleShapeViewModel rectangle:
                 if (ReplacePoint(project, movingPoint, target, rectangle.TopLeft, p => rectangle.TopLeft = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, rectangle.BottomRight, p => rectangle.BottomRight = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 break;
             case EllipseShapeViewModel ellipse:
                 if (ReplacePoint(project, movingPoint, target, ellipse.TopLeft, p => ellipse.TopLeft = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, ellipse.BottomRight, p => ellipse.BottomRight = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 break;
             case TextShapeViewModel text:
                 if (ReplacePoint(project, movingPoint, target, text.TopLeft, p => text.TopLeft = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, text.BottomRight, p => text.BottomRight = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 break;
             case ImageShapeViewModel image:
                 if (ReplacePoint(project, movingPoint, target, image.TopLeft, p => image.TopLeft = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 if (ReplacePoint(project, movingPoint, target, image.BottomRight, p => image.BottomRight = p))
                 {
-                    selectionService?.RememberConnectionPoint(target);
                     return true;
                 }
                 break;
@@ -433,6 +429,117 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         return null;
     }
 
+    private static Dictionary<PointShapeViewModel, List<BaseShapeViewModel>> BuildPointUsage(IEnumerable<BaseShapeViewModel> shapes)
+    {
+        var usage = new Dictionary<PointShapeViewModel, List<BaseShapeViewModel>>();
+        var buffer = new List<PointShapeViewModel>();
+
+        foreach (var shape in shapes)
+        {
+            buffer.Clear();
+            shape.GetPoints(buffer);
+            foreach (var point in buffer)
+            {
+                if (!usage.TryGetValue(point, out var owners))
+                {
+                    owners = new List<BaseShapeViewModel>();
+                    usage.Add(point, owners);
+                }
+
+                owners.Add(shape);
+            }
+        }
+
+        return usage;
+    }
+
+    private bool DisconnectSelectionPoints(ProjectContainerViewModel project)
+    {
+        var layer = project.CurrentContainer?.CurrentLayer;
+        if (layer is null)
+        {
+            return false;
+        }
+
+        if (project.SelectedShapes is not { Count: > 0 } selected)
+        {
+            return false;
+        }
+
+        var usage = BuildPointUsage(layer.Shapes);
+        var disconnected = false;
+
+        foreach (var kvp in usage)
+        {
+            var point = kvp.Key;
+            var shapes = kvp.Value;
+            if (shapes.Count < 2)
+            {
+                continue;
+            }
+
+            var hasSelected = false;
+            var hasUnselected = false;
+            foreach (var shape in shapes)
+            {
+                if (selected.Contains(shape))
+                {
+                    hasSelected = true;
+                }
+                else
+                {
+                    hasUnselected = true;
+                }
+
+                if (hasSelected && hasUnselected)
+                {
+                    break;
+                }
+            }
+
+            if (!hasSelected || !hasUnselected)
+            {
+                continue;
+            }
+
+            foreach (var shape in shapes)
+            {
+                if (!selected.Contains(shape))
+                {
+                    continue;
+                }
+
+                var clone = (PointShapeViewModel)point.Copy(null);
+                clone.Owner = shape;
+                if (ReplaceShapePoint(project, shape, point, clone))
+                {
+                    disconnected = true;
+                }
+            }
+        }
+
+        if (disconnected)
+        {
+            GenerateMoveSelectionCache();
+            project.CurrentContainer?.CurrentLayer?.RaiseInvalidateLayer();
+        }
+
+        return disconnected;
+    }
+
+    private void EnsureDisconnectedSelectionOnControlMove(ProjectEditorViewModel editor)
+    {
+        if (_hasDetachedOnControlMove || editor.Project is null)
+        {
+            return;
+        }
+
+        if (DisconnectSelectionPoints(editor.Project))
+        {
+            _hasDetachedOnControlMove = true;
+        }
+    }
+
     private bool IsSelectionAvailable()
     {
         var editor = ServiceProvider.GetService<ProjectEditorViewModel>();
@@ -455,6 +562,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
             {
                 editor.IsToolIdle = false;
                 _currentState = State.Selected;
+                _hasDetachedOnControlMove = false;
                 return true;
             }
         }
@@ -616,6 +724,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                         _historyY = _startY;
                         GenerateMoveSelectionCache();
                         _currentState = State.Selected;
+                        _hasDetachedOnControlMove = false;
                         selection.OnShowOrHideDecorator();
                         HitTestDecorator(args, isControl, false);
                         break;
@@ -639,6 +748,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
                             _currentState = State.Selected;
+                            _hasDetachedOnControlMove = false;
                             selection.OnShowOrHideDecorator();
                             HitTestDecorator(args, isControl, false);
                             break;
@@ -657,6 +767,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     _historyY = _startY;
                     GenerateMoveSelectionCache();
                     _currentState = State.Selected;
+                    _hasDetachedOnControlMove = false;
                     selection.OnShowOrHideDecorator();
                     HitTestDecorator(args, isControl, false);
                     break;
@@ -677,6 +788,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 }
 
                 _currentState = State.Selected;
+                _hasDetachedOnControlMove = false;
                 break;
             }
             case State.Selected:
@@ -745,7 +857,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                     }
                 }
 
-                if (IsSelectionAvailable() && !isControl)
+                if (IsSelectionAvailable())
                 {
                     var (sx, sy) = selection.TryToSnap(args);
                     if (_historyX != sx || _historyY != sy)
@@ -847,6 +959,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 DisposeMoveSelectionCache();
                 selection.OnHideDecorator();
                 editor.IsToolIdle = true;
+                _hasDetachedOnControlMove = false;
                 break;
             }
         }
@@ -900,8 +1013,13 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
 
                 HitTestDecorator(args, isControl, true);
 
-                if (IsSelectionAvailable() && !isControl)
+                if (IsSelectionAvailable())
                 {
+                    if (isControl)
+                    {
+                        EnsureDisconnectedSelectionOnControlMove(editor);
+                    }
+
                     MoveSelectionCacheTo(args);
                     selection.OnUpdateDecorator();
                     if (editor.Project.CurrentContainer?.CurrentLayer is { })
@@ -954,5 +1072,6 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
         editor.Project?.CurrentContainer?.WorkingLayer?.RaiseInvalidateLayer();
 
         editor.IsToolIdle = true;
+        _hasDetachedOnControlMove = false;
     }
 }
