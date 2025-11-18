@@ -120,7 +120,8 @@ internal static class Program
                 });
             }
 
-            if (settings.UseManagedSystemDialogs)
+            if (settings.UseManagedSystemDialogs
+                && (OperatingSystem.IsWindows() || OperatingSystem.IsLinux() || OperatingSystem.IsMacOS()))
             {
                 builder.UseManagedSystemDialogs();
             }

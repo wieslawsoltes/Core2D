@@ -3,6 +3,7 @@
 
 #nullable enable
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Autofac;
 using Avalonia.Controls;
@@ -53,6 +54,8 @@ namespace Core2D;
 
 public class AppModule : Autofac.Module
 {
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Autofac registration intentionally scans assemblies at runtime.")]
+    [UnconditionalSuppressMessage("Trimming", "IL2066", Justification = "Type registrations are created via reflection and not trim compatible.")]
     protected override void Load(ContainerBuilder builder)
     {
         // Container

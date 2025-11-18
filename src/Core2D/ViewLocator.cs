@@ -3,6 +3,7 @@
 
 #nullable enable
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Core2D.ViewModels;
@@ -14,6 +15,8 @@ namespace Core2D;
 [StaticViewLocator]
 public partial class ViewLocator : IDataTemplate
 {
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "View fallback uses reflection to locate views by name.")]
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Fallback assumes views expose public parameterless constructors.")]
     public Control? Build(object? data)
     {
         if (data is null)

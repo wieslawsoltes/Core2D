@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia;
@@ -934,6 +935,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         public static extern bool DeleteEnhMetaFile(IntPtr hemetafile);
     }
 
+    [SupportedOSPlatform("windows")]
     private void SetClipboardMetafile(MemoryStream ms)
     {
         using var metafile = new System.Drawing.Imaging.Metafile(ms);
@@ -966,7 +968,7 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
 
     public void OnCopyAsEmf(object? param)
     {
-        if (Environment.OSVersion.Platform != PlatformID.Win32NT)
+        if (!OperatingSystem.IsWindows())
         {
             return;
         }

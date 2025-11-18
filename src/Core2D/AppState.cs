@@ -4,6 +4,7 @@
 #nullable enable
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -23,6 +24,7 @@ namespace Core2D;
 
 public class AppState : IDisposable
 {
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Newtonsoft converters rely on reflection and are required for layout persistence.")]
     private static readonly JsonSerializerSettings s_jsonSettings = new ()
     {
         Formatting = Formatting.Indented,
@@ -87,6 +89,7 @@ public class AppState : IDisposable
         WindowConfiguration = LoadWindowSettings();
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Layout persistence uses Newtonsoft.Json which relies on reflection.")]
     private void InitializeEditor()
     {
         if (Editor is null)
@@ -140,6 +143,7 @@ public class AppState : IDisposable
         };
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Layout persistence uses Newtonsoft.Json which relies on reflection.")]
     public void Save()
     {
         if (Editor is null)
@@ -160,6 +164,7 @@ public class AppState : IDisposable
         }
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Layout persistence uses Newtonsoft.Json which relies on reflection.")]
     private WindowConfiguration? LoadWindowSettings()
     {
         if (FileSystem is null)

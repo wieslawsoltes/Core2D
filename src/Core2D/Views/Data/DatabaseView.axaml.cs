@@ -4,6 +4,7 @@
 #nullable enable
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
@@ -142,6 +143,7 @@ public partial class DatabaseView : UserControl
         _recordsView = null;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Generated binding paths rely on Avalonia's reflection-based Binding API.")]
     private void CreateColumns()
     {
         if (_databaseViewModel is null || _rowsDataGrid is null)

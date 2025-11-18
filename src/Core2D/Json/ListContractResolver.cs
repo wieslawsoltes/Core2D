@@ -4,6 +4,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -11,6 +12,8 @@ using Newtonsoft.Json.Serialization;
 
 namespace Core2D.Json;
 
+[UnconditionalSuppressMessage("Trimming", "IL2109", Justification = "Custom resolver intentionally derives from DefaultContractResolver which is not trim compatible.")]
+[UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Newtonsoft.Json contract resolver uses reflection.")]
 public class ListContractResolver : DefaultContractResolver
 {
     private readonly Type _type;
@@ -20,6 +23,7 @@ public class ListContractResolver : DefaultContractResolver
         _type = type;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2055", Justification = "Generic contract resolution operates on user-defined collection shapes.")]
     public override JsonContract ResolveContract(Type type)
     {
         if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>))
