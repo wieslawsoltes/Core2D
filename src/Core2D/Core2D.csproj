@@ -74,6 +74,7 @@
     <ProjectReference Include="..\Core2D.Modules.Renderer.Dwg\Core2D.Modules.Renderer.Dwg.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Renderer.PdfSharp\Core2D.Modules.Renderer.PdfSharp.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Renderer.SkiaSharp\Core2D.Modules.Renderer.SkiaSharp.csproj" />
+    <ProjectReference Include="..\Core2D.Modules.Renderer.OpenXml\Core2D.Modules.Renderer.OpenXml.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Renderer.SparseStrips\Core2D.Modules.Renderer.SparseStrips.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Renderer.VelloSharp\Core2D.Modules.Renderer.VelloSharp.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Renderer.Wmf\Core2D.Modules.Renderer.Wmf.csproj" />

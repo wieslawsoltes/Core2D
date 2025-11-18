@@ -25,6 +25,7 @@ public interface IProjectEditorPlatform
     void OnImportExcel(object? param);
     void OnImportWord(object? param);
     void OnImportPowerPoint(object? param);
+    void OnImportVisio(object? param);
 
     void OnExportJson(object? param);
 

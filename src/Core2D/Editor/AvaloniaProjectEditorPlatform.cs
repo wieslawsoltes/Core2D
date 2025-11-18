@@ -91,6 +91,15 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
         };
     }
 
+    private static List<FilePickerFileType> GetVisioFileTypes()
+    {
+        return new List<FilePickerFileType>
+        {
+            StorageService.Vsdx,
+            StorageService.All
+        };
+    }
+
     private static List<FilePickerFileType> GetCadFileTypes()
     {
         return new List<FilePickerFileType>
@@ -165,6 +174,9 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
                 case "ppt":
                 case "pptx":
                     result.Add(StorageService.Pptx);
+                    break;
+                case "vsdx":
+                    result.Add(StorageService.Vsdx);
                     break;
                 case "xps":
                     result.Add(StorageService.Xps);
@@ -533,6 +545,12 @@ public class AvaloniaProjectEditorPlatform : ViewModelBase, IProjectEditorPlatfo
     {
         await ImportOpenXmlAsync("Import PowerPoint", GetPowerPointFileTypes(),
             (editor, stream) => editor.OnImportPowerPoint(stream));
+    }
+
+    public async void OnImportVisio(object? param)
+    {
+        await ImportOpenXmlAsync("Import Visio", GetVisioFileTypes(),
+            (editor, stream) => editor.OnImportVisio(stream));
     }
 
     public async void OnExportJson(object? param)

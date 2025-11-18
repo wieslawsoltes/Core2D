@@ -807,6 +807,108 @@ public partial class ProjectEditorViewModel
     public void OnImportPowerPoint(Stream stream)
         => ImportOpenXml(stream, s => PresentationDocument.Open(s, false), package => ((PresentationDocument)package).PresentationPart);
 
+    public void OnImportVisio(Stream stream)
+    {
+        var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
+        var visioImporter = ServiceProvider.GetService<IVisioImporter>();
+
+        try
+        {
+            var buffer = ReadAllBytes(stream);
+            if (buffer.Length == 0)
+            {
+                return;
+            }
+
+            if (jsonSerializer is { })
+            {
+                var payloadJson = VisioPackagePayloadHelper.ReadPayload(buffer);
+                if (!string.IsNullOrWhiteSpace(payloadJson))
+                {
+                    var imported = OpenXmlPayloadSerializer.Deserialize(jsonSerializer, payloadJson);
+                    if (imported is { })
+                    {
+                        OnImportObject(imported, true);
+                        return;
+                    }
+                }
+            }
+
+            if (visioImporter is null)
+            {
+                throw new NotSupportedException("The selected document does not contain embedded Core2D data and cannot be converted.");
+            }
+
+            using var memoryStream = new MemoryStream(buffer, writable: false);
+            var result = visioImporter.Import(memoryStream);
+            if (result is null)
+            {
+                return;
+            }
+
+            if (Project is { } blockProject && result.Blocks.Count > 0)
+            {
+                var groupLibrary = blockProject.CurrentGroupLibrary ?? blockProject.GroupLibraries.FirstOrDefault();
+                if (groupLibrary is null)
+                {
+                    var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+                    groupLibrary = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaultGroupLibraryName);
+                    if (groupLibrary is { })
+                    {
+                        blockProject.AddGroupLibrary(groupLibrary);
+                        blockProject.SetCurrentGroupLibrary(groupLibrary);
+                    }
+                }
+
+                if (groupLibrary is { })
+                {
+                    foreach (var block in result.Blocks)
+                    {
+                        if (!groupLibrary.Items.Contains(block))
+                        {
+                            blockProject.AddGroup(groupLibrary, block);
+                        }
+                    }
+                }
+            }
+
+            if (Project is { } project && result.Styles.Count > 0)
+            {
+                var styleLibrary = project.CurrentStyleLibrary ?? project.StyleLibraries.FirstOrDefault();
+                if (styleLibrary is null)
+                {
+                    var viewModelFactory = ServiceProvider.GetService<IViewModelFactory>();
+                    styleLibrary = viewModelFactory?.CreateLibrary(ProjectEditorConfiguration.DefaultStyleLibraryName);
+                    if (styleLibrary is { })
+                    {
+                        project.AddStyleLibrary(styleLibrary);
+                        project.SetCurrentStyleLibrary(styleLibrary);
+                    }
+                }
+
+                if (styleLibrary is { })
+                {
+                    foreach (var style in result.Styles)
+                    {
+                        if (!styleLibrary.Items.Contains(style))
+                        {
+                            project.AddStyle(styleLibrary, style);
+                        }
+                    }
+                }
+            }
+
+            if (result.Shapes.Count > 0)
+            {
+                ServiceProvider.GetService<IClipboardService>()?.OnPasteShapes(result.Shapes);
+            }
+        }
+        catch (Exception ex)
+        {
+            ServiceProvider.GetService<ILog>()?.LogException(ex);
+        }
+    }
+
     private void ImportOpenXml(Stream stream, Func<Stream, OpenXmlPackage> openPackage, Func<OpenXmlPackage, OpenXmlPartContainer?> partSelector)
     {
         var jsonSerializer = ServiceProvider.GetService<IJsonSerializer>();
@@ -840,6 +942,18 @@ public partial class ProjectEditorViewModel
         {
             ServiceProvider.GetService<ILog>()?.LogException(ex);
         }
+    }
+
+    private static byte[] ReadAllBytes(Stream stream)
+    {
+        if (stream.CanSeek)
+        {
+            stream.Seek(0, SeekOrigin.Begin);
+        }
+
+        using var ms = new MemoryStream();
+        stream.CopyTo(ms);
+        return ms.ToArray();
     }
 
     public void OnExportJson(Stream stream, object item)

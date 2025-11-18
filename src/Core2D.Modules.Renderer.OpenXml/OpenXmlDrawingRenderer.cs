@@ -33,6 +33,35 @@ public sealed class OpenXmlDrawingRenderer
         }
     }
 
+    public IEnumerable<OpenXmlShapeDescriptor> Render(BlockShapeViewModel block)
+    {
+        if (block.Shapes.IsDefault)
+        {
+            yield break;
+        }
+
+        foreach (var shape in block.Shapes)
+        {
+            var descriptor = CreateDescriptor(shape);
+            if (descriptor is { })
+            {
+                yield return descriptor;
+            }
+        }
+    }
+
+    public IEnumerable<OpenXmlShapeDescriptor> Render(IEnumerable<BaseShapeViewModel> shapes)
+    {
+        foreach (var shape in shapes)
+        {
+            var descriptor = CreateDescriptor(shape);
+            if (descriptor is { })
+            {
+                yield return descriptor;
+            }
+        }
+    }
+
     private OpenXmlShapeDescriptor? CreateDescriptor(BaseShapeViewModel shape)
     {
         return shape switch

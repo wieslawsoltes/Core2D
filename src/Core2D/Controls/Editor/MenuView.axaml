@@ -39,6 +39,7 @@
       <MenuItem Header="Import E_xcel..." Command="{Binding Platform.OnImportExcel, FallbackValue={x:Null}}" />
       <MenuItem Header="Import _Word..." Command="{Binding Platform.OnImportWord, FallbackValue={x:Null}}" />
       <MenuItem Header="Import _PowerPoint..." Command="{Binding Platform.OnImportPowerPoint, FallbackValue={x:Null}}" />
+      <MenuItem Header="Import _Visio..." Command="{Binding Platform.OnImportVisio, FallbackValue={x:Null}}" />
       <Separator />
       <MenuItem Header="Import Sv_g..." Command="{Binding Platform.OnImportSvg, FallbackValue={x:Null}}" />
       <MenuItem Header="Import _PDF..." Command="{Binding Platform.OnImportPdf, FallbackValue={x:Null}}" />

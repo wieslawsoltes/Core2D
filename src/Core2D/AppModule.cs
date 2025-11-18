@@ -22,6 +22,7 @@ using Core2D.Modules.FileWriter.OpenXml;
 using Core2D.Modules.Log.Trace;
 using Core2D.Modules.Renderer.Avalonia;
 using Core2D.Modules.Renderer.Dwg;
+using Core2D.Modules.Renderer.OpenXml;
 using Core2D.Modules.Renderer.PdfSharp;
 using Core2D.Modules.Renderer.SkiaSharp;
 using Core2D.Modules.Renderer.Wmf;
@@ -163,6 +164,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<ExcelOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<WordOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<PowerPointOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
+        builder.RegisterType<VisioOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
         builder.RegisterType<OpenXmlReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
         builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
         builder.RegisterType<OpenXmlWriter>().As<ITextFieldWriter<DatabaseViewModel>>().InstancePerLifetimeScope();
@@ -172,6 +174,7 @@ public class AppModule : Autofac.Module
         builder.RegisterType<DwgImporter>().As<IDwgImporter>().InstancePerLifetimeScope();
         builder.RegisterType<PdfImporter>().As<IPdfImporter>().InstancePerLifetimeScope();
         builder.RegisterType<WmfImporter>().As<IWmfImporter>().InstancePerLifetimeScope();
+        builder.RegisterType<VisioImporter>().As<IVisioImporter>().InstancePerLifetimeScope();
 
         builder.RegisterType<DrawingGroupXamlExporter>().As<IXamlExporter>().InstancePerLifetimeScope();
         builder.RegisterType<SvgSvgExporter>().As<ISvgExporter>().InstancePerLifetimeScope();

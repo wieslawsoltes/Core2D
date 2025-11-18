@@ -149,6 +149,13 @@ internal static class StorageService
         MimeTypes = new[] { "application/vnd.openxmlformats-officedocument.presentationml.presentation" }
     };
 
+    public static FilePickerFileType Vsdx { get; } = new("Visio drawing")
+    {
+        Patterns = new[] { "*.vsdx" },
+        AppleUniformTypeIdentifiers = new[] { "com.microsoft.visio.drawing" },
+        MimeTypes = new[] { "application/vnd.ms-visio.drawing" }
+    };
+
     public static FilePickerFileType Xps { get; } = new("XPS document")
     {
         Patterns = new[] { "*.xps" },

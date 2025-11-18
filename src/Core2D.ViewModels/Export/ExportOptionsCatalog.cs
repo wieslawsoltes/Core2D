@@ -75,6 +75,8 @@ public sealed class ExportOptionsCatalog : IExportOptionsCatalog
                 Caps("Vector/Raster", "Project", "Document", "Page"), "xlsx", sp => new OpenXmlExportOptionsViewModel(sp)),
             ["PowerPoint (OpenXML)"] = new("PowerPoint (OpenXML)", "PowerPoint Deck", "PPTX export with vector shapes.", "OpenXML",
                 Caps("Vector/Raster", "Project", "Document", "Page"), "pptx", sp => new OpenXmlExportOptionsViewModel(sp)),
+            ["Visio (OpenXML)"] = new("Visio (OpenXML)", "Visio Drawing", "VSDX export for Microsoft Visio.", "OpenXML",
+                Caps("Vector/Raster", "Project", "Document", "Page"), "vsdx", sp => new OpenXmlExportOptionsViewModel(sp)),
             ["Dwg (ACadSharp)"] = new("Dwg (ACadSharp)", "DWG Export", "AutoCAD-compatible DWG export.", "CAD",
                 Caps("Vector", "Project", "Document", "Page"), "dwg", sp => new CadExportOptionsViewModel(sp)),
             ["Dxf (netDxf)"] = new("Dxf (netDxf)", "DXF Export", "DXF export via netDxf.", "CAD",
