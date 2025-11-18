@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:app="using:Core2D"
              xmlns:vm="using:Core2D.ViewModels.Docking.Views"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
@@ -16,12 +17,12 @@
         <MenuItem Header="_New" 
                   Command="{Binding OnNew}" 
                   CommandParameter="{Binding}" 
-                  InputGesture="Ctrl+N"
+                  InputGesture="{app:PlatformGesture Text=Primary+N}"
                   x:CompileBindings="False" />
         <Separator />
         <MenuItem Header="_Open..." 
                   Command="{Binding Platform.OnOpen}" 
-                  InputGesture="Ctrl+O"
+                  InputGesture="{app:PlatformGesture Text=Primary+O}"
                   x:CompileBindings="False" />
         <Separator />
         <MenuItem Header="Execu_te Script..." 

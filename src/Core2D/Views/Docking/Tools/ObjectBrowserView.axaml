@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:app="using:Core2D"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools"
              xmlns:core="using:Core2D.ViewModels"
@@ -30,7 +31,7 @@
         <TreeView.KeyBindings>
           <KeyBinding Command="{Binding ExportCommand}" 
                       CommandParameter="{Binding #ProjectTreeView.SelectedItem}" 
-                      Gesture="Ctrl+E"
+                      Gesture="{app:PlatformGesture Text=Primary+E}"
                       x:DataType="core:ViewModelBase"/>
         </TreeView.KeyBindings>
         <TreeView.Styles>

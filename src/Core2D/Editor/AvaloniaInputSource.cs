@@ -26,7 +26,8 @@ public class AvaloniaInputSource : InputSource
             modifier |= ModifierFlags.Alt;
         }
 
-        if (inputModifiers.HasFlag(KeyModifiers.Control))
+        if (inputModifiers.HasFlag(KeyModifiers.Control)
+            || inputModifiers.HasFlag(KeyModifiers.Meta))
         {
             modifier |= ModifierFlags.Control;
         }

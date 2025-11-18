@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:app="using:Core2D"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
@@ -107,13 +108,13 @@
       <ListBox.KeyBindings>
         <KeyBinding Command="{Binding AddGroup}"
                     CommandParameter="{Binding #GroupsListBox.DataContext}" 
-                    Gesture="Ctrl+N" />
+                    Gesture="{app:PlatformGesture Text=Primary+N}" />
         <KeyBinding Command="{Binding RemoveGroup}"
                     CommandParameter="{Binding #GroupsListBox.SelectedItem}" 
                     Gesture="Delete" />
         <KeyBinding Command="{Binding ExportGroup}"
                     CommandParameter="{Binding #GroupsListBox.SelectedItem}" 
-                    Gesture="Ctrl+E" />
+                    Gesture="{app:PlatformGesture Text=Primary+E}" />
       </ListBox.KeyBindings>
       <ListBox.ItemsPanel>
         <ItemsPanelTemplate>

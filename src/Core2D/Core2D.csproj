@@ -86,4 +86,10 @@
     <ProjectReference Include="..\Core2D.Modules.XamlExporter\Core2D.Modules.XamlExporter.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Avalonia.Markup.Xaml">
+      <HintPath>$(PkgAvalonia)/lib/net8.0/Avalonia.Markup.Xaml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

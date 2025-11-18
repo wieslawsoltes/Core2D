@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:app="using:Core2D"
              xmlns:vms="using:Core2D.ViewModels.Scripting"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
@@ -12,7 +13,7 @@
   <UserControl.KeyBindings>
     <KeyBinding Command="{Binding ExecuteRepl}"
                 CommandParameter="{Binding #ScriptTextEditor.Text}" 
-                Gesture="Ctrl+Enter" />
+                Gesture="{app:PlatformGesture Text=Primary+Enter}" />
   </UserControl.KeyBindings>
   <TextBox Name="ScriptTextEditor"
            Margin="0"

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:app="using:Core2D"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
@@ -37,29 +38,29 @@
         <KeyBinding Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding}" Gesture="Delete" />
         <KeyBinding Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding}" Gesture="Back" />
         <KeyBinding Command="{Binding OnCancel}" Gesture="Escape" />
-        <KeyBinding Command="{Binding OnUndo}" Gesture="Ctrl+Z" />
-        <KeyBinding Command="{Binding OnRedo}" Gesture="Ctrl+Y" />
-        <KeyBinding Command="{Binding ClipboardService.OnCut}" Gesture="Ctrl+X" />
-        <KeyBinding Command="{Binding ClipboardService.OnCopy}" Gesture="Ctrl+C" />
-        <KeyBinding Command="{Binding ClipboardService.OnPaste}" Gesture="Ctrl+V" />
-        <KeyBinding Command="{Binding SelectionService.OnSelectAll}" Gesture="Ctrl+A" />
+        <KeyBinding Command="{Binding OnUndo}" Gesture="{app:PlatformGesture Text=Primary+Z}" />
+        <KeyBinding Command="{Binding OnRedo}" Gesture="{app:PlatformGesture Text=Primary+Y}" />
+        <KeyBinding Command="{Binding ClipboardService.OnCut}" Gesture="{app:PlatformGesture Text=Primary+X}" />
+        <KeyBinding Command="{Binding ClipboardService.OnCopy}" Gesture="{app:PlatformGesture Text=Primary+C}" />
+        <KeyBinding Command="{Binding ClipboardService.OnPaste}" Gesture="{app:PlatformGesture Text=Primary+V}" />
+        <KeyBinding Command="{Binding SelectionService.OnSelectAll}" Gesture="{app:PlatformGesture Text=Primary+A}" />
         <!-- View -->
-        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+D0" />
-        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Ctrl+NumPad0" />
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="{app:PlatformGesture Text=Primary+D0}" />
+        <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="{app:PlatformGesture Text=Primary+NumPad0}" />
         <KeyBinding Command="{Binding Platform.OnZoomReset}" Gesture="Z" />
-        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+D1" />
-        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="Ctrl+NumPad1" />
+        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="{app:PlatformGesture Text=Primary+D1}" />
+        <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="{app:PlatformGesture Text=Primary+NumPad1}" />
         <KeyBinding Command="{Binding Platform.OnZoomUniform}" Gesture="X" />
-        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+D2" />
-        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="Ctrl+NumPad2" />
-        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+D3" />
-        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="Ctrl+NumPad3" />
-        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+D4" />
-        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="Ctrl+NumPad4" />
-        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="Ctrl+Add" />
-        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="Ctrl+OemPlus" />
-        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="Ctrl+Subtract" />
-        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="Ctrl+OemMinus" />
+        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="{app:PlatformGesture Text=Primary+D2}" />
+        <KeyBinding Command="{Binding Platform.OnZoomUniformToFill}" Gesture="{app:PlatformGesture Text=Primary+NumPad2}" />
+        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="{app:PlatformGesture Text=Primary+D3}" />
+        <KeyBinding Command="{Binding Platform.OnZoomFill}" Gesture="{app:PlatformGesture Text=Primary+NumPad3}" />
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="{app:PlatformGesture Text=Primary+D4}" />
+        <KeyBinding Command="{Binding Platform.OnZoomAutoFit}" Gesture="{app:PlatformGesture Text=Primary+NumPad4}" />
+        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="{app:PlatformGesture Text=Primary+Add}" />
+        <KeyBinding Command="{Binding Platform.OnZoomIn}" Gesture="{app:PlatformGesture Text=Primary+OemPlus}" />
+        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="{app:PlatformGesture Text=Primary+Subtract}" />
+        <KeyBinding Command="{Binding Platform.OnZoomOut}" Gesture="{app:PlatformGesture Text=Primary+OemMinus}" />
         <!-- Options -->
         <KeyBinding Command="{Binding OnToggleDefaultIsStroked}" Gesture="K" />
         <KeyBinding Command="{Binding OnToggleDefaultIsFilled}" Gesture="F" />
@@ -67,41 +68,41 @@
         <KeyBinding Command="{Binding OnToggleSnapToGrid}" Gesture="G" />
         <KeyBinding Command="{Binding OnToggleTryToConnect}" Gesture="C" />
         <!-- Shape -->
-        <KeyBinding Command="{Binding ShapeService.OnDuplicateSelected}" Gesture="Ctrl+D" />
-        <KeyBinding Command="{Binding ShapeService.OnGroupSelected}" Gesture="Ctrl+G" />
-        <KeyBinding Command="{Binding ShapeService.OnExplodeSelected}" Gesture="Ctrl+U" />
-        <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="90" Gesture="Ctrl+R" />
-        <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="-90" Gesture="Ctrl+L" />
-        <KeyBinding Command="{Binding ShapeService.OnFlipHorizontalSelected}" Gesture="Ctrl+H" />
-        <KeyBinding Command="{Binding ShapeService.OnFlipVerticalSelected}" Gesture="Ctrl+J" />
+        <KeyBinding Command="{Binding ShapeService.OnDuplicateSelected}" Gesture="{app:PlatformGesture Text=Primary+D}" />
+        <KeyBinding Command="{Binding ShapeService.OnGroupSelected}" Gesture="{app:PlatformGesture Text=Primary+G}" />
+        <KeyBinding Command="{Binding ShapeService.OnExplodeSelected}" Gesture="{app:PlatformGesture Text=Primary+U}" />
+        <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="90" Gesture="{app:PlatformGesture Text=Primary+R}" />
+        <KeyBinding Command="{Binding ShapeService.OnRotateSelected}" CommandParameter="-90" Gesture="{app:PlatformGesture Text=Primary+L}" />
+        <KeyBinding Command="{Binding ShapeService.OnFlipHorizontalSelected}" Gesture="{app:PlatformGesture Text=Primary+H}" />
+        <KeyBinding Command="{Binding ShapeService.OnFlipVerticalSelected}" Gesture="{app:PlatformGesture Text=Primary+J}" />
         <KeyBinding Command="{Binding ShapeService.OnMoveUpSelected}" Gesture="Up" />
         <KeyBinding Command="{Binding ShapeService.OnMoveDownSelected}" Gesture="Down" />
         <KeyBinding Command="{Binding ShapeService.OnMoveLeftSelected}" Gesture="Left" />
         <KeyBinding Command="{Binding ShapeService.OnMoveRightSelected}" Gesture="Right" />
         <KeyBinding Command="{Binding ShapeService.OnStackHorizontallySelected}" Gesture="Shift+H" />
         <KeyBinding Command="{Binding ShapeService.OnStackVerticallySelected}" Gesture="Shift+Y" />
-        <KeyBinding Command="{Binding ShapeService.OnDistributeHorizontallySelected}" Gesture="Ctrl+Shift+H" />
-        <KeyBinding Command="{Binding ShapeService.OnDistributeVerticallySelected}" Gesture="Ctrl+Shift+Y" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignLeftSelected}" Gesture="Ctrl+Shift+Left" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignCenteredSelected}" Gesture="Ctrl+Shift+OemMinus" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignCenteredSelected}" Gesture="Ctrl+Shift+Subtract" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignRightSelected}" Gesture="Ctrl+Shift+Right" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignTopSelected}" Gesture="Ctrl+Shift+Up" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignCenterSelected}" Gesture="Ctrl+Shift+OemPipe" />
-        <KeyBinding Command="{Binding ShapeService.OnAlignBottomSelected}" Gesture="Ctrl+Shift+Down" />
-        <KeyBinding Command="{Binding ShapeService.OnBringToFrontSelected}" Gesture="Ctrl+Shift+OemCloseBrackets" />
-        <KeyBinding Command="{Binding ShapeService.OnBringForwardSelected}" Gesture="Ctrl+OemCloseBrackets" />
-        <KeyBinding Command="{Binding ShapeService.OnSendBackwardSelected}" Gesture="Ctrl+OemOpenBrackets" />
-        <KeyBinding Command="{Binding ShapeService.OnSendToBackSelected}" Gesture="Ctrl+Shift+OemOpenBrackets" />
-        <KeyBinding Command="{Binding ShapeService.OnPathBreak}" Gesture="Ctrl+B" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Difference" Gesture="Ctrl+Shift+D" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Intersect" Gesture="Ctrl+Shift+I" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Union" Gesture="Ctrl+Shift+U" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Xor" Gesture="Ctrl+Shift+X" />
-        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="ReverseDifference" Gesture="Ctrl+Shift+R" />
+        <KeyBinding Command="{Binding ShapeService.OnDistributeHorizontallySelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+H}" />
+        <KeyBinding Command="{Binding ShapeService.OnDistributeVerticallySelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+Y}" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignLeftSelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+Left}" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignCenteredSelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+OemMinus}" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignCenteredSelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+Subtract}" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignRightSelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+Right}" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignTopSelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+Up}" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignCenterSelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+OemPipe}" />
+        <KeyBinding Command="{Binding ShapeService.OnAlignBottomSelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+Down}" />
+        <KeyBinding Command="{Binding ShapeService.OnBringToFrontSelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+OemCloseBrackets}" />
+        <KeyBinding Command="{Binding ShapeService.OnBringForwardSelected}" Gesture="{app:PlatformGesture Text=Primary+OemCloseBrackets}" />
+        <KeyBinding Command="{Binding ShapeService.OnSendBackwardSelected}" Gesture="{app:PlatformGesture Text=Primary+OemOpenBrackets}" />
+        <KeyBinding Command="{Binding ShapeService.OnSendToBackSelected}" Gesture="{app:PlatformGesture Text=Primary+Shift+OemOpenBrackets}" />
+        <KeyBinding Command="{Binding ShapeService.OnPathBreak}" Gesture="{app:PlatformGesture Text=Primary+B}" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Difference" Gesture="{app:PlatformGesture Text=Primary+Shift+D}" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Intersect" Gesture="{app:PlatformGesture Text=Primary+Shift+I}" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Union" Gesture="{app:PlatformGesture Text=Primary+Shift+U}" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="Xor" Gesture="{app:PlatformGesture Text=Primary+Shift+X}" />
+        <KeyBinding Command="{Binding ShapeService.OnPathOp}" CommandParameter="ReverseDifference" Gesture="{app:PlatformGesture Text=Primary+Shift+R}" />
         <!-- Format -->
-        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="Ctrl+Shift+C" />
-        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="Ctrl+Shift+V" />
+        <KeyBinding Command="{Binding StyleEditor.OnCopyStyle}" Gesture="{app:PlatformGesture Text=Primary+Shift+C}" />
+        <KeyBinding Command="{Binding StyleEditor.OnPasteStyle}" Gesture="{app:PlatformGesture Text=Primary+Shift+V}" />
         <!-- Tool -->
         <KeyBinding Command="{Binding OnToolNone}" Gesture="N" />
         <KeyBinding Command="{Binding OnToolSelection}" Gesture="S" />
@@ -137,9 +138,9 @@
                             HorizontalAlignment="Stretch">
               <paz:ZoomBorder.ContextMenu>
                 <ContextMenu x:Name="TemplateContextMenu" DataContext="{Binding #PageZoomBorder.DataContext}">
-                  <MenuItem Header="Cu_t" Command="{Binding ClipboardService.OnCut}" InputGesture="Ctrl+X" />
-                  <MenuItem Header="_Copy" Command="{Binding ClipboardService.OnCopy}" InputGesture="Ctrl+C" />
-                  <MenuItem Header="_Paste" Command="{Binding ClipboardService.OnPaste}" InputGesture="Ctrl+V" />
+                  <MenuItem Header="Cu_t" Command="{Binding ClipboardService.OnCut}" InputGesture="{app:PlatformGesture Text=Primary+X}" />
+                  <MenuItem Header="_Copy" Command="{Binding ClipboardService.OnCopy}" InputGesture="{app:PlatformGesture Text=Primary+C}" />
+                  <MenuItem Header="_Paste" Command="{Binding ClipboardService.OnPaste}" InputGesture="{app:PlatformGesture Text=Primary+V}" />
                   <MenuItem Header="_Delete" Command="{Binding ClipboardService.OnDelete}" CommandParameter="{Binding}" InputGesture="Delete" />
                 </ContextMenu>
               </paz:ZoomBorder.ContextMenu>
