@@ -24,5 +24,7 @@ jobs:
         fetch-depth: 0
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
+    - name: Install workloads
+      run: dotnet workload install wasm-tools
     - name: Build Release
       run: dotnet build -c Release

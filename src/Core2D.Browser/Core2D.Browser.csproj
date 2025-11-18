@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net9.0-browser</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <WasmAllowUndefinedSymbols>true</WasmAllowUndefinedSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Browser" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core2D\Core2D.csproj" />
+  </ItemGroup>
+</Project>

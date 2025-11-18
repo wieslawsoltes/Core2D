@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);NU1701</NoWarn>
@@ -48,8 +48,6 @@
     <PackageReference Include="Avalonia.Diagnostics" Condition="'$(Configuration)' == 'Debug'" />
     <PackageReference Include="Avalonia.Skia" />
     <PackageReference Include="Avalonia.Desktop" />
-    <PackageReference Include="Avalonia.Headless" />
-    <PackageReference Include="Avalonia.Headless.Vnc" />
     <PackageReference Include="Xaml.Behaviors.Avalonia" />
     <PackageReference Include="PanAndZoom" />
     <PackageReference Include="ThemeEditor.Controls.ColorPicker" />
@@ -63,7 +61,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.CommandLine" />
   </ItemGroup>
 
   <ItemGroup>

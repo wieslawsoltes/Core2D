@@ -142,7 +142,10 @@ public class App : Application
 
         base.OnFrameworkInitializationCompleted();
 #if DEBUG
-        this.AttachDevTools();
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
+        {
+            this.AttachDevTools();
+        }
 #endif
     }
 

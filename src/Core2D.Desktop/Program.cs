@@ -67,7 +67,7 @@ internal static class Program
     {
         try
         {
-            var builder = BuildAvaloniaApp();
+            var builder = AppBuilderFactory.BuildAvaloniaApp();
 
             if (settings.Theme is { })
             {
@@ -198,9 +198,4 @@ internal static class Program
             StartAvaloniaApp(rootSettings, args);
         }
     }
-
-    public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>()
-            .UsePlatformDetect()
-            .LogToTrace();
 }
