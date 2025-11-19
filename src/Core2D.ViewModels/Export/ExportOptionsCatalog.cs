@@ -83,6 +83,12 @@ public sealed class ExportOptionsCatalog : IExportOptionsCatalog
                 Caps("Vector", "Project", "Document", "Page"), "dxf", sp => new CadExportOptionsViewModel(sp)),
             ["Dxf (ACadSharp)"] = new("Dxf (ACadSharp)", "DXF Export (ACadSharp)", "DXF export via ACadSharp.", "CAD",
                 Caps("Vector", "Project", "Document", "Page"), "dxf", sp => new CadExportOptionsViewModel(sp)),
+            ["Wmf (Oxage)"] = new("Wmf (Oxage)", "WMF (Oxage)", "Windows Metafile export.", "Vector",
+                Caps("Vector", "Page"), "wmf", sp => new DefaultExportOptionsViewModel(sp)),
+            ["Emf (WinForms)"] = new("Emf (WinForms)", "EMF (WinForms)", "Enhanced Metafile export.", "Vector",
+                Caps("Vector", "Page"), "emf", sp => new DefaultExportOptionsViewModel(sp)),
+            ["Skp (SkiaSharp)"] = new("Skp (SkiaSharp)", "SKP (SkiaSharp)", "SkiaSharp Picture export.", "Vector",
+                Caps("Vector", "Page"), "skp", sp => new DefaultExportOptionsViewModel(sp)),
         };
 
         return descriptors;
