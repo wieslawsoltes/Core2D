@@ -23,7 +23,7 @@ public class HitTest : IHitTest
     {
         Registered = new Dictionary<Type, IBounds>();
 
-        var bounds = serviceProvider.GetService<IBounds[]>();
+        var bounds = serviceProvider?.GetService(typeof(IEnumerable<IBounds>)) as IEnumerable<IBounds>;
         if (bounds is { })
         {
             Register(bounds);

@@ -10,7 +10,7 @@
     <ProjectReference Include="..\Core2D.ViewModels\Core2D.ViewModels.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
 </Project>

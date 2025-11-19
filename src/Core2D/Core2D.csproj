@@ -56,7 +56,6 @@
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="System.Drawing.Common" />
     <PackageReference Include="Newtonsoft.Json" />
-    <PackageReference Include="Autofac" />
     <PackageReference Include="StaticViewLocator">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -80,7 +79,6 @@
     <ProjectReference Include="..\Core2D.Modules.Renderer.Wmf\Core2D.Modules.Renderer.Wmf.csproj" />
     <ProjectReference Include="..\Core2D.Modules.ScriptRunner\Core2D.Modules.ScriptRunner.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Serializer\Core2D.Modules.Serializer.csproj" />
-    <ProjectReference Include="..\Core2D.Modules.ServiceProvider\Core2D.Modules.ServiceProvider.csproj" />
     <ProjectReference Include="..\Core2D.Modules.SvgExporter\Core2D.Modules.SvgExporter.csproj" />
     <ProjectReference Include="..\Core2D.Modules.TextFieldReader\Core2D.Modules.TextFieldReader.csproj" />
     <ProjectReference Include="..\Core2D.Modules.TextFieldWriter\Core2D.Modules.TextFieldWriter.csproj" />

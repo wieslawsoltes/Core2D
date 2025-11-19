@@ -9,8 +9,8 @@
 | Log | Model | – | – |
 | Renderer | Model, ViewModels, Spatial | Avalonia, SkiaSharp (and NativeAssets), PdfSharp, Svg, netDxf, ACadSharp (with CSMath/CSUtilities), UglyToad.PdfPig.Rendering.Skia | – |
 | ScriptRunner | Model, ViewModels | Microsoft.CodeAnalysis.CSharp.Scripting | – |
-| Serializer | Model | Autofac, Newtonsoft.Json | – |
-| ServiceProvider | – | Autofac | – |
+| Serializer | Model | Microsoft.Extensions.DependencyInjection, Newtonsoft.Json | – |
+| ServiceProvider | – | Microsoft.Extensions.DependencyInjection | – |
 | SvgExporter | Model, ViewModels | – | – |
 | TextFieldReader | Model, ViewModels | CsvHelper, DocumentFormat.OpenXml | – |
 | TextFieldWriter | Model, ViewModels | CsvHelper, DocumentFormat.OpenXml | – |

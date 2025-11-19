@@ -6,49 +6,45 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Autofac;
-using Autofac.Core;
-using Autofac.Core.Activators.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Core2D.Modules.Serializer.Newtonsoft;
 
-internal class ProjectContractResolver : DefaultContractResolver
+internal sealed class ProjectContractResolver : DefaultContractResolver
 {
-    private readonly ILifetimeScope _lifetimeScope;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly IServiceProviderIsService? _serviceProviderIsService;
     private readonly Type _listType;
 
-    public ProjectContractResolver(ILifetimeScope lifetimeScope, Type listType)
+    public ProjectContractResolver(IServiceProvider serviceProvider, Type listType)
     {
-        _lifetimeScope = lifetimeScope;
+        _serviceProvider = serviceProvider;
+        _serviceProviderIsService = serviceProvider.GetService<IServiceProviderIsService>();
         _listType = listType;
     }
 
     protected override JsonObjectContract CreateObjectContract(Type objectType)
     {
-        if (_lifetimeScope.IsRegistered(objectType))
+        if (IsService(objectType))
         {
-            var contract = ResolveContractUsingLifetimeScope(objectType);
-            contract.DefaultCreator = () => _lifetimeScope.Resolve(objectType);
+            var contract = base.CreateObjectContract(objectType);
+            contract.DefaultCreator = () => _serviceProvider.GetRequiredService(objectType);
             return contract;
         }
 
         return base.CreateObjectContract(objectType);
     }
 
-    private JsonObjectContract ResolveContractUsingLifetimeScope(Type objectType)
+    private bool IsService(Type serviceType)
     {
-        if (_lifetimeScope.ComponentRegistry.TryGetRegistration(new TypedService(objectType), out var registration))
+        if (_serviceProviderIsService is { } serviceAccessor)
         {
-            var viewType = (registration.Activator as ReflectionActivator)?.LimitType;
-            if (viewType is { })
-            {
-                return base.CreateObjectContract(viewType);
-            }
+            return serviceAccessor.IsService(serviceType);
         }
-            
-        return base.CreateObjectContract(objectType);
+
+        return _serviceProvider.GetService(serviceType) is not null;
     }
 
     public override JsonContract ResolveContract(Type type)
@@ -57,9 +53,10 @@ internal class ProjectContractResolver : DefaultContractResolver
         {
             return base.ResolveContract(_listType.MakeGenericType(type.GenericTypeArguments[0]));
         }
+
         return base.ResolveContract(type);
     }
-        
+
     protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
     {
         return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();

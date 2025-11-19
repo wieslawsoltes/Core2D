@@ -3,23 +3,25 @@
 
 #nullable enable
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
-using Autofac;
 using Avalonia.Controls;
 using Core2D.Editor;
 using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
 using Core2D.Modules.FileSystem.DotNet;
+using Core2D.Modules.FileWriter.Dwg;
 using Core2D.Modules.FileWriter.Dxf;
 using Core2D.Modules.FileWriter.Emf;
-using Core2D.Modules.FileWriter.Dwg;
+using Core2D.Modules.FileWriter.OpenXml;
+using Core2D.Modules.FileWriter.PdfSharp;
 using Core2D.Modules.FileWriter.SkiaSharp;
 using Core2D.Modules.FileWriter.Svg;
-using Core2D.Modules.FileWriter.Xaml;
 using Core2D.Modules.FileWriter.Wmf;
-using Core2D.Modules.FileWriter.OpenXml;
+using Core2D.Modules.FileWriter.Xaml;
 using Core2D.Modules.Log.Trace;
 using Core2D.Modules.Renderer.Avalonia;
 using Core2D.Modules.Renderer.Dwg;
@@ -29,186 +31,276 @@ using Core2D.Modules.Renderer.SkiaSharp;
 using Core2D.Modules.Renderer.Wmf;
 using Core2D.Modules.ScriptRunner.Roslyn;
 using Core2D.Modules.Serializer.Newtonsoft;
-using Core2D.Modules.ServiceProvider.Autofac;
+using Core2D.Modules.SvgExporter.Svg;
 using Core2D.Modules.TextFieldReader.CsvHelper;
 using Core2D.Modules.TextFieldReader.OpenXml;
 using Core2D.Modules.TextFieldWriter.CsvHelper;
 using Core2D.Modules.TextFieldWriter.OpenXml;
+using Core2D.Modules.XamlExporter.Avalonia;
+using Core2D.Rendering;
+using Core2D.Services;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Editor.Bounds;
 using Core2D.ViewModels.Editor.Factories;
-using Core2D.Views;
-using Core2D.Rendering;
-using Core2D.Modules.FileWriter.PdfSharp;
-using Core2D.Modules.SvgExporter.Svg;
-using Core2D.Modules.XamlExporter.Avalonia;
 using Core2D.ViewModels.Export;
 using Core2D.ViewModels.Wizard.Export;
-using Core2D.ViewModels.Wizard.Export.Steps;
 using Core2D.ViewModels.Wizard.Export.Execution;
-using Core2D.Services;
+using Core2D.ViewModels.Wizard.Export.Steps;
+using Core2D.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Core2D;
 
-public class AppModule : Autofac.Module
+public static class AppModule
 {
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Autofac registration intentionally scans assemblies at runtime.")]
-    [UnconditionalSuppressMessage("Trimming", "IL2066", Justification = "Type registrations are created via reflection and not trim compatible.")]
-    protected override void Load(ContainerBuilder builder)
+    private static readonly string[] s_viewModelNamespaces =
     {
-        // Container
+        "Core2D.ViewModels.Containers",
+        "Core2D.ViewModels.Data",
+        "Core2D.ViewModels.Path",
+        "Core2D.ViewModels.Scripting",
+        "Core2D.ViewModels.Shapes",
+        "Core2D.ViewModels.Style"
+    };
 
-        ILifetimeScope lifetimeScope = null!;
-        builder.Register(_ => lifetimeScope).AsSelf().SingleInstance();
-        builder.RegisterBuildCallback(x => lifetimeScope = x);
+    public static ServiceProvider CreateServiceProvider()
+    {
+        var services = new ServiceCollection();
+        ConfigureServices(services);
+        return services.BuildServiceProvider(new ServiceProviderOptions
+        {
+            ValidateScopes = true,
+            ValidateOnBuild = true
+        });
+    }
 
-        // Locator
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Service registration intentionally scans assemblies at runtime.")]
+    [UnconditionalSuppressMessage("Trimming", "IL2066", Justification = "View model registration relies on reflection.")]
+    public static void ConfigureServices(IServiceCollection services)
+    {
+        RegisterViewModels(services);
+        RegisterEditorServices(services);
+        RegisterDependencies(services);
+        RegisterAvaloniaServices(services);
+        RegisterViews(services);
+    }
 
-        builder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>().InstancePerLifetimeScope();
-
-        // ViewModels
-
-        builder.RegisterAssemblyTypes(typeof(ViewModelBase).GetTypeInfo().Assembly)
-            .PublicOnly()
-            .Where(t =>
+    private static void RegisterViewModels(IServiceCollection services)
+    {
+        var assembly = typeof(ViewModelBase).GetTypeInfo().Assembly;
+        foreach (var type in assembly.GetTypes())
+        {
+            if (IsEligibleViewModel(type))
             {
-                if (t.Namespace is null)
-                {
-                    return false;
-                }
-                if ((
-                        t.Namespace.StartsWith("Core2D.ViewModels.Containers")
-                        || t.Namespace.StartsWith("Core2D.ViewModels.Data")
-                        || t.Namespace.StartsWith("Core2D.ViewModels.Path")
-                        || t.Namespace.StartsWith("Core2D.ViewModels.Scripting")
-                        || t.Namespace.StartsWith("Core2D.ViewModels.Shapes")
-                        || t.Namespace.StartsWith("Core2D.ViewModels.Style")
-                    )
-                    && t.Name.EndsWith("ViewModel"))
-                {
-                    return true;
-                }
-                return false;
-            })
-            .AsSelf()
-            .InstancePerDependency();
+                services.AddTransient(type);
+            }
+        }
+    }
 
-        // Editor
+    private static bool IsEligibleViewModel(Type type)
+    {
+        if (!type.IsClass || type.IsAbstract || !type.IsPublic)
+        {
+            return false;
+        }
 
-        builder.RegisterType<AboutInfoViewModel>().As<AboutInfoViewModel>().InstancePerLifetimeScope();
-        builder.RegisterType<StyleEditorViewModel>().As<StyleEditorViewModel>().InstancePerLifetimeScope();
-        builder.RegisterType<DialogViewModel>().As<DialogViewModel>().InstancePerDependency();
+        if (!type.Name.EndsWith("ViewModel", StringComparison.Ordinal))
+        {
+            return false;
+        }
 
-        builder.RegisterType<ShapeEditor>().As<IShapeEditor>().InstancePerLifetimeScope();
-        builder.RegisterType<SelectionServiceViewModel>().As<ISelectionService>().InstancePerLifetimeScope();
-        builder.RegisterType<ClipboardServiceViewModel>().As<IClipboardService>().InstancePerLifetimeScope();
-        builder.RegisterType<ShapeServiceViewModel>().As<IShapeService>().InstancePerLifetimeScope();
-        builder.RegisterType<GraphLayoutServiceViewModel>().As<IGraphLayoutService>().InstancePerLifetimeScope();
-        builder.RegisterType<WaveFunctionCollapseServiceViewModel>().As<IWaveFunctionCollapseService>().InstancePerLifetimeScope();
-        builder.RegisterType<RendererProvider>().As<IRendererProvider>().SingleInstance();
-        builder.RegisterType<RendererSelectionService>().As<IRendererSelectionService>().InstancePerLifetimeScope();
+        var ns = type.Namespace;
+        if (ns is null)
+        {
+            return false;
+        }
 
-        builder.RegisterType<ProjectEditorViewModel>().As<ProjectEditorViewModel>().InstancePerLifetimeScope();
+        foreach (var prefix in s_viewModelNamespaces)
+        {
+            if (ns.StartsWith(prefix, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
 
-        builder.RegisterType<ViewModelFactory>().As<IViewModelFactory>().InstancePerLifetimeScope();
-        builder.RegisterType<ContainerFactory>().As<IContainerFactory>().InstancePerLifetimeScope();
-        builder.RegisterType<ShapeFactory>().As<IShapeFactory>().InstancePerLifetimeScope();
+        return false;
+    }
 
-        builder.RegisterAssemblyTypes(typeof(IEditorTool).GetTypeInfo().Assembly)
-            .PublicOnly()
-            .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools"))
-            .As<IEditorTool>()
-            .AsSelf()
-            .InstancePerLifetimeScope();
-            
-        builder.RegisterAssemblyTypes(typeof(IPathTool).GetTypeInfo().Assembly)
-            .PublicOnly()
-            .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools.Path"))
-            .As<IPathTool>()
-            .AsSelf()
-            .InstancePerLifetimeScope();
+    private static void RegisterEditorServices(IServiceCollection services)
+    {
+        services.AddSingleton<AboutInfoViewModel>();
+        services.AddSingleton<StyleEditorViewModel>();
+        services.AddTransient<DialogViewModel>();
 
-        builder.RegisterType<HitTest>().As<IHitTest>().InstancePerLifetimeScope();
-            
-        builder.RegisterAssemblyTypes(typeof(IBounds).GetTypeInfo().Assembly)
-            .PublicOnly()
-            .Where(t => t.Namespace is not null && t.Namespace.StartsWith("Core2D.ViewModels.Editor.Bounds.Shapes"))
-            .As<IBounds>()
-            .AsSelf()
-            .InstancePerLifetimeScope();
+        services.AddSingleton<IShapeEditor, ShapeEditor>();
+        services.AddSingleton<ISelectionService, SelectionServiceViewModel>();
+        services.AddSingleton<IClipboardService, ClipboardServiceViewModel>();
+        services.AddSingleton<IShapeService, ShapeServiceViewModel>();
+        services.AddSingleton<IGraphLayoutService, GraphLayoutServiceViewModel>();
+        services.AddSingleton<IWaveFunctionCollapseService, WaveFunctionCollapseServiceViewModel>();
+        services.AddSingleton<IRendererProvider, RendererProvider>();
+        services.AddSingleton<IRendererSelectionService, RendererSelectionService>();
 
-        builder.RegisterType<DataFlow>().As<DataFlow>().InstancePerLifetimeScope();
+        services.AddSingleton<ProjectEditorViewModel>();
+        services.AddSingleton<IDialogPresenter>(sp => sp.GetRequiredService<ProjectEditorViewModel>());
 
-        // Dependencies
+        services.AddSingleton<IViewModelFactory, ViewModelFactory>();
+        services.AddSingleton<IContainerFactory, ContainerFactory>();
+        services.AddSingleton<IShapeFactory, ShapeFactory>();
 
-        builder.RegisterType<AvaloniaRendererViewModel>().As<IShapeRenderer>().InstancePerDependency();
-        builder.RegisterType<AvaloniaTextClipboard>().As<ITextClipboard>().InstancePerLifetimeScope();
-        builder.RegisterType<TraceLog>().As<ILog>().SingleInstance();
-        builder.RegisterType<DotNetFileSystem>().As<IFileSystem>().InstancePerLifetimeScope();
-        builder.RegisterType<RoslynScriptRunner>().As<IScriptRunner>().InstancePerLifetimeScope();
-        builder.RegisterType<NewtonsoftJsonSerializer>().As<IJsonSerializer>().InstancePerLifetimeScope();
-        builder.RegisterType<PdfSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<SvgSvgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<DrawingGroupXamlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<PdfSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<DxfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<DxfACadSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<DwgWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<SvgSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<PngSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<SkpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<EmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<EmfWriter>().As<IMetafileExporter>().InstancePerLifetimeScope();
-        builder.RegisterType<WmfWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<JpegSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<WebpSkiaSharpWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<ExcelOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<WordOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<PowerPointOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<VisioOpenXmlWriter>().As<IFileWriter>().InstancePerLifetimeScope();
-        builder.RegisterType<OpenXmlReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
-        builder.RegisterType<CsvHelperReader>().As<ITextFieldReader<DatabaseViewModel>>().InstancePerLifetimeScope();
-        builder.RegisterType<OpenXmlWriter>().As<ITextFieldWriter<DatabaseViewModel>>().InstancePerLifetimeScope();
-        builder.RegisterType<CsvHelperWriter>().As<ITextFieldWriter<DatabaseViewModel>>().InstancePerLifetimeScope();
-        builder.RegisterType<SkiaSharpPathConverter>().As<IPathConverter>().InstancePerLifetimeScope();
-        builder.RegisterType<SkiaSharpSvgConverter>().As<ISvgConverter>().InstancePerLifetimeScope();
-        builder.RegisterType<DwgImporter>().As<IDwgImporter>().InstancePerLifetimeScope();
-        builder.RegisterType<PdfImporter>().As<IPdfImporter>().InstancePerLifetimeScope();
-        builder.RegisterType<WmfImporter>().As<IWmfImporter>().InstancePerLifetimeScope();
-        builder.RegisterType<VisioImporter>().As<IVisioImporter>().InstancePerLifetimeScope();
+        RegisterAssemblyTypes(
+            services,
+            typeof(IEditorTool).GetTypeInfo().Assembly,
+            type => type.Namespace is not null && type.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools", StringComparison.Ordinal),
+            ServiceLifetime.Singleton,
+            includeSelf: true,
+            typeof(IEditorTool));
 
-        builder.RegisterType<DrawingGroupXamlExporter>().As<IXamlExporter>().InstancePerLifetimeScope();
-        builder.RegisterType<SvgSvgExporter>().As<ISvgExporter>().InstancePerLifetimeScope();
+        RegisterAssemblyTypes(
+            services,
+            typeof(IPathTool).GetTypeInfo().Assembly,
+            type => type.Namespace is not null && type.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools.Path", StringComparison.Ordinal),
+            ServiceLifetime.Singleton,
+            includeSelf: true,
+            typeof(IPathTool));
 
-        builder.RegisterType<ExportOptionsCatalog>()
-            .As<IExportOptionsCatalog>()
-            .SingleInstance();
+        services.AddSingleton<IHitTest, HitTest>();
 
-        builder.RegisterType<ExportWizardTelemetry>()
-            .As<IExportWizardTelemetry>()
-            .SingleInstance();
+        RegisterAssemblyTypes(
+            services,
+            typeof(IBounds).GetTypeInfo().Assembly,
+            type => type.Namespace is not null && type.Namespace.StartsWith("Core2D.ViewModels.Editor.Bounds.Shapes", StringComparison.Ordinal),
+            ServiceLifetime.Singleton,
+            includeSelf: true,
+            typeof(IBounds));
 
-        builder.RegisterType<ExportWizardContext>().AsSelf().InstancePerLifetimeScope();
-        builder.RegisterType<WizardNavigationService>().AsSelf().InstancePerLifetimeScope();
-        builder.RegisterType<ScopeWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
-        builder.RegisterType<ExporterWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
-        builder.RegisterType<SettingsWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
-        builder.RegisterType<DestinationWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
-        builder.RegisterType<ExecutionWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
-        builder.RegisterType<SummaryWizardStepViewModel>().As<IWizardStepViewModel>().InstancePerDependency();
-        builder.RegisterType<ExportWizardViewModel>().AsSelf().InstancePerDependency();
-        builder.RegisterType<ExportJobRunner>().AsSelf().InstancePerDependency();
-        
-        // Avalonia
+        services.AddSingleton<DataFlow>();
+    }
 
-        builder.RegisterType<AvaloniaImageImporter>().As<IImageImporter>().InstancePerLifetimeScope();
-        builder.RegisterType<AvaloniaProjectEditorPlatform>().As<IProjectEditorPlatform>().InstancePerLifetimeScope();
-        builder.RegisterType<AvaloniaEditorCanvasPlatform>().As<IEditorCanvasPlatform>().InstancePerLifetimeScope();
+    private static void RegisterDependencies(IServiceCollection services)
+    {
+        services.AddTransient<IShapeRenderer, AvaloniaRendererViewModel>();
+        services.AddSingleton<ITextClipboard, AvaloniaTextClipboard>();
+        services.AddSingleton<ILog, TraceLog>();
+        services.AddSingleton<IFileSystem, DotNetFileSystem>();
+        services.AddSingleton<IScriptRunner, RoslynScriptRunner>();
+        services.AddSingleton<IJsonSerializer, NewtonsoftJsonSerializer>();
 
-        // Views
+        services.AddSingleton<IFileWriter, PdfSharpWriter>();
+        services.AddSingleton<IFileWriter, SvgSvgWriter>();
+        services.AddSingleton<IFileWriter, DrawingGroupXamlWriter>();
+        services.AddSingleton<IFileWriter, PdfSkiaSharpWriter>();
+        services.AddSingleton<IFileWriter, DxfWriter>();
+        services.AddSingleton<IFileWriter, DxfACadSharpWriter>();
+        services.AddSingleton<IFileWriter, DwgWriter>();
+        services.AddSingleton<IFileWriter, SvgSkiaSharpWriter>();
+        services.AddSingleton<IFileWriter, PngSkiaSharpWriter>();
+        services.AddSingleton<IFileWriter, SkpSkiaSharpWriter>();
+        services.AddSingleton<IFileWriter, EmfWriter>();
+        services.AddSingleton<IMetafileExporter, EmfWriter>();
+        services.AddSingleton<IFileWriter, WmfWriter>();
+        services.AddSingleton<IFileWriter, JpegSkiaSharpWriter>();
+        services.AddSingleton<IFileWriter, WebpSkiaSharpWriter>();
+        services.AddSingleton<IFileWriter, ExcelOpenXmlWriter>();
+        services.AddSingleton<IFileWriter, WordOpenXmlWriter>();
+        services.AddSingleton<IFileWriter, PowerPointOpenXmlWriter>();
+        services.AddSingleton<IFileWriter, VisioOpenXmlWriter>();
 
-        builder.RegisterType<MainWindow>().As<Window>().InstancePerLifetimeScope();
+        services.AddSingleton<ITextFieldReader<DatabaseViewModel>, OpenXmlReader>();
+        services.AddSingleton<ITextFieldReader<DatabaseViewModel>, CsvHelperReader>();
+        services.AddSingleton<ITextFieldWriter<DatabaseViewModel>, OpenXmlWriter>();
+        services.AddSingleton<ITextFieldWriter<DatabaseViewModel>, CsvHelperWriter>();
+
+        services.AddSingleton<IPathConverter, SkiaSharpPathConverter>();
+        services.AddSingleton<ISvgConverter, SkiaSharpSvgConverter>();
+        services.AddSingleton<IDwgImporter, DwgImporter>();
+        services.AddSingleton<IPdfImporter, PdfImporter>();
+        services.AddSingleton<IWmfImporter, WmfImporter>();
+        services.AddSingleton<IVisioImporter, VisioImporter>();
+
+        services.AddSingleton<IXamlExporter, DrawingGroupXamlExporter>();
+        services.AddSingleton<ISvgExporter, SvgSvgExporter>();
+
+        services.AddSingleton<IExportOptionsCatalog, ExportOptionsCatalog>();
+        services.AddSingleton<IExportWizardTelemetry, ExportWizardTelemetry>();
+        services.AddSingleton<ExportWizardContext>();
+        services.AddSingleton<WizardNavigationService>();
+        RegisterWizardStep<ScopeWizardStepViewModel>(services);
+        RegisterWizardStep<ExporterWizardStepViewModel>(services);
+        RegisterWizardStep<SettingsWizardStepViewModel>(services);
+        RegisterWizardStep<DestinationWizardStepViewModel>(services);
+        RegisterWizardStep<ExecutionWizardStepViewModel>(services);
+        RegisterWizardStep<SummaryWizardStepViewModel>(services);
+        services.AddTransient<ExportWizardViewModel>();
+        services.AddTransient<ExportJobRunner>();
+    }
+
+    private static void RegisterAvaloniaServices(IServiceCollection services)
+    {
+        services.AddSingleton<IImageImporter, AvaloniaImageImporter>();
+        services.AddSingleton<IProjectEditorPlatform, AvaloniaProjectEditorPlatform>();
+        services.AddSingleton<IEditorCanvasPlatform, AvaloniaEditorCanvasPlatform>();
+    }
+
+    private static void RegisterViews(IServiceCollection services)
+    {
+        services.AddSingleton<MainWindow>();
+        services.AddSingleton<Window>(sp => sp.GetRequiredService<MainWindow>());
+    }
+
+    private static void RegisterWizardStep<TStep>(IServiceCollection services)
+        where TStep : class, IWizardStepViewModel
+    {
+        services.AddTransient<TStep>();
+        services.AddTransient<IWizardStepViewModel, TStep>();
+    }
+
+    private static void RegisterAssemblyTypes(
+        IServiceCollection services,
+        Assembly assembly,
+        Func<Type, bool> predicate,
+        ServiceLifetime lifetime,
+        bool includeSelf,
+        params Type[] serviceTypes)
+    {
+        foreach (var type in assembly.GetTypes())
+        {
+            if (!type.IsClass || type.IsAbstract || !type.IsPublic || !predicate(type))
+            {
+                continue;
+            }
+
+            RegisterType(services, type, lifetime, includeSelf, serviceTypes);
+        }
+    }
+
+    private static void RegisterType(
+        IServiceCollection services,
+        Type implementationType,
+        ServiceLifetime lifetime,
+        bool includeSelf,
+        IReadOnlyCollection<Type> serviceTypes)
+    {
+        var registered = false;
+        foreach (var serviceType in serviceTypes)
+        {
+            if (serviceType.IsAssignableFrom(implementationType))
+            {
+                services.Add(new ServiceDescriptor(serviceType, implementationType, lifetime));
+                registered = true;
+            }
+        }
+
+        if (includeSelf)
+        {
+            services.Add(new ServiceDescriptor(implementationType, implementationType, lifetime));
+        }
+
+        if (!registered && serviceTypes.Count > 0)
+        {
+            // Keep behavior aligned with Autofac: skip interface registrations for incompatible types.
+        }
     }
 }

@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Dock.Avalonia.Themes.Fluent" Version="11.3.6" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
     <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
     <PackageVersion Include="System.Collections.Immutable" Version="9.0.9" />
     <PackageVersion Include="System.IO.Compression" Version="4.3.0" />
@@ -36,7 +37,6 @@
     <PackageVersion Include="Svg.Skia" Version="3.2.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageVersion Include="Autofac" Version="8.4.0" />
     <PackageVersion Include="AutomaticGraphLayout" Version="1.1.12" />
     <PackageVersion Include="CsvHelper" Version="33.1.0" />
     <PackageVersion Include="DocumentFormat.OpenXml" Version="3.3.0" />

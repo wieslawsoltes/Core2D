@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using Autofac;
 using Core2D.Configuration.Windows;
 using Core2D.Json;
 using Core2D.Model;
@@ -17,6 +16,7 @@ using Core2D.ViewModels.Editor;
 using Dock.Model.Controls;
 using Dock.Model.Core;
 using Dock.Model.Mvvm.Controls;
+using MsServiceProvider = Microsoft.Extensions.DependencyInjection.ServiceProvider;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -47,9 +47,9 @@ public class AppState : IDisposable
 
     public string WindowConfigurationPath { get; }
 
-    public IContainer? Container { get; }
-
-    public IServiceProvider? ServiceProvider { get; }
+    private readonly MsServiceProvider _serviceProvider;
+    
+    public IServiceProvider ServiceProvider => _serviceProvider;
     
     public ILog? Log { get; }
     
@@ -67,22 +67,16 @@ public class AppState : IDisposable
 
         WindowConfigurationPath = "Core2D.window";
 
-        var builder = new ContainerBuilder();
+        _serviceProvider = AppModule.CreateServiceProvider();
 
-        builder.RegisterModule<AppModule>();
-
-        Container = builder.Build();
-
-        ServiceProvider = Container.Resolve<IServiceProvider>();
-
-        Log = ServiceProvider.GetService<ILog>();
-        FileSystem = ServiceProvider.GetService<IFileSystem>();
+        Log = _serviceProvider.GetService<ILog>();
+        FileSystem = _serviceProvider.GetService<IFileSystem>();
 
         BaseDirectory = FileSystem?.GetBaseDirectory() ?? "";
         
         Log?.Initialize(System.IO.Path.Combine(BaseDirectory, LogPath));
 
-        Editor = ServiceProvider.GetService<ProjectEditorViewModel>();
+        Editor = _serviceProvider.GetService<ProjectEditorViewModel>();
 
         InitializeEditor();
 
@@ -127,7 +121,7 @@ public class AppState : IDisposable
         Editor.CurrentPathTool = Editor.PathTools.FirstOrDefault(t => t.Title == "Line");
         Editor.IsToolIdle = true;
 
-        Editor.AboutInfo = CreateAboutInfo(ServiceProvider);
+        Editor.AboutInfo = CreateAboutInfo(_serviceProvider);
 
     }
 
@@ -228,7 +222,7 @@ public class AppState : IDisposable
 
     public void Dispose()
     {
-        Container?.Dispose();
         Log?.Dispose();
+        _serviceProvider.Dispose();
     }
 }

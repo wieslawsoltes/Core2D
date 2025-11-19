@@ -26,22 +26,22 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     {
         _dialogs = new ObservableCollection<DialogViewModel>();
         _tools = serviceProvider is null 
-            ? new Lazy<ImmutableArray<IEditorTool>>(() => new ImmutableArray<IEditorTool>()) 
-            : serviceProvider.GetServiceLazily<IEditorTool[], ImmutableArray<IEditorTool>>(tools =>
+            ? new Lazy<ImmutableArray<IEditorTool>>(() => ImmutableArray<IEditorTool>.Empty) 
+            : serviceProvider.GetServiceLazily<IEnumerable<IEditorTool>, ImmutableArray<IEditorTool>>(tools =>
             {
                 if (tools is null)
                 {
-                    return new ImmutableArray<IEditorTool>();
+                    return ImmutableArray<IEditorTool>.Empty;
                 }
                 return tools.ToImmutableArray();
             });
         _pathTools = serviceProvider is null 
-            ? new Lazy<ImmutableArray<IPathTool>>(() => new ImmutableArray<IPathTool>()) 
-            : serviceProvider.GetServiceLazily<IPathTool[], ImmutableArray<IPathTool>>(pathTools =>
+            ? new Lazy<ImmutableArray<IPathTool>>(() => ImmutableArray<IPathTool>.Empty) 
+            : serviceProvider.GetServiceLazily<IEnumerable<IPathTool>, ImmutableArray<IPathTool>>(pathTools =>
             {
                 if (pathTools is null)
                 {
-                    return new ImmutableArray<IPathTool>();
+                    return ImmutableArray<IPathTool>.Empty;
                 }
                 return pathTools.ToImmutableArray();
             });
@@ -55,32 +55,32 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
         _waveFunctionCollapseService = serviceProvider.GetServiceLazily<IWaveFunctionCollapseService>();
         _clipboardService = serviceProvider.GetServiceLazily<IClipboardService>();
         _fileWriters = serviceProvider is null 
-            ? new Lazy<ImmutableArray<IFileWriter>>(() => new ImmutableArray<IFileWriter>()) 
-            : serviceProvider.GetServiceLazily<IFileWriter[], ImmutableArray<IFileWriter>>(writers =>
+            ? new Lazy<ImmutableArray<IFileWriter>>(() => ImmutableArray<IFileWriter>.Empty) 
+            : serviceProvider.GetServiceLazily<IEnumerable<IFileWriter>, ImmutableArray<IFileWriter>>(writers =>
             {
                 if (writers is null)
                 {
-                    return new ImmutableArray<IFileWriter>();
+                    return ImmutableArray<IFileWriter>.Empty;
                 }
                 return writers.ToImmutableArray();
             });  
         _textFieldReaders = serviceProvider is null 
-            ? new Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>>(() => new ImmutableArray<ITextFieldReader<DatabaseViewModel>>()) 
-            : serviceProvider.GetServiceLazily<ITextFieldReader<DatabaseViewModel>[], ImmutableArray<ITextFieldReader<DatabaseViewModel>>>(readers =>
+            ? new Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>>(() => ImmutableArray<ITextFieldReader<DatabaseViewModel>>.Empty) 
+            : serviceProvider.GetServiceLazily<IEnumerable<ITextFieldReader<DatabaseViewModel>>, ImmutableArray<ITextFieldReader<DatabaseViewModel>>>(readers =>
             {
                 if (readers is null)
                 {
-                    return new ImmutableArray<ITextFieldReader<DatabaseViewModel>>();
+                    return ImmutableArray<ITextFieldReader<DatabaseViewModel>>.Empty;
                 }
                 return readers.ToImmutableArray();
             });
         _textFieldWriters = serviceProvider is null 
-            ? new Lazy<ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>(() => new ImmutableArray<ITextFieldWriter<DatabaseViewModel>>()) 
-            : serviceProvider.GetServiceLazily<ITextFieldWriter<DatabaseViewModel>[], ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>(writers =>
+            ? new Lazy<ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>(() => ImmutableArray<ITextFieldWriter<DatabaseViewModel>>.Empty) 
+            : serviceProvider.GetServiceLazily<IEnumerable<ITextFieldWriter<DatabaseViewModel>>, ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>(writers =>
             {
                 if (writers is null)
                 {
-                    return new ImmutableArray<ITextFieldWriter<DatabaseViewModel>>();
+                    return ImmutableArray<ITextFieldWriter<DatabaseViewModel>>.Empty;
                 }
                 return writers.ToImmutableArray();
             });

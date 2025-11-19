@@ -2,8 +2,8 @@
 // Licensed under the MIT. See LICENSE.TXT file in the project root for details.
 
 #nullable enable
+using System;
 using System.Collections.ObjectModel;
-using Autofac;
 using Core2D.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -14,7 +14,7 @@ public sealed class NewtonsoftJsonSerializer : IJsonSerializer
 {
     private readonly JsonSerializerSettings _settings;
 
-    public NewtonsoftJsonSerializer(ILifetimeScope lifetimeScope)
+    public NewtonsoftJsonSerializer(IServiceProvider serviceProvider)
     {
         _settings = new JsonSerializerSettings
         {
@@ -22,7 +22,7 @@ public sealed class NewtonsoftJsonSerializer : IJsonSerializer
             TypeNameHandling = TypeNameHandling.Objects,
             PreserveReferencesHandling = PreserveReferencesHandling.Objects,
             ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-            ContractResolver = new ProjectContractResolver(lifetimeScope, typeof(ObservableCollection<>)),
+            ContractResolver = new ProjectContractResolver(serviceProvider, typeof(ObservableCollection<>)),
             NullValueHandling = NullValueHandling.Ignore,
             Converters =
             {

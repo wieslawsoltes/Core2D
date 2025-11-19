@@ -6,7 +6,6 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
-using Autofac;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -46,13 +45,8 @@ public class App : Application
     {
         if (Design.IsDesignMode)
         {
-            var builder = new ContainerBuilder();
-
-            builder.RegisterModule<AppModule>();
-
-            var container = builder.Build();
-
-            DesignerContext.InitializeContext(container.Resolve<IServiceProvider>());
+            using var serviceProvider = AppModule.CreateServiceProvider();
+            DesignerContext.InitializeContext(serviceProvider);
         }
     }
 
