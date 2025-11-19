@@ -15,4 +15,31 @@
   <ItemGroup>
     <ProjectReference Include="..\Core2D\Core2D.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <TrimmerRootAssembly Include="Core2D" />
+    <TrimmerRootAssembly Include="Core2D.Model" />
+    <TrimmerRootAssembly Include="Core2D.Spatial" />
+    <TrimmerRootAssembly Include="Core2D.ViewModels" />
+    <TrimmerRootAssembly Include="Core2D.Modules.FileSystem" />
+    <TrimmerRootAssembly Include="Core2D.Modules.FileWriter" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Log" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.Avalonia" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.Common" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.Dwg" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.Dxf" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.OpenXml" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.PdfSharp" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.SkiaSharp" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.SparseStrips" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.VelloSharp" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Renderer.Wmf" />
+    <TrimmerRootAssembly Include="Core2D.Modules.ScriptRunner" />
+    <TrimmerRootAssembly Include="Core2D.Modules.Serializer" />
+    <TrimmerRootAssembly Include="Core2D.Modules.ServiceProvider" />
+    <TrimmerRootAssembly Include="Core2D.Modules.SvgExporter" />
+    <TrimmerRootAssembly Include="Core2D.Modules.TextFieldReader" />
+    <TrimmerRootAssembly Include="Core2D.Modules.TextFieldWriter" />
+    <TrimmerRootAssembly Include="Core2D.Modules.XamlExporter" />
+  </ItemGroup>
 </Project>
