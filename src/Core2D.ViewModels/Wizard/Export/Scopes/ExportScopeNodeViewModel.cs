@@ -55,6 +55,10 @@ public partial class ExportScopeNodeViewModel : ViewModelBase
                 if (!_suppressSelectionChanged)
                 {
                     SelectionChanged?.Invoke(this, value);
+                    foreach (var child in Children)
+                    {
+                        child.IsSelected = value;
+                    }
                 }
             }
         }

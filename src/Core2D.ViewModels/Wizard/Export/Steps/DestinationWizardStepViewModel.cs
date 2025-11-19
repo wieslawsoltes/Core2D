@@ -102,6 +102,11 @@ public sealed partial class DestinationWizardStepViewModel : WizardStepViewModel
         {
             foreach (var exporter in Context.SelectedExporters)
             {
+                if (!exporter.Descriptor.Capabilities.Contains(scope.Kind.ToString()))
+                {
+                    continue;
+                }
+
                 var path = ExportPathBuilder.BuildPath(Context, scope, exporter);
                 var label = ExportScopeFormatter.Describe(scope);
                 _previewItems.Add(new DestinationPreviewItem(label, exporter.DisplayName, path));

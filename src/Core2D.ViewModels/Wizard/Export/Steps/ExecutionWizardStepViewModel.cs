@@ -120,6 +120,11 @@ public sealed partial class ExecutionWizardStepViewModel : WizardStepViewModelBa
         {
             foreach (var exporter in Context.SelectedExporters)
             {
+                if (!exporter.Descriptor.Capabilities.Contains(scope.Kind.ToString()))
+                {
+                    continue;
+                }
+
                 var path = ExportPathBuilder.BuildPath(Context, scope, exporter);
                 var label = ExportScopeFormatter.Describe(scope);
                 Jobs.Add(new ExportJobItemViewModel(ServiceProvider, scope, exporter, label, path));

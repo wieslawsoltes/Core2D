@@ -117,7 +117,19 @@ public sealed partial class SummaryWizardStepViewModel : WizardStepViewModelBase
 
         HasScopes = ScopeSummaries.Count > 0;
         HasExporters = ExporterSummaries.Count > 0;
-        EstimatedJobCount = Context.SelectedScopes.Count * Context.SelectedExporters.Count;
+        
+        EstimatedJobCount = 0;
+        foreach (var scope in Context.SelectedScopes)
+        {
+            foreach (var exporter in Context.SelectedExporters)
+            {
+                if (exporter.Descriptor.Capabilities.Contains(scope.Kind.ToString()))
+                {
+                    EstimatedJobCount++;
+                }
+            }
+        }
+
         RefreshPreview();
         _ = ValidateAsync(CancellationToken.None);
     }
@@ -136,6 +148,11 @@ public sealed partial class SummaryWizardStepViewModel : WizardStepViewModelBase
         {
             foreach (var exporter in Context.SelectedExporters)
             {
+                if (!exporter.Descriptor.Capabilities.Contains(scope.Kind.ToString()))
+                {
+                    continue;
+                }
+
                 var path = ExportPathBuilder.BuildPath(Context, scope, exporter);
                 var label = ExportScopeFormatter.Describe(scope);
                 PreviewItems.Add(new DestinationPreviewItem(label, exporter.DisplayName, path));
