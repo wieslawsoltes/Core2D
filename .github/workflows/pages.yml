@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 env:
     PROJECT_PATH: src/Core2D.Browser/Core2D.Browser.csproj
-    OUTPUT_PATH: src/Core2D.Browser/bin/Release/net9.0/browser-wasm/AppBundle
+    OUTPUT_PATH: src/Core2D.Browser/bin/Release/net9.0-browser/wwwroot
 on:
   push:
     branches: [ master ]
