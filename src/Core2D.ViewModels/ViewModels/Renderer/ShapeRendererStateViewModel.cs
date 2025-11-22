@@ -39,6 +39,15 @@ public partial class ShapeRendererStateViewModel : ViewModelBase
     [AutoNotify] private ImmutableHashSet<PointShapeViewModel> _activeConnectionPoints = ImmutableHashSet<PointShapeViewModel>.Empty;
     [AutoNotify] private PointShapeViewModel? _connectionHoverPoint;
     [AutoNotify] private bool _connectionHoverCanConnect;
+    [AutoNotify] private double _rulerPageWidth;
+    [AutoNotify] private double _rulerPageHeight;
+    [AutoNotify] private double _rulerPageLeft;
+    [AutoNotify] private double _rulerPageTop;
+    [AutoNotify] private double _rulerSelectionLeft;
+    [AutoNotify] private double _rulerSelectionTop;
+    [AutoNotify] private double _rulerSelectionWidth;
+    [AutoNotify] private double _rulerSelectionHeight;
+    [AutoNotify] private bool _rulerHasSelection;
 
     public ShapeRendererStateViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {

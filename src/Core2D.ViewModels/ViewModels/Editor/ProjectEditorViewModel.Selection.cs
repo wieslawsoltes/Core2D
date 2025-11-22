@@ -209,6 +209,7 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         pageState.Decorator.Shapes = shapes;
         pageState.Decorator.Update();
         pageState.Decorator.Show();
+        UpdateRulerSelectionBounds();
     }
 
     public void OnUpdateDecorator()
@@ -225,6 +226,8 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         }
 
         pageState.Decorator?.Update(false);
+        UpdateRulerSelectionBounds();
+        UpdateRulerSelectionBounds();
     }
 
     public void OnHideDecorator()
@@ -277,10 +280,12 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         if (project.SelectedShapes is { })
         {
             OnShowDecorator();
+            UpdateRulerSelectionBounds();
         }
         else
         {
             OnHideDecorator();
+            ClearRulerSelectionBounds();
         }
     }
 
@@ -383,6 +388,39 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         }
     }
 
+    private void UpdateRulerSelectionBounds()
+    {
+        var state = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+        var shapes = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project?.SelectedShapes;
+        if (state is null || shapes is null || shapes.Count == 0)
+        {
+            ClearRulerSelectionBounds();
+            return;
+        }
+
+        var groupBox = new GroupBox(shapes.ToList());
+        state.RulerSelectionLeft = (double)groupBox.Bounds.Left;
+        state.RulerSelectionTop = (double)groupBox.Bounds.Top;
+        state.RulerSelectionWidth = (double)groupBox.Bounds.Width;
+        state.RulerSelectionHeight = (double)groupBox.Bounds.Height;
+        state.RulerHasSelection = true;
+    }
+
+    private void ClearRulerSelectionBounds()
+    {
+        var state = ServiceProvider.GetService<ProjectEditorViewModel>()?.Renderer?.State;
+        if (state is null)
+        {
+            return;
+        }
+
+        state.RulerSelectionLeft = 0.0;
+        state.RulerSelectionTop = 0.0;
+        state.RulerSelectionWidth = 0.0;
+        state.RulerSelectionHeight = 0.0;
+        state.RulerHasSelection = false;
+    }
+
     public void OnDeleteSelected()
     {
         var project = ServiceProvider.GetService<ProjectEditorViewModel>()?.Project;
@@ -425,6 +463,7 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         layer.RaiseInvalidateLayer();
 
         OnHideDecorator();
+        ClearRulerSelectionBounds();
     }
 
     public void Deselect()
@@ -443,6 +482,7 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
         project.HoveredShape = null;
 
         OnHideDecorator();
+        ClearRulerSelectionBounds();
     }
 
     public void Select(LayerContainerViewModel? layer, BaseShapeViewModel shape)
@@ -465,16 +505,19 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
             if (pageState.DrawPoints)
             {
                 OnHideDecorator();
+                ClearRulerSelectionBounds();
             }
             else
             {
                 if (shape is PointShapeViewModel or LineShapeViewModel)
                 {
                     OnHideDecorator();
+                    ClearRulerSelectionBounds();
                 }
                 else
                 {
                     OnShowDecorator();
+                    UpdateRulerSelectionBounds();
                 }
             }
         }
@@ -512,6 +555,7 @@ public class SelectionServiceViewModel : ViewModelBase, ISelectionService
             }
 
             OnShowDecorator();
+            UpdateRulerSelectionBounds();
         }
 
         if (layer?.Owner is FrameContainerViewModel { CurrentShape: { } } owner)

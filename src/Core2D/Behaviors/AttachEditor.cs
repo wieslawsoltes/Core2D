@@ -60,6 +60,8 @@ public class AttachEditor
         var presenterViewData = _control.FindControl<Control>("RenderViewData");
         var presenterViewTemplate = _control.FindControl<Control>("RenderViewTemplate");
         var presenterViewEditor = _control.FindControl<Control>("RenderViewEditor");
+        var horizontalRuler = _control.FindControl<Control>("HorizontalRuler");
+        var verticalRuler = _control.FindControl<Control>("VerticalRuler");
         var zoomBorder = _control.FindControl<ZoomBorder>("PageZoomBorder");
 
         if (projectEditor.CanvasPlatform is { } canvasPlatform)
@@ -69,6 +71,8 @@ public class AttachEditor
                 presenterViewData?.InvalidateVisual();
                 presenterViewTemplate?.InvalidateVisual();
                 presenterViewEditor?.InvalidateVisual();
+                horizontalRuler?.InvalidateVisual();
+                verticalRuler?.InvalidateVisual();
             };
             canvasPlatform.ResetZoom = () => zoomBorder?.ResetMatrix();
             canvasPlatform.FillZoom = () => zoomBorder?.Fill();

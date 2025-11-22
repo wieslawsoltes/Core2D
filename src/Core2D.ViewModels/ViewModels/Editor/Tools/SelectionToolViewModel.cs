@@ -1008,6 +1008,7 @@ public partial class SelectionToolViewModel : ViewModelBase, IEditorTool
                 {
                     decorator.Move(args);
                     decorator.Update(false);
+                    selection.OnUpdateDecorator();
                     return;
                 }
 

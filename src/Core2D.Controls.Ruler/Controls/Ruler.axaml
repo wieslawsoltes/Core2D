@@ -1,0 +1,37 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Core2D.Controls">
+  <Design.PreviewWith>
+    <StackPanel>
+      <controls:Ruler Width="260" Height="32" HighlightLength="180" />
+      <controls:Ruler Orientation="Vertical" Width="32" Height="180" HighlightLength="140" />
+    </StackPanel>
+  </Design.PreviewWith>
+  <Style Selector="controls|Ruler">
+    <Setter Property="FontFamily" Value="{DynamicResource UiFontFamily}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeLowBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemChromeMediumLowColor}" />
+    <Setter Property="BorderThickness" Value="0,0,0,1" />
+    <Setter Property="TickBrush" Value="{DynamicResource SystemControlForegroundBaseMediumLowBrush}" />
+    <Setter Property="TextBrush" Value="{DynamicResource SystemControlForegroundBaseMediumLowBrush}" />
+    <Setter Property="AccentBrush" Value="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+    <Setter Property="SelectionBrush" Value="{DynamicResource SystemAccentColor}" />
+    <Setter Property="SelectionLabelBrush" Value="{DynamicResource SystemAccentColor}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}" />
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="controls|Ruler:horizontal">
+    <Setter Property="Height" Value="32" />
+    <Setter Property="BorderThickness" Value="0,0,0,1" />
+  </Style>
+  <Style Selector="controls|Ruler:vertical">
+    <Setter Property="Width" Value="32" />
+    <Setter Property="BorderThickness" Value="0,0,1,0" />
+  </Style>
+</Styles>

@@ -58,6 +58,7 @@
   <StyleInclude Source="avares://Core2D/Styles/Dock.axaml" />
   <StyleInclude Source="avares://Core2D/Controls/EditableItem.axaml" />
   <StyleInclude Source="avares://Core2D/Controls/ToggleItem.axaml" />
+  <StyleInclude Source="avares://Core2D.Controls.Ruler/Controls/Ruler.axaml" />
 
   <Style Selector="AccessText">
     <Setter Property="(TextElement.Foreground)" Value="{DynamicResource ButtonForeground}" />

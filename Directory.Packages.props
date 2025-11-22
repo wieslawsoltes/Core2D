@@ -16,6 +16,7 @@
     <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="3.119.1" />
     <PackageVersion Include="System.Text.Encoding.CodePages" Version="9.0.9" />
     <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Markup.Xaml" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />

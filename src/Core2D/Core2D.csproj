@@ -77,6 +77,7 @@
     <ProjectReference Include="..\Core2D.Modules.Renderer.SparseStrips\Core2D.Modules.Renderer.SparseStrips.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Renderer.VelloSharp\Core2D.Modules.Renderer.VelloSharp.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Renderer.Wmf\Core2D.Modules.Renderer.Wmf.csproj" />
+    <ProjectReference Include="..\Core2D.Controls.Ruler\Core2D.Controls.Ruler.csproj" />
     <ProjectReference Include="..\Core2D.Modules.ScriptRunner\Core2D.Modules.ScriptRunner.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Serializer\Core2D.Modules.Serializer.csproj" />
     <ProjectReference Include="..\Core2D.Modules.SvgExporter\Core2D.Modules.SvgExporter.csproj" />
