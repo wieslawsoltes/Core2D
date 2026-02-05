@@ -40,6 +40,7 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
     [AutoNotify] private ViewModelBase? _selected;
     [AutoNotify(IgnoreDataMember = true)] private ISet<BaseShapeViewModel>? _selectedShapes;
     [AutoNotify(IgnoreDataMember = true)] private BaseShapeViewModel? _hoveredShape;
+    private bool _isSelectionSyncing;
 
     public ProjectContainerViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
@@ -115,6 +116,10 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
             {
                 SetSelected(Selected);
             }
+            else if (e.PropertyName == nameof(SelectedShapes))
+            {
+                SyncSelectedFromShapes();
+            }
         };
     }
 
@@ -187,6 +192,28 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
 
             if (container is { } && layer is { })
             {
+                var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
+                if (document is { } && CurrentDocument != document)
+                {
+                    Debug.WriteLine($"  [CurrentDocument] {document.Name}");
+                    CurrentDocument = document;
+                }
+
+                if (document is { IsExpanded: false })
+                {
+                    document.IsExpanded = true;
+                }
+
+                if (container is { IsExpanded: false })
+                {
+                    container.IsExpanded = true;
+                }
+
+                if (layer is { IsExpanded: false })
+                {
+                    layer.IsExpanded = true;
+                }
+
                 if (container.CurrentLayer != layer)
                 {
                     Debug.WriteLine($"  [CurrentLayer] {layer.Name}");
@@ -199,9 +226,18 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
                     CurrentContainer = container;
                     CurrentContainer.InvalidateLayer();
                 }
+
+                if (container is PageContainerViewModel pageContainer)
+                {
+                    ServiceProvider.GetService<ProjectEditorViewModel>()?.OpenPage(pageContainer);
+                }
             }
 
-            // SelectedShapes = new HashSet<BaseShapeViewModel>() { shape };
+            if (!_isSelectionSyncing)
+            {
+                var selectionService = ServiceProvider.GetService<ISelectionService>();
+                selectionService?.Select(layer, shape);
+            }
         }
         else if (value is LayerContainerViewModel layer)
         {
@@ -211,6 +247,13 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
 
             if (container is { })
             {
+                var document = _documents.FirstOrDefault(d => d.Pages.Contains(container));
+                if (document is { } && CurrentDocument != document)
+                {
+                    Debug.WriteLine($"  [CurrentDocument] {document.Name}");
+                    CurrentDocument = document;
+                }
+
                 if (container.CurrentLayer != layer)
                 {
                     Debug.WriteLine($"  [CurrentLayer] {layer.Name}");
@@ -222,6 +265,11 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
                     Debug.WriteLine($"  [CurrentContainer] {container.Name}");
                     CurrentContainer = container;
                     CurrentContainer.InvalidateLayer();
+                }
+
+                if (container is PageContainerViewModel pageContainer)
+                {
+                    ServiceProvider.GetService<ProjectEditorViewModel>()?.OpenPage(pageContainer);
                 }
             }
         }
@@ -271,6 +319,33 @@ public partial class ProjectContainerViewModel : BaseContainerViewModel, ISelect
             {
                 ServiceProvider.GetService<ProjectEditorViewModel>()?.OpenPage(page);
             }
+        }
+    }
+
+    private void SyncSelectedFromShapes()
+    {
+        if (_isSelectionSyncing)
+        {
+            return;
+        }
+
+        _isSelectionSyncing = true;
+        try
+        {
+            BaseShapeViewModel? shape = null;
+            if (SelectedShapes is { Count: 1 })
+            {
+                shape = SelectedShapes.FirstOrDefault();
+            }
+
+            if (!ReferenceEquals(Selected, shape))
+            {
+                Selected = shape;
+            }
+        }
+        finally
+        {
+            _isSelectionSyncing = false;
         }
     }
 
