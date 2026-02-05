@@ -3,10 +3,6 @@
 
 #nullable enable
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
 using Avalonia.Controls;
 using Core2D.Editor;
 using Core2D.Model;
@@ -40,11 +36,20 @@ using Core2D.Modules.XamlExporter.Avalonia;
 using Core2D.Rendering;
 using Core2D.Services;
 using Core2D.ViewModels;
+using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Editor.Bounds;
+using Core2D.ViewModels.Editor.Bounds.Shapes;
+using Core2D.ViewModels.Editor.Tools;
+using Core2D.ViewModels.Editor.Tools.Path;
 using Core2D.ViewModels.Editor.Factories;
 using Core2D.ViewModels.Export;
+using Core2D.ViewModels.Path;
+using Core2D.ViewModels.Path.Segments;
+using Core2D.ViewModels.Scripting;
+using Core2D.ViewModels.Shapes;
+using Core2D.ViewModels.Style;
 using Core2D.ViewModels.Wizard.Export;
 using Core2D.ViewModels.Wizard.Export.Execution;
 using Core2D.ViewModels.Wizard.Export.Steps;
@@ -55,16 +60,6 @@ namespace Core2D;
 
 public static class AppModule
 {
-    private static readonly string[] s_viewModelNamespaces =
-    {
-        "Core2D.ViewModels.Containers",
-        "Core2D.ViewModels.Data",
-        "Core2D.ViewModels.Path",
-        "Core2D.ViewModels.Scripting",
-        "Core2D.ViewModels.Shapes",
-        "Core2D.ViewModels.Style"
-    };
-
     public static ServiceProvider CreateServiceProvider()
     {
         var services = new ServiceCollection();
@@ -76,8 +71,6 @@ public static class AppModule
         });
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Service registration intentionally scans assemblies at runtime.")]
-    [UnconditionalSuppressMessage("Trimming", "IL2066", Justification = "View model registration relies on reflection.")]
     public static void ConfigureServices(IServiceCollection services)
     {
         RegisterViewModels(services);
@@ -89,43 +82,55 @@ public static class AppModule
 
     private static void RegisterViewModels(IServiceCollection services)
     {
-        var assembly = typeof(ViewModelBase).GetTypeInfo().Assembly;
-        foreach (var type in assembly.GetTypes())
-        {
-            if (IsEligibleViewModel(type))
-            {
-                services.AddTransient(type);
-            }
-        }
-    }
+        // Containers
+        services.AddTransient(sp => new DocumentContainerViewModel(sp));
+        services.AddTransient(sp => new LayerContainerViewModel(sp));
+        services.AddTransient(sp => new LibraryViewModel(sp));
+        services.AddTransient(sp => new OptionsViewModel(sp));
+        services.AddTransient(sp => new PageContainerViewModel(sp));
+        services.AddTransient(sp => new ProjectContainerViewModel(sp));
+        services.AddTransient(sp => new TemplateContainerViewModel(sp));
 
-    private static bool IsEligibleViewModel(Type type)
-    {
-        if (!type.IsClass || type.IsAbstract || !type.IsPublic)
-        {
-            return false;
-        }
+        // Data
+        services.AddTransient(sp => new ColumnViewModel(sp));
+        services.AddTransient(sp => new DatabaseViewModel(sp));
+        services.AddTransient(sp => new PropertyViewModel(sp));
+        services.AddTransient(sp => new RecordViewModel(sp));
+        services.AddTransient(sp => new ValueViewModel(sp));
 
-        if (!type.Name.EndsWith("ViewModel", StringComparison.Ordinal))
-        {
-            return false;
-        }
+        // Path
+        services.AddTransient(sp => new PathFigureViewModel(sp));
+        services.AddTransient(sp => new PathSizeViewModel(sp));
+        services.AddTransient(sp => new ArcSegmentViewModel(sp));
+        services.AddTransient(sp => new CubicBezierSegmentViewModel(sp));
+        services.AddTransient(sp => new LineSegmentViewModel(sp));
+        services.AddTransient(sp => new QuadraticBezierSegmentViewModel(sp));
 
-        var ns = type.Namespace;
-        if (ns is null)
-        {
-            return false;
-        }
+        // Scripting
+        services.AddTransient(sp => new ScriptViewModel(sp));
 
-        foreach (var prefix in s_viewModelNamespaces)
-        {
-            if (ns.StartsWith(prefix, StringComparison.Ordinal))
-            {
-                return true;
-            }
-        }
+        // Shapes
+        services.AddTransient(sp => new ArcShapeViewModel(sp));
+        services.AddTransient(sp => new BlockShapeViewModel(sp));
+        services.AddTransient(sp => new CubicBezierShapeViewModel(sp));
+        services.AddTransient(sp => new EllipseShapeViewModel(sp));
+        services.AddTransient(sp => new ImageShapeViewModel(sp));
+        services.AddTransient(sp => new InsertShapeViewModel(sp));
+        services.AddTransient(sp => new LineShapeViewModel(sp));
+        services.AddTransient(sp => new PathShapeViewModel(sp));
+        services.AddTransient(sp => new PointShapeViewModel(sp));
+        services.AddTransient(sp => new QuadraticBezierShapeViewModel(sp));
+        services.AddTransient(sp => new RectangleShapeViewModel(sp));
+        services.AddTransient(sp => new TextShapeViewModel(sp));
+        services.AddTransient(sp => new WireShapeViewModel(sp));
 
-        return false;
+        // Style
+        services.AddTransient(sp => new ArgbColorViewModel(sp));
+        services.AddTransient(sp => new ArrowStyleViewModel(sp));
+        services.AddTransient(sp => new FillStyleViewModel(sp));
+        services.AddTransient(sp => new ShapeStyleViewModel(sp));
+        services.AddTransient(sp => new StrokeStyleViewModel(sp));
+        services.AddTransient(sp => new TextStyleViewModel(sp));
     }
 
     private static void RegisterEditorServices(IServiceCollection services)
@@ -150,33 +155,57 @@ public static class AppModule
         services.AddSingleton<IContainerFactory, ContainerFactory>();
         services.AddSingleton<IShapeFactory, ShapeFactory>();
 
-        RegisterAssemblyTypes(
-            services,
-            typeof(IEditorTool).GetTypeInfo().Assembly,
-            type => type.Namespace is not null && type.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools", StringComparison.Ordinal),
-            ServiceLifetime.Singleton,
-            includeSelf: true,
-            typeof(IEditorTool));
-
-        RegisterAssemblyTypes(
-            services,
-            typeof(IPathTool).GetTypeInfo().Assembly,
-            type => type.Namespace is not null && type.Namespace.StartsWith("Core2D.ViewModels.Editor.Tools.Path", StringComparison.Ordinal),
-            ServiceLifetime.Singleton,
-            includeSelf: true,
-            typeof(IPathTool));
+        RegisterEditorTools(services);
+        RegisterPathTools(services);
 
         services.AddSingleton<IHitTest, HitTest>();
 
-        RegisterAssemblyTypes(
-            services,
-            typeof(IBounds).GetTypeInfo().Assembly,
-            type => type.Namespace is not null && type.Namespace.StartsWith("Core2D.ViewModels.Editor.Bounds.Shapes", StringComparison.Ordinal),
-            ServiceLifetime.Singleton,
-            includeSelf: true,
-            typeof(IBounds));
+        RegisterBounds(services);
 
         services.AddSingleton<DataFlow>();
+    }
+
+    private static void RegisterEditorTools(IServiceCollection services)
+    {
+        RegisterEditorTool(services, sp => new NoneToolViewModel(sp));
+        RegisterEditorTool(services, sp => new SelectionToolViewModel(sp));
+        RegisterEditorTool(services, sp => new PointToolViewModel(sp));
+        RegisterEditorTool(services, sp => new LineToolViewModel(sp));
+        RegisterEditorTool(services, sp => new ArcToolViewModel(sp));
+        RegisterEditorTool(services, sp => new CubicBezierToolViewModel(sp));
+        RegisterEditorTool(services, sp => new QuadraticBezierToolViewModel(sp));
+        RegisterEditorTool(services, sp => new PathToolViewModel(sp));
+        RegisterEditorTool(services, sp => new RectangleToolViewModel(sp));
+        RegisterEditorTool(services, sp => new EllipseToolViewModel(sp));
+        RegisterEditorTool(services, sp => new TextToolViewModel(sp));
+        RegisterEditorTool(services, sp => new ImageToolViewModel(sp));
+        RegisterEditorTool(services, sp => new WireToolViewModel(sp));
+    }
+
+    private static void RegisterPathTools(IServiceCollection services)
+    {
+        RegisterPathTool(services, sp => new LinePathToolViewModel(sp));
+        RegisterPathTool(services, sp => new ArcPathToolViewModel(sp));
+        RegisterPathTool(services, sp => new CubicBezierPathToolViewModel(sp));
+        RegisterPathTool(services, sp => new QuadraticBezierPathToolViewModel(sp));
+        RegisterPathTool(services, sp => new MovePathToolViewModel(sp));
+    }
+
+    private static void RegisterBounds(IServiceCollection services)
+    {
+        RegisterBoundsType(services, _ => new ArcBounds());
+        RegisterBoundsType(services, _ => new BlockBounds());
+        RegisterBoundsType(services, _ => new CubicBezierBounds());
+        RegisterBoundsType(services, _ => new EllipseBounds());
+        RegisterBoundsType(services, _ => new ImageBounds());
+        RegisterBoundsType(services, _ => new InsertBounds());
+        RegisterBoundsType(services, _ => new LineBounds());
+        RegisterBoundsType(services, _ => new PathBounds());
+        RegisterBoundsType(services, _ => new PointBounds());
+        RegisterBoundsType(services, _ => new QuadraticBezierBounds());
+        RegisterBoundsType(services, _ => new RectangleBounds());
+        RegisterBoundsType(services, _ => new TextBounds());
+        RegisterBoundsType(services, _ => new WireBounds());
     }
 
     private static void RegisterDependencies(IServiceCollection services)
@@ -227,12 +256,16 @@ public static class AppModule
         services.AddSingleton<IExportWizardTelemetry, ExportWizardTelemetry>();
         services.AddSingleton<ExportWizardContext>();
         services.AddSingleton<WizardNavigationService>();
-        RegisterWizardStep<ScopeWizardStepViewModel>(services);
-        RegisterWizardStep<ExporterWizardStepViewModel>(services);
-        RegisterWizardStep<SettingsWizardStepViewModel>(services);
-        RegisterWizardStep<DestinationWizardStepViewModel>(services);
-        RegisterWizardStep<ExecutionWizardStepViewModel>(services);
-        RegisterWizardStep<SummaryWizardStepViewModel>(services);
+        RegisterWizardStep(services, sp => new ScopeWizardStepViewModel(sp));
+        RegisterWizardStep(services, sp => new ExporterWizardStepViewModel(
+            sp,
+            sp.GetRequiredService<IExportOptionsCatalog>()));
+        RegisterWizardStep(services, sp => new SettingsWizardStepViewModel(sp));
+        RegisterWizardStep(services, sp => new DestinationWizardStepViewModel(sp));
+        RegisterWizardStep(services, sp => new ExecutionWizardStepViewModel(
+            sp,
+            sp.GetRequiredService<ExportJobRunner>()));
+        RegisterWizardStep(services, sp => new SummaryWizardStepViewModel(sp));
         services.AddTransient<ExportWizardViewModel>();
         services.AddTransient<ExportJobRunner>();
     }
@@ -250,57 +283,39 @@ public static class AppModule
         services.AddSingleton<Window>(sp => sp.GetRequiredService<MainWindow>());
     }
 
-    private static void RegisterWizardStep<TStep>(IServiceCollection services)
+    private static void RegisterWizardStep<TStep>(
+        IServiceCollection services,
+        Func<IServiceProvider, TStep> factory)
         where TStep : class, IWizardStepViewModel
     {
-        services.AddTransient<TStep>();
-        services.AddTransient<IWizardStepViewModel, TStep>();
+        services.AddTransient(factory);
+        services.AddTransient<IWizardStepViewModel>(sp => sp.GetRequiredService<TStep>());
     }
 
-    private static void RegisterAssemblyTypes(
+    private static void RegisterEditorTool<TTool>(
         IServiceCollection services,
-        Assembly assembly,
-        Func<Type, bool> predicate,
-        ServiceLifetime lifetime,
-        bool includeSelf,
-        params Type[] serviceTypes)
+        Func<IServiceProvider, TTool> factory)
+        where TTool : class, IEditorTool
     {
-        foreach (var type in assembly.GetTypes())
-        {
-            if (!type.IsClass || type.IsAbstract || !type.IsPublic || !predicate(type))
-            {
-                continue;
-            }
-
-            RegisterType(services, type, lifetime, includeSelf, serviceTypes);
-        }
+        services.AddSingleton(factory);
+        services.AddSingleton<IEditorTool>(sp => factory(sp));
     }
 
-    private static void RegisterType(
+    private static void RegisterPathTool<TTool>(
         IServiceCollection services,
-        Type implementationType,
-        ServiceLifetime lifetime,
-        bool includeSelf,
-        IReadOnlyCollection<Type> serviceTypes)
+        Func<IServiceProvider, TTool> factory)
+        where TTool : class, IPathTool
     {
-        var registered = false;
-        foreach (var serviceType in serviceTypes)
-        {
-            if (serviceType.IsAssignableFrom(implementationType))
-            {
-                services.Add(new ServiceDescriptor(serviceType, implementationType, lifetime));
-                registered = true;
-            }
-        }
+        services.AddSingleton(factory);
+        services.AddSingleton<IPathTool>(sp => factory(sp));
+    }
 
-        if (includeSelf)
-        {
-            services.Add(new ServiceDescriptor(implementationType, implementationType, lifetime));
-        }
-
-        if (!registered && serviceTypes.Count > 0)
-        {
-            // Keep behavior aligned with Autofac: skip interface registrations for incompatible types.
-        }
+    private static void RegisterBoundsType<TBounds>(
+        IServiceCollection services,
+        Func<IServiceProvider, TBounds> factory)
+        where TBounds : class, IBounds
+    {
+        services.AddSingleton(factory);
+        services.AddSingleton<IBounds>(sp => factory(sp));
     }
 }
