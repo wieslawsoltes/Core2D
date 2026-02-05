@@ -30,9 +30,6 @@
     <Setter Property="FontWeight" Value="Normal" />
     <Setter Property="Padding" Value="6,0,6,0" />
   </Style>
-  <Style Selector="TreeView">
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
-  </Style>
   <Style Selector="DataGridColumnHeader">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" />
   </Style>
@@ -52,7 +49,7 @@
 
   <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
   <StyleInclude Source="avares://Dock.Avalonia.Themes.Fluent/DockFluentTheme.axaml" />
-  <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+  <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.v2.xaml" />
   <StyleInclude Source="avares://Core2D/Styles/Geometry.axaml" />
   <StyleInclude Source="avares://Core2D/Styles/Icons.axaml" />
   <StyleInclude Source="avares://Core2D/Styles/Dock.axaml" />

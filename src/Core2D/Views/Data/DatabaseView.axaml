@@ -6,6 +6,7 @@
              xmlns:app="using:Core2D"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:behaviors="using:Core2D.Behaviors"
              xmlns:vmdt="using:Core2D.ViewModels.Data"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
@@ -19,8 +20,7 @@
               ColumnDefinitions="*,Auto" 
               Margin="{DynamicResource ContentMargin}" 
               DockPanel.Dock="Top">
-          <TextBox x:Name="FilterRecordsTextBox" 
-                   Text="" 
+          <TextBox Text="{Binding RecordFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                    Watermark="Filter records" 
                    BorderBrush="Transparent"
                    Background="Transparent" 
@@ -60,11 +60,12 @@
                   IsReadOnly="False" 
                   CanUserReorderColumns="False"
                   CanUserResizeColumns="True" 
-                  CanUserSortColumns="False" 
+                  CanUserSortColumns="True" 
                   BorderThickness="0" 
                   RowBackground="Transparent">
           <i:Interaction.Behaviors>
             <idd:TypedDragBehavior DataType="{x:Type vmdt:RecordViewModel}" />
+            <behaviors:DatabaseRecordsGridBehavior />
           </i:Interaction.Behaviors>
           <DataGrid.KeyBindings>
             <KeyBinding Command="{Binding AddRecord}"
@@ -82,34 +83,46 @@
     </TabItem>
     <TabItem Header="Columns">
         <DockPanel>
-          <StackPanel Orientation="Horizontal" 
-                      HorizontalAlignment="Right" 
-                      VerticalAlignment="Center"
-                      DockPanel.Dock="Top">
-            <Button Content="&#727;" 
-                    Command="{Binding RemoveColumn}"
-                    CommandParameter="{Binding #ColumnsDataGrid.SelectedItem}" 
-                    BorderBrush="Transparent"
-                    Background="Transparent" Padding="12,4,12,4" />
-            <Button Content="+" 
-                    Command="{Binding AddColumn}"
-                    CommandParameter="{Binding}" 
-                    BorderBrush="Transparent"
-                    Background="Transparent" 
-                    Padding="12,4,12,4" />
-          </StackPanel>
+          <Grid RowDefinitions="*" 
+                ColumnDefinitions="*,Auto" 
+                Margin="{DynamicResource ContentMargin}"
+                DockPanel.Dock="Top">
+            <TextBox Text="{Binding ColumnFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     Watermark="Filter columns" 
+                     BorderBrush="Transparent"
+                     Background="Transparent" 
+                     VerticalAlignment="Center" 
+                     Margin="0,0,0,0" 
+                     Grid.Column="0" />
+            <StackPanel Grid.Column="1" 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Center">
+              <Button Content="&#727;" 
+                      Command="{Binding RemoveColumn}"
+                      CommandParameter="{Binding #ColumnsDataGrid.SelectedItem}" 
+                      BorderBrush="Transparent"
+                      Background="Transparent" Padding="12,4,12,4" />
+              <Button Content="+" 
+                      Command="{Binding AddColumn}"
+                      CommandParameter="{Binding}" 
+                      BorderBrush="Transparent"
+                      Background="Transparent" 
+                      Padding="12,4,12,4" />
+            </StackPanel>
+          </Grid>
           <DataGrid x:Name="ColumnsDataGrid" 
-                    ItemsSource="{Binding Columns}" 
                     SelectionMode="Single"
                     AutoGenerateColumns="False" 
                     IsReadOnly="False" 
                     CanUserReorderColumns="False"
                     CanUserResizeColumns="True" 
-                    CanUserSortColumns="False" 
+                    CanUserSortColumns="True" 
                     BorderThickness="0"
                     RowBackground="Transparent">
             <i:Interaction.Behaviors>
               <idd:TypedDragBehavior DataType="{x:Type vmdt:ColumnViewModel}" />
+              <behaviors:DatabaseColumnsGridBehavior />
             </i:Interaction.Behaviors>
             <DataGrid.KeyBindings>
               <KeyBinding Command="{Binding AddColumn}" 
@@ -119,17 +132,6 @@
                           CommandParameter="{Binding #ColumnsDataGrid.SelectedItem}" 
                           Gesture="Delete" />
             </DataGrid.KeyBindings>
-            <DataGrid.Columns>
-              <DataGridTextColumn Header="Name"
-                                  IsReadOnly="False"
-                                  Binding="{Binding Name}" />
-              <DataGridCheckBoxColumn Header="IsVisible" 
-                                      Binding="{Binding IsVisible}"
-                                      x:DataType="vmdt:ColumnViewModel" />
-              <DataGridTextColumn Header="Owner" 
-                                  Binding="{Binding Owner.Name, FallbackValue={x:Null}}" 
-                                  IsReadOnly="True" />
-            </DataGrid.Columns>
           </DataGrid>
         </DockPanel>
     </TabItem>

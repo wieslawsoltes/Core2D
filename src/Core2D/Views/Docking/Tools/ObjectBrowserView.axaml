@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:app="using:Core2D"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:behaviors="using:Core2D.Behaviors"
+             xmlns:dgh="using:Avalonia.Controls.DataGridHierarchical"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools"
              xmlns:core="using:Core2D.ViewModels"
@@ -27,114 +30,99 @@
   </UserControl.Resources>
   <Panel DataContext="{Binding Context}">
     <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}" x:DataType="vme:ProjectEditorViewModel">
-      <TreeView x:Name="ProjectTreeView">
-        <TreeView.KeyBindings>
-          <KeyBinding Command="{Binding ExportCommand}" 
-                      CommandParameter="{Binding #ProjectTreeView.SelectedItem}" 
+      <DataGrid x:Name="ProjectDataGrid"
+                SelectionMode="Single"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="True"
+                CanUserSortColumns="True"
+                HeadersVisibility="None"
+                GridLinesVisibility="None"
+                BorderThickness="0"
+                RowBackground="Transparent">
+        <i:Interaction.Behaviors>
+          <behaviors:ObjectBrowserGridBehavior />
+        </i:Interaction.Behaviors>
+        <DataGrid.KeyBindings>
+          <KeyBinding Command="{Binding ExportCommand}"
+                      CommandParameter="{Binding #ProjectDataGrid.SelectedItem}"
                       Gesture="{app:PlatformGesture Text=Primary+E}"
-                      x:DataType="core:ViewModelBase"/>
-        </TreeView.KeyBindings>
-        <TreeView.Styles>
-          <Style Selector="TreeViewItem">
-            <Setter Property="IsExpanded" Value="False" />
-          </Style>
-        </TreeView.Styles>
-        <TreeView.DataTemplates>
-          <TreeDataTemplate DataType="vmc:LibraryViewModel" 
-                            ItemsSource="{Binding Items, FallbackValue={x:Null}}"
-                            x:DataType="vmc:LibraryViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" 
-                            ItemsSource="{Binding Pages}"
-                            x:DataType="vmc:DocumentContainerViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmc:PageContainerViewModel" 
-                            ItemsSource="{Binding Layers}"
-                            x:DataType="vmc:PageContainerViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmc:TemplateContainerViewModel"
-                            ItemsSource="{Binding Layers}"
-                            x:DataType="vmc:TemplateContainerViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmc:LayerContainerViewModel" 
-                            ItemsSource="{Binding Shapes}"
-                            x:DataType="vmc:LayerContainerViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </TreeDataTemplate>
-          <TreeDataTemplate DataType="vms:BlockShapeViewModel" 
-                            ItemsSource="{Binding Shapes}"
-                            x:DataType="vms:BlockShapeViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </TreeDataTemplate>
-          <TreeDataTemplate DataType="vms:PathShapeViewModel" 
-                            ItemsSource="{Binding Figures, FallbackValue={x:Null}}"
-                            x:DataType="vms:PathShapeViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </TreeDataTemplate>
-          <TreeDataTemplate DataType="vmp:PathFigureViewModel" 
-                            ItemsSource="{Binding Segments, FallbackValue={x:Null}}"
-                            x:DataType="vmp:PathFigureViewModel">
-            <c:EditableItem TextBinding="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </TreeDataTemplate>
-          <DataTemplate DataType="vms:BaseShapeViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </DataTemplate>
-          <DataTemplate DataType="vmst:ShapeStyleViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </DataTemplate>
-          <DataTemplate DataType="vmdt:DatabaseViewModel">
-            <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </DataTemplate>
-          <DataTemplate DataType="core:ViewModelBase">
-            <c:EditableItem TextBinding="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}" 
-                            ContextMenu="{StaticResource ExportContextMenu}"/>
-          </DataTemplate>
-        </TreeView.DataTemplates>
-        <TreeViewItem Header="{Binding Name}" 
-                      ContextMenu="{StaticResource ExportContextMenu}" 
-                      DataContext="{Binding Project}" 
-                      IsExpanded="True">
-          <TreeViewItem Header="Styles" 
-                        ContextMenu="{StaticResource ExportContextMenu}" 
-                        DataContext="{Binding StyleLibraries}" 
-                        ItemsSource="{Binding}"/>
-          <TreeViewItem Header="Blocks" 
-                        ContextMenu="{StaticResource ExportContextMenu}" 
-                        DataContext="{Binding GroupLibraries}" 
-                        ItemsSource="{Binding}"/>
-          <TreeViewItem Header="Databases" 
-                        ContextMenu="{StaticResource ExportContextMenu}" 
-                        DataContext="{Binding Databases}" 
-                        ItemsSource="{Binding}"/>
-          <TreeViewItem Header="Templates" 
-                        ContextMenu="{StaticResource ExportContextMenu}" 
-                        DataContext="{Binding Templates}" 
-                        ItemsSource="{Binding}"/>
-          <TreeViewItem Header="Scripts" 
-                        ContextMenu="{StaticResource ExportContextMenu}" 
-                        DataContext="{Binding Scripts}" 
-                        ItemsSource="{Binding}"/>
-          <TreeViewItem Header="Documents" 
-                        ContextMenu="{StaticResource ExportContextMenu}"
-                        DataContext="{Binding Documents}" 
-                        ItemsSource="{Binding}"/>
-        </TreeViewItem>
-      </TreeView>
+                      x:DataType="core:ViewModelBase" />
+        </DataGrid.KeyBindings>
+      <DataGrid.Resources>
+        <DataTemplate x:Key="ObjectBrowserCellTemplate"
+                      x:DataType="x:Object">
+          <ContentPresenter Content="{Binding}" />
+        </DataTemplate>
+      </DataGrid.Resources>
+      <DataGrid.DataTemplates>
+        <DataTemplate DataType="vme:ObjectBrowserNode"
+                      x:DataType="vme:ObjectBrowserNode">
+          <TextBlock Text="{Binding Title}" FontWeight="SemiBold" />
+        </DataTemplate>
+        <DataTemplate DataType="vmc:LibraryViewModel"
+                      x:DataType="vmc:LibraryViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vmc:DocumentContainerViewModel"
+                      x:DataType="vmc:DocumentContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vmc:PageContainerViewModel"
+                      x:DataType="vmc:PageContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vmc:TemplateContainerViewModel"
+                      x:DataType="vmc:TemplateContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vmc:LayerContainerViewModel"
+                      x:DataType="vmc:LayerContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vms:BlockShapeViewModel"
+                      x:DataType="vms:BlockShapeViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vms:PathShapeViewModel"
+                      x:DataType="vms:PathShapeViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vmp:PathFigureViewModel"
+                      x:DataType="vmp:PathFigureViewModel">
+          <c:EditableItem TextBinding="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vms:BaseShapeViewModel"
+                      x:DataType="vms:BaseShapeViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vmst:ShapeStyleViewModel"
+                      x:DataType="vmst:ShapeStyleViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vmdt:DatabaseViewModel"
+                      x:DataType="vmdt:DatabaseViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="core:ViewModelBase"
+                      x:DataType="core:ViewModelBase">
+          <c:EditableItem TextBinding="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
+                          ContextMenu="{StaticResource ExportContextMenu}" />
+        </DataTemplate>
+      </DataGrid.DataTemplates>
+      </DataGrid>
     </Panel>
   </Panel>
 </UserControl>

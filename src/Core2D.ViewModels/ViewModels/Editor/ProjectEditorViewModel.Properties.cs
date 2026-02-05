@@ -44,6 +44,7 @@ public partial class ProjectEditorViewModel
     private readonly Lazy<IProjectEditorPlatform?>? _platform;
     private readonly Lazy<IEditorCanvasPlatform?>? _canvasPlatform;
     private readonly Lazy<StyleEditorViewModel?>? _styleEditor;
+    private readonly ObjectBrowserState _objectBrowserState = new();
 
     public ImmutableArray<IEditorTool> Tools => _tools.Value;
 
@@ -80,6 +81,8 @@ public partial class ProjectEditorViewModel
     public IEditorCanvasPlatform? CanvasPlatform => _canvasPlatform?.Value;
 
     public StyleEditorViewModel? StyleEditor => _styleEditor?.Value;
+
+    public ObjectBrowserState ObjectBrowserState => _objectBrowserState;
 
     public Action<string>? NavigateTo { get; set; }
 }

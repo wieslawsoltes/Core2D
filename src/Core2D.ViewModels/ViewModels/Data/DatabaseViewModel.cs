@@ -21,6 +21,8 @@ public partial class DatabaseViewModel : ViewModelBase
     [AutoNotify] private ImmutableArray<ColumnViewModel> _columns;
     [AutoNotify] private ImmutableArray<RecordViewModel> _records;
     [AutoNotify] private RecordViewModel? _currentRecord;
+    [AutoNotify(IgnoreDataMember = true)] private string? _recordFilterText;
+    [AutoNotify(IgnoreDataMember = true)] private string? _columnFilterText;
 
     public DatabaseViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {

@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:behaviors="using:Core2D.Behaviors"
+             xmlns:dgh="using:Avalonia.Controls.DataGridHierarchical"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
              xmlns:vmp="using:Core2D.ViewModels.Path"
@@ -31,28 +34,42 @@
       </StackPanel>
     </TabItem>
     <TabItem Header="Figures">
-      <TreeView x:Name="FiguresTreeView" 
-                ItemsSource="{Binding Figures}">
-        <TreeView.Styles>
-          <Style Selector="TreeViewItem">
-            <Setter Property="IsExpanded" Value="False" />
-          </Style>
-        </TreeView.Styles>
-        <TreeView.DataTemplates>
-          <TreeDataTemplate DataType="vmp:PathFigureViewModel" 
-                            ItemsSource="{Binding Segments}">
-            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                       Background="Transparent" />
-          </TreeDataTemplate>
-          <DataTemplate DataType="vmp:PathSegmentViewModel">
+      <DataGrid x:Name="FiguresDataGrid"
+                SelectionMode="Single"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                CanUserReorderColumns="False"
+                CanUserResizeColumns="True"
+                CanUserSortColumns="True"
+                HeadersVisibility="None"
+                GridLinesVisibility="None"
+                BorderThickness="0"
+                RowBackground="Transparent">
+        <i:Interaction.Behaviors>
+          <behaviors:PathFiguresGridBehavior />
+        </i:Interaction.Behaviors>
+        <DataGrid.Resources>
+          <DataTemplate x:Key="PathFiguresCellTemplate"
+                        x:DataType="x:Object">
+            <ContentPresenter Content="{Binding}" />
+          </DataTemplate>
+        </DataGrid.Resources>
+        <DataGrid.DataTemplates>
+          <DataTemplate DataType="vmp:PathFigureViewModel"
+                        x:DataType="vmp:PathFigureViewModel">
             <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
                        Background="Transparent" />
           </DataTemplate>
-        </TreeView.DataTemplates>
-      </TreeView>
+          <DataTemplate DataType="vmp:PathSegmentViewModel"
+                        x:DataType="vmp:PathSegmentViewModel">
+            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
+                       Background="Transparent" />
+          </DataTemplate>
+        </DataGrid.DataTemplates>
+      </DataGrid>
     </TabItem>
     <TabItem Header="Selected Figure">
-      <ContentControl Content="{Binding #FiguresTreeView.SelectedItem}" />
+      <ContentControl Content="{Binding #FiguresDataGrid.SelectedItem}" />
     </TabItem>
   </TabControl>
 </UserControl>

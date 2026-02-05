@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:behaviors="using:Core2D.Behaviors"
+             xmlns:dgh="using:Avalonia.Controls.DataGridHierarchical"
              xmlns:vm="using:Core2D.ViewModels.Wizard.Export"
              xmlns:steps="using:Core2D.ViewModels.Wizard.Export.Steps"
              xmlns:exporters="using:Core2D.ViewModels.Wizard.Export.Exporters"
@@ -19,17 +22,35 @@
   <UserControl.DataTemplates>
     <DataTemplate DataType="steps:ScopeWizardStepViewModel">
       <Border Padding="12">
-        <TreeView ItemsSource="{Binding Nodes}">
-          <TreeView.ItemTemplate>
-            <TreeDataTemplate ItemsSource="{Binding Children}"
-                              x:DataType="scopes:ExportScopeNodeViewModel">
+        <DataGrid SelectionMode="Single"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="True"
+                  HeadersVisibility="None"
+                  GridLinesVisibility="None"
+                  BorderThickness="0"
+                  RowBackground="Transparent">
+          <i:Interaction.Behaviors>
+            <behaviors:ExportScopeGridBehavior />
+          </i:Interaction.Behaviors>
+          <DataGrid.Resources>
+            <DataTemplate x:Key="ExportScopeCellTemplate"
+                          x:DataType="x:Object">
+              <ContentPresenter Content="{Binding}" />
+            </DataTemplate>
+          </DataGrid.Resources>
+          <DataGrid.DataTemplates>
+            <DataTemplate DataType="scopes:ExportScopeNodeViewModel"
+                          x:DataType="scopes:ExportScopeNodeViewModel">
               <StackPanel Orientation="Horizontal" Spacing="6">
                 <CheckBox IsChecked="{Binding IsSelected}" />
                 <TextBlock Text="{Binding Title}" />
               </StackPanel>
-            </TreeDataTemplate>
-          </TreeView.ItemTemplate>
-        </TreeView>
+            </DataTemplate>
+          </DataGrid.DataTemplates>
+        </DataGrid>
       </Border>
     </DataTemplate>
     <DataTemplate DataType="steps:ExporterWizardStepViewModel">

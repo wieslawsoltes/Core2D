@@ -4,6 +4,8 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.VisualTree;
@@ -14,7 +16,7 @@ using Core2D.ViewModels.Shapes;
 
 namespace Core2D.Behaviors.DragAndDrop;
 
-public class ProjectTreeViewDropHandler : DefaultDropHandler
+public class ProjectDataGridDropHandler : DefaultDropHandler
 {
     private bool IsContainer(object? source)
     {
@@ -213,12 +215,13 @@ public class ProjectTreeViewDropHandler : DefaultDropHandler
         return false;
     }
 
-    private bool ValidateContainer(TreeView treeView, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute)
+    private bool ValidateContainer(DataGrid dataGrid, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute)
     {
+        var targetControl = GetTargetControl(dataGrid, e.GetPosition(dataGrid));
         if ((!IsContainer(sourceContext) && !(sourceContext is BaseShapeViewModel))
             || !(targetContext is ProjectContainerViewModel)
-            || !(treeView.GetVisualAt(e.GetPosition(treeView)) is Control targetControl)
-            || !(treeView.GetVisualRoot() is Control rootControl)
+            || targetControl is null
+            || !(dataGrid.GetVisualRoot() is Control rootControl)
             || !(rootControl.DataContext is ProjectEditorViewModel editor)
             || !(IsContainer(targetControl.DataContext)))
         {
@@ -250,20 +253,36 @@ public class ProjectTreeViewDropHandler : DefaultDropHandler
         return false;
     }
 
+    private static Control? GetTargetControl(DataGrid dataGrid, Point position)
+    {
+        var visual = dataGrid.GetVisualAt(position);
+        if (visual is null)
+        {
+            return null;
+        }
+
+        if (visual is DataGridRow row)
+        {
+            return row;
+        }
+
+        return visual.GetVisualAncestors().OfType<DataGridRow>().FirstOrDefault();
+    }
+
     public override bool Validate(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is Control && sender is TreeView treeView)
+        if (e.Source is Control && sender is DataGrid dataGrid)
         {
-            return ValidateContainer(treeView, e, sourceContext, targetContext, false);
+            return ValidateContainer(dataGrid, e, sourceContext, targetContext, false);
         }
         return false;
     }
 
     public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
     {
-        if (e.Source is Control && sender is TreeView treeView)
+        if (e.Source is Control && sender is DataGrid dataGrid)
         {
-            return ValidateContainer(treeView, e, sourceContext, targetContext, true);
+            return ValidateContainer(dataGrid, e, sourceContext, targetContext, true);
         }
         return false;
     }

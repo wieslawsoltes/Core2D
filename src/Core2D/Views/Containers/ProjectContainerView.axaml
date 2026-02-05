@@ -7,6 +7,8 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
+             xmlns:behaviors="using:Core2D.Behaviors"
+             xmlns:dgh="using:Avalonia.Controls.DataGridHierarchical"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
@@ -17,7 +19,7 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <UserControl.Resources>
-    <dd:ProjectTreeViewDropHandler x:Key="ProjectTreeViewDropHandler" />
+    <dd:ProjectDataGridDropHandler x:Key="ProjectDataGridDropHandler" />
     <ContextMenu x:Key="ProjectContainerContextMenu" x:DataType="vmc:ProjectContainerViewModel">
       <MenuItem Header="_Add Document" 
                 Command="{Binding AddDocument}"
@@ -156,77 +158,85 @@
                 Padding="12,4,12,4" />
       </StackPanel>
     </Grid>
-    <TreeView x:Name="DocumentsTreeView" SelectionMode="Multiple" 
-              ItemsSource="{Binding Documents}"
-              SelectedItem="{Binding Selected, Mode=TwoWay}" 
+    <DataGrid x:Name="DocumentsDataGrid"
+              SelectedItem="{Binding Selected, Mode=TwoWay}"
+              SelectionMode="Extended"
+              AutoGenerateColumns="False"
+              IsReadOnly="True"
+              CanUserReorderColumns="False"
+              CanUserResizeColumns="True"
+              CanUserSortColumns="True"
+              HeadersVisibility="None"
+              GridLinesVisibility="None"
+              BorderThickness="0"
+              RowBackground="Transparent"
               ContextMenu="{StaticResource ProjectContainerContextMenu}">
       <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}"
-                                 Handler="{StaticResource ProjectTreeViewDropHandler}" />
+                                 Handler="{StaticResource ProjectDataGridDropHandler}" />
+        <behaviors:ProjectDocumentsGridBehavior />
       </i:Interaction.Behaviors>
-      <TreeView.KeyBindings>
+      <DataGrid.KeyBindings>
         <KeyBinding Command="{Binding New}"
-                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
+                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
                     Gesture="{app:PlatformGesture Text=Primary+N}" />
         <KeyBinding Command="{Binding CutCommand}"
-                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
+                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
                     Gesture="{app:PlatformGesture Text=Primary+X}" />
         <KeyBinding Command="{Binding CopyCommand}"
-                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
+                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
                     Gesture="{app:PlatformGesture Text=Primary+C}" />
         <KeyBinding Command="{Binding PasteCommand}"
-                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
+                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
                     Gesture="{app:PlatformGesture Text=Primary+V}" />
         <KeyBinding Command="{Binding DeleteCommand}"
-                    CommandParameter="{Binding #DocumentsTreeView.SelectedItems}" 
+                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItems}"
                     Gesture="Delete" />
         <KeyBinding Command="{Binding ExportCommand}"
-                    CommandParameter="{Binding #DocumentsTreeView.SelectedItem}" 
+                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
                     Gesture="{app:PlatformGesture Text=Primary+E}" />
-      </TreeView.KeyBindings>
-      <TreeView.Styles>
-        <Style Selector="TreeViewItem">
-          <Setter Property="IsExpanded" 
-                  Value="{Binding IsExpanded, Mode=TwoWay, FallbackValue=False}" />
-        </Style>
-      </TreeView.Styles>
-      <TreeView.DataTemplates>
-        <TreeDataTemplate DataType="vmc:DocumentContainerViewModel" 
-                          ItemsSource="{Binding Pages}"
-                          x:DataType="vmc:DocumentContainerViewModel" >
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                          ContextMenu="{StaticResource DocumentContainerContextMenu}"/>
-        </TreeDataTemplate>
-        <TreeDataTemplate DataType="vmc:PageContainerViewModel" 
-                          ItemsSource="{Binding Layers}"
-                          x:DataType="vmc:PageContainerViewModel" >
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                          ContextMenu="{StaticResource PageContainerContextMenu}"/>
-        </TreeDataTemplate>
-        <TreeDataTemplate DataType="vmc:LayerContainerViewModel" 
-                          ItemsSource="{Binding Shapes}"
-                          x:DataType="vmc:LayerContainerViewModel" >
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+      </DataGrid.KeyBindings>
+      <DataGrid.Resources>
+        <DataTemplate x:Key="ProjectDocumentsCellTemplate"
+                      x:DataType="x:Object">
+          <ContentPresenter Content="{Binding}" />
+        </DataTemplate>
+      </DataGrid.Resources>
+      <DataGrid.DataTemplates>
+        <DataTemplate DataType="vmc:DocumentContainerViewModel"
+                      x:DataType="vmc:DocumentContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource DocumentContainerContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vmc:PageContainerViewModel"
+                      x:DataType="vmc:PageContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
+                          ContextMenu="{StaticResource PageContainerContextMenu}" />
+        </DataTemplate>
+        <DataTemplate DataType="vmc:LayerContainerViewModel"
+                      x:DataType="vmc:LayerContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
                           ContextMenu="{StaticResource LayerContainerContextMenu}">
             <c:EditableItem.IconContent>
-              <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" 
-                        MinWidth="0" 
+              <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}"
+                        MinWidth="0"
                         VerticalAlignment="Center" />
             </c:EditableItem.IconContent>
           </c:EditableItem>
-        </TreeDataTemplate>
-        <DataTemplate DataType="vms:BaseShapeViewModel" x:DataType="vms:BaseShapeViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
+        </DataTemplate>
+        <DataTemplate DataType="vms:BaseShapeViewModel"
+                      x:DataType="vms:BaseShapeViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
                           ContextMenu="{StaticResource BaseShapeContextMenu}">
             <c:EditableItem.IconContent>
-              <Image Source="{Binding Mode=OneWay, Converter={x:Static converters:BaseShapeIconConverter.Instance}}" 
+              <Image Source="{Binding Mode=OneWay, Converter={x:Static converters:BaseShapeIconConverter.Instance}}"
                      Width="16"
-                     Height="16" 
+                     Height="16"
                      Margin="8" />
             </c:EditableItem.IconContent>
           </c:EditableItem>
         </DataTemplate>
-      </TreeView.DataTemplates>
-    </TreeView>
+      </DataGrid.DataTemplates>
+    </DataGrid>
   </DockPanel>
 </UserControl>
