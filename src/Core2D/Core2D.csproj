@@ -12,6 +12,7 @@
     <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
     <RootNamespace>Core2D</RootNamespace>
     <StaticViewLocatorViewModelNamespacePrefixes>Core2D.ViewModels</StaticViewLocatorViewModelNamespacePrefixes>
+    <StaticViewLocatorIncludeReferencedAssemblies>true</StaticViewLocatorIncludeReferencedAssemblies>
   </PropertyGroup>
 
   <PropertyGroup>
