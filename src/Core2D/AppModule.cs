@@ -298,7 +298,7 @@ public static class AppModule
         where TTool : class, IEditorTool
     {
         services.AddSingleton(factory);
-        services.AddSingleton<IEditorTool>(sp => factory(sp));
+        services.AddSingleton<IEditorTool>(sp => sp.GetRequiredService<TTool>());
     }
 
     private static void RegisterPathTool<TTool>(
@@ -307,7 +307,7 @@ public static class AppModule
         where TTool : class, IPathTool
     {
         services.AddSingleton(factory);
-        services.AddSingleton<IPathTool>(sp => factory(sp));
+        services.AddSingleton<IPathTool>(sp => sp.GetRequiredService<TTool>());
     }
 
     private static void RegisterBoundsType<TBounds>(
@@ -316,6 +316,6 @@ public static class AppModule
         where TBounds : class, IBounds
     {
         services.AddSingleton(factory);
-        services.AddSingleton<IBounds>(sp => factory(sp));
+        services.AddSingleton<IBounds>(sp => sp.GetRequiredService<TBounds>());
     }
 }
