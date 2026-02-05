@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <IsPackable>False</IsPackable>
     <Nullable>enable</Nullable>
@@ -44,7 +44,6 @@
     <PackageReference Include="Avalonia" />
     <PackageReference Include="Avalonia.Themes.Fluent" />
     <PackageReference Include="Avalonia.Fonts.Inter" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" />
     <PackageReference Include="Avalonia.Diagnostics" Condition="'$(Configuration)' == 'Debug'" />
     <PackageReference Include="Avalonia.Skia" />
     <PackageReference Include="Avalonia.Desktop" />
@@ -52,7 +51,8 @@
     <PackageReference Include="PanAndZoom" />
     <PackageReference Include="ThemeEditor.Controls.ColorPicker" />
     <PackageReference Include="Dock.Avalonia" />
-    <PackageReference Include="Dock.Model.MVVM" />
+    <PackageReference Include="Dock.Model.ReactiveUI" />
+    <PackageReference Include="ProDataGrid" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="System.Drawing.Common" />
     <PackageReference Include="Newtonsoft.Json" />

@@ -1,0 +1,57 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/config/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="NuGet.Config" />
+  </Folder>
+  <Folder Name="/docs/">
+    <File Path="LICENSE.TXT" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/external/" />
+  <Folder Name="/external/ACadSharp/">
+    <Project Path="external/ACadSharp/src/ACadSharp/ACadSharp.csproj" />
+  </Folder>
+  <Folder Name="/external/PdfPig.Rendering.Skia/">
+    <Project Path="external/PdfPig.Rendering.Skia/UglyToad.PdfPig.Rendering.Skia/UglyToad.PdfPig.Rendering.Skia.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Core2D.Browser/Core2D.Browser.csproj" />
+    <Project Path="src/Core2D.Controls.Ruler/Core2D.Controls.Ruler.csproj" />
+    <Project Path="src/Core2D.Desktop/Core2D.Desktop.csproj" />
+    <Project Path="src/Core2D.Generators/Core2D.Generators.csproj" />
+    <Project Path="src/Core2D.Modules.FileSystem/Core2D.Modules.FileSystem.csproj" />
+    <Project Path="src/Core2D.Modules.FileWriter/Core2D.Modules.FileWriter.csproj" />
+    <Project Path="src/Core2D.Modules.Log/Core2D.Modules.Log.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.Avalonia/Core2D.Modules.Renderer.Avalonia.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.Common/Core2D.Modules.Renderer.Common.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.Dwg/Core2D.Modules.Renderer.Dwg.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.Dxf/Core2D.Modules.Renderer.Dxf.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.OpenXml/Core2D.Modules.Renderer.OpenXml.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.PdfSharp/Core2D.Modules.Renderer.PdfSharp.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.SkiaSharp/Core2D.Modules.Renderer.SkiaSharp.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.SparseStrips/Core2D.Modules.Renderer.SparseStrips.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.VelloSharp/Core2D.Modules.Renderer.VelloSharp.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.WinForms/Core2D.Modules.Renderer.WinForms.csproj" />
+    <Project Path="src/Core2D.Modules.Renderer.Wmf/Core2D.Modules.Renderer.Wmf.csproj" />
+    <Project Path="src/Core2D.Modules.ScriptRunner/Core2D.Modules.ScriptRunner.csproj" />
+    <Project Path="src/Core2D.Modules.Serializer/Core2D.Modules.Serializer.csproj" />
+    <Project Path="src/Core2D.Modules.SvgExporter/Core2D.Modules.SvgExporter.csproj" />
+    <Project Path="src/Core2D.Modules.TextFieldReader/Core2D.Modules.TextFieldReader.csproj" />
+    <Project Path="src/Core2D.Modules.TextFieldWriter/Core2D.Modules.TextFieldWriter.csproj" />
+    <Project Path="src/Core2D.Modules.XamlExporter/Core2D.Modules.XamlExporter.csproj" />
+    <Project Path="src/Core2D.Spatial/Core2D.Spatial.csproj" />
+    <Project Path="src/Core2D.ViewModels/Core2D.ViewModels.csproj" />
+    <Project Path="src/Core2D/Core2D.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Core2D.ViewModels.Tests/Core2D.ViewModels.Tests.csproj" />
+  </Folder>
+</Solution>

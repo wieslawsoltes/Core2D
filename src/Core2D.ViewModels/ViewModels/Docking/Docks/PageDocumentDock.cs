@@ -6,7 +6,7 @@ using System;
 using CommunityToolkit.Mvvm.Input;
 using Core2D.ViewModels.Docking.Documents;
 using Core2D.ViewModels.Editor;
-using Dock.Model.Mvvm.Controls;
+using Dock.Model.ReactiveUI.Controls;
 
 namespace Core2D.ViewModels.Docking.Docks;
 

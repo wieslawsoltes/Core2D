@@ -4,7 +4,8 @@
 #nullable enable
 using Core2D.ViewModels.Containers;
 using Dock.Model.Core;
-using Dock.Model.Mvvm.Controls;
+using Dock.Model.ReactiveUI.Controls;
+using ReactiveUI;
 
 namespace Core2D.ViewModels.Docking.Documents;
 
@@ -15,6 +16,6 @@ public class PageViewModel : Document
     public PageContainerViewModel? Page
     {
         get => _page;
-        set => SetProperty(ref _page, value);
+        set => this.RaiseAndSetIfChanged(ref _page, value);
     }
 }

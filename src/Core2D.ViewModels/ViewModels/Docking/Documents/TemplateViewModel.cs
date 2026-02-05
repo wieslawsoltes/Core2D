@@ -3,7 +3,8 @@
 
 #nullable enable
 using Core2D.ViewModels.Containers;
-using Dock.Model.Mvvm.Controls;
+using Dock.Model.ReactiveUI.Controls;
+using ReactiveUI;
 
 namespace Core2D.ViewModels.Docking.Documents;
 
@@ -14,6 +15,6 @@ public class TemplateViewModel : Document
     public TemplateContainerViewModel? Template
     {
         get => _template;
-        set => SetProperty(ref _template, value);
+        set => this.RaiseAndSetIfChanged(ref _template, value);
     }
 }

@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Core2D.ViewModels;
-using Dock.Model.Mvvm.Core;
+using Dock.Model.ReactiveUI.Core;
 using StaticViewLocator;
 
 namespace Core2D;

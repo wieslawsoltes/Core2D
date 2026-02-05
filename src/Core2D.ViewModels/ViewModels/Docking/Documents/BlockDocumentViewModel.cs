@@ -4,7 +4,8 @@
 #nullable enable
 using Core2D.ViewModels.Containers;
 using Core2D.ViewModels.Shapes;
-using Dock.Model.Mvvm.Controls;
+using Dock.Model.ReactiveUI.Controls;
+using ReactiveUI;
 
 namespace Core2D.ViewModels.Docking.Documents;
 
@@ -16,12 +17,12 @@ public class BlockDocumentViewModel : Document
     public BlockShapeViewModel? Group
     {
         get => _group;
-        set => SetProperty(ref _group, value);
+        set => this.RaiseAndSetIfChanged(ref _group, value);
     }
 
     public PageContainerViewModel? Container
     {
         get => _container;
-        set => SetProperty(ref _container, value);
+        set => this.RaiseAndSetIfChanged(ref _container, value);
     }
 }

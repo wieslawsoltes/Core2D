@@ -1,15 +1,15 @@
 ﻿<Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <AvaloniaVersion>11.3.7</AvaloniaVersion>
+    <AvaloniaVersion>11.3.11</AvaloniaVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Dock.Avalonia.Themes.Fluent" Version="11.3.6" />
+    <PackageVersion Include="Dock.Avalonia.Themes.Fluent" Version="11.3.11.5" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
     <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
     <PackageVersion Include="System.Collections.Immutable" Version="9.0.9" />
     <PackageVersion Include="System.IO.Compression" Version="4.3.0" />
-    <PackageVersion Include="System.Reactive" Version="6.0.2" />
+    <PackageVersion Include="System.Reactive" Version="6.1.0" />
     <PackageVersion Include="System.Text.Json" Version="9.0.9" />
     <PackageVersion Include="SkiaSharp" Version="3.119.1" />
     <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="3.119.1" />
@@ -19,7 +19,7 @@
     <PackageVersion Include="Avalonia.Markup.Xaml" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
-    <PackageVersion Include="Avalonia.Controls.DataGrid" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="ProDataGrid" Version="11.3.11-preview.5" />
     <PackageVersion Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" Condition="'$(Configuration)' == 'Debug'" />
     <PackageVersion Include="Avalonia.Skia" Version="$(AvaloniaVersion)" />
     <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
@@ -29,8 +29,8 @@
     <PackageVersion Include="Xaml.Behaviors.Avalonia" Version="11.3.6.1" />
     <PackageVersion Include="PanAndZoom" Version="11.3.6" />
     <PackageVersion Include="ThemeEditor.Controls.ColorPicker" Version="11.3.0" />
-    <PackageVersion Include="Dock.Avalonia" Version="11.3.6" />
-    <PackageVersion Include="Dock.Model.MVVM" Version="11.3.6" />
+    <PackageVersion Include="Dock.Avalonia" Version="11.3.11.5" />
+    <PackageVersion Include="Dock.Model.ReactiveUI" Version="11.3.11.5" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageVersion Include="netDXF.netstandard" Version="3.0.1" />
     <PackageVersion Include="PDFsharp" Version="6.2.1" />

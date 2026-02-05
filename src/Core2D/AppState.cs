@@ -15,7 +15,7 @@ using Core2D.ViewModels.Docking;
 using Core2D.ViewModels.Editor;
 using Dock.Model.Controls;
 using Dock.Model.Core;
-using Dock.Model.Mvvm.Controls;
+using Dock.Model.ReactiveUI.Controls;
 using MsServiceProvider = Microsoft.Extensions.DependencyInjection.ServiceProvider;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
