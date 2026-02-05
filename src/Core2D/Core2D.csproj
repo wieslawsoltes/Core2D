@@ -11,6 +11,7 @@
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
     <DisableImplicitNamespaceImports>True</DisableImplicitNamespaceImports>
     <RootNamespace>Core2D</RootNamespace>
+    <StaticViewLocatorViewModelNamespacePrefixes>Core2D.ViewModels</StaticViewLocatorViewModelNamespacePrefixes>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -56,14 +57,11 @@
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="System.Drawing.Common" />
     <PackageReference Include="Newtonsoft.Json" />
-    <PackageReference Include="StaticViewLocator">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core2D.Generators\Core2D.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="/Users/wieslawsoltes/GitHub/StaticViewLocator/StaticViewLocator/StaticViewLocator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Core2D.Spatial\Core2D.Spatial.csproj" />
     <ProjectReference Include="..\Core2D.ViewModels\Core2D.ViewModels.csproj" />
     <ProjectReference Include="..\Core2D.Modules.FileSystem\Core2D.Modules.FileSystem.csproj" />
