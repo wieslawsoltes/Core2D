@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using Autofac;
 using Core2D.Editor;
 using Core2D.Interfaces;
@@ -96,6 +97,19 @@ namespace Core2D.UI.Wpf
                     };
 
                 window.DataContext = editor;
+
+                if (Environment.GetEnvironmentVariable("CORE2D_LIBREWPF_SMOKE") == "1")
+                {
+                    window.Dispatcher.BeginInvoke(
+                        DispatcherPriority.ApplicationIdle,
+                        new Action(
+                            () =>
+                            {
+                                Console.WriteLine("Core2D LibreWPF macOS smoke succeeded.");
+                                window.Close();
+                            }));
+                }
+
                 window.ShowDialog();
             }
             catch (Exception ex)

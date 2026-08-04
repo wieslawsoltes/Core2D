@@ -44,20 +44,64 @@ namespace Core2D.UI.Wpf.Utilities
         /// <param name="translate">The translate function.</param>
         public WpfInputSource(UIElement source, UIElement relative, Func<Point, Point> translate)
         {
-            LeftDown = GetObservable(source, "PreviewMouseLeftButtonDown", relative, translate);
-            LeftUp = GetObservable(source, "PreviewMouseLeftButtonUp", relative, translate);
-            RightDown = GetObservable(source, "PreviewMouseRightButtonDown", relative, translate);
-            RightUp = GetObservable(source, "PreviewMouseRightButtonUp", relative, translate);
-            Move = GetObservable(source, "PreviewMouseMove", relative, translate);
+            LeftDown = GetObservable(
+                Observable.FromEvent<MouseButtonEventHandler, MouseButtonEventArgs>(
+                    handler => (sender, e) => handler(e),
+                    handler => source.PreviewMouseLeftButtonDown += handler,
+                    handler => source.PreviewMouseLeftButtonDown -= handler),
+                source,
+                relative,
+                translate);
+
+            LeftUp = GetObservable(
+                Observable.FromEvent<MouseButtonEventHandler, MouseButtonEventArgs>(
+                    handler => (sender, e) => handler(e),
+                    handler => source.PreviewMouseLeftButtonUp += handler,
+                    handler => source.PreviewMouseLeftButtonUp -= handler),
+                source,
+                relative,
+                translate);
+
+            RightDown = GetObservable(
+                Observable.FromEvent<MouseButtonEventHandler, MouseButtonEventArgs>(
+                    handler => (sender, e) => handler(e),
+                    handler => source.PreviewMouseRightButtonDown += handler,
+                    handler => source.PreviewMouseRightButtonDown -= handler),
+                source,
+                relative,
+                translate);
+
+            RightUp = GetObservable(
+                Observable.FromEvent<MouseButtonEventHandler, MouseButtonEventArgs>(
+                    handler => (sender, e) => handler(e),
+                    handler => source.PreviewMouseRightButtonUp += handler,
+                    handler => source.PreviewMouseRightButtonUp -= handler),
+                source,
+                relative,
+                translate);
+
+            Move = GetObservable(
+                Observable.FromEvent<MouseEventHandler, MouseEventArgs>(
+                    handler => (sender, e) => handler(e),
+                    handler => source.PreviewMouseMove += handler,
+                    handler => source.PreviewMouseMove -= handler),
+                source,
+                relative,
+                translate);
         }
 
-        private IObservable<InputArgs> GetObservable(UIElement target, string eventName, UIElement relative, Func<Point, Point> translate)
+        private static IObservable<InputArgs> GetObservable<TEventArgs>(
+            IObservable<TEventArgs> input,
+            UIElement target,
+            UIElement relative,
+            Func<Point, Point> translate)
+            where TEventArgs : MouseEventArgs
         {
-            return Observable.FromEventPattern<MouseEventArgs>(target, eventName).Select(
+            return input.Select(
                 e =>
                 {
                     target.Focus();
-                    var point = translate(e.EventArgs.GetPosition(relative));
+                    var point = translate(e.GetPosition(relative));
                     return new InputArgs(point.X, point.Y, GetModifier());
                 });
         }

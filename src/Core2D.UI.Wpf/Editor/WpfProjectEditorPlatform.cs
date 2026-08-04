@@ -1,12 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,7 +8,6 @@ using System.Windows;
 using Core2D.Containers;
 using Core2D.Data;
 using Core2D.Editor;
-using Core2D.FileWriter.Emf;
 using Core2D.Interfaces;
 using Core2D.Renderer;
 using Core2D.Shapes;
@@ -411,74 +404,12 @@ namespace Core2D.UI.Wpf.Editor
             }
         }
 
-        private void SetClipboard(MemoryStream ms)
-        {
-            var data = new DataObject();
-            data.SetData(DataFormats.EnhancedMetafile, ms);
-            Clipboard.SetDataObject(data, true);
-        }
-
-        private void SetClipboard(IEnumerable<IBaseShape> shapes, double width, double height, IImageCache ic)
-        {
-            using (var bitmap = new Bitmap((int)width, (int)height))
-            {
-                var writer = new EmfWriter(_serviceProvider);
-                using (var ms = writer.MakeMetafileStream(bitmap, shapes, ic))
-                {
-                    SetClipboard(ms);
-                }
-            }
-        }
-
-        private void SetClipboard(IPageContainer container, IImageCache ic)
-        {
-            var writer = new EmfWriter(_serviceProvider);
-            using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
-            {
-                using (var ms = writer.MakeMetafileStream(bitmap, container, ic))
-                {
-                    SetClipboard(ms);
-                }
-            }
-        }
-
         /// <inheritdoc/>
         public void OnCopyAsEmf(object item)
         {
-            try
-            {
-                var editor = _serviceProvider.GetService<IProjectEditor>();
-                var page = editor.Project?.CurrentContainer;
-    
-                var dataFlow = _serviceProvider.GetService<IDataFlow>();
-                var db = (object)page.Data.Properties;
-                var record = (object)page.Data.Record;
-
-                dataFlow.Bind(page.Template, db, record);
-                dataFlow.Bind(page, db, record);
-
-                if (page != null && page.Template != null && editor.Project is IImageCache imageChache)
-                {
-                    if (editor.Renderers[0]?.State?.SelectedShape != null)
-                    {
-                        var shapes = Enumerable.Repeat(editor.Renderers[0].State.SelectedShape, 1).ToList();
-                        SetClipboard(shapes, page.Template.Width, page.Template.Height, imageChache);
-                    }
-                    else if (editor.Renderers?[0]?.State?.SelectedShapes != null)
-                    {
-                        var shapes = editor.Renderers[0].State.SelectedShapes.ToList();
-                        SetClipboard(shapes, page.Template.Width, page.Template.Height, imageChache);
-                    }
-                    else
-                    {
-                        SetClipboard(page, imageChache);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _serviceProvider.GetService<ILog>()?.LogException(ex);
-            }
+            _serviceProvider.GetService<ILog>()?.LogException(
+                new PlatformNotSupportedException(
+                    "Enhanced Metafile clipboard export is unavailable on LibreWPF portable hosts."));
         }
 
         /// <inheritdoc/>

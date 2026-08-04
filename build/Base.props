@@ -12,7 +12,7 @@
     <PackageTags>2d;editor;data;diagram;graphics;geometry;data;shapes;wysiwyg-editor</PackageTags>
   </PropertyGroup>
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
@@ -35,9 +35,11 @@
     <CoreRT>True</CoreRT>
     <DefineConstants>$(DefineConstants);_CORERT;_CORERT_OSX_X64</DefineConstants>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'net10.0-windows'">
     <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
   </ItemGroup>
 </Project>

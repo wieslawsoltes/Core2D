@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="LibreWPF.Sdk/0.1.0-preview.41">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
     <UseWPF>True</UseWPF>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>

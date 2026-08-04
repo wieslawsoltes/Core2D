@@ -27,12 +27,33 @@ You can automate drawing and processing by using C# scripting.
 
 ## Supported Platforms
 
-* `Windows 7 SP1 or higher` using `Core2D.UI.Wpf` or `Core2D.UI.Avalonia` project.
+* `Windows` using the `Core2D.UI.Wpf` or `Core2D.UI.Avalonia` project.
 * `Linux` using `Core2D.UI.Avalonia` project.
-* `macOS` using `Core2D.UI.Avalonia` project.
+* `macOS` using the `Core2D.UI.Wpf` project through LibreWPF, or the `Core2D.UI.Avalonia` project.
 * `.NET Core` supported platforms using `Core2D.UI.Avalonia` project.
 
 The core libraries are portable and should work on all platforms where C# is supported.
+
+### LibreWPF on macOS
+
+The restored WPF application targets `.NET 10` and `LibreWPF.Sdk` `0.1.0-preview.41`.
+Its package source is the sibling LibreWPF checkout at
+`../wpf/artifacts/packages/Release/NonShipping`, as configured in `NuGet.Config`.
+
+Build and launch the application on macOS with:
+
+```sh
+./run-librewpf-macos.sh
+```
+
+Run the deterministic startup smoke check with:
+
+```sh
+CORE2D_LIBREWPF_SMOKE=1 ./run-librewpf-macos.sh
+```
+
+The legacy PDFsharp and Windows Enhanced Metafile paths are not registered in the
+portable WPF application. PDF and bitmap export continue through the SkiaSharp writers.
 
 ## Resources
 

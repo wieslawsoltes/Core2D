@@ -843,7 +843,7 @@ namespace Core2D.Renderer.Wpf
                     ci.TextInfo.IsRightToLeft ? W.FlowDirection.RightToLeft : W.FlowDirection.LeftToRight,
                     tf,
                     style.TextStyle.FontSize > 0.0 ? style.TextStyle.FontSize : double.Epsilon,
-                    stroke.Brush, null, WM.TextFormattingMode.Ideal);
+                    stroke.Brush, null, WM.TextFormattingMode.Ideal, 1.0);
 
                 if (style.TextStyle.FontStyle != null)
                 {
