@@ -1,4 +1,4 @@
-﻿<Project Sdk="LibreWPF.Sdk/0.1.0-preview.44">
+﻿<Project Sdk="LibreWPF.Sdk/0.1.0-preview.45">
 
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>

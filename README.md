@@ -36,7 +36,7 @@ The core libraries are portable and should work on all platforms where C# is sup
 
 ### LibreWPF on macOS
 
-The restored WPF application targets `.NET 10` and `LibreWPF.Sdk` `0.1.0-preview.44`.
+The restored WPF application targets `.NET 10` and `LibreWPF.Sdk` `0.1.0-preview.45`.
 Its package source is the sibling LibreWPF checkout at
 `../wpf/artifacts/packages/Release/NonShipping`, as configured in `NuGet.Config`.
 
