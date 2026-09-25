@@ -1,5 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ruler="clr-namespace:Core2D.Controls;assembly=Core2D.Controls.Ruler">
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -8,8 +9,7 @@
     </ResourceDictionary>
   </Styles.Resources>
 
-  <!-- Retain native input, validation and automation. Do not override TextBlock foreground:
-       template text must inherit the button/selection foreground for correct contrast. -->
+  <!-- Retain native input, validation and automation. Template text inherits its control foreground. -->
   <Style Selector=":is(TemplatedControl)">
     <Setter Property="FontSize" Value="12" />
   </Style>
@@ -107,13 +107,23 @@
     <Setter Property="CornerRadius" Value="6" />
     <Setter Property="Padding" Value="8,6" />
   </Style>
+  <Style Selector="ruler|Ruler">
+    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}" />
+    <Setter Property="TickBrush" Value="{DynamicResource StudioMutedBrush}" />
+    <Setter Property="TextBrush" Value="{DynamicResource StudioMutedBrush}" />
+    <Setter Property="AccentBrush" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="SelectionBrush" Value="{DynamicResource StudioAccentBrush}" />
+    <Setter Property="SelectionLabelBrush" Value="{DynamicResource StudioTextBrush}" />
+  </Style>
 
-  <!-- Dock keeps ownership of drag, resize, float, close, pin and saved-layout behavior. -->
+  <!-- Dock owns drag, resize, float, close, pin and persistence. Match derived tab item controls too. -->
   <Style Selector="DockControl">
     <Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}" />
   </Style>
   <Style Selector="ToolControl">
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
   </Style>
   <Style Selector="ToolControl /template/ DockPanel#PART_DockPanel">
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
@@ -121,20 +131,28 @@
   <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip">
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
   </Style>
-  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem">
+  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip :is(TabStripItem)">
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
-    <Setter Property="Padding" Value="10,7" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Padding" Value="8,6" />
     <Setter Property="FontSize" Value="11" />
   </Style>
-  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
+  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip :is(TabStripItem):selected">
     <Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioSelectionTextBrush}" />
     <Setter Property="FontWeight" Value="SemiBold" />
   </Style>
   <Style Selector="DocumentControl">
     <Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}" />
   </Style>
-  <Style Selector="DocumentControl /template/ TabStripItem">
+  <Style Selector="DocumentControl /template/ :is(TabStripItem)">
     <Setter Property="Padding" Value="12,7" />
     <Setter Property="FontSize" Value="12" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
+  </Style>
+  <Style Selector="DocumentControl /template/ :is(TabStripItem):selected">
+    <Setter Property="Foreground" Value="{DynamicResource StudioOnAccentBrush}" />
+    <Setter Property="Background" Value="{DynamicResource StudioAccentBrush}" />
   </Style>
 </Styles>

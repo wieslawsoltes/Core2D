@@ -46,13 +46,15 @@
     <Setter Property="Padding" Value="8" />
     <Setter Property="CornerRadius" Value="7" />
     <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
     <Setter Property="BorderBrush" Value="Transparent" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="Template">
       <ControlTemplate>
         <Border Name="PART_Surface" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
-          <Image Source="{TemplateBinding Icon}" Width="18" Height="18" Stretch="Uniform" />
+          <s:StudioGlyph Source="{TemplateBinding Icon}" Foreground="{TemplateBinding Foreground}"
+                         Width="18" Height="18" IsHitTestVisible="False" />
         </Border>
       </ControlTemplate>
     </Setter>

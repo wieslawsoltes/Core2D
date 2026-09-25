@@ -7,19 +7,22 @@
              xmlns:editor="using:Core2D.ViewModels.Editor"
              x:DataType="vm:ShapePropertiesViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}">
-    <ScrollViewer x:DataType="editor:ProjectEditorViewModel" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-      <StackPanel>
-        <s:StudioSection Header="Design" IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}">
+    <Grid x:DataType="editor:ProjectEditorViewModel">
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                    IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}">
+        <s:StudioSection Header="Design">
           <ContentControl Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
         </s:StudioSection>
-        <StackPanel Margin="20,28" Spacing="8" IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}">
-          <PathIcon Data="M1,1 L1,18 L6,13 L10,21 L13,19 L9,11 L16,11 Z" Width="24" Height="24"
-                    HorizontalAlignment="Left" Foreground="{DynamicResource StudioMutedBrush}" />
-          <TextBlock Text="Select an object" Classes="studio-title" />
-          <TextBlock Text="Inspect geometry and edit its properties here. Drawing tools are below the canvas."
-                     TextWrapping="Wrap" Classes="studio-muted" />
-        </StackPanel>
+      </ScrollViewer>
+      <!-- Outside the horizontal scroller so wrapping uses the actual inspector width. -->
+      <StackPanel Margin="20,28" Spacing="8"
+                  IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}">
+        <PathIcon Data="M1,1 L1,18 L6,13 L10,21 L13,19 L9,11 L16,11 Z" Width="24" Height="24"
+                  HorizontalAlignment="Left" Foreground="{DynamicResource StudioMutedBrush}" />
+        <TextBlock Text="Select an object" Classes="studio-title" />
+        <TextBlock Name="EmptySelectionHint" Text="Inspect geometry and edit its properties here. Drawing tools are below the canvas."
+                   TextWrapping="Wrap" Classes="studio-muted" />
       </StackPanel>
-    </ScrollViewer>
+    </Grid>
   </Panel>
 </UserControl>
