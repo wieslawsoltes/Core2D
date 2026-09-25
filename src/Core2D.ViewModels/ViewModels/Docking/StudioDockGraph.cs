@@ -52,7 +52,7 @@ public static class StudioDockGraph
         }
     }
 
-    /// <summary>Registers stable panel IDs so existing menu commands can restore hidden tools.</summary>
+    /// <summary>Reattaches the runtime factory and registers stable panel IDs after layout initialization.</summary>
     public static void RegisterTools(DockFactory factory, IDockable root)
     {
         if (factory.DockableLocator is not { } locator)
@@ -61,6 +61,10 @@ public static class StudioDockGraph
         }
         foreach (var item in Enumerate(root))
         {
+            // Factory is runtime state, not persisted document data. Structural migration and
+            // hidden-tool restoration can introduce nodes outside the original initialization
+            // walk. Attach the entire graph without resetting owners, proportions or selection.
+            item.Factory = factory;
             if (item is ITool && !string.IsNullOrEmpty(item.Id))
             {
                 var tool = item;
