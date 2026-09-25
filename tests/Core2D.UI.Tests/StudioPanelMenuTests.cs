@@ -26,12 +26,15 @@ public class StudioPanelMenuTests
             var sidebars = view.GetVisualDescendants().OfType<UserControl>()
                 .Where(x => x is StudioNavigatorView or StudioInspectorView).ToArray();
             Assert.Equal(2, sidebars.Length);
+            Assert.NotSame(sidebars[0].ContextMenu, sidebars[1].ContextMenu);
             foreach (var sidebar in sidebars)
             {
                 var dockable = Assert.IsAssignableFrom<IDockable>(sidebar.DataContext);
+                Assert.NotNull(dockable.Factory);
                 var menu = Assert.IsType<ContextMenu>(sidebar.ContextMenu);
                 menu.Open(sidebar);
                 Dispatcher.UIThread.RunJobs();
+                Assert.Same(dockable, menu.DataContext);
                 var actions = menu.Items.OfType<MenuItem>().ToArray();
                 Assert.Equal(2, actions.Length);
                 Assert.All(actions, item =>

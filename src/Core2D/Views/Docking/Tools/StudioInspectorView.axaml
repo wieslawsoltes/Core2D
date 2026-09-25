@@ -1,9 +1,16 @@
-<UserControl x:Class="Core2D.Views.Docking.Tools.StudioInspectorView"
+<UserControl x:Class="Core2D.Views.Docking.Tools.StudioInspectorView" x:Name="SidebarRoot"
              xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools" xmlns:editor="using:Core2D.ViewModels.Editor"
+             xmlns:core="using:Dock.Model.Core"
              xmlns:s="using:Core2D.Controls.Studio" xmlns:converters="using:Core2D.Converters"
              xmlns:containers="using:Core2D.Views.Containers" xmlns:data="using:Core2D.Views.Data"
              x:DataType="vm:StudioInspectorViewModel" x:CompileBindings="True">
+  <UserControl.ContextMenu>
+    <ContextMenu DataContext="{Binding #SidebarRoot.DataContext}" x:DataType="core:IDockable">
+      <MenuItem Header="Float panel" Command="{Binding Factory.FloatDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanFloat}" />
+      <MenuItem Header="Pin / unpin panel" Command="{Binding Factory.PinDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanPin}" />
+    </ContextMenu>
+  </UserControl.ContextMenu>
   <Panel DataContext="{Binding Context}" Background="{DynamicResource StudioSurfaceBrush}">
     <Grid x:DataType="editor:ProjectEditorViewModel" RowDefinitions="Auto,*,Auto">
       <Grid ColumnDefinitions="*,Auto" Margin="12,8" ColumnSpacing="8">
