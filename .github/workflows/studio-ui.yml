@@ -1,0 +1,42 @@
+name: Studio UI validation
+
+on:
+  push:
+    branches: [feat/figma-inspired-workspace]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: studio-ui-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  headless:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CORE2D_UI_ARTIFACTS: ${{ github.workspace }}/artifacts/ui
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Install native rendering dependencies
+        run: sudo apt-get update && sudo apt-get install -y libfontconfig1 libfreetype6
+      - name: Test actual application and render headless screenshots
+        run: dotnet test tests/Core2D.UI.Tests/Core2D.UI.Tests.csproj -c Release --logger 'trx;LogFileName=studio-ui.trx' --results-directory artifacts/tests
+      - name: Run existing regression tests
+        run: dotnet test tests/Core2D.ViewModels.Tests/Core2D.ViewModels.Tests.csproj -c Release --logger 'trx;LogFileName=regressions.trx' --results-directory artifacts/tests
+      - name: Upload screenshots and test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: studio-ui-validation
+          path: artifacts
+          if-no-files-found: warn

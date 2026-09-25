@@ -1,0 +1,6 @@
+<Project>
+  <Import Project="../../Directory.Packages.props" />
+  <ItemGroup>
+    <PackageVersion Include="Avalonia.Headless.XUnit" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+</Project>

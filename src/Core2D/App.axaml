@@ -9,12 +9,14 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <MergeResourceInclude Source="avares://Core2D/Themes/Themes.axaml" />
+        <MergeResourceInclude Source="avares://Core2D/Themes/StudioPalette.axaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
   <Application.Styles>
     <FluentTheme DensityStyle="Compact" />
     <StyleInclude Source="avares://Core2D/Styles/Common.axaml" />
+    <StyleInclude Source="avares://Core2D/Styles/Studio.axaml" />
   </Application.Styles>
   <Application.DataTemplates>
     <local:ViewLocator />

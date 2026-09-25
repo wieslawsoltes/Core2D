@@ -1,0 +1,53 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="using:Core2D.Controls.Studio">
+  <Styles.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <MergeResourceInclude Source="avares://Core2D/Styles/StudioControls.axaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Styles.Resources>
+  <!-- Keep built-in templates and their input/validation contracts for existing editors. -->
+  <Style Selector="TemplatedControl"><Setter Property="FontSize" Value="12" /></Style>
+  <Style Selector="TextBlock"><Setter Property="FontSize" Value="12" /><Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" /></Style>
+  <Style Selector="TextBlock.studio-muted"><Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}" /></Style>
+  <Style Selector="TextBlock.studio-title"><Setter Property="FontSize" Value="13" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
+  <Style Selector="Button">
+    <Setter Property="MinHeight" Value="28" /><Setter Property="Padding" Value="8,4" />
+    <Setter Property="CornerRadius" Value="6" /><Setter Property="BorderThickness" Value="0" />
+  </Style>
+  <Style Selector="Button.studio-primary">
+    <Setter Property="Background" Value="{DynamicResource StudioAccentBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioOnAccentBrush}" />
+    <Setter Property="FontWeight" Value="SemiBold" /><Setter Property="Padding" Value="16,7" />
+  </Style>
+  <Style Selector="TextBox">
+    <Setter Property="MinHeight" Value="28" /><Setter Property="Padding" Value="8,5" />
+    <Setter Property="CornerRadius" Value="5" /><Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="TextBox:focus /template/ Border#PART_BorderElement"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+  <Style Selector="NumericUpDown"><Setter Property="MinHeight" Value="28" /><Setter Property="CornerRadius" Value="5" /><Setter Property="Background" Value="{DynamicResource StudioInputBrush}" /><Setter Property="BorderBrush" Value="Transparent" /></Style>
+  <Style Selector="ComboBox"><Setter Property="MinHeight" Value="28" /><Setter Property="CornerRadius" Value="5" /><Setter Property="Background" Value="{DynamicResource StudioInputBrush}" /><Setter Property="BorderBrush" Value="Transparent" /></Style>
+  <Style Selector="CheckBox"><Setter Property="MinHeight" Value="28" /><Setter Property="FontSize" Value="12" /></Style>
+  <Style Selector="Label"><Setter Property="FontSize" Value="11" /><Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}" /><Setter Property="Padding" Value="0,6,0,4" /></Style>
+  <Style Selector="Menu"><Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" /></Style>
+  <Style Selector="MenuItem"><Setter Property="FontSize" Value="12" /><Setter Property="MinHeight" Value="28" /></Style>
+  <Style Selector="Separator"><Setter Property="Background" Value="{DynamicResource StudioBorderBrush}" /></Style>
+  <Style Selector="Separator.studio-tool-separator"><Setter Property="Width" Value="1" /><Setter Property="Height" Value="20" /><Setter Property="Margin" Value="4,0" /><Setter Property="VerticalAlignment" Value="Center" /></Style>
+  <Style Selector="TabItem"><Setter Property="Padding" Value="10,6" /><Setter Property="MinHeight" Value="32" /><Setter Property="FontSize" Value="12" /></Style>
+  <Style Selector="ListBoxItem"><Setter Property="MinHeight" Value="28" /><Setter Property="Padding" Value="6,2" /></Style>
+  <Style Selector="ListBoxItem TextBlock"><Setter Property="Padding" Value="4,3" /></Style>
+  <Style Selector="DataGrid"><Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" /><Setter Property="BorderThickness" Value="0" /><Setter Property="RowHeight" Value="28" /></Style>
+  <Style Selector="DataGridColumnHeader"><Setter Property="Background" Value="{DynamicResource StudioInputBrush}" /><Setter Property="FontSize" Value="11" /></Style>
+  <Style Selector="ToolTip"><Setter Property="CornerRadius" Value="6" /><Setter Property="Padding" Value="8,6" /></Style>
+  <!-- Dock's own templates remain responsible for drag, resize, float, close and pin. -->
+  <Style Selector="DockControl"><Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}" /></Style>
+  <Style Selector="ToolControl"><Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" /></Style>
+  <Style Selector="ToolControl /template/ DockPanel#PART_DockPanel"><Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" /></Style>
+  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip"><Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" /></Style>
+  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem"><Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" /><Setter Property="Padding" Value="10,7" /><Setter Property="FontSize" Value="11" /></Style>
+  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected"><Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
+  <Style Selector="DocumentControl"><Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}" /></Style>
+  <Style Selector="DocumentControl /template/ TabStripItem"><Setter Property="Padding" Value="12,7" /><Setter Property="FontSize" Value="12" /></Style>
+</Styles>
