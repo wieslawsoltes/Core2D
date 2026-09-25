@@ -1,0 +1,40 @@
+<UserControl x:Class="Core2D.Controls.Studio.WorkspaceHeader"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio"
+             xmlns:editor="using:Core2D.Controls.Editor"
+             xmlns:vm="using:Core2D.ViewModels.Editor"
+             x:DataType="vm:ProjectEditorViewModel" x:CompileBindings="True">
+  <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,0,0,1">
+    <Grid RowDefinitions="Auto,Auto">
+      <Grid ColumnDefinitions="Auto,*,Auto" Margin="12,6" ColumnSpacing="12">
+        <Border Width="28" Height="28" CornerRadius="7" Background="{DynamicResource StudioAccentBrush}" VerticalAlignment="Center">
+          <PathIcon Data="M2,2 L14,2 L14,6 L6,6 L6,14 L2,14 Z M10,10 L22,10 L22,22 L10,22 Z M13,13 L13,19 L19,19 L19,13 Z"
+                    Width="18" Height="18" Foreground="White" />
+        </Border>
+        <Grid Grid.Column="1" ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center" ColumnSpacing="12">
+          <TextBlock Text="Core2D" Classes="studio-title" VerticalAlignment="Center" />
+          <TextBlock Grid.Column="1" Text="{Binding ProjectName, TargetNullValue='Untitled drawing'}" TextTrimming="CharacterEllipsis"
+                     VerticalAlignment="Center" ToolTip.Tip="{Binding ProjectName}" />
+          <TextBlock Grid.Column="2" Text="Edited" Classes="studio-muted" IsVisible="{Binding IsProjectDirty}" VerticalAlignment="Center"
+                     AutomationProperties.Name="Unsaved changes" />
+        </Grid>
+        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+          <s:StudioIconButton Name="UndoButton" Icon="M7,1 L1,7 L7,13 L7,9 L11,9 C15,9 17,11 17,15 L19,15 C19,9 16,6 11,6 L7,6 Z"
+                              Command="{Binding OnUndo}" ToolTip.Tip="Undo" AutomationProperties.Name="Undo" />
+          <s:StudioIconButton Name="RedoButton" Icon="M13,1 L19,7 L13,13 L13,9 L9,9 C5,9 3,11 3,15 L1,15 C1,9 4,6 9,6 L13,6 Z"
+                              Command="{Binding OnRedo}" ToolTip.Tip="Redo" AutomationProperties.Name="Redo" />
+          <Separator Classes="studio-tool-separator" />
+          <s:StudioIconButton Name="SaveButton" Icon="M2,1 L14,1 L18,5 L18,19 L2,19 Z M5,2 L5,8 L13,8 L13,2 Z M5,12 L5,18 L15,18 L15,12 Z"
+                              Command="{Binding Platform.OnSave}" ToolTip.Tip="Save project" AutomationProperties.Name="Save project" />
+          <Button Name="ExportButton" Content="Export" Classes="studio-primary" Command="{Binding Platform.OnExport}"
+                  AutomationProperties.Name="Export drawing" />
+        </StackPanel>
+      </Grid>
+      <!-- The entire original menu stays available, including every import/export and advanced command. -->
+      <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+        <editor:MenuView />
+      </ScrollViewer>
+    </Grid>
+  </Border>
+</UserControl>

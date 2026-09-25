@@ -1,33 +1,20 @@
-﻿<UserControl x:Class="Core2D.Views.Shapes.RectangleShapeView"
+<UserControl x:Class="Core2D.Views.Shapes.RectangleShapeView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vms="using:Core2D.ViewModels.Shapes"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Rectangle}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:RectangleShapeViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Rectangle">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="Name" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        <CheckBox Content="IsStroked" 
-                  IsChecked="{Binding IsStroked, Mode=TwoWay}" 
-                  HorizontalAlignment="Stretch" />
-        <CheckBox Content="IsFilled" 
-                  IsChecked="{Binding IsFilled, Mode=TwoWay}" 
-                  HorizontalAlignment="Stretch" />
-      </StackPanel>
-    </TabItem>
-    <TabItem Header="TopLeft">
+             xmlns:s="using:Core2D.Controls.Studio"
+             xmlns:vm="using:Core2D.ViewModels.Shapes"
+             x:DataType="vm:RectangleShapeViewModel" x:CompileBindings="True">
+  <StackPanel>
+    <s:StudioPropertyField Label="Name">
+      <TextBox Text="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Rectangle name" />
+    </s:StudioPropertyField>
+    <CheckBox Content="Stroke" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+    <CheckBox Content="Fill" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+    <s:StudioSection Header="Top left">
       <ContentControl Content="{Binding TopLeft}" />
-    </TabItem>
-    <TabItem Header="BottomRight">
+    </s:StudioSection>
+    <s:StudioSection Header="Bottom right">
       <ContentControl Content="{Binding BottomRight}" />
-    </TabItem>
-  </TabControl>
+    </s:StudioSection>
+  </StackPanel>
 </UserControl>
