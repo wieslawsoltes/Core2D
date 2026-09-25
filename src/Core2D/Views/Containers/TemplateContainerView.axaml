@@ -1,46 +1,24 @@
 <UserControl x:Class="Core2D.Views.Containers.TemplateContainerView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:studio="using:Core2D.Controls.Studio"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:data="using:Core2D.Views.Data"
-             xmlns:renderer="using:Core2D.Views.Renderer"
-             xmlns:vmc="using:Core2D.ViewModels.Containers"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Template}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:TemplateContainerViewModel" x:CompileBindings="True">
-  
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:data="using:Core2D.Views.Data"
+             xmlns:renderer="using:Core2D.Views.Renderer" xmlns:vm="using:Core2D.ViewModels.Containers"
+             x:DataType="vm:TemplateContainerViewModel" x:CompileBindings="True">
   <StackPanel>
-    <studio:StudioSection Header="Size">
-      <Grid ColumnDefinitions="50*,6,50*" Margin="0">
-        <StackPanel Grid.Column="0">
-          <studio:StudioPropertyField Label="Width">
-            <studio:StudioNumberBox Prefix="W" Text="{Binding Width, Mode=TwoWay}" />
-          </studio:StudioPropertyField>
-        </StackPanel>
-        <GridSplitter ResizeDirection="Columns" 
-                      ResizeBehavior="PreviousAndNext" 
-                      Background="Transparent" 
-                      Width="6"
-                      Grid.Column="1" />
-        <StackPanel Grid.Column="2">
-          <studio:StudioPropertyField Label="Height">
-            <studio:StudioNumberBox Prefix="H" Text="{Binding Height, Mode=TwoWay}" />
-          </studio:StudioPropertyField>
-        </StackPanel>
+    <s:StudioSection Header="Layout">
+      <Grid ColumnDefinitions="*,6,*">
+        <s:StudioNumberBox Prefix="W" Text="{Binding Width, Mode=TwoWay}" AutomationProperties.Name="Page width" />
+        <GridSplitter Grid.Column="1" Width="6" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" />
+        <s:StudioNumberBox Grid.Column="2" Prefix="H" Text="{Binding Height, Mode=TwoWay}" AutomationProperties.Name="Page height" />
       </Grid>
-    </studio:StudioSection>
-    <studio:StudioSection Header="Background">
+    </s:StudioSection>
+    <s:StudioSection Header="Page fill">
       <ContentControl Content="{Binding Background}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Grid" IsExpanded="False">
+    </s:StudioSection>
+    <s:StudioSection Header="Layout grid" IsExpanded="False">
       <renderer:GridView />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Data" IsExpanded="False">
+    </s:StudioSection>
+    <s:StudioSection Header="Template data" IsExpanded="False">
       <data:DataObjectView />
-    </studio:StudioSection>
+    </s:StudioSection>
   </StackPanel>
 </UserControl>

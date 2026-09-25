@@ -11,26 +11,40 @@ using Dock.Model.ReactiveUI.Controls;
 
 namespace Core2D.ViewModels.Docking;
 
-/// <summary>Migrates the legacy four-pane home perspective without recreating document models.</summary>
+/// <summary>Migrates the legacy home perspective while retaining documents and recoverable tool state.</summary>
 public static class StudioWorkspaceLayout
 {
-    /// <summary>Applies the studio layout once. Already migrated and user-customized layouts are left alone.</summary>
+    /// <summary>Applies the studio sidebar layout once; later initialization preserves user customization.</summary>
     public static bool Apply(DockFactory factory, ProjectEditorViewModel editor)
     {
-        if (factory.RootDock is not { } root || factory.HomeDock is not { VisibleDockables: { } children } home
-            || factory.FindDockable(root, x => x.Id == "StudioNavigator") is not null)
+        if (factory.RootDock is not { } root || factory.HomeDock is not { VisibleDockables: { } children } home)
         {
             return false;
         }
 
-        // Retain document subtrees, not just the active page: split groups keep their relative layout.
+        // GetDockable resolves locator aliases, not arbitrary graph IDs. Include hidden/pinned tools
+        // on every initialization, including deserialization and when a sidebar has been floated.
+        StudioDockGraph.RegisterTools(factory, root);
+        if (StudioDockGraph.Enumerate(root).Any(x => x.Id is "StudioNavigator" or "StudioInspector"))
+        {
+            return false;
+        }
+
         var documents = children.Where(ContainsDocuments).ToArray();
         if (documents.Length == 0 && factory.PagesDock is { } pages)
         {
             documents = new IDockable[] { pages };
         }
 
-        var tools = Walk(home).OfType<ITool>().ToList();
+        var homeRoot = factory.FindRoot(home) ?? root;
+        factory.HidePreviewingDockables(homeRoot);
+        var tools = new HashSet<ITool>(WalkVisible(home).OfType<ITool>(), ReferenceEqualityComparer.Instance);
+        CollectHidden(homeRoot, tools);
+        if (!ReferenceEquals(root, homeRoot))
+        {
+            CollectHidden(root, tools);
+        }
+
         var navigator = new StudioNavigatorViewModel
         {
             Id = "StudioNavigator", Title = "Layers & assets", Context = editor, CanClose = false
@@ -57,7 +71,16 @@ public static class StudioWorkspaceLayout
         foreach (var tool in tools)
         {
             var owner = IsNavigationTool(tool.Id) ? left : right;
+            tool.OriginalOwner = null;
             owner.VisibleDockables!.Add(tool);
+        }
+
+        // Pinned tools stay in their existing pinned collections, but their restoration owner must
+        // not point to one of the legacy tool docks that is about to leave the visual tree.
+        RehomePinned(homeRoot, left, right);
+        if (!ReferenceEquals(root, homeRoot))
+        {
+            RehomePinned(root, left, right);
         }
 
         var layout = new List<IDockable> { left, new ProportionalDockSplitter() };
@@ -82,8 +105,8 @@ public static class StudioWorkspaceLayout
             }
         }
 
-        // The marker panes above make this reinitialization idempotent. Dock registers new owners
-        // before hiding advanced tools, so RestoreDockable returns them to a live sidebar.
+        // New markers make the nested initialization idempotent. Register owners before hiding
+        // advanced panels so restore/close/float actions keep using the existing Dock implementation.
         factory.InitLayout(root);
         foreach (var tool in tools)
         {
@@ -91,7 +114,37 @@ public static class StudioWorkspaceLayout
         }
         factory.SetActiveDockable(navigator);
         factory.SetActiveDockable(inspector);
+        StudioDockGraph.RegisterTools(factory, root);
         return true;
+    }
+
+    private static void CollectHidden(IRootDock root, HashSet<ITool> tools)
+    {
+        if (root.HiddenDockables is not { } hidden)
+        {
+            return;
+        }
+        foreach (var tool in hidden.OfType<ITool>().ToArray())
+        {
+            tools.Add(tool);
+            hidden.Remove(tool);
+        }
+    }
+
+    private static void RehomePinned(IRootDock root, IToolDock left, IToolDock right)
+    {
+        foreach (var list in new[] { root.LeftPinnedDockables, root.RightPinnedDockables, root.TopPinnedDockables, root.BottomPinnedDockables })
+        {
+            if (list is null)
+            {
+                continue;
+            }
+            foreach (var tool in list)
+            {
+                tool.Owner = IsNavigationTool(tool.Id) ? left : right;
+                tool.OriginalOwner = null;
+            }
+        }
     }
 
     private static bool IsNavigationTool(string? id) => id is "ProjectExplorer" or "ObjectBrowser"
@@ -100,14 +153,14 @@ public static class StudioWorkspaceLayout
     private static bool ContainsDocuments(IDockable dockable) => dockable is IDocumentDock
         || dockable is IDock { VisibleDockables: { } children } && children.Any(ContainsDocuments);
 
-    private static IEnumerable<IDockable> Walk(IDockable dockable)
+    private static IEnumerable<IDockable> WalkVisible(IDockable dockable)
     {
         yield return dockable;
         if (dockable is IDock { VisibleDockables: { } children })
         {
             foreach (var child in children)
             {
-                foreach (var item in Walk(child))
+                foreach (var item in WalkVisible(child))
                 {
                     yield return item;
                 }
