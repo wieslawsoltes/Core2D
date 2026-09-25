@@ -11,6 +11,8 @@
     <PackageReference Include="xunit.runner.visualstudio" />
     <PackageReference Include="Avalonia.Headless.XUnit" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
+    <!-- Match the desktop host's centrally versioned Debug diagnostics reference. -->
+    <PackageReference Include="ProDiagnostics" Condition="'$(Configuration)' == 'Debug'" />
     <PackageReference Include="ProDataGrid" GeneratePathProperty="true">
       <ExcludeAssets>compile</ExcludeAssets>
     </PackageReference>
