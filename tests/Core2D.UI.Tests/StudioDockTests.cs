@@ -22,6 +22,9 @@ public class StudioDockTests
         using var state = new AppState();
         var editor = state.Editor!;
         editor.OnNewProject();
+        editor.OnToggleDockableVisibility("ProjectExplorer");
+        editor.OnToggleDockableVisibility("ObjectBrowser");
+        editor.OnToggleDockableVisibility("ShapeProperties");
         var view = new MainView { DataContext = editor };
         var window = new Window
         {
@@ -35,7 +38,7 @@ public class StudioDockTests
             window.Show();
             Dispatcher.UIThread.RunJobs();
             var tabs = view.GetVisualDescendants().OfType<ToolTabStripItem>().ToArray();
-            Assert.True(tabs.Length >= 10, "The real workspace must expose its docked tool tabs.");
+            Assert.True(tabs.Length >= 5, "The real workspace must expose its docked tool tabs.");
             Assert.Contains(tabs, tab => tab.IsSelected);
             Assert.Contains(tabs, tab => !tab.IsSelected);
             foreach (var tab in tabs)

@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Shapes.InsertShapeView"
+<UserControl x:Class="Core2D.Views.Shapes.InsertShapeView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,12 +18,12 @@
   <UserControl.Resources>
     <dd:InsertBlockDropHandler x:Key="InsertBlockDropHandler" />
   </UserControl.Resources>
-  <TabControl>
-    <TabItem Header="Insert">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="Name"
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding Name, Mode=TwoWay}" />
+  <StackPanel>
+    <studio:StudioSection Header="Insert">
+      <StackPanel Margin="0">
+        <studio:StudioPropertyField Label="Name">
+          <TextBox Text="{Binding Name, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
 
         <Label Content="Block"
                Margin="{DynamicResource TextControlThemePadding}" />
@@ -47,11 +48,11 @@
                                    Handler="{StaticResource InsertBlockDropHandler}" />
         </i:Interaction.Behaviors>
       </StackPanel>
-    </TabItem>
-    <TabItem Header="Point">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Point">
       <ContentControl Content="{Binding Point}" />
-    </TabItem>
-    <TabItem Header="Connectors">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Connectors" IsExpanded="False">
       <Grid RowDefinitions="50*,6,50*">
         <ListBox x:Name="ConnectorsListBox"
                  ItemsSource="{Binding Connectors}" 
@@ -80,6 +81,6 @@
           <ContentControl Content="{Binding #ConnectorsListBox.SelectedItem}" />
         </ScrollViewer>
       </Grid>
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

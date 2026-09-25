@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Containers.LayerContainerView"
+<UserControl x:Class="Core2D.Views.Containers.LayerContainerView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,14 +14,14 @@
              d:DataContext="{x:Static vmd:DesignerContext.Layer}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:LayerContainerViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Properties">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
+  <StackPanel>
+    <studio:StudioSection Header="Properties">
+      <StackPanel Margin="0">
         <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        <CheckBox Content="IsVisible" IsChecked="{Binding IsVisible, Mode=TwoWay}" />
+        <CheckBox Content="Is Visible" IsChecked="{Binding IsVisible, Mode=TwoWay}" />
       </StackPanel>
-    </TabItem>
-    <TabItem Header="Shapes">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Shapes" IsExpanded="False">
       <ListBox x:Name="ShapesListBox" ItemsSource="{Binding Shapes}">
         <ListBox.DataTemplates>
           <DataTemplate DataType="vms:BaseShapeViewModel">
@@ -33,9 +34,9 @@
           </DataTemplate>
         </ListBox.DataTemplates>
       </ListBox>
-    </TabItem>
-    <TabItem Header="Selected Shape">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Selected Shape">
       <ContentControl Content="{Binding #ShapesListBox.SelectedItem}" />
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

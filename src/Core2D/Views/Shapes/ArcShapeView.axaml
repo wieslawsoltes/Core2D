@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Shapes.ArcShapeView"
+<UserControl x:Class="Core2D.Views.Shapes.ArcShapeView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,31 +10,31 @@
              d:DataContext="{x:Static vmd:DesignerContext.Arc}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:ArcShapeViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Arc">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="Name" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        <CheckBox Content="IsStroked" 
+  <StackPanel>
+    <studio:StudioSection Header="Arc">
+      <StackPanel Margin="0">
+        <studio:StudioPropertyField Label="Name">
+          <TextBox Text="{Binding Name, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
+        <CheckBox Content="Stroke" 
                   IsChecked="{Binding IsStroked, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
-        <CheckBox Content="IsFilled" 
+        <CheckBox Content="Fill" 
                   IsChecked="{Binding IsFilled, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
       </StackPanel>
-    </TabItem>
-    <TabItem Header="Point1">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Point1">
       <ContentControl Content="{Binding Point1}" />
-    </TabItem>
-    <TabItem Header="Point2">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Point2">
       <ContentControl Content="{Binding Point2}" />
-    </TabItem>
-    <TabItem Header="Point3">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Point3">
       <ContentControl Content="{Binding Point3}" />
-    </TabItem>
-    <TabItem Header="Point4">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Point4">
       <ContentControl Content="{Binding Point4}" />
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

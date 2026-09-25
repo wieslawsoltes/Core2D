@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Containers.TemplateContainerView"
+<UserControl x:Class="Core2D.Views.Containers.TemplateContainerView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,13 +13,13 @@
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:TemplateContainerViewModel" x:CompileBindings="True">
   
-  <TabControl>
-    <TabItem Header="Size">
-      <Grid ColumnDefinitions="50*,6,50*" Margin="{DynamicResource ContentMargin}">
+  <StackPanel>
+    <studio:StudioSection Header="Size">
+      <Grid ColumnDefinitions="50*,6,50*" Margin="0">
         <StackPanel Grid.Column="0">
-          <Label Content="Width" 
-                 Margin="{DynamicResource TextControlThemePadding}" />
-          <TextBox Text="{Binding Width, Mode=TwoWay}" />
+          <studio:StudioPropertyField Label="Width">
+            <studio:StudioNumberBox Prefix="W" Text="{Binding Width, Mode=TwoWay}" />
+          </studio:StudioPropertyField>
         </StackPanel>
         <GridSplitter ResizeDirection="Columns" 
                       ResizeBehavior="PreviousAndNext" 
@@ -26,20 +27,20 @@
                       Width="6"
                       Grid.Column="1" />
         <StackPanel Grid.Column="2">
-          <Label Content="Height" 
-                 Margin="{DynamicResource TextControlThemePadding}" />
-          <TextBox Text="{Binding Height, Mode=TwoWay}" />
+          <studio:StudioPropertyField Label="Height">
+            <studio:StudioNumberBox Prefix="H" Text="{Binding Height, Mode=TwoWay}" />
+          </studio:StudioPropertyField>
         </StackPanel>
       </Grid>
-    </TabItem>
-    <TabItem Header="Background">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Background">
       <ContentControl Content="{Binding Background}" />
-    </TabItem>
-    <TabItem Header="Grid">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Grid" IsExpanded="False">
       <renderer:GridView />
-    </TabItem>
-    <TabItem Header="Data">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Data" IsExpanded="False">
       <data:DataObjectView />
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

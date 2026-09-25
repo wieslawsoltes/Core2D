@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Path.PathFigureView"
+<UserControl x:Class="Core2D.Views.Path.PathFigureView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,18 +13,18 @@
              d:DataContext="{x:Static vmd:DesignerContext.PathFigure}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmp:PathFigureViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Properties">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <CheckBox Content="IsClosed" 
+  <StackPanel>
+    <studio:StudioSection Header="Properties">
+      <StackPanel Margin="0">
+        <CheckBox Content="Closed" 
                   IsChecked="{Binding IsClosed, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
       </StackPanel>
-    </TabItem>
-    <TabItem Header="StartPoint">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Start Point">
       <ContentControl Content="{Binding StartPoint}" />
-    </TabItem>
-    <TabItem Header="Segments">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Segments" IsExpanded="False">
       <ListBox ItemsSource="{Binding Segments}">
         <ListBox.ItemTemplate>
           <DataTemplate>
@@ -36,6 +37,6 @@
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

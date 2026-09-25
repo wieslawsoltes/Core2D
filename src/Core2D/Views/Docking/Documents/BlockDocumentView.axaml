@@ -1,12 +1,14 @@
 <UserControl x:Class="Core2D.Views.Docking.Documents.BlockDocumentView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio"
              xmlns:ce="using:Core2D.Controls.Editor"
              xmlns:vm="using:Core2D.ViewModels.Docking.Documents"
              Background="{DynamicResource StudioCanvasBrush}"
              x:DataType="vm:BlockDocumentViewModel" x:CompileBindings="True">
-  <Grid RowDefinitions="*,Auto">
+  <Grid>
     <ce:PageView DataContext="{Binding Context}" />
-    <ce:ToolsView Grid.Row="1" DataContext="{Binding Context}" HorizontalAlignment="Center" Margin="12,10,12,12" />
+    <ce:ToolsView VerticalAlignment="Bottom" DataContext="{Binding Context}" HorizontalAlignment="Center" Margin="12,10,12,12" />
+    <s:StudioCanvasControls DataContext="{Binding Context}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12" />
   </Grid>
 </UserControl>

@@ -167,6 +167,13 @@ public class WorkspaceTests
     private static IEnumerable<IDockable> EnumerateDockables(IDockable dockable)
     {
         yield return dockable;
+        if (dockable is Dock.Model.Controls.IRootDock { HiddenDockables: { } hidden })
+        {
+            foreach (var item in hidden)
+            {
+                yield return item;
+            }
+        }
         if (dockable is IDock { VisibleDockables: { } children })
         {
             foreach (var child in children)

@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Shapes.TextShapeView"
+<UserControl x:Class="Core2D.Views.Shapes.TextShapeView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,16 +10,16 @@
              d:DataContext="{x:Static vmd:DesignerContext.Text}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:TextShapeViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Text">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="Name" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        <CheckBox Content="IsStroked"
+  <StackPanel>
+    <studio:StudioSection Header="Text">
+      <StackPanel Margin="0">
+        <studio:StudioPropertyField Label="Name">
+          <TextBox Text="{Binding Name, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
+        <CheckBox Content="Stroke"
                   IsChecked="{Binding IsStroked, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
-        <CheckBox Content="IsFilled" 
+        <CheckBox Content="Fill" 
                   IsChecked="{Binding IsFilled, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
         <Label Content="Text" 
@@ -38,12 +39,12 @@
                    HorizontalAlignment="Stretch" />
         </DockPanel>
       </StackPanel>
-    </TabItem>
-    <TabItem Header="TopLeft">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Top left">
       <ContentControl Content="{Binding TopLeft}" />
-    </TabItem>
-    <TabItem Header="BottomRight">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Bottom right">
       <ContentControl Content="{Binding BottomRight}" />
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

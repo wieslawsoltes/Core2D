@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Core2D.Controls.Editor.PageView"
+<UserControl x:Class="Core2D.Controls.Editor.PageView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -123,8 +123,8 @@
         <KeyBinding Command="{Binding OnToolText}" Gesture="T" />
         <KeyBinding Command="{Binding OnToolImage}" Gesture="I" />
       </Panel.KeyBindings>
-      <Panel Background="#FFF5F5F5" />
-      <Panel Background="{DynamicResource TemplateCheckerBoard}" />
+      <Panel Background="{DynamicResource StudioCanvasBrush}" />
+      <!-- The workspace is a solid surface; document transparency remains in the renderer. -->
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto" />
@@ -135,14 +135,14 @@
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Border Grid.Row="0" Grid.Column="0"
-                Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                Background="{DynamicResource StudioSurfaceBrush}"
                 BorderBrush="{DynamicResource SystemChromeMediumColor}"
                 BorderThickness="0,0,1,1"
                 Padding="8,4,8,4">
           <TextBlock Text="PX"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
-                     Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                     Foreground="{DynamicResource StudioMutedBrush}"
                      FontSize="11" />
         </Border>
         <ruler:Ruler x:Name="HorizontalRuler"

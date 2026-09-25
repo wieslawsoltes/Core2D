@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Shapes.PathShapeView"
+<UserControl x:Class="Core2D.Views.Shapes.PathShapeView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,26 +15,26 @@
              d:DataContext="{x:Static vmd:DesignerContext.Path}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:PathShapeViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Path">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="Name"
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        <CheckBox Content="IsStroked" 
+  <StackPanel>
+    <studio:StudioSection Header="Path">
+      <StackPanel Margin="0">
+        <studio:StudioPropertyField Label="Name">
+          <TextBox Text="{Binding Name, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
+        <CheckBox Content="Stroke" 
                   IsChecked="{Binding IsStroked, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
-        <CheckBox Content="IsFilled" 
+        <CheckBox Content="Fill" 
                   IsChecked="{Binding IsFilled, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
-        <Label Content="FillRule" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox ItemsSource="{x:Static vms:PathShapeViewModel.FillRuleValues}"
+        <studio:StudioPropertyField Label="Fill Rule">
+          <ComboBox ItemsSource="{x:Static vms:PathShapeViewModel.FillRuleValues}"
                   SelectedItem="{Binding FillRule, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
+        </studio:StudioPropertyField>
       </StackPanel>
-    </TabItem>
-    <TabItem Header="Figures">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Figures" IsExpanded="False">
       <DataGrid x:Name="FiguresDataGrid"
                 SelectionMode="Single"
                 AutoGenerateColumns="False"
@@ -67,9 +68,9 @@
           </DataTemplate>
         </DataGrid.DataTemplates>
       </DataGrid>
-    </TabItem>
-    <TabItem Header="Selected Figure">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Selected Figure">
       <ContentControl Content="{Binding #FiguresDataGrid.SelectedItem}" />
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

@@ -1,11 +1,16 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="using:Core2D.Converters"
         xmlns:ruler="clr-namespace:Core2D.Controls;assembly=Core2D.Controls.Ruler">
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <MergeResourceInclude Source="avares://Core2D/Styles/StudioControls.axaml" />
+        <ResourceInclude Source="avares://Core2D/Styles/StudioInputs.axaml" />
+        <ResourceInclude Source="avares://Core2D/Styles/StudioNavigation.axaml" />
+        <ResourceInclude Source="avares://Core2D/Styles/StudioColorField.axaml" />
       </ResourceDictionary.MergedDictionaries>
+      <converters:MultipleDockTabsConverter x:Key="MultipleDockTabs" />
     </ResourceDictionary>
   </Styles.Resources>
 
@@ -155,4 +160,28 @@
     <Setter Property="Foreground" Value="{DynamicResource StudioOnAccentBrush}" />
     <Setter Property="Background" Value="{DynamicResource StudioAccentBrush}" />
   </Style>
+
+  <Style Selector="Button"><Setter Property="Theme" Value="{StaticResource StudioButtonTheme}" /></Style>
+  <Style Selector="TextBox"><Setter Property="Theme" Value="{StaticResource StudioTextBoxTheme}" /></Style>
+  <Style Selector="CheckBox"><Setter Property="Theme" Value="{StaticResource StudioCheckBoxTheme}" /></Style>
+  <Style Selector="ComboBox"><Setter Property="Theme" Value="{StaticResource StudioComboBoxTheme}" /></Style>
+  <Style Selector="TabControl"><Setter Property="Theme" Value="{StaticResource StudioTabControlTheme}" /></Style>
+  <Style Selector="TabItem"><Setter Property="Theme" Value="{StaticResource StudioTabItemTheme}" /></Style>
+  <Style Selector="Button.studio-primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource StudioAccentBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioOnAccentBrush}" />
+    <Setter Property="Opacity" Value="0.9" />
+  </Style>
+  <Style Selector="ToolControl /template/ :is(TabStrip)#PART_TabStrip">
+    <Setter Property="DockPanel.Dock" Value="Top" />
+    <Setter Property="IsVisible" Value="{Binding VisibleDockables.Count, Converter={StaticResource MultipleDockTabs}}" />
+  </Style>
+  <Style Selector="DocumentControl /template/ :is(TabStripItem):selected">
+    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+  </Style>
+  <Style Selector="ruler|Ruler:horizontal"><Setter Property="Height" Value="24" /></Style>
+  <Style Selector="ruler|Ruler:vertical"><Setter Property="Width" Value="24" /></Style>
+  <Style Selector="ComboBoxItem"><Setter Property="MinHeight" Value="28" /><Setter Property="Padding" Value="8,5" /></Style>
+  <Style Selector="FlyoutPresenter"><Setter Property="CornerRadius" Value="10" /><Setter Property="Padding" Value="6" /><Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" /></Style>
 </Styles>

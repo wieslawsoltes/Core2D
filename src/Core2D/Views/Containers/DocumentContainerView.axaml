@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Containers.DocumentContainerView"
+<UserControl x:Class="Core2D.Views.Containers.DocumentContainerView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,13 +12,13 @@
              d:DataContext="{x:Static vmd:DesignerContext.Document}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmc:DocumentContainerViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Properties">
+  <StackPanel>
+    <studio:StudioSection Header="Properties">
       <StackPanel>
         <TextBox Text="{Binding Name, Mode=TwoWay}" />
       </StackPanel>
-    </TabItem>
-    <TabItem Header="Pages">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Pages" IsExpanded="False">
       <ListBox x:Name="PagesListBox" ItemsSource="{Binding Pages}">
         <ListBox.DataTemplates>
           <DataTemplate DataType="vmc:PageContainerViewModel">
@@ -29,9 +30,9 @@
           </DataTemplate>
         </ListBox.DataTemplates>
       </ListBox>
-    </TabItem>
-    <TabItem Header="Selected Page">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Selected Page">
       <ContentControl Content="{Binding #PagesListBox.SelectedItem}" />
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

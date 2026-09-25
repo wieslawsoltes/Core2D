@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Renderer.ShapeRendererStateView"
+<UserControl x:Class="Core2D.Views.Renderer.ShapeRendererStateView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,74 +11,74 @@
              d:DataContext="{x:Static vmd:DesignerContext.ShapeRendererState}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmr:ShapeRendererStateViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Point">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <CheckBox Content="DrawDecorators" 
+  <StackPanel>
+    <studio:StudioSection Header="Point">
+      <StackPanel Margin="0">
+        <CheckBox Content="Draw Decorators" 
                   IsChecked="{Binding DrawDecorators, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
-        <CheckBox Content="DrawPoints" 
+        <CheckBox Content="Draw Points" 
                   IsChecked="{Binding DrawPoints, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
-        <Label Content="PointSize" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding PointSize, Mode=TwoWay}" />
+        <studio:StudioPropertyField Label="Point Size">
+          <TextBox Text="{Binding PointSize, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
       </StackPanel>
-    </TabItem>
-    <TabItem Header="Normal Style">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Normal Style">
       <ContentControl Content="{Binding PointStyle}" />
-    </TabItem>
-    <TabItem Header="Selected Style">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Selected Style">
       <ContentControl Content="{Binding SelectedPointStyle}" />
-    </TabItem>
-    <TabItem Header="Connector Default">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Connector Default">
       <ContentControl Content="{Binding ConnectorNoneStyle}" />
-    </TabItem>
-    <TabItem Header="Connector Input">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Connector Input">
       <ContentControl Content="{Binding ConnectorInputStyle}" />
-    </TabItem>
-    <TabItem Header="Connector Output">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Connector Output">
       <ContentControl Content="{Binding ConnectorOutputStyle}" />
-    </TabItem>
-    <TabItem Header="Connector Hover">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Connector Hover">
       <ContentControl Content="{Binding ConnectorHoverStyle}" />
-    </TabItem>
-    <TabItem Header="Connector Tool Hover">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Connector Tool Hover">
       <ContentControl Content="{Binding ConnectorToolHoverStyle}" />
-    </TabItem>
-    <TabItem Header="Connector Tool Hover Invalid">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Connector Tool Hover Invalid">
       <ContentControl Content="{Binding ConnectorToolHoverInvalidStyle}" />
-    </TabItem>
-    <TabItem Header="Connector Selected">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Connector Selected">
       <ContentControl Content="{Binding ConnectorSelectedStyle}" />
-    </TabItem>
-    <TabItem Header="Zoom">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="PanX" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding PanX, Mode=TwoWay}" />
-        <Label Content="PanY" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding PanY, Mode=TwoWay}" />
-        <Label Content="ZoomX" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding ZoomX, Mode=TwoWay}" />
-        <Label Content="ZoomY" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding ZoomY, Mode=TwoWay}" />
+    </studio:StudioSection>
+    <studio:StudioSection Header="Zoom">
+      <StackPanel Margin="0">
+        <studio:StudioPropertyField Label="Pan X">
+          <TextBox Text="{Binding PanX, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
+        <studio:StudioPropertyField Label="Pan Y">
+          <TextBox Text="{Binding PanY, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
+        <studio:StudioPropertyField Label="Zoom X">
+          <TextBox Text="{Binding ZoomX, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
+        <studio:StudioPropertyField Label="Zoom Y">
+          <TextBox Text="{Binding ZoomY, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
       </StackPanel>
-    </TabItem>
-    <TabItem Header="DrawShapeState">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Draw Shape State">
       <ContentControl Content="{Binding DrawShapeState}" />
-    </TabItem>
-    <TabItem Header="ImageCache">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Image Cache" IsExpanded="False">
       <libraries:ImagesView DataContext="{Binding ImageCache}" />
-    </TabItem>
-    <TabItem Header="SelectionStyle">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Selection Style">
       <ContentControl Content="{Binding SelectionStyle}" />
-    </TabItem>
-    <TabItem Header="HelperStyle">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Helper Style" IsExpanded="False">
       <ContentControl Content="{Binding HelperStyle}" />
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

@@ -1,5 +1,6 @@
 <UserControl x:Class="Core2D.Views.Style.TextStyleView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:s="using:Core2D.Controls.Studio"
              xmlns:converters="using:Core2D.Converters"
@@ -11,7 +12,7 @@
       <TextBox Text="{Binding FontName, Mode=TwoWay}" AutomationProperties.Name="Font family" />
     </s:StudioPropertyField>
     <s:StudioPropertyField Label="Font size">
-      <TextBox Text="{Binding FontSize, Mode=TwoWay}" AutomationProperties.Name="Font size" />
+      <studio:StudioNumberBox Prefix="T" Text="{Binding FontSize, Mode=TwoWay}" AutomationProperties.Name="Font size" />
     </s:StudioPropertyField>
     <WrapPanel>
       <CheckBox Content="Regular" Command="{Binding ToggleRegularFontStyle}"

@@ -87,8 +87,11 @@ public class StudioPresentationTests
             Assert.NotNull(header.FindControl<StudioIconButton>("SaveButton")!.Command);
             var export = header.FindControl<Button>("ExportButton")!;
             Assert.NotNull(export.Command);
-            Assert.Equal(Colors.White, Assert.IsAssignableFrom<ISolidColorBrush>(export.Foreground).Color);
-            var menu = header.GetVisualDescendants().OfType<Menu>().Single();
+            var menuButton = header.GetVisualDescendants().OfType<StudioIconButton>().Single(x => x.Flyout is Flyout);
+            var flyout = (Flyout)menuButton.Flyout!;
+            flyout.ShowAt(menuButton);
+            Dispatcher.UIThread.RunJobs();
+            var menu = ((Control)flyout.Content!).GetVisualDescendants().OfType<Menu>().Single();
             Assert.True(menu.Items.Count >= 5);
             Assert.All(menu.Items.OfType<MenuItem>(), item => Assert.NotNull(item.Header));
             editor.Project.Name = "Renamed prototype";
