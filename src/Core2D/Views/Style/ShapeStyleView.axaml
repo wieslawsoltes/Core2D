@@ -1,21 +1,15 @@
 <UserControl x:Class="Core2D.Views.Style.ShapeStyleView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:s="using:Core2D.Controls.Studio"
-             xmlns:vm="using:Core2D.ViewModels.Style"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Style"
              x:DataType="vm:ShapeStyleViewModel" x:CompileBindings="True">
   <StackPanel>
-    <s:StudioPropertyField Label="Style name" Margin="12,8,12,12">
-      <TextBox Text="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Style name" />
-    </s:StudioPropertyField>
-    <s:StudioSection Header="Stroke">
-      <ContentControl Content="{Binding Stroke}" />
-    </s:StudioSection>
-    <s:StudioSection Header="Fill">
-      <ContentControl Content="{Binding Fill}" />
-    </s:StudioSection>
-    <s:StudioSection Header="Typography">
-      <ContentControl Content="{Binding TextStyle}" />
+    <s:StudioSection Header="Fill"><ContentControl Content="{Binding Fill}" /></s:StudioSection>
+    <s:StudioSection Header="Stroke"><ContentControl Content="{Binding Stroke}" /></s:StudioSection>
+    <s:StudioSection Header="Typography" IsExpanded="False"><ContentControl Content="{Binding TextStyle}" /></s:StudioSection>
+    <s:StudioSection Header="Shared style" IsExpanded="False">
+      <s:StudioPropertyField Label="Style name">
+        <TextBox Text="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Style name" />
+      </s:StudioPropertyField>
     </s:StudioSection>
   </StackPanel>
 </UserControl>

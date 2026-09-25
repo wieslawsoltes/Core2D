@@ -1,0 +1,31 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:editor="using:Core2D.Controls.Editor">
+  <Styles.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioInteractions.axaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Styles.Resources>
+  <Style Selector="ToggleButton"><Setter Property="Theme" Value="{StaticResource StudioToggleButtonTheme}" /></Style>
+  <Style Selector="RadioButton"><Setter Property="Theme" Value="{StaticResource StudioRadioButtonTheme}" /></Style>
+  <Style Selector="ListBoxItem"><Setter Property="Theme" Value="{StaticResource StudioListBoxItemTheme}" /></Style>
+  <Style Selector="MenuItem"><Setter Property="Theme" Value="{StaticResource StudioMenuItemTheme}" /></Style>
+  <Style Selector="NumericUpDown"><Setter Property="Theme" Value="{StaticResource StudioNumericUpDownTheme}" /></Style>
+  <Style Selector=":is(TextBox)"><Setter Property="ContextFlyout" Value="{StaticResource StudioTextContextFlyout}" /></Style>
+  <Style Selector="Menu > MenuItem /template/ Popup#PART_Popup"><Setter Property="Placement" Value="BottomEdgeAlignedLeft" /></Style>
+  <Style Selector="editor|MenuView.studio-command-menu Menu > MenuItem /template/ Popup#PART_Popup"><Setter Property="Placement" Value="RightEdgeAlignedTop" /></Style>
+  <Style Selector="DocumentTabStripItem">
+    <Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}" />
+    <Setter Property="MinHeight" Value="32" />
+  </Style>
+  <Style Selector="DocumentTabStripItem:selected, DocumentTabStripItem:active:selected">
+    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+  </Style>
+  <Style Selector="DocumentTabStripItem:pointerover">
+    <Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+  </Style>
+</Styles>

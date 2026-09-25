@@ -1,0 +1,193 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:conv="using:Avalonia.Controls.Converters"
+                    x:CompileBindings="True">
+  <conv:PlatformKeyGestureConverter x:Key="StudioKeyGestureConverter" />
+
+  <MenuFlyout x:Key="StudioTextContextFlyout" x:DataType="TextBox">
+    <MenuItem Header="Cut" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" />
+    <MenuItem Header="Copy" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" />
+    <MenuItem Header="Paste" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" />
+    <Separator />
+    <MenuItem Header="Select all" Command="{Binding $parent[TextBox].SelectAll}" />
+  </MenuFlyout>
+
+  <ControlTheme x:Key="StudioToggleButtonTheme" TargetType="ToggleButton" x:DataType="ToggleButton">
+    <Setter Property="MinHeight" Value="28" />
+    <Setter Property="Padding" Value="8,5" />
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}" RecognizesAccessKey="True"
+                          Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                          Padding="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" />
+    </Style>
+    <Style Selector="^:checked /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource StudioSelectionTextBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" />
+    </Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="StudioRadioButtonTheme" TargetType="RadioButton" BasedOn="{StaticResource StudioToggleButtonTheme}" />
+
+  <ControlTheme x:Key="StudioListBoxItemTheme" TargetType="ListBoxItem" x:DataType="ListBoxItem">
+    <Setter Property="MinHeight" Value="28" />
+    <Setter Property="Padding" Value="8,4" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}" Padding="{TemplateBinding Padding}"
+                          Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}"
+                          BorderBrush="Transparent" BorderThickness="1" CornerRadius="4"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalContentAlignment="Center" />
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" />
+    </Style>
+    <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource StudioSelectionTextBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" />
+    </Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="StudioMenuItemTheme" TargetType="MenuItem" x:DataType="MenuItem">
+    <Setter Property="MinHeight" Value="28" />
+    <Setter Property="Padding" Value="8,5" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_MenuSurface" Background="{TemplateBinding Background}" CornerRadius="5" Padding="{TemplateBinding Padding}">
+          <Grid ColumnDefinitions="16,*,Auto,8" ColumnSpacing="8">
+            <ContentControl Name="PART_IconPresenter" Content="{TemplateBinding Icon}" Width="16" Height="16" VerticalAlignment="Center" />
+            <Path Name="PART_Checkmark" Data="M2,7L6,11L14,3" Stroke="{TemplateBinding Foreground}" StrokeThickness="1.5" IsVisible="False" />
+            <Ellipse Name="PART_RadioMark" Width="6" Height="6" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" IsVisible="False" />
+            <ContentPresenter Name="PART_HeaderPresenter" Grid.Column="1" Content="{TemplateBinding Header}"
+                              ContentTemplate="{TemplateBinding HeaderTemplate}" Foreground="{TemplateBinding Foreground}"
+                              VerticalContentAlignment="Center" RecognizesAccessKey="True" />
+            <TextBlock Grid.Column="2" Text="{TemplateBinding InputGesture, Converter={StaticResource StudioKeyGestureConverter}}"
+                       Foreground="{DynamicResource StudioMutedBrush}" VerticalAlignment="Center" FontSize="11" />
+            <Path Name="PART_SubmenuArrow" Grid.Column="3" Data="M1,1L5,5L1,9"
+                  Stroke="{TemplateBinding Foreground}" StrokeThickness="1" Width="6" Height="10" VerticalAlignment="Center" />
+            <Popup Name="PART_Popup" IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}"
+                   Placement="RightEdgeAlignedTop" IsLightDismissEnabled="False">
+              <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}"
+                      BorderThickness="1" CornerRadius="8" Padding="4" BoxShadow="{DynamicResource StudioElevation}">
+                <ScrollViewer MaxHeight="600" HorizontalScrollBarVisibility="Disabled">
+                  <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" Grid.IsSharedSizeScope="True" />
+                </ScrollViewer>
+              </Border>
+            </Popup>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:selected /template/ Border#PART_MenuSurface">
+      <Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}" />
+    </Style>
+    <Style Selector="^:empty /template/ Path#PART_SubmenuArrow"><Setter Property="IsVisible" Value="False" /></Style>
+    <Style Selector="^:toggle /template/ ContentControl#PART_IconPresenter, ^:radio /template/ ContentControl#PART_IconPresenter">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^:checked:toggle /template/ Path#PART_Checkmark"><Setter Property="IsVisible" Value="True" /></Style>
+    <Style Selector="^:checked:radio /template/ Ellipse#PART_RadioMark"><Setter Property="IsVisible" Value="True" /></Style>
+    <Style Selector="^:separator">
+      <Setter Property="Template"><ControlTemplate><Separator Margin="8,3" /></ControlTemplate></Setter>
+    </Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="StudioSpinnerButtonTheme" TargetType="RepeatButton" x:DataType="RepeatButton">
+    <Setter Property="Padding" Value="3,1" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}"
+                          Background="Transparent" Foreground="{TemplateBinding Foreground}"
+                          HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" />
+    </Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.3" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="StudioSpinnerTheme" TargetType="ButtonSpinner" x:DataType="ButtonSpinner">
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Surface" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+          <DockPanel>
+            <UniformGrid Name="PART_SpinnerPanel" DockPanel.Dock="Right" Rows="2" Width="20" IsVisible="{TemplateBinding ShowButtonSpinner}">
+              <RepeatButton Name="PART_IncreaseButton" Theme="{StaticResource StudioSpinnerButtonTheme}" AutomationProperties.Name="Increase">
+                <Path Data="M0,4L4,0L8,4" Width="8" Height="4" Stroke="{DynamicResource StudioMutedBrush}" StrokeThickness="1" />
+              </RepeatButton>
+              <RepeatButton Name="PART_DecreaseButton" Theme="{StaticResource StudioSpinnerButtonTheme}" AutomationProperties.Name="Decrease">
+                <Path Data="M0,0L4,4L8,0" Width="8" Height="4" Stroke="{DynamicResource StudioMutedBrush}" StrokeThickness="1" />
+              </RepeatButton>
+            </UniformGrid>
+            <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:left /template/ UniformGrid#PART_SpinnerPanel"><Setter Property="DockPanel.Dock" Value="Left" /></Style>
+    <Style Selector="^:focus-within /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="StudioNumericUpDownTheme" TargetType="NumericUpDown" x:DataType="NumericUpDown">
+    <Setter Property="MinHeight" Value="28" />
+    <Setter Property="Padding" Value="6,4" />
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DataValidationErrors>
+          <ButtonSpinner Name="PART_Spinner" Theme="{StaticResource StudioSpinnerTheme}" IsTabStop="False"
+                         AllowSpin="{TemplateBinding AllowSpin}" ShowButtonSpinner="{TemplateBinding ShowButtonSpinner}"
+                         ButtonSpinnerLocation="{TemplateBinding ButtonSpinnerLocation}"
+                         Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+            <TextBox Name="PART_TextBox" MinWidth="20" Text="{TemplateBinding Text}" IsReadOnly="{TemplateBinding IsReadOnly}"
+                     TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="NoWrap" AcceptsReturn="False"
+                     Watermark="{TemplateBinding Watermark}" Padding="{TemplateBinding Padding}" BorderThickness="0"
+                     InnerLeftContent="{TemplateBinding InnerLeftContent}" InnerRightContent="{TemplateBinding InnerRightContent}"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+          </ButtonSpinner>
+        </DataValidationErrors>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

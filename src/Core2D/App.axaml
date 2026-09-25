@@ -8,7 +8,6 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <!-- Keep dictionaries separate: the studio palette deliberately overrides legacy tokens. -->
         <ResourceInclude Source="avares://Core2D/Themes/Themes.axaml" />
         <ResourceInclude Source="avares://Core2D/Themes/StudioPalette.axaml" />
       </ResourceDictionary.MergedDictionaries>
@@ -18,6 +17,7 @@
     <FluentTheme DensityStyle="Compact" />
     <StyleInclude Source="avares://Core2D/Styles/Common.axaml" />
     <StyleInclude Source="avares://Core2D/Styles/Studio.axaml" />
+    <StyleInclude Source="avares://Core2D/Styles/StudioInteractionStyles.axaml" />
   </Application.Styles>
   <Application.DataTemplates>
     <local:ViewLocator />

@@ -1,20 +1,16 @@
 <UserControl x:Class="Core2D.Views.Shapes.RectangleShapeView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:s="using:Core2D.Controls.Studio"
-             xmlns:vm="using:Core2D.ViewModels.Shapes"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Shapes"
              x:DataType="vm:RectangleShapeViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <s:StudioPropertyField Label="Name">
+  <StackPanel Spacing="8">
+    <s:StudioPropertyField Label="Object name" Margin="0">
       <TextBox Text="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Rectangle name" />
     </s:StudioPropertyField>
-    <CheckBox Content="Stroke" IsChecked="{Binding IsStroked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-    <CheckBox Content="Fill" IsChecked="{Binding IsFilled, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-    <s:StudioSection Header="Top left">
-      <ContentControl Content="{Binding TopLeft}" />
-    </s:StudioSection>
-    <s:StudioSection Header="Bottom right">
-      <ContentControl Content="{Binding BottomRight}" />
-    </s:StudioSection>
+    <WrapPanel>
+      <CheckBox Content="Stroke" IsChecked="{Binding IsStroked, Mode=TwoWay}" Margin="0,0,16,0" />
+      <CheckBox Content="Fill" IsChecked="{Binding IsFilled, Mode=TwoWay}" />
+    </WrapPanel>
+    <s:StudioPropertyField Label="Top left" Margin="0"><ContentControl Content="{Binding TopLeft}" /></s:StudioPropertyField>
+    <s:StudioPropertyField Label="Bottom right" Margin="0"><ContentControl Content="{Binding BottomRight}" /></s:StudioPropertyField>
   </StackPanel>
 </UserControl>

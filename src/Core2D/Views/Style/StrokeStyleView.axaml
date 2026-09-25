@@ -1,93 +1,21 @@
 <UserControl x:Class="Core2D.Views.Style.StrokeStyleView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:studio="using:Core2D.Controls.Studio"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vms="using:Core2D.ViewModels.Style"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.StrokeStyle}"
-             d:DesignWidth="250" d:DesignHeight="500"
-             x:DataType="vms:StrokeStyleViewModel" x:CompileBindings="True">
-  <StackPanel Margin="{DynamicResource ContentMargin}">
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Style"
+             x:DataType="vm:StrokeStyleViewModel" x:CompileBindings="True">
+  <StackPanel Spacing="8">
     <ContentControl Content="{Binding Color}" />
-    <studio:StudioPropertyField Label="Thickness">
-      <studio:StudioNumberBox Prefix="W" Text="{Binding Thickness, Mode=TwoWay}" />
-    </studio:StudioPropertyField>
-    <studio:StudioPropertyField Label="Line Cap">
-      <ComboBox ItemsSource="{x:Static vms:StrokeStyleViewModel.LineCapValues}" 
-              SelectedItem="{Binding LineCap, Mode=TwoWay}"
-              HorizontalAlignment="Stretch" />
-    </studio:StudioPropertyField>
-    <studio:StudioPropertyField Label="Dash Offset">
-      <studio:StudioNumberBox Prefix="#" Text="{Binding DashOffset, Mode=TwoWay}" />
-    </studio:StudioPropertyField>
-    <studio:StudioPropertyField Label="Dashes">
-      <TextBox Text="{Binding Dashes, Mode=TwoWay}" />
-    </studio:StudioPropertyField>
-    <StackPanel DataContext="{Binding StartArrow}">
-      <Grid ColumnDefinitions="40*,6,30*,6,30*">
-        <StackPanel Grid.Column="0">
-          <studio:StudioPropertyField Label="Start Arrow">
-            <ComboBox ItemsSource="{x:Static vms:StrokeStyleViewModel.ArrowTypeValues}" 
-                    SelectedItem="{Binding ArrowType, Mode=TwoWay}" 
-                    Padding="3"
-                    HorizontalAlignment="Stretch" />
-          </studio:StudioPropertyField>
-        </StackPanel>
-        <GridSplitter ResizeDirection="Columns" 
-                      ResizeBehavior="PreviousAndNext" 
-                      Background="Transparent" 
-                      Width="6"
-                      Grid.Column="1" />
-        <StackPanel Grid.Column="2">
-          <studio:StudioPropertyField Label="Radius X">
-            <studio:StudioNumberBox Prefix="RX" Text="{Binding RadiusX, Mode=TwoWay}" />
-          </studio:StudioPropertyField>
-        </StackPanel>
-        <GridSplitter ResizeDirection="Columns"
-                      ResizeBehavior="PreviousAndNext"
-                      Background="Transparent"
-                      Width="6"
-                      Grid.Column="3" />
-        <StackPanel Grid.Column="4">
-          <studio:StudioPropertyField Label="Radius Y">
-            <studio:StudioNumberBox Prefix="RY" Text="{Binding RadiusY, Mode=TwoWay}" />
-          </studio:StudioPropertyField>
-        </StackPanel>
-      </Grid>
-    </StackPanel>
-    <StackPanel DataContext="{Binding EndArrow}">
-      <Grid ColumnDefinitions="40*,6,30*,6,30*">
-        <StackPanel Grid.Column="0">
-          <studio:StudioPropertyField Label="End Arrow">
-            <ComboBox ItemsSource="{x:Static vms:StrokeStyleViewModel.ArrowTypeValues}" 
-                    SelectedItem="{Binding ArrowType, Mode=TwoWay}"
-                    Padding="3" HorizontalAlignment="Stretch" />
-          </studio:StudioPropertyField>
-        </StackPanel>
-        <GridSplitter ResizeDirection="Columns"
-                      ResizeBehavior="PreviousAndNext"
-                      Background="Transparent"
-                      Width="6"
-                      Grid.Column="1" />
-        <StackPanel Grid.Column="2">
-          <studio:StudioPropertyField Label="Radius X">
-            <studio:StudioNumberBox Prefix="RX" Text="{Binding RadiusX, Mode=TwoWay}" />
-          </studio:StudioPropertyField>
-        </StackPanel>
-        <GridSplitter ResizeDirection="Columns"
-                      ResizeBehavior="PreviousAndNext"
-                      Background="Transparent"
-                      Width="6"
-                      Grid.Column="3" />
-        <StackPanel Grid.Column="4">
-          <studio:StudioPropertyField Label="Radius Y">
-            <studio:StudioNumberBox Prefix="RY" Text="{Binding RadiusY, Mode=TwoWay}" />
-          </studio:StudioPropertyField>
-        </StackPanel>
-      </Grid>
-    </StackPanel>
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+      <s:StudioNumberBox Prefix="W" Text="{Binding Thickness, Mode=TwoWay}" AutomationProperties.Name="Stroke width" />
+      <ComboBox Grid.Column="1" ItemsSource="{x:Static vm:StrokeStyleViewModel.LineCapValues}"
+                SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch" AutomationProperties.Name="Line cap" />
+    </Grid>
+    <s:StudioSection Header="Stroke details" IsExpanded="False" Padding="0,6,0,0" BorderThickness="0">
+      <StackPanel Spacing="8">
+        <s:StudioPropertyField Label="Dash pattern"><TextBox Text="{Binding Dashes, Mode=TwoWay}" AutomationProperties.Name="Dash pattern" /></s:StudioPropertyField>
+        <s:StudioPropertyField Label="Dash offset"><s:StudioNumberBox Prefix="#" Text="{Binding DashOffset, Mode=TwoWay}" AutomationProperties.Name="Dash offset" /></s:StudioPropertyField>
+        <s:StudioPropertyField Label="Start arrow"><s:StudioArrowField DataContext="{Binding StartArrow}" /></s:StudioPropertyField>
+        <s:StudioPropertyField Label="End arrow"><s:StudioArrowField DataContext="{Binding EndArrow}" /></s:StudioPropertyField>
+      </StackPanel>
+    </s:StudioSection>
   </StackPanel>
 </UserControl>

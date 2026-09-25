@@ -3,13 +3,22 @@
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools" xmlns:editor="using:Core2D.ViewModels.Editor"
              xmlns:s="using:Core2D.Controls.Studio" xmlns:containers="using:Core2D.Views.Containers"
              xmlns:libraries="using:Core2D.Views.Libraries" xmlns:renderer="using:Core2D.Views.Renderer"
+             xmlns:i="using:Avalonia.Xaml.Interactivity" xmlns:behaviors="using:Core2D.Behaviors"
              x:DataType="vm:StudioNavigatorViewModel" x:CompileBindings="True">
   <Grid DataContext="{Binding Context}" Background="{DynamicResource StudioSurfaceBrush}">
     <Grid x:DataType="editor:ProjectEditorViewModel" RowDefinitions="Auto,*">
       <s:WorkspaceHeader />
       <TabControl Name="NavigationTabs" Grid.Row="1" Classes="studio-navigation" AutomationProperties.Name="Navigation">
         <TabItem Header="Layers">
-          <containers:ProjectContainerView DataContext="{Binding Project}" />
+          <Grid RowDefinitions="Auto,*">
+            <TextBox Name="LayerSearch" Watermark="Find in layers…" Margin="12,8,12,0"
+                     AutomationProperties.Name="Find in layers" ToolTip.Tip="Search expanded layers. Enter or F3 finds the next match; Shift finds the previous match; Escape clears.">
+              <i:Interaction.Behaviors>
+                <behaviors:StudioLayerSearchBehavior Target="{Binding #ProjectTree}" />
+              </i:Interaction.Behaviors>
+            </TextBox>
+            <containers:ProjectContainerView Name="ProjectTree" Grid.Row="1" DataContext="{Binding Project}" />
+          </Grid>
         </TabItem>
         <TabItem Header="Assets">
           <Grid renderer:RendererOptions.Renderer="{Binding LibraryRenderer}"

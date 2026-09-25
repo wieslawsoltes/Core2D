@@ -1,17 +1,10 @@
 <UserControl x:Class="Core2D.Views.Shapes.PointShapeView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:studio="using:Core2D.Controls.Studio"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:s="using:Core2D.Controls.Studio"
-             xmlns:vm="using:Core2D.ViewModels.Shapes"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Shapes"
              x:DataType="vm:PointShapeViewModel" x:CompileBindings="True">
-  <Grid ColumnDefinitions="*,6,*" Margin="{DynamicResource ContentMargin}">
-    <s:StudioPropertyField Label="X">
-      <studio:StudioNumberBox Prefix="X" Text="{Binding X, Mode=TwoWay}" AutomationProperties.Name="X coordinate" />
-    </s:StudioPropertyField>
+  <Grid ColumnDefinitions="*,6,*">
+    <s:StudioNumberBox Prefix="X" Text="{Binding X, Mode=TwoWay}" AutomationProperties.Name="X coordinate" />
     <GridSplitter Grid.Column="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6" />
-    <s:StudioPropertyField Grid.Column="2" Label="Y">
-      <studio:StudioNumberBox Prefix="Y" Text="{Binding Y, Mode=TwoWay}" AutomationProperties.Name="Y coordinate" />
-    </s:StudioPropertyField>
+    <s:StudioNumberBox Grid.Column="2" Prefix="Y" Text="{Binding Y, Mode=TwoWay}" AutomationProperties.Name="Y coordinate" />
   </Grid>
 </UserControl>

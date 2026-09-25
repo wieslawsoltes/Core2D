@@ -16,7 +16,8 @@ public class StudioLayoutTests
         var editor = state.Editor!;
         editor.OnNewProject();
         var factory = Assert.IsType<DockFactory>(editor.DockFactory);
-        var panels = StudioDockGraph.Enumerate(editor.RootDock!).OfType<ITool>()
+        var root = Assert.IsAssignableFrom<IDockable>(editor.RootDock);
+        var panels = StudioDockGraph.Enumerate(root).OfType<ITool>()
             .Where(x => x.Id is not ("StudioNavigator" or "StudioInspector")).ToArray();
         Assert.Equal(16, panels.Length);
         foreach (var panel in panels)
@@ -43,7 +44,7 @@ public class StudioLayoutTests
         var navigator = factory.GetDockable<IDockable>("StudioNavigator")!;
         factory.PinDockable(navigator);
         Assert.True(factory.IsDockablePinned(navigator));
-        factory.InitLayout(editor.RootDock!);
+        factory.InitLayout(Assert.IsAssignableFrom<IDockable>(editor.RootDock));
         Assert.Same(children, home.VisibleDockables);
         Assert.Equal(0.28, left.Proportion);
         Assert.True(factory.IsDockablePinned(navigator));
