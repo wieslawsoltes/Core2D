@@ -1,19 +1,26 @@
 <UserControl x:Class="Core2D.Controls.Studio.WorkspaceHeader"
-             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:s="using:Core2D.Controls.Studio" xmlns:editor="using:Core2D.Controls.Editor"
-             xmlns:vm="using:Core2D.ViewModels.Editor" x:DataType="vm:ProjectEditorViewModel" x:CompileBindings="True">
-  <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,0,0,1" Padding="8">
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio"
+             xmlns:editor="using:Core2D.Controls.Editor"
+             xmlns:vm="using:Core2D.ViewModels.Editor"
+             x:DataType="vm:ProjectEditorViewModel" x:CompileBindings="True">
+  <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}"
+          BorderThickness="0,0,0,1" Padding="8">
     <Grid RowDefinitions="Auto,Auto" RowSpacing="4">
       <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="6">
-        <s:StudioIconButton Icon="M1,1H8V3H3V8H1Z M5,5H15V15H5Z M7,7V13H13V7Z" ToolTip.Tip="Main menu" AutomationProperties.Name="Main menu">
+        <s:StudioIconButton Name="MainMenuButton" Icon="M1,1H8V3H3V8H1Z M5,5H15V15H5Z M7,7V13H13V7Z"
+                            ToolTip.Tip="Main menu" AutomationProperties.Name="Main menu">
           <Button.Flyout>
             <Flyout Placement="BottomEdgeAlignedLeft">
               <editor:MenuView Width="246">
                 <editor:MenuView.Styles>
                   <Style Selector="Menu">
-                    <Setter Property="ItemsPanel"><ItemsPanelTemplate><StackPanel /></ItemsPanelTemplate></Setter>
+                    <Setter Property="ItemsPanel">
+                      <ItemsPanelTemplate><StackPanel /></ItemsPanelTemplate>
+                    </Setter>
                   </Style>
-                  <Style Selector="MenuItem"><Setter Property="HorizontalContentAlignment" Value="Stretch" /></Style>
+                  <Style Selector="MenuItem"><Setter Property="HorizontalAlignment" Value="Stretch" /></Style>
                 </editor:MenuView.Styles>
               </editor:MenuView>
             </Flyout>
