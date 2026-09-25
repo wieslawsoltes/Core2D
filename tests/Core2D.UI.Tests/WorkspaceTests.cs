@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Avalonia;
@@ -31,7 +32,7 @@ public class WorkspaceTests
         var editor = state.Editor;
         Assert.NotNull(editor);
         editor!.OnNewProject();
-        editor.ProjectName = "Studio workspace";
+        editor.Project!.Name = "Studio workspace";
         var view = new MainView { DataContext = editor };
         var window = new Window
         {
@@ -49,11 +50,6 @@ public class WorkspaceTests
             Assert.True(dock.Bounds.Width > 0);
             Assert.NotEmpty(view.GetVisualDescendants().OfType<WorkspaceHeader>());
             Assert.NotEmpty(view.GetVisualDescendants().OfType<ToolsView>());
-            var factory = Assert.IsAssignableFrom<IFactory>(editor.DockFactory);
-            foreach (var id in new[] { "ProjectExplorer", "PageProperties", "ShapeProperties", "StyleProperties", "StyleLibrary", "BlockLibrary", "DatabaseLibrary", "TemplateLibrary", "ScriptLibrary", "ProjectOptions", "RendererOptions", "ZoomOptions", "ImageOptions", "ObjectBrowser" })
-            {
-                Assert.True(factory.GetDockable<IDockable>(id) is not null, $"Dockable {id} must remain available.");
-            }
             using var frame = window.CaptureRenderedFrame();
             Assert.NotNull(frame);
             Assert.Equal(width, frame!.PixelSize.Width);
@@ -62,6 +58,14 @@ public class WorkspaceTests
             {
                 Directory.CreateDirectory(directory);
                 frame.Save(Path.Combine(directory, $"workspace-{(dark ? "dark" : "light")}-{width}.png"));
+            }
+
+            // GetDockable resolves registered locator aliases (Root/Pages/Home), not arbitrary IDs.
+            // Inspect the actual layout tree to verify all sixteen existing panels are retained.
+            var dockables = EnumerateDockables(Assert.IsAssignableFrom<IDockable>(editor.RootDock)).ToArray();
+            foreach (var id in new[] { "ProjectExplorer", "PageProperties", "ShapeProperties", "StyleProperties", "DataProperties", "StateProperties", "StyleLibrary", "BlockLibrary", "DatabaseLibrary", "TemplateLibrary", "ScriptLibrary", "ProjectOptions", "RendererOptions", "ZoomOptions", "ImageOptions", "ObjectBrowser" })
+            {
+                Assert.Contains(dockables, dockable => dockable.Id == id);
             }
         }
         finally
@@ -157,6 +161,21 @@ public class WorkspaceTests
         finally
         {
             window.Close();
+        }
+    }
+
+    private static IEnumerable<IDockable> EnumerateDockables(IDockable dockable)
+    {
+        yield return dockable;
+        if (dockable is IDock { VisibleDockables: { } children })
+        {
+            foreach (var child in children)
+            {
+                foreach (var descendant in EnumerateDockables(child))
+                {
+                    yield return descendant;
+                }
+            }
         }
     }
 }
