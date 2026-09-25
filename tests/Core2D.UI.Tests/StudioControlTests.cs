@@ -28,15 +28,18 @@ public class StudioControlTests
         {
             window.Show();
             Assert.True(button.Focus());
-            window.KeyPress(Key.Space, RawInputModifiers.None);
-            window.KeyRelease(Key.Space, RawInputModifiers.None);
+            window.KeyPressQwerty(PhysicalKey.Space, RawInputModifiers.None);
+            window.KeyReleaseQwerty(PhysicalKey.Space, RawInputModifiers.None);
             Assert.Equal(1, executions);
             enabled = false;
             command.NotifyCanExecuteChanged();
             Dispatcher.UIThread.RunJobs();
             Assert.False(button.IsEffectivelyEnabled);
         }
-        finally { window.Close(); }
+        finally
+        {
+            window.Close();
+        }
     }
 
     [AvaloniaFact]
@@ -52,7 +55,10 @@ public class StudioControlTests
             Assert.False(first.IsChecked);
             Assert.True(second.IsChecked);
         }
-        finally { window.Close(); }
+        finally
+        {
+            window.Close();
+        }
     }
 
     [AvaloniaFact]
@@ -70,7 +76,10 @@ public class StudioControlTests
             Assert.Same(input, field.Content);
             Assert.True(input.Bounds.Height >= 28);
         }
-        finally { window.Close(); }
+        finally
+        {
+            window.Close();
+        }
     }
 
     [AvaloniaTheory]
@@ -93,11 +102,24 @@ public class StudioControlTests
                 {
                     section,
                     new StudioIconButton { Content = "Export", Icon = Geometry.Parse("M0,8 L8,0 L16,8 L10,8 L10,16 L6,16 L6,8 Z") },
-                    new StudioToolShelf { Content = new StackPanel { Orientation = Avalonia.Layout.Orientation.Horizontal, Children = { new StudioToolButton { IsChecked = true }, new StudioToolButton() } } }
+                    new StudioToolShelf
+                    {
+                        Content = new StackPanel
+                        {
+                            Orientation = Avalonia.Layout.Orientation.Horizontal,
+                            Children = { new StudioToolButton { IsChecked = true }, new StudioToolButton() }
+                        }
+                    }
                 }
             }
         };
-        var window = new Window { Width = 360, Height = 360, Content = surface, RequestedThemeVariant = dark ? ThemeVariant.Dark : ThemeVariant.Light };
+        var window = new Window
+        {
+            Width = 360,
+            Height = 360,
+            Content = surface,
+            RequestedThemeVariant = dark ? ThemeVariant.Dark : ThemeVariant.Light
+        };
         try
         {
             window.Show();
@@ -114,6 +136,9 @@ public class StudioControlTests
                 frame.Save(Path.Combine(directory, dark ? "controls-dark.png" : "controls-light.png"));
             }
         }
-        finally { window.Close(); }
+        finally
+        {
+            window.Close();
+        }
     }
 }

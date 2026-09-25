@@ -52,7 +52,7 @@ public class WorkspaceTests
             var factory = Assert.IsAssignableFrom<IFactory>(editor.DockFactory);
             foreach (var id in new[] { "ProjectExplorer", "PageProperties", "ShapeProperties", "StyleProperties", "StyleLibrary", "BlockLibrary", "DatabaseLibrary", "TemplateLibrary", "ScriptLibrary", "ProjectOptions", "RendererOptions", "ZoomOptions", "ImageOptions", "ObjectBrowser" })
             {
-                Assert.NotNull(factory.GetDockable<IDockable>(id));
+                Assert.True(factory.GetDockable<IDockable>(id) is not null, $"Dockable {id} must remain available.");
             }
             using var frame = window.CaptureRenderedFrame();
             Assert.NotNull(frame);
@@ -92,8 +92,8 @@ public class WorkspaceTests
             });
             var rectangle = tools.Single(x => AutomationProperties.GetName(x) == "Rectangle tool");
             rectangle.Focus();
-            window.KeyPressQwerty(Key.Space, RawInputModifiers.None);
-            window.KeyReleaseQwerty(Key.Space, RawInputModifiers.None);
+            window.KeyPressQwerty(PhysicalKey.Space, RawInputModifiers.None);
+            window.KeyReleaseQwerty(PhysicalKey.Space, RawInputModifiers.None);
             Assert.Equal("Rectangle", editor.CurrentTool?.Title);
             Assert.True(rectangle.IsChecked);
             var path = tools.Single(x => AutomationProperties.GetName(x) == "Path tool");
