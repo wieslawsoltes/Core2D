@@ -117,7 +117,7 @@
     <Setter Property="SelectionLabelBrush" Value="{DynamicResource StudioTextBrush}" />
   </Style>
 
-  <!-- Dock owns drag, resize, float, close, pin and persistence. Match derived tab item controls too. -->
+  <!-- Dock owns drag, resize, float, close, pin and persistence. Both the strip and items are derived controls. -->
   <Style Selector="DockControl">
     <Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}" />
   </Style>
@@ -128,16 +128,16 @@
   <Style Selector="ToolControl /template/ DockPanel#PART_DockPanel">
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
   </Style>
-  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip">
+  <Style Selector="ToolControl /template/ :is(TabStrip)#PART_TabStrip">
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
   </Style>
-  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip :is(TabStripItem)">
+  <Style Selector="ToolControl /template/ :is(TabStrip)#PART_TabStrip :is(TabStripItem)">
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
     <Setter Property="Padding" Value="8,6" />
     <Setter Property="FontSize" Value="11" />
   </Style>
-  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip :is(TabStripItem):selected">
+  <Style Selector="ToolControl /template/ :is(TabStrip)#PART_TabStrip :is(TabStripItem):selected">
     <Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource StudioSelectionTextBrush}" />
     <Setter Property="FontWeight" Value="SemiBold" />
