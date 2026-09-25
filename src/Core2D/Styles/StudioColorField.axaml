@@ -8,12 +8,11 @@
       <ControlTemplate>
         <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="4">
           <ToggleButton Name="PART_Swatch" Width="30" Height="28" Padding="3" CornerRadius="5"
+                        HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         IsChecked="{TemplateBinding IsOpen, Mode=TwoWay}" AutomationProperties.Name="Open color picker">
             <Panel>
               <Border Background="#B0B0B0" CornerRadius="2" />
-              <Border CornerRadius="2">
-                <Border.Background><SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}}" /></Border.Background>
-              </Border>
+              <Border Name="PART_SwatchColor" CornerRadius="2" Background="{TemplateBinding SwatchBrush}" />
             </Panel>
           </ToggleButton>
           <TextBox Name="PART_Hex" Grid.Column="1" Text="{Binding Hex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"

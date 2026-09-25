@@ -14,7 +14,7 @@ namespace Core2D.ViewModels.Docking;
 /// <summary>Migrates the legacy home perspective while retaining documents and recoverable tool state.</summary>
 public static class StudioWorkspaceLayout
 {
-    /// <summary>Applies the studio sidebar layout once; later initialization preserves user customization.</summary>
+    /// <summary>Applies the sidebar layout once; later initialization preserves user customization.</summary>
     public static bool Apply(DockFactory factory, ProjectEditorViewModel editor)
     {
         if (factory.RootDock is not { } root || factory.HomeDock is not { VisibleDockables: { } children } home)
@@ -22,8 +22,6 @@ public static class StudioWorkspaceLayout
             return false;
         }
 
-        // GetDockable resolves locator aliases, not arbitrary graph IDs. Include hidden/pinned tools
-        // on every initialization, including deserialization and when a sidebar has been floated.
         StudioDockGraph.RegisterTools(factory, root);
         if (StudioDockGraph.Enumerate(root).Any(x => x.Id is "StudioNavigator" or "StudioInspector"))
         {
@@ -63,20 +61,29 @@ public static class StudioWorkspaceLayout
         var right = new ToolDock
         {
             Id = "StudioRightDock", Title = "Inspector", Proportion = 0.21,
-            MinWidth = 240, ActiveDockable = inspector, Alignment = Alignment.Right,
+            // Leave 240 logical pixels for content after Dock's four-pixel frame.
+            MinWidth = 244, ActiveDockable = inspector, Alignment = Alignment.Right,
             GripMode = GripMode.Hidden, IsCollapsable = false,
             VisibleDockables = factory.CreateList<IDockable>(inspector)
         };
 
         foreach (var tool in tools)
         {
+            // Tools may have been docked inside a document subtree that will be retained.
+            // Remove their old slot before adding them to a sidebar, preserving single ownership.
+            if (tool.Owner is IDock { VisibleDockables: { } oldChildren } oldOwner)
+            {
+                oldChildren.Remove(tool);
+                if (ReferenceEquals(oldOwner.ActiveDockable, tool))
+                {
+                    oldOwner.ActiveDockable = oldChildren.FirstOrDefault(x => x is not ISplitter);
+                }
+            }
             var owner = IsNavigationTool(tool.Id) ? left : right;
             tool.OriginalOwner = null;
             owner.VisibleDockables!.Add(tool);
         }
 
-        // Pinned tools stay in their existing pinned collections, but their restoration owner must
-        // not point to one of the legacy tool docks that is about to leave the visual tree.
         RehomePinned(homeRoot, left, right);
         if (!ReferenceEquals(root, homeRoot))
         {
@@ -105,8 +112,7 @@ public static class StudioWorkspaceLayout
             }
         }
 
-        // New markers make the nested initialization idempotent. Register owners before hiding
-        // advanced panels so restore/close/float actions keep using the existing Dock implementation.
+        // Markers make nested initialization idempotent. Register owners before hiding tools.
         factory.InitLayout(root);
         foreach (var tool in tools)
         {

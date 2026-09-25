@@ -21,6 +21,10 @@ public class StudioColorField : TemplatedControl
     public static readonly StyledProperty<bool> IsOpenProperty =
         AvaloniaProperty.Register<StudioColorField, bool>(nameof(IsOpen));
 
+    /// <summary>Defines the presentation brush derived from Color.</summary>
+    public static readonly DirectProperty<StudioColorField, IBrush> SwatchBrushProperty =
+        AvaloniaProperty.RegisterDirect<StudioColorField, IBrush>(nameof(SwatchBrush), x => x.SwatchBrush);
+
     /// <summary>Defines the validated hex editor value.</summary>
     public static readonly DirectProperty<StudioColorField, string> HexProperty =
         AvaloniaProperty.RegisterDirect<StudioColorField, string>(nameof(Hex), x => x.Hex, (x, v) => x.Hex = v,
@@ -31,8 +35,12 @@ public class StudioColorField : TemplatedControl
         AvaloniaProperty.RegisterDirect<StudioColorField, decimal>(nameof(OpacityPercent), x => x.OpacityPercent,
             (x, v) => x.OpacityPercent = v, defaultBindingMode: BindingMode.TwoWay, enableDataValidation: true);
 
+    private IBrush _swatchBrush = Brushes.Black;
     private string _hex = "000000";
     private decimal _opacityPercent = 100m;
+
+    /// <summary>Gets the presentation brush, derived from the edited color.</summary>
+    public IBrush SwatchBrush => _swatchBrush;
 
     /// <summary>Gets or sets the edited color.</summary>
     public Color Color
@@ -85,6 +93,7 @@ public class StudioColorField : TemplatedControl
         base.OnPropertyChanged(change);
         if (change.Property == ColorProperty)
         {
+            SetAndRaise(SwatchBrushProperty, ref _swatchBrush, new SolidColorBrush(Color));
             SetAndRaise(HexProperty, ref _hex, $"{Color.R:X2}{Color.G:X2}{Color.B:X2}");
             SetAndRaise(OpacityPercentProperty, ref _opacityPercent, decimal.Round(Color.A * 100m / 255m, 2));
         }
