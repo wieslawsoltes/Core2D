@@ -1,20 +1,38 @@
 # Studio workspace
 
-Core2D's Figma-inspired presentation layer uses native Avalonia controls and the existing Dock layout. It is not a web overlay or a separate editor.
+Core2D's native Avalonia workspace uses a Figma-inspired sidebar-and-canvas layout. The editor, rendering engines, document models, import/export services and existing commands remain the source of application behavior.
 
-## Components
+## Workspace composition
 
-`Controls/Studio` provides `StudioIconButton`, `StudioToolButton`, `StudioGlyph`, `StudioToolShelf`, `StudioSurface`, `StudioSection`, `StudioPropertyField`, and `WorkspaceHeader`. Native command, focus, automation, radio-button and expander behavior is retained. Views remain passive; no editor state is duplicated in the controls. `StudioGlyph` tints the alpha mask of shared drawing images with a control-local foreground, avoiding invisible dark-theme icons without mutating shared resources.
+The default home perspective has a full-height **Layers / Assets** sidebar, the central document canvas, and a single **Design / Data / State** inspector. The document title and main menu live in the navigation sidebar. All twelve drawing tools and five contextual path tools remain in the floating bottom shelf. Zoom out, fit, zoom in and reset are canvas-local actions. Overlays occupy only their actual control bounds; the remainder of the canvas receives drawing input normally. Narrow shelves scroll horizontally.
 
-`Themes/StudioPalette.axaml` contains light/dark semantic brushes, spacing and elevation. `Styles/StudioControls.axaml` contains control templates. `Styles/Studio.axaml` adapts existing inputs, tables, rulers and docking chrome without replacing Dock's interaction templates. Resource dictionaries are layered with `ResourceInclude`, not flattened with `MergeResourceInclude`, because the studio palette intentionally overrides legacy keys.
+The design inspector composes existing view models for geometry, fill, stroke, typography, page layout, snapping, overlays and export. It does not copy editable properties into another model. Alignment actions call the existing shape service. Advanced stroke details, arrow editors, shared styles and less-frequently-used settings are collapsible. Assets retain the original blocks, styles, templates, images, databases and scripts views.
 
-## Preserved workflows
+Layer search uses the existing ProDataGrid search model and searches its expanded/flattened hierarchy. Enter or F3 navigates forward, Shift navigates backward, and Escape clears the query. It does not claim to recursively search collapsed branches.
 
-The entire original menu remains accessible below the workspace header, including file/import/export operations, scripts, advanced tools, options and panel commands. Undo, redo, save and export bind to existing editor/platform actions. The title follows the project name, including unsaved projects.
+The project home screen retains the original New, Open and file-drop actions. No synthetic recent-file entries or nonfunctional collaboration actions are presented.
 
-All twelve drawing tools and five contextual path subtools remain available. Pages, templates and block documents share a bottom shelf. It reserves its own layout row, so it does not intercept canvas input, and scrolls horizontally in narrow dock panes. Radio groups are local to each shelf, allowing multiple document panes to reflect the selected editor tool.
+## Dock layout compatibility
 
-The Dock factory, sixteen panel IDs, persistence, document models, renderers, import/export code and canvas behaviors are unchanged. Existing layouts are not reset or migrated. Property editors preserve their original two-way bindings and validation. Stroke, fill, typography, rectangle geometry and coordinate editors use compact sections and labelled fields. The empty-selection guidance wraps independently of the property editor's horizontal scroller.
+`StudioWorkspaceLayout` adapts legacy four-pane home layouts during factory initialization. It preserves document subtrees and their split structure, moves legacy tools into recoverable sidebar locations, retains pinned collections, and avoids recreating floating document windows. The redundant global menu/status dockables are replaced by the sidebar header, canvas controls and inspector settings.
+
+`StudioDockGraph` traverses visible, hidden, pinned and floating dockables without following cyclic owner references. It registers stable tool IDs in the factory's locator on each initialization, allowing existing panel menu commands to restore tools hidden in nested root docks. Previously hidden legacy tools receive a live restoration owner rather than retaining a reference to a removed pane.
+
+The `StudioNavigator` and `StudioInspector` dockables act as migration markers. They are detected even when pinned, hidden or floated. Subsequent initialization and saved-layout loading retain user-customized proportions and locations rather than resetting the workspace. All sixteen original tool panels remain available through the existing menu. Single-tab tool strips are hidden; restoring an advanced tool reveals the sidebar tab strip.
+
+## Controls and themes
+
+`Controls/Studio` contains the reusable surfaces, icon and tool buttons, tinted image glyphs, collapsible sections, property fields, numeric fields, color fields, arrow editors, alignment bar, canvas controls and workspace header. View code-behind only initializes declarative markup. Interaction behavior lives in `Behaviors`.
+
+The theme dictionaries define original compact templates for buttons, text inputs, check boxes, toggle/radio buttons, combo boxes, tabs, list items, menu items, numeric spinners and color fields. Complex infrastructure such as ProDataGrid virtualization, Dock drag/drop handling, scroll viewers and the color picker's spectrum implementation remains supplied by the existing libraries; it is not reimplemented or replaced with decorative mock controls.
+
+The custom text editor template keeps Avalonia's native text presenter, selection, caret, composition, password, wrapping and validation contracts. Context actions retain cut, copy, paste and select-all. Menus retain their original commands, checked states, shortcuts and submenus. A leaf command dismisses the owning main-menu flyout after command dispatch.
+
+`StudioNumberBox` preserves the existing `TextBox.Text` bindings and numeric conversion. Up/Down step by one, Shift by ten, and Alt by one tenth. Prefix scrubbing previews a value and commits once on release, avoiding a history entry per pointer movement. Escape, lost capture, template replacement and detachment cancel the scrub without changing the model. Read-only fields do not step or scrub.
+
+`StudioColorField` exposes one two-way color value, RGB hex and alpha percentage. Six hexadecimal digits preserve alpha; eight explicitly specify ARGB. Invalid values are rejected through binding validation. The swatch opens the existing spectrum picker. `StudioGlyph` tints an image's alpha mask with the local foreground without modifying shared drawing resources.
+
+Semantic palette tokens live in `Themes/StudioPalette.axaml`. Dictionaries are layered with `ResourceInclude`, because the studio palette intentionally overrides legacy keys. Existing application keyboard shortcuts remain unchanged; familiar Figma positioning does not silently remap Core2D's commands.
 
 ## Validation
 
@@ -26,10 +44,8 @@ dotnet test tests/Core2D.UI.Tests/Core2D.UI.Tests.csproj -c Release
 dotnet test tests/Core2D.ViewModels.Tests/Core2D.ViewModels.Tests.csproj -c Release
 ```
 
-On Linux, install `libfontconfig1` and `libfreetype6`. Set `CORE2D_UI_ARTIFACTS` to retain Skia-rendered PNGs. The Studio UI validation workflow uploads screenshots, full build logs and TRX reports as `studio-ui-validation`.
+Linux rendering requires `libfontconfig1` and `libfreetype6`. Set `CORE2D_UI_ARTIFACTS` to retain real Skia-rendered screenshots. The read-only Studio UI workflow uploads PNGs, complete build logs and TRX reports.
 
-The suite exercises real application resources and the docked `MainView` at desktop and compact sizes, both themes, live theme changes, keyboard command activation, section expansion, hosted text editing, header bindings, all drawing-tool bindings, contextual path subtools, narrow-pane scrolling and selection synchronization across duplicated shelves. All sixteen panels are checked in the actual layout tree, not the factory's three locator aliases.
+Coverage includes the actual docked workspace, both themes, compact windows, native keyboard command activation, drawing/path tools, duplicate tool shelves, numeric binding preservation and scrub cancellation, color validation, popups, layer search, asset tabs, legacy panel restoration, pinned-layout reinitialization and saved-layout round trips. The editor catalog constructs 32 real view/model pairs in each theme on the Avalonia test thread (64 editor instantiations, reported as two catalog test cases). Populated drawing and project-home screenshots complement empty-workspace and control-gallery captures.
 
-Full-workspace validation also exposed a missing ProDataGrid runtime dependency. Its package reference now excludes only compile assets, preserving the existing explicit assembly reference while allowing FormulaEngine and other runtime dependencies to flow to the application.
-
-Native OS drag-and-drop and floating-window chrome still require platform-specific interactive validation; headless rendering is not a substitute for that coverage.
+Headless coverage is not an exhaustive end-to-end test of every import/export format. Native OS drag-and-drop, platform floating-window decorations, touch/IME integration and screen-reader behavior still require interactive platform validation. This presentation refactor does not add Figma's collaboration service, prototype runtime or file-format compatibility, and is not a pixel-identical reproduction of every Figma product screen.
