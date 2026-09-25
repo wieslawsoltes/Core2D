@@ -11,10 +11,10 @@
         <s:StudioIconButton Name="MainMenuButton" Icon="M1,1H8V3H3V8H1Z M5,5H15V15H5Z M7,7V13H13V7Z"
                             ToolTip.Tip="Main menu" AutomationProperties.Name="Main menu">
           <Button.Flyout>
-            <Flyout x:Name="MainMenuFlyout" Placement="BottomEdgeAlignedLeft">
+            <Flyout Placement="BottomEdgeAlignedLeft">
               <editor:MenuView Width="246" Classes="studio-command-menu">
                 <i:Interaction.Behaviors>
-                  <behaviors:DismissMenuFlyoutBehavior Flyout="{Binding #MainMenuFlyout}" />
+                  <behaviors:DismissMenuFlyoutBehavior Flyout="{Binding #MainMenuButton.Flyout}" />
                 </i:Interaction.Behaviors>
                 <editor:MenuView.Styles>
                   <Style Selector="Menu">
