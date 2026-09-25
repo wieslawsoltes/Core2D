@@ -1,0 +1,13 @@
+<UserControl x:Class="Core2D.Controls.Studio.StudioCanvasControls"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Editor"
+             x:DataType="vm:ProjectEditorViewModel" x:CompileBindings="True">
+  <s:StudioSurface CornerRadius="8" Padding="2">
+    <StackPanel Orientation="Horizontal" Spacing="2">
+      <s:StudioIconButton Icon="M2,8H14V10H2Z" Command="{Binding Platform.OnZoomOut}" ToolTip.Tip="Zoom out" AutomationProperties.Name="Zoom out" />
+      <Button Content="Fit" Command="{Binding Platform.OnZoomAutoFit}" ToolTip.Tip="Fit drawing" AutomationProperties.Name="Fit drawing" />
+      <s:StudioIconButton Icon="M2,8H14V10H2Z M7,3H9V15H7Z" Command="{Binding Platform.OnZoomIn}" ToolTip.Tip="Zoom in" AutomationProperties.Name="Zoom in" />
+      <Button Content="100%" Command="{Binding Platform.OnZoomReset}" ToolTip.Tip="Reset zoom to 100%" AutomationProperties.Name="Reset zoom" />
+    </StackPanel>
+  </s:StudioSurface>
+</UserControl>

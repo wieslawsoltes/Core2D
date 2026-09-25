@@ -1,0 +1,54 @@
+name: Studio workspace migration
+on:
+  push:
+    branches: [feat/figma-inspired-workspace]
+    paths:
+      - tools/upgrade-studio-workspace.py
+      - .github/workflows/studio-migration.yml
+permissions:
+  contents: write
+concurrency:
+  group: studio-migration
+  cancel-in-progress: false
+jobs:
+  migrate-and-validate:
+    if: github.repository == 'wieslawsoltes/Core2D'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CORE2D_UI_ARTIFACTS: ${{ github.workspace }}/artifacts/ui
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/figma-inspired-workspace
+          submodules: recursive
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Materialize binding-preserving source migration
+        run: |
+          python tools/upgrade-studio-workspace.py
+          git add src tests docs
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Apply studio sidebar layout, custom inputs and binding-preserving inspector migration'
+          git push origin HEAD:feat/figma-inspired-workspace
+      - name: Validate rendered UI
+        run: |
+          mkdir -p artifacts
+          set +e
+          dotnet test tests/Core2D.UI.Tests/Core2D.UI.Tests.csproj -c Release --logger 'trx;LogFileName=studio-ui.trx' --results-directory artifacts/tests > artifacts/ui-build.log 2>&1
+          result=$?
+          grep -E 'error |Failed |Passed!|Failed!|Error Message:' artifacts/ui-build.log || true
+          tail -n 70 artifacts/ui-build.log
+          exit $result
+      - name: Capture reproducible source and results
+        if: always()
+        run: |
+          mkdir -p artifacts
+          git archive --format=tar.gz --output=artifacts/studio-source.tar.gz HEAD
+          git rev-parse HEAD > artifacts/validated-sha.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: studio-migration-review
+          path: artifacts
+          retention-days: 3

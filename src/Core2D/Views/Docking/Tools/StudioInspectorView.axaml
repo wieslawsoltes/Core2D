@@ -1,0 +1,66 @@
+<UserControl x:Class="Core2D.Views.Docking.Tools.StudioInspectorView"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Core2D.ViewModels.Docking.Tools" xmlns:editor="using:Core2D.ViewModels.Editor"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:converters="using:Core2D.Converters"
+             xmlns:containers="using:Core2D.Views.Containers" xmlns:data="using:Core2D.Views.Data"
+             xmlns:renderer="using:Core2D.Views.Renderer"
+             x:DataType="vm:StudioInspectorViewModel" x:CompileBindings="True">
+  <Panel DataContext="{Binding Context}" Background="{DynamicResource StudioSurfaceBrush}">
+    <Grid x:DataType="editor:ProjectEditorViewModel" RowDefinitions="Auto,*,Auto">
+      <Grid ColumnDefinitions="*,Auto" Margin="12,8" ColumnSpacing="8">
+        <TextBlock Text="Design" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center" />
+        <Button Grid.Column="1" Content="Export" Command="{Binding Platform.OnExport}"
+                Classes="studio-primary" AutomationProperties.Name="Export drawing" />
+      </Grid>
+      <TabControl Name="InspectorTabs" Grid.Row="1" Classes="studio-navigation">
+        <TabItem Header="Design">
+          <ScrollViewer Name="DesignScrollViewer" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+              <s:StudioAlignmentBar IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+              <ContentControl Name="SelectionGeometry" Margin="12,8"
+                              Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}"
+                              IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+              <s:StudioSection Header="Page" IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}">
+                <ContentControl Content="{Binding Project.CurrentContainer}" />
+              </s:StudioSection>
+              <ContentControl Name="SelectionAppearance"
+                              Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemStyleValueConverter.Instance}}"
+                              IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+              <s:StudioSection Header="Drawing defaults" IsExpanded="False">
+                <ContentControl Content="{Binding Project.CurrentStyleLibrary.Selected}" />
+              </s:StudioSection>
+              <s:StudioSection Header="Snapping &amp; drawing" IsExpanded="False">
+                <containers:OptionsView DataContext="{Binding Project.Options}" />
+              </s:StudioSection>
+              <s:StudioSection Header="Canvas overlays" IsExpanded="False">
+                <StackPanel>
+                  <CheckBox Content="Selection decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" />
+                  <CheckBox Content="Control points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" />
+                </StackPanel>
+              </s:StudioSection>
+              <s:StudioSection Header="Export" IsExpanded="False">
+                <StackPanel Spacing="8">
+                  <Button Content="Export drawing…" Command="{Binding Platform.OnExport}" HorizontalAlignment="Stretch" />
+                  <Button Content="Batch export wizard…" Command="{Binding Platform.OnOpenExportWizard}" HorizontalAlignment="Stretch" />
+                </StackPanel>
+              </s:StudioSection>
+            </StackPanel>
+          </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Data">
+          <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <data:DataObjectView DataContext="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
+          </ScrollViewer>
+        </TabItem>
+        <TabItem Header="State">
+          <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <ContentControl Content="{Binding PageState}" />
+          </ScrollViewer>
+        </TabItem>
+      </TabControl>
+      <Border Grid.Row="2" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0" Padding="12,8">
+        <TextBlock Text="{Binding Project.SelectedShapes.Count, StringFormat='{}{0} selected'}" Classes="studio-muted" FontSize="11" />
+      </Border>
+    </Grid>
+  </Panel>
+</UserControl>

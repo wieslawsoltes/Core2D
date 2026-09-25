@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio"
+                    xmlns:cp="using:ThemeEditor.Controls.ColorPicker" x:CompileBindings="True">
+  <ControlTheme x:Key="{x:Type s:StudioColorField}" TargetType="s:StudioColorField" x:DataType="s:StudioColorField">
+    <Setter Property="MinHeight" Value="30" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="4">
+          <ToggleButton Name="PART_Swatch" Width="30" Height="28" Padding="3" CornerRadius="5"
+                        IsChecked="{TemplateBinding IsOpen, Mode=TwoWay}" AutomationProperties.Name="Open color picker">
+            <Panel>
+              <Border Background="#B0B0B0" CornerRadius="2" />
+              <Border CornerRadius="2">
+                <Border.Background><SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}}" /></Border.Background>
+              </Border>
+            </Panel>
+          </ToggleButton>
+          <TextBox Name="PART_Hex" Grid.Column="1" Text="{Binding Hex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                   InnerLeftContent="#" AutomationProperties.Name="Hex color" />
+          <NumericUpDown Grid.Column="2" Width="62" Minimum="0" Maximum="100" Increment="1" FormatString="0.##"
+                         ShowButtonSpinner="False" Value="{Binding OpacityPercent, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                         AutomationProperties.Name="Color opacity percent" />
+          <TextBlock Grid.Column="3" Text="%" VerticalAlignment="Center" Classes="studio-muted" />
+          <Popup Name="PART_Popup" IsOpen="{TemplateBinding IsOpen, Mode=TwoWay}" IsLightDismissEnabled="True"
+                 Placement="BottomEdgeAlignedRight" PlacementTarget="{Binding #PART_Swatch}">
+            <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}"
+                    BorderThickness="1" CornerRadius="10" Padding="12">
+              <cp:ColorPicker Width="260" Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+            </Border>
+          </Popup>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

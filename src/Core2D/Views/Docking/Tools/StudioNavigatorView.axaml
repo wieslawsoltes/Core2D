@@ -1,0 +1,31 @@
+<UserControl x:Class="Core2D.Views.Docking.Tools.StudioNavigatorView"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Core2D.ViewModels.Docking.Tools" xmlns:editor="using:Core2D.ViewModels.Editor"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:containers="using:Core2D.Views.Containers"
+             xmlns:libraries="using:Core2D.Views.Libraries" xmlns:renderer="using:Core2D.Views.Renderer"
+             x:DataType="vm:StudioNavigatorViewModel" x:CompileBindings="True">
+  <Grid DataContext="{Binding Context}" Background="{DynamicResource StudioSurfaceBrush}">
+    <Grid x:DataType="editor:ProjectEditorViewModel" RowDefinitions="Auto,*">
+      <s:WorkspaceHeader />
+      <TabControl Name="NavigationTabs" Grid.Row="1" Classes="studio-navigation" AutomationProperties.Name="Navigation">
+        <TabItem Header="Layers">
+          <containers:ProjectContainerView DataContext="{Binding Project}" />
+        </TabItem>
+        <TabItem Header="Assets">
+          <Grid renderer:RendererOptions.Renderer="{Binding LibraryRenderer}"
+                renderer:RendererOptions.Selection="{Binding Project}"
+                renderer:RendererOptions.DataFlow="{Binding DataFlow}">
+            <TabControl Classes="studio-assets" TabStripPlacement="Top">
+              <TabItem Header="Blocks"><libraries:BlocksView DataContext="{Binding Project}" /></TabItem>
+              <TabItem Header="Styles"><libraries:StylesView DataContext="{Binding Project}" /></TabItem>
+              <TabItem Header="Templates"><libraries:TemplatesView DataContext="{Binding Project}" /></TabItem>
+              <TabItem Header="Images"><libraries:ImagesView DataContext="{Binding Project}" /></TabItem>
+              <TabItem Header="Data"><libraries:DatabasesView DataContext="{Binding Project}" /></TabItem>
+              <TabItem Header="Scripts"><libraries:ScriptsView DataContext="{Binding Project}" /></TabItem>
+            </TabControl>
+          </Grid>
+        </TabItem>
+      </TabControl>
+    </Grid>
+  </Grid>
+</UserControl>

@@ -1,54 +1,7 @@
-﻿<UserControl x:Class="Core2D.Views.Style.ArgbColorView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="using:Core2D.Converters"
-             xmlns:cp="using:ThemeEditor.Controls.ColorPicker"
-             xmlns:vms="using:Core2D.ViewModels.Style"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             xmlns:c="clr-namespace:Core2D.Controls"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.ArgbColor}"
-             d:DesignWidth="300" d:DesignHeight="400"
-             x:DataType="vms:ArgbColorViewModel" x:CompileBindings="True">
-  <UserControl.Resources>
-    <VisualBrush x:Key="ColorCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
-      <VisualBrush.Visual>
-        <Path Data="M 0,0 L 0,10 L 10,10 L 10,0 Z M 10,10 L 10,20 L 20,20 L 20,10 Z" Fill="LightGray" />
-      </VisualBrush.Visual>
-    </VisualBrush>
-  </UserControl.Resources>
-  <Grid Margin="{DynamicResource TextControlThemePadding}">
-    <c:ToggleItem Height="30">
-      <c:ToggleItem.ToggleContent>
-        <Panel Height="30">
-          <Border BorderThickness="0" 
-                  CornerRadius="0"
-                  Background="DarkGray" />
-          <Border BorderThickness="0" 
-                  CornerRadius="0" 
-                  Background="{DynamicResource ColorCheckerBoard}" />
-          <Border BorderThickness="0" 
-                  CornerRadius="0"
-                  Background="{Binding Value, Converter={x:Static converters:ArgbColorToBrushConverter.Instance}}" />
-        </Panel>
-      </c:ToggleItem.ToggleContent>
-      <c:ToggleItem.PopupContent>
-        <Border Background="{DynamicResource SystemChromeMediumColor}" 
-                CornerRadius="0">
-          <cp:ColorPicker x:Name="ArgbColorPicker"
-                          Color="{Binding Value, Mode=TwoWay, Converter={x:Static converters:UInt32ToColorConverter.Instance}}" 
-                          Margin="8">
-            <cp:ColorPicker.Styles>
-              <Style Selector="cp|ColorPicker /template/ Grid#PART_PickerGrid">
-                <Setter Property="MinHeight" Value="200" />
-                <Setter Property="MinWidth" Value="200" />
-              </Style>
-            </cp:ColorPicker.Styles>
-          </cp:ColorPicker>
-        </Border>  
-      </c:ToggleItem.PopupContent>
-    </c:ToggleItem>
-  </Grid>
+<UserControl x:Class="Core2D.Views.Style.ArgbColorView"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Style"
+             xmlns:converters="using:Core2D.Converters" x:DataType="vm:ArgbColorViewModel" x:CompileBindings="True">
+  <s:StudioColorField Color="{Binding Value, Mode=TwoWay, Converter={x:Static converters:UInt32ToColorConverter.Instance}}"
+                      AutomationProperties.Name="Color" />
 </UserControl>

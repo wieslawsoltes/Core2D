@@ -1,0 +1,82 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:CompileBindings="True">
+  <ControlTheme x:Key="StudioComboBoxTheme" TargetType="ComboBox" x:DataType="ComboBox">
+    <Setter Property="MinHeight" Value="28" />
+    <Setter Property="Padding" Value="8,5" />
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid>
+          <Border Name="PART_Surface" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+              <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding SelectionBoxItem}"
+                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" Foreground="{TemplateBinding Foreground}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="Center" />
+              <Path Grid.Column="1" Data="M0,0L4,4L8,0" Stroke="{TemplateBinding Foreground}" StrokeThickness="1"
+                    Width="8" Height="4" VerticalAlignment="Center" />
+            </Grid>
+          </Border>
+          <Popup Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}" Placement="BottomEdgeAlignedLeft"
+                 PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}" IsLightDismissEnabled="True">
+            <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="4" MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}">
+              <ScrollViewer MaxHeight="{TemplateBinding MaxDropDownHeight}" HorizontalScrollBarVisibility="Disabled">
+                <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+              </ScrollViewer>
+            </Border>
+          </Popup>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}" /></Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="StudioTabControlTheme" TargetType="TabControl" x:DataType="TabControl">
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="ItemsPanel"><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <Border DockPanel.Dock="{TemplateBinding TabStripPlacement}" BorderBrush="{DynamicResource StudioBorderBrush}"
+                  BorderThickness="0,0,0,1" Padding="8,4" Background="{DynamicResource StudioSurfaceBrush}">
+            <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+          </Border>
+          <ContentPresenter Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}"
+                            ContentTemplate="{TemplateBinding SelectedContentTemplate}" Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="StudioTabItemTheme" TargetType="TabItem" x:DataType="TabItem">
+    <Setter Property="Padding" Value="10,6" />
+    <Setter Property="MinHeight" Value="28" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}"
+                          Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                          CornerRadius="5" BorderBrush="Transparent" BorderThickness="1" VerticalContentAlignment="Center" />
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:selected">
+      <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="{DynamicResource StudioInputBrush}" /></Style>
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" /></Style>
+    <Style Selector="^:focus-visible /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+</ResourceDictionary>
