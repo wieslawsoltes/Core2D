@@ -14,8 +14,8 @@
         </Border>
         <Grid Grid.Column="1" ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center" ColumnSpacing="12">
           <TextBlock Text="Core2D" Classes="studio-title" VerticalAlignment="Center" />
-          <TextBlock Grid.Column="1" Text="{Binding ProjectName, TargetNullValue='Untitled drawing'}" TextTrimming="CharacterEllipsis"
-                     VerticalAlignment="Center" ToolTip.Tip="{Binding ProjectName}" />
+          <TextBlock Name="DocumentTitle" Grid.Column="1" Text="{Binding Project.Name, TargetNullValue='Untitled drawing'}"
+                     TextTrimming="CharacterEllipsis" VerticalAlignment="Center" ToolTip.Tip="{Binding ProjectName}" />
           <TextBlock Grid.Column="2" Text="Edited" Classes="studio-muted" IsVisible="{Binding IsProjectDirty}" VerticalAlignment="Center"
                      AutomationProperties.Name="Unsaved changes" />
         </Grid>

@@ -54,7 +54,9 @@
     <PackageReference Include="Dock.Avalonia" />
     <PackageReference Include="Dock.Model.ReactiveUI" />
     <PackageReference Include="ProDataGrid" GeneratePathProperty="true">
-      <ExcludeAssets>all</ExcludeAssets>
+      <!-- Keep the explicit compile reference below, but retain the grid's runtime dependencies,
+           including FormulaEngine. Excluding all assets prevents real inspector views loading. -->
+      <ExcludeAssets>compile</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="System.Drawing.Common" />
