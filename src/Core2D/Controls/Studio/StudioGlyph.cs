@@ -18,7 +18,9 @@ public class StudioGlyph : Control
     public static readonly StyledProperty<IBrush?> ForegroundProperty =
         AvaloniaProperty.Register<StudioGlyph, IBrush?>(nameof(Foreground), Brushes.Black);
 
-    private readonly ImageBrush _mask = new() { Stretch = Stretch.Uniform };
+    // DrawingImage is an IImage, but not an IImageBrushSource. An Image visual supports both
+    // vector and bitmap sources without rasterizing or changing their shared drawing resources.
+    private readonly VisualBrush _mask = new() { Stretch = Stretch.Uniform };
 
     static StudioGlyph()
     {
@@ -43,6 +45,7 @@ public class StudioGlyph : Control
     /// <inheritdoc />
     public override void Render(DrawingContext context)
     {
+        base.Render(context);
         if (Source is null || Foreground is null || Bounds.Width <= 0 || Bounds.Height <= 0)
         {
             return;
@@ -64,7 +67,9 @@ public class StudioGlyph : Control
         base.OnPropertyChanged(change);
         if (change.Property == SourceProperty)
         {
-            _mask.Source = Source;
+            _mask.Visual = Source is { } image
+                ? new Image { Source = image, Stretch = Stretch.Uniform }
+                : null;
         }
     }
 }
