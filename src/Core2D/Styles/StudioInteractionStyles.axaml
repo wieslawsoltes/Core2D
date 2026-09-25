@@ -29,10 +29,10 @@
     <Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
   </Style>
-  <!-- Single-tab strips are hidden, but docking actions remain available on sidebar chrome. -->
+  <!-- Resolve the owner explicitly: context menus are shared setter values, not view children. -->
   <Style Selector="views|StudioNavigatorView, views|StudioInspectorView" x:DataType="core:IDockable" x:CompileBindings="True">
     <Setter Property="ContextMenu">
-      <ContextMenu>
+      <ContextMenu DataContext="{Binding $parent[UserControl].DataContext}">
         <MenuItem Header="Float panel" Command="{Binding Factory.FloatDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanFloat}" />
         <MenuItem Header="Pin / unpin panel" Command="{Binding Factory.PinDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanPin}" />
       </ContextMenu>
