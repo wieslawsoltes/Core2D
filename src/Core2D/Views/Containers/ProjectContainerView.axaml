@@ -1,238 +1,126 @@
-﻿<UserControl x:Class="Core2D.Views.Containers.ProjectContainerView"
+<UserControl x:Class="Core2D.Views.Containers.ProjectContainerView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:app="using:Core2D"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
              xmlns:behaviors="using:Core2D.Behaviors"
-             xmlns:dgh="using:Avalonia.Controls.DataGridHierarchical"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Shapes"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             xmlns:c="clr-namespace:Core2D.Controls"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Project}"
-             d:DesignWidth="250" d:DesignHeight="400"
+             xmlns:c="using:Core2D.Controls"
+             xmlns:s="using:Core2D.Controls.Studio"
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <UserControl.Resources>
     <dd:ProjectDataGridDropHandler x:Key="ProjectDataGridDropHandler" />
     <ContextMenu x:Key="ProjectContainerContextMenu" x:DataType="vmc:ProjectContainerViewModel">
-      <MenuItem Header="_Add Document" 
-                Command="{Binding AddDocument}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Add Document" Command="{Binding AddDocument}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="E_xport" 
-                Command="{Binding ExportCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="E_xport" Command="{Binding ExportCommand}" CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
     <ContextMenu x:Key="DocumentContainerContextMenu" x:DataType="vmc:DocumentContainerViewModel">
-      <MenuItem Header="_Add Page" 
-                Command="{Binding AddPage}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Add Page" Command="{Binding AddPage}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="Insert Document Bef_ore"
-                Command="{Binding InsertDocumentBefore}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="Insert Document Aft_er"
-                Command="{Binding InsertDocumentAfter}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="Insert Document Bef_ore" Command="{Binding InsertDocumentBefore}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="Insert Document Aft_er" Command="{Binding InsertDocumentAfter}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="Cu_t" 
-                Command="{Binding CutCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Copy" 
-                Command="{Binding CopyCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Paste" 
-                Command="{Binding PasteCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="Cu_t" Command="{Binding CutCommand}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Copy" Command="{Binding CopyCommand}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Paste" Command="{Binding PasteCommand}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="_Delete" 
-                Command="{Binding DeleteCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="E_xport" 
-                Command="{Binding ExportCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="E_xport" Command="{Binding ExportCommand}" CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
     <ContextMenu x:Key="PageContainerContextMenu" x:DataType="vmc:PageContainerViewModel">
-      <MenuItem Header="Insert Page Bef_ore"
-                Command="{Binding InsertPageBefore}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="Insert Page Aft_er"
-                Command="{Binding InsertPageAfter}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="Insert Page Bef_ore" Command="{Binding InsertPageBefore}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="Insert Page Aft_er" Command="{Binding InsertPageAfter}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="Cu_t" 
-                Command="{Binding CutCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Copy" 
-                Command="{Binding CopyCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Paste" 
-                Command="{Binding PasteCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="Cu_t" Command="{Binding CutCommand}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Copy" Command="{Binding CopyCommand}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Paste" Command="{Binding PasteCommand}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="_Delete" 
-                Command="{Binding DeleteCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="E_xport" 
-                Command="{Binding ExportCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="E_xport" Command="{Binding ExportCommand}" CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
     <ContextMenu x:Key="LayerContainerContextMenu" x:DataType="vmc:LayerContainerViewModel">
-      <MenuItem Header="_Add Layer" 
-                Command="{Binding AddLayer}"
-                CommandParameter="{Binding Owner, Mode=OneWay}" />
+      <MenuItem Header="_Add Layer" Command="{Binding AddLayer}" CommandParameter="{Binding Owner, Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="Cu_t" 
-                Command="{Binding CutCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Copy" 
-                Command="{Binding CopyCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Paste" 
-                Command="{Binding PasteCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="Cu_t" Command="{Binding CutCommand}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Copy" Command="{Binding CopyCommand}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Paste" Command="{Binding PasteCommand}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="_Delete" 
-                Command="{Binding RemoveLayer}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Delete" Command="{Binding RemoveLayer}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="E_xport" 
-                Command="{Binding ExportCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="E_xport" Command="{Binding ExportCommand}" CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
     <ContextMenu x:Key="BaseShapeContextMenu" x:DataType="vms:BaseShapeViewModel">
-      <MenuItem Header="Cu_t" 
-                Command="{Binding CutCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Copy" 
-                Command="{Binding CopyCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
-      <MenuItem Header="_Paste" 
-                Command="{Binding PasteCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="Cu_t" Command="{Binding CutCommand}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Copy" Command="{Binding CopyCommand}" CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Paste" Command="{Binding PasteCommand}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="_Delete" 
-                Command="{Binding DeleteCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="_Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Mode=OneWay}" />
       <Separator />
-      <MenuItem Header="E_xport" 
-                Command="{Binding ExportCommand}"
-                CommandParameter="{Binding Mode=OneWay}" />
+      <MenuItem Header="E_xport" Command="{Binding ExportCommand}" CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
   </UserControl.Resources>
   <DockPanel>
-    <Grid DockPanel.Dock="Top" 
-          RowDefinitions="*" 
-          ColumnDefinitions="*,Auto" 
-          Margin="{DynamicResource ContentMargin}">
-      <TextBox Text="{Binding Name, Mode=TwoWay}" 
-               BorderBrush="Transparent" 
-               Background="Transparent"
-               VerticalAlignment="Center" 
-               Margin="0,0,0,0" 
-               Grid.Column="0" />
-      <StackPanel Grid.Column="1" 
-                  Orientation="Horizontal" 
-                  HorizontalAlignment="Right" 
-                  VerticalAlignment="Center">
-        <Button Content="&#727;" 
-                Command="{Binding DeleteCommand}"
-                CommandParameter="{Binding Selected}"
-                IsVisible="{Binding !!Selected}" 
-                BorderBrush="Transparent"
-                Background="Transparent" 
-                Padding="12,4,12,4" />
-        <Button Content="+" 
-                Command="{Binding New}"
-                CommandParameter="{Binding Selected}" 
-                BorderBrush="Transparent" 
-                Background="Transparent"
-                Padding="12,4,12,4" />
+    <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}">
+      <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent"
+               VerticalAlignment="Center" AutomationProperties.Name="Project name" />
+      <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <s:StudioIconButton Icon="M3,3H13V4H3Z M5,1H11V2H5Z M4,5H12V15H4Z M5,6V14H11V6Z"
+                            Command="{Binding DeleteCommand}" CommandParameter="{Binding Selected}"
+                            IsVisible="{Binding !!Selected}" ToolTip.Tip="Delete selected item" AutomationProperties.Name="Delete selected item" />
+        <s:StudioIconButton Icon="M1,7H15V9H1Z M7,1H9V15H7Z" Command="{Binding New}"
+                            CommandParameter="{Binding Selected}" ToolTip.Tip="Add document, page or layer" AutomationProperties.Name="Add project item" />
       </StackPanel>
     </Grid>
     <DataGrid x:Name="DocumentsDataGrid"
               SelectedItem="{Binding Selected, Mode=TwoWay}"
-              SelectionMode="Extended"
-              AutoGenerateColumns="False"
-              IsReadOnly="True"
-              CanUserReorderColumns="False"
-              CanUserResizeColumns="True"
-              CanUserSortColumns="True"
-              HeadersVisibility="None"
-              GridLinesVisibility="None"
-              BorderThickness="0"
-              RowBackground="Transparent"
-              ContextMenu="{StaticResource ProjectContainerContextMenu}">
+              SelectionMode="Extended" AutoGenerateColumns="False" IsReadOnly="True"
+              CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="True"
+              HeadersVisibility="None" GridLinesVisibility="None" BorderThickness="0"
+              RowBackground="Transparent" ContextMenu="{StaticResource ProjectContainerContextMenu}">
       <i:Interaction.Behaviors>
-        <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}"
-                                 Handler="{StaticResource ProjectDataGridDropHandler}" />
+        <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ProjectDataGridDropHandler}" />
         <behaviors:ProjectDocumentsGridBehavior />
       </i:Interaction.Behaviors>
       <DataGrid.KeyBindings>
-        <KeyBinding Command="{Binding New}"
-                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
-                    Gesture="{app:PlatformGesture Text=Primary+N}" />
-        <KeyBinding Command="{Binding CutCommand}"
-                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
-                    Gesture="{app:PlatformGesture Text=Primary+X}" />
-        <KeyBinding Command="{Binding CopyCommand}"
-                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
-                    Gesture="{app:PlatformGesture Text=Primary+C}" />
-        <KeyBinding Command="{Binding PasteCommand}"
-                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
-                    Gesture="{app:PlatformGesture Text=Primary+V}" />
-        <KeyBinding Command="{Binding DeleteCommand}"
-                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItems}"
-                    Gesture="Delete" />
-        <KeyBinding Command="{Binding ExportCommand}"
-                    CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}"
-                    Gesture="{app:PlatformGesture Text=Primary+E}" />
+        <KeyBinding Command="{Binding New}" CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}" Gesture="{app:PlatformGesture Text=Primary+N}" />
+        <KeyBinding Command="{Binding CutCommand}" CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}" Gesture="{app:PlatformGesture Text=Primary+X}" />
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}" Gesture="{app:PlatformGesture Text=Primary+C}" />
+        <KeyBinding Command="{Binding PasteCommand}" CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}" Gesture="{app:PlatformGesture Text=Primary+V}" />
+        <KeyBinding Command="{Binding DeleteCommand}" CommandParameter="{Binding #DocumentsDataGrid.SelectedItems}" Gesture="Delete" />
+        <KeyBinding Command="{Binding ExportCommand}" CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}" Gesture="{app:PlatformGesture Text=Primary+E}" />
       </DataGrid.KeyBindings>
       <DataGrid.Resources>
-        <DataTemplate x:Key="ProjectDocumentsCellTemplate"
-                      x:DataType="x:Object">
+        <DataTemplate x:Key="ProjectDocumentsCellTemplate" x:DataType="x:Object">
           <ContentPresenter Content="{Binding}" />
         </DataTemplate>
       </DataGrid.Resources>
       <DataGrid.DataTemplates>
-        <DataTemplate DataType="vmc:DocumentContainerViewModel"
-                      x:DataType="vmc:DocumentContainerViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
-                          ContextMenu="{StaticResource DocumentContainerContextMenu}" />
+        <DataTemplate DataType="vmc:DocumentContainerViewModel" x:DataType="vmc:DocumentContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource DocumentContainerContextMenu}" />
         </DataTemplate>
-        <DataTemplate DataType="vmc:PageContainerViewModel"
-                      x:DataType="vmc:PageContainerViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
-                          ContextMenu="{StaticResource PageContainerContextMenu}" />
+        <DataTemplate DataType="vmc:PageContainerViewModel" x:DataType="vmc:PageContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource PageContainerContextMenu}" />
         </DataTemplate>
-        <DataTemplate DataType="vmc:LayerContainerViewModel"
-                      x:DataType="vmc:LayerContainerViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
-                          ContextMenu="{StaticResource LayerContainerContextMenu}">
+        <DataTemplate DataType="vmc:LayerContainerViewModel" x:DataType="vmc:LayerContainerViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource LayerContainerContextMenu}">
             <c:EditableItem.IconContent>
-              <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}"
-                        MinWidth="0"
-                        VerticalAlignment="Center" />
+              <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center"
+                        AutomationProperties.Name="Layer visibility" />
             </c:EditableItem.IconContent>
           </c:EditableItem>
         </DataTemplate>
-        <DataTemplate DataType="vms:BaseShapeViewModel"
-                      x:DataType="vms:BaseShapeViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}"
-                          ContextMenu="{StaticResource BaseShapeContextMenu}">
+        <DataTemplate DataType="vms:BaseShapeViewModel" x:DataType="vms:BaseShapeViewModel">
+          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource BaseShapeContextMenu}">
             <c:EditableItem.IconContent>
-              <Image Source="{Binding Mode=OneWay, Converter={x:Static converters:BaseShapeIconConverter.Instance}}"
-                     Width="16"
-                     Height="16"
-                     Margin="8" />
+              <s:StudioGlyph Source="{Binding Mode=OneWay, Converter={x:Static converters:BaseShapeIconConverter.Instance}}"
+                             Foreground="{DynamicResource StudioTextBrush}" Width="16" Height="16" Margin="8" IsHitTestVisible="False" />
             </c:EditableItem.IconContent>
           </c:EditableItem>
         </DataTemplate>

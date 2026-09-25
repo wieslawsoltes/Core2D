@@ -1,5 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:editor="using:Core2D.Controls.Editor">
+        xmlns:editor="using:Core2D.Controls.Editor" xmlns:views="using:Core2D.Views.Docking.Tools"
+        xmlns:core="using:Dock.Model.Core">
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -27,5 +28,14 @@
   <Style Selector="DocumentTabStripItem:pointerover">
     <Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+  </Style>
+  <!-- Single-tab strips are hidden, but docking actions remain available on sidebar chrome. -->
+  <Style Selector="views|StudioNavigatorView, views|StudioInspectorView" x:DataType="core:IDockable" x:CompileBindings="True">
+    <Setter Property="ContextMenu">
+      <ContextMenu>
+        <MenuItem Header="Float panel" Command="{Binding Factory.FloatDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanFloat}" />
+        <MenuItem Header="Pin / unpin panel" Command="{Binding Factory.PinDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanPin}" />
+      </ContextMenu>
+    </Setter>
   </Style>
 </Styles>

@@ -53,5 +53,6 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Core2D.ViewModels.Tests/Core2D.ViewModels.Tests.csproj" />
+    <Project Path="tests/Core2D.UI.Tests/Core2D.UI.Tests.csproj" />
   </Folder>
 </Solution>
