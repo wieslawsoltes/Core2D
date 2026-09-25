@@ -32,7 +32,7 @@
   <!-- Resolve the owner explicitly: context menus are shared setter values, not view children. -->
   <Style Selector="views|StudioNavigatorView, views|StudioInspectorView" x:DataType="core:IDockable" x:CompileBindings="True">
     <Setter Property="ContextMenu">
-      <ContextMenu DataContext="{Binding $parent[UserControl].DataContext}">
+      <ContextMenu DataContext="{Binding $parent[UserControl].DataContext}" x:DataType="core:IDockable">
         <MenuItem Header="Float panel" Command="{Binding Factory.FloatDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanFloat}" />
         <MenuItem Header="Pin / unpin panel" Command="{Binding Factory.PinDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanPin}" />
       </ContextMenu>
