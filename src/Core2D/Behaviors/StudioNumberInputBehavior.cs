@@ -3,11 +3,13 @@
 
 using System;
 using System.Globalization;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
 using Core2D.Controls.Studio;
 
@@ -31,6 +33,8 @@ public sealed class StudioNumberInputBehavior : Behavior<StudioNumberBox>
         {
             field.TemplateApplied += OnTemplateApplied;
             field.AddHandler(InputElement.KeyDownEvent, OnKeyDown, RoutingStrategies.Tunnel);
+            AttachHandle(field.GetVisualDescendants().OfType<ContentPresenter>().FirstOrDefault(x =>
+                x.Name == "PART_InnerLeft" && ReferenceEquals(x.TemplatedParent, field)));
         }
     }
 
@@ -46,10 +50,13 @@ public sealed class StudioNumberInputBehavior : Behavior<StudioNumberBox>
         base.OnDetaching();
     }
 
-    private void OnTemplateApplied(object? sender, TemplateAppliedEventArgs e)
+    private void OnTemplateApplied(object? sender, TemplateAppliedEventArgs e) =>
+        AttachHandle(e.NameScope.Find<ContentPresenter>("PART_InnerLeft"));
+
+    private void AttachHandle(ContentPresenter? presenter)
     {
         DetachHandle();
-        _handle = e.NameScope.Find<ContentPresenter>("PART_InnerLeft");
+        _handle = presenter;
         if (_handle is { } handle)
         {
             handle.PointerPressed += OnPointerPressed;

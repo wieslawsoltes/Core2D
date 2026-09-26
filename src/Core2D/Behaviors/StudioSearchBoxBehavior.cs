@@ -1,9 +1,11 @@
 // Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT. See LICENSE.TXT file in the project root for details.
 
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
 using Core2D.Controls.Studio;
 
@@ -18,7 +20,12 @@ public sealed class StudioSearchBoxBehavior : Behavior<StudioSearchBox>
     protected override void OnAttached()
     {
         base.OnAttached();
-        if (AssociatedObject is { } box) box.TemplateApplied += OnTemplateApplied;
+        if (AssociatedObject is { } box)
+        {
+            box.TemplateApplied += OnTemplateApplied;
+            AttachButton(box.GetVisualDescendants().OfType<Button>().FirstOrDefault(x =>
+                x.Name == "PART_Clear" && ReferenceEquals(x.TemplatedParent, box)));
+        }
     }
 
     /// <inheritdoc />
@@ -29,10 +36,13 @@ public sealed class StudioSearchBoxBehavior : Behavior<StudioSearchBox>
         base.OnDetaching();
     }
 
-    private void OnTemplateApplied(object? sender, TemplateAppliedEventArgs e)
+    private void OnTemplateApplied(object? sender, TemplateAppliedEventArgs e) =>
+        AttachButton(e.NameScope.Find<Button>("PART_Clear"));
+
+    private void AttachButton(Button? button)
     {
         DetachButton();
-        _clear = e.NameScope.Find<Button>("PART_Clear");
+        _clear = button;
         if (_clear is not null) _clear.Click += OnClear;
     }
 

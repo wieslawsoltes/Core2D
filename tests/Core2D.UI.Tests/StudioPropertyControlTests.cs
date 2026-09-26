@@ -231,6 +231,8 @@ public class StudioPropertyControlTests
             fonts.IsDropDownOpen = false;
             Dispatcher.UIThread.RunJobs();
             Assert.Equal("Inter", fonts.GetVisualDescendants().OfType<TextBox>().Single().Text);
+            // Settle compositor jobs as well as UI bindings before capturing the final model state.
+            window.MouseMove(new Point(330, 710));
             using var frame = window.CaptureRenderedFrame();
             Assert.NotNull(frame);
             string? directory = Environment.GetEnvironmentVariable("CORE2D_UI_ARTIFACTS");

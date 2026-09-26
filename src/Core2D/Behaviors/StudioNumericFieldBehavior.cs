@@ -7,10 +7,10 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
-using Avalonia.VisualTree;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 using Avalonia.Xaml.Interactivity;
 using Core2D.Controls.Studio;
 
@@ -37,6 +37,12 @@ public sealed class StudioNumericFieldBehavior : Behavior<StudioNumericField>
             field.DetachedFromVisualTree += OnVisualDetached;
             field.PropertyChanged += OnFieldChanged;
             field.AddHandler(InputElement.KeyDownEvent, OnKeyDown, RoutingStrategies.Tunnel);
+            // Dock moves can retain the visual template while detaching its behaviors.
+            AttachParts(
+                field.GetVisualDescendants().OfType<TextBox>().FirstOrDefault(x =>
+                    x.Name == "PART_Input" && ReferenceEquals(x.TemplatedParent, field)),
+                field.GetVisualDescendants().OfType<Control>().FirstOrDefault(x =>
+                    x.Name == "PART_ScrubHandle" && ReferenceEquals(x.TemplatedParent, field)));
         }
     }
 
@@ -51,14 +57,18 @@ public sealed class StudioNumericFieldBehavior : Behavior<StudioNumericField>
             field.RemoveHandler(InputElement.KeyDownEvent, OnKeyDown);
         }
         DetachParts();
+        AssociatedObject?.CancelEdit();
         base.OnDetaching();
     }
 
-    private void OnTemplateApplied(object? sender, TemplateAppliedEventArgs e)
+    private void OnTemplateApplied(object? sender, TemplateAppliedEventArgs e) =>
+        AttachParts(e.NameScope.Find<TextBox>("PART_Input"), e.NameScope.Find<Control>("PART_ScrubHandle"));
+
+    private void AttachParts(TextBox? inputPart, Control? handlePart)
     {
         DetachParts();
-        _input = e.NameScope.Find<TextBox>("PART_Input");
-        _handle = e.NameScope.Find<Control>("PART_ScrubHandle");
+        _input = inputPart;
+        _handle = handlePart;
         if (_input is { } input) input.LostFocus += OnLostFocus;
         if (_handle is { } handle)
         {
