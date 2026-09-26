@@ -38,7 +38,7 @@ public sealed class StudioSettingsSearchBehavior : Behavior<StudioSettingsPanel>
     private void OnItemsChanged(object? sender, NotifyCollectionChangedEventArgs e) => Reconnect();
     private void OnChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
-        if (e.Property == StudioSettingsPanel.QueryProperty || e.Property == HeaderedContentControl.HeaderProperty || e.Property == StudioSettingsSection.KeywordsProperty) Apply();
+        if (e.Property == StudioSettingsPanel.QueryProperty || e.Property == StudioSettingsSection.HeaderProperty || e.Property == StudioSettingsSection.KeywordsProperty) Apply();
     }
     private void Disconnect()
     {
