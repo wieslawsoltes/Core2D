@@ -16,6 +16,8 @@
   </Style>
   <Style Selector="s|StudioAnchorPicker ListBoxItem">
     <Setter Property="Theme" Value="{StaticResource StudioAnchorItemTheme}" />
+    <Setter Property="MinWidth" Value="0" /><Setter Property="MinHeight" Value="0" />
+    <Setter Property="Padding" Value="0" />
   </Style>
   <Style Selector="MenuItem"><Setter Property="Theme" Value="{StaticResource StudioMenuItemTheme}" /></Style>
   <Style Selector="NumericUpDown"><Setter Property="Theme" Value="{StaticResource StudioNumericUpDownTheme}" /></Style>

@@ -91,7 +91,7 @@
                 </Grid>
                 <Grid ColumnDefinitions="*,Auto">
                   <TextBlock Text="Selection size" FontWeight="SemiBold" VerticalAlignment="Center" />
-                  <s:StudioIconToggle Grid.Column="1" Content="↔" IsChecked="{Binding IsAspectLocked, Mode=TwoWay}" ToolTip.Tip="Lock selection aspect ratio" AutomationProperties.Name="Lock selection aspect ratio" />
+                  <s:StudioIconToggle Grid.Column="1" Icon="M5,6V4A3,3 0 0 1 11,4V6H12V15H4V6Z M6,6H10V4A2,2 0 0 0 6,4Z M7,9H9V12H7Z" IsChecked="{Binding IsAspectLocked, Mode=TwoWay}" ToolTip.Tip="Lock selection aspect ratio" AutomationProperties.Name="Lock selection aspect ratio" />
                 </Grid>
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
                   <s:StudioNumericField Prefix="W" Value="{Binding Width, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Selection width" />

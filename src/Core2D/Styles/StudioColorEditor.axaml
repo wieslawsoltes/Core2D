@@ -15,7 +15,7 @@
     <Setter Property="Template"><ControlTemplate><Border Background="Transparent" /></ControlTemplate></Setter>
   </ControlTheme>
   <ControlTheme x:Key="{x:Type s:StudioColorSlider}" TargetType="s:StudioColorSlider" x:DataType="s:StudioColorSlider">
-    <Setter Property="MinHeight" Value="24" /><Setter Property="IsMoveToPointEnabled" Value="True" />
+    <Setter Property="MinHeight" Value="24" />
     <Setter Property="Template">
       <ControlTemplate>
         <Grid Background="Transparent">
