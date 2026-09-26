@@ -27,7 +27,9 @@ public class StudioColorPlane : Control
     private readonly LinearGradientBrush _black = new()
     {
         StartPoint = new RelativePoint(0, 0, RelativeUnit.Relative), EndPoint = new RelativePoint(0, 1, RelativeUnit.Relative),
-        GradientStops = new GradientStops { new(Colors.Transparent, 0), new(Colors.Black, 1) }
+        // Keep both endpoints black in RGB, including the fully transparent one.
+        // A transparent-white endpoint introduces a white tint when straight-alpha colors interpolate.
+        GradientStops = new GradientStops { new(Color.FromArgb(0, 0, 0, 0), 0), new(Colors.Black, 1) }
     };
     /// <summary>Initializes pointer and keyboard color-plane interactions.</summary>
     public StudioColorPlane()
