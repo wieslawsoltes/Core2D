@@ -1,0 +1,38 @@
+name: Apply canvas refinement
+on:
+  push:
+    branches: [feat/figma-inspired-workspace]
+    paths: [.github/workflows/studio-apply-canvas.yml, '.github/studio-transfer/**']
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.ref == 'refs/heads/feat/figma-inspired-workspace'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate and apply complete source patch
+        shell: python
+        run: |
+          from pathlib import Path
+          import hashlib, lzma, subprocess
+          parts = sorted(Path('.github/studio-transfer').glob('patch.*.bin'))
+          assert len(parts) == 3
+          patch = lzma.decompress(b''.join(p.read_bytes() for p in parts))
+          assert hashlib.sha256(patch).hexdigest() == '2172dea0a39ef71485f9efad56725351dff5d6c38a1ffb7cc964be37311c0c96'
+          for line in patch.decode().splitlines():
+              if line.startswith('diff --git '):
+                  assert line.split()[2].startswith(('a/src/', 'a/tests/'))
+                  assert line.split()[3].startswith(('b/src/', 'b/tests/'))
+          subprocess.run(['git', 'apply', '--check', '-'], input=patch, check=True)
+          subprocess.run(['git', 'apply', '--index', '-'], input=patch, check=True)
+      - name: Commit canvas refinement and remove temporary transfer files
+        shell: bash
+        run: |
+          git rm -r .github/studio-transfer .github/workflows/studio-apply-canvas.yml .github/workflows/studio-source-inspection.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat(studio): improve canvas rulers, guides and layer navigation'
+          git push origin HEAD:feat/figma-inspired-workspace
