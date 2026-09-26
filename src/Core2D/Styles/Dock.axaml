@@ -43,7 +43,6 @@
     <Setter Property="Background" Value="{DynamicResource DockSurfaceSidebarBrush}" />
   </Style>
   <Style Selector="dc|ToolControl /template/ dc|ToolTabStrip#PART_TabStrip" x:DataType="dmc:IToolDock">
-    <Setter Property="DockPanel.Dock" Value="Top" />
     <Setter Property="IsVisible" Value="{Binding VisibleDockables.Count, Converter={StaticResource StudioDockMultipleTabs}}" />
   </Style>
   <Style Selector="dc|DocumentControl /template/ Border#PART_Border, dc|ToolControl /template/ Border#PART_Border">
@@ -74,6 +73,7 @@
   </Style>
   <Style Selector="dc|ToolTabStripItem, dc|ToolTabStripItem:selected">
     <Setter Property="Padding" Value="{DynamicResource DockToolTabItemPadding}" />
+    <Setter Property="BorderThickness" Value="0,0,0,2" />
   </Style>
   <Style Selector="dc|DocumentTabStripItem /template/ Border, dc|ToolTabStripItem /template/ Border">
     <Setter Property="CornerRadius" Value="{DynamicResource DockDocumentTabItemCornerRadius}" />

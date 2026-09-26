@@ -52,7 +52,7 @@ public class StudioDockBrowserThemeTests
                 ("DockWindowChromeForegroundBrush", "BrowserTextBrush")
             })
             {
-                Assert.Same(window.FindResource(browser), window.FindResource(dock));
+                Assert.Same(window.FindResource(window.ActualThemeVariant, browser), window.FindResource(window.ActualThemeVariant, dock));
             }
         }
         finally { window.Close(); }
@@ -255,7 +255,7 @@ public class StudioDockBrowserThemeTests
     private static ThemeVariant Variant(bool dark) => dark ? ThemeVariant.Dark : ThemeVariant.Light;
     private static Window Host(Control view, bool dark) => new() { Width = 1440, Height = 900, Content = view, RequestedThemeVariant = Variant(dark) };
     private static Color Solid(IBrush? brush) => Assert.IsAssignableFrom<ISolidColorBrush>(brush).Color;
-    private static Color Brush(Control control, string key) => Solid(Assert.IsAssignableFrom<IBrush>(control.FindResource(key)));
+    private static Color Brush(Control control, string key) => Solid(Assert.IsAssignableFrom<IBrush>(control.FindResource(control.ActualThemeVariant, key)));
     private static void Jobs() => Dispatcher.UIThread.RunJobs();
     private static Point Center(Window window, Control control) => control.TranslatePoint(new Point(control.Bounds.Width / 2, control.Bounds.Height / 2), window)!.Value;
     private static void Move(Window window, Control control) => window.MouseMove(Center(window, control));

@@ -1,8 +1,7 @@
-﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <ResourceDictionary.ThemeDictionaries>
     <ResourceDictionary x:Key='Default'>
-      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#F1F1F1</SolidColorBrush>
       <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
       <SolidColorBrush x:Key="IconAccentBrush1" Color="#FF424242" />
       <SolidColorBrush x:Key="IconAccentBrush2" Color="#80424242" />
@@ -24,7 +23,6 @@
       <Thickness x:Key="ContentMargin">6,0,6,0</Thickness>
     </ResourceDictionary>
     <ResourceDictionary x:Key='Dark'>
-      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#292929</SolidColorBrush>
       <SolidColorBrush x:Key="IconTransparentBrush" Color="#00000000" />
       <SolidColorBrush x:Key="IconAccentBrush1" Color="#FFA0A0A0" />
       <SolidColorBrush x:Key="IconAccentBrush2" Color="#80A0A0A0" />

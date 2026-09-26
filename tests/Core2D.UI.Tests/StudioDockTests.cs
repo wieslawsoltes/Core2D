@@ -44,7 +44,7 @@ public class StudioDockTests
             Assert.Contains(tabs, tab => !tab.IsSelected);
             foreach (var tab in tabs)
             {
-                var expected = Assert.IsAssignableFrom<ISolidColorBrush>(tab.FindResource(
+                var expected = Assert.IsAssignableFrom<ISolidColorBrush>(tab.FindResource(tab.ActualThemeVariant,
                     tab.IsSelected ? "DockTabSelectedForegroundBrush" : "DockTabForegroundBrush")).Color;
                 Assert.Equal(expected, Assert.IsAssignableFrom<ISolidColorBrush>(tab.Foreground).Color);
                 var dockable = Assert.IsAssignableFrom<IDockable>(tab.DataContext);

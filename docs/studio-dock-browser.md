@@ -18,7 +18,7 @@ Tabs and headers use neutral browser surfaces, muted inactive text, selected tex
 
 Native splitter thickness, preview-resize settings and hit areas are unchanged. Idle, hover and drag/preview brushes distinguish resize feedback. Dock target indicators use the browser accent; existing target-selector images are deliberately retained. Floating-window title/client resources and drag-preview palette follow the same browser roles; OS-owned window chrome is not reskinned.
 
-The previous acrylic-era overrides in Common, duplicate Dock background colors in StudioPalette and competing tab overrides in Studio/StudioInteractionStyles are removed. The existing top-aligned tool tabs and suppression of redundant single-tool tab strips are preserved, with the converter owned by the Dock integration styles.
+The previous acrylic-era overrides in Common, duplicate Dock background colors in Themes and StudioPalette and competing tab overrides in Studio/StudioInteractionStyles are removed. Native tool-tab placement and suppression of redundant single-tool tab strips are preserved, with the converter owned by the Dock integration styles. This pinned version sets bottom placement locally in its template; a style setter cannot override that local value. The adapter does not introduce a behavior or replace the template merely to move the strip.
 
 ## Validation
 
