@@ -27,8 +27,9 @@ namespace Core2D.Behaviors;
 /// <summary>Projects declarative actions into a native grid, restores focus, and executes only explicit user choices.</summary>
 public sealed class StudioCommandPaletteBehavior : Behavior<StudioCommandPalette>
 {
-    private readonly List<(MenuItem Menu, StudioActionViewModel Action, bool ParentEnabled)> _catalog = new();
+    private readonly List<(MenuItem Menu, StudioActionViewModel Action)> _catalog = new();
     private readonly List<MenuItem> _observedMenus = new();
+    private readonly Dictionary<MenuItem, MenuItem?> _parents = new(ReferenceEqualityComparer.Instance);
     private readonly HashSet<ICommand> _commands = new(ReferenceEqualityComparer.Instance);
     private readonly List<string> _recent = new();
     private List<StudioActionViewModel> _results = new();
@@ -161,18 +162,19 @@ public sealed class StudioCommandPaletteBehavior : Behavior<StudioCommandPalette
         _generation++; _pending = false;
         foreach (MenuItem menu in _observedMenus) menu.PropertyChanged -= OnMenuChanged;
         foreach (ICommand command in _commands) command.CanExecuteChanged -= OnAvailabilityChanged;
-        _commands.Clear(); _observedMenus.Clear(); _catalog.Clear(); _results.Clear();
+        _commands.Clear(); _observedMenus.Clear(); _parents.Clear(); _catalog.Clear(); _results.Clear();
     }
     private void RebuildCatalog()
     {
         ClearCatalog();
         if (AssociatedObject is not { } palette) return;
-        foreach (object? item in palette.Items) if (item is MenuItem menu) Visit(menu, "", true, 0);
+        foreach (object? item in palette.Items) if (item is MenuItem menu) Visit(menu, "", true, 0, null);
     }
-    private void Visit(MenuItem menu, string category, bool parentEnabled, int depth)
+    private void Visit(MenuItem menu, string category, bool parentEnabled, int depth, MenuItem? parent)
     {
         if (depth > 8 || _catalog.Count >= 512 || _observedMenus.Contains(menu)) return;
         _observedMenus.Add(menu);
+        _parents.Add(menu, parent);
         menu.PropertyChanged += OnMenuChanged;
         if (!menu.IsVisible) return;
         string title = (menu.Header as string ?? "").Replace("__", "\0").Replace("_", "").Replace("\0", "_");
@@ -181,11 +183,11 @@ public sealed class StudioCommandPaletteBehavior : Behavior<StudioCommandPalette
         {
             var action = new StudioActionViewModel(title, category, menu.InputGesture?.ToString() ?? "", command, menu.CommandParameter);
             action.RefreshAvailability(enabled);
-            _catalog.Add((menu, action, parentEnabled));
+            _catalog.Add((menu, action));
             if (_commands.Add(command)) command.CanExecuteChanged += OnAvailabilityChanged;
         }
         string path = category.Length == 0 ? title : category + " / " + title;
-        foreach (object? child in menu.Items) if (child is MenuItem nested) Visit(nested, path, enabled, depth + 1);
+        foreach (object? child in menu.Items) if (child is MenuItem nested) Visit(nested, path, enabled, depth + 1, menu);
     }
     private void OnMenuChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
@@ -245,7 +247,17 @@ public sealed class StudioCommandPaletteBehavior : Behavior<StudioCommandPalette
         }
         else if (e.Key == Key.Enter) { ExecuteSelected(); e.Handled = true; }
     }
-    private void OnDoubleTapped(object? sender, TappedEventArgs e) { ExecuteSelected(); e.Handled = true; }
+    private void OnDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        // Empty grid space must not execute a previously selected action.
+        for (Visual? visual = e.Source as Visual; visual is not null && !ReferenceEquals(visual, _grid); visual = visual.GetVisualParent())
+        {
+            if (visual is not DataGridRow { DataContext: StudioActionViewModel action }) continue;
+            if (ReferenceEquals(_grid?.SelectedItem, action)) ExecuteSelected();
+            e.Handled = true;
+            return;
+        }
+    }
     private void OnClick(object? sender, RoutedEventArgs e)
     {
         if (e.Source is Button { Name: "PART_Close" } && AssociatedObject is { } palette) { palette.IsOpen = false; e.Handled = true; }
@@ -255,11 +267,25 @@ public sealed class StudioCommandPaletteBehavior : Behavior<StudioCommandPalette
         if (_surface is not null && !new Rect(_surface.Bounds.Size).Contains(e.GetPosition(_surface)) && AssociatedObject is { } palette)
         { palette.IsOpen = false; e.Handled = true; }
     }
+    private bool IsPathAvailable(MenuItem menu)
+    {
+        MenuItem? current = menu;
+        for (int depth = 0; current is not null && depth <= 8; depth++)
+        {
+            if (!current.IsEnabled || !current.IsVisible || !_parents.TryGetValue(current, out MenuItem? parent)) return false;
+            current = parent;
+        }
+        return current is null;
+    }
     private void ExecuteSelected()
     {
         if (_grid?.SelectedItem is not StudioActionViewModel action || AssociatedObject is not { } palette) return;
         var entry = _catalog.FirstOrDefault(x => ReferenceEquals(x.Action, action));
-        if (entry.Menu is null || !entry.ParentEnabled || !entry.Menu.IsEnabled || !entry.Menu.IsVisible || !action.Command.CanExecute(action.Parameter)) return;
+        // Bindings may change between a queued catalog refresh and Enter. Never execute a stale
+        // command, parameter or action whose ancestor was disabled/hidden in that interval.
+        if (entry.Menu is null || !ReferenceEquals(entry.Menu.Command, action.Command)
+            || !Equals(entry.Menu.CommandParameter, action.Parameter) || !IsPathAvailable(entry.Menu)
+            || !action.Command.CanExecute(action.Parameter)) return;
         _recent.Remove(action.Id); _recent.Insert(0, action.Id);
         if (_recent.Count > 8) _recent.RemoveAt(8);
         // Closing restores the prior canvas focus before a command opens a dialog or manipulates selection.

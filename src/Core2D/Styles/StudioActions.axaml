@@ -33,7 +33,7 @@
                                   IsVisible="{Binding ResultCount, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StudioZeroCount}}" />
               <Border Grid.Row="2" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0" Padding="12,8">
                 <Grid ColumnDefinitions="*,Auto">
-                  <TextBlock Text="↑ ↓ navigate   ·   Enter run   ·   Esc close" Classes="studio-muted" FontSize="10" />
+                  <TextBlock Text="↑ ↓ navigate   ·   Enter run   ·   Esc close" TextTrimming="CharacterEllipsis" Margin="0,0,8,0" Classes="studio-muted" FontSize="10" />
                   <TextBlock Grid.Column="1" Text="{Binding ResultCount, RelativeSource={RelativeSource TemplatedParent}, StringFormat='{}{0} actions'}" Classes="studio-muted" FontSize="10" />
                 </Grid>
               </Border>
