@@ -18,7 +18,8 @@ namespace Core2D.Behaviors;
 public sealed class StudioCanvasGuideBehavior : Behavior<Control>
 {
     private StudioCanvasOverlay? _overlay;
-    private Control? _horizontal, _vertical;
+    private Control? _horizontal, _vertical, _zoom;
+    private Window? _window;
     private IPointer? _pointer;
     private CanvasGuide? _original;
     private bool _copy;
@@ -39,9 +40,13 @@ public sealed class StudioCanvasGuideBehavior : Behavior<Control>
     private void OnLoaded(object? sender, RoutedEventArgs e) => Connect();
     private void Connect()
     {
-        if (_overlay is not null) _overlay.SessionChanged -= OnSessionChanged;
+        if (_overlay is not null) _overlay.InteractionInvalidated -= OnInteractionInvalidated;
+        if (_window is not null) _window.Deactivated -= OnInteractionInvalidated;
+        _window = AssociatedObject is { } root ? TopLevel.GetTopLevel(root) as Window : null;
+        if (_window is not null) _window.Deactivated += OnInteractionInvalidated;
+        _zoom = AssociatedObject?.FindControl<Control>("PageZoomBorder");
         _overlay = AssociatedObject?.FindControl<StudioCanvasOverlay>("CanvasOverlay");
-        if (_overlay is not null) _overlay.SessionChanged += OnSessionChanged;
+        if (_overlay is not null) _overlay.InteractionInvalidated += OnInteractionInvalidated;
         _horizontal = AssociatedObject?.FindControl<Control>("HorizontalRuler");
         _vertical = AssociatedObject?.FindControl<Control>("VerticalRuler");
     }
@@ -58,15 +63,27 @@ public sealed class StudioCanvasGuideBehavior : Behavior<Control>
             root.RemoveHandler(InputElement.KeyDownEvent, OnKeyDown);
             root.PointerCaptureLost -= OnCaptureLost;
         }
-        if (_overlay is not null) _overlay.SessionChanged -= OnSessionChanged;
+        if (_overlay is not null) _overlay.InteractionInvalidated -= OnInteractionInvalidated;
+        if (_window is not null) _window.Deactivated -= OnInteractionInvalidated;
+        _window = null;
         _overlay = null;
-        _horizontal = _vertical = null;
+        _horizontal = _vertical = _zoom = null;
         base.OnDetaching();
     }
     private static bool Inside(Control? control, PointerEventArgs e) =>
         control is { IsEffectivelyVisible: true } && new Rect(control.Bounds.Size).Contains(e.GetPosition(control));
+    private bool IsCanvasSource(object? source)
+    {
+        for (Visual? visual = source as Visual; visual is not null; visual = visual.GetVisualParent())
+        {
+            if (visual is TextBox or Button) return false;
+            if (ReferenceEquals(visual, _zoom) || ReferenceEquals(visual, _horizontal) || ReferenceEquals(visual, _vertical)) return true;
+        }
+        return false;
+    }
     private void OnPressed(object? sender, PointerPressedEventArgs e)
     {
+        if (!IsCanvasSource(e.Source) || AssociatedObject?.IsEffectivelyEnabled != true) return;
         if (_overlay?.Guides is not { IsVisible: true, IsLocked: false } || !_overlay.ShowGuides
             || !e.GetCurrentPoint(AssociatedObject).Properties.IsLeftButtonPressed
             || AssociatedObject?.DataContext is not ProjectEditorViewModel { IsToolIdle: true }) return;
@@ -106,15 +123,20 @@ public sealed class StudioCanvasGuideBehavior : Behavior<Control>
     private void OnReleased(object? sender, PointerReleasedEventArgs e)
     {
         if (_pointer != e.Pointer || _overlay?.Preview is not { } preview) return;
+        if (AssociatedObject?.IsEffectivelyEnabled != true || !_overlay.ShowGuides
+            || _overlay.Guides is not { IsVisible: true, IsLocked: false }) { Cancel(); e.Handled = true; return; }
         CanvasGuidesViewModel? guides = _overlay.Guides;
+        // Publishing a mutation invalidates previews in every viewport, including this one.
+        CanvasGuide? original = _original;
+        bool copy = _copy;
         bool valid = Inside(_overlay, e);
         Guid? selected = null;
         if (valid)
         {
-            if (_original is null || _copy) selected = guides?.Add(preview.IsVertical, preview.Position);
-            else { guides?.Move(_original.Id, preview.Position); selected = _original.Id; }
+            if (original is null || copy) selected = guides?.Add(preview.IsVertical, preview.Position);
+            else { guides?.Move(original.Id, preview.Position); selected = original.Id; }
         }
-        else if (_original is not null && !_copy) guides?.Remove(_original.Id);
+        else if (original is not null && !copy) guides?.Remove(original.Id);
         Cancel();
         _overlay.SelectedGuide = selected;
         e.Handled = true;
@@ -122,8 +144,7 @@ public sealed class StudioCanvasGuideBehavior : Behavior<Control>
     private void OnKeyDown(object? sender, KeyEventArgs e)
     {
         if (_pointer is not null && e.Key == Key.Escape) { Cancel(); e.Handled = true; return; }
-        if (e.Source is Visual visual)
-            for (Visual? p = visual; p is not null; p = p.GetVisualParent()) if (p is TextBox) return;
+        if (!IsCanvasSource(e.Source) || _overlay?.ShowGuides != true || AssociatedObject?.IsEffectivelyEnabled != true) return;
         if (_overlay?.SelectedGuide is not { } id || _overlay.Guides is not { IsVisible: true, IsLocked: false } guides) return;
         if (e.Key is Key.Delete or Key.Back)
         {
@@ -145,7 +166,7 @@ public sealed class StudioCanvasGuideBehavior : Behavior<Control>
             }
         }
     }
-    private void OnSessionChanged(object? sender, EventArgs e) => Cancel();
+    private void OnInteractionInvalidated(object? sender, EventArgs e) => Cancel();
     private void OnCaptureLost(object? sender, PointerCaptureLostEventArgs e) => Cancel();
     private void Cancel()
     {

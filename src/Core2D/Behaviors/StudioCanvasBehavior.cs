@@ -217,7 +217,9 @@ public sealed class StudioCanvasBehavior : Behavior<Control>
     private void ZoomAt(double value, Point viewportPoint)
     {
         if (_zoom?.Child is not { } child || !_zoom.EnableZoom || _zoom.ZoomX <= 0) return;
-        value = Math.Clamp(value, Math.Max(.01, _zoom.MinZoomX), Math.Min(256, _zoom.MaxZoomX));
+        double minimum = Math.Max(.01, _zoom.MinZoomX), maximum = Math.Min(256, _zoom.MaxZoomX);
+        if (!double.IsFinite(value) || minimum > maximum) return;
+        value = Math.Clamp(value, minimum, maximum);
         if (_zoom.TranslatePoint(viewportPoint, child) is { } center)
             _zoom.ZoomTo(value / _zoom.ZoomX, center.X, center.Y, true);
         UpdateTransform();

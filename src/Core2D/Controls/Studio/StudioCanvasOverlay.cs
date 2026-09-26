@@ -30,8 +30,8 @@ public sealed class StudioCanvasOverlay : Control
 
     static StudioCanvasOverlay() => AffectsRender<StudioCanvasOverlay>(GuideBrushProperty);
 
-    /// <summary>Raised when the page session changes, cancelling any in-flight guide gesture.</summary>
-    public event EventHandler? SessionChanged;
+    /// <summary>Raised when page or guide state invalidates an in-flight gesture.</summary>
+    public event EventHandler? InteractionInvalidated;
 
     /// <summary>Gets or sets the guide stroke.</summary>
     public IBrush? GuideBrush { get => GetValue(GuideBrushProperty); set => SetValue(GuideBrushProperty, value); }
@@ -46,7 +46,17 @@ public sealed class StudioCanvasOverlay : Control
     /// <summary>Gets or sets a transient guide preview; never mutates document history.</summary>
     public CanvasGuide? Preview { get => _preview; set { _preview = value; InvalidateVisual(); } }
     /// <summary>Gets or sets whether guides are drawn along with the rulers.</summary>
-    public bool ShowGuides { get => _showGuides; set { _showGuides = value; InvalidateVisual(); } }
+    public bool ShowGuides
+    {
+        get => _showGuides;
+        set
+        {
+            if (_showGuides == value) return;
+            _showGuides = value;
+            if (!value) InvalidateInteraction();
+            InvalidateVisual();
+        }
+    }
 
     /// <summary>Attaches display state. Passing null releases page-guide subscriptions.</summary>
     public void Bind(CanvasNavigationViewModel? navigation, CanvasGuidesViewModel? guides)
@@ -65,7 +75,7 @@ public sealed class StudioCanvasOverlay : Control
         }
         _preview = null;
         _selected = null;
-        SessionChanged?.Invoke(this, EventArgs.Empty);
+        InteractionInvalidated?.Invoke(this, EventArgs.Empty);
         InvalidateVisual();
     }
     /// <summary>Updates mapping using the actual container transform, including layout centering.</summary>
@@ -89,8 +99,23 @@ public sealed class StudioCanvasOverlay : Control
     }
     /// <summary>Converts overlay-local coordinates to page coordinates.</summary>
     public Point? ToWorld(Point point) => _worldToScreen.TryInvert(out Matrix inverse) ? point * inverse : null;
-    private void OnGuidesChanged(object? sender, NotifyCollectionChangedEventArgs e) => InvalidateVisual();
-    private void OnGuideOptionsChanged(object? sender, PropertyChangedEventArgs e) => InvalidateVisual();
+    private void InvalidateInteraction()
+    {
+        _preview = null;
+        _selected = null;
+        InteractionInvalidated?.Invoke(this, EventArgs.Empty);
+    }
+    private void OnGuidesChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        // Undo or another viewport wins over an uncommitted drag.
+        if (_preview is not null) InvalidateInteraction();
+        InvalidateVisual();
+    }
+    private void OnGuideOptionsChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (_guides is not { IsVisible: true, IsLocked: false }) InvalidateInteraction();
+        InvalidateVisual();
+    }
     /// <inheritdoc />
     public override void Render(DrawingContext context)
     {

@@ -271,7 +271,7 @@ public class Ruler : TemplatedControl
 
     public double SelectionOpacity
     {
-        get => GetValue(SelectionOpacityProperty, ShowSelectionLabelsProperty);
+        get => GetValue(SelectionOpacityProperty);
         set => SetValue(SelectionOpacityProperty, value);
     }
 
@@ -440,13 +440,13 @@ public class Ruler : TemplatedControl
 
         if (string.IsNullOrWhiteSpace(startText))
         {
-            startText = SelectionStart.ToString(format, culture);
+            startText = format == "Auto" ? RulerScale.Create(zoom, offset, axisLength).Format(SelectionStart, culture) : SelectionStart.ToString(format, culture);
         }
 
         var endValue = SelectionStart + SelectionLength;
         if (string.IsNullOrWhiteSpace(endText))
         {
-            endText = endValue.ToString(format, culture);
+            endText = format == "Auto" ? RulerScale.Create(zoom, offset, axisLength).Format(endValue, culture) : endValue.ToString(format, culture);
         }
 
         var labelBrush = SelectionLabelBrush ?? selectionBrush ?? Brushes.Gray;

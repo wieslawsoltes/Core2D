@@ -21,9 +21,9 @@ public sealed class CanvasNavigationViewModel : ReactiveObject, IDisposable
     public CanvasNavigationViewModel(Action<double> zoom, Action fitPage, Action fitSelection)
     {
         _zoom = zoom;
-        ZoomIn = ReactiveCommand.Create(() => ZoomPercent *= 1.25m);
-        ZoomOut = ReactiveCommand.Create(() => ZoomPercent /= 1.25m);
-        ResetZoom = ReactiveCommand.Create(() => ZoomPercent = 100);
+        ZoomIn = ReactiveCommand.Create(() => { ZoomPercent *= 1.25m; });
+        ZoomOut = ReactiveCommand.Create(() => { ZoomPercent /= 1.25m; });
+        ResetZoom = ReactiveCommand.Create(() => { ZoomPercent = 100; });
         FitPage = ReactiveCommand.Create(fitPage);
         FitSelection = ReactiveCommand.Create(fitSelection, this.WhenAnyValue(x => x.HasSelection));
         ClearGuides = ReactiveCommand.Create(() => Guides?.Clear());

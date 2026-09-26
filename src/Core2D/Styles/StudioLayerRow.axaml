@@ -34,5 +34,11 @@
     <Style Selector="^ /template/ s|StudioIconToggle#PART_Visible"><Setter Property="Opacity" Value="0" /></Style>
     <Style Selector="^:pointerover /template/ s|StudioIconToggle, ^:focus-within /template/ s|StudioIconToggle"><Setter Property="Opacity" Value="1" /></Style>
     <Style Selector="^ /template/ s|StudioIconToggle#PART_Lock:checked, ^ /template/ s|StudioIconToggle#PART_Visible:unchecked"><Setter Property="Opacity" Value="1" /></Style>
+    <Style Selector="^ /template/ s|StudioIconToggle#PART_Lock:unchecked">
+      <Setter Property="Icon" Value="M4,7V4A4,4 0 0 1 12,4H10A2,2 0 0 0 6,4V7H14V16H2V7Z" />
+    </Style>
+    <Style Selector="^ /template/ s|StudioIconToggle#PART_Visible:unchecked">
+      <Setter Property="Icon" Value="M0,8Q8,-3 16,8Q8,19 0,8Z M2,8Q8,0 14,8Q8,16 2,8Z M1,0L16,15L15,16L0,1Z" />
+    </Style>
   </ControlTheme>
 </ResourceDictionary>

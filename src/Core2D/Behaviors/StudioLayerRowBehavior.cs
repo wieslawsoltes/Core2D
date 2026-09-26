@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Presenters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
@@ -69,6 +70,7 @@ public sealed class StudioLayerRowBehavior : Behavior<StudioLayerRow>
     private void OnKeyDown(object? sender, KeyEventArgs e)
     {
         if (AssociatedObject is not { } row) return;
+        if (row.IsRenaming && row.GetVisualDescendants().OfType<TextPresenter>().Any(x => !string.IsNullOrEmpty(x.PreeditText))) return;
         if (e.Key == Key.F2) { row.IsRenaming = true; e.Handled = true; }
         else if (row.IsRenaming && e.Key is Key.Enter or Key.Escape)
         {
