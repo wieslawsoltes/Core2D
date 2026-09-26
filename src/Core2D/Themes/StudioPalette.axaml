@@ -21,7 +21,6 @@
       <SolidColorBrush x:Key="StudioSelectionTextBrush">#075BAE</SolidColorBrush>
       <SolidColorBrush x:Key="StudioOnAccentBrush">#FFFFFF</SolidColorBrush>
       <SolidColorBrush x:Key="AcrylicFallbackColor">#FFFFFF</SolidColorBrush>
-      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#FFFFFF</SolidColorBrush>
       <SolidColorBrush x:Key="TextControlBackground">#F5F5F5</SolidColorBrush>
       <SolidColorBrush x:Key="ButtonForeground">#242424</SolidColorBrush>
       <SolidColorBrush x:Key="IconAccentBrush1">#333333</SolidColorBrush>
@@ -49,7 +48,6 @@
       <SolidColorBrush x:Key="StudioSelectionTextBrush">#D1E9FF</SolidColorBrush>
       <SolidColorBrush x:Key="StudioOnAccentBrush">#FFFFFF</SolidColorBrush>
       <SolidColorBrush x:Key="AcrylicFallbackColor">#2C2C2C</SolidColorBrush>
-      <SolidColorBrush x:Key="DockThemeBackgroundBrush">#2C2C2C</SolidColorBrush>
       <SolidColorBrush x:Key="TextControlBackground">#383838</SolidColorBrush>
       <SolidColorBrush x:Key="ButtonForeground">#F5F5F5</SolidColorBrush>
       <SolidColorBrush x:Key="IconAccentBrush1">#E6E6E6</SolidColorBrush>

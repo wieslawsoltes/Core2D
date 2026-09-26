@@ -1,4 +1,5 @@
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Media;
@@ -43,9 +44,8 @@ public class StudioDockTests
             Assert.Contains(tabs, tab => !tab.IsSelected);
             foreach (var tab in tabs)
             {
-                var expected = Color.Parse(tab.IsSelected
-                    ? (dark ? "#D1E9FF" : "#075BAE")
-                    : (dark ? "#F5F5F5" : "#242424"));
+                var expected = Assert.IsAssignableFrom<ISolidColorBrush>(tab.FindResource(
+                    tab.IsSelected ? "DockTabSelectedForegroundBrush" : "DockTabForegroundBrush")).Color;
                 Assert.Equal(expected, Assert.IsAssignableFrom<ISolidColorBrush>(tab.Foreground).Color);
                 var dockable = Assert.IsAssignableFrom<IDockable>(tab.DataContext);
                 var title = Assert.Single(tab.GetVisualDescendants().OfType<TextBlock>().Where(text => text.Text == dockable.Title));

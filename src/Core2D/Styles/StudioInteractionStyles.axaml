@@ -1,14 +1,4 @@
 <Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:editor="using:Core2D.Controls.Editor" xmlns:s="using:Core2D.Controls.Studio">
-  <Styles.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-  </Styles.Resources>
-  
-  
-  
   <!-- These container themes must follow the generic item theme; Avalonia uses style order. -->
   <Style Selector="s|StudioSegmentedControl ListBoxItem, s|StudioColorPalette ListBoxItem">
     <Setter Property="Theme" Value="{StaticResource StudioSegmentItemTheme}"/>
@@ -18,23 +8,6 @@
     <Setter Property="MinWidth" Value="0"/><Setter Property="MinHeight" Value="0"/>
     <Setter Property="Padding" Value="0"/>
   </Style>
-  
-  
-  
-  
   <Style Selector="Menu &gt; MenuItem /template/ Popup#PART_Popup"><Setter Property="Placement" Value="BottomEdgeAlignedLeft"/></Style>
   <Style Selector="editor|MenuView.studio-command-menu Menu &gt; MenuItem /template/ Popup#PART_Popup"><Setter Property="Placement" Value="RightEdgeAlignedTop"/></Style>
-  <Style Selector="DocumentTabStripItem">
-    <Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}"/>
-    <Setter Property="MinHeight" Value="32"/>
-  </Style>
-  <Style Selector="DocumentTabStripItem:selected, DocumentTabStripItem:active:selected">
-    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}"/>
-  </Style>
-  <Style Selector="DocumentTabStripItem:pointerover">
-    <Setter Property="Background" Value="{DynamicResource StudioHoverBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}"/>
-  </Style>
 </Styles>

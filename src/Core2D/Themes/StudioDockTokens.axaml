@@ -1,0 +1,107 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Core2D-only adapter: BrowserTheme stays independent of Dock.
+       Resolve aliases inside each variant so simultaneous light/dark windows never share the wrong brush.
+       The pinned Dock 11.3.11.5 predates its semantic token catalog; Styles/Dock.axaml bridges those
+       roles with setters, while the legacy aliases below feed its unchanged native templates. -->
+  <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Light">
+      <StaticResource x:Key="DockSurfaceWorkbenchBrush" ResourceKey="BrowserCanvasBrush" />
+      <StaticResource x:Key="DockSurfaceSidebarBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockSurfaceEditorBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockSurfacePanelBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockSurfaceHeaderBrush" ResourceKey="BrowserCanvasBrush" />
+      <StaticResource x:Key="DockSurfaceHeaderActiveBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockBorderSubtleBrush" ResourceKey="BrowserBorderBrush" />
+      <StaticResource x:Key="DockBorderStrongBrush" ResourceKey="BrowserBorderHoverBrush" />
+      <StaticResource x:Key="DockSeparatorBrush" ResourceKey="BrowserBorderBrush" />
+      <StaticResource x:Key="DockSplitterIdleBrush" ResourceKey="BrowserBorderBrush" />
+      <StaticResource x:Key="DockSplitterHoverBrush" ResourceKey="BrowserSelectionBrush" />
+      <StaticResource x:Key="DockSplitterDragBrush" ResourceKey="BrowserAccentBrush" />
+      <StaticResource x:Key="DockTargetIndicatorBrush" ResourceKey="BrowserAccentBrush" />
+      <StaticResource x:Key="DockTabBackgroundBrush" ResourceKey="BrowserCanvasBrush" />
+      <StaticResource x:Key="DockTabHoverBackgroundBrush" ResourceKey="BrowserHoverBrush" />
+      <StaticResource x:Key="DockTabActiveBackgroundBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockTabActiveIndicatorBrush" ResourceKey="BrowserAccentBrush" />
+      <StaticResource x:Key="DockTabForegroundBrush" ResourceKey="BrowserMutedBrush" />
+      <StaticResource x:Key="DockTabSelectedForegroundBrush" ResourceKey="BrowserTextBrush" />
+      <StaticResource x:Key="DockTabActiveForegroundBrush" ResourceKey="BrowserTextBrush" />
+      <StaticResource x:Key="DockTabCloseHoverBackgroundBrush" ResourceKey="BrowserHoverBrush" />
+      <StaticResource x:Key="DockChromeButtonForegroundBrush" ResourceKey="BrowserMutedBrush" />
+      <StaticResource x:Key="DockChromeButtonHoverBackgroundBrush" ResourceKey="BrowserHoverBrush" />
+      <StaticResource x:Key="DockChromeButtonPressedBackgroundBrush" ResourceKey="BrowserSelectionBrush" />
+      <StaticResource x:Key="DockChromeButtonDangerHoverBrush" ResourceKey="BrowserDangerBackgroundBrush" />
+      <StaticResource x:Key="DockThemeBackgroundBrush" ResourceKey="DockSurfacePanelBrush" />
+      <StaticResource x:Key="DockThemeControlBackgroundBrush" ResourceKey="BrowserInputBrush" />
+      <StaticResource x:Key="DockThemeForegroundBrush" ResourceKey="BrowserTextBrush" />
+      <StaticResource x:Key="DockThemeBorderLowBrush" ResourceKey="DockBorderSubtleBrush" />
+      <StaticResource x:Key="DockThemeAccentBrush" ResourceKey="DockSurfaceHeaderActiveBrush" />
+      <StaticResource x:Key="DockApplicationAccentBrushLow" ResourceKey="DockTabActiveBackgroundBrush" />
+      <StaticResource x:Key="DockApplicationAccentBrushMed" ResourceKey="DockTabHoverBackgroundBrush" />
+      <StaticResource x:Key="DockApplicationAccentBrushHigh" ResourceKey="DockChromeButtonHoverBackgroundBrush" />
+      <StaticResource x:Key="DockApplicationAccentForegroundBrush" ResourceKey="DockTabActiveForegroundBrush" />
+      <StaticResource x:Key="DockApplicationAccentBrushIndicator" ResourceKey="DockTargetIndicatorBrush" />
+      <StaticResource x:Key="DockToolChromeIconBrush" ResourceKey="DockChromeButtonForegroundBrush" />
+      <StaticResource x:Key="DockWindowChromeBackgroundBrush" ResourceKey="DockSurfacePanelBrush" />
+      <StaticResource x:Key="DockWindowChromeBorderBrush" ResourceKey="DockBorderSubtleBrush" />
+      <StaticResource x:Key="DockWindowChromeTitleBarBackgroundBrush" ResourceKey="DockSurfaceHeaderBrush" />
+      <StaticResource x:Key="DockWindowChromeForegroundBrush" ResourceKey="BrowserTextBrush" />
+    </ResourceDictionary>
+    <ResourceDictionary x:Key="Dark">
+      <StaticResource x:Key="DockSurfaceWorkbenchBrush" ResourceKey="BrowserCanvasBrush" />
+      <StaticResource x:Key="DockSurfaceSidebarBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockSurfaceEditorBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockSurfacePanelBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockSurfaceHeaderBrush" ResourceKey="BrowserCanvasBrush" />
+      <StaticResource x:Key="DockSurfaceHeaderActiveBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockBorderSubtleBrush" ResourceKey="BrowserBorderBrush" />
+      <StaticResource x:Key="DockBorderStrongBrush" ResourceKey="BrowserBorderHoverBrush" />
+      <StaticResource x:Key="DockSeparatorBrush" ResourceKey="BrowserBorderBrush" />
+      <StaticResource x:Key="DockSplitterIdleBrush" ResourceKey="BrowserBorderBrush" />
+      <StaticResource x:Key="DockSplitterHoverBrush" ResourceKey="BrowserSelectionBrush" />
+      <StaticResource x:Key="DockSplitterDragBrush" ResourceKey="BrowserAccentBrush" />
+      <StaticResource x:Key="DockTargetIndicatorBrush" ResourceKey="BrowserAccentBrush" />
+      <StaticResource x:Key="DockTabBackgroundBrush" ResourceKey="BrowserCanvasBrush" />
+      <StaticResource x:Key="DockTabHoverBackgroundBrush" ResourceKey="BrowserHoverBrush" />
+      <StaticResource x:Key="DockTabActiveBackgroundBrush" ResourceKey="BrowserSurfaceBrush" />
+      <StaticResource x:Key="DockTabActiveIndicatorBrush" ResourceKey="BrowserAccentBrush" />
+      <StaticResource x:Key="DockTabForegroundBrush" ResourceKey="BrowserMutedBrush" />
+      <StaticResource x:Key="DockTabSelectedForegroundBrush" ResourceKey="BrowserTextBrush" />
+      <StaticResource x:Key="DockTabActiveForegroundBrush" ResourceKey="BrowserTextBrush" />
+      <StaticResource x:Key="DockTabCloseHoverBackgroundBrush" ResourceKey="BrowserHoverBrush" />
+      <StaticResource x:Key="DockChromeButtonForegroundBrush" ResourceKey="BrowserMutedBrush" />
+      <StaticResource x:Key="DockChromeButtonHoverBackgroundBrush" ResourceKey="BrowserHoverBrush" />
+      <StaticResource x:Key="DockChromeButtonPressedBackgroundBrush" ResourceKey="BrowserSelectionBrush" />
+      <StaticResource x:Key="DockChromeButtonDangerHoverBrush" ResourceKey="BrowserDangerBackgroundBrush" />
+      <StaticResource x:Key="DockThemeBackgroundBrush" ResourceKey="DockSurfacePanelBrush" />
+      <StaticResource x:Key="DockThemeControlBackgroundBrush" ResourceKey="BrowserInputBrush" />
+      <StaticResource x:Key="DockThemeForegroundBrush" ResourceKey="BrowserTextBrush" />
+      <StaticResource x:Key="DockThemeBorderLowBrush" ResourceKey="DockBorderSubtleBrush" />
+      <StaticResource x:Key="DockThemeAccentBrush" ResourceKey="DockSurfaceHeaderActiveBrush" />
+      <StaticResource x:Key="DockApplicationAccentBrushLow" ResourceKey="DockTabActiveBackgroundBrush" />
+      <StaticResource x:Key="DockApplicationAccentBrushMed" ResourceKey="DockTabHoverBackgroundBrush" />
+      <StaticResource x:Key="DockApplicationAccentBrushHigh" ResourceKey="DockChromeButtonHoverBackgroundBrush" />
+      <StaticResource x:Key="DockApplicationAccentForegroundBrush" ResourceKey="DockTabActiveForegroundBrush" />
+      <StaticResource x:Key="DockApplicationAccentBrushIndicator" ResourceKey="DockTargetIndicatorBrush" />
+      <StaticResource x:Key="DockToolChromeIconBrush" ResourceKey="DockChromeButtonForegroundBrush" />
+      <StaticResource x:Key="DockWindowChromeBackgroundBrush" ResourceKey="DockSurfacePanelBrush" />
+      <StaticResource x:Key="DockWindowChromeBorderBrush" ResourceKey="DockBorderSubtleBrush" />
+      <StaticResource x:Key="DockWindowChromeTitleBarBackgroundBrush" ResourceKey="DockSurfaceHeaderBrush" />
+      <StaticResource x:Key="DockWindowChromeForegroundBrush" ResourceKey="BrowserTextBrush" />
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+  <!-- Core2D is a compact authoring workspace; metrics do not change persisted dock proportions. -->
+  <x:Double x:Key="DockFontSizeNormal">12</x:Double>
+  <x:Double x:Key="DockDragPreviewFontSize">11</x:Double>
+  <x:Double x:Key="DockHeaderHeight">32</x:Double>
+  <x:Double x:Key="DockTabItemMinHeight">32</x:Double>
+  <x:Double x:Key="DockCloseButtonSize">24</x:Double>
+  <x:Double x:Key="DockChromeButtonWidth">24</x:Double>
+  <x:Double x:Key="DockChromeButtonHeight">24</x:Double>
+  <Thickness x:Key="DockDocumentTabItemPadding">8,0</Thickness>
+  <Thickness x:Key="DockToolTabItemPadding">10,0</Thickness>
+  <Thickness x:Key="DockChromeButtonPadding">5</Thickness>
+  <Thickness x:Key="DockToolChromeTitleMargin">0,7,8,7</Thickness>
+  <CornerRadius x:Key="DockDocumentTabItemCornerRadius">6,6,0,0</CornerRadius>
+  <CornerRadius x:Key="DockCornerRadiusSmall">6</CornerRadius>
+</ResourceDictionary>

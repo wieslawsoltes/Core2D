@@ -1,30 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
   <Styles.Resources>
     <FontFamily x:Key="UiFontFamily">avares://Avalonia.Fonts.Inter/Assets#Inter</FontFamily>
     <FontFamily x:Key="CodeFontFamily">avares://Core2D/Assets/Fonts#Roboto Mono</FontFamily>
     <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="UiFontFamily"/>
-  <StaticResource x:Key="BrowserFontFamily" ResourceKey="UiFontFamily"/></Styles.Resources>
+    <StaticResource x:Key="BrowserFontFamily" ResourceKey="UiFontFamily"/>
+  </Styles.Resources>
 
-  
-  
-  
-  
-  
-  
   <Style Selector="DataGridColumnHeader">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"/>
-  </Style>
-  
-
-  <Style Selector="ToolControl /template/ DockPanel#PART_DockPanel">
-    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}"/>
-  </Style>
-  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem">
-    <Setter Property="Background" Value="{DynamicResource AcrylicFallbackColor}"/>
-  </Style>
-  <Style Selector="ToolControl /template/ TabStrip#PART_TabStrip TabStripItem:selected">
-    <Setter Property="Background" Value="{DynamicResource DockThemeBackgroundBrush}"/>
   </Style>
 
   <StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml"/>

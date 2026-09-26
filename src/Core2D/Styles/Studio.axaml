@@ -1,10 +1,9 @@
-<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dmc="using:Dock.Model.Controls" xmlns:s="using:Core2D.Controls.Studio" xmlns:converters="using:Core2D.Converters" xmlns:ruler="clr-namespace:Core2D.Controls;assembly=Core2D.Controls.Ruler">
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="using:Core2D.Controls.Studio" xmlns:ruler="clr-namespace:Core2D.Controls;assembly=Core2D.Controls.Ruler">
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://Core2D/Styles/StudioControls.axaml"/>
         <ResourceInclude Source="avares://Core2D/Styles/StudioInputs.axaml"/>
-        
         <ResourceInclude Source="avares://Core2D/Styles/StudioColorField.axaml"/>
         <ResourceInclude Source="avares://Core2D/Styles/StudioPropertyControls.axaml"/>
         <ResourceInclude Source="avares://Core2D/Styles/StudioSearchBox.axaml"/>
@@ -17,11 +16,9 @@
         <ResourceInclude Source="avares://Core2D/Styles/StudioActions.axaml"/>
         <ResourceInclude Source="avares://Core2D/Styles/StudioNestedInspectors.axaml"/>
       </ResourceDictionary.MergedDictionaries>
-      <converters:MultipleDockTabsConverter x:Key="MultipleDockTabs"/>
     </ResourceDictionary>
   </Styles.Resources>
-  
-  
+
   <Style Selector="TextBlock.studio-muted">
     <Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}"/>
   </Style>
@@ -29,28 +26,14 @@
     <Setter Property="FontSize" Value="13"/>
     <Setter Property="FontWeight" Value="SemiBold"/>
   </Style>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   <Style Selector="Separator.studio-tool-separator">
     <Setter Property="Width" Value="1"/>
     <Setter Property="Height" Value="20"/>
     <Setter Property="Margin" Value="4,0"/>
     <Setter Property="VerticalAlignment" Value="Center"/>
   </Style>
-  
-  
-  
-  
+
   <Style Selector="DataGrid">
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
     <Setter Property="BorderThickness" Value="0"/>
@@ -60,8 +43,7 @@
     <Setter Property="Background" Value="{DynamicResource StudioInputBrush}"/>
     <Setter Property="FontSize" Value="11"/>
   </Style>
-  
-  
+
   <Style Selector="ruler|Ruler:horizontal">
     <Setter Property="Height" Value="20"/>
   </Style>
@@ -95,45 +77,5 @@
   </Style>
   <Style Selector="s|StudioSegmentedControl ListBoxItem, s|StudioColorPalette ListBoxItem">
     <Setter Property="Theme" Value="{StaticResource StudioSegmentItemTheme}"/>
-  </Style>
-  <!-- Keep Dock's drag targets, resize handles and floating windows; remove only redundant single-tab chrome. -->
-  <Style Selector="DockControl">
-    <Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}"/>
-  </Style>
-  <Style Selector="ToolControl">
-    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}"/>
-  </Style>
-  <Style Selector="ToolControl /template/ DockPanel#PART_DockPanel">
-    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
-  </Style>
-  <Style Selector="ToolControl /template/ :is(TabStrip)#PART_TabStrip" x:DataType="dmc:IToolDock" x:CompileBindings="True">
-    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
-    <Setter Property="DockPanel.Dock" Value="Top"/>
-    <Setter Property="IsVisible" Value="{Binding VisibleDockables.Count, Converter={StaticResource MultipleDockTabs}}"/>
-  </Style>
-  <Style Selector="ToolControl /template/ :is(TabStrip)#PART_TabStrip :is(TabStripItem)">
-    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}"/>
-    <Setter Property="Padding" Value="8,6"/>
-    <Setter Property="FontSize" Value="11"/>
-  </Style>
-  <Style Selector="ToolControl /template/ :is(TabStrip)#PART_TabStrip :is(TabStripItem):selected">
-    <Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioSelectionTextBrush}"/>
-    <Setter Property="FontWeight" Value="SemiBold"/>
-  </Style>
-  <Style Selector="DocumentControl">
-    <Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}"/>
-  </Style>
-  <Style Selector="DocumentControl /template/ :is(TabStripItem)">
-    <Setter Property="Padding" Value="12,7"/>
-    <Setter Property="FontSize" Value="12"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}"/>
-    <Setter Property="Background" Value="{DynamicResource StudioCanvasBrush}"/>
-  </Style>
-  <Style Selector="DocumentControl /template/ :is(TabStripItem):selected">
-    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}"/>
   </Style>
 </Styles>

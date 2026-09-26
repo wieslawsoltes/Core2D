@@ -6,6 +6,7 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://Core2D/Themes/Themes.axaml"/>
         <ResourceInclude Source="avares://Core2D/Themes/StudioPalette.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Themes/StudioDockTokens.axaml"/>
         <ResourceInclude Source="avares://Core2D/Styles/StudioInspectorPrimitives.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
