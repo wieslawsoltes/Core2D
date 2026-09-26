@@ -31,7 +31,7 @@
                        Watermark="Solid" Background="Transparent" BorderThickness="0" Padding="7,4" MinHeight="26"
                        IsReadOnly="{TemplateBinding IsReadOnly}" AutomationProperties.Name="Dash lengths" />
             </Border>
-            <ComboBox Grid.Column="1" ItemsSource="{TemplateBinding Presets}" PlaceholderText="Custom" HorizontalAlignment="Stretch"
+            <ComboBox Grid.Column="1" ItemsSource="{Binding Presets, RelativeSource={RelativeSource TemplatedParent}}" PlaceholderText="Custom" HorizontalAlignment="Stretch"
                       IsEnabled="{Binding !IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
                       SelectedItem="{Binding SelectedPreset, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Stroke pattern preset" />
           </Grid>

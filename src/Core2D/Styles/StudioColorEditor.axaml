@@ -56,7 +56,7 @@
             <s:StudioHexField Value="{Binding Hex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Color hexadecimal value" />
             <s:StudioNumericField Grid.Column="1" Minimum="0" Maximum="100" Suffix="%" Value="{Binding Alpha, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Opacity percent" />
           </Grid>
-          <ComboBox ItemsSource="{TemplateBinding ColorModels}" SelectedIndex="{Binding ModelIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+          <ComboBox ItemsSource="{Binding ColorModels, RelativeSource={RelativeSource TemplatedParent}}" SelectedIndex="{Binding ModelIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                     HorizontalAlignment="Left" Width="76" AutomationProperties.Name="Color model" />
           <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
             <s:StudioNumericField Prefix="{TemplateBinding FirstLabel}" Minimum="0" Maximum="{TemplateBinding FirstMaximum}"
