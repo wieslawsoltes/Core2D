@@ -11,9 +11,9 @@
   </Design.PreviewWith>
 
   <ControlTheme x:Key="{x:Type ListBox}" TargetType="ListBox" x:DataType="ListBox"><Setter Property="CornerRadius" Value="{DynamicResource BrowserControlRadius}"/>
-    <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource BrowserCanvasBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserTextBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ListBoxBorderThemeThickness}"/>
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
     <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>

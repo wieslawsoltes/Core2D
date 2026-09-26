@@ -109,5 +109,5 @@
     <Style Selector="^[TabStripPlacement=Right]">
       <Setter Property="HorizontalContentAlignment" Value="Right"/>
     </Style>
-  </ControlTheme>
+  <Style Selector="^:selected"><Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/><Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/><Setter Property="FontWeight" Value="SemiBold"/></Style><Style Selector="^:selected /template/ Border#PART_SelectedPipe"><Setter Property="Opacity" Value="0"/></Style><Style Selector="^:selected:pointerover /template/ Border#PART_LayoutRoot"><Setter Property="Background" Value="{DynamicResource BrowserHoverBrush}"/><Setter Property="TextElement.Foreground" Value="{DynamicResource BrowserTextBrush}"/></Style></ControlTheme>
 </ResourceDictionary>

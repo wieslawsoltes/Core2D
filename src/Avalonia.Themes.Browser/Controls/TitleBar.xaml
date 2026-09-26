@@ -6,7 +6,7 @@
     </Design.PreviewWith>
 
     <ControlTheme x:Key="{x:Type TitleBar}" TargetType="TitleBar" x:DataType="TitleBar">
-      <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
       <Setter Property="VerticalAlignment" Value="Top"/>
       <Setter Property="HorizontalAlignment" Value="Stretch"/>
       <Setter Property="Background" Value="Transparent"/>

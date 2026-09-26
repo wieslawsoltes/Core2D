@@ -29,7 +29,7 @@
       </Style>
       <Style Selector="^/template/ ContentPresenter">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
       </Style>
     </Style>
     <Style Selector="^.MonthItem">
@@ -74,7 +74,7 @@
     <Setter Property="Height" Value="22"/>
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="Focusable" Value="False"/>
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource BrowserCanvasBrush}"/>
     <Setter Property="IsVisible" Value="False"/>
     <Setter Property="Content">
       <Template>
@@ -90,7 +90,7 @@
     <Setter Property="Height" Value="22"/>
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="Focusable" Value="False"/>
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource BrowserCanvasBrush}"/>
     <Setter Property="IsVisible" Value="False"/>
     <Setter Property="Content">
       <Template>

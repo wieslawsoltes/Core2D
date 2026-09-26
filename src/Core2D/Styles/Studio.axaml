@@ -1,12 +1,10 @@
-<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:dmc="using:Dock.Model.Controls" xmlns:s="using:Core2D.Controls.Studio" xmlns:converters="using:Core2D.Converters"
-  xmlns:ruler="clr-namespace:Core2D.Controls;assembly=Core2D.Controls.Ruler">
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:dmc="using:Dock.Model.Controls" xmlns:s="using:Core2D.Controls.Studio" xmlns:converters="using:Core2D.Converters" xmlns:ruler="clr-namespace:Core2D.Controls;assembly=Core2D.Controls.Ruler">
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://Core2D/Styles/StudioControls.axaml"/>
         <ResourceInclude Source="avares://Core2D/Styles/StudioInputs.axaml"/>
-        <ResourceInclude Source="avares://Core2D/Styles/StudioNavigation.axaml"/>
+        
         <ResourceInclude Source="avares://Core2D/Styles/StudioColorField.axaml"/>
         <ResourceInclude Source="avares://Core2D/Styles/StudioPropertyControls.axaml"/>
         <ResourceInclude Source="avares://Core2D/Styles/StudioSearchBox.axaml"/>
@@ -22,12 +20,8 @@
       <converters:MultipleDockTabsConverter x:Key="MultipleDockTabs"/>
     </ResourceDictionary>
   </Styles.Resources>
-  <Style Selector=":is(TemplatedControl)">
-    <Setter Property="FontSize" Value="12"/>
-  </Style>
-  <Style Selector="TextBlock">
-    <Setter Property="FontSize" Value="12"/>
-  </Style>
+  
+  
   <Style Selector="TextBlock.studio-muted">
     <Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}"/>
   </Style>
@@ -35,73 +29,28 @@
     <Setter Property="FontSize" Value="13"/>
     <Setter Property="FontWeight" Value="SemiBold"/>
   </Style>
-  <Style Selector="Button">
-    <Setter Property="Theme" Value="{StaticResource StudioButtonTheme}"/>
-  </Style>
-  <Style Selector="Button.studio-primary">
-    <Setter Property="Background" Value="{DynamicResource StudioAccentBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioOnAccentBrush}"/>
-    <Setter Property="FontWeight" Value="SemiBold"/>
-    <Setter Property="Padding" Value="16,7"/>
-  </Style>
-  <Style Selector="Button.studio-primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-    <Setter Property="Background" Value="{DynamicResource StudioAccentBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioOnAccentBrush}"/>
-    <Setter Property="Opacity" Value="0.9"/>
-  </Style>
-  <Style Selector="TextBox">
-    <Setter Property="Theme" Value="{StaticResource StudioTextBoxTheme}"/>
-  </Style>
-  <Style Selector="CheckBox">
-    <Setter Property="Theme" Value="{StaticResource StudioCheckBoxTheme}"/>
-  </Style>
-  <Style Selector="ComboBox">
-    <Setter Property="Theme" Value="{StaticResource StudioComboBoxTheme}"/>
-  </Style>
-  <Style Selector="ComboBoxItem">
-    <Setter Property="MinHeight" Value="28"/>
-    <Setter Property="Padding" Value="8,5"/>
-  </Style>
-  <Style Selector="NumericUpDown">
-    <Setter Property="MinHeight" Value="28"/>
-    <Setter Property="CornerRadius" Value="5"/>
-    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}"/>
-    <Setter Property="BorderBrush" Value="Transparent"/>
-  </Style>
-  <Style Selector="Label">
-    <Setter Property="FontSize" Value="11"/>
-    <Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}"/>
-    <Setter Property="Padding" Value="0,6,0,4"/>
-  </Style>
-  <Style Selector="Menu">
-    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
-  </Style>
-  <Style Selector="MenuItem">
-    <Setter Property="FontSize" Value="12"/>
-    <Setter Property="MinHeight" Value="28"/>
-  </Style>
-  <Style Selector="Separator">
-    <Setter Property="Background" Value="{DynamicResource StudioBorderBrush}"/>
-  </Style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <Style Selector="Separator.studio-tool-separator">
     <Setter Property="Width" Value="1"/>
     <Setter Property="Height" Value="20"/>
     <Setter Property="Margin" Value="4,0"/>
     <Setter Property="VerticalAlignment" Value="Center"/>
   </Style>
-  <Style Selector="TabControl">
-    <Setter Property="Theme" Value="{StaticResource StudioTabControlTheme}"/>
-  </Style>
-  <Style Selector="TabItem">
-    <Setter Property="Theme" Value="{StaticResource StudioTabItemTheme}"/>
-  </Style>
-  <Style Selector="ListBoxItem">
-    <Setter Property="MinHeight" Value="28"/>
-    <Setter Property="Padding" Value="6,2"/>
-  </Style>
-  <Style Selector="ListBoxItem TextBlock">
-    <Setter Property="Padding" Value="4,3"/>
-  </Style>
+  
+  
+  
+  
   <Style Selector="DataGrid">
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
     <Setter Property="BorderThickness" Value="0"/>
@@ -111,15 +60,8 @@
     <Setter Property="Background" Value="{DynamicResource StudioInputBrush}"/>
     <Setter Property="FontSize" Value="11"/>
   </Style>
-  <Style Selector="ToolTip">
-    <Setter Property="CornerRadius" Value="6"/>
-    <Setter Property="Padding" Value="8,6"/>
-  </Style>
-  <Style Selector="FlyoutPresenter">
-    <Setter Property="CornerRadius" Value="10"/>
-    <Setter Property="Padding" Value="6"/>
-    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
-  </Style>
+  
+  
   <Style Selector="ruler|Ruler:horizontal">
     <Setter Property="Height" Value="20"/>
   </Style>

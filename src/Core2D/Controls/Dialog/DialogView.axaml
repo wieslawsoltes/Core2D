@@ -35,7 +35,7 @@
         <Border Grid.Row="2" IsVisible="{Binding IsCloseButtonVisible}" Padding="16,10"
           BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0">
           <Button Name="CloseButton" Content="Done" Command="{Binding CloseCommand}" HorizontalAlignment="Right"
-            MinWidth="80" Classes="studio-primary" AutomationProperties.Name="Close dialog" />
+            MinWidth="80" Classes="primary" AutomationProperties.Name="Close dialog" />
         </Border>
       </Grid>
     </Border>

@@ -65,7 +65,7 @@
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type Menu}" TargetType="Menu" x:DataType="Menu">
-    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}"/>
     <Setter Property="Height" Value="{DynamicResource MenuBarHeight}"/>
     <Setter Property="ItemContainerTheme" Value="{StaticResource FluentTopLevelMenuItem}"/>
     <Setter Property="Template">

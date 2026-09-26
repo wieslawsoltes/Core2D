@@ -455,7 +455,7 @@
         <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsBusy}" MaxWidth="120" Height="3" HorizontalAlignment="Left"/>
         <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}"/>
         <Button Grid.Column="2" Content="Back" Command="{Binding BackCommand}"/>
-        <Button Grid.Column="3" Content="Continue" Command="{Binding NextCommand}" Classes="studio-primary"/>
+        <Button Grid.Column="3" Content="Continue" Command="{Binding NextCommand}" Classes="primary"/>
       </Grid>
     </Border>
   </Grid>

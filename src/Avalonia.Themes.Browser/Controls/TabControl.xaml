@@ -19,7 +19,7 @@
 
   <ControlTheme x:Key="{x:Type TabControl}" TargetType="TabControl" x:DataType="TabControl">
     <Setter Property="Margin" Value="0"/>
-    <Setter Property="Padding" Value="{DynamicResource TabItemMargin}"/>
+    <Setter Property="Padding" Value="0"/>
     <Setter Property="Background" Value="{DynamicResource BrowserTransparentBrush}"/>
     <Setter Property="Template">
       <ControlTemplate>

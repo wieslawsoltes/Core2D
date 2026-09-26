@@ -7,7 +7,7 @@
   </UserControl.KeyBindings>
   <Grid RowDefinitions="Auto,*" MinHeight="180">
     <s:StudioPanelHeader Title="{Binding Name}" Description="C# · Ctrl/Command+Enter runs in the REPL">
-      <Button Content="Run" Command="{Binding ExecuteCode}" CommandParameter="{Binding Code}" Classes="studio-primary"
+      <Button Content="Run" Command="{Binding ExecuteCode}" CommandParameter="{Binding Code}" Classes="primary"
         AutomationProperties.Name="Run script" />
     </s:StudioPanelHeader>
     <s:StudioCodeEditor Name="ScriptTextEditor" Grid.Row="1" Text="{Binding Code, Mode=TwoWay}"/>

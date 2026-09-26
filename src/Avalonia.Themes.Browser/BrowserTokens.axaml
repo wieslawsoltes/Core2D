@@ -1125,5 +1125,7 @@
 <CornerRadius x:Key="OverlayCornerRadius">10</CornerRadius>
 <Thickness x:Key="TextControlBorderThemeThicknessFocused">1</Thickness>
 <sys:Double x:Key="ScrollBarSize">12</sys:Double>
+ <Thickness x:Key="MenuFlyoutPresenterThemePadding">4</Thickness>
+ <Thickness x:Key="FlyoutBorderThemePadding">12</Thickness>
 <BoxShadows x:Key="BrowserOverlayShadow">0 4 20 0 #22000000</BoxShadows>
 </ResourceDictionary>

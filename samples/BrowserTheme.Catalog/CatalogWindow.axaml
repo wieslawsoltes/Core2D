@@ -1,0 +1,5 @@
+<Window x:Class="BrowserTheme.Catalog.CatalogWindow" xmlns="https://github.com/avaloniaui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:BrowserTheme.Catalog"
+ Title="Browser theme • Native Avalonia control catalog" Width="1080" Height="900" MinWidth="720" MinHeight="640">
+ <local:GalleryView/>
+</Window>

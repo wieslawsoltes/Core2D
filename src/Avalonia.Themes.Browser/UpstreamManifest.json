@@ -1010,6 +1010,13 @@
     "brushMappings": 516,
     "densityModes": 3,
     "templateCatalog": "Controls/BrowserControls.xaml",
-    "sourceBuildDependency": "none"
+    "sourceBuildDependency": "none",
+    "contractRefinements": [
+      "Neutral tab selection",
+      "Dropdown checkmarks",
+      "Compact scroll extents",
+      "Native text context select-all",
+      "Portable primary/ghost/danger buttons"
+    ]
   }
 }

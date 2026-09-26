@@ -17,10 +17,10 @@
               Watermark="Filter records" BorderBrush="Transparent" VerticalAlignment="Center"
               Margin="0,0,0,0" Grid.Column="0" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-              <Button Content="Apply record" Classes="studio-primary" Command="{Binding ApplyRecord}" CommandParameter="{Binding CurrentRecord}"
+              <Button Content="Apply record" Classes="primary" Command="{Binding ApplyRecord}" CommandParameter="{Binding CurrentRecord}"
                 IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent"
                 Padding="8,5" />
-              <Button Content="Remove" Classes="studio-danger" Command="{Binding RemoveRecord}" CommandParameter="{Binding CurrentRecord}"
+              <Button Content="Remove" Classes="danger" Command="{Binding RemoveRecord}" CommandParameter="{Binding CurrentRecord}"
                 IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent"
                 Padding="8,5" />
               <Button Content="Add record" Command="{Binding AddRecord}" CommandParameter="{Binding}" BorderBrush="Transparent"
@@ -59,7 +59,7 @@
               Watermark="Filter columns" BorderBrush="Transparent" VerticalAlignment="Center"
               Margin="0,0,0,0" Grid.Column="0" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-              <Button Content="Remove" Classes="studio-danger" Command="{Binding RemoveColumn}"
+              <Button Content="Remove" Classes="danger" Command="{Binding RemoveColumn}"
                 CommandParameter="{Binding #ColumnsDataGrid.SelectedItem}" BorderBrush="Transparent"
                 Background="Transparent" Padding="8,5" />
               <Button Content="Add column" Command="{Binding AddColumn}" CommandParameter="{Binding}" BorderBrush="Transparent"

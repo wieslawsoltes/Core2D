@@ -1,140 +1,14 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:s="using:Core2D.Controls.Studio" x:CompileBindings="True">
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="using:Core2D.Controls.Studio" x:CompileBindings="True">
   <!-- Custom chrome with native input, selection, IME, validation and automation contracts. -->
-  <ControlTheme x:Key="StudioButtonTheme" TargetType="Button" x:DataType="Button">
-    <Setter Property="MinHeight" Value="28" />
-    <Setter Property="Padding" Value="10,6" />
-    <Setter Property="CornerRadius" Value="6" />
-    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
-    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
-    <Setter Property="BorderBrush" Value="Transparent" />
-    <Setter Property="BorderThickness" Value="1" />
-    <Setter Property="HorizontalContentAlignment" Value="Center" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="Template">
-      <ControlTemplate>
-        <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
-                          ContentTemplate="{TemplateBinding ContentTemplate}" RecognizesAccessKey="True"
-                          Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}"
-                          Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
-                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-      </ControlTemplate>
-    </Setter>
-    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" />
-    </Style>
-    <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}" />
-      <Setter Property="Foreground" Value="{DynamicResource StudioSelectionTextBrush}" />
-    </Style>
-    <Style Selector="^:focus-visible /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" />
-    </Style>
-    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
-  </ControlTheme>
+  
 
-  <ControlTheme x:Key="StudioTextBoxTheme" TargetType="TextBox" x:DataType="TextBox">
-    <Setter Property="MinHeight" Value="28" />
-    <Setter Property="Padding" Value="8,5" />
-    <Setter Property="CornerRadius" Value="5" />
-    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
-    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
-    <Setter Property="BorderBrush" Value="Transparent" />
-    <Setter Property="BorderThickness" Value="1" />
-    <Setter Property="CaretBrush" Value="{DynamicResource StudioTextBrush}" />
-    <Setter Property="SelectionBrush" Value="{DynamicResource StudioAccentBrush}" />
-    <Setter Property="SelectionForegroundBrush" Value="White" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="Template">
-      <ControlTemplate>
-        <DataValidationErrors>
-          <Border Name="PART_BorderElement" Background="{TemplateBinding Background}"
-                  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                  CornerRadius="{TemplateBinding CornerRadius}">
-            <Grid ColumnDefinitions="Auto,*,Auto" Margin="{TemplateBinding Padding}">
-              <ContentPresenter Name="PART_InnerLeft" Content="{TemplateBinding InnerLeftContent}" VerticalAlignment="Center"
-                                Foreground="{DynamicResource StudioMutedBrush}" Margin="0,0,6,0" />
-              <ScrollViewer Name="PART_ScrollViewer" Grid.Column="1"
-                            HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
-                            VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
-                            IsScrollChainingEnabled="True">
-                <Panel VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                  <TextBlock Text="{TemplateBinding Watermark}" Foreground="{DynamicResource StudioMutedBrush}"
-                             TextWrapping="{TemplateBinding TextWrapping}" IsHitTestVisible="False">
-                    <TextBlock.IsVisible>
-                      <MultiBinding Converter="{x:Static BoolConverters.And}">
-                        <Binding ElementName="PART_TextPresenter" Path="PreeditText" Converter="{x:Static StringConverters.IsNullOrEmpty}" />
-                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Text" Converter="{x:Static StringConverters.IsNullOrEmpty}" />
-                      </MultiBinding>
-                    </TextBlock.IsVisible>
-                  </TextBlock>
-                  <TextPresenter Name="PART_TextPresenter" Text="{TemplateBinding Text, Mode=TwoWay}"
-                                 CaretIndex="{TemplateBinding CaretIndex}" CaretBrush="{TemplateBinding CaretBrush}"
-                                 CaretBlinkInterval="{TemplateBinding CaretBlinkInterval}"
-                                 SelectionStart="{TemplateBinding SelectionStart}" SelectionEnd="{TemplateBinding SelectionEnd}"
-                                 SelectionBrush="{TemplateBinding SelectionBrush}" SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
-                                 PasswordChar="{TemplateBinding PasswordChar}" RevealPassword="{TemplateBinding RevealPassword}"
-                                 TextWrapping="{TemplateBinding TextWrapping}" TextAlignment="{TemplateBinding TextAlignment}"
-                                 LineHeight="{TemplateBinding LineHeight}" LetterSpacing="{TemplateBinding LetterSpacing}" />
-                </Panel>
-              </ScrollViewer>
-              <ContentPresenter Grid.Column="2" Content="{TemplateBinding InnerRightContent}" VerticalAlignment="Center" />
-            </Grid>
-          </Border>
-        </DataValidationErrors>
-      </ControlTemplate>
-    </Setter>
-    <Style Selector="^:pointerover /template/ Border#PART_BorderElement">
-      <Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}" />
-    </Style>
-    <Style Selector="^:focus /template/ Border#PART_BorderElement">
-      <Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" />
-    </Style>
-    <Style Selector="^:error /template/ Border#PART_BorderElement">
-      <Setter Property="BorderBrush" Value="#E5484D" />
-    </Style>
-    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
-  </ControlTheme>
-  <ControlTheme x:Key="{x:Type s:StudioNumberBox}" TargetType="s:StudioNumberBox"
-                BasedOn="{StaticResource StudioTextBoxTheme}" x:DataType="s:StudioNumberBox">
-    <Setter Property="InnerLeftContent" Value="{Binding Prefix, RelativeSource={RelativeSource Self}}" />
+  
+  <ControlTheme x:Key="{x:Type s:StudioNumberBox}" TargetType="s:StudioNumberBox" BasedOn="{StaticResource {x:Type TextBox}}" x:DataType="s:StudioNumberBox">
+    <Setter Property="InnerLeftContent" Value="{Binding Prefix, RelativeSource={RelativeSource Self}}"/>
     <Style Selector="^ /template/ ContentPresenter#PART_InnerLeft">
-      <Setter Property="Cursor" Value="SizeWestEast" />
+      <Setter Property="Cursor" Value="SizeWestEast"/>
     </Style>
   </ControlTheme>
 
-  <ControlTheme x:Key="StudioCheckBoxTheme" TargetType="CheckBox" x:DataType="CheckBox">
-    <Setter Property="MinHeight" Value="28" />
-    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8" Background="Transparent">
-          <Border Name="PART_Check" Width="14" Height="14" VerticalAlignment="Center" CornerRadius="3"
-                  BorderThickness="1" BorderBrush="{DynamicResource StudioMutedBrush}" Background="Transparent">
-            <Panel>
-              <Path Name="PART_Tick" Data="M2,6L5,9L11,3" Stroke="White" StrokeThickness="1.4" IsVisible="False" />
-              <Border Name="PART_Mixed" Height="2" Margin="3,0" Background="White" VerticalAlignment="Center" IsVisible="False" />
-            </Panel>
-          </Border>
-          <ContentPresenter Name="PART_ContentPresenter" Grid.Column="1" Content="{TemplateBinding Content}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}"
-                            VerticalContentAlignment="Center" RecognizesAccessKey="True" />
-        </Grid>
-      </ControlTemplate>
-    </Setter>
-    <Style Selector="^:checked /template/ Border#PART_Check, ^:indeterminate /template/ Border#PART_Check">
-      <Setter Property="Background" Value="{DynamicResource StudioAccentBrush}" />
-      <Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" />
-    </Style>
-    <Style Selector="^:checked /template/ Path#PART_Tick"><Setter Property="IsVisible" Value="True" /></Style>
-    <Style Selector="^:indeterminate /template/ Border#PART_Mixed"><Setter Property="IsVisible" Value="True" /></Style>
-    <Style Selector="^:focus-visible /template/ Border#PART_Check">
-      <Setter Property="BorderThickness" Value="2" />
-      <Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" />
-    </Style>
-    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
-  </ControlTheme>
+  
 </ResourceDictionary>

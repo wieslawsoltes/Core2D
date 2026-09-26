@@ -19,11 +19,11 @@
   <converters:StringFormatConverter x:Key="StringFormatConverter"/>
 
   <ControlTheme x:Key="{x:Type ProgressBar}" TargetType="ProgressBar" x:DataType="ProgressBar">
-    <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightAccentBrush}"/>
-    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource BrowserAccentBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ProgressBarBorderThemeThickness}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightTransparentBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
     <Setter Property="MinHeight" Value="{DynamicResource ProgressBarThemeMinHeight}"/>
     <Setter Property="VerticalAlignment" Value="Center"/>
     <Setter Property="Template">
@@ -48,7 +48,7 @@
               <Border x:Name="IndeterminateProgressBarIndicator2" Margin="{TemplateBinding Padding}" Background="{TemplateBinding Foreground}" CornerRadius="{TemplateBinding CornerRadius}"/>
             </Panel>
             <LayoutTransformControl x:Name="PART_LayoutTransformControl" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{TemplateBinding ShowProgressText}">
-              <TextBlock Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}">
+              <TextBlock Foreground="{DynamicResource BrowserTextBrush}">
                   <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource StringFormatConverter}">
                       <TemplateBinding Property="ProgressTextFormat"/>

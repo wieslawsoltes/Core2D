@@ -72,7 +72,7 @@ public class StudioSurfaceChromeTests
         try
         {
             window.Show(); Jobs();
-            var placeholder = choice.GetVisualDescendants().OfType<TextBlock>().Single(x => x.Name == "PART_Placeholder");
+            var placeholder = choice.GetVisualDescendants().OfType<TextBlock>().Single(x => x.Name == "PlaceholderTextBlock");
             Assert.True(placeholder.IsVisible); Assert.Equal("Choose a mode", placeholder.Text);
             choice.SelectedIndex = 1; Jobs(); Assert.False(placeholder.IsVisible);
             Assert.Equal("Data", choice.SelectedItem);

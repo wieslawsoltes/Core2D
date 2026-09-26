@@ -16,7 +16,7 @@
       <Grid ColumnDefinitions="*,Auto" Margin="12,8" ColumnSpacing="8">
         <TextBlock Text="Design" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center" />
         <Button Grid.Column="1" Content="Export" Command="{Binding Platform.OnExport}"
-                Classes="studio-primary" AutomationProperties.Name="Export drawing" />
+                Classes="primary" AutomationProperties.Name="Export drawing" />
       </Grid>
       <TabControl Name="InspectorTabs" Grid.Row="1" Classes="studio-navigation">
         <TabItem Header="Design">

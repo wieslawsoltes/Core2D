@@ -197,6 +197,6 @@
         <Setter Property="Opacity" Value="1"/>
       </Style>
     </Style>
-  </ControlTheme>
+  <Style Selector="^:vertical"><Setter Property="Width" Value="{DynamicResource ScrollBarSize}"/></Style><Style Selector="^:horizontal"><Setter Property="Height" Value="{DynamicResource ScrollBarSize}"/></Style></ControlTheme>
 
 </ResourceDictionary>

@@ -1,82 +1,18 @@
-<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:s="using:Core2D.Controls.Studio" x:CompileBindings="True">
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="using:Core2D.Controls.Studio" x:CompileBindings="True">
   <Styles.Resources>
     <ResourceDictionary>
-      <ControlTheme x:Key="StudioScrollThumbTheme" TargetType="Thumb" x:DataType="Thumb">
-        <Setter Property="MinWidth" Value="6" /><Setter Property="MinHeight" Value="6" />
-        <Setter Property="Template">
-          <ControlTemplate>
-            <Border Name="PART_Grip" Margin="3" CornerRadius="4" Background="{DynamicResource StudioMutedBrush}" Opacity="0.55" />
-          </ControlTemplate>
-        </Setter>
-        <Style Selector="^:pointerover /template/ Border#PART_Grip, ^:pressed /template/ Border#PART_Grip"><Setter Property="Opacity" Value="0.95" /></Style>
-      </ControlTheme>
-      <ControlTheme x:Key="StudioScrollPageTheme" TargetType="RepeatButton" x:DataType="RepeatButton">
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="Template"><ControlTemplate><Border Background="Transparent" /></ControlTemplate></Setter>
-      </ControlTheme>
-      <ControlTheme x:Key="StudioScrollBarTheme" TargetType="ScrollBar" x:DataType="ScrollBar">
-        <Setter Property="Template">
-          <ControlTemplate>
-            <Border Name="PART_TrackSurface" Background="Transparent" CornerRadius="6">
-              <Track Name="PART_Track" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}"
-                     Value="{TemplateBinding Value, Mode=TwoWay}" ViewportSize="{TemplateBinding ViewportSize}"
-                     Orientation="{TemplateBinding Orientation}" IsDirectionReversed="True">
-                <Track.DecreaseButton><RepeatButton Name="PART_PageUpButton" Theme="{StaticResource StudioScrollPageTheme}" /></Track.DecreaseButton>
-                <Track.IncreaseButton><RepeatButton Name="PART_PageDownButton" Theme="{StaticResource StudioScrollPageTheme}" /></Track.IncreaseButton>
-                <Thumb Name="PART_Thumb" Theme="{StaticResource StudioScrollThumbTheme}" />
-              </Track>
-            </Border>
-          </ControlTemplate>
-        </Setter>
-        <Style Selector="^:vertical"><Setter Property="Width" Value="12" /></Style>
-        <Style Selector="^:horizontal"><Setter Property="Height" Value="12" /></Style>
-        <Style Selector="^:vertical /template/ Thumb#PART_Thumb"><Setter Property="MinHeight" Value="20" /></Style>
-        <Style Selector="^:horizontal /template/ Thumb#PART_Thumb"><Setter Property="MinWidth" Value="20" /></Style>
-        <Style Selector="^:horizontal /template/ Track#PART_Track"><Setter Property="IsDirectionReversed" Value="False" /></Style>
-        <Style Selector="^:pointerover /template/ Border#PART_TrackSurface"><Setter Property="Background" Value="{DynamicResource StudioInputBrush}" /></Style>
-        <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.35" /></Style>
-      </ControlTheme>
-      <ControlTheme x:Key="StudioChoiceItemTheme" TargetType="ComboBoxItem" x:DataType="ComboBoxItem">
-        <Setter Property="MinHeight" Value="28" /><Setter Property="Padding" Value="8,5" />
-        <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
-        <Setter Property="Template">
-          <ControlTemplate>
-            <Border Name="PART_Choice" Padding="{TemplateBinding Padding}" CornerRadius="5" Background="Transparent" BorderBrush="Transparent" BorderThickness="1">
-              <Grid ColumnDefinitions="12,*" ColumnSpacing="8">
-                <Path Name="PART_Checkmark" Data="M1,6L4,9L11,2" Stroke="{TemplateBinding Foreground}" StrokeThickness="1.5" IsVisible="False" VerticalAlignment="Center" Height="12" />
-                <ContentPresenter Name="PART_ContentPresenter" Grid.Column="1" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
-                                  Foreground="{TemplateBinding Foreground}" RecognizesAccessKey="True" VerticalContentAlignment="Center" />
-              </Grid>
-            </Border>
-          </ControlTemplate>
-        </Setter>
-        <Style Selector="^:selected /template/ Path#PART_Checkmark"><Setter Property="IsVisible" Value="True" /></Style>
-        <Style Selector="^:selected /template/ Border#PART_Choice"><Setter Property="Background" Value="{DynamicResource StudioInputBrush}" /></Style>
-        <Style Selector="^:pointerover /template/ Border#PART_Choice"><Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}" /></Style>
-        <Style Selector="^:focus-visible /template/ Border#PART_Choice"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
-        <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
-      </ControlTheme>
-      <ControlTheme x:Key="StudioTooltipTheme" TargetType="ToolTip" x:DataType="ToolTip">
-        <Setter Property="Background" Value="#222222" /><Setter Property="Foreground" Value="#FFFFFF" />
-        <Setter Property="MaxWidth" Value="320" /><Setter Property="Padding" Value="9,6" /><Setter Property="CornerRadius" Value="6" />
-        <Setter Property="Template">
-          <ControlTemplate>
-            <Border Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}"
-                    BoxShadow="{DynamicResource StudioElevation}">
-              <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Foreground="{TemplateBinding Foreground}" />
-            </Border>
-          </ControlTemplate>
-        </Setter>
-      </ControlTheme>
+      
+      
+      
+      
+      
       <ControlTheme x:Key="{x:Type s:StudioTableStatus}" TargetType="s:StudioTableStatus" x:DataType="s:StudioTableStatus">
         <Setter Property="Template">
           <ControlTemplate>
             <Border BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0" Background="{DynamicResource StudioSurfaceBrush}" Padding="12,7">
               <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
-                <TextBlock Text="{TemplateBinding Summary}" FontSize="11" Foreground="{DynamicResource StudioMutedBrush}" TextTrimming="CharacterEllipsis" />
-                <TextBlock Grid.Column="1" Text="{TemplateBinding SelectionSummary}" FontSize="11" Foreground="{DynamicResource StudioMutedBrush}" />
+                <TextBlock Text="{TemplateBinding Summary}" FontSize="11" Foreground="{DynamicResource StudioMutedBrush}" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Grid.Column="1" Text="{TemplateBinding SelectionSummary}" FontSize="11" Foreground="{DynamicResource StudioMutedBrush}"/>
               </Grid>
             </Border>
           </ControlTemplate>
@@ -85,16 +21,11 @@
     </ResourceDictionary>
   </Styles.Resources>
   <!-- Preserve the native Track/Thumb, selection and grid interaction implementations. -->
-  <Style Selector="ScrollBar"><Setter Property="Theme" Value="{StaticResource StudioScrollBarTheme}" /></Style>
-  <Style Selector="ComboBoxItem"><Setter Property="Theme" Value="{StaticResource StudioChoiceItemTheme}" /></Style>
-  <Style Selector="ToolTip">
-    <Setter Property="Theme" Value="{StaticResource StudioTooltipTheme}" />
-    <!-- Override the legacy application-level background, which outranks a ControlTheme. -->
-    <Setter Property="Background" Value="#222222" />
-    <Setter Property="Foreground" Value="#FFFFFF" />
-  </Style>
-  <Style Selector="ToolTip TextBlock"><Setter Property="TextWrapping" Value="Wrap" /></Style>
-  <Style Selector="ContextMenu"><Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" /><Setter Property="Padding" Value="4" /><Setter Property="CornerRadius" Value="8" /></Style>
-  <Style Selector="DataGridColumnHeader"><Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}" /><Setter Property="FontWeight" Value="Medium" /><Setter Property="MinHeight" Value="30" /></Style>
-  <Style Selector="Button.studio-danger"><Setter Property="Foreground" Value="{DynamicResource StudioDangerBrush}" /></Style>
+  
+  
+  
+  
+  
+  <Style Selector="DataGridColumnHeader"><Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}"/><Setter Property="FontWeight" Value="Medium"/><Setter Property="MinHeight" Value="30"/></Style>
+  
 </Styles>

@@ -23,7 +23,7 @@
     <MenuItem Header="{DynamicResource StringTextFlyoutCutText}" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" InputGesture="{x:Static TextBox.CutGesture}"/>
     <MenuItem Header="{DynamicResource StringTextFlyoutCopyText}" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" InputGesture="{x:Static TextBox.CopyGesture}"/>
     <MenuItem Header="{DynamicResource StringTextFlyoutPasteText}" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" InputGesture="{x:Static TextBox.PasteGesture}"/>
-  </MenuFlyout>
+  <Separator/><MenuItem Header="Select all" Command="{Binding $parent[TextBox].SelectAll}"/></MenuFlyout>
   <MenuFlyout x:Key="HorizontalTextBoxContextFlyout" ShowMode="{OnFormFactor Desktop=Standard, Mobile=Transient}" FlyoutPresenterTheme="{StaticResource HorizontalMenuFlyoutPresenter}" ItemContainerTheme="{StaticResource HorizontalMenuItem}">
     <MenuItem Header="{DynamicResource StringTextFlyoutCutText}" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" IsVisible="{Binding $parent[TextBox].CanCut}"/>
     <MenuItem Header="{DynamicResource StringTextFlyoutCopyText}" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" IsVisible="{Binding $parent[TextBox].CanCopy}"/>
@@ -86,7 +86,7 @@
     <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/>
     <Setter Property="CaretBrush" Value="{DynamicResource BrowserTextBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource BrowserBorderBrush}"/>
-    <Setter Property="SelectionBrush" Value="{DynamicResource BrowserAccentBrush}"/>
+    <Setter Property="SelectionBrush" Value="{DynamicResource BrowserPrimaryBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource BrowserControlRadius}"/>
     <Setter Property="MinHeight" Value="{DynamicResource BrowserControlHeight}"/>

@@ -266,7 +266,7 @@
             <ControlTemplate>
               <Border x:Name="LayoutRoot" CornerRadius="2" Margin="10,0">
                 <Panel>
-                  <Border x:Name="SelectedLine" HorizontalAlignment="Left" Margin="2,6" CornerRadius="0.5" Width="3" Background="{DynamicResource SystemControlHighlightAccentBrush}" IsVisible="{TemplateBinding IsSelected}"/>
+                  <Border x:Name="SelectedLine" HorizontalAlignment="Left" Margin="2,6" CornerRadius="0.5" Width="3" Background="{DynamicResource BrowserAccentBrush}" IsVisible="{TemplateBinding IsSelected}"/>
                   <ContentPresenter Name="PART_ContentPresenter" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 
                 </Panel>

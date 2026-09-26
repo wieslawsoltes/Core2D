@@ -1,8 +1,8 @@
 <!-- Derived from AvaloniaUI/Avalonia 11.3.12 (MIT). See LICENSE.Avalonia.txt and UpstreamManifest.json. --><ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:ClassModifier="internal">
   <ControlTheme x:Key="{x:Type Window}" TargetType="Window" x:DataType="Window">
     <Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}"/>
-    <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
-    <Setter Property="TopLevel.SystemBarColor" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
+    <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource BrowserSurfaceBrush}"/>
+    <Setter Property="TopLevel.SystemBarColor" Value="{DynamicResource BrowserSurfaceBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
     <Setter Property="FontSize" Value="{DynamicResource BrowserFontSize}"/>
     <Setter Property="FontFamily" Value="{DynamicResource BrowserFontFamily}"/>

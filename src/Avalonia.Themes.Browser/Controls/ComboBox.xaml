@@ -67,7 +67,7 @@
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="VerticalAlignment" Value="Top"/>
-    <Setter Property="PlaceholderForeground" Value="{DynamicResource BrowserTextBrush}"/>
+    <Setter Property="PlaceholderForeground" Value="{DynamicResource BrowserMutedBrush}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <DataValidationErrors>

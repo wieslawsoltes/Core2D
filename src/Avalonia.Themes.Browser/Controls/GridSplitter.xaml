@@ -3,7 +3,7 @@
       <Setter Property="Focusable" Value="True"/>
       <Setter Property="MinWidth" Value="6"/>
       <Setter Property="MinHeight" Value="6"/>
-      <Setter Property="Background" Value="{DynamicResource SystemAltMediumLowColor}"/>
+      <Setter Property="Background" Value="{DynamicResource BrowserBorderBrush}"/>
       <Setter Property="PreviewContent">
         <Template>
           <Rectangle Fill="{DynamicResource SystemAccentColor}"/>
@@ -14,5 +14,5 @@
           <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}"/>
         </ControlTemplate>
       </Setter>
-    </ControlTheme>
+    <Style Selector="^:pointerover"><Setter Property="Background" Value="{DynamicResource BrowserAccentBrush}"/></Style></ControlTheme>
 </ResourceDictionary>

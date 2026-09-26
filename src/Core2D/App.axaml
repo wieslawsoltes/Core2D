@@ -1,5 +1,5 @@
 <Application xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:local="clr-namespace:Core2D;assembly=Core2D" xmlns:vme="using:Core2D.ViewModels.Editor" x:Class="Core2D.App"
+  xmlns:browser="using:Avalonia.Themes.Browser" xmlns:local="clr-namespace:Core2D;assembly=Core2D" xmlns:vme="using:Core2D.ViewModels.Editor" x:Class="Core2D.App"
   Name="Core2D" x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
   <Application.Resources>
     <ResourceDictionary>
@@ -11,7 +11,7 @@
     </ResourceDictionary>
   </Application.Resources>
   <Application.Styles>
-    <FluentTheme DensityStyle="Compact"/>
+    <browser:BrowserTheme Density="Compact"/>
     <StyleInclude Source="avares://Core2D/Styles/Common.axaml"/>
     <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml"/>
     <StyleInclude Source="avares://Core2D/Styles/Studio.axaml"/>
