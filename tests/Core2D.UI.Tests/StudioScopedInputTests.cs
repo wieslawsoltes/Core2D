@@ -1,5 +1,3 @@
-using System.Linq;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.PanAndZoom;
 using Avalonia.Headless;
@@ -40,14 +38,14 @@ public class StudioScopedInputTests
             Assert.Empty(panel.KeyBindings);
             input.Focus();
             input.SelectAll();
-            Key(window, PhysicalKey.Delete);
+            PressKey(window, PhysicalKey.Delete);
             Assert.Equal(string.Empty, input.Text);
             Assert.Equal(0, executions);
             target.Focus();
-            Key(window, PhysicalKey.Delete);
+            PressKey(window, PhysicalKey.Delete);
             Assert.Equal(1, executions);
             consume = true;
-            Key(window, PhysicalKey.Delete);
+            PressKey(window, PhysicalKey.Delete);
             Assert.Equal(1, executions);
             consume = false;
             for (int iteration = 0; iteration < 3; iteration++)
@@ -58,7 +56,7 @@ public class StudioScopedInputTests
                 Dispatcher.UIThread.RunJobs();
                 Assert.Empty(panel.KeyBindings);
                 target.Focus();
-                Key(window, PhysicalKey.Delete);
+                PressKey(window, PhysicalKey.Delete);
                 Assert.Equal(iteration + 2, executions);
             }
         }
@@ -79,11 +77,11 @@ public class StudioScopedInputTests
             Dispatcher.UIThread.RunJobs();
             var zoom = view.FindControl<ZoomBorder>("PageZoomBorder")!;
             zoom.Focus();
-            Key(window, PhysicalKey.R);
+            PressKey(window, PhysicalKey.R);
             Assert.Equal("Rectangle", editor.CurrentTool?.Title);
-            Key(window, PhysicalKey.H);
+            PressKey(window, PhysicalKey.H);
             Assert.Equal("Path", editor.CurrentTool?.Title);
-            Key(window, PhysicalKey.S);
+            PressKey(window, PhysicalKey.S);
             Assert.Equal("Selection", editor.CurrentTool?.Title);
             var overlay = view.FindControl<StudioCanvasOverlay>("CanvasOverlay")!;
             window.KeyPressQwerty(PhysicalKey.Digit2, RawInputModifiers.Shift);
@@ -94,7 +92,7 @@ public class StudioScopedInputTests
         finally { window.Close(); }
     }
 
-    private static void Key(Window window, PhysicalKey key)
+    private static void PressKey(Window window, PhysicalKey key)
     {
         window.KeyPressQwerty(key, RawInputModifiers.None);
         window.KeyReleaseQwerty(key, RawInputModifiers.None);
