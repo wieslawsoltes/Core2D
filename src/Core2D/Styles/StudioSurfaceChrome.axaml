@@ -87,7 +87,12 @@
   <!-- Preserve the native Track/Thumb, selection and grid interaction implementations. -->
   <Style Selector="ScrollBar"><Setter Property="Theme" Value="{StaticResource StudioScrollBarTheme}" /></Style>
   <Style Selector="ComboBoxItem"><Setter Property="Theme" Value="{StaticResource StudioChoiceItemTheme}" /></Style>
-  <Style Selector="ToolTip"><Setter Property="Theme" Value="{StaticResource StudioTooltipTheme}" /></Style>
+  <Style Selector="ToolTip">
+    <Setter Property="Theme" Value="{StaticResource StudioTooltipTheme}" />
+    <!-- Override the legacy application-level background, which outranks a ControlTheme. -->
+    <Setter Property="Background" Value="#222222" />
+    <Setter Property="Foreground" Value="#FFFFFF" />
+  </Style>
   <Style Selector="ToolTip TextBlock"><Setter Property="TextWrapping" Value="Wrap" /></Style>
   <Style Selector="ContextMenu"><Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" /><Setter Property="Padding" Value="4" /><Setter Property="CornerRadius" Value="8" /></Style>
   <Style Selector="DataGridColumnHeader"><Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}" /><Setter Property="FontWeight" Value="Medium" /><Setter Property="MinHeight" Value="30" /></Style>

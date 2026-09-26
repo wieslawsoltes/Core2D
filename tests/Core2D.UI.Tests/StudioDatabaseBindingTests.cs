@@ -83,7 +83,7 @@ public class StudioDatabaseBindingTests
     {
         var owner = new DatabaseViewModel(null) { Name = "Original owner" };
         var column = new ColumnViewModel(null) { Name = "Role", IsVisible = true, Owner = owner };
-        var database = new DatabaseViewModel(null) { Columns = ImmutableArray.Create(column) };
+        var database = new DatabaseViewModel(null) { Columns = ImmutableArray.Create(column), Records = ImmutableArray<RecordViewModel>.Empty };
         var view = new DatabaseView { DataContext = database };
         var window = new Window { Width = 720, Height = 420, Content = view };
         try
