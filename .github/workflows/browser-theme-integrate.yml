@@ -26,8 +26,11 @@ jobs:
               if line.startswith('diff --git '):
                   assert line.split()[2].startswith(('a/src/', 'a/tests/', 'a/samples/', 'a/tools/', 'a/.github/workflows/browser-theme.yml', 'a/Core2D.slnx'))
                   assert line.split()[3].startswith(('b/src/', 'b/tests/', 'b/samples/', 'b/tools/', 'b/.github/workflows/browser-theme.yml', 'b/Core2D.slnx'))
-          subprocess.run(['git', 'apply', '--check', '-'], input=patch, check=True)
-          subprocess.run(['git', 'apply', '--index', '-'], input=patch, check=True)
+          # The permanent validation workflow is committed through the authorized connector,
+          # not modified by the build job's contents-only token.
+          exclude = '--exclude=.github/workflows/browser-theme.yml'
+          subprocess.run(['git', 'apply', exclude, '--check', '-'], input=patch, check=True)
+          subprocess.run(['git', 'apply', exclude, '--index', '-'], input=patch, check=True)
       - name: Refine complete native templates and verify original coverage
         run: |
           python tools/browser-theme/refine_browser.py src/Avalonia.Themes.Browser
