@@ -1,0 +1,89 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- State surfaces stay separate from their label: selection is on the native indicator. -->
+  <Style Selector="CheckBox:checked:not(:disabled), CheckBox:indeterminate:not(:disabled)">
+    <Setter Property="Background" Value="{DynamicResource BrowserTransparentBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}" />
+  </Style>
+  <Style Selector="CheckBox:checked:not(:disabled) /template/ Border#PART_Border, CheckBox:indeterminate:not(:disabled) /template/ Border#PART_Border">
+    <Setter Property="Background" Value="{DynamicResource BrowserTransparentBrush}" />
+  </Style>
+  <Style Selector="CheckBox:checked:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter, CheckBox:indeterminate:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}" />
+  </Style>
+  <Style Selector="CheckBox:not(:disabled) /template/ Border#NormalRectangle">
+    <Setter Property="CornerRadius" Value="4" />
+  </Style>
+  <Style Selector="RadioButton:checked:not(:disabled) /template/ Ellipse#CheckGlyph">
+    <Setter Property="Fill" Value="{DynamicResource BrowserOnAccentBrush}" />
+    <Setter Property="Stroke" Value="{DynamicResource BrowserOnAccentBrush}" />
+  </Style>
+  <Style Selector="Separator"><Setter Property="Background" Value="{DynamicResource BrowserBorderBrush}" /></Style>
+
+  <!-- Keep native Track, reserved tick space, reversed/vertical layouts and drag handling. -->
+  <Style Selector="Slider">
+    <Setter Property="Foreground" Value="{DynamicResource BrowserAccentBrush}" />
+    <Setter Property="Background" Value="{DynamicResource BrowserBorderBrush}" />
+  </Style>
+  <Style Selector="Slider:not(:disabled) /template/ RepeatButton#PART_DecreaseButton" x:DataType="Slider" x:CompileBindings="True">
+    <Setter Property="Background" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+  </Style>
+  <Style Selector="Slider:not(:disabled) /template/ RepeatButton#PART_IncreaseButton" x:DataType="Slider" x:CompileBindings="True">
+    <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
+  </Style>
+  <Style Selector="Slider:not(:disabled) /template/ Thumb#thumb">
+    <Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserAccentBrush}" />
+    <Setter Property="BorderThickness" Value="2" />
+  </Style>
+  <Style Selector="Slider:not(:disabled) /template/ TickBar">
+    <Setter Property="Fill" Value="{DynamicResource BrowserMutedBrush}" />
+  </Style>
+  <Style Selector="Slider:focus-visible /template/ Thumb#thumb, Slider:pointerover:not(:disabled) /template/ Thumb#thumb">
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserPrimaryBrush}" />
+  </Style>
+  <Style Selector="Slider:error:not(:disabled) /template/ Thumb#thumb">
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserDangerBrush}" />
+  </Style>
+
+  <!-- Do not modify CalendarItem's empty generated day/year grids or selection machinery. -->
+  <Style Selector="CalendarItem:not(:disabled) /template/ Border#BackgroundLayer, CalendarItem:not(:disabled) /template/ Grid#PART_YearView">
+    <Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}" />
+  </Style>
+  <Style Selector="CalendarDayButton:not(:disabled) /template/ Border#Root, CalendarDayButton:not(:disabled) /template/ Border#Border, CalendarButton:not(:disabled) /template/ Border#Root, CalendarButton:not(:disabled) /template/ Border#Border">
+    <Setter Property="CornerRadius" Value="6" />
+  </Style>
+  <Style Selector="CalendarDayButton:inactive:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter, CalendarDayButton:blackout:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter, CalendarButton:inactive:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Foreground" Value="{DynamicResource BrowserMutedBrush}" />
+  </Style>
+  <Style Selector="CalendarDayButton:pointerover:not(:selected):not(:today):not(:disabled) /template/ Border#Root">
+    <Setter Property="Background" Value="{DynamicResource BrowserHoverBrush}" />
+  </Style>
+  <Style Selector="CalendarDayButton:today:not(:selected):not(:disabled) /template/ Border#Root">
+    <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}" />
+  </Style>
+  <Style Selector="CalendarDayButton:today:not(:selected):not(:disabled) /template/ Border#Border">
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserAccentBrush}" />
+  </Style>
+  <Style Selector="CalendarDayButton:today:not(:selected):not(:disabled) /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}" />
+  </Style>
+  <Style Selector="CalendarDayButton:selected:not(:disabled) /template/ Border#Root, CalendarButton:selected:not(:disabled) /template/ Border#Root">
+    <Setter Property="Background" Value="{DynamicResource BrowserPrimaryBrush}" />
+  </Style>
+  <Style Selector="CalendarDayButton:selected:not(:disabled) /template/ Border#Border, CalendarButton:selected:not(:disabled) /template/ Border#Border">
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="CalendarDayButton:selected:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter, CalendarButton:selected:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Foreground" Value="{DynamicResource BrowserOnAccentBrush}" />
+  </Style>
+
+  <!-- Header/content share the same neutral card surface in every expansion direction. -->
+  <Style Selector="Expander"><Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}" /></Style>
+  <Style Selector="Expander /template/ ToggleButton#ExpanderHeader:not(:disabled) /template/ Border#ToggleButtonBackground">
+    <Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserBorderBrush}" />
+  </Style>
+  <Style Selector="Expander /template/ ToggleButton#ExpanderHeader:pointerover:not(:disabled) /template/ Border#ToggleButtonBackground">
+    <Setter Property="Background" Value="{DynamicResource BrowserHoverBrush}" />
+  </Style>
+</Styles>

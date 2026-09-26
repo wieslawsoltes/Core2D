@@ -13,4 +13,5 @@
     <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource BrowserBorderBrush}" />
   </Style>
+  <StyleInclude Source="avares://Avalonia.Themes.Browser/BrowserVisualRefinements.axaml" />
 </Styles>

@@ -1,6 +1,6 @@
 # Avalonia.Themes.Browser
 
-An independent, MIT-licensed browser-style design system for native Avalonia 11.3.12.
+An independent browser-style design system for native Avalonia 11.3.12.
 This is not an official Avalonia package. It contains the entire Fluent template
 catalog and support resources from commit `37fbd9655cc581ff5b1c6b1fb1be4e3118c889d0`,
 with a new neutral surface system, density metrics, compact typography and button
@@ -36,8 +36,10 @@ controls and remain app-owned integrations. Their base resources are available.
 `UpstreamManifest.json` records original file hashes, theme keys and named parts.
 The maintainer importer and skin tool live in `tools/browser-theme` in Core2D;
 normal builds never download or regenerate upstream sources. Keep the original
-MIT license with redistributed source/binaries. No public NuGet publish occurs
-as part of a build.
+Avalonia MIT, WinUI MIT and per-file Microsoft MS-PL notices with redistributed
+source/binaries. Package metadata lists `MIT AND MS-PL` to retain the calendar/
+date/time template notices; the source headers are not removed or relicensed.
+No public NuGet publish occurs as part of a build.
 
 Browser-style means the cross-platform web-app design language, not a DOM engine
 or a claim that OS pickers and text rasterization match every browser. Native

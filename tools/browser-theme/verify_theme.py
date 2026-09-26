@@ -31,6 +31,8 @@ def verify(root: Path, package: Path | None = None) -> dict:
             names = archive.namelist()
             assert 'lib/net8.0/Avalonia.Themes.Browser.dll' in names
             assert 'LICENSE.Avalonia.txt' in names
+            assert 'NOTICE.WinUI.md' in names
+            assert 'NOTICE.Silverlight.md' in names
             assert 'README.md' in names
             assert 'UpstreamManifest.json' in names
             assert not any(n.lower().endswith(('.ttf','.otf','.woff','.woff2')) for n in names)
@@ -38,6 +40,7 @@ def verify(root: Path, package: Path | None = None) -> dict:
             nuspec = archive.read('Avalonia.Themes.Browser.nuspec').decode('utf-8-sig')
             assert 'dependency id="Avalonia.Themes.Fluent"' not in nuspec
             assert 'dependency id="Core2D"' not in nuspec
+            assert 'MIT AND MS-PL' in nuspec
     return {'dictionaries': dictionaries, 'keyedThemes': keys, 'retainedNamedPartsPerFile': parts,
             'upstream': manifest['commit'], 'package': str(package) if package else None}
 
