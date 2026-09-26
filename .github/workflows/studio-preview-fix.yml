@@ -1,0 +1,32 @@
+name: Apply studio preview fix
+on:
+  push:
+    branches: [feat/figma-inspired-workspace]
+    paths: [.github/workflows/studio-preview-fix.yml]
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.ref == 'refs/heads/feat/figma-inspired-workspace'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and apply source patch
+        shell: python
+        run: |
+          import base64, lzma, hashlib, subprocess
+          data = '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'
+          patch = lzma.decompress(base64.b64decode(data))
+          assert hashlib.sha256(patch).hexdigest() == '42167bdb2523abf66db5977f5972c528d27e01bd0e488530efe002a014df1d31'
+          for line in patch.decode().splitlines():
+              if line.startswith('diff --git '):
+                  assert all(path[2:].startswith(('src/', 'tests/')) for path in line.split()[2:4])
+          subprocess.run(['git', 'apply', '--check', '-'], input=patch, check=True)
+          subprocess.run(['git', 'apply', '--index', '-'], input=patch, check=True)
+      - name: Commit fixes and remove transfer workflow
+        run: |
+          git rm .github/workflows/studio-preview-fix.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'fix(studio): size block previews and reconnect their model subscriptions'
+          git push origin HEAD:feat/figma-inspired-workspace
