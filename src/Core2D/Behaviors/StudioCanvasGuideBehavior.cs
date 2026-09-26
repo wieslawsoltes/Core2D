@@ -2,6 +2,7 @@
 // Licensed under the MIT. See LICENSE.TXT file in the project root for details.
 
 using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -175,7 +176,12 @@ public sealed class StudioCanvasGuideBehavior : Behavior<Control>
         IPointer? pointer = _pointer;
         _pointer = null;
         _original = null;
-        if (_overlay is not null) _overlay.Preview = null;
+        if (_overlay is not null)
+        {
+            _overlay.Preview = null;
+            if (_overlay.SelectedGuide is { } id && _overlay.Guides?.Items.Any(guide => guide.Id == id) != true)
+                _overlay.SelectedGuide = null;
+        }
         pointer?.Capture(null);
     }
 }

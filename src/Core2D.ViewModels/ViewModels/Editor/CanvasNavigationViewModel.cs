@@ -4,6 +4,7 @@
 using System;
 using System.Globalization;
 using System.Reactive;
+using System.Reactive.Concurrency;
 using ReactiveUI;
 
 namespace Core2D.ViewModels.Editor;
@@ -21,12 +22,14 @@ public sealed class CanvasNavigationViewModel : ReactiveObject, IDisposable
     public CanvasNavigationViewModel(Action<double> zoom, Action fitPage, Action fitSelection)
     {
         _zoom = zoom;
-        ZoomIn = ReactiveCommand.Create(() => { ZoomPercent *= 1.25m; });
-        ZoomOut = ReactiveCommand.Create(() => { ZoomPercent /= 1.25m; });
-        ResetZoom = ReactiveCommand.Create(() => { ZoomPercent = 100; });
-        FitPage = ReactiveCommand.Create(fitPage);
-        FitSelection = ReactiveCommand.Create(fitSelection, this.WhenAnyValue(x => x.HasSelection));
-        ClearGuides = ReactiveCommand.Create(() => Guides?.Clear());
+        // These commands perform synchronous UI-thread operations. Do not defer CanExecute
+        // notifications to an unconfigured host's default task-pool scheduler.
+        ZoomIn = ReactiveCommand.Create(() => { ZoomPercent *= 1.25m; }, outputScheduler: CurrentThreadScheduler.Instance);
+        ZoomOut = ReactiveCommand.Create(() => { ZoomPercent /= 1.25m; }, outputScheduler: CurrentThreadScheduler.Instance);
+        ResetZoom = ReactiveCommand.Create(() => { ZoomPercent = 100; }, outputScheduler: CurrentThreadScheduler.Instance);
+        FitPage = ReactiveCommand.Create(fitPage, outputScheduler: CurrentThreadScheduler.Instance);
+        FitSelection = ReactiveCommand.Create(fitSelection, this.WhenAnyValue(x => x.HasSelection), outputScheduler: CurrentThreadScheduler.Instance);
+        ClearGuides = ReactiveCommand.Create(() => Guides?.Clear(), outputScheduler: CurrentThreadScheduler.Instance);
     }
     /// <summary>Gets or sets zoom as a percentage, between 1 and 25600.</summary>
     public decimal ZoomPercent

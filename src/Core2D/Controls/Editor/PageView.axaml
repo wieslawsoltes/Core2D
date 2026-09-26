@@ -38,6 +38,7 @@
            x:DataType="vme:ProjectEditorViewModel" 
            x:CompileBindings="False">
       <i:Interaction.Behaviors>
+        <behaviors:StudioScopedKeyBindingsBehavior />
         <behaviors:AttachEditorBehavior />
         <iac:FocusOnAttachedToVisualTreeBehavior />
         <!--<iac:FocusOnPointerMovedBehavior />-->
@@ -153,19 +154,11 @@
         <ruler:Ruler x:Name="HorizontalRuler"
                  Grid.Row="0"
                  Grid.Column="1"
-                 Orientation="Horizontal"
-                 Zoom="{Binding ZoomX, ElementName=PageZoomBorder}"
-                 Offset="{Binding OffsetX, ElementName=PageZoomBorder}"
-                 HighlightStart="{Binding Bounds.X, ElementName=ContainerPanel}"
-                 HighlightLength="{Binding Bounds.Width, ElementName=ContainerPanel}" />
+                 Orientation="Horizontal" />
         <ruler:Ruler x:Name="VerticalRuler"
                  Grid.Row="1"
                  Grid.Column="0"
-                 Orientation="Vertical"
-                 Zoom="{Binding ZoomY, ElementName=PageZoomBorder}"
-                 Offset="{Binding OffsetY, ElementName=PageZoomBorder}"
-                 HighlightStart="{Binding Bounds.Y, ElementName=ContainerPanel}"
-                 HighlightLength="{Binding Bounds.Height, ElementName=ContainerPanel}" />
+                 Orientation="Vertical" />
         <Panel Grid.Row="1" Grid.Column="1" Name="CanvasViewport">
           <Panel ClipToBounds="True">
             <ScrollViewer x:Name="PageScrollViewer" 
@@ -240,8 +233,8 @@
             </ScrollViewer>
           </Panel>
           <s:StudioCanvasOverlay Name="CanvasOverlay" IsHitTestVisible="False" GuideBrush="{DynamicResource StudioGuideBrush}" />
-          <s:StudioCanvasControls Name="CanvasNavigation" DataContext="{Binding #CanvasOverlay.Navigation}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12" />
-          <Border Background="{DynamicResource StudioSurfaceBrush}" CornerRadius="5" Padding="8,4" HorizontalAlignment="Left"
+          <s:StudioCanvasControls x:CompileBindings="True" Name="CanvasNavigation" DataContext="{Binding #CanvasOverlay.Navigation}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12" />
+          <Border x:CompileBindings="True" Background="{DynamicResource StudioSurfaceBrush}" CornerRadius="5" Padding="8,4" HorizontalAlignment="Left"
                   VerticalAlignment="Bottom" Margin="12,0,0,12" IsHitTestVisible="False">
             <TextBlock Text="{Binding #CanvasOverlay.Navigation.PointerSummary}" Foreground="{DynamicResource StudioMutedBrush}" FontSize="10" />
           </Border>

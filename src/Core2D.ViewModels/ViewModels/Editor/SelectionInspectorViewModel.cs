@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive;
+using System.Reactive.Concurrency;
 using Core2D.Model.History;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Shapes;
@@ -44,8 +45,8 @@ public sealed class SelectionInspectorViewModel : ReactiveObject, IDisposable
         foreach (BaseShapeViewModel shape in _shapes) shape.PropertyChanged += OnShapeChanged;
         RefreshPoints();
         var canTransform = this.WhenAnyValue(x => x.CanEditGeometry);
-        FlipHorizontal = ReactiveCommand.Create(() => Flip(true), canTransform);
-        FlipVertical = ReactiveCommand.Create(() => Flip(false), canTransform);
+        FlipHorizontal = ReactiveCommand.Create(() => Flip(true), canTransform, outputScheduler: CurrentThreadScheduler.Instance);
+        FlipVertical = ReactiveCommand.Create(() => Flip(false), canTransform, outputScheduler: CurrentThreadScheduler.Instance);
     }
 
     /// <summary>Gets the number of unique selected objects.</summary>

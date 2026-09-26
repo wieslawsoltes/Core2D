@@ -56,6 +56,7 @@ public sealed class StudioCanvasBehavior : Behavior<Control>
         root.AddHandler(InputElement.KeyDownEvent, OnKeyDown, RoutingStrategies.Tunnel);
         root.AddHandler(InputElement.KeyUpEvent, OnKeyUp, RoutingStrategies.Tunnel);
         root.PointerCaptureLost += OnCaptureLost;
+        root.AddHandler(InputElement.LostFocusEvent, OnLostFocus, RoutingStrategies.Bubble);
         Connect();
     }
     /// <inheritdoc />
@@ -73,6 +74,7 @@ public sealed class StudioCanvasBehavior : Behavior<Control>
             root.RemoveHandler(InputElement.KeyDownEvent, OnKeyDown);
             root.RemoveHandler(InputElement.KeyUpEvent, OnKeyUp);
             root.PointerCaptureLost -= OnCaptureLost;
+            root.RemoveHandler(InputElement.LostFocusEvent, OnLostFocus);
         }
         Disconnect();
         base.OnDetaching();
@@ -151,7 +153,10 @@ public sealed class StudioCanvasBehavior : Behavior<Control>
         if (_project?.SelectedShapes is { } shapes)
         {
             foreach (BaseShapeViewModel shape in shapes)
-                _selectionSubscriptions.Add(shape.Subscribe(Observer.Create<(object? sender, PropertyChangedEventArgs e)>(_ => QueueSelection())));
+            {
+                IDisposable? subscription = shape.Subscribe(Observer.Create<(object? sender, PropertyChangedEventArgs e)>(_ => QueueSelection()));
+                if (subscription is not null) _selectionSubscriptions.Add(subscription);
+            }
         }
         UpdateSelection();
     }
@@ -317,6 +322,13 @@ public sealed class StudioCanvasBehavior : Behavior<Control>
         if (_horizontal is not null) _horizontal.Marker = null;
         if (_vertical is not null) _vertical.Marker = null;
         if (_navigation is not null) _navigation.PointerSummary = string.Empty;
+    }
+    private void OnLostFocus(object? sender, RoutedEventArgs e)
+    {
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (_zoom is not { IsKeyboardFocusWithin: true }) { _space = false; EndPan(); }
+        }, DispatcherPriority.Input);
     }
     private void OnCaptureLost(object? sender, PointerCaptureLostEventArgs e) => EndPan();
     private void OnDeactivated(object? sender, EventArgs e) { _space = false; EndPan(); }

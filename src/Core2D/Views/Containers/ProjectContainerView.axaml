@@ -94,6 +94,7 @@
       <i:Interaction.Behaviors>
         <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource ProjectDataGridDropHandler}" />
         <behaviors:ProjectDocumentsGridBehavior />
+        <behaviors:StudioScopedKeyBindingsBehavior />
       </i:Interaction.Behaviors>
       <DataGrid.KeyBindings>
         <KeyBinding Command="{Binding New}" CommandParameter="{Binding #DocumentsDataGrid.SelectedItem}" Gesture="{app:PlatformGesture Text=Primary+N}" />

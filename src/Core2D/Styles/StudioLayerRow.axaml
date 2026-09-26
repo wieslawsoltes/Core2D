@@ -21,17 +21,15 @@
           </Grid>
           <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="0" DataContext="{TemplateBinding Editor}" x:DataType="vm:StudioLayerRowViewModel">
             <s:StudioIconToggle Name="PART_Lock" MinWidth="22" MinHeight="24" Padding="3" IsVisible="{Binding CanLock}"
-                                IsChecked="{Binding IsLocked, Mode=TwoWay}" ToolTip.Tip="Lock / unlock object" AutomationProperties.Name="Lock object"
-                                Icon="M4,7V4A4,4 0 0 1 12,4V7H14V16H2V7Z M6,7H10V4A2,2 0 0 0 6,4Z" />
+                                IsChecked="{Binding IsLocked, Mode=TwoWay}" ToolTip.Tip="Lock / unlock object" AutomationProperties.Name="Lock object" />
             <s:StudioIconToggle Name="PART_Visible" MinWidth="22" MinHeight="24" Padding="3"
-                                IsChecked="{Binding IsVisible, Mode=TwoWay}" ToolTip.Tip="Show / hide item" AutomationProperties.Name="Show item"
-                                Icon="M0,8Q8,-3 16,8Q8,19 0,8Z M2,8Q8,0 14,8Q8,16 2,8Z M8,5A3,3 0 1 1 7.99,5Z" />
+                                IsChecked="{Binding IsVisible, Mode=TwoWay}" ToolTip.Tip="Show / hide item" AutomationProperties.Name="Show item" />
           </StackPanel>
         </Grid>
       </ControlTemplate>
     </Setter>
-    <Style Selector="^ /template/ s|StudioIconToggle#PART_Lock"><Setter Property="Opacity" Value="0" /></Style>
-    <Style Selector="^ /template/ s|StudioIconToggle#PART_Visible"><Setter Property="Opacity" Value="0" /></Style>
+    <Style Selector="^ /template/ s|StudioIconToggle#PART_Lock"><Setter Property="Opacity" Value="0" /><Setter Property="Icon" Value="M4,7V4A4,4 0 0 1 12,4V7H14V16H2V7Z M6,7H10V4A2,2 0 0 0 6,4Z" /></Style>
+    <Style Selector="^ /template/ s|StudioIconToggle#PART_Visible"><Setter Property="Opacity" Value="0" /><Setter Property="Icon" Value="M0,8Q8,-3 16,8Q8,19 0,8Z M2,8Q8,0 14,8Q8,16 2,8Z M8,5A3,3 0 1 1 7.99,5Z" /></Style>
     <Style Selector="^:pointerover /template/ s|StudioIconToggle, ^:focus-within /template/ s|StudioIconToggle"><Setter Property="Opacity" Value="1" /></Style>
     <Style Selector="^ /template/ s|StudioIconToggle#PART_Lock:checked, ^ /template/ s|StudioIconToggle#PART_Visible:unchecked"><Setter Property="Opacity" Value="1" /></Style>
     <Style Selector="^ /template/ s|StudioIconToggle#PART_Lock:unchecked">
