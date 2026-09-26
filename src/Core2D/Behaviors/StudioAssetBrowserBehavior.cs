@@ -31,6 +31,7 @@ namespace Core2D.Behaviors;
 public sealed class StudioAssetBrowserBehavior : Behavior<StudioAssetBrowser>
 {
     private const string ColumnKey = "AssetName";
+    private const string TemplateKey = "StudioAssetBrowserCellTemplate";
     private DataGrid? _grid;
     private DataGridCollectionView? _view;
     private INotifyCollectionChanged? _source;
@@ -93,6 +94,7 @@ public sealed class StudioAssetBrowserBehavior : Behavior<StudioAssetBrowser>
             grid.RemoveHandler(InputElement.KeyDownEvent, OnKey);
             grid.ItemsSource = null;
             grid.ColumnDefinitionsSource = null;
+            grid.Resources.Remove(TemplateKey);
         }
         if (_view is not null) _view.CollectionChanged -= OnViewChanged;
         if ((object?)_view is IDisposable disposable) disposable.Dispose();
@@ -113,9 +115,19 @@ public sealed class StudioAssetBrowserBehavior : Behavior<StudioAssetBrowser>
     {
         if (_grid is null || AssociatedObject is not { } browser) return;
         var accessor = new DataGridColumnValueAccessor<object, string>(Name, (_, _) => { });
-        DataGridColumnDefinition column = browser.ItemTemplate is { } template
-            ? new DataGridTemplateColumnDefinition { CellTemplate = template }
-            : new DataGridTextColumnDefinition();
+        // The pinned ProDataGrid resolves cell templates from resource keys. Keep the
+        // resource local to this grid so browsers can use different item templates.
+        DataGridColumnDefinition column;
+        if (browser.ItemTemplate is { } template)
+        {
+            _grid.Resources[TemplateKey] = template;
+            column = new DataGridTemplateColumnDefinition { CellTemplateKey = TemplateKey };
+        }
+        else
+        {
+            _grid.Resources.Remove(TemplateKey);
+            column = new DataGridTextColumnDefinition();
+        }
         column.ColumnKey = ColumnKey;
         column.Header = "Name";
         column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
