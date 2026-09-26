@@ -3,7 +3,7 @@
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools" xmlns:editor="using:Core2D.ViewModels.Editor"
              xmlns:core="using:Dock.Model.Core"
              xmlns:s="using:Core2D.Controls.Studio" xmlns:converters="using:Core2D.Converters"
-             xmlns:containers="using:Core2D.Views.Containers" xmlns:data="using:Core2D.Views.Data"
+             xmlns:renderer="using:Core2D.Views.Renderer" xmlns:containers="using:Core2D.Views.Containers" xmlns:data="using:Core2D.Views.Data"
              x:DataType="vm:StudioInspectorViewModel" x:CompileBindings="True">
   <UserControl.ContextMenu>
     <ContextMenu DataContext="{Binding #SidebarRoot.DataContext}" x:DataType="core:IDockable">
@@ -27,9 +27,18 @@
                                        IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:MultipleSelectionConverter.Instance}}" />
               <ContentControl Name="SelectionGeometry" Margin="12,8"
                               Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}"
-                              IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+                              IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SingleSelectionConverter.Instance}}" />
+              <s:StudioSection Header="First selected object" IsExpanded="False"
+                               IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:MultipleSelectionConverter.Instance}}">
+                <StackPanel Spacing="8">
+                  <s:StudioNotice Message="The fields in this section edit only the first selected object. Use Selection position and size above for collective edits." />
+                  <ContentControl Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
+                </StackPanel>
+              </s:StudioSection>
               <ContentControl Content="{Binding Project.CurrentContainer}"
                               IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}" />
+              <s:StudioNotice Title="First selected object's style" Message="These shared-style fields describe the first selected object. Use the selection controls above for changes to all selected objects."
+                IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:MultipleSelectionConverter.Instance}}" />
               <ContentControl Name="SelectionAppearance"
                               Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemStyleValueConverter.Instance}}"
                               IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
@@ -44,6 +53,9 @@
                   <s:StudioSwitch Content="Selection decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" />
                   <s:StudioSwitch Content="Control points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" />
                 </StackPanel>
+              </s:StudioSection>
+              <s:StudioSection Header="Renderer preferences" IsExpanded="False">
+                <renderer:ShapeRendererStateView DataContext="{Binding PageState}" Height="420" />
               </s:StudioSection>
               <s:StudioSection Header="Export" IsExpanded="False">
                 <StackPanel Spacing="8">
@@ -64,7 +76,12 @@
           </Grid>
         </TabItem>
         <TabItem Header="State">
-          <ContentControl Content="{Binding PageState}" />
+          <Grid>
+            <s:StudioShapeStateEditor Name="SelectionState" Selection="{Binding Project.SelectedShapes}"
+                                     IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+            <s:StudioEmptyState Title="Select an object" Description="Edit display, print, lock and connection flags for one or more objects. Renderer preferences remain below the Design settings."
+                                IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}" />
+          </Grid>
         </TabItem>
       </TabControl>
       <Border Grid.Row="2" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0" Padding="12,8">

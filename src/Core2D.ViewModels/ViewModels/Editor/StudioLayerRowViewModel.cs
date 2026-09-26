@@ -41,6 +41,8 @@ public sealed class StudioLayerRowViewModel : ReactiveObject, IDisposable
     }
     /// <summary>Gets whether the item supports a shape lock.</summary>
     public bool CanLock => Item is BaseShapeViewModel;
+    /// <summary>Gets whether visibility exists on the original model.</summary>
+    public bool CanChangeVisibility => Item is BaseShapeViewModel or BaseContainerViewModel;
     /// <summary>Gets or sets shape/container visibility without discarding state bits.</summary>
     public bool IsVisible
     {

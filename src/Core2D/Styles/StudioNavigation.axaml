@@ -15,6 +15,8 @@
           <Border Name="PART_Surface" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
                   BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+              <TextBlock Name="PART_Placeholder" Text="{TemplateBinding PlaceholderText}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource StudioMutedBrush}"
+                         IsVisible="{Binding SelectionBoxItem, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNull}}" VerticalAlignment="Center" />
               <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding SelectionBoxItem}"
                                 ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" Foreground="{TemplateBinding Foreground}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="Center" />

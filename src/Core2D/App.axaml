@@ -6,6 +6,7 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://Core2D/Themes/Themes.axaml"/>
         <ResourceInclude Source="avares://Core2D/Themes/StudioPalette.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioInspectorPrimitives.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
@@ -15,6 +16,7 @@
     <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml"/>
     <StyleInclude Source="avares://Core2D/Styles/Studio.axaml"/>
     <StyleInclude Source="avares://Core2D/Styles/StudioInteractionStyles.axaml"/>
+    <StyleInclude Source="avares://Core2D/Styles/StudioSurfaceChrome.axaml"/>
   </Application.Styles>
   <Application.DataTemplates>
     <local:ViewLocator/>

@@ -18,12 +18,15 @@
   <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}">
     <s:StudioPanelHeader Title="Object browser" Description="Inspect the project object hierarchy"/>
     <Panel DataContext="{Binding Context}" Grid.Row="1">
-      <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}" x:DataType="vme:ProjectEditorViewModel">
-        <DataGrid x:Name="ProjectDataGrid" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True"
+      <Grid RowDefinitions="Auto,*,Auto" d:DataContext="{x:Static vmd:DesignerContext.Editor}" x:DataType="vme:ProjectEditorViewModel" s:StudioEditContext.History="{Binding Project.History}">
+        <s:StudioFindBar Target="{Binding #ProjectDataGrid}" />
+        <s:StudioTableStatus Grid.Row="2" Target="{Binding #ProjectDataGrid}" Unit="expanded objects" />
+        <DataGrid x:Name="ProjectDataGrid" Grid.Row="1" RowHeight="34" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True"
           CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="True"
           HeadersVisibility="None" GridLinesVisibility="None" BorderThickness="0" RowBackground="Transparent">
           <i:Interaction.Behaviors>
             <behaviors:ObjectBrowserGridBehavior/>
+            <behaviors:StudioScopedKeyBindingsBehavior/>
           </i:Interaction.Behaviors>
           <DataGrid.KeyBindings>
             <KeyBinding Command="{Binding ExportCommand}" CommandParameter="{Binding #ProjectDataGrid.SelectedItem}"
@@ -39,25 +42,25 @@
               <TextBlock Text="{Binding Title}" FontWeight="SemiBold"/>
             </DataTemplate>
             <DataTemplate DataType="vmc:LibraryViewModel" x:DataType="vmc:LibraryViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="vmc:DocumentContainerViewModel" x:DataType="vmc:DocumentContainerViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="vmc:PageContainerViewModel" x:DataType="vmc:PageContainerViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="vmc:TemplateContainerViewModel" x:DataType="vmc:TemplateContainerViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="vmc:LayerContainerViewModel" x:DataType="vmc:LayerContainerViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="vms:BlockShapeViewModel" x:DataType="vms:BlockShapeViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="vms:PathShapeViewModel" x:DataType="vms:PathShapeViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="vmp:PathFigureViewModel" x:DataType="vmp:PathFigureViewModel">
               <c:EditableItem
@@ -65,13 +68,13 @@
                 ContextMenu="{StaticResource ExportContextMenu}" />
             </DataTemplate>
             <DataTemplate DataType="vms:BaseShapeViewModel" x:DataType="vms:BaseShapeViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="vmst:ShapeStyleViewModel" x:DataType="vmst:ShapeStyleViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="vmdt:DatabaseViewModel" x:DataType="vmdt:DatabaseViewModel">
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource ExportContextMenu}"/>
+              <s:StudioLayerRow Glyph="M8,1L15,8L8,15L1,8Z M8,4L4,8L8,12L12,8Z" ContextMenu="{StaticResource ExportContextMenu}"/>
             </DataTemplate>
             <DataTemplate DataType="core:ViewModelBase" x:DataType="core:ViewModelBase">
               <c:EditableItem
@@ -80,7 +83,7 @@
             </DataTemplate>
           </DataGrid.DataTemplates>
         </DataGrid>
-      </Panel>
+      </Grid>
     </Panel>
   </Grid>
 </UserControl>

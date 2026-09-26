@@ -1,0 +1,120 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Editor" x:CompileBindings="True">
+  <ControlTheme x:Key="{x:Type s:StudioSettingToggle}" TargetType="s:StudioSettingToggle" x:DataType="s:StudioSettingToggle">
+    <Setter Property="MinHeight" Value="36" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Surface" Background="Transparent" CornerRadius="5" BorderBrush="Transparent" BorderThickness="1" Padding="6,7">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+            <StackPanel Spacing="3">
+              <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Foreground="{TemplateBinding Foreground}" RecognizesAccessKey="True" />
+              <TextBlock Text="{TemplateBinding Description}" TextWrapping="Wrap" FontSize="11" Foreground="{DynamicResource StudioMutedBrush}"
+                         IsVisible="{Binding Description, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+            </StackPanel>
+            <Border Name="PART_Track" Grid.Column="1" Width="26" Height="16" CornerRadius="8" Margin="0,1,0,0"
+                    VerticalAlignment="Top" Background="{DynamicResource StudioSwitchTrackBrush}">
+              <Ellipse Name="PART_Thumb" Fill="White" Width="12" Height="12" Margin="2,0" HorizontalAlignment="Left" />
+            </Border>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_Surface"><Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" /></Style>
+    <Style Selector="^:checked /template/ Border#PART_Track"><Setter Property="Background" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:checked /template/ Ellipse#PART_Thumb"><Setter Property="HorizontalAlignment" Value="Right" /></Style>
+    <Style Selector="^:indeterminate /template/ Ellipse#PART_Thumb"><Setter Property="HorizontalAlignment" Value="Center" /></Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioReadout}" TargetType="s:StudioReadout" x:DataType="s:StudioReadout">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{DynamicResource StudioInputBrush}" CornerRadius="6" Padding="10,8">
+          <StackPanel Spacing="4">
+            <TextBlock Text="{TemplateBinding Label}" FontSize="11" Foreground="{DynamicResource StudioMutedBrush}" TextTrimming="CharacterEllipsis" />
+            <SelectableTextBlock Text="{TemplateBinding Value}" Foreground="{DynamicResource StudioTextBrush}" FontWeight="SemiBold"
+                                 TextWrapping="Wrap" AutomationProperties.Name="{TemplateBinding Label}" />
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioNotice}" TargetType="s:StudioNotice" x:DataType="s:StudioNotice">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{DynamicResource StudioInputBrush}" BorderBrush="{DynamicResource StudioBorderBrush}"
+                BorderThickness="1" CornerRadius="6" Padding="10">
+          <Grid ColumnDefinitions="16,*" ColumnSpacing="8">
+            <PathIcon Data="M8,0A8,8 0 1 1 8,16A8,8 0 1 1 8,0Z M8,1A7,7 0 1 0 8,15A7,7 0 1 0 8,1Z M7,7H9V12H7Z M7,4H9V6H7Z"
+                      Width="14" Height="14" VerticalAlignment="Top" Foreground="{DynamicResource StudioMutedBrush}" />
+            <StackPanel Grid.Column="1" Spacing="4">
+              <TextBlock Text="{TemplateBinding Title}" FontWeight="SemiBold" TextWrapping="Wrap" Foreground="{DynamicResource StudioTextBrush}"
+                         IsVisible="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+              <TextBlock Text="{TemplateBinding Message}" TextWrapping="Wrap" FontSize="11" Foreground="{DynamicResource StudioMutedBrush}" />
+            </StackPanel>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioShapeStateEditor}" TargetType="s:StudioShapeStateEditor" x:DataType="s:StudioShapeStateEditor">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel DataContext="{TemplateBinding Editor}">
+          <Grid x:DataType="vm:ShapeFlagsInspectorViewModel" RowDefinitions="Auto,*,Auto" Background="{DynamicResource StudioSurfaceBrush}">
+            <s:StudioPanelHeader Title="{Binding Title}" Description="Object behavior and output flags">
+              <s:StudioStatusBadge Content="{Binding Mask}" />
+            </s:StudioPanelHeader>
+            <s:StudioSettingsPanel Grid.Row="1" IsEnabled="{Binding CanEdit}">
+              <s:StudioSettingsSection Header="Display &amp; output" Keywords="visible printable print export locked editing">
+                <StackPanel>
+                  <s:StudioSettingToggle Content="Visible" Description="Show the object on the drawing canvas." IsChecked="{Binding Visible, Mode=TwoWay}" AutomationProperties.Name="Object visible" />
+                  <s:StudioSettingToggle Content="Printable" Description="Include the printable flag used by output renderers." IsChecked="{Binding Printable, Mode=TwoWay}" AutomationProperties.Name="Object printable" />
+                  <s:StudioSettingToggle Content="Locked" Description="Protect the object from ordinary canvas editing." IsChecked="{Binding Locked, Mode=TwoWay}" AutomationProperties.Name="Object locked" />
+                </StackPanel>
+              </s:StudioSettingsSection>
+              <s:StudioSettingsSection Header="Rendering flags" Keywords="size thickness scale renderer">
+                <StackPanel>
+                  <s:StudioSettingToggle Content="Size" Description="Enable the existing renderer size flag." IsChecked="{Binding Size, Mode=TwoWay}" AutomationProperties.Name="Object size flag" />
+                  <s:StudioSettingToggle Content="Thickness" Description="Enable the existing renderer thickness flag." IsChecked="{Binding Thickness, Mode=TwoWay}" AutomationProperties.Name="Object thickness flag" />
+                </StackPanel>
+              </s:StudioSettingsSection>
+              <s:StudioSettingsSection Header="Connections" Keywords="connector port none standalone input output">
+                <StackPanel>
+                  <s:StudioSettingToggle Content="Connector" Description="Mark this object as a connection point." IsChecked="{Binding Connector, Mode=TwoWay}" AutomationProperties.Name="Object connector" />
+                  <s:StudioSettingToggle Content="Standalone" Description="Retain the object's standalone flag." IsChecked="{Binding Standalone, Mode=TwoWay}" AutomationProperties.Name="Object standalone" />
+                  <s:StudioSettingToggle Content="No connector role" Description="Set the explicit None role bit; this does not clear other flags." IsChecked="{Binding None, Mode=TwoWay}" AutomationProperties.Name="Object none role" />
+                  <s:StudioSettingToggle Content="Input" Description="Mark the input connector role." IsChecked="{Binding Input, Mode=TwoWay}" AutomationProperties.Name="Object input role" />
+                  <s:StudioSettingToggle Content="Output" Description="Mark the output connector role." IsChecked="{Binding Output, Mode=TwoWay}" AutomationProperties.Name="Object output role" />
+                </StackPanel>
+              </s:StudioSettingsSection>
+            </s:StudioSettingsPanel>
+            <s:StudioNotice Grid.Row="2" Margin="12,8" Message="Centered switches indicate mixed values. A change applies to every selected object and keeps unrelated flags." />
+          </Grid>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioFindBar}" TargetType="s:StudioFindBar" x:DataType="s:StudioFindBar">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Spacing="6" Margin="12,8">
+          <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="4">
+            <s:StudioSearchBox Name="PART_Search" Watermark="{TemplateBinding Watermark}" MaxLength="256"
+                               Text="{Binding Query, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Find objects" />
+            <s:StudioIconButton Grid.Column="1" Name="PART_Previous" Icon="M1,9L6,4L11,9L10,10L6,6L2,10Z" IsEnabled="{TemplateBinding HasMatches}" ToolTip.Tip="Previous match · Shift+Enter" AutomationProperties.Name="Previous match" />
+            <s:StudioIconButton Grid.Column="2" Name="PART_Next" Icon="M1,5L6,10L11,5L10,4L6,8L2,4Z" IsEnabled="{TemplateBinding HasMatches}" ToolTip.Tip="Next match · Enter" AutomationProperties.Name="Next match" />
+          </Grid>
+          <Grid ColumnDefinitions="*,Auto,Auto">
+            <TextBlock Text="{TemplateBinding MatchSummary}" FontSize="11" Classes="studio-muted" VerticalAlignment="Center" />
+            <s:StudioIconButton Grid.Column="1" Name="PART_ExpandAll" Icon="M2,3H14V5H2Z M4,7H12V9H4Z M6,11H10V13H6Z" IsVisible="{TemplateBinding HasHierarchy}" ToolTip.Tip="Expand all objects before searching collapsed branches" AutomationProperties.Name="Expand object hierarchy" />
+            <s:StudioIconButton Grid.Column="2" Name="PART_CollapseAll" Icon="M2,7H14V9H2Z" IsVisible="{TemplateBinding HasHierarchy}" ToolTip.Tip="Collapse all objects" AutomationProperties.Name="Collapse object hierarchy" />
+          </Grid>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

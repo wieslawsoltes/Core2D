@@ -5,13 +5,13 @@
   xmlns:s="using:Core2D.Controls.Studio" x:Class="Core2D.Views.Libraries.DatabasesView" mc:Ignorable="d"
   d:DataContext="{x:Static vmd:DesignerContext.Project}" d:DesignWidth="250" d:DesignHeight="400"
   x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
-  <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}">
+  <Grid s:StudioEditContext.History="{Binding History}" RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}">
     <s:StudioPanelHeader Title="Data sources" Description="Records and columns attached to this project"/>
     <Grid RowDefinitions="Auto,Auto,*" Grid.Row="1">
       <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" Grid.Row="0">
-        <TextBox Text="{Binding CurrentDatabase.Name, Mode=TwoWay, FallbackValue={x:Null}}" BorderBrush="Transparent"
+        <s:StudioNameField DataContext="{Binding CurrentDatabase}" x:DataType="vmdt:DatabaseViewModel" Value="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent"
           Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0"
-          IsVisible="{Binding CurrentDatabase}" Grid.Column="0" />
+          IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}" Grid.Column="0" />
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
           <Button Content="Remove" Command="{Binding RemoveDatabase}" CommandParameter="{Binding CurrentDatabase}"
             IsVisible="{Binding !!CurrentDatabase}" BorderBrush="Transparent" Background="Transparent"
@@ -28,7 +28,11 @@
           </DataTemplate>
         </ComboBox.DataTemplates>
       </ComboBox>
-      <ContentControl Content="{Binding CurrentDatabase}" Grid.Row="2"/>
+      <Grid Grid.Row="2">
+        <ContentControl Content="{Binding CurrentDatabase}" />
+        <s:StudioEmptyState Title="No data source selected" Description="Create a database to organize reusable records and columns, then apply records to drawing objects."
+                            IsVisible="{Binding !CurrentDatabase}" />
+      </Grid>
     </Grid>
   </Grid>
 </UserControl>

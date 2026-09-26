@@ -14,14 +14,14 @@
   <studio:StudioSettingsPanel>
     <studio:StudioSettingsSection Header="Point" Keywords="points handles size decorators vertices">
       <StackPanel Margin="0">
-        <studio:StudioSwitch Content="Draw Decorators"
+        <studio:StudioSettingToggle Content="Selection decorators" Description="Show the existing manipulation and selection adorners."
                   IsChecked="{Binding DrawDecorators, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
-        <studio:StudioSwitch Content="Draw Points"
+        <studio:StudioSettingToggle Content="Control points" Description="Show editable points and connection handles."
                   IsChecked="{Binding DrawPoints, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
         <studio:StudioPropertyField Label="Point Size">
-          <studio:StudioNumberBox Prefix="#" Text="{Binding PointSize, Mode=TwoWay}" AutomationProperties.Name="Control point size" />
+          <studio:StudioNumericField Prefix="#" Minimum="0" Maximum="1000000" Value="{Binding PointSize, Mode=TwoWay}" AutomationProperties.Name="Control point size" />
         </studio:StudioPropertyField>
       </StackPanel>
     </studio:StudioSettingsSection>
@@ -69,7 +69,10 @@
       </StackPanel>
     </studio:StudioSettingsSection>
     <studio:StudioSettingsSection Header="Draw Shape State" Keywords="visible printable locked thickness size state" IsExpanded="False">
-      <ContentControl Content="{Binding DrawShapeState}" />
+      <StackPanel Spacing="8">
+        <studio:StudioReadout Label="Renderer state mask" Value="{Binding DrawShapeState}" />
+        <studio:StudioNotice Message="This is the renderer's active draw mask. Edit individual objects in the inspector's State tab." />
+      </StackPanel>
     </studio:StudioSettingsSection>
     <studio:StudioSettingsSection Header="Image Cache" Keywords="images resources cache" IsExpanded="False">
       <Panel DataContext="{Binding ImageCache}">

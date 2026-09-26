@@ -11,18 +11,19 @@
     <TabControl Grid.Row="1">
       <TabItem Header="Records">
         <DockPanel>
+          <s:StudioTableStatus DockPanel.Dock="Bottom" Target="{Binding #RowsDataGrid}" TotalCount="{Binding Records.Length}" Unit="records" />
           <Grid RowDefinitions="Auto,Auto" RowSpacing="8" ColumnDefinitions="*" Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
             <s:StudioSearchBox Text="{Binding RecordFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
               Watermark="Filter records" BorderBrush="Transparent" VerticalAlignment="Center"
               Margin="0,0,0,0" Grid.Column="0" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-              <Button Content="Apply" Command="{Binding ApplyRecord}" CommandParameter="{Binding CurrentRecord}"
-                IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent" Background="Transparent"
+              <Button Content="Apply record" Classes="studio-primary" Command="{Binding ApplyRecord}" CommandParameter="{Binding CurrentRecord}"
+                IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent"
                 Padding="8,5" />
-              <Button Content="Remove" Command="{Binding RemoveRecord}" CommandParameter="{Binding CurrentRecord}"
-                IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent" Background="Transparent"
+              <Button Content="Remove" Classes="studio-danger" Command="{Binding RemoveRecord}" CommandParameter="{Binding CurrentRecord}"
+                IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent"
                 Padding="8,5" />
-              <Button Content="Add" Command="{Binding AddRecord}" CommandParameter="{Binding}" BorderBrush="Transparent"
+              <Button Content="Add record" Command="{Binding AddRecord}" CommandParameter="{Binding}" BorderBrush="Transparent"
                 Background="Transparent" Padding="8,5" />
             </StackPanel>
           </Grid>
@@ -44,20 +45,24 @@
           </DataGrid>
         </DockPanel>
       </TabItem>
-      <TabItem Header="Current Record">
-        <ContentControl Content="{Binding CurrentRecord}"/>
+      <TabItem Header="Details">
+        <Grid>
+          <ContentControl Content="{Binding CurrentRecord}"/>
+          <s:StudioEmptyState Title="Select a record" Description="Choose a row in Records to inspect or edit its individual values." IsVisible="{Binding !CurrentRecord}" />
+        </Grid>
       </TabItem>
       <TabItem Header="Columns">
         <DockPanel>
+          <s:StudioTableStatus DockPanel.Dock="Bottom" Target="{Binding #ColumnsDataGrid}" TotalCount="{Binding Columns.Length}" Unit="columns" />
           <Grid RowDefinitions="Auto,Auto" RowSpacing="8" ColumnDefinitions="*" Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
             <s:StudioSearchBox Text="{Binding ColumnFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
               Watermark="Filter columns" BorderBrush="Transparent" VerticalAlignment="Center"
               Margin="0,0,0,0" Grid.Column="0" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-              <Button Content="Remove" Command="{Binding RemoveColumn}"
+              <Button Content="Remove" Classes="studio-danger" Command="{Binding RemoveColumn}"
                 CommandParameter="{Binding #ColumnsDataGrid.SelectedItem}" BorderBrush="Transparent"
                 Background="Transparent" Padding="8,5" />
-              <Button Content="Add" Command="{Binding AddColumn}" CommandParameter="{Binding}" BorderBrush="Transparent"
+              <Button Content="Add column" Command="{Binding AddColumn}" CommandParameter="{Binding}" BorderBrush="Transparent"
                 Background="Transparent" Padding="8,5" />
             </StackPanel>
           </Grid>

@@ -22,7 +22,7 @@
           <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="0" DataContext="{TemplateBinding Editor}" x:DataType="vm:StudioLayerRowViewModel">
             <s:StudioIconToggle Name="PART_Lock" MinWidth="22" MinHeight="24" Padding="3" IsVisible="{Binding CanLock}"
                                 IsChecked="{Binding IsLocked, Mode=TwoWay}" ToolTip.Tip="Lock / unlock object" AutomationProperties.Name="Lock object" />
-            <s:StudioIconToggle Name="PART_Visible" MinWidth="22" MinHeight="24" Padding="3"
+            <s:StudioIconToggle Name="PART_Visible" MinWidth="22" MinHeight="24" Padding="3" IsVisible="{Binding CanChangeVisibility}"
                                 IsChecked="{Binding IsVisible, Mode=TwoWay}" ToolTip.Tip="Show / hide item" AutomationProperties.Name="Show item" />
           </StackPanel>
         </Grid>

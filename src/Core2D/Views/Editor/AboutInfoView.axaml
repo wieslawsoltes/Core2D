@@ -3,15 +3,13 @@
   x:Class="Core2D.Views.Editor.AboutInfoView" x:DataType="vm:AboutInfoViewModel" x:CompileBindings="True">
   <StackPanel Spacing="16" Margin="20" MaxWidth="580">
     <s:StudioPanelHeader Title="{Binding Title}" Description="{Binding Description}"/>
-    <s:StudioPropertyRow Label="Version">
-      <SelectableTextBlock Text="{Binding Version}"/>
-    </s:StudioPropertyRow>
+    <s:StudioReadout Label="Version" Value="{Binding Version}" />
     <s:StudioPropertyRow Label="Copyright">
       <SelectableTextBlock Text="{Binding Copyright}" TextWrapping="Wrap"/>
     </s:StudioPropertyRow>
     <s:StudioPropertyRow Label="License">
       <SelectableTextBlock Text="{Binding License}" TextWrapping="Wrap"/>
     </s:StudioPropertyRow>
-    <s:StudioStatusBadge Content="Native Avalonia workspace" HorizontalAlignment="Left"/>
+    <s:StudioNotice Title="Native Avalonia workspace" Message="Dockable tools, document-based editing, reusable libraries and portable export workflows."/>
   </StackPanel>
 </UserControl>

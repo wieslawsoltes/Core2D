@@ -12,12 +12,12 @@
           <s:StudioSection x:DataType="paz:ZoomBorder" Header="Transform">
             <StackPanel Spacing="8">
               <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
-                <s:StudioPropertyField Label="Horizontal scale"><TextBlock Text="{Binding ZoomX, StringFormat='{}{0:G6}'}" /></s:StudioPropertyField>
-                <s:StudioPropertyField Grid.Column="1" Label="Vertical scale"><TextBlock Text="{Binding ZoomY, StringFormat='{}{0:G6}'}" /></s:StudioPropertyField>
+                <s:StudioReadout Label="Horizontal scale" Value="{Binding ZoomX, StringFormat='{}{0:G6}'}" />
+                <s:StudioReadout Grid.Column="1" Label="Vertical scale" Value="{Binding ZoomY, StringFormat='{}{0:G6}'}" />
               </Grid>
               <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
-                <s:StudioPropertyField Label="Horizontal offset"><TextBlock Text="{Binding OffsetX, StringFormat='{}{0:G6}'}" /></s:StudioPropertyField>
-                <s:StudioPropertyField Grid.Column="1" Label="Vertical offset"><TextBlock Text="{Binding OffsetY, StringFormat='{}{0:G6}'}" /></s:StudioPropertyField>
+                <s:StudioReadout Label="Horizontal offset" Value="{Binding OffsetX, StringFormat='{}{0:G6}'}" />
+                <s:StudioReadout Grid.Column="1" Label="Vertical offset" Value="{Binding OffsetY, StringFormat='{}{0:G6}'}" />
               </Grid>
               <WrapPanel DataContext="{Binding #EditorContext.DataContext}" x:DataType="vme:ProjectEditorViewModel">
                 <Button Content="Reset" Command="{Binding Platform.OnZoomReset}" Margin="0,0,4,4" />
@@ -33,13 +33,13 @@
               <s:StudioPropertyRow Label="Pan button"><ComboBox ItemsSource="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" HorizontalAlignment="Stretch" /></s:StudioPropertyRow>
               <s:StudioPropertyRow Label="Stretch"><ComboBox ItemsSource="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" HorizontalAlignment="Stretch" /></s:StudioPropertyRow>
               <s:StudioPropertyRow Label="Zoom speed"><s:StudioNumericField Value="{Binding ZoomSpeed, Mode=TwoWay}" Minimum="0.01" Maximum="100" Increment="0.1" AutomationProperties.Name="Zoom speed" /></s:StudioPropertyRow>
-              <s:StudioSwitch Content="Allow panning" IsChecked="{Binding EnablePan, Mode=TwoWay}" />
-              <s:StudioSwitch Content="Allow zooming" IsChecked="{Binding EnableZoom, Mode=TwoWay}" />
+              <s:StudioSettingToggle Content="Allow panning" Description="Move the viewport without changing document geometry." IsChecked="{Binding EnablePan, Mode=TwoWay}" />
+              <s:StudioSettingToggle Content="Allow zooming" Description="Enable pointer and gesture zoom in the active viewport." IsChecked="{Binding EnableZoom, Mode=TwoWay}" />
             </StackPanel>
           </s:StudioSection>
           <s:StudioSection x:DataType="paz:ZoomBorder" Header="Constraints" IsExpanded="False">
             <StackPanel Spacing="8">
-              <s:StudioSwitch Content="Constrain viewport" IsChecked="{Binding EnableConstrains, Mode=TwoWay}" />
+              <s:StudioSettingToggle Content="Constrain viewport" Description="Apply the existing scale and offset limits below." IsChecked="{Binding EnableConstrains, Mode=TwoWay}" />
               <!-- Keep text conversion for existing infinite/unbounded limits. -->
               <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
                 <s:StudioPropertyField Label="Min horizontal scale"><TextBox Text="{Binding MinZoomX, Mode=TwoWay}" /></s:StudioPropertyField>
