@@ -10,11 +10,11 @@ This pass extends the native Avalonia presentation system beyond the canvas and 
 
 Blocks, styles, templates, scripts, and image keys use a ProDataGrid-backed asset browser. It exposes a name query, original/A-Z/Z-A order, compact or detailed rows, and an empty state with a result count. Filtering and sorting project the original item instances rather than copying models or reordering the source collection. A filtered-out item remains the document's selection; clearing the query restores its visible selection. Selecting another result updates the existing model binding.
 
-Explicit column accessors supply filtering, sorting, and search text. The browser observes source changes and relevant name/key changes and releases those subscriptions on replacement or detachment. Block rows retain actual block previews; other asset rows show their kind icon and metadata. This is a row-based browser, not a tiled-grid implementation or thumbnail renderer for every asset type.
+Explicit column accessors supply filtering, sorting, and search text. The browser observes source changes and relevant name/key changes and releases those subscriptions on replacement or detachment. Block rows retain actual block previews; other asset rows show their kind icon and metadata. This is a row-based browser, not a tiled-grid implementation or thumbnail renderer for every asset type. The block preview uses the inherited `RendererOptions.Renderer` supplied by the Assets sidebar and docked Block Library host. Standalone hosts must supply that same renderer scope. Preview content stretches within its bounded tile; block subscriptions reconnect after detachment, and non-finite point coordinates are rejected.
 
 Original library commands, context menus, model selection, and supported drag/drop operations remain wired. Name fields commit against the original model and inherited document history. Scripts are never executed by browsing or double-clicking; Run/Execute/REPL remain explicit existing actions. Image keys remain read-only identifiers with their original add/remove commands.
 
-Database, record, data-object, object-browser, state, image-options, and zoom-options views receive matching headers, spacing, search presentation, switches, and surfaces. Their existing data adapters and advanced functions remain in place.
+Database, record, data-object, object-browser, state, image-options, and zoom-options views receive matching headers, spacing, search presentation, switches, and surfaces. Their existing data adapters and advanced functions remain in place. Viewport settings now use compact Transform/Navigation/Constraints sections and compiled command bindings. Existing unbounded viewport constraints retain their text conversion rather than forcing infinity through a decimal field.
 
 ## Native source editing and text bindings
 
@@ -30,11 +30,11 @@ Dialogs use the original presenter and visibility flags with shared surface/elev
 
 ## Export
 
-The export wizard keeps the existing step models, validation, exporter options, scope hierarchy, destination templates, preview, execution, and navigation commands. Its presentation uses a top step rail, contextual step heading, common input controls, a scrollable body, and a persistent navigation footer. Step indicators are status displays, not clickable shortcuts that bypass validation. The destination template controls now occupy their own grid row instead of overlapping the output-folder row. No new export formats or changes to rendering pipelines are introduced.
+The export wizard keeps the existing step models, validation, exporter options, scope hierarchy, destination templates, preview, execution, and navigation commands. Its presentation uses a top step rail, contextual step heading, common input controls, a scrollable body, and a persistent navigation footer. Step indicators are status displays, not clickable shortcuts that bypass validation. The destination template controls now occupy their own grid row instead of overlapping the output-folder row. The step's shared context is publicly readable, but not serialized, so compiled templates can access its live properties. No new export formats or changes to rendering pipelines are introduced.
 
 ## Validation and boundaries
 
-The added tests instantiate the real library and export views, asset projections and model identity, native source editing and grammar lifecycle, text-binding insertion, modal sizing/focus/closing, and both theme variants. Existing canvas, guide, selection, docking, property, and editor-catalog tests remain enabled.
+The added tests instantiate the real library and export views, asset projections and model identity, native source editing and grammar lifecycle, text-binding insertion, modal sizing/focus/closing, and both theme variants. Preview tests sample rendered block pixels before and after reattachment and verify that the shared renderer's zoom state is restored. Existing canvas, guide, selection, docking, property, and editor-catalog tests remain enabled.
 
 ```sh
 git submodule update --init --recursive
