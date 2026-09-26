@@ -49,7 +49,10 @@
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Background" Value="{DynamicResource DockSurfaceEditorBrush}" />
   </Style>
-  <Style Selector="dc|DocumentControl /template/ Grid#PART_Grid, dc|DocumentControl:active /template/ Grid#PART_Grid">
+  <Style Selector="dc|DocumentControl /template/ Grid#PART_Grid">
+    <Setter Property="Background" Value="{DynamicResource DockSeparatorBrush}" />
+  </Style>
+  <Style Selector="dc|DocumentControl:active /template/ Grid#PART_Grid">
     <Setter Property="Background" Value="{DynamicResource DockSeparatorBrush}" />
   </Style>
   <Style Selector="dc|DocumentControl[TabsLayout=Top] /template/ Grid#PART_Grid">
@@ -71,7 +74,12 @@
   <Style Selector="dc|DocumentTabStripItem">
     <Setter Property="Padding" Value="{DynamicResource DockDocumentTabItemPadding}" />
   </Style>
-  <Style Selector="dc|ToolTabStripItem, dc|ToolTabStripItem:selected">
+  <Style Selector="dc|ToolTabStripItem">
+    <Setter Property="Padding" Value="{DynamicResource DockToolTabItemPadding}" />
+  </Style>
+  <!-- Keep state selectors separate from unconditional selectors: a matching unconditional
+       branch in a selector union lowers the setter priority below native theme triggers. -->
+  <Style Selector="dc|ToolTabStripItem:selected">
     <Setter Property="Padding" Value="{DynamicResource DockToolTabItemPadding}" />
     <Setter Property="BorderThickness" Value="0,0,0,2" />
   </Style>

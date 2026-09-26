@@ -44,7 +44,6 @@ public class StudioDockBrowserThemeTests
                 ("DockApplicationAccentBrushMed", "BrowserHoverBrush"),
                 ("DockApplicationAccentBrushHigh", "BrowserHoverBrush"),
                 ("DockApplicationAccentForegroundBrush", "BrowserTextBrush"),
-                ("DockApplicationAccentBrushIndicator", "BrowserAccentBrush"),
                 ("DockToolChromeIconBrush", "BrowserMutedBrush"),
                 ("DockWindowChromeBackgroundBrush", "BrowserSurfaceBrush"),
                 ("DockWindowChromeBorderBrush", "BrowserBorderBrush"),
