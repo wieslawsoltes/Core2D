@@ -1,0 +1,12 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style Selector="TextBlock"><Setter Property="FontSize" Value="{DynamicResource BrowserFontSize}" /></Style>
+  <Style Selector="ToolTip TextBlock"><Setter Property="TextWrapping" Value="Wrap" /></Style>
+  <Style Selector="Border.browser-card">
+    <Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" /><Setter Property="CornerRadius" Value="10" />
+    <Setter Property="Padding" Value="20" />
+  </Style>
+  <Style Selector="TextBlock.browser-heading"><Setter Property="FontSize" Value="22" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
+  <Style Selector="TextBlock.browser-muted"><Setter Property="Foreground" Value="{DynamicResource BrowserMutedBrush}" /></Style>
+</Styles>

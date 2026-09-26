@@ -1,0 +1,81 @@
+<!-- Derived from AvaloniaUI/Avalonia 11.3.12 (MIT). See LICENSE.Avalonia.txt and UpstreamManifest.json. --><ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <StackPanel Spacing="20">
+        <Button Content="Click Me!"/>
+        <Button Classes="accent" Content="Click Me!"/>
+      </StackPanel>
+    </Border>
+  </Design.PreviewWith>
+
+  <ControlTheme x:Key="{x:Type Button}" TargetType="Button" x:DataType="Button"><Setter Property="VerticalContentAlignment" Value="Center"/><Setter Property="HorizontalContentAlignment" Value="Center"/><Setter Property="FontFamily" Value="{DynamicResource BrowserFontFamily}"/><Setter Property="FontSize" Value="{DynamicResource BrowserFontSize}"/><Setter Property="MinHeight" Value="{DynamicResource BrowserControlHeight}"/>
+    <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ButtonBorderThemeThickness}"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource BrowserControlRadius}"/>
+    <Setter Property="Padding" Value="{DynamicResource BrowserButtonPadding}"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    
+    
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter x:Name="PART_ContentPresenter" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="RecognizesAccessKey" Value="True"/>
+    </Style>
+
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BrowserHoverBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    </Style>
+
+    <Style Selector="^:pressed">
+      
+    </Style>
+
+    <Style Selector="^:pressed  /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BrowserSelectionBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    </Style>
+
+    <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserDisabledBrush}"/>
+    </Style>
+
+    <Style Selector="^.accent">
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrowserPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrowserOnAccentBrush}"/>
+      </Style>
+
+      <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrowserPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrowserOnAccentBrush}"/>
+      </Style>
+
+      <Style Selector="^:pressed  /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrowserPrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrowserOnAccentBrush}"/>
+      </Style>
+
+      <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrowserDisabledBrush}"/>
+      </Style>
+    </Style>
+  <Style Selector="^:focus-visible /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="BorderBrush" Value="{DynamicResource BrowserAccentBrush}"/></Style><Style Selector="^.primary /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="{DynamicResource BrowserPrimaryBrush}"/><Setter Property="Foreground" Value="{DynamicResource BrowserOnAccentBrush}"/><Setter Property="BorderBrush" Value="{DynamicResource BrowserPrimaryBrush}"/></Style><Style Selector="^.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Opacity" Value="0.86"/></Style><Style Selector="^.primary:disabled /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/><Setter Property="Foreground" Value="{DynamicResource BrowserDisabledBrush}"/><Setter Property="BorderBrush" Value="{DynamicResource BrowserBorderBrush}"/></Style><Style Selector="^.ghost /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="{DynamicResource BrowserTransparentBrush}"/><Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/><Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/></Style><Style Selector="^.ghost:pointerover /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Opacity" Value="0.86"/></Style><Style Selector="^.ghost:disabled /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/><Setter Property="Foreground" Value="{DynamicResource BrowserDisabledBrush}"/><Setter Property="BorderBrush" Value="{DynamicResource BrowserBorderBrush}"/></Style><Style Selector="^.danger /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="{DynamicResource BrowserDangerBackgroundBrush}"/><Setter Property="Foreground" Value="{DynamicResource BrowserDangerBrush}"/><Setter Property="BorderBrush" Value="{DynamicResource BrowserDangerBrush}"/></Style><Style Selector="^.danger:pointerover /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Opacity" Value="0.86"/></Style><Style Selector="^.danger:disabled /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/><Setter Property="Foreground" Value="{DynamicResource BrowserDisabledBrush}"/><Setter Property="BorderBrush" Value="{DynamicResource BrowserBorderBrush}"/></Style></ControlTheme>
+</ResourceDictionary>

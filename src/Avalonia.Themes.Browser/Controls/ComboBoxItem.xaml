@@ -1,0 +1,75 @@
+<!-- Derived from AvaloniaUI/Avalonia 11.3.12 (MIT). See LICENSE.Avalonia.txt and UpstreamManifest.json. --><ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <Border Background="{DynamicResource BrowserInputBrush}" BorderBrush="{DynamicResource BrowserBorderBrush}" BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}" Margin="0,-1,0,-1" Padding="{DynamicResource ComboBoxDropdownBorderPadding}" CornerRadius="{DynamicResource OverlayCornerRadius}">
+        <StackPanel HorizontalAlignment="Stretch">
+          <ComboBoxItem>Item 1</ComboBoxItem>
+          <ComboBoxItem>Item 2 long</ComboBoxItem>
+          <ComboBoxItem IsSelected="True">Item 3</ComboBoxItem>
+          <ComboBoxItem IsEnabled="False">Item 4</ComboBoxItem>
+          <ComboBoxItem IsSelected="True" IsEnabled="False">Item 5</ComboBoxItem>
+        </StackPanel>
+      </Border>
+    </Border>
+  </Design.PreviewWith>
+
+  <ControlTheme x:Key="{x:Type ComboBoxItem}" TargetType="ComboBoxItem" x:DataType="ComboBoxItem"><Setter Property="FontFamily" Value="{DynamicResource BrowserFontFamily}"/><Setter Property="FontSize" Value="{DynamicResource BrowserFontSize}"/><Setter Property="CornerRadius" Value="{DynamicResource BrowserControlRadius}"/><Setter Property="MinHeight" Value="{DynamicResource BrowserControlHeight}"/>
+    <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource BrowserTransparentBrush}"/>
+    <Setter Property="Padding" Value="{DynamicResource ComboBoxItemThemePadding}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Padding="{TemplateBinding Padding}"/>
+      </ControlTemplate>
+    </Setter>
+
+    <!--  PointerOver state  -->
+    <Style Selector="^:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BrowserHoverBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    </Style>
+
+    <!--  Disabled state  -->
+    <Style Selector="^:disabled /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserDisabledBrush}"/>
+    </Style>
+
+    <!--  Pressed state  -->
+    <Style Selector="^:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BrowserSelectionBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    </Style>
+
+    <!--  Selected state  -->
+    <Style Selector="^:selected">
+      <Style Selector="^ /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrowserSelectionBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrowserSelectionTextBrush}"/>
+      </Style>
+      <!--  Selected Disabled state  -->
+      <Style Selector="^:disabled /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrowserTransparentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrowserDisabledBrush}"/>
+      </Style>
+      <!--  Selected PointerOver state  -->
+      <Style Selector="^:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrowserSelectionBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrowserSelectionTextBrush}"/>
+      </Style>
+      <!--  Selected Pressed state  -->
+      <Style Selector="^:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrowserSelectionBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrowserSelectionTextBrush}"/>
+      </Style>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

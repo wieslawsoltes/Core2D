@@ -1,0 +1,1015 @@
+{
+  "repository": "AvaloniaUI/Avalonia",
+  "tag": "11.3.12",
+  "commit": "37fbd9655cc581ff5b1c6b1fb1be4e3118c889d0",
+  "files": [
+    {
+      "source": "Accents/BaseColorsPalette.xaml",
+      "output": "Accents/BaseColorsPalette.xaml",
+      "sha256": "cbb5ffd6b378cfcb278bf7179b0bf63ec2988003dea8aee9c9f75d5eb58244a1",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "Accents/BaseResources.xaml",
+      "output": "Accents/BaseResources.xaml",
+      "sha256": "628fad3a5f337b7cd855d157527cac34144d8279ccf472a3107b50dabbe7ba9b",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "Accents/FluentControlResources.xaml",
+      "output": "Accents/FluentControlResources.xaml",
+      "sha256": "a74b792e79d3c4113b02d733292c1cd474a1d8bb46b9945e8de1b3fa74de4716",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "Accents/SystemAccentColors.cs",
+      "output": "Accents/SystemAccentColors.cs",
+      "sha256": "56e184eab8cdb6de4e8dd8766fc3f985f9ea24a735d911e9983369d7c3fa7069",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "ColorPaletteResources.Properties.cs",
+      "output": "ColorPaletteResources.Properties.cs",
+      "sha256": "dc6271c96e02de7cd05b0e6c7375f2138d10dc48ece4b3b00729f5a0a7ac7c5c",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "ColorPaletteResources.cs",
+      "output": "ColorPaletteResources.cs",
+      "sha256": "78844ea3df7ba60e32ad87cc52007a7b31c0d34b41ac9816778e8eb863d4905b",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "ColorPaletteResourcesCollection.cs",
+      "output": "ColorPaletteResourcesCollection.cs",
+      "sha256": "efb3e8b40b4f1948ef05c2a3960faf91ed83b28f3b203d165670406d0c14415c",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "Controls/AdornerLayer.xaml",
+      "output": "Controls/AdornerLayer.xaml",
+      "sha256": "abc715f03afe62574c966eacb9c0e0ce072c64f6cd8b038457f7e4f5b473d56c",
+      "themeKeys": [
+        "{x:Type AdornerLayer}"
+      ],
+      "templateParts": []
+    },
+    {
+      "source": "Controls/AutoCompleteBox.xaml",
+      "output": "Controls/AutoCompleteBox.xaml",
+      "sha256": "78dc1129132ec0335ac805c70d9c3948172cfdf3562aceb84a26171e956f91ee",
+      "themeKeys": [
+        "{x:Type AutoCompleteBox}"
+      ],
+      "templateParts": [
+        "PART_LayoutRoot",
+        "PART_Popup",
+        "PART_SelectingItemsControl",
+        "PART_SuggestionsContainer",
+        "PART_TextBox"
+      ]
+    },
+    {
+      "source": "Controls/Button.xaml",
+      "output": "Controls/Button.xaml",
+      "sha256": "c4a9526a1170294d65a33918ce26719bd2c7986cff42c96a399e407e11f9bda3",
+      "themeKeys": [
+        "{x:Type Button}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/ButtonSpinner.xaml",
+      "output": "Controls/ButtonSpinner.xaml",
+      "sha256": "5858572e77a3d63a0e699b12a9e4657d925bd2f1be97a52b050bc85b567ee4e4",
+      "themeKeys": [
+        "FluentButtonSpinnerRepeatButton",
+        "{x:Type ButtonSpinner}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_DecreaseButton",
+        "PART_IncreaseButton",
+        "PART_SpinnerPanel"
+      ]
+    },
+    {
+      "source": "Controls/Calendar.xaml",
+      "output": "Controls/Calendar.xaml",
+      "sha256": "c80880e02996fb3858651de339c1cacfe6ddc57d345c39cb66cb16d94250afda",
+      "themeKeys": [
+        "{x:Type Calendar}"
+      ],
+      "templateParts": [
+        "PART_CalendarItem",
+        "PART_Root"
+      ]
+    },
+    {
+      "source": "Controls/CalendarButton.xaml",
+      "output": "Controls/CalendarButton.xaml",
+      "sha256": "e3a2fbd58652b5874f4f49ed36e77a05b542dc73f72381c445a4a2ecc0f2caf6",
+      "themeKeys": [
+        "{x:Type CalendarButton}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/CalendarDatePicker.xaml",
+      "output": "Controls/CalendarDatePicker.xaml",
+      "sha256": "7d31310d9b4864856e9abba8ff300787d1bd18098895207c0433e9a9f803b3b1",
+      "themeKeys": [
+        "FluentCalendarDatePickerButton",
+        "{x:Type CalendarDatePicker}"
+      ],
+      "templateParts": [
+        "PART_Button",
+        "PART_Calendar",
+        "PART_Popup",
+        "PART_TextBox"
+      ]
+    },
+    {
+      "source": "Controls/CalendarDayButton.xaml",
+      "output": "Controls/CalendarDayButton.xaml",
+      "sha256": "2dca08fa53bfdfcdf94feca18e1d6a59a1f11766dffc1303e535c92a69172996",
+      "themeKeys": [
+        "{x:Type CalendarDayButton}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/CalendarItem.xaml",
+      "output": "Controls/CalendarItem.xaml",
+      "sha256": "48278ae237c47904551de7ff48030821c2b3a6d68278e596edded8d12ecbc70c",
+      "themeKeys": [
+        "FluentCalendarButton",
+        "{x:Type CalendarItem}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_HeaderButton",
+        "PART_MonthView",
+        "PART_NextButton",
+        "PART_PreviousButton",
+        "PART_YearView"
+      ]
+    },
+    {
+      "source": "Controls/CaptionButtons.xaml",
+      "output": "Controls/CaptionButtons.xaml",
+      "sha256": "db131d74682669b2289c66a669134dafb001c0fd18a9a753b65e96e3c6a4be34",
+      "themeKeys": [
+        "FluentCaptionButton",
+        "{x:Type CaptionButtons}"
+      ],
+      "templateParts": [
+        "PART_CloseButton",
+        "PART_ContentPresenter",
+        "PART_FullScreenButton",
+        "PART_MinimizeButton",
+        "PART_RestoreButton"
+      ]
+    },
+    {
+      "source": "Controls/Carousel.xaml",
+      "output": "Controls/Carousel.xaml",
+      "sha256": "d2ca1ae1ae9b7d682500d7fbe92816c6e9373b245512f991a4ca4784ac14381e",
+      "themeKeys": [
+        "{x:Type Carousel}"
+      ],
+      "templateParts": [
+        "PART_ItemsPresenter",
+        "PART_ScrollViewer"
+      ]
+    },
+    {
+      "source": "Controls/CheckBox.xaml",
+      "output": "Controls/CheckBox.xaml",
+      "sha256": "71208f6357537fcef17eecabe7a277dad0ba769a18675a7dac2e90320c9b0184",
+      "themeKeys": [
+        "{x:Type CheckBox}"
+      ],
+      "templateParts": [
+        "PART_Border",
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/ComboBox.xaml",
+      "output": "Controls/ComboBox.xaml",
+      "sha256": "138dc44de0d51340ec573a107f213d932c53305f13db7e4d8e483e776f060b07",
+      "themeKeys": [
+        "{x:Type ComboBox}"
+      ],
+      "templateParts": [
+        "PART_EditableTextBox",
+        "PART_ItemsPresenter",
+        "PART_Popup"
+      ]
+    },
+    {
+      "source": "Controls/ComboBoxItem.xaml",
+      "output": "Controls/ComboBoxItem.xaml",
+      "sha256": "d512550f85d85526a2f26c5125b894d5d6f6989eb81ed5cfeb8138de7095d20b",
+      "themeKeys": [
+        "{x:Type ComboBoxItem}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/ContextMenu.xaml",
+      "output": "Controls/ContextMenu.xaml",
+      "sha256": "dd4ae364dac1819fd4a2aa2581581b49422ea714c51d6c094257b208334f6458",
+      "themeKeys": [
+        "{x:Type ContextMenu}"
+      ],
+      "templateParts": [
+        "PART_ItemsPresenter"
+      ]
+    },
+    {
+      "source": "Controls/DataValidationErrors.xaml",
+      "output": "Controls/DataValidationErrors.xaml",
+      "sha256": "05b8c9197967a92fa590a7fd6db9c3ef72a7cfd96cec68d8758e0271617002b1",
+      "themeKeys": [
+        "{x:Type DataValidationErrors}",
+        "TooltipDataValidationErrors"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_InlineErrorTemplatePanel"
+      ]
+    },
+    {
+      "source": "Controls/DatePicker.xaml",
+      "output": "Controls/DatePicker.xaml",
+      "sha256": "90f565bc19797745b0b686ea3e03a4ba5ac83b242a0457030168cb5bd076b6da",
+      "themeKeys": [
+        "FluentDatePickerFlyoutButton",
+        "{x:Type DatePicker}",
+        "{x:Type DatePickerPresenter}"
+      ],
+      "templateParts": [
+        "PART_AcceptButton",
+        "PART_ButtonContentGrid",
+        "PART_ContentPresenter",
+        "PART_DayDownButton",
+        "PART_DayHost",
+        "PART_DaySelector",
+        "PART_DayTextBlock",
+        "PART_DayUpButton",
+        "PART_DismissButton",
+        "PART_FirstSpacer",
+        "PART_FlyoutButton",
+        "PART_MonthDownButton",
+        "PART_MonthHost",
+        "PART_MonthSelector",
+        "PART_MonthTextBlock",
+        "PART_MonthUpButton",
+        "PART_PickerContainer",
+        "PART_PickerPresenter",
+        "PART_Popup",
+        "PART_SecondSpacer",
+        "PART_YearDownButton",
+        "PART_YearHost",
+        "PART_YearSelector",
+        "PART_YearTextBlock",
+        "PART_YearUpButton"
+      ]
+    },
+    {
+      "source": "Controls/DateTimePickerShared.xaml",
+      "output": "Controls/DateTimePickerShared.xaml",
+      "sha256": "49677a0a5a7dbc7c31c222b88f772e46a6a91adb655424931020510319bdc1da",
+      "themeKeys": [
+        "FluentDateTimePickerItem",
+        "FluentDateTimePickerButton",
+        "FluentDateTimePickerUpButton",
+        "FluentDateTimePickerDownButton"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/DropDownButton.xaml",
+      "output": "Controls/DropDownButton.xaml",
+      "sha256": "ab93de3f96e5070b93aeb0e2a0d155c29b3a616e5a763b942b6a7fe28a245e83",
+      "themeKeys": [
+        "{x:Type DropDownButton}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/EmbeddableControlRoot.xaml",
+      "output": "Controls/EmbeddableControlRoot.xaml",
+      "sha256": "d94ac7deac34d581a4b5055bf99981a9f0b06e95e26dfcac6c57a49f5c7d09c1",
+      "themeKeys": [
+        "{x:Type EmbeddableControlRoot}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_TransparencyFallback"
+      ]
+    },
+    {
+      "source": "Controls/Expander.xaml",
+      "output": "Controls/Expander.xaml",
+      "sha256": "01a57c0b7af45a4daa9ffe14bc2decdff93937e26a2ff8d7167fa911fcc7ce80",
+      "themeKeys": [
+        "FluentExpanderToggleButtonTheme",
+        "FluentExpanderToggleButtonUpTheme",
+        "FluentExpanderToggleButtonDownTheme",
+        "FluentExpanderToggleButtonLeftTheme",
+        "FluentExpanderToggleButtonRightTheme",
+        "{x:Type Expander}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/FluentControls.xaml",
+      "output": "Controls/BrowserControls.xaml",
+      "sha256": "53a912fa3cd955ba80d907b7754fe4dc5e99ef7c9ebae7d36c08ed0566d22ef8",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "Controls/FlyoutPresenter.xaml",
+      "output": "Controls/FlyoutPresenter.xaml",
+      "sha256": "0a4394fdcd662f9ff58aa1e6938705db752b5190031c7455e9ca45e7bc30813b",
+      "themeKeys": [
+        "{x:Type FlyoutPresenter}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/GridSplitter.xaml",
+      "output": "Controls/GridSplitter.xaml",
+      "sha256": "8ca9893aec060626f671846d4240009ee059d481b80bb6b7ee175a6c9a758e60",
+      "themeKeys": [
+        "{x:Type GridSplitter}"
+      ],
+      "templateParts": []
+    },
+    {
+      "source": "Controls/HeaderedContentControl.xaml",
+      "output": "Controls/HeaderedContentControl.xaml",
+      "sha256": "6593c6a07e8a9a75fab2fc4cdb6b5c459a1f871a4dd151b3ec81172eab9105f7",
+      "themeKeys": [
+        "{x:Type HeaderedContentControl}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_HeaderPresenter"
+      ]
+    },
+    {
+      "source": "Controls/HyperlinkButton.xaml",
+      "output": "Controls/HyperlinkButton.xaml",
+      "sha256": "ce24ba3e6228a23cca584ae9183a6f857e26d8deaf262cba1b6422188fccc555",
+      "themeKeys": [
+        "{x:Type HyperlinkButton}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/ItemsControl.xaml",
+      "output": "Controls/ItemsControl.xaml",
+      "sha256": "1d5958681d7a99dd7be989e6c8b1f880ee8dccb1fca433886ad687c03c81ee53",
+      "themeKeys": [
+        "{x:Type ItemsControl}"
+      ],
+      "templateParts": [
+        "PART_ItemsPresenter"
+      ]
+    },
+    {
+      "source": "Controls/Label.xaml",
+      "output": "Controls/Label.xaml",
+      "sha256": "3e1e8a16d9a577dff5b86dea127af7ddc78d8a33bb46f216bf3c871208b945df",
+      "themeKeys": [
+        "{x:Type Label}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/ListBox.xaml",
+      "output": "Controls/ListBox.xaml",
+      "sha256": "f98c91602aa6d3831d1ca3af413c73593462fa62859e933861b6b0254591a4ca",
+      "themeKeys": [
+        "{x:Type ListBox}"
+      ],
+      "templateParts": [
+        "PART_ItemsPresenter",
+        "PART_ScrollViewer"
+      ]
+    },
+    {
+      "source": "Controls/ListBoxItem.xaml",
+      "output": "Controls/ListBoxItem.xaml",
+      "sha256": "b35470082a85307751b14d0174e149f693c454c92cff93b2a67b9ef4b872261b",
+      "themeKeys": [
+        "{x:Type ListBoxItem}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/ManagedFileChooser.xaml",
+      "output": "Controls/ManagedFileChooser.xaml",
+      "sha256": "8781b831210d88b1367539bb92c46b83abb9661c80be89e090c5c3d9f2a94fac",
+      "themeKeys": [
+        "{x:Type dialogs:ManagedFileChooser}",
+        "{x:Type dialogs:ManagedFileChooserOverwritePrompt}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_Files",
+        "PART_ItemsPresenter",
+        "PART_QuickLinks",
+        "PART_ScrollViewer"
+      ]
+    },
+    {
+      "source": "Controls/Menu.xaml",
+      "output": "Controls/Menu.xaml",
+      "sha256": "cacee8a6c4815ebc71a49310d6b36345c529ad81898655f97f01ceaf1049fd5a",
+      "themeKeys": [
+        "FluentTopLevelMenuItem",
+        "{x:Type Menu}"
+      ],
+      "templateParts": [
+        "PART_HeaderPresenter",
+        "PART_ItemsPresenter",
+        "PART_LayoutRoot",
+        "PART_Popup"
+      ]
+    },
+    {
+      "source": "Controls/MenuFlyoutPresenter.xaml",
+      "output": "Controls/MenuFlyoutPresenter.xaml",
+      "sha256": "612592250dd354472ba002cc820d185c7be57ed832615f661cddb99fa9410390",
+      "themeKeys": [
+        "{x:Type MenuFlyoutPresenter}",
+        "HorizontalMenuFlyoutPresenter"
+      ],
+      "templateParts": [
+        "PART_ItemsPresenter"
+      ]
+    },
+    {
+      "source": "Controls/MenuItem.xaml",
+      "output": "Controls/MenuItem.xaml",
+      "sha256": "627d67e3aeb2c08d5f90efa3707e90d7c92b64569999f017e049b399feb37e60",
+      "themeKeys": [
+        "{x:Type MenuItem}",
+        "HorizontalMenuItem",
+        "FluentMenuItemIconTheme"
+      ],
+      "templateParts": [
+        "PART_ChevronPath",
+        "PART_ContentPresenter",
+        "PART_HeaderPresenter",
+        "PART_IconPresenter",
+        "PART_InputGestureText",
+        "PART_ItemsPresenter",
+        "PART_LayoutRoot",
+        "PART_Popup",
+        "PART_ToggleIconPresenter"
+      ]
+    },
+    {
+      "source": "Controls/MenuScrollViewer.xaml",
+      "output": "Controls/MenuScrollViewer.xaml",
+      "sha256": "776ac7c3e6825a9a6c0fe6029d529bd20b9ee7432620666ec392b4ea712393bb",
+      "themeKeys": [
+        "FluentMenuScrollViewer"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/NotificationCard.xaml",
+      "output": "Controls/NotificationCard.xaml",
+      "sha256": "164dc4cef732fdb5202fb3ccb029115b46bfa763912f02f8d132f3f382b2f124",
+      "themeKeys": [
+        "{x:Type NotificationCard}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_HeaderBar",
+        "PART_LayoutTransformControl"
+      ]
+    },
+    {
+      "source": "Controls/NumericUpDown.xaml",
+      "output": "Controls/NumericUpDown.xaml",
+      "sha256": "eb9d2c44c337d040f49dc7ec4dae48ad58f2583afd9ae32e3c806b9d86c28f11",
+      "themeKeys": [
+        "{x:Type NumericUpDown}"
+      ],
+      "templateParts": [
+        "PART_Spinner",
+        "PART_TextBox"
+      ]
+    },
+    {
+      "source": "Controls/OverlayPopupHost.xaml",
+      "output": "Controls/OverlayPopupHost.xaml",
+      "sha256": "4c363d75f53cf868e199acd4efbb9281b38d6662f7928a6a79b4459a8b0d873c",
+      "themeKeys": [
+        "{x:Type OverlayPopupHost}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/PathIcon.xaml",
+      "output": "Controls/PathIcon.xaml",
+      "sha256": "cc0b9374bc1c5ddd1e397f22a1d1c15b2fd6c639239dbedc8dd0a1fa5c24f936",
+      "themeKeys": [
+        "{x:Type PathIcon}"
+      ],
+      "templateParts": []
+    },
+    {
+      "source": "Controls/PopupRoot.xaml",
+      "output": "Controls/PopupRoot.xaml",
+      "sha256": "684e99e149934ab6c40be1598d6ab8cef0142fd3de3b537f6e86314e46bb691c",
+      "themeKeys": [
+        "{x:Type PopupRoot}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_TransparencyFallback"
+      ]
+    },
+    {
+      "source": "Controls/ProgressBar.xaml",
+      "output": "Controls/ProgressBar.xaml",
+      "sha256": "f3036ceb206a944c6561a3441144ac7a5132dcad6670bc42f7f7fa07cdf7be5a",
+      "themeKeys": [
+        "{x:Type ProgressBar}"
+      ],
+      "templateParts": [
+        "PART_Indicator",
+        "PART_LayoutTransformControl"
+      ]
+    },
+    {
+      "source": "Controls/RadioButton.xaml",
+      "output": "Controls/RadioButton.xaml",
+      "sha256": "fd4ee165273e460ea1118e4c127d3618004e6c589c62f04fd828d0a15188a459",
+      "themeKeys": [
+        "{x:Type RadioButton}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/RefreshContainer.xaml",
+      "output": "Controls/RefreshContainer.xaml",
+      "sha256": "1dac05e67c1cc8cca232801ee5f97472fd955790da58468c36c216c904493f87",
+      "themeKeys": [
+        "{x:Type RefreshContainer}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_RefreshVisualizerPresenter"
+      ]
+    },
+    {
+      "source": "Controls/RefreshVisualizer.xaml",
+      "output": "Controls/RefreshVisualizer.xaml",
+      "sha256": "9ee11bdbbf73bd2573b89028f26429eb1614bcd65a556e35742ac13ee650f01b",
+      "themeKeys": [
+        "{x:Type RefreshVisualizer}"
+      ],
+      "templateParts": [
+        "PART_Icon",
+        "PART_Root"
+      ]
+    },
+    {
+      "source": "Controls/RepeatButton.xaml",
+      "output": "Controls/RepeatButton.xaml",
+      "sha256": "9e678b8de18fb7d0e6ff3efbe860db3da2b6aa73c0cfb0a28edd7f8a0bfe4931",
+      "themeKeys": [
+        "{x:Type RepeatButton}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/ScrollBar.xaml",
+      "output": "Controls/ScrollBar.xaml",
+      "sha256": "0f737c9a0d5394265633cb1e951268cd027e081f32016bed5e86b388de48f71e",
+      "themeKeys": [
+        "FluentScrollBarThumb",
+        "FluentScrollBarPageButton",
+        "FluentScrollBarLineButton",
+        "{x:Type ScrollBar}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_LineDownButton",
+        "PART_LineUpButton",
+        "PART_PageDownButton",
+        "PART_PageUpButton"
+      ]
+    },
+    {
+      "source": "Controls/ScrollViewer.xaml",
+      "output": "Controls/ScrollViewer.xaml",
+      "sha256": "271ee2df891a1e5cfa238f9522fcd049b57eaed37f24261f568bef6e2ecc542e",
+      "themeKeys": [
+        "{x:Type ScrollViewer}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_HorizontalScrollBar",
+        "PART_ScrollBarsSeparator",
+        "PART_VerticalScrollBar"
+      ]
+    },
+    {
+      "source": "Controls/SelectableTextBlock.xaml",
+      "output": "Controls/SelectableTextBlock.xaml",
+      "sha256": "e733cf05db64c4963b5c9281f6a79a762571ac9cef8efae3cfe352d24dcd58cd",
+      "themeKeys": [
+        "{x:Type SelectableTextBlock}"
+      ],
+      "templateParts": []
+    },
+    {
+      "source": "Controls/Separator.xaml",
+      "output": "Controls/Separator.xaml",
+      "sha256": "92188b07f6b86c0da71094d57c0aa5c3378bc380e8ca58a6f775722ebbd86b92",
+      "themeKeys": [
+        "{x:Type Separator}"
+      ],
+      "templateParts": []
+    },
+    {
+      "source": "Controls/Slider.xaml",
+      "output": "Controls/Slider.xaml",
+      "sha256": "ecba484a70dbf730bb8fec052daa6269357b1a450ae118d2810573ad3d9558e4",
+      "themeKeys": [
+        "FluentSliderHorizontalRepeatButton",
+        "FluentSliderVerticalRepeatButton",
+        "FluentSliderThumbTheme",
+        "{x:Type Slider}"
+      ],
+      "templateParts": [
+        "PART_DecreaseButton",
+        "PART_IncreaseButton",
+        "PART_Track"
+      ]
+    },
+    {
+      "source": "Controls/SplitButton.xaml",
+      "output": "Controls/SplitButton.xaml",
+      "sha256": "d8b3a480ae6c0c7404ad0964b535ae45cdb295f8184e826d0b482d1ade1c4836",
+      "themeKeys": [
+        "FluentSplitButtonComponent",
+        "{x:Type SplitButton}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_PrimaryButton",
+        "PART_SecondaryButton"
+      ]
+    },
+    {
+      "source": "Controls/SplitView.xaml",
+      "output": "Controls/SplitView.xaml",
+      "sha256": "61566f20581f5269f7ed1f8bb1f78feb7464a23c286ca9464fddf257344a2b1d",
+      "themeKeys": [
+        "{x:Type SplitView}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_PanePresenter",
+        "PART_PaneRoot"
+      ]
+    },
+    {
+      "source": "Controls/TabControl.xaml",
+      "output": "Controls/TabControl.xaml",
+      "sha256": "e3dc5abec35016978984092cc32f8381b51c104d84f0230c45206c31fb02b647",
+      "themeKeys": [
+        "{x:Type TabControl}"
+      ],
+      "templateParts": [
+        "PART_ItemsPresenter",
+        "PART_SelectedContentHost"
+      ]
+    },
+    {
+      "source": "Controls/TabItem.xaml",
+      "output": "Controls/TabItem.xaml",
+      "sha256": "fd233175979270d26bf27d3eda9b0cf42d3fe77172d6b95430a635ae0cd0a4d2",
+      "themeKeys": [
+        "{x:Type TabItem}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_LayoutRoot",
+        "PART_SelectedPipe"
+      ]
+    },
+    {
+      "source": "Controls/TabStrip.xaml",
+      "output": "Controls/TabStrip.xaml",
+      "sha256": "1ac003492c6798e75c2565fd5295c8271efc4d39165c6d6360c2de5c9ad11972",
+      "themeKeys": [
+        "{x:Type TabStrip}"
+      ],
+      "templateParts": [
+        "PART_ItemsPresenter"
+      ]
+    },
+    {
+      "source": "Controls/TabStripItem.xaml",
+      "output": "Controls/TabStripItem.xaml",
+      "sha256": "60541dc639a7ad227fd9c7c8bc720803830b56d2f96c02aa040849b59248ca96",
+      "themeKeys": [
+        "{x:Type TabStripItem}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_LayoutRoot",
+        "PART_SelectedPipe"
+      ]
+    },
+    {
+      "source": "Controls/TextBox.xaml",
+      "output": "Controls/TextBox.xaml",
+      "sha256": "c80d9aa7acda094292dc48ea1ae359059bad3fa71c293a100d526260d3c220e6",
+      "themeKeys": [
+        "FluentTextBoxButton",
+        "FluentTextBoxToggleButton",
+        "{x:Type TextBox}"
+      ],
+      "templateParts": [
+        "PART_BorderElement",
+        "PART_ContentPresenter",
+        "PART_FloatingWatermark",
+        "PART_InnerDockPanel",
+        "PART_ScrollViewer",
+        "PART_TextPresenter",
+        "PART_Watermark"
+      ]
+    },
+    {
+      "source": "Controls/TextSelectionHandle.xaml",
+      "output": "Controls/TextSelectionHandle.xaml",
+      "sha256": "c21f7be5ccdbfd95958121c1c08c46a61be0003eb1693c4d6af1b80dc95be0ff",
+      "themeKeys": [
+        "{x:Type TextSelectionHandle}"
+      ],
+      "templateParts": [
+        "PART_HandlePathIcon"
+      ]
+    },
+    {
+      "source": "Controls/ThemeVariantScope.xaml",
+      "output": "Controls/ThemeVariantScope.xaml",
+      "sha256": "4416e6ce6d8ebd035dd45a5901f7c922d7af6f4f503054fee9582b5f7ca59194",
+      "themeKeys": [
+        "{x:Type ThemeVariantScope}"
+      ],
+      "templateParts": []
+    },
+    {
+      "source": "Controls/TimePicker.xaml",
+      "output": "Controls/TimePicker.xaml",
+      "sha256": "6553ac2d14a75fbdad685ee7e3cc7a5f68fd99801c7e046b2a81ebcb490eae88",
+      "themeKeys": [
+        "FluentTimePickerFlyoutButton",
+        "{x:Type TimePicker}",
+        "{x:Type TimePickerPresenter}"
+      ],
+      "templateParts": [
+        "PART_AcceptButton",
+        "PART_ContentPresenter",
+        "PART_DismissButton",
+        "PART_FirstColumnDivider",
+        "PART_FirstPickerHost",
+        "PART_FirstSpacer",
+        "PART_FlyoutButton",
+        "PART_FlyoutButtonContentGrid",
+        "PART_FourthPickerHost",
+        "PART_HourDownButton",
+        "PART_HourHost",
+        "PART_HourSelector",
+        "PART_HourTextBlock",
+        "PART_HourUpButton",
+        "PART_MinuteDownButton",
+        "PART_MinuteHost",
+        "PART_MinuteSelector",
+        "PART_MinuteTextBlock",
+        "PART_MinuteUpButton",
+        "PART_PeriodDownButton",
+        "PART_PeriodHost",
+        "PART_PeriodSelector",
+        "PART_PeriodTextBlock",
+        "PART_PeriodUpButton",
+        "PART_PickerContainer",
+        "PART_PickerPresenter",
+        "PART_Popup",
+        "PART_SecondColumnDivider",
+        "PART_SecondDownButton",
+        "PART_SecondHost",
+        "PART_SecondPickerHost",
+        "PART_SecondSelector",
+        "PART_SecondSpacer",
+        "PART_SecondTextBlock",
+        "PART_SecondUpButton",
+        "PART_ThirdColumnDivider",
+        "PART_ThirdPickerHost",
+        "PART_ThirdSpacer"
+      ]
+    },
+    {
+      "source": "Controls/TitleBar.xaml",
+      "output": "Controls/TitleBar.xaml",
+      "sha256": "1c33b5d6a163fc0d8c5c8052df3db6f8f02997737c509fec67eb4c3a6ae4f1a5",
+      "themeKeys": [
+        "{x:Type TitleBar}"
+      ],
+      "templateParts": [
+        "PART_Background",
+        "PART_CaptionButtons",
+        "PART_Container",
+        "PART_MouseTracker"
+      ]
+    },
+    {
+      "source": "Controls/ToggleButton.xaml",
+      "output": "Controls/ToggleButton.xaml",
+      "sha256": "ab81ac213246c70c7200ee332b3821c42a523c0369f3273f0a99a32fcec42f10",
+      "themeKeys": [
+        "{x:Type ToggleButton}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter"
+      ]
+    },
+    {
+      "source": "Controls/ToggleSwitch.xaml",
+      "output": "Controls/ToggleSwitch.xaml",
+      "sha256": "0618ec8f6b8d8f5243750629b172f2f2dea0d3485cc8e10194446b6bd101c732",
+      "themeKeys": [
+        "{x:Type ToggleSwitch}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_MovingKnobs",
+        "PART_OffContentPresenter",
+        "PART_OnContentPresenter",
+        "PART_SwitchKnob"
+      ]
+    },
+    {
+      "source": "Controls/ToolTip.xaml",
+      "output": "Controls/ToolTip.xaml",
+      "sha256": "bd6c8d9ac287fd4bfab7dd387214e420c0e33e730ddad25eaf6690eefc449e00",
+      "themeKeys": [
+        "{x:Type ToolTip}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_LayoutRoot"
+      ]
+    },
+    {
+      "source": "Controls/TransitioningContentControl.xaml",
+      "output": "Controls/TransitioningContentControl.xaml",
+      "sha256": "8e0d11608386d15181a807b5a2d23d8050dc9bf46c68cc613627256628b2d737",
+      "themeKeys": [
+        "{x:Type TransitioningContentControl}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_ContentPresenter2"
+      ]
+    },
+    {
+      "source": "Controls/TreeView.xaml",
+      "output": "Controls/TreeView.xaml",
+      "sha256": "47a9fd0ec63d8cbe96cef096c9fc79b50e731793c27ee9f2ddd8c64c62294e47",
+      "themeKeys": [
+        "{x:Type TreeView}"
+      ],
+      "templateParts": [
+        "PART_ItemsPresenter"
+      ]
+    },
+    {
+      "source": "Controls/TreeViewItem.xaml",
+      "output": "Controls/TreeViewItem.xaml",
+      "sha256": "f6df5c02004e68422920bb01912ece0553d53fa3bdd4b3302d17327be64f1388",
+      "themeKeys": [
+        "FluentTreeViewExpandCollapseChevron",
+        "{x:Type TreeViewItem}"
+      ],
+      "templateParts": [
+        "PART_ExpandCollapseChevron",
+        "PART_ExpandCollapseChevronContainer",
+        "PART_Header",
+        "PART_HeaderPresenter",
+        "PART_ItemsPresenter",
+        "PART_LayoutRoot"
+      ]
+    },
+    {
+      "source": "Controls/Window.xaml",
+      "output": "Controls/Window.xaml",
+      "sha256": "7a71c1b18c02778247a5704a9c60d2e79117953887e085c170e5682e5119ba5b",
+      "themeKeys": [
+        "{x:Type Window}"
+      ],
+      "templateParts": [
+        "PART_ContentPresenter",
+        "PART_TransparencyFallback"
+      ]
+    },
+    {
+      "source": "Controls/WindowNotificationManager.xaml",
+      "output": "Controls/WindowNotificationManager.xaml",
+      "sha256": "7482f934d45b8d083c299ce69134f7e8778b3976a00ae5ab86d290c0b321bc2f",
+      "themeKeys": [
+        "{x:Type WindowNotificationManager}"
+      ],
+      "templateParts": [
+        "PART_Items"
+      ]
+    },
+    {
+      "source": "DensityStyles/Compact.xaml",
+      "output": "DensityStyles/Compact.xaml",
+      "sha256": "63a39030789a7873184a509adec78bc55dd7cd9baf824a657801339f75dae3b4",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "FluentTheme.xaml",
+      "output": "BrowserTheme.xaml",
+      "sha256": "9a8c70ff5b4e1df3787830436bbecfcc9b70e06290a36e692be46cba270947d6",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "FluentTheme.xaml.cs",
+      "output": "BrowserTheme.xaml.cs",
+      "sha256": "489ba7813aa70cd42b5e49486b5577a2730bad5b8c3af87a766e4e823ed44b38",
+      "themeKeys": [],
+      "templateParts": []
+    },
+    {
+      "source": "Strings/InvariantResources.xaml",
+      "output": "Strings/InvariantResources.xaml",
+      "sha256": "0c5a85af280bf1db98ef0172b5e2e30117373b7cb1d998f979d160134866318d",
+      "themeKeys": [],
+      "templateParts": []
+    }
+  ],
+  "adaptations": {
+    "brushMappings": 516,
+    "densityModes": 3,
+    "templateCatalog": "Controls/BrowserControls.xaml",
+    "sourceBuildDependency": "none"
+  }
+}
