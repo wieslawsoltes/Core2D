@@ -18,12 +18,12 @@
       <TabControl Name="NavigationTabs" Grid.Row="1" Classes="studio-navigation" AutomationProperties.Name="Navigation">
         <TabItem Header="Layers">
           <Grid RowDefinitions="Auto,*">
-            <TextBox Name="LayerSearch" Watermark="Find in layers…" Margin="12,8,12,0"
+            <s:StudioSearchBox Name="LayerSearch" Watermark="Find in layers…" Margin="12,8,12,0"
                      AutomationProperties.Name="Find in layers" ToolTip.Tip="Search expanded layers. Enter or F3 finds the next match; Shift finds the previous match; Escape clears.">
               <i:Interaction.Behaviors>
                 <behaviors:StudioLayerSearchBehavior Target="{Binding #ProjectTree}" />
               </i:Interaction.Behaviors>
-            </TextBox>
+            </s:StudioSearchBox>
             <containers:ProjectContainerView Name="ProjectTree" Grid.Row="1" DataContext="{Binding Project}" />
           </Grid>
         </TabItem>

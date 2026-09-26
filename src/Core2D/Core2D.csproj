@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -94,9 +94,12 @@
   <ItemGroup>
     <Reference Include="Avalonia.Markup.Xaml">
       <HintPath>$(PkgAvalonia)/lib/net8.0/Avalonia.Markup.Xaml.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Avalonia.Controls.DataGrid">
       <HintPath>$(PkgProDataGrid)/lib/net10.0/Avalonia.Controls.DataGrid.dll</HintPath>
+      <!-- The NuGet runtime asset supplies this assembly. Do not copy the compile hint a second time. -->
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
 

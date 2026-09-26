@@ -14,7 +14,7 @@
   <StackPanel>
     <studio:StudioSection Header="General">
       <StackPanel Margin="0">
-        <CheckBox Content="Snap to grid" 
+        <studio:StudioSwitch Content="Snap to grid" 
                   IsChecked="{Binding SnapToGrid, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
         <studio:StudioPropertyField Label="Snap X">
@@ -31,23 +31,23 @@
                   SelectedItem="{Binding MoveMode, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
         </studio:StudioPropertyField>
-        <CheckBox Content="Connect points" 
+        <studio:StudioSwitch Content="Connect points" 
                   IsChecked="{Binding TryToConnect, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
-        <CheckBox Content="Single press drawing" 
+        <studio:StudioSwitch Content="Single press drawing" 
                   IsChecked="{Binding SinglePressMode, Mode=TwoWay}" 
                   HorizontalAlignment="Stretch" />
       </StackPanel>
     </studio:StudioSection>
     <studio:StudioSection Header="Defaults">
       <StackPanel Margin="0">
-          <CheckBox Content="Stroke" 
+          <studio:StudioSwitch Content="Stroke" 
                     IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" 
                     HorizontalAlignment="Stretch" />
-          <CheckBox Content="Fill" 
+          <studio:StudioSwitch Content="Fill" 
                     IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" 
                     HorizontalAlignment="Stretch" />
-          <CheckBox Content="Closed" 
+          <studio:StudioSwitch Content="Closed" 
                     IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" 
                     HorizontalAlignment="Stretch" />
           <studio:StudioPropertyField Label="Fill Rule">

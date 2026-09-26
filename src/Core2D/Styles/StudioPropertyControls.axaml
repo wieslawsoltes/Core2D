@@ -1,0 +1,191 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" xmlns:c="using:Core2D.Converters"
+                    xmlns:vm="using:Core2D.ViewModels.Editor" x:CompileBindings="True">
+  <c:StudioOptionIconConverter x:Key="StudioOptionIcon" />
+  <c:StudioColorBrushConverter x:Key="StudioColorBrush" />
+  <DataTemplate x:Key="StudioOptionIconTemplate" x:DataType="x:Object">
+    <PathIcon Data="{Binding Converter={StaticResource StudioOptionIcon}}" Width="16" Height="16"
+              Foreground="{DynamicResource StudioTextBrush}" ToolTip.Tip="{Binding}"
+              AutomationProperties.Name="{Binding StringFormat='{}{0}'}" />
+  </DataTemplate>
+
+  <ControlTheme x:Key="{x:Type s:StudioNumericField}" TargetType="s:StudioNumericField" x:DataType="s:StudioNumericField">
+    <Setter Property="MinHeight" Value="28" />
+    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Surface" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1"
+                CornerRadius="{TemplateBinding CornerRadius}" ToolTip.Tip="{TemplateBinding Error}">
+          <Grid ColumnDefinitions="Auto,*,Auto">
+            <Border Name="PART_ScrubHandle" Padding="8,0,4,0" Background="Transparent" Cursor="SizeWestEast">
+              <TextBlock Text="{TemplateBinding Prefix}" Foreground="{DynamicResource StudioMutedBrush}" VerticalAlignment="Center" />
+            </Border>
+            <TextBox Name="PART_Input" Grid.Column="1" MinHeight="26" Padding="3,4" BorderThickness="0" Background="Transparent"
+                     Text="{Binding DraftText, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                     IsReadOnly="{TemplateBinding IsReadOnly}" Watermark="Mixed"
+                     AutomationProperties.Name="{TemplateBinding (AutomationProperties.Name)}" />
+            <TextBlock Grid.Column="2" Text="{TemplateBinding Suffix}" Foreground="{DynamicResource StudioMutedBrush}"
+                       Margin="2,0,6,0" VerticalAlignment="Center" IsHitTestVisible="False" />
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}" /></Style>
+    <Style Selector="^:focus-within /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:error /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioDangerBrush}" /></Style>
+    <Style Selector="^[IsReadOnly=True] /template/ Border#PART_ScrubHandle"><Setter Property="Cursor" Value="Arrow" /></Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="StudioSegmentItemTheme" TargetType="ListBoxItem" x:DataType="ListBoxItem">
+    <Setter Property="MinHeight" Value="26" />
+    <Setter Property="Padding" Value="6,3" />
+    <Setter Property="Margin" Value="1" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}"
+                          BorderThickness="1" BorderBrush="Transparent" CornerRadius="4"
+                          HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" /></Style>
+    <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource StudioSelectedSurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioSegmentedControl}" TargetType="s:StudioSegmentedControl" x:DataType="s:StudioSegmentedControl">
+    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="1" />
+    <Setter Property="ItemContainerTheme" Value="{StaticResource StudioSegmentItemTheme}" />
+    <Setter Property="ItemsPanel"><ItemsPanelTemplate><UniformGrid Rows="1" /></ItemsPanelTemplate></Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+          <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type s:StudioIconToggle}" TargetType="s:StudioIconToggle" x:DataType="s:StudioIconToggle">
+    <Setter Property="MinWidth" Value="28" /><Setter Property="MinHeight" Value="28" />
+    <Setter Property="Padding" Value="6,3" /><Setter Property="CornerRadius" Value="5" />
+    <Setter Property="Background" Value="Transparent" /><Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Surface" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1"
+                CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+          <Grid>
+            <PathIcon Data="{TemplateBinding Icon}" Foreground="{TemplateBinding Foreground}" Width="16" Height="16" IsHitTestVisible="False" />
+            <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_Surface"><Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" /></Style>
+    <Style Selector="^:checked /template/ Border#PART_Surface"><Setter Property="Background" Value="{DynamicResource StudioSelectedSurfaceBrush}" /><Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}" /></Style>
+    <Style Selector="^:pressed /template/ Border#PART_Surface"><Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}" /></Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type s:StudioSwitch}" TargetType="s:StudioSwitch" x:DataType="s:StudioSwitch">
+    <Setter Property="MinHeight" Value="30" /><Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Surface" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="4" Padding="2,3">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+            <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Foreground="{TemplateBinding Foreground}" VerticalContentAlignment="Center" />
+            <Border Name="PART_Track" Grid.Column="1" Width="26" Height="16" CornerRadius="8" Background="{DynamicResource StudioSwitchTrackBrush}" VerticalAlignment="Center">
+              <Ellipse Name="PART_Thumb" Fill="White" Width="12" Height="12" Margin="2,0" HorizontalAlignment="Left" />
+            </Border>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:checked /template/ Border#PART_Track"><Setter Property="Background" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:checked /template/ Ellipse#PART_Thumb"><Setter Property="HorizontalAlignment" Value="Right" /></Style>
+    <Style Selector="^:indeterminate /template/ Ellipse#PART_Thumb"><Setter Property="HorizontalAlignment" Value="Center" /></Style>
+    <Style Selector="^:pointerover /template/ Border#PART_Surface"><Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" /></Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type s:StudioPropertyRow}" TargetType="s:StudioPropertyRow" x:DataType="s:StudioPropertyRow">
+    <Setter Property="Margin" Value="0,0,0,8" /><Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+          <TextBlock Text="{TemplateBinding Label}" Width="{TemplateBinding LabelWidth}" Foreground="{DynamicResource StudioMutedBrush}" VerticalAlignment="Center" />
+          <ContentPresenter Name="PART_ContentPresenter" Grid.Column="1" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalContentAlignment="Stretch" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type s:StudioBoundsEditor}" TargetType="s:StudioBoundsEditor" x:DataType="s:StudioBoundsEditor">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel DataContext="{TemplateBinding Editor}">
+          <Grid x:DataType="vm:BoundsInspectorViewModel" ColumnDefinitions="*,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="8" RowSpacing="8" IsEnabled="{Binding IsValid}">
+            <TextBlock Grid.ColumnSpan="3" Text="Position" FontWeight="SemiBold" />
+            <s:StudioNumericField Grid.Row="1" Prefix="X" Value="{Binding X, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Position X" />
+            <s:StudioNumericField Grid.Row="1" Grid.Column="1" Prefix="Y" Value="{Binding Y, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Position Y" />
+            <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Text="Layout" FontWeight="SemiBold" Margin="0,4,0,0" />
+            <s:StudioNumericField Grid.Row="3" Prefix="W" Value="{Binding Width, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Width" />
+            <s:StudioNumericField Grid.Row="3" Grid.Column="1" Prefix="H" Value="{Binding Height, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Height" />
+            <s:StudioIconToggle Grid.Row="3" Grid.Column="2" IsChecked="{Binding IsAspectLocked, Mode=TwoWay}" ToolTip.Tip="Lock aspect ratio"
+                                AutomationProperties.Name="Lock aspect ratio" Icon="M6,1 H10 A3,3 0 0 1 13,4 V6 H11 V4 A1,1 0 0 0 10,3 H6 A1,1 0 0 0 5,4 V6 H3 V4 A3,3 0 0 1 6,1 Z M3,7 H13 V15 H3 Z" />
+          </Grid>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type s:StudioFontPicker}" TargetType="s:StudioFontPicker" x:DataType="s:StudioFontPicker">
+    <Setter Property="MinHeight" Value="28" /><Setter Property="MaxDropDownHeight" Value="240" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="PART_LayoutRoot">
+          <TextBox Name="PART_TextBox" Watermark="Search font families" CaretIndex="{TemplateBinding CaretIndex, Mode=TwoWay}"
+                   MaxLength="{TemplateBinding MaxLength}" ClearSelectionOnLostFocus="{TemplateBinding ClearSelectionOnLostFocus}"
+                   DataValidationErrors.Errors="{TemplateBinding (DataValidationErrors.Errors)}"
+                   AutomationProperties.Name="{TemplateBinding (AutomationProperties.Name)}">
+            <TextBox.InnerLeftContent><TextBlock Text="A" FontWeight="SemiBold" Foreground="{DynamicResource StudioMutedBrush}" /></TextBox.InnerLeftContent>
+          </TextBox>
+          <Popup Name="PART_Popup" IsLightDismissEnabled="True" PlacementTarget="{TemplateBinding}"
+                 MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+            <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="1" CornerRadius="8" Padding="4">
+              <ListBox Name="PART_SelectingItemsControl" Background="Transparent" BorderThickness="0" ItemTemplate="{TemplateBinding ItemTemplate}" ScrollViewer.IsScrollChainingEnabled="False" />
+            </Border>
+          </Popup>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type s:StudioColorPalette}" TargetType="s:StudioColorPalette" x:DataType="s:StudioColorPalette">
+    <Setter Property="Background" Value="Transparent" /><Setter Property="BorderThickness" Value="0" />
+    <Setter Property="ItemContainerTheme" Value="{StaticResource StudioSegmentItemTheme}" />
+    <Setter Property="ItemsPanel"><ItemsPanelTemplate><UniformGrid Columns="8" /></ItemsPanelTemplate></Setter>
+    <Setter Property="ItemTemplate">
+      <DataTemplate x:DataType="x:Object">
+        <Border Width="18" Height="18" CornerRadius="3" Background="{Binding Converter={StaticResource StudioColorBrush}}"
+                BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="1" ToolTip.Tip="{Binding}"
+                AutomationProperties.Name="{Binding StringFormat='{}{0}'}" />
+      </DataTemplate>
+    </Setter>
+    <Setter Property="Template"><ControlTemplate><ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" /></ControlTemplate></Setter>
+  </ControlTheme>
+</ResourceDictionary>

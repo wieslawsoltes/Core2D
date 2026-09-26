@@ -5,14 +5,14 @@
   <StackPanel Spacing="8">
     <ContentControl Content="{Binding Color}" />
     <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
-      <s:StudioNumberBox Prefix="W" Text="{Binding Thickness, Mode=TwoWay}" AutomationProperties.Name="Stroke width" />
-      <ComboBox Grid.Column="1" ItemsSource="{x:Static vm:StrokeStyleViewModel.LineCapValues}"
-                SelectedItem="{Binding LineCap, Mode=TwoWay}" HorizontalAlignment="Stretch" AutomationProperties.Name="Line cap" />
+      <s:StudioNumericField Prefix="W" Value="{Binding Thickness, Mode=TwoWay}" Minimum="0" Maximum="100000" AutomationProperties.Name="Stroke width" />
+      <s:StudioSegmentedControl Grid.Column="1" ItemsSource="{x:Static vm:StrokeStyleViewModel.LineCapValues}"
+                SelectedItem="{Binding LineCap, Mode=TwoWay}" ItemTemplate="{StaticResource StudioOptionIconTemplate}" HorizontalAlignment="Stretch" AutomationProperties.Name="Line cap" />
     </Grid>
     <s:StudioSection Header="Stroke details" IsExpanded="False" Padding="0,6,0,0" BorderThickness="0">
       <StackPanel Spacing="8">
         <s:StudioPropertyField Label="Dash pattern"><TextBox Text="{Binding Dashes, Mode=TwoWay}" AutomationProperties.Name="Dash pattern" /></s:StudioPropertyField>
-        <s:StudioPropertyField Label="Dash offset"><s:StudioNumberBox Prefix="#" Text="{Binding DashOffset, Mode=TwoWay}" AutomationProperties.Name="Dash offset" /></s:StudioPropertyField>
+        <s:StudioPropertyField Label="Dash offset"><s:StudioNumericField Prefix="#" Value="{Binding DashOffset, Mode=TwoWay}" AutomationProperties.Name="Dash offset" /></s:StudioPropertyField>
         <s:StudioPropertyField Label="Start arrow"><s:StudioArrowField DataContext="{Binding StartArrow}" /></s:StudioPropertyField>
         <s:StudioPropertyField Label="End arrow"><s:StudioArrowField DataContext="{Binding EndArrow}" /></s:StudioPropertyField>
       </StackPanel>

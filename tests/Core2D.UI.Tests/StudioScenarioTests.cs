@@ -49,7 +49,7 @@ public class StudioScenarioTests
             var inspector = Assert.Single(view.GetVisualDescendants().OfType<StudioInspectorView>());
             Assert.Same(selected, inspector.FindControl<ContentControl>("SelectionGeometry")!.Content);
             Assert.Same(selected.Style, inspector.FindControl<ContentControl>("SelectionAppearance")!.Content);
-            Assert.NotEmpty(inspector.GetVisualDescendants().OfType<StudioNumberBox>());
+            Assert.NotEmpty(inspector.GetVisualDescendants().OfType<StudioNumericField>());
             Assert.NotEmpty(inspector.GetVisualDescendants().OfType<StudioColorField>());
             var canvas = Assert.Single(view.GetVisualDescendants().OfType<Controls.Editor.PageView>());
             Assert.True(canvas.Bounds.Width >= 400, "Sidebars must leave usable drawing space at compact sizes.");
@@ -126,7 +126,7 @@ public class StudioScenarioTests
         }
     }
 
-    private static RectangleShapeViewModel Populate(AppState state)
+    internal static RectangleShapeViewModel Populate(AppState state)
     {
         var editor = state.Editor!;
         editor.OnNewProject();

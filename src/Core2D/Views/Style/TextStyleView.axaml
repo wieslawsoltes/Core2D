@@ -1,51 +1,34 @@
 <UserControl x:Class="Core2D.Views.Style.TextStyleView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:studio="using:Core2D.Controls.Studio"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:s="using:Core2D.Controls.Studio"
-             xmlns:converters="using:Core2D.Converters"
-             xmlns:ms="using:Core2D.Model.Style"
-             xmlns:vm="using:Core2D.ViewModels.Style"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:c="using:Core2D.Converters"
+             xmlns:ms="using:Core2D.Model.Style" xmlns:vm="using:Core2D.ViewModels.Style"
              x:DataType="vm:TextStyleViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <s:StudioPropertyField Label="Font family">
-      <TextBox Text="{Binding FontName, Mode=TwoWay}" AutomationProperties.Name="Font family" />
-    </s:StudioPropertyField>
-    <s:StudioPropertyField Label="Font size">
-      <studio:StudioNumberBox Prefix="T" Text="{Binding FontSize, Mode=TwoWay}" AutomationProperties.Name="Font size" />
-    </s:StudioPropertyField>
-    <WrapPanel>
-      <CheckBox Content="Regular" Command="{Binding ToggleRegularFontStyle}"
-                IsChecked="{Binding FontStyle, Mode=OneWay, Converter={x:Static converters:FontStyleFlagsConverter.Instance}, ConverterParameter={x:Static ms:FontStyleFlags.Regular}}"
-                IsVisible="False" x:CompileBindings="False" />
-      <CheckBox Content="Bold" Command="{Binding ToggleBoldFontStyle}" Margin="0,0,12,0"
-                IsChecked="{Binding FontStyle, Mode=OneWay, Converter={x:Static converters:FontStyleFlagsConverter.Instance}, ConverterParameter={x:Static ms:FontStyleFlags.Bold}}"
-                x:CompileBindings="False" />
-      <CheckBox Content="Italic" Command="{Binding ToggleItalicFontStyle}"
-                IsChecked="{Binding FontStyle, Mode=OneWay, Converter={x:Static converters:FontStyleFlagsConverter.Instance}, ConverterParameter={x:Static ms:FontStyleFlags.Italic}}"
-                x:CompileBindings="False" />
-    </WrapPanel>
-    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
-      <s:StudioPropertyField Label="Horizontal">
-        <ComboBox ItemsSource="{x:Static vm:TextStyleViewModel.TextHAlignmentValues}"
-                  SelectedItem="{Binding TextHAlignment, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" AutomationProperties.Name="Horizontal text alignment" />
-      </s:StudioPropertyField>
-      <s:StudioPropertyField Grid.Column="1" Label="Vertical">
-        <ComboBox ItemsSource="{x:Static vm:TextStyleViewModel.TextVAlignmentValues}"
-                  SelectedItem="{Binding TextVAlignment, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" AutomationProperties.Name="Vertical text alignment" />
-      </s:StudioPropertyField>
+  <StackPanel Spacing="8">
+    <s:StudioFontPicker Text="{Binding FontName, Mode=TwoWay}" AutomationProperties.Name="Font family" />
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+      <s:StudioNumericField Prefix="T" Value="{Binding FontSize, Mode=TwoWay}" Minimum="0.1" Maximum="10000" AutomationProperties.Name="Font size" />
+      <Border Grid.Column="1" Background="{DynamicResource StudioInputBrush}" CornerRadius="6" Padding="1">
+        <StackPanel Orientation="Horizontal" Spacing="1">
+          <s:StudioIconToggle Content="B" FontWeight="Bold" Command="{Binding ToggleBoldFontStyle}" ToolTip.Tip="Bold" AutomationProperties.Name="Bold"
+                              IsChecked="{Binding FontStyle, Mode=OneWay, Converter={x:Static c:FontStyleFlagsConverter.Instance}, ConverterParameter={x:Static ms:FontStyleFlags.Bold}}" />
+          <s:StudioIconToggle Content="I" FontStyle="Italic" Command="{Binding ToggleItalicFontStyle}" ToolTip.Tip="Italic" AutomationProperties.Name="Italic"
+                              IsChecked="{Binding FontStyle, Mode=OneWay, Converter={x:Static c:FontStyleFlagsConverter.Instance}, ConverterParameter={x:Static ms:FontStyleFlags.Italic}}" />
+          <s:StudioIconToggle IsChecked="{Binding Underline, Mode=TwoWay}" ToolTip.Tip="Underline" AutomationProperties.Name="Underline"><TextBlock Text="U" TextDecorations="Underline" /></s:StudioIconToggle>
+        </StackPanel>
+      </Border>
     </Grid>
-    <WrapPanel>
-      <CheckBox Content="Underline" IsChecked="{Binding Underline, Mode=TwoWay}" Margin="0,0,12,0" />
-      <CheckBox Content="Overline" IsChecked="{Binding Overline, Mode=TwoWay}" />
-    </WrapPanel>
-    <CheckBox Content="Text background" IsChecked="{Binding UseTextBackground, Mode=TwoWay}" />
-    <s:StudioSection Header="Font source" IsExpanded="False">
-      <s:StudioPropertyField Label="Font file">
-        <TextBox Text="{Binding FontFile, Mode=TwoWay}" AutomationProperties.Name="Font file" />
-      </s:StudioPropertyField>
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+      <s:StudioSegmentedControl ItemsSource="{x:Static vm:TextStyleViewModel.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment, Mode=TwoWay}"
+                               ItemTemplate="{StaticResource StudioOptionIconTemplate}" AutomationProperties.Name="Horizontal text alignment" />
+      <s:StudioSegmentedControl Grid.Column="1" ItemsSource="{x:Static vm:TextStyleViewModel.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment, Mode=TwoWay}"
+                               ItemTemplate="{StaticResource StudioOptionIconTemplate}" AutomationProperties.Name="Vertical text alignment" />
+    </Grid>
+    <s:StudioSection Header="Type options" IsExpanded="False" BorderThickness="0" Padding="0,6">
+      <StackPanel Spacing="6">
+        <s:StudioSwitch Content="Overline" IsChecked="{Binding Overline, Mode=TwoWay}" />
+        <s:StudioSwitch Content="Text background" IsChecked="{Binding UseTextBackground, Mode=TwoWay}" />
+        <s:StudioPropertyField Label="Font file"><TextBox Text="{Binding FontFile, Mode=TwoWay}" AutomationProperties.Name="Font file" /></s:StudioPropertyField>
+      </StackPanel>
     </s:StudioSection>
   </StackPanel>
 </UserControl>

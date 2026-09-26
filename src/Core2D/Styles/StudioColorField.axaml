@@ -11,21 +11,26 @@
                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         IsChecked="{TemplateBinding IsOpen, Mode=TwoWay}" AutomationProperties.Name="Open color picker">
             <Panel>
-              <Border Background="#B0B0B0" CornerRadius="2" />
+              <s:StudioCheckerboard />
               <Border Name="PART_SwatchColor" CornerRadius="2" Background="{TemplateBinding SwatchBrush}" />
             </Panel>
           </ToggleButton>
           <TextBox Name="PART_Hex" Grid.Column="1" Text="{Binding Hex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                    InnerLeftContent="#" AutomationProperties.Name="Hex color" />
-          <NumericUpDown Grid.Column="2" Width="62" Minimum="0" Maximum="100" Increment="1" FormatString="0.##"
-                         ShowButtonSpinner="False" Value="{Binding OpacityPercent, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                         AutomationProperties.Name="Color opacity percent" />
-          <TextBlock Grid.Column="3" Text="%" VerticalAlignment="Center" Classes="studio-muted" />
+          <s:StudioNumericField Grid.Column="2" Grid.ColumnSpan="2" Width="78" Prefix="" Suffix="%" Minimum="0" Maximum="100"
+                                Value="{Binding OpacityPercent, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                AutomationProperties.Name="Color opacity percent" />
           <Popup Name="PART_Popup" IsOpen="{TemplateBinding IsOpen, Mode=TwoWay}" IsLightDismissEnabled="True"
                  Placement="BottomEdgeAlignedRight" PlacementTarget="{Binding #PART_Swatch}">
             <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}"
                     BorderThickness="1" CornerRadius="10" Padding="12">
-              <cp:ColorPicker Width="260" Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+              <StackPanel Width="264" Spacing="10">
+                <TextBlock Text="Custom color" FontWeight="SemiBold" />
+                <cp:ColorPicker Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                <Separator />
+                <TextBlock Text="Presets" FontWeight="SemiBold" />
+                <s:StudioColorPalette Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Color presets" />
+              </StackPanel>
             </Border>
           </Popup>
         </Grid>

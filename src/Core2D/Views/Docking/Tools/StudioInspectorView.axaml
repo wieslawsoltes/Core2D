@@ -12,7 +12,7 @@
     </ContextMenu>
   </UserControl.ContextMenu>
   <Panel DataContext="{Binding Context}" Background="{DynamicResource StudioSurfaceBrush}">
-    <Grid x:DataType="editor:ProjectEditorViewModel" RowDefinitions="Auto,*,Auto">
+    <Grid x:DataType="editor:ProjectEditorViewModel" RowDefinitions="Auto,*,Auto" s:StudioEditContext.History="{Binding Project.History}">
       <Grid ColumnDefinitions="*,Auto" Margin="12,8" ColumnSpacing="8">
         <TextBlock Text="Design" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center" />
         <Button Grid.Column="1" Content="Export" Command="{Binding Platform.OnExport}"
@@ -39,8 +39,8 @@
               </s:StudioSection>
               <s:StudioSection Header="Canvas overlays" IsExpanded="False">
                 <StackPanel>
-                  <CheckBox Content="Selection decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" />
-                  <CheckBox Content="Control points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" />
+                  <s:StudioSwitch Content="Selection decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" />
+                  <s:StudioSwitch Content="Control points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" />
                 </StackPanel>
               </s:StudioSection>
               <s:StudioSection Header="Export" IsExpanded="False">

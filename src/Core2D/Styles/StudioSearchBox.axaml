@@ -1,0 +1,69 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" x:CompileBindings="True">
+  <ControlTheme x:Key="{x:Type s:StudioSearchBox}" TargetType="s:StudioSearchBox" x:DataType="s:StudioSearchBox">
+    <Setter Property="MinHeight" Value="28" />
+    <Setter Property="Padding" Value="8,5" />
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CaretBrush" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="SelectionBrush" Value="{DynamicResource StudioAccentBrush}" />
+    <Setter Property="SelectionForegroundBrush" Value="White" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DataValidationErrors>
+          <Border Name="PART_BorderElement" Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}">
+            <Grid ColumnDefinitions="Auto,*,Auto" Margin="{TemplateBinding Padding}">
+              <PathIcon Data="M6,0 A6,6 0 1 0 6,12 A6,6 0 0 0 6,0 Z M6,1.5 A4.5,4.5 0 1 1 6,10.5 A4.5,4.5 0 0 1 6,1.5 Z M10,10 L15,15 L16,14 L11,9 Z"
+                        Width="13" Height="13" Foreground="{DynamicResource StudioMutedBrush}" Margin="0,0,7,0" />
+              <ScrollViewer Name="PART_ScrollViewer" Grid.Column="1"
+                            HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                            VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
+                            IsScrollChainingEnabled="True">
+                <Panel VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                  <TextBlock Text="{TemplateBinding Watermark}" Foreground="{DynamicResource StudioMutedBrush}"
+                             TextWrapping="{TemplateBinding TextWrapping}" IsHitTestVisible="False">
+                    <TextBlock.IsVisible>
+                      <MultiBinding Converter="{x:Static BoolConverters.And}">
+                        <Binding ElementName="PART_TextPresenter" Path="PreeditText" Converter="{x:Static StringConverters.IsNullOrEmpty}" />
+                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Text" Converter="{x:Static StringConverters.IsNullOrEmpty}" />
+                      </MultiBinding>
+                    </TextBlock.IsVisible>
+                  </TextBlock>
+                  <TextPresenter Name="PART_TextPresenter" Text="{TemplateBinding Text, Mode=TwoWay}"
+                                 CaretIndex="{TemplateBinding CaretIndex}" CaretBrush="{TemplateBinding CaretBrush}"
+                                 CaretBlinkInterval="{TemplateBinding CaretBlinkInterval}"
+                                 SelectionStart="{TemplateBinding SelectionStart}" SelectionEnd="{TemplateBinding SelectionEnd}"
+                                 SelectionBrush="{TemplateBinding SelectionBrush}" SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                                 PasswordChar="{TemplateBinding PasswordChar}" RevealPassword="{TemplateBinding RevealPassword}"
+                                 TextWrapping="{TemplateBinding TextWrapping}" TextAlignment="{TemplateBinding TextAlignment}"
+                                 LineHeight="{TemplateBinding LineHeight}" LetterSpacing="{TemplateBinding LetterSpacing}" />
+                </Panel>
+              </ScrollViewer>
+              <Button Name="PART_Clear" Grid.Column="2" Width="20" Height="20" MinHeight="20" Padding="5" Margin="4,-2,-4,-2"
+                      IsTabStop="False" AutomationProperties.Name="Clear search" ToolTip.Tip="Clear search"
+                      IsVisible="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                <PathIcon Data="M1,0 L5,4 L9,0 L10,1 L6,5 L10,9 L9,10 L5,6 L1,10 L0,9 L4,5 L0,1 Z" Width="10" Height="10" />
+              </Button>
+            </Grid>
+          </Border>
+        </DataValidationErrors>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}" />
+    </Style>
+    <Style Selector="^:focus /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" />
+    </Style>
+    <Style Selector="^:error /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="{DynamicResource StudioDangerBrush}" />
+    </Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+</ResourceDictionary>

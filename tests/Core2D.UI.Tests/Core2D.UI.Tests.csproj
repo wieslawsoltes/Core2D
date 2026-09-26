@@ -18,6 +18,8 @@
     </PackageReference>
     <Reference Include="Avalonia.Controls.DataGrid">
       <HintPath>$(PkgProDataGrid)/lib/net10.0/Avalonia.Controls.DataGrid.dll</HintPath>
+      <!-- The NuGet runtime asset supplies this assembly. Do not copy the compile hint a second time. -->
+      <Private>false</Private>
     </Reference>
     <ProjectReference Include="../../src/Core2D/Core2D.csproj" />
   </ItemGroup>
