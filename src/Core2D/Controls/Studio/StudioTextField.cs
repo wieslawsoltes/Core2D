@@ -49,6 +49,7 @@ public class StudioTextField : TemplatedControl
     public bool TryCommit()
     {
         if (IsReadOnly || !IsEffectivelyEnabled) return false;
+        if (DraftText == (Value ?? string.Empty)) { CancelEdit(); return true; }
         if (!TryNormalize(DraftText, out string normalized, out string? error)) { SetError(error); return false; }
         string? previous = Value;
         SetCurrentValue(ValueProperty, normalized);

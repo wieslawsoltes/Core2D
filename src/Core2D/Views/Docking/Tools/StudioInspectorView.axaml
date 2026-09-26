@@ -55,12 +55,15 @@
           </ScrollViewer>
         </TabItem>
         <TabItem Header="Data">
-          <ScrollViewer HorizontalScrollBarVisibility="Auto">
-            <data:DataObjectView DataContext="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
-          </ScrollViewer>
+          <Grid>
+            <data:DataObjectView DataContext="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}"
+                                 IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+            <s:StudioEmptyState Title="Select an object" Description="Linked data and custom properties appear here."
+                                IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}" />
+          </Grid>
         </TabItem>
         <TabItem Header="State">
-          <ScrollViewer HorizontalScrollBarVisibility="Auto"><ContentControl Content="{Binding PageState}" /></ScrollViewer>
+          <ContentControl Content="{Binding PageState}" />
         </TabItem>
       </TabControl>
       <Border Grid.Row="2" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0" Padding="12,8">

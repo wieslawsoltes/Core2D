@@ -11,11 +11,11 @@
     <TabControl Grid.Row="1">
       <TabItem Header="Records">
         <DockPanel>
-          <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
+          <Grid RowDefinitions="Auto,Auto" RowSpacing="8" ColumnDefinitions="*" Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
             <s:StudioSearchBox Text="{Binding RecordFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
               Watermark="Filter records" BorderBrush="Transparent" VerticalAlignment="Center"
               Margin="0,0,0,0" Grid.Column="0" />
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
               <Button Content="Apply" Command="{Binding ApplyRecord}" CommandParameter="{Binding CurrentRecord}"
                 IsVisible="{Binding !!CurrentRecord}" BorderBrush="Transparent" Background="Transparent"
                 Padding="8,5" />
@@ -33,6 +33,7 @@
             <i:Interaction.Behaviors>
               <idd:TypedDragBehavior DataType="{x:Type vmdt:RecordViewModel}"/>
               <behaviors:DatabaseRecordsGridBehavior/>
+              <behaviors:StudioScopedKeyBindingsBehavior/>
             </i:Interaction.Behaviors>
             <DataGrid.KeyBindings>
               <KeyBinding Command="{Binding AddRecord}"
@@ -48,11 +49,11 @@
       </TabItem>
       <TabItem Header="Columns">
         <DockPanel>
-          <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
+          <Grid RowDefinitions="Auto,Auto" RowSpacing="8" ColumnDefinitions="*" Margin="{DynamicResource ContentMargin}" DockPanel.Dock="Top">
             <s:StudioSearchBox Text="{Binding ColumnFilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
               Watermark="Filter columns" BorderBrush="Transparent" VerticalAlignment="Center"
               Margin="0,0,0,0" Grid.Column="0" />
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
               <Button Content="Remove" Command="{Binding RemoveColumn}"
                 CommandParameter="{Binding #ColumnsDataGrid.SelectedItem}" BorderBrush="Transparent"
                 Background="Transparent" Padding="8,5" />
@@ -66,6 +67,7 @@
             <i:Interaction.Behaviors>
               <idd:TypedDragBehavior DataType="{x:Type vmdt:ColumnViewModel}"/>
               <behaviors:DatabaseColumnsGridBehavior/>
+              <behaviors:StudioScopedKeyBindingsBehavior/>
             </i:Interaction.Behaviors>
             <DataGrid.KeyBindings>
               <KeyBinding Command="{Binding AddColumn}" CommandParameter="{Binding}" Gesture="{app:PlatformGesture Text=Primary+N}"/>

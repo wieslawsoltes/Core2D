@@ -3,6 +3,8 @@
 
 using System;
 using System.Collections.Generic;
+using Avalonia;
+using Core2D.Controls.Studio;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -15,6 +17,13 @@ namespace Core2D.Behaviors;
 public sealed class StudioScopedKeyBindingsBehavior : Behavior<Control>
 {
     private readonly List<KeyBinding> _bindings = new();
+
+    /// <summary>Defines whether unhandled primary-modifier shortcuts remain available from native text editors.</summary>
+    public static readonly DirectProperty<StudioScopedKeyBindingsBehavior, bool> AllowModifiedTextBindingsProperty =
+        AvaloniaProperty.RegisterDirect<StudioScopedKeyBindingsBehavior, bool>(nameof(AllowModifiedTextBindings), x => x.AllowModifiedTextBindings, (x, value) => x.AllowModifiedTextBindings = value);
+    private bool _allowModifiedTextBindings;
+    /// <summary>Gets or sets support for application file shortcuts after native text input has had priority.</summary>
+    public bool AllowModifiedTextBindings { get => _allowModifiedTextBindings; set => SetAndRaise(AllowModifiedTextBindingsProperty, ref _allowModifiedTextBindings, value); }
 
     /// <inheritdoc />
     protected override void OnAttached()
@@ -59,7 +68,11 @@ public sealed class StudioScopedKeyBindingsBehavior : Behavior<Control>
         if (e.Handled || AssociatedObject is not { IsEffectivelyEnabled: true } root) return;
         for (var current = e.Source as Avalonia.Visual; current is not null; current = current.GetVisualParent())
         {
-            if (current is TextBox or AutoCompleteBox or AvaloniaEdit.Editing.TextArea) return;
+            if (current is StudioCommandPalette) return;
+            if (current is TextBox or AutoCompleteBox or AvaloniaEdit.Editing.TextArea)
+            {
+                if (!AllowModifiedTextBindings || (e.KeyModifiers & (KeyModifiers.Control | KeyModifiers.Meta)) == 0) return;
+            }
             if (ReferenceEquals(current, root)) break;
         }
         // A command can replace the current view and detach this behavior during execution.

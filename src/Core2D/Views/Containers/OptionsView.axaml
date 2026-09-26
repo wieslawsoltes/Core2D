@@ -2,8 +2,8 @@
              xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:studio="using:Core2D.Controls.Studio" xmlns:vmc="using:Core2D.ViewModels.Containers"
              xmlns:vms="using:Core2D.ViewModels.Shapes" x:DataType="vmc:OptionsViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <studio:StudioSection Header="General">
+  <studio:StudioSettingsPanel>
+    <studio:StudioSettingsSection Header="General" Keywords="snap grid tolerance hit spacing move mode connect single press">
       <StackPanel Spacing="8">
         <studio:StudioSwitch Content="Snap to grid" IsChecked="{Binding SnapToGrid, Mode=TwoWay}" />
         <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
@@ -19,8 +19,8 @@
         <studio:StudioSwitch Content="Connect points" IsChecked="{Binding TryToConnect, Mode=TwoWay}" />
         <studio:StudioSwitch Content="Single press drawing" IsChecked="{Binding SinglePressMode, Mode=TwoWay}" />
       </StackPanel>
-    </studio:StudioSection>
-    <studio:StudioSection Header="Defaults">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Defaults" Keywords="default shapes fill stroke closed fill rule">
       <StackPanel Spacing="8">
         <studio:StudioSwitch Content="Stroke" IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" />
         <studio:StudioSwitch Content="Fill" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" />
@@ -29,6 +29,6 @@
           <ComboBox ItemsSource="{x:Static vms:PathShapeViewModel.FillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
         </studio:StudioPropertyRow>
       </StackPanel>
-    </studio:StudioSection>
-  </StackPanel>
+    </studio:StudioSettingsSection>
+  </studio:StudioSettingsPanel>
 </UserControl>

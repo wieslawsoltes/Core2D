@@ -7,7 +7,7 @@
   <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}"
           BorderThickness="0,0,0,1" Padding="8">
     <Grid RowDefinitions="Auto,Auto" RowSpacing="4">
-      <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="6">
+      <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="6">
         <s:StudioIconButton Name="MainMenuButton" Icon="M1,1H8V3H3V8H1Z M5,5H15V15H5Z M7,7V13H13V7Z"
                             ToolTip.Tip="Main menu" AutomationProperties.Name="Main menu">
           <Button.Flyout>
@@ -27,7 +27,9 @@
           </Button.Flyout>
         </s:StudioIconButton>
         <TextBlock Grid.Column="1" Text="Core2D" FontWeight="SemiBold" VerticalAlignment="Center" />
-        <s:StudioIconButton Name="SaveButton" Grid.Column="2" Icon="M2,1H14L18,5V19H2Z M5,2V8H13V2Z M5,12V18H15V12Z"
+        <s:StudioIconButton Name="QuickActionsButton" Grid.Column="2" Icon="M7,1A6,6 0 1 0 7,13A6,6 0 1 0 7,1Z M7,3A4,4 0 1 1 7,11A4,4 0 1 1 7,3Z M11,12L15,16L16,15L12,11Z"
+                            ToolTip.Tip="Quick actions (Ctrl/Command+K)" AutomationProperties.Name="Quick actions" />
+        <s:StudioIconButton Name="SaveButton" Grid.Column="3" Icon="M2,1H14L18,5V19H2Z M5,2V8H13V2Z M5,12V18H15V12Z"
                             Command="{Binding Platform.OnSave}" ToolTip.Tip="Save project" AutomationProperties.Name="Save project" />
       </Grid>
       <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="2">

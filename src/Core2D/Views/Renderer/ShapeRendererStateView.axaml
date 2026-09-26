@@ -4,81 +4,84 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:libraries="using:Core2D.Views.Libraries"
+             xmlns:mr="using:Core2D.Model.Renderer"
              xmlns:vmr="using:Core2D.ViewModels.Renderer"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
              mc:Ignorable="d"
              d:DataContext="{x:Static vmd:DesignerContext.ShapeRendererState}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmr:ShapeRendererStateViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <studio:StudioSection Header="Point">
+  <studio:StudioSettingsPanel>
+    <studio:StudioSettingsSection Header="Point" Keywords="points handles size decorators vertices">
       <StackPanel Margin="0">
-        <CheckBox Content="Draw Decorators" 
+        <studio:StudioSwitch Content="Draw Decorators"
                   IsChecked="{Binding DrawDecorators, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
-        <CheckBox Content="Draw Points" 
-                  IsChecked="{Binding DrawPoints, Mode=TwoWay}" 
+        <studio:StudioSwitch Content="Draw Points"
+                  IsChecked="{Binding DrawPoints, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
         <studio:StudioPropertyField Label="Point Size">
-          <TextBox Text="{Binding PointSize, Mode=TwoWay}" />
+          <studio:StudioNumberBox Prefix="#" Text="{Binding PointSize, Mode=TwoWay}" AutomationProperties.Name="Control point size" />
         </studio:StudioPropertyField>
       </StackPanel>
-    </studio:StudioSection>
-    <studio:StudioSection Header="Normal Style">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Normal Style" Keywords="points fill stroke normal" IsExpanded="False">
       <ContentControl Content="{Binding PointStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Selected Style">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Selected Style" Keywords="points active selected fill stroke" IsExpanded="False">
       <ContentControl Content="{Binding SelectedPointStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Connector Default">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Connector Default" Keywords="connection none default" IsExpanded="False">
       <ContentControl Content="{Binding ConnectorNoneStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Connector Input">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Connector Input" Keywords="connection input port" IsExpanded="False">
       <ContentControl Content="{Binding ConnectorInputStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Connector Output">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Connector Output" Keywords="connection output port" IsExpanded="False">
       <ContentControl Content="{Binding ConnectorOutputStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Connector Hover">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Connector Hover" Keywords="connection mouse hover" IsExpanded="False">
       <ContentControl Content="{Binding ConnectorHoverStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Connector Tool Hover">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Connector Tool Hover" Keywords="connection tool mouse hover valid" IsExpanded="False">
       <ContentControl Content="{Binding ConnectorToolHoverStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Connector Tool Hover Invalid">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Connector Tool Hover Invalid" Keywords="connection tool mouse hover invalid" IsExpanded="False">
       <ContentControl Content="{Binding ConnectorToolHoverInvalidStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Connector Selected">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Connector Selected" Keywords="connection active selected" IsExpanded="False">
       <ContentControl Content="{Binding ConnectorSelectedStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Zoom">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Zoom" Keywords="viewport pan offset zoom transform scale" IsExpanded="False">
       <StackPanel Margin="0">
         <studio:StudioPropertyField Label="Pan X">
-          <TextBox Text="{Binding PanX, Mode=TwoWay}" />
+          <studio:StudioNumberBox Prefix="X" Text="{Binding PanX, Mode=TwoWay}" AutomationProperties.Name="PanX" />
         </studio:StudioPropertyField>
         <studio:StudioPropertyField Label="Pan Y">
-          <TextBox Text="{Binding PanY, Mode=TwoWay}" />
+          <studio:StudioNumberBox Prefix="Y" Text="{Binding PanY, Mode=TwoWay}" AutomationProperties.Name="PanY" />
         </studio:StudioPropertyField>
         <studio:StudioPropertyField Label="Zoom X">
-          <TextBox Text="{Binding ZoomX, Mode=TwoWay}" />
+          <studio:StudioNumberBox Prefix="X" Text="{Binding ZoomX, Mode=TwoWay}" AutomationProperties.Name="ZoomX" />
         </studio:StudioPropertyField>
         <studio:StudioPropertyField Label="Zoom Y">
-          <TextBox Text="{Binding ZoomY, Mode=TwoWay}" />
+          <studio:StudioNumberBox Prefix="Y" Text="{Binding ZoomY, Mode=TwoWay}" AutomationProperties.Name="ZoomY" />
         </studio:StudioPropertyField>
       </StackPanel>
-    </studio:StudioSection>
-    <studio:StudioSection Header="Draw Shape State">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Draw Shape State" Keywords="visible printable locked thickness size state" IsExpanded="False">
       <ContentControl Content="{Binding DrawShapeState}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Image Cache" IsExpanded="False">
-      <libraries:ImagesView DataContext="{Binding ImageCache}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Selection Style">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Image Cache" Keywords="images resources cache" IsExpanded="False">
+      <Panel DataContext="{Binding ImageCache}">
+        <studio:StudioAssetBrowser x:DataType="mr:IImageCache" Items="{Binding Keys}" IsCompact="True" Height="220"
+                                  EmptyTitle="No cached images" EmptyDescription="Images appear when the renderer loads them." />
+      </Panel>
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Selection Style" Keywords="selection outline fill stroke" IsExpanded="False">
       <ContentControl Content="{Binding SelectionStyle}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Helper Style" IsExpanded="False">
+    </studio:StudioSettingsSection>
+    <studio:StudioSettingsSection Header="Helper Style" Keywords="helper guide style fill stroke" IsExpanded="False">
       <ContentControl Content="{Binding HelperStyle}" />
-    </studio:StudioSection>
-  </StackPanel>
+    </studio:StudioSettingsSection>
+  </studio:StudioSettingsPanel>
 </UserControl>

@@ -1,0 +1,48 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Data" x:CompileBindings="True">
+  <DataTemplate x:Key="StudioDataNameCell" x:DataType="vm:DataFieldRowViewModel">
+    <s:StudioTextField Value="{Binding Name, Mode=TwoWay}" IsReadOnly="{Binding !CanEditName}"
+                       Margin="4,2" Background="Transparent" AutomationProperties.Name="Field name" />
+  </DataTemplate>
+  <DataTemplate x:Key="StudioDataValueCell" x:DataType="vm:DataFieldRowViewModel">
+    <s:StudioDataValueField Value="{Binding Value, Mode=TwoWay}" IsReadOnly="{Binding !CanEditValue}"
+                            Margin="4,2" Watermark="Empty" ToolTip.Tip="{Binding Issue}"
+                            AutomationProperties.Name="{Binding Name, StringFormat='{}{0} value'}" />
+  </DataTemplate>
+  <DataTemplate x:Key="StudioDataRemoveCell" x:DataType="vm:DataFieldRowViewModel">
+    <s:StudioIconButton Icon="M2,3H14V5H2Z M5,0H11V2H5Z M3,6H5V14H11V6H13V16H3Z" Width="28" Height="28"
+                        Padding="5" IsVisible="{Binding CanRemove}" Command="{Binding RemoveCommand}" CommandParameter="{Binding Model}"
+                        ToolTip.Tip="Remove property" AutomationProperties.Name="{Binding Name, StringFormat='Remove {0}'}" />
+  </DataTemplate>
+  <ControlTheme x:Key="{x:Type s:StudioDataTable}" TargetType="s:StudioDataTable" x:DataType="s:StudioDataTable">
+    <Setter Property="MinHeight" Value="160" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid RowDefinitions="Auto,*,Auto" Background="{DynamicResource StudioSurfaceBrush}">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6" Margin="12,8">
+            <s:StudioSearchBox Text="{Binding Query, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                               Watermark="Search names or values…" MaxLength="256" AutomationProperties.Name="Search data fields" />
+            <ComboBox Grid.Column="1" Width="72" SelectedIndex="{Binding SortIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                      AutomationProperties.Name="Field order">
+              <ComboBoxItem Content="Order" /><ComboBoxItem Content="A–Z" /><ComboBoxItem Content="Z–A" />
+            </ComboBox>
+          </Grid>
+          <DataGrid Name="PART_Grid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                    HeadersVisibility="Column" SelectionMode="Single" RowHeight="38" GridLinesVisibility="Horizontal"
+                    CanUserResizeColumns="True" CanUserReorderColumns="False" CanUserSortColumns="True"
+                    BorderThickness="0" RowBackground="Transparent" Background="{DynamicResource StudioSurfaceBrush}" />
+          <s:StudioEmptyState Grid.Row="1" Title="No matching fields" Description="Add a property or clear the search to see your data."
+                              IsVisible="{Binding ResultCount, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StudioZeroCount}}" />
+          <Border Grid.Row="2" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0" Padding="12,8">
+            <StackPanel Spacing="4">
+              <TextBlock Text="{Binding ResultCount, RelativeSource={RelativeSource TemplatedParent}, StringFormat='{}{0} fields'}" Classes="studio-muted" FontSize="11" />
+              <TextBlock Text="Some fields have no matching column or value. Review the database schema before editing."
+                         TextWrapping="Wrap" FontSize="11" Foreground="{DynamicResource StudioDangerBrush}"
+                         IsVisible="{Binding Editor.HasIssues, RelativeSource={RelativeSource TemplatedParent}}" />
+            </StackPanel>
+          </Border>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>
