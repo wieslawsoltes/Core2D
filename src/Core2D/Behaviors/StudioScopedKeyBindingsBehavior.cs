@@ -59,7 +59,7 @@ public sealed class StudioScopedKeyBindingsBehavior : Behavior<Control>
         if (e.Handled || AssociatedObject is not { IsEffectivelyEnabled: true } root) return;
         for (var current = e.Source as Avalonia.Visual; current is not null; current = current.GetVisualParent())
         {
-            if (current is TextBox or AutoCompleteBox) return;
+            if (current is TextBox or AutoCompleteBox or AvaloniaEdit.Editing.TextArea) return;
             if (ReferenceEquals(current, root)) break;
         }
         // A command can replace the current view and detach this behavior during execution.

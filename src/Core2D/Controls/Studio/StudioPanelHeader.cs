@@ -1,0 +1,26 @@
+// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Licensed under the MIT. See LICENSE.TXT file in the project root for details.
+
+using Avalonia;
+using Avalonia.Controls;
+
+namespace Core2D.Controls.Studio;
+
+/// <summary>A shared title, description and command area for secondary workspaces.</summary>
+public class StudioPanelHeader : ContentControl
+{
+    /// <summary>Gets or sets the panel title.</summary>
+    public static readonly DirectProperty<StudioPanelHeader, string?> TitleProperty =
+        AvaloniaProperty.RegisterDirect<StudioPanelHeader, string?>(nameof(Title), x => x.Title, (x, value) => x.Title = value);
+    private string? _title = null;
+    /// <summary>Gets or sets the panel title.</summary>
+    public string? Title { get => _title; set => SetAndRaise(TitleProperty, ref _title, value); }
+
+    /// <summary>Gets or sets the supporting description.</summary>
+    public static readonly DirectProperty<StudioPanelHeader, string?> DescriptionProperty =
+        AvaloniaProperty.RegisterDirect<StudioPanelHeader, string?>(nameof(Description), x => x.Description, (x, value) => x.Description = value);
+    private string? _description = null;
+    /// <summary>Gets or sets the supporting description.</summary>
+    public string? Description { get => _description; set => SetAndRaise(DescriptionProperty, ref _description, value); }
+
+}

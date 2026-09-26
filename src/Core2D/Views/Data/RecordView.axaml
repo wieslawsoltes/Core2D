@@ -1,65 +1,45 @@
-﻿<UserControl x:Class="Core2D.Views.Data.RecordView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vmdt="using:Core2D.ViewModels.Data"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Record}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmdt:RecordViewModel" x:CompileBindings="True">
-  <Grid RowDefinitions="Auto,*" 
-        ColumnDefinitions="50*,Auto,50*" 
-        Margin="{DynamicResource ContentMargin}">
-    <TextBlock VerticalAlignment="Center" 
-               Text="Name" 
-               Grid.Column="0" Grid.Row="0" />
-    <ItemsControl DataContext="{Binding Owner}"
-                  ItemsSource="{Binding Columns}" 
-                  VerticalAlignment="Stretch" 
-                  Grid.Column="0" Grid.Row="1" 
-                  x:DataType="vmdt:DatabaseViewModel">
-      <ItemsControl.DataTemplates>
-        <DataTemplate DataType="vmdt:ColumnViewModel">
-          <Grid VerticalAlignment="Top" 
-                Background="Transparent" 
-                Margin="0,2,0,2">
-            <!--
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:vmdt="using:Core2D.ViewModels.Data"
+  xmlns:vmd="using:Core2D.ViewModels.Designer" xmlns:s="using:Core2D.Controls.Studio"
+  x:Class="Core2D.Views.Data.RecordView" mc:Ignorable="d" d:DataContext="{x:Static vmd:DesignerContext.Record}"
+  d:DesignWidth="250" d:DesignHeight="400" x:DataType="vmdt:RecordViewModel" x:CompileBindings="True">
+  <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}">
+    <s:StudioPanelHeader Title="Record values" Description="Edit field names and their values"/>
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" Margin="{DynamicResource ContentMargin}" Grid.Row="1">
+      <TextBlock VerticalAlignment="Center" Text="Name" Grid.Column="0" Grid.Row="0"/>
+      <ItemsControl DataContext="{Binding Owner}" ItemsSource="{Binding Columns}" VerticalAlignment="Stretch"
+        Grid.Column="0" Grid.Row="1" x:DataType="vmdt:DatabaseViewModel">
+        <ItemsControl.DataTemplates>
+          <DataTemplate DataType="vmdt:ColumnViewModel" x:DataType="vmdt:ColumnViewModel">
+            <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+              <!--
             <i:Interaction.Behaviors>
               <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
             </i:Interaction.Behaviors>
             -->
-            <TextBox VerticalAlignment="Center" 
-                     Text="{Binding Name, Mode=TwoWay}" />
-          </Grid>
-        </DataTemplate>
-      </ItemsControl.DataTemplates>
-    </ItemsControl>
-    <GridSplitter ResizeDirection="Columns" 
-                  ResizeBehavior="PreviousAndNext" 
-                  Background="Transparent" 
-                  Width="6"
-                  Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
-    <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" />
-    <ItemsControl ItemsSource="{Binding Values}"
-                  VerticalAlignment="Stretch" 
-                  Grid.Column="2" Grid.Row="1">
-      <ItemsControl.DataTemplates>
-        <DataTemplate DataType="vmdt:ValueViewModel">
-          <Grid VerticalAlignment="Top" 
-                Background="Transparent" 
-                Margin="0,2,0,2">
-            <!--
+              <TextBox VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
+            </Grid>
+          </DataTemplate>
+        </ItemsControl.DataTemplates>
+      </ItemsControl>
+      <GridSplitter ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" Width="6"
+        Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+      <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
+      <ItemsControl ItemsSource="{Binding Values}" VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1">
+        <ItemsControl.DataTemplates>
+          <DataTemplate DataType="vmdt:ValueViewModel" x:DataType="vmdt:ValueViewModel">
+            <Grid VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
+              <!--
             <i:Interaction.Behaviors>
               <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
             </i:Interaction.Behaviors
             -->
-            <TextBox VerticalAlignment="Center" 
-                     Text="{Binding Content, Mode=TwoWay}" />
-          </Grid>
-        </DataTemplate>
-      </ItemsControl.DataTemplates>
-    </ItemsControl>
+              <TextBox VerticalAlignment="Center" Text="{Binding Content, Mode=TwoWay}"/>
+            </Grid>
+          </DataTemplate>
+        </ItemsControl.DataTemplates>
+      </ItemsControl>
+    </Grid>
   </Grid>
 </UserControl>

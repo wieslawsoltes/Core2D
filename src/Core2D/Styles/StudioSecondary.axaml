@@ -1,0 +1,160 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:s="using:Core2D.Controls.Studio" xmlns:c="using:Core2D.Converters"
+  xmlns:edit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit" x:CompileBindings="True">
+  <c:StudioZeroCountConverter x:Key="StudioZeroCount"/>
+  <ControlTheme x:Key="{x:Type s:StudioPanelHeader}" TargetType="s:StudioPanelHeader" x:DataType="s:StudioPanelHeader">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Padding="12,12,12,10" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,0,0,1">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <StackPanel Spacing="4">
+              <TextBlock Text="{TemplateBinding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+              <TextBlock Text="{TemplateBinding Description}" Classes="studio-muted" FontSize="11" TextWrapping="Wrap"
+                IsVisible="{Binding Description, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+            </StackPanel>
+            <ContentPresenter Name="PART_ContentPresenter" Grid.Column="1" Content="{TemplateBinding Content}"
+              ContentTemplate="{TemplateBinding ContentTemplate}" VerticalAlignment="Top" />
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioEmptyState}" TargetType="s:StudioEmptyState" x:DataType="s:StudioEmptyState">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Margin="20,24" Spacing="8" VerticalAlignment="Center">
+          <PathIcon Data="M1,1 H15 V15 H1 Z M3,3 V13 H13 V3 Z M5,7 H11 V9 H5 Z" Width="24" Height="24"
+            HorizontalAlignment="Left" Foreground="{DynamicResource StudioMutedBrush}" />
+          <TextBlock Text="{TemplateBinding Title}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+          <TextBlock Text="{TemplateBinding Description}" Classes="studio-muted" TextWrapping="Wrap"/>
+          <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="Left" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioToolbar}" TargetType="s:StudioToolbar" x:DataType="s:StudioToolbar">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Padding="8,6" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,0,0,1">
+          <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+              ContentTemplate="{TemplateBinding ContentTemplate}" />
+          </ScrollViewer>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioStatusBadge}" TargetType="s:StudioStatusBadge" x:DataType="s:StudioStatusBadge">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{DynamicResource StudioInputBrush}" CornerRadius="4" Padding="6,3">
+          <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{DynamicResource StudioMutedBrush}"
+            FontSize="11" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioAssetItem}" TargetType="s:StudioAssetItem" x:DataType="s:StudioAssetItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10" Margin="8,4">
+          <Border Name="PART_Preview" Width="48" Height="48" CornerRadius="6"
+            Background="{DynamicResource StudioInputBrush}" ClipToBounds="True">
+            <Grid>
+              <PathIcon Data="{TemplateBinding Icon}" Width="20" Height="20"
+                Foreground="{DynamicResource StudioMutedBrush}"
+                IsVisible="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNull}}" />
+              <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+                ContentTemplate="{TemplateBinding ContentTemplate}" />
+            </Grid>
+          </Border>
+          <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
+            <s:StudioNameField Value="{Binding Title, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              AutomationProperties.Name="Asset name" />
+            <TextBlock Text="{TemplateBinding Detail}" Classes="studio-muted" FontSize="11"
+              TextTrimming="CharacterEllipsis"
+              IsVisible="{Binding !IsCompact, RelativeSource={RelativeSource TemplatedParent}}" />
+          </StackPanel>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^[IsCompact=True] /template/ Border#PART_Preview">
+      <Setter Property="Width" Value="20"/>
+      <Setter Property="Height" Value="20"/>
+    </Style>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioAssetBrowser}" TargetType="s:StudioAssetBrowser" x:DataType="s:StudioAssetBrowser">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid RowDefinitions="Auto,*,Auto">
+          <Grid Margin="10,8" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="4">
+            <s:StudioSearchBox Name="PART_Search"
+              Text="{Binding Query, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              Watermark="Search assets…" AutomationProperties.Name="Search assets" />
+            <s:StudioIconToggle Grid.Column="1"
+              IsChecked="{Binding IsCompact, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              Content="≡" ToolTip.Tip="Compact rows" AutomationProperties.Name="Compact asset rows" />
+            <ComboBox Grid.Column="2" Width="72"
+              SelectedIndex="{Binding SortIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              AutomationProperties.Name="Asset sort order" ToolTip.Tip="Sort assets">
+              <ComboBoxItem Content="Order"/>
+              <ComboBoxItem Content="A–Z"/>
+              <ComboBoxItem Content="Z–A"/>
+            </ComboBox>
+          </Grid>
+          <DataGrid Name="PART_Grid" Grid.Row="1" AutoGenerateColumns="False" HeadersVisibility="None"
+            GridLinesVisibility="None" SelectionMode="Single" IsReadOnly="True" CanUserSortColumns="True"
+            CanUserResizeColumns="True" Background="{DynamicResource StudioSurfaceBrush}" BorderThickness="0"
+            RowBackground="Transparent" />
+          <s:StudioEmptyState Grid.Row="1" Title="{TemplateBinding EmptyTitle}"
+            Description="{TemplateBinding EmptyDescription}"
+            IsVisible="{Binding ResultCount, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StudioZeroCount}}" />
+          <Border Grid.Row="2" Padding="12,6" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource StudioBorderBrush}">
+            <TextBlock
+              Text="{Binding ResultCount, RelativeSource={RelativeSource TemplatedParent}, StringFormat='{}{0} results'}"
+              Classes="studio-muted" FontSize="11" />
+          </Border>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioCodeEditor}" TargetType="s:StudioCodeEditor" x:DataType="s:StudioCodeEditor">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid RowDefinitions="*,Auto" Background="{DynamicResource StudioSurfaceBrush}">
+          <edit:TextEditor Name="PART_Editor" ShowLineNumbers="True" FontFamily="{DynamicResource CodeFontFamily}"
+            FontSize="12" Background="{DynamicResource StudioSurfaceBrush}"
+            Foreground="{DynamicResource StudioTextBrush}"
+            LineNumbersForeground="{DynamicResource StudioMutedBrush}" Padding="8"
+            AutomationProperties.Name="Source editor" />
+          <Border Grid.Row="1" Padding="10,5" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{TemplateBinding PositionText}" Classes="studio-muted" FontSize="11" VerticalAlignment="Center"/>
+              <s:StudioIconToggle Grid.Column="1" Content="Wrap"
+                IsChecked="{Binding WordWrap, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                AutomationProperties.Name="Wrap source lines" />
+            </Grid>
+          </Border>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioStepIndicator}" TargetType="s:StudioStepIndicator" x:DataType="s:StudioStepIndicator">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Step" CornerRadius="6" Padding="8,6" Margin="2" BorderThickness="1" BorderBrush="Transparent">
+          <StackPanel Spacing="3">
+            <TextBlock Text="{Binding Step.Title, RelativeSource={RelativeSource TemplatedParent}}" FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding Step.State, RelativeSource={RelativeSource TemplatedParent}}" Classes="studio-muted" FontSize="10"/>
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:current /template/ Border#PART_Step">
+      <Setter Property="Background" Value="{DynamicResource StudioSelectionBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,55 +1,34 @@
-﻿<UserControl x:Class="Core2D.Views.Libraries.DatabasesView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vmdt="using:Core2D.ViewModels.Data"
-             xmlns:vmc="using:Core2D.ViewModels.Containers"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Project}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
-  <Grid RowDefinitions="Auto,Auto,*">
-    <Grid RowDefinitions="*" 
-          ColumnDefinitions="*,Auto" 
-          Margin="{DynamicResource ContentMargin}" 
-          Grid.Row="0">
-      <TextBox Text="{Binding CurrentDatabase.Name, Mode=TwoWay, FallbackValue={x:Null}}" 
-               BorderBrush="Transparent" 
-               Background="Transparent"
-               VerticalAlignment="Center" 
-               Margin="0,0,0,0" 
-               IsVisible="{Binding CurrentDatabase}"
-               Grid.Column="0" />
-      <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-        <Button Content="&#727;" 
-                Command="{Binding RemoveDatabase}"
-                CommandParameter="{Binding CurrentDatabase}" 
-                IsVisible="{Binding !!CurrentDatabase}"
-                BorderBrush="Transparent" 
-                Background="Transparent" 
-                Padding="12,4,12,4" />
-        <Button Content="+" 
-                Command="{Binding AddDatabase}" 
-                BorderBrush="Transparent"
-                Background="Transparent" 
-                Padding="12,4,12,4" />
-      </StackPanel>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:vmdt="using:Core2D.ViewModels.Data"
+  xmlns:vmc="using:Core2D.ViewModels.Containers" xmlns:vmd="using:Core2D.ViewModels.Designer"
+  xmlns:s="using:Core2D.Controls.Studio" x:Class="Core2D.Views.Libraries.DatabasesView" mc:Ignorable="d"
+  d:DataContext="{x:Static vmd:DesignerContext.Project}" d:DesignWidth="250" d:DesignHeight="400"
+  x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
+  <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}">
+    <s:StudioPanelHeader Title="Data sources" Description="Records and columns attached to this project"/>
+    <Grid RowDefinitions="Auto,Auto,*" Grid.Row="1">
+      <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" Grid.Row="0">
+        <TextBox Text="{Binding CurrentDatabase.Name, Mode=TwoWay, FallbackValue={x:Null}}" BorderBrush="Transparent"
+          Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0"
+          IsVisible="{Binding CurrentDatabase}" Grid.Column="0" />
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+          <Button Content="Remove" Command="{Binding RemoveDatabase}" CommandParameter="{Binding CurrentDatabase}"
+            IsVisible="{Binding !!CurrentDatabase}" BorderBrush="Transparent" Background="Transparent"
+            Padding="8,5" />
+          <Button Content="Add" Command="{Binding AddDatabase}" BorderBrush="Transparent" Background="Transparent" Padding="8,5"/>
+        </StackPanel>
+      </Grid>
+      <ComboBox ItemsSource="{Binding Databases}" SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}"
+        IsVisible="{Binding !!CurrentDatabase}" HorizontalAlignment="Stretch"
+        Margin="{DynamicResource ContentMargin}" Grid.Row="1">
+        <ComboBox.DataTemplates>
+          <DataTemplate DataType="vmdt:DatabaseViewModel" x:DataType="vmdt:DatabaseViewModel">
+            <TextBlock Text="{Binding Name}"/>
+          </DataTemplate>
+        </ComboBox.DataTemplates>
+      </ComboBox>
+      <ContentControl Content="{Binding CurrentDatabase}" Grid.Row="2"/>
     </Grid>
-    <ComboBox ItemsSource="{Binding Databases}" 
-              SelectedItem="{Binding CurrentDatabase, Mode=TwoWay}" 
-              IsVisible="{Binding !!CurrentDatabase}" 
-              HorizontalAlignment="Stretch"
-              Margin="{DynamicResource ContentMargin}"
-              Grid.Row="1">
-      <ComboBox.DataTemplates>
-        <DataTemplate DataType="vmdt:DatabaseViewModel">
-          <TextBlock Text="{Binding Name}" />
-        </DataTemplate>
-      </ComboBox.DataTemplates>
-    </ComboBox>
-    <ContentControl Content="{Binding CurrentDatabase}" 
-                    Grid.Row="2" />
   </Grid>
 </UserControl>

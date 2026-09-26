@@ -1,31 +1,17 @@
-﻿<UserControl x:Class="Core2D.Views.Editor.AboutInfoView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vme="using:Core2D.ViewModels.Editor"
-             mc:Ignorable="d"
-             d:DesignWidth="1000" d:DesignHeight="600"
-             x:DataType="vme:AboutInfoViewModel" x:CompileBindings="True">
-  <UserControl.Styles>
-    <Style Selector="Label">
-      <Setter Property="Margin" Value="0" />
-    </Style>
-  </UserControl.Styles>
-  <Grid ColumnDefinitions="Auto,4,*"
-        RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
-        Margin="10">
-    <Label Content="{Binding Title}" 
-           FontSize="18"
-           FontWeight="SemiBold"
-           Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
-    <Label Content="Version" Grid.Column="0" Grid.Row="1" />
-    <Label Content="Description" Grid.Column="0" Grid.Row="2" />
-    <Label Content="Copyright" Grid.Column="0" Grid.Row="3" />
-    <Label Content="License" Grid.Column="0" Grid.Row="4" />
-    <Label Content="{Binding Version}" Grid.Column="2" Grid.Row="1" />
-    <Label Content="{Binding Description}" Grid.Column="2" Grid.Row="2" />
-    <Label Content="{Binding Copyright}" Grid.Column="2" Grid.Row="3" />
-    <Label Content="{Binding License}" Grid.Column="2" Grid.Row="4" />
-  </Grid>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Editor"
+  x:Class="Core2D.Views.Editor.AboutInfoView" x:DataType="vm:AboutInfoViewModel" x:CompileBindings="True">
+  <StackPanel Spacing="16" Margin="20" MaxWidth="580">
+    <s:StudioPanelHeader Title="{Binding Title}" Description="{Binding Description}"/>
+    <s:StudioPropertyRow Label="Version">
+      <SelectableTextBlock Text="{Binding Version}"/>
+    </s:StudioPropertyRow>
+    <s:StudioPropertyRow Label="Copyright">
+      <SelectableTextBlock Text="{Binding Copyright}" TextWrapping="Wrap"/>
+    </s:StudioPropertyRow>
+    <s:StudioPropertyRow Label="License">
+      <SelectableTextBlock Text="{Binding License}" TextWrapping="Wrap"/>
+    </s:StudioPropertyRow>
+    <s:StudioStatusBadge Content="Native Avalonia workspace" HorizontalAlignment="Left"/>
+  </StackPanel>
 </UserControl>

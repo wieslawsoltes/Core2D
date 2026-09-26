@@ -1,25 +1,22 @@
-<Application x:Class="Core2D.App"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Core2D;assembly=Core2D"
-             xmlns:vme="using:Core2D.ViewModels.Editor"
-             Name="Core2D"
-             x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
+<Application xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="clr-namespace:Core2D;assembly=Core2D" xmlns:vme="using:Core2D.ViewModels.Editor" x:Class="Core2D.App"
+  Name="Core2D" x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceInclude Source="avares://Core2D/Themes/Themes.axaml" />
-        <ResourceInclude Source="avares://Core2D/Themes/StudioPalette.axaml" />
+        <ResourceInclude Source="avares://Core2D/Themes/Themes.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Themes/StudioPalette.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
   <Application.Styles>
-    <FluentTheme DensityStyle="Compact" />
-    <StyleInclude Source="avares://Core2D/Styles/Common.axaml" />
-    <StyleInclude Source="avares://Core2D/Styles/Studio.axaml" />
-    <StyleInclude Source="avares://Core2D/Styles/StudioInteractionStyles.axaml" />
+    <FluentTheme DensityStyle="Compact"/>
+    <StyleInclude Source="avares://Core2D/Styles/Common.axaml"/>
+    <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml"/>
+    <StyleInclude Source="avares://Core2D/Styles/Studio.axaml"/>
+    <StyleInclude Source="avares://Core2D/Styles/StudioInteractionStyles.axaml"/>
   </Application.Styles>
   <Application.DataTemplates>
-    <local:ViewLocator />
+    <local:ViewLocator/>
   </Application.DataTemplates>
 </Application>

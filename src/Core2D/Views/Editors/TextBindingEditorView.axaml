@@ -1,201 +1,88 @@
-﻿<UserControl x:Class="Core2D.Views.Editors.TextBindingEditorView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vmdt="using:Core2D.ViewModels.Data"
-             Width="600" Height="250"
-             mc:Ignorable="d"
-             d:DesignWidth="1000" d:DesignHeight="600"
-             x:CompileBindings="False">
-  <Grid ColumnDefinitions="30*,30*,30*" RowDefinitions="Auto,*,Auto">
-    <Label Content="Columns" FontWeight="Bold" Margin="6" Grid.Row="0" Grid.Column="0" />
-    <DockPanel Margin="6" Grid.Row="1" Grid.Column="0">
-      <ComboBox x:Name="DatabasesComboBox" 
-                ItemsSource="{Binding Editor.Project.Databases}"
-                SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" 
-                HorizontalAlignment="Stretch"
-                DockPanel.Dock="Top">
-        <ComboBox.DataTemplates>
-          <DataTemplate DataType="vmdt:DatabaseViewModel">
-            <Label Content="{Binding Name}" />
-          </DataTemplate>
-        </ComboBox.DataTemplates>
-      </ComboBox>
-      <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <ItemsControl ItemsSource="{Binding #DatabasesComboBox.SelectedItem.Columns}" 
-                      VerticalAlignment="Stretch">
-          <ItemsControl.DataTemplates>
-            <DataTemplate DataType="vmdt:ColumnViewModel">
-              <Grid VerticalAlignment="Top" 
-                    ColumnDefinitions="*,30" 
-                    Background="Transparent" 
-                    Margin="0,2,0,2">
-                <Label Content="{Binding Name, Mode=TwoWay}" 
-                       Margin="{DynamicResource TextControlThemePadding}"
-                       Grid.Column="0" />
-                <Button Content="+" Grid.Column="1"
-                        Command="{Binding $parent[UserControl].DataContext.OnUseColumnName}"
-                        CommandParameter="{Binding}"
-                        Padding="0" 
-                        VerticalAlignment="Stretch"
-                        VerticalContentAlignment="Center" 
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Center" 
-                        Margin="6,0,0,0" 
-                        x:CompileBindings="False" />
-              </Grid>
-            </DataTemplate>
-          </ItemsControl.DataTemplates>
-        </ItemsControl>
-      </ScrollViewer>
-    </DockPanel>
-    <Label Content="Page Properties" 
-           FontWeight="Bold"
-           Margin="6" 
-           Grid.Row="0" Grid.Column="1" />
-    <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                  HorizontalScrollBarVisibility="Auto"
-                  Margin="6" 
-                  Grid.Row="1" Grid.Column="1">
-      <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-        <Label Content="Name" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" />
-        <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Properties}"
-                      VerticalAlignment="Stretch" 
-                      Grid.Column="0" Grid.Row="1">
-          <ItemsControl.DataTemplates>
-            <DataTemplate DataType="vmdt:PropertyViewModel">
-              <Grid VerticalAlignment="Top" 
-                    Background="Transparent" 
-                    Margin="0,2,0,2">
-                <Label Content="{Binding Name, Mode=TwoWay}" 
-                       VerticalAlignment="Center"
-                       Margin="{DynamicResource TextControlThemePadding}" />
-              </Grid>
-            </DataTemplate>
-          </ItemsControl.DataTemplates>
-        </ItemsControl>
-        <GridSplitter ResizeDirection="Columns"
-                      ResizeBehavior="PreviousAndNext" 
-                      Background="Transparent" 
-                      Width="6"
-                      Grid.Column="1" Grid.Row="1" />
-        <Label Content="Value" 
-               VerticalAlignment="Center" 
-               Grid.Column="2" Grid.Row="0" />
-        <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Properties}"
-                      VerticalAlignment="Stretch" 
-                      Grid.Column="2" Grid.Row="1">
-          <ItemsControl.DataTemplates>
-            <DataTemplate DataType="vmdt:PropertyViewModel">
-              <Grid ColumnDefinitions="*,30"
-                    Background="Transparent" 
-                    VerticalAlignment="Top" 
-                    Margin="0,2,0,2">
-                <Label Content="{Binding Value, Mode=TwoWay}" 
-                       Margin="{DynamicResource TextControlThemePadding}"
-                       Grid.Column="0" />
-                <Button Content="+" Grid.Column="1"
-                        Command="{Binding $parent[UserControl].DataContext.OnUsePageProperty}"
-                        CommandParameter="{Binding}" 
-                        Padding="0" 
-                        VerticalAlignment="Stretch"
-                        VerticalContentAlignment="Center" 
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Center"
-                        Margin="6,0,0,0" 
-                        x:CompileBindings="False" />
-              </Grid>
-            </DataTemplate>
-          </ItemsControl.DataTemplates>
-        </ItemsControl>
-      </Grid>
-    </ScrollViewer>
-    <Label Content="Shape Properties" 
-           FontWeight="Bold" 
-           Margin="6" 
-           Grid.Row="0" Grid.Column="2" />
-    <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                  HorizontalScrollBarVisibility="Auto" 
-                  Margin="6" 
-                  Grid.Row="1"
-                  Grid.Column="2">
-      <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-        <Label Content="Name" 
-               VerticalAlignment="Center" 
-               Grid.Column="0" Grid.Row="0" />
-        <ItemsControl ItemsSource="{Binding Text.Properties}"
-                      VerticalAlignment="Stretch"
-                      Grid.Column="0" Grid.Row="1">
-          <ItemsControl.DataTemplates>
-            <DataTemplate DataType="vmdt:PropertyViewModel">
-              <Grid VerticalAlignment="Top"
-                    Background="Transparent" 
-                    Margin="0,2,0,2">
-                <Label Content="{Binding Name, Mode=TwoWay}" 
-                       VerticalAlignment="Center"
-                       Margin="{DynamicResource TextControlThemePadding}" />
-              </Grid>
-            </DataTemplate>
-          </ItemsControl.DataTemplates>
-        </ItemsControl>
-        <GridSplitter ResizeDirection="Columns" 
-                      ResizeBehavior="PreviousAndNext" 
-                      Background="Transparent"
-                      Width="6"
-                      Grid.Column="1" Grid.Row="1" />
-        <Label Content="Value" 
-               VerticalAlignment="Center" 
-               Grid.Column="2" Grid.Row="0" />
-        <ItemsControl ItemsSource="{Binding Text.Properties}"
-                      VerticalAlignment="Stretch"
-                      Grid.Column="2" Grid.Row="1">
-          <ItemsControl.DataTemplates>
-            <DataTemplate DataType="vmdt:PropertyViewModel">
-              <Grid ColumnDefinitions="*,30" 
-                    Background="Transparent" 
-                    VerticalAlignment="Top" 
-                    Margin="0,2,0,2">
-                <Label Content="{Binding Value, Mode=TwoWay}" 
-                       Margin="{DynamicResource TextControlThemePadding}"
-                       Grid.Column="0" />
-                <Button Content="+"
-                        Command="{Binding $parent[UserControl].DataContext.OnUseShapeProperty}"
-                        CommandParameter="{Binding}" 
-                        Padding="0"
-                        VerticalAlignment="Stretch"
-                        VerticalContentAlignment="Center" 
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Center" 
-                        Margin="6,0,0,0" 
-                        Grid.Column="1" 
-                        x:CompileBindings="False" />
-              </Grid>
-            </DataTemplate>
-          </ItemsControl.DataTemplates>
-        </ItemsControl>
-      </Grid>
-    </ScrollViewer>
-    <Grid ColumnDefinitions="*,30"
-          VerticalAlignment="Top"
-          Margin="6"
-          Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-      <TextBox Text="{Binding Text.Text, Mode=TwoWay}"
-               Margin="0" 
-               VerticalAlignment="Stretch"
-               AcceptsReturn="True"
-               Grid.Column="0" />
-      <Button Content="x" 
-              Command="{Binding $parent[UserControl].DataContext.OnResetText}"
-              CommandParameter="{Binding}" 
-              Padding="0" 
-              VerticalAlignment="Stretch" 
-              VerticalContentAlignment="Center"
-              HorizontalAlignment="Stretch"
-              HorizontalContentAlignment="Center"
-              Margin="6,0,0,0" 
-              Grid.Column="1"
-              x:CompileBindings="False" />
-    </Grid>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Editors"
+  xmlns:data="using:Core2D.ViewModels.Data" xmlns:local="using:Core2D.Views.Editors"
+  x:Class="Core2D.Views.Editors.TextBindingEditorView" x:DataType="vm:TextBindingEditorViewModel"
+  x:CompileBindings="True" MinWidth="360" MinHeight="380">
+  <Grid RowDefinitions="Auto,*,150" Background="{DynamicResource StudioSurfaceBrush}">
+    <s:StudioPanelHeader Title="Text binding" Description="Insert data tokens or edit the expression below.">
+      <Button Content="Reset" Command="{Binding OnResetText}" AutomationProperties.Name="Reset text binding"/>
+    </s:StudioPanelHeader>
+    <TabControl Grid.Row="1">
+      <TabItem Header="Columns">
+        <Grid RowDefinitions="Auto,*">
+          <ComboBox Name="DatabasesComboBox" ItemsSource="{Binding Editor.Project.Databases}"
+            SelectedItem="{Binding Editor.Project.CurrentDatabase, Mode=OneWay}" HorizontalAlignment="Stretch"
+            Margin="10,8">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="data:DatabaseViewModel">
+                <TextBlock Text="{Binding Name}"/>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          <s:StudioAssetBrowser Grid.Row="1"
+            Items="{Binding #DatabasesComboBox.((data:DatabaseViewModel)SelectedItem).Columns}"
+            IsCompact="True" EmptyTitle="No columns"
+            EmptyDescription="Add data to the document to insert its tokens."
+            OpenCommand="{Binding OnUseColumnName}">
+            <s:StudioAssetBrowser.ItemTemplate>
+              <DataTemplate x:DataType="data:ColumnViewModel">
+                <Grid ColumnDefinitions="*,Auto" Margin="10,2" ColumnSpacing="8">
+                  <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+                  </StackPanel>
+                  <Button Grid.Column="1" Content="Insert" AutomationProperties.Name="Insert columns token"
+                    Command="{Binding $parent[local:TextBindingEditorView].((vm:TextBindingEditorViewModel)DataContext).OnUseColumnName}"
+                    CommandParameter="{Binding}" />
+                </Grid>
+              </DataTemplate>
+            </s:StudioAssetBrowser.ItemTemplate>
+          </s:StudioAssetBrowser>
+        </Grid>
+      </TabItem>
+      <TabItem Header="Page properties">
+        <Grid RowDefinitions="Auto,*">
+          <s:StudioAssetBrowser Grid.Row="1" Items="{Binding Editor.Project.CurrentContainer.Properties}"
+            IsCompact="True" EmptyTitle="No page properties"
+            EmptyDescription="Add data to the document to insert its tokens."
+            OpenCommand="{Binding OnUsePageProperty}">
+            <s:StudioAssetBrowser.ItemTemplate>
+              <DataTemplate x:DataType="data:PropertyViewModel">
+                <Grid ColumnDefinitions="*,Auto" Margin="10,2" ColumnSpacing="8">
+                  <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="{Binding Value}" Classes="studio-muted" TextTrimming="CharacterEllipsis"/>
+                  </StackPanel>
+                  <Button Grid.Column="1" Content="Insert" AutomationProperties.Name="Insert page properties token"
+                    Command="{Binding $parent[local:TextBindingEditorView].((vm:TextBindingEditorViewModel)DataContext).OnUsePageProperty}"
+                    CommandParameter="{Binding}" />
+                </Grid>
+              </DataTemplate>
+            </s:StudioAssetBrowser.ItemTemplate>
+          </s:StudioAssetBrowser>
+        </Grid>
+      </TabItem>
+      <TabItem Header="Shape properties">
+        <Grid RowDefinitions="Auto,*">
+          <s:StudioAssetBrowser Grid.Row="1" Items="{Binding Text.Properties}" IsCompact="True"
+            EmptyTitle="No shape properties" EmptyDescription="Add data to the document to insert its tokens."
+            OpenCommand="{Binding OnUseShapeProperty}">
+            <s:StudioAssetBrowser.ItemTemplate>
+              <DataTemplate x:DataType="data:PropertyViewModel">
+                <Grid ColumnDefinitions="*,Auto" Margin="10,2" ColumnSpacing="8">
+                  <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="{Binding Value}" Classes="studio-muted" TextTrimming="CharacterEllipsis"/>
+                  </StackPanel>
+                  <Button Grid.Column="1" Content="Insert" AutomationProperties.Name="Insert shape properties token"
+                    Command="{Binding $parent[local:TextBindingEditorView].((vm:TextBindingEditorViewModel)DataContext).OnUseShapeProperty}"
+                    CommandParameter="{Binding}" />
+                </Grid>
+              </DataTemplate>
+            </s:StudioAssetBrowser.ItemTemplate>
+          </s:StudioAssetBrowser>
+        </Grid>
+      </TabItem>
+    </TabControl>
+    <s:StudioCodeEditor Grid.Row="2" Text="{Binding Text.Text, Mode=TwoWay}" LanguageExtension=".txt" WordWrap="True"/>
   </Grid>
 </UserControl>

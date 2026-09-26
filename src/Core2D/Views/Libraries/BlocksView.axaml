@@ -1,187 +1,101 @@
-﻿<UserControl x:Class="Core2D.Views.Libraries.BlocksView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:app="using:Core2D"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
-             xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
-             xmlns:converters="using:Core2D.Converters"
-             xmlns:vmc="using:Core2D.ViewModels.Containers"
-             xmlns:vms="using:Core2D.ViewModels.Shapes"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             xmlns:c="clr-namespace:Core2D.Controls"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Project}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:app="using:Core2D"
+  xmlns:i="using:Avalonia.Xaml.Interactivity" xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+  xmlns:dd="using:Core2D.Behaviors.DragAndDrop" xmlns:converters="using:Core2D.Converters"
+  xmlns:vmc="using:Core2D.ViewModels.Containers" xmlns:vms="using:Core2D.ViewModels.Shapes"
+  xmlns:vmd="using:Core2D.ViewModels.Designer" xmlns:c="clr-namespace:Core2D.Controls"
+  xmlns:s="using:Core2D.Controls.Studio" xmlns:behaviors="using:Core2D.Behaviors"
+  x:Class="Core2D.Views.Libraries.BlocksView" mc:Ignorable="d" d:DataContext="{x:Static vmd:DesignerContext.Project}"
+  d:DesignWidth="250" d:DesignHeight="400" x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <UserControl.Resources>
-    <dd:BlocksListBoxDropHandler x:Key="BlocksListBoxDropHandler" />
+    <dd:StudioLibraryDropHandler x:Key="StudioLibraryDrop"/>
   </UserControl.Resources>
-  <Grid RowDefinitions="Auto,Auto,Auto,*">
-    <Grid RowDefinitions="*" 
-          ColumnDefinitions="*,Auto" 
-          Margin="{DynamicResource ContentMargin}" 
-          Grid.Row="0">
-      <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay, FallbackValue={x:Null}}" 
-               BorderBrush="Transparent"
-               Background="Transparent" 
-               VerticalAlignment="Center" 
-               Margin="0,0,0,0"
-               IsVisible="{Binding !!CurrentGroupLibrary}" 
-               Grid.Column="0" />
-      <StackPanel Grid.Column="1"
-                  Orientation="Horizontal" 
-                  HorizontalAlignment="Right" 
-                  VerticalAlignment="Center">
-        <Button Content="&#727;" 
-                Command="{Binding RemoveGroupLibrary}"
-                CommandParameter="{Binding CurrentGroupLibrary}"
-                IsVisible="{Binding !!CurrentGroupLibrary}" 
-                BorderBrush="Transparent"
-                Background="Transparent" 
-                Padding="12,4,12,4" />
-        <Button Content="+" 
-                Command="{Binding AddGroupLibrary}"
-                BorderBrush="Transparent" 
-                Background="Transparent" 
-                Padding="12,4,12,4" />
-      </StackPanel>
+  <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}" s:StudioEditContext.History="{Binding History}">
+    <s:StudioPanelHeader Title="Blocks" Description="Reusable components in this project"/>
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Grid.Row="1">
+      <Grid RowDefinitions="*" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}" Grid.Row="0">
+        <TextBox Text="{Binding CurrentGroupLibrary.Name, Mode=TwoWay, FallbackValue={x:Null}}" BorderBrush="Transparent"
+          Background="Transparent" VerticalAlignment="Center" Margin="0,0,0,0"
+          IsVisible="{Binding !!CurrentGroupLibrary}" Grid.Column="0" />
+        <s:StudioToolbar Grid.Column="1">
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="2">
+            <Button Content="Remove" Command="{Binding RemoveGroupLibrary}"
+              CommandParameter="{Binding CurrentGroupLibrary}" IsVisible="{Binding !!CurrentGroupLibrary}"
+              BorderBrush="Transparent" Background="Transparent" Padding="8,5"
+              AutomationProperties.Name="RemoveGroupLibrary" />
+            <Button Content="Add" Command="{Binding AddGroupLibrary}" BorderBrush="Transparent" Background="Transparent"
+              Padding="8,5" AutomationProperties.Name="AddGroupLibrary" />
+          </StackPanel>
+        </s:StudioToolbar>
+      </Grid>
+      <ComboBox ItemsSource="{Binding GroupLibraries}" SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}"
+        IsVisible="{Binding !!CurrentGroupLibrary}" HorizontalAlignment="Stretch"
+        Margin="{DynamicResource ContentMargin}" Grid.Row="1">
+        <ComboBox.ItemTemplate>
+          <DataTemplate x:DataType="vmc:LibraryViewModel">
+            <TextBlock Text="{Binding Name}"/>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+      <s:StudioToolbar Grid.Row="2">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" IsVisible="{Binding !!CurrentGroupLibrary}" Spacing="2">
+          <Button Content="Insert" Command="{Binding InsertGroup}"
+            CommandParameter="{Binding CurrentGroupLibrary.Selected, FallbackValue={x:Null}}"
+            IsVisible="{Binding !!CurrentGroupLibrary.Selected}" BorderBrush="Transparent"
+            Background="Transparent" Padding="8,5" AutomationProperties.Name="InsertGroup" />
+          <Button Content="Edit" Command="{Binding EditGroup}"
+            CommandParameter="{Binding CurrentGroupLibrary.Selected, FallbackValue={x:Null}}"
+            IsVisible="{Binding !!CurrentGroupLibrary.Selected}" BorderBrush="Transparent"
+            Background="Transparent" Padding="8,5" AutomationProperties.Name="EditGroup" />
+          <Button Content="Remove" Command="{Binding RemoveGroup}"
+            CommandParameter="{Binding CurrentGroupLibrary.Selected, FallbackValue={x:Null}}"
+            IsVisible="{Binding !!CurrentGroupLibrary.Selected}" BorderBrush="Transparent"
+            Background="Transparent" Padding="8,5" AutomationProperties.Name="RemoveGroup" />
+          <Button Content="Add" Command="{Binding AddGroup}" CommandParameter="{Binding CurrentGroupLibrary}"
+            IsVisible="{Binding CurrentContainer.CurrentShape, Converter={x:Static converters:IsBlockConverter.Instance}, FallbackValue={x:Null}}"
+            BorderBrush="Transparent" Background="Transparent" Padding="8,5"
+            AutomationProperties.Name="AddGroup" />
+        </StackPanel>
+      </s:StudioToolbar>
+      <s:StudioAssetBrowser x:Name="GroupsListBox" Items="{Binding CurrentGroupLibrary.Items}"
+        SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay}" EmptyTitle="No blocks found"
+        EmptyDescription="Try a different search or add an item from the toolbar."
+        OpenCommand="{Binding EditGroup}" Grid.Row="3">
+        <s:StudioAssetBrowser.KeyBindings>
+          <KeyBinding Command="{Binding AddGroup}" CommandParameter="{Binding #GroupsListBox.DataContext}"
+            Gesture="{app:PlatformGesture Text=Primary+N}" />
+          <KeyBinding Command="{Binding RemoveGroup}" CommandParameter="{Binding #GroupsListBox.SelectedItem}" Gesture="Delete"/>
+          <KeyBinding Command="{Binding ExportGroup}" CommandParameter="{Binding #GroupsListBox.SelectedItem}"
+            Gesture="{app:PlatformGesture Text=Primary+E}" />
+        </s:StudioAssetBrowser.KeyBindings>
+        <s:StudioAssetBrowser.Resources>
+          <ContextMenu x:Key="GroupShapeContextMenu" x:DataType="vms:BlockShapeViewModel">
+            <MenuItem Header="_Edit" Command="{Binding EditGroup}" CommandParameter="{Binding Mode=OneWay}"/>
+            <Separator/>
+            <MenuItem Header="_Delete" Command="{Binding RemoveGroup}" CommandParameter="{Binding Mode=OneWay}"/>
+            <Separator/>
+            <MenuItem Header="E_xport" Command="{Binding ExportGroup}" CommandParameter="{Binding Mode=OneWay}"/>
+          </ContextMenu>
+        </s:StudioAssetBrowser.Resources>
+        <i:Interaction.Behaviors>
+          <behaviors:StudioScopedKeyBindingsBehavior/>
+          <idd:ContextDropBehavior Context="{Binding CurrentGroupLibrary}" Handler="{StaticResource StudioLibraryDrop}"/>
+        </i:Interaction.Behaviors>
+        <s:StudioAssetBrowser.ItemTemplate>
+          <DataTemplate x:DataType="vms:BlockShapeViewModel">
+            <s:StudioAssetItem Title="{Binding Name, Mode=TwoWay}" Detail="Reusable block"
+              Icon="M8,0 L16,8 L8,16 L0,8 Z M8,3 L3,8 L8,13 L13,8 Z"
+              IsCompact="{Binding $parent[s:StudioAssetBrowser].IsCompact}"
+              ContextMenu="{StaticResource GroupShapeContextMenu}">
+              <i:Interaction.Behaviors>
+                <idd:ContextDragBehavior Context="{Binding}"/>
+              </i:Interaction.Behaviors>
+              <c:BlockTileView Block="{Binding}" IsHitTestVisible="False"/>
+            </s:StudioAssetItem>
+          </DataTemplate>
+        </s:StudioAssetBrowser.ItemTemplate>
+      </s:StudioAssetBrowser>
     </Grid>
-    <ComboBox ItemsSource="{Binding GroupLibraries}" 
-              SelectedItem="{Binding CurrentGroupLibrary, Mode=TwoWay}" 
-              IsVisible="{Binding !!CurrentGroupLibrary}" 
-              HorizontalAlignment="Stretch"
-              Margin="{DynamicResource ContentMargin}"
-              Grid.Row="1">
-      <ComboBox.ItemTemplate>
-        <DataTemplate>
-          <TextBlock Text="{Binding Name}" />
-        </DataTemplate>
-      </ComboBox.ItemTemplate>
-    </ComboBox>
-    <StackPanel Grid.Row="2" 
-                Orientation="Horizontal" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Center"
-                IsVisible="{Binding !!CurrentGroupLibrary}"
-                Margin="{DynamicResource ContentMargin}">
-      <Button Content="insert" 
-              Command="{Binding InsertGroup}"
-              CommandParameter="{Binding CurrentGroupLibrary.Selected, FallbackValue={x:Null}}"
-              IsVisible="{Binding !!CurrentGroupLibrary.Selected}" 
-              BorderBrush="Transparent" 
-              Background="Transparent"
-              Padding="12,4,12,4" />
-      <Button Content="edit"
-              Command="{Binding EditGroup}"
-              CommandParameter="{Binding CurrentGroupLibrary.Selected, FallbackValue={x:Null}}"
-              IsVisible="{Binding !!CurrentGroupLibrary.Selected}"
-              BorderBrush="Transparent"
-              Background="Transparent"
-              Padding="12,4,12,4" />
-      <Button Content="&#727;" 
-              Command="{Binding RemoveGroup}"
-              CommandParameter="{Binding CurrentGroupLibrary.Selected, FallbackValue={x:Null}}"
-              IsVisible="{Binding !!CurrentGroupLibrary.Selected}" 
-              BorderBrush="Transparent" 
-              Background="Transparent"
-              Padding="12,4,12,4" />
-      <Button Content="+" 
-              Command="{Binding AddGroup}"
-              CommandParameter="{Binding CurrentGroupLibrary}"
-              IsVisible="{Binding CurrentContainer.CurrentShape, Converter={x:Static converters:IsBlockConverter.Instance}, FallbackValue={x:Null}}"
-              BorderBrush="Transparent" 
-              Background="Transparent" 
-              Padding="12,4,12,4" />
-    </StackPanel>
-    <ListBox x:Name="GroupsListBox" 
-             ItemsSource="{Binding CurrentGroupLibrary.Items, FallbackValue={x:Null}}"
-             SelectedItem="{Binding CurrentGroupLibrary.Selected, Mode=TwoWay, FallbackValue={x:Null}}"
-             Padding="{DynamicResource ContentMargin}"
-             Grid.Row="3">
-      <i:Interaction.Behaviors>
-        <idd:ContextDropBehavior Context="{Binding CurrentGroupLibrary, FallbackValue={x:Null}}"
-                                 Handler="{StaticResource BlocksListBoxDropHandler}" />
-      </i:Interaction.Behaviors>
-      <ListBox.KeyBindings>
-        <KeyBinding Command="{Binding AddGroup}"
-                    CommandParameter="{Binding #GroupsListBox.DataContext}" 
-                    Gesture="{app:PlatformGesture Text=Primary+N}" />
-        <KeyBinding Command="{Binding RemoveGroup}"
-                    CommandParameter="{Binding #GroupsListBox.SelectedItem}" 
-                    Gesture="Delete" />
-        <KeyBinding Command="{Binding ExportGroup}"
-                    CommandParameter="{Binding #GroupsListBox.SelectedItem}" 
-                    Gesture="{app:PlatformGesture Text=Primary+E}" />
-      </ListBox.KeyBindings>
-      <ListBox.ItemsPanel>
-        <ItemsPanelTemplate>
-          <WrapPanel Orientation="Horizontal" />
-        </ItemsPanelTemplate>
-      </ListBox.ItemsPanel>
-      <ListBox.Styles>
-        <Style Selector="ListBoxItem">
-          <Setter Property="Margin" Value="0" />
-          <Setter Property="Padding" Value="0" />
-          <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        </Style>
-        <Style Selector="ListBoxItem > Border#TileBorder">
-          <Setter Property="Margin" Value="0,0,4,4" />
-          <Setter Property="Background" Value="{DynamicResource ThemeControlLowBrush}" />
-          <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
-          <Setter Property="BorderThickness" Value="1" />
-        </Style>
-        <Style Selector="ListBoxItem:pointerover > Border#TileBorder">
-          <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlHighBrush}" />
-        </Style>
-        <Style Selector="ListBoxItem:selected > Border#TileBorder">
-          <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
-          <Setter Property="BorderThickness" Value="2" />
-        </Style>
-      </ListBox.Styles>
-      <ListBox.Resources>
-        <ContextMenu x:Key="GroupShapeContextMenu">
-          <MenuItem Header="_Edit"
-                    Command="{Binding EditGroup}"
-                    CommandParameter="{Binding Mode=OneWay}" />
-          <Separator />
-          <MenuItem Header="_Delete"
-                    Command="{Binding RemoveGroup}"
-                    CommandParameter="{Binding Mode=OneWay}" />
-          <Separator />
-          <MenuItem Header="E_xport" 
-                    Command="{Binding ExportGroup}"
-                    CommandParameter="{Binding Mode=OneWay}" />
-        </ContextMenu>
-      </ListBox.Resources>
-      <ListBox.DataTemplates>
-        <DataTemplate DataType="vms:BlockShapeViewModel">
-          <Border x:Name="TileBorder"
-                  Background="Transparent"
-                  Padding="2"
-                  DoubleTapped="OnGroupDoubleTapped">
-            <StackPanel HorizontalAlignment="Stretch">
-              <Border Height="60"
-                      Padding="2"
-                      Background="{DynamicResource ThemeControlMidBrush}">
-                <c:BlockTileView Block="{Binding}"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Stretch"
-                                  IsHitTestVisible="False" />
-              </Border>
-              <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                              ContextMenu="{StaticResource GroupShapeContextMenu}"
-                              Margin="0"
-                              HorizontalAlignment="Center" />
-            </StackPanel>
-            <i:Interaction.Behaviors>
-              <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-            </i:Interaction.Behaviors>
-          </Border>
-        </DataTemplate>
-      </ListBox.DataTemplates>
-    </ListBox>
   </Grid>
 </UserControl>

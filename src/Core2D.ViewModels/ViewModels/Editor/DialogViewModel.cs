@@ -4,6 +4,9 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Reactive;
+using System.Reactive.Concurrency;
+using ReactiveUI;
 using Core2D.Model.Editor;
 
 namespace Core2D.ViewModels.Editor;
@@ -21,7 +24,11 @@ public partial class DialogViewModel : ViewModelBase
     public DialogViewModel(IServiceProvider? serviceProvider, IDialogPresenter dialogPresenter) : base(serviceProvider)
     {
         _dialogPresenter = dialogPresenter;
+        CloseCommand = ReactiveCommand.Create(Close, outputScheduler: ImmediateScheduler.Instance);
     }
+
+    /// <summary>Closes the dialog through its original presenter.</summary>
+    public ReactiveCommand<Unit, Unit> CloseCommand { get; }
 
     public override object Copy(IDictionary<object, object>? shared)
     {
