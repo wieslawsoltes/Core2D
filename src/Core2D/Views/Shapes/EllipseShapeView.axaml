@@ -3,7 +3,7 @@
              xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Shapes"
              x:DataType="vm:EllipseShapeViewModel" x:CompileBindings="True">
   <StackPanel Spacing="12">
-    <TextBox Text="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Ellipse name" Watermark="Ellipse" />
+    <s:StudioNameField Value="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Ellipse name" Watermark="Ellipse" />
     <s:StudioBoundsEditor Start="{Binding TopLeft}" End="{Binding BottomRight}" />
     <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
       <s:StudioSwitch Content="Fill" IsChecked="{Binding IsFilled, Mode=TwoWay}" />

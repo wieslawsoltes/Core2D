@@ -14,6 +14,9 @@
   <Style Selector="s|StudioSegmentedControl ListBoxItem, s|StudioColorPalette ListBoxItem">
     <Setter Property="Theme" Value="{StaticResource StudioSegmentItemTheme}" />
   </Style>
+  <Style Selector="s|StudioAnchorPicker ListBoxItem">
+    <Setter Property="Theme" Value="{StaticResource StudioAnchorItemTheme}" />
+  </Style>
   <Style Selector="MenuItem"><Setter Property="Theme" Value="{StaticResource StudioMenuItemTheme}" /></Style>
   <Style Selector="NumericUpDown"><Setter Property="Theme" Value="{StaticResource StudioNumericUpDownTheme}" /></Style>
   <Style Selector=":is(TextBox)"><Setter Property="ContextFlyout" Value="{StaticResource StudioTextContextFlyout}" /></Style>

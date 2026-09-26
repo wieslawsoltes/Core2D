@@ -16,6 +16,7 @@ public sealed class BoundsInspectorViewModel : ReactiveObject, IDisposable
     private readonly PointShapeViewModel _end;
     private readonly IHistory? _history;
     private bool _isAspectLocked;
+    private int _anchorIndex;
     private bool _updating;
     private bool _disposed;
 
@@ -37,10 +38,13 @@ public sealed class BoundsInspectorViewModel : ReactiveObject, IDisposable
     public decimal X { get => IsValid ? Math.Min((decimal)_start.X, (decimal)_end.X) : 0; set { if (value >= -1e15m && value <= 1e15m) Translate(value - X, 0); } }
     /// <summary>Gets or sets the top coordinate, translating both corners.</summary>
     public decimal Y { get => IsValid ? Math.Min((decimal)_start.Y, (decimal)_end.Y) : 0; set { if (value >= -1e15m && value <= 1e15m) Translate(0, value - Y); } }
-    /// <summary>Gets or sets the non-negative width, anchored at the current left edge.</summary>
+    /// <summary>Gets or sets the non-negative width, resizing about the selected anchor.</summary>
     public decimal Width { get => IsValid ? Math.Abs((decimal)_end.X - (decimal)_start.X) : 0; set => Resize(value, true); }
-    /// <summary>Gets or sets the non-negative height, anchored at the current top edge.</summary>
+    /// <summary>Gets or sets the non-negative height, resizing about the selected anchor.</summary>
     public decimal Height { get => IsValid ? Math.Abs((decimal)_end.Y - (decimal)_start.Y) : 0; set => Resize(value, false); }
+
+    /// <summary>Gets or sets the nine-point resize anchor in row-major order.</summary>
+    public int AnchorIndex { get => _anchorIndex; set => this.RaiseAndSetIfChanged(ref _anchorIndex, Math.Clamp(value, 0, 8)); }
 
     private static bool Valid(double value) => double.IsFinite(value) && Math.Abs(value) <= 1e15;
 
@@ -66,7 +70,8 @@ public sealed class BoundsInspectorViewModel : ReactiveObject, IDisposable
             catch (OverflowException) { return; }
         }
         if (width > 1e15m || height > 1e15m) return;
-        decimal left = X, top = Y;
+        decimal left = X + (Width - width) * (AnchorIndex % 3) / 2;
+        decimal top = Y + (Height - height) * (AnchorIndex / 3) / 2;
         Apply(new Snapshot(
             (double)(_start.X <= _end.X ? left : left + width),
             (double)(_start.Y <= _end.Y ? top : top + height),

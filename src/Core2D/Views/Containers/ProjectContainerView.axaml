@@ -66,9 +66,9 @@
       <MenuItem Header="E_xport" Command="{Binding ExportCommand}" CommandParameter="{Binding Mode=OneWay}" />
     </ContextMenu>
   </UserControl.Resources>
-  <DockPanel>
+  <DockPanel s:StudioEditContext.History="{Binding History}">
     <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="{DynamicResource ContentMargin}">
-      <TextBox Text="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent"
+      <s:StudioNameField Value="{Binding Name, Mode=TwoWay}" BorderBrush="Transparent" Background="Transparent"
                VerticalAlignment="Center" AutomationProperties.Name="Project name" />
       <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
         <s:StudioIconButton Icon="M3,3H13V4H3Z M5,1H11V2H5Z M4,5H12V15H4Z M5,6V14H11V6Z"

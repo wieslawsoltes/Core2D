@@ -142,6 +142,7 @@
             <TextBlock Grid.ColumnSpan="3" Text="Position" FontWeight="SemiBold" />
             <s:StudioNumericField Grid.Row="1" Prefix="X" Value="{Binding X, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Position X" />
             <s:StudioNumericField Grid.Row="1" Grid.Column="1" Prefix="Y" Value="{Binding Y, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Position Y" />
+            <s:StudioAnchorPicker Grid.Row="1" Grid.Column="2" Width="32" Height="32" SelectedIndex="{Binding AnchorIndex, Mode=TwoWay}" ToolTip.Tip="Resize origin" AutomationProperties.Name="Resize origin" />
             <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Text="Layout" FontWeight="SemiBold" Margin="0,4,0,0" />
             <s:StudioNumericField Grid.Row="3" Prefix="W" Value="{Binding Width, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Width" />
             <s:StudioNumericField Grid.Row="3" Grid.Column="1" Prefix="H" Value="{Binding Height, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Height" />

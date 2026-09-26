@@ -23,6 +23,8 @@
           <ScrollViewer Name="DesignScrollViewer" HorizontalScrollBarVisibility="Disabled">
             <StackPanel>
               <s:StudioAlignmentBar IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+              <s:StudioSelectionEditor Name="MultipleSelection" Selection="{Binding Project.SelectedShapes}"
+                                       IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:MultipleSelectionConverter.Instance}}" />
               <ContentControl Name="SelectionGeometry" Margin="12,8"
                               Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}"
                               IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />

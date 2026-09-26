@@ -1,0 +1,73 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" x:CompileBindings="True">
+  <LinearGradientBrush x:Key="StudioHueRamp" StartPoint="0%,0%" EndPoint="100%,0%">
+    <GradientStop Color="#FF0000" Offset="0" /><GradientStop Color="#FFFF00" Offset="0.166667" />
+    <GradientStop Color="#00FF00" Offset="0.333333" /><GradientStop Color="#00FFFF" Offset="0.5" />
+    <GradientStop Color="#0000FF" Offset="0.666667" /><GradientStop Color="#FF00FF" Offset="0.833333" />
+    <GradientStop Color="#FF0000" Offset="1" />
+  </LinearGradientBrush>
+  <ControlTheme x:Key="StudioColorThumbTheme" TargetType="Thumb">
+    <Setter Property="Width" Value="14" /><Setter Property="Height" Value="14" />
+    <Setter Property="Template"><ControlTemplate><Border BorderBrush="White" BorderThickness="3" CornerRadius="7" Background="Transparent" BoxShadow="0 1 3 0 #80000000" /></ControlTemplate></Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="StudioColorTrackButtonTheme" TargetType="RepeatButton">
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template"><ControlTemplate><Border Background="Transparent" /></ControlTemplate></Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioColorSlider}" TargetType="s:StudioColorSlider" x:DataType="s:StudioColorSlider">
+    <Setter Property="MinHeight" Value="24" /><Setter Property="IsMoveToPointEnabled" Value="True" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Background="Transparent">
+          <Border Margin="7,0" Height="12" CornerRadius="6" ClipToBounds="True" VerticalAlignment="Center">
+            <Panel>
+              <s:StudioCheckerboard IsVisible="{TemplateBinding ShowTransparency}" />
+              <Border Background="{TemplateBinding Ramp}" CornerRadius="6" />
+            </Panel>
+          </Border>
+          <Track Name="PART_Track" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}"
+                 Value="{TemplateBinding Value, Mode=TwoWay}" IsDirectionReversed="{TemplateBinding IsDirectionReversed}" Orientation="Horizontal">
+            <Track.DecreaseButton><RepeatButton Name="PART_DecreaseButton" Theme="{StaticResource StudioColorTrackButtonTheme}" /></Track.DecreaseButton>
+            <Track.IncreaseButton><RepeatButton Name="PART_IncreaseButton" Theme="{StaticResource StudioColorTrackButtonTheme}" /></Track.IncreaseButton>
+            <Thumb Name="thumb" Theme="{StaticResource StudioColorThumbTheme}" />
+          </Track>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:focus-visible /template/ Thumb"><Setter Property="Opacity" Value="0.7" /></Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioColorEditor}" TargetType="s:StudioColorEditor" x:DataType="s:StudioColorEditor">
+    <Setter Property="MinWidth" Value="240" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Spacing="8">
+          <Border CornerRadius="6" ClipToBounds="True">
+            <s:StudioColorPlane Height="160" Hsv="{Binding Hsv, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                AutomationProperties.Name="Saturation and brightness" ToolTip.Tip="Drag to adjust saturation and brightness. Arrow keys adjust by 1%; Shift adjusts by 10%." />
+          </Border>
+          <StackPanel Spacing="0">
+            <s:StudioColorSlider Minimum="0" Maximum="360" SmallChange="1" LargeChange="15" Ramp="{StaticResource StudioHueRamp}"
+                                 Value="{Binding Hue, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Hue" />
+            <s:StudioColorSlider Minimum="0" Maximum="100" SmallChange="1" LargeChange="10" ShowTransparency="True" Ramp="{TemplateBinding AlphaBrush}"
+                                 Value="{Binding Alpha, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Opacity" />
+          </StackPanel>
+          <Grid ColumnDefinitions="*,72" ColumnSpacing="6">
+            <s:StudioHexField Value="{Binding Hex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Color hexadecimal value" />
+            <s:StudioNumericField Grid.Column="1" Minimum="0" Maximum="100" Suffix="%" Value="{Binding Alpha, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Opacity percent" />
+          </Grid>
+          <ComboBox ItemsSource="{TemplateBinding ColorModels}" SelectedIndex="{Binding ModelIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                    HorizontalAlignment="Left" Width="76" AutomationProperties.Name="Color model" />
+          <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
+            <s:StudioNumericField Prefix="{TemplateBinding FirstLabel}" Minimum="0" Maximum="{TemplateBinding FirstMaximum}"
+                                  Value="{Binding First, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="First color component" />
+            <s:StudioNumericField Grid.Column="1" Prefix="{TemplateBinding SecondLabel}" Minimum="0" Maximum="{TemplateBinding OtherMaximum}"
+                                  Value="{Binding Second, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Second color component" />
+            <s:StudioNumericField Grid.Column="2" Prefix="{TemplateBinding ThirdLabel}" Minimum="0" Maximum="{TemplateBinding OtherMaximum}"
+                                  Value="{Binding Third, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Third color component" />
+          </Grid>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

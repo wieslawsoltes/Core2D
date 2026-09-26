@@ -3,7 +3,7 @@
              xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Shapes"
              x:DataType="vm:TextShapeViewModel" x:CompileBindings="True">
   <StackPanel Spacing="12">
-    <TextBox Text="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Text layer name" />
+    <s:StudioNameField Value="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Text layer name" />
     <s:StudioBoundsEditor Start="{Binding TopLeft}" End="{Binding BottomRight}" />
     <s:StudioPropertyField Label="Text content" Margin="0">
       <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">

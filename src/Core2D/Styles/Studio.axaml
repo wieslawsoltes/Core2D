@@ -13,6 +13,8 @@
         <ResourceInclude Source="avares://Core2D/Styles/StudioColorField.axaml" />
         <ResourceInclude Source="avares://Core2D/Styles/StudioPropertyControls.axaml" />
         <ResourceInclude Source="avares://Core2D/Styles/StudioSearchBox.axaml" />
+        <ResourceInclude Source="avares://Core2D/Styles/StudioAdvancedControls.axaml" />
+        <ResourceInclude Source="avares://Core2D/Styles/StudioColorEditor.axaml" />
       </ResourceDictionary.MergedDictionaries>
       <converters:MultipleDockTabsConverter x:Key="MultipleDockTabs" />
     </ResourceDictionary>

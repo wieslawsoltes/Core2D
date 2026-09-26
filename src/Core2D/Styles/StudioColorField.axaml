@@ -15,8 +15,8 @@
               <Border Name="PART_SwatchColor" CornerRadius="2" Background="{TemplateBinding SwatchBrush}" />
             </Panel>
           </ToggleButton>
-          <TextBox Name="PART_Hex" Grid.Column="1" Text="{Binding Hex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                   InnerLeftContent="#" AutomationProperties.Name="Hex color" />
+          <s:StudioHexField Name="PART_Hex" Grid.Column="1" Value="{Binding Hex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                            AutomationProperties.Name="Hex color" />
           <s:StudioNumericField Grid.Column="2" Grid.ColumnSpan="2" Width="78" Prefix="" Suffix="%" Minimum="0" Maximum="100"
                                 Value="{Binding OpacityPercent, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                 AutomationProperties.Name="Color opacity percent" />
@@ -26,10 +26,13 @@
                     BorderThickness="1" CornerRadius="10" Padding="12">
               <StackPanel Width="264" Spacing="10">
                 <TextBlock Text="Custom color" FontWeight="SemiBold" />
-                <cp:ColorPicker Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                <s:StudioColorEditor Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 <Separator />
                 <TextBlock Text="Presets" FontWeight="SemiBold" />
                 <s:StudioColorPalette Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Color presets" />
+                <s:StudioSection Header="Advanced picker" IsExpanded="False" Padding="0" BorderThickness="0">
+                  <cp:ColorPicker Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                </s:StudioSection>
               </StackPanel>
             </Border>
           </Popup>
