@@ -23,6 +23,7 @@
     <Project Path="external/PdfPig.Rendering.Skia/UglyToad.PdfPig.Rendering.Skia/UglyToad.PdfPig.Rendering.Skia.csproj" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src/Avalonia.Themes.Browser/Avalonia.Themes.Browser.csproj" />
     <Project Path="src/Core2D.Browser/Core2D.Browser.csproj" />
     <Project Path="src/Core2D.Controls.Ruler/Core2D.Controls.Ruler.csproj" />
     <Project Path="src/Core2D.Desktop/Core2D.Desktop.csproj" />
@@ -51,7 +52,12 @@
     <Project Path="src/Core2D.ViewModels/Core2D.ViewModels.csproj" />
     <Project Path="src/Core2D/Core2D.csproj" />
   </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/BrowserTheme.Catalog/BrowserTheme.Catalog.csproj" />
+  </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Avalonia.Themes.Browser.Tests/Avalonia.Themes.Browser.Tests.csproj" />
     <Project Path="tests/Core2D.ViewModels.Tests/Core2D.ViewModels.Tests.csproj" />
+    <Project Path="tests/Core2D.UI.Tests/Core2D.UI.Tests.csproj" />
   </Folder>
 </Solution>

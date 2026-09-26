@@ -1,0 +1,85 @@
+name: Studio UI validation
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: studio-ui-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  headless:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CORE2D_UI_ARTIFACTS: ${{ github.workspace }}/artifacts/ui
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Install native rendering dependencies
+        run: sudo apt-get update && sudo apt-get install -y libfontconfig1 libfreetype6
+      - name: Test actual application and render headless screenshots
+        shell: bash
+        run: |
+          mkdir -p artifacts/tests
+          set +e
+          dotnet test tests/Core2D.UI.Tests/Core2D.UI.Tests.csproj -c Release --logger 'trx;LogFileName=studio-ui.trx' --results-directory artifacts/tests > artifacts/ui-build.log 2>&1
+          result=$?
+          set -e
+          tail -n 100 artifacts/ui-build.log
+          exit "$result"
+      - name: Run existing regression tests
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          mkdir -p artifacts/tests
+          set +e
+          dotnet test tests/Core2D.ViewModels.Tests/Core2D.ViewModels.Tests.csproj -c Release --logger 'trx;LogFileName=regressions.trx' --results-directory artifacts/tests > artifacts/regression-build.log 2>&1
+          result=$?
+          set -e
+          tail -n 80 artifacts/regression-build.log
+          exit "$result"
+      - name: Summarize validation
+        if: always()
+        shell: python
+        run: |
+          import os
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          ns = {'t': 'http://microsoft.com/schemas/VisualStudio/TeamTest/2010'}
+          lines = ['## Studio UI validation', '']
+          for path in sorted(Path('artifacts/tests').glob('*.trx')):
+              root = ET.parse(path).getroot()
+              counters = root.find('t:ResultSummary/t:Counters', ns)
+              if counters is not None:
+                  lines.append(f"**{path.name}**: {counters.get('passed')} passed, {counters.get('failed')} failed, {counters.get('total')} total.")
+              for result in root.findall('t:Results/t:UnitTestResult', ns):
+                  if result.get('outcome') == 'Failed':
+                      message = result.findtext('t:Output/t:ErrorInfo/t:Message', default='', namespaces=ns)
+                      stack = result.findtext('t:Output/t:ErrorInfo/t:StackTrace', default='', namespaces=ns)
+                      lines.extend(['', f"### {result.get('testName')}", '```text', message, '\n'.join(stack.splitlines()[:20]), '```'])
+          for path in sorted(Path('artifacts/ui').glob('*.png')):
+              lines.append(f'- Screenshot: `{path.name}` ({path.stat().st_size:,} bytes)')
+          summary = '\n'.join(lines) + '\n'
+          print(summary)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream:
+              stream.write(summary)
+      - name: Upload screenshots and test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: studio-ui-validation
+          path: artifacts
+          if-no-files-found: warn

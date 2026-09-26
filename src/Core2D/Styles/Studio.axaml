@@ -1,0 +1,81 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="using:Core2D.Controls.Studio" xmlns:ruler="clr-namespace:Core2D.Controls;assembly=Core2D.Controls.Ruler">
+  <Styles.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioControls.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioInputs.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioColorField.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioPropertyControls.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioSearchBox.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioAdvancedControls.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioColorEditor.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioLayerRow.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioSecondary.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioDataTable.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioSettings.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioActions.axaml"/>
+        <ResourceInclude Source="avares://Core2D/Styles/StudioNestedInspectors.axaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Styles.Resources>
+
+  <Style Selector="TextBlock.studio-muted">
+    <Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}"/>
+  </Style>
+  <Style Selector="TextBlock.studio-title">
+    <Setter Property="FontSize" Value="13"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+  </Style>
+
+  <Style Selector="Separator.studio-tool-separator">
+    <Setter Property="Width" Value="1"/>
+    <Setter Property="Height" Value="20"/>
+    <Setter Property="Margin" Value="4,0"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+  </Style>
+
+  <Style Selector="DataGrid">
+    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="RowHeight" Value="28"/>
+  </Style>
+  <Style Selector="DataGridColumnHeader">
+    <Setter Property="Background" Value="{DynamicResource StudioInputBrush}"/>
+    <Setter Property="FontSize" Value="11"/>
+  </Style>
+
+  <Style Selector="ruler|Ruler:horizontal">
+    <Setter Property="Height" Value="20"/>
+  </Style>
+  <Style Selector="ruler|Ruler:vertical">
+    <Setter Property="Width" Value="20"/>
+  </Style>
+  <Style Selector="ruler|Ruler">
+    <Setter Property="FontSize" Value="9"/>
+    <Setter Property="LabelFormat" Value="Auto"/>
+    <Setter Property="ShowSelectionLabels" Value="False"/>
+    <Setter Property="MajorTickLength" Value="6"/>
+    <Setter Property="MinorTickLength" Value="3"/>
+    <Setter Property="SelectionOpacity" Value="0.24"/>
+    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}"/>
+    <Setter Property="TickBrush" Value="{DynamicResource StudioMutedBrush}"/>
+    <Setter Property="TextBrush" Value="{DynamicResource StudioMutedBrush}"/>
+    <Setter Property="AccentBrush" Value="{DynamicResource StudioTextBrush}"/>
+    <Setter Property="SelectionBrush" Value="{DynamicResource StudioAccentBrush}"/>
+    <Setter Property="SelectionLabelBrush" Value="{DynamicResource StudioTextBrush}"/>
+  </Style>
+  <Style Selector="ruler|Ruler:horizontal">
+    <Setter Property="Height" Value="20"/>
+  </Style>
+  <Style Selector="ruler|Ruler:vertical">
+    <Setter Property="Width" Value="20"/>
+  </Style>
+  <Style Selector="s|StudioCheckerboard">
+    <Setter Property="LightBrush" Value="{DynamicResource StudioCheckerLightBrush}"/>
+    <Setter Property="DarkBrush" Value="{DynamicResource StudioCheckerDarkBrush}"/>
+  </Style>
+  <Style Selector="s|StudioSegmentedControl ListBoxItem, s|StudioColorPalette ListBoxItem">
+    <Setter Property="Theme" Value="{StaticResource StudioSegmentItemTheme}"/>
+  </Style>
+</Styles>

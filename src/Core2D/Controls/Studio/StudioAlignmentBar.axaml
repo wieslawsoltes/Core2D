@@ -1,0 +1,15 @@
+<UserControl x:Class="Core2D.Controls.Studio.StudioAlignmentBar"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Editor"
+             x:DataType="vm:ProjectEditorViewModel" x:CompileBindings="True">
+  <Border BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,0,0,1" Padding="8,4">
+    <UniformGrid Columns="6">
+      <s:StudioIconButton Icon="M1,1H2V19H1Z M5,4H18V7H5Z M5,12H13V15H5Z" Command="{Binding ShapeService.OnAlignLeftSelected}" ToolTip.Tip="Align left" AutomationProperties.Name="Align left" />
+      <s:StudioIconButton Icon="M9,0H10V20H9Z M2,4H17V7H2Z M5,12H14V15H5Z" Command="{Binding ShapeService.OnAlignCenteredSelected}" ToolTip.Tip="Align horizontal centers" AutomationProperties.Name="Align horizontal centers" />
+      <s:StudioIconButton Icon="M18,1H19V19H18Z M2,4H15V7H2Z M7,12H15V15H7Z" Command="{Binding ShapeService.OnAlignRightSelected}" ToolTip.Tip="Align right" AutomationProperties.Name="Align right" />
+      <s:StudioIconButton Icon="M1,1H19V2H1Z M4,5H7V18H4Z M12,5H15V13H12Z" Command="{Binding ShapeService.OnAlignTopSelected}" ToolTip.Tip="Align top" AutomationProperties.Name="Align top" />
+      <s:StudioIconButton Icon="M0,9H20V10H0Z M4,2H7V17H4Z M12,5H15V14H12Z" Command="{Binding ShapeService.OnAlignCenterSelected}" ToolTip.Tip="Align vertical centers" AutomationProperties.Name="Align vertical centers" />
+      <s:StudioIconButton Icon="M1,18H19V19H1Z M4,2H7V15H4Z M12,7H15V15H12Z" Command="{Binding ShapeService.OnAlignBottomSelected}" ToolTip.Tip="Align bottom" AutomationProperties.Name="Align bottom" />
+    </UniformGrid>
+  </Border>
+</UserControl>

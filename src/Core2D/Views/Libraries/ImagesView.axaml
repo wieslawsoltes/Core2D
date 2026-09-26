@@ -1,61 +1,31 @@
-﻿<UserControl x:Class="Core2D.Views.Libraries.ImagesView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
-             xmlns:vmc="using:Core2D.ViewModels.Containers"
-             xmlns:vmr="using:Core2D.ViewModels.Renderer"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Project}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
-  <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*">
-    <StackPanel Grid.Row="0" 
-                Grid.Column="0"
-                Margin="{DynamicResource ContentMargin}" 
-                Orientation="Horizontal"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center">
-      <Button Content="+" 
-              Command="{Binding AddImageKey}" 
-              BorderBrush="Transparent"
-              Background="Transparent" 
-              Padding="12,4,12,4" />
-    </StackPanel>
-    <TextBlock Margin="{DynamicResource ContentMargin}" 
-               VerticalAlignment="Center" 
-               Text="Key"
-               Grid.Column="0" 
-               Grid.Row="1" />
-    <ItemsControl VerticalAlignment="Stretch"
-                  Margin="{DynamicResource ContentMargin}"
-                  ItemsSource="{Binding Keys}"
-                  Grid.Column="0" 
-                  Grid.Row="2" >
-      <ItemsControl.DataTemplates>
-        <DataTemplate DataType="vmr:ImageKeyViewModel">
-          <Grid VerticalAlignment="Top" ColumnDefinitions="*,30" Background="Transparent">
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:s="using:Core2D.Controls.Studio" xmlns:i="using:Avalonia.Xaml.Interactivity"
+  xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop" xmlns:vm="using:Core2D.ViewModels.Containers"
+  xmlns:r="using:Core2D.ViewModels.Renderer" x:Class="Core2D.Views.Libraries.ImagesView"
+  x:DataType="vm:ProjectContainerViewModel" x:CompileBindings="True">
+  <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}">
+    <s:StudioPanelHeader Title="Images" Description="Image resources in this project">
+      <Button Content="Add" Command="{Binding AddImageKey}" AutomationProperties.Name="Add image"/>
+    </s:StudioPanelHeader>
+    <s:StudioAssetBrowser Grid.Row="1" Items="{Binding Keys}" EmptyTitle="No images found"
+      EmptyDescription="Add an image resource or change your search.">
+      <s:StudioAssetBrowser.ItemTemplate>
+        <DataTemplate x:DataType="r:ImageKeyViewModel">
+          <Grid ColumnDefinitions="24,*,Auto" ColumnSpacing="8" Margin="8,4">
             <i:Interaction.Behaviors>
-              <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
+              <idd:ContextDragBehavior Context="{Binding}"/>
             </i:Interaction.Behaviors>
-            <TextBox VerticalAlignment="Center" 
-                     Text="{Binding Key, Mode=OneWay}" 
-                     Grid.Column="0" />
-            <Button Content="-" 
-                    Command="{Binding RemoveImageKey}"
-                    CommandParameter="{Binding Key}" 
-                    Padding="0" 
-                    VerticalAlignment="Stretch"
-                    VerticalContentAlignment="Center" 
-                    HorizontalAlignment="Stretch" 
-                    HorizontalContentAlignment="Center"
-                    Grid.Column="1" />
+            <PathIcon Data="M1,1 H15 V15 H1 Z M3,3 V13 H13 V3 Z M4,11 L7,6 L9,9 L11,7 L13,12 H4 Z" Width="18" Height="18"
+              Foreground="{DynamicResource StudioMutedBrush}" />
+            <TextBlock Grid.Column="1" Text="{Binding Key}" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Key}"
+              VerticalAlignment="Center" />
+            <s:StudioIconButton Grid.Column="2"
+              Icon="M3,2 L8,7 L13,2 L14,3 L9,8 L14,13 L13,14 L8,9 L3,14 L2,13 L7,8 L2,3 Z"
+              Command="{Binding RemoveImageKey}" CommandParameter="{Binding Key}" ToolTip.Tip="Remove image"
+              AutomationProperties.Name="Remove image" />
           </Grid>
         </DataTemplate>
-      </ItemsControl.DataTemplates>
-    </ItemsControl>
+      </s:StudioAssetBrowser.ItemTemplate>
+    </s:StudioAssetBrowser>
   </Grid>
 </UserControl>

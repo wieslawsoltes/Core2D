@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="using:Core2D.Controls.Studio" x:CompileBindings="True">
+  <!-- Custom chrome with native input, selection, IME, validation and automation contracts. -->
+  
+
+  
+  <ControlTheme x:Key="{x:Type s:StudioNumberBox}" TargetType="s:StudioNumberBox" BasedOn="{StaticResource {x:Type TextBox}}" x:DataType="s:StudioNumberBox">
+    <Setter Property="InnerLeftContent" Value="{Binding Prefix, RelativeSource={RelativeSource Self}}"/>
+    <Style Selector="^ /template/ ContentPresenter#PART_InnerLeft">
+      <Setter Property="Cursor" Value="SizeWestEast"/>
+    </Style>
+  </ControlTheme>
+
+  
+</ResourceDictionary>

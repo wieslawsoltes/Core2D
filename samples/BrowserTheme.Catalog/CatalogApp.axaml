@@ -1,0 +1,5 @@
+<Application x:Class="BrowserTheme.Catalog.CatalogApp"
+ xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:browser="using:Avalonia.Themes.Browser" RequestedThemeVariant="Default">
+ <Application.Styles><browser:BrowserTheme Density="Comfortable" /></Application.Styles>
+</Application>

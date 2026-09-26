@@ -1,0 +1,121 @@
+<UserControl x:Class="BrowserTheme.Catalog.GalleryView" xmlns="https://github.com/avaloniaui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:b="using:Avalonia.Themes.Browser"
+ xmlns:local="using:BrowserTheme.Catalog" x:DataType="local:GalleryView" x:CompileBindings="True">
+ <Grid RowDefinitions="Auto,Auto,*" Background="{DynamicResource BrowserCanvasBrush}">
+  <Border Padding="28,22" Background="{DynamicResource BrowserSurfaceBrush}" BorderBrush="{DynamicResource BrowserBorderBrush}" BorderThickness="0,0,0,1">
+   <Grid ColumnDefinitions="*,Auto">
+    <StackPanel Spacing="4">
+     <TextBlock Text="Browser" FontSize="26" FontWeight="SemiBold" />
+     <TextBlock Text="A complete native Avalonia design system" Classes="browser-muted" />
+    </StackPanel>
+    <TextBlock Grid.Column="1" Text="11.3.12 / PREVIEW" Classes="browser-muted" VerticalAlignment="Center" FontSize="11" />
+   </Grid>
+  </Border>
+  <Grid Grid.Row="1" ColumnDefinitions="Auto,180,Auto,180,*" ColumnSpacing="10" Margin="28,16">
+   <TextBlock Text="Appearance" VerticalAlignment="Center" />
+   <ComboBox Name="Appearance" Grid.Column="1" SelectedIndex="{Binding AppearanceIndex, RelativeSource={RelativeSource AncestorType=local:GalleryView}, Mode=TwoWay}" HorizontalAlignment="Stretch">
+    <ComboBoxItem Content="System"/><ComboBoxItem Content="Light"/><ComboBoxItem Content="Dark"/>
+   </ComboBox>
+   <TextBlock Grid.Column="2" Text="Density" Margin="16,0,0,0" VerticalAlignment="Center" />
+   <ComboBox Name="Density" Grid.Column="3" SelectedIndex="{Binding DensityIndex, RelativeSource={RelativeSource AncestorType=local:GalleryView}, Mode=TwoWay}" HorizontalAlignment="Stretch">
+    <ComboBoxItem Content="Compact"/><ComboBoxItem Content="Comfortable"/><ComboBoxItem Content="Touch"/>
+   </ComboBox>
+  </Grid>
+  <TabControl Name="Pages" Grid.Row="2" Margin="28,0,28,24">
+   <TabItem Header="Actions &amp; inputs">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+     <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0,16,0,0">
+      <Border Classes="browser-card">
+       <StackPanel Spacing="14">
+        <TextBlock Text="Actions" Classes="browser-heading" />
+        <TextBlock Text="Consistent states, native commands and keyboard input." Classes="browser-muted" TextWrapping="Wrap" />
+        <WrapPanel><Button Name="PrimaryAction" Content="Create project" Classes="primary" Margin="0,0,8,8"/><Button Content="Secondary" Margin="0,0,8,8"/><Button Content="Subtle" Classes="ghost" Margin="0,0,8,8"/></WrapPanel>
+        <WrapPanel><Button Content="Remove" Classes="danger" Margin="0,0,8,8"/><Button Content="Unavailable" IsEnabled="False" Margin="0,0,8,8"/></WrapPanel>
+        <WrapPanel><ToggleButton Name="Pinned" Content="Pin view" IsChecked="True" Margin="0,0,8,8"/><RepeatButton Content="Repeat" Margin="0,0,8,8"/></WrapPanel>
+        <WrapPanel>
+         <SplitButton Name="Publish" Content="Publish" Margin="0,0,8,8"><SplitButton.Flyout><MenuFlyout><MenuItem Header="Publish draft"/><MenuItem Header="Export archive"/></MenuFlyout></SplitButton.Flyout></SplitButton>
+         <DropDownButton Content="More actions" Margin="0,0,8,8"><DropDownButton.Flyout><Flyout><StackPanel Spacing="8"><TextBlock Text="Native flyout" FontWeight="SemiBold"/><TextBox Watermark="Name"/><Button Content="Done" Classes="primary"/></StackPanel></Flyout></DropDownButton.Flyout></DropDownButton>
+        </WrapPanel>
+        <HyperlinkButton Content="Read documentation" />
+        <Separator/>
+        <TextBlock Text="Selection controls" FontWeight="SemiBold" />
+        <CheckBox Name="Check" Content="Include source files" IsChecked="True"/>
+        <CheckBox Content="Mixed values" IsChecked="{x:Null}" IsThreeState="True"/>
+        <CheckBox Content="Disabled option" IsEnabled="False"/>
+        <StackPanel Orientation="Horizontal" Spacing="16"><RadioButton Content="Personal" GroupName="plan" IsChecked="True"/><RadioButton Content="Team" GroupName="plan"/></StackPanel>
+        <ToggleSwitch Name="Notifications" Content="Notifications" IsChecked="True" OnContent="Enabled" OffContent="Disabled"/>
+       </StackPanel>
+      </Border>
+      <Border Grid.Column="1" Classes="browser-card">
+       <StackPanel Spacing="10">
+        <TextBlock Text="Form inputs" Classes="browser-heading"/>
+        <Label Content="Project name" Target="{Binding #ProjectName}"/>
+        <TextBox Name="ProjectName" Text="Product exploration" Watermark="Untitled project" Classes="clearButton"/>
+        <Label Content="Description"/>
+        <TextBox Height="86" AcceptsReturn="True" TextWrapping="Wrap" Watermark="What are you working on?"/>
+        <Label Content="Password"/>
+        <TextBox Name="Password" Text="demo-password" PasswordChar="●" Classes="revealPasswordButton"/>
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+         <StackPanel Spacing="6"><TextBlock Text="Quantity"/><NumericUpDown Name="Quantity" Value="12" Minimum="0" Maximum="99" Increment="1"/></StackPanel>
+         <StackPanel Grid.Column="1" Spacing="6"><TextBlock Text="Access"/><ComboBox Name="Access" SelectedIndex="0" HorizontalAlignment="Stretch"><ComboBoxItem Content="Can edit"/><ComboBoxItem Content="Can view"/><ComboBoxItem Content="Unavailable" IsEnabled="False"/></ComboBox></StackPanel>
+        </Grid>
+        <Label Content="Search a font family"/>
+        <AutoCompleteBox Name="AutoComplete" Watermark="Start typing" ItemsSource="{Binding FontNames, RelativeSource={RelativeSource AncestorType=local:GalleryView}}" />
+        <Label Content="Masked value"/><MaskedTextBox Mask="00/00/0000" Watermark="DD/MM/YYYY"/>
+        <Label Content="Read-only field"/><TextBox Text="Original model values remain intact" IsReadOnly="True"/>
+       </StackPanel>
+      </Border>
+     </Grid>
+    </ScrollViewer>
+   </TabItem>
+   <TabItem Header="Navigation">
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0,16,0,0">
+     <Border Classes="browser-card">
+      <StackPanel Spacing="14">
+       <TextBlock Text="Lists &amp; hierarchy" Classes="browser-heading"/>
+       <ListBox Name="List" Height="156" SelectedIndex="1"><ListBoxItem Content="Overview"/><ListBoxItem Content="Design system"/><ListBoxItem Content="Components"/><ListBoxItem Content="Archived" IsEnabled="False"/></ListBox>
+       <TreeView Name="Tree" Height="200"><TreeViewItem Header="Workspace" IsExpanded="True"><TreeViewItem Header="Pages" IsExpanded="True"><TreeViewItem Header="Overview"/><TreeViewItem Header="Components" IsSelected="True"/></TreeViewItem><TreeViewItem Header="Assets"/></TreeViewItem></TreeView>
+       <Expander Name="Details" Header="Advanced options" IsExpanded="True"><StackPanel Spacing="10" Margin="12"><TextBox Watermark="Optional value"/><CheckBox Content="Remember my choice"/></StackPanel></Expander>
+      </StackPanel>
+     </Border>
+     <Border Grid.Column="1" Classes="browser-card">
+      <StackPanel Spacing="14">
+       <TextBlock Text="Menus &amp; tabs" Classes="browser-heading"/>
+       <Menu Name="Menu"><MenuItem Header="_File"><MenuItem Header="New" InputGesture="Ctrl+N"/><MenuItem Header="Open"/><Separator/><MenuItem Header="Recent"><MenuItem Header="Exploration"/></MenuItem></MenuItem><MenuItem Header="Edit"><MenuItem Header="Undo"/><MenuItem Header="Redo"/></MenuItem></Menu>
+       <TabControl Height="200"><TabItem Header="Design"><Border Padding="16"><TextBlock Text="Native content and selection semantics." TextWrapping="Wrap"/></Border></TabItem><TabItem Header="Inspect"><TextBox Text="Editable details"/></TabItem><TabItem Header="Disabled" IsEnabled="False"/></TabControl>
+       <SelectableTextBlock Text="This text remains selectable and copyable using native input." TextWrapping="Wrap" />
+       <Button Content="Context menu" HorizontalAlignment="Left"><Button.ContextMenu><ContextMenu><MenuItem Header="Duplicate"/><MenuItem Header="Rename"/><Separator/><MenuItem Header="Delete"/></ContextMenu></Button.ContextMenu></Button>
+       <ToolTip Content="Wrapping, high-contrast tooltip content"/>
+       <SplitView DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="100" Height="140"><SplitView.Pane><Border Padding="8"><TextBlock Text="Sidebar"/></Border></SplitView.Pane><Border Padding="12"><TextBlock Text="Native SplitView"/></Border></SplitView>
+      </StackPanel>
+     </Border>
+    </Grid>
+   </TabItem>
+   <TabItem Header="Dates &amp; ranges">
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0,16,0,0">
+     <Border Classes="browser-card">
+      <StackPanel Spacing="12">
+       <TextBlock Text="Dates &amp; time" Classes="browser-heading"/>
+       <Calendar Name="Calendar" HorizontalAlignment="Left"/>
+       <DatePicker Name="Date" HorizontalAlignment="Stretch"/>
+       <TimePicker Name="Time" ClockIdentifier="24HourClock" HorizontalAlignment="Stretch"/>
+       <CalendarDatePicker Name="CalendarInput" Watermark="Choose a date"/>
+      </StackPanel>
+     </Border>
+     <Border Grid.Column="1" Classes="browser-card">
+      <StackPanel Spacing="14">
+       <TextBlock Text="Range &amp; progress" Classes="browser-heading"/>
+       <TextBlock Text="Zoom"/><Slider Name="Slider" Minimum="0" Maximum="100" Value="60" TickFrequency="10"/>
+       <TextBlock Text="Discrete steps"/><Slider Minimum="0" Maximum="10" Value="4" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight"/>
+       <TextBlock Text="Uploading assets"/><ProgressBar Name="Progress" Value="65"/>
+       <ProgressBar Value="40" ShowProgressText="True" Height="24"/>
+       <TextBlock Text="Working"/><ProgressBar IsIndeterminate="True"/>
+       <Grid Height="140" ColumnDefinitions="*,Auto,*" ColumnSpacing="10"><Border Padding="8"><TextBlock Text="Resizable"/></Border><GridSplitter Grid.Column="1" Width="4" ResizeDirection="Columns"/><Border Grid.Column="2" Padding="8"><TextBlock Text="Native layout"/></Border></Grid>
+       <ScrollViewer Name="Scroller" Height="126" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"><Border Width="700" Height="400" Padding="16" Background="{DynamicResource BrowserInputBrush}"><TextBlock Text="Native scroll viewport with both orientations."/></Border></ScrollViewer>
+      </StackPanel>
+     </Border>
+    </Grid>
+   </TabItem>
+  </TabControl>
+ </Grid>
+</UserControl>

@@ -1,37 +1,12 @@
-﻿<UserControl x:Class="Core2D.Views.Containers.DocumentContainerView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
-             xmlns:vmc="using:Core2D.ViewModels.Containers"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Document}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:DocumentContainerViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Properties">
-      <StackPanel>
-        <TextBox Text="{Binding Name, Mode=TwoWay}" />
-      </StackPanel>
-    </TabItem>
-    <TabItem Header="Pages">
-      <ListBox x:Name="PagesListBox" ItemsSource="{Binding Pages}">
-        <ListBox.DataTemplates>
-          <DataTemplate DataType="vmc:PageContainerViewModel">
-            <TextBlock Text="{Binding Name}" Background="Transparent">
-              <i:Interaction.Behaviors>
-                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-              </i:Interaction.Behaviors>
-            </TextBlock>
-          </DataTemplate>
-        </ListBox.DataTemplates>
-      </ListBox>
-    </TabItem>
-    <TabItem Header="Selected Page">
-      <ContentControl Content="{Binding #PagesListBox.SelectedItem}" />
-    </TabItem>
-  </TabControl>
+<UserControl x:Class="Core2D.Views.Containers.DocumentContainerView"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Containers"
+
+             x:DataType="vm:DocumentContainerViewModel" x:CompileBindings="True">
+  <StackPanel>
+    <s:StudioSection Header="Document">
+      <s:StudioNameField Value="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Document name" />
+    </s:StudioSection>
+    <s:StudioCollectionInspector Title="Pages" Items="{Binding Pages}" />
+  </StackPanel>
 </UserControl>

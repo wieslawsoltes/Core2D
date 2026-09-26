@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net10.0</TargetFramework><AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault></PropertyGroup>
+ <ItemGroup>
+  <PackageReference Include="Avalonia.Desktop" Version="11.3.12" />
+  <ProjectReference Include="../../src/Avalonia.Themes.Browser/Avalonia.Themes.Browser.csproj" Condition="'$(BrowserThemePackage)' != 'true'" />
+  <PackageReference Include="Avalonia.Themes.Browser" Version="11.3.12-preview.1" Condition="'$(BrowserThemePackage)' == 'true'" />
+ </ItemGroup>
+</Project>

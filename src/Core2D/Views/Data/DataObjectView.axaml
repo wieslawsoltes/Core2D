@@ -1,111 +1,28 @@
-﻿<UserControl x:Class="Core2D.Views.Data.DataObjectView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:m="using:Core2D.Model"
-             xmlns:vmdt="using:Core2D.ViewModels.Data"
-             mc:Ignorable="d"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="m:IDataObject" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Record">
-      <DockPanel IsVisible="{Binding !!Record}">
-        <StackPanel Orientation="Horizontal" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Center"
-                    IsVisible="{Binding !!Record}" 
-                    Margin="{DynamicResource ContentMargin}"
-                    DockPanel.Dock="Top">
-          <Button Content="&#727;" 
-                  Command="{Binding ResetRecord}"
-                  CommandParameter="{Binding}" 
-                  IsVisible="{Binding !!Record}" BorderBrush="Transparent"
-                  Background="Transparent" 
-                  Padding="12,4,12,4" />
-        </StackPanel>
-        <ContentControl Content="{Binding Record}" />
-      </DockPanel>
-    </TabItem>
-    <TabItem Header="Properties">
-      <DockPanel Margin="{DynamicResource ContentMargin}">
-        <StackPanel Orientation="Horizontal" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Center"
-                    Margin="{DynamicResource ContentMargin}"
-                    DockPanel.Dock="Top">
-          <Button Content="+" 
-                  Command="{Binding AddProperty}"
-                  CommandParameter="{Binding}"
-                  BorderBrush="Transparent" 
-                  Background="Transparent" 
-                  Padding="12,4,12,4" />
-        </StackPanel>
-        <Grid RowDefinitions="Auto,*" 
-              ColumnDefinitions="50*,Auto,50*" 
-              IsVisible="{Binding !!Properties.Length}">
-          <Label Content="Name" 
-                 VerticalAlignment="Center"
-                 Grid.Column="0" 
-                 Grid.Row="0" />
-          <ItemsControl ItemsSource="{Binding Properties}"
-                        VerticalAlignment="Stretch" 
-                        Grid.Column="0" 
-                        Grid.Row="1">
-            <ItemsControl.DataTemplates>
-              <DataTemplate DataType="vmdt:PropertyViewModel">
-                <Panel VerticalAlignment="Top" Background="Transparent" Margin="0,2,0,2">
-                  <!--
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                  -->
-                  <TextBox VerticalAlignment="Center" 
-                           Text="{Binding Name, Mode=TwoWay}" />
-                </Panel>
-              </DataTemplate>
-            </ItemsControl.DataTemplates>
-          </ItemsControl>
-          <GridSplitter ResizeDirection="Columns" 
-                        ResizeBehavior="PreviousAndNext" 
-                        Background="Transparent" 
-                        Width="6"
-                        Grid.Column="1" Grid.Row="1" />
-          <Label Content="Value" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
-          <ItemsControl ItemsSource="{Binding Properties}" 
-                        VerticalAlignment="Stretch" 
-                        Grid.Column="2" Grid.Row="1">
-            <ItemsControl.DataTemplates>
-              <DataTemplate DataType="vmdt:PropertyViewModel">
-                <DockPanel VerticalAlignment="Top" 
-                           HorizontalAlignment="Stretch" 
-                           Background="Transparent"
-                           Margin="0,2,0,2">
-                  <!--
-                  <i:Interaction.Behaviors>
-                    <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                  </i:Interaction.Behaviors>
-                  -->
-                  <Button Content="-" 
-                          Command="{Binding RemoveProperty}"
-                          CommandParameter="{Binding}" 
-                          Padding="0" 
-                          VerticalAlignment="Stretch"
-                          VerticalContentAlignment="Center" 
-                          HorizontalAlignment="Stretch"
-                          HorizontalContentAlignment="Center" 
-                          Margin="6,0,0,0" 
-                          Width="30" 
-                          DockPanel.Dock="Right" />
-                  <TextBox Text="{Binding Value, Mode=TwoWay}" 
-                           VerticalAlignment="Stretch"
-                           HorizontalAlignment="Stretch" />
-                </DockPanel>
-              </DataTemplate>
-            </ItemsControl.DataTemplates>
-          </ItemsControl>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:m="using:Core2D.Model"
+             x:Class="Core2D.Views.Data.DataObjectView" x:DataType="m:IDataObject" x:CompileBindings="True">
+  <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}">
+    <s:StudioPanelHeader Title="Object data" Description="Linked records and reusable custom properties" />
+    <TabControl Grid.Row="1">
+      <TabItem Header="Record">
+        <Grid RowDefinitions="Auto,*">
+          <s:StudioToolbar IsVisible="{Binding !!Record}">
+            <Button Content="Unlink record" Command="{Binding ResetRecord}" CommandParameter="{Binding}" AutomationProperties.Name="Unlink record" />
+          </s:StudioToolbar>
+          <ContentControl Grid.Row="1" Content="{Binding Record}" />
+          <s:StudioEmptyState Grid.Row="1" Title="No linked record" Description="Apply a record from the Data library to populate this object's data."
+                             IsVisible="{Binding !Record}" />
         </Grid>
-      </DockPanel>
-    </TabItem>
-  </TabControl>
+      </TabItem>
+      <TabItem Header="Properties">
+        <Grid RowDefinitions="Auto,*">
+          <s:StudioToolbar>
+            <Button Content="Add property" Command="{Binding AddProperty}" CommandParameter="{Binding}"
+                    AutomationProperties.Name="Add custom property" />
+          </s:StudioToolbar>
+          <s:StudioDataTable Grid.Row="1" Source="{Binding}" />
+        </Grid>
+      </TabItem>
+    </TabControl>
+  </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Shapes.PathShapeView"
+<UserControl x:Class="Core2D.Views.Shapes.PathShapeView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,27 +15,27 @@
              d:DataContext="{x:Static vmd:DesignerContext.Path}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vms:PathShapeViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Path">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="Name"
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        <CheckBox Content="IsStroked" 
-                  IsChecked="{Binding IsStroked, Mode=TwoWay}" 
+  <StackPanel>
+    <studio:StudioSection Header="Path">
+      <StackPanel Margin="0">
+        <studio:StudioPropertyField Label="Name">
+          <studio:StudioNameField Value="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Object name" />
+        </studio:StudioPropertyField>
+        <studio:StudioSwitch Content="Stroke"
+                  IsChecked="{Binding IsStroked, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
-        <CheckBox Content="IsFilled" 
-                  IsChecked="{Binding IsFilled, Mode=TwoWay}" 
+        <studio:StudioSwitch Content="Fill"
+                  IsChecked="{Binding IsFilled, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
-        <Label Content="FillRule" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox ItemsSource="{x:Static vms:PathShapeViewModel.FillRuleValues}"
-                  SelectedItem="{Binding FillRule, Mode=TwoWay}" 
+        <studio:StudioPropertyField Label="Fill Rule">
+          <ComboBox ItemsSource="{x:Static vms:PathShapeViewModel.FillRuleValues}"
+                  SelectedItem="{Binding FillRule, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
+        </studio:StudioPropertyField>
       </StackPanel>
-    </TabItem>
-    <TabItem Header="Figures">
-      <DataGrid x:Name="FiguresDataGrid"
+    </studio:StudioSection>
+    <studio:StudioSection Header="Vector structure">
+      <DataGrid x:Name="FiguresDataGrid" Height="220"
                 SelectionMode="Single"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
@@ -57,19 +58,17 @@
         <DataGrid.DataTemplates>
           <DataTemplate DataType="vmp:PathFigureViewModel"
                         x:DataType="vmp:PathFigureViewModel">
-            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                       Background="Transparent" />
+            <studio:StudioObjectSummary Source="{Binding}" />
           </DataTemplate>
           <DataTemplate DataType="vmp:PathSegmentViewModel"
                         x:DataType="vmp:PathSegmentViewModel">
-            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                       Background="Transparent" />
+            <studio:StudioObjectSummary Source="{Binding}" />
           </DataTemplate>
         </DataGrid.DataTemplates>
       </DataGrid>
-    </TabItem>
-    <TabItem Header="Selected Figure">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Selected vector element">
       <ContentControl Content="{Binding #FiguresDataGrid.SelectedItem}" />
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>

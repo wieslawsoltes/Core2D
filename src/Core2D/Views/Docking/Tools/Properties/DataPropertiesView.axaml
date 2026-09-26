@@ -1,23 +1,15 @@
-﻿<UserControl x:Class="Core2D.Views.Docking.Tools.Properties.DataPropertiesView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="using:Core2D.Converters"
-             xmlns:data="using:Core2D.Views.Data"
-             xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Properties"
-             xmlns:vme="using:Core2D.ViewModels.Editor"
-             mc:Ignorable="d"
-             d:DesignWidth="800" d:DesignHeight="600"
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:data="using:Core2D.Views.Data" xmlns:s="using:Core2D.Controls.Studio"
+             xmlns:c="using:Core2D.Converters" xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Properties"
+             xmlns:editor="using:Core2D.ViewModels.Editor" x:Class="Core2D.Views.Docking.Tools.Properties.DataPropertiesView"
              x:DataType="vm:DataPropertiesViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}">
-    <Panel x:DataType="vme:ProjectEditorViewModel">
-      <ScrollViewer DataContext="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}"
-                    HorizontalScrollBarVisibility="Auto"
-                    VerticalScrollBarVisibility="Auto">
-        <data:DataObjectView IsVisible="{Binding $self.DataContext, Converter={x:Static ObjectConverters.IsNotNull}}"
-                             x:CompileBindings="False" />
-      </ScrollViewer>
-    </Panel>
+    <Grid x:DataType="editor:ProjectEditorViewModel" s:StudioEditContext.History="{Binding Project.History}">
+      <Panel IsVisible="{Binding Project.SelectedShapes, Converter={x:Static c:SelectedShapesHasItemsValueConverter.Instance}}">
+        <data:DataObjectView DataContext="{Binding Project.SelectedShapes, Converter={x:Static c:SelectedShapesFirstItemValueConverter.Instance}}" />
+      </Panel>
+      <s:StudioEmptyState Title="Select an object" Description="Inspect linked data and custom properties for your selection."
+                          IsVisible="{Binding Project.SelectedShapes, Converter={x:Static c:SelectedShapesIsEmptyValueConverter.Instance}}" />
+    </Grid>
   </Panel>
 </UserControl>

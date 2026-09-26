@@ -1,0 +1,87 @@
+name: Browser theme package validation
+on:
+  push:
+    branches: [feat/figma-inspired-workspace]
+    paths: ['src/Avalonia.Themes.Browser/**', 'samples/BrowserTheme.Catalog/**', 'tests/Avalonia.Themes.Browser.Tests/**', 'tools/browser-theme/**', '.github/workflows/browser-theme.yml']
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: browser-theme-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BROWSER_THEME_ARTIFACTS: ${{ github.workspace }}/artifacts/browser-ui
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - run: sudo apt-get update && sudo apt-get install -y libfontconfig1 libfreetype6
+      - name: Verify complete imported keys and template parts
+        run: |
+          mkdir -p artifacts/tests
+          python tools/browser-theme/verify_theme.py src/Avalonia.Themes.Browser > artifacts/coverage.json
+      - name: Test independent theme and render native control catalog
+        shell: bash
+        run: |
+          set +e
+          dotnet test tests/Avalonia.Themes.Browser.Tests/Avalonia.Themes.Browser.Tests.csproj -c Release --logger 'trx;LogFileName=browser-theme.trx' --results-directory artifacts/tests > artifacts/theme-tests.log 2>&1
+          result=$?
+          set -e
+          tail -n 100 artifacts/theme-tests.log
+          exit "$result"
+      - name: Create reusable NuGet package
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          set +e
+          dotnet pack src/Avalonia.Themes.Browser/Avalonia.Themes.Browser.csproj -c Release -o artifacts/packages > artifacts/package.log 2>&1
+          result=$?
+          set -e
+          tail -n 80 artifacts/package.log
+          exit "$result"
+      - name: Verify package and run a clean NuGet-only consumer
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          python tools/browser-theme/verify_theme.py src/Avalonia.Themes.Browser --package artifacts/packages/Avalonia.Themes.Browser.11.3.12-preview.1.nupkg > artifacts/package-coverage.json
+          consumer="$RUNNER_TEMP/browser-theme-consumer"
+          mkdir -p "$consumer/samples" "$consumer/tests"
+          cp -r samples/BrowserTheme.Catalog "$consumer/samples/"
+          cp -r tests/Avalonia.Themes.Browser.Tests "$consumer/tests/"
+          find "$consumer" -type d \( -name bin -o -name obj \) -prune -exec rm -rf {} +
+          cat > "$consumer/NuGet.Config" <<CONFIG
+          <configuration><packageSources><clear/><add key="local" value="${{ github.workspace }}/artifacts/packages"/><add key="nuget" value="https://api.nuget.org/v3/index.json"/></packageSources></configuration>
+          CONFIG
+          set +e
+          dotnet test "$consumer/tests/Avalonia.Themes.Browser.Tests/Avalonia.Themes.Browser.Tests.csproj" -c Release -p:BrowserThemePackage=true --logger 'trx;LogFileName=package-consumer.trx' --results-directory "${{ github.workspace }}/artifacts/tests" > artifacts/package-consumer.log 2>&1
+          result=$?
+          set -e
+          tail -n 100 artifacts/package-consumer.log
+          python - "$consumer" <<'PY'
+          import json,sys
+          from pathlib import Path
+          root=Path(sys.argv[1])
+          assets=json.loads((root/'samples/BrowserTheme.Catalog/obj/project.assets.json').read_text())
+          assert not any(k.startswith(('Avalonia.Themes.Fluent/', 'Core2D/')) for k in assets['libraries'])
+          print('Independent NuGet consumer has no Fluent or Core2D dependency.')
+          PY
+          exit "$result"
+      - name: Retain package sources without font binaries
+        if: always()
+        run: |
+          git archive --format=zip HEAD src/Avalonia.Themes.Browser samples/BrowserTheme.Catalog tests/Avalonia.Themes.Browser.Tests tools/browser-theme > artifacts/browser-theme-source.zip
+          git rev-parse HEAD > artifacts/source-head.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-theme-validation
+          path: artifacts

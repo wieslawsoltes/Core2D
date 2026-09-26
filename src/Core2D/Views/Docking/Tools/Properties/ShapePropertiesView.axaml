@@ -1,19 +1,28 @@
-﻿<UserControl x:Class="Core2D.Views.Docking.Tools.Properties.ShapePropertiesView"
+<UserControl x:Class="Core2D.Views.Docking.Tools.Properties.ShapePropertiesView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:s="using:Core2D.Controls.Studio"
              xmlns:converters="using:Core2D.Converters"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Properties"
-             xmlns:vme="using:Core2D.ViewModels.Editor"
-             mc:Ignorable="d"
-             d:DesignWidth="800" d:DesignHeight="600"
+             xmlns:editor="using:Core2D.ViewModels.Editor"
              x:DataType="vm:ShapePropertiesViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}">
-    <Panel x:DataType="vme:ProjectEditorViewModel">
-      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <ContentControl Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
+    <Grid x:DataType="editor:ProjectEditorViewModel">
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                    IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}">
+        <s:StudioSection Header="Design">
+          <ContentControl Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
+        </s:StudioSection>
       </ScrollViewer>
-    </Panel>
+      <!-- Outside the horizontal scroller so wrapping uses the actual inspector width. -->
+      <StackPanel Margin="20,28" Spacing="8"
+                  IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}">
+        <PathIcon Data="M1,1 L1,18 L6,13 L10,21 L13,19 L9,11 L16,11 Z" Width="24" Height="24"
+                  HorizontalAlignment="Left" Foreground="{DynamicResource StudioMutedBrush}" />
+        <TextBlock Text="Select an object" Classes="studio-title" />
+        <TextBlock Name="EmptySelectionHint" Text="Inspect geometry and edit its properties here. Drawing tools are below the canvas."
+                   TextWrapping="Wrap" Classes="studio-muted" />
+      </StackPanel>
+    </Grid>
   </Panel>
 </UserControl>

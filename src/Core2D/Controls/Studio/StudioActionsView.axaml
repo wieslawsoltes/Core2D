@@ -1,0 +1,192 @@
+<s:StudioCommandPalette xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="using:Core2D.Controls.Studio" xmlns:app="using:Core2D" xmlns:vm="using:Core2D.ViewModels.Editor" x:Class="Core2D.Controls.Studio.StudioActionsView" x:DataType="vm:ProjectEditorViewModel" x:CompileBindings="True">
+  <MenuItem Header="_File">
+    <MenuItem Header="_New" Command="{Binding OnNew}" CommandParameter="{Binding}" InputGesture="{app:PlatformGesture Text=Primary+N}"/>
+    <MenuItem Header="_Open..." Command="{Binding Platform.OnOpen, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+O}"/>
+    <MenuItem Header="_Close" Command="{Binding OnCloseProject}" InputGesture="{app:PlatformGesture Text=Primary+F4}"/>
+    <MenuItem Header="_Save" Command="{Binding Platform.OnSave, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+S}"/>
+    <MenuItem Header="Save _As..." Command="{Binding Platform.OnSaveAs, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+S}"/>
+    <MenuItem Header="Execu_te Script..." Command="{Binding Platform.OnExecuteScriptFile, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Import _Json..." Command="{Binding Platform.OnImportJson, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Import E_xcel..." Command="{Binding Platform.OnImportExcel, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Import _Word..." Command="{Binding Platform.OnImportWord, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Import _PowerPoint..." Command="{Binding Platform.OnImportPowerPoint, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Import _Visio..." Command="{Binding Platform.OnImportVisio, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Import Sv_g..." Command="{Binding Platform.OnImportSvg, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Import _PDF..." Command="{Binding Platform.OnImportPdf, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Import DW_G/DXF..." Command="{Binding Platform.OnImportDwg, FallbackValue={x:Null}}"/>
+    <MenuItem Header="_Export..." Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+E}"/>
+    <MenuItem Header="Export _Wizard..." Command="{Binding Platform.OnOpenExportWizard, FallbackValue={x:Null}}"/>
+    <MenuItem Header="E_xit" Command="{Binding Platform.OnExit, FallbackValue={x:Null}}" InputGesture="Alt+F4" IsVisible="{Binding !!RootDock}"/>
+  </MenuItem>
+  <MenuItem Header="_Edit">
+    <MenuItem Header="_Undo" Command="{Binding OnUndo}" InputGesture="{app:PlatformGesture Text=Primary+Z}"/>
+    <MenuItem Header="_Redo" Command="{Binding OnRedo}" InputGesture="{app:PlatformGesture Text=Primary+Y}"/>
+    <MenuItem Header="Cu_t" Command="{Binding ClipboardService.OnCut, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+X}"/>
+    <MenuItem Header="_Copy" Command="{Binding ClipboardService.OnCopy, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+C}"/>
+    <MenuItem Header="_Paste" Command="{Binding ClipboardService.OnPaste, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+V}"/>
+    <MenuItem Header="_Delete" Command="{Binding ClipboardService.OnDelete, FallbackValue={x:Null}}" InputGesture="Delete"/>
+    <MenuItem Header="Copy As _Xaml" Command="{Binding Platform.OnCopyAsXaml, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Copy As _Svg" Command="{Binding Platform.OnCopyAsSvg, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Paste Sv_g" Command="{Binding Platform.OnPasteSvg, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Copy As _Metafile" Command="{Binding Platform.OnCopyAsEmf, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Copy As Svg Path Data" Command="{Binding Platform.OnCopyAsPathData, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Paste Stroked Svg Path Data" Command="{Binding Platform.OnPastePathDataStroked, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Paste Filled Svg Path Data" Command="{Binding Platform.OnPastePathDataFilled, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Select _All" Command="{Binding SelectionService.OnSelectAll, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+A}"/>
+    <MenuItem Header="De_select All" Command="{Binding SelectionService.OnDeselectAll, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+A}"/>
+    <MenuItem Header="Cl_ear All" Command="{Binding SelectionService.OnClearAll, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Cance_l" Command="{Binding OnCancel}" InputGesture="Escape"/>
+  </MenuItem>
+  <MenuItem Header="_View">
+    <MenuItem Header="_Tool Windows" IsVisible="{Binding !!RootDock}">
+      <MenuItem Header="Project _Explorer" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ProjectExplorer"/>
+      <MenuItem Header="Page Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="PageProperties"/>
+      <MenuItem Header="Shape Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ShapeProperties"/>
+      <MenuItem Header="Style Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StyleProperties"/>
+      <MenuItem Header="Data Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="DataProperties"/>
+      <MenuItem Header="State Properties" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StateProperties"/>
+      <MenuItem Header="Style Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="StyleLibrary"/>
+      <MenuItem Header="Block Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="BlockLibrary"/>
+      <MenuItem Header="Database Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="DatabaseLibrary"/>
+      <MenuItem Header="Template Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="TemplateLibrary"/>
+      <MenuItem Header="Script Library" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ScriptLibrary"/>
+      <MenuItem Header="Project Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ProjectOptions"/>
+      <MenuItem Header="Renderer Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="RendererOptions"/>
+      <MenuItem Header="Zoom Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ZoomOptions"/>
+      <MenuItem Header="Image Options" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ImageOptions"/>
+      <MenuItem Header="Object Browser" Command="{Binding OnToggleDockableVisibility}" CommandParameter="ObjectBrowser"/>
+    </MenuItem>
+    <MenuItem Header="_Appearance" IsVisible="{Binding !!RootDock}">
+      <MenuItem Header="_Main Menu" Command="{Binding OnToggleDockableVisibility}" CommandParameter="HomeMenuView"/>
+      <MenuItem Header="_Status Bar" Command="{Binding OnToggleDockableVisibility}" CommandParameter="HomeStatusBarView"/>
+    </MenuItem>
+    <MenuItem Header="_Zoom">
+      <MenuItem Header="_Actual Size" Command="{Binding Platform.OnZoomReset, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+D0}"/>
+      <MenuItem Header="Fit _Page" Command="{Binding Platform.OnZoomUniform, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+D1}"/>
+      <MenuItem Header="Fit To Fi_ll" Command="{Binding Platform.OnZoomUniformToFill, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+D2}"/>
+      <MenuItem Header="_Fill Page" Command="{Binding Platform.OnZoomFill, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+D3}"/>
+      <MenuItem Header="A_uto Fit Page" Command="{Binding Platform.OnZoomAutoFit, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+D4}"/>
+      <MenuItem Header="Zoom _In" Command="{Binding Platform.OnZoomIn, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Add}"/>
+      <MenuItem Header="Zoom _Out" Command="{Binding Platform.OnZoomOut, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Subtract}"/>
+    </MenuItem>
+    <MenuItem Header="T_heme">
+      <MenuItem Header="Fluent _Light" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentLight"/>
+      <MenuItem Header="Fluent _Dark" Command="{x:Static app:App.ChangeTheme}" CommandParameter="FluentDark"/>
+    </MenuItem>
+  </MenuItem>
+  <MenuItem Header="_Project">
+    <MenuItem Header="_Document">
+      <MenuItem Header="_Add Document" Command="{Binding Project.OnAddDocument, FallbackValue={x:Null}}" CommandParameter="{Binding Mode=OneWay}"/>
+      <MenuItem Header="Insert Document Bef_ore" Command="{Binding Project.OnInsertDocumentBefore, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}"/>
+      <MenuItem Header="Insert Document Aft_er" Command="{Binding Project.OnInsertDocumentAfter, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}"/>
+      <MenuItem Header="Cu_t Document" Command="{Binding ClipboardService.OnCut, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}"/>
+      <MenuItem Header="_Copy Document" Command="{Binding ClipboardService.OnCopy, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}"/>
+      <MenuItem Header="_Paste Document" Command="{Binding ClipboardService.OnPaste, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}"/>
+      <MenuItem Header="_Delete Document" Command="{Binding ClipboardService.OnDelete, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}"/>
+      <MenuItem Header="E_xport Document" Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDocument, FallbackValue={x:Null}}"/>
+    </MenuItem>
+    <MenuItem Header="P_age">
+      <MenuItem Header="_Add Page" Command="{Binding Project.OnAddPage, FallbackValue={x:Null}}" CommandParameter="{Binding Mode=OneWay}"/>
+      <MenuItem Header="Insert Page Bef_ore" Command="{Binding Project.OnInsertPageBefore, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+      <MenuItem Header="Insert Page Aft_er" Command="{Binding Project.OnInsertPageAfter, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+      <MenuItem Header="Cu_t Page" Command="{Binding ClipboardService.OnCut, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+      <MenuItem Header="_Copy Page" Command="{Binding ClipboardService.OnCopy, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+      <MenuItem Header="_Paste Page" Command="{Binding ClipboardService.OnPaste, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+      <MenuItem Header="_Delete Page" Command="{Binding ClipboardService.OnDelete, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+      <MenuItem Header="E_xport Page" Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+    </MenuItem>
+    <MenuItem Header="_Layer">
+      <MenuItem Header="_Add Layer" Command="{Binding Project.AddLayer, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer, FallbackValue={x:Null}}"/>
+      <MenuItem Header="_Delete Layer" Command="{Binding Project.RemoveLayer, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentContainer.CurrentLayer, FallbackValue={x:Null}}"/>
+    </MenuItem>
+    <MenuItem Header="D_ata">
+      <MenuItem Header="_Import Database..." Command="{Binding Platform.OnImportData, FallbackValue={x:Null}}" CommandParameter="{Binding Project}"/>
+      <MenuItem Header="_Export Database..." Command="{Binding Platform.OnExportData, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDatabase, FallbackValue={x:Null}}"/>
+      <MenuItem Header="_Update Database..." Command="{Binding Platform.OnUpdateData, FallbackValue={x:Null}}" CommandParameter="{Binding Project.CurrentDatabase, FallbackValue={x:Null}}"/>
+    </MenuItem>
+    <MenuItem Header="O_ptions">
+      <MenuItem Header="Default is Stro_ked" Command="{Binding OnToggleDefaultIsStroked}" InputGesture="K"/>
+      <MenuItem Header="Default is _Filled" Command="{Binding OnToggleDefaultIsFilled}" InputGesture="F"/>
+      <MenuItem Header="Default is Close_d" Command="{Binding OnToggleDefaultIsClosed}" InputGesture="D"/>
+      <MenuItem Header="Snap to _Grid" Command="{Binding OnToggleSnapToGrid}" InputGesture="G"/>
+      <MenuItem Header="Try To _Connect" Command="{Binding OnToggleTryToConnect}" InputGesture="C"/>
+      <MenuItem Header="_Single Press Mode" Command="{Binding OnToggleSinglePressMode}"/>
+    </MenuItem>
+    <MenuItem Header="E_xport Project" Command="{Binding Platform.OnExport, FallbackValue={x:Null}}" CommandParameter="{Binding Project}"/>
+  </MenuItem>
+  <MenuItem Header="_Shape">
+    <MenuItem Header="Du_plicate" Command="{Binding ShapeService.OnDuplicateSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+D}"/>
+    <MenuItem Header="_Block">
+      <MenuItem Header="_Block" Command="{Binding ShapeService.OnGroupSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+G}"/>
+      <MenuItem Header="E_xplode" Command="{Binding ShapeService.OnExplodeSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+U}"/>
+    </MenuItem>
+    <MenuItem Header="Rotat_e">
+      <MenuItem Header="Rotate _Right 90°" Command="{Binding ShapeService.OnRotateSelected, FallbackValue={x:Null}}" CommandParameter="90" InputGesture="{app:PlatformGesture Text=Primary+R}"/>
+      <MenuItem Header="Rotate _Left 90°" Command="{Binding ShapeService.OnRotateSelected, FallbackValue={x:Null}}" CommandParameter="-90" InputGesture="{app:PlatformGesture Text=Primary+L}"/>
+      <MenuItem Header="Flip _Horizontal" Command="{Binding ShapeService.OnFlipHorizontalSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+H}"/>
+      <MenuItem Header="Flip _Vertical" Command="{Binding ShapeService.OnFlipVerticalSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+J}"/>
+    </MenuItem>
+    <MenuItem Header="_Move">
+      <MenuItem Header="_Up" Command="{Binding ShapeService.OnMoveUpSelected, FallbackValue={x:Null}}" InputGesture="Up"/>
+      <MenuItem Header="_Down" Command="{Binding ShapeService.OnMoveDownSelected, FallbackValue={x:Null}}" InputGesture="Down"/>
+      <MenuItem Header="_Left" Command="{Binding ShapeService.OnMoveLeftSelected, FallbackValue={x:Null}}" InputGesture="Left"/>
+      <MenuItem Header="_Right" Command="{Binding ShapeService.OnMoveRightSelected, FallbackValue={x:Null}}" InputGesture="Right"/>
+    </MenuItem>
+    <MenuItem Header="Stac_k">
+      <MenuItem Header="_Horizontally" Command="{Binding ShapeService.OnStackHorizontallySelected, FallbackValue={x:Null}}" InputGesture="Shift+H"/>
+      <MenuItem Header="_Vertically" Command="{Binding ShapeService.OnStackVerticallySelected, FallbackValue={x:Null}}" InputGesture="Shift+Y"/>
+    </MenuItem>
+    <MenuItem Header="Dis_tribute">
+      <MenuItem Header="_Horizontally" Command="{Binding ShapeService.OnDistributeHorizontallySelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+H}"/>
+      <MenuItem Header="_Vertically" Command="{Binding ShapeService.OnDistributeVerticallySelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+Y}"/>
+    </MenuItem>
+    <MenuItem Header="Alig_n">
+      <MenuItem Header="_Left" Command="{Binding ShapeService.OnAlignLeftSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+Left}"/>
+      <MenuItem Header="_Centered" Command="{Binding ShapeService.OnAlignCenteredSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+Subtract}"/>
+      <MenuItem Header="_Right" Command="{Binding ShapeService.OnAlignRightSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+Right}"/>
+      <MenuItem Header="_Top" Command="{Binding ShapeService.OnAlignTopSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+Up}"/>
+      <MenuItem Header="C_enter" Command="{Binding ShapeService.OnAlignCenterSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+OemPipe}"/>
+      <MenuItem Header="_Bottom" Command="{Binding ShapeService.OnAlignBottomSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+Down}"/>
+    </MenuItem>
+    <MenuItem Header="_Arange">
+      <MenuItem Header="_Bring to Front" Command="{Binding ShapeService.OnBringToFrontSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+OemCloseBrackets}"/>
+      <MenuItem Header="Bring _Forward" Command="{Binding ShapeService.OnBringForwardSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+OemCloseBrackets}"/>
+      <MenuItem Header="Send Back_ward" Command="{Binding ShapeService.OnSendBackwardSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+OemOpenBrackets}"/>
+      <MenuItem Header="_Send to Back" Command="{Binding ShapeService.OnSendToBackSelected, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+Shift+OemOpenBrackets}"/>
+    </MenuItem>
+    <MenuItem Header="Create Pat_h" Command="{Binding ShapeService.OnCreatePath, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Create Str_oke Path" Command="{Binding ShapeService.OnCreateStrokePath, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Create _Fill Path" Command="{Binding ShapeService.OnCreateFillPath, FallbackValue={x:Null}}"/>
+    <MenuItem Header="Create _Winding Path" Command="{Binding ShapeService.OnCreateWindingPath, FallbackValue={x:Null}}"/>
+    <MenuItem Header="_Simplify Path" Command="{Binding ShapeService.OnPathSimplify, FallbackValue={x:Null}}"/>
+    <MenuItem Header="_Break Path" Command="{Binding ShapeService.OnPathBreak, FallbackValue={x:Null}}" InputGesture="{app:PlatformGesture Text=Primary+B}"/>
+    <MenuItem Header="_Difference" Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" CommandParameter="Difference" InputGesture="{app:PlatformGesture Text=Primary+Shift+D}"/>
+    <MenuItem Header="_Intersect" Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" CommandParameter="Intersect" InputGesture="{app:PlatformGesture Text=Primary+Shift+I}"/>
+    <MenuItem Header="_Union" Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" CommandParameter="Union" InputGesture="{app:PlatformGesture Text=Primary+Shift+U}"/>
+    <MenuItem Header="_Xor" Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" CommandParameter="Xor" InputGesture="{app:PlatformGesture Text=Primary+Shift+X}"/>
+    <MenuItem Header="_Reverse Difference" Command="{Binding ShapeService.OnPathOp, FallbackValue={x:Null}}" CommandParameter="ReverseDifference" InputGesture="{app:PlatformGesture Text=Primary+Shift+R}"/>
+  </MenuItem>
+  <MenuItem Header="_Tool">
+    <MenuItem Header="_None" Command="{Binding OnToolNone}" InputGesture="N"/>
+    <MenuItem Header="_Selection" Command="{Binding OnToolSelection}" InputGesture="S"/>
+    <MenuItem Header="_Point" Command="{Binding OnToolPoint}" InputGesture="P"/>
+    <MenuItem Header="_Line" Command="{Binding OnToolLine}" InputGesture="L"/>
+    <MenuItem Header="_Wire" Command="{Binding OnToolWire}" InputGesture="W"/>
+    <MenuItem Header="_Arc" Command="{Binding OnToolArc}" InputGesture="A"/>
+    <MenuItem Header="Cubic _Bezier" Command="{Binding OnToolCubicBezier}" InputGesture="B"/>
+    <MenuItem Header="_Quadratic Bezier" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q"/>
+    <MenuItem Header="Pat_h" Command="{Binding OnToolPath}" InputGesture="H"/>
+    <MenuItem Header="Path Tool">
+      <MenuItem Header="_Line" Command="{Binding OnToolLine}" InputGesture="L"/>
+      <MenuItem Header="_Arc" Command="{Binding OnToolArc}" InputGesture="A"/>
+      <MenuItem Header="Cubic _Bezier" Command="{Binding OnToolCubicBezier}" InputGesture="B"/>
+      <MenuItem Header="_Quadratic Bezier" Command="{Binding OnToolQuadraticBezier}" InputGesture="Q"/>
+      <MenuItem Header="_Move" Command="{Binding OnToolMove}" InputGesture="M"/>
+    </MenuItem>
+    <MenuItem Header="_Rectangle" Command="{Binding OnToolRectangle}" InputGesture="R"/>
+    <MenuItem Header="_Ellipse" Command="{Binding OnToolEllipse}" InputGesture="E"/>
+    <MenuItem Header="_Text" Command="{Binding OnToolText}" InputGesture="T"/>
+    <MenuItem Header="_Image" Command="{Binding OnToolImage}" InputGesture="I"/>
+    <MenuItem Header="Reset" Command="{Binding OnResetTool}"/>
+  </MenuItem>
+</s:StudioCommandPalette>

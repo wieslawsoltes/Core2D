@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Avalonia.Headless.XUnit" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
+    <!-- Match the desktop host's centrally versioned Debug diagnostics reference. -->
+    <PackageReference Include="ProDiagnostics" Condition="'$(Configuration)' == 'Debug'" />
+    <PackageReference Include="ProDataGrid" GeneratePathProperty="true">
+      <ExcludeAssets>compile</ExcludeAssets>
+    </PackageReference>
+    <Reference Include="Avalonia.Controls.DataGrid">
+      <HintPath>$(PkgProDataGrid)/lib/net10.0/Avalonia.Controls.DataGrid.dll</HintPath>
+      <!-- The NuGet runtime asset supplies this assembly. Do not copy the compile hint a second time. -->
+      <Private>false</Private>
+    </Reference>
+    <ProjectReference Include="../../src/Core2D/Core2D.csproj" />
+  </ItemGroup>
+</Project>

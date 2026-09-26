@@ -1,0 +1,50 @@
+<!-- Derived from AvaloniaUI/Avalonia 11.3.12 (MIT). See LICENSE.Avalonia.txt and UpstreamManifest.json. --><ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <StackPanel Spacing="20">
+        <RepeatButton Content="Click Me!"/>
+        <RepeatButton Content="Disabled" IsEnabled="False"/>
+        <RepeatButton Content="Rounded" CornerRadius="16"/>
+      </StackPanel>
+    </Border>
+  </Design.PreviewWith>
+
+  <ControlTheme x:Key="{x:Type RepeatButton}" TargetType="RepeatButton" x:DataType="RepeatButton"><Setter Property="VerticalContentAlignment" Value="Center"/><Setter Property="HorizontalContentAlignment" Value="Center"/><Setter Property="FontFamily" Value="{DynamicResource BrowserFontFamily}"/><Setter Property="FontSize" Value="{DynamicResource BrowserFontSize}"/><Setter Property="MinHeight" Value="{DynamicResource BrowserControlHeight}"/>
+    <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ButtonBorderThemeThickness}"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource BrowserControlRadius}"/>
+    <Setter Property="Padding" Value="{DynamicResource BrowserButtonPadding}"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter x:Name="PART_ContentPresenter" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BrowserHoverBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    </Style>
+
+    <Style Selector="^:pressed">
+      
+    </Style>
+
+    <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BrowserSelectionBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    </Style>
+
+    <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BrowserTransparentBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource BrowserDisabledBrush}"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

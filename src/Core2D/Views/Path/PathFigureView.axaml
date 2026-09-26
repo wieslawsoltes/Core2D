@@ -1,41 +1,18 @@
-﻿<UserControl x:Class="Core2D.Views.Path.PathFigureView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
-             xmlns:converters="using:Core2D.Converters"
-             xmlns:vmp="using:Core2D.ViewModels.Path"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.PathFigure}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmp:PathFigureViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Properties">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <CheckBox Content="IsClosed" 
-                  IsChecked="{Binding IsClosed, Mode=TwoWay}" 
-                  HorizontalAlignment="Stretch" />
+<UserControl x:Class="Core2D.Views.Path.PathFigureView"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Path"
+
+             x:DataType="vm:PathFigureViewModel" x:CompileBindings="True">
+  <StackPanel>
+    <s:StudioSection Header="Figure">
+      <StackPanel Spacing="8">
+        <s:StudioNameField Value="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Figure name" />
+        <s:StudioSwitch Content="Closed path" IsChecked="{Binding IsClosed, Mode=TwoWay}" />
+        <s:StudioPropertyField Label="Start point">
+          <s:StudioCoordinateEditor Source="{Binding StartPoint}" />
+        </s:StudioPropertyField>
       </StackPanel>
-    </TabItem>
-    <TabItem Header="StartPoint">
-      <ContentControl Content="{Binding StartPoint}" />
-    </TabItem>
-    <TabItem Header="Segments">
-      <ListBox ItemsSource="{Binding Segments}">
-        <ListBox.ItemTemplate>
-          <DataTemplate>
-            <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                       Background="Transparent">
-              <i:Interaction.Behaviors>
-                <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-              </i:Interaction.Behaviors>
-            </TextBlock>
-          </DataTemplate>
-        </ListBox.ItemTemplate>
-      </ListBox>
-    </TabItem>
-  </TabControl>
+    </s:StudioSection>
+    <s:StudioCollectionInspector Title="Path segments" Items="{Binding Segments}" BrowserHeight="200" />
+  </StackPanel>
 </UserControl>

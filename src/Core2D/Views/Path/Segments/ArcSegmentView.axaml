@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="Core2D.Views.Path.Segments.ArcSegmentView"
+<UserControl x:Class="Core2D.Views.Path.Segments.ArcSegmentView"
              xmlns="https://github.com/avaloniaui"
+             xmlns:studio="using:Core2D.Controls.Studio"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,27 +10,27 @@
              d:DataContext="{x:Static vmd:DesignerContext.ArcSegment}"
              d:DesignWidth="250" d:DesignHeight="400"
              x:DataType="vmps:ArcSegmentViewModel" x:CompileBindings="True">
-  <TabControl>
-    <TabItem Header="Properties">
-      <StackPanel Margin="{DynamicResource ContentMargin}">
-        <Label Content="RotationAngle" 
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <TextBox Text="{Binding RotationAngle, Mode=TwoWay}" />
-        <CheckBox Content="IsLargeArc" 
+  <StackPanel>
+    <studio:StudioSection Header="Properties">
+      <StackPanel Margin="0">
+        <studio:StudioPropertyField Label="Rotation Angle">
+          <studio:StudioNumberBox Prefix="°" Text="{Binding RotationAngle, Mode=TwoWay}" />
+        </studio:StudioPropertyField>
+        <studio:StudioSwitch Content="Is Large Arc"
                   IsChecked="{Binding IsLargeArc, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
-        <Label Content="SweepDirection"
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox ItemsSource="{x:Static vmps:ArcSegmentViewModel.SweepDirectionValues}"
-                  SelectedItem="{Binding SweepDirection, Mode=TwoWay}" 
+        <studio:StudioPropertyField Label="Sweep Direction">
+          <ComboBox ItemsSource="{x:Static vmps:ArcSegmentViewModel.SweepDirectionValues}"
+                  SelectedItem="{Binding SweepDirection, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
+        </studio:StudioPropertyField>
       </StackPanel>
-    </TabItem>
-    <TabItem Header="Point">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Point">
       <ContentControl Content="{Binding Point}" />
-    </TabItem>
-    <TabItem Header="Size">
+    </studio:StudioSection>
+    <studio:StudioSection Header="Size">
       <ContentControl Content="{Binding Size}" />
-    </TabItem>
-  </TabControl>
+    </studio:StudioSection>
+  </StackPanel>
 </UserControl>
