@@ -6,6 +6,7 @@ using System.Linq;
 using Core2D.Controls;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Editor.History;
+using Core2D.Model.History;
 using Core2D.ViewModels.Shapes;
 using Core2D.Model.Renderer;
 using Xunit;
@@ -17,7 +18,7 @@ public class CanvasGuideModelTests
     [Fact]
     public void GuidesCommitUndoAndRedoStableIdentities()
     {
-        var history = new StackHistory();
+        IHistory history = new StackHistory();
         var guides = new CanvasGuidesViewModel(history);
         Guid first = guides.Add(true, 44)!.Value;
         Guid second = guides.Add(false, 180)!.Value;
@@ -43,7 +44,7 @@ public class CanvasGuideModelTests
     [InlineData(1e16)]
     public void InvalidGuideCoordinatesDoNotCreateHistory(double value)
     {
-        var history = new StackHistory();
+        IHistory history = new StackHistory();
         var guides = new CanvasGuidesViewModel(history);
         Assert.Null(guides.Add(false, value));
         Assert.False(history.CanUndo());
@@ -100,7 +101,7 @@ public class CanvasGuideModelTests
     public void LayerActionsPreserveFlagsAndUndoAfterAdapterDisposal()
     {
         var shape = new RectangleShapeViewModel(null) { Name = "Card", State = ShapeStateFlags.Visible | ShapeStateFlags.Connector };
-        var history = new StackHistory();
+        IHistory history = new StackHistory();
         var row = new StudioLayerRowViewModel(shape, history);
         row.IsLocked = true;
         row.IsVisible = false;

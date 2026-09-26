@@ -14,6 +14,7 @@ using Core2D.Controls.Studio;
 using Core2D.Model.Editor;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Editor.History;
+using Core2D.Model.History;
 using Xunit;
 using PageView = Core2D.Controls.Editor.PageView;
 
@@ -34,7 +35,7 @@ public class StudioCanvasSafetyTests
     [AvaloniaFact]
     public void GuideVisibilityLockAndExternalChangesInvalidateOnlyPreviews()
     {
-        var history = new StackHistory();
+        IHistory history = new StackHistory();
         var guides = new CanvasGuidesViewModel(history);
         var overlay = new StudioCanvasOverlay();
         using var navigation = new CanvasNavigationViewModel(_ => { }, () => { }, () => { });
