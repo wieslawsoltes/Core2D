@@ -9,4 +9,8 @@
   </Style>
   <Style Selector="TextBlock.browser-heading"><Setter Property="FontSize" Value="22" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
   <Style Selector="TextBlock.browser-muted"><Setter Property="Foreground" Value="{DynamicResource BrowserMutedBrush}" /></Style>
+  <Style Selector="TextBox:disabled /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{DynamicResource BrowserInputBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserBorderBrush}" />
+  </Style>
 </Styles>

@@ -13,6 +13,6 @@
  <ItemGroup><PackageReference Include="Avalonia" Version="11.3.12" /></ItemGroup>
  <ItemGroup>
   <AvaloniaResource Include="**/*.xaml" />
-  <None Update="README.md;LICENSE.Avalonia.txt;UpstreamManifest.json" Pack="true" PackagePath="/" />
+  <None Update="README.md;LICENSE.Avalonia.txt;NOTICE.WinUI.md;UpstreamManifest.json" Pack="true" PackagePath="/" />
  </ItemGroup>
 </Project>
