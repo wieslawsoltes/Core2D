@@ -56,8 +56,9 @@
         </TabItem>
         <TabItem Header="Data">
           <Grid>
-            <data:DataObjectView DataContext="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}"
-                                 IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+            <Panel IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}">
+              <data:DataObjectView DataContext="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
+            </Panel>
             <s:StudioEmptyState Title="Select an object" Description="Linked data and custom properties appear here."
                                 IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}" />
           </Grid>

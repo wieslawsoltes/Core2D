@@ -5,8 +5,9 @@
              x:DataType="vm:DataPropertiesViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}">
     <Grid x:DataType="editor:ProjectEditorViewModel" s:StudioEditContext.History="{Binding Project.History}">
-      <data:DataObjectView DataContext="{Binding Project.SelectedShapes, Converter={x:Static c:SelectedShapesFirstItemValueConverter.Instance}}"
-                           IsVisible="{Binding Project.SelectedShapes, Converter={x:Static c:SelectedShapesHasItemsValueConverter.Instance}}" />
+      <Panel IsVisible="{Binding Project.SelectedShapes, Converter={x:Static c:SelectedShapesHasItemsValueConverter.Instance}}">
+        <data:DataObjectView DataContext="{Binding Project.SelectedShapes, Converter={x:Static c:SelectedShapesFirstItemValueConverter.Instance}}" />
+      </Panel>
       <s:StudioEmptyState Title="Select an object" Description="Inspect linked data and custom properties for your selection."
                           IsVisible="{Binding Project.SelectedShapes, Converter={x:Static c:SelectedShapesIsEmptyValueConverter.Instance}}" />
     </Grid>
