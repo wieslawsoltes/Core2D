@@ -10,6 +10,7 @@ using Avalonia.Styling;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 using Core2D.Controls.Studio;
+using Core2D.Model;
 using Core2D.ViewModels;
 using Core2D.ViewModels.Data;
 using Core2D.ViewModels.Editors;
@@ -32,8 +33,16 @@ public class StudioSecondaryViewTests
     public void LibrariesRenderAndRetainBoundActions(bool dark, int kind)
     {
         using var state = new AppState();
-        StudioScenarioTests.Populate(state);
+        var selectedShape = StudioScenarioTests.Populate(state);
         var project = state.Editor!.Project!;
+        var factory = state.ServiceProvider.GetService<IViewModelFactory>()!;
+        var block = factory.CreateBlockShape("Feature card component");
+        block.Shapes = ImmutableArray.Create<BaseShapeViewModel>(selectedShape);
+        project.CurrentGroupLibrary!.Items = ImmutableArray.Create<ViewModelBase>(block);
+        project.CurrentGroupLibrary.Selected = block;
+        project.CurrentStyleLibrary!.Items = ImmutableArray.Create<ViewModelBase>(
+            selectedShape.Style!, factory.CreateShapeStyle("Surface / Neutral", fr: 240, fg: 242, fb: 246));
+        project.CurrentStyleLibrary.Selected = selectedShape.Style;
         var script = new ScriptViewModel(state.ServiceProvider)
         {
             Name = "Create diagram", Code = "// This source is only displayed, never executed by this test.\nvar title = \"Studio\";\n// Use the Run action explicitly."

@@ -1,9 +1,10 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT. See LICENSE.TXT file in the project root for details.
 
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Core2D.ViewModels;
@@ -31,7 +32,9 @@ public abstract partial class WizardStepViewModelBase : ViewModelBase, IWizardSt
 
     public string Description { get; }
 
-    protected ExportWizardContext Context
+    /// <summary>Gets the shared export context consumed by the compiled step templates.</summary>
+    [IgnoreDataMember]
+    public ExportWizardContext Context
         => _context ?? throw new InvalidOperationException("Context has not been attached.");
 
     protected IExportWizardTelemetry Telemetry
