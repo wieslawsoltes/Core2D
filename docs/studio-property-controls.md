@@ -41,7 +41,7 @@ Up/Down step by `Increment`, Shift multiplies the step by ten and Alt divides it
 
 ## Bounds and history
 
-`BoundsInspectorViewModel` derives from `ReactiveObject`. It reads and writes existing `PointShapeViewModel` instances without replacing point identity. X/Y translate both points. Width/height preserve the original corner orientation and resize from the left/top bounds. Optional aspect locking uses the current non-zero ratio; zero dimensions remain editable without division by zero.
+`BoundsInspectorViewModel` derives from `ReactiveObject`. It reads and writes existing `PointShapeViewModel` instances without replacing point identity. X/Y translate both points. Width/height preserve the original corner orientation and resize about the selected nine-point anchor; the default anchor remains top left. Optional aspect locking uses the current non-zero ratio; zero dimensions remain editable without division by zero.
 
 A bounds change records one before/after snapshot in the document's `IHistory`. Undo callbacks retain the original points, not the disposable inspector adapter, so undo and redo remain valid after selection changes or view detachment. The adapter releases all point subscriptions when detached or replaced. Non-finite, coincident-identity and excessively large coordinates are not edited.
 
@@ -49,11 +49,11 @@ A bounds change records one before/after snapshot in the document's `IHistory`. 
 
 ## Native interaction and theme boundaries
 
-Segmented selection uses Avalonia's selection model. Arrow keys, Home and End skip disabled/hidden options and respect right-to-left flow. Switches and formatting buttons retain native keyboard and toggle semantics. Text inputs and font autocomplete keep the native text presenter, caret, selection and composition machinery. The color spectrum still comes from the existing color-picker library.
+Segmented selection uses Avalonia's selection model. Arrow keys, Home and End skip disabled/hidden options and respect right-to-left flow. Switches and formatting buttons retain native keyboard and toggle semantics. Text inputs and font autocomplete keep the native text presenter, caret, selection and composition machinery. The native solid-color workbench is described in the advanced-controls document; its Advanced picker retains the existing color-picker library.
 
 New semantic tokens cover raised selection surfaces, switch tracks, transparency cells and error borders in both light and dark themes. The compact property templates use shared input, border, foreground, hover and focus tokens; they do not hard-code a separate per-view theme.
 
-This implements the listed controls and workflows, not every Figma product feature. Multi-selection aggregation, gradient-stop editing, variable fonts, collaborative comments and prototype execution are not introduced by this control pass. Native-platform touch, IME and assistive-technology behavior still require interactive validation in addition to headless tests.
+This implements the listed controls and workflows, not every Figma product feature. The subsequent [advanced-controls pass](studio-advanced-controls.md) adds multi-selection aggregation, resize anchors, transactional names/dashes and a native solid-color workbench. Gradient-stop editing, variable fonts, collaborative comments and prototype execution remain outside these passes. Native-platform touch, IME and assistive-technology behavior still require interactive validation in addition to headless tests.
 
 ## Validation
 

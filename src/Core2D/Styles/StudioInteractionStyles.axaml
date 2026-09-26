@@ -22,6 +22,9 @@
   <Style Selector="MenuItem"><Setter Property="Theme" Value="{StaticResource StudioMenuItemTheme}" /></Style>
   <Style Selector="NumericUpDown"><Setter Property="Theme" Value="{StaticResource StudioNumericUpDownTheme}" /></Style>
   <Style Selector=":is(TextBox)"><Setter Property="ContextFlyout" Value="{StaticResource StudioTextContextFlyout}" /></Style>
+  <Style Selector=":is(TextBox) /template/ ContentPresenter#PART_InnerLeft" x:DataType="TextBox" x:CompileBindings="True">
+    <Setter Property="IsVisible" Value="{Binding InnerLeftContent, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}" />
+  </Style>
   <Style Selector="Menu > MenuItem /template/ Popup#PART_Popup"><Setter Property="Placement" Value="BottomEdgeAlignedLeft" /></Style>
   <Style Selector="editor|MenuView.studio-command-menu Menu > MenuItem /template/ Popup#PART_Popup"><Setter Property="Placement" Value="RightEdgeAlignedTop" /></Style>
   <Style Selector="DocumentTabStripItem">

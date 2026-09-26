@@ -19,14 +19,15 @@
         <Border Name="PART_Surface" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1"
                 CornerRadius="{TemplateBinding CornerRadius}" ToolTip.Tip="{TemplateBinding Error}">
           <Grid ColumnDefinitions="Auto,*,Auto">
-            <Border Name="PART_ScrubHandle" Padding="8,0,4,0" Background="Transparent" Cursor="SizeWestEast">
+            <Border Name="PART_ScrubHandle" Padding="8,0,0,0" Background="Transparent" Cursor="SizeWestEast"
+                    IsVisible="{Binding Prefix, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
               <TextBlock Text="{TemplateBinding Prefix}" Foreground="{DynamicResource StudioMutedBrush}" VerticalAlignment="Center" />
             </Border>
-            <TextBox Name="PART_Input" Grid.Column="1" MinHeight="26" Padding="3,4" BorderThickness="0" Background="Transparent"
+            <TextBox Name="PART_Input" Grid.Column="1" MinHeight="26" Padding="7,4,3,4" BorderThickness="0" Background="Transparent"
                      Text="{Binding DraftText, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                      IsReadOnly="{TemplateBinding IsReadOnly}" Watermark="Mixed"
                      AutomationProperties.Name="{TemplateBinding (AutomationProperties.Name)}" />
-            <TextBlock Grid.Column="2" Text="{TemplateBinding Suffix}" Foreground="{DynamicResource StudioMutedBrush}"
+            <TextBlock Grid.Column="2" IsVisible="{Binding Suffix, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Text="{TemplateBinding Suffix}" Foreground="{DynamicResource StudioMutedBrush}"
                        Margin="2,0,6,0" VerticalAlignment="Center" IsHitTestVisible="False" />
           </Grid>
         </Border>
@@ -123,7 +124,6 @@
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type s:StudioPropertyRow}" TargetType="s:StudioPropertyRow" x:DataType="s:StudioPropertyRow">
-    <Setter Property="Margin" Value="0,0,0,8" /><Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="Template">
       <ControlTemplate>
         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
