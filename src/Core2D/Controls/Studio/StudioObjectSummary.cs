@@ -44,7 +44,7 @@ public sealed class StudioObjectSummary : TemplatedControl
             BlockShapeViewModel => "Block", InsertShapeViewModel => "Block instance",
             RectangleShapeViewModel => "Rectangle", EllipseShapeViewModel => "Ellipse",
             TextShapeViewModel => "Text", ImageShapeViewModel => "Image", PathShapeViewModel => "Path",
-            PointShapeViewModel => "Point", LineShapeViewModel => "Line", WireShapeViewModel => "Wire",
+            PointShapeViewModel => "Point", WireShapeViewModel => "Wire", LineShapeViewModel => "Line",
             ArcShapeViewModel => "Arc", CubicBezierShapeViewModel => "Cubic Bézier", QuadraticBezierShapeViewModel => "Quadratic Bézier",
             PathFigureViewModel => "Path figure", ArcSegmentViewModel => "Arc segment",
             CubicBezierSegmentViewModel => "Cubic segment", QuadraticBezierSegmentViewModel => "Quadratic segment",
