@@ -13,6 +13,9 @@ using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
+using Avalonia.Layout;
+using Avalonia.Media;
 using Avalonia.Controls.DataGridFiltering;
 using Avalonia.Controls.DataGridSearching;
 using Avalonia.Controls.DataGridSorting;
@@ -126,8 +129,14 @@ public sealed class StudioAssetBrowserBehavior : Behavior<StudioAssetBrowser>
         }
         else
         {
-            _grid.Resources.Remove(TemplateKey);
-            column = new DataGridTextColumnDefinition();
+            // A text-column accessor supplies sort/search values but the pinned grid's default
+            // display binding still targets the whole object. Render the explicit display contract.
+            _grid.Resources[TemplateKey] = new FuncDataTemplate<object>((item, _) => new StudioItemLabel
+            {
+                Item = item, TextTrimming = TextTrimming.CharacterEllipsis,
+                VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(12, 0)
+            }, supportsRecycling: false);
+            column = new DataGridTemplateColumnDefinition { CellTemplateKey = TemplateKey };
         }
         column.ColumnKey = ColumnKey;
         column.Header = "Name";

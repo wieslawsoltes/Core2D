@@ -27,6 +27,7 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
 {
     private const string NameKey = "FieldName", ValueKey = "FieldValue";
     private DataGrid? _grid;
+    private DataGridTemplateColumnDefinition? _removeColumn;
     private DataGridCollectionView? _view;
     private DataFieldsViewModel? _editor;
     private readonly List<DataFieldRowViewModel> _rows = new();
@@ -67,11 +68,16 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
         _grid.SortingModel = _sorting;
         _grid.SearchModel = _search;
         _grid.SearchAdapterFactory = new DataGridAccessorSearchAdapterFactory();
+        _removeColumn = new DataGridTemplateColumnDefinition
+        {
+            Header = "", ColumnKey = "RemoveField", CellTemplateKey = "StudioDataRemoveCell",
+            Width = new DataGridLength(34), IsReadOnly = true, IsVisible = false
+        };
         _grid.ColumnDefinitionsSource = new AvaloniaList<DataGridColumnDefinition>
         {
             Column(NameKey, "Name", "StudioDataNameCell", row => row.Name, 1),
             Column(ValueKey, "Value", "StudioDataValueCell", row => row.Value, 1.25),
-            new DataGridTemplateColumnDefinition { Header = "", ColumnKey = "RemoveField", CellTemplateKey = "StudioDataRemoveCell", Width = new DataGridLength(34), IsReadOnly = true }
+            _removeColumn
         };
         RebuildEditor();
     }
@@ -99,7 +105,7 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
         _editor = null;
         if (AssociatedObject is { } table) { table.Editor = null; table.ResultCount = 0; }
         if (_grid is not null) _grid.ColumnDefinitionsSource = null;
-        _grid = null;
+        _grid = null; _removeColumn = null;
         _filtering.Clear(); _sorting.Clear(); _search.Clear();
     }
     private void RebuildEditor()
@@ -129,6 +135,7 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
         DropRows();
         if (_grid is null || _editor is null) return;
         foreach (DataFieldRowViewModel row in _editor.Rows) { _rows.Add(row); row.PropertyChanged += OnRowChanged; }
+        if (_removeColumn is not null) _removeColumn.IsVisible = _rows.Any(row => row.CanRemove);
         _view = new DataGridCollectionView(_editor.Rows);
         _view.CollectionChanged += OnViewChanged;
         _grid.ItemsSource = _view;

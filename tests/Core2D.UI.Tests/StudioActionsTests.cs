@@ -74,7 +74,7 @@ public class StudioActionsTests
             Assert.True(palette.ResultCount > 40, $"Only {palette.ResultCount} actions were bound.");
             var grid = Assert.Single(palette.GetVisualDescendants().OfType<DataGrid>());
             Assert.Contains(grid.ItemsSource!.Cast<StudioActionViewModel>(), action => action.IsAvailable);
-            var surface = palette.GetVisualDescendants().OfType<Border>().Single(x => x.Name == "PART_Surface");
+            var surface = palette.GetVisualDescendants().OfType<Border>().Single(x => x.Name == "PART_Surface" && ReferenceEquals(x.TemplatedParent, palette));
             Assert.True(surface.Bounds.Width <= width - 30);
             palette.Query = "align"; Dispatcher.UIThread.RunJobs();
             Assert.True(palette.ResultCount >= 4);
