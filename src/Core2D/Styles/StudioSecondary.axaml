@@ -87,13 +87,15 @@
     </Style>
   </ControlTheme>
   <ControlTheme x:Key="{x:Type s:StudioAssetBrowser}" TargetType="s:StudioAssetBrowser" x:DataType="s:StudioAssetBrowser">
+    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Grid RowDefinitions="Auto,*,Auto">
+        <Grid RowDefinitions="Auto,*,Auto" Background="{TemplateBinding Background}">
           <Grid Margin="10,8" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="4">
             <s:StudioSearchBox Name="PART_Search"
               Text="{Binding Query, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-              Watermark="Search assets…" AutomationProperties.Name="Search assets" />
+              Watermark="{TemplateBinding SearchWatermark}" AutomationProperties.Name="{TemplateBinding SearchWatermark}" />
             <s:StudioIconToggle Grid.Column="1"
               IsChecked="{Binding IsCompact, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
               Content="≡" ToolTip.Tip="Compact rows" AutomationProperties.Name="Compact asset rows" />

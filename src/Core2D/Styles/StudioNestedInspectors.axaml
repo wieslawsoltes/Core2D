@@ -48,14 +48,16 @@
     </Setter>
   </ControlTheme>
   <ControlTheme x:Key="{x:Type s:StudioCollectionInspector}" TargetType="s:StudioCollectionInspector" x:DataType="s:StudioCollectionInspector">
+    <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
     <Setter Property="Template">
       <ControlTemplate>
-        <StackPanel>
+        <StackPanel Background="{TemplateBinding Background}">
           <s:StudioPanelHeader Title="{TemplateBinding Title}" Description="Search, select and inspect objects">
             <s:StudioIconButton Name="PART_ClearSelection" Icon="M1,1L15,15L14,16L0,2Z M15,1L1,15L0,14L14,0Z"
                                 IsVisible="{TemplateBinding HasSelection}" ToolTip.Tip="Clear detail selection" AutomationProperties.Name="Clear detail selection" />
           </s:StudioPanelHeader>
-          <s:StudioAssetBrowser Name="PART_Browser" Height="{TemplateBinding BrowserHeight}" IsCompact="True"
+          <s:StudioAssetBrowser Name="PART_Browser" SearchWatermark="Search objects…" Height="{TemplateBinding BrowserHeight}" IsCompact="True"
                                 Items="{TemplateBinding Items}" SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                 ItemTemplate="{StaticResource StudioObjectCollectionCell}" EmptyTitle="No matching objects"
                                 EmptyDescription="Clear the search or add objects using the existing drawing and project commands." />

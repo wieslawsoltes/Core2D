@@ -29,6 +29,13 @@ public class StudioAssetBrowser : TemplatedControl
     /// <summary>Gets or sets the selected original model object.</summary>
     public object? SelectedItem { get => _selectedItem; set => SetAndRaise(SelectedItemProperty, ref _selectedItem, value); }
 
+    /// <summary>Defines the search input's contextual prompt.</summary>
+    public static readonly DirectProperty<StudioAssetBrowser, string> SearchWatermarkProperty =
+        AvaloniaProperty.RegisterDirect<StudioAssetBrowser, string>(nameof(SearchWatermark), x => x.SearchWatermark, (x, value) => x.SearchWatermark = value);
+    private string _searchWatermark = "Search assets…";
+    /// <summary>Gets or sets the prompt without changing the browser's search semantics.</summary>
+    public string SearchWatermark { get => _searchWatermark; set => SetAndRaise(SearchWatermarkProperty, ref _searchWatermark, value); }
+
     /// <summary>Gets or sets the compiled asset cell template.</summary>
     public static readonly DirectProperty<StudioAssetBrowser, IDataTemplate?> ItemTemplateProperty =
         AvaloniaProperty.RegisterDirect<StudioAssetBrowser, IDataTemplate?>(nameof(ItemTemplate), x => x.ItemTemplate, (x, value) => x.ItemTemplate = value);

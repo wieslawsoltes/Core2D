@@ -1,93 +1,33 @@
 <UserControl x:Class="Core2D.Views.Renderer.GridView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:studio="using:Core2D.Controls.Studio"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mr="using:Core2D.Model.Renderer"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Template}"
-             d:DesignWidth="250" d:DesignHeight="400"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:mr="using:Core2D.Model.Renderer"
              x:DataType="mr:IGrid" x:CompileBindings="True">
   <StackPanel>
-    <studio:StudioSection Header="Properties">
-      <StackPanel Margin="0">
-        <CheckBox Content="Is Grid Enabled" 
-                  IsChecked="{Binding IsGridEnabled, Mode=TwoWay}" 
-                  HorizontalAlignment="Stretch" />
-        <CheckBox Content="Is Border Enabled" 
-                  IsChecked="{Binding IsBorderEnabled, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" />
+    <s:StudioSection Header="Grid visibility">
+      <StackPanel Spacing="4">
+        <s:StudioSwitch Content="Show layout grid" IsChecked="{Binding IsGridEnabled, Mode=TwoWay}" AutomationProperties.Name="Show layout grid" />
+        <s:StudioSwitch Content="Show page border" IsChecked="{Binding IsBorderEnabled, Mode=TwoWay}" AutomationProperties.Name="Show page border" />
       </StackPanel>
-    </studio:StudioSection>
-    <studio:StudioSection Header="Offset">
-      <Grid ColumnDefinitions="25*,25*,25*,25*" 
-            RowDefinitions="Auto,Auto" 
-            Margin="0">
-        <Label Content="Left" 
-               Margin="{DynamicResource TextControlThemePadding}" 
-               Grid.Row="0" Grid.Column="0" />
-        <Label Content="Top" 
-               Margin="{DynamicResource TextControlThemePadding}" 
-               Grid.Row="0" Grid.Column="1" />
-        <Label Content="Right" 
-               Margin="{DynamicResource TextControlThemePadding}" 
-               Grid.Row="0" Grid.Column="2" />
-        <Label Content="Bottom"
-               Margin="{DynamicResource TextControlThemePadding}" 
-               Grid.Row="0" Grid.Column="3" />
-        <TextBox Text="{Binding GridOffsetLeft, Mode=TwoWay}" 
-                 TextAlignment="Center"
-                 Margin="{DynamicResource TextControlThemePadding}" 
-                 MinWidth="35" 
-                 Grid.Row="1" Grid.Column="0" />
-        <TextBox Text="{Binding GridOffsetTop, Mode=TwoWay}" 
-                 TextAlignment="Center"
-                 Margin="{DynamicResource TextControlThemePadding}" 
-                 MinWidth="35" 
-                 Grid.Row="1" Grid.Column="1" />
-        <TextBox Text="{Binding GridOffsetRight, Mode=TwoWay}" 
-                 TextAlignment="Center"
-                 Margin="{DynamicResource TextControlThemePadding}" 
-                 MinWidth="35" 
-                 Grid.Row="1" Grid.Column="2" />
-        <TextBox Text="{Binding GridOffsetBottom, Mode=TwoWay}"
-                 TextAlignment="Center"
-                 Margin="{DynamicResource TextControlThemePadding}" 
-                 MinWidth="35"
-                 Grid.Row="1" Grid.Column="3" />
+    </s:StudioSection>
+    <s:StudioSection Header="Margins">
+      <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="4">
+        <s:StudioPropertyField Label="Left"><s:StudioNumericField Value="{Binding GridOffsetLeft, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Grid left margin" /></s:StudioPropertyField>
+        <s:StudioPropertyField Grid.Column="1" Label="Top"><s:StudioNumericField Value="{Binding GridOffsetTop, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Grid top margin" /></s:StudioPropertyField>
+        <s:StudioPropertyField Grid.Row="1" Label="Right"><s:StudioNumericField Value="{Binding GridOffsetRight, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Grid right margin" /></s:StudioPropertyField>
+        <s:StudioPropertyField Grid.Row="1" Grid.Column="1" Label="Bottom"><s:StudioNumericField Value="{Binding GridOffsetBottom, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Grid bottom margin" /></s:StudioPropertyField>
       </Grid>
-    </studio:StudioSection>
-    <studio:StudioSection Header="Cell">
-      <Grid ColumnDefinitions="50*,6,50*" 
-            Margin="0">
-        <StackPanel Grid.Column="0">
-          <studio:StudioPropertyField Label="Width">
-            <TextBox Text="{Binding GridCellWidth, Mode=TwoWay}" />
-          </studio:StudioPropertyField>
-        </StackPanel>
-        <GridSplitter ResizeDirection="Columns" 
-                      ResizeBehavior="PreviousAndNext" 
-                      Background="Transparent" 
-                      Width="6"
-                      Grid.Column="1" />
-        <StackPanel Grid.Column="2">
-          <studio:StudioPropertyField Label="Height">
-            <TextBox Text="{Binding GridCellHeight, Mode=TwoWay}" />
-          </studio:StudioPropertyField>
-        </StackPanel>
+    </s:StudioSection>
+    <s:StudioSection Header="Cell size">
+      <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+        <s:StudioNumericField Prefix="W" Value="{Binding GridCellWidth, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Grid cell width" />
+        <s:StudioNumericField Grid.Column="1" Prefix="H" Value="{Binding GridCellHeight, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Grid cell height" />
       </Grid>
-    </studio:StudioSection>
-    <studio:StudioSection Header="Color">
+    </s:StudioSection>
+    <s:StudioSection Header="Grid stroke">
+      <StackPanel Spacing="8">
         <ContentControl Content="{Binding GridStrokeColor}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Thickness">
-      <StackPanel Margin="0">
-        <studio:StudioPropertyField Label="Thickness">
-          <TextBox Text="{Binding GridStrokeThickness, Mode=TwoWay}" />
-        </studio:StudioPropertyField>
+        <s:StudioPropertyRow Label="Weight"><s:StudioNumericField Value="{Binding GridStrokeThickness, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" Increment="0.1" AutomationProperties.Name="Grid stroke weight" /></s:StudioPropertyRow>
       </StackPanel>
-    </studio:StudioSection>
+    </s:StudioSection>
   </StackPanel>
 </UserControl>

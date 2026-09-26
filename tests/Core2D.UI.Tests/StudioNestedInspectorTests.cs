@@ -40,6 +40,7 @@ public class StudioNestedInspectorTests
         {
             window.Show(); Jobs();
             var browser = Find<StudioAssetBrowser>(inspector, "PART_Browser");
+            Assert.Equal("Search objects…", browser.SearchWatermark);
             browser.SelectedItem = second;
             Jobs();
             Assert.Same(second, inspector.SelectedItem);
@@ -89,6 +90,7 @@ public class StudioNestedInspectorTests
             Assert.False(oldAdapter.CanEdit);
             Assert.Equal(10d, first.X);
             Assert.Equal("100", x.DraftText);
+            Assert.True(input.IsFocused);
             input.Text = "+=25";
             Press(window, PhysicalKey.Enter);
             Assert.Equal(125d, second.X);
@@ -216,7 +218,7 @@ public class StudioNestedInspectorTests
             } };
             name = "path-inspector";
         }
-        var window = new Window { Width = 340, Height = 900, Content = new ScrollViewer { Content = view, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled }, RequestedThemeVariant = dark ? ThemeVariant.Dark : ThemeVariant.Light };
+        var window = new Window { Width = 340, Height = 900, Content = new StudioSurface { Content = new ScrollViewer { Content = view, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled } }, RequestedThemeVariant = dark ? ThemeVariant.Dark : ThemeVariant.Light };
         try
         {
             window.Show(); Jobs();

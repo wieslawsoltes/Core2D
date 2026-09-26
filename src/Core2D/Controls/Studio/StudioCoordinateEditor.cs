@@ -29,9 +29,13 @@ public sealed class StudioCoordinateEditor : TemplatedControl
     public CoordinatePairInspectorViewModel? Editor => _editor;
     internal void Rebind(bool attached)
     {
-        _editor?.Dispose();
-        SetAndRaise(EditorProperty, ref _editor, attached && Source is
+        CoordinatePairInspectorViewModel? previous = _editor;
+        CoordinatePairInspectorViewModel? next = attached && Source is
             ViewModels.Shapes.PointShapeViewModel or ViewModels.Path.PathSizeViewModel or ViewModels.Containers.TemplateContainerViewModel
-            ? new CoordinatePairInspectorViewModel(Source!, StudioEditContext.GetHistory(this)) : null);
+            ? new CoordinatePairInspectorViewModel(Source!, StudioEditContext.GetHistory(this)) : null;
+        // Publish the replacement before disposing the old adapter. Its final CanEdit=false
+        // notification must not transiently disable the retained TextBox and steal keyboard focus.
+        try { SetAndRaise(EditorProperty, ref _editor, next); }
+        finally { previous?.Dispose(); }
     }
 }
