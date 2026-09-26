@@ -2,7 +2,7 @@ name: Studio UI validation
 
 on:
   push:
-    branches: [feat/figma-inspired-workspace]
+    branches: [master]
   pull_request:
     branches: [master]
   workflow_dispatch:

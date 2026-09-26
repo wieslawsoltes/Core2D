@@ -81,10 +81,10 @@ public sealed class DataFieldRowViewModel : ReactiveObject, IDisposable
                 _history?.Snapshot(property.Value, value, text => property.Value = text);
                 property.Value = value;
             }
-            else if (_value is { } field)
+            else if (_value is { } recordValue)
             {
-                _history?.Snapshot(field.Content, value, text => field.Content = text);
-                field.Content = value;
+                _history?.Snapshot(recordValue.Content, value, text => recordValue.Content = text);
+                recordValue.Content = value;
             }
         }
     }
