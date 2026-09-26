@@ -1,5 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Data" x:CompileBindings="True">
+  <DataTemplate x:Key="StudioDataOwnerCell" x:DataType="vm:DataFieldRowViewModel">
+    <TextBlock Text="{Binding OwnerLabel}" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding OwnerLabel}" Margin="6,2"
+               Classes="studio-muted" VerticalAlignment="Center" />
+  </DataTemplate>
   <DataTemplate x:Key="StudioDataNameCell" x:DataType="vm:DataFieldRowViewModel">
     <s:StudioTextField Value="{Binding Name, Mode=TwoWay}" IsReadOnly="{Binding !CanEditName}"
                        Margin="4,2" Background="Transparent" AutomationProperties.Name="Field name" />

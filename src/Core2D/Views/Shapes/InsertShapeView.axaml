@@ -1,86 +1,29 @@
 <UserControl x:Class="Core2D.Views.Shapes.InsertShapeView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:studio="using:Core2D.Controls.Studio"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
-             xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
-             xmlns:converters="using:Core2D.Converters"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             xmlns:vms="using:Core2D.ViewModels.Shapes"
-             xmlns:vme="using:Core2D.ViewModels.Editor"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Point}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:InsertShapeViewModel" x:CompileBindings="True">
-  <UserControl.Resources>
-    <dd:InsertBlockDropHandler x:Key="InsertBlockDropHandler" />
-  </UserControl.Resources>
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Shapes"
+             xmlns:i="using:Avalonia.Xaml.Interactivity" xmlns:dd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:drop="using:Core2D.Behaviors.DragAndDrop"
+             x:DataType="vm:InsertShapeViewModel" x:CompileBindings="True">
+  <UserControl.Resources><drop:InsertBlockDropHandler x:Key="InsertBlockDropHandler" /></UserControl.Resources>
   <StackPanel>
-    <studio:StudioSection Header="Insert">
-      <StackPanel Margin="0">
-        <studio:StudioPropertyField Label="Name">
-          <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        </studio:StudioPropertyField>
-
-        <Label Content="Block"
-               Margin="{DynamicResource TextControlThemePadding}" />
-        <ComboBox ItemsSource="{Binding AvailableBlocks}"
-                  SelectedItem="{Binding Block, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch">
-          <ComboBox.ItemTemplate>
-            <DataTemplate>
-              <TextBlock Text="{Binding Name}" />
-            </DataTemplate>
-          </ComboBox.ItemTemplate>
-        </ComboBox>
-
-        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-          <Button Content="Edit Block"
-                  Command="{Binding Block.EditGroup}"
-                  CommandParameter="{Binding Block}"
-                  IsEnabled="{Binding !!Block}" />
-        </StackPanel>
-        <i:Interaction.Behaviors>
-          <idd:ContextDropBehavior Context="{Binding}"
-                                   Handler="{StaticResource InsertBlockDropHandler}" />
-        </i:Interaction.Behaviors>
+    <s:StudioSection Header="Instance">
+      <StackPanel Spacing="8">
+        <s:StudioNameField Value="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Instance name" />
+        <s:StudioPropertyField Label="Position"><s:StudioCoordinateEditor Source="{Binding Point}" /></s:StudioPropertyField>
       </StackPanel>
-    </studio:StudioSection>
-    <studio:StudioSection Header="Point">
-      <ContentControl Content="{Binding Point}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Connectors" IsExpanded="False">
-      <Grid RowDefinitions="50*,6,50*">
-        <ListBox x:Name="ConnectorsListBox"
-                 ItemsSource="{Binding Connectors}" 
-                 Grid.Row="0">
-          <ListBox.DataTemplates>
-            <DataTemplate DataType="vms:PointShapeViewModel">
-              <TextBlock Text="{Binding Mode=OneWay, Converter={x:Static converters:ViewModelToTypeStringConverter.Instance}}"
-                         Background="Transparent"
-                         VerticalAlignment="Stretch"
-                         HorizontalAlignment="Stretch">
-                <i:Interaction.Behaviors>
-                  <idd:ContextDragBehavior Context="{Binding FallbackValue={x:Null}}" />
-                </i:Interaction.Behaviors>
-              </TextBlock>
-            </DataTemplate>
-          </ListBox.DataTemplates>
-        </ListBox>
-        <GridSplitter ResizeDirection="Rows"
-                      ResizeBehavior="PreviousAndNext"
-                      Background="Transparent"
-                      Height="6"
-                      Grid.Row="1" />
-        <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                      VerticalScrollBarVisibility="Auto"
-                      Grid.Row="2">
-          <ContentControl Content="{Binding #ConnectorsListBox.SelectedItem}" />
-        </ScrollViewer>
-      </Grid>
-    </studio:StudioSection>
+    </s:StudioSection>
+    <s:StudioSection Header="Source block">
+      <StackPanel Spacing="8">
+        <i:Interaction.Behaviors><dd:ContextDropBehavior Context="{Binding}" Handler="{StaticResource InsertBlockDropHandler}" /></i:Interaction.Behaviors>
+        <s:StudioAssetBrowser Items="{Binding AvailableBlocks}" SelectedItem="{Binding Block, Mode=TwoWay}"
+                              ItemTemplate="{StaticResource StudioObjectCollectionCell}" Height="200" IsCompact="True"
+                              EmptyTitle="No matching blocks" EmptyDescription="Add a block to the project library or clear the search." />
+        <Button Content="Edit source block" Command="{Binding Block.EditGroup}" CommandParameter="{Binding Block}"
+                IsEnabled="{Binding !!Block}" HorizontalAlignment="Stretch" />
+      </StackPanel>
+    </s:StudioSection>
+    <s:StudioSection Header="Instance connectors" IsExpanded="False">
+      <s:StudioCollectionInspector Title="Connection points" Items="{Binding Connectors}" BrowserHeight="180" />
+    </s:StudioSection>
   </StackPanel>
 </UserControl>

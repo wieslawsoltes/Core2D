@@ -1,40 +1,21 @@
 <UserControl x:Class="Core2D.Views.Shapes.ArcShapeView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:studio="using:Core2D.Controls.Studio"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vms="using:Core2D.ViewModels.Shapes"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Arc}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vms:ArcShapeViewModel" x:CompileBindings="True">
-  <StackPanel>
-    <studio:StudioSection Header="Arc">
-      <StackPanel Margin="0">
-        <studio:StudioPropertyField Label="Name">
-          <TextBox Text="{Binding Name, Mode=TwoWay}" />
-        </studio:StudioPropertyField>
-        <CheckBox Content="Stroke" 
-                  IsChecked="{Binding IsStroked, Mode=TwoWay}" 
-                  HorizontalAlignment="Stretch" />
-        <CheckBox Content="Fill" 
-                  IsChecked="{Binding IsFilled, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" />
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Shapes"
+
+             x:DataType="vm:ArcShapeViewModel" x:CompileBindings="True">
+  <StackPanel Spacing="10">
+    <s:StudioNameField Value="{Binding Name, Mode=TwoWay}" AutomationProperties.Name="Object name" />
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+      <s:StudioSwitch Content="Fill" IsChecked="{Binding IsFilled, Mode=TwoWay}" />
+      <s:StudioSwitch Grid.Column="1" Content="Stroke" IsChecked="{Binding IsStroked, Mode=TwoWay}" />
+    </Grid>
+    <s:StudioSection Header="Geometry">
+      <StackPanel Spacing="4">
+        <s:StudioPropertyField Label="Point 1"><s:StudioCoordinateEditor Source="{Binding Point1}" /></s:StudioPropertyField>
+        <s:StudioPropertyField Label="Point 2"><s:StudioCoordinateEditor Source="{Binding Point2}" /></s:StudioPropertyField>
+        <s:StudioPropertyField Label="Point 3"><s:StudioCoordinateEditor Source="{Binding Point3}" /></s:StudioPropertyField>
+        <s:StudioPropertyField Label="Point 4"><s:StudioCoordinateEditor Source="{Binding Point4}" /></s:StudioPropertyField>
       </StackPanel>
-    </studio:StudioSection>
-    <studio:StudioSection Header="Point1">
-      <ContentControl Content="{Binding Point1}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Point2">
-      <ContentControl Content="{Binding Point2}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Point3">
-      <ContentControl Content="{Binding Point3}" />
-    </studio:StudioSection>
-    <studio:StudioSection Header="Point4">
-      <ContentControl Content="{Binding Point4}" />
-    </studio:StudioSection>
+    </s:StudioSection>
   </StackPanel>
 </UserControl>

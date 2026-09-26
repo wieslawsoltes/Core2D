@@ -5,11 +5,7 @@
              x:DataType="vm:TemplateContainerViewModel" x:CompileBindings="True">
   <StackPanel>
     <s:StudioSection Header="Layout">
-      <Grid ColumnDefinitions="*,6,*">
-        <s:StudioNumberBox Prefix="W" Text="{Binding Width, Mode=TwoWay}" AutomationProperties.Name="Page width" />
-        <GridSplitter Grid.Column="1" Width="6" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" />
-        <s:StudioNumberBox Grid.Column="2" Prefix="H" Text="{Binding Height, Mode=TwoWay}" AutomationProperties.Name="Page height" />
-      </Grid>
+      <s:StudioCoordinateEditor Source="{Binding}" />
     </s:StudioSection>
     <s:StudioSection Header="Page fill">
       <ContentControl Content="{Binding Background}" />

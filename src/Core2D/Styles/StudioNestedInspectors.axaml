@@ -1,0 +1,76 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels"
+                    xmlns:editor="using:Core2D.ViewModels.Editor" xmlns:i="using:Avalonia.Xaml.Interactivity"
+                    xmlns:dd="using:Avalonia.Xaml.Interactions.DragAndDrop" x:CompileBindings="True">
+  <DataTemplate x:Key="StudioObjectCollectionCell" x:DataType="vm:ViewModelBase">
+    <Border Background="Transparent" Padding="8,2">
+      <i:Interaction.Behaviors><dd:ContextDragBehavior Context="{Binding}" /></i:Interaction.Behaviors>
+      <s:StudioObjectSummary Source="{Binding}" />
+    </Border>
+  </DataTemplate>
+  <ControlTheme x:Key="{x:Type s:StudioObjectSummary}" TargetType="s:StudioObjectSummary" x:DataType="s:StudioObjectSummary">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="18,*" ColumnSpacing="8">
+          <PathIcon Data="M8,0L16,8L8,16L0,8Z M8,3L3,8L8,13L13,8Z" Width="14" Height="14"
+                    VerticalAlignment="Center" Foreground="{DynamicResource StudioMutedBrush}" />
+          <StackPanel Grid.Column="1" Spacing="1" VerticalAlignment="Center">
+            <TextBlock Text="{TemplateBinding Title}" TextTrimming="CharacterEllipsis" ToolTip.Tip="{TemplateBinding Title}" />
+            <TextBlock Text="{TemplateBinding Kind}" FontSize="10" Classes="studio-muted" TextTrimming="CharacterEllipsis" />
+          </StackPanel>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioCoordinateEditor}" TargetType="s:StudioCoordinateEditor" x:DataType="s:StudioCoordinateEditor">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel DataContext="{TemplateBinding Editor}">
+          <StackPanel x:DataType="editor:CoordinatePairInspectorViewModel" Spacing="6">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="8" IsEnabled="{Binding CanEdit}">
+              <s:StudioNumericField Prefix="{Binding FirstLabel}" Value="{Binding First, Mode=TwoWay}"
+                                    Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" AutomationProperties.Name="{Binding FirstLabel}" />
+              <s:StudioNumericField Grid.Column="1" Prefix="{Binding SecondLabel}" Value="{Binding Second, Mode=TwoWay}"
+                                    Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" AutomationProperties.Name="{Binding SecondLabel}" />
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto,Auto" IsVisible="{Binding IsSize}">
+              <TextBlock Text="Document units" FontSize="11" Classes="studio-muted" VerticalAlignment="Center" />
+              <s:StudioIconToggle Grid.Column="1" Content="Link" IsChecked="{Binding IsAspectLocked, Mode=TwoWay}"
+                                  IsEnabled="{Binding CanEdit}" ToolTip.Tip="Keep the current aspect ratio" AutomationProperties.Name="Link dimensions" />
+              <s:StudioIconButton Grid.Column="2" Icon="M2,3H12L9,0L10,-1L15,4L10,9L9,8L12,5H2Z M14,11H4L7,8L6,7L1,12L6,17L7,16L4,13H14Z"
+                                  Command="{Binding Swap}" ToolTip.Tip="Swap width and height without rotating content" AutomationProperties.Name="Swap dimensions" />
+            </Grid>
+            <TextBlock Text="Locked or invalid coordinates cannot be edited here." TextWrapping="Wrap" FontSize="11"
+                       Classes="studio-muted" IsVisible="{Binding !CanEdit}" />
+          </StackPanel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioCollectionInspector}" TargetType="s:StudioCollectionInspector" x:DataType="s:StudioCollectionInspector">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel>
+          <s:StudioPanelHeader Title="{TemplateBinding Title}" Description="Search, select and inspect objects">
+            <s:StudioIconButton Name="PART_ClearSelection" Icon="M1,1L15,15L14,16L0,2Z M15,1L1,15L0,14L14,0Z"
+                                IsVisible="{TemplateBinding HasSelection}" ToolTip.Tip="Clear detail selection" AutomationProperties.Name="Clear detail selection" />
+          </s:StudioPanelHeader>
+          <s:StudioAssetBrowser Name="PART_Browser" Height="{TemplateBinding BrowserHeight}" IsCompact="True"
+                                Items="{TemplateBinding Items}" SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                ItemTemplate="{StaticResource StudioObjectCollectionCell}" EmptyTitle="No matching objects"
+                                EmptyDescription="Clear the search or add objects using the existing drawing and project commands." />
+          <s:StudioEmptyState Title="Select an object" Description="Its design and custom properties appear here."
+                              IsVisible="{Binding !HasSelection, RelativeSource={RelativeSource TemplatedParent}}" />
+          <TabControl Name="PART_Details" IsVisible="{TemplateBinding HasSelection}">
+            <TabItem Header="Design">
+              <ContentControl Name="PART_Inspector" Content="{TemplateBinding SelectedItem}" Margin="12,10" />
+            </TabItem>
+            <TabItem Header="Data" IsVisible="{TemplateBinding HasData}">
+              <s:StudioDataTable Source="{TemplateBinding SelectedItem}" Height="260" />
+            </TabItem>
+          </TabControl>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

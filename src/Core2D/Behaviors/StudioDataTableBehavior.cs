@@ -28,6 +28,7 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
     private const string NameKey = "FieldName", ValueKey = "FieldValue";
     private DataGrid? _grid;
     private DataGridTemplateColumnDefinition? _removeColumn;
+    private DataGridColumnDefinition? _ownerColumn;
     private DataGridCollectionView? _view;
     private DataFieldsViewModel? _editor;
     private readonly List<DataFieldRowViewModel> _rows = new();
@@ -73,8 +74,11 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
             Header = "", ColumnKey = "RemoveField", CellTemplateKey = "StudioDataRemoveCell",
             Width = new DataGridLength(34), IsReadOnly = true, IsVisible = false
         };
+        _ownerColumn = Column("PropertyOwner", "Object", "StudioDataOwnerCell", row => row.OwnerLabel, 1);
+        _ownerColumn.IsVisible = AssociatedObject?.IncludeChildProperties == true;
         _grid.ColumnDefinitionsSource = new AvaloniaList<DataGridColumnDefinition>
         {
+            _ownerColumn,
             Column(NameKey, "Name", "StudioDataNameCell", row => row.Name, 1),
             Column(ValueKey, "Value", "StudioDataValueCell", row => row.Value, 1.25),
             _removeColumn
@@ -105,7 +109,7 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
         _editor = null;
         if (AssociatedObject is { } table) { table.Editor = null; table.ResultCount = 0; }
         if (_grid is not null) _grid.ColumnDefinitionsSource = null;
-        _grid = null; _removeColumn = null;
+        _grid = null; _removeColumn = null; _ownerColumn = null;
         _filtering.Clear(); _sorting.Clear(); _search.Clear();
     }
     private void RebuildEditor()
@@ -114,7 +118,8 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
         DropRows();
         _editor = null;
         if (_grid is null || AssociatedObject is not { } table) return;
-        _editor = new DataFieldsViewModel(table.Source, StudioEditContext.GetHistory(table));
+        _editor = new DataFieldsViewModel(table.Source, StudioEditContext.GetHistory(table), table.IncludeChildProperties);
+        if (_ownerColumn is not null) _ownerColumn.IsVisible = table.IncludeChildProperties;
         table.Editor = _editor;
         _editor.PropertyChanged += OnEditorChanged;
         RebuildRows();
@@ -150,7 +155,7 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
         {
             _filtering.SetOrUpdate(new FilteringDescriptor("Query", FilteringOperator.Custom, string.Empty, query,
                 Array.Empty<object>(), item => item is DataFieldRowViewModel row &&
-                (row.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || (row.Value?.Contains(query, StringComparison.OrdinalIgnoreCase) ?? false)),
+                ((table.IncludeChildProperties && row.OwnerLabel.Contains(query, StringComparison.OrdinalIgnoreCase)) || row.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || (row.Value?.Contains(query, StringComparison.OrdinalIgnoreCase) ?? false)),
                 CultureInfo.CurrentCulture, StringComparison.OrdinalIgnoreCase));
             _search.Apply(new[] { new SearchDescriptor(query, SearchMatchMode.Contains, SearchTermCombineMode.Any,
                 SearchScope.VisibleColumns, Array.Empty<object>(), StringComparison.OrdinalIgnoreCase,
@@ -162,7 +167,7 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
     }
     private void OnChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
-        if (e.Property == StudioDataTable.SourceProperty || e.Property == StudioEditContext.HistoryProperty) RebuildEditor();
+        if (e.Property == StudioDataTable.SourceProperty || e.Property == StudioDataTable.IncludeChildPropertiesProperty || e.Property == StudioEditContext.HistoryProperty) RebuildEditor();
         else if (e.Property == StudioDataTable.QueryProperty || e.Property == StudioDataTable.SortIndexProperty) ApplyQuery();
     }
     private void OnEditorChanged(object? sender, PropertyChangedEventArgs e)
@@ -171,7 +176,7 @@ public sealed class StudioDataTableBehavior : Behavior<StudioDataTable>
     }
     private void OnRowChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (_pending || e.PropertyName is not (nameof(DataFieldRowViewModel.Name) or nameof(DataFieldRowViewModel.Value))) return;
+        if (_pending || e.PropertyName is not (nameof(DataFieldRowViewModel.Name) or nameof(DataFieldRowViewModel.Value) or nameof(DataFieldRowViewModel.OwnerLabel))) return;
         _pending = true;
         int version = _generation;
         // Do not recycle a cell while its user-commit callback is still on the stack.

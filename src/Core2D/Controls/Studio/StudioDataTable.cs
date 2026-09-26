@@ -46,6 +46,12 @@ public class StudioDataTable : TemplatedControl
     private DataFieldsViewModel? _editor = null;
     /// <summary>Gets the disposable row projection supplied by the behavior.</summary>
     public DataFieldsViewModel? Editor { get => _editor; set => SetAndRaise(EditorProperty, ref _editor, value); }
+    /// <summary>Defines an aggregate view of direct block-child properties rather than block-local properties.</summary>
+    public static readonly DirectProperty<StudioDataTable, bool> IncludeChildPropertiesProperty =
+        AvaloniaProperty.RegisterDirect<StudioDataTable, bool>(nameof(IncludeChildProperties), x => x.IncludeChildProperties, (x, value) => x.IncludeChildProperties = value);
+    private bool _includeChildProperties;
+    /// <summary>Gets or sets whether a block table includes each direct child's original properties.</summary>
+    public bool IncludeChildProperties { get => _includeChildProperties; set => SetAndRaise(IncludeChildPropertiesProperty, ref _includeChildProperties, value); }
     /// <summary>Connects native grid projection and document-scoped editing services.</summary>
     public StudioDataTable() => Interaction.GetBehaviors(this).Add(new StudioDataTableBehavior());
 }

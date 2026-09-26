@@ -16,12 +16,12 @@
         <studio:StudioPropertyField Label="Rotation Angle">
           <studio:StudioNumberBox Prefix="°" Text="{Binding RotationAngle, Mode=TwoWay}" />
         </studio:StudioPropertyField>
-        <CheckBox Content="Is Large Arc" 
+        <studio:StudioSwitch Content="Is Large Arc"
                   IsChecked="{Binding IsLargeArc, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
         <studio:StudioPropertyField Label="Sweep Direction">
           <ComboBox ItemsSource="{x:Static vmps:ArcSegmentViewModel.SweepDirectionValues}"
-                  SelectedItem="{Binding SweepDirection, Mode=TwoWay}" 
+                  SelectedItem="{Binding SweepDirection, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" />
         </studio:StudioPropertyField>
       </StackPanel>

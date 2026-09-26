@@ -16,11 +16,12 @@ public sealed class DataFieldRowViewModel : ReactiveObject, IDisposable
     private readonly PropertyViewModel? _property;
     private readonly ValueViewModel? _value;
     private readonly IHistory? _history;
+    private readonly ViewModelBase? _propertyOwner;
     private readonly string _fallbackName;
     private bool _disposed;
 
     /// <summary>Adapts a custom property; removal is delegated to its existing owner command.</summary>
-    public DataFieldRowViewModel(PropertyViewModel property, ICommand? remove, IHistory? history)
+    public DataFieldRowViewModel(PropertyViewModel property, ICommand? remove, IHistory? history, ViewModelBase? propertyOwner = null)
     {
         ArgumentNullException.ThrowIfNull(property);
         Model = property;
@@ -28,6 +29,8 @@ public sealed class DataFieldRowViewModel : ReactiveObject, IDisposable
         _history = history;
         _fallbackName = string.Empty;
         RemoveCommand = remove;
+        _propertyOwner = propertyOwner;
+        if (_propertyOwner is not null) _propertyOwner.PropertyChanged += OnOwnerChanged;
         Observe();
     }
 
@@ -44,6 +47,12 @@ public sealed class DataFieldRowViewModel : ReactiveObject, IDisposable
         Observe();
     }
 
+    /// <summary>Gets the original property owner, when an aggregate block view supplies one.</summary>
+    public ViewModelBase? PropertyOwner => _propertyOwner;
+    /// <summary>Gets the owner label used to disambiguate equal property names across block objects.</summary>
+    public string OwnerLabel => string.IsNullOrWhiteSpace(_propertyOwner?.Name) ? "Unnamed object" : _propertyOwner.Name;
+    private void OnOwnerChanged(object? sender, PropertyChangedEventArgs e)
+    { if (e.PropertyName is nameof(ViewModelBase.Name) or null or "") this.RaisePropertyChanged(nameof(OwnerLabel)); }
     /// <summary>Gets the original field object, never a cloned document value.</summary>
     public ViewModelBase Model { get; }
     /// <summary>Gets schema mismatch guidance; mismatches never shift later field/value pairs.</summary>
@@ -103,6 +112,7 @@ public sealed class DataFieldRowViewModel : ReactiveObject, IDisposable
     {
         if (_disposed) return;
         _disposed = true;
+        if (_propertyOwner is not null) _propertyOwner.PropertyChanged -= OnOwnerChanged;
         if (_nameTarget is not null) _nameTarget.PropertyChanged -= OnChanged;
         if (!ReferenceEquals(Model, _nameTarget)) Model.PropertyChanged -= OnChanged;
         this.RaisePropertyChanged(nameof(CanEditName));
