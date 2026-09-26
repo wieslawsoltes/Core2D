@@ -67,7 +67,8 @@
                 Foreground="{DynamicResource StudioMutedBrush}"
                 IsVisible="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNull}}" />
               <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
-                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch" />
             </Grid>
           </Border>
           <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">

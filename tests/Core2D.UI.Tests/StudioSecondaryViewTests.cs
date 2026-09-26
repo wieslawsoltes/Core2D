@@ -18,6 +18,7 @@ using Core2D.ViewModels.Scripting;
 using Core2D.ViewModels.Shapes;
 using Core2D.Views.Editors;
 using Core2D.Views.Libraries;
+using Core2D.Views.Renderer;
 using Xunit;
 
 namespace Core2D.UI.Tests;
@@ -55,6 +56,10 @@ public class StudioSecondaryViewTests
             3 => new ScriptsView(), 4 => new ImagesView(), _ => throw new ArgumentOutOfRangeException(nameof(kind))
         };
         view.DataContext = project;
+        // Standalone test views need the same inherited renderer supplied by the real Assets sidebar.
+        RendererOptions.SetRenderer(view, state.Editor.LibraryRenderer);
+        RendererOptions.SetSelection(view, project);
+        RendererOptions.SetDataFlow(view, state.Editor.DataFlow);
         var window = new Window
         {
             Width = kind == 3 ? 680 : 380, Height = 680, Content = view,

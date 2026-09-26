@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.VisualTree;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Shapes;
 using Core2D.Views.Renderer;
@@ -29,7 +30,7 @@ public class BlockTileView : Control
 
     static BlockTileView()
     {
-        AffectsRender<BlockTileView>(BlockProperty, RendererProperty, BoundsProperty);
+        AffectsRender<BlockTileView>(BlockProperty, RendererProperty, BoundsProperty, RendererOptions.RendererProperty);
     }
 
     public BlockTileView()
@@ -53,8 +54,14 @@ public class BlockTileView : Control
     private void OnBlockChanged(BlockShapeViewModel? block)
     {
         _groupSubscription?.Dispose();
-        _groupSubscription = block?.Subscribe(_groupObserver);
+        _groupSubscription = this.GetVisualRoot() is not null ? block?.Subscribe(_groupObserver) : null;
         InvalidateVisual();
+    }
+
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        OnBlockChanged(Block);
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -100,6 +107,7 @@ public class BlockTileView : Control
 
         foreach (var point in _points)
         {
+            if (!double.IsFinite(point.X) || !double.IsFinite(point.Y)) return;
             minX = Math.Min(minX, point.X);
             minY = Math.Min(minY, point.Y);
             maxX = Math.Max(maxX, point.X);
