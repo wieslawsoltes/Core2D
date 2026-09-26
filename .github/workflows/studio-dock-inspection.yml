@@ -40,7 +40,7 @@ jobs:
       - name: Archive source and provenance
         run: |
           git -C app archive --format=tar.gz HEAD > inspection/core2d.tar.gz
-          git -C dock archive --format=tar.gz HEAD src docs > inspection/dock.tar.gz
+          git -C dock archive --format=tar.gz HEAD src > inspection/dock.tar.gz
           git -C app rev-parse HEAD > inspection/app-sha.txt
           git -C dock rev-parse HEAD > inspection/dock-sha.txt
       - uses: actions/upload-artifact@v4
