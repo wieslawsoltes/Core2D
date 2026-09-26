@@ -40,6 +40,8 @@ public sealed class StudioCanvasGuideBehavior : Behavior<Control>
     private void OnLoaded(object? sender, RoutedEventArgs e) => Connect();
     private void Connect()
     {
+        // Behaviors attach while XAML is still populating the root. Resolve names only after realization.
+        if (AssociatedObject?.GetVisualRoot() is null) return;
         if (_overlay is not null) _overlay.InteractionInvalidated -= OnInteractionInvalidated;
         if (_window is not null) _window.Deactivated -= OnInteractionInvalidated;
         _window = AssociatedObject is { } root ? TopLevel.GetTopLevel(root) as Window : null;
