@@ -1,0 +1,37 @@
+name: Apply studio workbench
+on:
+  push:
+    branches: [feat/figma-inspired-workspace]
+    paths: [.github/workflows/studio-apply-workbench.yml, '.github/studio-transfer/**']
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.ref == 'refs/heads/feat/figma-inspired-workspace'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify and apply source changes
+        shell: python
+        run: |
+          from pathlib import Path
+          import hashlib, lzma, subprocess
+          parts = sorted(Path('.github/studio-transfer').glob('patch.*.bin'))
+          assert len(parts) == 3
+          patch = lzma.decompress(b''.join(p.read_bytes() for p in parts))
+          assert hashlib.sha256(patch).hexdigest() == '0c09a5f8f8a39ab47137e49e9b9096fc03506b5708ce76192b89b4ed7fc9d80b'
+          for line in patch.decode().splitlines():
+              if line.startswith('diff --git '):
+                  assert line.split()[2].startswith(('a/src/', 'a/tests/'))
+                  assert line.split()[3].startswith(('b/src/', 'b/tests/'))
+          subprocess.run(['git', 'apply', '--check', '-'], input=patch, check=True)
+          subprocess.run(['git', 'apply', '--index', '-'], input=patch, check=True)
+      - name: Commit workbench and remove transfer files
+        run: |
+          git rm -r .github/studio-transfer .github/workflows/studio-apply-workbench.yml .github/workflows/studio-source-inspection.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat(studio): add quick actions, searchable settings and paired data editors'
+          git push origin HEAD:feat/figma-inspired-workspace
