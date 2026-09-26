@@ -1,0 +1,33 @@
+name: Browser theme source inspection
+on:
+  push:
+    branches: [feat/figma-inspired-workspace]
+    paths: [.github/workflows/browser-theme-source.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: app
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: AvaloniaUI/Avalonia
+          ref: 11.3.12
+          path: upstream
+          persist-credentials: false
+      - name: Archive text sources and provenance
+        run: |
+          mkdir inspection
+          git -C app archive --format=tar.gz HEAD > inspection/core2d.tar.gz
+          git -C upstream archive --format=tar.gz HEAD src/Avalonia.Themes.Fluent src/Avalonia.Controls LICENSE.md > inspection/avalonia.tar.gz
+          git -C upstream rev-parse HEAD > inspection/upstream-sha.txt
+          git -C app rev-parse HEAD > inspection/app-sha.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: browser-theme-sources
+          path: inspection
+          retention-days: 3
