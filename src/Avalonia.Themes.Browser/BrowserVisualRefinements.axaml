@@ -46,7 +46,10 @@
   </Style>
 
   <!-- Do not modify CalendarItem's empty generated day/year grids or selection machinery. -->
-  <Style Selector="CalendarItem:not(:disabled) /template/ Border#BackgroundLayer, CalendarItem:not(:disabled) /template/ Grid#PART_YearView">
+  <Style Selector="CalendarItem:not(:disabled) /template/ Border#BackgroundLayer">
+    <Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}" />
+  </Style>
+  <Style Selector="CalendarItem:not(:disabled) /template/ Grid#PART_YearView">
     <Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}" />
   </Style>
   <Style Selector="CalendarDayButton:not(:disabled) /template/ Border#Root, CalendarDayButton:not(:disabled) /template/ Border#Border, CalendarButton:not(:disabled) /template/ Border#Root, CalendarButton:not(:disabled) /template/ Border#Border">
