@@ -100,6 +100,9 @@ public class StudioGridSurfaceTests
             var rows = view.FindControl<DataGrid>("RowsDataGrid")!;
             var status = view.GetVisualDescendants().OfType<StudioTableStatus>().Single(x => x.IsEffectivelyVisible);
             Assert.Equal(2, status.ResultCount);
+            Assert.All(rows.Columns.OfType<DataGridTextColumn>(), column => Assert.NotNull(column.Binding));
+            Assert.Contains(rows.GetVisualDescendants().OfType<TextBlock>(), text => text.Text == "Primary");
+            Assert.Contains(rows.GetVisualDescendants().OfType<TextBlock>(), text => text.Text == "Ready");
             model.RecordFilterText = "Primary"; Jobs();
             Assert.Equal(1, status.ResultCount);
             Assert.Equal("1 of 2 records", status.Summary);
@@ -115,6 +118,9 @@ public class StudioGridSurfaceTests
             var columnsStatus = view.GetVisualDescendants().OfType<StudioTableStatus>().Single(x => x.IsEffectivelyVisible);
             Assert.Equal(1, columnsStatus.ResultCount);
             Assert.Equal("1 of 2 columns", columnsStatus.Summary);
+            var columns = view.FindControl<DataGrid>("ColumnsDataGrid")!;
+            Assert.Contains(columns.GetVisualDescendants().OfType<TextBlock>(), text => text.Text == "Role");
+            Assert.All(columns.Columns.OfType<DataGridBoundColumn>(), column => Assert.NotNull(column.Binding));
             StudioSecondaryViewTests.Capture(window, $"database-columns-{(dark ? "dark" : "light")}.png");
         }
         finally { window.Close(); }

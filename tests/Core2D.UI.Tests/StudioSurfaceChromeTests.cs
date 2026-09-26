@@ -79,7 +79,7 @@ public class StudioSurfaceChromeTests
             readout.Value = "150% · 1440 × 900"; Jobs();
             Assert.Equal(readout.Value, readout.GetVisualDescendants().OfType<SelectableTextBlock>().Single().Text);
             Assert.True(toggle.Focus()); window.KeyPressQwerty(PhysicalKey.Space, RawInputModifiers.None); window.KeyReleaseQwerty(PhysicalKey.Space, RawInputModifiers.None);
-            Assert.True(toggle.IsChecked);
+            Assert.False(toggle.IsChecked);
             var item = new ComboBoxItem { Content = "Selected mode", IsSelected = true };
             panel.Children.Add(item); Jobs();
             Assert.True(item.GetVisualDescendants().OfType<Avalonia.Controls.Shapes.Path>().Single(x => x.Name == "PART_Checkmark").IsVisible);

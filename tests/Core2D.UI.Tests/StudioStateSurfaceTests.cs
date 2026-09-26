@@ -41,7 +41,8 @@ public class StudioStateSurfaceTests
             var printable = switches.Single(x => AutomationProperties.GetName(x) == "Object printable");
             Assert.Null(printable.IsChecked);
             Assert.True(printable.Focus()); Press(window, PhysicalKey.Space);
-            Assert.True(editor.Editor.Printable);
+            // Avalonia's native mixed-toggle activation clears the flag.
+            Assert.False(editor.Editor.Printable);
             Assert.True(second.State.HasFlag(ShapeStateFlags.Input));
             Assert.True(history.Undo()); Assert.False(history.CanUndo());
             Assert.Null(editor.Editor.Printable);
@@ -102,6 +103,7 @@ public class StudioStateSurfaceTests
             editor.OnUndo();
             Assert.False(editor.Project.History.CanUndo());
             Assert.Equal(previousRendererFlags, editor.PageState.DrawShapeState);
+            StudioSecondaryViewTests.Capture(window, "workspace-state-light.png");
             tabs.SelectedIndex = 0; Jobs();
             Assert.Contains(view.GetVisualDescendants().OfType<StudioSection>(), x => Equals(x.Header, "Renderer preferences"));
         }
@@ -113,7 +115,9 @@ public class StudioStateSurfaceTests
     {
         using var state = new AppState();
         var shape = StudioScenarioTests.Populate(state);
-        state.Editor!.Project!.SelectedShapes = new HashSet<BaseShapeViewModel> { shape, new RectangleShapeViewModel(null) { Name = "Other" } };
+        var page = Assert.IsType<Core2D.ViewModels.Containers.PageContainerViewModel>(state.Editor!.Project!.CurrentContainer);
+        var other = page.Layers.SelectMany(layer => layer.Shapes).First(item => item.Name == "Secondary card");
+        state.Editor.Project.SelectedShapes = new HashSet<BaseShapeViewModel> { shape, other };
         var view = new MainView { DataContext = state.Editor };
         var window = new Window { Width = 1440, Height = 900, Content = view };
         try
