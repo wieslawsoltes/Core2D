@@ -1,89 +1,66 @@
 <UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:paz="using:Avalonia.Controls.PanAndZoom"
-  xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Options" xmlns:vme="using:Core2D.ViewModels.Editor"
-  xmlns:s="using:Core2D.Controls.Studio" x:Class="Core2D.Views.Docking.Tools.Options.ZoomOptionsView" mc:Ignorable="d"
-  d:DesignWidth="800" d:DesignHeight="600" x:DataType="vm:ZoomOptionsViewModel" x:CompileBindings="True">
+             xmlns:paz="using:Avalonia.Controls.PanAndZoom"
+             xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Options"
+             xmlns:vme="using:Core2D.ViewModels.Editor" xmlns:s="using:Core2D.Controls.Studio"
+             x:Class="Core2D.Views.Docking.Tools.Options.ZoomOptionsView"
+             x:DataType="vm:ZoomOptionsViewModel" x:CompileBindings="True">
   <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}">
-    <s:StudioPanelHeader Title="Viewport settings" Description="Inspect the active viewport and configure navigation"/>
-    <Panel DataContext="{Binding Context}" Grid.Row="1">
-      <Panel x:DataType="vme:ProjectEditorViewModel">
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
-          DataContext="{Binding CanvasPlatform.Zoom, FallbackValue={x:Null}}">
-          <TabControl x:DataType="paz:ZoomBorder">
-            <TabItem Header="Status">
-              <StackPanel Margin="{DynamicResource ContentMargin}">
-                <Label Content="ZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
-                <Label Content="{Binding ZoomX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                <Label Content="ZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
-                <Label Content="{Binding ZoomY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                <Label Content="OffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
-                <Label Content="{Binding OffsetX, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                <Label Content="OffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
-                <Label Content="{Binding OffsetY, Mode=OneWay}" Margin="{DynamicResource TextControlThemePadding}"/>
-                <Button Content="Reset" Command="{Binding $parent[UserControl].DataContext.Context.Platform.OnZoomReset}"
-                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                  Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"
-                  Padding="8,5" />
-                <Button Content="Fill" Command="{Binding $parent[UserControl].DataContext.Context.Platform.OnZoomFill}"
-                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                  Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"
-                  Padding="8,5" />
-                <Button Content="Uniform"
-                  Command="{Binding $parent[UserControl].DataContext.Context.Platform.OnZoomUniform}"
-                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                  Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"
-                  Padding="8,5" />
-                <Button Content="UniformToFill"
-                  Command="{Binding $parent[UserControl].DataContext.Context.Platform.OnZoomUniformToFill}"
-                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                  Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"
-                  Padding="8,5" />
-                <Button Content="AutoFit"
-                  Command="{Binding $parent[UserControl].DataContext.Context.Platform.OnZoomAutoFit}"
-                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                  Margin="{DynamicResource TextControlThemePadding}" x:CompileBindings="False"
-                  Padding="8,5" />
-              </StackPanel>
-            </TabItem>
-            <TabItem Header="Options">
-              <StackPanel Margin="{DynamicResource ContentMargin}">
-                <Label Content="PanButton" Margin="{DynamicResource TextControlThemePadding}"/>
-                <ComboBox ItemsSource="{x:Static paz:ZoomBorder.ButtonNames}"
-                  SelectedItem="{Binding PanButton, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-                <Label Content="Stretch" Margin="{DynamicResource TextControlThemePadding}"/>
-                <ComboBox ItemsSource="{x:Static paz:ZoomBorder.StretchModes}"
-                  SelectedItem="{Binding Stretch, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-                <Label Content="ZoomSpeed" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding ZoomSpeed, Mode=TwoWay}"/>
-                <s:StudioSwitch Content="EnablePan" IsChecked="{Binding EnablePan}" HorizontalAlignment="Stretch"/>
-                <s:StudioSwitch Content="EnableZoom" IsChecked="{Binding EnableZoom}" HorizontalAlignment="Stretch"/>
-              </StackPanel>
-            </TabItem>
-            <TabItem Header="Constrains">
-              <StackPanel Margin="{DynamicResource ContentMargin}">
-                <Label Content="MinZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding MinZoomX, Mode=TwoWay}"/>
-                <Label Content="MaxZoomX" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding MaxZoomX, Mode=TwoWay}"/>
-                <Label Content="MinZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding MinZoomY, Mode=TwoWay}"/>
-                <Label Content="MaxZoomY" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding MaxZoomY, Mode=TwoWay}"/>
-                <Label Content="MinOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding MinOffsetX, Mode=TwoWay}"/>
-                <Label Content="MinOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding MinOffsetY, Mode=TwoWay}"/>
-                <Label Content="MaxOffsetX" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding MaxOffsetX, Mode=TwoWay}"/>
-                <Label Content="MaxOffsetY" Margin="{DynamicResource TextControlThemePadding}"/>
-                <TextBox Text="{Binding MaxOffsetY, Mode=TwoWay}"/>
-                <s:StudioSwitch Content="EnableConstrains" IsChecked="{Binding EnableConstrains}" HorizontalAlignment="Stretch"/>
-              </StackPanel>
-            </TabItem>
-          </TabControl>
-        </ScrollViewer>
-      </Panel>
+    <s:StudioPanelHeader Title="Viewport settings" Description="Inspect the active viewport and configure navigation" />
+    <Panel Name="EditorContext" Grid.Row="1" DataContext="{Binding Context}">
+      <ScrollViewer x:DataType="vme:ProjectEditorViewModel" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel DataContext="{Binding CanvasPlatform.Zoom}">
+          <s:StudioSection x:DataType="paz:ZoomBorder" Header="Transform">
+            <StackPanel Spacing="8">
+              <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <s:StudioPropertyField Label="Horizontal scale"><TextBlock Text="{Binding ZoomX, StringFormat='{}{0:G6}'}" /></s:StudioPropertyField>
+                <s:StudioPropertyField Grid.Column="1" Label="Vertical scale"><TextBlock Text="{Binding ZoomY, StringFormat='{}{0:G6}'}" /></s:StudioPropertyField>
+              </Grid>
+              <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <s:StudioPropertyField Label="Horizontal offset"><TextBlock Text="{Binding OffsetX, StringFormat='{}{0:G6}'}" /></s:StudioPropertyField>
+                <s:StudioPropertyField Grid.Column="1" Label="Vertical offset"><TextBlock Text="{Binding OffsetY, StringFormat='{}{0:G6}'}" /></s:StudioPropertyField>
+              </Grid>
+              <WrapPanel DataContext="{Binding #EditorContext.DataContext}" x:DataType="vme:ProjectEditorViewModel">
+                <Button Content="Reset" Command="{Binding Platform.OnZoomReset}" Margin="0,0,4,4" />
+                <Button Content="Fill" Command="{Binding Platform.OnZoomFill}" Margin="0,0,4,4" />
+                <Button Content="Fit" Command="{Binding Platform.OnZoomUniform}" Margin="0,0,4,4" />
+                <Button Content="Cover" Command="{Binding Platform.OnZoomUniformToFill}" Margin="0,0,4,4" />
+                <Button Content="Auto fit" Command="{Binding Platform.OnZoomAutoFit}" Margin="0,0,4,4" />
+              </WrapPanel>
+            </StackPanel>
+          </s:StudioSection>
+          <s:StudioSection x:DataType="paz:ZoomBorder" Header="Navigation">
+            <StackPanel Spacing="8">
+              <s:StudioPropertyRow Label="Pan button"><ComboBox ItemsSource="{x:Static paz:ZoomBorder.ButtonNames}" SelectedItem="{Binding PanButton, Mode=TwoWay}" HorizontalAlignment="Stretch" /></s:StudioPropertyRow>
+              <s:StudioPropertyRow Label="Stretch"><ComboBox ItemsSource="{x:Static paz:ZoomBorder.StretchModes}" SelectedItem="{Binding Stretch, Mode=TwoWay}" HorizontalAlignment="Stretch" /></s:StudioPropertyRow>
+              <s:StudioPropertyRow Label="Zoom speed"><s:StudioNumericField Value="{Binding ZoomSpeed, Mode=TwoWay}" Minimum="0.01" Maximum="100" Increment="0.1" AutomationProperties.Name="Zoom speed" /></s:StudioPropertyRow>
+              <s:StudioSwitch Content="Allow panning" IsChecked="{Binding EnablePan, Mode=TwoWay}" />
+              <s:StudioSwitch Content="Allow zooming" IsChecked="{Binding EnableZoom, Mode=TwoWay}" />
+            </StackPanel>
+          </s:StudioSection>
+          <s:StudioSection x:DataType="paz:ZoomBorder" Header="Constraints" IsExpanded="False">
+            <StackPanel Spacing="8">
+              <s:StudioSwitch Content="Constrain viewport" IsChecked="{Binding EnableConstrains, Mode=TwoWay}" />
+              <!-- Keep text conversion for existing infinite/unbounded limits. -->
+              <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <s:StudioPropertyField Label="Min horizontal scale"><TextBox Text="{Binding MinZoomX, Mode=TwoWay}" /></s:StudioPropertyField>
+                <s:StudioPropertyField Grid.Column="1" Label="Max horizontal scale"><TextBox Text="{Binding MaxZoomX, Mode=TwoWay}" /></s:StudioPropertyField>
+              </Grid>
+              <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <s:StudioPropertyField Label="Min vertical scale"><TextBox Text="{Binding MinZoomY, Mode=TwoWay}" /></s:StudioPropertyField>
+                <s:StudioPropertyField Grid.Column="1" Label="Max vertical scale"><TextBox Text="{Binding MaxZoomY, Mode=TwoWay}" /></s:StudioPropertyField>
+              </Grid>
+              <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <s:StudioPropertyField Label="Min horizontal offset"><TextBox Text="{Binding MinOffsetX, Mode=TwoWay}" /></s:StudioPropertyField>
+                <s:StudioPropertyField Grid.Column="1" Label="Max horizontal offset"><TextBox Text="{Binding MaxOffsetX, Mode=TwoWay}" /></s:StudioPropertyField>
+              </Grid>
+              <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <s:StudioPropertyField Label="Min vertical offset"><TextBox Text="{Binding MinOffsetY, Mode=TwoWay}" /></s:StudioPropertyField>
+                <s:StudioPropertyField Grid.Column="1" Label="Max vertical offset"><TextBox Text="{Binding MaxOffsetY, Mode=TwoWay}" /></s:StudioPropertyField>
+              </Grid>
+            </StackPanel>
+          </s:StudioSection>
+        </StackPanel>
+      </ScrollViewer>
     </Panel>
   </Grid>
 </UserControl>

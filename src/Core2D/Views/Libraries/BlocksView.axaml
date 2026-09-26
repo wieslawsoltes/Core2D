@@ -63,7 +63,7 @@
         EmptyDescription="Try a different search or add an item from the toolbar."
         OpenCommand="{Binding EditGroup}" Grid.Row="3">
         <s:StudioAssetBrowser.KeyBindings>
-          <KeyBinding Command="{Binding AddGroup}" CommandParameter="{Binding #GroupsListBox.DataContext}"
+          <KeyBinding Command="{Binding AddGroup}" CommandParameter="{Binding CurrentGroupLibrary}"
             Gesture="{app:PlatformGesture Text=Primary+N}" />
           <KeyBinding Command="{Binding RemoveGroup}" CommandParameter="{Binding #GroupsListBox.SelectedItem}" Gesture="Delete"/>
           <KeyBinding Command="{Binding ExportGroup}" CommandParameter="{Binding #GroupsListBox.SelectedItem}"
@@ -73,9 +73,9 @@
           <ContextMenu x:Key="GroupShapeContextMenu" x:DataType="vms:BlockShapeViewModel">
             <MenuItem Header="_Edit" Command="{Binding EditGroup}" CommandParameter="{Binding Mode=OneWay}"/>
             <Separator/>
-            <MenuItem Header="_Delete" Command="{Binding RemoveGroup}" CommandParameter="{Binding Mode=OneWay}"/>
+            <MenuItem Header="_Delete" Command="{Binding #GroupsListBox.((vmc:ProjectContainerViewModel)DataContext).RemoveGroup}" CommandParameter="{Binding Mode=OneWay}"/>
             <Separator/>
-            <MenuItem Header="E_xport" Command="{Binding ExportGroup}" CommandParameter="{Binding Mode=OneWay}"/>
+            <MenuItem Header="E_xport" Command="{Binding #GroupsListBox.((vmc:ProjectContainerViewModel)DataContext).ExportGroup}" CommandParameter="{Binding Mode=OneWay}"/>
           </ContextMenu>
         </s:StudioAssetBrowser.Resources>
         <i:Interaction.Behaviors>

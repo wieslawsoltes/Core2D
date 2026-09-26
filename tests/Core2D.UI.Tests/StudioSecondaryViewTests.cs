@@ -58,6 +58,14 @@ public class StudioSecondaryViewTests
             var browser = Assert.Single(view.GetVisualDescendants().OfType<StudioAssetBrowser>());
             Assert.NotNull(browser.Items);
             Assert.NotEmpty(view.GetVisualDescendants().OfType<Button>().Where(x => x.Command is not null));
+            var asset = browser.GetVisualDescendants().OfType<StudioAssetItem>().FirstOrDefault();
+            if (asset?.ContextMenu is { } menu)
+            {
+                menu.Open(asset);
+                Dispatcher.UIThread.RunJobs();
+                Assert.All(menu.Items.OfType<MenuItem>(), item => Assert.NotNull(item.Command));
+                menu.Close();
+            }
             int count = browser.ResultCount;
             browser.Query = "___not_an_asset___";
             Dispatcher.UIThread.RunJobs();

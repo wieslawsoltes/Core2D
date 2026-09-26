@@ -71,6 +71,7 @@ public sealed class StudioAssetBrowserBehavior : Behavior<StudioAssetBrowser>
         Disconnect();
         _grid = grid;
         if (_grid is null) return;
+        _grid.RowHeight = AssociatedObject?.IsCompact == true ? 36 : 64;
         _grid.SelectionChanged += OnSelectionChanged;
         _grid.DoubleTapped += OnOpen;
         _grid.AddHandler(InputElement.KeyDownEvent, OnKey, RoutingStrategies.Bubble);
@@ -161,8 +162,9 @@ public sealed class StudioAssetBrowserBehavior : Behavior<StudioAssetBrowser>
             _grid.ItemsSource = _view;
             _source = items as INotifyCollectionChanged;
             if (_source is not null) _source.CollectionChanged += OnCollectionChanged;
+            var seen = new HashSet<INotifyPropertyChanged>(ReferenceEqualityComparer.Instance);
             foreach (object? item in items)
-                if (item is INotifyPropertyChanged observable && !_observed.Contains(observable))
+                if (item is INotifyPropertyChanged observable && seen.Add(observable))
                 {
                     _observed.Add(observable);
                     observable.PropertyChanged += OnItemChanged;
