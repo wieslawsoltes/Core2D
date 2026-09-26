@@ -6,10 +6,8 @@
              xmlns:vm="using:Core2D.ViewModels.Docking.Documents"
              Background="{DynamicResource StudioCanvasBrush}"
              x:DataType="vm:PageViewModel" x:CompileBindings="True">
-  <!-- Reserve toolbar space instead of intercepting pointer input over the drawing. -->
   <Grid>
     <ce:PageView DataContext="{Binding Context}" />
     <ce:ToolsView VerticalAlignment="Bottom" DataContext="{Binding Context}" HorizontalAlignment="Center" Margin="12,10,12,12" />
-    <s:StudioCanvasControls DataContext="{Binding Context}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12" />
   </Grid>
 </UserControl>

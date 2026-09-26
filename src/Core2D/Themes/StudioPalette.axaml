@@ -3,6 +3,7 @@
   <!-- Semantic tokens: no renderer, document or persisted layout state is changed. -->
   <ResourceDictionary.ThemeDictionaries>
     <ResourceDictionary x:Key="Default">
+      <SolidColorBrush x:Key="StudioGuideBrush">#F24822</SolidColorBrush>
       <SolidColorBrush x:Key="StudioCanvasBrush">#E5E5E5</SolidColorBrush>
       <SolidColorBrush x:Key="StudioSurfaceBrush">#FFFFFF</SolidColorBrush>
       <SolidColorBrush x:Key="StudioInputBrush">#F5F5F5</SolidColorBrush>
@@ -30,6 +31,7 @@
       <BoxShadows x:Key="StudioElevation">0 2 10 0 #18000000</BoxShadows>
     </ResourceDictionary>
     <ResourceDictionary x:Key="Dark">
+      <SolidColorBrush x:Key="StudioGuideBrush">#F24822</SolidColorBrush>
       <SolidColorBrush x:Key="StudioCanvasBrush">#1E1E1E</SolidColorBrush>
       <SolidColorBrush x:Key="StudioSurfaceBrush">#2C2C2C</SolidColorBrush>
       <SolidColorBrush x:Key="StudioInputBrush">#383838</SolidColorBrush>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:app="using:Core2D"
+             xmlns:s="using:Core2D.Controls.Studio"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
@@ -18,6 +19,10 @@
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
             x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
+  <i:Interaction.Behaviors>
+    <behaviors:StudioCanvasBehavior />
+    <behaviors:StudioCanvasGuideBehavior />
+  </i:Interaction.Behaviors>
   <UserControl.Resources>
     <VisualBrush x:Key="TemplateCheckerBoard" TileMode="Tile" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
       <VisualBrush.Visual>
@@ -134,16 +139,16 @@
           <ColumnDefinition Width="Auto" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" Grid.Column="0"
+        <Border Name="RulerCorner" Grid.Row="0" Grid.Column="0"
                 Background="{DynamicResource StudioSurfaceBrush}"
                 BorderBrush="{DynamicResource SystemChromeMediumColor}"
                 BorderThickness="0,0,1,1"
-                Padding="8,4,8,4">
-          <TextBlock Text="PX"
+                Width="20" Height="20">
+          <TextBlock Text="px"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
                      Foreground="{DynamicResource StudioMutedBrush}"
-                     FontSize="11" />
+                     FontSize="9" />
         </Border>
         <ruler:Ruler x:Name="HorizontalRuler"
                  Grid.Row="0"
@@ -161,7 +166,7 @@
                  Offset="{Binding OffsetY, ElementName=PageZoomBorder}"
                  HighlightStart="{Binding Bounds.Y, ElementName=ContainerPanel}"
                  HighlightLength="{Binding Bounds.Height, ElementName=ContainerPanel}" />
-        <Panel Grid.Row="1" Grid.Column="1">
+        <Panel Grid.Row="1" Grid.Column="1" Name="CanvasViewport">
           <Panel ClipToBounds="True">
             <ScrollViewer x:Name="PageScrollViewer" 
                           HorizontalScrollBarVisibility="Disabled"
@@ -234,6 +239,12 @@
               </paz:ZoomBorder>
             </ScrollViewer>
           </Panel>
+          <s:StudioCanvasOverlay Name="CanvasOverlay" IsHitTestVisible="False" GuideBrush="{DynamicResource StudioGuideBrush}" />
+          <s:StudioCanvasControls Name="CanvasNavigation" DataContext="{Binding #CanvasOverlay.Navigation}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12" />
+          <Border Background="{DynamicResource StudioSurfaceBrush}" CornerRadius="5" Padding="8,4" HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom" Margin="12,0,0,12" IsHitTestVisible="False">
+            <TextBlock Text="{Binding #CanvasOverlay.Navigation.PointerSummary}" Foreground="{DynamicResource StudioMutedBrush}" FontSize="10" />
+          </Border>
         </Panel>
       </Grid>
     </Panel>

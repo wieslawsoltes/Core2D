@@ -1,13 +1,35 @@
-<UserControl x:Class="Core2D.Controls.Studio.StudioCanvasControls"
+<UserControl x:Class="Core2D.Controls.Studio.StudioCanvasControls" x:Name="NavigationRoot"
              xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Editor"
-             x:DataType="vm:ProjectEditorViewModel" x:CompileBindings="True">
-  <s:StudioSurface CornerRadius="8" Padding="2">
+             x:DataType="vm:CanvasNavigationViewModel" x:CompileBindings="True">
+  <s:StudioSurface CornerRadius="8" Padding="3">
     <StackPanel Orientation="Horizontal" Spacing="2">
-      <s:StudioIconButton Icon="M2,8H14V10H2Z" Command="{Binding Platform.OnZoomOut}" ToolTip.Tip="Zoom out" AutomationProperties.Name="Zoom out" />
-      <Button Content="Fit" Command="{Binding Platform.OnZoomAutoFit}" ToolTip.Tip="Fit drawing" AutomationProperties.Name="Fit drawing" />
-      <s:StudioIconButton Icon="M2,8H14V10H2Z M7,3H9V15H7Z" Command="{Binding Platform.OnZoomIn}" ToolTip.Tip="Zoom in" AutomationProperties.Name="Zoom in" />
-      <Button Content="100%" Command="{Binding Platform.OnZoomReset}" ToolTip.Tip="Reset zoom to 100%" AutomationProperties.Name="Reset zoom" />
+      <s:StudioIconToggle IsChecked="{Binding IsHandTool, Mode=TwoWay}" ToolTip.Tip="Hand tool · Space temporarily pans" AutomationProperties.Name="Hand tool"
+                         Icon="M4,8V4A1,1 0 0 1 6,4V8H7V2A1,1 0 0 1 9,2V8H10V3A1,1 0 0 1 12,3V9H13V5A1,1 0 0 1 15,5V12L12,16H6L1,10A1,1 0 0 1 3,8L4,9Z" />
+      <Button Name="ZoomMenu" Content="{Binding ZoomText}" MinWidth="68" ToolTip.Tip="Zoom and view options" AutomationProperties.Name="Zoom and view options">
+        <Button.Flyout>
+          <Flyout Placement="BottomEdgeAlignedRight">
+            <StackPanel Width="224" Spacing="8" DataContext="{Binding #NavigationRoot.DataContext}" x:DataType="vm:CanvasNavigationViewModel">
+              <TextBlock Text="Zoom" FontWeight="SemiBold" />
+              <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="6">
+                <s:StudioIconButton Icon="M2,7H14V9H2Z" Command="{Binding ZoomOut}" AutomationProperties.Name="Zoom out" />
+                <s:StudioNumericField Grid.Column="1" Value="{Binding ZoomPercent, Mode=TwoWay}" Suffix="%" Minimum="1" Maximum="25600" AutomationProperties.Name="Zoom percentage" />
+                <s:StudioIconButton Grid.Column="2" Icon="M2,7H14V9H2Z M7,2H9V14H7Z" Command="{Binding ZoomIn}" AutomationProperties.Name="Zoom in" />
+              </Grid>
+              <Button Content="Zoom to 100%" Command="{Binding ResetZoom}" HorizontalAlignment="Stretch" />
+              <Button Content="Fit page    Shift+1" Command="{Binding FitPage}" HorizontalAlignment="Stretch" />
+              <Button Content="Fit selection    Shift+2" Command="{Binding FitSelection}" HorizontalAlignment="Stretch" />
+              <Separator />
+              <s:StudioSwitch Content="Rulers" IsChecked="{Binding ShowRulers, Mode=TwoWay}" />
+              <s:StudioSwitch Content="Guides" IsChecked="{Binding Guides.IsVisible, Mode=TwoWay}" />
+              <s:StudioSwitch Content="Lock guides" IsChecked="{Binding Guides.IsLocked, Mode=TwoWay}" />
+              <Button Content="Clear page guides" Command="{Binding ClearGuides}" HorizontalAlignment="Stretch" />
+              <TextBlock Text="Drag from a ruler to create a guide. Alt-drag duplicates; Shift snaps to 10 px. Guides last for this editor session." TextWrapping="Wrap" Classes="studio-muted" FontSize="11" />
+            </StackPanel>
+          </Flyout>
+        </Button.Flyout>
+      </Button>
+      <Button Content="Fit" Command="{Binding FitPage}" ToolTip.Tip="Fit page · Shift+1" AutomationProperties.Name="Fit page" />
     </StackPanel>
   </s:StudioSurface>
 </UserControl>

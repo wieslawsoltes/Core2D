@@ -15,6 +15,7 @@
         <ResourceInclude Source="avares://Core2D/Styles/StudioSearchBox.axaml" />
         <ResourceInclude Source="avares://Core2D/Styles/StudioAdvancedControls.axaml" />
         <ResourceInclude Source="avares://Core2D/Styles/StudioColorEditor.axaml" />
+        <ResourceInclude Source="avares://Core2D/Styles/StudioLayerRow.axaml" />
       </ResourceDictionary.MergedDictionaries>
       <converters:MultipleDockTabsConverter x:Key="MultipleDockTabs" />
     </ResourceDictionary>
@@ -118,7 +119,15 @@
     <Setter Property="Padding" Value="6" />
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
   </Style>
+  <Style Selector="ruler|Ruler:horizontal"><Setter Property="Height" Value="20" /></Style>
+  <Style Selector="ruler|Ruler:vertical"><Setter Property="Width" Value="20" /></Style>
   <Style Selector="ruler|Ruler">
+    <Setter Property="FontSize" Value="9" />
+    <Setter Property="LabelFormat" Value="Auto" />
+    <Setter Property="ShowSelectionLabels" Value="False" />
+    <Setter Property="MajorTickLength" Value="6" />
+    <Setter Property="MinorTickLength" Value="3" />
+    <Setter Property="SelectionOpacity" Value="0.24" />
     <Setter Property="Background" Value="{DynamicResource StudioSurfaceBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}" />
     <Setter Property="TickBrush" Value="{DynamicResource StudioMutedBrush}" />
@@ -127,8 +136,8 @@
     <Setter Property="SelectionBrush" Value="{DynamicResource StudioAccentBrush}" />
     <Setter Property="SelectionLabelBrush" Value="{DynamicResource StudioTextBrush}" />
   </Style>
-  <Style Selector="ruler|Ruler:horizontal"><Setter Property="Height" Value="24" /></Style>
-  <Style Selector="ruler|Ruler:vertical"><Setter Property="Width" Value="24" /></Style>
+  <Style Selector="ruler|Ruler:horizontal"><Setter Property="Height" Value="20" /></Style>
+  <Style Selector="ruler|Ruler:vertical"><Setter Property="Width" Value="20" /></Style>
 
   <Style Selector="s|StudioCheckerboard">
     <Setter Property="LightBrush" Value="{DynamicResource StudioCheckerLightBrush}" />

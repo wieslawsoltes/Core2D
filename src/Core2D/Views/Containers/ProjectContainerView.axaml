@@ -12,6 +12,7 @@
              xmlns:c="using:Core2D.Controls"
              xmlns:s="using:Core2D.Controls.Studio"
              x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
+  <i:Interaction.Behaviors><behaviors:StudioHierarchyActionsBehavior /></i:Interaction.Behaviors>
   <UserControl.Resources>
     <dd:ProjectDataGridDropHandler x:Key="ProjectDataGridDropHandler" />
     <ContextMenu x:Key="ProjectContainerContextMenu" x:DataType="vmc:ProjectContainerViewModel">
@@ -78,7 +79,13 @@
                             CommandParameter="{Binding Selected}" ToolTip.Tip="Add document, page or layer" AutomationProperties.Name="Add project item" />
       </StackPanel>
     </Grid>
-    <DataGrid x:Name="DocumentsDataGrid"
+    <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto,Auto,Auto" Margin="12,0,6,6">
+      <TextBlock Text="Pages &amp; layers" FontWeight="SemiBold" VerticalAlignment="Center" />
+      <s:StudioIconButton Grid.Column="1" Name="RevealLayer" Icon="M7,0H9V3H7Z M7,13H9V16H7Z M0,7H3V9H0Z M13,7H16V9H13Z M8,4A4,4 0 1 1 7.99,4Z M8,6A2,2 0 1 0 8.01,6Z" ToolTip.Tip="Reveal selected item" AutomationProperties.Name="Reveal selected item" />
+      <s:StudioIconButton Grid.Column="2" Name="ExpandLayers" Icon="M2,3H14V5H2Z M4,7H12V9H4Z M6,11H10V13H6Z" ToolTip.Tip="Expand all layers" AutomationProperties.Name="Expand all layers" />
+      <s:StudioIconButton Grid.Column="3" Name="CollapseLayers" Icon="M2,7H14V9H2Z" ToolTip.Tip="Collapse all layers" AutomationProperties.Name="Collapse all layers" />
+    </Grid>
+    <DataGrid x:Name="DocumentsDataGrid" Classes="studio-layer-grid" RowHeight="30"
               SelectedItem="{Binding Selected, Mode=TwoWay}"
               SelectionMode="Extended" AutoGenerateColumns="False" IsReadOnly="True"
               CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="True"
@@ -103,26 +110,16 @@
       </DataGrid.Resources>
       <DataGrid.DataTemplates>
         <DataTemplate DataType="vmc:DocumentContainerViewModel" x:DataType="vmc:DocumentContainerViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource DocumentContainerContextMenu}" />
+          <s:StudioLayerRow Glyph="M2,0H11L15,4V16H2Z M4,2V14H13V5H10V2Z" ContextMenu="{StaticResource DocumentContainerContextMenu}" />
         </DataTemplate>
         <DataTemplate DataType="vmc:PageContainerViewModel" x:DataType="vmc:PageContainerViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource PageContainerContextMenu}" />
+          <s:StudioLayerRow Glyph="M3,0H5V3H11V0H13V3H16V5H13V11H16V13H13V16H11V13H5V16H3V13H0V11H3V5H0V3H3Z M5,5V11H11V5Z" ContextMenu="{StaticResource PageContainerContextMenu}" />
         </DataTemplate>
         <DataTemplate DataType="vmc:LayerContainerViewModel" x:DataType="vmc:LayerContainerViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource LayerContainerContextMenu}">
-            <c:EditableItem.IconContent>
-              <CheckBox IsChecked="{Binding IsVisible, Mode=TwoWay}" MinWidth="0" VerticalAlignment="Center"
-                        AutomationProperties.Name="Layer visibility" />
-            </c:EditableItem.IconContent>
-          </c:EditableItem>
+          <s:StudioLayerRow Glyph="M8,1L16,5L8,9L0,5Z M2,9L8,12L14,9L16,10L8,14L0,10Z" ContextMenu="{StaticResource LayerContainerContextMenu}" />
         </DataTemplate>
         <DataTemplate DataType="vms:BaseShapeViewModel" x:DataType="vms:BaseShapeViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" ContextMenu="{StaticResource BaseShapeContextMenu}">
-            <c:EditableItem.IconContent>
-              <s:StudioGlyph Source="{Binding Mode=OneWay, Converter={x:Static converters:BaseShapeIconConverter.Instance}}"
-                             Foreground="{DynamicResource StudioTextBrush}" Width="16" Height="16" Margin="8" IsHitTestVisible="False" />
-            </c:EditableItem.IconContent>
-          </c:EditableItem>
+          <s:StudioLayerRow Icon="{Binding Converter={x:Static converters:BaseShapeIconConverter.Instance}}" ContextMenu="{StaticResource BaseShapeContextMenu}" />
         </DataTemplate>
       </DataGrid.DataTemplates>
     </DataGrid>
