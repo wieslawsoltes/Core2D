@@ -209,7 +209,7 @@ public class StudioPropertyControlTests
             new StudioSwitch { Content = "Snap to grid", IsChecked = true },
             new StudioPropertyRow { Label = "Precision", Content = new StudioNumericField { Prefix = "#", Value = 0.125m, Increment = 0.125m } }
         }};
-        var window = new Window { Width = 340, Height = 720, Content = panel, RequestedThemeVariant = dark ? ThemeVariant.Dark : ThemeVariant.Light };
+        var window = new Window { Width = 340, Height = 720, Content = new StudioSurface { Content = panel }, RequestedThemeVariant = dark ? ThemeVariant.Dark : ThemeVariant.Light };
         try
         {
             window.Show();
@@ -227,9 +227,10 @@ public class StudioPropertyControlTests
             fonts.Text = "Custom font";
             Dispatcher.UIThread.RunJobs();
             Assert.Equal("Custom font", model.FontName);
-            fonts.Text = "Inter";
+            model.FontName = "Inter";
             fonts.IsDropDownOpen = false;
             Dispatcher.UIThread.RunJobs();
+            Assert.Equal("Inter", fonts.GetVisualDescendants().OfType<TextBox>().Single().Text);
             using var frame = window.CaptureRenderedFrame();
             Assert.NotNull(frame);
             string? directory = Environment.GetEnvironmentVariable("CORE2D_UI_ARTIFACTS");

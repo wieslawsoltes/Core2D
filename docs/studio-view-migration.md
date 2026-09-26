@@ -1,31 +1,21 @@
 # Studio view migration
 
-The static tab-based inspectors below now use collapsible sections, labelled fields and numeric controls. The migration verified the complete multiset of existing binding expressions before and after each rewrite. No editor command or binding expression was removed.
+The first presentation pass migrated the static tab-based inspectors below to collapsible sections, labelled fields and numeric controls. That pass checked preservation of the multiset of original binding expressions. The subsequent property-control pass intentionally replaces some direct bindings with transactional numeric values and the bounds adapter; the original model properties and editing operations remain available through those controls.
 
-- `src/Core2D/Views/Shapes/ArcShapeView.axaml`
-- `src/Core2D/Views/Shapes/BlockShapeView.axaml`
-- `src/Core2D/Views/Shapes/CubicBezierShapeView.axaml`
-- `src/Core2D/Views/Shapes/EllipseShapeView.axaml`
-- `src/Core2D/Views/Shapes/ImageShapeView.axaml`
-- `src/Core2D/Views/Shapes/InsertShapeView.axaml`
-- `src/Core2D/Views/Shapes/LineShapeView.axaml`
-- `src/Core2D/Views/Shapes/PathShapeView.axaml`
-- `src/Core2D/Views/Shapes/PointShapeView.axaml`
-- `src/Core2D/Views/Shapes/QuadraticBezierShapeView.axaml`
-- `src/Core2D/Views/Shapes/TextShapeView.axaml`
-- `src/Core2D/Views/Shapes/WireShapeView.axaml`
-- `src/Core2D/Views/Path/PathFigureView.axaml`
-- `src/Core2D/Views/Path/PathSizeView.axaml`
-- `src/Core2D/Views/Path/Segments/ArcSegmentView.axaml`
-- `src/Core2D/Views/Path/Segments/CubicBezierSegmentView.axaml`
-- `src/Core2D/Views/Path/Segments/LineSegmentView.axaml`
-- `src/Core2D/Views/Path/Segments/QuadraticBezierSegmentView.axaml`
-- `src/Core2D/Views/Style/StrokeStyleView.axaml`
-- `src/Core2D/Views/Style/TextStyleView.axaml`
-- `src/Core2D/Views/Containers/DocumentContainerView.axaml`
-- `src/Core2D/Views/Containers/LayerContainerView.axaml`
-- `src/Core2D/Views/Containers/OptionsView.axaml`
-- `src/Core2D/Views/Containers/PageContainerView.axaml`
-- `src/Core2D/Views/Containers/TemplateContainerView.axaml`
-- `src/Core2D/Views/Renderer/GridView.axaml`
-- `src/Core2D/Views/Renderer/ShapeRendererStateView.axaml`
+## Migrated editors
+
+- Shapes: arc, block, cubic and quadratic Bezier, ellipse, image, insert, line, path, point, rectangle, text and wire.
+- Path geometry: figures, sizes, arc segments, cubic and quadratic Bezier segments and line segments.
+- Styles: fill, stroke, text and shared shape styles.
+- Containers: document, layer, options, page and template.
+- Renderer settings: grid and shape renderer state.
+
+## Property-control refinement
+
+Rectangle, ellipse and text editors now present position and size instead of separate corner sections. `StudioBoundsEditor` retains both existing corner objects, their orientation and document-scoped undo history. Shape fill/stroke visibility uses compact switches. The text editor retains text content and the existing text-binding action.
+
+Typography uses the searchable font picker, transactional size field, formatting toggles and horizontal/vertical alignment segments. Stroke editing uses transactional thickness/dash-offset fields and a cap selector. Color editing retains the spectrum picker and adds transparency previews, an opacity field and alpha-preserving presets.
+
+Options now uses shared property rows, paired snap-spacing fields and compact switches. Layers search uses the custom search field while retaining the original ProDataGrid search behavior. Advanced details and original data/state views remain accessible.
+
+See [studio-property-controls.md](studio-property-controls.md) for control contracts, expression syntax, lifecycle and history behavior, theme tokens, validation commands and explicit feature boundaries.

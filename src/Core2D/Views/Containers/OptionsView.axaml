@@ -1,61 +1,34 @@
 <UserControl x:Class="Core2D.Views.Containers.OptionsView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:studio="using:Core2D.Controls.Studio"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vmc="using:Core2D.ViewModels.Containers"
-             xmlns:vms="using:Core2D.ViewModels.Shapes"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Options}"
-             d:DesignWidth="250" d:DesignHeight="500"
-             x:DataType="vmc:OptionsViewModel" x:CompileBindings="True">
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:studio="using:Core2D.Controls.Studio" xmlns:vmc="using:Core2D.ViewModels.Containers"
+             xmlns:vms="using:Core2D.ViewModels.Shapes" x:DataType="vmc:OptionsViewModel" x:CompileBindings="True">
   <StackPanel>
     <studio:StudioSection Header="General">
-      <StackPanel Margin="0">
-        <studio:StudioSwitch Content="Snap to grid" 
-                  IsChecked="{Binding SnapToGrid, Mode=TwoWay}" 
-                  HorizontalAlignment="Stretch" />
-        <studio:StudioPropertyField Label="Snap X">
-          <studio:StudioNumberBox Prefix="#" Text="{Binding SnapX, Mode=TwoWay}" />
-        </studio:StudioPropertyField>
-        <studio:StudioPropertyField Label="Snap Y">
-          <studio:StudioNumberBox Prefix="#" Text="{Binding SnapY, Mode=TwoWay}" />
-        </studio:StudioPropertyField>
-        <studio:StudioPropertyField Label="Hit Threshold">
-          <studio:StudioNumberBox Prefix="#" Text="{Binding HitThreshold, Mode=TwoWay}" />
-        </studio:StudioPropertyField>
-        <studio:StudioPropertyField Label="Move Mode">
-          <ComboBox ItemsSource="{x:Static vmc:OptionsViewModel.MoveModeValues}" 
-                  SelectedItem="{Binding MoveMode, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" />
-        </studio:StudioPropertyField>
-        <studio:StudioSwitch Content="Connect points" 
-                  IsChecked="{Binding TryToConnect, Mode=TwoWay}" 
-                  HorizontalAlignment="Stretch" />
-        <studio:StudioSwitch Content="Single press drawing" 
-                  IsChecked="{Binding SinglePressMode, Mode=TwoWay}" 
-                  HorizontalAlignment="Stretch" />
+      <StackPanel Spacing="8">
+        <studio:StudioSwitch Content="Snap to grid" IsChecked="{Binding SnapToGrid, Mode=TwoWay}" />
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+          <studio:StudioNumericField Prefix="X" Value="{Binding SnapX, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Horizontal snap spacing" />
+          <studio:StudioNumericField Grid.Column="1" Prefix="Y" Value="{Binding SnapY, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Vertical snap spacing" />
+        </Grid>
+        <studio:StudioPropertyRow Label="Tolerance">
+          <studio:StudioNumericField Prefix="#" Value="{Binding HitThreshold, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Hit tolerance" />
+        </studio:StudioPropertyRow>
+        <studio:StudioPropertyRow Label="Move mode">
+          <ComboBox ItemsSource="{x:Static vmc:OptionsViewModel.MoveModeValues}" SelectedItem="{Binding MoveMode, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        </studio:StudioPropertyRow>
+        <studio:StudioSwitch Content="Connect points" IsChecked="{Binding TryToConnect, Mode=TwoWay}" />
+        <studio:StudioSwitch Content="Single press drawing" IsChecked="{Binding SinglePressMode, Mode=TwoWay}" />
       </StackPanel>
     </studio:StudioSection>
     <studio:StudioSection Header="Defaults">
-      <StackPanel Margin="0">
-          <studio:StudioSwitch Content="Stroke" 
-                    IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" 
-                    HorizontalAlignment="Stretch" />
-          <studio:StudioSwitch Content="Fill" 
-                    IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" 
-                    HorizontalAlignment="Stretch" />
-          <studio:StudioSwitch Content="Closed" 
-                    IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" 
-                    HorizontalAlignment="Stretch" />
-          <studio:StudioPropertyField Label="Fill Rule">
-            <ComboBox ItemsSource="{x:Static vms:PathShapeViewModel.FillRuleValues}"
-                    SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" 
-                    HorizontalAlignment="Stretch" />
-          </studio:StudioPropertyField>
-        </StackPanel>
+      <StackPanel Spacing="8">
+        <studio:StudioSwitch Content="Stroke" IsChecked="{Binding DefaultIsStroked, Mode=TwoWay}" />
+        <studio:StudioSwitch Content="Fill" IsChecked="{Binding DefaultIsFilled, Mode=TwoWay}" />
+        <studio:StudioSwitch Content="Closed" IsChecked="{Binding DefaultIsClosed, Mode=TwoWay}" />
+        <studio:StudioPropertyRow Label="Fill rule">
+          <ComboBox ItemsSource="{x:Static vms:PathShapeViewModel.FillRuleValues}" SelectedItem="{Binding DefaultFillRule, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+        </studio:StudioPropertyRow>
+      </StackPanel>
     </studio:StudioSection>
   </StackPanel>
 </UserControl>

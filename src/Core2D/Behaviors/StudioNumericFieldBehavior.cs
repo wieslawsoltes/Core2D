@@ -34,6 +34,7 @@ public sealed class StudioNumericFieldBehavior : Behavior<StudioNumericField>
         if (AssociatedObject is { } field)
         {
             field.TemplateApplied += OnTemplateApplied;
+            field.DetachedFromVisualTree += OnVisualDetached;
             field.PropertyChanged += OnFieldChanged;
             field.AddHandler(InputElement.KeyDownEvent, OnKeyDown, RoutingStrategies.Tunnel);
         }
@@ -45,6 +46,7 @@ public sealed class StudioNumericFieldBehavior : Behavior<StudioNumericField>
         if (AssociatedObject is { } field)
         {
             field.TemplateApplied -= OnTemplateApplied;
+            field.DetachedFromVisualTree -= OnVisualDetached;
             field.PropertyChanged -= OnFieldChanged;
             field.RemoveHandler(InputElement.KeyDownEvent, OnKeyDown);
         }
@@ -82,17 +84,24 @@ public sealed class StudioNumericFieldBehavior : Behavior<StudioNumericField>
         _handle = null;
     }
 
+    private void OnVisualDetached(object? sender, VisualTreeAttachmentEventArgs e)
+    {
+        CancelScrub();
+        AssociatedObject?.CancelEdit();
+    }
+
     private void OnFieldChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
         if (e.Property == StudioNumericField.ValueProperty || e.Property == StyledElement.DataContextProperty
             || e.Property == StudioNumericField.IsReadOnlyProperty || e.Property == InputElement.IsEnabledProperty
+            || e.Property.Name == nameof(InputElement.IsEffectivelyEnabled)
             || e.Property == StudioNumericField.MinimumProperty || e.Property == StudioNumericField.MaximumProperty)
             CancelScrub();
     }
 
     private void OnLostFocus(object? sender, RoutedEventArgs e)
     {
-        if (_pointer is null) AssociatedObject?.TryCommit();
+        if (_pointer is null && AssociatedObject?.GetVisualRoot() is not null) AssociatedObject.TryCommit();
     }
 
     private void OnKeyDown(object? sender, KeyEventArgs e)
