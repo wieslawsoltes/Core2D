@@ -1,0 +1,80 @@
+name: Browser rendered-history diagnostics
+on:
+  push:
+    branches: [master]
+    paths: [.github/workflows/browser-render-diagnostics.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Capture tracked source and prepare rendered-pixel assertions
+        shell: python
+        run: |
+          import pathlib, subprocess
+          pathlib.Path('artifacts').mkdir(exist_ok=True)
+          subprocess.run(['git', 'archive', '--format=tar.gz', '-o', 'artifacts/source.tar.gz', 'HEAD'], check=True)
+          source = pathlib.Path('tools/pages/smoke.cjs').read_text()
+          helper = '''
+          const { PNG } = require('pngjs');
+          const visualSamples = [];
+          async function expectInk(page, output, phase, present) {
+            const started = Date.now();
+            let samples;
+            do {
+              const bytes = await page.screenshot({ scale: 'css' });
+              const image = PNG.sync.read(bytes);
+              let count = 0, minX = Infinity, minY = Infinity, maxX = -1, maxY = -1;
+              for (let y = 375; y < 550; y++) for (let x = 625; x < 840; x++) {
+                const index = (y * image.width + x) * 4;
+                if (image.data[index + 3] > 200 && image.data[index] < 100 && image.data[index+1] < 100 && image.data[index+2] < 100) {
+                  count++; minX = Math.min(minX,x); maxX = Math.max(maxX,x); minY = Math.min(minY,y); maxY = Math.max(maxY,y);
+                }
+              }
+              samples = {phase, present, count, minX, minY, maxX, maxY, elapsedMs: Date.now()-started};
+              if (present ? count > 300 && maxX-minX > 100 && maxY-minY > 70 : count === 0) {
+                visualSamples.push(samples);
+                await fs.writeFile(path.join(output, `${phase}-pixels.png`), bytes);
+                return;
+              }
+              await fs.writeFile(path.join(output, `${phase}-pixels-failure.png`), bytes);
+              await page.waitForTimeout(200);
+            } while (Date.now()-started < 10000);
+            visualSamples.push(samples);
+            throw new Error(`Rendered frame mismatch: ${JSON.stringify(samples)}`);
+          }
+          '''
+          source = source.replace('(async () => {', helper + '\n(async () => {', 1)
+          source = source.replace('expectedCommit: process.env.EXPECTED_COMMIT, checks:', 'expectedCommit: process.env.EXPECTED_COMMIT, visualSamples, checks:')
+          source = source.replace("report.checks.push('Native pointer input creates a rectangle');", "report.checks.push('Native pointer input creates a rectangle');\n    await expectInk(page, output, 'draw', true);")
+          source = source.replace("await page.keyboard.press('Control+y');", "await expectInk(page, output, 'undo', false);\n    await page.keyboard.press('Control+y');")
+          source = source.replace("report.checks.push('Document undo and redo restore the expected shape count');", "report.checks.push('Document undo and redo restore the expected shape count');\n    await expectInk(page, output, 'redo', true);")
+          pathlib.Path('tools/pages/smoke-visual.cjs').write_text(source)
+      - name: Install browser engines and PNG decoder
+        run: |
+          npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1 pngjs@7.0.0
+          "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Verify actual rendered pixels without extra pointer movement or resize
+        shell: bash
+        run: |
+          export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
+          result=0
+          for engine in webkit chromium; do
+            node tools/pages/smoke-visual.cjs https://wieslawsoltes.github.io/Core2D/ "artifacts/$engine" "$engine" > "artifacts/$engine.log" 2>&1 || result=1
+            tail -n 45 "artifacts/$engine.log"
+          done
+          exit "$result"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-render-diagnostics
+          path: artifacts
+          retention-days: 7
