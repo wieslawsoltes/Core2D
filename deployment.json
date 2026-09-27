@@ -1,8 +1,8 @@
 {
   "repository": "wieslawsoltes/Core2D",
-  "commit": "fda8cb8eca8ad5461bd38f6021aa70e51cbddf4d",
+  "commit": "f1bf4736925c7bff691100438452eaf32c067715",
   "basePath": "/Core2D/",
-  "runId": "36312088135",
+  "runId": "36312288379",
   "files": [
     {
       "path": ".nojekyll",
@@ -12,7 +12,7 @@
     {
       "path": "404.html",
       "bytes": 995,
-      "sha256": "60455316725d61cf2bd89a1a464ee0efc183f21bce63553f29221d9798fd08d6"
+      "sha256": "e806b5d35b1abf7bb64f3aac1d30650c775ec86a9ecf4337194bcb47a52b4633"
     },
     {
       "path": "_framework/ACadSharp.oyfjj7pcei.wasm",
@@ -210,19 +210,19 @@
       "sha256": "bed9dab656db283aa375e26137be801cb8ff430666f2a5edcdf090f887d98dba"
     },
     {
-      "path": "_framework/Avalonia.Themes.Browser.g3y73ozdg5.wasm",
+      "path": "_framework/Avalonia.Themes.Browser.a6ozjomrk6.wasm",
       "bytes": 690453,
-      "sha256": "5c5b1e812891301c161784bd8bd8b84da71f50f5535a1001efeac483089e881f"
+      "sha256": "22d80718b5f4d6012ed31dbc7fdca862d8acfbb1aed27db02f836a2cc3285bc3"
     },
     {
-      "path": "_framework/Avalonia.Themes.Browser.g3y73ozdg5.wasm.br",
-      "bytes": 74181,
-      "sha256": "41330c24cda53336927e8486fc5d07245dd41d50fee87b4ef8f484d694cbc9a8"
+      "path": "_framework/Avalonia.Themes.Browser.a6ozjomrk6.wasm.br",
+      "bytes": 74101,
+      "sha256": "6b39fc9afb4b0604a3796aa18daf504ab52dd5a0fd996e2c841cee0015724b93"
     },
     {
-      "path": "_framework/Avalonia.Themes.Browser.g3y73ozdg5.wasm.gz",
+      "path": "_framework/Avalonia.Themes.Browser.a6ozjomrk6.wasm.gz",
       "bytes": 106510,
-      "sha256": "4ebe50ac76abb66eaa4a718848c29bdd0f6f254e1ccc7932244eae79bca69ce6"
+      "sha256": "f0ebfebcb3c9aaeb73b0f37f47f8c2544105101c1170a80008a122ba868c5ec6"
     },
     {
       "path": "_framework/Avalonia.Vulkan.fik2ar6f1z.wasm",
@@ -285,379 +285,379 @@
       "sha256": "95c4c76d8320a2b0abbcead8aa94c11c929261c8af40dd60f9b44e5f31dc33b1"
     },
     {
-      "path": "_framework/Core2D.Browser.xg02bmdef3.wasm",
-      "bytes": 8981,
-      "sha256": "e1c12bfe1c0c559459a7e5752150358e5b81dd5030cc06a64574316e208caf04"
-    },
-    {
-      "path": "_framework/Core2D.Browser.xg02bmdef3.wasm.br",
-      "bytes": 3379,
-      "sha256": "dbe51fafd0fb482a97d81f3c2691b0ee301994f684e4152936b84a2730f0b439"
-    },
-    {
-      "path": "_framework/Core2D.Browser.xg02bmdef3.wasm.gz",
-      "bytes": 3880,
-      "sha256": "6ec68e72b2e16787a212b34485e739c7ef909a3c60473903ab6c359b6552dcf9"
-    },
-    {
-      "path": "_framework/Core2D.Controls.Ruler.9zsk0ocjoi.wasm",
-      "bytes": 29973,
-      "sha256": "4b501efc34110618c564c74f3078a3b0767da912f9bcb9597ac5dd452446fb90"
-    },
-    {
-      "path": "_framework/Core2D.Controls.Ruler.9zsk0ocjoi.wasm.br",
-      "bytes": 11275,
-      "sha256": "ff6c570e1e6034456883c6fff3aaa7c2134401f15a9df574b1f0aa75a5159e39"
-    },
-    {
-      "path": "_framework/Core2D.Controls.Ruler.9zsk0ocjoi.wasm.gz",
-      "bytes": 12868,
-      "sha256": "48392e6fae3f3c147550cbd0cbfcab1a4827e346f5d05dc391692fcdbb6ebd8c"
-    },
-    {
-      "path": "_framework/Core2D.Modules.FileSystem.40l8ijwosr.wasm",
-      "bytes": 6421,
-      "sha256": "ac65c26a3b37b0d9cf986d2dbe9afaeb6cfde4a171907adcac8b0b9a987e9cec"
-    },
-    {
-      "path": "_framework/Core2D.Modules.FileSystem.40l8ijwosr.wasm.br",
-      "bytes": 2376,
-      "sha256": "9428d412658084d6347eb648cb24dd3e7ba510036ab25d091df1850d43a816b6"
-    },
-    {
-      "path": "_framework/Core2D.Modules.FileSystem.40l8ijwosr.wasm.gz",
-      "bytes": 2650,
-      "sha256": "0c215832ea36055f5cf6b78d298f9cba38de43b34b9261b87079fac9232d6c22"
-    },
-    {
-      "path": "_framework/Core2D.Modules.FileWriter.jajp75lqgp.wasm",
-      "bytes": 73493,
-      "sha256": "eb981d9fc083222c335faf1cd22c0b91e8820d0f95dfca55fc0342c27295c536"
-    },
-    {
-      "path": "_framework/Core2D.Modules.FileWriter.jajp75lqgp.wasm.br",
-      "bytes": 24501,
-      "sha256": "f9b140a407087b90c70a4c7f189f514de39655fad5f6052e2ec399e1786caddb"
-    },
-    {
-      "path": "_framework/Core2D.Modules.FileWriter.jajp75lqgp.wasm.gz",
-      "bytes": 28851,
-      "sha256": "588ded85d70efd59c19b9ebe1c81323fbbd381b3aa0dc94ff95f6e2583d4e455"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Log.6ac167xt4n.wasm",
-      "bytes": 5909,
-      "sha256": "6e8603a81eacd0a722692170c16bf248eadb246923200af68f35cca858edfbf8"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Log.6ac167xt4n.wasm.br",
-      "bytes": 2321,
-      "sha256": "4b00d937f8b5f72901bf9ebecba73b9fbc10722220022800ce06d752dd015850"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Log.6ac167xt4n.wasm.gz",
-      "bytes": 2602,
-      "sha256": "5e976db4baba1c065e1deed851f6b921c8157ae33be1c14737db7122a2eb4b42"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Avalonia.uyilggklvv.wasm",
-      "bytes": 35605,
-      "sha256": "badc98d4540e5584e90377e2eab28bab7605ca17e42c9a13c3778397f6d142ee"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Avalonia.uyilggklvv.wasm.br",
-      "bytes": 12647,
-      "sha256": "c00886be3d508f8b419e902e15bd6fa7f2788ff71f68ae9274ee4666772e8c44"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Avalonia.uyilggklvv.wasm.gz",
-      "bytes": 15270,
-      "sha256": "fa35c4ead97881940f0bd1db48491383069f49d7e41eedc137f98a6f969ba850"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Common.me9op5arpx.wasm",
-      "bytes": 7445,
-      "sha256": "9e92ab193127f9df66c928fed1db3c5004734664ded23a4fa2427ab406bdc7c1"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Common.me9op5arpx.wasm.br",
-      "bytes": 2950,
-      "sha256": "5f61e712930066fad3522fc95b419c857c175aca5d56ab5b7db5fa6dc41386d8"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Common.me9op5arpx.wasm.gz",
-      "bytes": 3303,
-      "sha256": "8799fb97fe64748853e1eb39809d89fc7ef9f4d21a86c90952ac180fa60b5b68"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Dwg.9jiqfkbj3j.wasm",
-      "bytes": 63253,
-      "sha256": "ab70a4b00fa6eeabf37f5bbef2e7a924adb82e7bdad7b6569171ffe8d24eb229"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Dwg.9jiqfkbj3j.wasm.br",
-      "bytes": 24833,
-      "sha256": "ed4415a7e3a655000cb378beec6e795cbe556e5fb948a03f64eac3a74ba66f12"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Dwg.9jiqfkbj3j.wasm.gz",
-      "bytes": 28708,
-      "sha256": "2c9b9950efafd8c61fd9294c87a307ee4bc5a54c01f890a25851b0def3d6a594"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Dxf.y0tiq05h6w.wasm",
-      "bytes": 27413,
-      "sha256": "8eb2f4272bad720ada31679db0dea0fdcf9cf784792ff2bcc114b24d7fef6cc0"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Dxf.y0tiq05h6w.wasm.br",
-      "bytes": 10928,
-      "sha256": "2f51c1ce31b7539690ea70b7e85565f5af82be2830e29c834229f0cd5e7e9302"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Dxf.y0tiq05h6w.wasm.gz",
-      "bytes": 12553,
-      "sha256": "d43f7822c1bc92162a2947a78d70b53633b5e4af384c27e55b64e709b475a32d"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.OpenXml.q5s14hxqkl.wasm",
-      "bytes": 64789,
-      "sha256": "ce3c786da2c395ad7faf863ed6cc753733e31c65c5bda700a2674d06347fdfe3"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.OpenXml.q5s14hxqkl.wasm.br",
-      "bytes": 23338,
-      "sha256": "b777ae2981665062855777039c0247bd1fd8f1723f4594a7bb86da61591f58dd"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.OpenXml.q5s14hxqkl.wasm.gz",
-      "bytes": 28053,
-      "sha256": "d5bf8156cb2c4993c08b53bc8d13358250f2c4131ef67bc1e03a630bd029173e"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.PdfSharp.wkuwesn0eq.wasm",
-      "bytes": 47893,
-      "sha256": "306f17bf16e4dac4a51b43cfd581a8639eca324acc9d9a00140be5a94a0b5837"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.PdfSharp.wkuwesn0eq.wasm.br",
-      "bytes": 18103,
-      "sha256": "80911095427a3824114f703b48e561f4f8dd3d5d78083eb3559db44828ef6c1d"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.PdfSharp.wkuwesn0eq.wasm.gz",
-      "bytes": 21288,
-      "sha256": "967f71de5e76e7748f08715087fc61e57c239751663d0a797a122e11409cbfad"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.SkiaSharp.gvtu3o8guo.wasm",
-      "bytes": 50453,
-      "sha256": "bcb51c1772a9d906599c7924cfd86becb999ef38458eda82e4e92ed54874cd97"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.SkiaSharp.gvtu3o8guo.wasm.br",
-      "bytes": 18131,
-      "sha256": "bc313e84133f399755be9f52f78d901246311a3d15963b6cc107d3ca4aa2fbe2"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.SkiaSharp.gvtu3o8guo.wasm.gz",
-      "bytes": 21923,
-      "sha256": "dfd5eba7d5d35318f2000640b6cb0f3ac3dd8f1bceb0c8308e7bb06f646f582b"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.SparseStrips.7gmh6i2quq.wasm",
-      "bytes": 11029,
-      "sha256": "e7798c55b9105e2330c6feb8ebe6a74c47fb1abe3d2506782b73360d25215ba4"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.SparseStrips.7gmh6i2quq.wasm.br",
-      "bytes": 4636,
-      "sha256": "bbddd39d6d3a0f5732adb29e1e1d598aa72b8936329a18883564528dd6218385"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.SparseStrips.7gmh6i2quq.wasm.gz",
-      "bytes": 5256,
-      "sha256": "3ea41bc9e93e39164664b8a9eb79ae5b1737fa83a7b716c86865b50b05cd58cd"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.VelloSharp.a98u4guebm.wasm",
-      "bytes": 12053,
-      "sha256": "b256abdd411bc77096a4672a041cacce54af86017c83f0f8dc89c5606e5c28df"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.VelloSharp.a98u4guebm.wasm.br",
-      "bytes": 5124,
-      "sha256": "b4d92a837d2c799c19b7c0f812dcffe7823f23a37100b0163956f9e55bd2d2c3"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.VelloSharp.a98u4guebm.wasm.gz",
-      "bytes": 5820,
-      "sha256": "ef9d86b1a82be2c2c9e6f4769525fdc65160c8c2bd08cffd530b30f73490b56b"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.WinForms.0mk59b7p6y.wasm",
-      "bytes": 21781,
-      "sha256": "985cbbe5dff7b1dc2a21044681abd36111e67165b6df9b7f1914056c35ca8849"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.WinForms.0mk59b7p6y.wasm.br",
-      "bytes": 8455,
-      "sha256": "fa2ac5c8a44bfa64d88abbf7447f211178b1830ea8435ae43374e325bdc9d627"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.WinForms.0mk59b7p6y.wasm.gz",
-      "bytes": 9643,
-      "sha256": "ab87e7c037d8d3cb7c99d0fe2f626c0b540026366a27e392e8e73a700454b382"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Wmf.0lsg0ixl09.wasm",
-      "bytes": 22293,
-      "sha256": "b4ccbbf36b3e6226789876705c9befa53957ac06bb643e1f72281fb17103cc57"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Wmf.0lsg0ixl09.wasm.br",
-      "bytes": 9214,
-      "sha256": "ad88d4bbe23858dcb6e0f3a82f13320da23ac3f6f98d951d59d88993dcdd7be9"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Renderer.Wmf.0lsg0ixl09.wasm.gz",
-      "bytes": 10559,
-      "sha256": "20b0fae3c7770ffdc08c2d856ed486a94d243e8d299d395c638f497661857bed"
-    },
-    {
-      "path": "_framework/Core2D.Modules.ScriptRunner.wwvvvru27p.wasm",
-      "bytes": 7445,
-      "sha256": "b021b414bfc83c17f4e501bf6739592db758d50231cc6c47e820b17da2538318"
-    },
-    {
-      "path": "_framework/Core2D.Modules.ScriptRunner.wwvvvru27p.wasm.br",
-      "bytes": 2941,
-      "sha256": "00f58d07388d22c067247fe57cc3ca984fddc9c2b758953b1c8609fd67ffdfce"
-    },
-    {
-      "path": "_framework/Core2D.Modules.ScriptRunner.wwvvvru27p.wasm.gz",
-      "bytes": 3288,
-      "sha256": "339517670415600b6661bbbf7645ca0350378211c85368fb205cc0fe9988cfde"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Serializer.s4iazac4wz.wasm",
-      "bytes": 7957,
-      "sha256": "4ca54c9ec95747fd5d33f3c906edc01c40c830e99171c8ce7802878d27c115a3"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Serializer.s4iazac4wz.wasm.br",
-      "bytes": 3145,
-      "sha256": "36864b29fe32c6f7dbc21111ccb93fb6ae06d6c81b7f8a8ada66e8a4068880f9"
-    },
-    {
-      "path": "_framework/Core2D.Modules.Serializer.s4iazac4wz.wasm.gz",
-      "bytes": 3533,
-      "sha256": "f76438a46ac03df99aa5d92e3eefffdefc15a62813dcc7caccea4d4c979bee47"
-    },
-    {
-      "path": "_framework/Core2D.Modules.SvgExporter.3v5gvmb2u7.wasm",
-      "bytes": 7445,
-      "sha256": "51b7835dc340aae6a8b62fc0fda3a599659ae0eff1194056eaff028b1e39ea30"
-    },
-    {
-      "path": "_framework/Core2D.Modules.SvgExporter.3v5gvmb2u7.wasm.br",
-      "bytes": 2948,
-      "sha256": "76425316aca39cb20f225a51ece3b6d3a5fc65aaa77c955a0bc8434ce9a7530d"
-    },
-    {
-      "path": "_framework/Core2D.Modules.SvgExporter.3v5gvmb2u7.wasm.gz",
-      "bytes": 3336,
-      "sha256": "747ebb543f7e2e4d289b490d60dd7dfd64af150c0a53921c10c5f2dc053ea3d3"
-    },
-    {
-      "path": "_framework/Core2D.Modules.TextFieldReader.wapjuwlh24.wasm",
-      "bytes": 11541,
-      "sha256": "280b6cca29459936b08ecbf12cca6997bba8dff76631d7a0abde5db694e4a1e8"
-    },
-    {
-      "path": "_framework/Core2D.Modules.TextFieldReader.wapjuwlh24.wasm.br",
-      "bytes": 4729,
-      "sha256": "9bc88d61d2c324334352ba658cbcd63bdea62bdec857ed62f427b26506f426ad"
-    },
-    {
-      "path": "_framework/Core2D.Modules.TextFieldReader.wapjuwlh24.wasm.gz",
-      "bytes": 5329,
-      "sha256": "2f098af15c2dc2458d3c64cbb232f4e8df88683c2884ff393dcf2b075647c6a2"
-    },
-    {
-      "path": "_framework/Core2D.Modules.TextFieldWriter.txa9qexzkr.wasm",
-      "bytes": 10517,
-      "sha256": "a1c1d99c6e013a69578a921c246cbd89fb0a85eb82e961c056e3295175d36eac"
-    },
-    {
-      "path": "_framework/Core2D.Modules.TextFieldWriter.txa9qexzkr.wasm.br",
-      "bytes": 4622,
-      "sha256": "7339a473844dbbbf09bdc25df8b9406970effe978d8484fa15faf2e30350cfea"
-    },
-    {
-      "path": "_framework/Core2D.Modules.TextFieldWriter.txa9qexzkr.wasm.gz",
-      "bytes": 5157,
-      "sha256": "ad2f2e5c244f26333348f14d5d74d6bbf096c19febef3d1199ed0c5a9a1cc6fb"
-    },
-    {
-      "path": "_framework/Core2D.Modules.XamlExporter.crbtkhbigp.wasm",
-      "bytes": 6933,
-      "sha256": "c888d4782cb4b47d4b3ba1c8a67b77f5b87bbe6ecf8d6fc8f82abfa3e078e42f"
-    },
-    {
-      "path": "_framework/Core2D.Modules.XamlExporter.crbtkhbigp.wasm.br",
-      "bytes": 2718,
-      "sha256": "09bd4d7884255d072c7f1db8cccb3ffce50036ece146922bab482032c48a4126"
-    },
-    {
-      "path": "_framework/Core2D.Modules.XamlExporter.crbtkhbigp.wasm.gz",
-      "bytes": 3018,
-      "sha256": "e272ae4cf86f5795eb7cf82d5449e03b30f22e2bd968eda6df3f715a6d7a4a16"
-    },
-    {
-      "path": "_framework/Core2D.Spatial.rj7uratgvf.wasm",
-      "bytes": 21269,
-      "sha256": "494b3894f3e4f05ad51db48a5e30c838c3af54a978ea09d742dbda07ccc73953"
-    },
-    {
-      "path": "_framework/Core2D.Spatial.rj7uratgvf.wasm.br",
-      "bytes": 8619,
-      "sha256": "1ec59b3d8e9ae42221e3ac97766363191031f7bc2c6c7ec941fdbf1d2751e0d6"
-    },
-    {
-      "path": "_framework/Core2D.Spatial.rj7uratgvf.wasm.gz",
-      "bytes": 9949,
-      "sha256": "76f0f671a075b0d7a76226cb52b6972476200101400160723bf69543be62ca13"
-    },
-    {
-      "path": "_framework/Core2D.ViewModels.gl9wcc33gj.wasm",
-      "bytes": 613141,
-      "sha256": "9424fe4dba8946986077c24951e885cdc507244b1fdbd983a4c70fdbe56e9e17"
-    },
-    {
-      "path": "_framework/Core2D.ViewModels.gl9wcc33gj.wasm.br",
-      "bytes": 173327,
-      "sha256": "9c83a00ab5ed5b2e29c7aa9f1748aee08374163fa661759fb1083eadd6d75274"
-    },
-    {
-      "path": "_framework/Core2D.ViewModels.gl9wcc33gj.wasm.gz",
-      "bytes": 222463,
-      "sha256": "eec39e1f0c1c572bfb29277ab95cf81dc39d2946d4f0c609999537c206472bf5"
-    },
-    {
-      "path": "_framework/Core2D.q6r56i24k4.wasm",
+      "path": "_framework/Core2D.58klb8exft.wasm",
       "bytes": 1584405,
-      "sha256": "e286c88d7a4d593b493de122883d71c9fd6427936c0338e7258792e93d14d549"
+      "sha256": "5b7bc529784ade2ae2a94005574056a2fd38d00afc90888a15e4445c1c36fcb5"
     },
     {
-      "path": "_framework/Core2D.q6r56i24k4.wasm.br",
-      "bytes": 281443,
-      "sha256": "69a78e45151eed08e7058a0a9857a51982d3ef5c609527ea170f956fff4ba7ea"
+      "path": "_framework/Core2D.58klb8exft.wasm.br",
+      "bytes": 281790,
+      "sha256": "d94ebefe8e625149a56d80cf2c6e5c6bc773d91ed98847023c5f7bdb1db0fcc3"
     },
     {
-      "path": "_framework/Core2D.q6r56i24k4.wasm.gz",
-      "bytes": 384029,
-      "sha256": "1a842dd9b8d2e6c050c664866ee3d71e312d3aaa091e59b6e8e13fa285b329c4"
+      "path": "_framework/Core2D.58klb8exft.wasm.gz",
+      "bytes": 384030,
+      "sha256": "92f466ce05496a81c79d80b555aad23d52d5c95e94691c53caf46db1e723336a"
+    },
+    {
+      "path": "_framework/Core2D.Browser.mtr570v5k7.wasm",
+      "bytes": 8981,
+      "sha256": "e64c7e24859bd9bd808a97b32a4ee513887fac0a44f3a4304ff76cf16fd73c5e"
+    },
+    {
+      "path": "_framework/Core2D.Browser.mtr570v5k7.wasm.br",
+      "bytes": 3420,
+      "sha256": "7212965764175360572405859f59f337017ee13d79b160d73c4db3199c8c2d43"
+    },
+    {
+      "path": "_framework/Core2D.Browser.mtr570v5k7.wasm.gz",
+      "bytes": 3887,
+      "sha256": "61f747250274cec717ec0408aba3d369a406bae7f78565e41cb911772d28e36a"
+    },
+    {
+      "path": "_framework/Core2D.Controls.Ruler.j8rxmg2ido.wasm",
+      "bytes": 29973,
+      "sha256": "dd411eca50d48c5eabab8b17539100d8921a5b80ec91a92eb559eb77c251964b"
+    },
+    {
+      "path": "_framework/Core2D.Controls.Ruler.j8rxmg2ido.wasm.br",
+      "bytes": 11204,
+      "sha256": "1200240013671b0cff3cf5065929b77b031e3e9e8d2c8f7f48878c3848bf77b8"
+    },
+    {
+      "path": "_framework/Core2D.Controls.Ruler.j8rxmg2ido.wasm.gz",
+      "bytes": 12874,
+      "sha256": "39312df2f3482db5a7ff40a14dc885abc1b5478189f5917c04e23f2c82b6371a"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileSystem.xdih5d304s.wasm",
+      "bytes": 6421,
+      "sha256": "552048e2256e0bb868d17ec9855bc2cfabdc12b1c3184d89adc71beb7aa00f2d"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileSystem.xdih5d304s.wasm.br",
+      "bytes": 2365,
+      "sha256": "4f41aa9f81640f6c95c1719d4b09ae3990188a633d0fdddcf7fc7873e253e69e"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileSystem.xdih5d304s.wasm.gz",
+      "bytes": 2653,
+      "sha256": "94095210572d6fb377b4d784cab6f6a1e1b4e1fdfd082e202029a2f58a5ccea5"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileWriter.mqdr9wzc0v.wasm",
+      "bytes": 73493,
+      "sha256": "4ed724ac5dd050d71da22a068a4dd9e7231c11a478a014734bda7d57ce7bdf35"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileWriter.mqdr9wzc0v.wasm.br",
+      "bytes": 24579,
+      "sha256": "c128c23a04957667c9ae16fa6e674fbd4439bd243361a2094037ae724d5212da"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileWriter.mqdr9wzc0v.wasm.gz",
+      "bytes": 28850,
+      "sha256": "c0b8b8783db5baf12fe41fe961d1165dc38a37e512ec0712af7f4da830623464"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Log.qjmr82yrlk.wasm",
+      "bytes": 5909,
+      "sha256": "e6da2ba31b7c4d8c60681f0e27419f4ce3dd6437a8565f8f5c8d956b1db3286e"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Log.qjmr82yrlk.wasm.br",
+      "bytes": 2325,
+      "sha256": "bed5022ad79129bf719ab976b7be31b230d951808136137782482eefdc8f6389"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Log.qjmr82yrlk.wasm.gz",
+      "bytes": 2603,
+      "sha256": "a4ba894dfe0e2e74690d71ff0608c9ea977733b19c3dfbd4078f7b955c85a88b"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Avalonia.owxua4z7i3.wasm",
+      "bytes": 35605,
+      "sha256": "d82e6e99a7c41dbeee3df5aa634a08c725232d5c478e85899bcd88a646716f50"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Avalonia.owxua4z7i3.wasm.br",
+      "bytes": 12698,
+      "sha256": "638d2278df8ed2082acb9aca7595c2f4cdc5350ba018202ac76e8e72f4747fa4"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Avalonia.owxua4z7i3.wasm.gz",
+      "bytes": 15277,
+      "sha256": "5825c8ef7de35a45cd98afdf9dd505babdf5b34e1cda2214c73fb9be890642a0"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Common.a6luirpxma.wasm",
+      "bytes": 7445,
+      "sha256": "4ecbc0b798ff456d9799b9e688bed1b0e1942cf9055c8a2ef76e68cf393f8776"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Common.a6luirpxma.wasm.br",
+      "bytes": 2963,
+      "sha256": "829454ea714aaefc18ee28e214dbd81be0958720c784359719bf42549f0403d0"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Common.a6luirpxma.wasm.gz",
+      "bytes": 3308,
+      "sha256": "6f8c11d969c5efa60ae47f6d69c664d4e79eadbe9a2add8e987b69a016dc6031"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dwg.ryxnd0kvkj.wasm",
+      "bytes": 63253,
+      "sha256": "4dc70ab1563c8277bb75ea4942f689522dfb99ed5c78061ba2f2c729a58f2e00"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dwg.ryxnd0kvkj.wasm.br",
+      "bytes": 24918,
+      "sha256": "6cb29ccfa338d1fec0187dfba262211b53ae688cab9040b33fd8b135771647fe"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dwg.ryxnd0kvkj.wasm.gz",
+      "bytes": 28710,
+      "sha256": "1b215a3196ec960837928361ffce53162d09b8142e23e85e0dbf66d3cf96d925"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dxf.wluei5mokd.wasm",
+      "bytes": 27413,
+      "sha256": "8c87e9f1c3305274f69401452e7d86301426e852c8f30ea8618dbbd246934213"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dxf.wluei5mokd.wasm.br",
+      "bytes": 10928,
+      "sha256": "7cda9cdd3de1d9006c617d5de4fd06723088a4108342d68bc98605f0501c0ffb"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dxf.wluei5mokd.wasm.gz",
+      "bytes": 12553,
+      "sha256": "9d70b7ca18e8f0b79a5493b20e38c1731927fcf80b8bd60767808ae6722366b8"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.OpenXml.t02x8w6rkf.wasm",
+      "bytes": 64789,
+      "sha256": "83cf8b65b872b4d8897ff5d4fa286216177e69aa1655c47b3b3a2100d6379517"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.OpenXml.t02x8w6rkf.wasm.br",
+      "bytes": 23298,
+      "sha256": "18ebfbd135e467bcb70a0993bf7e92ee41bcd2399d49f179eb363ee6fd51a967"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.OpenXml.t02x8w6rkf.wasm.gz",
+      "bytes": 28061,
+      "sha256": "53e376b100bfe809f6c226b1c5ae18ec44521acc9494c7f1b1317ceaa68192be"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.PdfSharp.97h1s5iqe2.wasm",
+      "bytes": 47893,
+      "sha256": "557d9be21c7a33c270a9f7533a335b89a05ecc2bb54c30f05210d798b8a42ff2"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.PdfSharp.97h1s5iqe2.wasm.br",
+      "bytes": 18066,
+      "sha256": "96af26ecd238e647068673f61cbdd598b20833d39e30d22e867de500522b5c0d"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.PdfSharp.97h1s5iqe2.wasm.gz",
+      "bytes": 21284,
+      "sha256": "1a47dfe9c53b6008914c0d01c0c39830979106361c13546bf47eb40e5d613e8e"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SkiaSharp.v0u1qc48yd.wasm",
+      "bytes": 50453,
+      "sha256": "c16720a6c9b97112f66e47b70bbf93ca527464cb240817e8ee9213d82bc456ab"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SkiaSharp.v0u1qc48yd.wasm.br",
+      "bytes": 18165,
+      "sha256": "442ab7de901245009eab99c05b5afa2a4ce2081b5b768d0003b610ad69cce11c"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SkiaSharp.v0u1qc48yd.wasm.gz",
+      "bytes": 21922,
+      "sha256": "412a89fcc6361867b66a8625f9f70a8f504068224a655ec97f8c73233b1eb452"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SparseStrips.azejxu3ri2.wasm",
+      "bytes": 11029,
+      "sha256": "6a440dda20fcb376d3a312c6a100fe075d5f8fdabeb13e1749785e4274bfae0e"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SparseStrips.azejxu3ri2.wasm.br",
+      "bytes": 4663,
+      "sha256": "8213ce701e88cb504106e66e25e2bedac2bde46356c644934886d01747a8a34f"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SparseStrips.azejxu3ri2.wasm.gz",
+      "bytes": 5259,
+      "sha256": "a2dfd1641438a0a934f501bdecfe4f86b1112c5012a31981ae696db076f5ac56"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.VelloSharp.cvb92lf3gu.wasm",
+      "bytes": 12053,
+      "sha256": "a8f5d1b96af3acd99761fb85596b558bb61fad5fec17d4e6726479f568325274"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.VelloSharp.cvb92lf3gu.wasm.br",
+      "bytes": 5115,
+      "sha256": "7cf933a7bd04438a50d46ac1d48e37648471e22d757b783a8090be4f8ecb39fa"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.VelloSharp.cvb92lf3gu.wasm.gz",
+      "bytes": 5822,
+      "sha256": "b80e70c56c505e7a2370e6d6ea9056332f94dacd21b7be77c3484d53526a94b4"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.WinForms.pyvztfaony.wasm",
+      "bytes": 21781,
+      "sha256": "91058c553aa249ae4dd60ded926e45a43812a997732e559589ec02f28716170e"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.WinForms.pyvztfaony.wasm.br",
+      "bytes": 8385,
+      "sha256": "aadfcfb7e10029c816ccd3bdcf0bd20d7bef34257d794618bb9df81e201e3166"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.WinForms.pyvztfaony.wasm.gz",
+      "bytes": 9644,
+      "sha256": "a37d3759c85ef9d1d38245a26a1437e76575ed1db78739a840923b24ca62243a"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Wmf.3vl980zlsf.wasm",
+      "bytes": 22293,
+      "sha256": "11b1c9fc51566ba1fe7a7f19d287ea751a7bb94fbc667dfa87597809f36e7ed0"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Wmf.3vl980zlsf.wasm.br",
+      "bytes": 9234,
+      "sha256": "77315477e8c69b773b267c78dc0db7b98937b2adb7ef8df8af583aaa89f3cbed"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Wmf.3vl980zlsf.wasm.gz",
+      "bytes": 10560,
+      "sha256": "41486885aadb0f8d634cdb0bddb8b7d88bd406e4581936ebbd08b7bdb52e53e7"
+    },
+    {
+      "path": "_framework/Core2D.Modules.ScriptRunner.7nixo6xp84.wasm",
+      "bytes": 7445,
+      "sha256": "5de34320a4a3893e902a1b9a8115aed3a195d29ffa5b687bc5db705b9bb370d3"
+    },
+    {
+      "path": "_framework/Core2D.Modules.ScriptRunner.7nixo6xp84.wasm.br",
+      "bytes": 2937,
+      "sha256": "ad1a76cca5882b48d0081069e062edc0141d124c0a46e72132c8354361854f3d"
+    },
+    {
+      "path": "_framework/Core2D.Modules.ScriptRunner.7nixo6xp84.wasm.gz",
+      "bytes": 3293,
+      "sha256": "585ee19fc1c547ac7f534b5ce48ca839cc45a2e2b86bfa8e39afa3ed762480a4"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Serializer.1fwitqzcvu.wasm",
+      "bytes": 7957,
+      "sha256": "6376f5d5adeddc2997a7809c26374ffcc9f974712a69c97b98bbfa5e89f26645"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Serializer.1fwitqzcvu.wasm.br",
+      "bytes": 3131,
+      "sha256": "00d7db0cf8e2ddb5fdcc915682cd2ce353a55bbbbf713e64e7023d3fb7ed5488"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Serializer.1fwitqzcvu.wasm.gz",
+      "bytes": 3535,
+      "sha256": "877e820988285046e5e2b91136da00ac695dfc250c55ae12eb3b582735557acb"
+    },
+    {
+      "path": "_framework/Core2D.Modules.SvgExporter.qj18uu5gyw.wasm",
+      "bytes": 7445,
+      "sha256": "d61f07ad52bc3e4d686a9e0122e52a3b3adb0b471c0bd5dd305c0532026e6a19"
+    },
+    {
+      "path": "_framework/Core2D.Modules.SvgExporter.qj18uu5gyw.wasm.br",
+      "bytes": 2955,
+      "sha256": "31b465699f400fd0f39676d8e792b6fd8d364ab1395638c3390587adee267c9b"
+    },
+    {
+      "path": "_framework/Core2D.Modules.SvgExporter.qj18uu5gyw.wasm.gz",
+      "bytes": 3339,
+      "sha256": "602701ba043dcb9a95fb10e8025136dbf5491dfddec781b17d0e3be6cac1e005"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldReader.a6or5fih0e.wasm",
+      "bytes": 11541,
+      "sha256": "de2bc3a2819e9dd3dc2cf651cda3c7e70861c10076c2c0adb307abf6de79619e"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldReader.a6or5fih0e.wasm.br",
+      "bytes": 4720,
+      "sha256": "960147fd4b48de712bdaa6ce2f51a15104eedff5cc6803d8eebb2ee11bc5a4d2"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldReader.a6or5fih0e.wasm.gz",
+      "bytes": 5335,
+      "sha256": "60418b1353e7f8d7de8941631d8cf671f9cce933d2c675f728f67bdce73bd910"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldWriter.scd3jkncxv.wasm",
+      "bytes": 10517,
+      "sha256": "a4666f04adcb8070c21549aafb0f988b76a60629fe748ad928366d8ecec63604"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldWriter.scd3jkncxv.wasm.br",
+      "bytes": 4585,
+      "sha256": "6eaa251478cc0a982f4e1ea26884588786ef520349485b722d60ec297b1f69c3"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldWriter.scd3jkncxv.wasm.gz",
+      "bytes": 5163,
+      "sha256": "f5da0caecda9c58e7bca2cfd5c11c1da312e6efa9b7ef118c5e8fd201c7accd0"
+    },
+    {
+      "path": "_framework/Core2D.Modules.XamlExporter.zvya257apo.wasm",
+      "bytes": 6933,
+      "sha256": "1f35019fa2e01fa57c30323190e84cea65486b59ffac4f008c2aa91adcbbb14a"
+    },
+    {
+      "path": "_framework/Core2D.Modules.XamlExporter.zvya257apo.wasm.br",
+      "bytes": 2693,
+      "sha256": "bdde57d8dbeee3b1ff8ea7ac6f38f3638d4e1ce01fd04a6c3377e48b430f49a3"
+    },
+    {
+      "path": "_framework/Core2D.Modules.XamlExporter.zvya257apo.wasm.gz",
+      "bytes": 3024,
+      "sha256": "0d4388826470c0897ee8986aa1434ee54f174403849d7a927aeef54df1f5ec4a"
+    },
+    {
+      "path": "_framework/Core2D.Spatial.wxe02i5ope.wasm",
+      "bytes": 21269,
+      "sha256": "5c9a2ac261cc396e9f637d71a7d3a80bcfd6183ec484a68a4b949edd98efa9eb"
+    },
+    {
+      "path": "_framework/Core2D.Spatial.wxe02i5ope.wasm.br",
+      "bytes": 8615,
+      "sha256": "a213cda9b2c7d3a78ab28ce6fbcfe1ebebaeddd6883a2e7229346adf9f806850"
+    },
+    {
+      "path": "_framework/Core2D.Spatial.wxe02i5ope.wasm.gz",
+      "bytes": 9952,
+      "sha256": "1e5ecac441440dbceacdf36ccfa1938f688ed9ff95c9d4b1ce2a77c815c865dd"
+    },
+    {
+      "path": "_framework/Core2D.ViewModels.csojp8w2nz.wasm",
+      "bytes": 613141,
+      "sha256": "c4a2ea7bf233b2cde98baf7c3478e8cab05744042ab7996ea950a858b023a8ca"
+    },
+    {
+      "path": "_framework/Core2D.ViewModels.csojp8w2nz.wasm.br",
+      "bytes": 173264,
+      "sha256": "a554b9a682b56678af9e632bcccf437e82643b666f707d6491b5fd244d74b732"
+    },
+    {
+      "path": "_framework/Core2D.ViewModels.csojp8w2nz.wasm.gz",
+      "bytes": 222459,
+      "sha256": "3f41a13615e9d9aa68b2d5458b9c2c268305c4be82592410e87fb1a1a8ed038a"
     },
     {
       "path": "_framework/CsvHelper.uav9ykykb7.wasm",
@@ -2447,17 +2447,17 @@
     {
       "path": "_framework/dotnet.js",
       "bytes": 91498,
-      "sha256": "f07120a052053ea40dc537ab2995164b6d1d010f97bd44a1b743575c5f08288d"
+      "sha256": "f2f318c851c6f5f3ddcfb8f99464282af92c62538c95e7bc8af683f33d2ba76e"
     },
     {
       "path": "_framework/dotnet.js.br",
-      "bytes": 21919,
-      "sha256": "972cd6d6de47a3e9a4eb6f40820894d1285345d350cdde7ff5277951f5bdfc85"
+      "bytes": 21874,
+      "sha256": "7f906f323ff7282813fdb422b697bc650eb61409a416e83f43d12e649c42f740"
     },
     {
       "path": "_framework/dotnet.js.gz",
-      "bytes": 25016,
-      "sha256": "4d8dc48a8b78590eebef1455027a6ef047dc7df8c3b0bf70c8b374a56511d137"
+      "bytes": 25017,
+      "sha256": "64780898eda691761d98e3edbc48585eb0fe24cc07980963e7d2472e1fe9d231"
     },
     {
       "path": "_framework/dotnet.native.bufmemcc37.wasm",
@@ -3317,7 +3317,7 @@
     {
       "path": "index.html",
       "bytes": 995,
-      "sha256": "60455316725d61cf2bd89a1a464ee0efc183f21bce63553f29221d9798fd08d6"
+      "sha256": "e806b5d35b1abf7bb64f3aac1d30650c775ec86a9ecf4337194bcb47a52b4633"
     },
     {
       "path": "index.html.br",
