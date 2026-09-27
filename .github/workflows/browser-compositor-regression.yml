@@ -1,0 +1,96 @@
+name: Browser compositor regression
+on:
+  push:
+    branches: [fix/browser-redraw]
+    paths:
+      - .github/workflows/browser-compositor-regression.yml
+      - tools/pages/render-pixels.cjs
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        option: [baseline, no-region, layer-clip]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Configure isolated candidate and visual assertions
+        env:
+          OPTION: ${{ matrix.option }}
+        shell: python
+        run: |
+          import os, pathlib
+          option = os.environ['OPTION']
+          program = pathlib.Path('src/Core2D.Browser/Program.cs')
+          source = program.read_text(encoding='utf-8-sig')
+          choices = {'baseline': '', 'no-region': '.With(new Avalonia.Rendering.Composition.CompositionOptions { UseRegionDirtyRectClipping = false })', 'layer-clip': '.With(new Avalonia.Rendering.Composition.CompositionOptions { UseSaveLayerRootClip = true })'}
+          marker = '.WithInterFont()'
+          assert source.count(marker) == 1
+          program.write_text(source.replace(marker, marker + '\n            ' + choices[option]))
+          smoke = pathlib.Path('tools/pages/smoke.cjs').read_text()
+          replacements = {
+              "const playwright = require('playwright');": "const playwright = require('playwright');\nconst { expectInk } = require('./render-pixels.cjs');\nconst visualSamples = [];",
+              'expectedCommit: process.env.EXPECTED_COMMIT, checks:': 'expectedCommit: process.env.EXPECTED_COMMIT, visualSamples, checks:',
+              "const before = await page.evaluate(() => core2dDiagnostics.GetShapeCount());": "const before = await page.evaluate(() => core2dDiagnostics.GetShapeCount());\n    await expectInk(page, output, 'blank', false, visualSamples);",
+              "report.checks.push('Native pointer input creates a rectangle');": "report.checks.push('Native pointer input creates a rectangle');\n    await expectInk(page, output, 'draw', true, visualSamples);",
+              "await page.keyboard.press('Control+y');": "await expectInk(page, output, 'undo', false, visualSamples);\n    await page.keyboard.press('Control+y');",
+              "report.checks.push('Document undo and redo restore the expected shape count');": "report.checks.push('Document undo and redo restore the expected shape count');\n    await expectInk(page, output, 'redo', true, visualSamples);"
+          }
+          for old, new in replacements.items():
+              assert smoke.count(old) == 1, old
+              smoke = smoke.replace(old, new)
+          pathlib.Path('tools/pages/smoke-visual.cjs').write_text(smoke)
+      - name: Install workload and publish candidate
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          dotnet workload install wasm-tools > artifacts/workload.log 2>&1
+          dotnet publish src/Core2D.Browser/Core2D.Browser.csproj -c Release --nologo > artifacts/publish.log 2>&1 || { tail -n 80 artifacts/publish.log; exit 1; }
+          python3 tools/pages/prepare.py
+      - name: Install pinned browser engine
+        run: |
+          npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1 pngjs@7.0.0
+          "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps webkit
+      - name: Verify draw undo and redo pixels in WebKit
+        env:
+          EXPECTED_COMMIT: ${{ github.sha }}
+        shell: bash
+        run: |
+          mkdir -p artifacts/preview/Core2D
+          cp -a artifacts/site/. artifacts/preview/Core2D/
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory artifacts/preview > artifacts/server.log 2>&1 &
+          server=$!
+          trap 'kill "$server" || true' EXIT
+          export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
+          set +e
+          node tools/pages/smoke-visual.cjs http://127.0.0.1:4173/Core2D/ artifacts/webkit webkit > artifacts/webkit.log 2>&1
+          result=$?
+          set -e
+          python3 - <<'PY'
+          import json
+          r = json.load(open('artifacts/webkit/validation.json'))
+          print(json.dumps({k: r.get(k) for k in ['success','commit','visualSamples','failure','errors','renderingFallbacks','rendererDiagnostics']}, indent=2))
+          PY
+          exit "$result"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compositor-${{ matrix.option }}
+          path: |
+            artifacts/webkit
+            artifacts/webkit.log
+            artifacts/publish.log
+            artifacts/site/deployment.json
+          retention-days: 14
