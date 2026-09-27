@@ -1,10 +1,9 @@
 'use strict';
-// Validate the real presented canvas, not just its document model. Test-only code.
+// Validate presented canvas pixels, never just the document model. Test-only code.
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 
-// CSS-pixel region inside the blank test page and enclosing its snapped rectangle.
 const drawingRegion = Object.freeze({ x: 625, y: 375, width: 215, height: 175 });
 
 function measureInk(image, region = drawingRegion) {
@@ -30,7 +29,16 @@ function measureInk(image, region = drawingRegion) {
 }
 
 function matchesInk(sample, present) {
-  return present ? sample.count > 300 && sample.spanX > 100 && sample.spanY > 70 : sample.count === 0;
+  return present ? sample.count > 300 && sample.count < 4000 && sample.spanX > 100 && sample.spanY > 70 : sample.count === 0;
+}
+
+function matchesDrawing(sample, present) {
+  if (!matchesInk(sample, present)) return false;
+  if (!present) return true;
+  // The smoke test draws the same snapped rectangle in its fixed 1440x900 workspace.
+  // Require its complete bounds: a stale, unfinished drag preview cannot pass as a draw.
+  const expected = { minX: 655, minY: 401, maxX: 806, maxY: 522 };
+  return Object.entries(expected).every(([key, value]) => Math.abs(sample[key] - value) <= 2);
 }
 
 async function expectInk(page, output, phase, present, samples) {
@@ -39,11 +47,11 @@ async function expectInk(page, output, phase, present, samples) {
   const started = Date.now();
   let bytes, sample;
   do {
-    // CSS scale makes the same region meaningful at DPR 1 and 2. No mouse move,
-    // resize, DOM mutation or production invalidation call may refresh the frame.
+    // CSS scale normalizes DPR. No input, resize, DOM mutation or production
+    // invalidation call may refresh the frame under test.
     bytes = await page.screenshot({ scale: 'css' });
     sample = { phase, present, ...measureInk(PNG.sync.read(bytes)), elapsedMs: Date.now() - started };
-    if (matchesInk(sample, present)) {
+    if (matchesDrawing(sample, present)) {
       samples.push(sample);
       await fs.writeFile(path.join(output, `${phase}-pixels.png`), bytes);
       return;
@@ -52,7 +60,10 @@ async function expectInk(page, output, phase, present, samples) {
   } while (Date.now() - started < 10000);
   samples.push(sample);
   await fs.writeFile(path.join(output, `${phase}-pixels-failure.png`), bytes);
-  throw new Error(`Rendered frame mismatch: ${JSON.stringify(sample)}`);
+  const error = new Error(`Rendered frame mismatch: ${JSON.stringify(sample)}`);
+  error.code = 'ERR_FRAME_MISMATCH';
+  error.phase = phase;
+  throw error;
 }
 
-module.exports = { drawingRegion, measureInk, matchesInk, expectInk };
+module.exports = { drawingRegion, measureInk, matchesInk, matchesDrawing, expectInk };
