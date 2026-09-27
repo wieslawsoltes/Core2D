@@ -31,6 +31,7 @@ def main() -> None:
     if count != 1:
         raise RuntimeError('The browser entry point must contain exactly one base element')
     html = html.replace('CORE2D_SOURCE_COMMIT', commit)
+    html = html.replace('./main.js"', f'./main.js?v={commit}"').replace('./app.css"', f'./app.css?v={commit}"')
     index.write_text(html, encoding='utf-8')
     shutil.copyfile(index, target / '404.html')
     (target / '.nojekyll').touch()

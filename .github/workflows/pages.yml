@@ -13,6 +13,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  site-config:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      build_type: ${{ steps.site.outputs.build_type }}
+      branch: ${{ steps.site.outputs.branch }}
+      url: ${{ steps.site.outputs.url }}
+    steps:
+      - name: Read existing Pages publishing configuration without changing it
+        id: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/pages" > site.json
+          python3 - <<'PY'
+          import json, os
+          site = json.load(open('site.json'))
+          kind = site.get('build_type', 'legacy')
+          branch = site.get('source', {}).get('branch', '')
+          if kind != 'workflow' and (branch not in ('pages', 'gh-pages') or site.get('source', {}).get('path') != '/'):
+              raise RuntimeError('Refusing to overwrite a source branch or an unexpected Pages path')
+          values = {'build_type': kind, 'branch': branch, 'url': site['html_url']}
+          print(json.dumps(values, indent=2))
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              for key, value in values.items():
+                  if '\n' in value: raise ValueError('Invalid Pages metadata')
+                  output.write(f'{key}={value}\n')
+          PY
+
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 35
@@ -72,9 +105,9 @@ jobs:
             artifacts/site/deployment.json
           if-no-files-found: warn
 
-  deploy:
-    if: github.ref == 'refs/heads/master'
-    needs: build
+  deploy-actions:
+    if: github.ref == 'refs/heads/master' && needs.site-config.outputs.build_type == 'workflow'
+    needs: [build, site-config]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -84,16 +117,57 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    outputs:
-      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/configure-pages@v5
       - name: Deploy complete tested bundle
         id: deployment
         uses: actions/deploy-pages@v4
 
+  deploy-branch:
+    if: github.ref == 'refs/heads/master' && needs.site-config.outputs.build_type != 'workflow'
+    needs: [build, site-config]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: pages-artifact
+      - name: Extract the exact browser-tested artifact
+        run: |
+          mkdir site
+          tar -xf pages-artifact/artifact.tar -C site
+          test -f site/_framework/dotnet.js
+          test -f site/deployment.json
+      - name: Publish to the existing generated-site branch
+        uses: JamesIves/github-pages-deploy-action@v4.9.0
+        with:
+          branch: ${{ needs.site-config.outputs.branch }}
+          folder: site
+          clean: true
+          clean-exclude: CNAME
+          force: false
+          commit-message: 'Deploy Core2D ${{ github.sha }}'
+      - name: Request Pages publication for token-authored commits
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: python
+        run: |
+          import os, subprocess
+          result = subprocess.run(['gh', 'api', '--method', 'POST', f'repos/{os.environ["GITHUB_REPOSITORY"]}/pages/builds'], text=True, capture_output=True)
+          print(result.stdout)
+          if result.returncode and 'HTTP 409' not in result.stderr:
+              raise RuntimeError(result.stderr)
+          if result.returncode:
+              print('Pages publication is already in progress; the live check will verify the source commit.')
+
   verify-live:
-    needs: deploy
+    needs: [site-config, deploy-actions, deploy-branch]
+    if: ${{ !cancelled() && (needs.deploy-actions.result == 'success' || needs.deploy-branch.result == 'success') }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -110,7 +184,7 @@ jobs:
       - name: Verify deployed commit and real browser editing
         env:
           EXPECTED_COMMIT: ${{ github.sha }}
-          SITE_URL: ${{ needs.deploy.outputs.page_url }}
+          SITE_URL: ${{ needs.site-config.outputs.url }}
         run: |
           export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
           node tools/pages/smoke.cjs "$SITE_URL" artifacts/live-browser

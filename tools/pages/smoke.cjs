@@ -10,7 +10,7 @@ const { chromium } = require('playwright');
   if (!base.pathname.endsWith('/')) base.pathname += '/';
   const output = process.argv[3] || 'artifacts/browser';
   await fs.mkdir(output, { recursive: true });
-  const report = { url: base.href, expectedCommit: process.env.EXPECTED_COMMIT, checks: [], console: [], errors: [], failedRequests: [] };
+  const report = { url: base.href, expectedCommit: process.env.EXPECTED_COMMIT, checks: [], console: [], errors: [], renderingFallbacks: [], failedRequests: [] };
   let browser;
   let page;
   try {
@@ -31,18 +31,25 @@ const { chromium } = require('playwright');
     report.commit = manifest.commit;
     report.files = manifest.files.length;
     report.checks.push('Published source commit matches');
-    browser = await chromium.launch({ headless: true, args: ['--enable-unsafe-swiftshader'] });
+    browser = await chromium.launch({ headless: true, args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
     page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
     page.setDefaultTimeout(60000);
     page.on('pageerror', error => report.errors.push(error.stack || error.message));
     page.on('console', message => {
-      report.console.push(`${message.type()}: ${message.text()}`);
-      if (message.type() === 'error') report.errors.push(message.text());
+      const text = message.text();
+      report.console.push(`${message.type()}: ${text}`);
+      if (message.type() === 'error') {
+        // Avalonia probes GPU modes before its supported software renderer. Do not hide these
+        // messages, but only accept these exact capability failures after all editing checks pass.
+        if (/^Failed to create render target for mode [23] : HTMLCanvasElement\.getContext returned null\.$/.test(text)) report.renderingFallbacks.push(text);
+        else report.errors.push(text);
+      }
     });
     page.on('requestfailed', request => report.failedRequests.push({ url: request.url(), failure: request.failure() }));
     page.on('response', response => { if (response.status() >= 400) report.errors.push(`HTTP ${response.status()}: ${response.url()}`); });
     await page.goto(base.href, { waitUntil: 'domcontentloaded', timeout: 60000 });
     await page.waitForFunction(() => globalThis.__core2dBoot?.state === 'ready' && globalThis.core2dDiagnostics?.IsReady(), null, { timeout: 180000 });
+    assert.equal(await page.locator('meta[name="core2d-source"]').getAttribute('content'), manifest.commit, 'The HTML and manifest must identify the same deployment');
     const canvas = page.locator('canvas').first();
     await canvas.waitFor({ state: 'visible' });
     await page.waitForFunction(() => [...document.querySelectorAll('canvas')].some(c => c.width > 600 && c.height > 400));
@@ -50,7 +57,6 @@ const { chromium } = require('playwright');
     await page.screenshot({ path: path.join(output, 'home.png') });
     report.checks.push('Published .NET runtime initialized and Avalonia canvas is visible');
     assert.equal(await page.evaluate(() => core2dDiagnostics.HasProject()), false);
-    // The native New drawing card occupies x=260..520 in the 1440-DIP dashboard.
     await page.mouse.click(380, 230);
     await page.waitForFunction(() => core2dDiagnostics.HasProject());
     await page.waitForTimeout(800);
@@ -80,8 +86,9 @@ const { chromium } = require('playwright');
     await page.waitForTimeout(800);
     await page.screenshot({ path: path.join(output, 'compact-project.png') });
     report.checks.push('Workspace renders after compact viewport resize');
-    assert.deepEqual(report.errors, [], 'No JavaScript, HTTP or .NET console errors');
+    assert.deepEqual(report.errors, [], 'No unexpected JavaScript, HTTP or .NET console errors');
     assert.deepEqual(report.failedRequests, [], 'No failed application resource requests');
+    report.boot = await page.evaluate(() => globalThis.__core2dBoot);
     report.success = true;
   } catch (error) {
     report.success = false;

@@ -1,6 +1,9 @@
 const boot = globalThis.__core2dBoot = { state: 'loading', startedAt: performance.now() };
 try {
-    const { dotnet } = await import('./_framework/dotnet.js');
+    const runtimeUrl = new URL('./_framework/dotnet.js', import.meta.url);
+    const source = document.querySelector('meta[name="core2d-source"]')?.content;
+    if (/^[0-9a-f]{40}$/.test(source || '')) runtimeUrl.searchParams.set('v', source);
+    const { dotnet } = await import(runtimeUrl.href);
     const runtime = await dotnet.withDiagnosticTracing(false).withApplicationArgumentsFromQuery().create();
     const config = runtime.getConfig();
     const exports = await runtime.getAssemblyExports(config.mainAssemblyName);
