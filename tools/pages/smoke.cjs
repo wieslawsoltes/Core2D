@@ -7,6 +7,8 @@ const { chromium } = require('playwright');
 
 (async () => {
   const base = new URL(process.argv[2]);
+  // Legacy Pages metadata may advertise HTTP even though the canonical site supports HTTPS.
+  if (base.hostname.endsWith('.github.io')) base.protocol = 'https:';
   if (!base.pathname.endsWith('/')) base.pathname += '/';
   const output = process.argv[3] || 'artifacts/browser';
   await fs.mkdir(output, { recursive: true });
