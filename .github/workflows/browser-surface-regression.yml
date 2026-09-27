@@ -1,0 +1,84 @@
+name: Browser surface resize regression
+on:
+  push:
+    branches: [fix/browser-redraw]
+    paths: [.github/workflows/browser-surface-regression.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare isolated compatibility candidate and pixel assertions
+        shell: python
+        run: |
+          from pathlib import Path
+          smoke = Path('tools/pages/smoke.cjs').read_text()
+          replacements = {
+            "const playwright = require('playwright');": "const playwright = require('playwright');\nconst { expectInk } = require('./render-pixels.cjs');\nconst visualSamples = [];",
+            'expectedCommit: process.env.EXPECTED_COMMIT, checks:': 'expectedCommit: process.env.EXPECTED_COMMIT, visualSamples, checks:',
+            "scenario.engine === 'webkit' ? 2 : 1": "Number(process.env.PROBE_DPR || 2)",
+            "const before = await page.evaluate(() => core2dDiagnostics.GetShapeCount());": "const before = await page.evaluate(() => core2dDiagnostics.GetShapeCount());\n    await expectInk(page, output, 'blank', false, visualSamples);",
+            "report.checks.push('Native pointer input creates a rectangle');": "report.checks.push('Native pointer input creates a rectangle');\n    await expectInk(page, output, 'draw', true, visualSamples);",
+            "await page.keyboard.press('Control+y');": "await expectInk(page, output, 'undo', false, visualSamples);\n    await page.keyboard.press('Control+y');",
+            "report.checks.push('Document undo and redo restore the expected shape count');": "report.checks.push('Document undo and redo restore the expected shape count');\n    await expectInk(page, output, 'redo', true, visualSamples);"
+          }
+          for old, new in replacements.items():
+            assert smoke.count(old) == 1, old
+            smoke = smoke.replace(old, new)
+          injection = '''
+          await page.route('**/main.js*', async route => {
+            const response = await route.fetch();
+            let text = await response.text();
+            const marker = 'const screenCompatibility = installScreenCompatibility(ScreenHelper);';
+            assert.equal(text.split(marker).length, 2);
+            const guard = `
+              const { WebRenderTarget } = await import(new URL('./_framework/avalonia.js', import.meta.url).href);
+              const originalResize = WebRenderTarget.setSize;
+              let skipped = 0, resized = 0;
+              WebRenderTarget.setSize = function(target, width, height) {
+                if (target.renderTargetType === 'webgl' && target.canvas.width === width && target.canvas.height === height) {
+                  skipped++; return;
+                }
+                resized++;
+                return originalResize.call(this, target, width, height);
+              };
+              globalThis.__resizeGuardProbe = () => ({skipped, resized});
+            `;
+            text = text.replace(marker, marker + guard);
+            await route.fulfill({response, body:text});
+          });
+          '''
+          smoke = smoke.replace('page.setDefaultTimeout(60000);', 'page.setDefaultTimeout(60000);' + injection)
+          smoke = smoke.replace('if (browser) await browser.close();', "if (page) report.resizeGuard = await page.evaluate(() => globalThis.__resizeGuardProbe?.());\n    if (browser) await browser.close();")
+          Path('tools/pages/smoke-surface.cjs').write_text(smoke)
+      - name: Install pinned engines
+        run: |
+          npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1 pngjs@7.0.0
+          "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps webkit chromium firefox
+      - name: Check real draw undo redo and resize across engines
+        shell: bash
+        run: |
+          export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
+          mkdir -p artifacts
+          result=0
+          for scenario in webkit chromium firefox; do
+            for dpr in 1 2; do
+              PROBE_DPR="$dpr" node tools/pages/smoke-surface.cjs https://wieslawsoltes.github.io/Core2D/ "artifacts/$scenario-$dpr" "$scenario" > "artifacts/$scenario-$dpr.log" 2>&1 || result=1
+              tail -n 40 "artifacts/$scenario-$dpr.log"
+            done
+          done
+          exit "$result"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-surface-regression
+          path: artifacts
+          retention-days: 14
