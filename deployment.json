@@ -1,0 +1,3348 @@
+{
+  "repository": "wieslawsoltes/Core2D",
+  "commit": "fda8cb8eca8ad5461bd38f6021aa70e51cbddf4d",
+  "basePath": "/Core2D/",
+  "runId": "36312088135",
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "404.html",
+      "bytes": 995,
+      "sha256": "60455316725d61cf2bd89a1a464ee0efc183f21bce63553f29221d9798fd08d6"
+    },
+    {
+      "path": "_framework/ACadSharp.oyfjj7pcei.wasm",
+      "bytes": 804629,
+      "sha256": "702967c6c31c73b9f22555b9e1e774de7cd09b36f01da31698f0b7c43c0ada98"
+    },
+    {
+      "path": "_framework/ACadSharp.oyfjj7pcei.wasm.br",
+      "bytes": 238178,
+      "sha256": "51013b6d9eda7cb231e08961361bebcc0ea27ed3bce16e0d33871281d502efa9"
+    },
+    {
+      "path": "_framework/ACadSharp.oyfjj7pcei.wasm.gz",
+      "bytes": 305566,
+      "sha256": "34aa86f6c67ccd9f0b89a0623feaee37a2be892316c0e2420b68a6e94b12ce45"
+    },
+    {
+      "path": "_framework/Avalonia.Base.gslero3l70.wasm",
+      "bytes": 1545493,
+      "sha256": "30cf12afd9333483f120615eb59b7a549a02a44443b01075e91610e8a2e4e06b"
+    },
+    {
+      "path": "_framework/Avalonia.Base.gslero3l70.wasm.br",
+      "bytes": 423217,
+      "sha256": "1ae289e0794eca1619a0401798d303ac6899c5048094e8af5a134969055c7dd7"
+    },
+    {
+      "path": "_framework/Avalonia.Base.gslero3l70.wasm.gz",
+      "bytes": 525266,
+      "sha256": "aa70d2ea2aea51a4c966fd2ac7a59469496bd6aa3989df71d5e2682d14a81549"
+    },
+    {
+      "path": "_framework/Avalonia.Browser.fiuq9vxofd.wasm",
+      "bytes": 144149,
+      "sha256": "f7b18d1c344f17f2435697be4e95199178a1bdf7e3c2339f06346cd667fb962c"
+    },
+    {
+      "path": "_framework/Avalonia.Browser.fiuq9vxofd.wasm.br",
+      "bytes": 47202,
+      "sha256": "34481ad9a662364d7b22543803c466da018ac61f5626807365d46d8a4b56a40c"
+    },
+    {
+      "path": "_framework/Avalonia.Browser.fiuq9vxofd.wasm.gz",
+      "bytes": 57269,
+      "sha256": "f84ed81c0c1d06a77b4af299db4d20d574e931c7d2ec95b93cb89321df2928bf"
+    },
+    {
+      "path": "_framework/Avalonia.Controls.0m7ifcqgec.wasm",
+      "bytes": 760597,
+      "sha256": "08b6865ac3c8e0ff6500dae46e5a50916d4738b0d7f6259b047ffcc460312f8e"
+    },
+    {
+      "path": "_framework/Avalonia.Controls.0m7ifcqgec.wasm.br",
+      "bytes": 246226,
+      "sha256": "efd376425c26ec5c33604b152fa092c6acafa712483130a9e2cbd481f2922664"
+    },
+    {
+      "path": "_framework/Avalonia.Controls.0m7ifcqgec.wasm.gz",
+      "bytes": 301350,
+      "sha256": "b31b3f4b4788251e462060e720f1c38096cace4eb7ebeea4322f28510b51f5b6"
+    },
+    {
+      "path": "_framework/Avalonia.Controls.DataGrid.4tv5vboh5t.wasm",
+      "bytes": 1039125,
+      "sha256": "b884f7dab7af57b482a9293f8e9deca0addc5e7ab59b48bf59d45bc56260a925"
+    },
+    {
+      "path": "_framework/Avalonia.Controls.DataGrid.4tv5vboh5t.wasm.br",
+      "bytes": 310094,
+      "sha256": "105ee721edc6bfcfd05b05ef3ca0ce46703a7692d9cae765cd9a6cc3022718b8"
+    },
+    {
+      "path": "_framework/Avalonia.Controls.DataGrid.4tv5vboh5t.wasm.gz",
+      "bytes": 380232,
+      "sha256": "980e1c9a8c458dd48695f37d14022390b9c5ff999dd3ccaaeba2bbc8b36b5281"
+    },
+    {
+      "path": "_framework/Avalonia.Desktop.dsy5y3q3tm.wasm",
+      "bytes": 14101,
+      "sha256": "5dedf26445741dce138e5f3884fc88e45d4ad93ffab42c1e1e4bdbb9b6ff94e1"
+    },
+    {
+      "path": "_framework/Avalonia.Desktop.dsy5y3q3tm.wasm.br",
+      "bytes": 2909,
+      "sha256": "68de7ab8c2e25d2648ae6534b8d9a6b2dab169fe5a833a36e4cfd262a588b62f"
+    },
+    {
+      "path": "_framework/Avalonia.Desktop.dsy5y3q3tm.wasm.gz",
+      "bytes": 3470,
+      "sha256": "a61a27719bd3958e93becfd12a12e10677f2a299410e8094456b7a92ed639585"
+    },
+    {
+      "path": "_framework/Avalonia.Dialogs.2mk90onnzs.wasm",
+      "bytes": 189205,
+      "sha256": "669fa4fc84659e58e8ab6ce753d611ea84b6cfe6848d3ba31e1dda520d604285"
+    },
+    {
+      "path": "_framework/Avalonia.Dialogs.2mk90onnzs.wasm.br",
+      "bytes": 79241,
+      "sha256": "4bbdc6bea5e0b232a48b4bf498c696e550f003df8eb98e1c19c98d6f329dbb8b"
+    },
+    {
+      "path": "_framework/Avalonia.Dialogs.2mk90onnzs.wasm.gz",
+      "bytes": 97354,
+      "sha256": "e5f312733a7905e1533930670250593bf41c1d52521b8b901833aa4b3be1f67f"
+    },
+    {
+      "path": "_framework/Avalonia.Fonts.Inter.zgxm5hhx5b.wasm",
+      "bytes": 1892117,
+      "sha256": "f3ab0c387ee6312c582553dd4ee20f6de5f66cb44c3a5fc6c911a3f299054301"
+    },
+    {
+      "path": "_framework/Avalonia.Fonts.Inter.zgxm5hhx5b.wasm.br",
+      "bytes": 474366,
+      "sha256": "b3b9e09bebc611b7e9b5ca3b63a073b847ff029b010c2083f5043e0ceecdf27d"
+    },
+    {
+      "path": "_framework/Avalonia.Fonts.Inter.zgxm5hhx5b.wasm.gz",
+      "bytes": 966143,
+      "sha256": "17d569a9d7c4464ca051c323bb0980ee079fa09f93b7c3ac8de07244bfcf5abc"
+    },
+    {
+      "path": "_framework/Avalonia.Markup.Xaml.lipgitp0e9.wasm",
+      "bytes": 54549,
+      "sha256": "2d5bc8d7dbd9d122121258b64b1831a33d4d2f726815f4d385839421355408be"
+    },
+    {
+      "path": "_framework/Avalonia.Markup.Xaml.lipgitp0e9.wasm.br",
+      "bytes": 18896,
+      "sha256": "831720d2d64593a31a2d2da8d9bd4386cc0c562e1e5c0fe34a670cd9e377ead4"
+    },
+    {
+      "path": "_framework/Avalonia.Markup.Xaml.lipgitp0e9.wasm.gz",
+      "bytes": 22434,
+      "sha256": "90aa9c24d9c11d46f4bb53d7cfb7e75156a88b18f0d18e9db2192496035ebb2d"
+    },
+    {
+      "path": "_framework/Avalonia.Markup.uh4142q83v.wasm",
+      "bytes": 38165,
+      "sha256": "fec66addc7bbe7e5e92727f740a0ef70cf5429915eb40eacbe5e0685a518f2f8"
+    },
+    {
+      "path": "_framework/Avalonia.Markup.uh4142q83v.wasm.br",
+      "bytes": 12048,
+      "sha256": "84240370732e4244942b6c8e0e1c5e67cb57f5a29921767e918e8136d96dc510"
+    },
+    {
+      "path": "_framework/Avalonia.Markup.uh4142q83v.wasm.gz",
+      "bytes": 14385,
+      "sha256": "2cd3bc8f78bb608946099d1701da1b1db023ef47db86dfc141e75669ce703bf4"
+    },
+    {
+      "path": "_framework/Avalonia.Metal.c2y0nr7ufw.wasm",
+      "bytes": 13589,
+      "sha256": "8ca0eefced471abb8e2aea45f3e2c83544663b5245eacbfda84078f117ac5638"
+    },
+    {
+      "path": "_framework/Avalonia.Metal.c2y0nr7ufw.wasm.br",
+      "bytes": 2876,
+      "sha256": "71d42436aa5ca7bcc8e855b32e1898c9c9416a99b64a37f829cc4c77cf4de16e"
+    },
+    {
+      "path": "_framework/Avalonia.Metal.c2y0nr7ufw.wasm.gz",
+      "bytes": 3460,
+      "sha256": "d052df7f35f4f7e00c555f685f7d772d21a124a2f7618e423b651a5621d648fb"
+    },
+    {
+      "path": "_framework/Avalonia.OpenGL.v3mhpr6jho.wasm",
+      "bytes": 30485,
+      "sha256": "2bafa6b73d722d9f1b8abce5c9e2d7973f17c6deab82360349cb688f60e6d2d6"
+    },
+    {
+      "path": "_framework/Avalonia.OpenGL.v3mhpr6jho.wasm.br",
+      "bytes": 7939,
+      "sha256": "8733e7f179984dfe52e4675a8273c83e04e2b202c41ba9d75f676c6d6e8f7d91"
+    },
+    {
+      "path": "_framework/Avalonia.OpenGL.v3mhpr6jho.wasm.gz",
+      "bytes": 9709,
+      "sha256": "a73741ef88bb084853a476e5bf665b77ebfd2df0059ec0e745a2dbbddf282f35"
+    },
+    {
+      "path": "_framework/Avalonia.Skia.0phldy2be3.wasm",
+      "bytes": 101141,
+      "sha256": "2cdef47f5e33eb099d2a6a56b31ff55bff0776ab3265c1cd76ff31c08074438c"
+    },
+    {
+      "path": "_framework/Avalonia.Skia.0phldy2be3.wasm.br",
+      "bytes": 41480,
+      "sha256": "ecad750d590febbe8e026ec2b778e7c6c75a6580dfbd86addaf7e79981d9795d"
+    },
+    {
+      "path": "_framework/Avalonia.Skia.0phldy2be3.wasm.gz",
+      "bytes": 48567,
+      "sha256": "bed9dab656db283aa375e26137be801cb8ff430666f2a5edcdf090f887d98dba"
+    },
+    {
+      "path": "_framework/Avalonia.Themes.Browser.g3y73ozdg5.wasm",
+      "bytes": 690453,
+      "sha256": "5c5b1e812891301c161784bd8bd8b84da71f50f5535a1001efeac483089e881f"
+    },
+    {
+      "path": "_framework/Avalonia.Themes.Browser.g3y73ozdg5.wasm.br",
+      "bytes": 74181,
+      "sha256": "41330c24cda53336927e8486fc5d07245dd41d50fee87b4ef8f484d694cbc9a8"
+    },
+    {
+      "path": "_framework/Avalonia.Themes.Browser.g3y73ozdg5.wasm.gz",
+      "bytes": 106510,
+      "sha256": "4ebe50ac76abb66eaa4a718848c29bdd0f6f254e1ccc7932244eae79bca69ce6"
+    },
+    {
+      "path": "_framework/Avalonia.Vulkan.fik2ar6f1z.wasm",
+      "bytes": 17685,
+      "sha256": "578afec814636d225b870d217de263307274fd6a677ad7645e182b3cc85ebd22"
+    },
+    {
+      "path": "_framework/Avalonia.Vulkan.fik2ar6f1z.wasm.br",
+      "bytes": 4356,
+      "sha256": "10ae63661f1339e7d1cfeff6e460e8936f4a513559ed89e4acbe14280d687361"
+    },
+    {
+      "path": "_framework/Avalonia.Vulkan.fik2ar6f1z.wasm.gz",
+      "bytes": 5325,
+      "sha256": "7a4e94bb76252e454acfe72542f46a1e3d1d2dcc1067532f2bf57cfb1d289997"
+    },
+    {
+      "path": "_framework/AvaloniaEdit.TextMate.gwqiyyuu0a.wasm",
+      "bytes": 20245,
+      "sha256": "501d9a83f68b596c9543b569fb069839461163c09c19b9a9e12e403cfd0dcc62"
+    },
+    {
+      "path": "_framework/AvaloniaEdit.TextMate.gwqiyyuu0a.wasm.br",
+      "bytes": 8439,
+      "sha256": "ab0c51d72c24e0aed0c1f4d2d813726cf533a72e32012398ae7c2ca9ebac5219"
+    },
+    {
+      "path": "_framework/AvaloniaEdit.TextMate.gwqiyyuu0a.wasm.gz",
+      "bytes": 9706,
+      "sha256": "e31ae889d5515c268b04f476c94257e155015b07aa97c3fd8e251b6f84a0b5e5"
+    },
+    {
+      "path": "_framework/AvaloniaEdit.l25g627z2e.wasm",
+      "bytes": 479509,
+      "sha256": "adbbb030f2ecde853b5f217e8fcd951728ab97d13e9714c6138dd3fa738f878b"
+    },
+    {
+      "path": "_framework/AvaloniaEdit.l25g627z2e.wasm.br",
+      "bytes": 144399,
+      "sha256": "eae626bf4b932bcd9a76232dcd618dbed04e80faa006509f172d553e339806f5"
+    },
+    {
+      "path": "_framework/AvaloniaEdit.l25g627z2e.wasm.gz",
+      "bytes": 173522,
+      "sha256": "2d959be828cf9c2530c62cd2d9bada6d70e02cd54ccf5b1df2ee51f9ac766c48"
+    },
+    {
+      "path": "_framework/CommunityToolkit.Mvvm.x91ymstd8h.wasm",
+      "bytes": 16149,
+      "sha256": "f510c05034701eec69fbf583d8a9379025b272284499a3287cdd8dc042bad5ee"
+    },
+    {
+      "path": "_framework/CommunityToolkit.Mvvm.x91ymstd8h.wasm.br",
+      "bytes": 6289,
+      "sha256": "a1ed605c491a3cca7c593983e497119fa859fb4db9caf3ec050f62657a9e4f6e"
+    },
+    {
+      "path": "_framework/CommunityToolkit.Mvvm.x91ymstd8h.wasm.gz",
+      "bytes": 7268,
+      "sha256": "95c4c76d8320a2b0abbcead8aa94c11c929261c8af40dd60f9b44e5f31dc33b1"
+    },
+    {
+      "path": "_framework/Core2D.Browser.xg02bmdef3.wasm",
+      "bytes": 8981,
+      "sha256": "e1c12bfe1c0c559459a7e5752150358e5b81dd5030cc06a64574316e208caf04"
+    },
+    {
+      "path": "_framework/Core2D.Browser.xg02bmdef3.wasm.br",
+      "bytes": 3379,
+      "sha256": "dbe51fafd0fb482a97d81f3c2691b0ee301994f684e4152936b84a2730f0b439"
+    },
+    {
+      "path": "_framework/Core2D.Browser.xg02bmdef3.wasm.gz",
+      "bytes": 3880,
+      "sha256": "6ec68e72b2e16787a212b34485e739c7ef909a3c60473903ab6c359b6552dcf9"
+    },
+    {
+      "path": "_framework/Core2D.Controls.Ruler.9zsk0ocjoi.wasm",
+      "bytes": 29973,
+      "sha256": "4b501efc34110618c564c74f3078a3b0767da912f9bcb9597ac5dd452446fb90"
+    },
+    {
+      "path": "_framework/Core2D.Controls.Ruler.9zsk0ocjoi.wasm.br",
+      "bytes": 11275,
+      "sha256": "ff6c570e1e6034456883c6fff3aaa7c2134401f15a9df574b1f0aa75a5159e39"
+    },
+    {
+      "path": "_framework/Core2D.Controls.Ruler.9zsk0ocjoi.wasm.gz",
+      "bytes": 12868,
+      "sha256": "48392e6fae3f3c147550cbd0cbfcab1a4827e346f5d05dc391692fcdbb6ebd8c"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileSystem.40l8ijwosr.wasm",
+      "bytes": 6421,
+      "sha256": "ac65c26a3b37b0d9cf986d2dbe9afaeb6cfde4a171907adcac8b0b9a987e9cec"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileSystem.40l8ijwosr.wasm.br",
+      "bytes": 2376,
+      "sha256": "9428d412658084d6347eb648cb24dd3e7ba510036ab25d091df1850d43a816b6"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileSystem.40l8ijwosr.wasm.gz",
+      "bytes": 2650,
+      "sha256": "0c215832ea36055f5cf6b78d298f9cba38de43b34b9261b87079fac9232d6c22"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileWriter.jajp75lqgp.wasm",
+      "bytes": 73493,
+      "sha256": "eb981d9fc083222c335faf1cd22c0b91e8820d0f95dfca55fc0342c27295c536"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileWriter.jajp75lqgp.wasm.br",
+      "bytes": 24501,
+      "sha256": "f9b140a407087b90c70a4c7f189f514de39655fad5f6052e2ec399e1786caddb"
+    },
+    {
+      "path": "_framework/Core2D.Modules.FileWriter.jajp75lqgp.wasm.gz",
+      "bytes": 28851,
+      "sha256": "588ded85d70efd59c19b9ebe1c81323fbbd381b3aa0dc94ff95f6e2583d4e455"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Log.6ac167xt4n.wasm",
+      "bytes": 5909,
+      "sha256": "6e8603a81eacd0a722692170c16bf248eadb246923200af68f35cca858edfbf8"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Log.6ac167xt4n.wasm.br",
+      "bytes": 2321,
+      "sha256": "4b00d937f8b5f72901bf9ebecba73b9fbc10722220022800ce06d752dd015850"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Log.6ac167xt4n.wasm.gz",
+      "bytes": 2602,
+      "sha256": "5e976db4baba1c065e1deed851f6b921c8157ae33be1c14737db7122a2eb4b42"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Avalonia.uyilggklvv.wasm",
+      "bytes": 35605,
+      "sha256": "badc98d4540e5584e90377e2eab28bab7605ca17e42c9a13c3778397f6d142ee"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Avalonia.uyilggklvv.wasm.br",
+      "bytes": 12647,
+      "sha256": "c00886be3d508f8b419e902e15bd6fa7f2788ff71f68ae9274ee4666772e8c44"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Avalonia.uyilggklvv.wasm.gz",
+      "bytes": 15270,
+      "sha256": "fa35c4ead97881940f0bd1db48491383069f49d7e41eedc137f98a6f969ba850"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Common.me9op5arpx.wasm",
+      "bytes": 7445,
+      "sha256": "9e92ab193127f9df66c928fed1db3c5004734664ded23a4fa2427ab406bdc7c1"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Common.me9op5arpx.wasm.br",
+      "bytes": 2950,
+      "sha256": "5f61e712930066fad3522fc95b419c857c175aca5d56ab5b7db5fa6dc41386d8"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Common.me9op5arpx.wasm.gz",
+      "bytes": 3303,
+      "sha256": "8799fb97fe64748853e1eb39809d89fc7ef9f4d21a86c90952ac180fa60b5b68"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dwg.9jiqfkbj3j.wasm",
+      "bytes": 63253,
+      "sha256": "ab70a4b00fa6eeabf37f5bbef2e7a924adb82e7bdad7b6569171ffe8d24eb229"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dwg.9jiqfkbj3j.wasm.br",
+      "bytes": 24833,
+      "sha256": "ed4415a7e3a655000cb378beec6e795cbe556e5fb948a03f64eac3a74ba66f12"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dwg.9jiqfkbj3j.wasm.gz",
+      "bytes": 28708,
+      "sha256": "2c9b9950efafd8c61fd9294c87a307ee4bc5a54c01f890a25851b0def3d6a594"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dxf.y0tiq05h6w.wasm",
+      "bytes": 27413,
+      "sha256": "8eb2f4272bad720ada31679db0dea0fdcf9cf784792ff2bcc114b24d7fef6cc0"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dxf.y0tiq05h6w.wasm.br",
+      "bytes": 10928,
+      "sha256": "2f51c1ce31b7539690ea70b7e85565f5af82be2830e29c834229f0cd5e7e9302"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Dxf.y0tiq05h6w.wasm.gz",
+      "bytes": 12553,
+      "sha256": "d43f7822c1bc92162a2947a78d70b53633b5e4af384c27e55b64e709b475a32d"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.OpenXml.q5s14hxqkl.wasm",
+      "bytes": 64789,
+      "sha256": "ce3c786da2c395ad7faf863ed6cc753733e31c65c5bda700a2674d06347fdfe3"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.OpenXml.q5s14hxqkl.wasm.br",
+      "bytes": 23338,
+      "sha256": "b777ae2981665062855777039c0247bd1fd8f1723f4594a7bb86da61591f58dd"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.OpenXml.q5s14hxqkl.wasm.gz",
+      "bytes": 28053,
+      "sha256": "d5bf8156cb2c4993c08b53bc8d13358250f2c4131ef67bc1e03a630bd029173e"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.PdfSharp.wkuwesn0eq.wasm",
+      "bytes": 47893,
+      "sha256": "306f17bf16e4dac4a51b43cfd581a8639eca324acc9d9a00140be5a94a0b5837"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.PdfSharp.wkuwesn0eq.wasm.br",
+      "bytes": 18103,
+      "sha256": "80911095427a3824114f703b48e561f4f8dd3d5d78083eb3559db44828ef6c1d"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.PdfSharp.wkuwesn0eq.wasm.gz",
+      "bytes": 21288,
+      "sha256": "967f71de5e76e7748f08715087fc61e57c239751663d0a797a122e11409cbfad"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SkiaSharp.gvtu3o8guo.wasm",
+      "bytes": 50453,
+      "sha256": "bcb51c1772a9d906599c7924cfd86becb999ef38458eda82e4e92ed54874cd97"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SkiaSharp.gvtu3o8guo.wasm.br",
+      "bytes": 18131,
+      "sha256": "bc313e84133f399755be9f52f78d901246311a3d15963b6cc107d3ca4aa2fbe2"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SkiaSharp.gvtu3o8guo.wasm.gz",
+      "bytes": 21923,
+      "sha256": "dfd5eba7d5d35318f2000640b6cb0f3ac3dd8f1bceb0c8308e7bb06f646f582b"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SparseStrips.7gmh6i2quq.wasm",
+      "bytes": 11029,
+      "sha256": "e7798c55b9105e2330c6feb8ebe6a74c47fb1abe3d2506782b73360d25215ba4"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SparseStrips.7gmh6i2quq.wasm.br",
+      "bytes": 4636,
+      "sha256": "bbddd39d6d3a0f5732adb29e1e1d598aa72b8936329a18883564528dd6218385"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.SparseStrips.7gmh6i2quq.wasm.gz",
+      "bytes": 5256,
+      "sha256": "3ea41bc9e93e39164664b8a9eb79ae5b1737fa83a7b716c86865b50b05cd58cd"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.VelloSharp.a98u4guebm.wasm",
+      "bytes": 12053,
+      "sha256": "b256abdd411bc77096a4672a041cacce54af86017c83f0f8dc89c5606e5c28df"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.VelloSharp.a98u4guebm.wasm.br",
+      "bytes": 5124,
+      "sha256": "b4d92a837d2c799c19b7c0f812dcffe7823f23a37100b0163956f9e55bd2d2c3"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.VelloSharp.a98u4guebm.wasm.gz",
+      "bytes": 5820,
+      "sha256": "ef9d86b1a82be2c2c9e6f4769525fdc65160c8c2bd08cffd530b30f73490b56b"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.WinForms.0mk59b7p6y.wasm",
+      "bytes": 21781,
+      "sha256": "985cbbe5dff7b1dc2a21044681abd36111e67165b6df9b7f1914056c35ca8849"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.WinForms.0mk59b7p6y.wasm.br",
+      "bytes": 8455,
+      "sha256": "fa2ac5c8a44bfa64d88abbf7447f211178b1830ea8435ae43374e325bdc9d627"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.WinForms.0mk59b7p6y.wasm.gz",
+      "bytes": 9643,
+      "sha256": "ab87e7c037d8d3cb7c99d0fe2f626c0b540026366a27e392e8e73a700454b382"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Wmf.0lsg0ixl09.wasm",
+      "bytes": 22293,
+      "sha256": "b4ccbbf36b3e6226789876705c9befa53957ac06bb643e1f72281fb17103cc57"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Wmf.0lsg0ixl09.wasm.br",
+      "bytes": 9214,
+      "sha256": "ad88d4bbe23858dcb6e0f3a82f13320da23ac3f6f98d951d59d88993dcdd7be9"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Renderer.Wmf.0lsg0ixl09.wasm.gz",
+      "bytes": 10559,
+      "sha256": "20b0fae3c7770ffdc08c2d856ed486a94d243e8d299d395c638f497661857bed"
+    },
+    {
+      "path": "_framework/Core2D.Modules.ScriptRunner.wwvvvru27p.wasm",
+      "bytes": 7445,
+      "sha256": "b021b414bfc83c17f4e501bf6739592db758d50231cc6c47e820b17da2538318"
+    },
+    {
+      "path": "_framework/Core2D.Modules.ScriptRunner.wwvvvru27p.wasm.br",
+      "bytes": 2941,
+      "sha256": "00f58d07388d22c067247fe57cc3ca984fddc9c2b758953b1c8609fd67ffdfce"
+    },
+    {
+      "path": "_framework/Core2D.Modules.ScriptRunner.wwvvvru27p.wasm.gz",
+      "bytes": 3288,
+      "sha256": "339517670415600b6661bbbf7645ca0350378211c85368fb205cc0fe9988cfde"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Serializer.s4iazac4wz.wasm",
+      "bytes": 7957,
+      "sha256": "4ca54c9ec95747fd5d33f3c906edc01c40c830e99171c8ce7802878d27c115a3"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Serializer.s4iazac4wz.wasm.br",
+      "bytes": 3145,
+      "sha256": "36864b29fe32c6f7dbc21111ccb93fb6ae06d6c81b7f8a8ada66e8a4068880f9"
+    },
+    {
+      "path": "_framework/Core2D.Modules.Serializer.s4iazac4wz.wasm.gz",
+      "bytes": 3533,
+      "sha256": "f76438a46ac03df99aa5d92e3eefffdefc15a62813dcc7caccea4d4c979bee47"
+    },
+    {
+      "path": "_framework/Core2D.Modules.SvgExporter.3v5gvmb2u7.wasm",
+      "bytes": 7445,
+      "sha256": "51b7835dc340aae6a8b62fc0fda3a599659ae0eff1194056eaff028b1e39ea30"
+    },
+    {
+      "path": "_framework/Core2D.Modules.SvgExporter.3v5gvmb2u7.wasm.br",
+      "bytes": 2948,
+      "sha256": "76425316aca39cb20f225a51ece3b6d3a5fc65aaa77c955a0bc8434ce9a7530d"
+    },
+    {
+      "path": "_framework/Core2D.Modules.SvgExporter.3v5gvmb2u7.wasm.gz",
+      "bytes": 3336,
+      "sha256": "747ebb543f7e2e4d289b490d60dd7dfd64af150c0a53921c10c5f2dc053ea3d3"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldReader.wapjuwlh24.wasm",
+      "bytes": 11541,
+      "sha256": "280b6cca29459936b08ecbf12cca6997bba8dff76631d7a0abde5db694e4a1e8"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldReader.wapjuwlh24.wasm.br",
+      "bytes": 4729,
+      "sha256": "9bc88d61d2c324334352ba658cbcd63bdea62bdec857ed62f427b26506f426ad"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldReader.wapjuwlh24.wasm.gz",
+      "bytes": 5329,
+      "sha256": "2f098af15c2dc2458d3c64cbb232f4e8df88683c2884ff393dcf2b075647c6a2"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldWriter.txa9qexzkr.wasm",
+      "bytes": 10517,
+      "sha256": "a1c1d99c6e013a69578a921c246cbd89fb0a85eb82e961c056e3295175d36eac"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldWriter.txa9qexzkr.wasm.br",
+      "bytes": 4622,
+      "sha256": "7339a473844dbbbf09bdc25df8b9406970effe978d8484fa15faf2e30350cfea"
+    },
+    {
+      "path": "_framework/Core2D.Modules.TextFieldWriter.txa9qexzkr.wasm.gz",
+      "bytes": 5157,
+      "sha256": "ad2f2e5c244f26333348f14d5d74d6bbf096c19febef3d1199ed0c5a9a1cc6fb"
+    },
+    {
+      "path": "_framework/Core2D.Modules.XamlExporter.crbtkhbigp.wasm",
+      "bytes": 6933,
+      "sha256": "c888d4782cb4b47d4b3ba1c8a67b77f5b87bbe6ecf8d6fc8f82abfa3e078e42f"
+    },
+    {
+      "path": "_framework/Core2D.Modules.XamlExporter.crbtkhbigp.wasm.br",
+      "bytes": 2718,
+      "sha256": "09bd4d7884255d072c7f1db8cccb3ffce50036ece146922bab482032c48a4126"
+    },
+    {
+      "path": "_framework/Core2D.Modules.XamlExporter.crbtkhbigp.wasm.gz",
+      "bytes": 3018,
+      "sha256": "e272ae4cf86f5795eb7cf82d5449e03b30f22e2bd968eda6df3f715a6d7a4a16"
+    },
+    {
+      "path": "_framework/Core2D.Spatial.rj7uratgvf.wasm",
+      "bytes": 21269,
+      "sha256": "494b3894f3e4f05ad51db48a5e30c838c3af54a978ea09d742dbda07ccc73953"
+    },
+    {
+      "path": "_framework/Core2D.Spatial.rj7uratgvf.wasm.br",
+      "bytes": 8619,
+      "sha256": "1ec59b3d8e9ae42221e3ac97766363191031f7bc2c6c7ec941fdbf1d2751e0d6"
+    },
+    {
+      "path": "_framework/Core2D.Spatial.rj7uratgvf.wasm.gz",
+      "bytes": 9949,
+      "sha256": "76f0f671a075b0d7a76226cb52b6972476200101400160723bf69543be62ca13"
+    },
+    {
+      "path": "_framework/Core2D.ViewModels.gl9wcc33gj.wasm",
+      "bytes": 613141,
+      "sha256": "9424fe4dba8946986077c24951e885cdc507244b1fdbd983a4c70fdbe56e9e17"
+    },
+    {
+      "path": "_framework/Core2D.ViewModels.gl9wcc33gj.wasm.br",
+      "bytes": 173327,
+      "sha256": "9c83a00ab5ed5b2e29c7aa9f1748aee08374163fa661759fb1083eadd6d75274"
+    },
+    {
+      "path": "_framework/Core2D.ViewModels.gl9wcc33gj.wasm.gz",
+      "bytes": 222463,
+      "sha256": "eec39e1f0c1c572bfb29277ab95cf81dc39d2946d4f0c609999537c206472bf5"
+    },
+    {
+      "path": "_framework/Core2D.q6r56i24k4.wasm",
+      "bytes": 1584405,
+      "sha256": "e286c88d7a4d593b493de122883d71c9fd6427936c0338e7258792e93d14d549"
+    },
+    {
+      "path": "_framework/Core2D.q6r56i24k4.wasm.br",
+      "bytes": 281443,
+      "sha256": "69a78e45151eed08e7058a0a9857a51982d3ef5c609527ea170f956fff4ba7ea"
+    },
+    {
+      "path": "_framework/Core2D.q6r56i24k4.wasm.gz",
+      "bytes": 384029,
+      "sha256": "1a842dd9b8d2e6c050c664866ee3d71e312d3aaa091e59b6e8e13fa285b329c4"
+    },
+    {
+      "path": "_framework/CsvHelper.uav9ykykb7.wasm",
+      "bytes": 69397,
+      "sha256": "4aa7f8623709cab5b3751df5d0ea0efd11aba355495693680881e7abbcdc0ee7"
+    },
+    {
+      "path": "_framework/CsvHelper.uav9ykykb7.wasm.br",
+      "bytes": 25125,
+      "sha256": "2e0360e88b334de962f95a7036c03e610184fba1c70ae537b4870dc00094289c"
+    },
+    {
+      "path": "_framework/CsvHelper.uav9ykykb7.wasm.gz",
+      "bytes": 29869,
+      "sha256": "6d557f6c0802f7ea9d16e69081fb3fc4ece6e05948c3bb9bd2ee70657e0c8af7"
+    },
+    {
+      "path": "_framework/Dock.Avalonia.Themes.Fluent.ibckyaii3e.wasm",
+      "bytes": 338197,
+      "sha256": "5ee5ca5c44ff195c7468833dfcc21d6a4e004f5b272d75b3d7a72724bc67da6c"
+    },
+    {
+      "path": "_framework/Dock.Avalonia.Themes.Fluent.ibckyaii3e.wasm.br",
+      "bytes": 46317,
+      "sha256": "0484e3c26d26e9afe3d9f74c474176ab0cf8752875dfb0800124b1f3e7ca0ac3"
+    },
+    {
+      "path": "_framework/Dock.Avalonia.Themes.Fluent.ibckyaii3e.wasm.gz",
+      "bytes": 66822,
+      "sha256": "e05e61822ba3fff49bf557f88a17150b24d61c2347807aff8bf7a3a15886e7a4"
+    },
+    {
+      "path": "_framework/Dock.Avalonia.wgchcbll2c.wasm",
+      "bytes": 214293,
+      "sha256": "6081deda9a46deaf4b491db0ce435c6f3407a44b48421cc10a9a553b9232edcc"
+    },
+    {
+      "path": "_framework/Dock.Avalonia.wgchcbll2c.wasm.br",
+      "bytes": 75114,
+      "sha256": "3781e15e178b0912ec7bc33ea46b2c042681f1a17a2e1c13282bb118d6242270"
+    },
+    {
+      "path": "_framework/Dock.Avalonia.wgchcbll2c.wasm.gz",
+      "bytes": 89966,
+      "sha256": "c906765245184a0d51ea156115471d7163f0043e36a02ac5bb6ee485e690e88a"
+    },
+    {
+      "path": "_framework/Dock.Controls.ProportionalStackPanel.v0gi1wiu91.wasm",
+      "bytes": 30997,
+      "sha256": "9fe26234c0b76672184367855fc75e207f08fb4fe84abf92c3e47c5b93c465b4"
+    },
+    {
+      "path": "_framework/Dock.Controls.ProportionalStackPanel.v0gi1wiu91.wasm.br",
+      "bytes": 12286,
+      "sha256": "c4fec80f3f0d905765d36ca6a2e99590d692d8c94e250d3369800f2f55f93286"
+    },
+    {
+      "path": "_framework/Dock.Controls.ProportionalStackPanel.v0gi1wiu91.wasm.gz",
+      "bytes": 14172,
+      "sha256": "2c64cc4270a6fdfa7b146160547375c228c1994fab4f808b9739fb9a741e881d"
+    },
+    {
+      "path": "_framework/Dock.Controls.Recycling.Model.d2stxb8dm2.wasm",
+      "bytes": 4885,
+      "sha256": "ab3f786b10d023bbbfd204b3edb6f8c8c6f801d6c3602837e372b35c1730a805"
+    },
+    {
+      "path": "_framework/Dock.Controls.Recycling.Model.d2stxb8dm2.wasm.br",
+      "bytes": 1754,
+      "sha256": "73da3a837b130b2b8d6c0290709562a0c573657b4ffd398d5663cfed95636724"
+    },
+    {
+      "path": "_framework/Dock.Controls.Recycling.Model.d2stxb8dm2.wasm.gz",
+      "bytes": 2007,
+      "sha256": "221d5010f807694483f64e4fe5474e49e829f94a23285678c0808734ec8ccec0"
+    },
+    {
+      "path": "_framework/Dock.Controls.Recycling.medz4w422m.wasm",
+      "bytes": 10005,
+      "sha256": "620d89f7188f724a92492f37e858748f761ff34e32448fb26b08934c32415900"
+    },
+    {
+      "path": "_framework/Dock.Controls.Recycling.medz4w422m.wasm.br",
+      "bytes": 4075,
+      "sha256": "ef70f255edf28e2a297d820308a4ff33ebec1cb1e5ecab866c5fa79d9673b017"
+    },
+    {
+      "path": "_framework/Dock.Controls.Recycling.medz4w422m.wasm.gz",
+      "bytes": 4634,
+      "sha256": "3624b97b877b4e51837fda6f4949ce4d8e4a9ffa69e21aaa1dd3e1496970ab1b"
+    },
+    {
+      "path": "_framework/Dock.Model.ReactiveUI.sq6ihitffr.wasm",
+      "bytes": 30997,
+      "sha256": "5c449a16d41a241cc4d69c6558475c84323e172c26e735ea68ac2f52f8a8e07b"
+    },
+    {
+      "path": "_framework/Dock.Model.ReactiveUI.sq6ihitffr.wasm.br",
+      "bytes": 10476,
+      "sha256": "7de272dec23590c58b87272db9e0d369a4def9ca05cd58e4c407421e42f820d0"
+    },
+    {
+      "path": "_framework/Dock.Model.ReactiveUI.sq6ihitffr.wasm.gz",
+      "bytes": 13242,
+      "sha256": "de37b56b098992939d9125d954df468321bc0b383190498c60f2f4dc13f54688"
+    },
+    {
+      "path": "_framework/Dock.Model.b6c6164ftr.wasm",
+      "bytes": 80149,
+      "sha256": "23fcc87c1494bdcf0900ff114aef9393ea96c0678155837b57b151566d0b0ff1"
+    },
+    {
+      "path": "_framework/Dock.Model.b6c6164ftr.wasm.br",
+      "bytes": 28129,
+      "sha256": "c272d4e72e1a65440652ab071be7851fa3db352b685c626aa763526110bfe837"
+    },
+    {
+      "path": "_framework/Dock.Model.b6c6164ftr.wasm.gz",
+      "bytes": 34245,
+      "sha256": "9197f004fc6b2c6c5439b53c993af10a9f58c26cc40def6fab630eece6db18ea"
+    },
+    {
+      "path": "_framework/Dock.Settings.9ha84oof24.wasm",
+      "bytes": 8981,
+      "sha256": "f3f4e2f16093c6f6d0d327a0c21e5841d60f736e91e59d58e62ad8cc4a610c00"
+    },
+    {
+      "path": "_framework/Dock.Settings.9ha84oof24.wasm.br",
+      "bytes": 3554,
+      "sha256": "e979f1df9a7086f16a977ee341b4a9e844ed677fbed8750e1b2abd8d5d571ae3"
+    },
+    {
+      "path": "_framework/Dock.Settings.9ha84oof24.wasm.gz",
+      "bytes": 4102,
+      "sha256": "69c9bcc78f7abd2d0f2b3b09ab25b43024c71c74844cea7c14d8306565e18399"
+    },
+    {
+      "path": "_framework/DocumentFormat.OpenXml.Framework.wmuqp1c6cp.wasm",
+      "bytes": 270101,
+      "sha256": "6845770e8251155da39ef2b1c5d7db62d93ab70c4235a2da9eeaa5d5701163d9"
+    },
+    {
+      "path": "_framework/DocumentFormat.OpenXml.Framework.wmuqp1c6cp.wasm.br",
+      "bytes": 79618,
+      "sha256": "eff4538cfe4ab4858be7884e7ccab8b896a35ad3582dc431f9c01a4db7717734"
+    },
+    {
+      "path": "_framework/DocumentFormat.OpenXml.Framework.wmuqp1c6cp.wasm.gz",
+      "bytes": 97883,
+      "sha256": "e7ea6ee64270c5ec9fd72e529f2fab7dadd91be5f4ac7662037e0e2a38bf8371"
+    },
+    {
+      "path": "_framework/DocumentFormat.OpenXml.sa6a8hhg7h.wasm",
+      "bytes": 4240153,
+      "sha256": "9cc53795578a346bfa472d659a1e7689f25013cc6f4d9e97ffba1f0c3fdd092a"
+    },
+    {
+      "path": "_framework/DocumentFormat.OpenXml.sa6a8hhg7h.wasm.br",
+      "bytes": 695384,
+      "sha256": "21277302c544e4daccd13de4aa22854362c8f2e5e4913c7c83e8d64fe6ebf86a"
+    },
+    {
+      "path": "_framework/DocumentFormat.OpenXml.sa6a8hhg7h.wasm.gz",
+      "bytes": 1052666,
+      "sha256": "4625703a7434e580d32ec7e2f69238ad1da3c72e2b966808367527a75d8bf872"
+    },
+    {
+      "path": "_framework/ExCSS.fb3gi43no9.wasm",
+      "bytes": 270613,
+      "sha256": "cb46c4f4bbc7368240a82c3cf6c9e5a4a7bd640ebcc570f9d38c4f006b030fd7"
+    },
+    {
+      "path": "_framework/ExCSS.fb3gi43no9.wasm.br",
+      "bytes": 83428,
+      "sha256": "a17553c3bee239e7768373356f76e0d702cbbcc78c375f2970bf871e84f28ac5"
+    },
+    {
+      "path": "_framework/ExCSS.fb3gi43no9.wasm.gz",
+      "bytes": 106410,
+      "sha256": "6aced8f138d12795e53b3685bd52985a193140eb8cfdcb4ae7e0d1c3c5ba9a82"
+    },
+    {
+      "path": "_framework/HarfBuzzSharp.l6qemr74ut.wasm",
+      "bytes": 32021,
+      "sha256": "f3f12df0088247dbf78c88159f3b5d8925388e641c13b170464b8cc993c527b6"
+    },
+    {
+      "path": "_framework/HarfBuzzSharp.l6qemr74ut.wasm.br",
+      "bytes": 12301,
+      "sha256": "19f3145a1c99649a70599a2d018a04bacec2398bfd4d20db76b476d87d91c411"
+    },
+    {
+      "path": "_framework/HarfBuzzSharp.l6qemr74ut.wasm.gz",
+      "bytes": 14991,
+      "sha256": "e9589060492a7703928228e0a1da8f6d37675f3f9cbde369e10d612425d576d1"
+    },
+    {
+      "path": "_framework/Microsoft.CSharp.kc7tjlkvly.wasm",
+      "bytes": 229653,
+      "sha256": "8ccef0c1278945ccdf93b231fd3d83c050b8720da57a72a9067808d267c6523c"
+    },
+    {
+      "path": "_framework/Microsoft.CSharp.kc7tjlkvly.wasm.br",
+      "bytes": 86271,
+      "sha256": "6c8a7a4a39018a98413df74c86d2aa06cb936d49b3829938d13889c4e1226ffe"
+    },
+    {
+      "path": "_framework/Microsoft.CSharp.kc7tjlkvly.wasm.gz",
+      "bytes": 104923,
+      "sha256": "a476ac9d0bd54ca59512a234276ca2c3c0799c1a41b2d2e1a456d12f66a84914"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.CSharp.Scripting.gmfdwhll1s.wasm",
+      "bytes": 15637,
+      "sha256": "58245bd30c7f518604d9121abe024797876d94002b20f5457cce69dc6a186d8d"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.CSharp.Scripting.gmfdwhll1s.wasm.br",
+      "bytes": 4415,
+      "sha256": "24cc7db9c079aa44cf21b2e8c55b771867cd40d3154eb1cbf7478cc680689f17"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.CSharp.Scripting.gmfdwhll1s.wasm.gz",
+      "bytes": 5243,
+      "sha256": "2dae44f4b3ffa467fe0f4746648ea32cdce1cdc7bb7eb8f2492df9535136f188"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.CSharp.cgulcbtgvb.wasm",
+      "bytes": 5095193,
+      "sha256": "6cf57b6cf461603a73a182e93730a0f29773c36ca896f7b77537ee600417edee"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.CSharp.cgulcbtgvb.wasm.br",
+      "bytes": 1486993,
+      "sha256": "b248c2d98d97a8a1d1ca7ba98226ed8992c28852bc07da635c18adce7f517781"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.CSharp.cgulcbtgvb.wasm.gz",
+      "bytes": 1888940,
+      "sha256": "496f4b7d18355ff83e58d0c3cbb98e72ac8f8b5902d0326cf07fceca93be64d1"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.Scripting.ptby2jtgz0.wasm",
+      "bytes": 65301,
+      "sha256": "5dae7198c85ee79e349c580fd50b3cb48f2de597d2ae9f1cf71af23955078025"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.Scripting.ptby2jtgz0.wasm.br",
+      "bytes": 25307,
+      "sha256": "b26f895b8df675001cd3d12549209d8ce9a1fbe6d4f508efd12d6dcf4e9f22ea"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.Scripting.ptby2jtgz0.wasm.gz",
+      "bytes": 29501,
+      "sha256": "47ecbc07d339387c1f0e0b13c9b9138adca5b246fa6e13decaa37cb3325a6747"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.dwbv5q1nxj.wasm",
+      "bytes": 1330965,
+      "sha256": "fdea9e619566dece2080c658e888d1398b603296ed8547915108e67125a2f2b2"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.dwbv5q1nxj.wasm.br",
+      "bytes": 401087,
+      "sha256": "c848a462290cd47258b4388da590bf3cfc497d4f86029f1ffe29ed47353f7b64"
+    },
+    {
+      "path": "_framework/Microsoft.CodeAnalysis.dwbv5q1nxj.wasm.gz",
+      "bytes": 499408,
+      "sha256": "e590002578062e85712026dcb8cde271160d95e8743fd90bbcb01278a9c04345"
+    },
+    {
+      "path": "_framework/Microsoft.Extensions.DependencyInjection.Abstractions.7eq1f8zv3d.wasm",
+      "bytes": 14101,
+      "sha256": "dfba3688cb07868526bb102f9c6d91a667af37243ebe3670f4781ba122b94125"
+    },
+    {
+      "path": "_framework/Microsoft.Extensions.DependencyInjection.Abstractions.7eq1f8zv3d.wasm.br",
+      "bytes": 5169,
+      "sha256": "2750c62534cc4b9f31823bd2a626854936ba28813f498c2988e86c1602c73bae"
+    },
+    {
+      "path": "_framework/Microsoft.Extensions.DependencyInjection.Abstractions.7eq1f8zv3d.wasm.gz",
+      "bytes": 5974,
+      "sha256": "3b53829603a580be436a0954a8abdc44cd9236160e263ee64e44e810fbb1b03e"
+    },
+    {
+      "path": "_framework/Microsoft.Extensions.DependencyInjection.qk0e9fmrwq.wasm",
+      "bytes": 44821,
+      "sha256": "96a0eb1cbe114293c5aff55e3fcce1a17f69ce1ea3ee495d27737451f185a789"
+    },
+    {
+      "path": "_framework/Microsoft.Extensions.DependencyInjection.qk0e9fmrwq.wasm.br",
+      "bytes": 18631,
+      "sha256": "b4a443942225dd57301c469c15e7e1706509c19349d70b97da927a5f41fdd762"
+    },
+    {
+      "path": "_framework/Microsoft.Extensions.DependencyInjection.qk0e9fmrwq.wasm.gz",
+      "bytes": 21585,
+      "sha256": "74995d912eb22546481646b0faebf08e99c98b3ec4609d71d265390547e3e4d4"
+    },
+    {
+      "path": "_framework/Microsoft.Extensions.Logging.Abstractions.byb5dzsqe2.wasm",
+      "bytes": 23317,
+      "sha256": "c3a40345b62cd17f291cb2c1422781f0796f88ad16b96212c42949538368029f"
+    },
+    {
+      "path": "_framework/Microsoft.Extensions.Logging.Abstractions.byb5dzsqe2.wasm.br",
+      "bytes": 9390,
+      "sha256": "e9b3f04e4b2d077448e6914de038e88c019963fe9877e696335f9d0d3f08a9f3"
+    },
+    {
+      "path": "_framework/Microsoft.Extensions.Logging.Abstractions.byb5dzsqe2.wasm.gz",
+      "bytes": 11007,
+      "sha256": "a47390a1284e41c2a8e5d9492a872aba652f39bccb69bf2e402abd20a755ee30"
+    },
+    {
+      "path": "_framework/Newtonsoft.Json.1xphlk3t1t.wasm",
+      "bytes": 379157,
+      "sha256": "75120b0f9c87d12a69a7b5685bee4c4de429810b922d4b6a69d8ec7a7420d05e"
+    },
+    {
+      "path": "_framework/Newtonsoft.Json.1xphlk3t1t.wasm.br",
+      "bytes": 129860,
+      "sha256": "3a288d18474fdf187a4d1cbc320e20ec6276707e2abccda5b3d0e0abc316550b"
+    },
+    {
+      "path": "_framework/Newtonsoft.Json.1xphlk3t1t.wasm.gz",
+      "bytes": 155553,
+      "sha256": "494fd371fe317d3d1252b294eb0c77c06addb5c34080ae5ea66eb325a4d4fafb"
+    },
+    {
+      "path": "_framework/Onigwrap.vtapslsauz.wasm",
+      "bytes": 11029,
+      "sha256": "1353cdd2e6415035347fe7eee8a87eacbea3e380ca61939aa499abf9ff08afcf"
+    },
+    {
+      "path": "_framework/Onigwrap.vtapslsauz.wasm.br",
+      "bytes": 4644,
+      "sha256": "7aab81dea3c50da6e24702d0ae941fda4f9def7ef537d2a929a997818d9e4bca"
+    },
+    {
+      "path": "_framework/Onigwrap.vtapslsauz.wasm.gz",
+      "bytes": 5287,
+      "sha256": "7ee0fee72ea7aa60faf2fde74789834448b7a38a61339325adc359d7354d018c"
+    },
+    {
+      "path": "_framework/Oxage.Wmf.6idmwy9yph.wasm",
+      "bytes": 30997,
+      "sha256": "221a59a30302f6bb857dafcfe23fb6288a919f88a3a2ef212836a04f5123bd14"
+    },
+    {
+      "path": "_framework/Oxage.Wmf.6idmwy9yph.wasm.br",
+      "bytes": 11015,
+      "sha256": "dd4964d32180ef42772ca278fa73c700cebd8f89fbf9ee08244e35d27a4ed4cb"
+    },
+    {
+      "path": "_framework/Oxage.Wmf.6idmwy9yph.wasm.gz",
+      "bytes": 13441,
+      "sha256": "fc9941c25988fd8bfc46b890e0def6089dbc57a5c449cbb3c1b97988545e9f8f"
+    },
+    {
+      "path": "_framework/PanAndZoom.771fjvttc3.wasm",
+      "bytes": 43285,
+      "sha256": "2d6d1adfd8e45d84a41dbd9e3f0bfd9b090a3323a9742ee7f0daa3f0d6c602ba"
+    },
+    {
+      "path": "_framework/PanAndZoom.771fjvttc3.wasm.br",
+      "bytes": 22409,
+      "sha256": "69f299ed0af1f45f33bf7e46cae1b5f6ccd41f95853da0dc920c16b64927a6f0"
+    },
+    {
+      "path": "_framework/PanAndZoom.771fjvttc3.wasm.gz",
+      "bytes": 25092,
+      "sha256": "e1ea301efc904df6efbe2f1cf5062835cfa78e27d093f04af149a6282cc8f3bc"
+    },
+    {
+      "path": "_framework/PdfSharp.Shared.7nmrg9oyzd.wasm",
+      "bytes": 19221,
+      "sha256": "9d800d1a21a50189d80d8a386e4e9e3edb9a98843fe84da668c74c7211301a1d"
+    },
+    {
+      "path": "_framework/PdfSharp.Shared.7nmrg9oyzd.wasm.br",
+      "bytes": 3036,
+      "sha256": "affa41f50ec4781e3566a2b9c43634cd9694b3273ae3c6ca01a66ff688e5031c"
+    },
+    {
+      "path": "_framework/PdfSharp.Shared.7nmrg9oyzd.wasm.gz",
+      "bytes": 3640,
+      "sha256": "4a58bba46525d3f7189cb556b95337f1e58c933327743b89469d2362a317b42b"
+    },
+    {
+      "path": "_framework/PdfSharp.System.0ako4rx14f.wasm",
+      "bytes": 4885,
+      "sha256": "586379a018df111dad484c956c93be7528058727e6eb42e8710e32c1b08f026c"
+    },
+    {
+      "path": "_framework/PdfSharp.System.0ako4rx14f.wasm.br",
+      "bytes": 1975,
+      "sha256": "068586884d70cbd6b04aa51068d3aebf64e3497894246bc56e1e853ad991a21d"
+    },
+    {
+      "path": "_framework/PdfSharp.System.0ako4rx14f.wasm.gz",
+      "bytes": 2233,
+      "sha256": "7739c0a6cdd4f8b627d82cc83d508a0ffa06afa6ec5cc1f26d7b5411d6ce0beb"
+    },
+    {
+      "path": "_framework/PdfSharp.r9cri0ir7k.wasm",
+      "bytes": 438549,
+      "sha256": "2157180071a5491dfe895582b2e61137f9ac64e72541fa7e7fb85bdca8470f9e"
+    },
+    {
+      "path": "_framework/PdfSharp.r9cri0ir7k.wasm.br",
+      "bytes": 157378,
+      "sha256": "784485ec54278a758f21903b794a35f109bc29a844fff1f8683b7abe947701f0"
+    },
+    {
+      "path": "_framework/PdfSharp.r9cri0ir7k.wasm.gz",
+      "bytes": 188620,
+      "sha256": "5c7d2c4b7498f7b1c7ec51ba7f85f9e332a4a2fef05348824a663c53b0588f01"
+    },
+    {
+      "path": "_framework/ProDataGrid.FormulaEngine.Excel.cs6z67dfqe.wasm",
+      "bytes": 96021,
+      "sha256": "1cdf5821478ba98e1951f1c40b0d97de0559a8dccaab07e27b157323bb3a24d8"
+    },
+    {
+      "path": "_framework/ProDataGrid.FormulaEngine.Excel.cs6z67dfqe.wasm.br",
+      "bytes": 33896,
+      "sha256": "4c4035d2ecac02f1c485511b6bf2665bcf2fce78eba0c1c73fee651089b889e4"
+    },
+    {
+      "path": "_framework/ProDataGrid.FormulaEngine.Excel.cs6z67dfqe.wasm.gz",
+      "bytes": 40074,
+      "sha256": "fd21e82a092e34d8b1395ef10079bafbcd53a707a8054ca5f33fd6685546202f"
+    },
+    {
+      "path": "_framework/ProDataGrid.FormulaEngine.t4v6xwk41j.wasm",
+      "bytes": 82197,
+      "sha256": "1d64daafe68f42273dcb3066a8ce0f4ed286775c694b80d4e784a165476c6aa8"
+    },
+    {
+      "path": "_framework/ProDataGrid.FormulaEngine.t4v6xwk41j.wasm.br",
+      "bytes": 30732,
+      "sha256": "66a48905a7c8dbdce020be57df8c515dcce59f1b445fead628bd52661e2ac427"
+    },
+    {
+      "path": "_framework/ProDataGrid.FormulaEngine.t4v6xwk41j.wasm.gz",
+      "bytes": 36771,
+      "sha256": "7087adadd5a927e5e3c82b6dc20adc09c7ee794bd4e4067f9d60bb721a680d8b"
+    },
+    {
+      "path": "_framework/ReactiveUI.7faqtu3dh3.wasm",
+      "bytes": 92949,
+      "sha256": "439cdc7b5e367cd47c32ba4f938a08c4e61d2520ca2da4e77a83ccee3651e598"
+    },
+    {
+      "path": "_framework/ReactiveUI.7faqtu3dh3.wasm.br",
+      "bytes": 47907,
+      "sha256": "803639eb5ff78823669f2f1463a6a109a898bea2a367125c357eb4ae6ac51416"
+    },
+    {
+      "path": "_framework/ReactiveUI.7faqtu3dh3.wasm.gz",
+      "bytes": 53559,
+      "sha256": "84c3f3bb74f8952955f2becc785a6f36fda3d420ef2366a186e000004c70c007"
+    },
+    {
+      "path": "_framework/ShimSkiaSharp.ihpx9f1hy9.wasm",
+      "bytes": 127253,
+      "sha256": "ba6b0ad06d02e16cab8e590a3fa5cf1e2de4f2dfc2b1c0b4ea46ebe23d9174f5"
+    },
+    {
+      "path": "_framework/ShimSkiaSharp.ihpx9f1hy9.wasm.br",
+      "bytes": 46499,
+      "sha256": "77897da4c9c1c793211e9bd27ba589f8af746f940007101591dfd66c107a5d9a"
+    },
+    {
+      "path": "_framework/ShimSkiaSharp.ihpx9f1hy9.wasm.gz",
+      "bytes": 56504,
+      "sha256": "71e0acb994b578432c17c81252da0123cdc7b8bcfd0d7a7375c8b8b9c41d1bf7"
+    },
+    {
+      "path": "_framework/SkiaSharp.9c42tq86o4.wasm",
+      "bytes": 170261,
+      "sha256": "8798bc0d87e81f4bf9c46ea10ddb409b901793e4f6c438a35823e96ead6c1dde"
+    },
+    {
+      "path": "_framework/SkiaSharp.9c42tq86o4.wasm.br",
+      "bytes": 58086,
+      "sha256": "e84b7cd53f938ca3a5a20bb5791ca08378205d4bb2a0817d9a4de8434c16f406"
+    },
+    {
+      "path": "_framework/SkiaSharp.9c42tq86o4.wasm.gz",
+      "bytes": 71629,
+      "sha256": "64fa51491c395813a02718b3b68fcb7bebb70b59a82f9936e27863fb8d31f31e"
+    },
+    {
+      "path": "_framework/Splat.Builder.r4641hn12j.wasm",
+      "bytes": 12565,
+      "sha256": "0b2da8fd3f5daee001cbfc09726c0089aa573d0928042637ca8ee77f2539e287"
+    },
+    {
+      "path": "_framework/Splat.Builder.r4641hn12j.wasm.br",
+      "bytes": 9192,
+      "sha256": "672a766818bf506e1c87629b676d1aea45522c9b884376e73c5a5919b9c53976"
+    },
+    {
+      "path": "_framework/Splat.Builder.r4641hn12j.wasm.gz",
+      "bytes": 9795,
+      "sha256": "b878481451b8299d5f30f5dd7501c9b5643499f90aa5aae5bd8ab7f4bbda4167"
+    },
+    {
+      "path": "_framework/Splat.Core.glthxrc83f.wasm",
+      "bytes": 23829,
+      "sha256": "ec82708efc723286debb2fdf22cde6e72e0153423e4eb37a070763f3828932c6"
+    },
+    {
+      "path": "_framework/Splat.Core.glthxrc83f.wasm.br",
+      "bytes": 15716,
+      "sha256": "e8e3576450180e5845d1bb4cde3ff702e59306103398e86a08a2d2bff9148722"
+    },
+    {
+      "path": "_framework/Splat.Core.glthxrc83f.wasm.gz",
+      "bytes": 17227,
+      "sha256": "7e8cf94f90aaf800015d0521fcbc0273c24006a880238aeb08c5155e06d47e28"
+    },
+    {
+      "path": "_framework/Splat.Logging.0gircqxpuf.wasm",
+      "bytes": 22805,
+      "sha256": "e0e584b43845a089a425a2d4c7bb437a6df31cccf1531cf77f97c609589e5cbe"
+    },
+    {
+      "path": "_framework/Splat.Logging.0gircqxpuf.wasm.br",
+      "bytes": 15433,
+      "sha256": "43688b479adb8dcac92590ff627836fb80748d8879b55f11d0d41cbaab4cf1bd"
+    },
+    {
+      "path": "_framework/Splat.Logging.0gircqxpuf.wasm.gz",
+      "bytes": 16880,
+      "sha256": "8e42854a78e2991f5f3157ffcb2b259ea1903c8abad8d8508836ac796ecef240"
+    },
+    {
+      "path": "_framework/Splat.e8equ8zey3.wasm",
+      "bytes": 21781,
+      "sha256": "8e781dedc0d06f51439af461c581893f0b1721f4ecf4cf718d3a8db38bddfec9"
+    },
+    {
+      "path": "_framework/Splat.e8equ8zey3.wasm.br",
+      "bytes": 14899,
+      "sha256": "8a2c0eecb735b7b851c7d14d09208b901336f7e4508048c0dfbde8bebc342d58"
+    },
+    {
+      "path": "_framework/Splat.e8equ8zey3.wasm.gz",
+      "bytes": 16231,
+      "sha256": "deedb247aa072e8bfddfc8497edf89d8f2a2f3df0360b1cd1f3719583f89a18c"
+    },
+    {
+      "path": "_framework/Svg.Custom.uykpzxxybi.wasm",
+      "bytes": 658709,
+      "sha256": "9a1285779f9121d7c9e9a85c474698a89ff1acfa985de9e8ad94c57203a0d871"
+    },
+    {
+      "path": "_framework/Svg.Custom.uykpzxxybi.wasm.br",
+      "bytes": 231247,
+      "sha256": "3d2e685dfa482b636e9d5b67d4de51c4ce594bc90dc170bcd75816ff10f809cc"
+    },
+    {
+      "path": "_framework/Svg.Custom.uykpzxxybi.wasm.gz",
+      "bytes": 272293,
+      "sha256": "213baf01d3231c1e1a3e03799186a03e57bc0babc39bc7e3cbf3cf64288d2d07"
+    },
+    {
+      "path": "_framework/Svg.Model.l3uy3ej28q.wasm",
+      "bytes": 139541,
+      "sha256": "e15725b28cb0bf93739f1195f74f2cab58835fbcd2676851ed6b6340c24f4c1c"
+    },
+    {
+      "path": "_framework/Svg.Model.l3uy3ej28q.wasm.br",
+      "bytes": 71447,
+      "sha256": "fecffe9fd1ae805af7b72070d20fd0ba3785dfe7a2d9426b855fcefbd78facf9"
+    },
+    {
+      "path": "_framework/Svg.Model.l3uy3ej28q.wasm.gz",
+      "bytes": 80022,
+      "sha256": "f3c4499d7bbcfb2945417befa9828c07c1ff5f056154de008dc1ff47268891e5"
+    },
+    {
+      "path": "_framework/Svg.Skia.l0m1k8wc0b.wasm",
+      "bytes": 49941,
+      "sha256": "b5d91f6f91b6372d1a907dbf425ae354aba941023b2fe1e200de9664e9f486e8"
+    },
+    {
+      "path": "_framework/Svg.Skia.l0m1k8wc0b.wasm.br",
+      "bytes": 27775,
+      "sha256": "eb46243c3f7044d2e82a5f066c81b760afa2ae1fa58efe77b957d5cd60f94b07"
+    },
+    {
+      "path": "_framework/Svg.Skia.l0m1k8wc0b.wasm.gz",
+      "bytes": 30851,
+      "sha256": "19ffaf2e20eb9efe2a34fa71dcd0762880c2af9e469d6f130336afcafe80a35c"
+    },
+    {
+      "path": "_framework/System.400l3mulw9.wasm",
+      "bytes": 4885,
+      "sha256": "bcf126d8aaa05eaaee1b09f3ef5f224a0983a01f089a0ee21f71733b9edbd118"
+    },
+    {
+      "path": "_framework/System.400l3mulw9.wasm.br",
+      "bytes": 1462,
+      "sha256": "628600b6e124b716e180a70d6a78325e5fa0aecf454e2d745d9590754a106e7e"
+    },
+    {
+      "path": "_framework/System.400l3mulw9.wasm.gz",
+      "bytes": 1688,
+      "sha256": "a4ccdaab0b61c3b4e59ccfab48c791d636090e2cb7c9f0cca20f8aa0f7dc1428"
+    },
+    {
+      "path": "_framework/System.Collections.Concurrent.998g67hpnx.wasm",
+      "bytes": 37141,
+      "sha256": "33e000710e7612ae90cea6122745e4dbe09a8fe70e8e94212cd0f648e4b9bcdf"
+    },
+    {
+      "path": "_framework/System.Collections.Concurrent.998g67hpnx.wasm.br",
+      "bytes": 15431,
+      "sha256": "72956e31d16ba50981eb88a1648be168cfd5575aa06e320e736a84ab4fb73459"
+    },
+    {
+      "path": "_framework/System.Collections.Concurrent.998g67hpnx.wasm.gz",
+      "bytes": 17570,
+      "sha256": "e354a88e5fabf78869ebf2f2fb30d59620d76a148a8004c45429818cac330259"
+    },
+    {
+      "path": "_framework/System.Collections.Immutable.vxe21duqtz.wasm",
+      "bytes": 83221,
+      "sha256": "ddf22a0ce4aad8bee3b8cd070f1ca92966d83f013bec6ec3687fdf984c49b4c9"
+    },
+    {
+      "path": "_framework/System.Collections.Immutable.vxe21duqtz.wasm.br",
+      "bytes": 30661,
+      "sha256": "b34fa71619cdb05c6c6e444dc2a34be39a3769de3d4553c71ff76359066a9625"
+    },
+    {
+      "path": "_framework/System.Collections.Immutable.vxe21duqtz.wasm.gz",
+      "bytes": 36793,
+      "sha256": "2514e8333c181baf3ca00df798d8e23a39b7e45ba941cc9a0c3295a17e91b157"
+    },
+    {
+      "path": "_framework/System.Collections.NonGeneric.2g2468i6rl.wasm",
+      "bytes": 16149,
+      "sha256": "9e944a1954da3640b03744def0d3b3236d6ee7b9974d8552e92efc0d33b10273"
+    },
+    {
+      "path": "_framework/System.Collections.NonGeneric.2g2468i6rl.wasm.br",
+      "bytes": 6140,
+      "sha256": "c8283c1838db844013dad304678984f75d73e68d44a9e40f977b791fc25dd923"
+    },
+    {
+      "path": "_framework/System.Collections.NonGeneric.2g2468i6rl.wasm.gz",
+      "bytes": 6915,
+      "sha256": "f7b18bc0710803a459ac7c6c00ffb7bcbbe97712c43eaf561f250be08c48d082"
+    },
+    {
+      "path": "_framework/System.Collections.Specialized.h8nd2pxbbq.wasm",
+      "bytes": 11541,
+      "sha256": "e1ccf706d7d8273368db01dbe83fd395dfed537d9cd960bf618751ab33c70b3a"
+    },
+    {
+      "path": "_framework/System.Collections.Specialized.h8nd2pxbbq.wasm.br",
+      "bytes": 4472,
+      "sha256": "f43dadcc90628132fc455b68022db7499fee47334509b70332ba740fc146d88a"
+    },
+    {
+      "path": "_framework/System.Collections.Specialized.h8nd2pxbbq.wasm.gz",
+      "bytes": 5059,
+      "sha256": "ebff03ff4f50c173bec93d986486323f9e081af9cab7269953b075154912772c"
+    },
+    {
+      "path": "_framework/System.Collections.v9xoev5486.wasm",
+      "bytes": 46357,
+      "sha256": "73b8e6451aaa5f826baf7a65636711e86f6bde854b6879882148a93dad5689d2"
+    },
+    {
+      "path": "_framework/System.Collections.v9xoev5486.wasm.br",
+      "bytes": 17288,
+      "sha256": "ca6b2f20c6d27b907513050aacc42b2123f2a18fa2d66d6b870c2a8c659d2285"
+    },
+    {
+      "path": "_framework/System.Collections.v9xoev5486.wasm.gz",
+      "bytes": 20260,
+      "sha256": "88a647b361dd38989de2e48f37c1de32d0dfd18a61a14fb2b7def678b75a6f88"
+    },
+    {
+      "path": "_framework/System.ComponentModel.Annotations.51e63h85cp.wasm",
+      "bytes": 15637,
+      "sha256": "891356b3432087b320ed5f5d8bd31d1fd2778e7e6ce44b3f0c43ce5f554b519e"
+    },
+    {
+      "path": "_framework/System.ComponentModel.Annotations.51e63h85cp.wasm.br",
+      "bytes": 6643,
+      "sha256": "912b5f0c030d625a91718666f7627261964a9071741dd4774e4c720873bdc5c2"
+    },
+    {
+      "path": "_framework/System.ComponentModel.Annotations.51e63h85cp.wasm.gz",
+      "bytes": 7619,
+      "sha256": "4f420342374e62d9b34b2c65ada21c445bfc1004d5960abce9ba95b89b5b4d5b"
+    },
+    {
+      "path": "_framework/System.ComponentModel.Primitives.p3osq0bk8o.wasm",
+      "bytes": 14613,
+      "sha256": "fb8c7685d01eaa0baf920a91d901f7e2046363eca76f8cb5bd7b585fab1b4414"
+    },
+    {
+      "path": "_framework/System.ComponentModel.Primitives.p3osq0bk8o.wasm.br",
+      "bytes": 5583,
+      "sha256": "a2580f52cdbdd0c30353624a05c1cc734dab99115ea366857619a4381d8d1312"
+    },
+    {
+      "path": "_framework/System.ComponentModel.Primitives.p3osq0bk8o.wasm.gz",
+      "bytes": 6496,
+      "sha256": "9d9e953444d296355989d1d9e99461ea7f6f6d90e4a4b877ad92b53fa8f51e49"
+    },
+    {
+      "path": "_framework/System.ComponentModel.TypeConverter.lsgke4dxdx.wasm",
+      "bytes": 132373,
+      "sha256": "0500db529e587ec87f1f14698fba165931e8252901fe94742f870142007dd11e"
+    },
+    {
+      "path": "_framework/System.ComponentModel.TypeConverter.lsgke4dxdx.wasm.br",
+      "bytes": 46076,
+      "sha256": "12a0d98367599ab0cc156d034376224ab97a9179b5e5bcfa2f143e430a6d17cd"
+    },
+    {
+      "path": "_framework/System.ComponentModel.TypeConverter.lsgke4dxdx.wasm.gz",
+      "bytes": 54568,
+      "sha256": "b6c9c0776a971dff36baaf1a98af8eaae42956e6cdf8b3a7bc8f3c24486a0d81"
+    },
+    {
+      "path": "_framework/System.ComponentModel.a5ymz1dgkp.wasm",
+      "bytes": 5397,
+      "sha256": "a232b4029611aea2f6d0e5e70198e508066addb8c2f4f74705c0b1d58838c82c"
+    },
+    {
+      "path": "_framework/System.ComponentModel.a5ymz1dgkp.wasm.br",
+      "bytes": 1974,
+      "sha256": "315f8c26bfd6eab7bd558fc8fea9be73c5387ec9b1744be12937a71012291c26"
+    },
+    {
+      "path": "_framework/System.ComponentModel.a5ymz1dgkp.wasm.gz",
+      "bytes": 2237,
+      "sha256": "9ef48f4965d2bf9ba77f54d6a4f6af9bdc0ec68a8882c54aa07248e3097b0a60"
+    },
+    {
+      "path": "_framework/System.Console.mp2jhdra6h.wasm",
+      "bytes": 15637,
+      "sha256": "7ac9ca0d4bee8f4b6f8b27c35c3b5f2d228813d840f1982cb92489bce301fa72"
+    },
+    {
+      "path": "_framework/System.Console.mp2jhdra6h.wasm.br",
+      "bytes": 6447,
+      "sha256": "02fcec8634e3f3115922bc61c3b88af4076522d28efc22cd609df634e1dcb98c"
+    },
+    {
+      "path": "_framework/System.Console.mp2jhdra6h.wasm.gz",
+      "bytes": 7643,
+      "sha256": "ef1aaa653fddc1905fe2a43768b30daa4f007058c6f6f09a40faa89de6bb80dd"
+    },
+    {
+      "path": "_framework/System.Data.Common.rjaxg8kaei.wasm",
+      "bytes": 479509,
+      "sha256": "595c1713af985c4c810b2dc6bc5feaeb2ba05377698ec0bca187c1db1658094a"
+    },
+    {
+      "path": "_framework/System.Data.Common.rjaxg8kaei.wasm.br",
+      "bytes": 158921,
+      "sha256": "ce40bab85feb40ce1f83c1bb5f0d6300f475c9bd39fef65bb79764c9df7fbd9e"
+    },
+    {
+      "path": "_framework/System.Data.Common.rjaxg8kaei.wasm.gz",
+      "bytes": 189855,
+      "sha256": "6d0e4abadf3d587f5626abf0b86263992f35a6b72258fad50ff81e06094a78ad"
+    },
+    {
+      "path": "_framework/System.Diagnostics.DiagnosticSource.yqzo959hoj.wasm",
+      "bytes": 48405,
+      "sha256": "fa771b233d65624344573a427f0298577cd2bd28577eff34fbdef9abf2c5f044"
+    },
+    {
+      "path": "_framework/System.Diagnostics.DiagnosticSource.yqzo959hoj.wasm.br",
+      "bytes": 20196,
+      "sha256": "b5eb59a30f0aeb91bbff8e331e6abaf96becfae1b8e29397cbbf8e7a41a2a928"
+    },
+    {
+      "path": "_framework/System.Diagnostics.DiagnosticSource.yqzo959hoj.wasm.gz",
+      "bytes": 23596,
+      "sha256": "08ccbd3adfb073cfe59ff632f0652d0de2fa7cacaa6c1917334d3a2ea169906a"
+    },
+    {
+      "path": "_framework/System.Diagnostics.Process.a8ziyocvze.wasm",
+      "bytes": 6933,
+      "sha256": "dac45d45b28839171ea78abb1ba4d352e0e26d541812fe7ad12f3913ef5d2848"
+    },
+    {
+      "path": "_framework/System.Diagnostics.Process.a8ziyocvze.wasm.br",
+      "bytes": 2413,
+      "sha256": "193130a24b87fa312b4e1c1449b85fdb139a30da4cd6bd18d3329e807c9cb6dc"
+    },
+    {
+      "path": "_framework/System.Diagnostics.Process.a8ziyocvze.wasm.gz",
+      "bytes": 2733,
+      "sha256": "a0e2238a2c5581477e1ca838e33c9e9c3311cbaf7a05a37cbfb4823b98ac11f8"
+    },
+    {
+      "path": "_framework/System.Diagnostics.TextWriterTraceListener.jsbg7r8t7f.wasm",
+      "bytes": 6933,
+      "sha256": "b31207b16931954606c6be58d6f2a1af84315049bc37bf5cb27ffdfd798673f8"
+    },
+    {
+      "path": "_framework/System.Diagnostics.TextWriterTraceListener.jsbg7r8t7f.wasm.br",
+      "bytes": 2710,
+      "sha256": "05ef70381889d5c3d4244d93a83e441946699893c4dd77ddccdebbe4ef8c419f"
+    },
+    {
+      "path": "_framework/System.Diagnostics.TextWriterTraceListener.jsbg7r8t7f.wasm.gz",
+      "bytes": 3066,
+      "sha256": "9096d909824ea2c94d6c0ce9e3ff7de4c1fc5ee657172702ba06a41103b08889"
+    },
+    {
+      "path": "_framework/System.Diagnostics.TraceSource.kc9k1de6ls.wasm",
+      "bytes": 21781,
+      "sha256": "54c1efe4aed8c1cb717105a3da74c83e345518ee21f99ef33506d0f70f7eafcf"
+    },
+    {
+      "path": "_framework/System.Diagnostics.TraceSource.kc9k1de6ls.wasm.br",
+      "bytes": 9261,
+      "sha256": "a1ce1da65282b606c591da025a8d0f2d46e31267eb498ba2d0880f633a79683b"
+    },
+    {
+      "path": "_framework/System.Diagnostics.TraceSource.kc9k1de6ls.wasm.gz",
+      "bytes": 10612,
+      "sha256": "a9f6c1160b056cb349bf5d7acaf933efac2633dc3ee71cf10181dca74dd43ac5"
+    },
+    {
+      "path": "_framework/System.Drawing.Common.ayojf3fjrc.wasm",
+      "bytes": 15637,
+      "sha256": "eeefe5aac7dfe801c51ad939ff5f6aa68221171b4ecfc76b9ed8162d6915b98b"
+    },
+    {
+      "path": "_framework/System.Drawing.Common.ayojf3fjrc.wasm.br",
+      "bytes": 5678,
+      "sha256": "00b2baaca753d894bf2e0a75755630154a297762ff0186601a4eddd11775994c"
+    },
+    {
+      "path": "_framework/System.Drawing.Common.ayojf3fjrc.wasm.gz",
+      "bytes": 6689,
+      "sha256": "0edbebec0a25db925ab8aab53c41619e9cabcc304743ff4223d8e76de3e50110"
+    },
+    {
+      "path": "_framework/System.Drawing.Primitives.x1fo8wr37x.wasm",
+      "bytes": 40725,
+      "sha256": "355a4fe490c13966742384fca588539d383532b73e285df8ec53c0b74fb91e79"
+    },
+    {
+      "path": "_framework/System.Drawing.Primitives.x1fo8wr37x.wasm.br",
+      "bytes": 14248,
+      "sha256": "3be8d485ce7314c3cfaaee6f91f651ae5a3edacefb5ab0b922d66eb726123b34"
+    },
+    {
+      "path": "_framework/System.Drawing.Primitives.x1fo8wr37x.wasm.gz",
+      "bytes": 18474,
+      "sha256": "bdd8c1491fc3fede7776eb7fcd040ea30ff006d3725949b43b7bd9e217e20301"
+    },
+    {
+      "path": "_framework/System.Drawing.c6tmp1gjc8.wasm",
+      "bytes": 4885,
+      "sha256": "345a572e0093b32054f802bedbb413b10431c80a1a2e8fc70d587d451bc320be"
+    },
+    {
+      "path": "_framework/System.Drawing.c6tmp1gjc8.wasm.br",
+      "bytes": 1626,
+      "sha256": "99f6b1cc12a3b8ed0c182bfdd789343bd56043f4fe01a8c229f73f628257e567"
+    },
+    {
+      "path": "_framework/System.Drawing.c6tmp1gjc8.wasm.gz",
+      "bytes": 1864,
+      "sha256": "26e39b8063649ae57808f6dac936b1bd285f4cc925db765e767e3d29ef91505d"
+    },
+    {
+      "path": "_framework/System.Globalization.lf410knpr2.wasm",
+      "bytes": 4373,
+      "sha256": "b14c57261d9fa45e61cf31a07eeedd6f6a3047325839dc4007bc3ea59d7da996"
+    },
+    {
+      "path": "_framework/System.Globalization.lf410knpr2.wasm.br",
+      "bytes": 1596,
+      "sha256": "7fc99bfd574d8f58cfc75c404881961bdb752326454e9bbedeac782016930568"
+    },
+    {
+      "path": "_framework/System.Globalization.lf410knpr2.wasm.gz",
+      "bytes": 1792,
+      "sha256": "90aaf3f8dd3d4cd6b9c396729925517c4adcee214e7a1512fdb0d166c309fe45"
+    },
+    {
+      "path": "_framework/System.IO.Compression.7pl815q6l2.wasm",
+      "bytes": 113941,
+      "sha256": "25eb1004a26a6ebed9c040c6b5a9dbd4f7657404c0cc47d36932ee8f8ee1b80a"
+    },
+    {
+      "path": "_framework/System.IO.Compression.7pl815q6l2.wasm.br",
+      "bytes": 41303,
+      "sha256": "2751a4b907534b3f3ca9c03feabcac27f13aea7675ba8ae0608e9598ad2e3517"
+    },
+    {
+      "path": "_framework/System.IO.Compression.7pl815q6l2.wasm.gz",
+      "bytes": 48885,
+      "sha256": "127005354f3f553e66c0b9c458204e09b1d1616f753e1cb36d538d37b00b3b3f"
+    },
+    {
+      "path": "_framework/System.IO.MemoryMappedFiles.9ojxkhkatq.wasm",
+      "bytes": 25877,
+      "sha256": "d919ee90c3a0e3dd5ed436bb6335dcae726af1e1e636e98200df5d0e33ccf543"
+    },
+    {
+      "path": "_framework/System.IO.MemoryMappedFiles.9ojxkhkatq.wasm.br",
+      "bytes": 10423,
+      "sha256": "540eb6e871964fcadbc341fa16390a827b14a3f76ba2a69a0fa764fa127e54c6"
+    },
+    {
+      "path": "_framework/System.IO.MemoryMappedFiles.9ojxkhkatq.wasm.gz",
+      "bytes": 12193,
+      "sha256": "e92f5a7be6253014bc5feab5e7aea8593639a38b75c0698c9db6923dc2b171ca"
+    },
+    {
+      "path": "_framework/System.IO.Packaging.xu878h3o7s.wasm",
+      "bytes": 72981,
+      "sha256": "994451a9300e5f25220b963964656631bf9c145ad6c6d90e2cfaf88ab46cacf8"
+    },
+    {
+      "path": "_framework/System.IO.Packaging.xu878h3o7s.wasm.br",
+      "bytes": 28546,
+      "sha256": "a602adab155f6676542af7148061674a1474e1fe87ce55c0e9671643e34f47ae"
+    },
+    {
+      "path": "_framework/System.IO.Packaging.xu878h3o7s.wasm.gz",
+      "bytes": 33072,
+      "sha256": "485c4ea92d41347046945340a272d63ad5fe23bb2a88e7f37b77fe2ac9343cf2"
+    },
+    {
+      "path": "_framework/System.IO.Pipelines.px0vglstfo.wasm",
+      "bytes": 5909,
+      "sha256": "7d9a41d8d166a0325702a9c2614e3e5c02a465b139d5588cdcab10f9bc6a54ea"
+    },
+    {
+      "path": "_framework/System.IO.Pipelines.px0vglstfo.wasm.br",
+      "bytes": 2353,
+      "sha256": "d3ebef73715d883544f9e6eb44b79e1605f71b12136793fca8a89480808e9dc2"
+    },
+    {
+      "path": "_framework/System.IO.Pipelines.px0vglstfo.wasm.gz",
+      "bytes": 2738,
+      "sha256": "f700775b2005235f016701b546a526b138c81b3d1971c1d611879d63304b798a"
+    },
+    {
+      "path": "_framework/System.Linq.Expressions.xw2hlj2biy.wasm",
+      "bytes": 428309,
+      "sha256": "ff952a4402d96bc7cc5dd9c11116c13da439e8e96760b8a18bb3885ce89fef98"
+    },
+    {
+      "path": "_framework/System.Linq.Expressions.xw2hlj2biy.wasm.br",
+      "bytes": 134294,
+      "sha256": "d093315bcb1f5ce9202ef3e11de88cc9a5f3cbb9348b6fc1ac79db456dcf1637"
+    },
+    {
+      "path": "_framework/System.Linq.Expressions.xw2hlj2biy.wasm.gz",
+      "bytes": 165205,
+      "sha256": "ec432ce28d5b37b34190261ac721ef0789e0ddbaf54d96fb79e2383739ad0461"
+    },
+    {
+      "path": "_framework/System.Linq.k4wqhn36fh.wasm",
+      "bytes": 86293,
+      "sha256": "dcbd3e6fd59a2089f3f36c4dd7142736f55cd58c12d57a545f2d0790cd76e314"
+    },
+    {
+      "path": "_framework/System.Linq.k4wqhn36fh.wasm.br",
+      "bytes": 31269,
+      "sha256": "9d4611cbce395661cc4474e584e1434f544b0a3fabdb209fd900e832bf94c6cd"
+    },
+    {
+      "path": "_framework/System.Linq.k4wqhn36fh.wasm.gz",
+      "bytes": 37334,
+      "sha256": "1685d6c3e4cdbe7935c6ac5b5a97776e297675f83bf660a9b70f8c615131f913"
+    },
+    {
+      "path": "_framework/System.Memory.2d2824qlqv.wasm",
+      "bytes": 14101,
+      "sha256": "f66f8cd14ed7a19159e58506cbefd6c9643b2a5549f1cb0dc39659ff686ca9ac"
+    },
+    {
+      "path": "_framework/System.Memory.2d2824qlqv.wasm.br",
+      "bytes": 5911,
+      "sha256": "c587ad410d3cb60e317ae338fa713e0c58f17d48bcf121b3ef95e93720f3cd2e"
+    },
+    {
+      "path": "_framework/System.Memory.2d2824qlqv.wasm.gz",
+      "bytes": 6707,
+      "sha256": "ea84c5aff619d4d0db8a077f50893c311d6bb1e02221dbefdf2b48b8f004401b"
+    },
+    {
+      "path": "_framework/System.Net.Http.rhytkc91vf.wasm",
+      "bytes": 139541,
+      "sha256": "df6746b1305fd17c5b3a62afc8e26be426a3e029436982420d16dda23a6dd6e4"
+    },
+    {
+      "path": "_framework/System.Net.Http.rhytkc91vf.wasm.br",
+      "bytes": 52045,
+      "sha256": "65addd18a438cce87806b1ab9c3794aa33381af63bd4037209452e64dafc0c10"
+    },
+    {
+      "path": "_framework/System.Net.Http.rhytkc91vf.wasm.gz",
+      "bytes": 61066,
+      "sha256": "aa00208666bc24b2df62b5cd640d01848b2a1b8d33b5ff2d3359190020c4579e"
+    },
+    {
+      "path": "_framework/System.Net.Primitives.llz1zzlk2t.wasm",
+      "bytes": 7445,
+      "sha256": "7929262d69d9dd1912c104c7eddba715733053e04ce02df9afd76f773012bd49"
+    },
+    {
+      "path": "_framework/System.Net.Primitives.llz1zzlk2t.wasm.br",
+      "bytes": 2906,
+      "sha256": "b57d44ca07a0a058e2f6c7bac45accf591f60a2add2cefa6bc253828b342d17a"
+    },
+    {
+      "path": "_framework/System.Net.Primitives.llz1zzlk2t.wasm.gz",
+      "bytes": 3451,
+      "sha256": "f2186987a744c037dc44329c87cead993365dfb3d1ae9e6b3ef2124fb554dcfb"
+    },
+    {
+      "path": "_framework/System.Net.Requests.3xo1nchctk.wasm",
+      "bytes": 5909,
+      "sha256": "9994d916636997f2d0f3a5cef08e5a1e9fcc17db42f6cd91bc6e4e980dd2eb25"
+    },
+    {
+      "path": "_framework/System.Net.Requests.3xo1nchctk.wasm.br",
+      "bytes": 2174,
+      "sha256": "8fe447eca0a09962aa4d315ce0ef732262b2e680c4add4fb6181b8f21f823b7c"
+    },
+    {
+      "path": "_framework/System.Net.Requests.3xo1nchctk.wasm.gz",
+      "bytes": 2475,
+      "sha256": "96ae6348653f685f43389504e9bf374f09208bff138d948c6676a2da09943679"
+    },
+    {
+      "path": "_framework/System.ObjectModel.enlsj2x5xn.wasm",
+      "bytes": 20757,
+      "sha256": "9ae735b3e720097618deabfdd0abc99332beec55fc538eed4d369941d6afb879"
+    },
+    {
+      "path": "_framework/System.ObjectModel.enlsj2x5xn.wasm.br",
+      "bytes": 7900,
+      "sha256": "f60b9ab6b48a29f36193baa413677cba45fc6130cbeacc17688bdd8224e8d506"
+    },
+    {
+      "path": "_framework/System.ObjectModel.enlsj2x5xn.wasm.gz",
+      "bytes": 9112,
+      "sha256": "dde4e18fd1cf922e727a6a31a6ce3a9b6ac47f230ce877e857c71fe773f01216"
+    },
+    {
+      "path": "_framework/System.Private.CoreLib.o9rui6p1of.wasm",
+      "bytes": 2101017,
+      "sha256": "8cdf1dba36d6a58d78acb2fe228610d0e2b0bc4566ffefabaafc7eeeccceca31"
+    },
+    {
+      "path": "_framework/System.Private.CoreLib.o9rui6p1of.wasm.br",
+      "bytes": 643097,
+      "sha256": "8f70795327354aebc8238e41ecb8aa23a45ab0c8f08a0cae64fbb397343c9745"
+    },
+    {
+      "path": "_framework/System.Private.CoreLib.o9rui6p1of.wasm.gz",
+      "bytes": 803032,
+      "sha256": "7e3ea5b71b73f29ffb6c5e46104f8a42e78e037bbe98e13930a5060da2b13861"
+    },
+    {
+      "path": "_framework/System.Private.Uri.af3rrtxbcp.wasm",
+      "bytes": 76565,
+      "sha256": "16a9293095d56b215f58c51e45bd7d5439e3f57a8bc6abdc78e5c315ea2d09b3"
+    },
+    {
+      "path": "_framework/System.Private.Uri.af3rrtxbcp.wasm.br",
+      "bytes": 30469,
+      "sha256": "9490b49a7790884e0fd87b3c66266903070ccd158932c555d97eb5a651aaa0a8"
+    },
+    {
+      "path": "_framework/System.Private.Uri.af3rrtxbcp.wasm.gz",
+      "bytes": 34971,
+      "sha256": "e9c15f48077f6b502d2cd587073ed7e1a9dd0104322a0244271c9f643e4943b2"
+    },
+    {
+      "path": "_framework/System.Private.Xml.Linq.n3gjul18m8.wasm",
+      "bytes": 54549,
+      "sha256": "433a6512ddc13d6306334e7d018df328fa485a152dda6645dc5d504d7a9a890c"
+    },
+    {
+      "path": "_framework/System.Private.Xml.Linq.n3gjul18m8.wasm.br",
+      "bytes": 20870,
+      "sha256": "ee78bd5699ebdc9f8b392fc451ada026cbae85ed445854a6e8b6e29ef8c5533c"
+    },
+    {
+      "path": "_framework/System.Private.Xml.Linq.n3gjul18m8.wasm.gz",
+      "bytes": 24628,
+      "sha256": "61cee8b1d89355c35f5b27d33970e423cfa873ecebff6a067f5b642e85c5b8ce"
+    },
+    {
+      "path": "_framework/System.Private.Xml.x22d2row4s.wasm",
+      "bytes": 1365269,
+      "sha256": "37a6fe61e43a7a7bad121807e414c57966e059b845d6aebefb2aad7696875ae1"
+    },
+    {
+      "path": "_framework/System.Private.Xml.x22d2row4s.wasm.br",
+      "bytes": 381615,
+      "sha256": "31f92f0d779634746c6bf41afa56a7a3b663b92c15b77f47c05c9ee08a984a67"
+    },
+    {
+      "path": "_framework/System.Private.Xml.x22d2row4s.wasm.gz",
+      "bytes": 469568,
+      "sha256": "7114d23238596cff92a8c6e4163d536ea7a1f87b9b03afc4f4768923456636d0"
+    },
+    {
+      "path": "_framework/System.Reactive.5b9tzd9z66.wasm",
+      "bytes": 112917,
+      "sha256": "9f84f7ebda926878de1276f722a73813a903f7582e2995331568992390f86932"
+    },
+    {
+      "path": "_framework/System.Reactive.5b9tzd9z66.wasm.br",
+      "bytes": 42834,
+      "sha256": "36c1735883e0057abf9cfc8357fd83599d71ac7897dab5d055e2c9097691afac"
+    },
+    {
+      "path": "_framework/System.Reactive.5b9tzd9z66.wasm.gz",
+      "bytes": 51605,
+      "sha256": "e443f26ee4583014a2364558efd77d7e492a7e87a6dad293c6feabb34b278100"
+    },
+    {
+      "path": "_framework/System.Reflection.Metadata.j8tej8qlyx.wasm",
+      "bytes": 263957,
+      "sha256": "7d8170741af12300832c9f18cb1f213eb09ad5db430090d20e5e5eeda0aa4a85"
+    },
+    {
+      "path": "_framework/System.Reflection.Metadata.j8tej8qlyx.wasm.br",
+      "bytes": 88511,
+      "sha256": "58e0f8fb1d6eaf8628ae0d3528f88c1aaeb047e80fa19f680a854d5e723d83c4"
+    },
+    {
+      "path": "_framework/System.Reflection.Metadata.j8tej8qlyx.wasm.gz",
+      "bytes": 112894,
+      "sha256": "0d3bea8faf5aed6d47f2f552c6fd27617dbc463b43a1fe8376d50d3a38460ead"
+    },
+    {
+      "path": "_framework/System.Runtime.InteropServices.JavaScript.wmgbagosjd.wasm",
+      "bytes": 50453,
+      "sha256": "08cd9df57cdbd5ca9c459ad5223ee575e63bfee4018cdc09665ccc39a93f92ef"
+    },
+    {
+      "path": "_framework/System.Runtime.InteropServices.JavaScript.wmgbagosjd.wasm.br",
+      "bytes": 18811,
+      "sha256": "5363b881ecdf8078c6749512937977b0bc314b67460b6fe35ff26079b20a130d"
+    },
+    {
+      "path": "_framework/System.Runtime.InteropServices.JavaScript.wmgbagosjd.wasm.gz",
+      "bytes": 22174,
+      "sha256": "478014e4a4ebe55d9df453460f4e9c9107a7b8c1704a42642f747b8120b47f1f"
+    },
+    {
+      "path": "_framework/System.Runtime.Numerics.fm07xoq2yg.wasm",
+      "bytes": 92949,
+      "sha256": "e73fc8ec283fb12a0dffe58ad2ebcf60dbf009ef1aa5d45bc8aff88b4bf296da"
+    },
+    {
+      "path": "_framework/System.Runtime.Numerics.fm07xoq2yg.wasm.br",
+      "bytes": 32752,
+      "sha256": "96bbb041bb38d38714f7e4c1f1bade4976a6b2841ba3ca2c4bfd8307d561f056"
+    },
+    {
+      "path": "_framework/System.Runtime.Numerics.fm07xoq2yg.wasm.gz",
+      "bytes": 38193,
+      "sha256": "435b70f2ed31a1a4908f23d3c69b7c7dd4ce5b5d16ae95fd74a553fa376aba40"
+    },
+    {
+      "path": "_framework/System.Runtime.Serialization.Formatters.9pbq9tghlg.wasm",
+      "bytes": 7957,
+      "sha256": "bd3aa6d4f52c2206631d19f0e31278deffea4b09a6a801aa85cc6e5dec1c90d7"
+    },
+    {
+      "path": "_framework/System.Runtime.Serialization.Formatters.9pbq9tghlg.wasm.br",
+      "bytes": 2942,
+      "sha256": "f54e347f23da69562d68a1db8bf5db171892980bca56de9430c1bf8bc51178fd"
+    },
+    {
+      "path": "_framework/System.Runtime.Serialization.Formatters.9pbq9tghlg.wasm.gz",
+      "bytes": 3406,
+      "sha256": "891f5637aafdd16779bb2c90caa308cef47c212fa868aac1d85c225034336ab4"
+    },
+    {
+      "path": "_framework/System.Runtime.Serialization.Primitives.64aavri0zb.wasm",
+      "bytes": 6421,
+      "sha256": "4ac3f00f5a5341ffcafbccd1ae4aaff28a03d9e3fa3cf09d5a960bdfd4752708"
+    },
+    {
+      "path": "_framework/System.Runtime.Serialization.Primitives.64aavri0zb.wasm.br",
+      "bytes": 2414,
+      "sha256": "9e6b460b3706d084f955678606285b8229af79b6b7bf461c26481de7cea6092a"
+    },
+    {
+      "path": "_framework/System.Runtime.Serialization.Primitives.64aavri0zb.wasm.gz",
+      "bytes": 2770,
+      "sha256": "589b78f824d0bccc59cf237abff59d29d394ee4f85d03d8c7af11ab3e7519d59"
+    },
+    {
+      "path": "_framework/System.Security.Cryptography.tmaleqogwd.wasm",
+      "bytes": 48405,
+      "sha256": "151f0cf08ddfa9ae5f699f54159ebab255feee0e8e21887ef0538c7af4fcfbc3"
+    },
+    {
+      "path": "_framework/System.Security.Cryptography.tmaleqogwd.wasm.br",
+      "bytes": 19015,
+      "sha256": "8f9f7c4a02e0cc317ad74c3ae0655ca4fd24ecbf905c79c7e0084455ce59d71f"
+    },
+    {
+      "path": "_framework/System.Security.Cryptography.tmaleqogwd.wasm.gz",
+      "bytes": 22497,
+      "sha256": "cda6996ac8a14d27a0fb43e447a6229ad3970b80edaa59173fff413134e22245"
+    },
+    {
+      "path": "_framework/System.Text.Encoding.CodePages.s8q469tp7w.wasm",
+      "bytes": 701717,
+      "sha256": "dcf79c274990a14b2f3444a2778c44703ca761be73bb75b68aac69c47935d347"
+    },
+    {
+      "path": "_framework/System.Text.Encoding.CodePages.s8q469tp7w.wasm.br",
+      "bytes": 173913,
+      "sha256": "226c3d33ff2de37f3bf236528218aee9755bf24539b99ee198e9d041e0c577a8"
+    },
+    {
+      "path": "_framework/System.Text.Encoding.CodePages.s8q469tp7w.wasm.gz",
+      "bytes": 508650,
+      "sha256": "d300e586c439c9eeb14e54307336eb7115b1c284db1d8a3377a79a264ff89140"
+    },
+    {
+      "path": "_framework/System.Text.Encodings.Web.gve7r38p7j.wasm",
+      "bytes": 29461,
+      "sha256": "0cee38940559266915559ba700a31d84907365f4e24b36d1522a8e8edd9a1d00"
+    },
+    {
+      "path": "_framework/System.Text.Encodings.Web.gve7r38p7j.wasm.br",
+      "bytes": 9530,
+      "sha256": "a20db405bf1324b06825fdb57de1189c59f886c5d476d483ed8dc8ad0be19506"
+    },
+    {
+      "path": "_framework/System.Text.Encodings.Web.gve7r38p7j.wasm.gz",
+      "bytes": 11027,
+      "sha256": "bed65c5ef44e9269c47b5614e9a277ea2a618959e1f7ec75bd6c3da572dd5356"
+    },
+    {
+      "path": "_framework/System.Text.Json.ikx8e1xfmy.wasm",
+      "bytes": 209173,
+      "sha256": "0e623370c24ca1e2aaee8b850cf9a11ea7c83fad9744848ed41287bdca3ac629"
+    },
+    {
+      "path": "_framework/System.Text.Json.ikx8e1xfmy.wasm.br",
+      "bytes": 73943,
+      "sha256": "4c5ebb54c2fd18d7d2c900a527c1e9f002f4216ea04ef95979560b2c4481b1b4"
+    },
+    {
+      "path": "_framework/System.Text.Json.ikx8e1xfmy.wasm.gz",
+      "bytes": 87137,
+      "sha256": "fc711eff254a114f8da6a66a425f4f53f153525cb3e337ccdc44279510db21ac"
+    },
+    {
+      "path": "_framework/System.Text.RegularExpressions.4f162xe0fl.wasm",
+      "bytes": 261397,
+      "sha256": "b092cc5950a7c02f5bf0642969c3994d97f7b76861b142fc910c10a09d88e216"
+    },
+    {
+      "path": "_framework/System.Text.RegularExpressions.4f162xe0fl.wasm.br",
+      "bytes": 101977,
+      "sha256": "f95c5b7ee5c59a19aa9c3949cdcbcb3631d4739b7daf87b20d51fbc3c9135dd2"
+    },
+    {
+      "path": "_framework/System.Text.RegularExpressions.4f162xe0fl.wasm.gz",
+      "bytes": 123041,
+      "sha256": "9ec4084dd2a82e1c4cd96aadb3630d65aa77cd72de8b8a42bac62a40b6ce1924"
+    },
+    {
+      "path": "_framework/System.Threading.Tasks.Parallel.w6jfaw4jgj.wasm",
+      "bytes": 19733,
+      "sha256": "e8d8464f77787a82006d1810567ab3ce2c2ae78ec44da041896e9f01e294620d"
+    },
+    {
+      "path": "_framework/System.Threading.Tasks.Parallel.w6jfaw4jgj.wasm.br",
+      "bytes": 8395,
+      "sha256": "a4b727e24bbe4490cee54563256481c1bd398dedd96d50846ce889d89c987f1a"
+    },
+    {
+      "path": "_framework/System.Threading.Tasks.Parallel.w6jfaw4jgj.wasm.gz",
+      "bytes": 9641,
+      "sha256": "d6714ede165771044e98217e8c46dd8e449a0013d45b13b13960d1ef6c177fe9"
+    },
+    {
+      "path": "_framework/System.Web.HttpUtility.0g89ximt2u.wasm",
+      "bytes": 5397,
+      "sha256": "007c06b16a2b75c61bb00b57d75e9257e3a8ae40df85734ed37cc447a745b7b4"
+    },
+    {
+      "path": "_framework/System.Web.HttpUtility.0g89ximt2u.wasm.br",
+      "bytes": 1867,
+      "sha256": "4084b28325560a72a3e5e9cac6e87197e201c0d8df692fa4d2c8cbe1b81b574c"
+    },
+    {
+      "path": "_framework/System.Web.HttpUtility.0g89ximt2u.wasm.gz",
+      "bytes": 2111,
+      "sha256": "531c09c75d2bcc7e69a6a1e8f075be2bc1d904ae19a99df3be9254d0ab34cc2c"
+    },
+    {
+      "path": "_framework/System.Xml.Linq.pzw688hdq1.wasm",
+      "bytes": 4373,
+      "sha256": "7b9b71b657b457f8e567ee656b11defa4da8db17b01e1eba015a43ae3f325e57"
+    },
+    {
+      "path": "_framework/System.Xml.Linq.pzw688hdq1.wasm.br",
+      "bytes": 1446,
+      "sha256": "ccf9d6b637f59bbce329a956d702392aaf4eb7c4f7586bf073442ab5b412dbd5"
+    },
+    {
+      "path": "_framework/System.Xml.Linq.pzw688hdq1.wasm.gz",
+      "bytes": 1630,
+      "sha256": "6a50b5b2d77ca3e4e8a111576a54883aae1332887284b13c22a921ea27d58ea4"
+    },
+    {
+      "path": "_framework/TextMateSharp.6md4kd9c6v.wasm",
+      "bytes": 104725,
+      "sha256": "126a3d11deb70fe9fda19b3cb7cf6348ea837427f2496854b889276717a5ffff"
+    },
+    {
+      "path": "_framework/TextMateSharp.6md4kd9c6v.wasm.br",
+      "bytes": 58143,
+      "sha256": "5ca236426ceb89b297ffe6befb36881949731a2a86f1dc8752c553202481f792"
+    },
+    {
+      "path": "_framework/TextMateSharp.6md4kd9c6v.wasm.gz",
+      "bytes": 64370,
+      "sha256": "61cf81302a3e37bd89c35b3f598998063702ac3375176e88f26878b738353542"
+    },
+    {
+      "path": "_framework/TextMateSharp.Grammars.otf09rpeig.wasm",
+      "bytes": 6558489,
+      "sha256": "e4aac7d0993cbf45a6258aac329791915b360e9af49707c90c0dc55e69e6d365"
+    },
+    {
+      "path": "_framework/TextMateSharp.Grammars.otf09rpeig.wasm.br",
+      "bytes": 510284,
+      "sha256": "a79598c6fd8eb397d0cbe158bd9c37a0ba702ba116381caedfefdd208f2e1c7c"
+    },
+    {
+      "path": "_framework/TextMateSharp.Grammars.otf09rpeig.wasm.gz",
+      "bytes": 878962,
+      "sha256": "1be55c1608f8a79796967a945e9a0524d44c1c40d80c010276ae4e4a6d445fd5"
+    },
+    {
+      "path": "_framework/ThemeEditor.Controls.ColorPicker.fclerks6wc.wasm",
+      "bytes": 72981,
+      "sha256": "8f6ede82941c10e8548fc1dd5ac44b1c7ef688938ccc333c4dd5ddda47d0ea26"
+    },
+    {
+      "path": "_framework/ThemeEditor.Controls.ColorPicker.fclerks6wc.wasm.br",
+      "bytes": 30881,
+      "sha256": "706504387ab2fcbe8d8d281828faecac088783ff766402e0ae40be1d86d3b5a8"
+    },
+    {
+      "path": "_framework/ThemeEditor.Controls.ColorPicker.fclerks6wc.wasm.gz",
+      "bytes": 34641,
+      "sha256": "71a0983e11123a488a7227423acb365ff02e77bdd988041872e3f436b297156e"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Core.onstv4oevl.wasm",
+      "bytes": 33045,
+      "sha256": "54459e46dceef61a506eca0bf0e968425124c33f3bebcd97acb658cf9c9a3c3a"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Core.onstv4oevl.wasm.br",
+      "bytes": 12383,
+      "sha256": "3817bed4066f744578cde909a3dc4fa7e914c68ca5c991a4d76cd3e38843ac07"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Core.onstv4oevl.wasm.gz",
+      "bytes": 14813,
+      "sha256": "5dd020ab39a5b055f8d3925c105f722ea6944249a551cb231902c65a29e00a26"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Fonts.287wmgrafz.wasm",
+      "bytes": 1024277,
+      "sha256": "923255396b0750b008e1bbd79b26b5829c75ba520bd4cc8aba6d00928d708c78"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Fonts.287wmgrafz.wasm.br",
+      "bytes": 144518,
+      "sha256": "a6859997e1c888dfc97b07cf623cd45203d32b44d05b51f763020e74f82efd28"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Fonts.287wmgrafz.wasm.gz",
+      "bytes": 247623,
+      "sha256": "a3b026bde020b29d2c5ec020fd7011751bd7595a861b9c9fdc03c21e74cc1ed6"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Rendering.Skia.1m6b02vrtd.wasm",
+      "bytes": 46357,
+      "sha256": "39ee519ec3c0124075ff4e4bae519751c1dc4561e60b94c22d4e6edea3ead849"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Rendering.Skia.1m6b02vrtd.wasm.br",
+      "bytes": 18791,
+      "sha256": "d89cff134cc7d2aca00e18dd334bae99e06ebfb0e1dd8a02c24fe5344ce6e9ea"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Rendering.Skia.1m6b02vrtd.wasm.gz",
+      "bytes": 21902,
+      "sha256": "4fa9e817b0948332d0ecca74ab6db758d5cc6984df28df0baaa23ea4d8347058"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Tokenization.g7831dtges.wasm",
+      "bytes": 19733,
+      "sha256": "b4ee42a67e093359fe11094e8676d509dbb91c98ab3c2e6b59a8e292d726f4f8"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Tokenization.g7831dtges.wasm.br",
+      "bytes": 8849,
+      "sha256": "9add92591853df8ba9124506fdfece22859b7e4a0ec6988c1d6da927cd8a9e17"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Tokenization.g7831dtges.wasm.gz",
+      "bytes": 10171,
+      "sha256": "4a5aac667315ae03f220fe0bbe8a4112bab189a273f39b81cba0c59be0194416"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Tokens.r0ektomzmm.wasm",
+      "bytes": 42261,
+      "sha256": "fb400126d044efa44d34df81d9c17c252b5f5cb01da64d4950604b4396484e8c"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Tokens.r0ektomzmm.wasm.br",
+      "bytes": 14669,
+      "sha256": "15840af9cfc7f08db87195bdc387c4d819cd67f46bfc1b25b9e49fa1d936142b"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.Tokens.r0ektomzmm.wasm.gz",
+      "bytes": 18585,
+      "sha256": "982e3e262c3a8bbf09883abfc90d0a3fccde83d0173eca077cb7231f6391615e"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.dz8evb8q3b.wasm",
+      "bytes": 3951385,
+      "sha256": "07509ca11668ce1ef26c485a925f2f4f6ecea301d301ec4154dd3d3be3b8f1a9"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.dz8evb8q3b.wasm.br",
+      "bytes": 701075,
+      "sha256": "799c2a431401ec0b656bb65bad11fbe4fcc8d94f774d541477c49aeae9218870"
+    },
+    {
+      "path": "_framework/UglyToad.PdfPig.dz8evb8q3b.wasm.gz",
+      "bytes": 1368517,
+      "sha256": "5a2789a2d24ecab5b35b9a4b1761534fe236570849ea6ba2dc85a5901cb3ad50"
+    },
+    {
+      "path": "_framework/Vello.5la0upv64k.wasm",
+      "bytes": 10005,
+      "sha256": "6778283029958894c06e3b3013ab51d3aee4b27f7fa93847e2688d46937ed641"
+    },
+    {
+      "path": "_framework/Vello.5la0upv64k.wasm.br",
+      "bytes": 4198,
+      "sha256": "672c5174f2f690d9f97681274e2529930077596e8fb66ad94c1c47ffef8fc6c3"
+    },
+    {
+      "path": "_framework/Vello.5la0upv64k.wasm.gz",
+      "bytes": 4848,
+      "sha256": "014fa69176146dfb4bb3170bfd6827c52d7f58659578f8d8b302e94c17feabd6"
+    },
+    {
+      "path": "_framework/Vello.Native.ngqll281cq.wasm",
+      "bytes": 23317,
+      "sha256": "c94996993b440c899abf60065b567b5051597cbf062ed177cbb45fa000767a92"
+    },
+    {
+      "path": "_framework/Vello.Native.ngqll281cq.wasm.br",
+      "bytes": 7153,
+      "sha256": "8042df0fc32ae0013ed9a56f3e0a9f623af002d044c649112d1e474b7a0e12c9"
+    },
+    {
+      "path": "_framework/Vello.Native.ngqll281cq.wasm.gz",
+      "bytes": 8578,
+      "sha256": "7317daa6fc2709d11ae8fac09dd3131a0648ce8bbd699a5644818cc732592587"
+    },
+    {
+      "path": "_framework/VelloSharp.9663jfwg9s.wasm",
+      "bytes": 28437,
+      "sha256": "ff2e181def2bbb2aae781fb05a2fc6477924311720f965a84042286707609e0c"
+    },
+    {
+      "path": "_framework/VelloSharp.9663jfwg9s.wasm.br",
+      "bytes": 10822,
+      "sha256": "277fc495c929be7ca53f8276750f9b943c123da9ee2adb17e7326eee8360f406"
+    },
+    {
+      "path": "_framework/VelloSharp.9663jfwg9s.wasm.gz",
+      "bytes": 12850,
+      "sha256": "41c81638a67d6798d1d40326a94f323ca702660c506d2825b7ad4bd4949d0907"
+    },
+    {
+      "path": "_framework/VelloSharp.Core.s3dweg76mv.wasm",
+      "bytes": 10005,
+      "sha256": "a8f726e8ff432369c56c7a98b810be5f4d9053fe4cf171c90c3beef6c8bd34d2"
+    },
+    {
+      "path": "_framework/VelloSharp.Core.s3dweg76mv.wasm.br",
+      "bytes": 3799,
+      "sha256": "cc309afc6c7503bf4b0bfa3ba80ff642c73e3ff8353c0149dc963fa5167d87b4"
+    },
+    {
+      "path": "_framework/VelloSharp.Core.s3dweg76mv.wasm.gz",
+      "bytes": 4524,
+      "sha256": "f55195eed1e6fe9bc244c869ee67e18150a930efaa3b1477604c51664fd1830c"
+    },
+    {
+      "path": "_framework/VelloSharp.Ffi.Core.0dv4r6lk5d.wasm",
+      "bytes": 6421,
+      "sha256": "3c652698ab8fadfdc5f3ae9a2c031988acde405c22d6d2b7220af62a516652da"
+    },
+    {
+      "path": "_framework/VelloSharp.Ffi.Core.0dv4r6lk5d.wasm.br",
+      "bytes": 2238,
+      "sha256": "49b84e699e33ae59a671c23544341e4e795e694c61ce5a70f34744f208f53172"
+    },
+    {
+      "path": "_framework/VelloSharp.Ffi.Core.0dv4r6lk5d.wasm.gz",
+      "bytes": 2612,
+      "sha256": "16b44c4abc5c53bc429698f2fa721bc071d1b762173c7d1b7f1808357f1ddea0"
+    },
+    {
+      "path": "_framework/VelloSharp.Ffi.Gpu.zcfh0pdwhg.wasm",
+      "bytes": 6421,
+      "sha256": "fdc33c1aaeca66cc9717d23d7440abe8a46525a47e6b095f49004e7b16ac0e14"
+    },
+    {
+      "path": "_framework/VelloSharp.Ffi.Gpu.zcfh0pdwhg.wasm.br",
+      "bytes": 2087,
+      "sha256": "d92dfac31525de8d94054856f3a92f86e0c14476ee96606ef3e739f5db0e30c1"
+    },
+    {
+      "path": "_framework/VelloSharp.Ffi.Gpu.zcfh0pdwhg.wasm.gz",
+      "bytes": 2403,
+      "sha256": "aca4f22fe89067ab6c929dd1948e71c6f4594c199d18f78be63f6d16d4bb9c99"
+    },
+    {
+      "path": "_framework/VelloSharp.Ffi.Sparse.9b1rwhkxp9.wasm",
+      "bytes": 4373,
+      "sha256": "9b3cb388eebbd7e599b74b1fea9b4ec067cc6ea462731ac201d36c84dc462cd9"
+    },
+    {
+      "path": "_framework/VelloSharp.Ffi.Sparse.9b1rwhkxp9.wasm.br",
+      "bytes": 1397,
+      "sha256": "871a0de8d22b47ccdc707212da4d499b84a800944bdfe26bd339f44613b3ba24"
+    },
+    {
+      "path": "_framework/VelloSharp.Ffi.Sparse.9b1rwhkxp9.wasm.gz",
+      "bytes": 1626,
+      "sha256": "6feb73bcd07e6836b587470365cad5fb65dc4773bf126b2dd5b4fb199a37029c"
+    },
+    {
+      "path": "_framework/VelloSharp.Rendering.scx4nnsg65.wasm",
+      "bytes": 7445,
+      "sha256": "248b263784bb93dbe267b32c54e74cd014921d159ff1d487ba91ffdbbfe2d44c"
+    },
+    {
+      "path": "_framework/VelloSharp.Rendering.scx4nnsg65.wasm.br",
+      "bytes": 2791,
+      "sha256": "d7b893d98fae5bb516ad0b902c87b35f3064fa349b3f2a71668c0dc062012580"
+    },
+    {
+      "path": "_framework/VelloSharp.Rendering.scx4nnsg65.wasm.gz",
+      "bytes": 3204,
+      "sha256": "34b862b45cb38220495c0f0a18f6aef340ddd86bd476abb95e7b30b197c5d619"
+    },
+    {
+      "path": "_framework/Xaml.Behaviors.Interactions.Custom.op4wxxbjqt.wasm",
+      "bytes": 36629,
+      "sha256": "dc34f67ef214ce47351f364efa991c69ab7f04d0fc00d947c725c1d8d2e9944f"
+    },
+    {
+      "path": "_framework/Xaml.Behaviors.Interactions.Custom.op4wxxbjqt.wasm.br",
+      "bytes": 29091,
+      "sha256": "541d0970ea9bb20c96216e4933d257e68801c6fbc12c6de8fe1358522979b8af"
+    },
+    {
+      "path": "_framework/Xaml.Behaviors.Interactions.Custom.op4wxxbjqt.wasm.gz",
+      "bytes": 30629,
+      "sha256": "7a9a7af4e74d18106bc49046aefd804b3d157ad3941a2b0eb2d5a2705aa66f50"
+    },
+    {
+      "path": "_framework/Xaml.Behaviors.Interactions.DragAndDrop.lfknxwyfv6.wasm",
+      "bytes": 26901,
+      "sha256": "cf17e0a6259a15afa4e336ec9f64e586883291aa24de437c0c0987cc3c64ae2c"
+    },
+    {
+      "path": "_framework/Xaml.Behaviors.Interactions.DragAndDrop.lfknxwyfv6.wasm.br",
+      "bytes": 16153,
+      "sha256": "a03b56fd007d9c0678a9846348eb60746f52cf02ebcb6a77662f2c5b93dd7f5c"
+    },
+    {
+      "path": "_framework/Xaml.Behaviors.Interactions.DragAndDrop.lfknxwyfv6.wasm.gz",
+      "bytes": 17994,
+      "sha256": "f5d021e2d2aced992ca8c181335d7df34e2884c5f6ea8585f42a58c9d0aa050d"
+    },
+    {
+      "path": "_framework/Xaml.Behaviors.Interactivity.ysj9hgjsg3.wasm",
+      "bytes": 38677,
+      "sha256": "82ed7dc95ae8687e199bc9c63990c654a7ee21174592b82a1403fd3426e318a9"
+    },
+    {
+      "path": "_framework/Xaml.Behaviors.Interactivity.ysj9hgjsg3.wasm.br",
+      "bytes": 19650,
+      "sha256": "443c2cd54d9f436080699290a1f4d60a5f8f14d249fecdb4faa7ad8bb8498afd"
+    },
+    {
+      "path": "_framework/Xaml.Behaviors.Interactivity.ysj9hgjsg3.wasm.gz",
+      "bytes": 21813,
+      "sha256": "a70921d9618330500499c5eee15a35f93f25b5df216a2df87e1f996a0f5afbe1"
+    },
+    {
+      "path": "_framework/avalonia.js",
+      "bytes": 29170,
+      "sha256": "e8782504d89cc1c41add8d99460369b2c04b4e486d43ff77bced979056791e84"
+    },
+    {
+      "path": "_framework/avalonia.js.br",
+      "bytes": 8581,
+      "sha256": "725fd657ef6bedf925fe17261a777ab72f02fd8bea6b3c36ba437d2addedfd1c"
+    },
+    {
+      "path": "_framework/avalonia.js.gz",
+      "bytes": 9774,
+      "sha256": "8be0513438ea8da0c1f75486e3dca392f7e422b04093f53e89966ceda3600864"
+    },
+    {
+      "path": "_framework/avalonia.js.map",
+      "bytes": 113961,
+      "sha256": "f5eed19245bffb20cc772e662bb13055e06c5271fc3ace1de9509c2b42b21fb2"
+    },
+    {
+      "path": "_framework/avalonia.js.map.br",
+      "bytes": 23965,
+      "sha256": "e672e6565949acabed902deeef42843c1b07e7b74ddf8c0b40100946f782a60e"
+    },
+    {
+      "path": "_framework/avalonia.js.map.gz",
+      "bytes": 28341,
+      "sha256": "e4f3052b07aa6b3080bc8fa93d497b689c0c495198e2e82261559071eb7ef518"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.CSharp.Scripting.resources.7tr8g6km7o.wasm",
+      "bytes": 6421,
+      "sha256": "cbe63d113bcb4f1f51fb3ec406a80d98806a40b12fd3386382fd13ec6b956b1c"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.CSharp.Scripting.resources.7tr8g6km7o.wasm.br",
+      "bytes": 2445,
+      "sha256": "855b471dfdc1846296a18ddf12ec2404f9d80fc78a8c4b9386ed7feb8e4026c8"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.CSharp.Scripting.resources.7tr8g6km7o.wasm.gz",
+      "bytes": 2764,
+      "sha256": "0b15b421d47b44887c138eab03649b5ad9db64cce6a3342c9de06b55d31354de"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.CSharp.resources.ncyjg21q77.wasm",
+      "bytes": 430869,
+      "sha256": "a71cd21a941d33fb2598506041ff1031e86390a58ca333c96337cfa96e477957"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.CSharp.resources.ncyjg21q77.wasm.br",
+      "bytes": 97606,
+      "sha256": "050c57a780b214c956daf5fd4aad1dcebdc73407a509171382396bd876cca445"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.CSharp.resources.ncyjg21q77.wasm.gz",
+      "bytes": 116130,
+      "sha256": "cbea0df9ff3a91b2be219836d8045f8e6a7f3bd9add595036f3f9553d39ba955"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.Scripting.resources.wnbdauwcjs.wasm",
+      "bytes": 7445,
+      "sha256": "4cfe181e5ab8fb5918cc471414661e6ab86ed608488d7e69a865588bb6671f39"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.Scripting.resources.wnbdauwcjs.wasm.br",
+      "bytes": 3080,
+      "sha256": "47d9a50162ef88cbc51631e601d80ac7ee2c8dc024bb3e2e60007b000f49071f"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.Scripting.resources.wnbdauwcjs.wasm.gz",
+      "bytes": 3445,
+      "sha256": "33e3c64e434bf5afbd41c1e01108bcecc5fe0bc9a9c753549ab6077b00bac1b6"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.resources.azbzwnm97j.wasm",
+      "bytes": 37653,
+      "sha256": "9a5c8fbc8cbf693ac3f5c591fa7694ddd2258328b41dde572f216381288d230a"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.resources.azbzwnm97j.wasm.br",
+      "bytes": 12801,
+      "sha256": "93b4b47a8e35b2a4b551abac3a94975e27fb0830f41d1baa62c5e09128f47bd6"
+    },
+    {
+      "path": "_framework/cs/Microsoft.CodeAnalysis.resources.azbzwnm97j.wasm.gz",
+      "bytes": 14502,
+      "sha256": "e36d3a5e07bfd36d17e03a7669a11cdb0a69d6674754334c1249c5973e72be8a"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.CSharp.Scripting.resources.s3jug86fll.wasm",
+      "bytes": 6933,
+      "sha256": "c8f331041484ec6589a9c6063b8d4e36a121916e684ac56c8403f5b231cc7e12"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.CSharp.Scripting.resources.s3jug86fll.wasm.br",
+      "bytes": 2467,
+      "sha256": "6cce4239bda7d500bad8f934663b0602430c7e0850165a3730512c8fd41aa797"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.CSharp.Scripting.resources.s3jug86fll.wasm.gz",
+      "bytes": 2788,
+      "sha256": "8e2331f89a6b2488a3e962515faf0f90a61b36889c0847fc95086bc77cf24c97"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.CSharp.resources.nrmkzk2qqa.wasm",
+      "bytes": 461077,
+      "sha256": "4323c73910ce6de7035d24f9c4cb9fecc3a3b3ce8206e188df156223ec68bc5f"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.CSharp.resources.nrmkzk2qqa.wasm.br",
+      "bytes": 100728,
+      "sha256": "6810e51f2bc7d3838a1a86e81aeb541b1361fd7c54e96ec160e33fa8efd3d845"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.CSharp.resources.nrmkzk2qqa.wasm.gz",
+      "bytes": 120269,
+      "sha256": "017ff8750829116239809f2b8d0aaa7d4bc4e140318e05bc34feb1b06c7ee21a"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.Scripting.resources.d09sl02o64.wasm",
+      "bytes": 7957,
+      "sha256": "9d7178ea8a28cfd11f23b69f2fefc3f3cd66e7e65bdd842873aa69f1b40de742"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.Scripting.resources.d09sl02o64.wasm.br",
+      "bytes": 3098,
+      "sha256": "ba2a0e447cdb5a3817f47c8522a290f0f4fdf88fb862dd0d00a83774db67441b"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.Scripting.resources.d09sl02o64.wasm.gz",
+      "bytes": 3469,
+      "sha256": "d8811515d25bf61ead664433a24d34d37088e2c012b596f2595588168962e0bf"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.resources.uxm2gznvff.wasm",
+      "bytes": 39701,
+      "sha256": "5e73b0323639ffe0ecacc753bbab657fe145e496d419fd036427aa0d9ad2f4d9"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.resources.uxm2gznvff.wasm.br",
+      "bytes": 13141,
+      "sha256": "6f3548fc5c3a5b284c5e87b81d78d46bb17438aae29ad9e348076bd441eac210"
+    },
+    {
+      "path": "_framework/de/Microsoft.CodeAnalysis.resources.uxm2gznvff.wasm.gz",
+      "bytes": 14805,
+      "sha256": "7ac64e851edd5db3f920a8b9f0d81537d32fef9c47b3d2eafe42d56b8fb7ae6f"
+    },
+    {
+      "path": "_framework/dotnet.js",
+      "bytes": 91498,
+      "sha256": "f07120a052053ea40dc537ab2995164b6d1d010f97bd44a1b743575c5f08288d"
+    },
+    {
+      "path": "_framework/dotnet.js.br",
+      "bytes": 21919,
+      "sha256": "972cd6d6de47a3e9a4eb6f40820894d1285345d350cdde7ff5277951f5bdfc85"
+    },
+    {
+      "path": "_framework/dotnet.js.gz",
+      "bytes": 25016,
+      "sha256": "4d8dc48a8b78590eebef1455027a6ef047dc7df8c3b0bf70c8b374a56511d137"
+    },
+    {
+      "path": "_framework/dotnet.native.bufmemcc37.wasm",
+      "bytes": 9896855,
+      "sha256": "b39f6fcffefd638d7502aee027b0b225f507439f1ddb22a453704158701504e6"
+    },
+    {
+      "path": "_framework/dotnet.native.bufmemcc37.wasm.br",
+      "bytes": 2741813,
+      "sha256": "8a564bb63fcbdabb43f08c1118550ad976cfbad7648620cef86431863344cc88"
+    },
+    {
+      "path": "_framework/dotnet.native.bufmemcc37.wasm.gz",
+      "bytes": 3651739,
+      "sha256": "72dfa579644d552243671f0b654c2183e4a7d8714bdf0f2c5c5b339a2a7c0bff"
+    },
+    {
+      "path": "_framework/dotnet.native.m93zitftf0.js",
+      "bytes": 410561,
+      "sha256": "b6eec6cc27c600a8bd05e0c99fba28fd5ac6cf7a7880324ed2f2c16e126c135a"
+    },
+    {
+      "path": "_framework/dotnet.native.m93zitftf0.js.br",
+      "bytes": 69340,
+      "sha256": "30fed6f964af955ef962ed5b0f822981e5cdc5a527e73671671c2bd55f59cb25"
+    },
+    {
+      "path": "_framework/dotnet.native.m93zitftf0.js.gz",
+      "bytes": 84865,
+      "sha256": "da667bff83a8c35597a9d7de4954e55c3641884361d0fcfd9b96e6e1f54e453a"
+    },
+    {
+      "path": "_framework/dotnet.runtime.v06hirbjsv.js",
+      "bytes": 198480,
+      "sha256": "41b9eaad9187b46abbc2e752d7bfc06043e91fd264a61aecc959650fa24799db"
+    },
+    {
+      "path": "_framework/dotnet.runtime.v06hirbjsv.js.br",
+      "bytes": 47894,
+      "sha256": "e9299011201cb71ca6654ddb85b6607d419d7ab5ca212bb382aacc55dd8e9a16"
+    },
+    {
+      "path": "_framework/dotnet.runtime.v06hirbjsv.js.gz",
+      "bytes": 57290,
+      "sha256": "ca2cef72c8552c63e6228b42a20f7f916e55af9e8ec6db76ba7b68318f31a02d"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.CSharp.Scripting.resources.mdxb0xc90d.wasm",
+      "bytes": 6933,
+      "sha256": "465e8fdf50b7c1dd923fecaa01356f1c7d3c8bd7793e77eb80c8c48b92b7540f"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.CSharp.Scripting.resources.mdxb0xc90d.wasm.br",
+      "bytes": 2404,
+      "sha256": "7fa14707e668d4f0c90999a87e0bd5d3376cbe05f92936fdd84e7efc0bef8ad1"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.CSharp.Scripting.resources.mdxb0xc90d.wasm.gz",
+      "bytes": 2765,
+      "sha256": "bcd1777456a6782dfe0329850a5ca0a37de39ad453eae76fbcaac7c09de50cc6"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.CSharp.resources.7u63wh3avx.wasm",
+      "bytes": 450837,
+      "sha256": "a106c6257d85cee3a7338d0a6fc6048c841ac7a23ea3516f3d7c93a4c7d57a92"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.CSharp.resources.7u63wh3avx.wasm.br",
+      "bytes": 95795,
+      "sha256": "f0196054a1c6de827ddddb73b2083ff9d138e3d2fdbec35b2eb3f86cc25c22f6"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.CSharp.resources.7u63wh3avx.wasm.gz",
+      "bytes": 114872,
+      "sha256": "b475a8b71f30f10488d65b2d4d2ae639575c8980556cb81ca88ad7196bdb8381"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.Scripting.resources.0enknokone.wasm",
+      "bytes": 7445,
+      "sha256": "68ca0d33c968a0b018edda0c749f9d9013d39745dcfbc9795a7d748f09c11cc5"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.Scripting.resources.0enknokone.wasm.br",
+      "bytes": 2984,
+      "sha256": "ef3c3a811083b0a3d955aad3500585aa3120a7ef68b0464f36418470c5ac1a42"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.Scripting.resources.0enknokone.wasm.gz",
+      "bytes": 3397,
+      "sha256": "7e59d2097d53870e424ccadcaecfbf4d2a88df67e9d34562462149d44dcca6ec"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.resources.ec0xfu5e6x.wasm",
+      "bytes": 39189,
+      "sha256": "fef6f3876c1289b90b1be87104d74ebe2b61ab45911231d923d5127ea113cddd"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.resources.ec0xfu5e6x.wasm.br",
+      "bytes": 12414,
+      "sha256": "3dc8b12cca62b88445d57b6cb149747a3907fdf43471aa3b5f413abb7f83ab94"
+    },
+    {
+      "path": "_framework/es/Microsoft.CodeAnalysis.resources.ec0xfu5e6x.wasm.gz",
+      "bytes": 14305,
+      "sha256": "03577c31c2c0e0765c88c99d990a8269cda2744a64ca7b218bfda89e90c93688"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.CSharp.Scripting.resources.or7kvtcugc.wasm",
+      "bytes": 6421,
+      "sha256": "ac48f21f747825b4c3c4212e3037f264c387c721163c1cedc3e64fcd5c835f12"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.CSharp.Scripting.resources.or7kvtcugc.wasm.br",
+      "bytes": 2463,
+      "sha256": "1658dc143b759ed66a92ad6f02d6909d8fb2af493d7bcd23fdf94d0faac3fe51"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.CSharp.Scripting.resources.or7kvtcugc.wasm.gz",
+      "bytes": 2777,
+      "sha256": "f5f95ef60c030934ad1d5a139b48b64b67847a62901b6865a5288f18d4dfa7c1"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.CSharp.resources.yiwbzamycv.wasm",
+      "bytes": 463125,
+      "sha256": "963b64c710e9679ec87403868b40638689a702cb00a2360a9251a66fe331b81b"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.CSharp.resources.yiwbzamycv.wasm.br",
+      "bytes": 97484,
+      "sha256": "5c8c2fd87d8ed882c07e9dabac26b024dfb4f85c7a2cfecfa3014d7c78972176"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.CSharp.resources.yiwbzamycv.wasm.gz",
+      "bytes": 116890,
+      "sha256": "00a65abbe0560831c2aadc54115eac8f3ff2422a85e7c9cc3bf25913b0b8a229"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.Scripting.resources.a0qu1k1uee.wasm",
+      "bytes": 7957,
+      "sha256": "d61f8b6aa7b0513de45d88db74a443aa5f3ca3caa555b0a4ec662f82ad5fbe04"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.Scripting.resources.a0qu1k1uee.wasm.br",
+      "bytes": 3055,
+      "sha256": "a62d8b0be524bf9b9d79fd9d69c70a3354f89ebe8f30c0883f485c152eadb596"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.Scripting.resources.a0qu1k1uee.wasm.gz",
+      "bytes": 3460,
+      "sha256": "97bcbf80e0a69235b702853981f491615178da20aebf39bf2d6f5ad2169a7022"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.resources.udwqjg1mda.wasm",
+      "bytes": 39701,
+      "sha256": "8e167e434812ab15faa6135c808c19cbda743f3ec475b142ad706bb6c96cd660"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.resources.udwqjg1mda.wasm.br",
+      "bytes": 12734,
+      "sha256": "b85bfb8faf59609acab3dac6330a01c357e1fb0ecad94f073dbcc3513ea33162"
+    },
+    {
+      "path": "_framework/fr/Microsoft.CodeAnalysis.resources.udwqjg1mda.wasm.gz",
+      "bytes": 14511,
+      "sha256": "e472ec7c8b74e18f64b4a41231dd02f94f7584f45071ec585be1e1c619fa55be"
+    },
+    {
+      "path": "_framework/icudt_CJK.tjcz0u77k5.dat",
+      "bytes": 956416,
+      "sha256": "4992ed42745cd09930a8769bd155153fb4f7b813d2798cf1cc39e9c4fa549c79"
+    },
+    {
+      "path": "_framework/icudt_CJK.tjcz0u77k5.dat.br",
+      "bytes": 248840,
+      "sha256": "a8fcd127bbe9657ce07e7ff344de2c1350c290830e86fd2e86921effa50c623e"
+    },
+    {
+      "path": "_framework/icudt_CJK.tjcz0u77k5.dat.gz",
+      "bytes": 359741,
+      "sha256": "f5fb50d83229560d2ecefaf4ac4ed2252b0cdc2c517a5ba4f1990d969265bd72"
+    },
+    {
+      "path": "_framework/icudt_EFIGS.tptq2av103.dat",
+      "bytes": 550832,
+      "sha256": "f1f22d7ad618f24434c30ea8c704cb893de85e50701caba66de3f6a51178c937"
+    },
+    {
+      "path": "_framework/icudt_EFIGS.tptq2av103.dat.br",
+      "bytes": 143983,
+      "sha256": "f02d24fa2b5ee677a3e0bd5b8e2789a7a5ac7fd0d8f369fa7fce6f09e7492bf6"
+    },
+    {
+      "path": "_framework/icudt_EFIGS.tptq2av103.dat.gz",
+      "bytes": 220093,
+      "sha256": "11c5ec42756a38306568f116bea7fcb1350c3359c1839ae71b35f26d2e75f175"
+    },
+    {
+      "path": "_framework/icudt_no_CJK.lfu7j35m59.dat",
+      "bytes": 1107168,
+      "sha256": "2fbb15ecd1183f7eff42bd853c278fa39709a918135d1c061eec05e50fb435fb"
+    },
+    {
+      "path": "_framework/icudt_no_CJK.lfu7j35m59.dat.br",
+      "bytes": 222250,
+      "sha256": "7eff6642a201babfc94327b17caad5623769c3bcdd696e33578ab1224ce0c652"
+    },
+    {
+      "path": "_framework/icudt_no_CJK.lfu7j35m59.dat.gz",
+      "bytes": 347783,
+      "sha256": "0ade156472bcb6f392d1e8aac122e8d4e014df4ebd3d67542dce49b7a1161d48"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.CSharp.Scripting.resources.77fsg4dpm3.wasm",
+      "bytes": 6421,
+      "sha256": "0d146db11b4aa3fe902a29f3ab780357a357248b7bcc007e2af04d86397b0812"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.CSharp.Scripting.resources.77fsg4dpm3.wasm.br",
+      "bytes": 2424,
+      "sha256": "74f6eddf9f93d57716d7ebf3b36f4de34e24bfc69a69fcac7254a52789ce0b57"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.CSharp.Scripting.resources.77fsg4dpm3.wasm.gz",
+      "bytes": 2740,
+      "sha256": "694de9aad8ea909bba7e8249092ff38e978616a9ef362c24e8dd6e9d09d6b403"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.CSharp.resources.465xyiyi1i.wasm",
+      "bytes": 457493,
+      "sha256": "94dd37278531f31f9ec209744c806c3565f9cb248c544b8eb484d54d729e878c"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.CSharp.resources.465xyiyi1i.wasm.br",
+      "bytes": 94779,
+      "sha256": "90a1630851faa292929af6e50465d33b915849f6ef343b3fc140e6e4045e836f"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.CSharp.resources.465xyiyi1i.wasm.gz",
+      "bytes": 113433,
+      "sha256": "59a843fe350eae26ce82b5702654f01a09d0f0fbb9b801f6816403ed9a85161a"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.Scripting.resources.cvwojecj65.wasm",
+      "bytes": 7957,
+      "sha256": "98d814d214701ea1af41792313c13761b753dcd90dd16453ba2e56a68a7df348"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.Scripting.resources.cvwojecj65.wasm.br",
+      "bytes": 3048,
+      "sha256": "bbc87755dd49287b867355482d67c6f69fd919c16c8c5f8de9c00b41e6fb1c0d"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.Scripting.resources.cvwojecj65.wasm.gz",
+      "bytes": 3394,
+      "sha256": "5a1a0922b174cc867e1d1556eca9b4e7efcc503045ab7bec775736578e7ce481"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.resources.86tqtx2upv.wasm",
+      "bytes": 39701,
+      "sha256": "d0e8e7692c25c1e4e39c3862fa77d94e4a3b9c2325380f9f1a22fa7e6979575d"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.resources.86tqtx2upv.wasm.br",
+      "bytes": 12528,
+      "sha256": "b52f8a22dec836622509b50abd755ed24c2d042858c39e7cd02539d75d82b6e8"
+    },
+    {
+      "path": "_framework/it/Microsoft.CodeAnalysis.resources.86tqtx2upv.wasm.gz",
+      "bytes": 14223,
+      "sha256": "ccf5fbc738d57af923b8a19de237df08b05a6448034724c5ff9bb719ec27cdf6"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.CSharp.Scripting.resources.kw2so9wmms.wasm",
+      "bytes": 6933,
+      "sha256": "4ca65330c762cdc19ba5236f11223633ad5833816718408c17f408063b0a09f8"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.CSharp.Scripting.resources.kw2so9wmms.wasm.br",
+      "bytes": 2513,
+      "sha256": "397d13e9120b758700b2abd3e4fdb65e8d292014c3e26804fb9959da47324084"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.CSharp.Scripting.resources.kw2so9wmms.wasm.gz",
+      "bytes": 2916,
+      "sha256": "defa16610d0990c61d0b76de31052eb6f640079c0cae7c248996a575ecfa1752"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.CSharp.resources.hi9e1rrn8r.wasm",
+      "bytes": 504597,
+      "sha256": "a984f5f020b40167706df13dd1b07fabf3de5cb9faa63bd28f51dc1df1a99b7e"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.CSharp.resources.hi9e1rrn8r.wasm.br",
+      "bytes": 96621,
+      "sha256": "e91be4a651e0521c7b74f384a1259ecae296859225b2fb47f3b3d667c95a4f93"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.CSharp.resources.hi9e1rrn8r.wasm.gz",
+      "bytes": 117387,
+      "sha256": "0b2d484c1cee652b369a95bb161895fedc139b0c90d22abb3236455d12e70c60"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.Scripting.resources.xlaf8g50im.wasm",
+      "bytes": 7957,
+      "sha256": "8b8408ab1925388af949a77916ba89c50f8c30b20ca01b8244b5db261a0c8c6a"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.Scripting.resources.xlaf8g50im.wasm.br",
+      "bytes": 3138,
+      "sha256": "32e953d069ab115df01ddd90f158ebf893922c89cc9377c503afeb0062594ae1"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.Scripting.resources.xlaf8g50im.wasm.gz",
+      "bytes": 3625,
+      "sha256": "6e27d8d4fe3ca7e571d5f53a6beae2c4e54fe93969e2953380d7838627237536"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.resources.ner1z7do1e.wasm",
+      "bytes": 43285,
+      "sha256": "0170006336c2590bcfe155a894e041643bcf27f8718c8f29e9b7ec83a56a8a64"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.resources.ner1z7do1e.wasm.br",
+      "bytes": 12890,
+      "sha256": "d92efe565c278d0af7fafb755523b5b6a78521fe5d69864a34b70bc5b8572aac"
+    },
+    {
+      "path": "_framework/ja/Microsoft.CodeAnalysis.resources.ner1z7do1e.wasm.gz",
+      "bytes": 14706,
+      "sha256": "99c2807cab79195d00103b87b560ce6edfe0ae27912ca66e2fab672ac5e2b78b"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.CSharp.Scripting.resources.xfsvx90w35.wasm",
+      "bytes": 6421,
+      "sha256": "bd2633c96ff269a805bd7785bf0362ecd20d942057f711207fa66bf424e26f6f"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.CSharp.Scripting.resources.xfsvx90w35.wasm.br",
+      "bytes": 2449,
+      "sha256": "59dbf0316b2d17d3c5e4e9f86623000c4417851958cb29c452f46c53ecd4509d"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.CSharp.Scripting.resources.xfsvx90w35.wasm.gz",
+      "bytes": 2823,
+      "sha256": "40fb2a059de404f0501d9d0e3bb286109fb0ac7be1577509d09cd2a8db5dc93f"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.CSharp.resources.998gjfe8qz.wasm",
+      "bytes": 462613,
+      "sha256": "3303e33701d8573dd7df1bf1cc3ba9b06eb7eee6c49bae535483db4ba7ef2fde"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.CSharp.resources.998gjfe8qz.wasm.br",
+      "bytes": 93366,
+      "sha256": "24abfa10cf970ee26f353b425b6b3d3b92d33130c7606e28d55b343ed9af504b"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.CSharp.resources.998gjfe8qz.wasm.gz",
+      "bytes": 112314,
+      "sha256": "4405b00334bc060345353b76130da73edaa038ede7ef39eadf89bcae7e330152"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.Scripting.resources.k6f9fxcwcy.wasm",
+      "bytes": 7957,
+      "sha256": "1c0877ff86ed35e82567b3e6bb7b0d7baa9016b7b19796562c61cbcc7f0c667d"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.Scripting.resources.k6f9fxcwcy.wasm.br",
+      "bytes": 3082,
+      "sha256": "ca2c3f0100d567ff622834aedef8bef4bc77d8284d32f6ddb2d117117c0fffed"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.Scripting.resources.k6f9fxcwcy.wasm.gz",
+      "bytes": 3548,
+      "sha256": "c713ee715b67cb37953f975ec2f7c1fe19fd4bd9cee66d1120b2d32200662d25"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.resources.u9mscaqe3g.wasm",
+      "bytes": 39701,
+      "sha256": "c273548046b7d4ff01bddb62e7640fd5f39041cbef56240398cb4c3f69e7975f"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.resources.u9mscaqe3g.wasm.br",
+      "bytes": 12400,
+      "sha256": "54c3cc6f6d572a6587efdb91a768bf7b9b51969a93da84d6373e142aaefbcd9b"
+    },
+    {
+      "path": "_framework/ko/Microsoft.CodeAnalysis.resources.u9mscaqe3g.wasm.gz",
+      "bytes": 14172,
+      "sha256": "d40f6b450f9aa4d77c604415c458963ed21f0c81ccf47b2bbac4854276205344"
+    },
+    {
+      "path": "_framework/netDxf.netstandard.t085q9h5tz.wasm",
+      "bytes": 359701,
+      "sha256": "23da3141125673cb83265c9088db5799f9f7c1ef784bdeb94cc99bd7ea041068"
+    },
+    {
+      "path": "_framework/netDxf.netstandard.t085q9h5tz.wasm.br",
+      "bytes": 103792,
+      "sha256": "ab95beb6c6f9762582360c1619312cd6550af66a1236a58c890b6bc51873efb6"
+    },
+    {
+      "path": "_framework/netDxf.netstandard.t085q9h5tz.wasm.gz",
+      "bytes": 130750,
+      "sha256": "3fb5354736db64949d4dde7dd3795d1688347b5ada039008f2053c731f42984b"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.CSharp.Scripting.resources.o8is0tcat6.wasm",
+      "bytes": 6421,
+      "sha256": "a8e03ea6e3be01e4cdaea6daddd8f50c235bac35474772ce5daf39346f52f64a"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.CSharp.Scripting.resources.o8is0tcat6.wasm.br",
+      "bytes": 2518,
+      "sha256": "9e188bb98cd03ff7cc2192943a2bde247942b9c8cf52748daec367a00a42030f"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.CSharp.Scripting.resources.o8is0tcat6.wasm.gz",
+      "bytes": 2854,
+      "sha256": "29769cebf42797eb6b6b220ff9dd5176cc977f7653a65f7dc2c6c3896c042b97"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.CSharp.resources.snlz6ty14s.wasm",
+      "bytes": 463637,
+      "sha256": "98edd553fff66f35ae4a20a8d8bff5f8b990d53ff547d0a9fd38db6454c5cfd5"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.CSharp.resources.snlz6ty14s.wasm.br",
+      "bytes": 100300,
+      "sha256": "8ea5ea3449f3dbb81901cd5f4ea3459fa0637dbf9d12b503c2e59b148f60e8bb"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.CSharp.resources.snlz6ty14s.wasm.gz",
+      "bytes": 119938,
+      "sha256": "1db33afbb5a9079842b4f7c928016091aceaeb0b1a816a5bd3eeda1176d5edee"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.Scripting.resources.85n1pcgl3t.wasm",
+      "bytes": 7957,
+      "sha256": "6cd434af112d52556f55beab7918fcb5d735c9a975895539c0b8b0a77ac0fc87"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.Scripting.resources.85n1pcgl3t.wasm.br",
+      "bytes": 3167,
+      "sha256": "c1dfb3b8992a94c64f6a0c7ef68d2074ad33182419b820e275722bec2b01acfd"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.Scripting.resources.85n1pcgl3t.wasm.gz",
+      "bytes": 3509,
+      "sha256": "e3dc51a49f6c0073fedba9af30bde3148e830c85ba12875389c2ecd472897c5b"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.resources.si9hlaf1s0.wasm",
+      "bytes": 39701,
+      "sha256": "7417edd7a418a858074e10277c36cf2f5e068193b8c5ec3716e4f646f489bc31"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.resources.si9hlaf1s0.wasm.br",
+      "bytes": 13179,
+      "sha256": "ad06e23e4be8f5397d379005f29f27430ec1ab749800db2f7dee7dc4c10ac730"
+    },
+    {
+      "path": "_framework/pl/Microsoft.CodeAnalysis.resources.si9hlaf1s0.wasm.gz",
+      "bytes": 14824,
+      "sha256": "0633d9fde7919bca1532cc18a5b0b1510cac65413a41caeddab9570329e8a7a0"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.CSharp.Scripting.resources.h3tvt6yhes.wasm",
+      "bytes": 6421,
+      "sha256": "0d1a4e1c4d8869e005f2dd59dd6e325a616f62c4529afebe63e8d2e2971292e2"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.CSharp.Scripting.resources.h3tvt6yhes.wasm.br",
+      "bytes": 2419,
+      "sha256": "76785e16c5b5a7198c83875088e0d39cb42ab6ae11720991db95a49e3f895cb3"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.CSharp.Scripting.resources.h3tvt6yhes.wasm.gz",
+      "bytes": 2725,
+      "sha256": "7c89301e8833ce45dff65ca3fd45b6c2fd13c6f933baa1b1a4fe9ea94f1bb203"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.xarwohe7gy.wasm",
+      "bytes": 443157,
+      "sha256": "39ee81c693c861b26a41fcc670ef17fd3fd678550fc50d262d83cf6677a02ce7"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.xarwohe7gy.wasm.br",
+      "bytes": 95896,
+      "sha256": "6e4c5854ffe965ac03f9d9acb92d5625e4075aa7f60aca7ec0a128a9265e5c15"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.xarwohe7gy.wasm.gz",
+      "bytes": 114433,
+      "sha256": "9b6a390b4891e17b004c291fe8e709b11718cdc316a8d0d2a396502a315d0a58"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.Scripting.resources.btsh2n0vep.wasm",
+      "bytes": 7445,
+      "sha256": "1f6ab01ca209a45404bd319fa0fb66bf70521e847bd4f75d27c50f0c07bd8af9"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.Scripting.resources.btsh2n0vep.wasm.br",
+      "bytes": 3052,
+      "sha256": "282a0c1cd26d8fff363a559fa528f0f82a9c923c7df5b21d5ae6b108246a1daa"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.Scripting.resources.btsh2n0vep.wasm.gz",
+      "bytes": 3404,
+      "sha256": "b1fbea35113db18ffbcbf1650f18828b7ac49b235cd3d0a43ebf457fe07719f6"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.resources.mn8z1j7j2b.wasm",
+      "bytes": 38677,
+      "sha256": "921393dcb10c6c087c0c3b73b493de8a2b8b6033dd2010fa724a8ae56e65446e"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.resources.mn8z1j7j2b.wasm.br",
+      "bytes": 12536,
+      "sha256": "eb7578a72e1c20eb76943705c700eeb34102d7920df32fc226ec86933f309bd2"
+    },
+    {
+      "path": "_framework/pt-BR/Microsoft.CodeAnalysis.resources.mn8z1j7j2b.wasm.gz",
+      "bytes": 14275,
+      "sha256": "d7c197772f77daf7bd5ef151f064db5a6deb3ec0ec09020368c7e27fac08c08d"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.CSharp.Scripting.resources.uyw3xgu151.wasm",
+      "bytes": 7445,
+      "sha256": "a6ead51747563caf011d1cbf5496cce109f28d4c52dfe1a071c05ce76b310ed8"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.CSharp.Scripting.resources.uyw3xgu151.wasm.br",
+      "bytes": 2642,
+      "sha256": "91d4bb949f4ed35953c13a5c61beccf7820fae73c119c483d101e8ca4f198265"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.CSharp.Scripting.resources.uyw3xgu151.wasm.gz",
+      "bytes": 3086,
+      "sha256": "1ed7130326c33b30e2392ee32425769599915ad0fac0f470560b555fcf3b067e"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.CSharp.resources.u5qr7p1vic.wasm",
+      "bytes": 610581,
+      "sha256": "ce074440d87f9f9e9da54db562668d4417f40113cee4300bc37246af91cc8d04"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.CSharp.resources.u5qr7p1vic.wasm.br",
+      "bytes": 105483,
+      "sha256": "dc8a5e7217949da764bb10cdb9d7f50c8f30409a1708746292bb8f8d04e4cc41"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.CSharp.resources.u5qr7p1vic.wasm.gz",
+      "bytes": 131231,
+      "sha256": "21b988c6fbb54299db63e91e0723dee63b94c2c180fc64f75188db669d17b867"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.Scripting.resources.3r9op2t2kp.wasm",
+      "bytes": 8981,
+      "sha256": "a1670f3ac58b7d23b0d87577f24eb1a362772b4ec101c122f8960c512220d32c"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.Scripting.resources.3r9op2t2kp.wasm.br",
+      "bytes": 3287,
+      "sha256": "4544830dcd53a65682018d2b485efaaf64a4681dd7f6270a058ceec0bf572bc0"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.Scripting.resources.3r9op2t2kp.wasm.gz",
+      "bytes": 3768,
+      "sha256": "25aeb90074a972d74e1cda47e5877dc68f9ae0f5e23249e8137fe23ca3abd34b"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.resources.h3mfsuyol9.wasm",
+      "bytes": 49941,
+      "sha256": "63ee787aea6292dcdbdab9ef2487cef244ebbbbbafee3e1212770399f8ce7b96"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.resources.h3mfsuyol9.wasm.br",
+      "bytes": 13851,
+      "sha256": "5a3dcb241bc1121c8e6220c6c5458e61bccef88641eb778f3a063707558590dd"
+    },
+    {
+      "path": "_framework/ru/Microsoft.CodeAnalysis.resources.h3mfsuyol9.wasm.gz",
+      "bytes": 15784,
+      "sha256": "4cbed44e3cd1d0992e27a8a7c0819b8d7f6c8037deab5590f339f4a5f801443d"
+    },
+    {
+      "path": "_framework/storage.js",
+      "bytes": 38661,
+      "sha256": "e6567a71eac02784b19929616f163e1d56543ab2e8d7996b90b53e4dbb40c780"
+    },
+    {
+      "path": "_framework/storage.js.br",
+      "bytes": 11073,
+      "sha256": "b58e933325614f50e9d66ce9071939db858bc8392b30f1441381698a0cf32969"
+    },
+    {
+      "path": "_framework/storage.js.gz",
+      "bytes": 12578,
+      "sha256": "fbea972cfd49e02aec7c700ef8df034dc077b7d3c3959665bdd50ea76710a2fc"
+    },
+    {
+      "path": "_framework/storage.js.map",
+      "bytes": 140177,
+      "sha256": "0f7615f5fed77fc05ac0808860a19ed25c04a80cb1841ad1bfa4086a0c20cbdc"
+    },
+    {
+      "path": "_framework/storage.js.map.br",
+      "bytes": 29798,
+      "sha256": "5ae1b08ca50993b2a7a43aa3adfd4945aec054ab947e6b654f143441dad48957"
+    },
+    {
+      "path": "_framework/storage.js.map.gz",
+      "bytes": 34902,
+      "sha256": "b92ef51514c3b21e1278d0a4548276d99fa8c4b2aa55a45051d3bbfbf9c9af3b"
+    },
+    {
+      "path": "_framework/sw.js",
+      "bytes": 971,
+      "sha256": "8e197b0f4175cd81d8bcc0921a41bcca5551777f6d3d42c612697c66ccd7e1dd"
+    },
+    {
+      "path": "_framework/sw.js.br",
+      "bytes": 416,
+      "sha256": "517aa1f31040bfa007d433c8fcb4884fcdce9f2907d7fb354eaf8bf1c6c658e4"
+    },
+    {
+      "path": "_framework/sw.js.gz",
+      "bytes": 490,
+      "sha256": "c3f53bde86c33519db4b7fb85c3e39d85249a0abad620773d4b5aa1efc89bc19"
+    },
+    {
+      "path": "_framework/sw.js.map",
+      "bytes": 3909,
+      "sha256": "6c91edea7921fcee4d7f19cbf85fdfdada537a7d2dd8456e1e0e3ec2c0b80f75"
+    },
+    {
+      "path": "_framework/sw.js.map.br",
+      "bytes": 1309,
+      "sha256": "74fd87d2af6bf246ccd3005ad30dfa9690d78574d9038a161b25ebce62d683e1"
+    },
+    {
+      "path": "_framework/sw.js.map.gz",
+      "bytes": 1534,
+      "sha256": "b75eb486694979ad3fc6ead05372370be8afea288afec98e52609e9000e5e850"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.CSharp.Scripting.resources.ztp2t39rbt.wasm",
+      "bytes": 6933,
+      "sha256": "b9970fea65ea9abba37718d4644ade73ab986db564a1d2d48c4f42afde6f8262"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.CSharp.Scripting.resources.ztp2t39rbt.wasm.br",
+      "bytes": 2479,
+      "sha256": "fb759f6ac7c06ca2a99c4c9904318a81c0c596ebb782eac84dd3af812c43e1f5"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.CSharp.Scripting.resources.ztp2t39rbt.wasm.gz",
+      "bytes": 2796,
+      "sha256": "5f37abf661b8959211beec97ac40fc882858c1fb285c8fd46e8f556f0c135126"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.CSharp.resources.pwlsqlbbsk.wasm",
+      "bytes": 439061,
+      "sha256": "1764230af7603218a5ec0e5f8006618319a3e30b3803a06a4ebc8609f910ddf2"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.CSharp.resources.pwlsqlbbsk.wasm.br",
+      "bytes": 96408,
+      "sha256": "13a037f1494a7bce11d39b5e18f4678e9bf007d3419f8212453d8378c96a786e"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.CSharp.resources.pwlsqlbbsk.wasm.gz",
+      "bytes": 113984,
+      "sha256": "25ba960a8d88f38dc613fdac8152250133f1050e9ac62204fa524a9256cc5e1b"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.Scripting.resources.d420wkh7zs.wasm",
+      "bytes": 7445,
+      "sha256": "bdcaef71bdd99ed2023a3928b6f6cefd20a9cdc014058ec05848e0d98a80c4bd"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.Scripting.resources.d420wkh7zs.wasm.br",
+      "bytes": 3056,
+      "sha256": "a2302e95ec329c79cd07cbef87c0f85b9c230f1d1fd60cf5fb4dc1406b0ea545"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.Scripting.resources.d420wkh7zs.wasm.gz",
+      "bytes": 3408,
+      "sha256": "f97089f797cbd910685680f66332db868a0809f6324b4561fffbfa48d00c2806"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.resources.5zvghpcemm.wasm",
+      "bytes": 38165,
+      "sha256": "1f05bc34b37b713aa565f61ed7a801fdadd00813ba6462a2f35ac0a5045379ce"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.resources.5zvghpcemm.wasm.br",
+      "bytes": 12487,
+      "sha256": "0126106715733c6f81e25d0f64cf51e2ac45ef81fa0b18304277b190001274e6"
+    },
+    {
+      "path": "_framework/tr/Microsoft.CodeAnalysis.resources.5zvghpcemm.wasm.gz",
+      "bytes": 14093,
+      "sha256": "b5ca4749611fabd8d35a67881e0d12fc1c9f1ab6eab8ff9709d8bdbb6728c0c1"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.CSharp.Scripting.resources.3uvaw3i9q1.wasm",
+      "bytes": 6421,
+      "sha256": "ab2b49b688c1cb5c506bd6e2ed723fbe91c15890470f9d59da1c3d4d32c2b688"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.CSharp.Scripting.resources.3uvaw3i9q1.wasm.br",
+      "bytes": 2385,
+      "sha256": "225bd9947b4ef67dd63522a4cca2cb8697cd2509788f8d5f6822505ad2daa474"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.CSharp.Scripting.resources.3uvaw3i9q1.wasm.gz",
+      "bytes": 2811,
+      "sha256": "63468311a28ed82295dac2d8b642454af911b1311107af38d7c5453b2db1253a"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.xa5czk39rr.wasm",
+      "bytes": 390421,
+      "sha256": "2717ddcf72609a89f9c2bad98230c6ebe85302b87956b65e41b953d6d66e78f0"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.xa5czk39rr.wasm.br",
+      "bytes": 90149,
+      "sha256": "5bba56ac8a7db0ba9023f6665cf20e9728c8738e8c954a6be2753de23d0d4e52"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.xa5czk39rr.wasm.gz",
+      "bytes": 109683,
+      "sha256": "12eedee7e5324a54160d4549c72202d7c9f0304cf055adec0e74ab66fab43e72"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.Scripting.resources.h75hdwb043.wasm",
+      "bytes": 7445,
+      "sha256": "636eec07264b198dc0812450bcd6588d75e2f7ccc7a942c6f9b2877fb681cb1c"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.Scripting.resources.h75hdwb043.wasm.br",
+      "bytes": 2987,
+      "sha256": "5fbc879ad769ab93e43943187588e481cb9d6b257f83c2c647b4ee3f5b41462e"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.Scripting.resources.h75hdwb043.wasm.gz",
+      "bytes": 3469,
+      "sha256": "515d60eb089320e712864544f431e553d8e7fd5705c21dc3de21a1d6c3d93de0"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.resources.v3jjn2jlhr.wasm",
+      "bytes": 34581,
+      "sha256": "85e94866e88998e4b88920ad7bcd3e4de57f91ec9c5b0e3331369ded3102739d"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.resources.v3jjn2jlhr.wasm.br",
+      "bytes": 11964,
+      "sha256": "ed1521a57f138a7d91d052ea4860bc590634c3bc7e106bf3a25fc70bfeed6535"
+    },
+    {
+      "path": "_framework/zh-Hans/Microsoft.CodeAnalysis.resources.v3jjn2jlhr.wasm.gz",
+      "bytes": 13954,
+      "sha256": "803cbca331cded313d3c4159a3f04922cd501eab2c5bb48535cebe4eac5fb002"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.CSharp.Scripting.resources.pn0k8ji6e9.wasm",
+      "bytes": 6421,
+      "sha256": "55148c99ac04966e3d3d220ea5614735608383b009e76d6bf7bcceb351f5bd1f"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.CSharp.Scripting.resources.pn0k8ji6e9.wasm.br",
+      "bytes": 2494,
+      "sha256": "329a829dd0be6c7d58d57421db88612c0ee33ad79c9903e36d8bfbbb28f9ab26"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.CSharp.Scripting.resources.pn0k8ji6e9.wasm.gz",
+      "bytes": 2845,
+      "sha256": "a9f1ca2711cc0591b5c0f5bb38c23e2fcff06b0b2b983ecd66c112ce2671caac"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.pc7lskmtva.wasm",
+      "bytes": 389909,
+      "sha256": "7924d132a621057d064d73e74a1e1d63486eee7fd73de4529b022b34e7003951"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.pc7lskmtva.wasm.br",
+      "bytes": 90800,
+      "sha256": "00bd1178a0c5995933cd399da00c4f986adbf29c9246ea61e1d5af3ef35e8b51"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.pc7lskmtva.wasm.gz",
+      "bytes": 110229,
+      "sha256": "3fed9889effa6bce039f7e08f93073a1fb2a37804a250bcc2aa5dd6cdf21c271"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.Scripting.resources.48h41ik7t3.wasm",
+      "bytes": 7445,
+      "sha256": "cca6592b3c2ba8e6a1adf8ba1b767d833a57ce2904e0d59fbb87b5bf1e9e8ffd"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.Scripting.resources.48h41ik7t3.wasm.br",
+      "bytes": 2960,
+      "sha256": "9bed8fa1e5286c7bbcad62121e1e78498a1d42c44854bc16e919f5c04f1651d7"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.Scripting.resources.48h41ik7t3.wasm.gz",
+      "bytes": 3461,
+      "sha256": "df66e45fcac1404654b3cb3faa26ad3dc3ef17fc6bfdc301007feb987236e398"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.resources.xff2phc93y.wasm",
+      "bytes": 34581,
+      "sha256": "ad5707a586422ee6256c8a9f044d26378c971706424b661b47b4f93f2a1e368d"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.resources.xff2phc93y.wasm.br",
+      "bytes": 11958,
+      "sha256": "1b07e20e407341c90b7b0c826c8c089a1d35cf06e4239a96b19dd75cc5793ac6"
+    },
+    {
+      "path": "_framework/zh-Hant/Microsoft.CodeAnalysis.resources.xff2phc93y.wasm.gz",
+      "bytes": 13922,
+      "sha256": "d09ecd4a2f153ed07e748e50481a8176c7407b6891905141a68ba20ffef53268"
+    },
+    {
+      "path": "app.css",
+      "bytes": 1242,
+      "sha256": "7e338d980ab65faeceeb92a3094ef141c874f604bd0222b96c6983024e4f064a"
+    },
+    {
+      "path": "app.css.br",
+      "bytes": 446,
+      "sha256": "09b865a44ffa8b0a73f43ead0e2c1346e9d1f1dab26672847f623a2c53543751"
+    },
+    {
+      "path": "app.css.gz",
+      "bytes": 589,
+      "sha256": "44fd81e16f0b60ddd4f66b9c07fe995ab62d5c32071bc75b650bd29f395db28a"
+    },
+    {
+      "path": "favicon.ico",
+      "bytes": 175875,
+      "sha256": "63bd34c6b0215a4d7507538f619308dfe20130f6bb0018ee075eb7d3891ba203"
+    },
+    {
+      "path": "favicon.ico.br",
+      "bytes": 30362,
+      "sha256": "656556cf832e03fb55c8f7eb931fb8e67e0b47f569f3bcd63cf7a397c0acba5e"
+    },
+    {
+      "path": "favicon.ico.gz",
+      "bytes": 35571,
+      "sha256": "8606802113ef5980c1b061d9450babbe05ee778cc14980ffd1d4029abdf6df3e"
+    },
+    {
+      "path": "index.html",
+      "bytes": 995,
+      "sha256": "60455316725d61cf2bd89a1a464ee0efc183f21bce63553f29221d9798fd08d6"
+    },
+    {
+      "path": "index.html.br",
+      "bytes": 322,
+      "sha256": "15cbeceffc50a2058a35bbc6313ab011e807f47c79e4a4194ef3780dab3d287c"
+    },
+    {
+      "path": "index.html.gz",
+      "bytes": 504,
+      "sha256": "46c2795ad14e3b294ea471aa6103dad1338b62ef3ca55f20d1c2f7b062be250b"
+    },
+    {
+      "path": "main.js",
+      "bytes": 1723,
+      "sha256": "c4b9780facefa8b792211027ba80c45d383fab5000f0e46879d6161ccb60bdbf"
+    },
+    {
+      "path": "main.js.br",
+      "bytes": 625,
+      "sha256": "10998a23525c7511e942ab3603ed46fdbbe6fbacd9964797f9ef7e6799ab6bba"
+    },
+    {
+      "path": "main.js.gz",
+      "bytes": 775,
+      "sha256": "ae271896add64b65aaf00113b4c6a2ee3957bcd38dff2a365447b5077931d905"
+    }
+  ]
+}
