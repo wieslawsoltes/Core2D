@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        option: [baseline, no-region, layer-clip]
+        option: [trace, history-invalidate, no-gpu-cache]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,12 +33,25 @@ jobs:
         run: |
           import os, pathlib
           option = os.environ['OPTION']
-          program = pathlib.Path('src/Core2D.Browser/Program.cs')
-          source = program.read_text(encoding='utf-8-sig')
-          choices = {'baseline': '', 'no-region': '.With(new Avalonia.Rendering.Composition.CompositionOptions { UseRegionDirtyRectClipping = false })', 'layer-clip': '.With(new Avalonia.Rendering.Composition.CompositionOptions { UseSaveLayerRootClip = true })'}
-          marker = '.WithInterFont()'
-          assert source.count(marker) == 1
-          program.write_text(source.replace(marker, marker + '\n            ' + choices[option]))
+          if option == 'no-gpu-cache':
+              p = pathlib.Path('src/Core2D.Browser/Program.cs')
+              s = p.read_text(encoding='utf-8-sig')
+              s = s.replace('.WithInterFont()', '.WithInterFont()\n            .With(new SkiaOptions { MaxGpuResourceSizeBytes = 0 })')
+              p.write_text(s)
+          if option == 'history-invalidate':
+              p = pathlib.Path('src/Core2D.ViewModels/ViewModels/Editor/ProjectEditorViewModel.Editor.cs')
+              s = p.read_text(encoding='utf-8-sig')
+              for method in ['Undo', 'Redo']:
+                  old = f'Project?.History.{method}();'
+                  assert s.count(old) == 1
+                  s = s.replace(old, old + '\n                CanvasPlatform?.InvalidateControl?.Invoke();')
+              p.write_text(s)
+          p = pathlib.Path('src/Core2D/Views/Renderer/RenderView.axaml.cs')
+          s = p.read_text(encoding='utf-8-sig')
+          marker = 'var drawState = new RenderState'
+          assert s.count(marker) == 1
+          s = s.replace(marker, 'Console.WriteLine($"CORE2D_RENDER:{RenderType}:count={Container?.CurrentLayer?.Shapes.Length}:working={Container?.WorkingLayer?.Shapes.Length}:helper={Container?.HelperLayer?.Shapes.Length}");\n        ' + marker)
+          p.write_text(s)
           smoke = pathlib.Path('tools/pages/smoke.cjs').read_text()
           replacements = {
               "const playwright = require('playwright');": "const playwright = require('playwright');\nconst { expectInk } = require('./render-pixels.cjs');\nconst visualSamples = [];",
@@ -52,6 +65,8 @@ jobs:
               assert smoke.count(old) == 1, old
               smoke = smoke.replace(old, new)
           pathlib.Path('tools/pages/smoke-visual.cjs').write_text(smoke)
+      - name: Test pixel measurement contracts
+        run: node --test tools/pages/render-pixels.test.cjs
       - name: Install workload and publish candidate
         shell: bash
         run: |
@@ -82,6 +97,7 @@ jobs:
           import json
           r = json.load(open('artifacts/webkit/validation.json'))
           print(json.dumps({k: r.get(k) for k in ['success','commit','visualSamples','failure','errors','renderingFallbacks','rendererDiagnostics']}, indent=2))
+          print('\n'.join(x for x in r['console'] if 'CORE2D_RENDER:' in x))
           PY
           exit "$result"
       - uses: actions/upload-artifact@v4
