@@ -60,6 +60,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Test screen compatibility and native capability preservation
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          node --test tools/pages/screen-compat.test.mjs | tee artifacts/screen-compat-unit.tap
       - name: Install WebAssembly workload
         run: dotnet workload install wasm-tools
       - name: Publish the actual Avalonia browser application
@@ -74,22 +79,27 @@ jobs:
           exit "$result"
       - name: Prepare complete Pages bundle and source manifest
         run: python3 tools/pages/prepare.py
-      - name: Install pinned browser test runner
+      - name: Install pinned Chromium, WebKit and Firefox test engines
         run: |
           npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1
-          "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps chromium
-      - name: Validate published application at the repository subpath
+          "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps chromium webkit firefox
+      - name: Validate published application and recorded screen regression
         shell: bash
         env:
           EXPECTED_COMMIT: ${{ github.sha }}
         run: |
-          mkdir -p artifacts/preview/Core2D
+          mkdir -p artifacts/preview/Core2D artifacts/local-browser
           cp -a artifacts/site/. artifacts/preview/Core2D/
           python3 -m http.server 4173 --bind 127.0.0.1 --directory artifacts/preview > artifacts/preview-server.log 2>&1 &
           server=$!
           trap 'kill "$server" || true' EXIT
           export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
-          node tools/pages/smoke.cjs http://127.0.0.1:4173/Core2D/ artifacts/local-browser
+          result=0
+          for scenario in screen-regression-negative chromium webkit firefox chromium-legacy-screen; do
+            node tools/pages/smoke.cjs http://127.0.0.1:4173/Core2D/ "artifacts/local-browser/$scenario" "$scenario" > "artifacts/local-browser/$scenario.log" 2>&1 || result=1
+            tail -n 35 "artifacts/local-browser/$scenario.log"
+          done
+          exit "$result"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: artifacts/site
@@ -99,6 +109,7 @@ jobs:
         with:
           name: pages-build-validation
           path: |
+            artifacts/screen-compat-unit.tap
             artifacts/browser-publish.log
             artifacts/preview-server.log
             artifacts/local-browser
@@ -169,7 +180,7 @@ jobs:
     needs: [site-config, deploy-actions, deploy-branch]
     if: ${{ !cancelled() && (needs.deploy-actions.result == 'success' || needs.deploy-branch.result == 'success') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -177,17 +188,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install pinned browser test runner
+      - name: Install pinned Chromium, WebKit and Firefox test engines
         run: |
           npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1
-          "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps chromium
-      - name: Verify deployed commit and real browser editing
+          "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps chromium webkit firefox
+      - name: Verify deployed commit and real editing in every browser engine
         env:
           EXPECTED_COMMIT: ${{ github.sha }}
           SITE_URL: ${{ needs.site-config.outputs.url }}
+        shell: bash
         run: |
           export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
-          node tools/pages/smoke.cjs "$SITE_URL" artifacts/live-browser
+          mkdir -p artifacts/live-browser
+          result=0
+          for scenario in chromium webkit firefox chromium-legacy-screen; do
+            node tools/pages/smoke.cjs "$SITE_URL" "artifacts/live-browser/$scenario" "$scenario" > "artifacts/live-browser/$scenario.log" 2>&1 || result=1
+            tail -n 35 "artifacts/live-browser/$scenario.log"
+          done
+          exit "$result"
       - name: Retain public-site screenshots and validation
         if: always()
         uses: actions/upload-artifact@v4
