@@ -67,3 +67,13 @@ against the public HTTPS URL, requiring the HTML and deployment manifest to iden
 expected source commit. Each browser keeps its own JSON report and screenshots. This is
 cross-engine headless validation, not a claim of interactive testing on physical macOS/iOS
 or physical-GPU performance. Existing application feature boundaries remain unchanged.
+
+WebKit runs with a device scale factor of two to cover the high-DPI setup shown in the
+recording. The test retains and separately reports its two exact startup
+`WEBGL_debug_renderer_info not enabled` diagnostics; these probe the optional renderer
+identification extension. Only that precise WebKit startup message, at most twice, is
+classified separately. It is accepted only after all native editing checks pass. Other
+WebGL errors, screen errors, JavaScript/.NET exceptions and failed requests still fail
+the gate. Production logging and renderer selection are not suppressed or replaced.
+The test also compares native screen and permission object/method identities captured
+before bootstrap, not just their reported types after startup.
