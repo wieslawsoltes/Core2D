@@ -1,50 +1,123 @@
 name: Deploy to GitHub Pages
 
-env:
-    PROJECT_PATH: src/Core2D.Browser/Core2D.Browser.csproj
-    OUTPUT_PATH: release/wwwroot
 on:
   push:
-    branches: [ master ]
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core2d-github-pages
+  cancel-in-progress: false
 
 jobs:
-  deploy-to-github-pages:
+  build:
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install WebAssembly workload
+        run: dotnet workload install wasm-tools
+      - name: Publish the actual Avalonia browser application
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set +e
+          dotnet publish src/Core2D.Browser/Core2D.Browser.csproj -c Release --nologo > artifacts/browser-publish.log 2>&1
+          result=$?
+          set -e
+          tail -n 100 artifacts/browser-publish.log
+          exit "$result"
+      - name: Prepare complete Pages bundle and source manifest
+        run: python3 tools/pages/prepare.py
+      - name: Install pinned browser test runner
+        run: |
+          npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1
+          "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Validate published application at the repository subpath
+        shell: bash
+        env:
+          EXPECTED_COMMIT: ${{ github.sha }}
+        run: |
+          mkdir -p artifacts/preview/Core2D
+          cp -a artifacts/site/. artifacts/preview/Core2D/
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory artifacts/preview > artifacts/preview-server.log 2>&1 &
+          server=$!
+          trap 'kill "$server" || true' EXIT
+          export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
+          node tools/pages/smoke.cjs http://127.0.0.1:4173/Core2D/ artifacts/local-browser
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: artifacts/site
+      - name: Retain build and browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-build-validation
+          path: |
+            artifacts/browser-publish.log
+            artifacts/preview-server.log
+            artifacts/local-browser
+            artifacts/site/deployment.json
+          if-no-files-found: warn
 
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.9.0
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Deploy complete tested bundle
+        id: deployment
+        uses: actions/deploy-pages@v4
 
-    - name: Install wasm-tools
-      run: dotnet workload install wasm-tools wasm-experimental
-
-    - name: Install DotNetCompress
-      run: dotnet tool install --global DotNetCompress --version 5.0.0 --no-cache
-
-    - name: Publish .NET Project
-      run: dotnet publish $PROJECT_PATH -c Release -o release --nologo
-
-    - name: Change base-tag in index.html
-      run: sed -i 's/<base href="\/" \/>/<base href="\/Core2D\/" \/>/g' $OUTPUT_PATH/index.html
-
-    - name: copy index.html to 404.html
-      run: cp $OUTPUT_PATH/index.html $OUTPUT_PATH/404.html
-
-    - name: Compress Output using Brotli
-      run: DotNetCompress -d $OUTPUT_PATH/ -p "*.dll" "*.js" "*.wasm" --format br --threads 4
-
-    - name: Compress Output using GZip
-      run: DotNetCompress -d $OUTPUT_PATH -p "*.dll" "*.js" "*.wasm" --format gz --threads 4
-
-    - name: Add .nojekyll file
-      run: touch $OUTPUT_PATH/.nojekyll
-
-    - name: Commit wwwroot to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.7
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: pages
-        FOLDER: ${{ env.OUTPUT_PATH }}
+  verify-live:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned browser test runner
+        run: |
+          npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1
+          "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify deployed commit and real browser editing
+        env:
+          EXPECTED_COMMIT: ${{ github.sha }}
+          SITE_URL: ${{ needs.deploy.outputs.page_url }}
+        run: |
+          export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
+          node tools/pages/smoke.cjs "$SITE_URL" artifacts/live-browser
+      - name: Retain public-site screenshots and validation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-live-validation
+          path: artifacts/live-browser
+          if-no-files-found: warn
