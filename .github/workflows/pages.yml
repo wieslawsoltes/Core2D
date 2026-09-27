@@ -3,17 +3,20 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: core2d-github-pages
+  group: core2d-github-pages-${{ github.event_name == 'pull_request' && github.ref || 'production' }}
   cancel-in-progress: false
 
 jobs:
   site-config:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -60,11 +63,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Test screen compatibility and native capability preservation
+      - name: Test compatibility adapters and presented-pixel contracts
         shell: bash
         run: |
           mkdir -p artifacts
-          node --test tools/pages/screen-compat.test.mjs | tee artifacts/screen-compat-unit.tap
+          node --test tools/pages/screen-compat.test.mjs tools/pages/render-compat.test.mjs tools/pages/render-pixels.test.cjs | tee artifacts/browser-unit.tap
       - name: Install WebAssembly workload
         run: dotnet workload install wasm-tools
       - name: Publish the actual Avalonia browser application
@@ -81,9 +84,9 @@ jobs:
         run: python3 tools/pages/prepare.py
       - name: Install pinned Chromium, WebKit and Firefox test engines
         run: |
-          npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1
+          npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1 pngjs@7.0.0
           "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps chromium webkit firefox
-      - name: Validate published application and recorded screen regression
+      - name: Validate published application and recorded regressions
         shell: bash
         env:
           EXPECTED_COMMIT: ${{ github.sha }}
@@ -95,7 +98,7 @@ jobs:
           trap 'kill "$server" || true' EXIT
           export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
           result=0
-          for scenario in screen-regression-negative chromium webkit firefox chromium-legacy-screen; do
+          for scenario in screen-regression-negative webkit-render-negative chromium webkit webkit-standard-dpi firefox chromium-legacy-screen; do
             node tools/pages/smoke.cjs http://127.0.0.1:4173/Core2D/ "artifacts/local-browser/$scenario" "$scenario" > "artifacts/local-browser/$scenario.log" 2>&1 || result=1
             tail -n 35 "artifacts/local-browser/$scenario.log"
           done
@@ -109,7 +112,7 @@ jobs:
         with:
           name: pages-build-validation
           path: |
-            artifacts/screen-compat-unit.tap
+            artifacts/browser-unit.tap
             artifacts/browser-publish.log
             artifacts/preview-server.log
             artifacts/local-browser
@@ -190,7 +193,7 @@ jobs:
           node-version: '22'
       - name: Install pinned Chromium, WebKit and Firefox test engines
         run: |
-          npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1
+          npm install --prefix "$RUNNER_TEMP/core2d-playwright" --no-save --no-package-lock playwright@1.55.1 pngjs@7.0.0
           "$RUNNER_TEMP/core2d-playwright/node_modules/.bin/playwright" install --with-deps chromium webkit firefox
       - name: Verify deployed commit and real editing in every browser engine
         env:
@@ -201,7 +204,7 @@ jobs:
           export NODE_PATH="$RUNNER_TEMP/core2d-playwright/node_modules"
           mkdir -p artifacts/live-browser
           result=0
-          for scenario in chromium webkit firefox chromium-legacy-screen; do
+          for scenario in chromium webkit webkit-standard-dpi firefox chromium-legacy-screen; do
             node tools/pages/smoke.cjs "$SITE_URL" "artifacts/live-browser/$scenario" "$scenario" > "artifacts/live-browser/$scenario.log" 2>&1 || result=1
             tail -n 35 "artifacts/live-browser/$scenario.log"
           done
