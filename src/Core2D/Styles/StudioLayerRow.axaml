@@ -1,0 +1,42 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Editor" x:CompileBindings="True">
+  <ControlTheme x:Key="{x:Type s:StudioLayerRow}" TargetType="s:StudioLayerRow" x:DataType="s:StudioLayerRow">
+    <Setter Property="MinHeight" Value="30" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="20,*,Auto" ColumnSpacing="6" Background="Transparent">
+          <Panel VerticalAlignment="Center">
+            <s:StudioGlyph Source="{TemplateBinding Icon}" Foreground="{TemplateBinding Foreground}" Width="14" Height="14" IsHitTestVisible="False" />
+            <PathIcon Data="{TemplateBinding Glyph}" Foreground="{TemplateBinding Foreground}" Width="14" Height="14" IsHitTestVisible="False" />
+          </Panel>
+          <Grid Grid.Column="1">
+            <TextBlock Name="PART_Title" Text="{Binding Editor.Name, RelativeSource={RelativeSource TemplatedParent}}" TextTrimming="CharacterEllipsis"
+                       Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"
+                       IsVisible="{Binding !IsRenaming, RelativeSource={RelativeSource TemplatedParent}}" />
+            <s:StudioNameField Name="PART_Name" Value="{Binding Editor.Name, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                               DataContext="{TemplateBinding Editor}" IsVisible="{Binding IsRenaming, RelativeSource={RelativeSource TemplatedParent}}"
+                               AutomationProperties.Name="Layer name" />
+          </Grid>
+          <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="0" DataContext="{TemplateBinding Editor}" x:DataType="vm:StudioLayerRowViewModel">
+            <s:StudioIconToggle Name="PART_Lock" MinWidth="22" MinHeight="24" Padding="3" IsVisible="{Binding CanLock}"
+                                IsChecked="{Binding IsLocked, Mode=TwoWay}" ToolTip.Tip="Lock / unlock object" AutomationProperties.Name="Lock object" />
+            <s:StudioIconToggle Name="PART_Visible" MinWidth="22" MinHeight="24" Padding="3" IsVisible="{Binding CanChangeVisibility}"
+                                IsChecked="{Binding IsVisible, Mode=TwoWay}" ToolTip.Tip="Show / hide item" AutomationProperties.Name="Show item" />
+          </StackPanel>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^ /template/ s|StudioIconToggle#PART_Lock"><Setter Property="Opacity" Value="0" /><Setter Property="Icon" Value="M4,7V4A4,4 0 0 1 12,4V7H14V16H2V7Z M6,7H10V4A2,2 0 0 0 6,4Z" /></Style>
+    <Style Selector="^ /template/ s|StudioIconToggle#PART_Visible"><Setter Property="Opacity" Value="0" /><Setter Property="Icon" Value="M0,8Q8,-3 16,8Q8,19 0,8Z M2,8Q8,0 14,8Q8,16 2,8Z M8,5A3,3 0 1 1 7.99,5Z" /></Style>
+    <Style Selector="^:pointerover /template/ s|StudioIconToggle, ^:focus-within /template/ s|StudioIconToggle"><Setter Property="Opacity" Value="1" /></Style>
+    <Style Selector="^ /template/ s|StudioIconToggle#PART_Lock:checked, ^ /template/ s|StudioIconToggle#PART_Visible:unchecked"><Setter Property="Opacity" Value="1" /></Style>
+    <Style Selector="^ /template/ s|StudioIconToggle#PART_Lock:unchecked">
+      <Setter Property="Icon" Value="M4,7V4A4,4 0 0 1 12,4H10A2,2 0 0 0 6,4V7H14V16H2V7Z" />
+    </Style>
+    <Style Selector="^ /template/ s|StudioIconToggle#PART_Visible:unchecked">
+      <Setter Property="Icon" Value="M0,8Q8,-3 16,8Q8,19 0,8Z M2,8Q8,0 14,8Q8,16 2,8Z M1,0L16,15L15,16L0,1Z" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Keep compatibility aliases distinct from disabled foregrounds. -->
+  <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Light">
+      <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="#F5F5F5" />
+      <SolidColorBrush x:Key="TextControlBorderBrushDisabled" Color="#E5E5E5" />
+    </ResourceDictionary>
+    <ResourceDictionary x:Key="Dark">
+      <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="#383838" />
+      <SolidColorBrush x:Key="TextControlBorderBrushDisabled" Color="#474747" />
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

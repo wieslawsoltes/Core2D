@@ -1,4 +1,4 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT. See LICENSE.TXT file in the project root for details.
 
 #nullable enable
@@ -12,7 +12,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Styling;
-using Avalonia.Themes.Fluent;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using Core2D.Configuration.Windows;
@@ -34,7 +33,7 @@ public partial class App : Application
 
     static App()
     {
-        DefaultTheme = "FluentDark";
+        DefaultTheme = "BrowserDark";
 
         ChangeTheme = new RelayCommand<string>(SetTheme);
 
@@ -105,11 +104,13 @@ public partial class App : Application
 
         switch (themeName)
         {
+            case "BrowserLight":
             case "FluentLight":
             {
                 Current.RequestedThemeVariant = ThemeVariant.Light;
                 break;
             }
+            case "BrowserDark":
             case "FluentDark":
             {
                 Current.RequestedThemeVariant = ThemeVariant.Dark;

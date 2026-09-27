@@ -1,66 +1,43 @@
-﻿<UserControl x:Class="Core2D.Controls.Dialog.DialogView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
-             xmlns:vme="using:Core2D.ViewModels.Editor"
-             mc:Ignorable="d"
-             d:DesignWidth="1200" d:DesignHeight="580"
-             x:DataType="vme:DialogViewModel" x:CompileBindings="True">
-  <UserControl.KeyBindings>
-    <KeyBinding Command="{Binding Close}" 
-                Gesture="Escape" 
-                x:CompileBindings="False" />
-  </UserControl.KeyBindings>
-  <Panel IsVisible="{Binding ViewModel, Converter={x:Static ObjectConverters.IsNotNull}}">
-    <Panel IsVisible="{Binding IsOverlayVisible}" 
-           Background="{DynamicResource DialogOverlayColor}">
-      <i:Interaction.Behaviors>
-        <ia:EventTriggerBehavior EventName="PointerPressed">
-          <ia:CallMethodAction TargetObject="{Binding}" MethodName="Close" />
-        </ia:EventTriggerBehavior>
-      </i:Interaction.Behaviors>
-    </Panel>
-    <Border x:Name="DragBorder"
-            CornerRadius="4"
-            Background="{DynamicResource DialogBackground}"
-            BoxShadow="{DynamicResource DialogBoxShadow}"
-            VerticalAlignment="Center" HorizontalAlignment="Center">
-      <DockPanel MaxWidth="900" MaxHeight="700" Margin="0">
-        <Border x:Name="TitleBorder"
-                IsVisible="{Binding IsTitleBarVisible}"
-                CornerRadius="4"
-                Background="{DynamicResource AcrylicFallbackColor}"
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Stretch"
-                Height="36"
-                DockPanel.Dock="Top">
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:s="using:Core2D.Controls.Studio" xmlns:i="using:Avalonia.Xaml.Interactivity"
+  xmlns:custom="using:Avalonia.Xaml.Interactions.Custom" xmlns:b="using:Core2D.Behaviors"
+  xmlns:vm="using:Core2D.ViewModels.Editor" x:Class="Core2D.Controls.Dialog.DialogView" x:DataType="vm:DialogViewModel"
+  x:CompileBindings="True">
+  <i:Interaction.Behaviors>
+    <b:StudioModalBehavior/>
+  </i:Interaction.Behaviors>
+  <Grid IsVisible="{Binding ViewModel, Converter={x:Static ObjectConverters.IsNotNull}}">
+    <Button Name="DialogBackdrop" IsVisible="{Binding IsOverlayVisible}" Command="{Binding CloseCommand}"
+      Background="{DynamicResource DialogOverlayColor}" BorderThickness="0" CornerRadius="0" Padding="0"
+      Focusable="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+      AutomationProperties.Name="Dismiss dialog">
+      <Button.Template>
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}"/>
+        </ControlTemplate>
+      </Button.Template>
+    </Button>
+    <Border Name="DragBorder" Margin="16" Background="{DynamicResource StudioSurfaceBrush}"
+      BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="1" CornerRadius="12"
+      BoxShadow="{DynamicResource StudioElevation}" HorizontalAlignment="Center" VerticalAlignment="Center"
+      KeyboardNavigation.TabNavigation="Cycle">
+      <Grid RowDefinitions="Auto,*,Auto">
+        <Border Name="TitleBorder" IsVisible="{Binding IsTitleBarVisible}" Padding="16,12"
+          BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,0,0,1">
           <i:Interaction.Behaviors>
-            <iac:DragControlBehavior TargetControl="{Binding #DragBorder}" />
+            <custom:DragControlBehavior TargetControl="{Binding #DragBorder}"/>
           </i:Interaction.Behaviors>
-          <Label Content="{Binding Title}" 
-                 Padding="8,6,8,6" 
-                 HorizontalAlignment="Left" 
-                 VerticalAlignment="Center" />
+          <TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
         </Border>
-        <Button x:Name="CloseButton"
-                IsVisible="{Binding IsCloseButtonVisible}"
-                Content="Close"
-                Command="{Binding Close}"
-                HorizontalAlignment="Right"
-                Margin="20,0,20,20"
-                Padding="20,10,20,10"
-                DockPanel.Dock="Bottom"
-                x:CompileBindings="False" />
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" 
-                      VerticalScrollBarVisibility="Auto" 
-                      Margin="20">
-          <ContentControl Content="{Binding ViewModel}" />
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="12">
+          <ContentControl Name="DialogContent" Content="{Binding ViewModel}"/>
         </ScrollViewer>
-      </DockPanel>
+        <Border Grid.Row="2" IsVisible="{Binding IsCloseButtonVisible}" Padding="16,10"
+          BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0">
+          <Button Name="CloseButton" Content="Done" Command="{Binding CloseCommand}" HorizontalAlignment="Right"
+            MinWidth="80" Classes="primary" AutomationProperties.Name="Close dialog" />
+        </Border>
+      </Grid>
     </Border>
-  </Panel>
+  </Grid>
 </UserControl>

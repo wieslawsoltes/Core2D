@@ -1,0 +1,18 @@
+<Styles x:Class="Avalonia.Themes.Browser.BrowserTheme" xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:browser="using:Avalonia.Themes.Browser" xmlns:accents="using:Avalonia.Themes.Browser.Accents">
+ <Styles.Resources><ResourceDictionary><ResourceDictionary.MergedDictionaries>
+  <ResourceInclude Source="avares://Avalonia.Themes.Browser/Accents/BaseColorsPalette.xaml" />
+  <accents:SystemAccentColors /><browser:ColorPaletteResourcesCollection />
+  <ResourceInclude Source="avares://Avalonia.Themes.Browser/Accents/BaseResources.xaml" />
+  <ResourceInclude Source="avares://Avalonia.Themes.Browser/Accents/FluentControlResources.xaml" />
+  <ResourceInclude Source="avares://Avalonia.Themes.Browser/Strings/InvariantResources.xaml" />
+  <ResourceInclude Source="avares://Avalonia.Themes.Browser/BrowserTokens.axaml" />
+  <ResourceInclude Source="avares://Avalonia.Themes.Browser/BrowserCompatibilityResources.axaml" />
+ </ResourceDictionary.MergedDictionaries>
+ <ResourceInclude x:Key="CompactStyles" Source="avares://Avalonia.Themes.Browser/DensityStyles/Compact.xaml" />
+ <ResourceInclude x:Key="ComfortableStyles" Source="avares://Avalonia.Themes.Browser/DensityStyles/Comfortable.xaml" />
+ <ResourceInclude x:Key="TouchStyles" Source="avares://Avalonia.Themes.Browser/DensityStyles/Touch.xaml" />
+ </ResourceDictionary></Styles.Resources>
+ <StyleInclude Source="avares://Avalonia.Themes.Browser/Controls/BrowserControls.xaml" />
+ <StyleInclude Source="avares://Avalonia.Themes.Browser/BrowserPrimitives.axaml" />
+</Styles>

@@ -4,6 +4,7 @@
 #nullable enable
 using Avalonia.Controls.DataGridHierarchical;
 using Core2D.ViewModels;
+using Core2D.Model.Renderer;
 using Core2D.ViewModels.Editor;
 using Core2D.ViewModels.Wizard.Export.Scopes;
 
@@ -23,6 +24,7 @@ internal static class GridTextHelper
             null => string.Empty,
             ExportScopeNodeViewModel scope => scope.Title ?? string.Empty,
             ObjectBrowserNode browserNode => browserNode.Title ?? string.Empty,
+            IImageKey image => image.Key ?? string.Empty,
             ViewModelBase viewModel => GetViewModelName(viewModel),
             _ => item?.ToString() ?? string.Empty
         };

@@ -2,29 +2,53 @@ name: CI
 
 on:
   push:
-    branches:
-    - master
-    - release/*
+    branches: [master, 'release/*']
   pull_request:
-    branches:
-    - master
+    branches: [master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     name: Build ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        fetch-depth: 0
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-    - name: Install workloads
-      run: dotnet workload install wasm-tools
-    - name: Build Release
-      run: dotnet build -c Release
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Install WebAssembly workload
+        run: dotnet workload install wasm-tools
+      - name: Build full solution
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set +e
+          dotnet build Core2D.slnx -c Release > artifacts/solution-build.log 2>&1
+          result=$?
+          set -e
+          tail -n 100 artifacts/solution-build.log
+          exit "$result"
+      - name: Upload complete build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: solution-build-${{ matrix.os }}
+          path: artifacts
+          if-no-files-found: ignore

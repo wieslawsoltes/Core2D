@@ -12,6 +12,7 @@ using Core2D.Model;
 using Core2D.Model.Editor;
 using Core2D.Model.Renderer;
 using Core2D.ViewModels.Data;
+using Core2D.ViewModels.Docking;
 using Core2D.ViewModels.Editors;
 using Core2D.ViewModels.Shapes;
 using Dock.Model;
@@ -25,8 +26,8 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
     public ProjectEditorViewModel(IServiceProvider? serviceProvider) : base(serviceProvider)
     {
         _dialogs = new ObservableCollection<DialogViewModel>();
-        _tools = serviceProvider is null 
-            ? new Lazy<ImmutableArray<IEditorTool>>(() => ImmutableArray<IEditorTool>.Empty) 
+        _tools = serviceProvider is null
+            ? new Lazy<ImmutableArray<IEditorTool>>(() => ImmutableArray<IEditorTool>.Empty)
             : serviceProvider.GetServiceLazily<IEnumerable<IEditorTool>, ImmutableArray<IEditorTool>>(tools =>
             {
                 if (tools is null)
@@ -35,8 +36,8 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
                 }
                 return tools.ToImmutableArray();
             });
-        _pathTools = serviceProvider is null 
-            ? new Lazy<ImmutableArray<IPathTool>>(() => ImmutableArray<IPathTool>.Empty) 
+        _pathTools = serviceProvider is null
+            ? new Lazy<ImmutableArray<IPathTool>>(() => ImmutableArray<IPathTool>.Empty)
             : serviceProvider.GetServiceLazily<IEnumerable<IPathTool>, ImmutableArray<IPathTool>>(pathTools =>
             {
                 if (pathTools is null)
@@ -54,8 +55,8 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
         _graphLayoutService = serviceProvider.GetServiceLazily<IGraphLayoutService>();
         _waveFunctionCollapseService = serviceProvider.GetServiceLazily<IWaveFunctionCollapseService>();
         _clipboardService = serviceProvider.GetServiceLazily<IClipboardService>();
-        _fileWriters = serviceProvider is null 
-            ? new Lazy<ImmutableArray<IFileWriter>>(() => ImmutableArray<IFileWriter>.Empty) 
+        _fileWriters = serviceProvider is null
+            ? new Lazy<ImmutableArray<IFileWriter>>(() => ImmutableArray<IFileWriter>.Empty)
             : serviceProvider.GetServiceLazily<IEnumerable<IFileWriter>, ImmutableArray<IFileWriter>>(writers =>
             {
                 if (writers is null)
@@ -63,9 +64,9 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
                     return ImmutableArray<IFileWriter>.Empty;
                 }
                 return writers.ToImmutableArray();
-            });  
-        _textFieldReaders = serviceProvider is null 
-            ? new Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>>(() => ImmutableArray<ITextFieldReader<DatabaseViewModel>>.Empty) 
+            });
+        _textFieldReaders = serviceProvider is null
+            ? new Lazy<ImmutableArray<ITextFieldReader<DatabaseViewModel>>>(() => ImmutableArray<ITextFieldReader<DatabaseViewModel>>.Empty)
             : serviceProvider.GetServiceLazily<IEnumerable<ITextFieldReader<DatabaseViewModel>>, ImmutableArray<ITextFieldReader<DatabaseViewModel>>>(readers =>
             {
                 if (readers is null)
@@ -74,8 +75,8 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
                 }
                 return readers.ToImmutableArray();
             });
-        _textFieldWriters = serviceProvider is null 
-            ? new Lazy<ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>(() => ImmutableArray<ITextFieldWriter<DatabaseViewModel>>.Empty) 
+        _textFieldWriters = serviceProvider is null
+            ? new Lazy<ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>(() => ImmutableArray<ITextFieldWriter<DatabaseViewModel>>.Empty)
             : serviceProvider.GetServiceLazily<IEnumerable<ITextFieldWriter<DatabaseViewModel>>, ImmutableArray<ITextFieldWriter<DatabaseViewModel>>>(writers =>
             {
                 if (writers is null)
@@ -98,17 +99,7 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
 
     public void OnToggleDockableVisibility(object? param)
     {
-        if (param is not string id)
-        {
-            return;
-        }
-
-        if (DockFactory is not FactoryBase dockFactory)
-        {
-            return;
-        }
-
-        if (RootDock is not IRootDock rootDock)
+        if (param is not string id || DockFactory is not FactoryBase dockFactory || RootDock is not IRootDock rootDock)
         {
             return;
         }
@@ -123,7 +114,11 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
             dockFactory.ActivateWindow(dockable);
         }
 
-        var hiddenDockable = rootDock.HiddenDockables?.FirstOrDefault(x => x.Id == id);
+        // Restore by object from every model root, including before DockControl realization.
+        var hiddenDockable = StudioDockGraph.Enumerate(rootDock)
+            .OfType<IRootDock>()
+            .SelectMany(x => (IEnumerable<IDockable>?)x.HiddenDockables ?? Enumerable.Empty<IDockable>())
+            .FirstOrDefault(x => x.Id == id);
         if (hiddenDockable is { })
         {
             dockFactory.RestoreDockable(hiddenDockable);
@@ -143,7 +138,6 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
                 dockFactory.RestoreDockable(dockable);
                 ActivateDockable(dockable);
             }
-
             return;
         }
 
@@ -177,7 +171,6 @@ public partial class ProjectEditorViewModel : ViewModelBase, IDialogPresenter
             Editor = this,
             Text = text
         };
-
         return new DialogViewModel(ServiceProvider, this)
         {
             Title = "Text Binding",

@@ -1,30 +1,15 @@
-﻿<UserControl x:Class="Core2D.Views.Scripting.ScriptView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:app="using:Core2D"
-             xmlns:vms="using:Core2D.ViewModels.Scripting"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Script}"
-             d:DesignWidth="1000" d:DesignHeight="600"
-             x:DataType="vms:ScriptViewModel" x:CompileBindings="True">
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:s="using:Core2D.Controls.Studio" xmlns:app="using:Core2D" xmlns:vm="using:Core2D.ViewModels.Scripting"
+  x:Class="Core2D.Views.Scripting.ScriptView" x:DataType="vm:ScriptViewModel" x:CompileBindings="True">
   <UserControl.KeyBindings>
-    <KeyBinding Command="{Binding ExecuteRepl}"
-                CommandParameter="{Binding #ScriptTextEditor.Text}" 
-                Gesture="{app:PlatformGesture Text=Primary+Enter}" />
+    <KeyBinding Gesture="{app:PlatformGesture Text=Primary+Enter}" Command="{Binding ExecuteRepl}"
+      CommandParameter="{Binding Code}" />
   </UserControl.KeyBindings>
-  <TextBox Name="ScriptTextEditor"
-           Margin="0"
-           Background="White"
-           Foreground="Black"
-           AcceptsReturn="True"
-           AcceptsTab="True"
-           FontFamily="{DynamicResource CodeFontFamily}"
-           FontWeight="Normal"
-           FontSize="14"
-           TextWrapping="NoWrap"
-           Text="{Binding Code, Mode=TwoWay}">
-    </TextBox>
+  <Grid RowDefinitions="Auto,*" MinHeight="180">
+    <s:StudioPanelHeader Title="{Binding Name}" Description="C# · Ctrl/Command+Enter runs in the REPL">
+      <Button Content="Run" Command="{Binding ExecuteCode}" CommandParameter="{Binding Code}" Classes="primary"
+        AutomationProperties.Name="Run script" />
+    </s:StudioPanelHeader>
+    <s:StudioCodeEditor Name="ScriptTextEditor" Grid.Row="1" Text="{Binding Code, Mode=TwoWay}"/>
+  </Grid>
 </UserControl>

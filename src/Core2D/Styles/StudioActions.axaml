@@ -1,0 +1,46 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Editor" x:CompileBindings="True">
+  <DataTemplate x:Key="StudioActionCell" x:DataType="vm:StudioActionViewModel">
+    <Grid ColumnDefinitions="24,*,Auto" ColumnSpacing="8" Margin="12,6" IsEnabled="{Binding IsAvailable}">
+      <PathIcon Data="M1,7H10L6,3L7,2L13,8L7,14L6,13L10,9H1Z" Width="14" Height="14" Foreground="{DynamicResource StudioMutedBrush}" />
+      <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+        <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+        <TextBlock Text="{Binding Category}" Classes="studio-muted" FontSize="10" TextTrimming="CharacterEllipsis" />
+      </StackPanel>
+      <s:StudioStatusBadge Grid.Column="2" Content="{Binding Shortcut}" VerticalAlignment="Center"
+                           IsVisible="{Binding Shortcut, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+    </Grid>
+  </DataTemplate>
+  <ControlTheme x:Key="{x:Type s:StudioCommandPalette}" TargetType="s:StudioCommandPalette" x:DataType="s:StudioCommandPalette">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="#66000000">
+          <Border Name="PART_Surface" Width="560" Height="440" HorizontalAlignment="Center" VerticalAlignment="Center"
+                  CornerRadius="12" Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}"
+                  BorderThickness="1" BoxShadow="{DynamicResource StudioElevation}" ClipToBounds="True"
+                  KeyboardNavigation.TabNavigation="Cycle">
+            <Grid RowDefinitions="Auto,*,Auto">
+              <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" Margin="12">
+                <s:StudioSearchBox Name="PART_Search" Text="{Binding Query, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                   Watermark="Search actions, tools and panels…" MaxLength="256" AutomationProperties.Name="Search actions" />
+                <s:StudioIconButton Grid.Column="1" Name="PART_Close" Icon="M2,1L8,7L14,1L15,2L9,8L15,14L14,15L8,9L2,15L1,14L7,8L1,2Z"
+                                    AutomationProperties.Name="Close actions" ToolTip.Tip="Close actions (Escape)" />
+              </Grid>
+              <DataGrid Name="PART_Grid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                        HeadersVisibility="None" GridLinesVisibility="None" RowHeight="50" BorderThickness="0"
+                        Background="{DynamicResource StudioSurfaceBrush}" RowBackground="Transparent" CanUserReorderColumns="False" />
+              <s:StudioEmptyState Grid.Row="1" Title="No matching actions" Description="Try a tool, panel name, or an action such as align or export."
+                                  IsVisible="{Binding ResultCount, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StudioZeroCount}}" />
+              <Border Grid.Row="2" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0" Padding="12,8">
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBlock Text="↑ ↓ navigate   ·   Enter run   ·   Esc close" TextTrimming="CharacterEllipsis" Margin="0,0,8,0" Classes="studio-muted" FontSize="10" />
+                  <TextBlock Grid.Column="1" Text="{Binding ResultCount, RelativeSource={RelativeSource TemplatedParent}, StringFormat='{}{0} actions'}" Classes="studio-muted" FontSize="10" />
+                </Grid>
+              </Border>
+            </Grid>
+          </Border>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

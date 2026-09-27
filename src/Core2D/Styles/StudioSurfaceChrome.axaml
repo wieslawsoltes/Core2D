@@ -1,0 +1,31 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="using:Core2D.Controls.Studio" x:CompileBindings="True">
+  <Styles.Resources>
+    <ResourceDictionary>
+      
+      
+      
+      
+      
+      <ControlTheme x:Key="{x:Type s:StudioTableStatus}" TargetType="s:StudioTableStatus" x:DataType="s:StudioTableStatus">
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Border BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0" Background="{DynamicResource StudioSurfaceBrush}" Padding="12,7">
+              <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <TextBlock Text="{TemplateBinding Summary}" FontSize="11" Foreground="{DynamicResource StudioMutedBrush}" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Grid.Column="1" Text="{TemplateBinding SelectionSummary}" FontSize="11" Foreground="{DynamicResource StudioMutedBrush}"/>
+              </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter>
+      </ControlTheme>
+    </ResourceDictionary>
+  </Styles.Resources>
+  <!-- Preserve the native Track/Thumb, selection and grid interaction implementations. -->
+  
+  
+  
+  
+  
+  <Style Selector="DataGridColumnHeader"><Setter Property="Foreground" Value="{DynamicResource StudioMutedBrush}"/><Setter Property="FontWeight" Value="Medium"/><Setter Property="MinHeight" Value="30"/></Style>
+  
+</Styles>

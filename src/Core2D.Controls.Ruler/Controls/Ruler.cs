@@ -1,9 +1,10 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT. See LICENSE.TXT file in the project root for details.
 
 #nullable enable
 using System;
 using System.Globalization;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
@@ -86,6 +87,15 @@ public class Ruler : TemplatedControl
     public static readonly StyledProperty<double> SelectionOpacityProperty =
         AvaloniaProperty.Register<Ruler, double>(nameof(SelectionOpacity), 0.18d);
 
+    /// <summary>Controls optional edge labels for the selected interval.</summary>
+    public static readonly StyledProperty<bool> ShowSelectionLabelsProperty =
+        AvaloniaProperty.Register<Ruler, bool>(nameof(ShowSelectionLabels), true);
+
+    /// <summary>Gets or sets whether selected bounds display numeric edge labels.</summary>
+    public bool ShowSelectionLabels { get => GetValue(ShowSelectionLabelsProperty); set => SetValue(ShowSelectionLabelsProperty, value); }
+
+    private readonly Dictionary<string, FormattedText> _labels = new();
+
     static Ruler()
     {
         AffectsRender<Ruler>(
@@ -119,7 +129,7 @@ public class Ruler : TemplatedControl
             SelectionLabelFormatProperty,
             SelectionBrushProperty,
             SelectionLabelBrushProperty,
-            SelectionOpacityProperty);
+            SelectionOpacityProperty, ShowSelectionLabelsProperty);
     }
 
     public Ruler()
@@ -268,6 +278,10 @@ public class Ruler : TemplatedControl
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
+        if (change.Property != MarkerProperty && change.Property != SelectionStartProperty
+            && change.Property != SelectionLengthProperty && change.Property != OffsetProperty
+            && change.Property != HighlightStartProperty && change.Property != HighlightLengthProperty)
+            _labels.Clear();
 
         if (change.Property == OrientationProperty)
         {
@@ -304,61 +318,64 @@ public class Ruler : TemplatedControl
             context.FillRectangle(background, new Rect(Bounds.Size));
         }
 
-        var zoom = Math.Max(Zoom, double.Epsilon);
-        var offset = Offset;
-        var desiredSpacing = DesiredMajorTickSpacing > double.Epsilon ? DesiredMajorTickSpacing : 80d;
-        var majorStep = CalculateStep(zoom, desiredSpacing);
-        if (!double.IsFinite(majorStep) || majorStep <= double.Epsilon)
-        {
-            return;
-        }
-
-        majorStep = NormalizeStepToPixels(majorStep, zoom, desiredSpacing);
-
-        var minorCount = Math.Max(2, Math.Min(10, (int)Math.Round((majorStep * zoom) / 12d)));
-        var minorStep = majorStep / minorCount;
-        var axisLength = Orientation == Orientation.Horizontal ? Bounds.Width : Bounds.Height;
-        var thickness = Orientation == Orientation.Horizontal ? Bounds.Height : Bounds.Width;
-        var startWorld = (-offset) / zoom;
-        var endWorld = (axisLength - offset) / zoom;
-        var firstMajor = Math.Floor(startWorld / majorStep) * majorStep;
-
+        double zoom = Zoom, offset = Offset;
+        double axisLength = Orientation == Orientation.Horizontal ? Bounds.Width : Bounds.Height;
+        double thickness = Orientation == Orientation.Horizontal ? Bounds.Height : Bounds.Width;
+        RulerScale scale = RulerScale.Create(zoom, offset, axisLength, DesiredMajorTickSpacing, MinorTickCount);
+        if (scale.Count == 0) return;
         var tickPen = new Pen(TickBrush ?? Foreground ?? Brushes.Gray, 1);
         var accentPen = new Pen(AccentBrush ?? tickPen.Brush, 1);
-        var textBrush = TextBrush ?? tickPen.Brush ?? Brushes.Gray;
-
+        IBrush textBrush = TextBrush ?? tickPen.Brush ?? Brushes.Gray;
         var typeface = new Typeface(FontFamily, FontStyle, FontWeight, FontStretch);
-        var culture = CultureInfo.CurrentUICulture;
-        var format = string.IsNullOrWhiteSpace(LabelFormat) ? "0" : LabelFormat;
-
-        DrawBorderLine(context, accentPen, axisLength, thickness);
-        DrawHighlight(context, axisLength, thickness, zoom, offset);
-        DrawSelectionHighlight(context, axisLength, thickness, zoom, offset, typeface, culture);
-        DrawMarker(context, accentPen, axisLength, thickness, zoom, offset);
-        DrawZeroLine(context, accentPen, axisLength, thickness, zoom, offset);
-
-        for (var major = firstMajor; major <= endWorld; major += majorStep)
+        CultureInfo culture = CultureInfo.CurrentUICulture;
+        using (context.PushClip(new Rect(Bounds.Size)))
         {
-            var position = (major * zoom) + offset;
-            if (position < -majorStep * zoom || position > axisLength + majorStep * zoom)
+            DrawBorderLine(context, tickPen, axisLength, thickness);
+            DrawHighlight(context, axisLength, thickness, zoom, offset);
+            DrawSelectionHighlight(context, axisLength, thickness, zoom, offset, typeface, culture);
+            double previousLabelEnd = double.NegativeInfinity;
+            // Integer-bounded iteration cannot stall at very large world coordinates.
+            for (int majorIndex = 0; majorIndex < scale.Count; majorIndex++)
             {
-                continue;
-            }
-
-            DrawTick(context, tickPen, position, thickness, MajorTickLength);
-            DrawLabel(context, textBrush, typeface, culture, format, position, thickness, major);
-
-            for (var i = 1; i < MinorTickCount; i++)
-            {
-                var minorValue = major + (i * minorStep);
-                var minorPosition = (minorValue * zoom) + offset;
-                if (minorPosition < 0 || minorPosition > axisLength)
+                double major = scale.First + majorIndex * scale.Step;
+                double position = major * zoom + offset;
+                if (!double.IsFinite(position)) continue;
+                if (position >= 0 && position <= axisLength)
                 {
-                    continue;
+                    DrawTick(context, tickPen, position, thickness, Math.Min(MajorTickLength, thickness));
+                    string text;
+                    try { text = LabelFormat == "Auto" ? scale.Format(major, culture) : major.ToString(LabelFormat, culture); }
+                    catch (FormatException) { text = scale.Format(major, culture); }
+                    if (!_labels.TryGetValue(text, out FormattedText? formatted))
+                    {
+                        if (_labels.Count >= 512) _labels.Clear();
+                        formatted = new FormattedText(text, culture, FlowDirection.LeftToRight, typeface, FontSize, textBrush);
+                        _labels[text] = formatted;
+                    }
+                    double labelStart = position + 4;
+                    if (labelStart >= previousLabelEnd && labelStart + formatted.Width <= axisLength - 2)
+                    {
+                        if (Orientation == Orientation.Horizontal)
+                            context.DrawText(formatted, new Point(labelStart, 1));
+                        else
+                        {
+                            // Rotate long vertical labels rather than clipping them to ruler thickness.
+                            using (context.PushTransform(Matrix.CreateRotation(-Math.PI / 2)
+                                * Matrix.CreateTranslation(1, labelStart + formatted.Width)))
+                                context.DrawText(formatted, default);
+                        }
+                        previousLabelEnd = labelStart + formatted.Width + 8;
+                    }
                 }
-
-                DrawTick(context, tickPen, minorPosition, thickness, MinorTickLength);
+                for (int i = 1; i < scale.Subdivisions; i++)
+                {
+                    double minor = position + i * scale.Step * zoom / scale.Subdivisions;
+                    if (minor >= 0 && minor <= axisLength)
+                        DrawTick(context, tickPen, minor, thickness, Math.Min(MinorTickLength, thickness));
+                }
             }
+            DrawZeroLine(context, accentPen, axisLength, thickness, zoom, offset);
+            DrawMarker(context, new Pen(SelectionBrush ?? accentPen.Brush, 1), axisLength, thickness, zoom, offset);
         }
     }
 
@@ -415,19 +432,21 @@ public class Ruler : TemplatedControl
             context.FillRectangle(selectionBrush, selectionRect);
         }
 
+        if (!ShowSelectionLabels) return;
+
         var startText = SelectionStartText;
         var endText = SelectionEndText;
         var format = string.IsNullOrWhiteSpace(SelectionLabelFormat) ? LabelFormat : SelectionLabelFormat;
 
         if (string.IsNullOrWhiteSpace(startText))
         {
-            startText = SelectionStart.ToString(format, culture);
+            startText = format == "Auto" ? RulerScale.Create(zoom, offset, axisLength).Format(SelectionStart, culture) : SelectionStart.ToString(format, culture);
         }
 
         var endValue = SelectionStart + SelectionLength;
         if (string.IsNullOrWhiteSpace(endText))
         {
-            endText = endValue.ToString(format, culture);
+            endText = format == "Auto" ? RulerScale.Create(zoom, offset, axisLength).Format(endValue, culture) : endValue.ToString(format, culture);
         }
 
         var labelBrush = SelectionLabelBrush ?? selectionBrush ?? Brushes.Gray;
@@ -469,49 +488,6 @@ public class Ruler : TemplatedControl
                 : Math.Clamp(position + 6, 0, Math.Max(0, Bounds.Height - formatted.Height - 2));
             context.DrawText(formatted, new Point(x, y));
         }
-    }
-
-    private static double CalculateStep(double pixelsPerUnit, double desiredPixels)
-    {
-        var rawStep = desiredPixels / Math.Max(pixelsPerUnit, double.Epsilon);
-        if (!double.IsFinite(rawStep) || rawStep <= double.Epsilon)
-        {
-            return 0d;
-        }
-
-        var exponent = Math.Floor(Math.Log10(rawStep));
-        var magnitude = Math.Pow(10, exponent);
-        var normalized = rawStep / magnitude;
-        var snapped = normalized switch
-        {
-            < 2d => 1d,
-            < 5d => 2d,
-            < 10d => 5d,
-            _ => 10d
-        };
-
-        return snapped * magnitude;
-    }
-
-    private static double NormalizeStepToPixels(double step, double zoom, double desiredPixels)
-    {
-        var min = desiredPixels * 0.6;
-        var max = desiredPixels * 1.6;
-        var stepPixels = step * zoom;
-
-        while (stepPixels < min)
-        {
-            step *= 2.0;
-            stepPixels *= 2.0;
-        }
-
-        while (stepPixels > max)
-        {
-            step *= 0.5;
-            stepPixels *= 0.5;
-        }
-
-        return step;
     }
 
     private void DrawBorderLine(DrawingContext context, Pen pen, double axisLength, double thickness)
@@ -603,7 +579,7 @@ public class Ruler : TemplatedControl
 
     private void DrawTick(DrawingContext context, Pen pen, double position, double thickness, double length)
     {
-        var aligned = position + 0.5;
+        var aligned = Math.Floor(position) + 0.5;
         if (Orientation == Orientation.Horizontal)
         {
             var y = thickness - length;

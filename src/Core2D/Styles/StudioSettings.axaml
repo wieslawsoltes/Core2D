@@ -1,0 +1,23 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" x:CompileBindings="True">
+  <ControlTheme x:Key="{x:Type s:StudioSettingsSection}" TargetType="s:StudioSettingsSection"
+                BasedOn="{StaticResource {x:Type s:StudioSection}}" x:DataType="s:StudioSettingsSection">
+    <Style Selector="^[MatchesQuery=False]"><Setter Property="IsVisible" Value="False" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioSettingsPanel}" TargetType="s:StudioSettingsPanel" x:DataType="s:StudioSettingsPanel">
+    <Setter Property="ItemsPanel"><ItemsPanelTemplate><StackPanel /></ItemsPanelTemplate></Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}">
+          <s:StudioSearchBox Margin="12,8" Text="{Binding Query, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                             Watermark="Find settings…" MaxLength="256" AutomationProperties.Name="Find settings" />
+          <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+          </ScrollViewer>
+          <s:StudioEmptyState Grid.Row="1" Title="No matching settings" Description="Search group names or related terms, or clear your search."
+                              IsVisible="{Binding MatchCount, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StudioZeroCount}}" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

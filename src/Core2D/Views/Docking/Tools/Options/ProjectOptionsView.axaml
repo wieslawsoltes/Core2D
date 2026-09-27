@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:containers="using:Core2D.Views.Containers"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Options"
+             xmlns:s="using:Core2D.Controls.Studio"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:ProjectOptionsViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}">
-    <Panel x:DataType="vme:ProjectEditorViewModel">
-      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <containers:OptionsView DataContext="{Binding Project.Options}" />
-      </ScrollViewer>
-    </Panel>
+    <Grid x:DataType="vme:ProjectEditorViewModel" RowDefinitions="Auto,*">
+      <s:StudioPanelHeader Title="Drawing settings" Description="Snapping, connections and new-object defaults" />
+      <containers:OptionsView Grid.Row="1" DataContext="{Binding Project.Options}" />
+    </Grid>
   </Panel>
 </UserControl>

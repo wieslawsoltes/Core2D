@@ -1,0 +1,29 @@
+<!-- Derived from AvaloniaUI/Avalonia 11.3.12 (MIT). See LICENSE.Avalonia.txt and UpstreamManifest.json. --><!--
+    // (c) Copyright Microsoft Corporation.
+    // This source is subject to the Microsoft Public License (Ms-PL).
+    // Please see https://go.microsoft.com/fwlink/?LinkID=131993 for details.
+    // All other rights reserved.
+--><ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <Calendar/>
+    </Border>
+  </Design.PreviewWith>
+
+  <ControlTheme x:Key="{x:Type Calendar}" TargetType="Calendar" x:DataType="Calendar"><Setter Property="FontFamily" Value="{DynamicResource BrowserFontFamily}"/><Setter Property="CornerRadius" Value="{DynamicResource BrowserControlRadius}"/>
+    <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource BrowserBorderBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="FontSize" Value="{DynamicResource BrowserFontSize}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Name="PART_Root" HorizontalAlignment="Center" ClipToBounds="True">
+          <CalendarItem Name="PART_CalendarItem" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" HeaderBackground="{TemplateBinding HeaderBackground}"/>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

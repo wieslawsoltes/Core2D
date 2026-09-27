@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="using:System">
+  <sys:Double x:Key="BrowserControlHeight">28</sys:Double>
+  <sys:Double x:Key="BrowserFontSize">12</sys:Double>
+  <Thickness x:Key="BrowserButtonPadding">8,4</Thickness>
+  <sys:Double x:Key="ControlContentThemeFontSize">12</sys:Double>
+  <sys:Double x:Key="TextControlThemeMinHeight">28</sys:Double>
+  <sys:Double x:Key="TextControlThemeMinWidth">0</sys:Double>
+  <Thickness x:Key="TextControlThemePadding">7,4</Thickness>
+  <Thickness x:Key="ListBoxItemPadding">8,4</Thickness>
+  <sys:Double x:Key="ListViewItemMinHeight">28</sys:Double>
+  <sys:Double x:Key="ComboBoxMinHeight">28</sys:Double>
+  <Thickness x:Key="ComboBoxPadding">8,4</Thickness>
+  <Thickness x:Key="ComboBoxItemThemePadding">8,4</Thickness>
+  <sys:Double x:Key="CheckBoxMinHeight">28</sys:Double>
+  <sys:Double x:Key="RadioButtonMinHeight">28</sys:Double>
+  <sys:Double x:Key="TreeViewItemMinHeight">28</sys:Double>
+  <sys:Double x:Key="TabItemMinHeight">28</sys:Double>
+  <Thickness x:Key="TabItemHeaderMargin">10,0</Thickness>
+  <Thickness x:Key="ButtonPadding">8,4</Thickness>
+  <Thickness x:Key="MenuFlyoutItemThemePaddingNarrow">8,4</Thickness>
+  <Thickness x:Key="MenuBarItemPadding">8,4</Thickness>
+  <Thickness x:Key="TimePickerHostPadding">0,3</Thickness>
+  <Thickness x:Key="DatePickerHostPadding">0,3</Thickness>
+  <Thickness x:Key="DatePickerHostMonthPadding">8,3,0,3</Thickness>
+</ResourceDictionary>

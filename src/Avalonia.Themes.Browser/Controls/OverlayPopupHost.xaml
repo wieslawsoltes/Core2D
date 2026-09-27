@@ -1,0 +1,19 @@
+<!-- Derived from AvaloniaUI/Avalonia 11.3.12 (MIT). See LICENSE.Avalonia.txt and UpstreamManifest.json. --><ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:ClassModifier="internal">
+  <ControlTheme x:Key="{x:Type OverlayPopupHost}" TargetType="OverlayPopupHost" x:DataType="OverlayPopupHost"><Setter Property="Background" Value="{DynamicResource BrowserSurfaceBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource BrowserTextBrush}"/>
+    <Setter Property="FontSize" Value="{DynamicResource BrowserFontSize}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource BrowserFontFamily}"/>
+    <Setter Property="FontWeight" Value="Normal"/>
+    <Setter Property="FontStyle" Value="Normal"/>
+    <Setter Property="Inline.TextDecorations" Value=""/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <LayoutTransformControl LayoutTransform="{TemplateBinding Transform}">
+          <VisualLayerManager IsPopup="True">
+            <ContentPresenter Name="PART_ContentPresenter" Background="{TemplateBinding Background}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}"/>
+          </VisualLayerManager>
+        </LayoutTransformControl>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

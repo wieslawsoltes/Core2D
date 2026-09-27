@@ -1,0 +1,64 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Semantic tokens: no renderer, document or persisted layout state is changed. -->
+  <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Default">
+      <SolidColorBrush x:Key="StudioGuideBrush">#F24822</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioCanvasBrush">#E5E5E5</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSurfaceBrush">#FFFFFF</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioInputBrush">#F5F5F5</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSelectedSurfaceBrush">#FFFFFF</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSwitchTrackBrush">#8A8A8A</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioCheckerLightBrush">#FFFFFF</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioCheckerDarkBrush">#D9D9D9</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioDangerBrush">#C92834</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioHoverBrush">#EBEBEB</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioBorderBrush">#E5E5E5</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioTextBrush">#242424</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioMutedBrush">#666666</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioAccentBrush">#0D70D8</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSelectionBrush">#DDEEFF</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSelectionTextBrush">#075BAE</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioOnAccentBrush">#FFFFFF</SolidColorBrush>
+      <SolidColorBrush x:Key="AcrylicFallbackColor">#FFFFFF</SolidColorBrush>
+      <SolidColorBrush x:Key="TextControlBackground">#F5F5F5</SolidColorBrush>
+      <SolidColorBrush x:Key="ButtonForeground">#242424</SolidColorBrush>
+      <SolidColorBrush x:Key="IconAccentBrush1">#333333</SolidColorBrush>
+      <SolidColorBrush x:Key="IconAccentBrush2">#80333333</SolidColorBrush>
+      <SolidColorBrush x:Key="DialogBackground">#FFFFFF</SolidColorBrush>
+      <SolidColorBrush x:Key="DialogOverlayColor">#66000000</SolidColorBrush>
+      <BoxShadows x:Key="StudioElevation">0 2 10 0 #18000000</BoxShadows>
+    </ResourceDictionary>
+    <ResourceDictionary x:Key="Dark">
+      <SolidColorBrush x:Key="StudioGuideBrush">#F24822</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioCanvasBrush">#1E1E1E</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSurfaceBrush">#2C2C2C</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioInputBrush">#383838</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSelectedSurfaceBrush">#555555</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSwitchTrackBrush">#757575</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioCheckerLightBrush">#A0A0A0</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioCheckerDarkBrush">#707070</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioDangerBrush">#FF807F</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioHoverBrush">#444444</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioBorderBrush">#444444</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioTextBrush">#F5F5F5</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioMutedBrush">#B3B3B3</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioAccentBrush">#0D70D8</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSelectionBrush">#214B70</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioSelectionTextBrush">#D1E9FF</SolidColorBrush>
+      <SolidColorBrush x:Key="StudioOnAccentBrush">#FFFFFF</SolidColorBrush>
+      <SolidColorBrush x:Key="AcrylicFallbackColor">#2C2C2C</SolidColorBrush>
+      <SolidColorBrush x:Key="TextControlBackground">#383838</SolidColorBrush>
+      <SolidColorBrush x:Key="ButtonForeground">#F5F5F5</SolidColorBrush>
+      <SolidColorBrush x:Key="IconAccentBrush1">#E6E6E6</SolidColorBrush>
+      <SolidColorBrush x:Key="IconAccentBrush2">#80E6E6E6</SolidColorBrush>
+      <SolidColorBrush x:Key="DialogBackground">#2C2C2C</SolidColorBrush>
+      <SolidColorBrush x:Key="DialogOverlayColor">#88000000</SolidColorBrush>
+      <BoxShadows x:Key="StudioElevation">0 2 10 0 #50000000</BoxShadows>
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+  <Thickness x:Key="ContentMargin">12,8,12,12</Thickness>
+  <Thickness x:Key="MenuBarItemPadding">10,0,10,0</Thickness>
+  <x:Double x:Key="MenuBarHeight">32</x:Double>
+  <CornerRadius x:Key="OverlayCornerRadius">10</CornerRadius>
+</ResourceDictionary>

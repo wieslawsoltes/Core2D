@@ -1,99 +1,70 @@
-﻿<UserControl x:Class="Core2D.Views.Libraries.TemplatesView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:app="using:Core2D"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
-             xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
-             xmlns:vmc="using:Core2D.ViewModels.Containers"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             xmlns:c="clr-namespace:Core2D.Controls"
-             mc:Ignorable="d"
-             d:DataContext="{x:Static vmd:DesignerContext.Project}"
-             d:DesignWidth="250" d:DesignHeight="400"
-             x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:app="using:Core2D"
+  xmlns:i="using:Avalonia.Xaml.Interactivity" xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
+  xmlns:dd="using:Core2D.Behaviors.DragAndDrop" xmlns:vmc="using:Core2D.ViewModels.Containers"
+  xmlns:vmd="using:Core2D.ViewModels.Designer" xmlns:c="clr-namespace:Core2D.Controls"
+  xmlns:s="using:Core2D.Controls.Studio" xmlns:behaviors="using:Core2D.Behaviors"
+  x:Class="Core2D.Views.Libraries.TemplatesView" mc:Ignorable="d" d:DataContext="{x:Static vmd:DesignerContext.Project}"
+  d:DesignWidth="250" d:DesignHeight="400" x:DataType="vmc:ProjectContainerViewModel" x:CompileBindings="True">
   <UserControl.Resources>
-    <dd:TemplatesListBoxDropHandler x:Key="TemplatesListBoxDropHandler" />
-  </UserControl.Resources>
-  <Grid RowDefinitions="Auto,*,12,Auto">
-    <StackPanel Grid.Row="0" 
-                Orientation="Horizontal" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Center"
-                Margin="{DynamicResource ContentMargin}">
-      <Button Content="apply"
-              Command="{Binding ApplyTemplate}"
-              CommandParameter="{Binding CurrentTemplate}" 
-              IsVisible="{Binding !!CurrentTemplate}"
-              BorderBrush="Transparent"
-              Background="Transparent" 
-              Padding="12,4,12,4" />
-      <Button Content="edit"
-              Command="{Binding EditTemplate}"
-              CommandParameter="{Binding CurrentTemplate}" 
-              IsVisible="{Binding !!CurrentTemplate}"
-              BorderBrush="Transparent" 
-              Background="Transparent"
-              Padding="12,4,12,4" />
-      <Button Content="&#727;" 
-              Command="{Binding RemoveTemplate}"
-              CommandParameter="{Binding CurrentTemplate}" 
-              IsVisible="{Binding !!CurrentTemplate}"
-              BorderBrush="Transparent" 
-              Background="Transparent"
-              Padding="12,4,12,4" />
-      <Button Content="+" 
-              Command="{Binding AddTemplate}" 
-              BorderBrush="Transparent"
-              Background="Transparent" Padding="12,4,12,4" />
-    </StackPanel>
-    <ListBox x:Name="TemplatesListBox" 
-             ItemsSource="{Binding Templates}"
-             SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" 
-             Grid.Row="1">
-      <i:Interaction.Behaviors>
-        <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}"
-                                 Handler="{StaticResource TemplatesListBoxDropHandler}" />
-      </i:Interaction.Behaviors>
-      <ListBox.KeyBindings>
-        <KeyBinding Command="{Binding AddTemplate}" 
-                    Gesture="{app:PlatformGesture Text=Primary+N}" />
-        <KeyBinding Command="{Binding EditTemplate}"
-                    CommandParameter="{Binding CurrentTemplate}" 
-                    Gesture="{app:PlatformGesture Text=Primary+T}" />
-        <KeyBinding Command="{Binding RemoveTemplate}"
-                    CommandParameter="{Binding CurrentTemplate}"
-                    Gesture="Delete" />
-        <KeyBinding Command="{Binding ExportTemplate}"
-                    CommandParameter="{Binding CurrentTemplate}" 
-                    Gesture="{app:PlatformGesture Text=Primary+E}" />
-      </ListBox.KeyBindings>
-      <ListBox.Resources>
-        <ContextMenu x:Key="TemplateContainerContextMenu" 
-                     x:DataType="vmc:TemplateContainerViewModel">
-          <MenuItem Header="_Edit Template" 
-                    Command="{Binding EditTemplate}"
-                    CommandParameter="{Binding 
-                    Mode=OneWay}" />
-          <Separator />
-          <MenuItem Header="_Delete" 
-                    Command="{Binding RemoveTemplate}"
-                    CommandParameter="{Binding Mode=OneWay}" />
-          <Separator />
-          <MenuItem Header="E_xport" 
-                    Command="{Binding ExportTemplate}"
-                    CommandParameter="{Binding Mode=OneWay}" />
-        </ContextMenu>
-      </ListBox.Resources>
-      <ListBox.DataTemplates>
-        <DataTemplate DataType="vmc:TemplateContainerViewModel">
-          <c:EditableItem TextBinding="{Binding Name, Mode=TwoWay}" 
-                          ContextMenu="{StaticResource TemplateContainerContextMenu}"
-                          Padding="0"/>
-        </DataTemplate>
-      </ListBox.DataTemplates>
-    </ListBox>
+    </UserControl.Resources>
+  <Grid RowDefinitions="Auto,*" Background="{DynamicResource StudioSurfaceBrush}" s:StudioEditContext.History="{Binding History}">
+    <s:StudioPanelHeader Title="Templates" Description="Reusable page layouts"/>
+    <Grid RowDefinitions="Auto,*,12,Auto" Grid.Row="1">
+      <s:StudioToolbar Grid.Row="0">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="2">
+          <Button Content="Apply" Command="{Binding ApplyTemplate}" CommandParameter="{Binding CurrentTemplate}"
+            IsVisible="{Binding !!CurrentTemplate}" BorderBrush="Transparent" Background="Transparent"
+            Padding="8,5" AutomationProperties.Name="ApplyTemplate" />
+          <Button Content="Edit" Command="{Binding EditTemplate}" CommandParameter="{Binding CurrentTemplate}"
+            IsVisible="{Binding !!CurrentTemplate}" BorderBrush="Transparent" Background="Transparent"
+            Padding="8,5" AutomationProperties.Name="EditTemplate" />
+          <Button Content="Remove" Command="{Binding RemoveTemplate}" CommandParameter="{Binding CurrentTemplate}"
+            IsVisible="{Binding !!CurrentTemplate}" BorderBrush="Transparent" Background="Transparent"
+            Padding="8,5" AutomationProperties.Name="RemoveTemplate" />
+          <Button Content="Add" Command="{Binding AddTemplate}" BorderBrush="Transparent" Background="Transparent"
+            Padding="8,5" AutomationProperties.Name="AddTemplate" />
+        </StackPanel>
+      </s:StudioToolbar>
+      <s:StudioAssetBrowser x:Name="TemplatesListBox" Items="{Binding Templates}"
+        SelectedItem="{Binding CurrentTemplate, Mode=TwoWay}" EmptyTitle="No templates found"
+        EmptyDescription="Try a different search or add an item from the toolbar."
+        OpenCommand="{Binding EditTemplate}" Grid.Row="1">
+        <s:StudioAssetBrowser.KeyBindings>
+          <KeyBinding Command="{Binding AddTemplate}" Gesture="{app:PlatformGesture Text=Primary+N}"/>
+          <KeyBinding Command="{Binding EditTemplate}" CommandParameter="{Binding CurrentTemplate}"
+            Gesture="{app:PlatformGesture Text=Primary+T}" />
+          <KeyBinding Command="{Binding RemoveTemplate}" CommandParameter="{Binding CurrentTemplate}" Gesture="Delete"/>
+          <KeyBinding Command="{Binding ExportTemplate}" CommandParameter="{Binding CurrentTemplate}"
+            Gesture="{app:PlatformGesture Text=Primary+E}" />
+        </s:StudioAssetBrowser.KeyBindings>
+        <s:StudioAssetBrowser.Resources>
+          <ContextMenu x:Key="TemplateContainerContextMenu" x:DataType="vmc:TemplateContainerViewModel">
+            <MenuItem Header="_Edit Template" Command="{Binding EditTemplate}"
+              CommandParameter="{Binding                      Mode=OneWay}" />
+            <Separator/>
+            <MenuItem Header="_Delete" Command="{Binding RemoveTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
+            <Separator/>
+            <MenuItem Header="E_xport" Command="{Binding ExportTemplate}" CommandParameter="{Binding Mode=OneWay}"/>
+          </ContextMenu>
+        </s:StudioAssetBrowser.Resources>
+        <i:Interaction.Behaviors>
+          <behaviors:StudioScopedKeyBindingsBehavior/>
+        </i:Interaction.Behaviors>
+        <s:StudioAssetBrowser.ItemTemplate>
+          <DataTemplate x:DataType="vmc:TemplateContainerViewModel">
+            <s:StudioAssetItem Title="{Binding Name, Mode=TwoWay}" Detail="Page template"
+              Icon="M2,1 H11 L15,5 V15 H2 Z M4,3 V13 H13 V6 H10 V3 Z"
+              IsCompact="{Binding $parent[s:StudioAssetBrowser].IsCompact}"
+              ContextMenu="{StaticResource TemplateContainerContextMenu}">
+              <i:Interaction.Behaviors>
+                <idd:ContextDragBehavior Context="{Binding}"/>
+              </i:Interaction.Behaviors>
+            </s:StudioAssetItem>
+          </DataTemplate>
+        </s:StudioAssetBrowser.ItemTemplate>
+      </s:StudioAssetBrowser>
+    </Grid>
   </Grid>
 </UserControl>

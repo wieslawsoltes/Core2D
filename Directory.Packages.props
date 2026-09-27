@@ -57,4 +57,9 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.8" PrivateAssets="all" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" PrivateAssets="all" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Avalonia.AvaloniaEdit" Version="11.3.0" />
+    <PackageVersion Include="AvaloniaEdit.TextMate" Version="11.3.0" />
+    <PackageVersion Include="TextMateSharp.Grammars" Version="1.0.65" />
+  </ItemGroup>
 </Project>

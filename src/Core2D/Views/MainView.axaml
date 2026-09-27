@@ -7,6 +7,9 @@
              xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              xmlns:vmd="using:Core2D.ViewModels.Designer"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:b="using:Core2D.Behaviors"
+             xmlns:s="using:Core2D.Controls.Studio"
              xmlns:cd="clr-namespace:Core2D.Controls.Dialog"
              FontFamily="{DynamicResource UiFontFamily}"
              Background="{DynamicResource AcrylicFallbackColor}"
@@ -14,6 +17,10 @@
              d:DataContext="{x:Static vmd:DesignerContext.Editor}"
              d:DesignWidth="1200" d:DesignHeight="580"
              x:DataType="vme:ProjectEditorViewModel" x:CompileBindings="True">
+  <i:Interaction.Behaviors>
+    <b:StudioScopedKeyBindingsBehavior AllowModifiedTextBindings="True" />
+    <b:StudioActionsHostBehavior />
+  </i:Interaction.Behaviors>
   <UserControl.KeyBindings>
     <KeyBinding Command="{Binding OnNew}" CommandParameter="{Binding}" Gesture="{app:PlatformGesture Text=Primary+N}" x:CompileBindings="False" />
     <KeyBinding Command="{Binding Platform.OnOpen}" Gesture="{app:PlatformGesture Text=Primary+O}" x:CompileBindings="False" />
@@ -27,6 +34,7 @@
     <Panel>
       <idc:DockControl Layout="{Binding RootDock}" />
     </Panel>
+    <s:StudioActionsView Name="QuickActionsPalette" CanOpen="{Binding Dialogs.Count, Converter={StaticResource StudioZeroCount}}" />
     <cd:DialogPresenterView IsVisible="{Binding !!Dialogs.Count}" />
   </Panel>
 </UserControl>

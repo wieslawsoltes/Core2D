@@ -20,7 +20,9 @@
     <Setter Property="SelectionLabelBrush" Value="{DynamicResource SystemAccentColor}" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}"
+        <!-- Ruler.Render paints the background before ticks and labels. A second opaque
+             background on this template child would paint over those markings. -->
+        <Border Background="Transparent"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}" />
       </ControlTemplate>

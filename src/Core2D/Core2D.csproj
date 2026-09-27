@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -44,8 +44,10 @@
     <PackageReference Include="System.Reactive" />
     <PackageReference Include="System.Text.Encoding.CodePages" />
     <PackageReference Include="Avalonia" />
-    <PackageReference Include="Avalonia.Themes.Fluent" />
     <PackageReference Include="Avalonia.Fonts.Inter" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" />
+    <PackageReference Include="AvaloniaEdit.TextMate" />
+    <PackageReference Include="TextMateSharp.Grammars" />
     <PackageReference Include="Avalonia.Skia" />
     <PackageReference Include="Avalonia.Desktop" />
     <PackageReference Include="Xaml.Behaviors.Avalonia" />
@@ -54,7 +56,9 @@
     <PackageReference Include="Dock.Avalonia" />
     <PackageReference Include="Dock.Model.ReactiveUI" />
     <PackageReference Include="ProDataGrid" GeneratePathProperty="true">
-      <ExcludeAssets>all</ExcludeAssets>
+      <!-- Keep the explicit compile reference below, but retain the grid's runtime dependencies,
+           including FormulaEngine. Excluding all assets prevents real inspector views loading. -->
+      <ExcludeAssets>compile</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="System.Drawing.Common" />
@@ -80,6 +84,7 @@
     <ProjectReference Include="..\Core2D.Modules.Renderer.SparseStrips\Core2D.Modules.Renderer.SparseStrips.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Renderer.VelloSharp\Core2D.Modules.Renderer.VelloSharp.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Renderer.Wmf\Core2D.Modules.Renderer.Wmf.csproj" />
+    <ProjectReference Include="..\Avalonia.Themes.Browser\Avalonia.Themes.Browser.csproj" />
     <ProjectReference Include="..\Core2D.Controls.Ruler\Core2D.Controls.Ruler.csproj" />
     <ProjectReference Include="..\Core2D.Modules.ScriptRunner\Core2D.Modules.ScriptRunner.csproj" />
     <ProjectReference Include="..\Core2D.Modules.Serializer\Core2D.Modules.Serializer.csproj" />
@@ -92,9 +97,12 @@
   <ItemGroup>
     <Reference Include="Avalonia.Markup.Xaml">
       <HintPath>$(PkgAvalonia)/lib/net8.0/Avalonia.Markup.Xaml.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Avalonia.Controls.DataGrid">
       <HintPath>$(PkgProDataGrid)/lib/net10.0/Avalonia.Controls.DataGrid.dll</HintPath>
+      <!-- The NuGet runtime asset supplies this assembly. Do not copy the compile hint a second time. -->
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
 

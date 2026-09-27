@@ -1,0 +1,93 @@
+<UserControl x:Class="Core2D.Views.Docking.Tools.StudioInspectorView" x:Name="SidebarRoot"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Core2D.ViewModels.Docking.Tools" xmlns:editor="using:Core2D.ViewModels.Editor"
+             xmlns:core="using:Dock.Model.Core"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:converters="using:Core2D.Converters"
+             xmlns:renderer="using:Core2D.Views.Renderer" xmlns:containers="using:Core2D.Views.Containers" xmlns:data="using:Core2D.Views.Data"
+             x:DataType="vm:StudioInspectorViewModel" x:CompileBindings="True">
+  <UserControl.ContextMenu>
+    <ContextMenu DataContext="{Binding #SidebarRoot.DataContext}" x:DataType="core:IDockable">
+      <MenuItem Header="Float panel" Command="{Binding Factory.FloatDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanFloat}" />
+      <MenuItem Header="Pin / unpin panel" Command="{Binding Factory.PinDockable}" CommandParameter="{Binding}" IsEnabled="{Binding CanPin}" />
+    </ContextMenu>
+  </UserControl.ContextMenu>
+  <Panel DataContext="{Binding Context}" Background="{DynamicResource StudioSurfaceBrush}">
+    <Grid x:DataType="editor:ProjectEditorViewModel" RowDefinitions="Auto,*,Auto" s:StudioEditContext.History="{Binding Project.History}">
+      <Grid ColumnDefinitions="*,Auto" Margin="12,8" ColumnSpacing="8">
+        <TextBlock Text="Design" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center" />
+        <Button Grid.Column="1" Content="Export" Command="{Binding Platform.OnExport}"
+                Classes="primary" AutomationProperties.Name="Export drawing" />
+      </Grid>
+      <TabControl Name="InspectorTabs" Grid.Row="1" Classes="studio-navigation">
+        <TabItem Header="Design">
+          <ScrollViewer Name="DesignScrollViewer" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+              <s:StudioAlignmentBar IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+              <s:StudioSelectionEditor Name="MultipleSelection" Selection="{Binding Project.SelectedShapes}"
+                                       IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:MultipleSelectionConverter.Instance}}" />
+              <ContentControl Name="SelectionGeometry" Margin="12,8"
+                              Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}"
+                              IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SingleSelectionConverter.Instance}}" />
+              <s:StudioSection Header="First selected object" IsExpanded="False"
+                               IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:MultipleSelectionConverter.Instance}}">
+                <StackPanel Spacing="8">
+                  <s:StudioNotice Message="The fields in this section edit only the first selected object. Use Selection position and size above for collective edits." />
+                  <ContentControl Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
+                </StackPanel>
+              </s:StudioSection>
+              <ContentControl Content="{Binding Project.CurrentContainer}"
+                              IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}" />
+              <s:StudioNotice Title="First selected object's style" Message="These shared-style fields describe the first selected object. Use the selection controls above for changes to all selected objects."
+                IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:MultipleSelectionConverter.Instance}}" />
+              <ContentControl Name="SelectionAppearance"
+                              Content="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemStyleValueConverter.Instance}}"
+                              IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+              <s:StudioSection Header="Drawing defaults" IsExpanded="False">
+                <ContentControl Content="{Binding Project.CurrentStyleLibrary.Selected}" />
+              </s:StudioSection>
+              <s:StudioSection Header="Snapping &amp; drawing" IsExpanded="False">
+                <containers:OptionsView DataContext="{Binding Project.Options}" />
+              </s:StudioSection>
+              <s:StudioSection Header="Canvas overlays" IsExpanded="False">
+                <StackPanel>
+                  <s:StudioSwitch Content="Selection decorators" IsChecked="{Binding PageState.DrawDecorators, Mode=TwoWay}" />
+                  <s:StudioSwitch Content="Control points" IsChecked="{Binding PageState.DrawPoints, Mode=TwoWay}" />
+                </StackPanel>
+              </s:StudioSection>
+              <s:StudioSection Header="Renderer preferences" IsExpanded="False">
+                <renderer:ShapeRendererStateView DataContext="{Binding PageState}" Height="420" />
+              </s:StudioSection>
+              <s:StudioSection Header="Export" IsExpanded="False">
+                <StackPanel Spacing="8">
+                  <Button Content="Export drawing…" Command="{Binding Platform.OnExport}" HorizontalAlignment="Stretch" />
+                  <Button Content="Batch export wizard…" Command="{Binding Platform.OnOpenExportWizard}" HorizontalAlignment="Stretch" />
+                </StackPanel>
+              </s:StudioSection>
+            </StackPanel>
+          </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Data">
+          <Grid>
+            <Panel IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}">
+              <data:DataObjectView DataContext="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesFirstItemValueConverter.Instance}}" />
+            </Panel>
+            <s:StudioEmptyState Title="Select an object" Description="Linked data and custom properties appear here."
+                                IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}" />
+          </Grid>
+        </TabItem>
+        <TabItem Header="State">
+          <Grid>
+            <s:StudioShapeStateEditor Name="SelectionState" Selection="{Binding Project.SelectedShapes}"
+                                     IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesHasItemsValueConverter.Instance}}" />
+            <s:StudioEmptyState Title="Select an object" Description="Edit display, print, lock and connection flags for one or more objects. Renderer preferences remain below the Design settings."
+                                IsVisible="{Binding Project.SelectedShapes, Converter={x:Static converters:SelectedShapesIsEmptyValueConverter.Instance}}" />
+          </Grid>
+        </TabItem>
+      </TabControl>
+      <Border Grid.Row="2" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,1,0,0" Padding="12,8">
+        <TextBlock Text="{Binding Project.SelectedShapes.Count, FallbackValue='No selection', TargetNullValue='No selection', StringFormat='{}{0} selected'}"
+                   Classes="studio-muted" FontSize="11" />
+      </Border>
+    </Grid>
+  </Panel>
+</UserControl>

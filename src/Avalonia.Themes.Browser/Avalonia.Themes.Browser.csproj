@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+  <TargetFramework>net8.0</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>disable</ImplicitUsings>
+  <PackageId>Avalonia.Themes.Browser</PackageId><Version>11.3.12-preview.1</Version>
+  <Authors>Wiesław Šoltés; AvaloniaUI contributors</Authors>
+  <Description>Independent browser-style native Avalonia theme, derived from the complete Fluent 11.3.12 template set.</Description>
+  <PackageLicenseExpression>MIT AND MS-PL</PackageLicenseExpression><PackageReadmeFile>README.md</PackageReadmeFile>
+  <RepositoryUrl>https://github.com/wieslawsoltes/Core2D</RepositoryUrl><RepositoryType>git</RepositoryType>
+  <PackageTags>avalonia;theme;browser;design-system;xaml</PackageTags>
+  <IsPackable>true</IsPackable><GenerateDocumentationFile>true</GenerateDocumentationFile>
+  <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+ </PropertyGroup>
+ <ItemGroup><PackageReference Include="Avalonia" Version="11.3.12" /></ItemGroup>
+ <ItemGroup>
+  <AvaloniaResource Include="**/*.xaml" />
+  <None Update="README.md;LICENSE.Avalonia.txt;NOTICE.WinUI.md;NOTICE.Silverlight.md;UpstreamManifest.json" Pack="true" PackagePath="/" />
+ </ItemGroup>
+</Project>

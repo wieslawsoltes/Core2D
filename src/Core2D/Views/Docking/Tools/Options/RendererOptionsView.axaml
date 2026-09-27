@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:renderer="using:Core2D.Views.Renderer"
              xmlns:vm="using:Core2D.ViewModels.Docking.Tools.Options"
+             xmlns:s="using:Core2D.Controls.Studio"
              xmlns:vme="using:Core2D.ViewModels.Editor"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="600"
              x:DataType="vm:RendererOptionsViewModel" x:CompileBindings="True">
   <Panel DataContext="{Binding Context}">
-    <Panel x:DataType="vme:ProjectEditorViewModel">
-      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <renderer:ShapeRendererStateView DataContext="{Binding PageState}" />
-      </ScrollViewer>
-    </Panel>
+    <Grid x:DataType="vme:ProjectEditorViewModel" RowDefinitions="Auto,*">
+      <s:StudioPanelHeader Title="Renderer settings" Description="Point handles, connectors and drawing appearance" />
+      <renderer:ShapeRendererStateView Grid.Row="1" DataContext="{Binding PageState}" />
+    </Grid>
   </Panel>
 </UserControl>

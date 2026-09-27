@@ -1,0 +1,120 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="using:Core2D.Controls.Studio" xmlns:vm="using:Core2D.ViewModels.Editor" x:CompileBindings="True">
+  <ControlTheme x:Key="{x:Type s:StudioTextField}" TargetType="s:StudioTextField" x:DataType="s:StudioTextField">
+    <Setter Property="MinHeight" Value="28" /><Setter Property="Background" Value="{DynamicResource StudioInputBrush}" />
+    <Setter Property="CornerRadius" Value="5" /><Setter Property="Foreground" Value="{DynamicResource StudioTextBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Surface" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1"
+                CornerRadius="{TemplateBinding CornerRadius}" ToolTip.Tip="{TemplateBinding Error}">
+          <TextBox Name="PART_Input" Text="{Binding DraftText, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                   Watermark="{TemplateBinding Watermark}" IsReadOnly="{TemplateBinding IsReadOnly}"
+                   Background="Transparent" BorderThickness="0" MinHeight="26" Padding="7,4"
+                   AutomationProperties.Name="{TemplateBinding (AutomationProperties.Name)}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioBorderBrush}" /></Style>
+    <Style Selector="^:focus-within /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:error /template/ Border#PART_Surface"><Setter Property="BorderBrush" Value="{DynamicResource StudioDangerBrush}" /></Style>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type s:StudioDashField}" TargetType="s:StudioDashField" x:DataType="s:StudioDashField"
+                BasedOn="{StaticResource {x:Type s:StudioTextField}}">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel Spacing="4">
+          <Grid ColumnDefinitions="*,94" ColumnSpacing="6">
+            <Border Name="PART_Surface" Background="{DynamicResource StudioInputBrush}" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5" ToolTip.Tip="{TemplateBinding Error}">
+              <TextBox Name="PART_Input" Text="{Binding DraftText, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                       Watermark="Solid" Background="Transparent" BorderThickness="0" Padding="7,4" MinHeight="26"
+                       IsReadOnly="{TemplateBinding IsReadOnly}" AutomationProperties.Name="Dash lengths" />
+            </Border>
+            <ComboBox Grid.Column="1" ItemsSource="{Binding Presets, RelativeSource={RelativeSource TemplatedParent}}" PlaceholderText="Custom" HorizontalAlignment="Stretch"
+                      IsEnabled="{Binding !IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
+                      SelectedItem="{Binding SelectedPreset, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" AutomationProperties.Name="Stroke pattern preset" />
+          </Grid>
+          <s:StudioStrokePreview Height="18" Pattern="{TemplateBinding Value}" Stroke="{DynamicResource StudioMutedBrush}" IsHitTestVisible="False" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="StudioAnchorItemTheme" TargetType="ListBoxItem" x:DataType="ListBoxItem">
+    <Setter Property="MinWidth" Value="0" /><Setter Property="MinHeight" Value="0" /><Setter Property="Padding" Value="0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Anchor" Background="Transparent" BorderThickness="1" BorderBrush="Transparent" CornerRadius="2" ToolTip.Tip="{TemplateBinding Content}">
+          <Rectangle Name="PART_Dot" Width="4" Height="4" RadiusX="1" RadiusY="1" Fill="{DynamicResource StudioMutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_Anchor"><Setter Property="Background" Value="{DynamicResource StudioHoverBrush}" /></Style>
+    <Style Selector="^:selected /template/ Border#PART_Anchor"><Setter Property="Background" Value="{DynamicResource StudioAccentBrush}" /></Style>
+    <Style Selector="^:selected /template/ Rectangle#PART_Dot"><Setter Property="Fill" Value="White" /></Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Anchor"><Setter Property="BorderBrush" Value="{DynamicResource StudioTextBrush}" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type s:StudioAnchorPicker}" TargetType="s:StudioAnchorPicker" x:DataType="s:StudioAnchorPicker">
+    <Setter Property="Width" Value="48" /><Setter Property="Height" Value="48" />
+    <Setter Property="ItemContainerTheme" Value="{StaticResource StudioAnchorItemTheme}" />
+    <Setter Property="ItemsPanel"><ItemsPanelTemplate><UniformGrid Columns="3" Rows="3" /></ItemsPanelTemplate></Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border CornerRadius="5" Padding="2" Background="{DynamicResource StudioInputBrush}">
+          <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4" /></Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type s:StudioSelectionEditor}" TargetType="s:StudioSelectionEditor" x:DataType="s:StudioSelectionEditor">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel DataContext="{TemplateBinding Editor}">
+          <StackPanel x:DataType="vm:SelectionInspectorViewModel">
+            <Border Padding="12,8" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,0,0,1">
+              <TextBlock Text="{Binding Title}" FontWeight="SemiBold" />
+            </Border>
+            <StackPanel Margin="12,10" Spacing="8">
+              <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <s:StudioSwitch Content="Visible" IsChecked="{Binding IsVisible, Mode=TwoWay}" AutomationProperties.Name="Selection visibility" />
+                <s:StudioSwitch Grid.Column="1" Content="Locked" IsChecked="{Binding IsLocked, Mode=TwoWay}" AutomationProperties.Name="Selection lock" />
+              </Grid>
+              <TextBlock Text="{Binding GeometryMessage}" IsVisible="{Binding !CanEditGeometry}" TextWrapping="Wrap" Classes="studio-muted" />
+              <StackPanel Spacing="8" IsEnabled="{Binding CanEditGeometry}">
+                <TextBlock Text="Selection position" FontWeight="SemiBold" />
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                  <s:StudioNumericField Prefix="X" Value="{Binding X, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Selection X" />
+                  <s:StudioNumericField Grid.Column="1" Prefix="Y" Value="{Binding Y, Mode=TwoWay}" Minimum="-1000000000000000" Maximum="1000000000000000" AutomationProperties.Name="Selection Y" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBlock Text="Selection size" FontWeight="SemiBold" VerticalAlignment="Center" />
+                  <s:StudioIconToggle Grid.Column="1" Icon="M5,6V4A3,3 0 0 1 11,4V6H12V15H4V6Z M6,6H10V4A2,2 0 0 0 6,4Z M7,9H9V12H7Z" IsChecked="{Binding IsAspectLocked, Mode=TwoWay}" ToolTip.Tip="Lock selection aspect ratio" AutomationProperties.Name="Lock selection aspect ratio" />
+                </Grid>
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                  <s:StudioNumericField Prefix="W" Value="{Binding Width, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Selection width" />
+                  <s:StudioNumericField Grid.Column="1" Prefix="H" Value="{Binding Height, Mode=TwoWay}" Minimum="0" Maximum="1000000000000000" AutomationProperties.Name="Selection height" />
+                </Grid>
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="6">
+                  <s:StudioAnchorPicker SelectedIndex="{Binding AnchorIndex, Mode=TwoWay}" AutomationProperties.Name="Selection resize origin" />
+                  <TextBlock Grid.Column="1" Text="Resize origin" Classes="studio-muted" VerticalAlignment="Center" Margin="4,0" />
+                  <s:StudioIconButton Grid.Column="2" Icon="M7,0 H9 V16 H7 Z M0,8 L5,3 V13 Z M16,8 L11,3 V13 Z" Command="{Binding FlipHorizontal}" ToolTip.Tip="Flip horizontally" AutomationProperties.Name="Flip selection horizontally" />
+                  <s:StudioIconButton Grid.Column="3" Icon="M0,7 H16 V9 H0 Z M8,0 L3,5 H13 Z M8,16 L3,11 H13 Z" Command="{Binding FlipVertical}" ToolTip.Tip="Flip vertically" AutomationProperties.Name="Flip selection vertically" />
+                </Grid>
+              </StackPanel>
+            </StackPanel>
+            <s:StudioSection Header="Appearance">
+              <StackPanel Spacing="4" IsEnabled="{Binding CanEditAppearance}">
+                <s:StudioSwitch Content="Fill" IsChecked="{Binding IsFilled, Mode=TwoWay}" AutomationProperties.Name="Selection fill" />
+                <s:StudioSwitch Content="Stroke" IsChecked="{Binding IsStroked, Mode=TwoWay}" AutomationProperties.Name="Selection stroke" />
+                <TextBlock Text="Centered switches indicate mixed values. Changes apply to every selected object." Classes="studio-muted" TextWrapping="Wrap" FontSize="11" />
+              </StackPanel>
+            </s:StudioSection>
+          </StackPanel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

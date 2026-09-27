@@ -1,4 +1,4 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT. See LICENSE.TXT file in the project root for details.
 
 #nullable enable
@@ -359,6 +359,8 @@ public class DockFactory : Factory
             // Documents
             ["PageDocument"] = () => _projectEditor,
             ["PageDocumentDock"] = () => _projectEditor,
+            ["StudioNavigator"] = () => _projectEditor,
+            ["StudioInspector"] = () => _projectEditor,
             // Explorers
             ["ProjectExplorer"] = () => _projectEditor,
             ["ObjectBrowser"] = () => _projectEditor,
@@ -409,6 +411,7 @@ public class DockFactory : Factory
         };
 
         base.InitLayout(layout);
+        StudioWorkspaceLayout.Apply(this, _projectEditor);
     }
 
     private void UpdateDockReferences(IDockable layout)

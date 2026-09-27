@@ -1,64 +1,71 @@
-﻿<UserControl x:Class="Core2D.Views.Docking.Views.DashboardView"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+<UserControl x:Class="Core2D.Views.Docking.Views.DashboardView"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              xmlns:idd="using:Avalonia.Xaml.Interactions.DragAndDrop"
              xmlns:dd="using:Core2D.Behaviors.DragAndDrop"
-             xmlns:vm="using:Core2D.ViewModels.Docking.Views"
-             xmlns:vme="using:Core2D.ViewModels.Editor"
-             xmlns:vmd="using:Core2D.ViewModels.Designer"
-             mc:Ignorable="d"
-             d:DesignWidth="800" d:DesignHeight="600"
+             xmlns:s="using:Core2D.Controls.Studio"
+             xmlns:vm="using:Core2D.ViewModels.Docking.Views" xmlns:editor="using:Core2D.ViewModels.Editor"
              x:DataType="vm:DashboardViewModel" x:CompileBindings="True">
-  <UserControl.Resources>
-    <dd:EditorDropHandler x:Key="EditorDropHandler" />
-  </UserControl.Resources>
+  <UserControl.Resources><dd:EditorDropHandler x:Key="EditorDropHandler" /></UserControl.Resources>
   <Panel DataContext="{Binding Context}">
-    <Panel d:DataContext="{x:Static vmd:DesignerContext.Editor}"
-           x:DataType="vme:ProjectEditorViewModel" 
-           x:CompileBindings="True">
+    <Grid x:DataType="editor:ProjectEditorViewModel" ColumnDefinitions="220,*" Background="{DynamicResource StudioInputBrush}">
       <i:Interaction.Behaviors>
-        <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" 
-                                 Handler="{StaticResource EditorDropHandler}" />
+        <idd:ContextDropBehavior Context="{Binding FallbackValue={x:Null}}" Handler="{StaticResource EditorDropHandler}" />
       </i:Interaction.Behaviors>
-      <Grid RowDefinitions="0.2*,50,30,1*,30,1*,30" 
-            ColumnDefinitions="5*,50*,30" 
-            MaxWidth="400" MaxHeight="400">
-        <Label Content="Core2D" 
-               FontSize="20" 
-               FontWeight="SemiBold" 
-               Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" />
-        <Button Content="New Project" 
-                Command="{Binding OnNewProject}" 
-                FontSize="14" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Stretch"
-                HorizontalContentAlignment="Center" 
-                VerticalContentAlignment="Center" 
-                Grid.Column="1" Grid.Row="3"
-                x:CompileBindings="False">
-          <i:Interaction.Behaviors>
-            <iac:FocusOnPointerMovedBehavior />
-          </i:Interaction.Behaviors>
-        </Button>
-        <Button Content="Open Project"
-                Command="{Binding Platform.OnOpen}"
-                CommandParameter=""
-                FontSize="14" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Stretch"
-                HorizontalContentAlignment="Center" 
-                VerticalContentAlignment="Center" 
-                Grid.Column="1" Grid.Row="5"
-                x:CompileBindings="False">
-          <i:Interaction.Behaviors>
-            <iac:FocusOnPointerMovedBehavior />
-          </i:Interaction.Behaviors>
-        </Button>
-      </Grid>
-    </Panel>
+      <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}" BorderThickness="0,0,1,0" Padding="16,28">
+        <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="20">
+          <StackPanel Spacing="8">
+            <TextBlock Text="Core2D" FontSize="22" FontWeight="Bold" />
+            <TextBlock Text="Your design workspace" Classes="studio-muted" />
+          </StackPanel>
+          <Border Grid.Row="1" Background="{DynamicResource StudioSelectionBrush}" CornerRadius="6" Padding="12,8">
+            <TextBlock Text="Home" Foreground="{DynamicResource StudioSelectionTextBrush}" FontWeight="SemiBold" />
+          </Border>
+          <StackPanel Grid.Row="3" Spacing="8">
+            <TextBlock Text="Local projects" FontWeight="SemiBold" />
+            <TextBlock Text="Your drawings stay in your files." TextWrapping="Wrap" Classes="studio-muted" />
+          </StackPanel>
+        </Grid>
+      </Border>
+      <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="40" MaxWidth="840" HorizontalAlignment="Left" Spacing="28">
+          <StackPanel Spacing="8">
+            <TextBlock Text="Start with an idea" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock Text="Create a drawing, open a project, or drop a file into this workspace." Classes="studio-muted" TextWrapping="Wrap" />
+          </StackPanel>
+          <WrapPanel>
+            <Button Name="NewProjectCard" Command="{Binding OnNewProject}" Width="260" Height="180" Margin="0,0,16,16"
+                    Padding="24" Background="{DynamicResource StudioSurfaceBrush}" HorizontalContentAlignment="Left"
+                    AutomationProperties.Name="New project">
+              <StackPanel Spacing="16">
+                <PathIcon Data="M1,8H15V10H1Z M7,2H9V16H7Z" Width="24" Height="24" HorizontalAlignment="Left"
+                          Foreground="{DynamicResource StudioAccentBrush}" />
+                <TextBlock Text="New drawing" FontSize="16" FontWeight="SemiBold" />
+                <TextBlock Text="A blank page for your next idea." Classes="studio-muted" TextWrapping="Wrap" />
+              </StackPanel>
+            </Button>
+            <Button Name="OpenProjectCard" Command="{Binding Platform.OnOpen}" CommandParameter="" Width="260" Height="180"
+                    Margin="0,0,16,16" Padding="24" Background="{DynamicResource StudioSurfaceBrush}"
+                    HorizontalContentAlignment="Left" AutomationProperties.Name="Open project">
+              <StackPanel Spacing="16">
+                <PathIcon Data="M1,3H7L9,5H18V17H1Z M3,7V15H16V7Z" Width="26" Height="24" HorizontalAlignment="Left"
+                          Foreground="{DynamicResource StudioAccentBrush}" />
+                <TextBlock Text="Open project" FontSize="16" FontWeight="SemiBold" />
+                <TextBlock Text="Continue working with your files." Classes="studio-muted" TextWrapping="Wrap" />
+              </StackPanel>
+            </Button>
+          </WrapPanel>
+          <s:StudioSurface Padding="24">
+            <StackPanel Spacing="12">
+              <TextBlock Text="Everything in its place" FontSize="16" FontWeight="SemiBold" />
+              <TextBlock Text="Find pages, layers and reusable assets on the left. Select an object to edit geometry, fill, stroke and typography in the design inspector."
+                         TextWrapping="Wrap" Classes="studio-muted" />
+              <TextBlock Text="Drag panels to customize your workspace. Advanced tools remain available from the main menu."
+                         TextWrapping="Wrap" Classes="studio-muted" />
+            </StackPanel>
+          </s:StudioSurface>
+        </StackPanel>
+      </ScrollViewer>
+    </Grid>
   </Panel>
 </UserControl>

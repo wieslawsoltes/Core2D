@@ -1,0 +1,50 @@
+<UserControl x:Class="Core2D.Controls.Studio.WorkspaceHeader"
+             xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="using:Core2D.Controls.Studio" xmlns:editor="using:Core2D.Controls.Editor"
+             xmlns:i="using:Avalonia.Xaml.Interactivity" xmlns:behaviors="using:Core2D.Behaviors"
+             xmlns:vm="using:Core2D.ViewModels.Editor"
+             x:DataType="vm:ProjectEditorViewModel" x:CompileBindings="True">
+  <Border Background="{DynamicResource StudioSurfaceBrush}" BorderBrush="{DynamicResource StudioBorderBrush}"
+          BorderThickness="0,0,0,1" Padding="8">
+    <Grid RowDefinitions="Auto,Auto" RowSpacing="4">
+      <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="6">
+        <s:StudioIconButton Name="MainMenuButton" Icon="M1,1H8V3H3V8H1Z M5,5H15V15H5Z M7,7V13H13V7Z"
+                            ToolTip.Tip="Main menu" AutomationProperties.Name="Main menu">
+          <Button.Flyout>
+            <Flyout Placement="BottomEdgeAlignedLeft">
+              <editor:MenuView Width="246" Classes="studio-command-menu">
+                <i:Interaction.Behaviors>
+                  <behaviors:DismissMenuFlyoutBehavior Flyout="{Binding #MainMenuButton.Flyout}" />
+                </i:Interaction.Behaviors>
+                <editor:MenuView.Styles>
+                  <Style Selector="Menu">
+                    <Setter Property="ItemsPanel"><ItemsPanelTemplate><StackPanel /></ItemsPanelTemplate></Setter>
+                  </Style>
+                  <Style Selector="MenuItem"><Setter Property="HorizontalAlignment" Value="Stretch" /></Style>
+                </editor:MenuView.Styles>
+              </editor:MenuView>
+            </Flyout>
+          </Button.Flyout>
+        </s:StudioIconButton>
+        <TextBlock Grid.Column="1" Text="Core2D" FontWeight="SemiBold" VerticalAlignment="Center" />
+        <s:StudioIconButton Name="QuickActionsButton" Grid.Column="2" Icon="M7,1A6,6 0 1 0 7,13A6,6 0 1 0 7,1Z M7,3A4,4 0 1 1 7,11A4,4 0 1 1 7,3Z M11,12L15,16L16,15L12,11Z"
+                            ToolTip.Tip="Quick actions (Ctrl/Command+K)" AutomationProperties.Name="Quick actions" />
+        <s:StudioIconButton Name="SaveButton" Grid.Column="3" Icon="M2,1H14L18,5V19H2Z M5,2V8H13V2Z M5,12V18H15V12Z"
+                            Command="{Binding Platform.OnSave}" ToolTip.Tip="Save project" AutomationProperties.Name="Save project" />
+      </Grid>
+      <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="2">
+        <StackPanel VerticalAlignment="Center" Margin="8,0,0,0">
+          <TextBlock Name="DocumentTitle" Text="{Binding Project.Name, TargetNullValue='Untitled drawing'}"
+                     FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding ProjectName}" />
+          <TextBlock Text="Unsaved changes" Classes="studio-muted" FontSize="10" IsVisible="{Binding IsProjectDirty}" />
+        </StackPanel>
+        <s:StudioIconButton Name="UndoButton" Grid.Column="1" Icon="M7,1L1,7L7,13V9H11C15,9 17,11 17,15H19C19,9 16,6 11,6H7Z"
+                            Command="{Binding OnUndo}" ToolTip.Tip="Undo" AutomationProperties.Name="Undo" />
+        <s:StudioIconButton Name="RedoButton" Grid.Column="2" Icon="M13,1L19,7L13,13V9H9C5,9 3,11 3,15H1C1,9 4,6 9,6H13Z"
+                            Command="{Binding OnRedo}" ToolTip.Tip="Redo" AutomationProperties.Name="Redo" />
+        <s:StudioIconButton Name="ExportButton" Grid.Column="3" Icon="M7,0L1,6H5V12H9V6H13Z M0,12H2V15H12V12H14V17H0Z"
+                            Command="{Binding Platform.OnExport}" ToolTip.Tip="Export" AutomationProperties.Name="Export drawing" />
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>
